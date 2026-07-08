@@ -1,0 +1,56 @@
+# SPDX-FileCopyrightText: 2026 Will Cook
+# SPDX-License-Identifier: Apache-2.0
+cff-version: 1.2.0
+type: software-code
+message: "Cite this generated Lean/Lake snapshot only together with its public tag/hash and receipt; it is not an Erdos #249/#257 solution claim."
+title: "Erdos257 Period Noncollapse Lean Snapshot"
+authors:
+  - family-names: "Cook"
+    given-names: "Will"
+license: Apache-2.0
+abstract: "Generated Lean/Lake snapshot for the public Plectis formal-methods operating-system boundary. It packages selected Lean source, build metadata, non-claim boundaries, and export receipts; it is not itself a proof-publication claim for Erdos #249 or Erdos #257."
+keywords:
+  - "Lean 4"
+  - "Lake"
+  - "formal mathematics"
+  - "formal methods"
+  - "certificate kernel"
+  - "proof receipts"
+  - "Erdos"
+  - "Lambert series"
+references:
+  - type: "article"
+    title: "The Lean Theorem Prover"
+    authors:
+      - family-names: "de Moura"
+        given-names: "Leonardo"
+      - family-names: "Kong"
+        given-names: "Soonho"
+      - family-names: "Avigad"
+        given-names: "Jeremy"
+      - family-names: "van Doorn"
+        given-names: "Floris"
+      - family-names: "von Raumer"
+        given-names: "Jakob"
+    year: "2015"
+    url: "https://lean-lang.org/papers/system.pdf"
+  - type: "manual"
+    title: "Lean Language Reference"
+    authors:
+      - name: "Lean FRO"
+    url: "https://lean-lang.org/doc/reference/latest/"
+  - type: "software"
+    title: "mathlib4"
+    authors:
+      - name: "The mathlib Community"
+    repository-code: "https://github.com/leanprover-community/mathlib4"
+  - type: "generic"
+    title: "Local bibliography placeholder: exact Erdos/Lambert-series source map"
+    authors:
+      - name: "Plectis citation map"
+    notes: "Resolved before publication by the Plectis paper-module citation lane."
+  - type: "generic"
+    title: "Local bibliography placeholder: exact #249/#257 Lean source snapshot"
+    authors:
+      - name: "Plectis source manifest"
+    notes: "Resolved before publication by public tag, commit hash, and standalone export receipt."

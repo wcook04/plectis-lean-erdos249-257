@@ -1,0 +1,208 @@
+{
+  "_type": "https://in-toto.io/Statement/v1",
+  "generated_at": "2026-07-08T20:55:03Z",
+  "predicate": {
+    "buildDefinition": {
+      "buildType": "https://plectis.local/build-types/lean-standalone-export/v0",
+      "externalParameters": {
+        "export_handle": "erdos257-period-noncollapse",
+        "source_config_path": "microcosm-substrate/docs/lean_formal_methods_os/release_topology_source_v0.json",
+        "source_root": "formal_math/erdos257_period_noncollapse",
+        "standalone_repo": {
+          "directory_name": "erdos257-period-noncollapse",
+          "display_name": "Erdos257 Period Noncollapse Lean Snapshot",
+          "remote_name_suggestion": "plectis-lean-erdos257-period-noncollapse",
+          "repository_role": "standalone_lean_lake_package_export"
+        }
+      },
+      "internalParameters": {
+        "non_claim_gate_status": "pass",
+        "publication_ready_boolean": false,
+        "selected_file_count": 19,
+        "source_files_sha256": "184c8e24fd40b098df2f4a6feb3f7e81ec7d02943b7045989adf6d5dc6df78e6"
+      },
+      "resolvedDependencies": [
+        {
+          "digest": {
+            "sha256": "46909a72bc753c801910a2a20967cc0eee6e574f76decd13116adf49c8a3d07e"
+          },
+          "uri": "microcosm-substrate/docs/lean_formal_methods_os/release_topology_source_v0.json"
+        },
+        {
+          "digest": {
+            "sha256": "184c8e24fd40b098df2f4a6feb3f7e81ec7d02943b7045989adf6d5dc6df78e6"
+          },
+          "uri": "source_files_sha256"
+        },
+        {
+          "digest": {
+            "sha256": "742c0e1042fd1e6c8b8024fd3c96d87916370420f2ae36315936907152dd8bd8"
+          },
+          "uri": "lake-manifest.json"
+        },
+        {
+          "digest": {
+            "sha256": "88a1d79c54cf3777f22b61a68377f44150124ba67f889c98587b2291885358a5"
+          },
+          "uri": "lean-toolchain"
+        }
+      ]
+    },
+    "runDetails": {
+      "builder": {
+        "id": "tools/meta/factory/build_plectis_lean_release_topology.py"
+      },
+      "byproducts": [
+        {
+          "body_in_receipt": false,
+          "digest": {
+            "sha256": "a46b29441ca8f853a9fc242b110f038d2deefa88d96bae5cff5a14d2c4924fe3"
+          },
+          "name": ".github/CODEOWNERS"
+        },
+        {
+          "body_in_receipt": false,
+          "digest": {
+            "sha256": "7132c1652660ac646e7787e45d37c2cfefd22316c30620a5b87c2b2fad53b941"
+          },
+          "name": ".github/workflows/lean.yml"
+        },
+        {
+          "body_in_receipt": false,
+          "digest": {
+            "sha256": "2829bfcf6564563e25eb0b65e598a5349f45ae32beb33c6795cd83fb3087a8c4"
+          },
+          "name": ".github/workflows/release-gate.yml"
+        },
+        {
+          "body_in_receipt": false,
+          "digest": {
+            "sha256": "16f03fea054533beaf51723939769d4fdd1135f7886baf6358044186fd575c11"
+          },
+          "name": "CITATION.cff"
+        },
+        {
+          "body_in_receipt": false,
+          "digest": {
+            "sha256": "37db35d0cc18b8d33be6e17647851c90f7380ea6669b5fd05a9a3bc58625cd53"
+          },
+          "name": "CLAIM_TO_REFERENCE_MAP.json"
+        },
+        {
+          "body_in_receipt": false,
+          "digest": {
+            "sha256": "5f73f0aafc768cc7c7f5da786dc7614296ee891a456faf175ab07456d3c35046"
+          },
+          "name": "LICENSE"
+        },
+        {
+          "body_in_receipt": false,
+          "digest": {
+            "sha256": "5f73f0aafc768cc7c7f5da786dc7614296ee891a456faf175ab07456d3c35046"
+          },
+          "name": "LICENSES/Apache-2.0.txt"
+        },
+        {
+          "body_in_receipt": false,
+          "digest": {
+            "sha256": "35560a2b48db4a25cfdc8f6d85971b5e4c7252ba26548059612cb72d1d0384df"
+          },
+          "name": "NON_CLAIMS.md"
+        },
+        {
+          "body_in_receipt": false,
+          "digest": {
+            "sha256": "e7d4e9f532a4752e56e7a4b213e24f3d215e3fb13ef7ebe8fd54d2146a7132ed"
+          },
+          "name": "PLECTIS_INTEGRATION.json"
+        },
+        {
+          "body_in_receipt": false,
+          "digest": {
+            "sha256": "f7383fee3de61c29e1b921ce07edcb7751272af74b9811fbdda9ccf85bc86df4"
+          },
+          "name": "PUBLIC_API_CONTRACT.json"
+        },
+        {
+          "body_in_receipt": false,
+          "digest": {
+            "sha256": "09ac39942db777a42b2713c1ef4b0b757f21fd1ad75c4d4ee405797a13820073"
+          },
+          "name": "PUBLIC_SNAPSHOT_MANIFEST.json"
+        },
+        {
+          "body_in_receipt": false,
+          "digest": {
+            "sha256": "5635d5dea4b0765490f4e268b903ea2352650b2aebd9b41c08399f6baa8fff7e"
+          },
+          "name": "PlectisSnapshot.lean"
+        },
+        {
+          "body_in_receipt": false,
+          "digest": {
+            "sha256": "e4ceb2e9a9b6aeaf63dde9ba96d83bcc9ec69e7e51b98567d2e11c5ce78beb09"
+          },
+          "name": "PlectisSnapshot/PublicAPI.lean"
+        },
+        {
+          "body_in_receipt": false,
+          "digest": {
+            "sha256": "85684b39252d216d560c6c82d197e3314c35361785f16618be87a22c27949972"
+          },
+          "name": "README.md"
+        },
+        {
+          "body_in_receipt": false,
+          "digest": {
+            "sha256": "3e68614bc2c4878ceab93684032691dfd336be9c5b279d741fd5eaedf1e1732c"
+          },
+          "name": "REFERENCES.yaml"
+        },
+        {
+          "body_in_receipt": false,
+          "digest": {
+            "sha256": "5c6e5eb15aabbcf15196bd5af6ec3f49d7b064ff89477a914f4a8c5299d5e777"
+          },
+          "name": "RELEASE_BOUNDARY.md"
+        },
+        {
+          "body_in_receipt": false,
+          "digest": {
+            "sha256": "1078c0fb7d45a3fdd67203d67365dce1c09cd0b0548758416a45ebcc38cf90d4"
+          },
+          "name": "RELEASE_NOTES.md"
+        },
+        {
+          "body_in_receipt": false,
+          "digest": {
+            "sha256": "933ce98cafc01c821ecd5bbdd89cd9b5916041bdcd22e18de2239f6b728d3ded"
+          },
+          "name": "REUSE.toml"
+        },
+        {
+          "body_in_receipt": false,
+          "digest": {
+            "sha256": "c963fbd7001e2d85e6bb5d74fb85c08e604a5d83537cf4ffc1deb55be501a4d2"
+          },
+          "name": "scripts/verify_snapshot.py"
+        }
+      ],
+      "metadata": {
+        "invocationFinishedOn": "2026-07-08T20:55:03Z",
+        "reproducibilityBoundary": "public export source selection plus generated metadata"
+      }
+    }
+  },
+  "predicateType": "https://slsa.dev/provenance/v1",
+  "schema": "plectis_lean_release_provenance_v0",
+  "subject": [
+    {
+      "digest": {
+        "sha256": "4dbfdde60ec9035a894e9b7b5383c6708128234d3a0d23ac3a3372d9c2ee17ab"
+      },
+      "file_count": 37,
+      "name": "erdos257-period-noncollapse"
+    }
+  ],
+  "subject_digest_scope": "export_subject_tree_excludes_release_notes_and_provenance_to_avoid_circular_digest"
+}

@@ -1,0 +1,65 @@
+{
+  "adapter_files": [
+    "PlectisSnapshot.lean",
+    "PlectisSnapshot/PublicAPI.lean"
+  ],
+  "adapter_modules": [
+    "PlectisSnapshot",
+    "PlectisSnapshot.PublicAPI"
+  ],
+  "contract_version": "0.1.0-pre",
+  "evidence_contract": {
+    "body_policy": "receipt_bodies_omitted_hashes_only",
+    "publication_authority_required": [
+      "public_tag",
+      "public_commit",
+      "target_runner_receipt"
+    ],
+    "required_public_receipts": [
+      "standalone_export_receipt_v0.json",
+      "publication_candidate_rehearsal_v0.json",
+      "snapshot_lineage_v0.json",
+      "private_source_drift_report_v0.json",
+      "public_prior_art_drift_report_v0.json",
+      "snapshot_steward_v0.json"
+    ]
+  },
+  "exposed_declaration_families": [
+    "certificate_kernel",
+    "generated_certificate_aggregate",
+    "selected_certificate_shards",
+    "target_runner_declarations",
+    "non_claim_ids",
+    "receipt_schema_ids"
+  ],
+  "non_claims": [
+    "not_erdos_257_solution",
+    "not_erdos_249_solution",
+    "not_publication_authority",
+    "not_private_root_equivalence",
+    "not_provider_proof_authority",
+    "not_hidden_proof_body_authority"
+  ],
+  "plectis_consumption_mode": "pointer_only_until_public_tag",
+  "schema": "plectis_lean_public_api_contract_v0",
+  "source_file_count": 19,
+  "source_snapshot_sha256": "184c8e24fd40b098df2f4a6feb3f7e81ec7d02943b7045989adf6d5dc6df78e6",
+  "stable_metadata_files": [
+    "PLECTIS_INTEGRATION.json",
+    "PUBLIC_SNAPSHOT_MANIFEST.json",
+    "PUBLIC_API_CONTRACT.json",
+    "CLAIM_TO_REFERENCE_MAP.json",
+    "RELEASE_PROVENANCE.json",
+    "NON_CLAIMS.md"
+  ],
+  "stable_root_import": "Erdos257PeriodNoncollapse",
+  "status": "local_contract_generated",
+  "watched_source_files": [
+    "lean-toolchain",
+    "lakefile.toml",
+    "lake-manifest.json",
+    "Erdos257PeriodNoncollapse.lean",
+    "Erdos257PeriodNoncollapse/CertificateKernel.lean",
+    "Erdos257PeriodNoncollapse/GeneratedCertificates.lean"
+  ]
+}
