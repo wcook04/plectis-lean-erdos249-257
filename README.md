@@ -5,34 +5,19 @@
 
 [![Lean CI](https://github.com/wcook04/plectis-lean-erdos257-period-noncollapse/actions/workflows/lean.yml/badge.svg)](https://github.com/wcook04/plectis-lean-erdos257-period-noncollapse/actions/workflows/lean.yml)
 
-A machine-checked Lean 4 (Mathlib) development around two Erdős irrationality problems. It **proves** the classical Erdős–Borwein irrationality, builds an exact "Mersenne–Lambert" ladder of Dirichlet-convolution identities around the open constant, and then reduces the open problem to a single sequence of finite, decidable certificates. It does **not** solve the open problems, and it says so in its own machine-checked non-claims.
+A machine-checked Lean 4 (Mathlib) development around two Erdős irrationality problems. It **proves** irrationality for a broad family of Erdős–Borwein-type series, gives an **unconditional** exclusion of every small-denominator rational value for the open totient constant, and **reduces** that open problem to a single sequence of finite, decidable certificates. It does **not** claim to settle either open problem, and it ships machine-checked non-claims and a standalone verifier that say so.
 
-This repository is a pinned, self-verifying snapshot exported from a larger private system (Plectis). Everything needed to build and check it is here; nothing private is.
-
----
-
-## The two constants
-
-Everything is read at base 2. Two Dirichlet series carry the whole story:
-
-- **Erdős–Borwein constant** `E = ∑_{n≥1} 1/(2ⁿ − 1)`. Erdős (1948) proved it irrational. That proof is **formalized here**: `irrational_erdosBorwein_series` (in `CertificateKernel.lean`), with no `sorry`.
-- **The totient constant** `S = ∑_{n≥1} φ(n)/2ⁿ`, where `φ` is Euler's totient. Whether `S` is irrational is **open**. In this project's framing this is Erdős **#249**; the general base-`b` period-noncollapse question is filed under **#257**. Both are open, and neither is claimed here.
-
-Equivalently, via the Möbius-square lens proved in the ladder,
-
-```
-S = 1/2 + ∑_{d≥1} μ(d) / (2^d − 1)²
-```
-
-so the irrationality of `S` is the irrationality of that signed Möbius–Mersenne sum.
+This repository is a pinned, self-verifying snapshot exported from a larger private system (Plectis). Everything needed to build and check it is here; nothing private is. Toolchain `leanprover/lean4:v4.29.1`, Mathlib pinned in `lake-manifest.json`. No `sorry`, no `admit`; proofs are checked by the Lean kernel (`decide`, never `native_decide`). 1,640 theorems across the package; continuous integration builds it on every push.
 
 ---
 
 ## Contents
 
+- [The two problems](#the-two-problems) — what is asked, what is proved, what is open
 - [The Mersenne–Lambert ladder](#the-mersennelambert-ladder) — the organizing identity
-- [The wave ladder (module by module)](#the-wave-ladder-module-by-module) — what each file proves
-- [What is proven, what is cited, what is open](#what-is-proven-what-is-cited-what-is-open) — the honest boundary
+- [The wave ladder, module by module](#the-wave-ladder-module-by-module) — what each file contains
+- [What is proved, cited, and open](#what-is-proved-cited-and-open) — the honest boundary
+- [Where to look in the source](#where-to-look-in-the-source) — headline declarations, by file and line
 - [The machinery](#the-machinery) — kernel, generated certificates, verifier, provenance
 - [Build and verify](#build-and-verify)
 - [Repository layout](#repository-layout)
@@ -40,90 +25,149 @@ so the irrationality of `S` is the irrationality of that signed Möbius–Mersen
 
 ---
 
+## The two problems
+
+Everything is read at base 2 unless a base `b` is named. Two Dirichlet series carry the story:
+
+- **Erdős–Borwein constant** `E = ∑_{n≥1} 1/(2ⁿ − 1)`.
+- **Totient constant** `S = ∑_{n≥1} φ(n)/2ⁿ`, where `φ` is Euler's totient.
+
+### Erdős #257 direction: Erdős–Borwein-type irrationality
+
+The question is whether Erdős–Borwein-type sums `∑_k 1/(b^{a_k} − 1)` are irrational. This snapshot **proves** several genuine cases, all machine-checked and for every base `b ≥ 2`:
+
+| Result | Series | Declaration |
+|---|---|---|
+| Full support, every base | `∑_{k≥0} 1/(b^{k+1} − 1)` irrational for all `b ≥ 2` | `irrational_erdosSum_full_support` |
+| Erdős–Borwein constant | `E = ∑ 1/(2ⁿ − 1)` irrational (base-2 corollary) | `irrational_erdosBorwein_series` |
+| Factorial support | `∑ 1/(b^{k!} − 1)` irrational | `irrational_erdosSum_factorial_support` |
+| Power-of-two support | `∑ 1/(b^{2^k} − 1)` irrational | `irrational_erdosSum_two_pow_support` |
+
+**Period noncollapse** is the mechanism behind these: a prime-valuation-deficit witness (`PrimeComponentWitness`, `witness_certificate_implies_period_noncollapse`) shows the multiplicative period of the base modulo the relevant modulus does not collapse, which forbids the long digit blocks a rational value would need. What remains **open** (and is *not* claimed here) is the fully universal statement: irrationality for *every* infinite support sequence. Proved families are not the universal theorem.
+
+### Erdős #249: irrationality of the totient constant `S`
+
+Whether `S = ∑ φ(n)/2ⁿ` is irrational is **open**. This snapshot contributes two things, and claims neither as a solution.
+
+**Unconditional.** No rational with a small denominator can equal `S`. The strongest landed rung excludes every denominator up to about `7.96 × 10³⁴`:
+
+```
+S ≠ p / q   for every integer p and every 1 ≤ q ≤ 79 639 646 646 701 375 323 355 774 875 831 053
+```
+
+(`tsum_totient_div_pow_two_ne_ratCast_of_den_le_79639646646701375323355774875831053`). The ladder of such bounds is `4838 → 4 194 304 (2²²) → 2.49×10¹⁷ (Farey K=120) → 7.96×10³⁴ (Farey K=240)`, each an elementary finite exclusion.
+
+**Conditional reduction.** Via the Möbius-square lens `S = 1/2 + ∑_{d≥1} μ(d)/(2^d − 1)²`, rationality of `S` is equivalent to eventual periodicity of its binary expansion, and periodicity is killed by a finite, decidable certificate. Waves 21–25 collapse the obligation onto a single one-parameter family, e.g.
+
+```
+(∀ t₀, ∃ t ≥ t₀, ∃ L, certifiedKill (periodLcm t) (periodLcm t) L)  →  Irrational S
+```
+
+(`irrational_totient_series_of_lcm_diagonal_certificate_supply`). The initial segment of that supply is machine-checked to be non-empty (`certifiedKill_all_small`, `certifiedKill_periodLcm_diagonal_upto_six`), but the **unboundedness** of the supply, equivalently the unboundedness of the Farey gap denominators, is the analytic core and is deliberately **untouched**. The reduction is real; the closure is not asserted.
+
+---
+
 ## The Mersenne–Lambert ladder
 
-Define the Lambert transform `L(f) = ∑_{n≥1} f(n)/(2ⁿ − 1) = ∑_{m≥1} (∑_{d∣m} f(d)) / 2^m`. Sliding an arithmetic function by one Dirichlet convolution with `ζ` walks along a ladder whose rungs have completely different arithmetic character:
+Define the Lambert transform `L(f) = ∑_{n≥1} f(n)/(2ⁿ − 1) = ∑_{m≥1} (∑_{d∣m} f(d)) / 2^m`. One Dirichlet convolution by `ζ` walks a ladder whose rungs have completely different arithmetic character:
 
 | Input `f` | `L(f)` | Value | Status |
 |---|---|---|---|
 | `μ` (Möbius) | `L(μ)` | `1/2` | rational (proved) |
 | `φ` (totient) | `L(φ)` | `2` | rational (proved) |
 | `1` (constant one) | `L(1)` | `E` | **irrational, machine-checked** |
-| `A = φ * μ` | `L(A)` | `S` | **open — this is #249** |
+| `A = φ * μ` | `L(A)` | `S` | **open — Erdős #249** |
 | `Id` | `L(Id)` | `∑ σ(m)/2^m` | transcendental (Nesterenko 1996, cited only) |
 
-One convolution by `ζ` separates the open constant from a trivially rational value (`A * ζ = φ`); one more separates rational from transcendental (`φ * ζ = Id`, `Id * ζ = σ`). The open constant `S` sits one rung away from the irrational `E` and one rung from the rational `2`. That is the geometry the rest of the development exploits.
+The primitive-conductor weight is `A = φ * μ` (`primWeight = totientZ * moebius`), with `primWeight p = p − 2` on primes and `A * ζ = φ`. So one convolution by `ζ` separates the open constant `S` from the rational `2`, and one more separates rational from transcendental (`φ * ζ = Id`, `Id * ζ = σ`). The open constant sits one rung from the machine-checked irrational `E`.
 
 ---
 
-## The wave ladder (module by module)
+## The wave ladder, module by module
 
-Each module is a self-contained step. The wave numbers are the development order. Every module states its own honest boundary in its header docstring.
+Each module is a self-contained step with a header docstring stating its own honest boundary. Wave numbers are development order; the import chain is `GapFareyBound → MersenneLambertLadder → … → LcmConeNonflat → CertificateKernel ← GeneratedCertificates`.
 
-| Module | Wave | What it establishes |
+| Wave | Module | What it establishes |
 |---|---|---|
-| `GapFareyBound.lean` | 17 | **Farey-gap denominator bounds.** A denominator `q` cannot represent `S` if a mediant/Farey argument places `m/q` inside a forbidden gap. Elementary, per-window, no bulk `decide`: clears every denominator up to `≈ 2.5×10¹⁷` (window `K=120`) and `≈ 7.96×10³⁴` (`K=240`). Closing #249 this way would need the gap denominators to be unbounded; that is exactly the analytic core left untouched. |
-| `MersenneLambertLadder.lean` | 18 | **The ladder above**, machine-checked: the two rational rungs, the positive lift `L(A) = S`, and the signed Möbius-square lens `S = 1/2 + ∑ μ(d)/(2^d−1)²`. Engine: a signed, linear-growth weighted Lambert rearrangement (`weighted_lambert_series_identity` and its signed extension). |
-| `GeometricCoprimality.lean` | 19 | **`S` as coprime-pair mass.** For every `n`, `#{(a,b) : a+b=n, 0<a, gcd(a,b)=1} = φ(n)`. Summed against `2⁻ⁿ` this reads `S` as visible-lattice mass, and `S − 1/2 = P(gcd(X,Y)=1)` for independent fair-coin waiting times `X, Y` (base 2 is the unique self-normalizing point of the geometric law). |
-| `GcdMomentCalculus.lean` | 20 | **The squared transform** `L₂(f) = ∑ f(d)/(2^d−1)² = E[(f * ζ)(gcd(X,Y))]`, since divisibility of the gcd factorizes across independent coordinates. Gives `L₂(μ) = S − 1/2`, the gcd-moment ladder, Pillai's gcd-sum function, and a q-zeta anchor (cited). |
-| `TotientTailPeriodKiller.lean` | 21 | **Change of target: period, not digits.** Rationality of `S` is equivalent to eventual periodicity of its binary expansion, which forces the tail-period law `R_{N+h} − R_N ∈ ℤ`. Missing that integer by a decidable margin is a finite "kill". Reduction: `irrational_totient_series_of_certificate_supply`. |
-| `CarrySurvivorExtinction.lean` | 22 | **Multiple-period collapse.** Every multiple of a period is a period, so the obligation collapses onto the one-parameter family `lcm(1..t)` (`irrational_totient_series_of_lcm_survivor_supply`). Adds the carry-survivor orbit certificate: an integer tail difference launches a bounded integer orbit that must escape a narrow strip. |
-| `LcmDiagonalReduction.lean` | 23 | **Diagonal collapse.** Standing on the ray (`N = H_t = lcm(1..t)`) removes the second parameter: #249 follows from ONE ℕ-indexed decidable sequence `P t := ∃ L, certifiedKill (H_t, H_t, L)` holding infinitely often (`irrational_totient_series_of_lcm_diagonal_certificate_supply`). Includes the window/totient factorization on the ray. |
-| `LcmConeFlatness.lean` | 24 | **Cone-flatness law.** Rationality forces a single fractional constant on the entire lcm cone `{k·H_t}`, and the cones at all scales form one directed system. **Certificate completeness**: a kill exists IFF the tail difference is a non-integer (`exists_certifiedKill_iff_tail_diff_notMem_int`). Plus rank-2 second-difference certificates. |
-| `LcmConeNonflat.lean` | 25 | **Cone non-flatness refuter.** Interrogates a whole menu of cone vertices at once: if their one-sided arcs shared a common fractional part, the minimal-deep-tail vertex would be a common endpoint, and its certificate row denies exactly that (`exists_nonintegral_pair_of_coneNonflatCert`). Sharper than pairwise kills; genuinely joint for menus of size ≥ 3. |
+| 17 | `GapFareyBound.lean` | **Farey-gap denominator bounds.** A mediant/Farey argument places any rational `m/q` inside a forbidden gap, so no `q` below the bound can represent `S`. Elementary and per-window; clears `q ≤ 2.49×10¹⁷` (`K=120`) and `q ≤ 7.96×10³⁴` (`K=240`). |
+| 18 | `MersenneLambertLadder.lean` | **The ladder above**, machine-checked: the rational rungs `L(μ)=1/2`, `L(φ)=2`, the positive lift `L(A)=S`, and the Möbius-square lens `S = 1/2 + ∑ μ(d)/(2^d−1)²`. Engine: a signed, linear-growth weighted Lambert rearrangement. |
+| 19 | `GeometricCoprimality.lean` | **`S` as coprime-pair mass.** `#{(a,b) : a+b=n, 0<a, gcd(a,b)=1} = φ(n)`, so at `r=1/2`, `S − 1/2 = P(gcd(X,Y)=1)` for independent fair-coin waiting times. Base 2 is the unique self-normalizing point of the geometric law. |
+| 20 | `GcdMomentCalculus.lean` | **The squared transform** `L₂(f) = ∑ f(d)/(2^d−1)² = E[(f * ζ)(gcd(X,Y))]`, since gcd-divisibility factorizes across independent coordinates. Yields `L₂(μ) = S − 1/2`, the gcd-moment ladder, and Pillai's gcd-sum function. |
+| 21 | `TotientTailPeriodKiller.lean` | **Period, not digits.** Rationality of `S` forces the tail-period law `R_{N+h} − R_N ∈ ℤ`; missing that integer by a decidable margin is a finite "kill". Reduction: `irrational_totient_series_of_certificate_supply`. |
+| 22 | `CarrySurvivorExtinction.lean` | **Multiple-period collapse.** Every multiple of a period is a period, so the obligation collapses onto the one-parameter family `periodLcm t = lcm(1..t)`. Adds the carry-survivor orbit certificate (a bounded integer orbit that must escape a narrow strip). |
+| 23 | `LcmDiagonalReduction.lean` | **Diagonal collapse.** Standing on the ray (`N = periodLcm t`) removes the second parameter: #249 follows from one ℕ-indexed decidable sequence `∃ L, certifiedKill (periodLcm t) (periodLcm t) L` holding infinitely often. |
+| 24 | `LcmConeFlatness.lean` | **Cone-flatness law.** Rationality forces one fractional constant on the whole lcm cone `{k·periodLcm t}`. Certificate **completeness**: a kill exists iff the tail difference is a non-integer (`exists_certifiedKill_iff_tail_diff_notMem_int`). Plus rank-2 second-difference certificates. |
+| 25 | `LcmConeNonflat.lean` | **Cone non-flatness refuter.** Interrogates a whole menu of cone vertices at once: if their one-sided arcs shared a common fractional part, the minimal-deep-tail vertex would be a common endpoint, and its certificate row denies exactly that. Sharper than pairwise; genuinely joint for menus of size ≥ 3. |
+
+**Assembled:** `CertificateKernel.lean` (18,887 lines, 483 theorems) imports all nine modules plus real Mathlib number theory and holds the irrationality proofs, the ladder identities, and the reductions. `GeneratedCertificates.lean` (27,728 lines, 1,026 theorems) plus three shards (`b10_L6_A11`, `b2_L105_A75047`, `b2_L210_A21371`) are machine-generated finite certificate instances, each discharged by `decide`.
 
 ---
 
-## What is proven, what is cited, what is open
+## What is proved, cited, and open
 
-This is the part a careful reader should read first.
+**Proved (machine-checked in Lean, no `sorry`, no `admit`):**
 
-**Proven (machine-checked in Lean, no `sorry`, no `admit`):**
+- Irrationality of `∑ 1/(b^{k+1} − 1)` for every `b ≥ 2` (full support), the base-2 Erdős–Borwein constant, and the factorial and power-of-two support families.
+- The Mersenne–Lambert ladder identities, including the Möbius-square lens for `S`.
+- **Unconditional** exclusion: `S ≠ p/q` for every `q ≤ 7.96 × 10³⁴`.
+- The full chain of **conditional** #249 reductions (periodicity ⟹ tail-period law ⟹ certificate supply ⟹ lcm-diagonal ⟹ cone flatness/non-flatness), plus certificate completeness, and a non-empty initial segment of certified kills.
 
-- The Erdős–Borwein constant `E = ∑ 1/(2ⁿ−1)` is irrational — `irrational_erdosBorwein_series`.
-- The Mersenne–Lambert ladder identities, including the Möbius-square lens for `S` — `weighted_lambert_series_identity` and the wave-18/19/20 identities.
-- The full chain of **conditional** reductions of #249: periodicity ⟹ tail-period law ⟹ certificate supply ⟹ lcm-diagonal ⟹ cone flatness, e.g. `irrational_totient_series_of_certificate_supply`, `irrational_totient_series_of_lcm_diagonal_certificate_supply`, `irrational_totient_series_of_lcm_cone_certificate_supply`.
-- Certificate completeness: `exists_certifiedKill_iff_tail_diff_notMem_int`.
-- The finite certificate instances themselves, discharged by the kernel-checked `decide`.
+**Cited, not formalized here:** transcendence of `∑ σ(m)/2^m` (Nesterenko, 1996) and the q-zeta / q-Padé anchor (Postelmans–Van Assche). They are named as ladder neighbours, not re-proved.
 
-**Cited, not formalized here:** the transcendence of `∑ σ(m)/2^m` (Nesterenko, 1996) and the q-zeta / q-Padé irrationality anchor (Postelmans–Van Assche). These are named as ladder neighbours; they are not re-proved.
+**Open (explicitly not solved in this repository):**
 
-**Open (explicitly NOT solved in this repository):**
+- Irrationality of `S = ∑ φ(n)/2ⁿ` (Erdős #249). The conditional reductions turn it into "the certificate supply is unbounded"; producing that unbounded supply is the untouched analytic core.
+- The fully universal Erdős–Borwein statement (#257): irrationality for *every* infinite support, beyond the families proved above.
 
-- Irrationality of `S = ∑ φ(n)/2ⁿ` (Erdős #249).
-- The general base-`b` period-noncollapse question (#257).
+The exact bibliographic problem-numbering for #249/#257 is still being finalized, which is why the bundled verifier reports publication status as `blocked`. That is by design, not an oversight.
 
-The reductions are **conditional**: they turn #249 into "the certificate supply is unbounded" (equivalently, the Farey gaps grow without bound). Producing that unbounded supply is the analytic core, and it is deliberately **untouched**. This repository provides the reduction and the finite certified initial segment, not the closure. The exact bibliographic problem-numbering for #249/#257 is still being finalized, which is why the bundled verifier reports publication status as `blocked` (see below). This is by design, not an oversight.
+---
+
+## Where to look in the source
+
+| Claim | Declaration | Location |
+|---|---|---|
+| `∑ 1/(bⁿ⁺¹−1)` irrational, all `b ≥ 2` | `irrational_erdosSum_full_support` | `CertificateKernel.lean:7999` |
+| Erdős–Borwein `E` irrational | `irrational_erdosBorwein_series` | `CertificateKernel.lean:8006` |
+| Factorial-support family | `erdos257_family_factorial_instance` | `CertificateKernel.lean:5753` |
+| Power-of-two-support family | `erdos257_family_two_pow_instance` | `CertificateKernel.lean:5761` |
+| Period-noncollapse witness | `witness_certificate_implies_period_noncollapse` | `CertificateKernel.lean:1270` |
+| `S ≠ p/q` for `q ≤ 7.96×10³⁴` | `tsum_totient_div_pow_two_ne_ratCast_of_den_le_79639646646701375323355774875831053` | `CertificateKernel.lean:18055` |
+| Möbius-square lens `S = 1/2 + ∑ μ(d)/(2^d−1)²` | `totient_series_eq_half_add_moebius_mersenne_square` | `CertificateKernel.lean:18125` |
+| Ladder rational rung `L(φ)=2` | `tsum_totient_div_two_pow_sub_one_eq_two` | `CertificateKernel.lean:18100` |
+| #249 reduction (period) | `irrational_totient_series_of_certificate_supply` | `TotientTailPeriodKiller.lean:386` |
+| #249 reduction (lcm diagonal) | `irrational_totient_series_of_lcm_diagonal_certificate_supply` | `LcmDiagonalReduction.lean:92` |
+| Rationality forces cone flatness | `rational_totient_series_forces_lcm_cone_flatness` | `LcmConeFlatness.lean:90` |
+| Certificate completeness | `exists_certifiedKill_iff_tail_diff_notMem_int` | `LcmConeFlatness.lean:316` |
+| Non-empty certified-kill segment | `certifiedKill_all_small`, `certifiedKill_periodLcm_diagonal_upto_six` | `TotientTailPeriodKiller.lean:396`, `LcmDiagonalReduction.lean:217` |
 
 ---
 
 ## The machinery
 
-Beyond the mathematics, the snapshot ships the release discipline that produced it. This is the "how it was made and how you can check it" layer.
+Beyond the mathematics, the snapshot ships the release discipline that produced it.
 
-- **`CertificateKernel.lean`** (~0.85 MB): the assembled microkernel. Imports all nine wave modules plus real Mathlib number theory (irrationality, cyclotomic polynomials, divisor-sum antidiagonals, prime factorization, Bertrand's postulate, geometric sums, infinite sums). Holds the Erdős–Borwein proof, the ladder identities, and the reduction theorems.
-- **`GeneratedCertificates.lean`** (~1.18 MB) and the shards under `GeneratedCertificates/` (`b10_L6_A11`, `b2_L105_A75047`, `b2_L210_A21371`): machine-generated finite certificate instances. The names encode base `b`, window/level `L`, and the residue/bound `A`. Each is checked by `decide` in the Lean kernel.
-- **Kernel-checked, no compiler trust.** The certificates use `decide` (evaluated by the Lean kernel), not `native_decide` (which would trust the compiler). There are zero uses of `native_decide` and zero `sorry`/`admit` in the development.
-- **`scripts/verify_snapshot.py`**: a dependency-free (standard-library-only) verifier. It recomputes the tree digest against `RELEASE_PROVENANCE.json`, checks the Apache license text, the SPDX/REUSE metadata, the public-API adapter, and the required non-claims, then reports its own status. On this snapshot it prints `structural_status: pass` and, deliberately, `status: blocked` until the exact bibliography and a public tag are attached.
-- **Provenance and contracts.** `RELEASE_PROVENANCE.json` (SLSA-style build statement), `CLAIM_TO_REFERENCE_MAP.json`, `PUBLIC_API_CONTRACT.json`, `PLECTIS_INTEGRATION.json`, `NON_CLAIMS.md`, `REUSE.toml`, and full SPDX headers. `PlectisSnapshot/PublicAPI.lean` exposes stable metadata (schema id, source-snapshot hash, non-claim ids) so a downstream consumer can pin this snapshot by hash.
+- **`CertificateKernel.lean`** (~0.85 MB): the assembled microkernel. Imports all nine wave modules plus real Mathlib number theory (`NumberTheory.Real.Irrational`, cyclotomic eval/expand/roots, `TsumDivisorsAntidiagonal`, factorization, `Bertrand`, geometric and infinite sums).
+- **`GeneratedCertificates.lean`** (~1.18 MB) and the shards under `GeneratedCertificates/`: machine-generated finite certificate instances. Names encode base `b`, window/level `L`, and the residue/bound `A`. Each is checked by `decide` in the Lean kernel.
+- **Kernel-checked, no compiler trust.** Zero uses of `native_decide` and zero `sorry`/`admit` across the package.
+- **`scripts/verify_snapshot.py`**: a standard-library-only verifier. It recomputes the tree digest against `RELEASE_PROVENANCE.json`, checks the Apache license text, the SPDX/REUSE metadata, the public-API adapter, and the required non-claims. On this snapshot it reports `structural_status: pass` and, deliberately, `status: blocked` until the exact bibliography and a public tag are attached.
+- **Provenance and contracts.** `RELEASE_PROVENANCE.json` (SLSA-style build statement), `CLAIM_TO_REFERENCE_MAP.json`, `PUBLIC_API_CONTRACT.json`, `PLECTIS_INTEGRATION.json`, `NON_CLAIMS.md`, `REUSE.toml`, and full SPDX headers. `PlectisSnapshot/PublicAPI.lean` exposes stable metadata (schema id, source-snapshot hash, non-claim ids) so a consumer can pin this snapshot by hash.
 
 ---
 
 ## Build and verify
-
-Toolchain: `leanprover/lean4:v4.29.1`, Mathlib pinned via `lake-manifest.json`. Continuous integration builds the whole package on every push (see the badge above).
 
 ```sh
 # Build (downloads the prebuilt Mathlib cache, then builds this package)
 lake exe cache get
 lake build
 
-# Verify the snapshot with no dependencies beyond a Python standard library
-python3 scripts/verify_snapshot.py                 # structural_status: pass; status: blocked (by design)
+# Verify the snapshot with no dependencies beyond the Python standard library
+python3 scripts/verify_snapshot.py                  # structural_status: pass; status: blocked (by design)
 python3 scripts/verify_snapshot.py --allow-blocked  # exits 0 on structural pass
 ```
 
-The build is heavy: the certificates are discharged by `decide`, so a cold `lake build` takes several minutes even with the Mathlib cache.
+The build is heavy: with 1,640 theorems and thousands of `decide`-discharged certificates, a cold `lake build` takes several minutes even with the Mathlib cache. It is exercised on GitHub Actions on every push (see the badge above).
 
 ---
 
@@ -132,8 +176,8 @@ The build is heavy: the certificates are discharged by `decide`, so a cold `lake
 ```
 Erdos257PeriodNoncollapse.lean            root module (imports kernel + certificates)
 Erdos257PeriodNoncollapse/
-  CertificateKernel.lean                  assembled microkernel (~0.85 MB)
-  GeneratedCertificates.lean              generated finite certificates (~1.18 MB)
+  CertificateKernel.lean                  assembled microkernel (18,887 lines, 483 theorems)
+  GeneratedCertificates.lean              generated finite certificates (27,728 lines, 1,026 theorems)
   GeneratedCertificates/                  per-base certificate shards
   GapFareyBound.lean                      wave 17  Farey-gap denominator bounds
   MersenneLambertLadder.lean              wave 18  the Lambert-transform ladder
