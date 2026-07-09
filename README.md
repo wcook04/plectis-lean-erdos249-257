@@ -9,6 +9,8 @@ A machine-checked Lean 4 (Mathlib) development around two Erdős irrationality p
 
 This repository is a pinned, self-verifying snapshot exported from a larger private system (Plectis). Everything needed to build and check it is here; nothing private is. Toolchain `leanprover/lean4:v4.29.1`, Mathlib pinned in `lake-manifest.json`. No `sorry`, no `admit`; proofs are checked by the Lean kernel (`decide`, never `native_decide`). 1,640 theorems across the package; continuous integration builds it on every push.
 
+**If you do not read Lean:** the [`paper/`](paper/) directory has a companion write-up, *A guide for mathematicians who do not read Lean*, in ordinary notation. It states what is proved, cited, and open, and links every claim to the exact source line. Build the PDF with `tectonic paper/erdos-exposition.tex` (or `make -C paper`).
+
 ---
 
 ## Contents
@@ -17,10 +19,12 @@ This repository is a pinned, self-verifying snapshot exported from a larger priv
 - [The Mersenne–Lambert ladder](#the-mersennelambert-ladder) — the organizing identity
 - [The wave ladder, module by module](#the-wave-ladder-module-by-module) — what each file contains
 - [What is proved, cited, and open](#what-is-proved-cited-and-open) — the honest boundary
+- [Related Erdős problems](#related-erdős-problems) — where this sits among #249/#257/#1049/#250/#258/#69
 - [Where to look in the source](#where-to-look-in-the-source) — headline declarations, by file and line
 - [The machinery](#the-machinery) — kernel, generated certificates, verifier, provenance
 - [Build and verify](#build-and-verify)
 - [Repository layout](#repository-layout)
+- [Related work in progress: Ramanujan Machine Challenge](#related-work-in-progress-ramanujan-machine-challenge)
 - [Non-claims and license](#non-claims-and-license)
 
 ---
@@ -123,6 +127,23 @@ The exact bibliographic problem-numbering for #249/#257 is still being finalized
 
 ---
 
+## Related Erdős problems
+
+Where this work sits among the numbered problems it is near. Statuses are as listed on [erdosproblems.com](https://www.erdosproblems.com) in July 2026; none of the external results is re-proved here.
+
+| Problem | Status | Relation in this repository |
+|---|---|---|
+| **#249** `∑ φ(n)/2ⁿ` | open | the target: an unconditional denominator exclusion and a conditional reduction, no solution |
+| **#257** `∑_{n∈A} 1/(2ⁿ−1)` | open | named infinite-support cases and full support (`A = ℕ`), not the universal statement |
+| **#1049** `∑ 1/(tⁿ−1)`, rational `t>1` | open (rational `t`) | the integer-base case `b ≥ 2` is exactly `irrational_erdosSum_full_support`; the rational case is untouched |
+| **#69** `∑ ω(n)/2ⁿ` | solved (Tao–Teräväinen) | the prime-support case of #257; only the identity bridge to `∑_p 1/(2ᵖ−1)` is formalized, not the irrationality |
+| **#250** `∑ σ(n)/2ⁿ` | solved (Nesterenko 1996) | the ladder neighbour `L(Id)`; cited, not re-proved |
+| **#258** `∑ τ(n)/(a₁···aₙ)` | solved | not addressed here; the monotone φ/σ sequel is the sibling territory of #249 |
+
+The one-line summary: a formalization of Erdős–Borwein-type irrationality, an unconditional record, and a finite-certificate reduction for the open totient constant. Not a solution to #249 or to the universal #257.
+
+---
+
 ## Where to look in the source
 
 | Claim | Declaration | Location |
@@ -190,9 +211,31 @@ Erdos257PeriodNoncollapse/
   LcmConeNonflat.lean                     wave 25  joint cone non-flatness refuter
 PlectisSnapshot/PublicAPI.lean            stable public-API metadata adapter
 scripts/verify_snapshot.py                standalone snapshot verifier
+paper/                                    exposition for non-Lean readers (LaTeX source + build)
 NON_CLAIMS.md  RELEASE_PROVENANCE.json  PUBLIC_API_CONTRACT.json  ...   release metadata
 lakefile.toml  lake-manifest.json  lean-toolchain                       build pins
 ```
+
+---
+
+## Related work in progress: Ramanujan Machine Challenge
+
+A separate, in-progress project targets the [Ramanujan Machine Challenge](https://www.ramanujanmachine.com/ramanujan-challenge/): ten problems, released in July 2026, on explicit formulas for constants such as π, e, Catalan's constant, and zeta values. That work lives in a separate, private Lean lane and is not part of this snapshot. No challenge target is claimed solved or fully formalized here; the table below is a coarse status map.
+
+| Target | Public theme | Status |
+|---|---|---|
+| 2.1 | polynomial continued fraction for a π-type constant | partial Lean kernel started |
+| 2.2 | Euler's constant γ as an Apéry-type limit | partial Lean kernel started |
+| 2.3 | π + e as an Apéry-type limit | in progress |
+| 2.4 | harmonic-number series for polylog / zeta values | in progress |
+| 2.5 | rational approximation of Catalan's constant | in progress |
+| 2.6 | series for ζ(2) + ζ(3) | non-formal proof packet in progress |
+| 2.7 | four-term recurrence for ζ(2) + ζ(3) | in progress |
+| 2.8 | fast rational approximation of √10005 / π | in progress (source-conjectural) |
+| 3.1 | knot-polynomial integral for π² | in progress (open conjecture in source) |
+| 3.2 | Apéry ζ(3) irrationality-measure bound | in progress (open conjecture in source) |
+
+Ten targets tracked, all ten statements normalized, two partial Lean kernels, zero full formalizations. The release discipline carries over from this package; the theorems do not.
 
 ---
 
