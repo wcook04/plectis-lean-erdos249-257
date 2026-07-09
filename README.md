@@ -13,8 +13,8 @@ This snapshot does not solve either open problem; it formalises bounded irration
 
 | | |
 |:--|:--|
-| **[Plectis repository](https://github.com/wcook04/plectis)** | Public machinery exhibit — 88 fixture-backed components you can clone and audit locally. |
-| **[Plectis website](https://wcook04.github.io/plectis/)** | Public overview of what Plectis publishes and how to read it. |
+| **[Plectis repository](https://github.com/wcook04/plectis)** | Public claim-testing surface: 88 fixture-backed components with bounded evidence classes, local checks, and receipts. |
+| **[Plectis website](https://wcook04.github.io/plectis/)** | Browseable wrapper over the Plectis map: component cards, docs, evidence classes, and scope limits. |
 | **[Formal math docs](https://wcook04.github.io/plectis/docs/area-formal-math.html)** | The formal-math & proof area: Lean pipeline components, certificates, and scope limits. |
 | **[Architecture docs](https://wcook04.github.io/plectis/docs/architecture.html)** | How the 88 components fit together on one shared path. |
 | **[Tour](https://wcook04.github.io/plectis/docs/tour.html)** | A plain walkthrough of what Plectis is, what a component is, and where claims stop. |
@@ -25,19 +25,19 @@ This repository is a pinned, self-verifying public snapshot: everything needed t
 
 **Read the exposition (no Lean required):** [`erdos249-257-exposition.pdf`](erdos249-257-exposition.pdf) at the repository root is a companion write-up in ordinary notation. It states what is proved, cited, and open, and links every claim to the exact Lean source line. The LaTeX source and build live in [`paper/`](paper/) (`tectonic paper/erdos249-257-exposition.tex`, or `make -C paper`).
 
-**Where this comes from.** `ai_workflow` is a private agentic system that turns intent into validated, receipt-backed work on disk. [Plectis](https://github.com/wcook04/plectis) is its public machinery exhibit — 88 fixture-backed components you can audit by cloning that repo. This Lean repository is a separate, still-growing lane focused on Erdős #249 and #257 (neither proven): ~1.7k theorems, ~51k lines, `0` `sorry`/`admit`/`axiom`, kernel-checked `decide` with no `native_decide` — what that machinery looks like running on a live mathematical frontier. None of that private tooling is a proof authority here: **the proof authority is the Lean source in this repository, checked by the Lean kernel.**
+**Where this comes from.** `ai_workflow` is a private agentic system that turns intent into validated, receipt-backed work on disk. [Plectis](https://github.com/wcook04/plectis) is the public claim-testing surface adjacent to that work: fixture-backed components, bounded evidence classes, local checks, and receipts you can audit by cloning the repository. This Lean repository is a separate lane focused on Erdős #249 and #257. It is useful to read beside Plectis because it shows the same evidence discipline around a mathematical frontier, but none of that tooling is proof authority here: **the proof authority is the Lean source in this repository, checked by the Lean kernel.**
 
 ---
 
 ## Contents
 
-- [The two problems](#the-two-problems) — what is asked, what is proved, what is open
-- [The Mersenne–Lambert ladder](#the-mersennelambert-ladder) — the organizing identity
-- [The wave ladder, module by module](#the-wave-ladder-module-by-module) — what each file contains
-- [What is proved, cited, and open](#what-is-proved-cited-and-open) — the honest boundary
-- [Related Erdős problems](#related-erdős-problems) — where this sits among #249/#257/#1049/#250/#258/#69
-- [Where to look in the source](#where-to-look-in-the-source) — headline declarations, by file and line
-- [The machinery](#the-machinery) — kernel, generated certificates, verifier, provenance
+- [The two problems](#the-two-problems): what is asked, what is proved, what is open
+- [The Mersenne–Lambert ladder](#the-mersennelambert-ladder): the organizing identity
+- [The wave ladder, module by module](#the-wave-ladder-module-by-module): what each file contains
+- [What is proved, cited, and open](#what-is-proved-cited-and-open): the honest boundary
+- [Related Erdős problems](#related-erdős-problems): where this sits among #249/#257/#1049/#250/#258/#69
+- [Where to look in the source](#where-to-look-in-the-source): headline declarations, by file and line
+- [The machinery](#the-machinery): kernel, generated certificates, verifier, provenance
 - [Build and verify](#build-and-verify)
 - [Repository layout](#repository-layout)
 - [Related work in progress: Ramanujan Machine Challenge](#related-work-in-progress-ramanujan-machine-challenge)
@@ -63,7 +63,7 @@ The question is whether Erdős–Borwein-type sums `∑_k 1/(b^{a_k} − 1)` are
 | Factorial support | `∑_{k≥0} 1/(b^{(k+1)!} − 1)` irrational | `irrational_erdosSum_factorial_support` |
 | Power-of-two support | `∑_{k≥0} 1/(b^{2^k} − 1)` irrational | `irrational_erdosSum_two_pow_support` |
 
-**Period noncollapse** is the mechanism behind these: a prime-valuation-deficit witness (`PrimeComponentWitness`, `witness_certificate_implies_period_noncollapse`) shows the multiplicative period of the base modulo the relevant modulus does not collapse, which forbids the long digit blocks a rational value would need. Beyond the four rows above, the same support calculus formalizes further named supports — multiples, pairwise-coprime sets with summable reciprocals (Erdős's condition), eventually-periodic supports, residue classes, and the odd numbers; none is claimed as new mathematics. What remains **open** (and is *not* claimed here) is the fully universal statement: irrationality for *every* infinite support sequence. Proved families are not the universal theorem.
+**Period noncollapse** is the mechanism behind these: a prime-valuation-deficit witness (`PrimeComponentWitness`, `witness_certificate_implies_period_noncollapse`) shows the multiplicative period of the base modulo the relevant modulus does not collapse, which forbids the long digit blocks a rational value would need. Beyond the four rows above, the same support calculus formalizes further named supports: multiples, pairwise-coprime sets with summable reciprocals (Erdős's condition), eventually-periodic supports, residue classes, and the odd numbers; none is claimed as new mathematics. What remains **open** (and is *not* claimed here) is the fully universal statement: irrationality for *every* infinite support sequence. Proved families are not the universal theorem.
 
 ### Erdős #249: irrationality of the totient constant `S`
 
@@ -96,7 +96,7 @@ Define the Lambert transform `L(f) = ∑_{n≥1} f(n)/(2ⁿ − 1) = ∑_{m≥1}
 | `μ` (Möbius) | `L(μ)` | `1/2` | rational (proved) |
 | `φ` (totient) | `L(φ)` | `2` | rational (proved) |
 | `1` (constant one) | `L(1)` | `E` | **irrational, machine-checked** |
-| `A = φ * μ` | `L(A)` | `S` | **open — Erdős #249** |
+| `A = φ * μ` | `L(A)` | `S` | **open: Erdős #249** |
 | `Id` | `L(Id)` | `∑ σ(m)/2^m` | transcendental (Nesterenko 1996, cited only) |
 
 The primitive-conductor weight is `A = φ * μ` (`primWeight = totientZ * moebius`), with `primWeight p = p − 2` on primes and `A * ζ = φ`. So one convolution by `ζ` separates the open constant `S` from the rational `2`, and one more separates rational from transcendental (`φ * ζ = Id`, `Id * ζ = σ`). The open constant sits one rung from the machine-checked irrational `E`.
@@ -271,7 +271,7 @@ Ten targets tracked, all ten statements normalized, two partial Lean kernels, ze
 
 The machine-checked non-claims (`snapshot/NON_CLAIMS.md`) are part of the artifact:
 
-- `not_erdos_257_solution`, `not_erdos_249_solution` — this does not solve either problem.
-- `not_publication_authority`, `not_private_root_equivalence`, `not_provider_proof_authority`, `not_hidden_proof_body_authority` — a snapshot, not a claim of authority over the private frontier or a hidden proof.
+- `not_erdos_257_solution`, `not_erdos_249_solution`: this does not solve either problem.
+- `not_publication_authority`, `not_private_root_equivalence`, `not_provider_proof_authority`, `not_hidden_proof_body_authority`: a snapshot, not a claim of authority over the private frontier or a hidden proof.
 
 Licensed under Apache-2.0 (`LICENSE`, with SPDX/REUSE metadata). Copyright 2026 Will Cook.
