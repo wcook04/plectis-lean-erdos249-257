@@ -1,4 +1,4 @@
-import Erdos257PeriodNoncollapse.LcmDiagonalReduction
+import Erdos249257.LcmDiagonalReduction
 
 /-!
 # Wave 24: the lcm-cone flatness law and the annihilator calculus
@@ -54,7 +54,7 @@ tail-period law, geometric tails, and integer window arithmetic.
 
 set_option maxRecDepth 10000
 
-namespace Erdos257PeriodNoncollapse
+namespace Erdos249257
 namespace TotientTailPeriodKiller
 
 open Finset
@@ -532,4 +532,4 @@ theorem tail_diff_not_int_periodLcm_diagonal_seven_eight :
     tail_diff_notMem_int_of_certifiedKill certifiedKill_periodLcm_diagonal_at_eight⟩
 
 end TotientTailPeriodKiller
-end Erdos257PeriodNoncollapse
+end Erdos249257

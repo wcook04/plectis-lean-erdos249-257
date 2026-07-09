@@ -1,7 +1,7 @@
 import Mathlib.Algebra.Order.Antidiag.Prod
 import Mathlib.Data.Finset.NatAntidiagonal
 import Mathlib.Analysis.Normed.Ring.InfiniteSum
-import Erdos257PeriodNoncollapse.MersenneLambertLadder
+import Erdos249257.MersenneLambertLadder
 
 /-!
 # Geometric coprimality: the #249 constant as visible-lattice mass

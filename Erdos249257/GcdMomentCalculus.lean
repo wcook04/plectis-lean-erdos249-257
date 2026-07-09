@@ -8,7 +8,7 @@ import Mathlib.Tactic.Linarith
 import Mathlib.Tactic.NormNum
 import Mathlib.Tactic.Positivity
 import Mathlib.Tactic.FieldSimp
-import Erdos257PeriodNoncollapse.GeometricCoprimality
+import Erdos249257.GeometricCoprimality
 
 /-!
 # The squared Lambert transform: gcd moments and Stern–Brocot cylinders

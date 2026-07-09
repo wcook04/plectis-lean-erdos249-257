@@ -98,7 +98,7 @@
     "plectis_consumption_mode": "pointer_only_until_public_tag",
     "schema": "plectis_lean_public_api_contract_v0",
     "source_file_count": 19,
-    "source_snapshot_sha256": "184c8e24fd40b098df2f4a6feb3f7e81ec7d02943b7045989adf6d5dc6df78e6",
+    "source_snapshot_sha256": "c93b6622f144513f9b014e9cc4fbb44dafb4abdd6e791a40b020466c7fbbee57",
     "stable_metadata_files": [
       "PLECTIS_INTEGRATION.json",
       "PUBLIC_SNAPSHOT_MANIFEST.json",
@@ -107,15 +107,15 @@
       "RELEASE_PROVENANCE.json",
       "NON_CLAIMS.md"
     ],
-    "stable_root_import": "Erdos257PeriodNoncollapse",
+    "stable_root_import": "Erdos249257",
     "status": "local_contract_generated",
     "watched_source_files": [
       "lean-toolchain",
       "lakefile.toml",
       "lake-manifest.json",
-      "Erdos257PeriodNoncollapse.lean",
-      "Erdos257PeriodNoncollapse/CertificateKernel.lean",
-      "Erdos257PeriodNoncollapse/GeneratedCertificates.lean"
+      "Erdos249257.lean",
+      "Erdos249257/CertificateKernel.lean",
+      "Erdos249257/GeneratedCertificates.lean"
     ]
   },
   "publication_boundary": {
@@ -124,9 +124,9 @@
     "target_runner_gate": {
       "axiom_dependency_class": "not_attached",
       "declared_targets": [
-        "Erdos257PeriodNoncollapse",
-        "Erdos257PeriodNoncollapse.CertificateKernel",
-        "Erdos257PeriodNoncollapse.GeneratedCertificates"
+        "Erdos249257",
+        "Erdos249257.CertificateKernel",
+        "Erdos249257.GeneratedCertificates"
       ],
       "deferred_reason": "public-safe target-runner receipt not attached",
       "required_snapshot_fields": [
@@ -188,89 +188,89 @@
       "sha256": "52ffb75b5c6effc6ade9cd750e2039acbe0025f490e66b4425569dc0d61591a5"
     },
     {
-      "bytes": 179,
-      "path": "Erdos257PeriodNoncollapse.lean",
-      "sha256": "d25e0671595695884d3cb4c82fb138f8b611823c95e0ce289e806c37ef332cb8"
+      "bytes": 1187,
+      "path": "Erdos249257.lean",
+      "sha256": "18a08e9deed839f77a4b24a5734f1ce2a3c2df985fd610471a6f256e20b1b57d"
     },
     {
-      "bytes": 16473,
-      "path": "Erdos257PeriodNoncollapse/CarrySurvivorExtinction.lean",
-      "sha256": "9f2bf39179ba9dd49d9f60f521030f33be303fc4873af76a07af9ed29be287f1"
+      "bytes": 16431,
+      "path": "Erdos249257/CarrySurvivorExtinction.lean",
+      "sha256": "1c15b3ee8c34598c63da57524c52e116a72cd2eeea8e61c2afd8b3c38723a937"
     },
     {
-      "bytes": 870521,
-      "path": "Erdos257PeriodNoncollapse/CertificateKernel.lean",
-      "sha256": "91a91a80194fc3bc24daec81d63b62b261a63ee605a0603e44f0240132a4b5d4"
+      "bytes": 870434,
+      "path": "Erdos249257/CertificateKernel.lean",
+      "sha256": "561867a05ed7b9fe307c7bd8f235ff951c36f139a0617b15caa624b90ed66209"
     },
     {
       "bytes": 10983,
-      "path": "Erdos257PeriodNoncollapse/GapFareyBound.lean",
+      "path": "Erdos249257/GapFareyBound.lean",
       "sha256": "ab529bf80b2dd74e1d9c6162785102c7e5745d8555381c4108e815a1dd2c674a"
     },
     {
-      "bytes": 30337,
-      "path": "Erdos257PeriodNoncollapse/GcdMomentCalculus.lean",
-      "sha256": "0629f5da7ba46799aef6b1a608617edd7a767c37f8ef0a12eff6bd44982d241f"
+      "bytes": 30323,
+      "path": "Erdos249257/GcdMomentCalculus.lean",
+      "sha256": "e535c90b20cf4c424df5503efbd33159a2fcff3f2dc1b901f035d5b2ce297369"
     },
     {
-      "bytes": 1234923,
-      "path": "Erdos257PeriodNoncollapse/GeneratedCertificates.lean",
-      "sha256": "95a0e287c0c2c144c0b31cbbec6b70ff0d32f30209853577496b59e8635fd2ec"
+      "bytes": 1234839,
+      "path": "Erdos249257/GeneratedCertificates.lean",
+      "sha256": "f8bca477842c49cfeac273c1f92d19b1ca50886df768d8cc2aa740e77af8c21f"
     },
     {
-      "bytes": 4497,
-      "path": "Erdos257PeriodNoncollapse/GeneratedCertificates/b10_L6_A11.lean",
-      "sha256": "9d2ea4a462a6559332c88605fbcd2ef85930368cb72db67bcbacdbb137006cab"
+      "bytes": 4455,
+      "path": "Erdos249257/GeneratedCertificates/b10_L6_A11.lean",
+      "sha256": "e18152be5d4495f30fa7057043db01facf3e67d1d25b9184f53b7b25860407a3"
     },
     {
-      "bytes": 6871,
-      "path": "Erdos257PeriodNoncollapse/GeneratedCertificates/b2_L105_A75047.lean",
-      "sha256": "7e93d69e7c8f87103b7c00f820b76333ddaf97a78a5f3f284847dfe21c03e057"
+      "bytes": 6829,
+      "path": "Erdos249257/GeneratedCertificates/b2_L105_A75047.lean",
+      "sha256": "1df9b9a01878b2d7d5532bc28eab6043f89385a73b683f9349971108b02931eb"
     },
     {
-      "bytes": 8906,
-      "path": "Erdos257PeriodNoncollapse/GeneratedCertificates/b2_L210_A21371.lean",
-      "sha256": "8e8fa07d22a9605e2f212b9e21c3fa21acf760fdc9fc1d473d9b266515e4b948"
+      "bytes": 8864,
+      "path": "Erdos249257/GeneratedCertificates/b2_L210_A21371.lean",
+      "sha256": "1b3023063337ca140c10ef28abfe68106e506b1283251db3e5222303725ec366"
     },
     {
-      "bytes": 22074,
-      "path": "Erdos257PeriodNoncollapse/GeometricCoprimality.lean",
-      "sha256": "c69eeb437424531a6a4a6700a4c519f5912976546b6ec749bb41e3724b614255"
+      "bytes": 22060,
+      "path": "Erdos249257/GeometricCoprimality.lean",
+      "sha256": "896cb5a90c8d1bc574ff627464f140749f77d11316c870807d7b0b4d0a2af5cf"
     },
     {
-      "bytes": 26879,
-      "path": "Erdos257PeriodNoncollapse/LcmConeFlatness.lean",
-      "sha256": "b1d12b5c359c498d4607545ecb9c388ccca03883697b713739988e9ff337f03b"
+      "bytes": 26837,
+      "path": "Erdos249257/LcmConeFlatness.lean",
+      "sha256": "2831b057eb4becd82dd0bc18748be94757fcdcdd1db87dcb8e82deabc30bf153"
     },
     {
-      "bytes": 26493,
-      "path": "Erdos257PeriodNoncollapse/LcmConeNonflat.lean",
-      "sha256": "3f093f276ffaa72984fcb0a36686e3e2b0eb10078c85d8a8d540431d9a24af5d"
+      "bytes": 26451,
+      "path": "Erdos249257/LcmConeNonflat.lean",
+      "sha256": "b113c51081a5a926c635dd8f192c4915e1f2a3a6ad6768ea9ed9d03954991af0"
     },
     {
-      "bytes": 11230,
-      "path": "Erdos257PeriodNoncollapse/LcmDiagonalReduction.lean",
-      "sha256": "f2921eb4dd28bd6bc5b9d49b1ef76034c5eeb618e25f0ee804e45b2b19cd4172"
+      "bytes": 11188,
+      "path": "Erdos249257/LcmDiagonalReduction.lean",
+      "sha256": "d88aa575b60b9253fab4606788ad998f5e5f246c7c8f4a65a30600880d47e071"
     },
     {
       "bytes": 32055,
-      "path": "Erdos257PeriodNoncollapse/MersenneLambertLadder.lean",
+      "path": "Erdos249257/MersenneLambertLadder.lean",
       "sha256": "eca788d96c4215abb7b39a764184c34d86e2b1cffb44b4f2521e148b5875cc43"
     },
     {
-      "bytes": 20279,
-      "path": "Erdos257PeriodNoncollapse/TotientTailPeriodKiller.lean",
-      "sha256": "9ecee7214465711791d175ddd8865ee2edeb6f8f2f518cee9d10fbc0cf1ae774"
+      "bytes": 20251,
+      "path": "Erdos249257/TotientTailPeriodKiller.lean",
+      "sha256": "d0aa09e5625d9eb0c0d2ae54e0f7f80c37d8aa1495c93ad5ac12f6c181f68633"
     },
     {
-      "bytes": 3151,
+      "bytes": 3205,
       "path": "lake-manifest.json",
-      "sha256": "742c0e1042fd1e6c8b8024fd3c96d87916370420f2ae36315936907152dd8bd8"
+      "sha256": "ce8af3495139dac717402363eea258de3aa128cf01384511f97107320dc0f90c"
     },
     {
-      "bytes": 320,
+      "bytes": 311,
       "path": "lakefile.toml",
-      "sha256": "9a1f88d286ba9662359674ebbff6cf184605b6aa3e0409966f20814778a457b8"
+      "sha256": "53162ff01c43f284c4fe4bf5866a9bf7689ddabc45e19875c9ac83a1f28605cb"
     },
     {
       "bytes": 26,
@@ -284,34 +284,40 @@
     "source_file_count": 19,
     "source_file_sha256": {
       ".gitignore": "52ffb75b5c6effc6ade9cd750e2039acbe0025f490e66b4425569dc0d61591a5",
-      "Erdos257PeriodNoncollapse.lean": "d25e0671595695884d3cb4c82fb138f8b611823c95e0ce289e806c37ef332cb8",
-      "Erdos257PeriodNoncollapse/CarrySurvivorExtinction.lean": "9f2bf39179ba9dd49d9f60f521030f33be303fc4873af76a07af9ed29be287f1",
-      "Erdos257PeriodNoncollapse/CertificateKernel.lean": "91a91a80194fc3bc24daec81d63b62b261a63ee605a0603e44f0240132a4b5d4",
-      "Erdos257PeriodNoncollapse/GapFareyBound.lean": "ab529bf80b2dd74e1d9c6162785102c7e5745d8555381c4108e815a1dd2c674a",
-      "Erdos257PeriodNoncollapse/GcdMomentCalculus.lean": "0629f5da7ba46799aef6b1a608617edd7a767c37f8ef0a12eff6bd44982d241f",
-      "Erdos257PeriodNoncollapse/GeneratedCertificates.lean": "95a0e287c0c2c144c0b31cbbec6b70ff0d32f30209853577496b59e8635fd2ec",
-      "Erdos257PeriodNoncollapse/GeneratedCertificates/b10_L6_A11.lean": "9d2ea4a462a6559332c88605fbcd2ef85930368cb72db67bcbacdbb137006cab",
-      "Erdos257PeriodNoncollapse/GeneratedCertificates/b2_L105_A75047.lean": "7e93d69e7c8f87103b7c00f820b76333ddaf97a78a5f3f284847dfe21c03e057",
-      "Erdos257PeriodNoncollapse/GeneratedCertificates/b2_L210_A21371.lean": "8e8fa07d22a9605e2f212b9e21c3fa21acf760fdc9fc1d473d9b266515e4b948",
-      "Erdos257PeriodNoncollapse/GeometricCoprimality.lean": "c69eeb437424531a6a4a6700a4c519f5912976546b6ec749bb41e3724b614255",
-      "Erdos257PeriodNoncollapse/LcmConeFlatness.lean": "b1d12b5c359c498d4607545ecb9c388ccca03883697b713739988e9ff337f03b",
-      "Erdos257PeriodNoncollapse/LcmConeNonflat.lean": "3f093f276ffaa72984fcb0a36686e3e2b0eb10078c85d8a8d540431d9a24af5d",
-      "Erdos257PeriodNoncollapse/LcmDiagonalReduction.lean": "f2921eb4dd28bd6bc5b9d49b1ef76034c5eeb618e25f0ee804e45b2b19cd4172",
-      "Erdos257PeriodNoncollapse/MersenneLambertLadder.lean": "eca788d96c4215abb7b39a764184c34d86e2b1cffb44b4f2521e148b5875cc43",
-      "Erdos257PeriodNoncollapse/TotientTailPeriodKiller.lean": "9ecee7214465711791d175ddd8865ee2edeb6f8f2f518cee9d10fbc0cf1ae774",
-      "lake-manifest.json": "742c0e1042fd1e6c8b8024fd3c96d87916370420f2ae36315936907152dd8bd8",
-      "lakefile.toml": "9a1f88d286ba9662359674ebbff6cf184605b6aa3e0409966f20814778a457b8",
+      "Erdos249257.lean": "18a08e9deed839f77a4b24a5734f1ce2a3c2df985fd610471a6f256e20b1b57d",
+      "Erdos249257/CarrySurvivorExtinction.lean": "1c15b3ee8c34598c63da57524c52e116a72cd2eeea8e61c2afd8b3c38723a937",
+      "Erdos249257/CertificateKernel.lean": "561867a05ed7b9fe307c7bd8f235ff951c36f139a0617b15caa624b90ed66209",
+      "Erdos249257/GapFareyBound.lean": "ab529bf80b2dd74e1d9c6162785102c7e5745d8555381c4108e815a1dd2c674a",
+      "Erdos249257/GcdMomentCalculus.lean": "e535c90b20cf4c424df5503efbd33159a2fcff3f2dc1b901f035d5b2ce297369",
+      "Erdos249257/GeneratedCertificates.lean": "f8bca477842c49cfeac273c1f92d19b1ca50886df768d8cc2aa740e77af8c21f",
+      "Erdos249257/GeneratedCertificates/b10_L6_A11.lean": "e18152be5d4495f30fa7057043db01facf3e67d1d25b9184f53b7b25860407a3",
+      "Erdos249257/GeneratedCertificates/b2_L105_A75047.lean": "1df9b9a01878b2d7d5532bc28eab6043f89385a73b683f9349971108b02931eb",
+      "Erdos249257/GeneratedCertificates/b2_L210_A21371.lean": "1b3023063337ca140c10ef28abfe68106e506b1283251db3e5222303725ec366",
+      "Erdos249257/GeometricCoprimality.lean": "896cb5a90c8d1bc574ff627464f140749f77d11316c870807d7b0b4d0a2af5cf",
+      "Erdos249257/LcmConeFlatness.lean": "2831b057eb4becd82dd0bc18748be94757fcdcdd1db87dcb8e82deabc30bf153",
+      "Erdos249257/LcmConeNonflat.lean": "b113c51081a5a926c635dd8f192c4915e1f2a3a6ad6768ea9ed9d03954991af0",
+      "Erdos249257/LcmDiagonalReduction.lean": "d88aa575b60b9253fab4606788ad998f5e5f246c7c8f4a65a30600880d47e071",
+      "Erdos249257/MersenneLambertLadder.lean": "eca788d96c4215abb7b39a764184c34d86e2b1cffb44b4f2521e148b5875cc43",
+      "Erdos249257/TotientTailPeriodKiller.lean": "d0aa09e5625d9eb0c0d2ae54e0f7f80c37d8aa1495c93ad5ac12f6c181f68633",
+      "lake-manifest.json": "ce8af3495139dac717402363eea258de3aa128cf01384511f97107320dc0f90c",
+      "lakefile.toml": "53162ff01c43f284c4fe4bf5866a9bf7689ddabc45e19875c9ac83a1f28605cb",
       "lean-toolchain": "88a1d79c54cf3777f22b61a68377f44150124ba67f889c98587b2291885358a5"
     },
-    "source_files_sha256": "184c8e24fd40b098df2f4a6feb3f7e81ec7d02943b7045989adf6d5dc6df78e6",
+    "source_files_sha256": "c93b6622f144513f9b014e9cc4fbb44dafb4abdd6e791a40b020466c7fbbee57",
     "source_manifest": "microcosm-substrate/docs/lean_formal_methods_os/release_topology_source_v0.json",
     "source_root": "formal_math/erdos257_period_noncollapse",
-    "source_total_bytes": 2326212
+    "source_total_bytes": 2326744,
+    "source_root_role": "legacy_private_export_source_root",
+    "source_root_note": "Historical private export-source root for the v0.1.x/v0.2.0 lineage. This path is provenance of the private lane, not the public Lean import path (which is Erdos249257). The private lane was not renamed in this pass.",
+    "public_root_import": "Erdos249257"
   },
   "standalone_repo": {
     "directory_name": "plectis-lean-erdos249-257",
     "display_name": "Erdos #249/#257 Lean Snapshot",
     "remote_name_suggestion": "plectis-lean-erdos249-257",
     "repository_role": "standalone_lean_lake_package_export"
-  }
+  },
+  "source_root_role": "legacy_private_export_source_root",
+  "source_root_note": "Historical private export-source root for the v0.1.x/v0.2.0 lineage. This path is provenance of the private lane, not the public Lean import path (which is Erdos249257). The private lane was not renamed in this pass.",
+  "public_root_import": "Erdos249257"
 }

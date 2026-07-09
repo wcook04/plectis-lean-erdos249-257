@@ -1,4 +1,4 @@
-import Erdos257PeriodNoncollapse.CarrySurvivorExtinction
+import Erdos249257.CarrySurvivorExtinction
 
 /-!
 # Wave 23: the diagonal lcm collapse and the window structure of the lcm ray
@@ -51,7 +51,7 @@ multiplicativity, geometric tails.  No q-Padé, no unformalised citations.
 
 set_option maxRecDepth 10000
 
-namespace Erdos257PeriodNoncollapse
+namespace Erdos249257
 namespace TotientTailPeriodKiller
 
 open Finset
@@ -235,4 +235,4 @@ theorem tail_diff_not_int_periodLcm_diagonal (t : ℕ) (h1 : 1 ≤ t) (h6 : t �
     (certifiedKill_periodLcm_diagonal_upto_six t (Finset.mem_Icc.mpr ⟨h1, h6⟩))
 
 end TotientTailPeriodKiller
-end Erdos257PeriodNoncollapse
+end Erdos249257

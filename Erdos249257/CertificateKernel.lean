@@ -18,20 +18,20 @@ import Mathlib.RingTheory.Polynomial.Cyclotomic.Roots
 import Mathlib.Topology.Algebra.InfiniteSum.NatInt
 import Mathlib.Topology.Algebra.InfiniteSum.Order
 import Mathlib.Topology.Algebra.InfiniteSum.Ring
-import Erdos257PeriodNoncollapse.GapFareyBound
-import Erdos257PeriodNoncollapse.MersenneLambertLadder
-import Erdos257PeriodNoncollapse.GeometricCoprimality
-import Erdos257PeriodNoncollapse.GcdMomentCalculus
-import Erdos257PeriodNoncollapse.TotientTailPeriodKiller
-import Erdos257PeriodNoncollapse.CarrySurvivorExtinction
-import Erdos257PeriodNoncollapse.LcmDiagonalReduction
-import Erdos257PeriodNoncollapse.LcmConeFlatness
-import Erdos257PeriodNoncollapse.LcmConeNonflat
+import Erdos249257.GapFareyBound
+import Erdos249257.MersenneLambertLadder
+import Erdos249257.GeometricCoprimality
+import Erdos249257.GcdMomentCalculus
+import Erdos249257.TotientTailPeriodKiller
+import Erdos249257.CarrySurvivorExtinction
+import Erdos249257.LcmDiagonalReduction
+import Erdos249257.LcmConeFlatness
+import Erdos249257.LcmConeNonflat
 
 set_option linter.unusedTactic false
 set_option linter.unreachableTactic false
 
-namespace Erdos257PeriodNoncollapse
+namespace Erdos249257
 
 theorem no_prime_drop_implies_eq
     (d L : Nat)
@@ -18884,4 +18884,4 @@ theorem totient_tail_cone_nonflat_cert_seed_lift {H L L' : ℕ}
     TotientTailPeriodKiller.coneNonflatCert H L' Q' :=
   TotientTailPeriodKiller.coneNonflatCert_seed_lift hQ hsub hfloor hcert hle
 
-end Erdos257PeriodNoncollapse
+end Erdos249257

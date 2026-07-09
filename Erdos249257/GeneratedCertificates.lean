@@ -1,13 +1,13 @@
 -- Generated direct-prime emitted certificate aggregate.
-import Erdos257PeriodNoncollapse.CertificateKernel
-import Erdos257PeriodNoncollapse.GeneratedCertificates.b10_L6_A11
-import Erdos257PeriodNoncollapse.GeneratedCertificates.b2_L210_A21371
-import Erdos257PeriodNoncollapse.GeneratedCertificates.b2_L105_A75047
+import Erdos249257.CertificateKernel
+import Erdos249257.GeneratedCertificates.b10_L6_A11
+import Erdos249257.GeneratedCertificates.b2_L210_A21371
+import Erdos249257.GeneratedCertificates.b2_L105_A75047
 
 set_option linter.unusedTactic false
 set_option linter.unreachableTactic false
 
-namespace Erdos257PeriodNoncollapse
+namespace Erdos249257
 
 theorem concrete_generated_b2_F10_A31_p2_prime_witness :
     PrimeComponentWitness 10 31 2 2 3 := by
@@ -27725,4 +27725,4 @@ theorem concrete_lifted_b10_F6_A33_from_A3_mul11_p3_CanonicalWitnessRowCase :
     CanonicalWitnessRowCase 6 33 10 3 := by
   exact Or.inr (Or.inr ⟨7, concrete_lifted_b10_F6_A33_from_A3_mul11_p3_prime_witness⟩)
 
-end Erdos257PeriodNoncollapse
+end Erdos249257

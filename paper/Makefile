@@ -4,7 +4,7 @@
 #     https://tectonic-typesetting.github.io
 # Fallback: a standard TeX Live install (run pdflatex twice for the TOC/refs).
 
-PAPER = erdos-exposition
+PAPER = erdos249-257-exposition
 
 .PHONY: all clean
 

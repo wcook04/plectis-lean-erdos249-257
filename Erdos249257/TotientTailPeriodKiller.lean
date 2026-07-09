@@ -47,7 +47,7 @@ Everything here is elementary: `φ(n) ≤ n`, geometric tails, and integer
 window arithmetic.  No q-Padé, no Stern–Brocot, no unformalised citations.
 -/
 
-namespace Erdos257PeriodNoncollapse
+namespace Erdos249257
 namespace TotientTailPeriodKiller
 
 open Finset
@@ -411,4 +411,4 @@ theorem totient_series_ne_rat_of_den_dvd (r : ℚ) (h : ℕ) (h1 : 1 ≤ h) (h8 
   tail_diff_not_int_small h h1 h8 (tail_diff_int_of_den_dvd r hS h 12 hdvd)
 
 end TotientTailPeriodKiller
-end Erdos257PeriodNoncollapse
+end Erdos249257

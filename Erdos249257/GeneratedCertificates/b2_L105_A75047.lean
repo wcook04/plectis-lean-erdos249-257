@@ -1,10 +1,10 @@
 -- Generated direct-prime emitted certificate shard from manifest: b2_L105_A75047.
-import Erdos257PeriodNoncollapse.CertificateKernel
+import Erdos249257.CertificateKernel
 
 set_option linter.unusedTactic false
 set_option linter.unreachableTactic false
 
-namespace Erdos257PeriodNoncollapse
+namespace Erdos249257
 
 theorem concrete_generated_b2_F105_A75047_factorization_support_cases
     {p : Nat}
@@ -155,4 +155,4 @@ theorem orderOf_b2_mod540525526767270388528448873_eq_105_from_emittedCertificate
     (Nat.one_le_pow (orderOf (ZMod.unitOfCoprime 2 hcop)) 2 (by decide))
     emittedCertificate_b2_L105_A75047
 
-end Erdos257PeriodNoncollapse
+end Erdos249257

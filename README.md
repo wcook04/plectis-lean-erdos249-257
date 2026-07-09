@@ -9,7 +9,7 @@ A machine-checked Lean 4 (Mathlib) development around two Erdős irrationality p
 
 This repository is a pinned, self-verifying public snapshot: everything needed to build and check it is here, and nothing private is required. Toolchain `leanprover/lean4:v4.29.1`, Mathlib pinned in `lake-manifest.json`. No `sorry`, no `admit`, no custom `axiom`; proofs are checked by the Lean kernel (`decide`, never `native_decide`). More than 1,600 theorem declarations across the package; continuous integration builds it on every push.
 
-**Read the exposition (no Lean required):** [`erdos-exposition.pdf`](erdos-exposition.pdf) at the repository root is a companion write-up in ordinary notation. It states what is proved, cited, and open, and links every claim to the exact Lean source line. The LaTeX source and build live in [`paper/`](paper/) (`tectonic paper/erdos-exposition.tex`, or `make -C paper`).
+**Read the exposition (no Lean required):** [`erdos249-257-exposition.pdf`](erdos249-257-exposition.pdf) at the repository root is a companion write-up in ordinary notation. It states what is proved, cited, and open, and links every claim to the exact Lean source line. The LaTeX source and build live in [`paper/`](paper/) (`tectonic paper/erdos249-257-exposition.tex`, or `make -C paper`).
 
 **Where this comes from.** `ai_workflow` is a private agentic system that turns intent into validated, receipt-backed work on disk. [Plectis](https://github.com/wcook04/plectis) is its public machinery exhibit — 88 fixture-backed components you can audit by cloning that repo. This Lean repository is a separate, still-growing lane focused on Erdős #249 and #257 (neither proven): ~1.7k theorems, ~51k lines, `0` `sorry`/`admit`/`axiom`, kernel-checked `decide` with no `native_decide` — what that machinery looks like running on a live mathematical frontier. None of that private tooling is a proof authority here: **the proof authority is the Lean source in this repository, checked by the Lean kernel.**
 
@@ -194,11 +194,18 @@ The build is heavy: with more than 1,600 theorem declarations and thousands of `
 
 ---
 
+## Source maps
+
+- Import graph: [`Erdos249257.lean`](Erdos249257.lean)
+- Chronology: [`docs/WAVE_INDEX.md`](docs/WAVE_INDEX.md)
+- Intention routes: [`docs/SOURCE_MAP.md`](docs/SOURCE_MAP.md)
+- Legacy private provenance: [`docs/PROVENANCE.md`](docs/PROVENANCE.md)
+
 ## Repository layout
 
 ```
-Erdos257PeriodNoncollapse.lean            root module (imports kernel + certificates)
-Erdos257PeriodNoncollapse/
+Erdos249257.lean            root module (imports kernel + certificates)
+Erdos249257/
   CertificateKernel.lean                  assembled microkernel (18,887 lines, 483 theorems)
   GeneratedCertificates.lean              generated finite certificates (27,728 lines, 1,026 theorems)
   GeneratedCertificates/                  per-base certificate shards
@@ -213,7 +220,7 @@ Erdos257PeriodNoncollapse/
   LcmConeNonflat.lean                     wave 25  joint cone non-flatness refuter
 PlectisSnapshot/PublicAPI.lean            stable public-API metadata adapter
 scripts/verify_snapshot.py                standalone snapshot verifier
-erdos-exposition.pdf                      compiled companion paper (tracked, root-visible)
+erdos249-257-exposition.pdf                      compiled companion paper (tracked, root-visible)
 paper/                                    exposition source for non-Lean readers (LaTeX + build)
 NON_CLAIMS.md  RELEASE_PROVENANCE.json  PUBLIC_API_CONTRACT.json  ...   release metadata
 lakefile.toml  lake-manifest.json  lean-toolchain                       build pins

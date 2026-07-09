@@ -1,10 +1,10 @@
 -- Generated direct-prime emitted certificate shard: b10_L6_A11.
-import Erdos257PeriodNoncollapse.CertificateKernel
+import Erdos249257.CertificateKernel
 
 set_option linter.unusedTactic false
 set_option linter.unreachableTactic false
 
-namespace Erdos257PeriodNoncollapse
+namespace Erdos249257
 
 theorem concrete_generated_b10_F6_A11_factorization_support_cases
     {p : Nat}
@@ -115,4 +115,4 @@ theorem orderOf_b10_mod90909_eq_6_from_emittedCertificate_denNorm :
     (Nat.one_le_pow (orderOf (ZMod.unitOfCoprime 10 hcop)) 10 (by decide))
     emittedCertificate_b10_L6_A11
 
-end Erdos257PeriodNoncollapse
+end Erdos249257

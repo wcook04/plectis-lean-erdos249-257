@@ -1,7 +1,7 @@
-name = "erdos257_period_noncollapse"
-version = "0.1.0"
-keywords = ["math", "erdos257", "period-noncollapse"]
-defaultTargets = ["Erdos257PeriodNoncollapse"]
+name = "erdos249257"
+version = "0.2.0"
+keywords = ["math", "erdos249", "erdos257", "lean4", "mathlib", "formalized-mathematics"]
+defaultTargets = ["Erdos249257"]
 
 [leanOptions]
 pp.unicode.fun = true
@@ -12,5 +12,4 @@ scope = "leanprover-community"
 rev = "v4.29.1"
 
 [[lean_lib]]
-name = "Erdos257PeriodNoncollapse"
-
+name = "Erdos249257"

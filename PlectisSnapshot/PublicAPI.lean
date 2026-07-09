@@ -5,15 +5,15 @@ SPDX-License-Identifier: Apache-2.0
 Generated public API adapter for the Plectis Lean snapshot.
 It exposes stable metadata strings for consumers while the private frontier moves.
 -/
-import Erdos257PeriodNoncollapse
-import Erdos257PeriodNoncollapse.CertificateKernel
-import Erdos257PeriodNoncollapse.GeneratedCertificates
+import Erdos249257
+import Erdos249257.CertificateKernel
+import Erdos249257.GeneratedCertificates
 
 namespace PlectisSnapshot
 
 def publicApiContractSchema : String := "plectis_lean_public_api_contract_v0"
 def publicApiContractVersion : String := "0.1.0-pre"
-def sourceSnapshotSHA256 : String := "184c8e24fd40b098df2f4a6feb3f7e81ec7d02943b7045989adf6d5dc6df78e6"
+def sourceSnapshotSHA256 : String := "c93b6622f144513f9b014e9cc4fbb44dafb4abdd6e791a40b020466c7fbbee57"
 def sourceFileCount : Nat := 19
 def plectisConsumptionMode : String := "pointer_only_until_public_tag"
 

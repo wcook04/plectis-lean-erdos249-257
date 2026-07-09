@@ -1,4 +1,4 @@
-import Erdos257PeriodNoncollapse.TotientTailPeriodKiller
+import Erdos249257.TotientTailPeriodKiller
 
 /-!
 # Wave 22: carry-survivor extinction and the multiple-period collapse
@@ -52,7 +52,7 @@ arithmetic.  No q-Padé, no Stern–Brocot, no unformalised citations.
 
 set_option maxRecDepth 10000
 
-namespace Erdos257PeriodNoncollapse
+namespace Erdos249257
 namespace TotientTailPeriodKiller
 
 open Finset
@@ -340,4 +340,4 @@ theorem totient_series_ne_rat_of_den_dvd_upto_sixteen (r : ℚ) (h : ℕ)
   tail_diff_not_int_upto_sixteen h h1 h16 (tail_diff_int_of_den_dvd r hS h 14 hdvd)
 
 end TotientTailPeriodKiller
-end Erdos257PeriodNoncollapse
+end Erdos249257

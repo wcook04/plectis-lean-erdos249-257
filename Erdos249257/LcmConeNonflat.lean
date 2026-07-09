@@ -1,4 +1,4 @@
-import Erdos257PeriodNoncollapse.LcmConeFlatness
+import Erdos249257.LcmConeFlatness
 
 /-!
 # Wave 25: the cone non-flatness refuter — killing the menu, not the pair
@@ -52,7 +52,7 @@ and integer window arithmetic.
 
 set_option maxRecDepth 100000
 
-namespace Erdos257PeriodNoncollapse
+namespace Erdos249257
 namespace TotientTailPeriodKiller
 
 open Finset
@@ -537,4 +537,4 @@ theorem cone_nonflat_joint_win_at_cell :
       ∧ (¬ certifiedKill (1 * periodLcm 2) (3 * periodLcm 2) 5) := by decide
 
 end TotientTailPeriodKiller
-end Erdos257PeriodNoncollapse
+end Erdos249257

@@ -13,13 +13,16 @@
           "display_name": "Erdos #249/#257 Lean Snapshot",
           "remote_name_suggestion": "plectis-lean-erdos249-257",
           "repository_role": "standalone_lean_lake_package_export"
-        }
+        },
+        "source_root_role": "legacy_private_export_source_root",
+        "source_root_note": "Historical private export-source root for the v0.1.x/v0.2.0 lineage. This path is provenance of the private lane, not the public Lean import path (which is Erdos249257). The private lane was not renamed in this pass.",
+        "public_root_import": "Erdos249257"
       },
       "internalParameters": {
         "non_claim_gate_status": "pass",
         "publication_ready_boolean": false,
         "selected_file_count": 19,
-        "source_files_sha256": "184c8e24fd40b098df2f4a6feb3f7e81ec7d02943b7045989adf6d5dc6df78e6"
+        "source_files_sha256": "c93b6622f144513f9b014e9cc4fbb44dafb4abdd6e791a40b020466c7fbbee57"
       },
       "resolvedDependencies": [
         {
@@ -30,13 +33,13 @@
         },
         {
           "digest": {
-            "sha256": "184c8e24fd40b098df2f4a6feb3f7e81ec7d02943b7045989adf6d5dc6df78e6"
+            "sha256": "c93b6622f144513f9b014e9cc4fbb44dafb4abdd6e791a40b020466c7fbbee57"
           },
           "uri": "source_files_sha256"
         },
         {
           "digest": {
-            "sha256": "742c0e1042fd1e6c8b8024fd3c96d87916370420f2ae36315936907152dd8bd8"
+            "sha256": "ce8af3495139dac717402363eea258de3aa128cf01384511f97107320dc0f90c"
           },
           "uri": "lake-manifest.json"
         },
@@ -77,7 +80,7 @@
         {
           "body_in_receipt": false,
           "digest": {
-            "sha256": "16f03fea054533beaf51723939769d4fdd1135f7886baf6358044186fd575c11"
+            "sha256": "e1a3d8305516a42873a09d93f48f088a980e8da0e5c8a462fdf11878c8c24031"
           },
           "name": "CITATION.cff"
         },
@@ -112,21 +115,21 @@
         {
           "body_in_receipt": false,
           "digest": {
-            "sha256": "e7d4e9f532a4752e56e7a4b213e24f3d215e3fb13ef7ebe8fd54d2146a7132ed"
+            "sha256": "d5c335368ad7c5eec077d004a7286da1317d0bdac1e40ef51e504e4d04fdda05"
           },
           "name": "PLECTIS_INTEGRATION.json"
         },
         {
           "body_in_receipt": false,
           "digest": {
-            "sha256": "f7383fee3de61c29e1b921ce07edcb7751272af74b9811fbdda9ccf85bc86df4"
+            "sha256": "093530b116e13746d880b2cb8b14460e42bdc620d4a7858eb5050808e7b4ade8"
           },
           "name": "PUBLIC_API_CONTRACT.json"
         },
         {
           "body_in_receipt": false,
           "digest": {
-            "sha256": "09ac39942db777a42b2713c1ef4b0b757f21fd1ad75c4d4ee405797a13820073"
+            "sha256": "587ca820ddcb4cff65656e4840ba8049bfd13b159badf0fcf72225809dd60c95"
           },
           "name": "PUBLIC_SNAPSHOT_MANIFEST.json"
         },
@@ -140,14 +143,14 @@
         {
           "body_in_receipt": false,
           "digest": {
-            "sha256": "e4ceb2e9a9b6aeaf63dde9ba96d83bcc9ec69e7e51b98567d2e11c5ce78beb09"
+            "sha256": "cb98b684a7da918485b584fc42c5b603a0250e5894f7f254e2d8b95d009b3a7b"
           },
           "name": "PlectisSnapshot/PublicAPI.lean"
         },
         {
           "body_in_receipt": false,
           "digest": {
-            "sha256": "51beadd5f8c022b13fcca0ac40ca12850aedf10ad25f28f6f7bf02a7e6529fd2"
+            "sha256": "11bfc36b053706b59460a587aee989da46a2349e916df2092a44271a8344ca4f"
           },
           "name": "README.md"
         },
@@ -168,7 +171,7 @@
         {
           "body_in_receipt": false,
           "digest": {
-            "sha256": "004cfa023b96784112667041d07c1b37ae828594b39da0c5f059da3670a8dc5e"
+            "sha256": "83d26198cdcda9b8eee04ecd9e6c3c611636207b716379431ba057c70bb93ea4"
           },
           "name": "RELEASE_NOTES.md"
         },
@@ -198,9 +201,9 @@
   "subject": [
     {
       "digest": {
-        "sha256": "e3abc3da7b82ff0b7daba1fb4078c4d1ab355dd75d5bada50936a5b3611f55ee"
+        "sha256": "646f18428d58280e176e1619f13653efb42e207d6ee25da308079b630ad04006"
       },
-      "file_count": 42,
+      "file_count": 45,
       "name": "plectis-lean-erdos249-257"
     }
   ],
