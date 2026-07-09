@@ -1,5 +1,4 @@
-<img width="1920" height="1080" alt="image-1783625330775" src="https://github.com/user-attachments/assets/b9a5c21e-058e-4fe9-9eff-92f76379089b" />
-
+<img width="1920" height="1080" alt="Machine-checked Erdős #249/#257 proof map in Lean 4. Full-support Erdős–Borwein is proven irrational; Erdős #249 is open, shown with its exact identities, a bounded partial (denominator excluded up to 7.96×10³⁴), and conditional walls. Nothing here claims either open problem is solved." src="banner.png" />
 
 <!-- SPDX-FileCopyrightText: 2026 Will Cook -->
 <!-- SPDX-License-Identifier: Apache-2.0 -->
