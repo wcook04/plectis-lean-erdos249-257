@@ -12,7 +12,7 @@ from typing import Any, Mapping, Sequence
 
 
 SCHEMA = "plectis_lean_snapshot_verifier_v0"
-SUBJECT_EXCLUDED = {"RELEASE_NOTES.md", "RELEASE_PROVENANCE.json"}
+SUBJECT_EXCLUDED = {"snapshot/RELEASE_NOTES.md", "snapshot/RELEASE_PROVENANCE.json"}
 APACHE_PHRASES = (
     "Apache License",
     "Version 2.0, January 2004",
@@ -50,7 +50,13 @@ def _tree_file_rows(root: Path, excluded: set[str] | None = None) -> list[dict[s
         if not path.is_file():
             continue
         rel = path.relative_to(root).as_posix()
-        if rel == ".git" or rel.startswith(".git/") or rel in excluded:
+        if (
+            rel == ".git"
+            or rel.startswith(".git/")
+            or rel.startswith(".lake/")
+            or rel.startswith(".cursor/")
+            or rel in excluded
+        ):
             continue
         stat = path.stat()
         rows.append({"path": rel, "bytes": stat.st_size, "sha256": _sha256(path)})
@@ -135,7 +141,7 @@ def _private_text_findings(root: Path) -> list[dict[str, str]]:
         if not path.is_file():
             continue
         rel = path.relative_to(root).as_posix()
-        if rel.startswith(".git/"):
+        if rel.startswith(".git/") or rel.startswith(".lake/") or rel.startswith(".cursor/"):
             continue
         try:
             text = path.read_text(encoding="utf-8")
@@ -153,16 +159,16 @@ def verify(root: Path) -> dict[str, Any]:
 
     required_files = [
         "CITATION.cff",
-        "REFERENCES.yaml",
-        "CLAIM_TO_REFERENCE_MAP.json",
-        "PUBLIC_API_CONTRACT.json",
+        "snapshot/REFERENCES.yaml",
+        "snapshot/CLAIM_TO_REFERENCE_MAP.json",
+        "snapshot/PUBLIC_API_CONTRACT.json",
         "PlectisSnapshot.lean",
         "PlectisSnapshot/PublicAPI.lean",
-        "NON_CLAIMS.md",
-        "PUBLIC_SNAPSHOT_MANIFEST.json",
-        "PLECTIS_INTEGRATION.json",
-        "RELEASE_PROVENANCE.json",
-        "RELEASE_NOTES.md",
+        "snapshot/NON_CLAIMS.md",
+        "snapshot/PUBLIC_SNAPSHOT_MANIFEST.json",
+        "snapshot/PLECTIS_INTEGRATION.json",
+        "snapshot/RELEASE_PROVENANCE.json",
+        "snapshot/RELEASE_NOTES.md",
         "LICENSE",
         "LICENSES/Apache-2.0.txt",
         "REUSE.toml",
@@ -191,12 +197,12 @@ def verify(root: Path) -> dict[str, Any]:
 
     references: dict[str, Any] = {}
     try:
-        references = _load_json_with_comment_header(root / "REFERENCES.yaml")
+        references = _load_json_with_comment_header(root / "snapshot" / "REFERENCES.yaml")
     except Exception as exc:  # noqa: BLE001
         failures.append({"kind": "references_parse_error", "error": str(exc)})
 
     try:
-        claim_map = _load_json(root / "CLAIM_TO_REFERENCE_MAP.json")
+        claim_map = _load_json(root / "snapshot" / "CLAIM_TO_REFERENCE_MAP.json")
         families = claim_map.get("claim_families") or {}
         for family in REQUIRED_CLAIM_FAMILIES:
             row = families.get(family) or {}
@@ -206,7 +212,7 @@ def verify(root: Path) -> dict[str, Any]:
         failures.append({"kind": "claim_reference_map_parse_error", "error": str(exc)})
 
     try:
-        non_claims = (root / "NON_CLAIMS.md").read_text(encoding="utf-8")
+        non_claims = (root / "snapshot" / "NON_CLAIMS.md").read_text(encoding="utf-8")
         missing = [item for item in REQUIRED_NON_CLAIMS if item not in non_claims]
         if missing:
             failures.append({"kind": "non_claims_missing", "missing": missing})
@@ -214,13 +220,13 @@ def verify(root: Path) -> dict[str, Any]:
         pass
 
     try:
-        public_manifest = _load_json(root / "PUBLIC_SNAPSHOT_MANIFEST.json")
-        integration = _load_json(root / "PLECTIS_INTEGRATION.json")
+        public_manifest = _load_json(root / "snapshot" / "PUBLIC_SNAPSHOT_MANIFEST.json")
+        integration = _load_json(root / "snapshot" / "PLECTIS_INTEGRATION.json")
         if public_manifest.get("parent_component") != (integration.get("plectis_integration") or {}).get("parent_component"):
             failures.append({"kind": "public_manifest_parent_component_mismatch"})
         public_tag = (public_manifest.get("standalone_repo") or {}).get("public_tag")
         public_commit = (public_manifest.get("standalone_repo") or {}).get("public_commit")
-        notes = (root / "RELEASE_NOTES.md").read_text(encoding="utf-8")
+        notes = (root / "snapshot" / "RELEASE_NOTES.md").read_text(encoding="utf-8")
         if not public_tag and "Publication status: blocked" not in notes:
             failures.append({"kind": "release_notes_not_blocked_without_public_tag"})
         if public_tag or public_commit:
@@ -229,7 +235,7 @@ def verify(root: Path) -> dict[str, Any]:
         failures.append({"kind": "public_manifest_or_integration_error", "error": str(exc)})
 
     try:
-        contract = _load_json(root / "PUBLIC_API_CONTRACT.json")
+        contract = _load_json(root / "snapshot" / "PUBLIC_API_CONTRACT.json")
         if contract.get("schema") != "plectis_lean_public_api_contract_v0":
             failures.append({"kind": "public_api_contract_schema_mismatch", "schema": contract.get("schema")})
         if contract.get("plectis_consumption_mode") != "pointer_only_until_public_tag":
@@ -247,7 +253,7 @@ def verify(root: Path) -> dict[str, Any]:
         failures.append({"kind": "public_api_contract_error", "error": str(exc)})
 
     try:
-        provenance = _load_json(root / "RELEASE_PROVENANCE.json")
+        provenance = _load_json(root / "snapshot" / "RELEASE_PROVENANCE.json")
         rows = _tree_file_rows(root, SUBJECT_EXCLUDED)
         digest = _tree_sha256(rows)
         subject_digest = ((provenance.get("subject") or [{}])[0].get("digest") or {}).get("sha256")
@@ -293,7 +299,7 @@ def verify(root: Path) -> dict[str, Any]:
 
     json_body_findings: list[dict[str, Any]] = []
     for path in sorted(root.rglob("*.json")):
-        if ".git" in path.parts:
+        if ".git" in path.parts or ".lake" in path.parts or ".cursor" in path.parts:
             continue
         try:
             keys = _json_body_keys(_load_json(path))

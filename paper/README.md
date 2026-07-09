@@ -32,5 +32,5 @@ The output is `erdos249-257-exposition.pdf`.
 - Erdős–Borwein-type irrationality (the #257 direction): full support at every base, plus named infinite-support cases.
 - The totient constant `S` (Erdős #249): the unconditional denominator record, the coprimality reading, and the reduction to finite certificates.
 - Where the work sits among the numbered Erdős problems (#249, #257, #1049, #250, #258, #69).
-- What is proved, what is only cited, and what is open, matching the machine-checked non-claims in `../NON_CLAIMS.md`.
+- What is proved, what is only cited, and what is open, matching the machine-checked non-claims in `../snapshot/NON_CLAIMS.md`.
 - An index of the principal declarations with drill-down links.

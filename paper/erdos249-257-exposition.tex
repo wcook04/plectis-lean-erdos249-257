@@ -140,7 +140,7 @@ universal \#257 statement are open. The reduction turns \#249 into the single
 assertion that the certificate supply is \emph{unbounded}; that unboundedness is
 the analytic core, and it is deliberately untouched. The repository states these
 boundaries in code as machine-checked non-claims
-(\idn{not_erdos_249_solution}, \idn{not_erdos_257_solution}; \rref{NON_CLAIMS.md}).
+(\idn{not_erdos_249_solution}, \idn{not_erdos_257_solution}; \rref{snapshot/NON_CLAIMS.md}).
 
 \paragraph{How it is checked.} The Lean~4 kernel verifies the whole package
 against Mathlib with no \texttt{sorry}, no \texttt{admit}, and no
@@ -162,7 +162,7 @@ declaration. Line numbers refer to that commit and do not drift.
 
 I have tried to be exact about the boundary between what is proved, what is only
 cited, and what is open. The repository enforces that boundary in code through a
-set of non-claims (\rref{NON_CLAIMS.md}), and I repeat it here in
+set of non-claims (\rref{snapshot/NON_CLAIMS.md}), and I repeat it here in
 Section~\ref{sec:boundary}.
 
 \section{Two constants, two problems}\label{sec:two}
@@ -335,7 +335,7 @@ near-integer route is a description of one lane, not a retraction of the theorem
 The universal Erd\H{o}s \#257 statement, irrationality of $\sum_{n\in A}1/(2^n-1)$
 for \emph{every} infinite $A$, is not proved. The proved cases are a family, not
 the quantified theorem, and the repository marks this in code
-(the non-claim \idn{not_erdos_257_solution} in \rref{NON_CLAIMS.md}).
+(the non-claim \idn{not_erdos_257_solution} in \rref{snapshot/NON_CLAIMS.md}).
 
 \section{The totient constant $S$ (Erd\H{o}s \#249)}\label{sec:249}
 
@@ -571,7 +571,7 @@ supply is unbounded'', which is the untouched analytic core.
 
 The repository states these boundaries in code as machine-checked non-claims:
 \idn{not_erdos_249_solution}, \idn{not_erdos_257_solution}, and four provenance
-non-claims (\rref{NON_CLAIMS.md}, \href{\repobase/PlectisSnapshot/PublicAPI.lean}{\texttt{PlectisSnapshot/PublicAPI.lean}}).
+non-claims (\rref{snapshot/NON_CLAIMS.md}, \href{\repobase/PlectisSnapshot/PublicAPI.lean}{\texttt{PlectisSnapshot/PublicAPI.lean}}).
 
 \section{Verification and reproducibility}\label{sec:verify}
 
@@ -599,7 +599,7 @@ python3 scripts/verify_snapshot.py --allow-blocked   # structural verify
 
 A standalone verifier \href{\repobase/\detokenize{scripts/verify_snapshot.py}}{\texttt{scripts/verify\_snapshot.py}}
 (Python standard library only) recomputes the tree digest against
-\href{\repobase/\detokenize{RELEASE_PROVENANCE.json}}{\texttt{RELEASE\_PROVENANCE.json}} and
+\href{\repobase/\detokenize{snapshot/RELEASE_PROVENANCE.json}}{\texttt{snapshot/RELEASE\_PROVENANCE.json}} and
 checks the license, the SPDX/REUSE metadata, the public-API adapter, and the
 required non-claims; it reports \texttt{structural\_status: pass}. It is a
 local-candidate structural check, not a publication authority: its

@@ -31,18 +31,6 @@
     }
   },
   "generated_at": "2026-07-08T20:55:03Z",
-  "local_receipt": "standalone_export_receipt_v0.json",
-  "metadata_gate_policy": {
-    "bibliography": "placeholders_allowed_only_for_blocked_local_candidates",
-    "citation": "generated_without_public_repository_version_commit_until_public_tag",
-    "consumer_verifier": "standalone_stdlib_verifier_generated_inside_repo_a",
-    "license": "full_apache_2_0_text_required_or_export_fails",
-    "provenance": "export_subject_tree_statement_generated",
-    "public_api_contract": "generated_contract_and_adapter_files_required_for_plectis_consumption",
-    "release_notes": "generated_blocked_snapshot_notes_until_public_tag",
-    "reuse": "reuse_toml_and_spdx_metadata_generated",
-    "workflows": "convenience_workflow_non_release_and_release_gate_full_sha_pinned"
-  },
   "moving_frontier_policy": {
     "breaking_private_change": "Topology changes require a compatibility adapter or a new snapshot lane in Plectis.",
     "private_frontier": "Private #249/#257 work is excluded until a new manifest row and release gate promote it.",
@@ -57,19 +45,14 @@
     "not_provider_proof_authority",
     "not_hidden_proof_body_authority"
   ],
-  "parent_component": "lean_formal_methods_operating_system",
-  "plectis_consumption": {
-    "active_target": {
-      "fallback": "pointer_only_until_public_tag",
-      "mode": "none_yet",
-      "reason": "standalone_export_manifest_has_no_public_tag_hash_authority"
-    },
-    "allowed_pointer": "PLECTIS_INTEGRATION.json plus standalone_export_receipt_v0.json",
-    "blocked_until_tag": "vendored_or_submodule_dependency",
+  "plectis_integration": {
+    "current_contour": "microcosm-substrate/docs/lean_formal_methods_os/import_contour_v0.md",
+    "eventual_import_manifest_family": "lean_formal_methods_os_public_snapshot_manifest",
     "eventual_snapshot_destination": "examples/lean_formal_methods_os/lake_project",
-    "mode": "pointer_only_until_public_tag"
+    "parent_component": "lean_formal_methods_operating_system",
+    "receiving_repo_role": "plectis_infrastructure_and_receipt_layer",
+    "topology_doc": "microcosm-substrate/docs/lean_formal_methods_os/two_repo_release_topology_v0.md"
   },
-  "private_source_drift_report_ref": "private_source_drift_report_v0.json",
   "public_api_contract": {
     "adapter_files": [
       "PlectisSnapshot.lean",
@@ -117,12 +100,12 @@
     "source_file_count": 19,
     "source_snapshot_sha256": "c93b6622f144513f9b014e9cc4fbb44dafb4abdd6e791a40b020466c7fbbee57",
     "stable_metadata_files": [
-      "PLECTIS_INTEGRATION.json",
-      "PUBLIC_SNAPSHOT_MANIFEST.json",
-      "PUBLIC_API_CONTRACT.json",
-      "CLAIM_TO_REFERENCE_MAP.json",
-      "RELEASE_PROVENANCE.json",
-      "NON_CLAIMS.md"
+      "snapshot/PLECTIS_INTEGRATION.json",
+      "snapshot/PUBLIC_SNAPSHOT_MANIFEST.json",
+      "snapshot/PUBLIC_API_CONTRACT.json",
+      "snapshot/CLAIM_TO_REFERENCE_MAP.json",
+      "snapshot/RELEASE_PROVENANCE.json",
+      "snapshot/NON_CLAIMS.md"
     ],
     "stable_root_import": "Erdos249257",
     "status": "local_contract_generated",
@@ -135,12 +118,41 @@
       "Erdos249257/GeneratedCertificates.lean"
     ]
   },
-  "public_api_contract_ref": "PUBLIC_API_CONTRACT.json",
-  "public_prior_art_drift_report_ref": "public_prior_art_drift_report_v0.json",
-  "publication_blocker": "clean_build_and_public_tag_missing",
-  "publication_ready_boolean": false,
-  "release_selected_source": "formal_math/erdos257_period_noncollapse",
-  "required_publication_gates": [
+  "public_root_import": "Erdos249257",
+  "publication_boundary": {
+    "plectis_repo_publication": "separate dissemination gate consumes the standalone tag/hash and Plectis receipts",
+    "standalone_repo_publication": "allowed_only_from_clean_export_after_release_gates",
+    "target_runner_gate": {
+      "axiom_dependency_class": "not_attached",
+      "declared_targets": [
+        "Erdos249257",
+        "Erdos249257.CertificateKernel",
+        "Erdos249257.GeneratedCertificates"
+      ],
+      "deferred_reason": "public-safe target-runner receipt not attached",
+      "required_snapshot_fields": [
+        "source_snapshot_sha256",
+        "repo_a_export_tree_sha256",
+        "target_runner_receipt_ref",
+        "target_runner_receipt_sha256",
+        "declared_targets",
+        "axiom_dependency_class"
+      ],
+      "status": "deferred",
+      "target_body_policy": "public_safe_receipt_hash_only",
+      "target_runner_receipt_ref": null,
+      "target_runner_receipt_sha256": null
+    },
+    "whole_ai_workflow_push": "out_of_scope_for_this_builder"
+  },
+  "publication_pointer": {
+    "public_commit": null,
+    "public_repo_url": null,
+    "public_snapshot_manifest": "snapshot/PUBLIC_SNAPSHOT_MANIFEST.json",
+    "public_tag": null,
+    "publication_ready_boolean": false
+  },
+  "release_gates": [
     "clean_export_tree",
     "lake_build_receipt",
     "target_runner_receipt",
@@ -161,13 +173,117 @@
     "local_publication_candidate_rehearsal",
     "publication_lane_clean_ref"
   ],
-  "schema": "plectis_lean_public_snapshot_manifest_v0",
-  "snapshot_lineage_ref": "snapshot_lineage_v0.json",
-  "snapshot_steward_ref": "snapshot_steward_v0.json",
-  "source_file_count": 19,
-  "source_files_sha256": "c93b6622f144513f9b014e9cc4fbb44dafb4abdd6e791a40b020466c7fbbee57",
-  "source_manifest": "microcosm-substrate/docs/lean_formal_methods_os/release_topology_source_v0.json",
+  "schema": "plectis_lean_release_export_receipt_v0",
+  "snapshot_lineage": {
+    "last_good_public_source": "Plectis-side lineage, not the moving private root",
+    "lineage_ref": "snapshot_lineage_v0.json",
+    "private_source_drift_report_ref": "private_source_drift_report_v0.json",
+    "public_prior_art_drift_report_ref": "public_prior_art_drift_report_v0.json",
+    "snapshot_steward_ref": "snapshot_steward_v0.json"
+  },
+  "source_config_path": "microcosm-substrate/docs/lean_formal_methods_os/release_topology_source_v0.json",
+  "source_files": [
+    {
+      "bytes": 15,
+      "path": ".gitignore",
+      "sha256": "52ffb75b5c6effc6ade9cd750e2039acbe0025f490e66b4425569dc0d61591a5"
+    },
+    {
+      "bytes": 1187,
+      "path": "Erdos249257.lean",
+      "sha256": "18a08e9deed839f77a4b24a5734f1ce2a3c2df985fd610471a6f256e20b1b57d"
+    },
+    {
+      "bytes": 16431,
+      "path": "Erdos249257/CarrySurvivorExtinction.lean",
+      "sha256": "1c15b3ee8c34598c63da57524c52e116a72cd2eeea8e61c2afd8b3c38723a937"
+    },
+    {
+      "bytes": 870434,
+      "path": "Erdos249257/CertificateKernel.lean",
+      "sha256": "561867a05ed7b9fe307c7bd8f235ff951c36f139a0617b15caa624b90ed66209"
+    },
+    {
+      "bytes": 10983,
+      "path": "Erdos249257/GapFareyBound.lean",
+      "sha256": "ab529bf80b2dd74e1d9c6162785102c7e5745d8555381c4108e815a1dd2c674a"
+    },
+    {
+      "bytes": 30323,
+      "path": "Erdos249257/GcdMomentCalculus.lean",
+      "sha256": "e535c90b20cf4c424df5503efbd33159a2fcff3f2dc1b901f035d5b2ce297369"
+    },
+    {
+      "bytes": 1234839,
+      "path": "Erdos249257/GeneratedCertificates.lean",
+      "sha256": "f8bca477842c49cfeac273c1f92d19b1ca50886df768d8cc2aa740e77af8c21f"
+    },
+    {
+      "bytes": 4455,
+      "path": "Erdos249257/GeneratedCertificates/b10_L6_A11.lean",
+      "sha256": "e18152be5d4495f30fa7057043db01facf3e67d1d25b9184f53b7b25860407a3"
+    },
+    {
+      "bytes": 6829,
+      "path": "Erdos249257/GeneratedCertificates/b2_L105_A75047.lean",
+      "sha256": "1df9b9a01878b2d7d5532bc28eab6043f89385a73b683f9349971108b02931eb"
+    },
+    {
+      "bytes": 8864,
+      "path": "Erdos249257/GeneratedCertificates/b2_L210_A21371.lean",
+      "sha256": "1b3023063337ca140c10ef28abfe68106e506b1283251db3e5222303725ec366"
+    },
+    {
+      "bytes": 22060,
+      "path": "Erdos249257/GeometricCoprimality.lean",
+      "sha256": "896cb5a90c8d1bc574ff627464f140749f77d11316c870807d7b0b4d0a2af5cf"
+    },
+    {
+      "bytes": 26837,
+      "path": "Erdos249257/LcmConeFlatness.lean",
+      "sha256": "2831b057eb4becd82dd0bc18748be94757fcdcdd1db87dcb8e82deabc30bf153"
+    },
+    {
+      "bytes": 26451,
+      "path": "Erdos249257/LcmConeNonflat.lean",
+      "sha256": "b113c51081a5a926c635dd8f192c4915e1f2a3a6ad6768ea9ed9d03954991af0"
+    },
+    {
+      "bytes": 11188,
+      "path": "Erdos249257/LcmDiagonalReduction.lean",
+      "sha256": "d88aa575b60b9253fab4606788ad998f5e5f246c7c8f4a65a30600880d47e071"
+    },
+    {
+      "bytes": 32055,
+      "path": "Erdos249257/MersenneLambertLadder.lean",
+      "sha256": "eca788d96c4215abb7b39a764184c34d86e2b1cffb44b4f2521e148b5875cc43"
+    },
+    {
+      "bytes": 20251,
+      "path": "Erdos249257/TotientTailPeriodKiller.lean",
+      "sha256": "d0aa09e5625d9eb0c0d2ae54e0f7f80c37d8aa1495c93ad5ac12f6c181f68633"
+    },
+    {
+      "bytes": 3205,
+      "path": "lake-manifest.json",
+      "sha256": "ce8af3495139dac717402363eea258de3aa128cf01384511f97107320dc0f90c"
+    },
+    {
+      "bytes": 311,
+      "path": "lakefile.toml",
+      "sha256": "53162ff01c43f284c4fe4bf5866a9bf7689ddabc45e19875c9ac83a1f28605cb"
+    },
+    {
+      "bytes": 26,
+      "path": "lean-toolchain",
+      "sha256": "88a1d79c54cf3777f22b61a68377f44150124ba67f889c98587b2291885358a5"
+    }
+  ],
+  "source_root": "formal_math/erdos257_period_noncollapse",
+  "source_root_note": "Historical private export-source root for the v0.1.x/v0.2.0 lineage. This path is provenance of the private lane, not the public Lean import path (which is Erdos249257). The private lane was not renamed in this pass.",
+  "source_root_role": "legacy_private_export_source_root",
   "source_snapshot": {
+    "public_root_import": "Erdos249257",
     "schema": "plectis_lean_source_snapshot_v0",
     "source_file_count": 19,
     "source_file_sha256": {
@@ -194,21 +310,14 @@
     "source_files_sha256": "c93b6622f144513f9b014e9cc4fbb44dafb4abdd6e791a40b020466c7fbbee57",
     "source_manifest": "microcosm-substrate/docs/lean_formal_methods_os/release_topology_source_v0.json",
     "source_root": "formal_math/erdos257_period_noncollapse",
-    "source_total_bytes": 2326744,
-    "source_root_role": "legacy_private_export_source_root",
     "source_root_note": "Historical private export-source root for the v0.1.x/v0.2.0 lineage. This path is provenance of the private lane, not the public Lean import path (which is Erdos249257). The private lane was not renamed in this pass.",
-    "public_root_import": "Erdos249257"
+    "source_root_role": "legacy_private_export_source_root",
+    "source_total_bytes": 2326744
   },
   "standalone_repo": {
     "directory_name": "plectis-lean-erdos249-257",
     "display_name": "Erdos #249/#257 Lean Snapshot",
-    "public_commit": null,
-    "public_tag": null,
     "remote_name_suggestion": "plectis-lean-erdos249-257",
     "repository_role": "standalone_lean_lake_package_export"
-  },
-  "status": "generated_export_pending_clean_build_and_public_tag",
-  "release_selected_source_role": "legacy_private_export_source_root",
-  "release_selected_source_note": "Historical private export-source root for the v0.1.x/v0.2.0 lineage. This path is provenance of the private lane, not the public Lean import path (which is Erdos249257). The private lane was not renamed in this pass.",
-  "public_root_import": "Erdos249257"
+  }
 }

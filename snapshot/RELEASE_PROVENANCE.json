@@ -6,17 +6,17 @@
       "buildType": "https://plectis.local/build-types/lean-standalone-export/v0",
       "externalParameters": {
         "export_handle": "plectis-lean-erdos249-257",
+        "public_root_import": "Erdos249257",
         "source_config_path": "microcosm-substrate/docs/lean_formal_methods_os/release_topology_source_v0.json",
         "source_root": "formal_math/erdos257_period_noncollapse",
+        "source_root_note": "Historical private export-source root for the v0.1.x/v0.2.0 lineage. This path is provenance of the private lane, not the public Lean import path (which is Erdos249257). The private lane was not renamed in this pass.",
+        "source_root_role": "legacy_private_export_source_root",
         "standalone_repo": {
           "directory_name": "plectis-lean-erdos249-257",
           "display_name": "Erdos #249/#257 Lean Snapshot",
           "remote_name_suggestion": "plectis-lean-erdos249-257",
           "repository_role": "standalone_lean_lake_package_export"
-        },
-        "source_root_role": "legacy_private_export_source_root",
-        "source_root_note": "Historical private export-source root for the v0.1.x/v0.2.0 lineage. This path is provenance of the private lane, not the public Lean import path (which is Erdos249257). The private lane was not renamed in this pass.",
-        "public_root_import": "Erdos249257"
+        }
       },
       "internalParameters": {
         "non_claim_gate_status": "pass",
@@ -87,13 +87,6 @@
         {
           "body_in_receipt": false,
           "digest": {
-            "sha256": "37db35d0cc18b8d33be6e17647851c90f7380ea6669b5fd05a9a3bc58625cd53"
-          },
-          "name": "CLAIM_TO_REFERENCE_MAP.json"
-        },
-        {
-          "body_in_receipt": false,
-          "digest": {
             "sha256": "5f73f0aafc768cc7c7f5da786dc7614296ee891a456faf175ab07456d3c35046"
           },
           "name": "LICENSE"
@@ -104,34 +97,6 @@
             "sha256": "5f73f0aafc768cc7c7f5da786dc7614296ee891a456faf175ab07456d3c35046"
           },
           "name": "LICENSES/Apache-2.0.txt"
-        },
-        {
-          "body_in_receipt": false,
-          "digest": {
-            "sha256": "35560a2b48db4a25cfdc8f6d85971b5e4c7252ba26548059612cb72d1d0384df"
-          },
-          "name": "NON_CLAIMS.md"
-        },
-        {
-          "body_in_receipt": false,
-          "digest": {
-            "sha256": "d5c335368ad7c5eec077d004a7286da1317d0bdac1e40ef51e504e4d04fdda05"
-          },
-          "name": "PLECTIS_INTEGRATION.json"
-        },
-        {
-          "body_in_receipt": false,
-          "digest": {
-            "sha256": "093530b116e13746d880b2cb8b14460e42bdc620d4a7858eb5050808e7b4ade8"
-          },
-          "name": "PUBLIC_API_CONTRACT.json"
-        },
-        {
-          "body_in_receipt": false,
-          "digest": {
-            "sha256": "587ca820ddcb4cff65656e4840ba8049bfd13b159badf0fcf72225809dd60c95"
-          },
-          "name": "PUBLIC_SNAPSHOT_MANIFEST.json"
         },
         {
           "body_in_receipt": false,
@@ -150,30 +115,9 @@
         {
           "body_in_receipt": false,
           "digest": {
-            "sha256": "11bfc36b053706b59460a587aee989da46a2349e916df2092a44271a8344ca4f"
+            "sha256": "a54cb88e150fb73d3376bbd9e46392872eb09e67d1d18e60e2e1a0ddffcb8ce2"
           },
           "name": "README.md"
-        },
-        {
-          "body_in_receipt": false,
-          "digest": {
-            "sha256": "3e68614bc2c4878ceab93684032691dfd336be9c5b279d741fd5eaedf1e1732c"
-          },
-          "name": "REFERENCES.yaml"
-        },
-        {
-          "body_in_receipt": false,
-          "digest": {
-            "sha256": "5c6e5eb15aabbcf15196bd5af6ec3f49d7b064ff89477a914f4a8c5299d5e777"
-          },
-          "name": "RELEASE_BOUNDARY.md"
-        },
-        {
-          "body_in_receipt": false,
-          "digest": {
-            "sha256": "83d26198cdcda9b8eee04ecd9e6c3c611636207b716379431ba057c70bb93ea4"
-          },
-          "name": "RELEASE_NOTES.md"
         },
         {
           "body_in_receipt": false,
@@ -185,9 +129,72 @@
         {
           "body_in_receipt": false,
           "digest": {
-            "sha256": "c963fbd7001e2d85e6bb5d74fb85c08e604a5d83537cf4ffc1deb55be501a4d2"
+            "sha256": "22492b85bb6cf0d87aea4d5d6411b7be07140453bd27acc88f9aac8458da9183"
           },
           "name": "scripts/verify_snapshot.py"
+        },
+        {
+          "body_in_receipt": false,
+          "digest": {
+            "sha256": "37db35d0cc18b8d33be6e17647851c90f7380ea6669b5fd05a9a3bc58625cd53"
+          },
+          "name": "snapshot/CLAIM_TO_REFERENCE_MAP.json"
+        },
+        {
+          "body_in_receipt": false,
+          "digest": {
+            "sha256": "35560a2b48db4a25cfdc8f6d85971b5e4c7252ba26548059612cb72d1d0384df"
+          },
+          "name": "snapshot/NON_CLAIMS.md"
+        },
+        {
+          "body_in_receipt": false,
+          "digest": {
+            "sha256": "d1978979c650f163f30a2e523fb3c80d22fc969eda331cd1cf07c7689ecc005b"
+          },
+          "name": "snapshot/PLECTIS_INTEGRATION.json"
+        },
+        {
+          "body_in_receipt": false,
+          "digest": {
+            "sha256": "f954f00b75bdd761f753e7d60d929a89c9242e1820156594753e185994c6dca6"
+          },
+          "name": "snapshot/PUBLIC_API_CONTRACT.json"
+        },
+        {
+          "body_in_receipt": false,
+          "digest": {
+            "sha256": "ee9a6eb1130c59ab5cfc9172a1ec93534d1c7bf18df858fac033be1aa47d7214"
+          },
+          "name": "snapshot/PUBLIC_SNAPSHOT_MANIFEST.json"
+        },
+        {
+          "body_in_receipt": false,
+          "digest": {
+            "sha256": "284ce79a70f75343b8e28cb965adceaf40baf736cbe98512b6be53c2e997c45f"
+          },
+          "name": "snapshot/README.md"
+        },
+        {
+          "body_in_receipt": false,
+          "digest": {
+            "sha256": "3e68614bc2c4878ceab93684032691dfd336be9c5b279d741fd5eaedf1e1732c"
+          },
+          "name": "snapshot/REFERENCES.yaml"
+        },
+        {
+          "body_in_receipt": false,
+          "digest": {
+            "sha256": "5c6e5eb15aabbcf15196bd5af6ec3f49d7b064ff89477a914f4a8c5299d5e777"
+          },
+          "name": "snapshot/RELEASE_BOUNDARY.md"
+        },
+        {
+          "body_in_receipt": false,
+          "digest": {
+            "sha256": "83d26198cdcda9b8eee04ecd9e6c3c611636207b716379431ba057c70bb93ea4"
+          },
+          "name": "snapshot/RELEASE_NOTES.md"
         }
       ],
       "metadata": {
@@ -201,9 +208,9 @@
   "subject": [
     {
       "digest": {
-        "sha256": "6828ee6406a7c22b7446b210c65e53e94f515a659de227e15f78f4d77c6d477e"
+        "sha256": "d8c6f6751d56d5203c628ee7801ff6ec2d168f2597ea75b763999bbac0f4a5a8"
       },
-      "file_count": 45,
+      "file_count": 46,
       "name": "plectis-lean-erdos249-257"
     }
   ],
