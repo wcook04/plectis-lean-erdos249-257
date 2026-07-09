@@ -31,7 +31,7 @@
 % \lloc{file}{line}: compact link showing only "file:line" (for very long decls).
 \newcommand{\lloc}[2]{\href{\repobase/\PK/#1\#L#2}{\texttt{#1:#2}}}
 % \rref{rootfile}: link a repository-root file (underscores handled).
-\newcommand{\rref}[1]{\href{\repobase/\detokenize{#1}}{\texttt{\detokenize{#1}}}}
+\newcommand{\rref}[1]{\href{https://github.com/wcook04/plectis-lean-erdos249-257/blob/main/\detokenize{#1}}{\texttt{\detokenize{#1}}}}
 \emergencystretch=2em
 
 \newtheorem{result}{Result}
@@ -138,7 +138,7 @@ universal \#257 statement are open. The reduction turns \#249 into the claim tha
 the certificate supply is \emph{unbounded}. That unboundedness is the remaining
 analytic question, and it is left open. The repository records these boundaries
 as machine-checked non-claims
-(\idn{not_erdos_249_solution}, \idn{not_erdos_257_solution}; \rref{snapshot/NON_CLAIMS.md}).
+(\idn{not_erdos_249_solution}, \idn{not_erdos_257_solution}; \rref{NON_CLAIMS.md}).
 
 \paragraph{How it is checked.} The Lean~4 kernel verifies the package against
 Mathlib with no \texttt{sorry}, no \texttt{admit}, and no \texttt{native\_decide};
@@ -160,7 +160,7 @@ declaration. Line numbers refer to that commit.
 
 The boundary between what is proved, what is only cited, and what is open is
 stated carefully. The repository enforces it in code through non-claims
-(\rref{snapshot/NON_CLAIMS.md}); Section~\ref{sec:boundary} repeats it here.
+(\rref{NON_CLAIMS.md}); Section~\ref{sec:boundary} repeats it here.
 
 \section{Two constants, two problems}\label{sec:two}
 
@@ -329,7 +329,7 @@ near-integer route is one lane, not a retraction of the theorem.
 The universal Erd\H{o}s \#257 statement, irrationality of $\sum_{n\in A}1/(2^n-1)$
 for \emph{every} infinite $A$, is not proved. The proved cases are a family, not
 the quantified theorem, and the repository marks this in code
-(the non-claim \idn{not_erdos_257_solution} in \rref{snapshot/NON_CLAIMS.md}).
+(the non-claim \idn{not_erdos_257_solution} in \rref{NON_CLAIMS.md}).
 
 \section{The totient constant $S$ (Erd\H{o}s \#249)}\label{sec:249}
 
@@ -563,7 +563,7 @@ supply is unbounded'', which is the remaining analytic question.
 
 The repository states these boundaries in code as machine-checked non-claims:
 \idn{not_erdos_249_solution}, \idn{not_erdos_257_solution}, and four provenance
-non-claims (\rref{snapshot/NON_CLAIMS.md}, \href{\repobase/PlectisSnapshot/PublicAPI.lean}{\texttt{PlectisSnapshot/PublicAPI.lean}}).
+non-claims (\rref{NON_CLAIMS.md}).
 
 \section{Verification and reproducibility}\label{sec:verify}
 
@@ -586,20 +586,12 @@ To build and check:
 \begin{verbatim}
 lake exe cache get      # fetch the prebuilt Mathlib cache
 lake build              # build and kernel-check the package
-python3 scripts/verify_snapshot.py --allow-blocked   # structural verify
 \end{verbatim}
 
-A standalone verifier \href{\repobase/\detokenize{scripts/verify_snapshot.py}}{\texttt{scripts/verify\_snapshot.py}}
-(Python standard library only) recomputes the tree digest against
-\href{\repobase/\detokenize{snapshot/RELEASE_PROVENANCE.json}}{\texttt{snapshot/RELEASE\_PROVENANCE.json}} and
-checks the license, the SPDX/REUSE metadata, the public-API adapter, and the
-required non-claims; it reports \texttt{structural\_status: pass}. It is a
-local-candidate structural check, not a publication authority: its
-\texttt{status: blocked} marker is a two-repo release-topology gate that stays set
-until a separate promotion lane attaches the exact public problem-numbering
-citation, and it is independent of the Lean build the kernel checks in full.
-Provenance and context for how this snapshot was produced, and its relation to
-the private system that generated it, are in the repository README.
+Trust rests on \texttt{lake build} alone: it elaborates every declaration and the
+Lean~4 kernel checks each proof term, including every \texttt{decide}, against
+Mathlib at the pinned toolchain. There is no separate trusted step and no
+compiler in the loop. Continuous integration runs the same build on every push.
 
 \section{A sibling project, in progress}\label{sec:ramanujan}
 

@@ -19,9 +19,9 @@ This snapshot does not solve either open problem; it formalises bounded irration
 | **[Architecture docs](https://wcook04.github.io/plectis/docs/architecture.html)** | How the 88 components fit together on one shared path. |
 | **[Tour](https://wcook04.github.io/plectis/docs/tour.html)** | A plain walkthrough of what Plectis is, what a component is, and where claims stop. |
 
-A machine-checked Lean 4 (Mathlib) development around two Erdős irrationality problems. It **proves** irrationality for a broad family of Erdős–Borwein-type series, gives an **unconditional** exclusion of every small-denominator rational value for the open totient constant, and **reduces** that open problem to a single sequence of finite, decidable certificates. It does **not** claim to settle either open problem, and it ships machine-checked non-claims and a standalone verifier that say so.
+A machine-checked Lean 4 (Mathlib) development around two Erdős irrationality problems. It **proves** irrationality for a broad family of Erdős–Borwein-type series, gives an **unconditional** exclusion of every small-denominator rational value for the open totient constant, and **reduces** that open problem to a single sequence of finite, decidable certificates. It does **not** claim to settle either open problem, and it ships machine-checked non-claims that say so.
 
-This repository is a pinned, self-verifying public snapshot: everything needed to build and check it is here, and nothing private is required. Toolchain `leanprover/lean4:v4.29.1`, Mathlib pinned in `lake-manifest.json`. No `sorry`, no `admit`, no custom `axiom`; proofs are checked by the Lean kernel (`decide`, never `native_decide`). More than 1,600 theorem declarations across the package; continuous integration builds it on every push.
+This repository is a pinned, self-contained public snapshot: everything needed to build and check it is here, and nothing private is required. Toolchain `leanprover/lean4:v4.29.1`, Mathlib pinned in `lake-manifest.json`. No `sorry`, no `admit`, no custom `axiom`; proofs are checked by the Lean kernel (`decide`, never `native_decide`). More than 1,600 theorem declarations across the package; continuous integration builds it on every push.
 
 **Read the exposition (no Lean required):** [`erdos249-257-exposition.pdf`](erdos249-257-exposition.pdf) at the repository root is a companion write-up in ordinary notation. It states what is proved, cited, and open, and links every claim to the exact Lean source line. The LaTeX source and build live in [`paper/`](paper/) (`tectonic paper/erdos249-257-exposition.tex`, or `make -C paper`).
 
@@ -180,28 +180,23 @@ The one-line summary: a formalization of Erdős–Borwein-type irrationality, an
 
 ---
 
-## The machinery
+## The package
 
-Beyond the mathematics, the snapshot ships the release discipline that produced it.
+Beyond the top-level results, here is what the package contains.
 
 - **`CertificateKernel.lean`** (~0.85 MB): the assembled microkernel. Imports all nine wave modules plus real Mathlib number theory (`NumberTheory.Real.Irrational`, cyclotomic eval/expand/roots, `TsumDivisorsAntidiagonal`, factorization, `Bertrand`, geometric and infinite sums).
 - **`GeneratedCertificates.lean`** (~1.18 MB) and the shards under `GeneratedCertificates/`: machine-generated finite certificate instances. Names encode base `b`, window/level `L`, and the residue/bound `A`. Each is checked by `decide` in the Lean kernel.
 - **Kernel-checked, no compiler trust.** Zero uses of `native_decide` and zero `sorry`/`admit` across the package.
-- **`scripts/verify_snapshot.py`**: a standard-library-only verifier. It recomputes the tree digest against `snapshot/RELEASE_PROVENANCE.json`, checks the Apache license text, the SPDX/REUSE metadata, the public-API adapter, and the required non-claims. On this snapshot it reports `structural_status: pass` and, deliberately, `status: blocked` until the exact bibliography and a public tag are attached.
-- **Provenance and contracts.** Under [`snapshot/`](snapshot/): `RELEASE_PROVENANCE.json` (SLSA-style build statement), `CLAIM_TO_REFERENCE_MAP.json`, `PUBLIC_API_CONTRACT.json`, `PLECTIS_INTEGRATION.json`, `NON_CLAIMS.md`, plus root `REUSE.toml` and full SPDX headers. `PlectisSnapshot/PublicAPI.lean` exposes stable metadata (schema id, source-snapshot hash, non-claim ids) so a consumer can pin this snapshot by hash.
+- **Licensing.** Apache-2.0 with full SPDX headers and REUSE metadata (`LICENSE`, `REUSE.toml`).
 
 ---
 
-## Build and verify
+## Build
 
 ```sh
-# Build (downloads the prebuilt Mathlib cache, then builds this package)
+# Downloads the prebuilt Mathlib cache, then builds and kernel-checks this package
 lake exe cache get
 lake build
-
-# Verify the snapshot with no dependencies beyond the Python standard library
-python3 scripts/verify_snapshot.py                  # structural_status: pass; status: blocked (by design)
-python3 scripts/verify_snapshot.py --allow-blocked  # exits 0 on structural pass
 ```
 
 The build is heavy: with more than 1,600 theorem declarations and thousands of `decide`-discharged certificates, a cold `lake build` takes several minutes even with the Mathlib cache. It is exercised on GitHub Actions on every push (see the badge above).
@@ -213,10 +208,7 @@ The build is heavy: with more than 1,600 theorem declarations and thousands of `
 - Import graph: [`Erdos249257.lean`](Erdos249257.lean)
 - Chronology: [`docs/WAVE_INDEX.md`](docs/WAVE_INDEX.md)
 - Intention routes: [`docs/SOURCE_MAP.md`](docs/SOURCE_MAP.md)
-- Legacy private provenance: [`docs/PROVENANCE.md`](docs/PROVENANCE.md)
-- Snapshot contract: [`snapshot/`](snapshot/)
-- Non-claims: [`snapshot/NON_CLAIMS.md`](snapshot/NON_CLAIMS.md)
-- Release boundary: [`snapshot/RELEASE_BOUNDARY.md`](snapshot/RELEASE_BOUNDARY.md)
+- Non-claims: [`NON_CLAIMS.md`](NON_CLAIMS.md)
 
 ## Repository layout
 
@@ -235,12 +227,9 @@ Erdos249257/
   LcmDiagonalReduction.lean               wave 23  one-parameter diagonal reduction
   LcmConeFlatness.lean                    wave 24  cone-flatness law + completeness
   LcmConeNonflat.lean                     wave 25  joint cone non-flatness refuter
-PlectisSnapshot/PublicAPI.lean            stable public-API metadata adapter
-scripts/verify_snapshot.py                standalone snapshot verifier
-erdos249-257-exposition.pdf                      compiled companion paper (tracked, root-visible)
+erdos249-257-exposition.pdf               compiled companion paper (tracked, root-visible)
 paper/                                    exposition source for non-Lean readers (LaTeX + build)
-snapshot/                         Plectis export contract: manifest, provenance,
-                                  non-claims, API contract, references, release notes
+NON_CLAIMS.md                             machine-checked non-claims (what this does not claim)
 lakefile.toml  lake-manifest.json  lean-toolchain                       build pins
 ```
 
@@ -263,13 +252,13 @@ A separate, in-progress project targets the [Ramanujan Machine Challenge](https:
 | 3.1 | knot-polynomial integral for π² | in progress; statement is an open conjecture |
 | 3.2 | Apéry ζ(3) irrationality-measure bound | in progress; statement is an open conjecture |
 
-Ten targets tracked, all ten statements normalized, two partial Lean kernels, zero full formalizations. The release discipline carries over from this package; the theorems do not.
+Ten targets tracked, all ten statements normalized, two partial Lean kernels, zero full formalizations. The methodology carries over from this package; the theorems do not.
 
 ---
 
 ## Non-claims and license
 
-The machine-checked non-claims (`snapshot/NON_CLAIMS.md`) are part of the artifact:
+The machine-checked non-claims (`NON_CLAIMS.md`) are part of the artifact:
 
 - `not_erdos_257_solution`, `not_erdos_249_solution`: this does not solve either problem.
 - `not_publication_authority`, `not_private_root_equivalence`, `not_provider_proof_authority`, `not_hidden_proof_body_authority`: a snapshot, not a claim of authority over the private frontier or a hidden proof.

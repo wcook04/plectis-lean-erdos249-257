@@ -45,7 +45,3 @@ Supporting ladder modules:
 
 - `Erdos249257.GeneratedCertificates`
 - `Erdos249257.GeneratedCertificates.*`
-
-## Public adapter
-
-- `PlectisSnapshot.PublicAPI` imports `Erdos249257`, `Erdos249257.CertificateKernel`, and `Erdos249257.GeneratedCertificates`
