@@ -7,7 +7,7 @@
 
 A machine-checked Lean 4 (Mathlib) development around two Erdős irrationality problems. It **proves** irrationality for a broad family of Erdős–Borwein-type series, gives an **unconditional** exclusion of every small-denominator rational value for the open totient constant, and **reduces** that open problem to a single sequence of finite, decidable certificates. It does **not** claim to settle either open problem, and it ships machine-checked non-claims and a standalone verifier that say so.
 
-This repository is a pinned, self-verifying snapshot exported from a larger private system (Plectis). Everything needed to build and check it is here; nothing private is. Toolchain `leanprover/lean4:v4.29.1`, Mathlib pinned in `lake-manifest.json`. No `sorry`, no `admit`; proofs are checked by the Lean kernel (`decide`, never `native_decide`). 1,640 theorems across the package; continuous integration builds it on every push.
+This repository is a pinned, self-verifying snapshot exported from a larger private system (Plectis). Everything needed to build and check it is here; nothing private is. Toolchain `leanprover/lean4:v4.29.1`, Mathlib pinned in `lake-manifest.json`. No `sorry`, no `admit`; proofs are checked by the Lean kernel (`decide`, never `native_decide`). More than 1,600 theorem declarations across the package; continuous integration builds it on every push.
 
 **If you do not read Lean:** the [`paper/`](paper/) directory has a companion write-up, *A guide for mathematicians who do not read Lean*, in ordinary notation. It states what is proved, cited, and open, and links every claim to the exact source line. Build the PDF with `tectonic paper/erdos-exposition.tex` (or `make -C paper`).
 
@@ -44,8 +44,8 @@ The question is whether Erdős–Borwein-type sums `∑_k 1/(b^{a_k} − 1)` are
 |---|---|---|
 | Full support, every base | `∑_{k≥0} 1/(b^{k+1} − 1)` irrational for all `b ≥ 2` | `irrational_erdosSum_full_support` |
 | Erdős–Borwein constant | `E = ∑ 1/(2ⁿ − 1)` irrational (base-2 corollary) | `irrational_erdosBorwein_series` |
-| Factorial support | `∑ 1/(b^{k!} − 1)` irrational | `irrational_erdosSum_factorial_support` |
-| Power-of-two support | `∑ 1/(b^{2^k} − 1)` irrational | `irrational_erdosSum_two_pow_support` |
+| Factorial support | `∑_{k≥0} 1/(b^{(k+1)!} − 1)` irrational | `irrational_erdosSum_factorial_support` |
+| Power-of-two support | `∑_{k≥0} 1/(b^{2^k} − 1)` irrational | `irrational_erdosSum_two_pow_support` |
 
 **Period noncollapse** is the mechanism behind these: a prime-valuation-deficit witness (`PrimeComponentWitness`, `witness_certificate_implies_period_noncollapse`) shows the multiplicative period of the base modulo the relevant modulus does not collapse, which forbids the long digit blocks a rational value would need. What remains **open** (and is *not* claimed here) is the fully universal statement: irrationality for *every* infinite support sequence. Proved families are not the universal theorem.
 
@@ -188,7 +188,7 @@ python3 scripts/verify_snapshot.py                  # structural_status: pass; s
 python3 scripts/verify_snapshot.py --allow-blocked  # exits 0 on structural pass
 ```
 
-The build is heavy: with 1,640 theorems and thousands of `decide`-discharged certificates, a cold `lake build` takes several minutes even with the Mathlib cache. It is exercised on GitHub Actions on every push (see the badge above).
+The build is heavy: with more than 1,600 theorem declarations and thousands of `decide`-discharged certificates, a cold `lake build` takes several minutes even with the Mathlib cache. It is exercised on GitHub Actions on every push (see the badge above).
 
 ---
 
@@ -220,7 +220,7 @@ lakefile.toml  lake-manifest.json  lean-toolchain                       build pi
 
 ## Related work in progress: Ramanujan Machine Challenge
 
-A separate, in-progress project targets the [Ramanujan Machine Challenge](https://www.ramanujanmachine.com/ramanujan-challenge/): ten problems, released in July 2026, on explicit formulas for constants such as π, e, Catalan's constant, and zeta values. That work lives in a separate, private Lean lane and is not part of this snapshot. No challenge target is claimed solved or fully formalized here; the table below is a coarse status map.
+A separate, in-progress project targets the [Ramanujan Machine Challenge](https://www.ramanujanmachine.com/ramanujan-challenge/): ten problems, released in July 2026, on explicit formulas for constants such as π, e, Catalan's constant, and zeta values. That work lives in a separate Lean lane and is not part of this snapshot. No challenge target is claimed solved or fully formalized here; the table below is a coarse status map.
 
 | Target | Public theme | Status |
 |---|---|---|
@@ -229,11 +229,11 @@ A separate, in-progress project targets the [Ramanujan Machine Challenge](https:
 | 2.3 | π + e as an Apéry-type limit | in progress |
 | 2.4 | harmonic-number series for polylog / zeta values | in progress |
 | 2.5 | rational approximation of Catalan's constant | in progress |
-| 2.6 | series for ζ(2) + ζ(3) | non-formal proof packet in progress |
+| 2.6 | series for ζ(2) + ζ(3) | exploratory; not formalized |
 | 2.7 | four-term recurrence for ζ(2) + ζ(3) | in progress |
-| 2.8 | fast rational approximation of √10005 / π | in progress (source-conjectural) |
-| 3.1 | knot-polynomial integral for π² | in progress (open conjecture in source) |
-| 3.2 | Apéry ζ(3) irrationality-measure bound | in progress (open conjecture in source) |
+| 2.8 | fast rational approximation of √10005 / π | in progress; target identity conjectural |
+| 3.1 | knot-polynomial integral for π² | in progress; statement is an open conjecture |
+| 3.2 | Apéry ζ(3) irrationality-measure bound | in progress; statement is an open conjecture |
 
 Ten targets tracked, all ten statements normalized, two partial Lean kernels, zero full formalizations. The release discipline carries over from this package; the theorems do not.
 

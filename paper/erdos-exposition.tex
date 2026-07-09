@@ -142,7 +142,7 @@ $\mu$ (M\"obius) & $L(\mu)$ & $1/2$ & rational, proved\\
 $\ph$ (totient) & $L(\ph)$ & $2$ & rational, proved\\
 $\mathbf 1$ (constant one) & $L(\mathbf 1)$ & $E$ & \textbf{irrational, machine-checked}\\
 $A=\ph*\mu$ & $L(A)$ & $S$ & \textbf{open (Erd\H{o}s \#249)}\\
-$\mathrm{Id}$ & $L(\mathrm{Id})$ & $\sum\sigma(m)/2^m$ & transcendental (Nesterenko 1996, cited only)\\
+$\mathrm{Id}$ & $L(\mathrm{Id})$ & $\sum\sigma(m)/2^m$ & transcendental (Nesterenko~1996~\cite{nesterenko}, cited only)\\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -193,7 +193,7 @@ is irrational.
 \end{result}
 \noindent Formalized: \lref{CertificateKernel.lean}{7999}{irrational_erdosSum_full_support}
 (all bases) and \lref{CertificateKernel.lean}{8006}{irrational_erdosBorwein_series}
-(the base-$2$ corollary). This is Erd\H{o}s's 1948 theorem. In the ladder of
+(the base-$2$ corollary). This is Erd\H{o}s's 1948 theorem~\cite{erdos1948}. In the ladder of
 Section~\ref{sec:ladder} it is the rung $L(\mathbf 1)$, and it is the fixed
 machine-checked point one convolution away from the open $S$.
 
@@ -217,7 +217,7 @@ each of the following supports $A$:
 \item factorial support $A=\{n! : n\ge1\}$, giving $\sum 1/(b^{n!}-1)$;
 \item power-of-two support $A=\{2^n : n\ge0\}$, giving $\sum 1/(b^{2^n}-1)$;
 \item multiples $A=d\N$;
-\item pairwise-coprime supports (Erd\H{o}s's 1948 coprime condition);
+\item pairwise-coprime supports (Erd\H{o}s's 1948 coprime condition~\cite{erdos1948});
 \item eventually-periodic supports, residue classes, and the odd numbers.
 \end{enumerate}
 \end{result}
@@ -431,8 +431,8 @@ Statuses are as listed on \href{https://www.erdosproblems.com}{erdosproblems.com
 in July 2026; none of the external results is re-proved here.\footnote{The
 irrationality of $S$ (\#249) and the universal \#257 statement are open. \#1049 is
 open for rational $t>1$, with the integer case attributed to Erd\H{o}s (1948).
-\#69 (Tao--Ter\"av\"ainen), \#250 (Nesterenko 1996), and \#258 are recorded as
-solved, the latter two with Lean formalizations attributed to other groups.}
+\#69 (Tao--Ter\"av\"ainen~\cite{taoterv}), \#250 (Nesterenko~1996~\cite{nesterenko}), and \#258
+are recorded as solved; none is re-proved here.}
 
 \begin{center}
 \begin{tabular}{@{}p{3.4cm}p{2.4cm}p{7.6cm}@{}}
@@ -466,8 +466,8 @@ chain of conditional \#249 reductions with certificate completeness and a
 non-empty initial supply (Results~\ref{res:red21}--\ref{res:deposits}).
 
 \paragraph{Cited, not formalized here.} Transcendence of $\sum\sigma(m)/2^m$
-(Nesterenko 1996) and the $q$-zeta anchor (Postelmans--Van~Assche). They are named
-as ladder neighbours.
+(Nesterenko~1996~\cite{nesterenko}) and the $q$-zeta anchor
+(Postelmans--Van~Assche~\cite{pva}). They are named as ladder neighbours.
 
 \paragraph{Open, and not solved here.} Irrationality of $S$ (\#249); the universal
 \#257 statement. The conditional reductions turn \#249 into ``the certificate
@@ -498,11 +498,11 @@ A standalone verifier \href{\repobase/\detokenize{scripts/verify_snapshot.py}}{\
 (Python standard library only) recomputes the tree digest against
 \href{\repobase/\detokenize{RELEASE_PROVENANCE.json}}{\texttt{RELEASE\_PROVENANCE.json}}, checks
 the license and SPDX metadata, the public-API adapter, and the required
-non-claims. On this snapshot it reports \texttt{structural\_status: pass} and,
-by design, \texttt{status: blocked}: the exact bibliographic problem-numbering and
-a public tag are held back deliberately, so the verifier refuses to call the
-snapshot publication-ready. That block is a conservative choice about metadata,
-separate from the Lean build, which passes.
+non-claims. On this snapshot it reports \texttt{structural\_status: pass}. It deliberately
+withholds the publication-ready stamp (\texttt{status: blocked}) until the exact
+bibliographic problem-numbering and a public tag are attached. That gate concerns
+release metadata; it says nothing about the Lean build, which the kernel checks in
+full.
 
 To build and check:
 \begin{verbatim}
@@ -517,7 +517,7 @@ Separately from this repository, I am working on the
 \href{https://www.ramanujanmachine.com/ramanujan-challenge/}{Ramanujan Machine
 Challenge}, a set of ten problems, released in July 2026, that ask for proofs or
 symbolic derivations of explicit formulas for constants such as $\pi$, $e$,
-Catalan's constant, and zeta values. That work lives in a separate, private Lean
+Catalan's constant, and zeta values. That work lives in a separate Lean
 lane and is not part of this snapshot. No challenge target is claimed solved or
 fully formalized here; the table below is a coarse status map only.
 
@@ -531,11 +531,11 @@ target & public theme & current status\\
 2.3 & $\pi+e$ as an Ap\'ery-type limit & in progress\\
 2.4 & harmonic-number series for polylog / zeta values & in progress\\
 2.5 & rational approximation of Catalan's constant & in progress\\
-2.6 & series for $\zeta(2)+\zeta(3)$ & non-formal proof packet in progress\\
+2.6 & series for $\zeta(2)+\zeta(3)$ & exploratory; not formalized\\
 2.7 & four-term recurrence for $\zeta(2)+\zeta(3)$ & in progress\\
-2.8 & fast rational approximation of $\sqrt{10005}/\pi$ & in progress (source-conjectural)\\
-3.1 & knot-polynomial integral for $\pi^2$ & in progress (open conjecture in source)\\
-3.2 & Ap\'ery $\zeta(3)$ irrationality-measure bound & in progress (open conjecture in source)\\
+2.8 & fast rational approximation of $\sqrt{10005}/\pi$ & in progress; target identity conjectural\\
+3.1 & knot-polynomial integral for $\pi^2$ & in progress; statement is an open conjecture\\
+3.2 & Ap\'ery $\zeta(3)$ irrationality-measure bound & in progress; statement is an open conjecture\\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -576,6 +576,24 @@ non-empty certified-kill segment & \lloc{TotientTailPeriodKiller.lean}{396}\ {\f
 \bottomrule
 \end{tabular}
 \end{center}
+
+\begin{thebibliography}{9}
+\bibitem{erdos1948} P.~Erd\H{o}s, \emph{On arithmetical properties of Lambert series},
+  J. Indian Math. Soc. (N.S.) \textbf{12} (1948), 63--66.
+\bibitem{borwein1992} P.~Borwein, \emph{On the irrationality of certain series},
+  Math. Proc. Cambridge Philos. Soc. \textbf{112} (1992), no.~1, 141--146.
+\bibitem{nesterenko} Yu.~V. Nesterenko, \emph{Modular functions and transcendence questions},
+  Mat. Sb. \textbf{187} (1996), no.~9, 65--96; English transl., Sb. Math. \textbf{187} (1996), no.~9, 1319--1348.
+\bibitem{pva} K.~Postelmans and W.~Van~Assche, \emph{Irrationality of $\zeta_q(1)$ and $\zeta_q(2)$},
+  J. Number Theory \textbf{126} (2007), no.~1, 119--154.
+\bibitem{taoterv} T.~Tao and J.~Ter\"av\"ainen, resolution of Erd\H{o}s~\#69
+  (irrationality of $\sum_{n\ge1}\omega(n)/2^n=\sum_{p}1/(2^p-1)$), 2024;
+  \href{https://www.erdosproblems.com/69}{\texttt{erdosproblems.com/69}}.
+\bibitem{erdosproblems} T.~Bloom (ed.), \emph{Erd\H{o}s Problems},
+  \href{https://www.erdosproblems.com}{\texttt{erdosproblems.com}}, accessed July 2026.
+\bibitem{ramanujan} The Ramanujan Machine, \emph{The Ramanujan Challenge} (2026),
+  \href{https://www.ramanujanmachine.com/ramanujan-challenge/}{\texttt{ramanujanmachine.com/ramanujan-challenge}}.
+\end{thebibliography}
 
 \vfill
 \noindent{\footnotesize Repository:
