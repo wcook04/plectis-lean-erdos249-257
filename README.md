@@ -1,9 +1,9 @@
 <!-- SPDX-FileCopyrightText: 2026 Will Cook -->
 <!-- SPDX-License-Identifier: Apache-2.0 -->
 
-# Erdős period-noncollapse: a Lean formalization toward #249 and #257
+# Erdős #249/#257: a Lean formalization
 
-[![Lean CI](https://github.com/wcook04/plectis-lean-erdos257-period-noncollapse/actions/workflows/lean.yml/badge.svg)](https://github.com/wcook04/plectis-lean-erdos257-period-noncollapse/actions/workflows/lean.yml)
+[![Lean CI](https://github.com/wcook04/plectis-lean-erdos249-257/actions/workflows/lean.yml/badge.svg)](https://github.com/wcook04/plectis-lean-erdos249-257/actions/workflows/lean.yml)
 
 A machine-checked Lean 4 (Mathlib) development around two Erdős irrationality problems. It **proves** irrationality for a broad family of Erdős–Borwein-type series, gives an **unconditional** exclusion of every small-denominator rational value for the open totient constant, and **reduces** that open problem to a single sequence of finite, decidable certificates. It does **not** claim to settle either open problem, and it ships machine-checked non-claims and a standalone verifier that say so.
 

@@ -5,13 +5,13 @@
     "buildDefinition": {
       "buildType": "https://plectis.local/build-types/lean-standalone-export/v0",
       "externalParameters": {
-        "export_handle": "erdos257-period-noncollapse",
+        "export_handle": "plectis-lean-erdos249-257",
         "source_config_path": "microcosm-substrate/docs/lean_formal_methods_os/release_topology_source_v0.json",
         "source_root": "formal_math/erdos257_period_noncollapse",
         "standalone_repo": {
-          "directory_name": "erdos257-period-noncollapse",
-          "display_name": "Erdos257 Period Noncollapse Lean Snapshot",
-          "remote_name_suggestion": "plectis-lean-erdos257-period-noncollapse",
+          "directory_name": "plectis-lean-erdos249-257",
+          "display_name": "Erdos #249/#257 Lean Snapshot",
+          "remote_name_suggestion": "plectis-lean-erdos249-257",
           "repository_role": "standalone_lean_lake_package_export"
         }
       },
@@ -198,10 +198,10 @@
   "subject": [
     {
       "digest": {
-        "sha256": "a522839eb95f14a916edff6a43bda87c544bae29c471ca436644065f3bce90a5"
+        "sha256": "e3abc3da7b82ff0b7daba1fb4078c4d1ab355dd75d5bada50936a5b3611f55ee"
       },
       "file_count": 42,
-      "name": "erdos257-period-noncollapse"
+      "name": "plectis-lean-erdos249-257"
     }
   ],
   "subject_digest_scope": "export_subject_tree_excludes_release_notes_and_provenance_to_avoid_circular_digest"

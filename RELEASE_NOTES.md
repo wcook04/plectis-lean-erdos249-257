@@ -5,7 +5,7 @@
 
 Publication status: blocked until a clean build receipt and public tag/hash exist.
 
-Snapshot name: `Erdos257 Period Noncollapse Lean Snapshot`
+Snapshot name: `Erdos #249/#257 Lean Snapshot`
 Public tag: `pending`
 Public commit: `pending`
 Export subject tree sha256: `4789c32f7889a8050acca9ec883f73ed7f2113234495816d5d50b0e2ff923170`
