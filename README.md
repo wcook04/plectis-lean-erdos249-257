@@ -5,7 +5,7 @@
 
 # Erdős #249/#257: a Lean formalization
 
-Epic fail at trying to solve both.
+This snapshot does not solve either open problem; it formalises bounded irrationality results, reductions, certificates, and non-claims around them.
 
 [![Lean CI](https://github.com/wcook04/plectis-lean-erdos249-257/actions/workflows/lean.yml/badge.svg)](https://github.com/wcook04/plectis-lean-erdos249-257/actions/workflows/lean.yml)
 
