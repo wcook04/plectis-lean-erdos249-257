@@ -7,9 +7,11 @@
 
 A machine-checked Lean 4 (Mathlib) development around two Erdős irrationality problems. It **proves** irrationality for a broad family of Erdős–Borwein-type series, gives an **unconditional** exclusion of every small-denominator rational value for the open totient constant, and **reduces** that open problem to a single sequence of finite, decidable certificates. It does **not** claim to settle either open problem, and it ships machine-checked non-claims and a standalone verifier that say so.
 
-This repository is a pinned, self-verifying snapshot exported from a larger private system (Plectis). Everything needed to build and check it is here; nothing private is. Toolchain `leanprover/lean4:v4.29.1`, Mathlib pinned in `lake-manifest.json`. No `sorry`, no `admit`; proofs are checked by the Lean kernel (`decide`, never `native_decide`). More than 1,600 theorem declarations across the package; continuous integration builds it on every push.
+This repository is a pinned, self-verifying public snapshot: everything needed to build and check it is here, and nothing private is required. Toolchain `leanprover/lean4:v4.29.1`, Mathlib pinned in `lake-manifest.json`. No `sorry`, no `admit`, no custom `axiom`; proofs are checked by the Lean kernel (`decide`, never `native_decide`). More than 1,600 theorem declarations across the package; continuous integration builds it on every push.
 
-**If you do not read Lean:** the [`paper/`](paper/) directory has a companion write-up, *A guide for mathematicians who do not read Lean*, in ordinary notation. It states what is proved, cited, and open, and links every claim to the exact source line. Build the PDF with `tectonic paper/erdos-exposition.tex` (or `make -C paper`).
+**Read the exposition (no Lean required):** [`erdos-exposition.pdf`](erdos-exposition.pdf) at the repository root is a companion write-up in ordinary notation. It states what is proved, cited, and open, and links every claim to the exact Lean source line. The LaTeX source and build live in [`paper/`](paper/) (`tectonic paper/erdos-exposition.tex`, or `make -C paper`).
+
+**Where this comes from.** `ai_workflow` is a private agentic system that turns intent into validated, receipt-backed work on disk. [Plectis](https://github.com/wcook04/plectis) is its public machinery exhibit — 88 fixture-backed components you can audit by cloning that repo. This Lean repository is a separate, still-growing lane focused on Erdős #249 and #257 (neither proven): ~1.7k theorems, ~51k lines, `0` `sorry`/`admit`/`axiom`, kernel-checked `decide` with no `native_decide` — what that machinery looks like running on a live mathematical frontier. None of that private tooling is a proof authority here: **the proof authority is the Lean source in this repository, checked by the Lean kernel.**
 
 ---
 
@@ -47,7 +49,7 @@ The question is whether Erdős–Borwein-type sums `∑_k 1/(b^{a_k} − 1)` are
 | Factorial support | `∑_{k≥0} 1/(b^{(k+1)!} − 1)` irrational | `irrational_erdosSum_factorial_support` |
 | Power-of-two support | `∑_{k≥0} 1/(b^{2^k} − 1)` irrational | `irrational_erdosSum_two_pow_support` |
 
-**Period noncollapse** is the mechanism behind these: a prime-valuation-deficit witness (`PrimeComponentWitness`, `witness_certificate_implies_period_noncollapse`) shows the multiplicative period of the base modulo the relevant modulus does not collapse, which forbids the long digit blocks a rational value would need. What remains **open** (and is *not* claimed here) is the fully universal statement: irrationality for *every* infinite support sequence. Proved families are not the universal theorem.
+**Period noncollapse** is the mechanism behind these: a prime-valuation-deficit witness (`PrimeComponentWitness`, `witness_certificate_implies_period_noncollapse`) shows the multiplicative period of the base modulo the relevant modulus does not collapse, which forbids the long digit blocks a rational value would need. Beyond the four rows above, the same support calculus formalizes further named supports — multiples, pairwise-coprime sets with summable reciprocals (Erdős's condition), eventually-periodic supports, residue classes, and the odd numbers; none is claimed as new mathematics. What remains **open** (and is *not* claimed here) is the fully universal statement: irrationality for *every* infinite support sequence. Proved families are not the universal theorem.
 
 ### Erdős #249: irrationality of the totient constant `S`
 
@@ -129,7 +131,7 @@ The exact bibliographic problem-numbering for #249/#257 is still being finalized
 
 ## Related Erdős problems
 
-Where this work sits among the numbered problems it is near. Statuses are as listed on [erdosproblems.com](https://www.erdosproblems.com) in July 2026; none of the external results is re-proved here.
+Where this work sits among the numbered problems it is near. Statuses are as listed on the individual problem pages ([249](https://www.erdosproblems.com/249), [257](https://www.erdosproblems.com/257), [1049](https://www.erdosproblems.com/1049), [69](https://www.erdosproblems.com/69), [250](https://www.erdosproblems.com/250), [258](https://www.erdosproblems.com/258)) in July 2026; none of the external results is re-proved here.
 
 | Problem | Status | Relation in this repository |
 |---|---|---|
@@ -211,7 +213,8 @@ Erdos257PeriodNoncollapse/
   LcmConeNonflat.lean                     wave 25  joint cone non-flatness refuter
 PlectisSnapshot/PublicAPI.lean            stable public-API metadata adapter
 scripts/verify_snapshot.py                standalone snapshot verifier
-paper/                                    exposition for non-Lean readers (LaTeX source + build)
+erdos-exposition.pdf                      compiled companion paper (tracked, root-visible)
+paper/                                    exposition source for non-Lean readers (LaTeX + build)
 NON_CLAIMS.md  RELEASE_PROVENANCE.json  PUBLIC_API_CONTRACT.json  ...   release metadata
 lakefile.toml  lake-manifest.json  lean-toolchain                       build pins
 ```

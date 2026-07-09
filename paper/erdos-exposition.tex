@@ -50,7 +50,7 @@
 \newcommand{\Irr}{\text{ irrational}}
 
 \title{\vspace{-2em}The Erd\H{o}s period--noncollapse formalization:\\
-a guide for mathematicians who do not read Lean}
+{\large a machine-checked study of \#249 and \#257 --- what is proved, what is cited, and what stays open}}
 \author{Will Cook}
 \date{July 2026\\[4pt]
 {\footnotesize Companion to the Lean~4 repository
@@ -62,24 +62,90 @@ a guide for mathematicians who do not read Lean}
 
 \begin{abstract}
 \noindent
-This note describes, in ordinary mathematical language, a machine-checked Lean~4
-development built around two Erd\H{o}s irrationality problems: the irrationality
-of Erd\H{o}s--Borwein-type series $\sum 1/(b^{a_k}-1)$ (the setting of Erd\H{o}s
+This note describes, in ordinary mathematical language, a machine-checked
+Lean~4 development built around two Erd\H{o}s irrationality problems: the
+irrationality of Erd\H{o}s--Borwein-type series $\sum 1/(b^{a_k}-1)$ (Erd\H{o}s
 \#257), and the still-open question of whether the totient constant
 $S=\sum_{n\ge1}\ph(n)/2^n$ is irrational (Erd\H{o}s \#249). The development
-proves irrationality for a broad family of Erd\H{o}s--Borwein-type series,
-including the Erd\H{o}s--Borwein constant itself for every integer base $b\ge2$;
-it proves \emph{unconditionally} that $S$ equals no rational with denominator up
-to about $7.96\times10^{34}$; and it \emph{reduces} the irrationality of $S$ to a
-single sequence of finite, decidable certificates whose unboundedness is the
-untouched analytic core. It does not claim to solve either open problem, and it
-ships machine-checked non-claims that say so. Every formal statement below is
-hyperlinked to the exact Lean source line, so a reader can move from a sentence
-of prose to the checked proof in one click. The Lean kernel verifies the whole
-package with no \texttt{sorry}, no \texttt{admit}, and no \texttt{native\_decide}.
+proves the Erd\H{o}s--Borwein constant irrational for every integer base $b\ge2$
+and does the same for a calculus of named infinite supports; it recoordinatizes
+$S$ as a weighted Erd\H{o}s--Borwein object; it proves \emph{unconditionally}
+that $S$ equals no rational with denominator up to about $7.96\times10^{34}$;
+and it \emph{reduces} the irrationality of $S$ to a single sequence of finite,
+decidable certificates whose unboundedness is the untouched analytic core. It
+solves neither open problem, and it ships machine-checked non-claims that say
+so. Every formal statement is hyperlinked to the exact Lean source line, so a
+reader can move from a sentence of prose to the checked proof in one click. The
+Lean kernel verifies the whole package with no \texttt{sorry}, no
+\texttt{admit}, and no \texttt{native\_decide}.
 \end{abstract}
 
 \tableofcontents
+
+\section{Main results and non-results}\label{sec:main}
+
+This section is the whole paper on one page: what the Lean development proves
+and, just as load-bearing, what it does not. Every item is machine-checked at
+the pinned commit; later sections expand each one and link it to source. The two
+named problems are Erd\H{o}s~\#249 --- is $S=\sum_{n\ge1}\ph(n)/2^n$ irrational?
+--- and Erd\H{o}s~\#257 --- is $\sum_{n\in A}1/(2^n-1)$ irrational for
+\emph{every} infinite $A\subseteq\N$? Both are open, and this development solves
+neither.
+
+\begin{center}
+\fbox{\begin{minipage}{0.94\textwidth}
+\centering
+\textbf{The Mersenne--Lambert ladder.}\quad $\displaystyle L(f)=\sum_{n\ge1}\frac{f(n)}{2^n-1}$\\[6pt]
+\begin{tabular}{@{}cccc@{}}
+$L(\mu)=\tfrac12$ & $L(\ph)=2$ & $L(\mathbf 1)=E$ & $L(\ph*\mu)=S$\ (\#249)\\
+rational & rational & \textbf{irrational (proved)} & \textbf{open}\\
+\end{tabular}\\[10pt]
+\textbf{The \#249 reduction chain.}\\[3pt]
+$S\in\Q\ \Longrightarrow\ \text{eventual binary periodicity}\ \Longrightarrow\ R_{N+h}-R_N\in\Z$\\[3pt]
+$\Longrightarrow\ $ a finite \textsf{certifiedKill} witnesses failure $\ \Longleftrightarrow\ R_{N+h}-R_N\notin\Z$\\[4pt]
+{\footnotesize (completeness: the finite certificate is exact, not a truncation heuristic;\\
+\#249 becomes ``the certificate supply is unbounded'')}
+\end{minipage}}
+\end{center}
+
+\paragraph{Proved (machine-checked).}
+\begin{itemize}[leftmargin=1.4em]
+\item \textbf{All-base Erd\H{o}s--Borwein irrationality.} $\sum_{n\ge1}1/(b^n-1)$
+is irrational for every integer $b\ge2$; the Erd\H{o}s--Borwein constant $E$ is
+the base-$2$ case (Result~\ref{res:full}). This is a formalization of Erd\H{o}s's
+classical theorem, and it is exactly the integer-base slice of Erd\H{o}s~\#1049.
+\item \textbf{A \#257 support calculus.} $\sum_{n\in A}1/(b^n-1)$ is irrational,
+at every base $b\ge2$, for several structured infinite supports $A$: factorial,
+powers of two, multiples, pairwise-coprime with summable reciprocals, eventually
+periodic, residue classes, and the odd numbers (Result~\ref{res:support}). These
+are named cases, not the universal \#257 theorem.
+\item \textbf{A change of coordinates for \#249.} The totient constant is a
+weighted Erd\H{o}s--Borwein object, $S=L(\ph*\mu)$ with a nonnegative
+primitive-conductor weight, and equals $\tfrac12+\sum_d\mu(d)/(2^d-1)^2$ and
+$\tfrac12+\Pr(\gcd(X,Y)=1)$ for independent fair-coin waiting times
+(Results~\ref{res:lift},~\ref{res:lens},~\ref{res:coprime}).
+\item \textbf{An unconditional denominator exclusion.} $S$ equals no rational of
+denominator up to about $7.96\times10^{34}$ (Result~\ref{res:farey}). This is a
+record on the denominator, not a proof of irrationality.
+\item \textbf{A reduction of \#249 to a finite, decidable supply.} Rationality of
+$S$ forces an integer tail-period law; a finite certificate witnesses its
+failure, and by a completeness theorem the certificate exists \emph{exactly} when
+the tail difference is non-integral
+(Results~\ref{res:red21}--\ref{res:complete}). The initial segment of the
+required supply is machine-checked non-empty (Result~\ref{res:deposits}).
+\end{itemize}
+
+\paragraph{Not proved, and not claimed.} The irrationality of $S$ (\#249) and the
+universal \#257 statement are open. The reduction turns \#249 into the single
+assertion that the certificate supply is \emph{unbounded}; that unboundedness is
+the analytic core, and it is deliberately untouched. The repository states these
+boundaries in code as machine-checked non-claims
+(\idn{not_erdos_249_solution}, \idn{not_erdos_257_solution}; \rref{NON_CLAIMS.md}).
+
+\paragraph{How it is checked.} The Lean~4 kernel verifies the whole package
+against Mathlib with no \texttt{sorry}, no \texttt{admit}, and no
+\texttt{native\_decide}; every finite computation is discharged by
+\texttt{decide}. Section~\ref{sec:verify} gives the reproduction commands.
 
 \section{How to read this document}
 
@@ -131,7 +197,8 @@ L(f)\;=\;\sum_{n\ge1}\frac{f(n)}{2^n-1}\;=\;\sum_{m\ge1}\frac{(f*\mathbf 1)(m)}{
 \]
 the second equality being the standard Lambert rearrangement (one Dirichlet
 convolution by the constant $\mathbf 1=\zeta$). Walking the ladder by convolution
-lands on four values of completely different arithmetic character.
+lands on five values spanning rational, irrational, open, and transcendental
+character.
 
 \begin{center}
 \begin{tabular}{@{}llll@{}}
@@ -150,9 +217,11 @@ $\mathrm{Id}$ & $L(\mathrm{Id})$ & $\sum\sigma(m)/2^m$ & transcendental (Nestere
 The weight $A=\ph*\mu$ is the primitive-conductor count: $A(p)=p-2$ on primes,
 $A\ge0$, and $A*\zeta=\ph$. So one convolution by $\zeta$ separates the open
 constant $S$ from the rational $2$, and one more separates rational from
-transcendental ($\ph*\zeta=\mathrm{Id}$, $\mathrm{Id}*\zeta=\sigma$). The open
-constant sits one rung from the machine-checked irrational $E$, and the two share
-the same series shape with weight $1$ replaced by $A$.
+transcendental ($\ph*\zeta=\mathrm{Id}$, $\mathrm{Id}*\zeta=\sigma$). This is the
+paper's organizing move: $S$ is not an unrelated totient sum but the rung one
+convolution from the machine-checked irrational $E$, the same series
+$\sum(\cdot)/(2^d-1)$ with the constant weight $1$ replaced by the nonnegative
+weight $A$.
 
 \begin{result}[the rational rungs]
 $\sum_{d\ge1}\mu(d)/(2^d-1)=1/2$ and $\sum_{d\ge1}\ph(d)/(2^d-1)=2$, exactly.
@@ -179,8 +248,11 @@ S \;=\; \tfrac12 \;+\; \sum_{d\ge1}\frac{\mu(d)}{(2^d-1)^2}.
 \end{result}
 \noindent Formalized: \lref{CertificateKernel.lean}{18125}{totient_series_eq_half_add_moebius_mersenne_square}.
 Writing $T=\sum_{d\ge1}\mu(d)/(2^d-1)^2$, irrationality of $S$ is equivalent to
-irrationality of $T$, since $S=\tfrac12+T$. The signed constant $T$ is the object
-the reduction of Section~\ref{sec:reduction} eventually interrogates.
+irrationality of $T$, since $S=\tfrac12+T$. The factor $1/(2^d-1)^2$ is exactly
+the probability that $d$ divides two independent fair-coin waiting times
+(Section~\ref{sec:geom}), which is why this signed constant, the coprime-pair
+mass, and the tail differences of Section~\ref{sec:reduction} are three faces of
+one object.
 
 \section{Erd\H{o}s--Borwein-type irrationality (the \#257 direction)}\label{sec:eb}
 
@@ -207,8 +279,9 @@ $\sum 1/(b^n-1)=\sum_m \tau(m)/b^m$ (divisor-count series) is
 \subsection{Named infinite-support cases}
 
 Beyond full support, the development proves irrationality for a family of infinite
-supports $A$, at every base $b\ge2$. Each is a genuine case of the \#257 statement
-family; none is the universal statement.
+supports $A$, at every base $b\ge2$. Each is a genuine formalized case of the
+\#257 statement family; none is the universal statement, and none is asserted to
+be new mathematics.
 
 \begin{result}[support-class family]\label{res:support}
 For every integer $b\ge2$, the series $\sum_{n\in A} 1/(b^n-1)$ is irrational for
@@ -217,11 +290,19 @@ each of the following supports $A$:
 \item factorial support $A=\{n! : n\ge1\}$, giving $\sum 1/(b^{n!}-1)$;
 \item power-of-two support $A=\{2^n : n\ge0\}$, giving $\sum 1/(b^{2^n}-1)$;
 \item multiples $A=d\N$;
-\item pairwise-coprime supports (Erd\H{o}s's 1948 coprime condition~\cite{erdos1948});
+\item pairwise-coprime supports with summable reciprocals (Erd\H{o}s's
+condition~\cite{erdos1968});
 \item eventually-periodic supports, residue classes, and the odd numbers.
 \end{enumerate}
 \end{result}
-\noindent Formalized: (a) \lrefx{CertificateKernel.lean}{5706}{irrational_erdosSum_factorial_support};
+\noindent These sort into three groups. The classical case is (d): infinite
+pairwise-coprime $A$ with $\sum_{a\in A}1/a<\infty$, formalized from Erd\H{o}s's
+condition. The lcm-gap named cases are (a) and (b), whose support gaps outgrow the
+running $\lcm$; the structured families are (c) and (e).\footnote{Periodic-coefficient
+Lambert series have their own literature; see e.g.\ Luca--Tachiya~\cite{lucatachiya}.
+The cases here are formalized in the repository's own framework and are not claimed
+as new results.} Formalized: (a)
+\lrefx{CertificateKernel.lean}{5706}{irrational_erdosSum_factorial_support};
 (b) \lrefx{CertificateKernel.lean}{5730}{irrational_erdosSum_two_pow_support};
 (c) \lrefx{CertificateKernel.lean}{8774}{irrational_erdosSupportSeries_multiples};
 (d) \lrefx{CertificateKernel.lean}{10447}{irrational_erdosSupportSeries_pairwise_coprime};
@@ -343,15 +424,19 @@ discrepancy
 \[
 \Delta_{h,N,L}=\sum_{j=0}^{L-1}\big(\ph(N+h+1+j)-\ph(N+1+j)\big)\,2^{\,L-1-j}\in\Z,
 \]
-and call the pair \emph{certified} when the residue of $\Delta_{h,N,L}$ modulo
-$2^L$ misses a neighbourhood of $0$:
+the first $L$ binary digits of $R_{N+h}-R_N$ up to a controlled deep tail (bounded
+using only $\ph(n)\le n$), and call the pair \emph{certified} when the residue of
+$\Delta_{h,N,L}$ modulo $2^L$ misses a neighbourhood of $0$:
 \[
 \textsf{certifiedKill}(h,N,L):\quad
 N+h+L+2 \;<\; \big(\Delta_{h,N,L}\bmod 2^L\big) \;<\; 2^L-(N+h+L+2).
 \]
-This is a finite integer computation, decidable by the kernel.
+This is a finite integer computation, decidable by the kernel. It is the natural
+finite object here precisely because a rational $S$ would pin the tail difference
+to an integer, and a residue that stays a fixed distance from $0$ is a finite
+proof that it did not.
 
-\begin{result}[wave-21 reduction]\label{res:red21}
+\begin{result}[tail-period reduction]\label{res:red21}
 If for every period $h\ge1$ and every threshold $N_0$ there exist $N\ge N_0$ and
 $L$ with $\textsf{certifiedKill}(h,N,L)$, then $S$ is irrational.
 \end{result}
@@ -361,8 +446,10 @@ the tail $R_N$ and the predicate are
 \lrefx{TotientTailPeriodKiller.lean}{72}{certifiedKill}.
 
 \paragraph{Step 2: collapse the two parameters to one.} Every multiple of a period
-is a period, so the obligation concentrates on the one-parameter diagonal
-$\lcm(1,\dots,t)$. Standing on that ray removes the position parameter as well.
+is a period, so $\lcm(1,\dots,t)$ is the universal-period envelope: any eventual
+period of a rational $S$ divides it once $t$ is large, so standing on that one
+diagonal ray dominates all possible periods at once, and the position parameter
+drops out too.
 
 \begin{result}[diagonal reduction]\label{res:diag}
 Write $\lcm(1..t)$ for $\lcm(1,\dots,t)$. If for every $t_0$ there exist $t\ge t_0$
@@ -372,7 +459,8 @@ is irrational.
 \noindent Formalized: \lref{LcmDiagonalReduction.lean}{92}{irrational_totient_series_of_lcm_diagonal_certificate_supply}.
 
 \paragraph{Step 3: the cone, flatness, and completeness.} On the cone
-$\{k\cdot\lcm(1..t)\}$, rationality forces a single fractional constant.
+$\{k\cdot\lcm(1..t)\}$, rationality is spent to its limit: it forces not one
+pairwise relation but a single fractional constant across the whole cone.
 
 \begin{result}[cone flatness]\label{res:flat}
 If $S$ is rational, then the relevant tail values share one fractional part across
@@ -381,7 +469,8 @@ the whole $\lcm$ cone.
 \noindent Formalized: \lref{LcmConeFlatness.lean}{90}{rational_totient_series_forces_lcm_cone_flatness}.
 
 The certificates are not a lossy heuristic: a certificate exists exactly when the
-object it certifies is non-integral.
+object it certifies is non-integral. This is the theorem that turns the finite
+computations from experiments into receipts.
 
 \begin{result}[certificate completeness]\label{res:complete}
 For all $h,N$,
@@ -394,11 +483,14 @@ R_{N+h}-R_N\notin\Z.
 \noindent Formalized: \lref{LcmConeFlatness.lean}{316}{exists_certifiedKill_iff_tail_diff_notMem_int}.
 Finite certificates are receipts; non-integrality is the object. A whole menu of
 cone vertices can be interrogated at once by a joint refuter that is sharper than
-any pairwise test
+any pairwise test: it refutes the single-fractional-part model that rationality
+predicts on a finite sample of cone vertices
 (\lref{LcmConeNonflat.lean}{126}{exists_nonintegral_pair_of_coneNonflatCert}).
 
 \paragraph{The certificates are non-empty.} The initial segment of the required
-supply is machine-checked, so the reduction is not vacuous.
+supply is machine-checked, so the reduction is not vacuous. By completeness, each
+of these is not a numerical experiment but a kernel-checked proof of a specific
+non-integral tail difference.
 
 \begin{result}[finite deposits]\label{res:deposits}
 The following are checked by the Lean kernel:
@@ -414,25 +506,29 @@ The following are checked by the Lean kernel:
 \lrefx{LcmDiagonalReduction.lean}{217}{certifiedKill_periodLcm_diagonal_upto_six}
 (with \lrefx{LcmDiagonalReduction.lean}{222}{certifiedKill_periodLcm_diagonal_at_seven},
 \lrefx{LcmDiagonalReduction.lean}{226}{certifiedKill_periodLcm_diagonal_at_eight}),
-and \lrefx{LcmConeNonflat.lean}{506}{coneNonflatCert_cells}.
+and \lrefx{LcmConeNonflat.lean}{506}{coneNonflatCert_cells}. These deposits prove
+that each layer of the reduction is non-vacuous and, by completeness, exact; they
+are not evidence that the unbounded supply exists.
 
 \paragraph{What is open.} The reduction converts \#249 into the statement that the
 certificate supply is \emph{unbounded}: certificates exist for arbitrarily large
 parameters. By completeness (Result~\ref{res:complete}) this is equivalent to the
 tail differences being non-integral infinitely often, and equivalently to the
-Farey gap denominators of Section~\ref{sec:uncond} being unbounded. That
-unboundedness is the analytic core, and it is deliberately untouched. The
-reduction is real; the closure is not asserted.
+Farey gap denominators of Section~\ref{sec:uncond} being unbounded --- the same
+obstruction seen as a rational denominator, an eventual binary period, and a flat
+tail on the $\lcm$ cone. That unboundedness is the analytic core, and it is
+deliberately untouched. The reduction is real; the closure is not asserted.
 
 \section{Where this sits: the Erd\H{o}s landscape}\label{sec:landscape}
 
 The table records how the development relates to the numbered problems it is near.
-Statuses are as listed on \href{https://www.erdosproblems.com}{erdosproblems.com}
-in July 2026; none of the external results is re-proved here.\footnote{The
+Statuses are as listed on the individual problem pages
+\href{https://www.erdosproblems.com/249}{erdosproblems.com/\{249, 257, 1049, 69,
+250, 258\}} in July 2026; none of the external results is re-proved here.\footnote{The
 irrationality of $S$ (\#249) and the universal \#257 statement are open. \#1049 is
-open for rational $t>1$, with the integer case attributed to Erd\H{o}s (1948).
+open for rational $t>1$, with the integer-base case attributed to Erd\H{o}s.
 \#69 (Tao--Ter\"av\"ainen~\cite{taoterv}), \#250 (Nesterenko~1996~\cite{nesterenko}), and \#258
-are recorded as solved; none is re-proved here.}
+(recorded as proved in Lean) are solved; none is re-proved here.}
 
 \begin{center}
 \begin{tabular}{@{}p{3.4cm}p{2.4cm}p{7.6cm}@{}}
@@ -442,8 +538,8 @@ problem & status & relation in this repository\\
 \#249 $\sum\ph(n)/2^n$ & open & the target; unconditional denominator exclusion and a conditional reduction, no solution\\
 \#257 $\sum_{n\in A}1/(2^n-1)$ & open & named infinite-support cases and the full-support ($A=\N$) case, not the universal statement\\
 \#1049 $\sum 1/(t^n-1)$, $t\in\Q_{>1}$ & open (rational $t$) & the integer-base case $b\ge2$ is formalized (Result~\ref{res:full}); the rational case is untouched\\
-\#69 $\sum\omega(n)/2^n$ & solved & the prime-support case of \#257; only the identity bridge to $\sum_p 1/(2^p-1)$ is formalized, not the irrationality\\
-\#250 $\sum\sigma(n)/2^n$ & solved & the ladder neighbour $L(\mathrm{Id})$; cited, not re-proved\\
+\#69 $\sum\omega(n)/2^n$ & solved~\cite{taoterv} & the prime-support case of \#257; only the identity bridge to $\sum_p 1/(2^p-1)$ is formalized, not the irrationality\\
+\#250 $\sum\sigma(n)/2^n$ & solved~\cite{nesterenko} & the ladder neighbour $L(\mathrm{Id})$; cited, not re-proved\\
 \#258 $\sum\tau(n)/(a_1\cdots a_n)$ & solved & not addressed here; the monotone $\ph$/$\sigma$ sequel is the sibling territory of \#249\\
 \bottomrule
 \end{tabular}
@@ -494,16 +590,6 @@ microkernel is \href{\repobase/\PK/CertificateKernel.lean}{\texttt{CertificateKe
 (about $27{,}700$ lines) plus per-base shards, each instance closed by \texttt{decide}.
 \end{itemize}
 
-A standalone verifier \href{\repobase/\detokenize{scripts/verify_snapshot.py}}{\texttt{scripts/verify\_snapshot.py}}
-(Python standard library only) recomputes the tree digest against
-\href{\repobase/\detokenize{RELEASE_PROVENANCE.json}}{\texttt{RELEASE\_PROVENANCE.json}}, checks
-the license and SPDX metadata, the public-API adapter, and the required
-non-claims. On this snapshot it reports \texttt{structural\_status: pass}. It deliberately
-withholds the publication-ready stamp (\texttt{status: blocked}) until the exact
-bibliographic problem-numbering and a public tag are attached. That gate concerns
-release metadata; it says nothing about the Lean build, which the kernel checks in
-full.
-
 To build and check:
 \begin{verbatim}
 lake exe cache get      # fetch the prebuilt Mathlib cache
@@ -511,39 +597,27 @@ lake build              # build and kernel-check the package
 python3 scripts/verify_snapshot.py --allow-blocked   # structural verify
 \end{verbatim}
 
+A standalone verifier \href{\repobase/\detokenize{scripts/verify_snapshot.py}}{\texttt{scripts/verify\_snapshot.py}}
+(Python standard library only) recomputes the tree digest against
+\href{\repobase/\detokenize{RELEASE_PROVENANCE.json}}{\texttt{RELEASE\_PROVENANCE.json}} and
+checks the license, the SPDX/REUSE metadata, the public-API adapter, and the
+required non-claims; it reports \texttt{structural\_status: pass}. It is a
+local-candidate structural check, not a publication authority: its
+\texttt{status: blocked} marker is a two-repo release-topology gate that stays set
+until a separate promotion lane attaches the exact public problem-numbering
+citation, and it is independent of the Lean build the kernel checks in full.
+Provenance and context for how this snapshot was produced --- and its relation to
+the private system that generated it --- are in the repository README.
+
 \section{A sibling project, in progress}\label{sec:ramanujan}
 
 Separately from this repository, I am working on the
 \href{https://www.ramanujanmachine.com/ramanujan-challenge/}{Ramanujan Machine
-Challenge}, a set of ten problems, released in July 2026, that ask for proofs or
-symbolic derivations of explicit formulas for constants such as $\pi$, $e$,
-Catalan's constant, and zeta values. That work lives in a separate Lean
-lane and is not part of this snapshot. No challenge target is claimed solved or
-fully formalized here; the table below is a coarse status map only.
-
-\begin{center}
-\begin{tabular}{@{}cp{6.4cm}p{4.8cm}@{}}
-\toprule
-target & public theme & current status\\
-\midrule
-2.1 & polynomial continued fraction for a $\pi$-type constant & partial Lean kernel started\\
-2.2 & Euler's constant $\gamma$ as an Ap\'ery-type limit & partial Lean kernel started\\
-2.3 & $\pi+e$ as an Ap\'ery-type limit & in progress\\
-2.4 & harmonic-number series for polylog / zeta values & in progress\\
-2.5 & rational approximation of Catalan's constant & in progress\\
-2.6 & series for $\zeta(2)+\zeta(3)$ & exploratory; not formalized\\
-2.7 & four-term recurrence for $\zeta(2)+\zeta(3)$ & in progress\\
-2.8 & fast rational approximation of $\sqrt{10005}/\pi$ & in progress; target identity conjectural\\
-3.1 & knot-polynomial integral for $\pi^2$ & in progress; statement is an open conjecture\\
-3.2 & Ap\'ery $\zeta(3)$ irrationality-measure bound & in progress; statement is an open conjecture\\
-\bottomrule
-\end{tabular}
-\end{center}
-
-\noindent Aggregate: ten targets tracked, all ten statements normalized, two
-partial Lean kernels, and zero full formalizations. The release discipline
-(receipts, non-claims, a target runner) carries over from the Erd\H{o}s package;
-the theorems do not.
+Challenge} (ten problems, released July 2026, on proofs or symbolic derivations of
+explicit formulas for constants such as $\pi$, $e$, Catalan's constant, and zeta
+values). That work is a different Lean lane and is not part of this snapshot: no
+challenge target is claimed solved or formalized here, and nothing in this paper
+depends on it. A coarse status map for that project lives in the repository README.
 
 \appendix
 \section{Index of principal declarations}\label{app:index}
@@ -567,7 +641,7 @@ positive lift $L(A)=S$ & \lloc{CertificateKernel.lean}{18116}\ {\footnotesize\id
 M\"obius-square lens & \lloc{CertificateKernel.lean}{18125}\ {\footnotesize\idn{totient_series_eq_half_add_moebius_mersenne_square}}\\
 $S=\tfrac12+\Pr(\gcd=1)$ & \lloc{CertificateKernel.lean}{18228}\ {\footnotesize\idn{totient_series_eq_half_add_visible_coprime_pairs}}\\
 $S\ne p/q$ for $q\le7.96\times10^{34}$ & \lloc{CertificateKernel.lean}{18055}\ {\footnotesize\idn{tsum_totient_div_pow_two_ne_ratCast_of_den_le_79639646646701375323355774875831053}}\\
-wave-21 reduction & \lloc{TotientTailPeriodKiller.lean}{386}\ {\footnotesize\idn{irrational_totient_series_of_certificate_supply}}\\
+tail-period reduction & \lloc{TotientTailPeriodKiller.lean}{386}\ {\footnotesize\idn{irrational_totient_series_of_certificate_supply}}\\
 diagonal reduction & \lloc{LcmDiagonalReduction.lean}{92}\ {\footnotesize\idn{irrational_totient_series_of_lcm_diagonal_certificate_supply}}\\
 cone flatness from rationality & \lloc{LcmConeFlatness.lean}{90}\ {\footnotesize\idn{rational_totient_series_forces_lcm_cone_flatness}}\\
 certificate completeness & \lloc{LcmConeFlatness.lean}{316}\ {\footnotesize\idn{exists_certifiedKill_iff_tail_diff_notMem_int}}\\
@@ -580,15 +654,19 @@ non-empty certified-kill segment & \lloc{TotientTailPeriodKiller.lean}{396}\ {\f
 \begin{thebibliography}{9}
 \bibitem{erdos1948} P.~Erd\H{o}s, \emph{On arithmetical properties of Lambert series},
   J. Indian Math. Soc. (N.S.) \textbf{12} (1948), 63--66.
+\bibitem{erdos1968} P.~Erd\H{o}s, \emph{On the irrationality of certain series},
+  Math. Student \textbf{36} (1968), 222--226.
 \bibitem{borwein1992} P.~Borwein, \emph{On the irrationality of certain series},
   Math. Proc. Cambridge Philos. Soc. \textbf{112} (1992), no.~1, 141--146.
 \bibitem{nesterenko} Yu.~V. Nesterenko, \emph{Modular functions and transcendence questions},
   Mat. Sb. \textbf{187} (1996), no.~9, 65--96; English transl., Sb. Math. \textbf{187} (1996), no.~9, 1319--1348.
 \bibitem{pva} K.~Postelmans and W.~Van~Assche, \emph{Irrationality of $\zeta_q(1)$ and $\zeta_q(2)$},
   J. Number Theory \textbf{126} (2007), no.~1, 119--154.
-\bibitem{taoterv} T.~Tao and J.~Ter\"av\"ainen, resolution of Erd\H{o}s~\#69
-  (irrationality of $\sum_{n\ge1}\omega(n)/2^n=\sum_{p}1/(2^p-1)$), 2024;
-  \href{https://www.erdosproblems.com/69}{\texttt{erdosproblems.com/69}}.
+\bibitem{lucatachiya} F.~Luca and Y.~Tachiya, \emph{Irrationality of Lambert series associated
+  with a periodic sequence}, Int. J. Number Theory \textbf{10} (2014), no.~3, 623--636.
+\bibitem{taoterv} T.~Tao and J.~Ter\"av\"ainen, \emph{Quantitative correlations and some
+  problems on prime factors of consecutive integers}, arXiv:2512.01739 (2025);
+  settles Erd\H{o}s~\#69, the irrationality of $\sum_{n}\omega(n)/2^n=\sum_{p}1/(2^p-1)$.
 \bibitem{erdosproblems} T.~Bloom (ed.), \emph{Erd\H{o}s Problems},
   \href{https://www.erdosproblems.com}{\texttt{erdosproblems.com}}, accessed July 2026.
 \bibitem{ramanujan} The Ramanujan Machine, \emph{The Ramanujan Challenge} (2026),
