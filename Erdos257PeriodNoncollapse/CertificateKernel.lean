@@ -5778,8 +5778,8 @@ with the divisor-count series `∑ τ(m) / b^m` (Mathlib's
 `irrational_erdosSum_full_support_of_near_int` reduces full-support
 (Erdős–Borwein) irrationality to producing near-integer witnesses for the
 divisor-count series — the exact obligation Erdős's 1948 congruence
-construction discharges.  Those witnesses are not constructed here:
-full-support irrationality is *not* claimed. -/
+construction discharges.  These near-integer witnesses are left unbuilt on this route;
+full-support irrationality itself is proved separately (`irrational_erdosSum_full_support`). -/
 
 /-- **Second irrationality engine: integer-dilation near-integer criterion.**
 If for every positive `q` some integer dilation `m * ξ` lies within `1 / q`
