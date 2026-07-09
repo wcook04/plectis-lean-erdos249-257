@@ -7,7 +7,7 @@ A guide to this repository for mathematicians who do not read Lean.
 
 `erdos249-257-exposition.tex` states, in ordinary notation, what the Lean development
 proves, cites, and leaves open. Every formal statement links to the exact source
-line on GitHub, pinned to commit `4fb5915`, so a reader can go from a sentence of
+line on GitHub, pinned to commit `cb82a6c`, so a reader can go from a sentence of
 prose to the checked proof in one click. The document adds no mathematics beyond
 what the Lean sources contain; the proofs are the sources it links to.
 
