@@ -123,7 +123,7 @@ Each module is a self-contained step with a header docstring stating its own hon
 
 ### The carry trunk (post-wave modules)
 
-Four modules sit above the kernel and carry no wave numbers. They isolate the shared binary-carry layer: what rationality of a binary series forces on its integer carry states. Each states its own honest boundary; none proves either open problem, and every carry-trunk theorem is literature-novelty-unchecked — a formal interface, not a novelty claim.
+Four modules sit above the kernel and carry no wave numbers. They isolate the shared binary-carry layer: what rationality of a binary series forces on its integer carry states. Each states its own honest boundary, and none proves either open problem. The contribution boundary is theorem-family-specific: the carry recurrence and strict-tail geometry have direct prior art; Möbius inversion, repetend algebra, and divisor averaging are classical; the converse/rigidity, certificate-normal-form, and coupled reciprocal-mass families remain exact-source-comparison candidates. No priority claim is made.
 
 | Module | What it establishes |
 |---|---|
@@ -144,7 +144,7 @@ Four modules sit above the kernel and carry no wave numbers. They isolate the sh
 - The full chain of **conditional** #249 reductions (periodicity ⟹ tail-period law ⟹ certificate supply ⟹ lcm-diagonal ⟹ cone flatness/non-flatness), plus certificate completeness, and a non-empty initial segment of certified kills.
 - The carry trunk: tail-orbit rigidity (rationality ⟺ tempered carry orbits), the greedy survival characterization of the Mersenne achievement set with sound finite death certificates, Boolean–Möbius carry coordinates for support series, and rationality-forced reciprocal-mass lower bounds with unbounded carry states over infinite rational-valued supports. Formal interfaces, checked; not claimed as new mathematics.
 
-**Cited, not formalized here:** transcendence of `∑ σ(m)/2^m` (Nesterenko, 1996) and the q-zeta / q-Padé anchor (Postelmans–Van Assche). They are named as ladder neighbours, not re-proved.
+**Cited, not formalized here:** transcendence of `∑ σ(m)/2^m` (Nesterenko, 1996), the q-zeta / q-Padé anchor (Postelmans–Van Assche), Kovač–Tao's Lambert-subseries geometry ([arXiv:2406.17593](https://arxiv.org/abs/2406.17593)), and Wang–Grau Ribas's integral carry method ([arXiv:2606.24972](https://arxiv.org/abs/2606.24972)). They delimit the surrounding literature and are not re-proved.
 
 **Open (explicitly not solved in this repository):**
 
