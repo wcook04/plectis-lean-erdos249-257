@@ -19,7 +19,7 @@
 % ---------------------------------------------------------------------------
 % Drill-down machinery: each anchor links to the GitHub blob at a pinned commit.
 % ---------------------------------------------------------------------------
-\newcommand{\commit}{cb82a6c987b1973148975d960d549e1cb6cd78bd}
+\newcommand{\commit}{de7a3601c48e865f1992758daa9b4d6391c86d7e}
 \newcommand{\repobase}{https://github.com/wcook04/plectis-lean-erdos249-257/blob/\commit}
 \newcommand{\PK}{Erdos249257}
 % \idn: typeset a Lean identifier (underscores literal, breakable across lines).
@@ -54,7 +54,7 @@
 \author{\texttt{ai\_workflow} (upstream of \href{https://wcook04.github.io/plectis/}{Plectis})}
 \date{July 2026\\[4pt]
 {\footnotesize Companion to the Lean~4 repository
-\href{https://github.com/wcook04/plectis-lean-erdos249-257}{\texttt{plectis-lean-erdos249-257}}, pinned at commit \href{\repobase}{\texttt{cb82a6c}}.}}
+\href{https://github.com/wcook04/plectis-lean-erdos249-257}{\texttt{plectis-lean-erdos249-257}}, pinned at commit \href{\repobase}{\texttt{de7a360}}.}}
 
 \begin{document}
 \sloppy
@@ -131,6 +131,14 @@ failure, and by a completeness theorem the certificate exists \emph{exactly} whe
 the tail difference is non-integral
 (Results~\ref{res:red21}--\ref{res:complete}). The initial segment of the
 required supply is machine-checked non-empty (Result~\ref{res:deposits}).
+\item \textbf{Carry coordinates for rational values.} A rationality criterion
+for binary series with linearly bounded coefficients (tempered integer carry
+orbits); a support-free Boolean--M\"obius carry certificate exactly equivalent
+to a rational \#257 support value; order-wrap, reciprocal-mass, and
+unbounded-carry constraints that any such rational value must satisfy; and a
+greedy geometry for the \#257 value set
+(Results~\ref{res:rigidity}--\ref{res:death}, Section~\ref{sec:carry}). These
+are equivalences and constraints, not exclusions of any open value.
 \end{itemize}
 
 \paragraph{Not proved, and not claimed.} The irrationality of $S$ (\#249) and the
@@ -155,7 +163,7 @@ First, the mathematics is stated in ordinary notation. Lean names appear only as
 pointers. Second, every formalized statement carries a link of the form
 \lref{CertificateKernel.lean}{8006}{irrational_erdosBorwein_series}. The blue
 \texttt{file:line} text links to that line of source on GitHub, pinned to
-commit \href{\repobase}{\texttt{cb82a6c}}; the name in parentheses is the Lean
+commit \href{\repobase}{\texttt{de7a360}}; the name in parentheses is the Lean
 declaration. Line numbers refer to that commit.
 
 The boundary between what is proved, what is only cited, and what is open is
@@ -512,6 +520,332 @@ obstruction seen as a rational denominator, an eventual binary period, and a fla
 tail on the $\lcm$ cone. That unboundedness is the remaining analytic question,
 and it is left open. The reduction is real; the closure is not asserted.
 
+\section{Rationality as a carry system (further infrastructure)}\label{sec:carry}
+
+Four further modules extend the development sideways. They prove no new
+irrationality. Instead they pin down, in machine-checked form, what a rational
+value of the series in question would have to look like: as an integer carry
+orbit, as a M\"obius-inverted support coordinate, as a residue-wrap cycle
+modulo the odd part of the denominator, and as a point of a greedy subset-sum
+geometry. Everything in this section is an equivalence or an unconditional
+constraint on the rational side; nothing excludes a rational value of either
+open series, and each module states that boundary in its header. One hedge is
+repeated from the sources: the literature has not been audited for prior
+statements of these lemmas, so they are offered as formal infrastructure, not
+as claimed novelties.
+
+\subsection{Tail-orbit rigidity: a rationality criterion}
+
+For a coefficient sequence $c:\N\to\N$ with $c(n)\le n$, write
+\[
+X_c=\sum_{n\ge1}\frac{c(n)}{2^n},
+\qquad
+T_c(N)=\sum_{j\ge1}\frac{c(N+j)}{2^j},
+\]
+the series and its scaled tail after $N$ binary digits. Call an integer
+sequence $u$ a \emph{tempered orbit} for $c$ with multiplier $v\ge1$ if
+\[
+u(N+1)=2\,u(N)-v\,c(N+1)\ \text{ for all } N,
+\qquad\text{and}\qquad
+u(N)/2^N\to0 .
+\]
+The recurrence is exact binary long division against the coefficient stream;
+the boundary condition forbids the homogeneous solution.
+
+\begin{result}[tail-orbit rigidity]\label{res:rigidity}
+Let $c(n)\le n$ for all $n$. Every tempered orbit is the scaled tail,
+$u(N)=v\,T_c(N)$ for all $N$; and $X_c$ is rational if and only if a tempered
+orbit exists for some multiplier $v\ge1$.
+\end{result}
+\noindent Formalized:
+\lref{GenericTailOrbitRigidity.lean}{171}{temperedBinaryOrbit_eq_scaledTail}
+(rigidity) and
+\lref{GenericTailOrbitRigidity.lean}{259}{binaryCoeffSeries_rational_iff_exists_temperedBinaryOrbit}
+(the criterion), restated in Mathlib's irrationality vocabulary at
+\lrefx{GenericTailOrbitRigidity.lean}{269}{not_irrational_binaryCoeffSeries_iff_exists_temperedBinaryOrbit}.
+The engine is one observation: a real orbit with $d(N+1)=2\,d(N)$ and
+$d(N)=o(2^N)$ vanishes identically
+(\lrefx{GenericTailOrbitRigidity.lean}{147}{doublingOrbit_eq_zero_of_tempered}).
+
+The tempered boundary is essential, and the source is deliberate about it: the
+homogeneous parasite $N\mapsto2^N$ can be added to any orbit without
+disturbing the recurrence, so positivity of an orbit certifies nothing by
+itself, and positivity is nowhere advertised as an equivalent criterion. The
+linear-growth hypothesis covers both constants of Section~\ref{sec:two}:
+$\ph(n)\le n$ for the \#249 coefficients, and $f_A(n)\le\tau(n)\le n$ for the
+\#257 support coefficients $f_A(n)=\#\{a\in A:a\mid n\}$. The modules below
+instantiate the criterion on supports; the totient instantiation is not taken
+here.
+
+\subsection{Boolean--M\"obius carry coordinates (the \#257 direction)}
+
+At base $2$ the support series of Section~\ref{sec:eb} is itself a binary
+coefficient series, $\sum_{n\in A}1/(2^n-1)=X_{f_A}$
+(\lrefx{BooleanMobiusCarry.lean}{388}{erdosSupportSeries_two_eq_binaryCoeffSeries}).
+Two exact coordinate changes then turn a hypothetical rational value into a
+support-free object.
+
+\begin{result}[Boolean M\"obius inversion, both directions]\label{res:boolmob}
+On positive integers, $f_A=\mathbf 1_A*\zeta$ and $\mu*f_A=\mathbf 1_A$, where
+$\mathbf 1_A$ is the indicator of $A$. Conversely, every integer-valued
+arithmetic function $f$ whose M\"obius transform is Boolean,
+$(\mu*f)(n)\in\{0,1\}$ for all $n\ge1$, satisfies $f=f_B$ for the support
+$B=\{n\ge1:(\mu*f)(n)=1\}$ selected by that transform.
+\end{result}
+\noindent Formalized:
+\lref{BooleanMobiusCarry.lean}{88}{positiveSupportBitAF_mul_zeta},
+\lref{BooleanMobiusCarry.lean}{106}{moebius_mul_supportCoeffAF}, and, with no
+search or finiteness hypothesis, the converse
+\lref{BooleanMobiusCarry.lean}{192}{eq_supportCoeffAF_booleanMobiusSupport_of_boolean};
+the selected support is
+\lrefx{BooleanMobiusCarry.lean}{151}{booleanMobiusSupport}.
+
+On the carry side, Result~\ref{res:rigidity} applies at $c=f_A$: the support
+series is rational exactly when a tempered carry orbit for $f_A$ exists
+(\lrefx{BooleanMobiusCarry.lean}{395}{erdosSupportSeries_rational_iff_exists_temperedCarry});
+a displayed fraction $p/q$ corresponds to an orbit $U$ with multiplier $q$ and
+initial value $U(0)=p$
+(\lrefx{BooleanMobiusCarry.lean}{479}{support_fraction_iff_exists_temperedCarry});
+and exact division recovers the coefficient from the orbit,
+$\bigl(2U(N)-U(N+1)\bigr)/q=f_A(N+1)$
+(\lrefx{BooleanMobiusCarry.lean}{508}{temperedCarry_quotient_eq_supportCoeff}).
+The elementary divisor-pair bound $\tau(n)\le2\lfloor\sqrt n\rfloor$
+(\lrefx{BooleanMobiusCarry.lean}{220}{card_divisors_le_two_mul_sqrt}) confines
+the tails to a square-root strip, $T_{f_A}(N)\le2\sqrt N+4$
+(\lrefx{BooleanMobiusCarry.lean}{301}{binaryCoeffTail_supportCoeff_le_two_sqrt_add_four}),
+hence every orbit state to $0<U(N)\le q\,(2\sqrt N+4)$
+(\lrefx{BooleanMobiusCarry.lean}{518}{temperedCarry_pos_of_exists_pos_mem},
+\lrefx{BooleanMobiusCarry.lean}{532}{temperedCarry_le_denominator_mul_two_sqrt_add_four});
+and the strip is strong enough to re-derive the tempered boundary, so the
+analytic side condition can be traded for one inequality. The two coordinate
+changes compose.
+
+\begin{result}[certificate-level equivalence]\label{res:carrycert}
+Fix an integer $p$ and an integer $q\ge1$. There is a nonempty support $A$ of
+positive integers with $\sum_{n\in A}1/(2^n-1)=p/q$ if and only if there is an
+integer sequence $U$ with $U(0)=p$ such that: every $U(N)$ is positive;
+$U(N)\le q\,(2\sqrt N+4)$; $q$ divides $2U(N)-U(N+1)$ for every $N$; and the
+M\"obius transform of the quotient sequence $\bigl(2U(N)-U(N+1)\bigr)/q$ is
+Boolean. The support is not guessed: it is reconstructed from the certificate
+by Result~\ref{res:boolmob}.
+\end{result}
+\noindent Formalized:
+\lref{BooleanMobiusCarry.lean}{776}{exists_normalized_support_fraction_iff_exists_booleanMobiusCarry},
+with the certificate packaged as
+\lrefx{BooleanMobiusCarry.lean}{603}{BooleanMobiusCarryCertificate} and the
+quotient normalized at index zero
+(\lrefx{BooleanMobiusCarry.lean}{593}{carryQuotient}). A worked fixture keeps
+the coordinates honest: the support $\{2,3\}$ has value
+$\tfrac13+\tfrac17=\tfrac{10}{21}$
+(\lrefx{BooleanMobiusCarry.lean}{882}{erdosSupportSeries_support23_eq_ten_div_twenty_one}),
+its orbit is the pure period-six cycle $10,20,19,17,13,26$ with multiplier
+$21$ (\lrefx{BooleanMobiusCarry.lean}{931}{carryOrbit23_isTempered}), and the
+M\"obius transform of the carry quotient recovers exactly $\{2,3\}$
+(\lrefx{BooleanMobiusCarry.lean}{968}{mobius_carryOrbit23_recovers_support}).
+
+These are coordinates, not by themselves a strategy: nothing here excludes
+infinite Boolean carry paths, and no finite search is promoted to a
+completeness argument.
+
+\subsection{Residue wraps, reciprocal mass, and unbounded carries}
+
+Suppose now the support series equals $p/(2^c v)$ with $v$ odd and $A$
+containing a positive element. Rationality makes the scaled tails integers:
+$u(N)=v\,T_{f_A}(c+N)$ is a positive integer, satisfies the carry recurrence
+$u(N+1)+v\,f_A(c+N+1)=2\,u(N)$, and reduces modulo $v$ to the doubling
+residues $r_N=p\,2^N\bmod v$
+(\lrefx{RationalSupportCarrySkeleton.lean}{694}{exists_shifted_odd_tail_nat_states_of_support_fraction}).
+Doubling a least residue either stays under $v$ or wraps past it exactly once,
+so each step emits a wrap digit $k_N=\lfloor2r_N/v\rfloor\in\{0,1\}$, and over
+any cycle length $h$ with $2^h\equiv1\pmod v$ the repetend identity holds:
+\[
+\sum_{N<h}r_N \;=\; v\cdot w,
+\qquad
+w=\sum_{N<h}k_N,
+\]
+with $w\ge1$ when $p$ is coprime to $v>1$. Formalized:
+\lref{RationalSupportCarrySkeleton.lean}{195}{sum_doublingResidue_eq_mul_wrapCount}
+and \lrefx{RationalSupportCarrySkeleton.lean}{205}{doublingWrapCount_pos};
+residues, digits, and counts are
+\lrefx{RationalSupportCarrySkeleton.lean}{59}{doublingResidue},
+\lrefx{RationalSupportCarrySkeleton.lean}{63}{doublingWrapDigit},
+\lrefx{RationalSupportCarrySkeleton.lean}{67}{doublingWrapCount}.
+
+\begin{result}[one-wrap classification]\label{res:onewrap}
+Let $v>1$ be odd, $p$ coprime to $v$, and $h\ge1$ with $2^h\equiv1\pmod v$.
+If the cycle of $p$ wraps exactly once, then $v=2^h-1$ and the starting
+residue is a power of two: $r_0=2^a$ for some $a<h$.
+\end{result}
+\noindent The one-wrap cycles are thus exactly the Mersenne repetends
+$2^a/(2^h-1)$. Formalized:
+\lref{RationalSupportCarrySkeleton.lean}{440}{one_doublingWrap_classification},
+from the generic closed-cycle form
+\lrefx{RationalSupportCarrySkeleton.lean}{378}{one_wrap_cycle_classification},
+and instantiated at the true order $h=\operatorname{ord}_v(2)$
+(\lrefx{RationalSupportCarrySkeleton.lean}{504}{one_oddOrder_doublingWrap_classification},
+with \lrefx{RationalSupportCarrySkeleton.lean}{461}{oddDoublingOrder}). The
+classification is algebraic; a finite check of $446$ coprime starting residues
+across twelve modulus/order rows is retained as kernel-checked validation, not
+as the proof
+(\lrefx{RationalSupportCarrySkeleton.lean}{2478}{orderWrapValidatedStartCount_eq_446},
+\lrefx{RationalSupportCarrySkeleton.lean}{2482}{orderWrapValidation446_passes},
+\lrefx{RationalSupportCarrySkeleton.lean}{2488}{orderWrap_minima_table_passes}).
+
+The analytic bridge is Ces\`aro averaging. Write $\rho(A)=\sum_{a\in A}1/a$
+for the reciprocal mass
+(\lrefx{RationalSupportCarrySkeleton.lean}{816}{reciprocalMass}). When the
+reciprocal family is summable, the mean of $f_A(1),\dots,f_A(N)$ converges to
+$\rho(A)$ --- the density of the multiples of $a$, summed over the support ---
+and the mean of the scaled tails has the same limit
+(\lref{RationalSupportCarrySkeleton.lean}{971}{tendsto_supportCoeff_mean_reciprocalMass},
+\lrefx{RationalSupportCarrySkeleton.lean}{1062}{tendsto_binaryCoeffTail_supportCoeff_mean_reciprocalMass}).
+The divergent case is carried as an explicit disjunction, not through the
+convention that a divergent \texttt{tsum} is zero
+(\lrefx{RationalSupportCarrySkeleton.lean}{822}{ReciprocalMassDivergesOrAtLeast}).
+Each tail state splits exactly as $u(N)=v\,e_N+r_N$ with integral excess
+$e_N=\lfloor u(N)/v\rfloor\ge0$
+(\lrefx{RationalSupportCarrySkeleton.lean}{527}{oddTailExcess}).
+
+\begin{result}[order-wrap lower bound, with exact excess mean]\label{res:orderwrap}
+Let $A$ and $p/(2^c v)$ be as above with $v>1$ odd, and let $w$ be the wrap
+count of $p$ over one cycle of length $h=\operatorname{ord}_v(2)$. Then
+$\sum_{a\in A}1/a$ diverges or $\rho(A)\ge w/h$; if moreover $p$ is coprime to
+$v$, then $w\ge1$, so $\rho(A)\ge1/\operatorname{ord}_v(2)$. In the summable
+case the bound is the periodic part of an exact identity: the Ces\`aro mean of
+the excess $e_N$ converges automatically, and
+\[
+\rho(A)\;=\;\frac{w}{h}\;+\;\lim_{N\to\infty}\frac1N\sum_{n<N}e_n .
+\]
+\end{result}
+\noindent Formalized:
+\lref{RationalSupportCarrySkeleton.lean}{1479}{support_fraction_oddOrder_wrapRatio_le_reciprocalMass},
+\lref{RationalSupportCarrySkeleton.lean}{1503}{one_div_oddOrder_le_reciprocalMass_of_support_fraction},
+the divergence-honest form
+\lloc{RationalSupportCarrySkeleton.lean}{1542}\ (\,\idn{support_fraction_one_div_oddOrder_reciprocalMassDivergesOrAtLeast}\,),
+and the excess mean
+\lref{RationalSupportCarrySkeleton.lean}{1359}{tendsto_oddTailExcess_mean}
+(fraction-facing shifted form
+\lrefx{RationalSupportCarrySkeleton.lean}{1602}{exists_shifted_oddTailExcess_mean_of_support_fraction},
+named-limit form
+\lrefx{RationalSupportCarrySkeleton.lean}{1378}{reciprocalMass_eq_wrapRatio_add_oddTailExcessMean}).
+A rational value thus ties the odd part of its denominator to the sparsity of
+its support: a summable support with small $\rho(A)$ can only display
+denominators whose odd part has small multiplicative order of $2$.
+
+\begin{result}[collision strengthening at common multiples]\label{res:collision}
+In the summable case, let $F\subseteq A$ be finite and let $L$ be a common
+multiple of $F$. Then
+\[
+\rho(A)\;\ge\;\frac{w}{h}\;+\;\frac{\lceil(|F|-1)/2\rceil}{L}.
+\]
+In particular, an infinite support whose value is a dyadic rational $p/2^c$
+has $\sum_{a\in A}1/a$ divergent or $\rho(A)>1$.
+\end{result}
+\noindent The mechanism is a collision: at every positive multiple of $L$ at
+least $|F|$ support divisors land on the same index, so $f_A\ge|F|$ there,
+while the exact carry equation $f_A(n)+e_n=k_{n-1}+2e_{n-1}$ with
+$k_{n-1}\le1$ lets one step absorb at most one unit --- so the preceding
+excess must spike to at least $\lceil(|F|-1)/2\rceil$, and the spikes recur
+with density $1/L$. Formalized:
+\lref{RationalSupportCarrySkeleton.lean}{2062}{booleanCollision_wrap_bound_of_common_multiple}
+(denominator-shifted form
+\lloc{RationalSupportCarrySkeleton.lean}{1988}\ (\,\idn{shiftedBooleanCollision_wrap_bound_of_common_multiple}\,)),
+the carry equation
+\lrefx{RationalSupportCarrySkeleton.lean}{1676}{supportCoeff_add_oddTailExcess_succ_eq_wrap_add_two_excess},
+and the dyadic corollary
+\lref{RationalSupportCarrySkeleton.lean}{2225}{dyadic_support_fraction_reciprocalMass_diverges_or_gt_one}
+(via \lloc{RationalSupportCarrySkeleton.lean}{2141}\ (\,\idn{one_lt_reciprocalMass_of_dyadic_support_fraction_of_two_pos_mem}\,)).
+
+\begin{result}[carry states are unbounded over infinite supports]\label{res:unbounded}
+Let $A$ be infinite with value $p/(2^c v)$, $v\ge1$. Then the positive integer
+carry state $u(N)=v\,T_{f_A}(c+N)$ is unbounded: for every $B$ there is an $N$
+with $u(N)>B$.
+\end{result}
+\noindent The proof picks $2B+1$ positive support elements; at a common
+multiple $L$ of all of them, the local inequality $1+v\,|F|\le2\,u(L-c-1)$
+pushes the state past $B$. Formalized:
+\lref{RationalSupportCarrySkeleton.lean}{2402}{exists_unbounded_shifted_odd_tail_nat_state_of_support_fraction},
+from
+\lrefx{RationalSupportCarrySkeleton.lean}{2345}{shifted_state_unbounded_of_infinite_support}
+and the local inequality
+\lrefx{RationalSupportCarrySkeleton.lean}{2253}{one_add_mul_card_le_two_mul_shifted_state};
+the $\{2,3\}$ fixture revalidates it at sixty-six common multiples
+(\lrefx{RationalSupportCarrySkeleton.lean}{2427}{carryOrbit23_common_multiple_bound_validation66}).
+So a rational value over an infinite support cannot run on a bounded carry
+alphabet. That closes finite-state readings of the carry system; it does not
+close the problem. Nothing in Results~\ref{res:onewrap}--\ref{res:unbounded}
+prevents an infinite support from satisfying every one of these constraints.
+
+\subsection{Greedy geometry of the \#257 value set}
+
+The fourth module studies the set of all values a base-$2$ support series can
+take. For $n\ge1$ put $w_n=1/(2^n-1)$, let $T(n)$ be the mass strictly after
+exponent $n$, and let
+\[
+\mathcal A\;=\;\Bigl\{\,\sum_{n\in A}w_n \;:\; A\subseteq\N,\ 0\notin A\Bigr\},
+\]
+the \emph{Mersenne achievement set}, the exponent $0$ being normalized away as
+analytically invisible. Coding by supports of positive exponents is literally
+the kernel's support series
+(\lrefx{GreedyAchievementSet.lean}{504}{positiveMersenneSupportValue_eq_erdosSupportSeries};
+the set is \lrefx{GreedyAchievementSet.lean}{521}{mersenneAchievementSet}). In
+this language the base-$2$ \#257 statement reads: the rational members of
+$\mathcal A$ are exactly the finite subset sums. Nothing below decides that.
+
+\begin{result}[superincreasing geometry and greedy membership]\label{res:greedy}
+For every $n\ge1$ the weight dominates the whole tail after it, $T(n)<w_n$,
+with the two-scale gap $w_n-T(n)=\tfrac23\,4^{-n}+O(8^{-n})$ and explicit
+valid $O$-constant $3$. Consequently a real $x$ belongs to $\mathcal A$
+exactly when $x\ge0$ and every greedy residual of $x$ is at most the remaining
+tail; and normalized support coding is injective, so each member of
+$\mathcal A$ has a unique support, which the greedy recursion recovers bit by
+bit.
+\end{result}
+\noindent Formalized:
+\lref{GreedyAchievementSet.lean}{183}{mersenneTail_lt_weight},
+\lref{GreedyAchievementSet.lean}{422}{mersenneGap_isBigOWith} (explicit bound
+\lrefx{GreedyAchievementSet.lean}{397}{mersenneGap_asymptotic_bound}),
+\lref{GreedyAchievementSet.lean}{750}{mem_mersenneAchievementSet_iff_greedy_survival},
+and
+\lref{GreedyAchievementSet.lean}{759}{positiveMersenneSupportValue_injective_normalized},
+transferred to the kernel series at
+\lrefx{GreedyAchievementSet.lean}{768}{erdosSupportSeries_two_injective_normalized}.
+The nonnegativity guard in the membership criterion is necessary: without it a
+negative target would survive every level while lying outside $\mathcal A$.
+
+\begin{result}[exact rational runs and death certificates]\label{res:death}
+The greedy recursion executed in exact rational arithmetic agrees step by step
+with the real recursion under casting. A finite decidable certificate --- the
+exact rational residual at some level is at least an exact rational upper
+enclosure of the remaining tail --- soundly proves non-membership in
+$\mathcal A$; the level-one instance shows $3/4\notin\mathcal A$. And a
+rational number already known to lie in $\mathcal A$ has computable support
+bits.
+\end{result}
+\noindent Formalized:
+\lref{GreedyAchievementSet.lean}{574}{cast_greedyMersenneRemainderRat};
+\lref{GreedyAchievementSet.lean}{827}{certifiedGreedyMersenneDeath_not_mem},
+with the certificate
+\lrefx{GreedyAchievementSet.lean}{821}{CertifiedGreedyMersenneDeath} and the
+enclosure \lrefx{GreedyAchievementSet.lean}{788}{mersenneTailUpperRat};
+\lref{GreedyAchievementSet.lean}{849}{three_fourths_not_mem_mersenneAchievementSet};
+and \lref{GreedyAchievementSet.lean}{933}{rational_member_support_bit_iff}.
+The certificates are one-sided: survival through any finite depth proves
+nothing about membership, and no decidability of membership in $\mathcal A$ is
+asserted. The module also declines to formalize the topological or
+measure-theoretic geometry of $\mathcal A$; in particular the phrase ``fat
+Cantor set'' is not promoted to a Lean-checked theorem.
+
+\paragraph{What this section does not do.} No statement above excludes a
+rational value of the totient constant or of any infinite-support series. The
+four modules supply coordinates (Results~\ref{res:rigidity},
+\ref{res:boolmob}, \ref{res:carrycert}), constraints
+(Results~\ref{res:onewrap}--\ref{res:unbounded}), and a decision geometry for
+the value set (Results~\ref{res:greedy}, \ref{res:death}). The closing
+argument --- excluding every infinite Boolean carry path, or exhibiting an
+unbounded certificate supply --- is exactly what Sections~\ref{sec:eb}
+and~\ref{sec:249} leave open.
+
 \section{Where this sits: the Erd\H{o}s landscape}\label{sec:landscape}
 
 The table records how the development relates to the numbered problems it is near.
@@ -551,7 +885,10 @@ M\"obius-square and coprimality reformulations
 (Results~\ref{res:lift},~\ref{res:lens},~\ref{res:coprime}); the unconditional
 denominator exclusion to $7.96\times10^{34}$ (Result~\ref{res:farey}); the full
 chain of conditional \#249 reductions with certificate completeness and a
-non-empty initial supply (Results~\ref{res:red21}--\ref{res:deposits}).
+non-empty initial supply (Results~\ref{res:red21}--\ref{res:deposits}); and the
+carry-coordinate equivalences, rational-value constraints, and greedy
+value-set geometry of Section~\ref{sec:carry}
+(Results~\ref{res:rigidity}--\ref{res:death}).
 
 \paragraph{Cited, not formalized here.} Transcendence of $\sum\sigma(m)/2^m$
 (Nesterenko~1996~\cite{nesterenko}) and the $q$-zeta anchor
@@ -606,7 +943,7 @@ depends on it. A coarse status map for that project lives in the repository READ
 \appendix
 \section{Index of principal declarations}\label{app:index}
 
-Each row links to the declaration at commit \href{\repobase}{\texttt{cb82a6c}}.
+Each row links to the declaration at commit \href{\repobase}{\texttt{de7a360}}.
 
 \begin{center}
 \small
@@ -631,6 +968,12 @@ cone flatness from rationality & \lloc{LcmConeFlatness.lean}{90}\ {\footnotesize
 certificate completeness & \lloc{LcmConeFlatness.lean}{316}\ {\footnotesize\idn{exists_certifiedKill_iff_tail_diff_notMem_int}}\\
 joint cone refuter & \lloc{LcmConeNonflat.lean}{126}\ {\footnotesize\idn{exists_nonintegral_pair_of_coneNonflatCert}}\\
 non-empty certified-kill segment & \lloc{TotientTailPeriodKiller.lean}{396}\ {\footnotesize\idn{certifiedKill_all_small}}\\
+tail-orbit rationality criterion & \lloc{GenericTailOrbitRigidity.lean}{259}\ {\footnotesize\idn{binaryCoeffSeries_rational_iff_exists_temperedBinaryOrbit}}\\
+Boolean carry certificate $\Leftrightarrow$ support fraction & \lloc{BooleanMobiusCarry.lean}{776}\ {\footnotesize\idn{exists_normalized_support_fraction_iff_exists_booleanMobiusCarry}}\\
+one-wrap classification & \lloc{RationalSupportCarrySkeleton.lean}{440}\ {\footnotesize\idn{one_doublingWrap_classification}}\\
+order-wrap mass bound & \lloc{RationalSupportCarrySkeleton.lean}{1503}\ {\footnotesize\idn{one_div_oddOrder_le_reciprocalMass_of_support_fraction}}\\
+unbounded carry states & \lloc{RationalSupportCarrySkeleton.lean}{2402}\ {\footnotesize\idn{exists_unbounded_shifted_odd_tail_nat_state_of_support_fraction}}\\
+greedy membership criterion & \lloc{GreedyAchievementSet.lean}{750}\ {\footnotesize\idn{mem_mersenneAchievementSet_iff_greedy_survival}}\\
 \bottomrule
 \end{tabular}
 \end{center}
