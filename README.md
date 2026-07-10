@@ -105,7 +105,7 @@ The primitive-conductor weight is `A = φ * μ` (`primWeight = totientZ * moebiu
 
 ## The wave ladder, module by module
 
-Each module is a self-contained step with a header docstring stating its own honest boundary. Wave numbers are development order; the import chain is `GapFareyBound → MersenneLambertLadder → … → LcmConeNonflat → CertificateKernel ← GeneratedCertificates`.
+Each module is a self-contained step with a header docstring stating its own honest boundary. Wave numbers are development order; the import chain is `GapFareyBound → MersenneLambertLadder → … → LcmConeNonflat → CertificateKernel ← GeneratedCertificates`. A further carry trunk builds on the kernel: `GenericTailOrbitRigidity → BooleanMobiusCarry → RationalSupportCarrySkeleton`, with `GreedyAchievementSet` importing `CertificateKernel` directly (see below).
 
 | Wave | Module | What it establishes |
 |---|---|---|
@@ -121,6 +121,17 @@ Each module is a self-contained step with a header docstring stating its own hon
 
 **Assembled:** `CertificateKernel.lean` (18,887 lines, 483 theorems) imports all nine modules plus real Mathlib number theory and holds the irrationality proofs, the ladder identities, and the reductions. `GeneratedCertificates.lean` (27,728 lines, 1,026 theorems) plus three shards (`b10_L6_A11`, `b2_L105_A75047`, `b2_L210_A21371`) are machine-generated finite certificate instances, each discharged by `decide`.
 
+### The carry trunk (post-wave modules)
+
+Four modules sit above the kernel and carry no wave numbers. They isolate the shared binary-carry layer: what rationality of a binary series forces on its integer carry states. Each states its own honest boundary; none proves either open problem, and every carry-trunk theorem is literature-novelty-unchecked — a formal interface, not a novelty claim.
+
+| Module | What it establishes |
+|---|---|
+| `GenericTailOrbitRigidity.lean` | **Tail-orbit rigidity.** For a coefficient sequence with `c(n) ≤ n`, the binary series `∑ c(n)/2ⁿ` is rational exactly when a positive multiplier `v` and an integer orbit `u(N+1) = 2·u(N) − v·c(N+1)` with `u(N)/2ᴺ → 0` exist; every such tempered orbit is rigid, equal to the scaled tail `v·T_c(N)`. The tempered boundary is essential: a homogeneous `2ᴺ` parasite can be added to any orbit, so positivity alone is deliberately not offered as an equivalent criterion. |
+| `GreedyAchievementSet.lean` | **Greedy geometry of the Mersenne achievement set** (values `∑_{n∈A} 1/(2ⁿ−1)`). Strict superincreasing tail inequalities, the quantitative gap asymptotic `(2/3)·4⁻ⁿ + O(8⁻ⁿ)` with an explicit remainder bound, exact real and rational greedy recurrences, and the characterization: membership iff the greedy remainder survives every level. Finite exact-rational death certificates are sound and one-sided — the exact level-one certificate shows `3/4` is not achievable — and normalized support coding is unique, with computable digits for rational members. |
+| `BooleanMobiusCarry.lean` | **Boolean–Möbius carry coordinates.** For a support `A`, the binary Lambert coefficient is `f_A(n) = #{a ∈ A : a ∣ n}`, and two exact coordinate changes are kernel-visible: `f_A = 1_A * ζ` with `μ * f_A = 1_A` on positive integers, and rationality of the support series equivalent to a tempered carry orbit whose carry quotient is exactly `f_A` (for a displayed fraction `p/q`, multiplier `q` and initial value `p`). Normalized nonempty supports with value `p/q` correspond exactly to quotient-only Boolean Möbius carry certificates. Worked support `{2,3}`: value `10/21`, pure period-six orbit `10, 20, 19, 17, 13, 26`. |
+| `RationalSupportCarrySkeleton.lean` | **Residue wraps and reciprocal mass.** The binary repetend identity — least positive residues in a complete doubling cycle sum to odd modulus × number of wraps — plus an algebraic one-wrap classification. The analytic bridge identifies the Cesàro mean of the support tails with the reciprocal mass `∑_{a∈A} 1/a`, giving the exact excess-mean identity and an order-sensitive bound: a rational value with odd denominator part `v` (numerator reduced) forces reciprocal mass at least `1/ord_v(2)`, or divergence. An infinite support with a dyadic-rational value has reciprocal mass divergent or strictly greater than one, and the positive carry state of any infinite support with rational value is globally unbounded at common multiples. Finite validation tables are kernel-checked by `decide`. |
+
 ---
 
 ## What is proved, cited, and open
@@ -131,6 +142,7 @@ Each module is a self-contained step with a header docstring stating its own hon
 - The Mersenne–Lambert ladder identities, including the Möbius-square lens for `S`.
 - **Unconditional** exclusion: `S ≠ p/q` for every `q ≤ 7.96 × 10³⁴`.
 - The full chain of **conditional** #249 reductions (periodicity ⟹ tail-period law ⟹ certificate supply ⟹ lcm-diagonal ⟹ cone flatness/non-flatness), plus certificate completeness, and a non-empty initial segment of certified kills.
+- The carry trunk: tail-orbit rigidity (rationality ⟺ tempered carry orbits), the greedy survival characterization of the Mersenne achievement set with sound finite death certificates, Boolean–Möbius carry coordinates for support series, and rationality-forced reciprocal-mass lower bounds with unbounded carry states over infinite rational-valued supports. Formal interfaces, checked; not claimed as new mathematics.
 
 **Cited, not formalized here:** transcendence of `∑ σ(m)/2^m` (Nesterenko, 1996) and the q-zeta / q-Padé anchor (Postelmans–Van Assche). They are named as ladder neighbours, not re-proved.
 
@@ -177,6 +189,12 @@ The one-line summary: a formalization of Erdős–Borwein-type irrationality, an
 | Rationality forces cone flatness | `rational_totient_series_forces_lcm_cone_flatness` | `LcmConeFlatness.lean:90` |
 | Certificate completeness | `exists_certifiedKill_iff_tail_diff_notMem_int` | `LcmConeFlatness.lean:316` |
 | Non-empty certified-kill segment | `certifiedKill_all_small`, `certifiedKill_periodLcm_diagonal_upto_six` | `TotientTailPeriodKiller.lean:396`, `LcmDiagonalReduction.lean:217` |
+| Rationality ⟺ tempered carry orbit | `binaryCoeffSeries_rational_iff_exists_temperedBinaryOrbit` | `GenericTailOrbitRigidity.lean` |
+| Achievement-set membership ⟺ greedy survival | `mem_mersenneAchievementSet_iff_greedy_survival` | `GreedyAchievementSet.lean` |
+| `3/4` excluded by a finite certificate | `three_fourths_not_mem_mersenneAchievementSet` | `GreedyAchievementSet.lean` |
+| Support fraction ⟺ Boolean Möbius carry certificate | `exists_normalized_support_fraction_iff_exists_booleanMobiusCarry` | `BooleanMobiusCarry.lean` |
+| Reciprocal-mass bound `1/ord_v(2)` from rationality | `one_div_oddOrder_le_reciprocalMass_of_support_fraction` | `RationalSupportCarrySkeleton.lean` |
+| Carry states unbounded over infinite rational-valued supports | `exists_unbounded_shifted_odd_tail_nat_state_of_support_fraction` | `RationalSupportCarrySkeleton.lean` |
 
 ---
 
@@ -227,6 +245,10 @@ Erdos249257/
   LcmDiagonalReduction.lean               wave 23  one-parameter diagonal reduction
   LcmConeFlatness.lean                    wave 24  cone-flatness law + completeness
   LcmConeNonflat.lean                     wave 25  joint cone non-flatness refuter
+  GenericTailOrbitRigidity.lean           carry trunk  rationality <=> tempered carry orbits
+  GreedyAchievementSet.lean               carry trunk  greedy geometry + finite death certificates
+  BooleanMobiusCarry.lean                 carry trunk  Boolean-Möbius carry coordinates
+  RationalSupportCarrySkeleton.lean       carry trunk  residue wraps + reciprocal-mass bounds
 erdos249-257-exposition.pdf               compiled companion paper (tracked, root-visible)
 paper/                                    exposition source for non-Lean readers (LaTeX + build)
 NON_CLAIMS.md                             machine-checked non-claims (what this does not claim)
