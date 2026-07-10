@@ -28,8 +28,15 @@ recurrence, so positivity of an orbit certifies nothing on its own.  This
 is a NON_CLAIM guard; nothing in this file asserts a solution of Erdős
 #249 or #257.
 
-The literature has not been audited for prior statements of these lemmas.
-They are formal infrastructure, not claimed novelties.
+The forward mechanism here is not new: Wang and Grau Ribas, *Positive
+dyadic density for rational weighted binary expansions* (arXiv:2606.24972,
+2026), use the same integral carry recurrence forced by rationality for
+weighted binary expansions with coefficients `c(n) = n·d(n)` — a special
+case of the linearly bounded coefficients treated here.  What this module
+contributes is the generic interface (arbitrary nonnegative `c(n) ≤ n`),
+the explicit converse, and the rigidity theorem that every tempered orbit
+equals the scaled analytic tail.  These are formalisation and abstraction
+contributions, not a priority claim on the carry mechanism.
 -/
 
 namespace Erdos249257
@@ -56,14 +63,10 @@ theorem hasRationalValue_iff_not_irrational (x : ℝ) :
     HasRationalValue x ↔ ¬ Irrational x := by
   constructor
   · rintro ⟨p, v, hv, hx⟩ hirr
-    have hne := hirr.ne_rational p (v : ℤ)
-    apply hne
-    simpa using hx
+    exact hirr.ne_rational p (v : ℤ) (by simpa using hx)
   · intro hx
     obtain ⟨q, hq⟩ := exists_rat_of_not_irrational hx
-    refine ⟨q.num, q.den, q.den_pos, ?_⟩
-    rw [hq]
-    exact Rat.cast_def q
+    exact ⟨q.num, q.den, q.den_pos, by rw [hq, Rat.cast_def]⟩
 
 /-- The exact integer recurrence together with the subexponential boundary
 `u(N) = o(2^N)`, expressed as convergence of the quotient. -/
@@ -109,6 +112,15 @@ theorem binaryCoeffTail_div_pow_tendsto_zero
       div_le_div_of_nonneg_right (binaryCoeffTail_le c hgrowth N) (by positivity))
     hupper
 
+/-- The scaled-tail quotient `v*T_c(N) / 2^N` inherits the subexponential
+decay.  Shared tendsto-transfer step for the rigidity and existence proofs. -/
+private theorem scaledTail_div_pow_tendsto_zero
+    (c : ℕ → ℕ) (hgrowth : ∀ n : ℕ, c n ≤ n) (v : ℕ) :
+    Tendsto (fun N : ℕ ↦ (v : ℝ) * binaryCoeffTail c N / (2 : ℝ) ^ N)
+      atTop (nhds 0) := by
+  simpa [mul_div_assoc] using
+    (binaryCoeffTail_div_pow_tendsto_zero c hgrowth).const_mul (v : ℝ)
+
 /-- Doubling the tail shifts the window by one and expels its head
 coefficient. -/
 theorem binaryCoeffTail_succ
@@ -153,16 +165,13 @@ theorem doublingOrbit_eq_zero_of_tempered
     induction N with
     | zero => simp
     | succ N ih =>
-        rw [show N + 1 = Nat.succ N from rfl, hrec N, ih, pow_succ]
+        rw [hrec N, ih, pow_succ]
         ring
   have hratio : ∀ N : ℕ, d N / (2 : ℝ) ^ N = d 0 := by
     intro N
     rw [hclosed N]
     field_simp
-  have hconst : Tendsto (fun _ : ℕ ↦ d 0) atTop (nhds (d 0)) := tendsto_const_nhds
-  have htozero : Tendsto (fun _ : ℕ ↦ d 0) atTop (nhds 0) :=
-    htemp.congr' (Filter.Eventually.of_forall fun N ↦ hratio N)
-  have hd0 : d 0 = 0 := tendsto_nhds_unique hconst htozero
+  have hd0 : d 0 = 0 := tendsto_nhds_unique tendsto_const_nhds (htemp.congr hratio)
   intro N
   rw [hclosed N, hd0, mul_zero]
 
@@ -182,13 +191,9 @@ theorem temperedBinaryOrbit_eq_scaledTail
     rw [hu, binaryCoeffTail_succ c hgrowth N]
     ring
   have hdt : Tendsto (fun N : ℕ ↦ d N / (2 : ℝ) ^ N) atTop (nhds 0) := by
-    have htail := (binaryCoeffTail_div_pow_tendsto_zero c hgrowth).const_mul (v : ℝ)
-    have hsub := htemp.sub htail
-    convert hsub using 1
-    · funext N
-      unfold d
-      ring
-    · simp
+    have hsub := htemp.sub (scaledTail_div_pow_tendsto_zero c hgrowth v)
+    rw [sub_zero] at hsub
+    exact hsub.congr fun N ↦ by unfold d; ring
   have hd0 := doublingOrbit_eq_zero_of_tempered d hdrec hdt
   intro N
   have := hd0 N
@@ -216,10 +221,10 @@ theorem exists_temperedBinaryOrbit_of_rational
     have hN := hz N
     rw [hvalue] at hN
     have hv0 : (v : ℝ) ≠ 0 := by positivity
-    have hmul := congrArg (fun x : ℝ ↦ (v : ℝ) * x) hN
-    change
-      (v : ℝ) * ((2 : ℝ) ^ N * ((p : ℝ) / (v : ℝ))) =
-        (v : ℝ) * ((z N : ℝ) + binaryCoeffTail c N) at hmul
+    have hmul :
+        (v : ℝ) * ((2 : ℝ) ^ N * ((p : ℝ) / (v : ℝ))) =
+          (v : ℝ) * ((z N : ℝ) + binaryCoeffTail c N) := by
+      rw [hN]
     have hcancel :
         (v : ℝ) * ((2 : ℝ) ^ N * ((p : ℝ) / (v : ℝ))) =
           (2 : ℝ) ^ N * (p : ℝ) := by
@@ -234,12 +239,8 @@ theorem exists_temperedBinaryOrbit_of_rational
     push_cast
     rw [hutail (N + 1), hutail N, binaryCoeffTail_succ c hgrowth N]
     ring
-  · have htail := (binaryCoeffTail_div_pow_tendsto_zero c hgrowth).const_mul (v : ℝ)
-    convert htail using 1
-    · funext N
-      rw [hutail N]
-      ring
-    · simp
+  · exact (scaledTail_div_pow_tendsto_zero c hgrowth v).congr
+      fun N ↦ by rw [hutail N]
 
 /-- A tempered integer orbit forces rationality of the coefficient series. -/
 theorem rational_of_exists_temperedBinaryOrbit
@@ -251,26 +252,25 @@ theorem rational_of_exists_temperedBinaryOrbit
   rw [binaryCoeffTail_zero] at hrigid
   refine ⟨u 0, v, hv, ?_⟩
   have hv0 : (v : ℝ) ≠ 0 := by positivity
-  apply (eq_div_iff hv0).2
-  nlinarith
+  rw [eq_div_iff hv0, mul_comm]
+  exact hrigid.symm
 
 /-- **Subexponential tail-orbit rigidity, equivalence form.**  The series
 `X_c` is rational exactly when some tempered integer orbit exists. -/
 theorem binaryCoeffSeries_rational_iff_exists_temperedBinaryOrbit
     (c : ℕ → ℕ) (hgrowth : ∀ n : ℕ, c n ≤ n) :
     HasRationalValue (binaryCoeffSeries c) ↔
-      ∃ v : ℕ, 0 < v ∧ ∃ u : ℕ → ℤ, IsTemperedBinaryOrbit c v u := by
-  constructor
-  · exact exists_temperedBinaryOrbit_of_rational c hgrowth
-  · exact rational_of_exists_temperedBinaryOrbit c hgrowth
+      ∃ v : ℕ, 0 < v ∧ ∃ u : ℕ → ℤ, IsTemperedBinaryOrbit c v u :=
+  ⟨exists_temperedBinaryOrbit_of_rational c hgrowth,
+    rational_of_exists_temperedBinaryOrbit c hgrowth⟩
 
 /-- The equivalence in Mathlib's standard irrationality vocabulary
 (`¬ Irrational`). -/
 theorem not_irrational_binaryCoeffSeries_iff_exists_temperedBinaryOrbit
     (c : ℕ → ℕ) (hgrowth : ∀ n : ℕ, c n ≤ n) :
     ¬ Irrational (binaryCoeffSeries c) ↔
-      ∃ v : ℕ, 0 < v ∧ ∃ u : ℕ → ℤ, IsTemperedBinaryOrbit c v u := by
-  rw [← hasRationalValue_iff_not_irrational]
-  exact binaryCoeffSeries_rational_iff_exists_temperedBinaryOrbit c hgrowth
+      ∃ v : ℕ, 0 < v ∧ ∃ u : ℕ → ℤ, IsTemperedBinaryOrbit c v u :=
+  (hasRationalValue_iff_not_irrational _).symm.trans
+    (binaryCoeffSeries_rational_iff_exists_temperedBinaryOrbit c hgrowth)
 
 end Erdos249257

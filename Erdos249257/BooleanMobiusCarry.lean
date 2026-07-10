@@ -41,8 +41,15 @@ do **not** prove Erdős #257: they neither exclude infinite Boolean carry
 paths nor turn finite search into a completeness argument.  Both Erdős #249
 and #257 remain open.
 
-The literature has not been audited for prior statements of these lemmas;
-they are formal infrastructure, not claimed novelties.
+The coefficient identities here are classical: the indicator-times-zeta
+divisor transform and its Möbius inversion are standard Lambert-series
+infrastructure, and no novelty is claimed for them.  What this module
+contributes is the composition: packaging those identities with the
+tempered carry criterion into a quotient-only certificate equivalence with
+an explicit square-root strip in place of the analytic tempering
+hypothesis.  That certificate normal form is a contribution of this formal
+development's interface, not a new Möbius theorem or a new
+characterisation of rationality.
 -/
 
 namespace Erdos249257
@@ -52,11 +59,11 @@ open scoped ArithmeticFunction.Moebius
 
 /-! ## Arithmetic-function packaging -/
 
+open Classical in
 /-- The positive-index integer indicator of a support.  Arithmetic functions
 must vanish at zero, which is also the correct normalization for the Lambert
 coefficient calculus. -/
 noncomputable def positiveSupportBit (A : Set ℕ) (n : ℕ) : ℤ :=
-  letI := Classical.propDecidable (0 < n ∧ n ∈ A)
   if 0 < n ∧ n ∈ A then 1 else 0
 
 /-- `positiveSupportBit` packaged as an integer-valued arithmetic function. -/
@@ -167,23 +174,14 @@ theorem moebius_mul_eq_positiveSupportBitAF_of_boolean
   ext n
   rcases Nat.eq_zero_or_pos n with rfl | hn
   · simp
-  · rcases hbool n hn with hzero | hone
-    · change (ArithmeticFunction.moebius * f) n =
-          positiveSupportBit (booleanMobiusSupport f) n
-      rw [hzero]
-      classical
-      unfold positiveSupportBit
-      rw [if_neg]
-      rintro ⟨_, hmem⟩
-      change 0 < n ∧ (ArithmeticFunction.moebius * f) n = 1 at hmem
+  · change (ArithmeticFunction.moebius * f) n =
+        positiveSupportBit (booleanMobiusSupport f) n
+    classical
+    rcases hbool n hn with h | h
+    · rw [h, positiveSupportBit, if_neg]
+      rintro ⟨-, -, hone⟩
       omega
-    · change (ArithmeticFunction.moebius * f) n =
-          positiveSupportBit (booleanMobiusSupport f) n
-      rw [hone]
-      classical
-      unfold positiveSupportBit
-      rw [if_pos]
-      exact ⟨hn, ⟨hn, hone⟩⟩
+    · rw [h, positiveSupportBit, if_pos ⟨hn, hn, h⟩]
 
 /-- **Boolean Möbius inversion, converse direction.**  Every integer-valued
 arithmetic function with Boolean Möbius transform is the support coefficient
@@ -239,15 +237,8 @@ theorem card_divisors_le_two_mul_sqrt (n : ℕ) :
       small.card ≤ (Finset.Icc 1 (Nat.sqrt n)).card :=
         Finset.card_le_card hsmallsub
       _ = Nat.sqrt n := by simp [Nat.card_Icc]
-  have hcomplement : ∀ {d : ℕ}, d ∈ n.divisors → n / (n / d) = d := by
-    intro d hd
-    have hdvd : d ∣ n := (Nat.mem_divisors.mp hd).1
-    have hdpos : 0 < d := Nat.pos_of_mem_divisors hd
-    have hdle : d ≤ n := Nat.le_of_dvd hnpos hdvd
-    have hqpos : 0 < n / d := Nat.div_pos hdle hdpos
-    have hqdvd : n / d ∣ n := Nat.div_dvd_of_dvd hdvd
-    apply (Nat.div_eq_iff_eq_mul_left hqpos hqdvd).2
-    exact (Nat.mul_div_cancel' hdvd).symm
+  have hcomplement : ∀ {d : ℕ}, d ∈ n.divisors → n / (n / d) = d :=
+    fun hd ↦ Nat.div_div_self (Nat.mem_divisors.mp hd).1 hn
   have hlargeinj : Set.InjOn (fun d : ℕ => n / d) (↑large : Set ℕ) := by
     intro a ha b hb hab
     have hadiv : a ∈ n.divisors := (Finset.mem_filter.mp ha).1
@@ -408,17 +399,12 @@ theorem exists_temperedCarry_of_support_fraction
     (hvalue : erdosSupportSeries 2 A = (p : ℝ) / (q : ℝ)) :
     ∃ U : ℕ → ℤ, U 0 = p ∧
       IsTemperedBinaryOrbit (supportCoeff A) q U := by
-  let z : ℕ → ℤ := fun N ↦
-    Classical.choose
-      (bpow_mul_coeff_series_eq_int_add_tail 2 N (supportCoeff A)
-        (by norm_num) (supportCoeff_le_self A))
+  choose z hz' using fun N : ℕ ↦
+    bpow_mul_coeff_series_eq_int_add_tail 2 N (supportCoeff A)
+      (by norm_num) (supportCoeff_le_self A)
   have hz : ∀ N : ℕ,
       (2 : ℝ) ^ N * binaryCoeffSeries (supportCoeff A) =
-        (z N : ℝ) + binaryCoeffTail (supportCoeff A) N := by
-    intro N
-    exact Classical.choose_spec
-      (bpow_mul_coeff_series_eq_int_add_tail 2 N (supportCoeff A)
-        (by norm_num) (supportCoeff_le_self A))
+        (z N : ℝ) + binaryCoeffTail (supportCoeff A) N := hz'
   let U : ℕ → ℤ := fun N ↦ (2 : ℤ) ^ N * p - (q : ℤ) * z N
   have htail : ∀ N : ℕ,
       (U N : ℝ) = (q : ℝ) * binaryCoeffTail (supportCoeff A) N := by
@@ -680,15 +666,21 @@ theorem exists_booleanMobiusCarry_of_support_fraction
     · exact fun n _ ↦ mobius_carryQuotient_boolean A q hq U horbit n
   · exact mobius_carryQuotient_recovers_support A hzero q hq U horbit
 
-/-- **Converse direction.**  A quotient-only Boolean carry certificate
-reconstructs a normalized support `A` and certifies the exact value `p/q`;
-`reconstructsSupport` below exposes the intermediate objects. -/
-theorem support_fraction_of_booleanMobiusCarry
-    (p : ℤ) (q : ℕ) (hq : 0 < q) (U : ℕ → ℤ)
+/-- A quotient-only Boolean carry certificate exposes every reconstructed
+object used by the converse, not only the final scalar identity. -/
+theorem BooleanMobiusCarryCertificate.reconstructsSupport
+    {p : ℤ} {q : ℕ} {U : ℕ → ℤ} (hq : 0 < q)
     (cert : BooleanMobiusCarryCertificate p q U) :
     let A := booleanMobiusSupport (carryQuotientAF q U)
-    0 ∉ A ∧ erdosSupportSeries 2 A = (p : ℝ) / (q : ℝ) := by
+    0 ∉ A ∧
+      carryQuotientAF q U = supportCoeffAF A ∧
+      IsTemperedBinaryOrbit (supportCoeff A) q U ∧
+      {n : ℕ |
+        (ArithmeticFunction.moebius * carryQuotientAF q U) n = 1} = A ∧
+      erdosSupportSeries 2 A = (p : ℝ) / (q : ℝ) := by
   let A := booleanMobiusSupport (carryQuotientAF q U)
+  have hzero : 0 ∉ A :=
+    zero_not_mem_booleanMobiusSupport (carryQuotientAF q U)
   have hcoeff : carryQuotientAF q U = supportCoeffAF A :=
     eq_supportCoeffAF_booleanMobiusSupport_of_boolean
       (carryQuotientAF q U) cert.mobiusBoolean
@@ -714,52 +706,6 @@ theorem support_fraction_of_booleanMobiusCarry
     tendsto_div_pow_zero_of_nonnegative_sqrt_bound q U
       (fun N ↦ (cert.positive N).le) cert.sqrtBound
   have horbit : IsTemperedBinaryOrbit (supportCoeff A) q U := ⟨hrec, htemp⟩
-  refine ⟨zero_not_mem_booleanMobiusSupport _, ?_⟩
-  exact support_fraction_of_temperedCarry A p q hq U cert.initial horbit
-
-/-- A quotient-only Boolean carry certificate exposes every reconstructed
-object used by the converse, not only the final scalar identity. -/
-theorem BooleanMobiusCarryCertificate.reconstructsSupport
-    {p : ℤ} {q : ℕ} {U : ℕ → ℤ} (hq : 0 < q)
-    (cert : BooleanMobiusCarryCertificate p q U) :
-    let A := booleanMobiusSupport (carryQuotientAF q U)
-    0 ∉ A ∧
-      carryQuotientAF q U = supportCoeffAF A ∧
-      IsTemperedBinaryOrbit (supportCoeff A) q U ∧
-      {n : ℕ |
-        (ArithmeticFunction.moebius * carryQuotientAF q U) n = 1} = A ∧
-      erdosSupportSeries 2 A = (p : ℝ) / (q : ℝ) := by
-  let A := booleanMobiusSupport (carryQuotientAF q U)
-  have hzero : 0 ∉ A :=
-    zero_not_mem_booleanMobiusSupport (carryQuotientAF q U)
-  have hcoeff : carryQuotientAF q U = supportCoeffAF A := by
-    simpa [A] using
-      eq_supportCoeffAF_booleanMobiusSupport_of_boolean
-        (carryQuotientAF q U) cert.mobiusBoolean
-  have hrec : ∀ N : ℕ,
-      U (N + 1) =
-        2 * U N - ((q * supportCoeff A (N + 1) : ℕ) : ℤ) := by
-    intro N
-    have hquot := congrArg
-      (fun f : ArithmeticFunction ℤ ↦ f (N + 1)) hcoeff
-    change carryQuotient q U (N + 1) =
-      (supportCoeff A (N + 1) : ℤ) at hquot
-    rw [carryQuotient, if_neg (by omega)] at hquot
-    have hqZ : (q : ℤ) ≠ 0 := Int.ofNat_ne_zero.mpr hq.ne'
-    have hdifference :
-        2 * U N - U (N + 1) =
-          (supportCoeff A (N + 1) : ℤ) * (q : ℤ) :=
-      (Int.ediv_eq_iff_eq_mul_left hqZ (cert.divisible N)).mp hquot
-    have hdifference' :
-        2 * U N - U (N + 1) =
-          (q : ℤ) * (supportCoeff A (N + 1) : ℤ) := by
-      simpa [mul_comm] using hdifference
-    push_cast
-    omega
-  have htemp := tendsto_div_pow_zero_of_nonnegative_sqrt_bound q U
-    (fun N ↦ (cert.positive N).le) cert.sqrtBound
-  have horbit : IsTemperedBinaryOrbit (supportCoeff A) q U :=
-    ⟨hrec, htemp⟩
   have hrecovery :
       {n : ℕ |
         (ArithmeticFunction.moebius * carryQuotientAF q U) n = 1} = A :=
@@ -767,6 +713,18 @@ theorem BooleanMobiusCarryCertificate.reconstructsSupport
   have hvalue : erdosSupportSeries 2 A = (p : ℝ) / (q : ℝ) :=
     support_fraction_of_temperedCarry A p q hq U cert.initial horbit
   exact ⟨hzero, hcoeff, horbit, hrecovery, hvalue⟩
+
+/-- **Converse direction.**  A quotient-only Boolean carry certificate
+reconstructs a normalized support `A` and certifies the exact value `p/q`;
+`BooleanMobiusCarryCertificate.reconstructsSupport` above exposes the
+intermediate objects. -/
+theorem support_fraction_of_booleanMobiusCarry
+    (p : ℤ) (q : ℕ) (hq : 0 < q) (U : ℕ → ℤ)
+    (cert : BooleanMobiusCarryCertificate p q U) :
+    let A := booleanMobiusSupport (carryQuotientAF q U)
+    0 ∉ A ∧ erdosSupportSeries 2 A = (p : ℝ) / (q : ℝ) := by
+  obtain ⟨hzero, -, -, -, hvalue⟩ := cert.reconstructsSupport hq
+  exact ⟨hzero, hvalue⟩
 
 /-- **Certificate-level equivalence.**  Positive normalized supports with
 value `p/q` are in exact correspondence at the existence level with
@@ -791,31 +749,16 @@ theorem exists_normalized_support_fraction_iff_exists_booleanMobiusCarry
       simpa [A] using support_fraction_of_booleanMobiusCarry p q hq U cert
     have hpos : ∃ a : ℕ, 0 < a ∧ a ∈ A := by
       by_contra hnone
-      have hnone' : ∀ a : ℕ, 0 < a → a ∉ A := by
-        intro a ha haA
-        exact hnone ⟨a, ha, haA⟩
-      have hAempty : A = ∅ := by
-        ext n
-        constructor
-        · intro hnA
-          have hnpos : 0 < n := by
-            change 0 < n ∧
-              (ArithmeticFunction.moebius * carryQuotientAF q U) n = 1 at hnA
-            exact hnA.1
-          exact False.elim (hnone' n hnpos hnA)
-        · simp
+      have hAempty : A = ∅ := Set.eq_empty_of_forall_notMem fun n hnA ↦
+        hnone ⟨n, hnA.1, hnA⟩
       have hvalue := hpair.2
       rw [hAempty] at hvalue
       have hzeroValue : (0 : ℝ) = (p : ℝ) / (q : ℝ) := by
         simpa [erdosSupportSeries] using hvalue
       have hq0 : (q : ℝ) ≠ 0 := by positivity
-      have hpcast : (p : ℝ) = 0 := by
-        field_simp [hq0] at hzeroValue
-        linarith
-      have hpzero : p = 0 := by exact_mod_cast hpcast
-      have hppos : 0 < p := by
-        rw [← cert.initial]
-        exact cert.positive 0
+      have hpzero : p = 0 := by
+        exact_mod_cast (div_eq_zero_iff.mp hzeroValue.symm).resolve_right hq0
+      have hppos : 0 < p := cert.initial ▸ cert.positive 0
       omega
     exact ⟨A, hpair.1, hpos, hpair.2⟩
 
@@ -849,7 +792,6 @@ def carryOrbit23 (N : ℕ) : ℤ :=
 private theorem mod_six_cases (n : ℕ) :
     n % 6 = 0 ∨ n % 6 = 1 ∨ n % 6 = 2 ∨
       n % 6 = 3 ∨ n % 6 = 4 ∨ n % 6 = 5 := by
-  have h := Nat.mod_lt n (by norm_num : 0 < 6)
   omega
 
 /-- Residue form equals the expected pair of divisibility indicators. -/
@@ -912,19 +854,9 @@ theorem carryOrbit23_recurrence (N : ℕ) :
       2 * carryOrbit23 N -
         ((21 * supportCoeff support23 (N + 1) : ℕ) : ℤ) := by
   rw [supportCoeff_support23_eq_residue (by omega : 0 < N + 1)]
-  rcases mod_six_cases N with h | h | h | h | h | h
-  · have hs : (N + 1) % 6 = 1 := by omega
-    simp [carryOrbit23, supportCoeff23Residue, h, hs]
-  · have hs : (N + 1) % 6 = 2 := by omega
-    simp [carryOrbit23, supportCoeff23Residue, h, hs]
-  · have hs : (N + 1) % 6 = 3 := by omega
-    simp [carryOrbit23, supportCoeff23Residue, h, hs]
-  · have hs : (N + 1) % 6 = 4 := by omega
-    simp [carryOrbit23, supportCoeff23Residue, h, hs]
-  · have hs : (N + 1) % 6 = 5 := by omega
-    simp [carryOrbit23, supportCoeff23Residue, h, hs]
-  · have hs : (N + 1) % 6 = 0 := by omega
-    simp [carryOrbit23, supportCoeff23Residue, h, hs]
+  rcases mod_six_cases N with h | h | h | h | h | h <;>
+    · have hs : (N + 1) % 6 = (N % 6 + 1) % 6 := by omega
+      simp [carryOrbit23, supportCoeff23Residue, hs, h]
 
 /-- The explicit six-cycle is a genuine tempered integer carry orbit, not
 merely a finite recurrence check. -/

@@ -39,8 +39,17 @@ is normalized away because its analytic weight is zero.  Nothing here
 settles Erdős #257, and no finite computation is promoted to an
 infinite-support claim.
 
-The literature has not been audited for prior statements of these lemmas;
-they are formal infrastructure, not claimed novelties.
+The core geometry here is known: Kovač and Tao, *On several irrationality
+problems for Ahmes series* (arXiv:2406.17593), prove that subsums of
+`1/(t^n − 1)` are mutually distinct and form a Cantor set via exactly the
+strict domination of each weight over its tail, and the same
+tail-versus-term relation drives the classical achievement-set literature.
+What this module contributes is operational: the two-scale gap asymptotic,
+the exact all-level greedy-survival characterisation, cast-coherent real
+and rational greedy recurrences, and a decidable one-sided finite
+non-membership certificate with a kernel-checked fixture.  These are
+quantitative sharpenings and executable formal interfaces over known
+geometry, not priority claims.
 
 NON_CLAIM: this module does not formalize the measure-one, perfect, or
 nowhere-dense geometry of the achievement set.  In particular, the name
@@ -73,19 +82,25 @@ noncomputable def mersenneWeight (n : ℕ) : ℝ :=
     ((mersenneWeightRat n : ℚ) : ℝ) = mersenneWeight n := by
   simp [mersenneWeightRat, mersenneWeight]
 
-theorem mersenneWeight_pos {n : ℕ} (hn : 0 < n) :
-    0 < mersenneWeight n := by
-  unfold mersenneWeight
-  have hpow : (1 : ℝ) < 2 ^ n :=
-    one_lt_pow₀ (by norm_num) (Nat.ne_of_gt hn)
-  exact one_div_pos.mpr (sub_pos.mpr hpow)
-
 theorem mersenneWeightRat_pos {n : ℕ} (hn : 0 < n) :
     0 < mersenneWeightRat n := by
   unfold mersenneWeightRat
   have hpow : (1 : ℚ) < 2 ^ n :=
     one_lt_pow₀ (by norm_num) (Nat.ne_of_gt hn)
   exact one_div_pos.mpr (sub_pos.mpr hpow)
+
+/-- Real positivity is the cast image of the exact rational proof. -/
+theorem mersenneWeight_pos {n : ℕ} (hn : 0 < n) :
+    0 < mersenneWeight n := by
+  rw [← cast_mersenneWeightRat]
+  exact_mod_cast mersenneWeightRat_pos hn
+
+/-- The real weight is nonnegative at every index, including the
+normalized-away index zero. -/
+private theorem mersenneWeight_nonneg (n : ℕ) : 0 ≤ mersenneWeight n := by
+  rcases Nat.eq_zero_or_pos n with rfl | hn
+  · simp
+  · exact (mersenneWeight_pos hn).le
 
 /-- The positive-index Mersenne weights form a summable real series. -/
 theorem summable_mersenneWeight :
@@ -94,23 +109,37 @@ theorem summable_mersenneWeight :
     (summable_erdos_term 2 (by norm_num) (fun k : ℕ => k + 1)
       (fun _ _ h => Nat.add_lt_add_right h 1) (by norm_num))
 
+/-- Shifting the start of a summable positive-index family preserves
+summability; shared by the tail, suffix, and envelope constructions. -/
+private theorem summable_shift_add {f : ℕ → ℝ}
+    (hf : Summable fun k : ℕ => f (k + 1)) (n : ℕ) :
+    Summable fun k : ℕ => f (n + k + 1) := by
+  have h := (summable_nat_add_iff n).mpr hf
+  simpa [Nat.add_assoc, Nat.add_comm, Nat.add_left_comm] using h
+
+/-- The shifted geometric envelope shared by all three channel estimates. -/
+private theorem summable_geometric_shift_add
+    {r : ℝ} (hr0 : 0 ≤ r) (hr1 : r < 1) (n : ℕ) :
+    Summable fun k : ℕ => r ^ (n + k + 1) :=
+  summable_shift_add
+    ((summable_nat_add_iff 1).mpr (summable_geometric_of_lt_one hr0 hr1)) n
+
 /-- The remaining mass after processing exponents `1, ..., n`. -/
 noncomputable def mersenneTail (n : ℕ) : ℝ :=
   ∑' k : ℕ, mersenneWeight (n + k + 1)
 
 theorem summable_mersenneTail (n : ℕ) :
-    Summable (fun k : ℕ => mersenneWeight (n + k + 1)) := by
-  have h := (summable_nat_add_iff n).mpr summable_mersenneWeight
-  simpa [Nat.add_assoc, Nat.add_comm, Nat.add_left_comm] using h
+    Summable (fun k : ℕ => mersenneWeight (n + k + 1)) :=
+  summable_shift_add summable_mersenneWeight n
 
 theorem mersenneTail_nonneg (n : ℕ) : 0 ≤ mersenneTail n := by
   unfold mersenneTail
-  exact tsum_nonneg fun k => (mersenneWeight_pos (by omega : 0 < n + k + 1)).le
+  exact tsum_nonneg fun k => mersenneWeight_nonneg _
 
 theorem mersenneTail_pos (n : ℕ) : 0 < mersenneTail n := by
   unfold mersenneTail
   exact (summable_mersenneTail n).tsum_pos
-    (fun k => (mersenneWeight_pos (by omega : 0 < n + k + 1)).le)
+    (fun k => mersenneWeight_nonneg _)
     0 (mersenneWeight_pos (by omega : 0 < n + 0 + 1))
 
 /-- Splitting off the next positive exponent gives the exact tail recurrence. -/
@@ -280,24 +309,21 @@ theorem tsum_geometric_nat_add_succ
 
 theorem tsum_half_nat_add_succ (n : ℕ) :
     ∑' k : ℕ, ((1 : ℝ) / 2) ^ (n + k + 1) = ((1 : ℝ) / 2) ^ n := by
-  rw [tsum_geometric_nat_add_succ _ (by norm_num) (by norm_num)]
-  rw [pow_succ]
+  rw [tsum_geometric_nat_add_succ _ (by norm_num) (by norm_num), pow_succ]
   norm_num
   ring
 
 theorem tsum_quarter_nat_add_succ (n : ℕ) :
     ∑' k : ℕ, ((1 : ℝ) / 4) ^ (n + k + 1)
       = (1 / 3 : ℝ) * ((1 : ℝ) / 4) ^ n := by
-  rw [tsum_geometric_nat_add_succ _ (by norm_num) (by norm_num)]
-  rw [pow_succ]
+  rw [tsum_geometric_nat_add_succ _ (by norm_num) (by norm_num), pow_succ]
   norm_num
   ring
 
 theorem tsum_eighth_nat_add_succ (n : ℕ) :
     ∑' k : ℕ, ((1 : ℝ) / 8) ^ (n + k + 1)
       = (1 / 7 : ℝ) * ((1 : ℝ) / 8) ^ n := by
-  rw [tsum_geometric_nat_add_succ _ (by norm_num) (by norm_num)]
-  rw [pow_succ]
+  rw [tsum_geometric_nat_add_succ _ (by norm_num) (by norm_num), pow_succ]
   norm_num
   ring
 
@@ -307,17 +333,12 @@ noncomputable def mersenneWeightRemainderTail (n : ℕ) : ℝ :=
   ∑' k : ℕ, mersenneWeightRemainder (n + k + 1)
 
 theorem summable_mersenneWeightRemainderTail (n : ℕ) :
-    Summable (fun k : ℕ => mersenneWeightRemainder (n + k + 1)) := by
-  have hgeo : Summable (fun k : ℕ =>
-      2 * ((1 : ℝ) / 8) ^ (n + k + 1)) := by
-    have hbase := summable_geometric_of_lt_one
-      (by norm_num : (0 : ℝ) ≤ 1 / 8) (by norm_num : (1 : ℝ) / 8 < 1)
-    have hshift := (summable_nat_add_iff (n + 1)).mpr hbase
-    have hmul := hshift.mul_left 2
-    simpa [Nat.add_assoc, Nat.add_comm, Nat.add_left_comm] using hmul
-  exact Summable.of_nonneg_of_le
+    Summable (fun k : ℕ => mersenneWeightRemainder (n + k + 1)) :=
+  Summable.of_nonneg_of_le
     (fun k => mersenneWeightRemainder_nonneg (by omega))
-    (fun k => mersenneWeightRemainder_le (by omega)) hgeo
+    (fun k => mersenneWeightRemainder_le (by omega))
+    ((summable_geometric_shift_add (r := (1 : ℝ) / 8)
+      (by norm_num) (by norm_num) n).mul_left 2)
 
 theorem mersenneWeightRemainderTail_nonneg (n : ℕ) :
     0 ≤ mersenneWeightRemainderTail n := by
@@ -329,12 +350,9 @@ theorem mersenneWeightRemainderTail_le (n : ℕ) :
     mersenneWeightRemainderTail n
       ≤ (2 / 7 : ℝ) * ((1 : ℝ) / 8) ^ n := by
   have henv : Summable (fun k : ℕ =>
-      2 * ((1 : ℝ) / 8) ^ (n + k + 1)) := by
-    have hbase := summable_geometric_of_lt_one
-      (by norm_num : (0 : ℝ) ≤ 1 / 8) (by norm_num : (1 : ℝ) / 8 < 1)
-    have hshift := (summable_nat_add_iff (n + 1)).mpr hbase
-    have hmul := hshift.mul_left 2
-    simpa [Nat.add_assoc, Nat.add_comm, Nat.add_left_comm] using hmul
+      2 * ((1 : ℝ) / 8) ^ (n + k + 1)) :=
+    (summable_geometric_shift_add (r := (1 : ℝ) / 8)
+      (by norm_num) (by norm_num) n).mul_left 2
   calc
     mersenneWeightRemainderTail n
         ≤ ∑' k : ℕ, 2 * ((1 : ℝ) / 8) ^ (n + k + 1) := by
@@ -352,16 +370,10 @@ theorem mersenneTail_eq_two_channels_add_remainderTail (n : ℕ) :
       = ((1 : ℝ) / 2) ^ n
         + (1 / 3 : ℝ) * ((1 : ℝ) / 4) ^ n
         + mersenneWeightRemainderTail n := by
-  have hhalf : Summable (fun k : ℕ => ((1 : ℝ) / 2) ^ (n + k + 1)) := by
-    have hbase := summable_geometric_of_lt_one
-      (by norm_num : (0 : ℝ) ≤ 1 / 2) (by norm_num : (1 : ℝ) / 2 < 1)
-    have hshift := (summable_nat_add_iff (n + 1)).mpr hbase
-    simpa [Nat.add_assoc, Nat.add_comm, Nat.add_left_comm] using hshift
-  have hquarter : Summable (fun k : ℕ => ((1 : ℝ) / 4) ^ (n + k + 1)) := by
-    have hbase := summable_geometric_of_lt_one
-      (by norm_num : (0 : ℝ) ≤ 1 / 4) (by norm_num : (1 : ℝ) / 4 < 1)
-    have hshift := (summable_nat_add_iff (n + 1)).mpr hbase
-    simpa [Nat.add_assoc, Nat.add_comm, Nat.add_left_comm] using hshift
+  have hhalf : Summable (fun k : ℕ => ((1 : ℝ) / 2) ^ (n + k + 1)) :=
+    summable_geometric_shift_add (by norm_num) (by norm_num) n
+  have hquarter : Summable (fun k : ℕ => ((1 : ℝ) / 4) ^ (n + k + 1)) :=
+    summable_geometric_shift_add (by norm_num) (by norm_num) n
   have hrem := summable_mersenneWeightRemainderTail n
   calc
     mersenneTail n
@@ -440,39 +452,28 @@ theorem summable_positiveMersenneSupportIndicator (A : Set ℕ) :
     Summable (fun k : ℕ => Set.indicator A mersenneWeight (k + 1)) := by
   have h := summable_mersenneWeight.indicator {k : ℕ | k + 1 ∈ A}
   refine h.congr fun k => ?_
-  by_cases hk : k + 1 ∈ A
-  · simp [hk]
-  · simp [hk]
+  by_cases hk : k + 1 ∈ A <;> simp [hk]
 
 /-- The portion of a support code strictly after exponent `n`. -/
 noncomputable def positiveMersenneSupportSuffix (A : Set ℕ) (n : ℕ) : ℝ :=
   ∑' k : ℕ, Set.indicator A mersenneWeight (n + k + 1)
 
 theorem summable_positiveMersenneSupportSuffix (A : Set ℕ) (n : ℕ) :
-    Summable (fun k : ℕ => Set.indicator A mersenneWeight (n + k + 1)) := by
-  have h := (summable_nat_add_iff n).mpr
-    (summable_positiveMersenneSupportIndicator A)
-  simpa [Nat.add_assoc, Nat.add_comm, Nat.add_left_comm] using h
+    Summable (fun k : ℕ => Set.indicator A mersenneWeight (n + k + 1)) :=
+  summable_shift_add (summable_positiveMersenneSupportIndicator A) n
 
 theorem positiveMersenneSupportSuffix_nonneg (A : Set ℕ) (n : ℕ) :
     0 ≤ positiveMersenneSupportSuffix A n := by
   unfold positiveMersenneSupportSuffix
-  exact tsum_nonneg fun k => by
-    by_cases hk : n + k + 1 ∈ A
-    · rw [Set.indicator_of_mem hk]
-      exact (mersenneWeight_pos (by omega)).le
-    · rw [Set.indicator_of_notMem hk]
+  exact tsum_nonneg fun k =>
+    Set.indicator_nonneg (fun m _ => mersenneWeight_nonneg m) _
 
 /-- A coded suffix is bounded by the full remaining mass. -/
 theorem positiveMersenneSupportSuffix_le_tail (A : Set ℕ) (n : ℕ) :
     positiveMersenneSupportSuffix A n ≤ mersenneTail n := by
   unfold positiveMersenneSupportSuffix mersenneTail
   exact (summable_positiveMersenneSupportSuffix A n).tsum_le_tsum
-    (fun k => by
-      by_cases hk : n + k + 1 ∈ A
-      · rw [Set.indicator_of_mem hk]
-      · rw [Set.indicator_of_notMem hk]
-        exact (mersenneWeight_pos (by omega)).le)
+    (fun k => Set.indicator_le_self' (fun m _ => mersenneWeight_nonneg m) _)
     (summable_mersenneTail n)
 
 /-- Exact recurrence for a coded support suffix. -/
@@ -577,28 +578,15 @@ theorem greedyMersenneRemainder_nonneg {x : ℝ} (hx : 0 ≤ x) (n : ℕ) :
   induction n with
   | zero => rfl
   | succ n ih =>
+      have hiff : mersenneWeightRat (n + 1) ≤ greedyMersenneRemainderRat x n
+          ↔ mersenneWeight (n + 1) ≤ greedyMersenneRemainder (x : ℝ) n := by
+        rw [← ih, ← cast_mersenneWeightRat]
+        exact Rat.cast_le.symm
       rw [greedyMersenneRemainderRat_succ, greedyMersenneRemainder_succ]
       by_cases h : mersenneWeightRat (n + 1) ≤ greedyMersenneRemainderRat x n
-      · have h' : mersenneWeight (n + 1)
-            ≤ greedyMersenneRemainder (x : ℝ) n := by
-          have hc : ((mersenneWeightRat (n + 1) : ℚ) : ℝ)
-              ≤ ((greedyMersenneRemainderRat x n : ℚ) : ℝ) := by
-            exact_mod_cast h
-          rw [← ih]
-          simpa using hc
-        rw [if_pos h, if_pos h']
-        push_cast
-        rw [cast_mersenneWeightRat, ih]
-      · have h' : ¬ mersenneWeight (n + 1)
-            ≤ greedyMersenneRemainder (x : ℝ) n := by
-          intro hreal
-          apply h
-          rw [← ih] at hreal
-          have hc : ((mersenneWeightRat (n + 1) : ℚ) : ℝ)
-              ≤ ((greedyMersenneRemainderRat x n : ℚ) : ℝ) := by
-            simpa using hreal
-          exact_mod_cast hc
-        rw [if_neg h, if_neg h', ih]
+      · rw [if_pos h, if_pos (hiff.mp h), Rat.cast_sub,
+          cast_mersenneWeightRat, ih]
+      · rw [if_neg h, if_neg (h ∘ hiff.mpr), ih]
 
 /-- The set of positive exponents selected by the real greedy recursion. -/
 noncomputable def greedyMersenneSupport (x : ℝ) : Set ℕ :=
@@ -914,18 +902,8 @@ comparison after casting. -/
 theorem rational_greedy_take_iff_real (x : ℚ) (n : ℕ) :
     mersenneWeightRat (n + 1) ≤ greedyMersenneRemainderRat x n
       ↔ mersenneWeight (n + 1) ≤ greedyMersenneRemainder (x : ℝ) n := by
-  constructor
-  · intro h
-    have hc : ((mersenneWeightRat (n + 1) : ℚ) : ℝ)
-        ≤ ((greedyMersenneRemainderRat x n : ℚ) : ℝ) := by
-      exact_mod_cast h
-    simpa using hc
-  · intro h
-    rw [← cast_greedyMersenneRemainderRat x n] at h
-    have hc : ((mersenneWeightRat (n + 1) : ℚ) : ℝ)
-        ≤ ((greedyMersenneRemainderRat x n : ℚ) : ℝ) := by
-      simpa using h
-    exact_mod_cast hc
+  rw [← cast_greedyMersenneRemainderRat, ← cast_mersenneWeightRat]
+  exact Rat.cast_le.symm
 
 /-- A rational value already known to have normalized support has computable
 support bits, recovered by the exact rational greedy recurrence.  This does
