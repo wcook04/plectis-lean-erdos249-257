@@ -278,10 +278,12 @@ condition~\cite{erdos1968});
 \noindent These sort into three groups. The classical case is (d): infinite
 pairwise-coprime $A$ with $\sum_{a\in A}1/a<\infty$, formalised from Erd\H{o}s's
 condition. The lcm-gap named cases are (a) and (b), whose support gaps outgrow the
-running $\lcm$; the structured families are (c) and (e).\footnote{Periodic-coefficient
-Lambert series have their own literature; see e.g.\ Luca--Tachiya~\cite{lucatachiya}.
-The cases here are formalised in the repository's own framework and are not claimed
-as new results.} Formalised: (a)
+running $\lcm$; the structured families are (c) and (e).\footnote{Luca--Tachiya
+prove the broader eventual-periodic rational-coefficient theorem; its indicator
+specialisation directly contains case (e)~\cite{lucatachiya}. Their Chowla--Erd\H{o}s/
+large-modulus-prime proof is distinct from the periodic-divisor certificate route
+formalised here, and the full mixed-sign coefficient theorem is not claimed here.}
+Formalised: (a)
 \lrefx{CertificateKernel.lean}{5706}{irrational_erdosSum_factorial_support};
 (b) \lrefx{CertificateKernel.lean}{5730}{irrational_erdosSum_two_pow_support};
 (c) \lrefx{CertificateKernel.lean}{8774}{irrational_erdosSupportSeries_multiples};
@@ -1096,7 +1098,8 @@ greedy membership criterion & \lrefx{GreedyAchievementSet.lean}{738}{mem_mersenn
   Mat. Sb. \textbf{187} (1996), no.~9, 65--96; English transl., Sb. Math. \textbf{187} (1996), no.~9, 1319--1348,
   doi:\href{https://doi.org/10.1070/SM1996v187n09ABEH000158}{10.1070/SM1996v187n09ABEH000158}.
 \bibitem{lucatachiya} F.~Luca and Y.~Tachiya, \emph{Irrationality of Lambert series associated
-  with a periodic sequence}, Int. J. Number Theory \textbf{10} (2014), no.~3, 623--636.
+  with a periodic sequence}, Int. J. Number Theory \textbf{10} (2014), no.~3, 623--636,
+  doi:\href{https://doi.org/10.1142/S1793042113501121}{10.1142/S1793042113501121}.
 \bibitem{kovactao} V.~Kova\v{c} and T.~Tao, \emph{On several irrationality problems for
   Ahmes series}, Acta Math. Hungar. \textbf{175} (2025), 572--608,
   doi:\href{https://doi.org/10.1007/s10474-025-01528-0}{10.1007/s10474-025-01528-0}.
