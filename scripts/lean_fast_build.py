@@ -17,6 +17,18 @@ ROOT = Path(__file__).resolve().parents[1]
 IMPORT_RE = re.compile(r"^\s*import\s+([A-Za-z0-9_'.]+)\s*(?:--.*)?$")
 
 
+def default_jobs() -> int:
+    configured = os.environ.get("LEAN_BUILD_JOBS")
+    if configured:
+        try:
+            return max(1, int(configured))
+        except ValueError:
+            pass
+    cpu_count = max(1, os.cpu_count() or 1)
+    interactive_reserve = max(1, cpu_count // 4)
+    return max(1, (cpu_count - interactive_reserve) // 2)
+
+
 def module_name(source: Path) -> str:
     return ".".join(source.relative_to(ROOT).with_suffix("").parts)
 
@@ -87,7 +99,7 @@ def build_one(name: str) -> tuple[str, int, float]:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--jobs", type=int, default=int(os.environ.get("LEAN_BUILD_JOBS", "2")))
+    parser.add_argument("--jobs", type=int, default=default_jobs())
     parser.add_argument("--plan", action="store_true")
     args = parser.parse_args()
     if args.jobs < 1:
