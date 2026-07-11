@@ -17,11 +17,11 @@
       "authority_role": "proof_bearing_release_anchor"
     },
     "navigation_snapshot": {
-      "commit": "8db268cdb4951fdba175dcfadc07df41c0733e46",
+      "commit": "8928442028429c5774e34e53a74a7161d1703913",
       "authority_role": "machine_readable_navigation_anchor",
       "publication_state": "navigation_snapshot_unpublished",
       "published_ref": null,
-      "repository_resolution": "https://github.com/wcook04/plectis-lean-erdos249-257/tree/8db268cdb4951fdba175dcfadc07df41c0733e46"
+      "repository_resolution": "https://github.com/wcook04/plectis-lean-erdos249-257/tree/8928442028429c5774e34e53a74a7161d1703913"
     },
     "content": {
       "machine_readable_paper": {
@@ -39,7 +39,7 @@
       },
       "methodology_contract": {
         "path": "docs/methodology.json",
-        "content_digest": "sha256:7d91903e4259351aece2442cd16e78dd1834561ab210837f5db9726e76f44f7f"
+        "content_digest": "sha256:30927988518e25bd89bcc60e4e6b6fe0017c35a84b9041b337e516c67483c704"
       }
     }
   },
@@ -47,7 +47,7 @@
     "claims": "erdos249257-claims/3",
     "machine_readable_paper": "erdos249257-machine-readable-paper/1",
     "declaration_atlas": "erdos249257-declaration-atlas/1",
-    "methodology": "erdos249257-methodology/1"
+    "methodology": "erdos249257-methodology/2"
   },
   "capabilities": {
     "global_argument_graph": true,
@@ -808,14 +808,15 @@
     },
     "methodology_capsule": {
       "path": "docs/methodology.json",
+      "human_projection": "METHODOLOGY.md",
       "artifact_role": "rules_for_mathematical_reasoning_and_public_claim_changes_not_proof_authority",
       "human_capsule": [
         "The exact boundary between proved and open must remain explicit.",
         "Lean checks the stated proposition; it does not check that the proposition expresses the intended mathematics.",
-        "A change of representation requires a proved implication or equivalence.",
+        "A public claim is transferred between representations only through a proved implication or equivalence.",
         "A reduction must state the hypothesis or quantifier that remains open.",
         "A finite result remains finite unless a theorem supplies the unbounded or universal step.",
-        "Progress toward an open problem must state which remaining open proposition changed and how."
+        "Progress toward an open problem must state which outstanding obligation it proves, narrows, decomposes, re-expresses, or constrains."
       ],
       "mathematical_research_cycle": [
         "open_target",
@@ -850,7 +851,387 @@
         "transition.finite_certificate_to_public_claim",
         "transition.public_claim_to_open_target_edge",
         "transition.methodology_source_to_public_projections"
-      ]
+      ],
+      "worked_example_ids": [
+        "example.exact_reduction_without_closure",
+        "example.finite_verification_stays_finite",
+        "example.necessary_structure_without_contradiction"
+      ],
+      "change_classes": [
+        {
+          "id": "proof_body_changed",
+          "summary": "A proof body changes; the stated proposition does not",
+          "minimum_evidence": [
+            "lean_check",
+            "repository_check"
+          ],
+          "human_review": "on_trigger",
+          "review_triggers": [
+            "intended_meaning_changed",
+            "claim_text_changed"
+          ],
+          "forbidden_effects": [
+            "strengthen_public_claim_wording",
+            "change_open_target_status"
+          ],
+          "public_consequence": "No claim or exposition change follows automatically. Compare the axiom audit before and after."
+        },
+        {
+          "id": "lean_proposition_changed",
+          "summary": "A stated proposition or its hypotheses change",
+          "minimum_evidence": [
+            "lean_check",
+            "repository_check",
+            "human_mathematical_review"
+          ],
+          "human_review": "required",
+          "forbidden_effects": [
+            "change_open_target_status"
+          ],
+          "public_consequence": "Reconcile the claim wording, the remaining-open boundary, and the paper statement."
+        },
+        {
+          "id": "assumptions_changed",
+          "summary": "The transitive assumptions of a declaration change",
+          "minimum_evidence": [
+            "lean_check",
+            "repository_check",
+            "human_mathematical_review"
+          ],
+          "human_review": "required",
+          "forbidden_effects": [
+            "strengthen_public_claim_wording"
+          ],
+          "public_consequence": "Reassess the proof posture even when the proposition is unchanged."
+        },
+        {
+          "id": "representation_changed",
+          "summary": "A claim moves between coordinates, encodings, or models",
+          "minimum_evidence": [
+            "lean_check",
+            "human_mathematical_review"
+          ],
+          "human_review": "required",
+          "forbidden_effects": [
+            "identify_representations_without_transport"
+          ],
+          "public_consequence": "Record the transport theorem, its direction, and anything not preserved."
+        },
+        {
+          "id": "finite_certificate_range_changed",
+          "summary": "A checked bounded range or certificate family is extended",
+          "minimum_evidence": [
+            "lean_check",
+            "repository_check"
+          ],
+          "human_review": "on_trigger",
+          "review_triggers": [
+            "claim_text_changed",
+            "claim_status_changed",
+            "intended_meaning_changed",
+            "paper_statement_changed"
+          ],
+          "forbidden_effects": [
+            "change_open_target_status",
+            "infer_unbounded_result"
+          ],
+          "public_consequence": "Keep the finite status; update only the stated bound."
+        },
+        {
+          "id": "open_problem_relation_changed",
+          "summary": "An advances-open-target relation is added or changed",
+          "minimum_evidence": [
+            "repository_check",
+            "human_mathematical_review"
+          ],
+          "human_review": "required",
+          "forbidden_effects": [
+            "change_open_target_status"
+          ],
+          "public_consequence": "Record the outstanding obligation affected and the exact relation."
+        },
+        {
+          "id": "claim_status_changed",
+          "summary": "The status of a public claim changes",
+          "minimum_evidence": [
+            "repository_check",
+            "human_mathematical_review"
+          ],
+          "human_review": "required",
+          "forbidden_effects": [
+            "infer_unbounded_result"
+          ],
+          "public_consequence": "State the theorem or review that licenses the new status."
+        },
+        {
+          "id": "authored_exposition_changed",
+          "summary": "Authored paper or documentation prose changes mathematically",
+          "minimum_evidence": [
+            "repository_check",
+            "human_mathematical_review"
+          ],
+          "human_review": "required",
+          "forbidden_effects": [
+            "change_open_target_status"
+          ],
+          "public_consequence": "Prose must not exceed the status recorded in the claim registry."
+        },
+        {
+          "id": "projection_changed",
+          "summary": "A generated projection is rebuilt",
+          "minimum_evidence": [
+            "repository_check"
+          ],
+          "human_review": "not_required",
+          "forbidden_effects": [
+            "bypass_projection_owner",
+            "strengthen_public_claim_wording"
+          ],
+          "public_consequence": "Regenerate below the existing owners; no mathematical effect."
+        },
+        {
+          "id": "methodology_changed",
+          "summary": "docs/methodology.json changes",
+          "minimum_evidence": [
+            "repository_check"
+          ],
+          "human_review": "on_trigger",
+          "review_triggers": [
+            "rule_semantics_changed"
+          ],
+          "forbidden_effects": [
+            "change_open_target_status"
+          ],
+          "public_consequence": "Regenerate METHODOLOGY.md and the corpus descriptor. Rules route review; they do not decide mathematics."
+        }
+      ],
+      "human_review_triggers": [
+        {
+          "id": "claim_text_changed",
+          "description": "The wording of a public claim changes."
+        },
+        {
+          "id": "claim_status_changed",
+          "description": "The status of a public claim changes."
+        },
+        {
+          "id": "intended_meaning_changed",
+          "description": "The reviewed correspondence between a proposition and its intended statement changes."
+        },
+        {
+          "id": "paper_statement_changed",
+          "description": "A paper-facing mathematical statement changes."
+        },
+        {
+          "id": "significance_claim_changed",
+          "description": "What the repository says a result means for an open problem changes."
+        },
+        {
+          "id": "rule_semantics_changed",
+          "description": "The meaning of a methodology rule changes, not only its wording or projection."
+        }
+      ],
+      "forbidden_effect_vocabulary": [
+        {
+          "id": "change_open_target_status",
+          "description": "The change must not alter the status of an open target claim."
+        },
+        {
+          "id": "infer_unbounded_result",
+          "description": "The change must not derive an unbounded or universal statement from bounded evidence."
+        },
+        {
+          "id": "strengthen_public_claim_wording",
+          "description": "The change must not strengthen the wording of any public claim."
+        },
+        {
+          "id": "identify_representations_without_transport",
+          "description": "The change must not present a transformed representation as the original claim without a checked transport theorem."
+        },
+        {
+          "id": "bypass_projection_owner",
+          "description": "The change must not edit a generated projection except by regenerating it from its owner."
+        }
+      ],
+      "negative_fixture_ids": [
+        "change_class_without_minimum_evidence",
+        "conditional_reduction_without_remaining_open_proposition",
+        "finite_range_forbidden_effects_removed",
+        "finite_result_changed_to_open_status",
+        "local_instance_reference_unresolvable",
+        "methodology_rule_without_implemented_guard",
+        "open_target_edge_without_stated_effect",
+        "semantic_change_review_downgraded"
+      ],
+      "local_instances": {
+        "method_axiom.proof_is_exact_checked_proposition": [
+          {
+            "relation": "illustrates",
+            "ref_kind": "public_claim",
+            "ref": "eb_full_support"
+          },
+          {
+            "relation": "enforces",
+            "ref_kind": "validation_guard",
+            "ref": "release.proof_trust"
+          }
+        ],
+        "method_axiom.formal_proof_does_not_verify_intended_meaning": [
+          {
+            "relation": "illustrates",
+            "ref_kind": "public_claim",
+            "ref": "support_families"
+          },
+          {
+            "relation": "states_limit",
+            "ref_kind": "remaining_open",
+            "ref": "remaining_open.universal_257_all_infinite_supports"
+          },
+          {
+            "relation": "enforces",
+            "ref_kind": "validation_guard",
+            "ref": "release.claim_transition_requirements"
+          }
+        ],
+        "method_axiom.representation_changes_require_proved_transport": [
+          {
+            "relation": "illustrates",
+            "ref_kind": "public_claim",
+            "ref": "mersenne_lambert_ladder"
+          },
+          {
+            "relation": "states_limit",
+            "ref_kind": "remaining_open",
+            "ref": "remaining_open.erdos_249_irrationality"
+          },
+          {
+            "relation": "enforces",
+            "ref_kind": "validation_guard",
+            "ref": "release.claim_transition_requirements"
+          }
+        ],
+        "method_axiom.reduction_states_remaining_open_hypothesis": [
+          {
+            "relation": "illustrates",
+            "ref_kind": "public_claim",
+            "ref": "certificate_reduction"
+          },
+          {
+            "relation": "states_limit",
+            "ref_kind": "remaining_open",
+            "ref": "remaining_open.unbounded_certificate_supply"
+          },
+          {
+            "relation": "enforces",
+            "ref_kind": "validation_guard",
+            "ref": "release.claim_transition_requirements"
+          },
+          {
+            "relation": "tests_rejection",
+            "ref_kind": "negative_fixture",
+            "ref": "conditional_reduction_without_remaining_open_proposition"
+          }
+        ],
+        "method_axiom.finite_results_remain_finite_without_uniform_theorem": [
+          {
+            "relation": "illustrates",
+            "ref_kind": "public_claim",
+            "ref": "certified_kill_instances"
+          },
+          {
+            "relation": "states_limit",
+            "ref_kind": "remaining_open",
+            "ref": "remaining_open.unbounded_certificate_supply"
+          },
+          {
+            "relation": "enforces",
+            "ref_kind": "validation_guard",
+            "ref": "release.claim_transition_requirements"
+          },
+          {
+            "relation": "tests_rejection",
+            "ref_kind": "negative_fixture",
+            "ref": "finite_result_changed_to_open_status"
+          }
+        ],
+        "method_axiom.open_problem_progress_names_changed_open_proposition": [
+          {
+            "relation": "illustrates",
+            "ref_kind": "public_claim",
+            "ref": "denominator_exclusion"
+          },
+          {
+            "relation": "illustrates",
+            "ref_kind": "public_claim",
+            "ref": "sublog_zero_windows"
+          },
+          {
+            "relation": "states_limit",
+            "ref_kind": "non_claim",
+            "ref": "not_erdos_249_solution"
+          },
+          {
+            "relation": "enforces",
+            "ref_kind": "validation_guard",
+            "ref": "release.claim_transition_requirements"
+          },
+          {
+            "relation": "tests_rejection",
+            "ref_kind": "negative_fixture",
+            "ref": "open_target_edge_without_stated_effect"
+          }
+        ]
+      },
+      "rules_by_change_class": {
+        "proof_body_changed": [
+          "method_axiom.proof_is_exact_checked_proposition",
+          "principle.classify_change_before_updating_public_claims"
+        ],
+        "lean_proposition_changed": [
+          "method_axiom.proof_is_exact_checked_proposition",
+          "method_axiom.formal_proof_does_not_verify_intended_meaning",
+          "principle.classify_change_before_updating_public_claims",
+          "principle.update_authoritative_sources_before_projections",
+          "anti_principle.do_not_equate_lean_acceptance_with_intended_meaning"
+        ],
+        "assumptions_changed": [
+          "principle.classify_change_before_updating_public_claims"
+        ],
+        "representation_changed": [
+          "method_axiom.representation_changes_require_proved_transport",
+          "principle.record_what_representation_changes_preserve",
+          "principle.classify_change_before_updating_public_claims",
+          "anti_principle.do_not_identify_representations_without_transport"
+        ],
+        "finite_certificate_range_changed": [
+          "method_axiom.finite_results_remain_finite_without_uniform_theorem",
+          "principle.classify_change_before_updating_public_claims",
+          "anti_principle.do_not_generalize_finite_result_without_theorem"
+        ],
+        "open_problem_relation_changed": [
+          "method_axiom.open_problem_progress_names_changed_open_proposition",
+          "anti_principle.do_not_use_output_volume_as_mathematical_progress"
+        ],
+        "claim_status_changed": [
+          "principle.classify_change_before_updating_public_claims",
+          "principle.update_authoritative_sources_before_projections"
+        ],
+        "authored_exposition_changed": [
+          "principle.record_failed_routes_and_counterexamples",
+          "principle.classify_change_before_updating_public_claims",
+          "principle.update_authoritative_sources_before_projections"
+        ],
+        "projection_changed": [
+          "principle.classify_change_before_updating_public_claims",
+          "principle.update_authoritative_sources_before_projections",
+          "principle.public_checkout_explains_claims_and_open_boundary",
+          "anti_principle.do_not_treat_graph_model_or_private_work_as_proof",
+          "anti_principle.do_not_edit_projection_as_source"
+        ],
+        "methodology_changed": [
+          "anti_principle.do_not_keep_rule_without_owner_check_and_scope"
+        ]
+      }
     },
     "high_salience_declarations": [
       {
@@ -1054,7 +1435,7 @@
     },
     "methodology_contract": {
       "path": "docs/methodology.json",
-      "expected_content_digest": "sha256:7d91903e4259351aece2442cd16e78dd1834561ab210837f5db9726e76f44f7f",
+      "expected_content_digest": "sha256:30927988518e25bd89bcc60e4e6b6fe0017c35a84b9041b337e516c67483c704",
       "human_projection": "METHODOLOGY.md",
       "check": "python3 scripts/build_methodology.py --check"
     }
