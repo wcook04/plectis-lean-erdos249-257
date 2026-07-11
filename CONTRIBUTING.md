@@ -41,7 +41,9 @@ lake exe cache get                 # fetch the prebuilt Mathlib cache
 lake build                         # elaborate and kernel-check the library
 lake build Examples                # build the downstream consumer example
 python3 scripts/check_release.py   # cross-surface release checks
+python3 -m pip install cffconvert reuse  # once, for metadata and licence checks
+python3 scripts/check_metadata.py  # CITATION.cff schema validation (same command as CI)
+reuse lint                         # licence validation
 ```
 
-CI runs the build and the release-surface checks (including `cffconvert` and
-`reuse lint`) on every push.
+CI runs these build and release-surface checks on every push.

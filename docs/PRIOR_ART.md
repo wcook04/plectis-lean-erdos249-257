@@ -11,9 +11,12 @@ this release proves. A citation never widens a release claim, and a source
 listed as *context* is not an imported argument or a claim of mathematical
 priority.
 
-The full bibliography is in the [exposition](../paper/erdos249-257-exposition.tex)
-and in [CITATION.cff](../CITATION.cff). This map explains why the principal
-sources are there.
+The [exposition](../paper/erdos249-257-exposition.tex) is the complete
+mathematics bibliography. [CITATION.cff](../CITATION.cff) is intentionally
+selected release/software citation metadata: it supplies the recommended
+citation for this version and selected foundational or software references,
+not a duplicate bibliography. This map explains why the principal sources are
+credited.
 
 | Source | Relationship to this release | Boundary |
 |---|---|---|
@@ -22,7 +25,7 @@ sources are there.
 | P. Erdős, *On the irrationality of certain series* (1968) | Pairwise-coprime support condition. | Only that classical family is attributed to this source; it does not settle universal #257. |
 | P. B. Borwein, *On the irrationality of certain series* (1992) | Broader irrationality theorem containing the relevant Mersenne--Lambert specialisation. | Context for the full-support family, not a proof route for the new #249 reductions. |
 | T. M. Apostol, *Introduction to Analytic Number Theory* (1976); M. Merca and M. D. Schmidt, *Generating Special Arithmetic Functions by Lambert Series Factorizations* (2017) | Classical Dirichlet/Möbius and Lambert-series infrastructure used in the exposition. | The release claims a Lean-checked composition, not new Möbius inversion or Lambert identities. |
-| S. Kakeya, *On the Set of Partial Sums of an Infinite Series* (1914); V. Kovač and T. Tao, *On several irrationality problems for Ahmes series* (2025) | Kakeya's strict-tail criterion is the general subsum-set source; Kovač--Tao give the direct fixed-base Lambert-subseries instance. | The executable greedy interface and finite certificates are not presented as a priority claim. |
+| S. Kakeya, *On the Set of Partial Sums of an Infinite Series* (1914); V. Kovač and T. Tao, [*On several irrationality problems for Ahmes series* (2025)](https://doi.org/10.1007/s10474-025-01528-0) | Kakeya's strict-tail criterion is the general subsum-set source; Kovač--Tao give the direct fixed-base Lambert-subseries instance. | The executable greedy interface and finite certificates are not presented as a priority claim. |
 | J. Farey, *On a Curious Property of Vulgar Fractions* (1816) | Historical source for the Farey/mediant language used by the finite denominator-exclusion frames. | The explicit Farey windows and denominator bound are Lean-checked arguments of this release, not historical results. |
 | F. Luca and Y. Tachiya, *Irrationality of Lambert series associated with a periodic sequence* (2014) | Context for periodic-coefficient Lambert-series literature. | The repository's named support families are stated only as its own formalised framework. |
 | H. Wang and J. M. Grau Ribas, *Positive dyadic density for rational weighted binary expansions* (2026) | Direct antecedent for the rationality-forced integral carry recurrence in a weighted-binary special case. | The public paper calls its generic carry criterion a formalisation/abstraction; converse and rigidity remain deliberately non-priority language. |

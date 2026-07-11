@@ -39,6 +39,6 @@ jobs:
       - name: Install metadata validators
         run: pip install cffconvert reuse
       - name: Validate CITATION.cff
-        run: cffconvert --validate
+        run: python3 scripts/check_metadata.py
       - name: REUSE licensing lint
         run: reuse lint
