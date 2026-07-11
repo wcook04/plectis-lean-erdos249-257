@@ -10,7 +10,9 @@ This package contains:
 * generated finite certificate witnesses;
 * the shared binary-carry trunk: tempered tail-orbit rigidity, greedy
   achievement sets, Boolean Möbius carry, and the rational support-carry
-  skeleton.
+  skeleton;
+* a sublogarithmic zero-window theorem for the divisor coverage forced by a
+  hypothetical rational infinite-support value.
 
 It does not prove Erdős #249, and it does not prove the universal #257 statement.
 
@@ -20,7 +22,8 @@ TotientTailPeriodKiller → CarrySurvivorExtinction → LcmDiagonalReduction →
 LcmConeFlatness → LcmConeNonflat → CertificateKernel ← GeneratedCertificates.
 The carry trunk builds on the kernel:
 GenericTailOrbitRigidity → BooleanMobiusCarry → RationalSupportCarrySkeleton,
-with GreedyAchievementSet importing CertificateKernel directly.
+with SublogDivisorCoverage building on RationalSupportCarrySkeleton and
+GreedyAchievementSet importing CertificateKernel directly.
 -/
 import Erdos249257.GapFareyBound
 import Erdos249257.MersenneLambertLadder
@@ -37,3 +40,4 @@ import Erdos249257.GenericTailOrbitRigidity
 import Erdos249257.GreedyAchievementSet
 import Erdos249257.BooleanMobiusCarry
 import Erdos249257.RationalSupportCarrySkeleton
+import Erdos249257.SublogDivisorCoverage
