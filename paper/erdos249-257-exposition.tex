@@ -24,12 +24,12 @@
 \newcommand{\PK}{Erdos249257}
 % \idn: typeset a Lean identifier (underscores literal, breakable across lines).
 \newcommand{\idn}[1]{\texttt{\expandafter\seqsplit\expandafter{\detokenize{#1}}}}
-% \lref{file}{line}{decl}: link "file:line" to the source line; show the decl name.
-\newcommand{\lref}[3]{\href{\repobase/\PK/#1\#L#2}{\texttt{#1:#2}}\ {\footnotesize(\idn{#3})}}
-% \lrefx{file}{line}{decl}: same target, decl name as the visible link text.
-\newcommand{\lrefx}[3]{\href{\repobase/\PK/#1\#L#2}{\idn{#3}}}
-% \lloc{file}{line}: compact link showing only "file:line" (for very long decls).
-\newcommand{\lloc}[2]{\href{\repobase/\PK/#1\#L#2}{\texttt{#1:#2}}}
+% The source coordinates remain in every hyperlink target and in the verifier's
+% manifest.  The paper shows a declaration name for principal results and a
+% quiet source marker for secondary links, so provenance does not dominate prose.
+\newcommand{\lref}[3]{\href{\repobase/\PK/#1\#L#2}{\idn{#3}}}
+\newcommand{\lrefx}[3]{\href{\repobase/\PK/#1\#L#2}{\texttt{Lean source}}}
+\newcommand{\lloc}[2]{\href{\repobase/\PK/#1\#L#2}{\texttt{Lean source}}}
 % \rref{rootfile}: link a repository-root file (underscores handled).
 \newcommand{\rref}[1]{\href{https://github.com/wcook04/plectis-lean-erdos249-257/blob/main/\detokenize{#1}}{\texttt{\detokenize{#1}}}}
 \emergencystretch=2em
@@ -48,13 +48,12 @@
 \newcommand{\ph}{\varphi}
 \newcommand{\lcm}{\operatorname{lcm}}
 \newcommand{\Irr}{\text{ irrational}}
+\newcommand{\Qzero}{Q_0}
 
-\title{\vspace{-2em}The Erd\H{o}s \#249/\#257 Lean formalization:\\
-{\large what is proved, what is cited, and what stays open}}
-\author{\texttt{ai\_workflow} (upstream of \href{https://wcook04.github.io/plectis/}{Plectis})}
-\date{July 2026\\[4pt]
-{\footnotesize Companion to the Lean~4 repository
-\href{https://github.com/wcook04/plectis-lean-erdos249-257}{\texttt{plectis-lean-erdos249-257}}, pinned at commit \href{\repobase}{\texttt{59f9cc4}}.}}
+\title{\vspace{-2em}Erd\H{o}s Problems 249 and 257 in Lean~4:\\
+{\large formalized results, certificate reductions, and open questions}}
+\author{Will Cook}
+\date{July 2026}
 
 \begin{document}
 \sloppy
@@ -62,33 +61,71 @@
 
 \begin{abstract}
 \noindent
-This note describes, in ordinary mathematical language, a machine-checked
-Lean~4 development around two Erd\H{o}s irrationality problems: the
-irrationality of Erd\H{o}s--Borwein-type series $\sum 1/(b^{a_k}-1)$ (Erd\H{o}s
-\#257), and the still-open question of whether the totient constant
-$S=\sum_{n\ge1}\ph(n)/2^n$ is irrational (Erd\H{o}s \#249). The development
-proves the Erd\H{o}s--Borwein constant irrational for every integer base $b\ge2$,
-and the same for several named infinite supports. It rewrites $S$ as a weighted
-Erd\H{o}s--Borwein object; proves \emph{unconditionally} that $S$ equals no
-rational with denominator up to about $7.96\times10^{34}$; and \emph{reduces}
-the irrationality of $S$ to a sequence of finite, decidable certificates. The
-remaining analytic question is whether that certificate supply is unbounded.
-Neither open problem is solved. Machine-checked non-claims in the repository
-state the same boundary. Every formal statement links to the exact Lean source
-line. The Lean kernel verifies the package with no \texttt{sorry}, no
-\texttt{admit}, and no \texttt{native\_decide}.
+We formalize in Lean~4 several results around Erd\H{o}s Problems 249 and 257.
+For every integer base $b\ge2$, the development verifies the irrationality of
+the Erd\H{o}s--Borwein series $\sum_{n\ge1}(b^n-1)^{-1}$, together with several
+structured infinite-support variants. For the totient constant
+$S=\sum_{n\ge1}\ph(n)/2^n$, whose irrationality remains open, we prove that any
+rational representation has denominator greater than
+$\Qzero\approx7.96\times10^{34}$, and formalize an exact reduction of
+irrationality to an unbounded family of finite decidable certificates. We also
+describe the proof architecture and auxiliary rationality criteria based on
+binary carry systems. This work solves neither Erd\H{o}s~\#249 nor the universal
+form of Erd\H{o}s~\#257.
 \end{abstract}
 
-\tableofcontents
+\section{Introduction}\label{sec:intro}
 
-\section{Main results and non-results}\label{sec:main}
+Two open questions provide the setting. Erd\H{o}s~\#249 asks whether the
+totient constant
+\[
+S=\sum_{n\ge1}\frac{\ph(n)}{2^n}
+\]
+is irrational. Erd\H{o}s~\#257 asks whether
+$\sum_{n\in A}(2^n-1)^{-1}$ is irrational for every infinite
+$A\subseteq\N$. The second problem contains the classical full-support
+Erd\H{o}s--Borwein constant, but the passage from structured supports to an
+arbitrary infinite support remains open.
 
-This section states what the Lean development proves and what it does not.
-Every item is machine-checked at the pinned commit; later sections expand each
-one and link it to source. The two named problems are Erd\H{o}s~\#249 (is
-$S=\sum_{n\ge1}\ph(n)/2^n$ irrational?) and Erd\H{o}s~\#257 (is
-$\sum_{n\in A}1/(2^n-1)$ irrational for \emph{every} infinite $A\subseteq\N$?).
-Both are open, and this development solves neither.
+The development has four principal outputs. First, it formalizes the
+irrationality of $\sum_{n\ge1}(b^n-1)^{-1}$ for every integer $b\ge2$, and of
+several structured infinite-support variants. Second, it places $S$ on the
+same Mersenne--Lambert ladder and proves useful positive, signed, and
+probabilistic representations. Third, it gives the unconditional denominator
+bound $q>\Qzero$ for any rational expression $S=p/q$. Fourth, it proves an
+exact finite-certificate reduction: irrationality follows if the certified
+non-integrality witnesses occur at unbounded parameters, and the existence of
+a witness at fixed parameters is equivalent to the corresponding tail
+difference being non-integral.
+
+\begin{center}
+\fbox{\begin{minipage}{0.91\textwidth}
+\textbf{Scope.} The irrationality of $S$ and the universal infinite-support
+statement remain open. The denominator theorem and certificate reduction are
+genuine unconditional and conditional advances toward \#249, respectively;
+neither is presented as a solution. The support theorems establish named
+families toward \#257, not the universal quantifier.
+\end{minipage}}
+\end{center}
+
+The formalization-specific contribution is not merely a list of declarations.
+It isolates a common architecture in which an infinite irrationality question
+is converted into finite arithmetic checked by the Lean kernel, while the
+remaining analytic uniformity statement is exposed rather than hidden inside
+computation. Exact links from the informal statements to the pinned source are
+kept as quiet hyperlinks; the complete declaration map is in
+Appendix~\ref{app:index}.
+
+The prior-art boundary is theorem-specific. The full-support theorem is due to
+Erd\H{o}s~\cite{erdos1948}, and the pairwise-coprime support condition is also
+classical~\cite{erdos1968}. Periodic-coefficient Lambert series have a separate
+literature~\cite{lucatachiya}. Kova\v{c}--Tao record the strict-tail geometry
+used by the achievement-set appendix~\cite{kovactao}, while Wang--Grau Ribas
+use the integral carry recurrence in the weighted binary setting
+\cite{wanggrauribas}. We make no priority claim for these mathematical
+ingredients; the contribution here is their verified integration, the stated
+certificate reductions and bounds, and the formalization lessons described
+below.
 
 \begin{center}
 \fbox{\begin{minipage}{0.94\textwidth}
@@ -98,99 +135,15 @@ Both are open, and this development solves neither.
 $L(\mu)=\tfrac12$ & $L(\ph)=2$ & $L(\mathbf 1)=E$ & $L(\ph*\mu)=S$\ (\#249)\\
 rational & rational & \textbf{irrational (proved)} & \textbf{open}\\
 \end{tabular}\\[10pt]
-\textbf{The \#249 reduction chain.}\\[3pt]
-$S\in\Q\ \Longrightarrow\ \text{eventual binary periodicity}\ \Longrightarrow\ R_{N+h}-R_N\in\Z$\\[3pt]
-$\Longrightarrow\ $ a finite \textsf{certifiedKill} witnesses failure $\ \Longleftrightarrow\ R_{N+h}-R_N\notin\Z$\\[4pt]
-{\footnotesize (completeness: the finite certificate is exact, not a truncation heuristic;\\
-\#249 becomes ``the certificate supply is unbounded'')}
+\textbf{Logical status of the \#249 reduction.}\\[3pt]
+$S\in\Q\ \Longrightarrow\ \text{eventual binary periodicity}
+\ \Longrightarrow\ R_{N+h}-R_N\in\Z$ for the eventual period.\\[3pt]
+$\textsf{certifiedKill}(h,N,L)\ \Longrightarrow\ R_{N+h}-R_N\notin\Z$, and\\[-2pt]
+$\exists L\,\textsf{certifiedKill}(h,N,L)\ \Longleftrightarrow\ R_{N+h}-R_N\notin\Z$.\\[4pt]
+{\footnotesize Solid implications and the equivalence are proved; the
+unresolved step is an unbounded supply of such non-integral tail differences.}
 \end{minipage}}
 \end{center}
-
-\paragraph{Proved (machine-checked).}
-\begin{itemize}[leftmargin=1.4em]
-\item \textbf{All-base Erd\H{o}s--Borwein irrationality.} $\sum_{n\ge1}1/(b^n-1)$
-is irrational for every integer $b\ge2$; the Erd\H{o}s--Borwein constant $E$ is
-the base-$2$ case (Result~\ref{res:full}). This is a formalization of Erd\H{o}s's
-classical theorem, and it is exactly the integer-base slice of Erd\H{o}s~\#1049.
-\item \textbf{A \#257 support calculus.} $\sum_{n\in A}1/(b^n-1)$ is irrational,
-at every base $b\ge2$, for several structured infinite supports $A$: factorial,
-powers of two, multiples, pairwise-coprime with summable reciprocals, eventually
-periodic, residue classes, and the odd numbers (Result~\ref{res:support}). These
-are named cases, not the universal \#257 theorem.
-\item \textbf{A change of coordinates for \#249.} The totient constant is a
-weighted Erd\H{o}s--Borwein object, $S=L(\ph*\mu)$ with a nonnegative
-primitive-conductor weight, and equals $\tfrac12+\sum_d\mu(d)/(2^d-1)^2$ and
-$\tfrac12+\Pr(\gcd(X,Y)=1)$ for independent fair-coin waiting times
-(Results~\ref{res:lift},~\ref{res:lens},~\ref{res:coprime}).
-\item \textbf{An unconditional denominator exclusion.} $S$ equals no rational of
-denominator up to about $7.96\times10^{34}$ (Result~\ref{res:farey}). This is a
-record on the denominator, not a proof of irrationality.
-\item \textbf{A reduction of \#249 to a finite, decidable supply.} Rationality of
-$S$ forces an integer tail-period law; a finite certificate witnesses its
-failure, and by a completeness theorem the certificate exists \emph{exactly} when
-the tail difference is non-integral
-(Results~\ref{res:red21}--\ref{res:complete}). The initial segment of the
-required supply is machine-checked non-empty (Result~\ref{res:deposits}).
-\item \textbf{Carry coordinates for rational values.} A rationality criterion
-for binary series with linearly bounded coefficients (tempered integer carry
-orbits); a support-free Boolean--M\"obius carry certificate exactly equivalent
-to a rational \#257 support value; order-wrap, reciprocal-mass, and
-unbounded-carry constraints that any such rational value must satisfy; and a
-greedy geometry for the \#257 value set
-(Results~\ref{res:rigidity}--\ref{res:death}, Section~\ref{sec:carry}). These
-are equivalences and constraints, not exclusions of any open value.
-\end{itemize}
-
-\paragraph{Not proved, and not claimed.} The irrationality of $S$ (\#249) and the
-universal \#257 statement are open. The reduction turns \#249 into the claim that
-the certificate supply is \emph{unbounded}. That unboundedness is the remaining
-analytic question, and it is left open. The repository records these boundaries
-as machine-checked non-claims
-(\idn{not_erdos_249_solution}, \idn{not_erdos_257_solution}; \rref{NON_CLAIMS.md}).
-
-\paragraph{How it is checked.} The Lean~4 kernel verifies the package against
-Mathlib with no \texttt{sorry}, no \texttt{admit}, and no \texttt{native\_decide};
-every finite computation is discharged by \texttt{decide}.
-Section~\ref{sec:verify} gives the reproduction commands.
-
-\section{How to read this document}
-
-This note is written so that a number theorist who has never used a proof
-assistant can see what has and has not been proved, and can check any claim
-without reading Lean. Two conventions make that possible.
-
-First, the mathematics is stated in ordinary notation. Lean names appear only as
-pointers. Second, every formalized statement carries a link of the form
-\lref{CertificateKernel.lean}{8006}{irrational_erdosBorwein_series}. The blue
-\texttt{file:line} text links to that line of source on GitHub, pinned to
-commit \href{\repobase}{\texttt{59f9cc4}}; the name in parentheses is the Lean
-declaration. Line numbers refer to that commit.
-
-The boundary between what is proved, what is only cited, and what is open is
-stated carefully. The repository enforces it in code through non-claims
-(\rref{NON_CLAIMS.md}); Section~\ref{sec:boundary} repeats it here.
-
-\section{Two constants, two problems}\label{sec:two}
-
-Work at base $2$ unless a base $b$ is named. Two Dirichlet-type series are
-central.
-
-\begin{itemize}[leftmargin=1.4em]
-\item The \textbf{Erd\H{o}s--Borwein constant} $E=\displaystyle\sum_{n\ge1}\frac{1}{2^n-1}$.
-\item The \textbf{totient constant} $S=\displaystyle\sum_{n\ge1}\frac{\ph(n)}{2^n}$, where $\ph$ is Euler's totient.
-\end{itemize}
-
-\paragraph{The \#257 direction.} Erd\H{o}s \#257 asks whether
-$\sum_{n\in A} 1/(2^n-1)$ is irrational for \emph{every} infinite $A\subseteq\N$.
-The development proves several cases of the analogous statement
-$\sum_k 1/(b^{a_k}-1)$, at every base $b\ge2$, but not the universal statement.
-
-\paragraph{The \#249 direction.} Whether $S$ is irrational is open. The
-development gives an unconditional exclusion of small-denominator rationals and
-a conditional reduction of the problem to finite certificates. Neither is a
-solution.
-
-The two constants sit one convolution apart on a single ladder.
 
 \section{The Mersenne--Lambert ladder}\label{sec:ladder}
 
@@ -329,7 +282,7 @@ A source comment near \lrefx{CertificateKernel.lean}{5943}{lcm_gap_hypothesis_fa
 describes a second, near-integer route to full support whose witnesses are not
 built there, and says so. The full-support theorem is proved by the separate
 certificate engine cited under Result~\ref{res:full}. The two coexist; the
-near-integer route is one lane, not a retraction of the theorem.
+near-integer route is one proof strategy, not a retraction of the theorem.
 \end{remark}
 
 \subsection{What stays open}
@@ -348,8 +301,12 @@ small-denominator rationals, and a conditional reduction to finite certificates.
 \subsection{Unconditional: no small denominator}\label{sec:uncond}
 
 \begin{result}[denominator exclusion]\label{res:farey}
-For every integer $p$ and every $q$ with
-$1\le q\le 79\,639\,646\,646\,701\,375\,323\,355\,774\,875\,831\,053\approx7.96\times10^{34}$,
+Set
+\[
+\Qzero:=79\,639\,646\,646\,701\,375\,323\,355\,774\,875\,831\,053
+       \approx7.96\times10^{34}.
+\]
+For every integer $p$ and every $q$ with $1\le q\le\Qzero$,
 \[
 S \;\ne\; \frac{p}{q}.
 \]
@@ -367,10 +324,11 @@ for the first rung and \lrefx{GapFareyBound.lean}{80}{gap_check_window_1_120_le_
 \lrefx{GapFareyBound.lean}{156}{gap_check_window_1_240_le_79639646646701375323355774875831053}
 for the two Farey windows.
 
-This is a record on the denominator, not a proof of irrationality. A rational with
-a larger denominator is not excluded by it.
+This is an explicit lower bound on the denominator of any rational
+representation, not a proof of irrationality. A rational with a larger
+denominator is not excluded by it.
 
-\begin{remark}[one record, four faces]
+\begin{remark}[one bound, four representations]
 Because the ladder identities of Section~\ref{sec:ladder} are equalities, the same
 finite record transfers verbatim to three other representations of the constant:
 to the positive lift $\sum_d A(d)/(2^d-1)$
@@ -470,8 +428,8 @@ the whole $\lcm$ cone.
 \noindent Formalized: \lref{LcmConeFlatness.lean}{90}{rational_totient_series_forces_lcm_cone_flatness}.
 
 The certificates are exact, not a lossy heuristic: a certificate exists exactly
-when the object it certifies is non-integral. That turns the finite computations
-from experiments into receipts.
+when the object it certifies is non-integral. Thus the finite computations are
+machine-checked witnesses rather than numerical experiments.
 
 \begin{result}[certificate completeness]\label{res:complete}
 For all $h,N$,
@@ -482,7 +440,7 @@ R_{N+h}-R_N\notin\Z.
 \]
 \end{result}
 \noindent Formalized: \lref{LcmConeFlatness.lean}{316}{exists_certifiedKill_iff_tail_diff_notMem_int}.
-Finite certificates are receipts; non-integrality is the object. A joint refuter
+Finite certificates witness non-integrality. A joint refuter
 can interrogate a menu of cone vertices at once and is sharper than any pairwise
 test: it refutes the single-fractional-part model that rationality predicts on a
 finite sample of cone vertices
@@ -493,7 +451,7 @@ supply is machine-checked, so the reduction is not vacuous. By completeness, eac
 of these is a kernel-checked proof of a specific non-integral tail difference,
 not a numerical experiment.
 
-\begin{result}[finite deposits]\label{res:deposits}
+\begin{result}[verified finite instances]\label{res:deposits}
 The following are checked by the Lean kernel:
 \begin{itemize}[leftmargin=1.4em]
 \item $\textsf{certifiedKill}(h,12,16)$ for every period $h\in[1,8]$;
@@ -507,7 +465,7 @@ The following are checked by the Lean kernel:
 \lrefx{LcmDiagonalReduction.lean}{217}{certifiedKill_periodLcm_diagonal_upto_six}
 (with \lrefx{LcmDiagonalReduction.lean}{222}{certifiedKill_periodLcm_diagonal_at_seven},
 \lrefx{LcmDiagonalReduction.lean}{226}{certifiedKill_periodLcm_diagonal_at_eight}),
-and \lrefx{LcmConeNonflat.lean}{506}{coneNonflatCert_cells}. These deposits show
+and \lrefx{LcmConeNonflat.lean}{506}{coneNonflatCert_cells}. These instances show
 that each layer of the reduction is non-vacuous and, by completeness, exact. They
 are not evidence that the unbounded supply exists.
 
@@ -520,9 +478,94 @@ obstruction seen as a rational denominator, an eventual binary period, and a fla
 tail on the $\lcm$ cone. That unboundedness is the remaining analytic question,
 and it is left open. The reduction is real; the closure is not asserted.
 
-\section{Rationality as a carry system (further infrastructure)}\label{sec:carry}
+\section{Formalization architecture and mathematical lessons}\label{sec:architecture}
 
-Four further modules extend the development sideways. They prove no new
+The formal development repeatedly separates a finite, kernel-checkable core
+from the analytic statement that would have to hold uniformly. For the
+full-support Erd\H{o}s--Borwein theorem, the core is a bounded certificate
+engine assembled from a Bertrand/CRT frame, divisor-pair averaging, and an
+explicit parameter closure. For \#249, the same design principle appears more
+sharply: eventual binary periodicity predicts an integral tail difference;
+finite modular arithmetic can refute that prediction at any fixed pair of
+parameters; and completeness proves that this computation loses no
+information. Lean therefore makes the open boundary visible: the missing
+ingredient is not another finite verification but a theorem producing
+witnesses at unbounded parameters.
+
+Three changes of coordinates serve different mathematical purposes. The
+Mersenne--Lambert transform places $S$ next to the Erd\H{o}s--Borwein constant
+and exposes the nonnegative primitive-conductor weight. The M\"obius-square
+identity turns the same number into a signed rapidly convergent series. The
+coprime-pair identity turns it into a probability. Formalizing all three and
+proving that the denominator exclusion transfers between them prevents an
+informal change of representation from silently changing the claim.
+
+The auxiliary carry modules ask what rationality would force rather than
+claiming a new irrationality theorem. They give an exact tempered-orbit
+criterion, Boolean--M\"obius coordinates for support series, constraints from
+residue wraps and reciprocal mass, and a greedy description of the value set.
+Together they rule out several tempting but false proof strategies---for
+example, rationality need not give a bounded carry alphabet---and identify the
+kind of infinite Boolean carry path that a future proof would have to exclude.
+The precise statements and source links are retained in
+Appendix~\ref{sec:carry}; their supporting role is why they are not a second
+main narrative here.
+
+This architecture is reusable beyond the two named problems: choose a
+representation in which rationality imposes a rigid tail law, isolate a finite
+predicate that soundly refutes that law, prove the predicate complete at fixed
+parameters, and state the remaining uniformity theorem separately. The last
+step matters as much as the first three. It prevents a large verified finite
+range from being mistaken for the infinite theorem.
+
+\section{Artefact availability and verification}\label{sec:verify}
+
+The Lean~4 source, exact informal-to-formal links, and build metadata are
+available in the public repository
+\href{https://github.com/wcook04/plectis-lean-erdos249-257}{\texttt{plectis-lean-erdos249-257}}.
+This paper is linked to commit \href{\repobase}{\texttt{59f9cc4}}; each blue
+Lean link targets an exact declaration at that commit (for example, the
+base-$2$ corollary in Result~\ref{res:full} resolves to
+\lrefx{CertificateKernel.lean}{8006}{irrational_erdosBorwein_series}). The package uses
+\texttt{leanprover/lean4:v4.29.1} and the Mathlib revision pinned by
+\href{\repobase/lake-manifest.json}{\texttt{lake-manifest.json}}.
+
+There is no \texttt{sorry} or \texttt{admit} in the package. Finite
+computations use \texttt{decide}, whose proof terms are checked by the Lean
+kernel; the package does not use \texttt{native\_decide}. Reproduction requires
+only the pinned toolchain and the ordinary project build:
+\begin{verbatim}
+lake exe cache get
+lake build
+\end{verbatim}
+The second command elaborates every declaration and kernel-checks every proof
+term against the pinned Mathlib dependency. Continuous integration executes
+the same build. Appendix~\ref{app:index} gives a compact map of the principal
+informal statements to declarations; the repository retains the exhaustive
+machine-readable provenance checked by the paper-link verifier.
+
+\section{Conclusion}\label{sec:conclusion}
+
+The formalization fixes two mathematical landmarks and two exact frontiers. It
+verifies the all-integer-base Erd\H{o}s--Borwein theorem and several structured
+support cases toward \#257. For \#249 it proves that a rational value of $S$
+would have denominator exceeding $\Qzero$, and it reduces irrationality to an
+unbounded supply of finite certificates whose fixed-parameter semantics are
+complete. The unresolved \#249 step is precisely that unboundedness; the
+unresolved \#257 step is the passage from the formalized support classes to
+every infinite support. Neither frontier is softened by the size of the
+verified artefact.
+
+The main lesson from formalization is the alignment of representations and
+proof obligations. The Lambert, M\"obius, probabilistic, periodic-tail, and
+carry descriptions are not competing stories: each makes a different
+rationality obstruction explicit. A future advance must exploit one of those
+obstructions uniformly, not merely extend the finite range already checked.
+
+\appendix
+\section{Auxiliary rationality criteria from binary carry systems}\label{sec:carry}
+
+Four further modules provide additional criteria. They prove no new
 irrationality. Instead they pin down, in machine-checked form, what a rational
 value of the series in question would have to look like: as an integer carry
 orbit, as a M\"obius-inverted support coordinate, as a residue-wrap cycle
@@ -533,10 +576,9 @@ open series, and each module states that boundary in its header. The prior-art
 boundary is theorem-family-specific. The integral carry recurrence has a
 direct antecedent in Wang--Grau Ribas~\cite{wanggrauribas}; the strict-tail
 geometry is recorded by Kova\v{c}--Tao~\cite{kovactao}; M\"obius inversion,
-repetend algebra, and divisor averaging are classical. The converse/rigidity,
-certificate-normal-form, and coupled reciprocal-mass/collision families are
-local deltas whose exact priority remains under audit. They are not presented
-as new results.
+repetend algebra, and divisor averaging are classical. We make no claim of
+mathematical priority for the converse/rigidity, certificate-normal-form, or
+coupled reciprocal-mass/collision statements collected here.
 
 \subsection{Tail-orbit rigidity: a rationality criterion}
 
@@ -576,11 +618,12 @@ The engine is one observation: a real orbit with $d(N+1)=2\,d(N)$ and
 $d(N)=o(2^N)$ vanishes identically
 (\lrefx{GenericTailOrbitRigidity.lean}{159}{doublingOrbit_eq_zero_of_tempered}).
 
-The tempered boundary is essential, and the source is deliberate about it: the
+The tempered boundary is essential: the
 homogeneous parasite $N\mapsto2^N$ can be added to any orbit without
 disturbing the recurrence, so positivity of an orbit certifies nothing by
 itself, and positivity is nowhere advertised as an equivalent criterion. The
-linear-growth hypothesis covers both constants of Section~\ref{sec:two}:
+linear-growth hypothesis covers both constants introduced in
+Section~\ref{sec:intro}:
 $\ph(n)\le n$ for the \#249 coefficients, and $f_A(n)\le\tau(n)\le n$ for the
 \#257 support coefficients $f_A(n)=\#\{a\in A:a\mid n\}$. The modules below
 instantiate the criterion on supports; the totient instantiation is not taken
@@ -832,7 +875,7 @@ transferred to the kernel series at
 The nonnegativity guard in the membership criterion is necessary: without it a
 negative target would survive every level while lying outside $\mathcal A$.
 
-\begin{result}[exact rational runs and death certificates]\label{res:death}
+\begin{result}[exact rational runs and finite non-membership certificates]\label{res:death}
 The greedy recursion executed in exact rational arithmetic agrees step by step
 with the real recursion under casting. A finite decidable certificate --- the
 exact rational residual at some level is at least an exact rational upper
@@ -865,171 +908,58 @@ argument --- excluding every infinite Boolean carry path, or exhibiting an
 unbounded certificate supply --- is exactly what Sections~\ref{sec:eb}
 and~\ref{sec:249} leave open.
 
-\section{Where this sits: the Erd\H{o}s landscape}\label{sec:landscape}
-
-The table records how the development relates to the numbered problems it is near.
-Statuses are as listed on the individual problem pages
-\href{https://www.erdosproblems.com/249}{erdosproblems.com/\{249, 257, 1049, 69,
-250, 258\}} in July 2026; none of the external results is re-proved here.\footnote{The
-irrationality of $S$ (\#249) and the universal \#257 statement are open. \#1049 is
-open for rational $t>1$, with the integer-base case attributed to Erd\H{o}s.
-\#69 (Tao--Ter\"av\"ainen~\cite{taoterv}), \#250 (Nesterenko~1996~\cite{nesterenko}), and \#258
-(recorded as proved in Lean) are solved; none is re-proved here.}
-
-\begin{center}
-\begin{tabular}{@{}p{3.4cm}p{2.4cm}p{7.6cm}@{}}
-\toprule
-problem & status & relation in this repository\\
-\midrule
-\#249 $\sum\ph(n)/2^n$ & open & the target; unconditional denominator exclusion and a conditional reduction, no solution\\
-\#257 $\sum_{n\in A}1/(2^n-1)$ & open & named infinite-support cases and the full-support ($A=\N$) case, not the universal statement\\
-\#1049 $\sum 1/(t^n-1)$, $t\in\Q_{>1}$ & open (rational $t$) & the integer-base case $b\ge2$ is formalized (Result~\ref{res:full}); the rational case is untouched\\
-\#69 $\sum\omega(n)/2^n$ & solved~\cite{taoterv} & the prime-support case of \#257; only the identity bridge to $\sum_p 1/(2^p-1)$ is formalized, not the irrationality\\
-\#250 $\sum\sigma(n)/2^n$ & solved~\cite{nesterenko} & the ladder neighbour $L(\mathrm{Id})$; cited, not re-proved\\
-\#258 $\sum\tau(n)/(a_1\cdots a_n)$ & solved & not addressed here; the monotone $\ph$/$\sigma$ sequel is the sibling territory of \#249\\
-\bottomrule
-\end{tabular}
-\end{center}
-
-In short: this is a formalization of Erd\H{o}s--Borwein-type irrationality
-together with an unconditional record and a finite-certificate reduction for the
-open totient constant. It is not a solution to \#249 or to the universal \#257.
-
-\section{What is proved, cited, and open}\label{sec:boundary}
-
-\paragraph{Proved (machine-checked, no \texttt{sorry}, no \texttt{admit}).}
-Irrationality of $\sum 1/(b^n-1)$ for every $b\ge2$ and of the named support cases
-(Results~\ref{res:full},~\ref{res:support}); the ladder identities and the
-M\"obius-square and coprimality reformulations
-(Results~\ref{res:lift},~\ref{res:lens},~\ref{res:coprime}); the unconditional
-denominator exclusion to $7.96\times10^{34}$ (Result~\ref{res:farey}); the full
-chain of conditional \#249 reductions with certificate completeness and a
-non-empty initial supply (Results~\ref{res:red21}--\ref{res:deposits}); and the
-carry-coordinate equivalences, rational-value constraints, and greedy
-value-set geometry of Section~\ref{sec:carry}
-(Results~\ref{res:rigidity}--\ref{res:death}).
-
-\paragraph{Cited, not formalized here.} Transcendence of $\sum\sigma(m)/2^m$
-(Nesterenko~1996~\cite{nesterenko}) and the $q$-zeta anchor
-(Postelmans--Van~Assche~\cite{pva}) are ladder neighbours. Kova\v{c}--Tao's
-Lambert-subseries geometry~\cite{kovactao} and Wang--Grau Ribas's integral
-carry method~\cite{wanggrauribas} delimit the carry section's direct prior art;
-neither paper is re-proved here.
-
-\paragraph{Open, and not solved here.} Irrationality of $S$ (\#249); the universal
-\#257 statement. The conditional reductions turn \#249 into ``the certificate
-supply is unbounded'', which is the remaining analytic question.
-
-The repository states these boundaries in code as machine-checked non-claims:
-\idn{not_erdos_249_solution}, \idn{not_erdos_257_solution}, and four provenance
-non-claims (\rref{NON_CLAIMS.md}).
-
-\section{Verification and reproducibility}\label{sec:verify}
-
-The package is checked by the Lean~4 kernel against Mathlib, pinned in
-\href{\repobase/lake-manifest.json}{\texttt{lake-manifest.json}} at toolchain
-\texttt{leanprover/lean4:v4.29.1}. Three facts matter for trust.
-
-\begin{itemize}[leftmargin=1.4em]
-\item There is no \texttt{sorry} and no \texttt{admit} anywhere in the package.
-\item Every finite computation is discharged by \texttt{decide}, checked by the
-kernel. There is no use of \texttt{native\_decide}, so no compiler is trusted.
-\item The package has more than $1{,}600$ theorem declarations. The assembled
-microkernel is \href{\repobase/\PK/CertificateKernel.lean}{\texttt{CertificateKernel.lean}}
-(about $18{,}900$ lines); the machine-generated finite certificates are
-\href{\repobase/\PK/GeneratedCertificates.lean}{\texttt{GeneratedCertificates.lean}}
-(about $27{,}700$ lines) plus per-base shards, each instance closed by \texttt{decide}.
-\end{itemize}
-
-To build and check:
-\begin{verbatim}
-lake exe cache get      # fetch the prebuilt Mathlib cache
-lake build              # build and kernel-check the package
-\end{verbatim}
-
-Trust rests on \texttt{lake build} alone: it elaborates every declaration and the
-Lean~4 kernel checks each proof term, including every \texttt{decide}, against
-Mathlib at the pinned toolchain. There is no separate trusted step and no
-compiler in the loop. Continuous integration runs the same build on every push.
-
-\section{A sibling project, in progress}\label{sec:ramanujan}
-
-Separately from this repository, I am working on the
-\href{https://www.ramanujanmachine.com/ramanujan-challenge/}{Ramanujan Machine
-Challenge} (ten problems, released July 2026, on proofs or symbolic derivations of
-explicit formulas for constants such as $\pi$, $e$, Catalan's constant, and zeta
-values). That work is a different Lean lane and is not part of this snapshot: no
-challenge target is claimed solved or formalized here, and nothing in this paper
-depends on it. A coarse status map for that project lives in the repository README.
-
-\appendix
 \section{Index of principal declarations}\label{app:index}
 
 Each row links to the declaration at commit \href{\repobase}{\texttt{59f9cc4}}.
 
 \begin{center}
-\small
-\begin{tabular}{@{}p{6.0cm}p{9.0cm}@{}}
+\footnotesize
+\begin{tabular}{@{}p{7.2cm}p{7.8cm}@{}}
 \toprule
-statement & source line (and declaration)\\
+informal statement & linked Lean module\\
 \midrule
-$\sum 1/(b^n-1)$ irrational, all $b\ge2$ & \lloc{CertificateKernel.lean}{7999}\ {\footnotesize\idn{irrational_erdosSum_full_support}}\\
-Erd\H{o}s--Borwein $E$ irrational & \lloc{CertificateKernel.lean}{8006}\ {\footnotesize\idn{irrational_erdosBorwein_series}}\\
-factorial support & \lloc{CertificateKernel.lean}{5706}\ {\footnotesize\idn{irrational_erdosSum_factorial_support}}\\
-power-of-two support & \lloc{CertificateKernel.lean}{5730}\ {\footnotesize\idn{irrational_erdosSum_two_pow_support}}\\
-pairwise-coprime supports & \lloc{CertificateKernel.lean}{10447}\ {\footnotesize\idn{irrational_erdosSupportSeries_pairwise_coprime}}\\
-$L(\mu)=1/2$ & \lloc{MersenneLambertLadder.lean}{527}\ {\footnotesize\idn{tsum_moebius_div_two_pow_sub_one_eq_half}}\\
-$L(\ph)=2$ & \lloc{MersenneLambertLadder.lean}{515}\ {\footnotesize\idn{tsum_totient_div_two_pow_sub_one_eq_two}}\\
-positive lift $L(A)=S$ & \lloc{CertificateKernel.lean}{18116}\ {\footnotesize\idn{tsum_primWeight_div_two_pow_sub_one_eq_totient_series}}\\
-M\"obius-square lens & \lloc{CertificateKernel.lean}{18125}\ {\footnotesize\idn{totient_series_eq_half_add_moebius_mersenne_square}}\\
-$S=\tfrac12+\Pr(\gcd=1)$ & \lloc{CertificateKernel.lean}{18228}\ {\footnotesize\idn{totient_series_eq_half_add_visible_coprime_pairs}}\\
-$S\ne p/q$ for $q\le7.96\times10^{34}$ & \lloc{CertificateKernel.lean}{18055}\ {\footnotesize\idn{tsum_totient_div_pow_two_ne_ratCast_of_den_le_79639646646701375323355774875831053}}\\
-tail-period reduction & \lloc{TotientTailPeriodKiller.lean}{386}\ {\footnotesize\idn{irrational_totient_series_of_certificate_supply}}\\
-diagonal reduction & \lloc{LcmDiagonalReduction.lean}{92}\ {\footnotesize\idn{irrational_totient_series_of_lcm_diagonal_certificate_supply}}\\
-cone flatness from rationality & \lloc{LcmConeFlatness.lean}{90}\ {\footnotesize\idn{rational_totient_series_forces_lcm_cone_flatness}}\\
-certificate completeness & \lloc{LcmConeFlatness.lean}{316}\ {\footnotesize\idn{exists_certifiedKill_iff_tail_diff_notMem_int}}\\
-joint cone refuter & \lloc{LcmConeNonflat.lean}{126}\ {\footnotesize\idn{exists_nonintegral_pair_of_coneNonflatCert}}\\
-non-empty certified-kill segment & \lloc{TotientTailPeriodKiller.lean}{396}\ {\footnotesize\idn{certifiedKill_all_small}}\\
-tail-orbit rationality criterion & \lloc{GenericTailOrbitRigidity.lean}{260}\ {\footnotesize\idn{binaryCoeffSeries_rational_iff_exists_temperedBinaryOrbit}}\\
-Boolean carry certificate $\Leftrightarrow$ support fraction & \lloc{BooleanMobiusCarry.lean}{734}\ {\footnotesize\idn{exists_normalized_support_fraction_iff_exists_booleanMobiusCarry}}\\
-one-wrap classification & \lloc{RationalSupportCarrySkeleton.lean}{454}\ {\footnotesize\idn{one_doublingWrap_classification}}\\
-order-wrap mass bound & \lloc{RationalSupportCarrySkeleton.lean}{1543}\ {\footnotesize\idn{one_div_oddOrder_le_reciprocalMass_of_support_fraction}}\\
-unbounded carry states & \lloc{RationalSupportCarrySkeleton.lean}{2251}\ {\footnotesize\idn{exists_unbounded_shifted_odd_tail_nat_state_of_support_fraction}}\\
-greedy membership criterion & \lloc{GreedyAchievementSet.lean}{738}\ {\footnotesize\idn{mem_mersenneAchievementSet_iff_greedy_survival}}\\
+$\sum 1/(b^n-1)$ irrational, all $b\ge2$ & \lrefx{CertificateKernel.lean}{7999}{irrational_erdosSum_full_support}\ (\texttt{CertificateKernel})\\
+Erd\H{o}s--Borwein $E$ irrational & \lrefx{CertificateKernel.lean}{8006}{irrational_erdosBorwein_series}\ (\texttt{CertificateKernel})\\
+factorial support & \lrefx{CertificateKernel.lean}{5706}{irrational_erdosSum_factorial_support}\ (\texttt{CertificateKernel})\\
+power-of-two support & \lrefx{CertificateKernel.lean}{5730}{irrational_erdosSum_two_pow_support}\ (\texttt{CertificateKernel})\\
+pairwise-coprime supports & \lrefx{CertificateKernel.lean}{10447}{irrational_erdosSupportSeries_pairwise_coprime}\ (\texttt{CertificateKernel})\\
+$L(\mu)=1/2$ & \lrefx{MersenneLambertLadder.lean}{527}{tsum_moebius_div_two_pow_sub_one_eq_half}\ (\texttt{MersenneLambertLadder})\\
+$L(\ph)=2$ & \lrefx{MersenneLambertLadder.lean}{515}{tsum_totient_div_two_pow_sub_one_eq_two}\ (\texttt{MersenneLambertLadder})\\
+positive lift $L(A)=S$ & \lrefx{CertificateKernel.lean}{18116}{tsum_primWeight_div_two_pow_sub_one_eq_totient_series}\ (\texttt{CertificateKernel})\\
+M\"obius-square lens & \lrefx{CertificateKernel.lean}{18125}{totient_series_eq_half_add_moebius_mersenne_square}\ (\texttt{CertificateKernel})\\
+$S=\tfrac12+\Pr(\gcd=1)$ & \lrefx{CertificateKernel.lean}{18228}{totient_series_eq_half_add_visible_coprime_pairs}\ (\texttt{CertificateKernel})\\
+$S\ne p/q$ for $q\le\Qzero$ & \lrefx{CertificateKernel.lean}{18055}{tsum_totient_div_pow_two_ne_ratCast_of_den_le_79639646646701375323355774875831053}\ (\texttt{CertificateKernel})\\
+tail-period reduction & \lrefx{TotientTailPeriodKiller.lean}{386}{irrational_totient_series_of_certificate_supply}\ (\texttt{TotientTailPeriodKiller})\\
+diagonal reduction & \lrefx{LcmDiagonalReduction.lean}{92}{irrational_totient_series_of_lcm_diagonal_certificate_supply}\ (\texttt{LcmDiagonalReduction})\\
+cone flatness from rationality & \lrefx{LcmConeFlatness.lean}{90}{rational_totient_series_forces_lcm_cone_flatness}\ (\texttt{LcmConeFlatness})\\
+certificate completeness & \lrefx{LcmConeFlatness.lean}{316}{exists_certifiedKill_iff_tail_diff_notMem_int}\ (\texttt{LcmConeFlatness})\\
+joint cone refuter & \lrefx{LcmConeNonflat.lean}{126}{exists_nonintegral_pair_of_coneNonflatCert}\ (\texttt{LcmConeNonflat})\\
+verified finite instances & \lrefx{TotientTailPeriodKiller.lean}{396}{certifiedKill_all_small}\ (\texttt{TotientTailPeriodKiller})\\
+tail-orbit rationality criterion & \lrefx{GenericTailOrbitRigidity.lean}{260}{binaryCoeffSeries_rational_iff_exists_temperedBinaryOrbit}\ (\texttt{GenericTailOrbitRigidity})\\
+Boolean carry certificate $\Leftrightarrow$ support fraction & \lrefx{BooleanMobiusCarry.lean}{734}{exists_normalized_support_fraction_iff_exists_booleanMobiusCarry}\ (\texttt{BooleanMobiusCarry})\\
+one-wrap classification & \lrefx{RationalSupportCarrySkeleton.lean}{454}{one_doublingWrap_classification}\ (\texttt{RationalSupportCarrySkeleton})\\
+order-wrap mass bound & \lrefx{RationalSupportCarrySkeleton.lean}{1543}{one_div_oddOrder_le_reciprocalMass_of_support_fraction}\ (\texttt{RationalSupportCarrySkeleton})\\
+unbounded carry states & \lrefx{RationalSupportCarrySkeleton.lean}{2251}{exists_unbounded_shifted_odd_tail_nat_state_of_support_fraction}\ (\texttt{RationalSupportCarrySkeleton})\\
+greedy membership criterion & \lrefx{GreedyAchievementSet.lean}{738}{mem_mersenneAchievementSet_iff_greedy_survival}\ (\texttt{GreedyAchievementSet})\\
 \bottomrule
 \end{tabular}
 \end{center}
 
-\begin{thebibliography}{11}
+\clearpage
+\begin{thebibliography}{6}
+\small
 \bibitem{erdos1948} P.~Erd\H{o}s, \emph{On arithmetical properties of Lambert series},
   J. Indian Math. Soc. (N.S.) \textbf{12} (1948), 63--66.
 \bibitem{erdos1968} P.~Erd\H{o}s, \emph{On the irrationality of certain series},
   Math. Student \textbf{36} (1968), 222--226.
-\bibitem{borwein1992} P.~Borwein, \emph{On the irrationality of certain series},
-  Math. Proc. Cambridge Philos. Soc. \textbf{112} (1992), no.~1, 141--146.
 \bibitem{nesterenko} Yu.~V. Nesterenko, \emph{Modular functions and transcendence questions},
   Mat. Sb. \textbf{187} (1996), no.~9, 65--96; English transl., Sb. Math. \textbf{187} (1996), no.~9, 1319--1348.
-\bibitem{pva} K.~Postelmans and W.~Van~Assche, \emph{Irrationality of $\zeta_q(1)$ and $\zeta_q(2)$},
-  J. Number Theory \textbf{126} (2007), no.~1, 119--154.
 \bibitem{lucatachiya} F.~Luca and Y.~Tachiya, \emph{Irrationality of Lambert series associated
   with a periodic sequence}, Int. J. Number Theory \textbf{10} (2014), no.~3, 623--636.
 \bibitem{kovactao} V.~Kova\v{c} and T.~Tao, \emph{On several irrationality problems for
   Ahmes series}, arXiv:2406.17593 (2024).
 \bibitem{wanggrauribas} H.~Wang and J.~M. Grau Ribas, \emph{Positive dyadic density for
   rational weighted binary expansions}, arXiv:2606.24972 (2026).
-\bibitem{taoterv} T.~Tao and J.~Ter\"av\"ainen, \emph{Quantitative correlations and some
-  problems on prime factors of consecutive integers}, arXiv:2512.01739 (2025);
-  settles Erd\H{o}s~\#69, the irrationality of $\sum_{n}\omega(n)/2^n=\sum_{p}1/(2^p-1)$.
-\bibitem{erdosproblems} T.~Bloom (ed.), \emph{Erd\H{o}s Problems},
-  \href{https://www.erdosproblems.com}{\texttt{erdosproblems.com}}, accessed July 2026.
-\bibitem{ramanujan} The Ramanujan Machine, \emph{The Ramanujan Challenge} (2026),
-  \href{https://www.ramanujanmachine.com/ramanujan-challenge/}{\texttt{ramanujanmachine.com/ramanujan-challenge}}.
 \end{thebibliography}
-
-\vfill
-\noindent{\footnotesize Repository:
-\href{https://github.com/wcook04/plectis-lean-erdos249-257}{\texttt{github.com/wcook04/plectis-lean-erdos249-257}}.
-Licensed under Apache-2.0. This document is expository; the proofs are the
-Lean sources it links to.}
 
 \end{document}
