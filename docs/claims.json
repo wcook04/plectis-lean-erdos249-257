@@ -1,6 +1,96 @@
 {
-  "schema": "erdos249257-claims/1",
-  "comment": "Single owner of release identity and mathematical claim status. Every human surface (README, paper, SCOPE.md, CITATION.cff) is a projection of this file; scripts/check_release.py fails the build when a projection drifts.",
+  "schema": "erdos249257-claims/2",
+  "comment": "Single owner of release identity, mathematical claim status, and the machine-readable paper map. Human surfaces (README, paper, SCOPE.md, CITATION.cff) project from this file; Lean remains proof authority, and scripts/check_release.py fails the build when a checked projection or graph edge drifts.",
+  "machine_readable_paper": {
+    "schema": "erdos249257-machine-readable-paper/1",
+    "purpose": "Give humans and agent harnesses one bounded map from the open problems and paper argument to claim status, Lean declarations, module dependencies, validation, and explicit non-claims.",
+    "authority_order": [
+      "Lean source checked by the pinned Lean kernel",
+      "docs/claims.json for release identity, status taxonomy, coordinates, and navigation relationships",
+      "the authored exposition for mathematical explanation",
+      "README.md, SCOPE.md, docs/SOURCE_MAP.md, and docs/WAVE_INDEX.md as reader projections"
+    ],
+    "projection_boundary": "The module graph records exact internal Lean imports. The argument graph is an authored navigation map, not an additional proof object and not a novelty or priority claim.",
+    "entrypoints": [
+      {
+        "id": "instant_orientation",
+        "intent": "Understand what this repository proves, reduces, cites, and leaves open.",
+        "read": ["docs/claims.json", "SCOPE.md", "README.md"]
+      },
+      {
+        "id": "follow_one_claim",
+        "intent": "Trace one mathematical claim from exposition to checked source.",
+        "read": ["docs/claims.json", "paper/erdos249-257-exposition.tex", "Erdos249257.lean"]
+      },
+      {
+        "id": "understand_argument_topology",
+        "intent": "See how the #249 reduction, #257 families, carry trunk, and open targets relate.",
+        "read": ["docs/claims.json", "docs/SOURCE_MAP.md", "docs/WAVE_INDEX.md"]
+      },
+      {
+        "id": "change_or_verify_release",
+        "intent": "Modify a formal or editorial surface without allowing status or source coordinates to drift.",
+        "read": ["AGENTS.md", "scripts/check_release.py", "CONTRIBUTING.md"]
+      }
+    ],
+    "paper": {
+      "source": "paper/erdos249-257-exposition.tex",
+      "rendered": "erdos249-257-exposition.pdf",
+      "principal_declaration_index_label": "app:index",
+      "claim_anchor_field": "paper_label"
+    },
+    "module_graph": {
+      "root": "Erdos249257.lean",
+      "nodes": [
+        {"id": "Erdos249257.GapFareyBound", "path": "Erdos249257/GapFareyBound.lean", "role": "Farey-gap denominator exclusions", "imports": []},
+        {"id": "Erdos249257.MersenneLambertLadder", "path": "Erdos249257/MersenneLambertLadder.lean", "role": "Mersenne-Lambert identities", "imports": []},
+        {"id": "Erdos249257.GeometricCoprimality", "path": "Erdos249257/GeometricCoprimality.lean", "role": "Coprime-pair interpretation of the totient series", "imports": ["Erdos249257.MersenneLambertLadder"]},
+        {"id": "Erdos249257.GcdMomentCalculus", "path": "Erdos249257/GcdMomentCalculus.lean", "role": "GCD moment transform", "imports": ["Erdos249257.GeometricCoprimality"]},
+        {"id": "Erdos249257.TotientTailPeriodKiller", "path": "Erdos249257/TotientTailPeriodKiller.lean", "role": "Tail-period certificate reduction", "imports": []},
+        {"id": "Erdos249257.CarrySurvivorExtinction", "path": "Erdos249257/CarrySurvivorExtinction.lean", "role": "Multiple-period collapse", "imports": ["Erdos249257.TotientTailPeriodKiller"]},
+        {"id": "Erdos249257.LcmDiagonalReduction", "path": "Erdos249257/LcmDiagonalReduction.lean", "role": "One-parameter lcm-diagonal reduction", "imports": ["Erdos249257.CarrySurvivorExtinction"]},
+        {"id": "Erdos249257.LcmConeFlatness", "path": "Erdos249257/LcmConeFlatness.lean", "role": "Cone-flatness and certificate completeness", "imports": ["Erdos249257.LcmDiagonalReduction"]},
+        {"id": "Erdos249257.LcmConeNonflat", "path": "Erdos249257/LcmConeNonflat.lean", "role": "Joint cone non-flatness refuter", "imports": ["Erdos249257.LcmConeFlatness"]},
+        {"id": "Erdos249257.CertificateKernel", "path": "Erdos249257/CertificateKernel.lean", "role": "Assembled theorem kernel and headline interfaces", "imports": ["Erdos249257.GapFareyBound", "Erdos249257.MersenneLambertLadder", "Erdos249257.GeometricCoprimality", "Erdos249257.GcdMomentCalculus", "Erdos249257.TotientTailPeriodKiller", "Erdos249257.CarrySurvivorExtinction", "Erdos249257.LcmDiagonalReduction", "Erdos249257.LcmConeFlatness", "Erdos249257.LcmConeNonflat"]},
+        {"id": "Erdos249257.GeneratedCertificates.b10_L6_A11", "path": "Erdos249257/GeneratedCertificates/b10_L6_A11.lean", "role": "Generated finite certificate shard", "imports": ["Erdos249257.CertificateKernel"]},
+        {"id": "Erdos249257.GeneratedCertificates.b2_L105_A75047", "path": "Erdos249257/GeneratedCertificates/b2_L105_A75047.lean", "role": "Generated finite certificate shard", "imports": ["Erdos249257.CertificateKernel"]},
+        {"id": "Erdos249257.GeneratedCertificates.b2_L210_A21371", "path": "Erdos249257/GeneratedCertificates/b2_L210_A21371.lean", "role": "Generated finite certificate shard", "imports": ["Erdos249257.CertificateKernel"]},
+        {"id": "Erdos249257.GeneratedCertificates", "path": "Erdos249257/GeneratedCertificates.lean", "role": "Generated certificate aggregation", "imports": ["Erdos249257.CertificateKernel", "Erdos249257.GeneratedCertificates.b10_L6_A11", "Erdos249257.GeneratedCertificates.b2_L210_A21371", "Erdos249257.GeneratedCertificates.b2_L105_A75047"]},
+        {"id": "Erdos249257.GenericTailOrbitRigidity", "path": "Erdos249257/GenericTailOrbitRigidity.lean", "role": "Tempered tail-orbit rationality criterion", "imports": ["Erdos249257.CertificateKernel"]},
+        {"id": "Erdos249257.GreedyAchievementSet", "path": "Erdos249257/GreedyAchievementSet.lean", "role": "Greedy geometry and finite death certificates", "imports": ["Erdos249257.CertificateKernel"]},
+        {"id": "Erdos249257.BooleanMobiusCarry", "path": "Erdos249257/BooleanMobiusCarry.lean", "role": "Boolean-Mobius carry coordinates", "imports": ["Erdos249257.GenericTailOrbitRigidity"]},
+        {"id": "Erdos249257.RationalSupportCarrySkeleton", "path": "Erdos249257/RationalSupportCarrySkeleton.lean", "role": "Residue wraps, reciprocal mass, and unbounded carries", "imports": ["Erdos249257.BooleanMobiusCarry"]},
+        {"id": "Erdos249257.SublogDivisorCoverage", "path": "Erdos249257/SublogDivisorCoverage.lean", "role": "Sublogarithmic divisor-coverage constraint", "imports": ["Erdos249257.RationalSupportCarrySkeleton"]}
+      ]
+    },
+    "argument_graph": {
+      "edge_semantics": {
+        "corollary_of": "The source claim is presented as a corollary or specialization of the target claim.",
+        "builds_on": "The source claim's argument layer builds on the target claim or criterion.",
+        "makes_exact": "The source claim records why a reduction or certificate formulation loses no information.",
+        "instantiates": "The source claim supplies checked finite instances of the target reduction.",
+        "advances_open_target": "The source claim is honest partial progress toward the open target and does not settle it.",
+        "positions": "The source claim is cited or used to position another claim; it is not formal proof authority here."
+      },
+      "edges": [
+        {"from": "eb_constant", "relation": "corollary_of", "to": "eb_full_support"},
+        {"from": "support_families", "relation": "advances_open_target", "to": "universal_257"},
+        {"from": "denominator_exclusion", "relation": "advances_open_target", "to": "erdos_249"},
+        {"from": "certificate_reduction", "relation": "advances_open_target", "to": "erdos_249"},
+        {"from": "certificate_completeness", "relation": "makes_exact", "to": "certificate_reduction"},
+        {"from": "certified_kill_instances", "relation": "instantiates", "to": "certificate_reduction"},
+        {"from": "boolean_mobius_carry", "relation": "builds_on", "to": "tail_orbit_rigidity"},
+        {"from": "reciprocal_mass_bound", "relation": "builds_on", "to": "boolean_mobius_carry"},
+        {"from": "unbounded_carry_states", "relation": "builds_on", "to": "boolean_mobius_carry"},
+        {"from": "sublog_zero_windows", "relation": "builds_on", "to": "unbounded_carry_states"},
+        {"from": "reciprocal_mass_bound", "relation": "advances_open_target", "to": "universal_257"},
+        {"from": "sublog_zero_windows", "relation": "advances_open_target", "to": "universal_257"},
+        {"from": "greedy_achievement_geometry", "relation": "advances_open_target", "to": "universal_257"},
+        {"from": "sigma_transcendence", "relation": "positions", "to": "mersenne_lambert_ladder"},
+        {"from": "prime_support_irrationality", "relation": "positions", "to": "universal_257"}
+      ]
+    }
+  },
   "release": {
     "version": "0.4.0",
     "tag": "v0.4.0",

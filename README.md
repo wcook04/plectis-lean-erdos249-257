@@ -32,6 +32,7 @@ The conditional reduction is exact: producing the unbounded certificate supply i
 
 ## Start here
 
+- **Machine-readable paper and agent map** — [`docs/claims.json`](docs/claims.json): the single checked map of claim status, paper anchors, Lean declarations, module dependencies, argument relationships, and explicit non-claims. Agent harnesses should begin with [`AGENTS.md`](AGENTS.md).
 - **The paper** — [`erdos249-257-exposition.pdf`](erdos249-257-exposition.pdf): the full argument in ordinary notation, no Lean required. Every formal statement links to the exact declaration at the pinned release. Source and build in [`paper/`](paper/).
 - **Module reference and chronology** — [`docs/WAVE_INDEX.md`](docs/WAVE_INDEX.md): what each module establishes, in development order.
 - **Declaration routes** — [`docs/SOURCE_MAP.md`](docs/SOURCE_MAP.md): intention-based routes to the principal declarations.
