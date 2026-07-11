@@ -251,7 +251,7 @@
       "group": "maintaining",
       "statement": "Distinguish proof-body, proposition, assumption, representation, finite-range, claim-status, exposition, and projection changes before deciding what must be updated.",
       "evidence_classes": ["repository_check", "human_mathematical_review"],
-      "applies_to": ["change_type:proof_body_changed", "change_type:lean_proposition_changed", "change_type:assumptions_changed", "change_type:representation_changed", "change_type:finite_certificate_range_changed", "change_type:claim_status_changed", "change_type:authored_exposition_changed", "change_type:projection_changed"],
+      "applies_to": ["change_type:proof_body_changed", "change_type:lean_proposition_changed", "change_type:assumptions_changed", "change_type:representation_changed", "change_type:finite_certificate_range_changed", "change_type:claim_support_linkage_changed", "change_type:claim_status_changed", "change_type:authored_exposition_changed", "change_type:projection_changed"],
       "checked_by": ["release.methodology_schema_and_references", "release.methodology_routes_exist"],
       "scope_limit": "The classification routes review; it does not decide the review outcome."
     },
@@ -380,7 +380,7 @@
       "title": "Finite verification that stays finite",
       "claim_ids": ["certified_kill_instances"],
       "remaining_open_ids": ["remaining_open.unbounded_certificate_supply"],
-      "narrative": "certifiedKill_all_small and certifiedKill_periodLcm_diagonal_upto_six are kernel-checked with decide at fixed bounds. They show the reduction is not vacuous and record exactly which bounded region has been checked. The claim keeps the status verified finite instance and states its bounded domain. Raising the checked bound changes the stated bound; it does not change the quantifier of any public claim."
+      "narrative": "certifiedKill_all_small and the lcm-diagonal deposits through t = 8 (certifiedKill_periodLcm_diagonal_upto_six and the t = 7 and t = 8 endpoints) are kernel-checked with decide at fixed bounds. Each names a specific bounded region the checker has cleared; together with the generated certificate shards they show the reduction is not vacuous. The claim keeps the status verified finite instance and states its bounded domain. Raising the checked bound changes the stated bound; it does not change the quantifier of any public claim."
     },
     {
       "id": "example.necessary_structure_without_contradiction",
@@ -411,6 +411,7 @@
     "assumptions_changed",
     "representation_changed",
     "finite_certificate_range_changed",
+    "claim_support_linkage_changed",
     "open_problem_relation_changed",
     "claim_status_changed",
     "authored_exposition_changed",
@@ -459,6 +460,15 @@
       "review_triggers": ["claim_text_changed", "claim_status_changed", "intended_meaning_changed", "paper_statement_changed"],
       "forbidden_effects": ["change_open_target_status", "infer_unbounded_result"],
       "public_consequence": "Keep the finite status; update only the stated bound."
+    },
+    {
+      "id": "claim_support_linkage_changed",
+      "summary": "A claim's declaration coordinates or links are corrected; the claim is otherwise unchanged",
+      "minimum_evidence": ["lean_check", "repository_check"],
+      "human_review": "on_trigger",
+      "review_triggers": ["claim_text_changed", "claim_status_changed", "intended_meaning_changed"],
+      "forbidden_effects": ["strengthen_public_claim_wording", "change_open_target_status"],
+      "public_consequence": "Link or correct the supporting declarations of an unchanged claim, then regenerate dependent projections. The mathematical claim does not change; a Lean check confirms the linked declaration exists and elaborates."
     },
     {
       "id": "open_problem_relation_changed",

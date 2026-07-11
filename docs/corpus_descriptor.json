@@ -30,16 +30,16 @@
       },
       "claims_document": {
         "path": "docs/claims.json",
-        "content_digest": "sha256:b8137ce4bf69b3fb5c1aed1523dac17df13d31c048f4fea7356884db5d05e9aa"
+        "content_digest": "sha256:f3af51bbfd40c546dc7d6ca1f8557bc00ff9635ef38c3069a5e02b725f9dba5a"
       },
       "declaration_atlas": {
         "path": "docs/declaration_atlas.json",
-        "content_digest": "sha256:da2e33a8728cb490fe382776cc94a62a10c0b967c3a4f2ae96e023dbde5d6ef2",
+        "content_digest": "sha256:cdc1348a5d6e9a61e00038ab4bfa471110567a232e227fd9c7500265a69fa5a2",
         "source_input_fingerprint": "sha256:6d86161aedbd9cbb09fd9a664f6ad24f6b8dd6b9cbeed53092da92d7a1fb95ee"
       },
       "methodology_contract": {
         "path": "docs/methodology.json",
-        "content_digest": "sha256:30927988518e25bd89bcc60e4e6b6fe0017c35a84b9041b337e516c67483c704"
+        "content_digest": "sha256:6f209a96135bb6c1675192074ebd80c1c4a56285c30de3891e3803f5aa02fa84"
       }
     }
   },
@@ -89,7 +89,7 @@
     "declaration_count": 2538,
     "theorem_like_count": 2259,
     "generated_certificate_declaration_count": 1201,
-    "principal_claim_link_count": 21,
+    "principal_claim_link_count": 23,
     "kind_counts": {
       "def": 272,
       "inductive": 1,
@@ -308,6 +308,22 @@
             "kind": "theorem",
             "signature": "theorem certifiedKill_periodLcm_diagonal_upto_six : ∀ t ∈ Finset.Icc 1 6, certifiedKill (periodLcm t) (periodLcm t) (diagonalKillDepth t)",
             "docstring": "**Diagonal deposit.** The wave-23 predicate `P t` holds for every `1 ≤ t ≤ 6`: the endpoint certificate fires at `(H_t, H_t)` with the tabulated depth. Totient arguments stay ≤ 130 — a light kernel `decide`."
+          },
+          {
+            "name": "certifiedKill_periodLcm_diagonal_at_seven",
+            "module": "Erdos249257/LcmDiagonalReduction.lean",
+            "line": 222,
+            "kind": "theorem",
+            "signature": "theorem certifiedKill_periodLcm_diagonal_at_seven : certifiedKill (periodLcm 7) (periodLcm 7) 14",
+            "docstring": "`P 7`: the diagonal certificate at `lcm(1..7) = 420`, depth `14`."
+          },
+          {
+            "name": "certifiedKill_periodLcm_diagonal_at_eight",
+            "module": "Erdos249257/LcmDiagonalReduction.lean",
+            "line": 226,
+            "kind": "theorem",
+            "signature": "theorem certifiedKill_periodLcm_diagonal_at_eight : certifiedKill (periodLcm 8) (periodLcm 8) 15",
+            "docstring": "`P 8`: the diagonal certificate at `lcm(1..8) = 840`, depth `15`."
           }
         ],
         "remaining_open_proposition_ids": [
@@ -938,6 +954,25 @@
           "public_consequence": "Keep the finite status; update only the stated bound."
         },
         {
+          "id": "claim_support_linkage_changed",
+          "summary": "A claim's declaration coordinates or links are corrected; the claim is otherwise unchanged",
+          "minimum_evidence": [
+            "lean_check",
+            "repository_check"
+          ],
+          "human_review": "on_trigger",
+          "review_triggers": [
+            "claim_text_changed",
+            "claim_status_changed",
+            "intended_meaning_changed"
+          ],
+          "forbidden_effects": [
+            "strengthen_public_claim_wording",
+            "change_open_target_status"
+          ],
+          "public_consequence": "Link or correct the supporting declarations of an unchanged claim, then regenerate dependent projections. The mathematical claim does not change; a Lean check confirms the linked declaration exists and elaborates."
+        },
+        {
           "id": "open_problem_relation_changed",
           "summary": "An advances-open-target relation is added or changed",
           "minimum_evidence": [
@@ -1058,6 +1093,7 @@
         "conditional_reduction_without_remaining_open_proposition",
         "finite_range_forbidden_effects_removed",
         "finite_result_changed_to_open_status",
+        "linkage_correction_forbidden_effects_removed",
         "local_instance_reference_unresolvable",
         "methodology_rule_without_implemented_guard",
         "open_target_edge_without_stated_effect",
@@ -1207,6 +1243,9 @@
           "method_axiom.finite_results_remain_finite_without_uniform_theorem",
           "principle.classify_change_before_updating_public_claims",
           "anti_principle.do_not_generalize_finite_result_without_theorem"
+        ],
+        "claim_support_linkage_changed": [
+          "principle.classify_change_before_updating_public_claims"
         ],
         "open_problem_relation_changed": [
           "method_axiom.open_problem_progress_names_changed_open_proposition",
@@ -1361,6 +1400,24 @@
         "docstring": "**Diagonal deposit.** The wave-23 predicate `P t` holds for every `1 ≤ t ≤ 6`: the endpoint certificate fires at `(H_t, H_t)` with the tabulated depth. Totient arguments stay ≤ 130 — a light kernel `decide`."
       },
       {
+        "claim_id": "certified_kill_instances",
+        "name": "certifiedKill_periodLcm_diagonal_at_seven",
+        "module": "Erdos249257/LcmDiagonalReduction.lean",
+        "line": 222,
+        "kind": "theorem",
+        "signature": "theorem certifiedKill_periodLcm_diagonal_at_seven : certifiedKill (periodLcm 7) (periodLcm 7) 14",
+        "docstring": "`P 7`: the diagonal certificate at `lcm(1..7) = 420`, depth `14`."
+      },
+      {
+        "claim_id": "certified_kill_instances",
+        "name": "certifiedKill_periodLcm_diagonal_at_eight",
+        "module": "Erdos249257/LcmDiagonalReduction.lean",
+        "line": 226,
+        "kind": "theorem",
+        "signature": "theorem certifiedKill_periodLcm_diagonal_at_eight : certifiedKill (periodLcm 8) (periodLcm 8) 15",
+        "docstring": "`P 8`: the diagonal certificate at `lcm(1..8) = 840`, depth `15`."
+      },
+      {
         "claim_id": "tail_orbit_rigidity",
         "name": "binaryCoeffSeries_rational_iff_exists_temperedBinaryOrbit",
         "module": "Erdos249257/GenericTailOrbitRigidity.lean",
@@ -1428,14 +1485,14 @@
   "expansion": {
     "exhaustive_declaration_atlas": {
       "path": "docs/declaration_atlas.json",
-      "expected_content_digest": "sha256:da2e33a8728cb490fe382776cc94a62a10c0b967c3a4f2ae96e023dbde5d6ef2",
+      "expected_content_digest": "sha256:cdc1348a5d6e9a61e00038ab4bfa471110567a232e227fd9c7500265a69fa5a2",
       "expected_source_input_fingerprint": "sha256:6d86161aedbd9cbb09fd9a664f6ad24f6b8dd6b9cbeed53092da92d7a1fb95ee",
       "availability": "optional_attached_corpus",
       "check": "python3 scripts/build_declaration_atlas.py --check"
     },
     "methodology_contract": {
       "path": "docs/methodology.json",
-      "expected_content_digest": "sha256:30927988518e25bd89bcc60e4e6b6fe0017c35a84b9041b337e516c67483c704",
+      "expected_content_digest": "sha256:6f209a96135bb6c1675192074ebd80c1c4a56285c30de3891e3803f5aa02fa84",
       "human_projection": "METHODOLOGY.md",
       "check": "python3 scripts/build_methodology.py --check"
     }

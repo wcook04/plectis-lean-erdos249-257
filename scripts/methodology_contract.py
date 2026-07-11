@@ -56,6 +56,7 @@ SEMANTIC_REVIEW_CHANGE_CLASSES = {
 REQUIRED_FORBIDDEN_EFFECTS = {
     "proof_body_changed": {"strengthen_public_claim_wording"},
     "finite_certificate_range_changed": {"change_open_target_status", "infer_unbounded_result"},
+    "claim_support_linkage_changed": {"strengthen_public_claim_wording", "change_open_target_status"},
 }
 
 MUTATION_FIXTURE_IDS = {
@@ -65,6 +66,7 @@ MUTATION_FIXTURE_IDS = {
     "methodology_rule_without_implemented_guard",
     "local_instance_reference_unresolvable",
     "finite_range_forbidden_effects_removed",
+    "linkage_correction_forbidden_effects_removed",
     "change_class_without_minimum_evidence",
     "semantic_change_review_downgraded",
 }
@@ -525,6 +527,13 @@ def mutation_fixture_errors(claims: dict[str, Any], methodology: dict[str, Any])
     )
     finite_class["forbidden_effects"] = []
     fixtures["finite_range_forbidden_effects_removed"] = (claims, forbidden_dropped)
+
+    linkage_dropped = deepcopy(methodology)
+    linkage_class = next(
+        row for row in linkage_dropped["change_classes"] if row["id"] == "claim_support_linkage_changed"
+    )
+    linkage_class["forbidden_effects"] = []
+    fixtures["linkage_correction_forbidden_effects_removed"] = (claims, linkage_dropped)
 
     evidence_dropped = deepcopy(methodology)
     body_class = next(

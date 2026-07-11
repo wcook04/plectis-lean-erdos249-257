@@ -128,7 +128,7 @@ Remaining open: `remaining_open.unbounded_certificate_supply`.
 
 ### Finite verification that stays finite
 
-certifiedKill_all_small and certifiedKill_periodLcm_diagonal_upto_six are kernel-checked with decide at fixed bounds. They show the reduction is not vacuous and record exactly which bounded region has been checked. The claim keeps the status verified finite instance and states its bounded domain. Raising the checked bound changes the stated bound; it does not change the quantifier of any public claim.
+certifiedKill_all_small and the lcm-diagonal deposits through t = 8 (certifiedKill_periodLcm_diagonal_upto_six and the t = 7 and t = 8 endpoints) are kernel-checked with decide at fixed bounds. Each names a specific bounded region the checker has cleared; together with the generated certificate shards they show the reduction is not vacuous. The claim keeps the status verified finite instance and states its bounded domain. Raising the checked bound changes the stated bound; it does not change the quantifier of any public claim.
 
 Claims: Initial certified-kill segment and generated certificates (`certified_kill_instances`).
 
@@ -153,6 +153,7 @@ Classify the change first. Each class states its minimum evidence, whether human
 | The transitive assumptions of a declaration change | Lean check, Repository check, Human mathematical review | required | Reassess the proof posture even when the proposition is unchanged. |
 | A claim moves between coordinates, encodings, or models | Lean check, Human mathematical review | required | Record the transport theorem, its direction, and anything not preserved. |
 | A checked bounded range or certificate family is extended | Lean check, Repository check | only when claim text changed or claim status changed or intended meaning changed or paper statement changed | Keep the finite status; update only the stated bound. |
+| A claim's declaration coordinates or links are corrected; the claim is otherwise unchanged | Lean check, Repository check | only when claim text changed or claim status changed or intended meaning changed | Link or correct the supporting declarations of an unchanged claim, then regenerate dependent projections. The mathematical claim does not change; a Lean check confirms the linked declaration exists and elaborates. |
 | An advances-open-target relation is added or changed | Repository check, Human mathematical review | required | Record the outstanding obligation affected and the exact relation. |
 | The status of a public claim changes | Repository check, Human mathematical review | required | State the theorem or review that licenses the new status. |
 | Authored paper or documentation prose changes mathematically | Repository check, Human mathematical review | required | Prose must not exceed the status recorded in the claim registry. |

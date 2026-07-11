@@ -10,7 +10,7 @@
     "declaration_count": 2538,
     "theorem_like_count": 2259,
     "generated_certificate_declaration_count": 1201,
-    "principal_claim_link_count": 21,
+    "principal_claim_link_count": 23,
     "kind_counts": {
       "def": 272,
       "inductive": 1,
@@ -24119,7 +24119,9 @@
       "line": 222,
       "signature": "theorem certifiedKill_periodLcm_diagonal_at_seven : certifiedKill (periodLcm 7) (periodLcm 7) 14",
       "generated_certificate": false,
-      "claim_ids": [],
+      "claim_ids": [
+        "certified_kill_instances"
+      ],
       "docstring": "`P 7`: the diagonal certificate at `lcm(1..7) = 420`, depth `14`."
     },
     {
@@ -24130,7 +24132,9 @@
       "line": 226,
       "signature": "theorem certifiedKill_periodLcm_diagonal_at_eight : certifiedKill (periodLcm 8) (periodLcm 8) 15",
       "generated_certificate": false,
-      "claim_ids": [],
+      "claim_ids": [
+        "certified_kill_instances"
+      ],
       "docstring": "`P 8`: the diagonal certificate at `lcm(1..8) = 840`, depth `15`."
     },
     {
