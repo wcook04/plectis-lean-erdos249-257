@@ -1,8 +1,10 @@
 # SPDX-FileCopyrightText: 2026 Will Cook
 # SPDX-License-Identifier: Apache-2.0
-name: Lean Convenience
+name: Lean CI
 
-# Developer convenience workflow only. This is not a release gate.
+# Two lanes: the Lean build (developer convenience; the kernel check is the
+# proof authority) and the release-surface checks (claim registry, paper
+# links, citation metadata, scope, licences).
 on:
   push:
   pull_request:
@@ -19,3 +21,19 @@ jobs:
         with:
           use-mathlib-cache: auto
           build: true
+
+  release-surfaces:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Cross-surface release checks
+        run: python3 scripts/check_release.py
+      - name: Install metadata validators
+        run: pip install cffconvert reuse
+      - name: Validate CITATION.cff
+        run: cffconvert --validate
+      - name: REUSE licensing lint
+        run: reuse lint

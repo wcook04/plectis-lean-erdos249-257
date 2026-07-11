@@ -1,15 +1,31 @@
 <!-- SPDX-FileCopyrightText: 2026 Will Cook -->
 <!-- SPDX-License-Identifier: Apache-2.0 -->
 
-# Non-Claims
+# Scope of this release
 
-This snapshot is a public Lean/Lake build artifact. It deliberately refuses the following claims:
+This release does not prove the irrationality of the Erdős #249 totient
+constant, and does not prove the universal form of Erdős #257. Its claims
+apply only to the source and dependencies identified by the release tag and
+commit.
 
-- `not_erdos_257_solution`
-- `not_erdos_249_solution`
-- `not_publication_authority`
-- `not_private_root_equivalence`
-- `not_provider_proof_authority`
-- `not_hidden_proof_body_authority`
+Mathematical proof authority is the published Lean source checked by the
+pinned Lean kernel. Unreleased work, private repositories, generated prose,
+provider output, and hidden proof sketches are not part of the public proof
+artefact. Later work is out of scope until it is included in a new tagged
+release.
 
-A newer private Plectis frontier can exist without changing this snapshot. Promotion requires a fresh export, build receipt, and public tag/hash.
+## Machine identifiers
+
+These identifiers are the machine-readable form of the scope statement above.
+They are declared once in [`docs/claims.json`](docs/claims.json) and
+cross-checked against this file by `scripts/check_release.py`, which fails
+when any public surface drifts from them.
+
+| Identifier | Public meaning |
+|---|---|
+| `not_erdos_249_solution` | The release does not settle Erdős #249 |
+| `not_erdos_257_solution` | The release does not settle the universal Erdős #257 |
+| `not_publication_authority` | The release is not itself a peer-reviewed publication record |
+| `not_private_root_equivalence` | The release is not asserted to be equivalent to any private development |
+| `not_provider_proof_authority` | Provider or model output is not proof authority; the Lean kernel check is |
+| `not_hidden_proof_body_authority` | No unpublished proof sketch or hidden artefact carries proof authority |

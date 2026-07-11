@@ -1,6 +1,21 @@
 version = 1
 
+# Licence map (deliberate, per class):
+#   * Lean sources, scripts, build configuration, generated certificate data,
+#     and repository documentation: Apache-2.0 (the blanket rule below).
+#   * The manuscript layer (paper source, rendered exposition, banner figure):
+#     CC-BY-4.0, the standard licence for open scholarly text.
+# In-file SPDX headers take precedence over these bulk annotations; the
+# stanzas here cover files that cannot carry headers (binaries, JSON, pins).
+# The paper source carries its CC-BY-4.0 header in-file.
+
 [[annotations]]
 path = ["**"]
 SPDX-FileCopyrightText = "2026 Will Cook"
 SPDX-License-Identifier = "Apache-2.0"
+
+[[annotations]]
+path = ["erdos249-257-exposition.pdf", "banner.png"]
+precedence = "override"
+SPDX-FileCopyrightText = "2026 Will Cook"
+SPDX-License-Identifier = "CC-BY-4.0"

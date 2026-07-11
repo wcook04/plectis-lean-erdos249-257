@@ -43,7 +43,7 @@ Supporting ladder modules:
 
 ## Binary-carry trunk (post-wave carry layer)
 
-Builds on `Erdos249257.CertificateKernel`; not part of the wave chronology. Reading order: `GenericTailOrbitRigidity → GreedyAchievementSet → BooleanMobiusCarry → RationalSupportCarrySkeleton`.
+Builds on `Erdos249257.CertificateKernel`; not part of the wave chronology. Reading order: `GenericTailOrbitRigidity → GreedyAchievementSet → BooleanMobiusCarry → RationalSupportCarrySkeleton → SublogDivisorCoverage`.
 
 - `Erdos249257.GenericTailOrbitRigidity`
 - Relevant declarations include: `temperedBinaryOrbit_eq_scaledTail`, `binaryCoeffSeries_rational_iff_exists_temperedBinaryOrbit`, `not_irrational_binaryCoeffSeries_iff_exists_temperedBinaryOrbit`
@@ -56,6 +56,13 @@ Builds on `Erdos249257.CertificateKernel`; not part of the wave chronology. Read
 
 - `Erdos249257.RationalSupportCarrySkeleton`
 - Relevant declarations include: `sum_doublingResidue_eq_mul_wrapCount`, `one_div_oddOrder_le_reciprocalMass_of_support_fraction`, `reciprocalMass_eq_residueMean_add_excessMean`, `dyadic_support_fraction_reciprocalMass_diverges_or_gt_one`, `exists_unbounded_shifted_odd_tail_nat_state_of_support_fraction`
+
+- `Erdos249257.SublogDivisorCoverage`
+- Relevant declarations include: `supportCoeffZeroWindow_length_le_eps_logb_add`
+
+## Claim registry
+
+- `docs/claims.json` — the single owner of release identity, claim statuses, and declaration coordinates (file and line), cross-checked by `scripts/check_release.py`
 
 ## Generated finite certificates
 

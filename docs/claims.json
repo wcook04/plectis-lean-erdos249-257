@@ -1,0 +1,219 @@
+{
+  "schema": "erdos249257-claims/1",
+  "comment": "Single owner of release identity and mathematical claim status. Every human surface (README, paper, NON_CLAIMS.md, CITATION.cff) is a projection of this file; scripts/check_release.py fails the build when a projection drifts.",
+  "release": {
+    "version": "0.4.0",
+    "tag": "v0.4.0",
+    "date": "2026-07-11",
+    "lean_toolchain": "leanprover/lean4:v4.29.1",
+    "repository": "https://github.com/wcook04/plectis-lean-erdos249-257"
+  },
+  "status_taxonomy": {
+    "proved here": "Lean theorem in the pinned public release; no novelty assertion is implied",
+    "formalised here": "Known mathematics represented and checked in Lean",
+    "unconditional progress": "Genuine theorem that does not settle the open problem",
+    "conditional reduction": "Exact implication whose remaining hypothesis is open",
+    "verified finite instance": "Kernel-checked computation at a bounded range",
+    "cited only": "External theorem used for positioning, not formalised",
+    "open": "Not proved by this release"
+  },
+  "claims": [
+    {
+      "id": "eb_full_support",
+      "label": "Full-support Erdős–Borwein irrationality, every integer base b ≥ 2",
+      "status": "formalised here",
+      "statement": "For every integer b ≥ 2, the series ∑_{n≥1} 1/(bⁿ − 1) is irrational (Erdős, 1948).",
+      "paper_label": "res:full",
+      "readme_headline": true,
+      "declarations": [
+        { "name": "irrational_erdosSum_full_support", "module": "Erdos249257/CertificateKernel.lean", "line": 7999 }
+      ]
+    },
+    {
+      "id": "eb_constant",
+      "label": "The Erdős–Borwein constant E is irrational",
+      "status": "formalised here",
+      "statement": "E = ∑_{n≥1} 1/(2ⁿ − 1) is irrational, as the base-2 corollary of the full-support theorem.",
+      "paper_label": "res:full",
+      "readme_headline": true,
+      "declarations": [
+        { "name": "irrational_erdosBorwein_series", "module": "Erdos249257/CertificateKernel.lean", "line": 8006 }
+      ]
+    },
+    {
+      "id": "support_families",
+      "label": "Named infinite-support irrationality families toward #257",
+      "status": "formalised here",
+      "statement": "For every base b ≥ 2, ∑_{n∈A} 1/(bⁿ − 1) is irrational for factorial support, power-of-two support, multiples, pairwise-coprime supports with summable reciprocals, eventually-periodic supports, residue classes, and the odd numbers. Proved families, not the universal statement.",
+      "paper_label": "res:support",
+      "readme_headline": true,
+      "declarations": [
+        { "name": "erdos257_family_factorial_instance", "module": "Erdos249257/CertificateKernel.lean", "line": 5753 },
+        { "name": "erdos257_family_two_pow_instance", "module": "Erdos249257/CertificateKernel.lean", "line": 5761 },
+        { "name": "irrational_erdosSupportSeries_pairwise_coprime", "module": "Erdos249257/CertificateKernel.lean", "line": 10447 }
+      ]
+    },
+    {
+      "id": "mersenne_lambert_ladder",
+      "label": "The Mersenne–Lambert ladder identities",
+      "status": "formalised here",
+      "statement": "L(μ) = 1/2, L(φ) = 2, L(φ*μ) = S, and the Möbius-square lens S = 1/2 + ∑ μ(d)/(2^d − 1)², placing the open constant one convolution from the machine-checked irrational E.",
+      "paper_label": "res:lens",
+      "readme_headline": false,
+      "declarations": [
+        { "name": "tsum_totient_div_two_pow_sub_one_eq_two", "module": "Erdos249257/CertificateKernel.lean", "line": 18100 },
+        { "name": "totient_series_eq_half_add_moebius_mersenne_square", "module": "Erdos249257/CertificateKernel.lean", "line": 18125 }
+      ]
+    },
+    {
+      "id": "denominator_exclusion",
+      "label": "Unconditional denominator exclusion for the totient constant",
+      "status": "unconditional progress",
+      "statement": "S = ∑ φ(n)/2ⁿ is not equal to p/q for any integer p and any 1 ≤ q ≤ 79 639 646 646 701 375 323 355 774 875 831 053 (≈ 7.96 × 10³⁴). A lower bound on any rational representation, not a proof of irrationality.",
+      "paper_label": "res:farey",
+      "readme_headline": true,
+      "declarations": [
+        { "name": "tsum_totient_div_pow_two_ne_ratCast_of_den_le_79639646646701375323355774875831053", "module": "Erdos249257/CertificateKernel.lean", "line": 18055 }
+      ]
+    },
+    {
+      "id": "certificate_reduction",
+      "label": "Exact reduction of #249 to finite decidable certificates",
+      "status": "conditional reduction",
+      "statement": "If certified non-integrality witnesses occur at unbounded parameters (equivalently on the lcm diagonal), then S is irrational. The unboundedness of the supply is the remaining open hypothesis.",
+      "paper_label": "res:diag",
+      "readme_headline": true,
+      "declarations": [
+        { "name": "irrational_totient_series_of_certificate_supply", "module": "Erdos249257/TotientTailPeriodKiller.lean", "line": 386 },
+        { "name": "irrational_totient_series_of_lcm_diagonal_certificate_supply", "module": "Erdos249257/LcmDiagonalReduction.lean", "line": 92 },
+        { "name": "rational_totient_series_forces_lcm_cone_flatness", "module": "Erdos249257/LcmConeFlatness.lean", "line": 90 }
+      ]
+    },
+    {
+      "id": "certificate_completeness",
+      "label": "Certificate completeness",
+      "status": "proved here",
+      "statement": "A certified kill exists at fixed parameters exactly when the corresponding tail difference is non-integral, so the finite computation loses no information.",
+      "paper_label": "res:complete",
+      "readme_headline": true,
+      "declarations": [
+        { "name": "exists_certifiedKill_iff_tail_diff_notMem_int", "module": "Erdos249257/LcmConeFlatness.lean", "line": 316 }
+      ]
+    },
+    {
+      "id": "certified_kill_instances",
+      "label": "Initial certified-kill segment and generated certificates",
+      "status": "verified finite instance",
+      "statement": "Kernel-checked certified kills for small periods and for the lcm diagonal up to t = 8, plus machine-generated finite certificate shards, each discharged by decide.",
+      "paper_label": "res:deposits",
+      "readme_headline": true,
+      "declarations": [
+        { "name": "certifiedKill_all_small", "module": "Erdos249257/TotientTailPeriodKiller.lean", "line": 396 },
+        { "name": "certifiedKill_periodLcm_diagonal_upto_six", "module": "Erdos249257/LcmDiagonalReduction.lean", "line": 217 }
+      ]
+    },
+    {
+      "id": "tail_orbit_rigidity",
+      "label": "Tempered tail-orbit rigidity criterion",
+      "status": "proved here",
+      "statement": "For coefficients c(n) ≤ n, the binary series ∑ c(n)/2ⁿ is rational exactly when a tempered integer carry orbit exists, and every tempered orbit equals the scaled tail.",
+      "paper_label": "res:rigidity",
+      "readme_headline": false,
+      "declarations": [
+        { "name": "binaryCoeffSeries_rational_iff_exists_temperedBinaryOrbit", "module": "Erdos249257/GenericTailOrbitRigidity.lean", "line": 260 }
+      ]
+    },
+    {
+      "id": "boolean_mobius_carry",
+      "label": "Boolean–Möbius carry certificate equivalence",
+      "status": "proved here",
+      "statement": "A nonempty support with series value p/q exists exactly when a positive, square-root-bounded integer orbit with Boolean Möbius quotient exists; the support is reconstructed from the certificate.",
+      "paper_label": "res:carrycert",
+      "readme_headline": false,
+      "declarations": [
+        { "name": "exists_normalized_support_fraction_iff_exists_booleanMobiusCarry", "module": "Erdos249257/BooleanMobiusCarry.lean", "line": 734 }
+      ]
+    },
+    {
+      "id": "reciprocal_mass_bound",
+      "label": "Rationality-forced reciprocal-mass lower bound",
+      "status": "proved here",
+      "statement": "A rational support-series value with odd denominator part v forces reciprocal mass at least 1/ord_v(2), or divergence; an infinite support with dyadic-rational value has reciprocal mass divergent or greater than one.",
+      "paper_label": "res:orderwrap",
+      "readme_headline": false,
+      "declarations": [
+        { "name": "one_div_oddOrder_le_reciprocalMass_of_support_fraction", "module": "Erdos249257/RationalSupportCarrySkeleton.lean", "line": 1543 }
+      ]
+    },
+    {
+      "id": "unbounded_carry_states",
+      "label": "Carry states are unbounded over infinite rational-valued supports",
+      "status": "proved here",
+      "statement": "An infinite support with rational series value has an unbounded positive carry state, closing finite-state readings of the carry system.",
+      "paper_label": "res:unbounded",
+      "readme_headline": false,
+      "declarations": [
+        { "name": "exists_unbounded_shifted_odd_tail_nat_state_of_support_fraction", "module": "Erdos249257/RationalSupportCarrySkeleton.lean", "line": 2251 }
+      ]
+    },
+    {
+      "id": "sublog_zero_windows",
+      "label": "Sublogarithmic divisor-coverage zero windows",
+      "status": "proved here",
+      "statement": "A rational support-series value forces every zero window in the divisor-count coefficient to have length at most ε·log₂(N+1) + O_{ε,c,v}(1), uniformly in the support. This constrains coverage; it does not solve universal #257.",
+      "paper_label": "res:sublog",
+      "readme_headline": true,
+      "declarations": [
+        { "name": "supportCoeffZeroWindow_length_le_eps_logb_add", "module": "Erdos249257/SublogDivisorCoverage.lean", "line": 671 }
+      ]
+    },
+    {
+      "id": "greedy_achievement_geometry",
+      "label": "Greedy geometry of the Mersenne achievement set",
+      "status": "formalised here",
+      "statement": "Membership in the Mersenne achievement set is equivalent to greedy survival at every level; finite exact-rational death certificates soundly prove non-membership (3/4 is excluded at level one). The underlying geometry is recorded by Kovač–Tao.",
+      "paper_label": "res:greedy",
+      "readme_headline": false,
+      "declarations": [
+        { "name": "mem_mersenneAchievementSet_iff_greedy_survival", "module": "Erdos249257/GreedyAchievementSet.lean", "line": 738 },
+        { "name": "three_fourths_not_mem_mersenneAchievementSet", "module": "Erdos249257/GreedyAchievementSet.lean", "line": 837 }
+      ]
+    },
+    {
+      "id": "sigma_transcendence",
+      "label": "Transcendence of ∑ σ(m)/2^m",
+      "status": "cited only",
+      "statement": "Nesterenko (1996); the ladder rung L(Id). Cited for positioning, not formalised here.",
+      "declarations": []
+    },
+    {
+      "id": "prime_support_irrationality",
+      "label": "Irrationality of the prime-support series ∑_p 1/(2^p − 1)",
+      "status": "cited only",
+      "statement": "Tao–Teräväinen; settles the prime-support special case of #257. Only the identity bridge to ∑ ω(n)/2ⁿ is formalised, not the irrationality.",
+      "declarations": []
+    },
+    {
+      "id": "erdos_249",
+      "label": "Erdős #249: irrationality of S = ∑ φ(n)/2ⁿ",
+      "status": "open",
+      "statement": "Not proved by this release. The reductions convert it into the unboundedness of the certificate supply, which is untouched.",
+      "declarations": []
+    },
+    {
+      "id": "universal_257",
+      "label": "Erdős #257, universal form",
+      "status": "open",
+      "statement": "Irrationality of ∑_{n∈A} 1/(2ⁿ − 1) for every infinite A is not proved by this release; only named families are formalised.",
+      "declarations": []
+    }
+  ],
+  "non_claims": [
+    { "id": "not_erdos_257_solution", "meaning": "This release does not settle the universal Erdős #257 problem" },
+    { "id": "not_erdos_249_solution", "meaning": "This release does not settle Erdős #249" },
+    { "id": "not_publication_authority", "meaning": "This release does not itself constitute a peer-reviewed publication record" },
+    { "id": "not_private_root_equivalence", "meaning": "This release is not asserted to be equivalent to any private development" },
+    { "id": "not_provider_proof_authority", "meaning": "Provider or model output is not proof authority; only the Lean kernel check is" },
+    { "id": "not_hidden_proof_body_authority", "meaning": "No unpublished proof sketch or hidden artefact carries proof authority for this release" }
+  ]
+}

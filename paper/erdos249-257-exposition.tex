@@ -1,9 +1,9 @@
 % SPDX-FileCopyrightText: 2026 Will Cook
-% SPDX-License-Identifier: Apache-2.0
+% SPDX-License-Identifier: CC-BY-4.0
 %
 % A mathematician-facing exposition of the Erdos249257 Lean
 % development. Every formalised statement links to the exact Lean source line
-% at the pinned commit. Build with `tectonic erdos249-257-exposition.tex` or `make`.
+% at the pinned release. Build with `tectonic erdos249-257-exposition.tex` or `make`.
 \documentclass[11pt]{article}
 
 \usepackage[T1]{fontenc}
@@ -17,10 +17,14 @@
 \usepackage[colorlinks=true,linkcolor=black,urlcolor=RoyalBlue,citecolor=black]{hyperref}
 
 % ---------------------------------------------------------------------------
-% Drill-down machinery: each anchor links to the GitHub blob at a pinned commit.
+% Drill-down machinery: each anchor links to the GitHub blob at the pinned
+% release tag. \commit names the released tree; scripts/check_release.py in
+% the repository verifies that it matches docs/claims.json and that every
+% \lref/\lrefx/\lloc target resolves to the named declaration at that line.
 % ---------------------------------------------------------------------------
-\newcommand{\commit}{769e93a0def435ec677631610bb5bbaba021131b}
+\newcommand{\commit}{v0.4.0}
 \newcommand{\repobase}{https://github.com/wcook04/plectis-lean-erdos249-257/blob/\commit}
+\newcommand{\releaseurl}{https://github.com/wcook04/plectis-lean-erdos249-257/releases/tag/\commit}
 \newcommand{\PK}{Erdos249257}
 % \idn: typeset a Lean identifier (underscores literal, breakable across lines).
 \newcommand{\idn}[1]{\texttt{\expandafter\seqsplit\expandafter{\detokenize{#1}}}}
@@ -30,8 +34,8 @@
 \newcommand{\lref}[3]{\href{\repobase/\PK/#1\#L#2}{\texttt{Lean}}}
 \newcommand{\lrefx}[3]{\href{\repobase/\PK/#1\#L#2}{\texttt{Lean}}}
 \newcommand{\lloc}[2]{\href{\repobase/\PK/#1\#L#2}{\texttt{Lean}}}
-% \rref{rootfile}: link a repository-root file (underscores handled).
-\newcommand{\rref}[1]{\href{https://github.com/wcook04/plectis-lean-erdos249-257/blob/main/\detokenize{#1}}{\texttt{\detokenize{#1}}}}
+% \rref{rootfile}: link a repository-root file at the pinned release.
+\newcommand{\rref}[1]{\href{\repobase/\detokenize{#1}}{\texttt{\detokenize{#1}}}}
 \emergencystretch=2em
 
 \newtheorem{theorem}{Theorem}[section]
@@ -75,6 +79,14 @@ describe the proof architecture and auxiliary rationality criteria based on
 binary carry systems. This work solves neither Erd\H{o}s~\#249 nor the universal
 form of Erd\H{o}s~\#257.
 \end{abstract}
+
+\medskip
+\noindent\textbf{Keywords.} irrationality; Erd\H{o}s--Borwein constant;
+Euler totient; Lambert series; binary carry systems; Lean~4; Mathlib;
+formal verification.
+
+\smallskip
+\noindent\textbf{MSC 2020.} 11J72 (primary); 11A25, 68V20 (secondary).
 
 \section{Introduction}\label{sec:intro}
 
@@ -481,7 +493,7 @@ obstruction seen as a rational denominator, an eventual binary period, and a fla
 tail on the $\lcm$ cone. That unboundedness is the remaining analytic question,
 and it is left open. The reduction is real; the closure is not asserted.
 
-\section{Formalization architecture and mathematical lessons}\label{sec:architecture}
+\section{Formalisation architecture and mathematical lessons}\label{sec:architecture}
 
 The formal development repeatedly separates a finite, kernel-checkable core
 from the analytic statement that would have to hold uniformly. For the
@@ -508,7 +520,7 @@ Three changes of coordinates serve different mathematical purposes. The
 Mersenne--Lambert transform places $S$ next to the Erd\H{o}s--Borwein constant
 and exposes the nonnegative primitive-conductor weight. The M\"obius-square
 identity turns the same number into a signed rapidly convergent series. The
-coprime-pair identity turns it into a probability. Formalizing all three and
+coprime-pair identity turns it into a probability. Formalising all three and
 proving that the denominator exclusion transfers between them prevents an
 informal change of representation from silently changing the claim.
 
@@ -543,13 +555,13 @@ The Lean~4 proof assistant~\cite{lean} and Mathlib library~\cite{mathlib} check
 the development. The source, exact informal-to-formal links, and build metadata are
 available in the public repository
 \href{https://github.com/wcook04/plectis-lean-erdos249-257}{\texttt{plectis-lean-erdos249-257}}.
-This paper is linked to commit \href{\repobase}{\texttt{769e93a}}; each blue
-Lean link targets an exact declaration at that commit (for example, the
+This paper is pinned to the tagged release \href{\releaseurl}{\texttt{\commit}};
+each blue Lean link targets an exact declaration at that tag (for example, the
 base-$2$ corollary in Theorem~\ref{res:full} resolves to
 \lrefx{CertificateKernel.lean}{8006}{irrational_erdosBorwein_series}). The package uses
 \texttt{leanprover/lean4:v4.29.1} and the Mathlib revision pinned by
 \href{\repobase/lake-manifest.json}{\texttt{lake-manifest.json}}.
-The exact public artefact cited here is commit \texttt{769e93a}~\cite{artifact}.
+The exact public artefact cited here is release \texttt{\commit}~\cite{artifact}.
 
 There is no \texttt{sorry} or \texttt{admit} in the package. Finite
 computations use \texttt{decide}, whose proof terms are checked by the Lean
@@ -562,8 +574,12 @@ lake build
 The second command elaborates every declaration and kernel-checks every proof
 term against the pinned Mathlib dependency. Continuous integration executes
 the same build. Appendix~\ref{app:index} gives a compact map of the principal
-informal statements to declarations; the repository retains the exhaustive
-machine-readable provenance checked by the paper-link verifier.
+informal statements to declarations. The repository's claim registry
+(\rref{docs/claims.json}) records each public claim once, and
+\rref{scripts/check_release.py} verifies that this paper's source links, the
+repository documentation, and the release metadata all agree with it,
+including that every Lean link above resolves to the named declaration at the
+stated line of the released source.
 
 \section{Conclusion}\label{sec:conclusion}
 
@@ -590,10 +606,31 @@ carry descriptions are not competing stories: each makes a different
 rationality obstruction explicit. A future advance must exploit one of those
 obstructions uniformly, not merely extend the finite range already checked.
 
+\subsection*{Statements and declarations}
+
+\paragraph{Artefact and data availability.} The complete formal artefact is
+the tagged public release \href{\releaseurl}{\texttt{\commit}} of the
+repository, including the Lean sources, the pinned toolchain and Mathlib
+manifest, the generated certificate files, and this manuscript's source.
+Section~\ref{sec:verify} gives the verification route.
+
+\paragraph{Use of AI assistance.} Large-language-model assistants were used
+during development for proof drafting, refactoring, and prose editing. This
+does not affect the trust story: every mathematical claim rests on the
+published Lean source, in which each proof term is checked by the Lean~4
+kernel against the pinned Mathlib, with no \texttt{sorry}, \texttt{admit},
+additional axioms, or \texttt{native\_decide}.
+
+\paragraph{Funding and competing interests.} This work received no external
+funding. The author declares no competing interests.
+
+\paragraph{Acknowledgements.} The problem numbering and status follow the
+Erd\H{o}s Problems catalogue maintained by Thomas Bloom~\cite{erdosproblems}.
+
 \appendix
 \section{Auxiliary rationality criteria from binary carry systems}\label{sec:carry}
 
-Four further modules provide additional criteria. They prove no new
+Five further modules provide additional criteria. They prove no new
 irrationality. Instead they pin down, in machine-checked form, what a rational
 value of the series in question would have to look like: as an integer carry
 orbit, as a M\"obius-inverted support coordinate, as a residue-wrap cycle
@@ -966,7 +1003,7 @@ These criteria do not exclude rational values for either open series.
 
 \section{Index of principal declarations}\label{app:index}
 
-Each row links to the declaration at commit \href{\repobase}{\texttt{769e93a}}.
+Each row links to the declaration at release \href{\releaseurl}{\texttt{\commit}}.
 
 \begin{center}
 \footnotesize
@@ -1027,8 +1064,8 @@ greedy membership criterion & \lrefx{GreedyAchievementSet.lean}{738}{mem_mersenn
 \bibitem{erdosproblems} T.~Bloom (ed.), \emph{Erd\H{o}s Problems}, entries 249 and 257,
   \href{https://www.erdosproblems.com}{\texttt{erdosproblems.com}}, accessed July 2026.
 \bibitem{artifact} W.~Cook, \emph{Erd\H{o}s \#249/\#257 Lean formalisation},
-  public source artefact at commit \texttt{769e93a} (2026),
-  \href{https://github.com/wcook04/plectis-lean-erdos249-257}{GitHub repository}.
+  public source artefact, release \texttt{v0.4.0} (2026),
+  \href{https://github.com/wcook04/plectis-lean-erdos249-257/releases/tag/v0.4.0}{GitHub repository}.
 \end{thebibliography}
 
 \end{document}
