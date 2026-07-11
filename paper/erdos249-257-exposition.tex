@@ -344,7 +344,10 @@ The bound is reached by a ladder of finite, elementary exclusions,
 \;\to\; 7.96\times10^{34}\ (\text{Farey } K{=}240),
 \]
 each a mediant/Farey argument that traps any candidate $m/q$ inside a forbidden
-gap. See \lrefx{CertificateKernel.lean}{15346}{tsum_totient_div_pow_two_ne_ratCast_of_den_le_4838}
+gap. The mediant framework is historically associated with Farey's 1816 note
+on vulgar fractions~\cite{farey1816}; the finite exclusions themselves are
+the Lean-checked arguments of this release. See
+\lrefx{CertificateKernel.lean}{15346}{tsum_totient_div_pow_two_ne_ratCast_of_den_le_4838}
 for the first rung and \lrefx{GapFareyBound.lean}{80}{gap_check_window_1_120_le_248672326362367909},
 \lrefx{GapFareyBound.lean}{156}{gap_check_window_1_240_le_79639646646701375323355774875831053}
 for the two Farey windows.
@@ -1077,6 +1080,9 @@ greedy membership criterion & \lrefx{GreedyAchievementSet.lean}{738}{mem_mersenn
 \bibitem{kakeya1914} S.~Kakeya, \emph{On the set of partial sums of an infinite series},
   Proc. Tokyo Math.-Phys. Soc., 2nd ser. \textbf{7} (1914), 250--251,
   doi:\href{https://doi.org/10.11429/ptmps1907.7.14_250}{10.11429/ptmps1907.7.14\_250}.
+\bibitem{farey1816} J.~Farey, \emph{On a curious property of vulgar fractions},
+  Philos. Mag. \textbf{47} (1816), 385--386,
+  doi:\href{https://doi.org/10.1080/14786441608628487}{10.1080/14786441608628487}.
 \bibitem{nesterenko} Yu.~V. Nesterenko, \emph{Modular functions and transcendence questions},
   Mat. Sb. \textbf{187} (1996), no.~9, 65--96; English transl., Sb. Math. \textbf{187} (1996), no.~9, 1319--1348.
 \bibitem{lucatachiya} F.~Luca and Y.~Tachiya, \emph{Irrationality of Lambert series associated
