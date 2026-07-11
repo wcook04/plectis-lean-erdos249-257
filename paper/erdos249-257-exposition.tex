@@ -119,17 +119,16 @@ difference being non-integral.
 \fbox{\begin{minipage}{0.91\textwidth}
 \textbf{Scope.} The irrationality of $S$ and the universal infinite-support
 statement remain open. The denominator theorem and certificate reduction are
-genuine unconditional and conditional advances toward \#249, respectively;
+unconditional and conditional progress toward \#249, respectively;
 neither is presented as a solution. The support theorems establish named
 families toward \#257, not the universal quantifier.
 \end{minipage}}
 \end{center}
 
-The formalisation-specific contribution is not merely a list of declarations.
-It isolates a common architecture in which an infinite irrationality question
-is converted into finite arithmetic checked by the Lean kernel, while the
-remaining analytic uniformity statement is exposed rather than hidden inside
-computation. Exact links from the informal statements to the pinned source are
+The formalisation-specific contribution is a common architecture in which an
+infinite irrationality question is converted into finite arithmetic checked by
+the Lean kernel, while the remaining analytic uniformity statement is exposed
+rather than hidden inside computation. Exact links from the informal statements to the pinned source are
 kept as quiet hyperlinks; the complete declaration map is in
 Appendix~\ref{app:index}.
 
@@ -450,8 +449,8 @@ irrational.
 \noindent Formalised: \lref{LcmDiagonalReduction.lean}{92}{irrational_totient_series_of_lcm_diagonal_certificate_supply}.
 
 \paragraph{Step 3: the cone, flatness, and completeness.} On the cone
-$\{kM_t:k\ge1\}$, rationality forces not one pairwise relation but a single
-fractional constant across the whole cone.
+$\{kM_t:k\ge1\}$, rationality forces a single fractional constant across the
+whole cone.
 
 \begin{proposition}[cone flatness]\label{res:flat}
 If $S$ is rational, then for every sufficiently large $t$ there is
@@ -460,7 +459,7 @@ $\theta_t$ for every $k\ge1$.
 \end{proposition}
 \noindent Formalised: \lref{LcmConeFlatness.lean}{90}{rational_totient_series_forces_lcm_cone_flatness}.
 
-The certificates are exact, not a lossy heuristic: a certificate exists exactly
+The certificates are exact: a certificate exists exactly
 when the object it certifies is non-integral. Thus the finite computations are
 machine-checked witnesses rather than numerical experiments.
 
@@ -605,7 +604,8 @@ stated line of the released source.
 
 \section{Conclusion}\label{sec:conclusion}
 
-The formalisation fixes two mathematical landmarks and two exact frontiers. It
+The formalisation establishes checked results in two directions and leaves two
+exact frontiers. It
 verifies the all-integer-base Erd\H{o}s--Borwein theorem and several structured
 support cases toward \#257. For \#249 it proves that a rational value of $S$
 would have denominator exceeding $\Qzero$, and it reduces irrationality to an
@@ -637,8 +637,8 @@ manifest, the generated certificate files, and this manuscript's source.
 Section~\ref{sec:verify} gives the verification route.
 
 \paragraph{Use of AI assistance.} Large-language-model assistants were used
-during development for proof drafting, refactoring, and prose editing. This
-does not affect the trust story: every mathematical claim rests on the
+during development for proof drafting, refactoring, and prose editing. Every
+mathematical claim rests on the
 published Lean source, in which each proof term is checked by the Lean~4
 kernel against the pinned Mathlib, with no \texttt{sorry}, \texttt{admit},
 additional axioms, or \texttt{native\_decide}.

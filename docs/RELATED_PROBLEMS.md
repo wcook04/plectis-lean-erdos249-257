@@ -16,4 +16,4 @@ Where this work sits among the numbered problems it is near. Statuses are as lis
 | **#250** `∑ σ(n)/2ⁿ` | solved (Nesterenko 1996) | the ladder neighbour `L(Id)`; cited, not re-proved |
 | **#258** `∑ τ(n)/(a₁···aₙ)` | solved | not addressed here; the monotone φ/σ sequel is the sibling territory of #249 |
 
-The one-line summary: a formalisation of Erdős–Borwein-type irrationality, an unconditional record, and a finite-certificate reduction for the open totient constant. Not a solution to #249 or to the universal #257.
+The one-line summary: a formalisation of Erdős–Borwein-type irrationality, an unconditional denominator exclusion, and a finite-certificate reduction for the open totient constant. Not a solution to #249 or to the universal #257.

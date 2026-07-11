@@ -3,7 +3,7 @@
 
 # Erdős #249/#257: a Lean 4 formalisation
 
-Machine-checked results around two Erdős irrationality problems. **This release does not solve either open problem**; it formalises irrationality for named support families, an unconditional denominator exclusion, exact certificate reductions, and rationality-forced carry constraints — and it states its own boundary precisely.
+Machine-checked results around two Erdős irrationality problems. **This release does not solve either open problem**; it formalises irrationality for named support families, an unconditional denominator exclusion, exact certificate reductions, and rationality-forced carry constraints. It states its own boundary precisely.
 
 [![Lean CI](https://github.com/wcook04/plectis-lean-erdos249-257/actions/workflows/lean.yml/badge.svg)](https://github.com/wcook04/plectis-lean-erdos249-257/actions/workflows/lean.yml)
 
@@ -87,7 +87,7 @@ import Erdos249257
 
 The exhaustive declaration map, with one row per principal statement, is Appendix B of the paper.
 
-A minimal downstream consumer lives in [`examples/Examples.lean`](examples/Examples.lean): it imports the package root exactly as an external project would and re-derives a corollary (the base-3 instance of the headline theorem) through this interface. CI builds it with `lake build Examples` on every push, so the package is proven externally usable, not merely internally buildable.
+A minimal downstream consumer lives in [`examples/Examples.lean`](examples/Examples.lean): it imports the package root exactly as an external project would and re-derives a corollary (the base-3 instance of the headline theorem) through this interface. CI builds it with `lake build Examples` on every push, so the package is checked to be externally usable, not merely internally buildable.
 
 ## Citation, licence, and support
 
