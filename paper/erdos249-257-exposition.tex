@@ -970,12 +970,16 @@ the formal support series
 the set is \lrefx{GreedyAchievementSet.lean}{522}{mersenneAchievementSet}). In
 this language the base-$2$ \#257 statement reads: the rational members of
 $\mathcal A$ are exactly the finite subset sums. Nothing below decides that.
-Kova\v{c} and Tao record the strict separation, uniqueness, and Cantor-set
-geometry for these Lambert subseries~\cite{kovactao}; this is the relevant
-Lambert-series instance of Kakeya's classical strict-tail criterion for
-subsum sets~\cite{kakeya1914}. The local contribution is the executable Lean
-interface, quantitative enclosure, and finite non-membership certificates over
-that known geometry.
+Kova\v{c} and Tao verify, for every fixed integer $t\ge2$, that
+\[
+  \sum_{\ell>n}\frac1{t^\ell-1}<\frac1{t^n-1},
+\]
+and deduce distinct Lambert subsums and a Cantor set~\cite{kovactao}. At
+$t=2$ this is the relevant Lambert-series instance of Kakeya's classical
+strict-tail criterion for subsum sets~\cite{kakeya1914}. The local
+contribution is the executable Lean interface, quantitative enclosure, and
+finite non-membership certificates over that known geometry; it does not
+attribute those refinements to the cited sources or settle \#257.
 
 \begin{theorem}[superincreasing geometry and greedy membership]\label{res:greedy}
 For every $n\ge1$ the weight dominates the whole tail after it, $T(n)<w_n$,
