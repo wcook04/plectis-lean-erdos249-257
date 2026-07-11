@@ -105,7 +105,7 @@ The primitive-conductor weight is `A = φ * μ` (`primWeight = totientZ * moebiu
 
 ## The wave ladder, module by module
 
-Each module is a self-contained step with a header docstring stating its own honest boundary. Wave numbers are development order; the import chain is `GapFareyBound → MersenneLambertLadder → … → LcmConeNonflat → CertificateKernel ← GeneratedCertificates`. A further carry trunk builds on the kernel: `GenericTailOrbitRigidity → BooleanMobiusCarry → RationalSupportCarrySkeleton`, with `GreedyAchievementSet` importing `CertificateKernel` directly (see below).
+Each module is a self-contained step with a header docstring stating its own honest boundary. Wave numbers are development order; the import chain is `GapFareyBound → MersenneLambertLadder → … → LcmConeNonflat → CertificateKernel ← GeneratedCertificates`. A further carry trunk builds on the kernel: `GenericTailOrbitRigidity → BooleanMobiusCarry → RationalSupportCarrySkeleton → SublogDivisorCoverage`, with `GreedyAchievementSet` importing `CertificateKernel` directly (see below).
 
 | Wave | Module | What it establishes |
 |---|---|---|
@@ -131,6 +131,7 @@ Four modules sit above the kernel and carry no wave numbers. They isolate the sh
 | `GreedyAchievementSet.lean` | **Greedy geometry of the Mersenne achievement set** (values `∑_{n∈A} 1/(2ⁿ−1)`). Strict superincreasing tail inequalities, the quantitative gap asymptotic `(2/3)·4⁻ⁿ + O(8⁻ⁿ)` with an explicit remainder bound, exact real and rational greedy recurrences, and the characterization: membership iff the greedy remainder survives every level. Finite exact-rational death certificates are sound and one-sided — the exact level-one certificate shows `3/4` is not achievable — and normalized support coding is unique, with computable digits for rational members. |
 | `BooleanMobiusCarry.lean` | **Boolean–Möbius carry coordinates.** For a support `A`, the binary Lambert coefficient is `f_A(n) = #{a ∈ A : a ∣ n}`, and two exact coordinate changes are kernel-visible: `f_A = 1_A * ζ` with `μ * f_A = 1_A` on positive integers, and rationality of the support series equivalent to a tempered carry orbit whose carry quotient is exactly `f_A` (for a displayed fraction `p/q`, multiplier `q` and initial value `p`). Normalized nonempty supports with value `p/q` correspond exactly to quotient-only Boolean Möbius carry certificates. Worked support `{2,3}`: value `10/21`, pure period-six orbit `10, 20, 19, 17, 13, 26`. |
 | `RationalSupportCarrySkeleton.lean` | **Residue wraps and reciprocal mass.** The binary repetend identity — least positive residues in a complete doubling cycle sum to odd modulus × number of wraps — plus an algebraic one-wrap classification. The analytic bridge identifies the Cesàro mean of the support tails with the reciprocal mass `∑_{a∈A} 1/a`, giving the exact excess-mean identity and an order-sensitive bound: a rational value with odd denominator part `v` (numerator reduced) forces reciprocal mass at least `1/ord_v(2)`, or divergence. An infinite support with a dyadic-rational value has reciprocal mass divergent or strictly greater than one, and the positive carry state of any infinite support with rational value is globally unbounded at common multiples. Finite validation tables are kernel-checked by `decide`. |
+| `SublogDivisorCoverage.lean` | **Sublogarithmic divisor coverage.** If an Erdős support series has a rational value, consecutive zero windows in its divisor-count coefficient `f_A` have length at most `ε log₂(N+1) + O_{ε,c,v}(1)` for every `ε>0`. The proof composes an explicit fixed-power divisor bound, a binary-tail estimate, and the exact carry recurrence. This constrains support coverage; it does not solve universal #257. |
 
 ---
 
@@ -195,6 +196,7 @@ The one-line summary: a formalization of Erdős–Borwein-type irrationality, an
 | Support fraction ⟺ Boolean Möbius carry certificate | `exists_normalized_support_fraction_iff_exists_booleanMobiusCarry` | `BooleanMobiusCarry.lean` |
 | Reciprocal-mass bound `1/ord_v(2)` from rationality | `one_div_oddOrder_le_reciprocalMass_of_support_fraction` | `RationalSupportCarrySkeleton.lean` |
 | Carry states unbounded over infinite rational-valued supports | `exists_unbounded_shifted_odd_tail_nat_state_of_support_fraction` | `RationalSupportCarrySkeleton.lean` |
+| Rationality forces sublogarithmic divisor-coverage zero windows | `supportCoeffZeroWindow_length_le_eps_logb_add` | `SublogDivisorCoverage.lean` |
 
 ---
 
@@ -249,6 +251,7 @@ Erdos249257/
   GreedyAchievementSet.lean               carry trunk  greedy geometry + finite death certificates
   BooleanMobiusCarry.lean                 carry trunk  Boolean-Möbius carry coordinates
   RationalSupportCarrySkeleton.lean       carry trunk  residue wraps + reciprocal-mass bounds
+  SublogDivisorCoverage.lean              carry trunk  sublogarithmic divisor-coverage windows
 erdos249-257-exposition.pdf               compiled companion paper (tracked, root-visible)
 paper/                                    exposition source for non-Lean readers (LaTeX + build)
 NON_CLAIMS.md                             machine-checked non-claims (what this does not claim)

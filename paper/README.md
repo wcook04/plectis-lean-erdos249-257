@@ -7,7 +7,7 @@ A guide to this repository for mathematicians who do not read Lean.
 
 `erdos249-257-exposition.tex` states, in ordinary notation, what the Lean development
 proves, cites, and leaves open. Every formal statement links to the exact source
-line on GitHub, pinned to commit `59f9cc4`, so a reader can go from a sentence of
+line on GitHub, pinned to commit `769e93a`, so a reader can go from a sentence of
 prose to the checked proof in one click. The visible link text is intentionally
 quiet; the file, line, and declaration remain in each link target and in the
 release-time paper-link verifier. The document adds no mathematics beyond what the
@@ -36,3 +36,4 @@ The output is `erdos249-257-exposition.pdf`.
 - Formalization architecture and mathematical lessons: how infinite questions are separated from finite kernel-checkable witnesses.
 - Artefact availability, verification, and a conclusion stating the exact open boundaries once.
 - Auxiliary binary-carry criteria and the compact declaration map in appendices.
+- The sublogarithmic zero-window theorem for divisor coverage forced by a hypothetical rational support value.
