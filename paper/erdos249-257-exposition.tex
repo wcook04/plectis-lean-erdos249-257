@@ -132,15 +132,19 @@ kept as quiet hyperlinks; the complete declaration map is in
 Appendix~\ref{app:index}.
 
 The prior-art boundary is theorem-specific. The full-support theorem is due to
-Erd\H{o}s~\cite{erdos1948}, and the pairwise-coprime support condition is also
-classical~\cite{erdos1968}. Periodic-coefficient Lambert series have a separate
-literature~\cite{lucatachiya}. Kova\v{c}--Tao record the strict-tail geometry
-used by the achievement-set appendix~\cite{kovactao}, while Wang--Grau Ribas
-use the integral carry recurrence in the weighted binary setting
-\cite{wanggrauribas}. We make no priority claim for these mathematical
-ingredients; the contribution here is their verified integration, the stated
-certificate reductions and bounds, and the formalisation lessons described
-below.
+Erd\H{o}s~\cite{erdos1948}; Borwein later proved a broader irrationality theorem
+that includes the relevant Mersenne--Lambert specialisation~\cite{borwein1992}.
+The pairwise-coprime support condition is also classical~\cite{erdos1968}.
+Periodic-coefficient Lambert series have a separate literature~\cite{lucatachiya}.
+Kova\v{c}--Tao record the strict-tail geometry used by the achievement-set
+appendix~\cite{kovactao}, while Wang--Grau Ribas use the integral carry
+recurrence in the weighted binary setting~\cite{wanggrauribas}. For adjacent
+work on the binary expansion of the Erd\H{o}s--Borwein constant, see Crandall
+and the subsequent result of Campbell~\cite{crandall,campbell}; neither result
+is used or formalised in this development. We make no priority claim for these
+mathematical ingredients; the contribution here is their verified integration,
+the stated certificate reductions and bounds, and the formalisation lessons
+described below.
 
 \begin{center}
 \fbox{\begin{minipage}{0.94\textwidth}
@@ -1046,6 +1050,9 @@ greedy membership criterion & \lrefx{GreedyAchievementSet.lean}{738}{mem_mersenn
   J. Indian Math. Soc. (N.S.) \textbf{12} (1948), 63--66.
 \bibitem{erdos1968} P.~Erd\H{o}s, \emph{On the irrationality of certain series},
   Math. Student \textbf{36} (1968), 222--226.
+\bibitem{borwein1992} P.~B. Borwein, \emph{On the irrationality of certain series},
+  Math. Proc. Cambridge Philos. Soc. \textbf{112} (1992), no.~1, 141--146,
+  doi:\href{https://doi.org/10.1017/S030500410007081X}{10.1017/S030500410007081X}.
 \bibitem{nesterenko} Yu.~V. Nesterenko, \emph{Modular functions and transcendence questions},
   Mat. Sb. \textbf{187} (1996), no.~9, 65--96; English transl., Sb. Math. \textbf{187} (1996), no.~9, 1319--1348.
 \bibitem{lucatachiya} F.~Luca and Y.~Tachiya, \emph{Irrationality of Lambert series associated
@@ -1054,6 +1061,11 @@ greedy membership criterion & \lrefx{GreedyAchievementSet.lean}{738}{mem_mersenn
   Ahmes series}, arXiv:2406.17593 (2024).
 \bibitem{wanggrauribas} H.~Wang and J.~M. Grau Ribas, \emph{Positive dyadic density for
   rational weighted binary expansions}, arXiv:2606.24972 (2026).
+\bibitem{crandall} R.~Crandall, \emph{The googol-th bit of the Erd\H{o}s--Borwein constant},
+  Integers \textbf{12} (2012), no.~5, 811--840,
+  doi:\href{https://doi.org/10.1515/integers-2012-0007}{10.1515/integers-2012-0007}.
+\bibitem{campbell} J.~M. Campbell, \emph{On the binary digits of the Erd\H{o}s--Borwein
+  constant}, arXiv:2605.24160 (2026).
 \bibitem{taoteravainen} T.~Tao and J.~Ter\"av\"ainen, \emph{Quantitative correlations and
   some problems on prime factors of consecutive integers}, arXiv:2512.01739 (2025).
 \bibitem{lean} L.~de Moura, S.~Kong, J.~Avigad, F.~van Doorn, and J.~von Raumer,

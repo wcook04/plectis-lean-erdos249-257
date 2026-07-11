@@ -92,6 +92,19 @@ Cite the tagged release `v0.4.0` using [`CITATION.cff`](CITATION.cff); for the m
 
 This release is a pinned scholarly artefact. Error reports are welcome through the GitHub issue forms (mathematical discrepancy, build failure, broken link, exposition correction); [`CONTRIBUTING.md`](CONTRIBUTING.md) explains the release-pinning rule and the local checks, and [`SECURITY.md`](SECURITY.md) the private reporting route. Substantial changes land only as a new tagged release with refreshed claim and citation metadata.
 
+## Prior art and attribution
+
+The exposition credits sources beside the theorem families they inform. In
+particular, the full-support irrationality theorem is due to Erdős, and Peter
+Borwein gave a later general irrationality result that includes the relevant
+Mersenne--Lambert specialisation. The bibliography also distinguishes the
+classical support and Lambert-series literature from the Kovač--Tao and
+Wang--Grau Ribas antecedents for the achievement-set and carry discussions.
+Crandall's binary-expansion work and Campbell's subsequent binary-digit result
+are included as adjacent context only: neither is an input to, nor formalised
+by, this release. These citations supply provenance; they do not expand the
+claims or priority asserted here.
+
 ---
 
 *Project context.* This formalisation is one lane of a broader programme; the adjacent public claim-testing surface is [Plectis](https://github.com/wcook04/plectis). None of that tooling is proof authority here: the proof authority is the Lean source in this repository, checked by the Lean kernel.
