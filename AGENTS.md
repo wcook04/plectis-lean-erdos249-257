@@ -17,7 +17,11 @@ in this repository, and never infer unpublished results or private machinery.
 3. For one claim, follow its `paper_label` into
    `paper/erdos249-257-exposition.tex`, then follow its `declarations` to the
    named Lean source coordinates.
-4. Use `Erdos249257.lean` for the supported root import and exact package
+4. Use `docs/declaration_atlas.json` when you need the exhaustive mathematical
+   scale: every declaration, signature excerpt, module, import edge, generated
+   certificate marker, and principal-claim link. It is a generated navigation
+   projection; drill back to Lean before trusting a statement.
+5. Use `Erdos249257.lean` for the supported root import and exact package
    topology. Use `docs/SOURCE_MAP.md` for intention-based routes and
    `docs/WAVE_INDEX.md` for mathematical chronology.
 
@@ -52,6 +56,7 @@ lake build
 ```
 
 The release checker validates claim status, declaration coordinates, paper
-anchors, the machine-readable module and argument graphs, scope, metadata,
-licensing, and proof-trust guards. Do not add `sorry`, `admit`, `axiom`, or
-`native_decide`; finite computations use kernel-checked `decide`.
+anchors, the machine-readable module and argument graphs, the exhaustive
+declaration atlas, scope, metadata, licensing, and proof-trust guards. Do not
+add `sorry`, `admit`, `axiom`, or `native_decide`; finite computations use
+kernel-checked `decide`.

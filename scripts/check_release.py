@@ -32,6 +32,7 @@ from __future__ import annotations
 
 import json
 import re
+import subprocess
 import sys
 from pathlib import Path
 
@@ -161,6 +162,9 @@ def main() -> int:
         for decl in claim["declarations"]:
             check(decl["module"] in module_paths,
                   f"claim {claim['id']}: declaration module missing from machine-readable module graph: {decl['module']}")
+    for projection in machine_paper.get("projections", []):
+        check((ROOT / projection["path"]).is_file(),
+              f"machine-readable paper projection does not exist: {projection['path']}")
 
     # --- 2. release identity ----------------------------------------------
     lakefile = read(ROOT / "lakefile.toml")
@@ -272,6 +276,16 @@ def main() -> int:
         check(required in agents, f"AGENTS.md does not route through {required}")
     check("remain open" in agents, "AGENTS.md must preserve the open-problem boundary")
     check("proof authority" in agents, "AGENTS.md must state the proof-authority boundary")
+
+    atlas_check = subprocess.run(
+        [sys.executable, str(ROOT / "scripts" / "build_declaration_atlas.py"), "--check"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    check(atlas_check.returncode == 0,
+          f"declaration atlas drift: {atlas_check.stdout.strip() or atlas_check.stderr.strip()}")
 
     # --- 9. proof-trust guard ------------------------------------------------------
     # Covers the library, its root, and the downstream examples: everything

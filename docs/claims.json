@@ -39,6 +39,16 @@
       "principal_declaration_index_label": "app:index",
       "claim_anchor_field": "paper_label"
     },
+    "projections": [
+      {
+        "id": "exhaustive_declaration_atlas",
+        "path": "docs/declaration_atlas.json",
+        "role": "Generated index of every public Lean declaration, source coordinate, signature excerpt, module import edge, generated-certificate marker, and principal-claim link.",
+        "authority": "navigation_projection_not_proof_authority",
+        "build": "python3 scripts/build_declaration_atlas.py",
+        "check": "python3 scripts/build_declaration_atlas.py --check"
+      }
+    ],
     "module_graph": {
       "root": "Erdos249257.lean",
       "nodes": [
