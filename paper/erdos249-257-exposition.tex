@@ -175,9 +175,10 @@ L(f)\;=\;\sum_{n\ge1}\frac{f(n)}{2^n-1}\;=\;\sum_{m\ge1}\frac{(f*\mathbf 1)(m)}{
 \]
 the second equality being the standard Lambert rearrangement (one Dirichlet
 convolution by the constant $\mathbf 1=\zeta$); Apostol supplies the classical
-arithmetic-function and Dirichlet-convolution background~\cite{apostol}, and
-Merca--Schmidt give a modern treatment of Lambert-series factorisations
-~\cite{mercaschmidt}. Walking the ladder by convolution gives five values with
+arithmetic-function and Dirichlet-convolution background~\cite{apostol}; Merca
+introduced a modern Lambert-series factorisation theorem~\cite{merca2017}, and
+Merca--Schmidt give a synthesis/unification treatment~\cite{mercaschmidt}.
+Walking the ladder by convolution gives five values with
 rational, irrational, open, or transcendental status.
 
 \begin{center}
@@ -714,7 +715,7 @@ coefficient series, $\sum_{n\in A}1/(2^n-1)=X_{f_A}$
 (\lrefx{BooleanMobiusCarry.lean}{379}{erdosSupportSeries_two_eq_binaryCoeffSeries}).
 Two exact coordinate changes then turn a hypothetical rational value into a
 support-free object. The divisor transform and M\"obius inversion below are
-classical Lambert-series infrastructure~\cite{apostol,mercaschmidt}; the
+classical Lambert-series infrastructure~\cite{apostol,merca2017,mercaschmidt}; the
 contribution here is their Lean-checked composition with the tempered carry
 interface.
 
@@ -1075,8 +1076,13 @@ greedy membership criterion & \lrefx{GreedyAchievementSet.lean}{738}{mem_mersenn
 \bibitem{apostol} T.~M. Apostol, \emph{Introduction to Analytic Number Theory},
   Undergraduate Texts in Mathematics, Springer, 1976,
   doi:\href{https://doi.org/10.1007/978-1-4757-5579-4}{10.1007/978-1-4757-5579-4}.
+\bibitem{merca2017} M.~Merca, \emph{The Lambert series factorization theorem},
+  Ramanujan J. \textbf{44} (2017), no.~2, 417--435,
+  doi:\href{https://doi.org/10.1007/s11139-016-9856-3}{10.1007/s11139-016-9856-3}.
 \bibitem{mercaschmidt} M.~Merca and M.~D. Schmidt, \emph{Generating special arithmetic
-  functions by Lambert series factorizations}, arXiv:1706.00393 (2017).
+  functions by Lambert series factorizations}, Contrib. Discrete Math. \textbf{14}
+  (2019), no.~1, 31--45,
+  doi:\href{https://doi.org/10.55016/ojs/cdm.v14i1.62425}{10.55016/ojs/cdm.v14i1.62425}.
 \bibitem{kakeya1914} S.~Kakeya, \emph{On the set of partial sums of an infinite series},
   Proc. Tokyo Math.-Phys. Soc., 2nd ser. \textbf{7} (1914), 250--251,
   doi:\href{https://doi.org/10.11429/ptmps1907.7.14_250}{10.11429/ptmps1907.7.14\_250}.
