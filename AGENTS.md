@@ -12,19 +12,23 @@ in this repository, and never infer unpublished results or private machinery.
 1. Read `docs/claims.json`. Its `machine_readable_paper` object is the compact
    map from open problems and paper claims to Lean declarations, module imports,
    argument relationships, validation, and explicit non-claims.
-2. Read `docs/corpus_descriptor.json` when another agent or system needs to
+2. Read `docs/methodology.json` for the literal mathematical methodology,
+   evidence classes, remaining-open requirements, and claim-transition rules.
+   `METHODOLOGY.md` is its generated human projection.
+3. Read `docs/corpus_descriptor.json` when another agent or system needs to
    register this repository as a mathematical corpus. It separates the pinned
-   proof-source tag from the later navigation snapshot and content digests.
-3. Read `SCOPE.md` before describing what the project proves. Erdős #249 and
+   proof-source tag from the later navigation snapshot and content digests, and
+   carries a compact methodology capsule.
+4. Read `SCOPE.md` before describing what the project proves. Erdős #249 and
    the universal form of #257 remain open.
-4. For one claim, follow its `paper_label` into
+5. For one claim, follow its `paper_label` into
    `paper/erdos249-257-exposition.tex`, then follow its `declarations` to the
    named Lean source coordinates.
-5. Use `docs/declaration_atlas.json` when you need the exhaustive mathematical
+6. Use `docs/declaration_atlas.json` when you need the exhaustive mathematical
    scale: every declaration, signature excerpt, module, import edge, generated
    certificate marker, and principal-claim link. It is a generated navigation
    projection; drill back to Lean before trusting a statement.
-6. Use `Erdos249257.lean` for the supported root import and exact package
+7. Use `Erdos249257.lean` for the supported root import and exact package
    topology. Use `docs/SOURCE_MAP.md` for intention-based routes and
    `docs/WAVE_INDEX.md` for mathematical chronology.
 
@@ -32,7 +36,10 @@ in this repository, and never infer unpublished results or private machinery.
 
 - Lean source checked by the pinned Lean kernel is proof authority.
 - `docs/claims.json` owns release identity, status taxonomy, declaration
-  coordinates, and the machine-readable navigation graph.
+  coordinates, typed remaining-open propositions, and the machine-readable
+  navigation graph.
+- `docs/methodology.json` owns mathematical methodology and claim-transition
+  requirements. It is not proof authority and does not own claim status.
 - `docs/corpus_descriptor.json` is a generated, compact registration envelope;
   it does not replace the claim registry, exhaustive atlas, or Lean authority.
 - The paper is authored mathematical exposition. Do not generate or rewrite its
@@ -41,10 +48,14 @@ in this repository, and never infer unpublished results or private machinery.
   the claim registry.
 - Provider or model output is never proof authority.
 
-When a theorem statement or public claim changes, update Lean first, then the
-claim registry, then every affected human projection. A proof-body-only change
+Before updating a public claim, classify whether the change affects only a
+proof body or changes a proposition, assumptions, representation, finite
+range, claim status, exposition, or projection. Update Lean first, then review
+assumptions and intended meaning, then update the claim registry, authored
+exposition, and generated projections in that order. A proof-body-only change
 does not automatically authorize stronger prose. New mathematics requires
-explicit review of the open-problem boundary and the paper-facing claim.
+explicit human mathematical review of the paper-facing statement and the
+remaining-open boundary.
 
 ## Validation
 
@@ -52,6 +63,7 @@ Run the focused public-surface gate after documentation or registry changes:
 
 ```sh
 python3 scripts/check_release.py
+python3 scripts/test_methodology_contract.py
 ```
 
 Run the full proof authority check after Lean changes:

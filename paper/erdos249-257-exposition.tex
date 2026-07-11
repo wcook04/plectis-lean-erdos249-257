@@ -567,6 +567,17 @@ parameters, and state the remaining uniformity theorem separately. The last
 step matters as much as the first three. It prevents a large verified finite
 range from being mistaken for the infinite theorem.
 
+The repository records this discipline in a separate, machine-readable
+methodology contract and its human projection, \texttt{METHODOLOGY.md}. The
+contract does not add proof authority. It distinguishes three checks that must
+not be conflated: Lean checks the exact formal proposition, repository checks
+keep claims and projections consistent, and human mathematical review decides
+whether a proposition expresses the intended statement and what it licenses us
+to say. In particular, a reduction must name the hypothesis that remains open,
+a finite result remains finite without an unbounded theorem, and a claimed
+advance toward an open problem must state exactly which remaining proposition
+changed and how.
+
 \section{Artefact availability and verification}\label{sec:verify}
 
 The Lean~4 proof assistant~\cite{lean} and Mathlib library~\cite{mathlib} check

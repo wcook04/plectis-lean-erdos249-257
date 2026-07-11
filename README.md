@@ -33,6 +33,7 @@ The conditional reduction is exact: producing the unbounded certificate supply i
 ## Start here
 
 - **Machine-readable paper and agent map** — [`docs/claims.json`](docs/claims.json): the single checked map of claim status, paper anchors, principal Lean declarations, module dependencies, argument relationships, and explicit non-claims. The generated [`docs/corpus_descriptor.json`](docs/corpus_descriptor.json) gives external agents a compact dual-anchored corpus identity, while [`docs/declaration_atlas.json`](docs/declaration_atlas.json) exposes every public Lean declaration and import edge. Agent harnesses should begin with [`AGENTS.md`](AGENTS.md).
+- **Mathematical methodology and claim-transition rules** — [`METHODOLOGY.md`](METHODOLOGY.md) is the generated human projection; [`docs/methodology.json`](docs/methodology.json) is the machine-readable owner. It states literally that Lean checks the stated proposition rather than its intended meaning, reductions must name what remains open, representation changes need proved transport, finite results stay finite without an unbounded theorem, and progress toward an open problem must name the remaining open proposition that changed.
 - **The paper** — [`erdos249-257-exposition.pdf`](erdos249-257-exposition.pdf): the full argument in ordinary notation, no Lean required. Every formal statement links to the exact declaration at the pinned release. Source and build in [`paper/`](paper/).
 - **Module reference and chronology** — [`docs/WAVE_INDEX.md`](docs/WAVE_INDEX.md): what each module establishes, in development order.
 - **Declaration routes** — [`docs/SOURCE_MAP.md`](docs/SOURCE_MAP.md): intention-based routes to the principal declarations.
@@ -62,6 +63,7 @@ The build is heavy (thousands of `decide`-discharged certificates); continuous i
 
 ```sh
 python3 scripts/check_release.py   # claim registry, paper links, metadata, scope, licences
+python3 scripts/test_methodology_contract.py  # invalid claim-transition mutations must fail
 ```
 
 The checker verifies that the paper's source links resolve to the named declarations at the stated lines, that README/paper/`CITATION.cff`/`SCOPE.md` agree with the claim registry, that no Lean source uses `sorry`/`admit`/`axiom`/`native_decide` (the downstream examples included), and that every licence in use has its text under `LICENSES/`.

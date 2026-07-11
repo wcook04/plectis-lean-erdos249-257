@@ -1,12 +1,13 @@
 {
-  "schema": "erdos249257-claims/2",
-  "comment": "Single owner of release identity, mathematical claim status, and the machine-readable paper map. Human surfaces (README, paper, SCOPE.md, CITATION.cff) project from this file; Lean remains proof authority, and scripts/check_release.py fails the build when a checked projection or graph edge drifts.",
+  "schema": "erdos249257-claims/3",
+  "comment": "Single owner of release identity, mathematical claim status, typed remaining-open propositions, and the machine-readable paper map. Human surfaces (README, paper, SCOPE.md, CITATION.cff) project from this file; Lean remains proof authority, docs/methodology.json owns claim-transition rules, and scripts/check_release.py fails the build when a checked projection or graph edge drifts.",
   "machine_readable_paper": {
     "schema": "erdos249257-machine-readable-paper/1",
     "purpose": "Give humans and agent harnesses one bounded map from the open problems and paper argument to claim status, Lean declarations, module dependencies, validation, and explicit non-claims.",
     "authority_order": [
       "Lean source checked by the pinned Lean kernel",
-      "docs/claims.json for release identity, status taxonomy, coordinates, and navigation relationships",
+      "docs/claims.json for release identity, status taxonomy, remaining-open propositions, coordinates, and navigation relationships",
+      "docs/methodology.json for mathematical methodology and claim-transition requirements",
       "the authored exposition for mathematical explanation",
       "README.md, SCOPE.md, docs/SOURCE_MAP.md, and docs/WAVE_INDEX.md as reader projections"
     ],
@@ -33,6 +34,11 @@
         "read": ["docs/PRIOR_ART.md", "paper/erdos249-257-exposition.tex", "CITATION.cff"]
       },
       {
+        "id": "understand_methodology_and_open_boundary",
+        "intent": "Understand the mathematical method, the evidence required for claim transitions, and the exact remaining open propositions.",
+        "read": ["docs/methodology.json", "METHODOLOGY.md", "docs/claims.json", "SCOPE.md"]
+      },
+      {
         "id": "change_or_verify_release",
         "intent": "Modify a formal or editorial surface without allowing status or source coordinates to drift.",
         "read": ["AGENTS.md", "scripts/check_release.py", "CONTRIBUTING.md"]
@@ -52,6 +58,14 @@
         "authority": "navigation_projection_not_proof_authority",
         "build": "python3 scripts/build_declaration_atlas.py",
         "check": "python3 scripts/build_declaration_atlas.py --check"
+      },
+      {
+        "id": "human_methodology_projection",
+        "path": "METHODOLOGY.md",
+        "role": "Generated human projection of the mathematical methodology and claim-transition rules in docs/methodology.json.",
+        "authority": "projection_of_docs_methodology_not_proof_authority",
+        "build": "python3 scripts/build_methodology.py",
+        "check": "python3 scripts/build_methodology.py --check"
       }
     ],
     "module_graph": {
@@ -89,18 +103,18 @@
       },
       "edges": [
         {"from": "eb_constant", "relation": "corollary_of", "to": "eb_full_support"},
-        {"from": "support_families", "relation": "advances_open_target", "to": "universal_257"},
-        {"from": "denominator_exclusion", "relation": "advances_open_target", "to": "erdos_249"},
-        {"from": "certificate_reduction", "relation": "advances_open_target", "to": "erdos_249"},
+        {"from": "support_families", "relation": "advances_open_target", "to": "universal_257", "remaining_open_effect": {"remaining_open_proposition_id": "remaining_open.universal_257_all_infinite_supports", "operation": "narrows", "statement": "Proves the claim for named infinite-support families while leaving arbitrary infinite supports open."}},
+        {"from": "denominator_exclusion", "relation": "advances_open_target", "to": "erdos_249", "remaining_open_effect": {"remaining_open_proposition_id": "remaining_open.erdos_249_irrationality", "operation": "narrows", "statement": "Excludes every rational representation up to the stated denominator bound without proving irrationality."}},
+        {"from": "certificate_reduction", "relation": "advances_open_target", "to": "erdos_249", "remaining_open_effect": {"remaining_open_proposition_id": "remaining_open.unbounded_certificate_supply", "operation": "re_expresses", "statement": "Re-expresses the open irrationality step as the unbounded supply of checked finite certificates."}},
         {"from": "certificate_completeness", "relation": "makes_exact", "to": "certificate_reduction"},
         {"from": "certified_kill_instances", "relation": "instantiates", "to": "certificate_reduction"},
         {"from": "boolean_mobius_carry", "relation": "builds_on", "to": "tail_orbit_rigidity"},
         {"from": "reciprocal_mass_bound", "relation": "builds_on", "to": "boolean_mobius_carry"},
         {"from": "unbounded_carry_states", "relation": "builds_on", "to": "boolean_mobius_carry"},
         {"from": "sublog_zero_windows", "relation": "builds_on", "to": "unbounded_carry_states"},
-        {"from": "reciprocal_mass_bound", "relation": "advances_open_target", "to": "universal_257"},
-        {"from": "sublog_zero_windows", "relation": "advances_open_target", "to": "universal_257"},
-        {"from": "greedy_achievement_geometry", "relation": "advances_open_target", "to": "universal_257"},
+        {"from": "reciprocal_mass_bound", "relation": "advances_open_target", "to": "universal_257", "remaining_open_effect": {"remaining_open_proposition_id": "remaining_open.universal_257_all_infinite_supports", "operation": "constrains", "statement": "Adds a necessary reciprocal-mass condition for a rational value over an infinite support."}},
+        {"from": "sublog_zero_windows", "relation": "advances_open_target", "to": "universal_257", "remaining_open_effect": {"remaining_open_proposition_id": "remaining_open.universal_257_all_infinite_supports", "operation": "constrains", "statement": "Adds a necessary sublogarithmic zero-window condition for a rational value over an infinite support."}},
+        {"from": "greedy_achievement_geometry", "relation": "advances_open_target", "to": "universal_257", "remaining_open_effect": {"remaining_open_proposition_id": "remaining_open.universal_257_all_infinite_supports", "operation": "constrains", "statement": "Provides exact finite non-membership tests for the value set without proving the universal irrationality statement."}},
         {"from": "sigma_transcendence", "relation": "positions", "to": "mersenne_lambert_ladder"},
         {"from": "prime_support_irrationality", "relation": "positions", "to": "universal_257"}
       ]
@@ -122,6 +136,23 @@
     "cited only": "External theorem used for positioning, not formalised",
     "open": "Not proved by this release"
   },
+  "remaining_open_propositions": [
+    {
+      "id": "remaining_open.erdos_249_irrationality",
+      "open_target_claim": "erdos_249",
+      "statement": "Prove that S = ∑ φ(n)/2ⁿ is irrational, with no bound on a possible rational denominator."
+    },
+    {
+      "id": "remaining_open.unbounded_certificate_supply",
+      "open_target_claim": "erdos_249",
+      "statement": "Produce certified non-integrality witnesses at unbounded parameters, equivalently along the lcm diagonal."
+    },
+    {
+      "id": "remaining_open.universal_257_all_infinite_supports",
+      "open_target_claim": "universal_257",
+      "statement": "Prove irrationality for every infinite support A, not only the named support families formalised here."
+    }
+  ],
   "claims": [
     {
       "id": "eb_full_support",
@@ -150,6 +181,7 @@
       "label": "Named infinite-support irrationality families toward #257",
       "status": "formalised here",
       "statement": "For every base b ≥ 2, ∑_{n∈A} 1/(bⁿ − 1) is irrational for factorial support, power-of-two support, multiples, pairwise-coprime supports with summable reciprocals, eventually-periodic supports, residue classes, and the odd numbers. Proved families, not the universal statement.",
+      "remaining_open_proposition_ids": ["remaining_open.universal_257_all_infinite_supports"],
       "paper_label": "res:support",
       "readme_headline": true,
       "declarations": [
@@ -175,6 +207,7 @@
       "label": "Unconditional denominator exclusion for the totient constant",
       "status": "unconditional progress",
       "statement": "S = ∑ φ(n)/2ⁿ is not equal to p/q for any integer p and any 1 ≤ q ≤ 79 639 646 646 701 375 323 355 774 875 831 053 (≈ 7.96 × 10³⁴). A lower bound on any rational representation, not a proof of irrationality.",
+      "remaining_open_proposition_ids": ["remaining_open.erdos_249_irrationality"],
       "paper_label": "res:farey",
       "readme_headline": true,
       "declarations": [
@@ -186,6 +219,7 @@
       "label": "Exact reduction of #249 to finite decidable certificates",
       "status": "conditional reduction",
       "statement": "If certified non-integrality witnesses occur at unbounded parameters (equivalently on the lcm diagonal), then S is irrational. The unboundedness of the supply is the remaining open hypothesis.",
+      "remaining_open_proposition_ids": ["remaining_open.unbounded_certificate_supply"],
       "paper_label": "res:diag",
       "readme_headline": true,
       "declarations": [
@@ -210,6 +244,8 @@
       "label": "Initial certified-kill segment and generated certificates",
       "status": "verified finite instance",
       "statement": "Kernel-checked certified kills for small periods and for the lcm diagonal up to t = 8, plus machine-generated finite certificate shards, each discharged by decide.",
+      "bounded_domain": "The explicitly listed small periods, the lcm diagonal through t = 8, and the parameters encoded by the generated certificate shards.",
+      "remaining_open_proposition_ids": ["remaining_open.unbounded_certificate_supply"],
       "paper_label": "res:deposits",
       "readme_headline": true,
       "declarations": [
@@ -244,6 +280,7 @@
       "label": "Rationality-forced reciprocal-mass lower bound",
       "status": "proved here",
       "statement": "A rational support-series value with odd denominator part v forces reciprocal mass at least 1/ord_v(2), or divergence; an infinite support with dyadic-rational value has reciprocal mass divergent or greater than one.",
+      "remaining_open_proposition_ids": ["remaining_open.universal_257_all_infinite_supports"],
       "paper_label": "res:orderwrap",
       "readme_headline": false,
       "declarations": [
@@ -266,6 +303,7 @@
       "label": "Sublogarithmic divisor-coverage zero windows",
       "status": "proved here",
       "statement": "A rational support-series value forces every zero window in the divisor-count coefficient to have length at most ε·log₂(N+1) + O_{ε,c,v}(1), uniformly in the support. This constrains coverage; it does not solve universal #257.",
+      "remaining_open_proposition_ids": ["remaining_open.universal_257_all_infinite_supports"],
       "paper_label": "res:sublog",
       "readme_headline": true,
       "declarations": [
@@ -277,6 +315,7 @@
       "label": "Greedy geometry of the Mersenne achievement set",
       "status": "formalised here",
       "statement": "Membership in the Mersenne achievement set is equivalent to greedy survival at every level; finite exact-rational death certificates soundly prove non-membership (3/4 is excluded at level one). The underlying geometry is recorded by Kovač–Tao.",
+      "remaining_open_proposition_ids": ["remaining_open.universal_257_all_infinite_supports"],
       "paper_label": "res:greedy",
       "readme_headline": false,
       "declarations": [
@@ -303,6 +342,7 @@
       "label": "Erdős #249: irrationality of S = ∑ φ(n)/2ⁿ",
       "status": "open",
       "statement": "Not proved by this release. The reductions convert it into the unboundedness of the certificate supply, which is untouched.",
+      "remaining_open_proposition_ids": ["remaining_open.erdos_249_irrationality", "remaining_open.unbounded_certificate_supply"],
       "declarations": []
     },
     {
@@ -310,6 +350,7 @@
       "label": "Erdős #257, universal form",
       "status": "open",
       "statement": "Irrationality of ∑_{n∈A} 1/(2ⁿ − 1) for every infinite A is not proved by this release; only named families are formalised.",
+      "remaining_open_proposition_ids": ["remaining_open.universal_257_all_infinite_supports"],
       "declarations": []
     }
   ],

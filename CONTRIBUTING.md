@@ -25,6 +25,11 @@ and citation metadata.
   status. Never edit a status table, the scope statement, or citation
   metadata directly without updating the registry; `scripts/check_release.py`
   fails when any surface drifts from it.
+- `docs/methodology.json` owns the mathematical methodology and
+  claim-transition rules; regenerate `METHODOLOGY.md` instead of editing that
+  projection. Conditional reductions must name what remains open, finite
+  claims must state their bounded domain, and every `advances_open_target`
+  edge must state which remaining open proposition changed and how.
 - Do not weaken the open-problem boundary. The release states plainly that
   Erdős #249 and the universal #257 remain open; wording that blurs that is a
   defect, not an improvement.
@@ -41,6 +46,7 @@ lake exe cache get                 # fetch the prebuilt Mathlib cache
 lake build                         # elaborate and kernel-check the library
 lake build Examples                # build the downstream consumer example
 python3 scripts/check_release.py   # cross-surface release checks
+python3 scripts/test_methodology_contract.py  # adversarial claim-transition fixtures
 python3 -m pip install cffconvert reuse  # once, for metadata and licence checks
 python3 scripts/check_metadata.py  # CITATION.cff schema validation (same command as CI)
 reuse lint                         # licence validation

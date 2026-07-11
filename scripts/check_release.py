@@ -6,8 +6,9 @@
 The single owner of release identity and claim status is docs/claims.json.
 This script verifies that every other public surface agrees with it:
 
-  1. claims.json is well formed, every claim status is in the taxonomy, and its
-     machine-readable paper graph resolves to real public files and claim ids.
+  1. claims.json is well formed, every claim status is in the taxonomy, typed
+     remaining-open propositions resolve, and the machine-readable paper graph
+     resolves to real public files and claim ids.
   2. Release identity: lakefile.toml, CITATION.cff, and the paper's pinned
      artefact reference all state the same version/tag.
   3. Every claimed Lean declaration exists in the stated module at the
@@ -24,6 +25,8 @@ This script verifies that every other public surface agrees with it:
      without weakening the proof or open-problem boundary.
   9. Proof-trust guard: no sorry/admit/native_decide/axiom in the Lean
      sources.
+ 10. The methodology source, generated root projection, claim-transition
+     requirements, descriptor capsule, and entry routes agree.
 
 Stdlib only; run from the repository root:  python3 scripts/check_release.py
 """
@@ -35,6 +38,8 @@ import re
 import subprocess
 import sys
 from pathlib import Path
+
+from methodology_contract import mutation_fixture_errors, render_markdown, validate_contract
 
 ROOT = Path(__file__).resolve().parent.parent
 ERRORS: list[str] = []
@@ -88,8 +93,8 @@ def main() -> int:
     # --- 1. claims.json ---------------------------------------------------
     claims_path = ROOT / "docs" / "claims.json"
     data = json.loads(read(claims_path))
-    check(data.get("schema") == "erdos249257-claims/2",
-          "docs/claims.json must use schema erdos249257-claims/2")
+    check(data.get("schema") == "erdos249257-claims/3",
+          "docs/claims.json must use schema erdos249257-claims/3")
     taxonomy = set(data["status_taxonomy"])
     release = data["release"]
     version, tag = release["version"], release["tag"]
@@ -165,6 +170,24 @@ def main() -> int:
     for projection in machine_paper.get("projections", []):
         check((ROOT / projection["path"]).is_file(),
               f"machine-readable paper projection does not exist: {projection['path']}")
+
+    # --- methodology source and typed claim transitions -------------------
+    methodology_path = ROOT / "docs" / "methodology.json"
+    methodology = json.loads(read(methodology_path))
+    methodology_errors = validate_contract(data, methodology)
+    check(not methodology_errors,
+          "methodology contract invalid: " + "; ".join(methodology_errors))
+
+    methodology_projection = ROOT / "METHODOLOGY.md"
+    expected_methodology_projection = render_markdown(methodology)
+    check(methodology_projection.is_file(), "METHODOLOGY.md is missing")
+    if methodology_projection.is_file():
+        check(read(methodology_projection) == expected_methodology_projection,
+              "METHODOLOGY.md does not exactly match docs/methodology.json")
+
+    for fixture_id, fixture_errors in mutation_fixture_errors(data, methodology).items():
+        check(bool(fixture_errors),
+              f"methodology mutation fixture escaped validation: {fixture_id}")
 
     # --- 2. release identity ----------------------------------------------
     lakefile = read(ROOT / "lakefile.toml")
@@ -244,6 +267,8 @@ def main() -> int:
                       f"README missing headline declaration {first} ({claim['id']})")
     check(tag in readme, f"README does not state the release tag {tag}")
     check("does not solve" in readme, "README must state the open boundary in plain language")
+    check("METHODOLOGY.md" in readme and "docs/methodology.json" in readme,
+          "README must route to the human and machine-readable methodology")
     for phrase in README_BANNED_PHRASES:
         check(phrase not in readme, f"README contains banned drift phrase: {phrase!r}")
     for status in re.findall(r"\|\s*\*\*([a-z][a-z ]+)\*\*\s*\|", readme):
@@ -275,6 +300,8 @@ def main() -> int:
     for required in (
         "docs/claims.json",
         "docs/corpus_descriptor.json",
+        "docs/methodology.json",
+        "METHODOLOGY.md",
         "SCOPE.md",
         "Erdos249257.lean",
         "scripts/check_release.py",
@@ -282,6 +309,16 @@ def main() -> int:
         check(required in agents, f"AGENTS.md does not route through {required}")
     check("remain open" in agents, "AGENTS.md must preserve the open-problem boundary")
     check("proof authority" in agents, "AGENTS.md must state the proof-authority boundary")
+
+    methodology_check = subprocess.run(
+        [sys.executable, str(ROOT / "scripts" / "build_methodology.py"), "--check"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    check(methodology_check.returncode == 0,
+          f"methodology projection drift: {methodology_check.stdout.strip() or methodology_check.stderr.strip()}")
 
     atlas_check = subprocess.run(
         [sys.executable, str(ROOT / "scripts" / "build_declaration_atlas.py"), "--check"],
@@ -302,6 +339,18 @@ def main() -> int:
     )
     check(corpus_check.returncode == 0,
           f"corpus descriptor drift: {corpus_check.stdout.strip() or corpus_check.stderr.strip()}")
+
+    descriptor = json.loads(read(ROOT / "docs" / "corpus_descriptor.json"))
+    check(descriptor.get("schema") == "erdos249257-corpus-descriptor/2",
+          "corpus descriptor must use schema erdos249257-corpus-descriptor/2")
+    methodology_content = descriptor.get("identity", {}).get("content", {}).get("methodology_contract", {})
+    check(methodology_content.get("path") == "docs/methodology.json",
+          "corpus descriptor does not register docs/methodology.json")
+    check(descriptor.get("schemas", {}).get("methodology") == methodology.get("schema"),
+          "corpus descriptor methodology schema does not match docs/methodology.json")
+    methodology_capsule = descriptor.get("compact_graph", {}).get("methodology_capsule", {})
+    check(methodology_capsule.get("human_capsule") == methodology.get("human_capsule"),
+          "corpus descriptor methodology capsule drifted from docs/methodology.json")
 
     # --- 9. proof-trust guard ------------------------------------------------------
     # Covers the library, its root, and the downstream examples: everything

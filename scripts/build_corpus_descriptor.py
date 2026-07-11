@@ -5,9 +5,9 @@
 
 The descriptor is a self-describing navigation root for external agents.  It
 keeps the proof-bearing release identity distinct from the later navigation
-snapshot, carries content digests for the machine-readable paper and exhaustive
-atlas, and embeds only the compact claim/module graph.  It does not duplicate
-the full declaration atlas or acquire proof authority.
+snapshot, carries content digests for the machine-readable paper, methodology
+contract, and exhaustive atlas, and embeds only compact navigation data.  It
+does not duplicate the full declaration atlas or acquire proof authority.
 """
 
 from __future__ import annotations
@@ -25,6 +25,7 @@ ROOT = Path(__file__).resolve().parent.parent
 OUTPUT = ROOT / "docs" / "corpus_descriptor.json"
 CLAIMS_PATH = ROOT / "docs" / "claims.json"
 ATLAS_PATH = ROOT / "docs" / "declaration_atlas.json"
+METHODOLOGY_PATH = ROOT / "docs" / "methodology.json"
 
 
 def canonical_digest(value: Any) -> str:
@@ -70,6 +71,7 @@ def is_ancestor(ancestor: str, descendant: str) -> bool:
 def build() -> dict[str, Any]:
     claims = json.loads(CLAIMS_PATH.read_text(encoding="utf-8"))
     atlas = json.loads(ATLAS_PATH.read_text(encoding="utf-8"))
+    methodology = json.loads(METHODOLOGY_PATH.read_text(encoding="utf-8"))
     machine_paper = claims["machine_readable_paper"]
     release = claims["release"]
 
@@ -82,6 +84,7 @@ def build() -> dict[str, Any]:
         "--",
         "docs/claims.json",
         "docs/declaration_atlas.json",
+        "docs/methodology.json",
     )
     origin_main = git("rev-parse", "--verify", "origin/main", check=False)
     publication_state = (
@@ -111,21 +114,24 @@ def build() -> dict[str, Any]:
             }
             declaration_rows.append(row)
             high_salience_declarations.append({"claim_id": claim["id"], **row})
-        compact_claims.append(
-            {
-                "id": claim["id"],
-                "label": claim["label"],
-                "status": claim["status"],
-                "statement": claim["statement"],
-                "paper_label": claim.get("paper_label"),
-                "readme_headline": bool(claim.get("readme_headline")),
-                "declarations": declaration_rows,
-            }
-        )
+        compact_claim = {
+            "id": claim["id"],
+            "label": claim["label"],
+            "status": claim["status"],
+            "statement": claim["statement"],
+            "paper_label": claim.get("paper_label"),
+            "readme_headline": bool(claim.get("readme_headline")),
+            "declarations": declaration_rows,
+        }
+        if claim.get("remaining_open_proposition_ids"):
+            compact_claim["remaining_open_proposition_ids"] = claim["remaining_open_proposition_ids"]
+        if claim.get("bounded_domain"):
+            compact_claim["bounded_domain"] = claim["bounded_domain"]
+        compact_claims.append(compact_claim)
 
     repository = str(release["repository"])
     return {
-        "schema": "erdos249257-corpus-descriptor/1",
+        "schema": "erdos249257-corpus-descriptor/2",
         "artifact_role": "self_describing_external_mathematical_corpus_root",
         "corpus_id": "plectis_lean_erdos249_257_public",
         "authority_posture": {
@@ -133,6 +139,7 @@ def build() -> dict[str, Any]:
             "authored_argument": "docs/claims.json::machine_readable_paper.argument_graph",
             "navigation": "generated projections and this descriptor; not proof authority",
             "semantic_bridge": "approximate correspondence only; never a proof edge",
+            "methodology": "docs/methodology.json defines mathematical methodology and claim-transition requirements; it is not proof authority or claim-status authority",
         },
         "identity": {
             "formal_source": {
@@ -162,12 +169,17 @@ def build() -> dict[str, Any]:
                     "content_digest": file_digest(ATLAS_PATH),
                     "source_input_fingerprint": atlas["source_fingerprint"],
                 },
+                "methodology_contract": {
+                    "path": "docs/methodology.json",
+                    "content_digest": file_digest(METHODOLOGY_PATH),
+                },
             },
         },
         "schemas": {
             "claims": claims["schema"],
             "machine_readable_paper": machine_paper["schema"],
             "declaration_atlas": atlas["schema"],
+            "methodology": methodology["schema"],
         },
         "capabilities": {
             "global_argument_graph": True,
@@ -176,11 +188,14 @@ def build() -> dict[str, Any]:
             "high_salience_signatures": True,
             "exhaustive_declaration_lookup": "attached_atlas",
             "declaration_level_proof_dependencies": False,
+            "typed_remaining_open_propositions": True,
+            "claim_transition_requirements": True,
+            "human_mathematical_review_is_machine_decidable": False,
         },
         "retrieval_modes": {
             "global": {
                 "source": "compact_graph",
-                "supports": ["proved_open_boundary", "principal_argument_routes", "module_topology"],
+                "supports": ["proved_open_boundary", "principal_argument_routes", "module_topology", "mathematical_methodology_and_claim_transition_rules"],
             },
             "concept": {
                 "source": "compact_graph.high_salience_declarations_then_attached_atlas",
@@ -196,8 +211,18 @@ def build() -> dict[str, Any]:
             "status_taxonomy": claims["status_taxonomy"],
             "claims": compact_claims,
             "non_claims": claims["non_claims"],
+            "remaining_open_propositions": claims["remaining_open_propositions"],
             "module_graph": machine_paper["module_graph"],
             "argument_graph": machine_paper["argument_graph"],
+            "methodology_capsule": {
+                "path": "docs/methodology.json",
+                "artifact_role": methodology["artifact_role"],
+                "human_capsule": methodology["human_capsule"],
+                "mathematical_research_cycle": methodology["mathematical_research_cycle"],
+                "public_claim_cycle": methodology["public_claim_cycle"],
+                "method_axiom_ids": [row["id"] for row in methodology["method_axioms"]],
+                "transition_contract_ids": [row["id"] for row in methodology["transition_contracts"]],
+            },
             "high_salience_declarations": high_salience_declarations,
         },
         "expansion": {
@@ -207,10 +232,18 @@ def build() -> dict[str, Any]:
                 "expected_source_input_fingerprint": atlas["source_fingerprint"],
                 "availability": "optional_attached_corpus",
                 "check": "python3 scripts/build_declaration_atlas.py --check",
-            }
+            },
+            "methodology_contract": {
+                "path": "docs/methodology.json",
+                "expected_content_digest": file_digest(METHODOLOGY_PATH),
+                "human_projection": "METHODOLOGY.md",
+                "check": "python3 scripts/build_methodology.py --check",
+            },
         },
         "checks": {
             "descriptor": "python3 scripts/build_corpus_descriptor.py --check",
+            "methodology": "python3 scripts/build_methodology.py --check",
+            "methodology_mutations": "python3 scripts/test_methodology_contract.py",
             "release": "python3 scripts/check_release.py",
         },
     }
