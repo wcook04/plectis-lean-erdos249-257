@@ -1,12 +1,13 @@
 {
-  "schema": "erdos249257-corpus-descriptor/1",
+  "schema": "erdos249257-corpus-descriptor/2",
   "artifact_role": "self_describing_external_mathematical_corpus_root",
   "corpus_id": "plectis_lean_erdos249_257_public",
   "authority_posture": {
     "proof": "Lean source checked by the pinned Lean kernel",
     "authored_argument": "docs/claims.json::machine_readable_paper.argument_graph",
     "navigation": "generated projections and this descriptor; not proof authority",
-    "semantic_bridge": "approximate correspondence only; never a proof edge"
+    "semantic_bridge": "approximate correspondence only; never a proof edge",
+    "methodology": "docs/methodology.json defines mathematical methodology and claim-transition requirements; it is not proof authority or claim-status authority"
   },
   "identity": {
     "formal_source": {
@@ -16,32 +17,37 @@
       "authority_role": "proof_bearing_release_anchor"
     },
     "navigation_snapshot": {
-      "commit": "7fbab10772fc4528edc7bb339f000b3c6a137a29",
+      "commit": "8db268cdb4951fdba175dcfadc07df41c0733e46",
       "authority_role": "machine_readable_navigation_anchor",
-      "publication_state": "published_origin_main",
-      "published_ref": "origin/main",
-      "repository_resolution": "https://github.com/wcook04/plectis-lean-erdos249-257/tree/7fbab10772fc4528edc7bb339f000b3c6a137a29"
+      "publication_state": "navigation_snapshot_unpublished",
+      "published_ref": null,
+      "repository_resolution": "https://github.com/wcook04/plectis-lean-erdos249-257/tree/8db268cdb4951fdba175dcfadc07df41c0733e46"
     },
     "content": {
       "machine_readable_paper": {
         "path": "docs/claims.json::machine_readable_paper",
-        "content_digest": "sha256:89d9887d22875fc6bae59770437d6aa2443b8142ce81a7a1367abd79c8f78a02"
+        "content_digest": "sha256:2ad0612c71b6dd9a3d1c17738c29841ea92b22f7dee4e645042cf7e383f4de5b"
       },
       "claims_document": {
         "path": "docs/claims.json",
-        "content_digest": "sha256:f17c9d1cf25ffe5d3ec78eb06d6c9b90fd26b9481109d27169d55e8831fb8c40"
+        "content_digest": "sha256:b8137ce4bf69b3fb5c1aed1523dac17df13d31c048f4fea7356884db5d05e9aa"
       },
       "declaration_atlas": {
         "path": "docs/declaration_atlas.json",
         "content_digest": "sha256:da2e33a8728cb490fe382776cc94a62a10c0b967c3a4f2ae96e023dbde5d6ef2",
         "source_input_fingerprint": "sha256:6d86161aedbd9cbb09fd9a664f6ad24f6b8dd6b9cbeed53092da92d7a1fb95ee"
+      },
+      "methodology_contract": {
+        "path": "docs/methodology.json",
+        "content_digest": "sha256:7d91903e4259351aece2442cd16e78dd1834561ab210837f5db9726e76f44f7f"
       }
     }
   },
   "schemas": {
-    "claims": "erdos249257-claims/2",
+    "claims": "erdos249257-claims/3",
     "machine_readable_paper": "erdos249257-machine-readable-paper/1",
-    "declaration_atlas": "erdos249257-declaration-atlas/1"
+    "declaration_atlas": "erdos249257-declaration-atlas/1",
+    "methodology": "erdos249257-methodology/1"
   },
   "capabilities": {
     "global_argument_graph": true,
@@ -49,7 +55,10 @@
     "principal_claim_declaration_links": true,
     "high_salience_signatures": true,
     "exhaustive_declaration_lookup": "attached_atlas",
-    "declaration_level_proof_dependencies": false
+    "declaration_level_proof_dependencies": false,
+    "typed_remaining_open_propositions": true,
+    "claim_transition_requirements": true,
+    "human_mathematical_review_is_machine_decidable": false
   },
   "retrieval_modes": {
     "global": {
@@ -57,7 +66,8 @@
       "supports": [
         "proved_open_boundary",
         "principal_argument_routes",
-        "module_topology"
+        "module_topology",
+        "mathematical_methodology_and_claim_transition_rules"
       ]
     },
     "concept": {
@@ -168,6 +178,9 @@
             "signature": "theorem irrational_erdosSupportSeries_pairwise_coprime (b : ℕ) (A : Set ℕ) (hb : 2 ≤ b) (hA : A.Infinite) (hpair : A.Pairwise Nat.Coprime) (hsum : Summable (Set.indicator A fun a : ℕ => (1 : ℝ) / a)) : Irrational (erdosSupportSeries b A)",
             "docstring": "**Erdős's pairwise-coprime support theorem (1948), machine-checked.** For every base `b ≥ 2` and every infinite pairwise-coprime support `A ⊆ ℕ` with summable reciprocals, `∑_{a ∈ A} 1/(b^a - 1)` is irrational. The first non-dilation support class of Erdős #257 to submit to the support-coefficient calculus: this is NOT valuation forcing — small support elements join the CRT modulus at residue zero, adaptive block sizes absorb their deterministic first-block hits, and summable reciprocals control the strays."
           }
+        ],
+        "remaining_open_proposition_ids": [
+          "remaining_open.universal_257_all_infinite_supports"
         ]
       },
       {
@@ -212,6 +225,9 @@
             "signature": "theorem tsum_totient_div_pow_two_ne_ratCast_of_den_le_79639646646701375323355774875831053 : ∀ p : ℚ, p.den ≤ 79639646646701375323355774875831053 → (∑' n : ℕ, ((Nat.totient n : ℝ)) / (2 : ℝ) ^ n) ≠ (p : ℝ)",
             "docstring": "**Erdős #249 denominator exclusion to `79639646646701375323355774875831053`, `ℚ` form.** If `∑_{n≥0} φ(n)/2^n` is rational, its reduced denominator exceeds `79639646646701375323355774875831053`."
           }
+        ],
+        "remaining_open_proposition_ids": [
+          "remaining_open.erdos_249_irrationality"
         ]
       },
       {
@@ -246,6 +262,9 @@
             "signature": "theorem rational_totient_series_forces_lcm_cone_flatness (hrat : ¬ Irrational (∑' n : ℕ, (Nat.totient n : ℝ) / 2 ^ n)) : ∃ t₁ : ℕ, ∀ t, t₁ ≤ t → ∀ q m : ℕ, 0 < q → totientTail (q * periodLcm t + m * periodLcm t) - totientTail (q * periodLcm t) ∈ Set.range ((↑) : ℤ → ℝ)",
             "docstring": "**The lcm-cone flatness law.** If the totient series is rational, then from some scale on, the ENTIRE lcm cone is fractionally flat: every difference `R_{q·H_t + m·H_t} - R_{q·H_t}` is an integer, for every `t` past the threshold, every base multiplier `q ≥ 1`, and every step multiplier `m`. One constant fractional part governs every cone point — the maximal spend of the rationality hypothesis on the lcm lattice."
           }
+        ],
+        "remaining_open_proposition_ids": [
+          "remaining_open.unbounded_certificate_supply"
         ]
       },
       {
@@ -290,7 +309,11 @@
             "signature": "theorem certifiedKill_periodLcm_diagonal_upto_six : ∀ t ∈ Finset.Icc 1 6, certifiedKill (periodLcm t) (periodLcm t) (diagonalKillDepth t)",
             "docstring": "**Diagonal deposit.** The wave-23 predicate `P t` holds for every `1 ≤ t ≤ 6`: the endpoint certificate fires at `(H_t, H_t)` with the tabulated depth. Totient arguments stay ≤ 130 — a light kernel `decide`."
           }
-        ]
+        ],
+        "remaining_open_proposition_ids": [
+          "remaining_open.unbounded_certificate_supply"
+        ],
+        "bounded_domain": "The explicitly listed small periods, the lcm diagonal through t = 8, and the parameters encoded by the generated certificate shards."
       },
       {
         "id": "tail_orbit_rigidity",
@@ -344,6 +367,9 @@
             "signature": "theorem one_div_oddOrder_le_reciprocalMass_of_support_fraction (A : Set ℕ) (hA : ∃ a : ℕ, 0 < a ∧ a ∈ A) (hsum : Summable (reciprocalSupportTerm A)) (p : ℤ) (c : ℕ) {v : ℕ} (hv : 1 < v) (hvodd : Odd v) (hpv : p.toNat.Coprime v) (hvalue : erdosSupportSeries 2 A = (p : ℝ) / ((2 ^ c * v : ℕ) : ℝ)) : (1 : ℝ) / (oddDoublingOrder v hvodd : ℝ) ≤ reciprocalMass A",
             "docstring": null
           }
+        ],
+        "remaining_open_proposition_ids": [
+          "remaining_open.universal_257_all_infinite_supports"
         ]
       },
       {
@@ -380,6 +406,9 @@
             "signature": "theorem supportCoeffZeroWindow_length_le_eps_logb_add (A : Set ℕ) (hA : ∃ a : ℕ, 0 < a ∧ a ∈ A) (p : ℤ) (c v : ℕ) (hv : 0 < v) (hvalue : erdosSupportSeries 2 A = (p : ℝ) / ((2 ^ c * v : ℕ) : ℝ)) (ε : ℝ) (hε : 0 < ε) : ∃ B : ℝ, 0 ≤ B ∧ ∀ N h : ℕ, SupportCoeffZeroWindow A (c + N) h → (h : ℝ) ≤ ε * Real.logb 2 (N + 1 : ℝ) + B",
             "docstring": "For every positive `ε`, a rational support-series value forces every support-coefficient zero window to have length at most `ε * log₂(N+1)` plus a constant depending only on `ε`, `v`, and `c`. The bound is uniform in the support `A`, numerator `p`, starting index `N`, and window length `h`."
           }
+        ],
+        "remaining_open_proposition_ids": [
+          "remaining_open.universal_257_all_infinite_supports"
         ]
       },
       {
@@ -406,6 +435,9 @@
             "signature": "theorem three_fourths_not_mem_mersenneAchievementSet : (3 / 4 : ℝ) ∉ mersenneAchievementSet",
             "docstring": "Consequently `3/4` is not in the Mersenne achievement set."
           }
+        ],
+        "remaining_open_proposition_ids": [
+          "remaining_open.universal_257_all_infinite_supports"
         ]
       },
       {
@@ -433,7 +465,11 @@
         "statement": "Not proved by this release. The reductions convert it into the unboundedness of the certificate supply, which is untouched.",
         "paper_label": null,
         "readme_headline": false,
-        "declarations": []
+        "declarations": [],
+        "remaining_open_proposition_ids": [
+          "remaining_open.erdos_249_irrationality",
+          "remaining_open.unbounded_certificate_supply"
+        ]
       },
       {
         "id": "universal_257",
@@ -442,7 +478,10 @@
         "statement": "Irrationality of ∑_{n∈A} 1/(2ⁿ − 1) for every infinite A is not proved by this release; only named families are formalised.",
         "paper_label": null,
         "readme_headline": false,
-        "declarations": []
+        "declarations": [],
+        "remaining_open_proposition_ids": [
+          "remaining_open.universal_257_all_infinite_supports"
+        ]
       }
     ],
     "non_claims": [
@@ -469,6 +508,23 @@
       {
         "id": "not_hidden_proof_body_authority",
         "meaning": "No unpublished proof sketch or hidden artefact carries proof authority for this release"
+      }
+    ],
+    "remaining_open_propositions": [
+      {
+        "id": "remaining_open.erdos_249_irrationality",
+        "open_target_claim": "erdos_249",
+        "statement": "Prove that S = ∑ φ(n)/2ⁿ is irrational, with no bound on a possible rational denominator."
+      },
+      {
+        "id": "remaining_open.unbounded_certificate_supply",
+        "open_target_claim": "erdos_249",
+        "statement": "Produce certified non-integrality witnesses at unbounded parameters, equivalently along the lcm diagonal."
+      },
+      {
+        "id": "remaining_open.universal_257_all_infinite_supports",
+        "open_target_claim": "universal_257",
+        "statement": "Prove irrationality for every infinite support A, not only the named support families formalised here."
       }
     ],
     "module_graph": {
@@ -651,17 +707,32 @@
         {
           "from": "support_families",
           "relation": "advances_open_target",
-          "to": "universal_257"
+          "to": "universal_257",
+          "remaining_open_effect": {
+            "remaining_open_proposition_id": "remaining_open.universal_257_all_infinite_supports",
+            "operation": "narrows",
+            "statement": "Proves the claim for named infinite-support families while leaving arbitrary infinite supports open."
+          }
         },
         {
           "from": "denominator_exclusion",
           "relation": "advances_open_target",
-          "to": "erdos_249"
+          "to": "erdos_249",
+          "remaining_open_effect": {
+            "remaining_open_proposition_id": "remaining_open.erdos_249_irrationality",
+            "operation": "narrows",
+            "statement": "Excludes every rational representation up to the stated denominator bound without proving irrationality."
+          }
         },
         {
           "from": "certificate_reduction",
           "relation": "advances_open_target",
-          "to": "erdos_249"
+          "to": "erdos_249",
+          "remaining_open_effect": {
+            "remaining_open_proposition_id": "remaining_open.unbounded_certificate_supply",
+            "operation": "re_expresses",
+            "statement": "Re-expresses the open irrationality step as the unbounded supply of checked finite certificates."
+          }
         },
         {
           "from": "certificate_completeness",
@@ -696,17 +767,32 @@
         {
           "from": "reciprocal_mass_bound",
           "relation": "advances_open_target",
-          "to": "universal_257"
+          "to": "universal_257",
+          "remaining_open_effect": {
+            "remaining_open_proposition_id": "remaining_open.universal_257_all_infinite_supports",
+            "operation": "constrains",
+            "statement": "Adds a necessary reciprocal-mass condition for a rational value over an infinite support."
+          }
         },
         {
           "from": "sublog_zero_windows",
           "relation": "advances_open_target",
-          "to": "universal_257"
+          "to": "universal_257",
+          "remaining_open_effect": {
+            "remaining_open_proposition_id": "remaining_open.universal_257_all_infinite_supports",
+            "operation": "constrains",
+            "statement": "Adds a necessary sublogarithmic zero-window condition for a rational value over an infinite support."
+          }
         },
         {
           "from": "greedy_achievement_geometry",
           "relation": "advances_open_target",
-          "to": "universal_257"
+          "to": "universal_257",
+          "remaining_open_effect": {
+            "remaining_open_proposition_id": "remaining_open.universal_257_all_infinite_supports",
+            "operation": "constrains",
+            "statement": "Provides exact finite non-membership tests for the value set without proving the universal irrationality statement."
+          }
         },
         {
           "from": "sigma_transcendence",
@@ -718,6 +804,52 @@
           "relation": "positions",
           "to": "universal_257"
         }
+      ]
+    },
+    "methodology_capsule": {
+      "path": "docs/methodology.json",
+      "artifact_role": "rules_for_mathematical_reasoning_and_public_claim_changes_not_proof_authority",
+      "human_capsule": [
+        "The exact boundary between proved and open must remain explicit.",
+        "Lean checks the stated proposition; it does not check that the proposition expresses the intended mathematics.",
+        "A change of representation requires a proved implication or equivalence.",
+        "A reduction must state the hypothesis or quantifier that remains open.",
+        "A finite result remains finite unless a theorem supplies the unbounded or universal step.",
+        "Progress toward an open problem must state which remaining open proposition changed and how."
+      ],
+      "mathematical_research_cycle": [
+        "open_target",
+        "representation",
+        "necessary_consequence",
+        "proved_reduction",
+        "finite_certificate",
+        "lean_declaration",
+        "remaining_open_proposition"
+      ],
+      "public_claim_cycle": [
+        "lean_declaration",
+        "checked_assumptions",
+        "reviewed_intended_meaning",
+        "public_claim",
+        "authored_exposition",
+        "generated_projection",
+        "public_checkout"
+      ],
+      "method_axiom_ids": [
+        "method_axiom.proof_is_exact_checked_proposition",
+        "method_axiom.formal_proof_does_not_verify_intended_meaning",
+        "method_axiom.representation_changes_require_proved_transport",
+        "method_axiom.reduction_states_remaining_open_hypothesis",
+        "method_axiom.finite_results_remain_finite_without_uniform_theorem",
+        "method_axiom.open_problem_progress_names_changed_open_proposition"
+      ],
+      "transition_contract_ids": [
+        "transition.lean_declaration_to_public_claim",
+        "transition.representation_change_to_public_claim",
+        "transition.conditional_reduction_to_public_claim",
+        "transition.finite_certificate_to_public_claim",
+        "transition.public_claim_to_open_target_edge",
+        "transition.methodology_source_to_public_projections"
       ]
     },
     "high_salience_declarations": [
@@ -919,10 +1051,18 @@
       "expected_source_input_fingerprint": "sha256:6d86161aedbd9cbb09fd9a664f6ad24f6b8dd6b9cbeed53092da92d7a1fb95ee",
       "availability": "optional_attached_corpus",
       "check": "python3 scripts/build_declaration_atlas.py --check"
+    },
+    "methodology_contract": {
+      "path": "docs/methodology.json",
+      "expected_content_digest": "sha256:7d91903e4259351aece2442cd16e78dd1834561ab210837f5db9726e76f44f7f",
+      "human_projection": "METHODOLOGY.md",
+      "check": "python3 scripts/build_methodology.py --check"
     }
   },
   "checks": {
     "descriptor": "python3 scripts/build_corpus_descriptor.py --check",
+    "methodology": "python3 scripts/build_methodology.py --check",
+    "methodology_mutations": "python3 scripts/test_methodology_contract.py",
     "release": "python3 scripts/check_release.py"
   }
 }
