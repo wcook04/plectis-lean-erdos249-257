@@ -28,6 +28,11 @@
         "read": ["docs/claims.json", "docs/SOURCE_MAP.md", "docs/WAVE_INDEX.md"]
       },
       {
+        "id": "trace_prior_art",
+        "intent": "Understand the cited mathematical sources, their precise relationship to the release, and the priority boundary.",
+        "read": ["docs/PRIOR_ART.md", "paper/erdos249-257-exposition.tex", "CITATION.cff"]
+      },
+      {
         "id": "change_or_verify_release",
         "intent": "Modify a formal or editorial surface without allowing status or source coordinates to drift.",
         "read": ["AGENTS.md", "scripts/check_release.py", "CONTRIBUTING.md"]

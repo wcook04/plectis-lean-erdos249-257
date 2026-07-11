@@ -37,6 +37,7 @@ The conditional reduction is exact: producing the unbounded certificate supply i
 - **Module reference and chronology** — [`docs/WAVE_INDEX.md`](docs/WAVE_INDEX.md): what each module establishes, in development order.
 - **Declaration routes** — [`docs/SOURCE_MAP.md`](docs/SOURCE_MAP.md): intention-based routes to the principal declarations.
 - **Neighbouring problems** — [`docs/RELATED_PROBLEMS.md`](docs/RELATED_PROBLEMS.md): where this sits among Erdős #249/#257/#1049/#69/#250/#258.
+- **Prior-art map** — [`docs/PRIOR_ART.md`](docs/PRIOR_ART.md): what each principal source contributes, and the boundary between citation, formalisation, and priority.
 - **Scope** — [`SCOPE.md`](SCOPE.md): what this release deliberately does not claim.
 
 ## Build and verify
