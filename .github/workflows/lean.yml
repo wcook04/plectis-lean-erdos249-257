@@ -21,6 +21,8 @@ jobs:
         with:
           use-mathlib-cache: auto
           build: true
+      - name: Build downstream consumer example
+        run: lake build Examples
 
   release-surfaces:
     runs-on: ubuntu-latest

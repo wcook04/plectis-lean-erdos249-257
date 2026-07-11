@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Will Cook
+# SPDX-License-Identifier: Apache-2.0
+name: Mathematical or statement discrepancy
+description: A stated result looks wrong, overclaimed, or inconsistent with its Lean declaration.
+labels: ["mathematics"]
+body:
+  - type: input
+    id: claim
+    attributes:
+      label: Which claim
+      description: The claim id from docs/claims.json, the Lean declaration name, or the README/paper statement.
+      placeholder: irrational_erdosSum_full_support, or "README row 4"
+    validations:
+      required: true
+  - type: textarea
+    id: discrepancy
+    attributes:
+      label: What looks wrong
+      description: The mismatch as precisely as you can state it (statement vs declaration, paper vs README, or a mathematical error).
+    validations:
+      required: true
+  - type: input
+    id: release
+    attributes:
+      label: Release tag
+      placeholder: v0.4.0
+    validations:
+      required: true

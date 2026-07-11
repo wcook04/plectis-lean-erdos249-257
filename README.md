@@ -1,5 +1,3 @@
-<img width="1920" height="1080" alt="Proof-status map of the Erdős #249/#257 Lean formalisation" src="banner.png" />
-
 <!-- SPDX-FileCopyrightText: 2026 Will Cook -->
 <!-- SPDX-License-Identifier: Apache-2.0 -->
 
@@ -30,7 +28,7 @@ Statuses use the release taxonomy declared once in [`docs/claims.json`](docs/cla
 | Transcendence of `∑ σ(m)/2^m` (Nesterenko); prime-support irrationality (Tao–Teräväinen) | **cited only** | — |
 | Erdős #249; the universal Erdős #257 | **open** | — |
 
-The conditional reduction is exact: producing the unbounded certificate supply is the untouched analytic core of #249, and the proved support families are not the universal #257 statement. The scope statement lives in [`NON_CLAIMS.md`](NON_CLAIMS.md).
+The conditional reduction is exact: producing the unbounded certificate supply is the untouched analytic core of #249, and the proved support families are not the universal #257 statement. The scope statement lives in [`SCOPE.md`](SCOPE.md).
 
 ## Start here
 
@@ -38,7 +36,7 @@ The conditional reduction is exact: producing the unbounded certificate supply i
 - **Module reference and chronology** — [`docs/WAVE_INDEX.md`](docs/WAVE_INDEX.md): what each module establishes, in development order.
 - **Declaration routes** — [`docs/SOURCE_MAP.md`](docs/SOURCE_MAP.md): intention-based routes to the principal declarations.
 - **Neighbouring problems** — [`docs/RELATED_PROBLEMS.md`](docs/RELATED_PROBLEMS.md): where this sits among Erdős #249/#257/#1049/#69/#250/#258.
-- **Scope** — [`NON_CLAIMS.md`](NON_CLAIMS.md): what this release deliberately does not claim.
+- **Scope** — [`SCOPE.md`](SCOPE.md): what this release deliberately does not claim.
 
 ## Build and verify
 
@@ -53,7 +51,7 @@ The build is heavy (thousands of `decide`-discharged certificates); continuous i
 python3 scripts/check_release.py   # claim registry, paper links, metadata, scope, licences
 ```
 
-The checker verifies that the paper's source links resolve to the named declarations at the stated lines, that README/paper/`CITATION.cff`/`NON_CLAIMS.md` agree with the claim registry, that no Lean source uses `sorry`/`admit`/`axiom`/`native_decide`, and that every licence in use has its text under `LICENSES/`.
+The checker verifies that the paper's source links resolve to the named declarations at the stated lines, that README/paper/`CITATION.cff`/`SCOPE.md` agree with the claim registry, that no Lean source uses `sorry`/`admit`/`axiom`/`native_decide` (the downstream examples included), and that every licence in use has its text under `LICENSES/`.
 
 ## Headline Lean interface
 
@@ -74,11 +72,13 @@ import Erdos249257
 
 The exhaustive declaration map, with one row per principal statement, is Appendix B of the paper.
 
+A minimal downstream consumer lives in [`examples/Examples.lean`](examples/Examples.lean): it imports the package root exactly as an external project would and re-derives a corollary (the base-3 instance of the headline theorem) through this interface. CI builds it with `lake build Examples` on every push, so the package is proven externally usable, not merely internally buildable.
+
 ## Citation, licence, and support
 
 Cite the tagged release `v0.4.0` using [`CITATION.cff`](CITATION.cff); for the mathematics, cite the exposition included in the release. Code, scripts, and documentation are licensed Apache-2.0; the manuscript layer (paper source, rendered PDF, banner) is CC-BY-4.0; the map is [`REUSE.toml`](REUSE.toml) with licence texts under [`LICENSES/`](LICENSES/).
 
-This release is a pinned scholarly artefact. Error reports are welcome through GitHub issues; substantial changes land only as a new tagged release with refreshed claim and citation metadata.
+This release is a pinned scholarly artefact. Error reports are welcome through the GitHub issue forms (mathematical discrepancy, build failure, broken link, exposition correction); [`CONTRIBUTING.md`](CONTRIBUTING.md) explains the release-pinning rule and the local checks, and [`SECURITY.md`](SECURITY.md) the private reporting route. Substantial changes land only as a new tagged release with refreshed claim and citation metadata.
 
 ---
 

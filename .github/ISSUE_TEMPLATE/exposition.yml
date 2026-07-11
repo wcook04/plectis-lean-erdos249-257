@@ -1,0 +1,19 @@
+# SPDX-FileCopyrightText: 2026 Will Cook
+# SPDX-License-Identifier: Apache-2.0
+name: Exposition or citation correction
+description: Prose, notation, attribution, or citation problems in the paper or documentation.
+labels: ["exposition"]
+body:
+  - type: input
+    id: location
+    attributes:
+      label: Where
+      placeholder: paper §2.1, README, docs/WAVE_INDEX.md, CITATION.cff
+    validations:
+      required: true
+  - type: textarea
+    id: correction
+    attributes:
+      label: The problem and suggested correction
+    validations:
+      required: true

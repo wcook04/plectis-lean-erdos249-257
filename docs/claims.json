@@ -1,6 +1,6 @@
 {
   "schema": "erdos249257-claims/1",
-  "comment": "Single owner of release identity and mathematical claim status. Every human surface (README, paper, NON_CLAIMS.md, CITATION.cff) is a projection of this file; scripts/check_release.py fails the build when a projection drifts.",
+  "comment": "Single owner of release identity and mathematical claim status. Every human surface (README, paper, SCOPE.md, CITATION.cff) is a projection of this file; scripts/check_release.py fails the build when a projection drifts.",
   "release": {
     "version": "0.4.0",
     "tag": "v0.4.0",

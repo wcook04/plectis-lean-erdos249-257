@@ -1,0 +1,21 @@
+# SPDX-FileCopyrightText: 2026 Will Cook
+# SPDX-License-Identifier: Apache-2.0
+name: Broken source or paper link
+description: A paper source link, README link, or declaration reference does not resolve to what it names.
+labels: ["links"]
+body:
+  - type: input
+    id: where
+    attributes:
+      label: Where the link is
+      description: Paper section, README section, or docs file.
+      placeholder: paper §4.2, or README "Headline Lean interface"
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What it points at vs what it should
+      description: The target it resolves to now, and the declaration/line it names.
+    validations:
+      required: true

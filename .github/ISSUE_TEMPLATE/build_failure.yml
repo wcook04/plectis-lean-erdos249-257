@@ -1,0 +1,29 @@
+# SPDX-FileCopyrightText: 2026 Will Cook
+# SPDX-License-Identifier: Apache-2.0
+name: Lean build failure
+description: lake build fails, the Mathlib cache does not resolve, or the toolchain misbehaves.
+labels: ["build"]
+body:
+  - type: textarea
+    id: command
+    attributes:
+      label: Command and failing output
+      description: The exact command (e.g. `lake exe cache get && lake build`) and the tail of its output.
+      render: shell
+    validations:
+      required: true
+  - type: input
+    id: toolchain
+    attributes:
+      label: Toolchain
+      description: Output of `cat lean-toolchain` and your OS.
+      placeholder: leanprover/lean4:v4.29.1 on macOS 15
+    validations:
+      required: false
+  - type: input
+    id: release
+    attributes:
+      label: Release tag or commit
+      placeholder: v0.4.0
+    validations:
+      required: true

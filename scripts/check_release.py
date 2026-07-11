@@ -13,7 +13,7 @@ This script verifies that every other public surface agrees with it:
      stated line.
   4. Every paper source link (\\lref / \\lrefx / \\lloc) resolves: the file
      exists and the named declaration appears at the stated line.
-  5. NON_CLAIMS.md lists exactly the machine identifiers in claims.json.
+  5. SCOPE.md lists exactly the machine identifiers in claims.json.
   6. README.md carries the headline declarations, states the release tag,
      uses only taxonomy statuses in its status table, and contains none of
      the banned drift phrases.
@@ -144,14 +144,14 @@ def main() -> int:
             check(name_at_line(lines, name, line),
                   f"paper \\{macro}: {name} not at {rel}:{line} (±{LINE_WINDOW})")
 
-    # --- 5. NON_CLAIMS.md ----------------------------------------------------
-    non_claims = read(ROOT / "NON_CLAIMS.md")
+    # --- 5. SCOPE.md ----------------------------------------------------------
+    scope = read(ROOT / "SCOPE.md")
     declared = {nc["id"] for nc in data["non_claims"]}
-    listed = set(re.findall(r"`(not_[a-z0-9_]+)`", non_claims))
+    listed = set(re.findall(r"`(not_[a-z0-9_]+)`", scope))
     check(declared == listed,
-          f"NON_CLAIMS.md identifiers {sorted(listed)} != claims.json {sorted(declared)}")
-    check("does not prove" in non_claims,
-          "NON_CLAIMS.md must state the open boundary in plain language")
+          f"SCOPE.md identifiers {sorted(listed)} != claims.json {sorted(declared)}")
+    check("does not prove" in scope,
+          "SCOPE.md must state the open boundary in plain language")
 
     # --- 6. README ------------------------------------------------------------
     readme = read(ROOT / "README.md")
@@ -190,8 +190,11 @@ def main() -> int:
               f"licence {lic} is used but LICENSES/{lic}.txt is missing")
 
     # --- 8. proof-trust guard ------------------------------------------------------
+    # Covers the library, its root, and the downstream examples: everything
+    # shipped as Lean source obeys the same no-sorry/no-axiom contract.
     trust_re = re.compile(r"^\s*(sorry\b|admit\b|axiom\s)|native_decide", re.M)
-    for lean in sorted((ROOT / "Erdos249257").rglob("*.lean")) + [ROOT / "Erdos249257.lean"]:
+    example_sources = sorted((ROOT / "examples").rglob("*.lean")) if (ROOT / "examples").is_dir() else []
+    for lean in sorted((ROOT / "Erdos249257").rglob("*.lean")) + [ROOT / "Erdos249257.lean"] + example_sources:
         m = trust_re.search(read(lean))
         check(m is None,
               f"proof-trust violation in {lean.relative_to(ROOT)}: {m.group(0).strip() if m else ''}")
