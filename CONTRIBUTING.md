@@ -50,6 +50,7 @@ python3 -m pip install cffconvert reuse  # once, for metadata and licence checks
 python3 scripts/check_metadata.py  # CITATION.cff schema validation (same command as CI)
 reuse lint                         # licence validation
 python3 scripts/check_cold_clone_comprehension.py  # diagnostic (not a gate): cold-clone readability
+python3 scripts/test_cold_clone_comprehension.py  # adversarial self-test for the diagnostic
 ```
 
 CI runs the build and release-surface checks on every push. The cold-clone

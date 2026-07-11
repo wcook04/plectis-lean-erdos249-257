@@ -81,6 +81,7 @@ A separate diagnostic checks that a cold clone stays readable:
 
 ```sh
 python3 scripts/check_cold_clone_comprehension.py
+python3 scripts/test_cold_clone_comprehension.py
 ```
 
 It derives the proved/open distinctions from the claim registry and confirms
@@ -88,3 +89,6 @@ both the prose surfaces and the machine surfaces still let a reader recover
 them. It measures availability, not mathematical correctness, and is not part
 of the release gate; a failure means a projection or route dropped a
 distinction and should be repaired.
+The companion adversarial test removes each machine token and each grouped
+human semantic anchor in turn; every such mutation must make the diagnostic
+fail, so generic vocabulary cannot masquerade as comprehension.

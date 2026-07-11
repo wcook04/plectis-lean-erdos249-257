@@ -7,7 +7,9 @@ Availability, not correctness. From a fresh clone, can a human reader (using the
 prose surfaces) and an agent (using the machine surfaces) each recover the same
 seven distinctions the release is built to keep straight? The canonical answers
 are derived from docs/claims.json and docs/methodology.json, so this check
-follows the registry rather than a hand-maintained answer key.
+follows the registry rather than a hand-maintained answer key. Human evidence is
+grouped by meaning: every semantic group must have an anchor, so a generic word
+such as "universal" or "required" cannot make a question pass by itself.
 
 A failure means a projection or route dropped a distinction, not that any
 mathematics is wrong. A pass certifies availability, not mathematical
@@ -58,14 +60,17 @@ def build_questions(claims: dict[str, Any], methodology: dict[str, Any]) -> list
     """Derive each question's recoverable tokens from the live registry.
 
     machine_all: every token must appear in the machine bundle (structured data
-    should carry each id). human_any: at least one token must appear in the human
-    bundle (prose need only surface the distinction once).
+    should carry each id). human_groups: every semantic group must contribute at
+    least one token to the human bundle. Alternatives within a group allow prose
+    and declaration-oriented routes to express the same distinction differently.
     """
-    remaining_ids = [row["id"] for row in claims["remaining_open_propositions"]]
+    remaining = claims["remaining_open_propositions"]
+    remaining_ids = [row["id"] for row in remaining]
     required_review = [
-        row["id"] for row in methodology["change_classes"] if row.get("human_review") == "required"
+        row for row in methodology["change_classes"] if row.get("human_review") == "required"
     ]
     reduction = claim_by_id(claims, "certificate_reduction")
+    exclusion = claim_by_id(claims, "denominator_exclusion")
     ladder = claim_by_id(claims, "mersenne_lambert_ladder")
     support = claim_by_id(claims, "support_families")
     finite = claim_by_id(claims, "certified_kill_instances")
@@ -74,44 +79,82 @@ def build_questions(claims: dict[str, Any], methodology: dict[str, Any]) -> list
         {
             "id": "q1_proved_about_249",
             "question": "What is proved about Erdős #249?",
-            "machine_all": ["certificate_reduction", "denominator_exclusion"],
-            "human_any": [n for n in (first_decl_name(reduction),) if n] + ["denominator"],
+            "machine_all": [
+                reduction["id"],
+                reduction["status"],
+                exclusion["id"],
+                exclusion["status"],
+            ],
+            "human_groups": [
+                [exclusion["label"], first_decl_name(exclusion), "7.96 × 10³⁴"],
+                [reduction["label"], first_decl_name(reduction), "unbounded certificate supply"],
+                ["does not solve either open problem", "does not prove the irrationality"],
+            ],
         },
         {
             "id": "q2_what_remains_open",
-            "question": "What proposition still remains open?",
+            "question": "Which three propositions remain open?",
             "machine_all": remaining_ids,
-            "human_any": remaining_ids,
+            "human_groups": [[row["id"], row["statement"]] for row in remaining],
         },
         {
             "id": "q3_finite_does_not_settle",
             "question": "Why do the finite certificates not settle it?",
-            "machine_all": ["verified finite instance", "remaining_open.unbounded_certificate_supply"],
-            "human_any": ["verified finite instance", "unbounded"],
+            "machine_all": [
+                finite["status"],
+                finite["bounded_domain"],
+                "remaining_open.unbounded_certificate_supply",
+            ],
+            "human_groups": [
+                [finite["status"]],
+                ["fixed bounds", "bounded region", "through t = 8"],
+                ["unbounded certificate supply", "remaining_open.unbounded_certificate_supply"],
+            ],
         },
         {
             "id": "q4_257_proved_vs_universal",
             "question": "Which #257 statements are proved, and which universal statement remains open?",
-            "machine_all": ["support_families", "universal_257", "remaining_open.universal_257_all_infinite_supports"],
-            "human_any": [n for n in (first_decl_name(support),) if n] + ["universal"],
+            "machine_all": [
+                support["id"],
+                support["status"],
+                "universal_257",
+                "remaining_open.universal_257_all_infinite_supports",
+            ],
+            "human_groups": [
+                [support["label"], first_decl_name(support)],
+                [
+                    "universal Erdős #257",
+                    "universal #257",
+                    "remaining_open.universal_257_all_infinite_supports",
+                ],
+                ["not the universal statement", "does not prove the universal"],
+            ],
         },
         {
             "id": "q5_representation_transport",
             "question": "Which representation changes have checked transport?",
-            "machine_all": ["mersenne_lambert_ladder"],
-            "human_any": [n for n in (first_decl_name(ladder),) if n] + ["Mersenne"],
+            "machine_all": [ladder["id"], *[row["name"] for row in ladder["declarations"]]],
+            "human_groups": [
+                [ladder["label"], first_decl_name(ladder)],
+                ["Mersenne–Lambert", "Mersenne--Lambert", "Möbius-square lens"],
+                ["kernel-checked", "Lean declaration"],
+            ],
         },
         {
             "id": "q6_proof_authority",
             "question": "What is proof authority?",
             "machine_all": ["Lean source checked by the pinned Lean kernel"],
-            "human_any": ["proof authority", "Lean kernel"],
+            "human_groups": [
+                ["proof authority"],
+                ["Lean kernel", "pinned Lean kernel"],
+                ["Provider or model output is not proof authority", "provider output"],
+            ],
         },
         {
             "id": "q7_which_changes_need_review",
             "question": "Which classes of repository change require mathematical review?",
-            "machine_all": required_review,
-            "human_any": ["required"],
+            "machine_all": [row["id"] for row in required_review],
+            "human_groups": [[row["summary"]] for row in required_review],
         },
     ]
 
@@ -122,6 +165,18 @@ def probe(tokens: list[str], bundle: str, mode: str) -> tuple[bool, list[str]]:
     if mode == "all":
         return (not missing, missing)
     return (bool(present), missing if not present else [])
+
+
+def probe_groups(
+    groups: list[list[str | None]], bundle: str
+) -> tuple[bool, list[list[str]]]:
+    """Require at least one non-empty anchor from every semantic group."""
+    missing: list[list[str]] = []
+    for group in groups:
+        anchors = [token for token in group if token]
+        if not any(token in bundle for token in anchors):
+            missing.append(anchors)
+    return (not missing, missing)
 
 
 def main() -> int:
@@ -140,15 +195,15 @@ def main() -> int:
 
     for q in questions:
         machine_ok, machine_missing = probe(q["machine_all"], machine_bundle, "all")
-        human_ok, _ = probe(q["human_any"], human_bundle, "any")
+        human_ok, human_missing = probe_groups(q["human_groups"], human_bundle)
         mark = "PASS" if (machine_ok and human_ok) else "FAIL"
         print(f"  [{mark}] {q['id']}: {q['question']}")
         if not machine_ok:
             failures.append(f"{q['id']}: machine surfaces missing {machine_missing}")
             print(f"         machine bundle missing: {machine_missing}")
         if not human_ok:
-            failures.append(f"{q['id']}: human surfaces recover none of {q['human_any']}")
-            print(f"         human bundle recovered none of: {q['human_any']}")
+            failures.append(f"{q['id']}: human surfaces missing semantic groups {human_missing}")
+            print(f"         human bundle missing semantic groups: {human_missing}")
 
     print()
     if failures:
