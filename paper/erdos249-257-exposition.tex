@@ -172,8 +172,11 @@ L(f)\;=\;\sum_{n\ge1}\frac{f(n)}{2^n-1}\;=\;\sum_{m\ge1}\frac{(f*\mathbf 1)(m)}{
 \qquad (f*\mathbf 1)(m)=\sum_{d\mid m} f(d),
 \]
 the second equality being the standard Lambert rearrangement (one Dirichlet
-convolution by the constant $\mathbf 1=\zeta$). Walking the ladder by convolution
-gives five values with rational, irrational, open, or transcendental status.
+convolution by the constant $\mathbf 1=\zeta$); Apostol supplies the classical
+arithmetic-function and Dirichlet-convolution background~\cite{apostol}, and
+Merca--Schmidt give a modern treatment of Lambert-series factorisations
+~\cite{mercaschmidt}. Walking the ladder by convolution gives five values with
+rational, irrational, open, or transcendental status.
 
 \begin{center}
 \begin{tabular}{@{}llll@{}}
@@ -645,9 +648,10 @@ open series, and each module states that boundary in its header. The prior-art
 boundary is theorem-family-specific. The integral carry recurrence has a
 direct antecedent in Wang--Grau Ribas~\cite{wanggrauribas}; the strict-tail
 geometry is recorded by Kova\v{c}--Tao~\cite{kovactao}; M\"obius inversion,
-repetend algebra, and divisor averaging are classical. We make no claim of
-mathematical priority for the converse/rigidity, certificate-normal-form, or
-coupled reciprocal-mass/collision statements collected here.
+repetend algebra, and divisor averaging are classical (see, for example,
+Apostol~\cite{apostol}). We make no claim of mathematical priority for the
+converse/rigidity, certificate-normal-form, or coupled reciprocal-mass/collision
+statements collected here.
 
 \subsection{Tail-orbit rigidity: a rationality criterion}
 
@@ -705,8 +709,9 @@ coefficient series, $\sum_{n\in A}1/(2^n-1)=X_{f_A}$
 (\lrefx{BooleanMobiusCarry.lean}{379}{erdosSupportSeries_two_eq_binaryCoeffSeries}).
 Two exact coordinate changes then turn a hypothetical rational value into a
 support-free object. The divisor transform and M\"obius inversion below are
-classical Lambert-series infrastructure; the contribution here is their
-Lean-checked composition with the tempered carry interface.
+classical Lambert-series infrastructure~\cite{apostol,mercaschmidt}; the
+contribution here is their Lean-checked composition with the tempered carry
+interface.
 
 \begin{proposition}[Boolean M\"obius inversion, both directions]\label{res:boolmob}
 On positive integers, $f_A=\mathbf 1_A*\zeta$ and $\mu*f_A=\mathbf 1_A$, where
@@ -1053,6 +1058,11 @@ greedy membership criterion & \lrefx{GreedyAchievementSet.lean}{738}{mem_mersenn
 \bibitem{borwein1992} P.~B. Borwein, \emph{On the irrationality of certain series},
   Math. Proc. Cambridge Philos. Soc. \textbf{112} (1992), no.~1, 141--146,
   doi:\href{https://doi.org/10.1017/S030500410007081X}{10.1017/S030500410007081X}.
+\bibitem{apostol} T.~M. Apostol, \emph{Introduction to Analytic Number Theory},
+  Undergraduate Texts in Mathematics, Springer, 1976,
+  doi:\href{https://doi.org/10.1007/978-1-4757-5579-4}{10.1007/978-1-4757-5579-4}.
+\bibitem{mercaschmidt} M.~Merca and M.~D. Schmidt, \emph{Generating special arithmetic
+  functions by Lambert series factorizations}, arXiv:1706.00393 (2017).
 \bibitem{nesterenko} Yu.~V. Nesterenko, \emph{Modular functions and transcendence questions},
   Mat. Sb. \textbf{187} (1996), no.~9, 65--96; English transl., Sb. Math. \textbf{187} (1996), no.~9, 1319--1348.
 \bibitem{lucatachiya} F.~Luca and Y.~Tachiya, \emph{Irrationality of Lambert series associated
