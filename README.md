@@ -45,6 +45,17 @@ lake exe cache get   # fetch the prebuilt Mathlib cache
 lake build           # elaborate and kernel-check the whole package
 ```
 
+On memory-constrained machines, use the bounded build wrapper instead:
+
+```sh
+python3 scripts/lean_fast_build.py --jobs 2
+```
+
+Lake 5 can start every ready local module at once; this wrapper prebuilds stale
+modules in dependency order with at most two Lean processes, then runs the
+ordinary `lake build` authority check. Set `--jobs` higher only after measuring
+memory headroom.
+
 The build is heavy (thousands of `decide`-discharged certificates); continuous integration runs it on every push. The release surfaces are checked separately:
 
 ```sh

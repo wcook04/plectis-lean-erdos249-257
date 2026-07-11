@@ -20,7 +20,10 @@ jobs:
       - uses: leanprover/lean-action@v1
         with:
           use-mathlib-cache: auto
-          build: true
+          auto-config: false
+          build: false
+      - name: Memory-bounded Lean build
+        run: python3 scripts/lean_fast_build.py --jobs 2
       - name: Build downstream consumer example
         run: lake build Examples
 
