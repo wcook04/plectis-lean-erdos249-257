@@ -1,5 +1,7 @@
 -- SPDX-FileCopyrightText: 2026 Will Cook
 -- SPDX-License-Identifier: Apache-2.0
+import Erdos249257
+
 /-!
 # Minimal downstream consumer
 
@@ -12,7 +14,6 @@ it with `lake build Examples`.
 The same proof-trust rules apply here as in the library: no `sorry`, no
 `admit`, no new axioms (`scripts/check_release.py` scans this directory too).
 -/
-import Erdos249257
 
 open Erdos249257
 
