@@ -964,9 +964,11 @@ the set is \lrefx{GreedyAchievementSet.lean}{522}{mersenneAchievementSet}). In
 this language the base-$2$ \#257 statement reads: the rational members of
 $\mathcal A$ are exactly the finite subset sums. Nothing below decides that.
 Kova\v{c} and Tao record the strict separation, uniqueness, and Cantor-set
-geometry for these Lambert subseries~\cite{kovactao}; the local contribution is
-the executable Lean interface, quantitative enclosure, and finite
-non-membership certificates over that known geometry.
+geometry for these Lambert subseries~\cite{kovactao}; this is the relevant
+Lambert-series instance of Kakeya's classical strict-tail criterion for
+subsum sets~\cite{kakeya1914}. The local contribution is the executable Lean
+interface, quantitative enclosure, and finite non-membership certificates over
+that known geometry.
 
 \begin{theorem}[superincreasing geometry and greedy membership]\label{res:greedy}
 For every $n\ge1$ the weight dominates the whole tail after it, $T(n)<w_n$,
@@ -1072,6 +1074,9 @@ greedy membership criterion & \lrefx{GreedyAchievementSet.lean}{738}{mem_mersenn
   doi:\href{https://doi.org/10.1007/978-1-4757-5579-4}{10.1007/978-1-4757-5579-4}.
 \bibitem{mercaschmidt} M.~Merca and M.~D. Schmidt, \emph{Generating special arithmetic
   functions by Lambert series factorizations}, arXiv:1706.00393 (2017).
+\bibitem{kakeya1914} S.~Kakeya, \emph{On the set of partial sums of an infinite series},
+  Proc. Tokyo Math.-Phys. Soc., 2nd ser. \textbf{7} (1914), 250--251,
+  doi:\href{https://doi.org/10.11429/ptmps1907.7.14_250}{10.11429/ptmps1907.7.14\_250}.
 \bibitem{nesterenko} Yu.~V. Nesterenko, \emph{Modular functions and transcendence questions},
   Mat. Sb. \textbf{187} (1996), no.~9, 65--96; English transl., Sb. Math. \textbf{187} (1996), no.~9, 1319--1348.
 \bibitem{lucatachiya} F.~Luca and Y.~Tachiya, \emph{Irrationality of Lambert series associated

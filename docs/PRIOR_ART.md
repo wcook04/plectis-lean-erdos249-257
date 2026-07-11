@@ -22,8 +22,8 @@ sources are there.
 | P. Erdős, *On the irrationality of certain series* (1968) | Pairwise-coprime support condition. | Only that classical family is attributed to this source; it does not settle universal #257. |
 | P. B. Borwein, *On the irrationality of certain series* (1992) | Broader irrationality theorem containing the relevant Mersenne--Lambert specialisation. | Context for the full-support family, not a proof route for the new #249 reductions. |
 | T. M. Apostol, *Introduction to Analytic Number Theory* (1976); M. Merca and M. D. Schmidt, *Generating Special Arithmetic Functions by Lambert Series Factorizations* (2017) | Classical Dirichlet/Möbius and Lambert-series infrastructure used in the exposition. | The release claims a Lean-checked composition, not new Möbius inversion or Lambert identities. |
+| S. Kakeya, *On the Set of Partial Sums of an Infinite Series* (1914); V. Kovač and T. Tao, *On several irrationality problems for Ahmes series* (2025) | Kakeya's strict-tail criterion is the general subsum-set source; Kovač--Tao give the direct fixed-base Lambert-subseries instance. | The executable greedy interface and finite certificates are not presented as a priority claim. |
 | F. Luca and Y. Tachiya, *Irrationality of Lambert series associated with a periodic sequence* (2014) | Context for periodic-coefficient Lambert-series literature. | The repository's named support families are stated only as its own formalised framework. |
-| V. Kovač and T. Tao, *On several irrationality problems for Ahmes series* (2025) | Strict-tail geometry, unique support coding, and achievement-set context. | The executable greedy interface and finite certificates are not presented as a priority claim. |
 | H. Wang and J. M. Grau Ribas, *Positive dyadic density for rational weighted binary expansions* (2026) | Direct antecedent for the rationality-forced integral carry recurrence in a weighted-binary special case. | The public paper calls its generic carry criterion a formalisation/abstraction; converse and rigidity remain deliberately non-priority language. |
 | R. Crandall, *The googol-th bit of the Erdős--Borwein constant* (2012); J. M. Campbell, *On the binary digits of the Erdős--Borwein constant* (2026) | Adjacent work on binary digits of the full-support constant. | Neither result is formalised or used by this release. |
 
@@ -35,4 +35,3 @@ an antecedent of a local theorem family, record the exact statement comparison:
 assumptions, conclusion, specialisation map, proof mechanism, and the remaining
 delta. Otherwise, retain it as private research context rather than turning a
 bibliographic lead into a public priority claim.
-
