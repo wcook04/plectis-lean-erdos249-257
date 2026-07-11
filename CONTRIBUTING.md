@@ -25,11 +25,10 @@ and citation metadata.
   status. Never edit a status table, the scope statement, or citation
   metadata directly without updating the registry; `scripts/check_release.py`
   fails when any surface drifts from it.
-- `docs/methodology.json` owns the mathematical methodology and
-  claim-transition rules; regenerate `METHODOLOGY.md` instead of editing that
-  projection. Conditional reductions must name what remains open, finite
-  claims must state their bounded domain, and every `advances_open_target`
-  edge must state which remaining open proposition changed and how.
+- `docs/methodology.json` owns the claim-transition rules and change
+  classifications; `METHODOLOGY.md` is generated from it. Follow the
+  applicable change class before altering a public claim. A successful Lean
+  build alone does not authorise a stronger mathematical statement.
 - Do not weaken the open-problem boundary. The release states plainly that
   Erdős #249 and the universal #257 remain open; wording that blurs that is a
   defect, not an improvement.

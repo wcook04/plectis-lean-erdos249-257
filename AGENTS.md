@@ -12,9 +12,10 @@ in this repository, and never infer unpublished results or private machinery.
 1. Read `docs/claims.json`. Its `machine_readable_paper` object is the compact
    map from open problems and paper claims to Lean declarations, module imports,
    argument relationships, validation, and explicit non-claims.
-2. Read `docs/methodology.json` for the literal mathematical methodology,
-   evidence classes, remaining-open requirements, and claim-transition rules.
-   `METHODOLOGY.md` is its generated human projection.
+2. Read `docs/methodology.json` before changing a public claim. It defines
+   the evidence responsibilities, change classes, required reviews, and local
+   claim, guard, and negative-fixture references for each rule.
+   `METHODOLOGY.md` is the shorter human projection.
 3. Read `docs/corpus_descriptor.json` when another agent or system needs to
    register this repository as a mathematical corpus. It separates the pinned
    proof-source tag from the later navigation snapshot and content digests, and
@@ -48,14 +49,12 @@ in this repository, and never infer unpublished results or private machinery.
   the claim registry.
 - Provider or model output is never proof authority.
 
-Before updating a public claim, classify whether the change affects only a
-proof body or changes a proposition, assumptions, representation, finite
-range, claim status, exposition, or projection. Update Lean first, then review
-assumptions and intended meaning, then update the claim registry, authored
-exposition, and generated projections in that order. A proof-body-only change
-does not automatically authorize stronger prose. New mathematics requires
-explicit human mathematical review of the paper-facing statement and the
-remaining-open boundary.
+Before updating a public claim, classify the change against the
+`change_classes` matrix in `docs/methodology.json`: each class states its
+minimum evidence, whether human mathematical review is required, and the
+effects the change must not have. The update order stays fixed: Lean source
+first, then assumption and meaning review, then the claim registry, then
+authored exposition, then generated projections.
 
 ## Validation
 

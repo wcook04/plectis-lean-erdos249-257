@@ -20,6 +20,8 @@ import sys
 from pathlib import Path
 from typing import Any
 
+from methodology_contract import MUTATION_FIXTURE_IDS
+
 
 ROOT = Path(__file__).resolve().parent.parent
 OUTPUT = ROOT / "docs" / "corpus_descriptor.json"
@@ -216,12 +218,33 @@ def build() -> dict[str, Any]:
             "argument_graph": machine_paper["argument_graph"],
             "methodology_capsule": {
                 "path": "docs/methodology.json",
+                "human_projection": "METHODOLOGY.md",
                 "artifact_role": methodology["artifact_role"],
                 "human_capsule": methodology["human_capsule"],
                 "mathematical_research_cycle": methodology["mathematical_research_cycle"],
                 "public_claim_cycle": methodology["public_claim_cycle"],
                 "method_axiom_ids": [row["id"] for row in methodology["method_axioms"]],
                 "transition_contract_ids": [row["id"] for row in methodology["transition_contracts"]],
+                "worked_example_ids": [row["id"] for row in methodology["worked_examples"]],
+                "change_classes": methodology["change_classes"],
+                "human_review_triggers": methodology["human_review_triggers"],
+                "forbidden_effect_vocabulary": methodology["forbidden_effect_vocabulary"],
+                "negative_fixture_ids": sorted(MUTATION_FIXTURE_IDS),
+                "local_instances": {
+                    row["id"]: row["local_instances"] for row in methodology["method_axioms"]
+                },
+                "rules_by_change_class": {
+                    change_type: [
+                        rule["id"]
+                        for rule in (
+                            *methodology["method_axioms"],
+                            *methodology["principles"],
+                            *methodology["anti_principles"],
+                        )
+                        if f"change_type:{change_type}" in rule["applies_to"]
+                    ]
+                    for change_type in methodology["change_types"]
+                },
             },
             "high_salience_declarations": high_salience_declarations,
         },

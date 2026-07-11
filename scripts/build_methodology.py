@@ -33,7 +33,7 @@ def main() -> int:
             print(f"  FAIL {error}")
         return 1
 
-    expected = render_markdown(methodology)
+    expected = render_markdown(methodology, claims)
     if args.check:
         actual = OUTPUT.read_text(encoding="utf-8") if OUTPUT.is_file() else ""
         if actual != expected:

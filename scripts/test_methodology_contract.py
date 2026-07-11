@@ -26,15 +26,13 @@ def main() -> int:
             print(f"  FAIL {error}")
         return 1
 
-    failures = []
-    for fixture_id, errors in mutation_fixture_errors(claims, methodology).items():
-        if not errors:
-            failures.append(fixture_id)
+    fixture_errors = mutation_fixture_errors(claims, methodology)
+    failures = [fixture_id for fixture_id, errors in fixture_errors.items() if not errors]
     if failures:
         print("test_methodology_contract: mutations escaped validation: " + ", ".join(failures))
         return 1
 
-    print("test_methodology_contract: baseline passed; all 4 invalid mutations were rejected")
+    print(f"test_methodology_contract: baseline passed; all {len(fixture_errors)} invalid mutations were rejected")
     return 0
 
 

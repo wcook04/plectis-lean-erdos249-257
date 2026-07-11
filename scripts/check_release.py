@@ -179,7 +179,7 @@ def main() -> int:
           "methodology contract invalid: " + "; ".join(methodology_errors))
 
     methodology_projection = ROOT / "METHODOLOGY.md"
-    expected_methodology_projection = render_markdown(methodology)
+    expected_methodology_projection = render_markdown(methodology, data)
     check(methodology_projection.is_file(), "METHODOLOGY.md is missing")
     if methodology_projection.is_file():
         check(read(methodology_projection) == expected_methodology_projection,
@@ -269,6 +269,9 @@ def main() -> int:
     check("does not solve" in readme, "README must state the open boundary in plain language")
     check("METHODOLOGY.md" in readme and "docs/methodology.json" in readme,
           "README must route to the human and machine-readable methodology")
+    leaked_identifier = re.search(r"method_axiom\.|anti_principle\.|principle\.[a-z_]|transition\.[a-z_]", readme)
+    check(leaked_identifier is None,
+          f"README leaks a methodology machine identifier: {leaked_identifier.group(0) if leaked_identifier else ''}")
     for phrase in README_BANNED_PHRASES:
         check(phrase not in readme, f"README contains banned drift phrase: {phrase!r}")
     for status in re.findall(r"\|\s*\*\*([a-z][a-z ]+)\*\*\s*\|", readme):
@@ -351,6 +354,8 @@ def main() -> int:
     methodology_capsule = descriptor.get("compact_graph", {}).get("methodology_capsule", {})
     check(methodology_capsule.get("human_capsule") == methodology.get("human_capsule"),
           "corpus descriptor methodology capsule drifted from docs/methodology.json")
+    check(methodology_capsule.get("change_classes") == methodology.get("change_classes"),
+          "corpus descriptor methodology capsule does not carry the change-class matrix")
 
     # --- 9. proof-trust guard ------------------------------------------------------
     # Covers the library, its root, and the downstream examples: everything
