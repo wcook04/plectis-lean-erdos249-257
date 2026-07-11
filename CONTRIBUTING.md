@@ -49,6 +49,10 @@ python3 scripts/test_methodology_contract.py  # adversarial claim-transition fix
 python3 -m pip install cffconvert reuse  # once, for metadata and licence checks
 python3 scripts/check_metadata.py  # CITATION.cff schema validation (same command as CI)
 reuse lint                         # licence validation
+python3 scripts/check_cold_clone_comprehension.py  # diagnostic (not a gate): cold-clone readability
 ```
 
-CI runs these build and release-surface checks on every push.
+CI runs the build and release-surface checks on every push. The cold-clone
+comprehension diagnostic is advisory: it flags when a prose or machine surface
+has dropped one of the proved/open distinctions, but it does not block a
+release.

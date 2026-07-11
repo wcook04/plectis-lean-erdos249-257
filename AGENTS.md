@@ -76,3 +76,15 @@ anchors, the machine-readable module and argument graphs, the exhaustive
 declaration atlas, scope, metadata, licensing, and proof-trust guards. Do not
 add `sorry`, `admit`, `axiom`, or `native_decide`; finite computations use
 kernel-checked `decide`.
+
+A separate diagnostic checks that a cold clone stays readable:
+
+```sh
+python3 scripts/check_cold_clone_comprehension.py
+```
+
+It derives the proved/open distinctions from the claim registry and confirms
+both the prose surfaces and the machine surfaces still let a reader recover
+them. It measures availability, not mathematical correctness, and is not part
+of the release gate; a failure means a projection or route dropped a
+distinction and should be repaired.
