@@ -12,16 +12,19 @@ in this repository, and never infer unpublished results or private machinery.
 1. Read `docs/claims.json`. Its `machine_readable_paper` object is the compact
    map from open problems and paper claims to Lean declarations, module imports,
    argument relationships, validation, and explicit non-claims.
-2. Read `SCOPE.md` before describing what the project proves. Erdős #249 and
+2. Read `docs/corpus_descriptor.json` when another agent or system needs to
+   register this repository as a mathematical corpus. It separates the pinned
+   proof-source tag from the later navigation snapshot and content digests.
+3. Read `SCOPE.md` before describing what the project proves. Erdős #249 and
    the universal form of #257 remain open.
-3. For one claim, follow its `paper_label` into
+4. For one claim, follow its `paper_label` into
    `paper/erdos249-257-exposition.tex`, then follow its `declarations` to the
    named Lean source coordinates.
-4. Use `docs/declaration_atlas.json` when you need the exhaustive mathematical
+5. Use `docs/declaration_atlas.json` when you need the exhaustive mathematical
    scale: every declaration, signature excerpt, module, import edge, generated
    certificate marker, and principal-claim link. It is a generated navigation
    projection; drill back to Lean before trusting a statement.
-5. Use `Erdos249257.lean` for the supported root import and exact package
+6. Use `Erdos249257.lean` for the supported root import and exact package
    topology. Use `docs/SOURCE_MAP.md` for intention-based routes and
    `docs/WAVE_INDEX.md` for mathematical chronology.
 
@@ -30,6 +33,8 @@ in this repository, and never infer unpublished results or private machinery.
 - Lean source checked by the pinned Lean kernel is proof authority.
 - `docs/claims.json` owns release identity, status taxonomy, declaration
   coordinates, and the machine-readable navigation graph.
+- `docs/corpus_descriptor.json` is a generated, compact registration envelope;
+  it does not replace the claim registry, exhaustive atlas, or Lean authority.
 - The paper is authored mathematical exposition. Do not generate or rewrite its
   prose mechanically from the registry.
 - README, scope, source maps, and other summaries must not exceed the status in

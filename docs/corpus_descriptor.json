@@ -1,0 +1,928 @@
+{
+  "schema": "erdos249257-corpus-descriptor/1",
+  "artifact_role": "self_describing_external_mathematical_corpus_root",
+  "corpus_id": "plectis_lean_erdos249_257_public",
+  "authority_posture": {
+    "proof": "Lean source checked by the pinned Lean kernel",
+    "authored_argument": "docs/claims.json::machine_readable_paper.argument_graph",
+    "navigation": "generated projections and this descriptor; not proof authority",
+    "semantic_bridge": "approximate correspondence only; never a proof edge"
+  },
+  "identity": {
+    "formal_source": {
+      "tag": "v0.4.0",
+      "resolved_commit": "650bd7faaf013d2ed2cce18e8bb5945adad7ba46",
+      "lean_toolchain": "leanprover/lean4:v4.29.1",
+      "authority_role": "proof_bearing_release_anchor"
+    },
+    "navigation_snapshot": {
+      "commit": "7fbab10772fc4528edc7bb339f000b3c6a137a29",
+      "authority_role": "machine_readable_navigation_anchor",
+      "publication_state": "published_origin_main",
+      "published_ref": "origin/main",
+      "repository_resolution": "https://github.com/wcook04/plectis-lean-erdos249-257/tree/7fbab10772fc4528edc7bb339f000b3c6a137a29"
+    },
+    "content": {
+      "machine_readable_paper": {
+        "path": "docs/claims.json::machine_readable_paper",
+        "content_digest": "sha256:89d9887d22875fc6bae59770437d6aa2443b8142ce81a7a1367abd79c8f78a02"
+      },
+      "claims_document": {
+        "path": "docs/claims.json",
+        "content_digest": "sha256:f17c9d1cf25ffe5d3ec78eb06d6c9b90fd26b9481109d27169d55e8831fb8c40"
+      },
+      "declaration_atlas": {
+        "path": "docs/declaration_atlas.json",
+        "content_digest": "sha256:da2e33a8728cb490fe382776cc94a62a10c0b967c3a4f2ae96e023dbde5d6ef2",
+        "source_input_fingerprint": "sha256:6d86161aedbd9cbb09fd9a664f6ad24f6b8dd6b9cbeed53092da92d7a1fb95ee"
+      }
+    }
+  },
+  "schemas": {
+    "claims": "erdos249257-claims/2",
+    "machine_readable_paper": "erdos249257-machine-readable-paper/1",
+    "declaration_atlas": "erdos249257-declaration-atlas/1"
+  },
+  "capabilities": {
+    "global_argument_graph": true,
+    "module_import_graph": true,
+    "principal_claim_declaration_links": true,
+    "high_salience_signatures": true,
+    "exhaustive_declaration_lookup": "attached_atlas",
+    "declaration_level_proof_dependencies": false
+  },
+  "retrieval_modes": {
+    "global": {
+      "source": "compact_graph",
+      "supports": [
+        "proved_open_boundary",
+        "principal_argument_routes",
+        "module_topology"
+      ]
+    },
+    "concept": {
+      "source": "compact_graph.high_salience_declarations_then_attached_atlas",
+      "supports": [
+        "name",
+        "signature",
+        "docstring",
+        "bounded_module_neighbourhood"
+      ]
+    },
+    "premise_chain": {
+      "source": "authored_argument_edges_and_module_imports",
+      "boundary": "The public atlas does not claim elaborator-derived declaration dependencies or accessibility annotations."
+    }
+  },
+  "summary": {
+    "module_count": 20,
+    "declaration_count": 2538,
+    "theorem_like_count": 2259,
+    "generated_certificate_declaration_count": 1201,
+    "principal_claim_link_count": 21,
+    "kind_counts": {
+      "def": 272,
+      "inductive": 1,
+      "instance": 3,
+      "lemma": 328,
+      "structure": 3,
+      "theorem": 1931
+    }
+  },
+  "compact_graph": {
+    "status_taxonomy": {
+      "proved here": "Lean theorem in the pinned public release; no novelty assertion is implied",
+      "formalised here": "Known mathematics represented and checked in Lean",
+      "unconditional progress": "Genuine theorem that does not settle the open problem",
+      "conditional reduction": "Exact implication whose remaining hypothesis is open",
+      "verified finite instance": "Kernel-checked computation at a bounded range",
+      "cited only": "External theorem used for positioning, not formalised",
+      "open": "Not proved by this release"
+    },
+    "claims": [
+      {
+        "id": "eb_full_support",
+        "label": "Full-support Erdős–Borwein irrationality, every integer base b ≥ 2",
+        "status": "formalised here",
+        "statement": "For every integer b ≥ 2, the series ∑_{n≥1} 1/(bⁿ − 1) is irrational (Erdős, 1948).",
+        "paper_label": "res:full",
+        "readme_headline": true,
+        "declarations": [
+          {
+            "name": "irrational_erdosSum_full_support",
+            "module": "Erdos249257/CertificateKernel.lean",
+            "line": 7999,
+            "kind": "theorem",
+            "signature": "theorem irrational_erdosSum_full_support (b : ℕ) (hb : 2 ≤ b) : Irrational (∑' k : ℕ, (1 : ℝ) / ((b : ℝ) ^ (k + 1) - 1))",
+            "docstring": "**Full-support (Erdős–Borwein) irrationality, unconditional.** For every base `b ≥ 2` the series `∑_{n≥1} 1/(b^n - 1)` is irrational — Erdős (1948), through the certificate machine: bounded Bertrand/CRT first-block frame, middle-window divisor-pair average with pigeonhole selection, and explicit parameter closure."
+          }
+        ]
+      },
+      {
+        "id": "eb_constant",
+        "label": "The Erdős–Borwein constant E is irrational",
+        "status": "formalised here",
+        "statement": "E = ∑_{n≥1} 1/(2ⁿ − 1) is irrational, as the base-2 corollary of the full-support theorem.",
+        "paper_label": "res:full",
+        "readme_headline": true,
+        "declarations": [
+          {
+            "name": "irrational_erdosBorwein_series",
+            "module": "Erdos249257/CertificateKernel.lean",
+            "line": 8006,
+            "kind": "theorem",
+            "signature": "theorem irrational_erdosBorwein_series : Irrational (∑' k : ℕ, (1 : ℝ) / ((2 : ℝ) ^ (k + 1) - 1))",
+            "docstring": "**The Erdős–Borwein constant is irrational.** Base-2 instance of the full-support theorem: `∑_{n≥1} 1/(2^n - 1)` is irrational."
+          }
+        ]
+      },
+      {
+        "id": "support_families",
+        "label": "Named infinite-support irrationality families toward #257",
+        "status": "formalised here",
+        "statement": "For every base b ≥ 2, ∑_{n∈A} 1/(bⁿ − 1) is irrational for factorial support, power-of-two support, multiples, pairwise-coprime supports with summable reciprocals, eventually-periodic supports, residue classes, and the odd numbers. Proved families, not the universal statement.",
+        "paper_label": "res:support",
+        "readme_headline": true,
+        "declarations": [
+          {
+            "name": "erdos257_family_factorial_instance",
+            "module": "Erdos249257/CertificateKernel.lean",
+            "line": 5753,
+            "kind": "theorem",
+            "signature": "theorem erdos257_family_factorial_instance : Irrational (∑' k, (1 : ℝ) / ((2 : ℝ) ^ (Nat.factorial (k + 1)) - 1))",
+            "docstring": "**Erdős #257 family, factorial instance at base 2.** The literal series `∑ 1 / (2^(n!) - 1)` over the infinite support `A = {n! : n ≥ 1}` is irrational. This is an instance of the statement family of Erdős problem #257 (which asks the same for *every* infinite support); the universal problem remains open and is not claimed."
+          },
+          {
+            "name": "erdos257_family_two_pow_instance",
+            "module": "Erdos249257/CertificateKernel.lean",
+            "line": 5761,
+            "kind": "theorem",
+            "signature": "theorem erdos257_family_two_pow_instance : Irrational (∑' k, (1 : ℝ) / ((2 : ℝ) ^ (2 ^ k) - 1))",
+            "docstring": "**Erdős #257 family, geometric instance at base 2.** The literal series `∑ 1 / (2^(2^n) - 1)` over the infinite support `A = {2^n : n ≥ 0}` is irrational. An instance of the #257 statement family; the universal problem remains open and is not claimed."
+          },
+          {
+            "name": "irrational_erdosSupportSeries_pairwise_coprime",
+            "module": "Erdos249257/CertificateKernel.lean",
+            "line": 10447,
+            "kind": "theorem",
+            "signature": "theorem irrational_erdosSupportSeries_pairwise_coprime (b : ℕ) (A : Set ℕ) (hb : 2 ≤ b) (hA : A.Infinite) (hpair : A.Pairwise Nat.Coprime) (hsum : Summable (Set.indicator A fun a : ℕ => (1 : ℝ) / a)) : Irrational (erdosSupportSeries b A)",
+            "docstring": "**Erdős's pairwise-coprime support theorem (1948), machine-checked.** For every base `b ≥ 2` and every infinite pairwise-coprime support `A ⊆ ℕ` with summable reciprocals, `∑_{a ∈ A} 1/(b^a - 1)` is irrational. The first non-dilation support class of Erdős #257 to submit to the support-coefficient calculus: this is NOT valuation forcing — small support elements join the CRT modulus at residue zero, adaptive block sizes absorb their deterministic first-block hits, and summable reciprocals control the strays."
+          }
+        ]
+      },
+      {
+        "id": "mersenne_lambert_ladder",
+        "label": "The Mersenne–Lambert ladder identities",
+        "status": "formalised here",
+        "statement": "L(μ) = 1/2, L(φ) = 2, L(φ*μ) = S, and the Möbius-square lens S = 1/2 + ∑ μ(d)/(2^d − 1)², placing the open constant one convolution from the machine-checked irrational E.",
+        "paper_label": "res:lens",
+        "readme_headline": false,
+        "declarations": [
+          {
+            "name": "tsum_totient_div_two_pow_sub_one_eq_two",
+            "module": "Erdos249257/CertificateKernel.lean",
+            "line": 18100,
+            "kind": "theorem",
+            "signature": "theorem tsum_totient_div_two_pow_sub_one_eq_two : ∑' d : ℕ+, (Nat.totient (d : ℕ) : ℝ) / ((2 : ℝ) ^ (d : ℕ) - 1) = 2",
+            "docstring": "**Rational rung `L(φ) = 2`**: `∑_{d≥1} φ(d)/(2^d-1) = 2`, exactly. The Lambert transform of the #249 coefficients at the #249 point is rational — the difficulty of #249 lives entirely on the power-series side."
+          },
+          {
+            "name": "totient_series_eq_half_add_moebius_mersenne_square",
+            "module": "Erdos249257/CertificateKernel.lean",
+            "line": 18125,
+            "kind": "theorem",
+            "signature": "theorem totient_series_eq_half_add_moebius_mersenne_square : (∑' n : ℕ, ((Nat.totient n : ℝ)) / (2 : ℝ) ^ n) = 1 / 2 + ∑' d : ℕ+, ((ArithmeticFunction.moebius (d : ℕ) : ℤ) : ℝ) / ((2 : ℝ) ^ (d : ℕ) - 1) ^ 2",
+            "docstring": "**Möbius-square lens**: `∑ φ(n)/2ⁿ = 1/2 + ∑_{d≥1} μ(d)/(2^d-1)²`. The #249 constant as a signed squared-Mersenne Lambert series."
+          }
+        ]
+      },
+      {
+        "id": "denominator_exclusion",
+        "label": "Unconditional denominator exclusion for the totient constant",
+        "status": "unconditional progress",
+        "statement": "S = ∑ φ(n)/2ⁿ is not equal to p/q for any integer p and any 1 ≤ q ≤ 79 639 646 646 701 375 323 355 774 875 831 053 (≈ 7.96 × 10³⁴). A lower bound on any rational representation, not a proof of irrationality.",
+        "paper_label": "res:farey",
+        "readme_headline": true,
+        "declarations": [
+          {
+            "name": "tsum_totient_div_pow_two_ne_ratCast_of_den_le_79639646646701375323355774875831053",
+            "module": "Erdos249257/CertificateKernel.lean",
+            "line": 18055,
+            "kind": "theorem",
+            "signature": "theorem tsum_totient_div_pow_two_ne_ratCast_of_den_le_79639646646701375323355774875831053 : ∀ p : ℚ, p.den ≤ 79639646646701375323355774875831053 → (∑' n : ℕ, ((Nat.totient n : ℝ)) / (2 : ℝ) ^ n) ≠ (p : ℝ)",
+            "docstring": "**Erdős #249 denominator exclusion to `79639646646701375323355774875831053`, `ℚ` form.** If `∑_{n≥0} φ(n)/2^n` is rational, its reduced denominator exceeds `79639646646701375323355774875831053`."
+          }
+        ]
+      },
+      {
+        "id": "certificate_reduction",
+        "label": "Exact reduction of #249 to finite decidable certificates",
+        "status": "conditional reduction",
+        "statement": "If certified non-integrality witnesses occur at unbounded parameters (equivalently on the lcm diagonal), then S is irrational. The unboundedness of the supply is the remaining open hypothesis.",
+        "paper_label": "res:diag",
+        "readme_headline": true,
+        "declarations": [
+          {
+            "name": "irrational_totient_series_of_certificate_supply",
+            "module": "Erdos249257/TotientTailPeriodKiller.lean",
+            "line": 386,
+            "kind": "theorem",
+            "signature": "theorem irrational_totient_series_of_certificate_supply (hsupply : ∀ h : ℕ, 0 < h → ∀ N₀ : ℕ, ∃ N, N₀ ≤ N ∧ ∃ L, certifiedKill h N L) : Irrational (∑' n : ℕ, (Nat.totient n : ℝ) / 2 ^ n)",
+            "docstring": "**The wave-21 reduction (the throat of #249).** A certified period-kill supply — for every period `h ≥ 1` and every threshold `N₀`, a certified kill at some `(N ≥ N₀, L)` — proves the totient series irrational. Each individual certificate is a finite, decidable residue computation."
+          },
+          {
+            "name": "irrational_totient_series_of_lcm_diagonal_certificate_supply",
+            "module": "Erdos249257/LcmDiagonalReduction.lean",
+            "line": 92,
+            "kind": "theorem",
+            "signature": "theorem irrational_totient_series_of_lcm_diagonal_certificate_supply (hsupply : ∀ t₀ : ℕ, ∃ t, t₀ ≤ t ∧ ∃ L, certifiedKill (periodLcm t) (periodLcm t) L) : Irrational (∑' n : ℕ, (Nat.totient n : ℝ) / 2 ^ n)",
+            "docstring": "**The wave-23 diagonal collapse.** #249 follows from a SINGLE ℕ-indexed sequence of decidable statements: the endpoint certificate firing on the diagonal `(h, N) = (periodLcm t, periodLcm t)` for infinitely many `t`. Rationality would supply a primitive period `h₀` and pre-period `N₀`; any `t ≥ max(h₀, N₀)` gives `h₀ ∣ periodLcm t` and `periodLcm t ≥ t ≥ N₀` simultaneously, so a diagonal kill at such `t` is a contradiction. No second parameter remains."
+          },
+          {
+            "name": "rational_totient_series_forces_lcm_cone_flatness",
+            "module": "Erdos249257/LcmConeFlatness.lean",
+            "line": 90,
+            "kind": "theorem",
+            "signature": "theorem rational_totient_series_forces_lcm_cone_flatness (hrat : ¬ Irrational (∑' n : ℕ, (Nat.totient n : ℝ) / 2 ^ n)) : ∃ t₁ : ℕ, ∀ t, t₁ ≤ t → ∀ q m : ℕ, 0 < q → totientTail (q * periodLcm t + m * periodLcm t) - totientTail (q * periodLcm t) ∈ Set.range ((↑) : ℤ → ℝ)",
+            "docstring": "**The lcm-cone flatness law.** If the totient series is rational, then from some scale on, the ENTIRE lcm cone is fractionally flat: every difference `R_{q·H_t + m·H_t} - R_{q·H_t}` is an integer, for every `t` past the threshold, every base multiplier `q ≥ 1`, and every step multiplier `m`. One constant fractional part governs every cone point — the maximal spend of the rationality hypothesis on the lcm lattice."
+          }
+        ]
+      },
+      {
+        "id": "certificate_completeness",
+        "label": "Certificate completeness",
+        "status": "proved here",
+        "statement": "A certified kill exists at fixed parameters exactly when the corresponding tail difference is non-integral, so the finite computation loses no information.",
+        "paper_label": "res:complete",
+        "readme_headline": true,
+        "declarations": [
+          {
+            "name": "exists_certifiedKill_iff_tail_diff_notMem_int",
+            "module": "Erdos249257/LcmConeFlatness.lean",
+            "line": 316,
+            "kind": "theorem",
+            "signature": "theorem exists_certifiedKill_iff_tail_diff_notMem_int (h N : ℕ) : (∃ L, certifiedKill h N L) ↔ totientTail (N + h) - totientTail N ∉ Set.range ((↑) : ℤ → ℝ)",
+            "docstring": "**Certificate completeness, iff form.** Some depth certifies `(h, N)` exactly when the tail difference is a non-integer. Finite certificates are receipts; non-integrality is the object."
+          }
+        ]
+      },
+      {
+        "id": "certified_kill_instances",
+        "label": "Initial certified-kill segment and generated certificates",
+        "status": "verified finite instance",
+        "statement": "Kernel-checked certified kills for small periods and for the lcm diagonal up to t = 8, plus machine-generated finite certificate shards, each discharged by decide.",
+        "paper_label": "res:deposits",
+        "readme_headline": true,
+        "declarations": [
+          {
+            "name": "certifiedKill_all_small",
+            "module": "Erdos249257/TotientTailPeriodKiller.lean",
+            "line": 396,
+            "kind": "theorem",
+            "signature": "theorem certifiedKill_all_small : ∀ h ∈ Finset.Icc 1 8, certifiedKill h 12 16",
+            "docstring": "Machine-checked kills: for every period `h ∈ [1,8]` the residue certificate holds at `(N, L) = (12, 16)`. Kernel-decidable: 256 totient values below 37."
+          },
+          {
+            "name": "certifiedKill_periodLcm_diagonal_upto_six",
+            "module": "Erdos249257/LcmDiagonalReduction.lean",
+            "line": 217,
+            "kind": "theorem",
+            "signature": "theorem certifiedKill_periodLcm_diagonal_upto_six : ∀ t ∈ Finset.Icc 1 6, certifiedKill (periodLcm t) (periodLcm t) (diagonalKillDepth t)",
+            "docstring": "**Diagonal deposit.** The wave-23 predicate `P t` holds for every `1 ≤ t ≤ 6`: the endpoint certificate fires at `(H_t, H_t)` with the tabulated depth. Totient arguments stay ≤ 130 — a light kernel `decide`."
+          }
+        ]
+      },
+      {
+        "id": "tail_orbit_rigidity",
+        "label": "Tempered tail-orbit rigidity criterion",
+        "status": "proved here",
+        "statement": "For coefficients c(n) ≤ n, the binary series ∑ c(n)/2ⁿ is rational exactly when a tempered integer carry orbit exists, and every tempered orbit equals the scaled tail.",
+        "paper_label": "res:rigidity",
+        "readme_headline": false,
+        "declarations": [
+          {
+            "name": "binaryCoeffSeries_rational_iff_exists_temperedBinaryOrbit",
+            "module": "Erdos249257/GenericTailOrbitRigidity.lean",
+            "line": 260,
+            "kind": "theorem",
+            "signature": "theorem binaryCoeffSeries_rational_iff_exists_temperedBinaryOrbit (c : ℕ → ℕ) (hgrowth : ∀ n : ℕ, c n ≤ n) : HasRationalValue (binaryCoeffSeries c) ↔ ∃ v : ℕ, 0 < v ∧ ∃ u : ℕ → ℤ, IsTemperedBinaryOrbit c v u",
+            "docstring": "**Subexponential tail-orbit rigidity, equivalence form.** The series `X_c` is rational exactly when some tempered integer orbit exists."
+          }
+        ]
+      },
+      {
+        "id": "boolean_mobius_carry",
+        "label": "Boolean–Möbius carry certificate equivalence",
+        "status": "proved here",
+        "statement": "A nonempty support with series value p/q exists exactly when a positive, square-root-bounded integer orbit with Boolean Möbius quotient exists; the support is reconstructed from the certificate.",
+        "paper_label": "res:carrycert",
+        "readme_headline": false,
+        "declarations": [
+          {
+            "name": "exists_normalized_support_fraction_iff_exists_booleanMobiusCarry",
+            "module": "Erdos249257/BooleanMobiusCarry.lean",
+            "line": 734,
+            "kind": "theorem",
+            "signature": "theorem exists_normalized_support_fraction_iff_exists_booleanMobiusCarry (p : ℤ) (q : ℕ) (hq : 0 < q) : (∃ A : Set ℕ, 0 ∉ A ∧ (∃ a : ℕ, 0 < a ∧ a ∈ A) ∧ erdosSupportSeries 2 A = (p : ℝ) / (q : ℝ)) ↔ ∃ U : ℕ → ℤ, BooleanMobiusCarryCertificate p q U",
+            "docstring": "**Certificate-level equivalence.** Positive normalized supports with value `p/q` are in exact correspondence at the existence level with quotient-only Boolean Möbius carry certificates. The converse support is not guessed: it is reconstructed as `booleanMobiusSupport` of the carry quotient."
+          }
+        ]
+      },
+      {
+        "id": "reciprocal_mass_bound",
+        "label": "Rationality-forced reciprocal-mass lower bound",
+        "status": "proved here",
+        "statement": "A rational support-series value with odd denominator part v forces reciprocal mass at least 1/ord_v(2), or divergence; an infinite support with dyadic-rational value has reciprocal mass divergent or greater than one.",
+        "paper_label": "res:orderwrap",
+        "readme_headline": false,
+        "declarations": [
+          {
+            "name": "one_div_oddOrder_le_reciprocalMass_of_support_fraction",
+            "module": "Erdos249257/RationalSupportCarrySkeleton.lean",
+            "line": 1543,
+            "kind": "theorem",
+            "signature": "theorem one_div_oddOrder_le_reciprocalMass_of_support_fraction (A : Set ℕ) (hA : ∃ a : ℕ, 0 < a ∧ a ∈ A) (hsum : Summable (reciprocalSupportTerm A)) (p : ℤ) (c : ℕ) {v : ℕ} (hv : 1 < v) (hvodd : Odd v) (hpv : p.toNat.Coprime v) (hvalue : erdosSupportSeries 2 A = (p : ℝ) / ((2 ^ c * v : ℕ) : ℝ)) : (1 : ℝ) / (oddDoublingOrder v hvodd : ℝ) ≤ reciprocalMass A",
+            "docstring": null
+          }
+        ]
+      },
+      {
+        "id": "unbounded_carry_states",
+        "label": "Carry states are unbounded over infinite rational-valued supports",
+        "status": "proved here",
+        "statement": "An infinite support with rational series value has an unbounded positive carry state, closing finite-state readings of the carry system.",
+        "paper_label": "res:unbounded",
+        "readme_headline": false,
+        "declarations": [
+          {
+            "name": "exists_unbounded_shifted_odd_tail_nat_state_of_support_fraction",
+            "module": "Erdos249257/RationalSupportCarrySkeleton.lean",
+            "line": 2251,
+            "kind": "theorem",
+            "signature": "theorem exists_unbounded_shifted_odd_tail_nat_state_of_support_fraction (A : Set ℕ) (hAinf : A.Infinite) (p : ℤ) (c v : ℕ) (hv : 0 < v) (hvalue : erdosSupportSeries 2 A = (p : ℝ) / ((2 ^ c * v : ℕ) : ℝ)) : ∃ u : ℕ → ℕ, (∀ n : ℕ, (u n : ℝ) = (v : ℝ) * binaryCoeffTail (supportCoeff A) (c + n)) ∧ (∀ n : ℕ, 0 < u n) ∧ (∀ n : ℕ, u (n + 1) + v * supportCoeff A (c + n + 1) = 2 * u n) ∧ (∀ n : ℕ, u n ≡ p.toNat * 2 ^ n [MOD v]) ∧ (∀ B : ℕ, ∃ n : ℕ, B < u n)",
+            "docstring": "Canonical fraction-facing unboundedness theorem. Every infinite rational support admits the existing shifted natural tail state, and that state is globally unbounded."
+          }
+        ]
+      },
+      {
+        "id": "sublog_zero_windows",
+        "label": "Sublogarithmic divisor-coverage zero windows",
+        "status": "proved here",
+        "statement": "A rational support-series value forces every zero window in the divisor-count coefficient to have length at most ε·log₂(N+1) + O_{ε,c,v}(1), uniformly in the support. This constrains coverage; it does not solve universal #257.",
+        "paper_label": "res:sublog",
+        "readme_headline": true,
+        "declarations": [
+          {
+            "name": "supportCoeffZeroWindow_length_le_eps_logb_add",
+            "module": "Erdos249257/SublogDivisorCoverage.lean",
+            "line": 671,
+            "kind": "theorem",
+            "signature": "theorem supportCoeffZeroWindow_length_le_eps_logb_add (A : Set ℕ) (hA : ∃ a : ℕ, 0 < a ∧ a ∈ A) (p : ℤ) (c v : ℕ) (hv : 0 < v) (hvalue : erdosSupportSeries 2 A = (p : ℝ) / ((2 ^ c * v : ℕ) : ℝ)) (ε : ℝ) (hε : 0 < ε) : ∃ B : ℝ, 0 ≤ B ∧ ∀ N h : ℕ, SupportCoeffZeroWindow A (c + N) h → (h : ℝ) ≤ ε * Real.logb 2 (N + 1 : ℝ) + B",
+            "docstring": "For every positive `ε`, a rational support-series value forces every support-coefficient zero window to have length at most `ε * log₂(N+1)` plus a constant depending only on `ε`, `v`, and `c`. The bound is uniform in the support `A`, numerator `p`, starting index `N`, and window length `h`."
+          }
+        ]
+      },
+      {
+        "id": "greedy_achievement_geometry",
+        "label": "Greedy geometry of the Mersenne achievement set",
+        "status": "formalised here",
+        "statement": "Membership in the Mersenne achievement set is equivalent to greedy survival at every level; finite exact-rational death certificates soundly prove non-membership (3/4 is excluded at level one). The underlying geometry is recorded by Kovač–Tao.",
+        "paper_label": "res:greedy",
+        "readme_headline": false,
+        "declarations": [
+          {
+            "name": "mem_mersenneAchievementSet_iff_greedy_survival",
+            "module": "Erdos249257/GreedyAchievementSet.lean",
+            "line": 738,
+            "kind": "theorem",
+            "signature": "theorem mem_mersenneAchievementSet_iff_greedy_survival (x : ℝ) : x ∈ mersenneAchievementSet ↔ 0 ≤ x ∧ ∀ n : ℕ, greedyMersenneRemainder x n ≤ mersenneTail n",
+            "docstring": "**Greedy membership criterion.** A real target belongs to the Mersenne achievement set exactly when it is nonnegative and every residual is at most the full remaining tail."
+          },
+          {
+            "name": "three_fourths_not_mem_mersenneAchievementSet",
+            "module": "Erdos249257/GreedyAchievementSet.lean",
+            "line": 837,
+            "kind": "theorem",
+            "signature": "theorem three_fourths_not_mem_mersenneAchievementSet : (3 / 4 : ℝ) ∉ mersenneAchievementSet",
+            "docstring": "Consequently `3/4` is not in the Mersenne achievement set."
+          }
+        ]
+      },
+      {
+        "id": "sigma_transcendence",
+        "label": "Transcendence of ∑ σ(m)/2^m",
+        "status": "cited only",
+        "statement": "Nesterenko (1996); the ladder rung L(Id). Cited for positioning, not formalised here.",
+        "paper_label": null,
+        "readme_headline": false,
+        "declarations": []
+      },
+      {
+        "id": "prime_support_irrationality",
+        "label": "Irrationality of the prime-support series ∑_p 1/(2^p − 1)",
+        "status": "cited only",
+        "statement": "Tao–Teräväinen; settles the prime-support special case of #257. Only the identity bridge to ∑ ω(n)/2ⁿ is formalised, not the irrationality.",
+        "paper_label": null,
+        "readme_headline": false,
+        "declarations": []
+      },
+      {
+        "id": "erdos_249",
+        "label": "Erdős #249: irrationality of S = ∑ φ(n)/2ⁿ",
+        "status": "open",
+        "statement": "Not proved by this release. The reductions convert it into the unboundedness of the certificate supply, which is untouched.",
+        "paper_label": null,
+        "readme_headline": false,
+        "declarations": []
+      },
+      {
+        "id": "universal_257",
+        "label": "Erdős #257, universal form",
+        "status": "open",
+        "statement": "Irrationality of ∑_{n∈A} 1/(2ⁿ − 1) for every infinite A is not proved by this release; only named families are formalised.",
+        "paper_label": null,
+        "readme_headline": false,
+        "declarations": []
+      }
+    ],
+    "non_claims": [
+      {
+        "id": "not_erdos_257_solution",
+        "meaning": "This release does not settle the universal Erdős #257 problem"
+      },
+      {
+        "id": "not_erdos_249_solution",
+        "meaning": "This release does not settle Erdős #249"
+      },
+      {
+        "id": "not_publication_authority",
+        "meaning": "This release does not itself constitute a peer-reviewed publication record"
+      },
+      {
+        "id": "not_private_root_equivalence",
+        "meaning": "This release is not asserted to be equivalent to any private development"
+      },
+      {
+        "id": "not_provider_proof_authority",
+        "meaning": "Provider or model output is not proof authority; only the Lean kernel check is"
+      },
+      {
+        "id": "not_hidden_proof_body_authority",
+        "meaning": "No unpublished proof sketch or hidden artefact carries proof authority for this release"
+      }
+    ],
+    "module_graph": {
+      "root": "Erdos249257.lean",
+      "nodes": [
+        {
+          "id": "Erdos249257.GapFareyBound",
+          "path": "Erdos249257/GapFareyBound.lean",
+          "role": "Farey-gap denominator exclusions",
+          "imports": []
+        },
+        {
+          "id": "Erdos249257.MersenneLambertLadder",
+          "path": "Erdos249257/MersenneLambertLadder.lean",
+          "role": "Mersenne-Lambert identities",
+          "imports": []
+        },
+        {
+          "id": "Erdos249257.GeometricCoprimality",
+          "path": "Erdos249257/GeometricCoprimality.lean",
+          "role": "Coprime-pair interpretation of the totient series",
+          "imports": [
+            "Erdos249257.MersenneLambertLadder"
+          ]
+        },
+        {
+          "id": "Erdos249257.GcdMomentCalculus",
+          "path": "Erdos249257/GcdMomentCalculus.lean",
+          "role": "GCD moment transform",
+          "imports": [
+            "Erdos249257.GeometricCoprimality"
+          ]
+        },
+        {
+          "id": "Erdos249257.TotientTailPeriodKiller",
+          "path": "Erdos249257/TotientTailPeriodKiller.lean",
+          "role": "Tail-period certificate reduction",
+          "imports": []
+        },
+        {
+          "id": "Erdos249257.CarrySurvivorExtinction",
+          "path": "Erdos249257/CarrySurvivorExtinction.lean",
+          "role": "Multiple-period collapse",
+          "imports": [
+            "Erdos249257.TotientTailPeriodKiller"
+          ]
+        },
+        {
+          "id": "Erdos249257.LcmDiagonalReduction",
+          "path": "Erdos249257/LcmDiagonalReduction.lean",
+          "role": "One-parameter lcm-diagonal reduction",
+          "imports": [
+            "Erdos249257.CarrySurvivorExtinction"
+          ]
+        },
+        {
+          "id": "Erdos249257.LcmConeFlatness",
+          "path": "Erdos249257/LcmConeFlatness.lean",
+          "role": "Cone-flatness and certificate completeness",
+          "imports": [
+            "Erdos249257.LcmDiagonalReduction"
+          ]
+        },
+        {
+          "id": "Erdos249257.LcmConeNonflat",
+          "path": "Erdos249257/LcmConeNonflat.lean",
+          "role": "Joint cone non-flatness refuter",
+          "imports": [
+            "Erdos249257.LcmConeFlatness"
+          ]
+        },
+        {
+          "id": "Erdos249257.CertificateKernel",
+          "path": "Erdos249257/CertificateKernel.lean",
+          "role": "Assembled theorem kernel and headline interfaces",
+          "imports": [
+            "Erdos249257.GapFareyBound",
+            "Erdos249257.MersenneLambertLadder",
+            "Erdos249257.GeometricCoprimality",
+            "Erdos249257.GcdMomentCalculus",
+            "Erdos249257.TotientTailPeriodKiller",
+            "Erdos249257.CarrySurvivorExtinction",
+            "Erdos249257.LcmDiagonalReduction",
+            "Erdos249257.LcmConeFlatness",
+            "Erdos249257.LcmConeNonflat"
+          ]
+        },
+        {
+          "id": "Erdos249257.GeneratedCertificates.b10_L6_A11",
+          "path": "Erdos249257/GeneratedCertificates/b10_L6_A11.lean",
+          "role": "Generated finite certificate shard",
+          "imports": [
+            "Erdos249257.CertificateKernel"
+          ]
+        },
+        {
+          "id": "Erdos249257.GeneratedCertificates.b2_L105_A75047",
+          "path": "Erdos249257/GeneratedCertificates/b2_L105_A75047.lean",
+          "role": "Generated finite certificate shard",
+          "imports": [
+            "Erdos249257.CertificateKernel"
+          ]
+        },
+        {
+          "id": "Erdos249257.GeneratedCertificates.b2_L210_A21371",
+          "path": "Erdos249257/GeneratedCertificates/b2_L210_A21371.lean",
+          "role": "Generated finite certificate shard",
+          "imports": [
+            "Erdos249257.CertificateKernel"
+          ]
+        },
+        {
+          "id": "Erdos249257.GeneratedCertificates",
+          "path": "Erdos249257/GeneratedCertificates.lean",
+          "role": "Generated certificate aggregation",
+          "imports": [
+            "Erdos249257.CertificateKernel",
+            "Erdos249257.GeneratedCertificates.b10_L6_A11",
+            "Erdos249257.GeneratedCertificates.b2_L210_A21371",
+            "Erdos249257.GeneratedCertificates.b2_L105_A75047"
+          ]
+        },
+        {
+          "id": "Erdos249257.GenericTailOrbitRigidity",
+          "path": "Erdos249257/GenericTailOrbitRigidity.lean",
+          "role": "Tempered tail-orbit rationality criterion",
+          "imports": [
+            "Erdos249257.CertificateKernel"
+          ]
+        },
+        {
+          "id": "Erdos249257.GreedyAchievementSet",
+          "path": "Erdos249257/GreedyAchievementSet.lean",
+          "role": "Greedy geometry and finite death certificates",
+          "imports": [
+            "Erdos249257.CertificateKernel"
+          ]
+        },
+        {
+          "id": "Erdos249257.BooleanMobiusCarry",
+          "path": "Erdos249257/BooleanMobiusCarry.lean",
+          "role": "Boolean-Mobius carry coordinates",
+          "imports": [
+            "Erdos249257.GenericTailOrbitRigidity"
+          ]
+        },
+        {
+          "id": "Erdos249257.RationalSupportCarrySkeleton",
+          "path": "Erdos249257/RationalSupportCarrySkeleton.lean",
+          "role": "Residue wraps, reciprocal mass, and unbounded carries",
+          "imports": [
+            "Erdos249257.BooleanMobiusCarry"
+          ]
+        },
+        {
+          "id": "Erdos249257.SublogDivisorCoverage",
+          "path": "Erdos249257/SublogDivisorCoverage.lean",
+          "role": "Sublogarithmic divisor-coverage constraint",
+          "imports": [
+            "Erdos249257.RationalSupportCarrySkeleton"
+          ]
+        }
+      ]
+    },
+    "argument_graph": {
+      "edge_semantics": {
+        "corollary_of": "The source claim is presented as a corollary or specialization of the target claim.",
+        "builds_on": "The source claim's argument layer builds on the target claim or criterion.",
+        "makes_exact": "The source claim records why a reduction or certificate formulation loses no information.",
+        "instantiates": "The source claim supplies checked finite instances of the target reduction.",
+        "advances_open_target": "The source claim is honest partial progress toward the open target and does not settle it.",
+        "positions": "The source claim is cited or used to position another claim; it is not formal proof authority here."
+      },
+      "edges": [
+        {
+          "from": "eb_constant",
+          "relation": "corollary_of",
+          "to": "eb_full_support"
+        },
+        {
+          "from": "support_families",
+          "relation": "advances_open_target",
+          "to": "universal_257"
+        },
+        {
+          "from": "denominator_exclusion",
+          "relation": "advances_open_target",
+          "to": "erdos_249"
+        },
+        {
+          "from": "certificate_reduction",
+          "relation": "advances_open_target",
+          "to": "erdos_249"
+        },
+        {
+          "from": "certificate_completeness",
+          "relation": "makes_exact",
+          "to": "certificate_reduction"
+        },
+        {
+          "from": "certified_kill_instances",
+          "relation": "instantiates",
+          "to": "certificate_reduction"
+        },
+        {
+          "from": "boolean_mobius_carry",
+          "relation": "builds_on",
+          "to": "tail_orbit_rigidity"
+        },
+        {
+          "from": "reciprocal_mass_bound",
+          "relation": "builds_on",
+          "to": "boolean_mobius_carry"
+        },
+        {
+          "from": "unbounded_carry_states",
+          "relation": "builds_on",
+          "to": "boolean_mobius_carry"
+        },
+        {
+          "from": "sublog_zero_windows",
+          "relation": "builds_on",
+          "to": "unbounded_carry_states"
+        },
+        {
+          "from": "reciprocal_mass_bound",
+          "relation": "advances_open_target",
+          "to": "universal_257"
+        },
+        {
+          "from": "sublog_zero_windows",
+          "relation": "advances_open_target",
+          "to": "universal_257"
+        },
+        {
+          "from": "greedy_achievement_geometry",
+          "relation": "advances_open_target",
+          "to": "universal_257"
+        },
+        {
+          "from": "sigma_transcendence",
+          "relation": "positions",
+          "to": "mersenne_lambert_ladder"
+        },
+        {
+          "from": "prime_support_irrationality",
+          "relation": "positions",
+          "to": "universal_257"
+        }
+      ]
+    },
+    "high_salience_declarations": [
+      {
+        "claim_id": "eb_full_support",
+        "name": "irrational_erdosSum_full_support",
+        "module": "Erdos249257/CertificateKernel.lean",
+        "line": 7999,
+        "kind": "theorem",
+        "signature": "theorem irrational_erdosSum_full_support (b : ℕ) (hb : 2 ≤ b) : Irrational (∑' k : ℕ, (1 : ℝ) / ((b : ℝ) ^ (k + 1) - 1))",
+        "docstring": "**Full-support (Erdős–Borwein) irrationality, unconditional.** For every base `b ≥ 2` the series `∑_{n≥1} 1/(b^n - 1)` is irrational — Erdős (1948), through the certificate machine: bounded Bertrand/CRT first-block frame, middle-window divisor-pair average with pigeonhole selection, and explicit parameter closure."
+      },
+      {
+        "claim_id": "eb_constant",
+        "name": "irrational_erdosBorwein_series",
+        "module": "Erdos249257/CertificateKernel.lean",
+        "line": 8006,
+        "kind": "theorem",
+        "signature": "theorem irrational_erdosBorwein_series : Irrational (∑' k : ℕ, (1 : ℝ) / ((2 : ℝ) ^ (k + 1) - 1))",
+        "docstring": "**The Erdős–Borwein constant is irrational.** Base-2 instance of the full-support theorem: `∑_{n≥1} 1/(2^n - 1)` is irrational."
+      },
+      {
+        "claim_id": "support_families",
+        "name": "erdos257_family_factorial_instance",
+        "module": "Erdos249257/CertificateKernel.lean",
+        "line": 5753,
+        "kind": "theorem",
+        "signature": "theorem erdos257_family_factorial_instance : Irrational (∑' k, (1 : ℝ) / ((2 : ℝ) ^ (Nat.factorial (k + 1)) - 1))",
+        "docstring": "**Erdős #257 family, factorial instance at base 2.** The literal series `∑ 1 / (2^(n!) - 1)` over the infinite support `A = {n! : n ≥ 1}` is irrational. This is an instance of the statement family of Erdős problem #257 (which asks the same for *every* infinite support); the universal problem remains open and is not claimed."
+      },
+      {
+        "claim_id": "support_families",
+        "name": "erdos257_family_two_pow_instance",
+        "module": "Erdos249257/CertificateKernel.lean",
+        "line": 5761,
+        "kind": "theorem",
+        "signature": "theorem erdos257_family_two_pow_instance : Irrational (∑' k, (1 : ℝ) / ((2 : ℝ) ^ (2 ^ k) - 1))",
+        "docstring": "**Erdős #257 family, geometric instance at base 2.** The literal series `∑ 1 / (2^(2^n) - 1)` over the infinite support `A = {2^n : n ≥ 0}` is irrational. An instance of the #257 statement family; the universal problem remains open and is not claimed."
+      },
+      {
+        "claim_id": "support_families",
+        "name": "irrational_erdosSupportSeries_pairwise_coprime",
+        "module": "Erdos249257/CertificateKernel.lean",
+        "line": 10447,
+        "kind": "theorem",
+        "signature": "theorem irrational_erdosSupportSeries_pairwise_coprime (b : ℕ) (A : Set ℕ) (hb : 2 ≤ b) (hA : A.Infinite) (hpair : A.Pairwise Nat.Coprime) (hsum : Summable (Set.indicator A fun a : ℕ => (1 : ℝ) / a)) : Irrational (erdosSupportSeries b A)",
+        "docstring": "**Erdős's pairwise-coprime support theorem (1948), machine-checked.** For every base `b ≥ 2` and every infinite pairwise-coprime support `A ⊆ ℕ` with summable reciprocals, `∑_{a ∈ A} 1/(b^a - 1)` is irrational. The first non-dilation support class of Erdős #257 to submit to the support-coefficient calculus: this is NOT valuation forcing — small support elements join the CRT modulus at residue zero, adaptive block sizes absorb their deterministic first-block hits, and summable reciprocals control the strays."
+      },
+      {
+        "claim_id": "mersenne_lambert_ladder",
+        "name": "tsum_totient_div_two_pow_sub_one_eq_two",
+        "module": "Erdos249257/CertificateKernel.lean",
+        "line": 18100,
+        "kind": "theorem",
+        "signature": "theorem tsum_totient_div_two_pow_sub_one_eq_two : ∑' d : ℕ+, (Nat.totient (d : ℕ) : ℝ) / ((2 : ℝ) ^ (d : ℕ) - 1) = 2",
+        "docstring": "**Rational rung `L(φ) = 2`**: `∑_{d≥1} φ(d)/(2^d-1) = 2`, exactly. The Lambert transform of the #249 coefficients at the #249 point is rational — the difficulty of #249 lives entirely on the power-series side."
+      },
+      {
+        "claim_id": "mersenne_lambert_ladder",
+        "name": "totient_series_eq_half_add_moebius_mersenne_square",
+        "module": "Erdos249257/CertificateKernel.lean",
+        "line": 18125,
+        "kind": "theorem",
+        "signature": "theorem totient_series_eq_half_add_moebius_mersenne_square : (∑' n : ℕ, ((Nat.totient n : ℝ)) / (2 : ℝ) ^ n) = 1 / 2 + ∑' d : ℕ+, ((ArithmeticFunction.moebius (d : ℕ) : ℤ) : ℝ) / ((2 : ℝ) ^ (d : ℕ) - 1) ^ 2",
+        "docstring": "**Möbius-square lens**: `∑ φ(n)/2ⁿ = 1/2 + ∑_{d≥1} μ(d)/(2^d-1)²`. The #249 constant as a signed squared-Mersenne Lambert series."
+      },
+      {
+        "claim_id": "denominator_exclusion",
+        "name": "tsum_totient_div_pow_two_ne_ratCast_of_den_le_79639646646701375323355774875831053",
+        "module": "Erdos249257/CertificateKernel.lean",
+        "line": 18055,
+        "kind": "theorem",
+        "signature": "theorem tsum_totient_div_pow_two_ne_ratCast_of_den_le_79639646646701375323355774875831053 : ∀ p : ℚ, p.den ≤ 79639646646701375323355774875831053 → (∑' n : ℕ, ((Nat.totient n : ℝ)) / (2 : ℝ) ^ n) ≠ (p : ℝ)",
+        "docstring": "**Erdős #249 denominator exclusion to `79639646646701375323355774875831053`, `ℚ` form.** If `∑_{n≥0} φ(n)/2^n` is rational, its reduced denominator exceeds `79639646646701375323355774875831053`."
+      },
+      {
+        "claim_id": "certificate_reduction",
+        "name": "irrational_totient_series_of_certificate_supply",
+        "module": "Erdos249257/TotientTailPeriodKiller.lean",
+        "line": 386,
+        "kind": "theorem",
+        "signature": "theorem irrational_totient_series_of_certificate_supply (hsupply : ∀ h : ℕ, 0 < h → ∀ N₀ : ℕ, ∃ N, N₀ ≤ N ∧ ∃ L, certifiedKill h N L) : Irrational (∑' n : ℕ, (Nat.totient n : ℝ) / 2 ^ n)",
+        "docstring": "**The wave-21 reduction (the throat of #249).** A certified period-kill supply — for every period `h ≥ 1` and every threshold `N₀`, a certified kill at some `(N ≥ N₀, L)` — proves the totient series irrational. Each individual certificate is a finite, decidable residue computation."
+      },
+      {
+        "claim_id": "certificate_reduction",
+        "name": "irrational_totient_series_of_lcm_diagonal_certificate_supply",
+        "module": "Erdos249257/LcmDiagonalReduction.lean",
+        "line": 92,
+        "kind": "theorem",
+        "signature": "theorem irrational_totient_series_of_lcm_diagonal_certificate_supply (hsupply : ∀ t₀ : ℕ, ∃ t, t₀ ≤ t ∧ ∃ L, certifiedKill (periodLcm t) (periodLcm t) L) : Irrational (∑' n : ℕ, (Nat.totient n : ℝ) / 2 ^ n)",
+        "docstring": "**The wave-23 diagonal collapse.** #249 follows from a SINGLE ℕ-indexed sequence of decidable statements: the endpoint certificate firing on the diagonal `(h, N) = (periodLcm t, periodLcm t)` for infinitely many `t`. Rationality would supply a primitive period `h₀` and pre-period `N₀`; any `t ≥ max(h₀, N₀)` gives `h₀ ∣ periodLcm t` and `periodLcm t ≥ t ≥ N₀` simultaneously, so a diagonal kill at such `t` is a contradiction. No second parameter remains."
+      },
+      {
+        "claim_id": "certificate_reduction",
+        "name": "rational_totient_series_forces_lcm_cone_flatness",
+        "module": "Erdos249257/LcmConeFlatness.lean",
+        "line": 90,
+        "kind": "theorem",
+        "signature": "theorem rational_totient_series_forces_lcm_cone_flatness (hrat : ¬ Irrational (∑' n : ℕ, (Nat.totient n : ℝ) / 2 ^ n)) : ∃ t₁ : ℕ, ∀ t, t₁ ≤ t → ∀ q m : ℕ, 0 < q → totientTail (q * periodLcm t + m * periodLcm t) - totientTail (q * periodLcm t) ∈ Set.range ((↑) : ℤ → ℝ)",
+        "docstring": "**The lcm-cone flatness law.** If the totient series is rational, then from some scale on, the ENTIRE lcm cone is fractionally flat: every difference `R_{q·H_t + m·H_t} - R_{q·H_t}` is an integer, for every `t` past the threshold, every base multiplier `q ≥ 1`, and every step multiplier `m`. One constant fractional part governs every cone point — the maximal spend of the rationality hypothesis on the lcm lattice."
+      },
+      {
+        "claim_id": "certificate_completeness",
+        "name": "exists_certifiedKill_iff_tail_diff_notMem_int",
+        "module": "Erdos249257/LcmConeFlatness.lean",
+        "line": 316,
+        "kind": "theorem",
+        "signature": "theorem exists_certifiedKill_iff_tail_diff_notMem_int (h N : ℕ) : (∃ L, certifiedKill h N L) ↔ totientTail (N + h) - totientTail N ∉ Set.range ((↑) : ℤ → ℝ)",
+        "docstring": "**Certificate completeness, iff form.** Some depth certifies `(h, N)` exactly when the tail difference is a non-integer. Finite certificates are receipts; non-integrality is the object."
+      },
+      {
+        "claim_id": "certified_kill_instances",
+        "name": "certifiedKill_all_small",
+        "module": "Erdos249257/TotientTailPeriodKiller.lean",
+        "line": 396,
+        "kind": "theorem",
+        "signature": "theorem certifiedKill_all_small : ∀ h ∈ Finset.Icc 1 8, certifiedKill h 12 16",
+        "docstring": "Machine-checked kills: for every period `h ∈ [1,8]` the residue certificate holds at `(N, L) = (12, 16)`. Kernel-decidable: 256 totient values below 37."
+      },
+      {
+        "claim_id": "certified_kill_instances",
+        "name": "certifiedKill_periodLcm_diagonal_upto_six",
+        "module": "Erdos249257/LcmDiagonalReduction.lean",
+        "line": 217,
+        "kind": "theorem",
+        "signature": "theorem certifiedKill_periodLcm_diagonal_upto_six : ∀ t ∈ Finset.Icc 1 6, certifiedKill (periodLcm t) (periodLcm t) (diagonalKillDepth t)",
+        "docstring": "**Diagonal deposit.** The wave-23 predicate `P t` holds for every `1 ≤ t ≤ 6`: the endpoint certificate fires at `(H_t, H_t)` with the tabulated depth. Totient arguments stay ≤ 130 — a light kernel `decide`."
+      },
+      {
+        "claim_id": "tail_orbit_rigidity",
+        "name": "binaryCoeffSeries_rational_iff_exists_temperedBinaryOrbit",
+        "module": "Erdos249257/GenericTailOrbitRigidity.lean",
+        "line": 260,
+        "kind": "theorem",
+        "signature": "theorem binaryCoeffSeries_rational_iff_exists_temperedBinaryOrbit (c : ℕ → ℕ) (hgrowth : ∀ n : ℕ, c n ≤ n) : HasRationalValue (binaryCoeffSeries c) ↔ ∃ v : ℕ, 0 < v ∧ ∃ u : ℕ → ℤ, IsTemperedBinaryOrbit c v u",
+        "docstring": "**Subexponential tail-orbit rigidity, equivalence form.** The series `X_c` is rational exactly when some tempered integer orbit exists."
+      },
+      {
+        "claim_id": "boolean_mobius_carry",
+        "name": "exists_normalized_support_fraction_iff_exists_booleanMobiusCarry",
+        "module": "Erdos249257/BooleanMobiusCarry.lean",
+        "line": 734,
+        "kind": "theorem",
+        "signature": "theorem exists_normalized_support_fraction_iff_exists_booleanMobiusCarry (p : ℤ) (q : ℕ) (hq : 0 < q) : (∃ A : Set ℕ, 0 ∉ A ∧ (∃ a : ℕ, 0 < a ∧ a ∈ A) ∧ erdosSupportSeries 2 A = (p : ℝ) / (q : ℝ)) ↔ ∃ U : ℕ → ℤ, BooleanMobiusCarryCertificate p q U",
+        "docstring": "**Certificate-level equivalence.** Positive normalized supports with value `p/q` are in exact correspondence at the existence level with quotient-only Boolean Möbius carry certificates. The converse support is not guessed: it is reconstructed as `booleanMobiusSupport` of the carry quotient."
+      },
+      {
+        "claim_id": "reciprocal_mass_bound",
+        "name": "one_div_oddOrder_le_reciprocalMass_of_support_fraction",
+        "module": "Erdos249257/RationalSupportCarrySkeleton.lean",
+        "line": 1543,
+        "kind": "theorem",
+        "signature": "theorem one_div_oddOrder_le_reciprocalMass_of_support_fraction (A : Set ℕ) (hA : ∃ a : ℕ, 0 < a ∧ a ∈ A) (hsum : Summable (reciprocalSupportTerm A)) (p : ℤ) (c : ℕ) {v : ℕ} (hv : 1 < v) (hvodd : Odd v) (hpv : p.toNat.Coprime v) (hvalue : erdosSupportSeries 2 A = (p : ℝ) / ((2 ^ c * v : ℕ) : ℝ)) : (1 : ℝ) / (oddDoublingOrder v hvodd : ℝ) ≤ reciprocalMass A",
+        "docstring": null
+      },
+      {
+        "claim_id": "unbounded_carry_states",
+        "name": "exists_unbounded_shifted_odd_tail_nat_state_of_support_fraction",
+        "module": "Erdos249257/RationalSupportCarrySkeleton.lean",
+        "line": 2251,
+        "kind": "theorem",
+        "signature": "theorem exists_unbounded_shifted_odd_tail_nat_state_of_support_fraction (A : Set ℕ) (hAinf : A.Infinite) (p : ℤ) (c v : ℕ) (hv : 0 < v) (hvalue : erdosSupportSeries 2 A = (p : ℝ) / ((2 ^ c * v : ℕ) : ℝ)) : ∃ u : ℕ → ℕ, (∀ n : ℕ, (u n : ℝ) = (v : ℝ) * binaryCoeffTail (supportCoeff A) (c + n)) ∧ (∀ n : ℕ, 0 < u n) ∧ (∀ n : ℕ, u (n + 1) + v * supportCoeff A (c + n + 1) = 2 * u n) ∧ (∀ n : ℕ, u n ≡ p.toNat * 2 ^ n [MOD v]) ∧ (∀ B : ℕ, ∃ n : ℕ, B < u n)",
+        "docstring": "Canonical fraction-facing unboundedness theorem. Every infinite rational support admits the existing shifted natural tail state, and that state is globally unbounded."
+      },
+      {
+        "claim_id": "sublog_zero_windows",
+        "name": "supportCoeffZeroWindow_length_le_eps_logb_add",
+        "module": "Erdos249257/SublogDivisorCoverage.lean",
+        "line": 671,
+        "kind": "theorem",
+        "signature": "theorem supportCoeffZeroWindow_length_le_eps_logb_add (A : Set ℕ) (hA : ∃ a : ℕ, 0 < a ∧ a ∈ A) (p : ℤ) (c v : ℕ) (hv : 0 < v) (hvalue : erdosSupportSeries 2 A = (p : ℝ) / ((2 ^ c * v : ℕ) : ℝ)) (ε : ℝ) (hε : 0 < ε) : ∃ B : ℝ, 0 ≤ B ∧ ∀ N h : ℕ, SupportCoeffZeroWindow A (c + N) h → (h : ℝ) ≤ ε * Real.logb 2 (N + 1 : ℝ) + B",
+        "docstring": "For every positive `ε`, a rational support-series value forces every support-coefficient zero window to have length at most `ε * log₂(N+1)` plus a constant depending only on `ε`, `v`, and `c`. The bound is uniform in the support `A`, numerator `p`, starting index `N`, and window length `h`."
+      },
+      {
+        "claim_id": "greedy_achievement_geometry",
+        "name": "mem_mersenneAchievementSet_iff_greedy_survival",
+        "module": "Erdos249257/GreedyAchievementSet.lean",
+        "line": 738,
+        "kind": "theorem",
+        "signature": "theorem mem_mersenneAchievementSet_iff_greedy_survival (x : ℝ) : x ∈ mersenneAchievementSet ↔ 0 ≤ x ∧ ∀ n : ℕ, greedyMersenneRemainder x n ≤ mersenneTail n",
+        "docstring": "**Greedy membership criterion.** A real target belongs to the Mersenne achievement set exactly when it is nonnegative and every residual is at most the full remaining tail."
+      },
+      {
+        "claim_id": "greedy_achievement_geometry",
+        "name": "three_fourths_not_mem_mersenneAchievementSet",
+        "module": "Erdos249257/GreedyAchievementSet.lean",
+        "line": 837,
+        "kind": "theorem",
+        "signature": "theorem three_fourths_not_mem_mersenneAchievementSet : (3 / 4 : ℝ) ∉ mersenneAchievementSet",
+        "docstring": "Consequently `3/4` is not in the Mersenne achievement set."
+      }
+    ]
+  },
+  "expansion": {
+    "exhaustive_declaration_atlas": {
+      "path": "docs/declaration_atlas.json",
+      "expected_content_digest": "sha256:da2e33a8728cb490fe382776cc94a62a10c0b967c3a4f2ae96e023dbde5d6ef2",
+      "expected_source_input_fingerprint": "sha256:6d86161aedbd9cbb09fd9a664f6ad24f6b8dd6b9cbeed53092da92d7a1fb95ee",
+      "availability": "optional_attached_corpus",
+      "check": "python3 scripts/build_declaration_atlas.py --check"
+    }
+  },
+  "checks": {
+    "descriptor": "python3 scripts/build_corpus_descriptor.py --check",
+    "release": "python3 scripts/check_release.py"
+  }
+}

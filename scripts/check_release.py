@@ -272,7 +272,13 @@ def main() -> int:
 
     # --- 8. agent entry ------------------------------------------------------------
     agents = read(ROOT / "AGENTS.md")
-    for required in ("docs/claims.json", "SCOPE.md", "Erdos249257.lean", "scripts/check_release.py"):
+    for required in (
+        "docs/claims.json",
+        "docs/corpus_descriptor.json",
+        "SCOPE.md",
+        "Erdos249257.lean",
+        "scripts/check_release.py",
+    ):
         check(required in agents, f"AGENTS.md does not route through {required}")
     check("remain open" in agents, "AGENTS.md must preserve the open-problem boundary")
     check("proof authority" in agents, "AGENTS.md must state the proof-authority boundary")
@@ -286,6 +292,16 @@ def main() -> int:
     )
     check(atlas_check.returncode == 0,
           f"declaration atlas drift: {atlas_check.stdout.strip() or atlas_check.stderr.strip()}")
+
+    corpus_check = subprocess.run(
+        [sys.executable, str(ROOT / "scripts" / "build_corpus_descriptor.py"), "--check"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    check(corpus_check.returncode == 0,
+          f"corpus descriptor drift: {corpus_check.stdout.strip() or corpus_check.stderr.strip()}")
 
     # --- 9. proof-trust guard ------------------------------------------------------
     # Covers the library, its root, and the downstream examples: everything
