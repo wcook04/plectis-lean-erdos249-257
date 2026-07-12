@@ -11,31 +11,31 @@
   },
   "identity": {
     "formal_source": {
-      "tag": "v0.5.0",
-      "resolved_commit": "4ed26ae47959338a40c61ec4cc6e175b49c05eef",
+      "tag": "v0.6.0",
+      "resolved_commit": "c2975740da4ecbfc91faee2a2d9947d49e21e334",
       "lean_toolchain": "leanprover/lean4:v4.29.1",
       "authority_role": "proof_bearing_release_anchor"
     },
     "navigation_snapshot": {
-      "commit": "4ed26ae47959338a40c61ec4cc6e175b49c05eef",
+      "commit": "c2975740da4ecbfc91faee2a2d9947d49e21e334",
       "authority_role": "machine_readable_navigation_anchor",
       "publication_state": "main_history_snapshot",
       "published_ref": "main",
-      "repository_resolution": "https://github.com/wcook04/plectis-lean-erdos249-257/tree/4ed26ae47959338a40c61ec4cc6e175b49c05eef"
+      "repository_resolution": "https://github.com/wcook04/plectis-lean-erdos249-257/tree/c2975740da4ecbfc91faee2a2d9947d49e21e334"
     },
     "content": {
       "machine_readable_paper": {
         "path": "docs/claims.json::machine_readable_paper",
-        "content_digest": "sha256:fd41d27c0ee3156e96b4dbf1d6882cddfa4f12eac9444fe5658ed5ed13147b36"
+        "content_digest": "sha256:a03ef79b4c2bf95fac0805c32d0ff73df2e9949d3ef2f8b3bb2ed4a4667c53ea"
       },
       "claims_document": {
         "path": "docs/claims.json",
-        "content_digest": "sha256:26f688701c8ab9ba41a6feecc469f4e37822c00a0aa049b4617982fd984995a2"
+        "content_digest": "sha256:f9a33127e06007739731afd4b779f6f3c7aa88d0a80a1995e0300cbb6465118a"
       },
       "declaration_atlas": {
         "path": "docs/declaration_atlas.json",
-        "content_digest": "sha256:f5b5f68bc821359291ddbfa98876e4b2840e0d7c8b4366872324543c3ce8d0ce",
-        "source_input_fingerprint": "sha256:6d8d9e3072caaebd401f16eebc075e233414dea2af2126e4a5af17bfb71f79da"
+        "content_digest": "sha256:aaa0b5889c6a995aa64dc1f3b63ac026e56d59a05829dec1ac268e23fba954ea",
+        "source_input_fingerprint": "sha256:608ab90dbae857bf3611ae77f809619e095080c45778e047826cf0c503a2032b"
       },
       "methodology_contract": {
         "path": "docs/methodology.json",
@@ -85,19 +85,19 @@
     }
   },
   "summary": {
-    "module_count": 531,
-    "declaration_count": 6218,
-    "theorem_like_count": 5771,
+    "module_count": 539,
+    "declaration_count": 6328,
+    "theorem_like_count": 5826,
     "generated_certificate_declaration_count": 1681,
-    "principal_claim_link_count": 36,
+    "principal_claim_link_count": 48,
     "kind_counts": {
       "abbrev": 1,
-      "def": 435,
-      "inductive": 2,
+      "def": 487,
+      "inductive": 3,
       "instance": 3,
-      "lemma": 332,
-      "structure": 6,
-      "theorem": 5439
+      "lemma": 336,
+      "structure": 8,
+      "theorem": 5490
     }
   },
   "compact_graph": {
@@ -626,6 +626,159 @@
         "declarations": []
       },
       {
+        "id": "transport_curvature_reductions",
+        "label": "Transport and curvature reductions for Erdős #249",
+        "status": "conditional reduction",
+        "statement": "Curvature, fixed-three exponent transport, anchored (3,5) transport, prime-jump, and balanced three-transport observables each have exact finite non-integrality consumers whose unbounded supply would imply irrationality of the totient constant. Every supply hypothesis remains open.",
+        "paper_label": "sec:curvature",
+        "readme_headline": false,
+        "declarations": [
+          {
+            "name": "irrational_totientSeries_of_sharpCurvatureSupply",
+            "module": "Erdos249257/CurvatureCarry.lean",
+            "line": 206,
+            "kind": "theorem",
+            "signature": "theorem irrational_totientSeries_of_sharpCurvatureSupply (hsupply : SharpCurvatureSupply) : Irrational (∑' n : ℕ, (Nat.totient n : ℝ) / 2 ^ n)",
+            "docstring": "The sharp curvature supply is a complete proof socket for #249."
+          },
+          {
+            "name": "irrational_totient_series_of_exponentOnlyThreeTransportSupply",
+            "module": "Erdos249257/ExponentOnlyTransport.lean",
+            "line": 205,
+            "kind": "theorem",
+            "signature": "theorem irrational_totient_series_of_exponentOnlyThreeTransportSupply (hsupply : ExponentOnlyThreeTransportSupply) : Irrational (∑' n : ℕ, (Nat.totient n : ℝ) / 2 ^ n)",
+            "docstring": "The fixed-three transport supply contradicts rational LCM-cone flatness and therefore proves irrationality of the totient series."
+          },
+          {
+            "name": "irrational_totient_series_of_anchoredJoint35ConeSupply",
+            "module": "Erdos249257/JointExponentTransport.lean",
+            "line": 217,
+            "kind": "theorem",
+            "signature": "theorem irrational_totient_series_of_anchoredJoint35ConeSupply (hsupply : AnchoredJoint35ConeSupply) : Irrational (∑' n : ℕ, (Nat.totient n : ℝ) / 2 ^ n)",
+            "docstring": "An unbounded joint certificate supply contradicts rational LCM-cone flatness and proves irrationality of the totient series."
+          },
+          {
+            "name": "irrational_totient_series_of_primeJumpSharpKill_supply",
+            "module": "Erdos249257/PrimeJumpWindow.lean",
+            "line": 193,
+            "kind": "theorem",
+            "signature": "theorem irrational_totient_series_of_primeJumpSharpKill_supply (hsupply : ∀ t₀ : ℕ, ∃ t, t₀ ≤ t ∧ ∃ p L : ℕ, 0 < p ∧ primeJumpSharpKill (periodLcm t) p L) : Irrational (∑' n : ℕ, (Nat.totient n : ℝ) / 2 ^ n)",
+            "docstring": "An unbounded supply of sharp prime-jump window kills on the LCM cone would prove Erdős #249. This is the exact remaining consumer socket; the supply is not asserted here."
+          },
+          {
+            "name": "irrational_totientSeries_of_roughnessBoundaryLatticeSupply",
+            "module": "Erdos249257/ThreeTransportBoundary.lean",
+            "line": 177,
+            "kind": "theorem",
+            "signature": "theorem irrational_totientSeries_of_roughnessBoundaryLatticeSupply (hsupply : RoughnessBoundaryLatticeSupply) : Irrational (∑' n : ℕ, (Nat.totient n : ℝ) / 2 ^ n)",
+            "docstring": "The boundary-certificate supply contradicts eventual LCM-cone flatness."
+          }
+        ],
+        "remaining_open_proposition_ids": [
+          "remaining_open.unbounded_certificate_supply"
+        ]
+      },
+      {
+        "id": "affine_transport_annihilation",
+        "label": "Affine residue state and old-channel annihilation",
+        "status": "proved here",
+        "statement": "The exact Möbius residue kernel has a periodic affine slope-and-intercept state. First-order exponent transport and every coefficient system with vanishing zeroth and first moments annihilate all divisor channels already present at the base height; a prime jump additionally has an explicit migrated-channel correction.",
+        "paper_label": "sec:transport",
+        "readme_headline": false,
+        "declarations": [
+          {
+            "name": "transportResidueKernel_eq_affineState",
+            "module": "Erdos249257/ExponentOnlyTransport.lean",
+            "line": 141,
+            "kind": "theorem",
+            "signature": "theorem transportResidueKernel_eq_affineState {d N : ℕ} (hd : 0 < d) : transportResidueKernel d N = (N : ℝ) * residueSlope d N + residueIntercept d N",
+            "docstring": "The exact kernel is affine in the scale coordinate and periodic in the residue coordinate. This is the state omitted by a residue-permutation-only transport matrix."
+          },
+          {
+            "name": "oldChannel_affine_moment_annihilation",
+            "module": "Erdos249257/JointExponentTransport.lean",
+            "line": 36,
+            "kind": "theorem",
+            "signature": "theorem oldChannel_affine_moment_annihilation {ι : Type*} [Fintype ι] (m : ι → ℕ) (c : ι → ℝ) (hzero : ∑ i, c i = 0) (hfirst : ∑ i, c i * (m i : ℝ) = 0) {d H : ℕ} (hd : 0 < d) (hdH : d ∣ H) : ∑ i, c i * transportResidueKernel d (m i * H) = 0",
+            "docstring": "Any finite real combination with zero constant and first moments kills an old affine residue channel. This is independent of the particular `(3,5)` operator."
+          },
+          {
+            "name": "residueHeckeDefect_eq_postJump_add_migration",
+            "module": "Erdos249257/PrimeJumpMigration.lean",
+            "line": 38,
+            "kind": "theorem",
+            "signature": "theorem residueHeckeDefect_eq_postJump_add_migration (d H p : ℕ) : residueHeckeDefect d H p = postJumpResidueChannel d H p + preJumpMigrationChannel d H p",
+            "docstring": "The actual transition channel is post-jump contribution plus same-channel migration."
+          }
+        ]
+      },
+      {
+        "id": "transport_certificate_instances",
+        "label": "Verified transport-window certificates",
+        "status": "verified finite instance",
+        "statement": "Lean verifies the sharp prime-jump certificate at (H,p,L)=(12,5,15) and the balanced three-transport certificate at (H,L)=(60,12). These bounded instances do not establish any unbounded supply.",
+        "paper_label": "sec:primejump",
+        "readme_headline": false,
+        "declarations": [
+          {
+            "name": "primeJumpSharpKill_twelve_five",
+            "module": "Erdos249257/PrimeJumpWindow.lean",
+            "line": 186,
+            "kind": "theorem",
+            "signature": "theorem primeJumpSharpKill_twelve_five : primeJumpSharpKill 12 5 15",
+            "docstring": "A concrete new-prime-jump deposit."
+          },
+          {
+            "name": "sharpThreeTransportCert_60_12",
+            "module": "Erdos249257/ThreeTransportBoundary.lean",
+            "line": 203,
+            "kind": "theorem",
+            "signature": "theorem sharpThreeTransportCert_60_12 : sharpThreeTransportCert 60 12",
+            "docstring": "Kernel-checked finite lattice separation at `t = 6`, `H = 60`."
+          }
+        ],
+        "bounded_domain": "Exactly the prime-jump parameter triple (H,p,L)=(12,5,15) and the balanced three-transport pair (H,L)=(60,12)."
+      },
+      {
+        "id": "first_harmonic_certificate_interface",
+        "label": "First-harmonic gap implies a finite certificate",
+        "status": "conditional reduction",
+        "statement": "Under the explicit dyadic room inequality, a constant-saving first-harmonic bound on one block forces a certified non-integrality witness in that block. No cofinal harmonic estimate is asserted.",
+        "paper_label": "sec:harmonic",
+        "readme_headline": false,
+        "declarations": [
+          {
+            "name": "exists_certifiedKill_of_first_harmonic_gap",
+            "module": "Erdos249257/FirstHarmonicGap.lean",
+            "line": 104,
+            "kind": "theorem",
+            "signature": "theorem exists_certifiedKill_of_first_harmonic_gap {h X L : ℕ} (hX : 0 < X) (hroom : 16 * (2 * X + h + L + 2) ≤ 2 ^ L) (hgap : (∑ N ∈ Finset.Ico X (2 * X), windowFirstCos h N L) ≤ (9 / 10 : ℝ) * X) : ∃ N ∈ Finset.Ico X (2 * X), certifiedKill h N L",
+            "docstring": "A constant-saving first-harmonic gap on one dyadic block forces a finite certificate somewhere in that block. Establishing such gaps cofinally is the analytic input still required for #249."
+          }
+        ],
+        "remaining_open_proposition_ids": [
+          "remaining_open.unbounded_certificate_supply"
+        ]
+      },
+      {
+        "id": "fixed_precision_transport_no_go",
+        "label": "Fixed-precision valuation-unit no-go theorem",
+        "status": "unconditional progress",
+        "statement": "At every fixed positive precision, each finite compatible valuation-unit word has a prefix-locked centred completion. Bounded local signatures alone therefore cannot exclude all finite centred endpoints; growing precision or global information remains possible.",
+        "paper_label": "sec:nogo",
+        "readme_headline": false,
+        "declarations": [
+          {
+            "name": "fixedPrecisionTropicalNoGo",
+            "module": "Erdos249257/TropicalCurvatureCarry.lean",
+            "line": 137,
+            "kind": "theorem",
+            "signature": "theorem fixedPrecisionTropicalNoGo (u : ℕ) (hu : 0 < u) (symbols : List VUSymbol) (hodd : ∀ σ ∈ symbols, Odd σ.unit) (e : ℤ) : ∃ states : List ℤ, VUOrbit u e symbols states ∧ List.Forall₂ (fun σ e' => |e'| ≤ vuRadius u σ) symbols states",
+            "docstring": "Formal fixed-precision tropical no-go: bounded local valuation--unit data alone never excludes all finite centred carry completions."
+          }
+        ]
+      },
+      {
         "id": "erdos_249",
         "label": "Erdős #249: irrationality of S = ∑ φ(n)/2ⁿ",
         "status": "open",
@@ -745,6 +898,14 @@
             "Erdos249257.LcmDiagonalReduction",
             "Erdos249257.LcmConeFlatness",
             "Erdos249257.LcmConeNonflat"
+          ]
+        },
+        {
+          "id": "Erdos249257.CurvatureCarry",
+          "path": "Erdos249257/CurvatureCarry.lean",
+          "role": "Lean proof module",
+          "imports": [
+            "Erdos249257.LcmConeFlatness"
           ]
         },
         {
@@ -5210,6 +5371,22 @@
           ]
         },
         {
+          "id": "Erdos249257.ExponentOnlyTransport",
+          "path": "Erdos249257/ExponentOnlyTransport.lean",
+          "role": "Lean proof module",
+          "imports": [
+            "Erdos249257.LcmConeFlatness"
+          ]
+        },
+        {
+          "id": "Erdos249257.FirstHarmonicGap",
+          "path": "Erdos249257/FirstHarmonicGap.lean",
+          "role": "Lean proof module",
+          "imports": [
+            "Erdos249257.LcmConeFlatness"
+          ]
+        },
+        {
           "id": "Erdos249257.FullTargetPrimeAdjunctionNoGo",
           "path": "Erdos249257/FullTargetPrimeAdjunctionNoGo.lean",
           "role": "Prime-adjunction obstruction for the full target",
@@ -5292,6 +5469,15 @@
           ]
         },
         {
+          "id": "Erdos249257.JointExponentTransport",
+          "path": "Erdos249257/JointExponentTransport.lean",
+          "role": "Lean proof module",
+          "imports": [
+            "Erdos249257.CurvatureCarry",
+            "Erdos249257.ExponentOnlyTransport"
+          ]
+        },
+        {
           "id": "Erdos249257.LambertDiagonalEnclosure",
           "path": "Erdos249257/LambertDiagonalEnclosure.lean",
           "role": "Lambert diagonal enclosure reduction",
@@ -5344,6 +5530,22 @@
           "role": "Exact denominator growth in the Mersenne shadow",
           "imports": [
             "Erdos249257.MersenneShadowCyclotomicNoncollapse"
+          ]
+        },
+        {
+          "id": "Erdos249257.PrimeJumpMigration",
+          "path": "Erdos249257/PrimeJumpMigration.lean",
+          "role": "Lean proof module",
+          "imports": [
+            "Erdos249257.ActualForeignResidueProjection"
+          ]
+        },
+        {
+          "id": "Erdos249257.PrimeJumpWindow",
+          "path": "Erdos249257/PrimeJumpWindow.lean",
+          "role": "Lean proof module",
+          "imports": [
+            "Erdos249257.LcmConeNonflat"
           ]
         },
         {
@@ -5433,10 +5635,27 @@
           ]
         },
         {
+          "id": "Erdos249257.ThreeTransportBoundary",
+          "path": "Erdos249257/ThreeTransportBoundary.lean",
+          "role": "Lean proof module",
+          "imports": [
+            "Erdos249257.CurvatureCarry",
+            "Erdos249257.ExponentOnlyTransport"
+          ]
+        },
+        {
           "id": "Erdos249257.TotientTailPeriodKiller",
           "path": "Erdos249257/TotientTailPeriodKiller.lean",
           "role": "Tail-period certificate reduction",
           "imports": []
+        },
+        {
+          "id": "Erdos249257.TropicalCurvatureCarry",
+          "path": "Erdos249257/TropicalCurvatureCarry.lean",
+          "role": "Lean proof module",
+          "imports": [
+            "Erdos249257.CurvatureCarry"
+          ]
         }
       ]
     },
@@ -5579,6 +5798,51 @@
             "operation": "constrains",
             "statement": "Provides exact global geometry and finite non-membership tests for the value set without proving the universal irrationality statement."
           }
+        },
+        {
+          "from": "transport_curvature_reductions",
+          "relation": "builds_on",
+          "to": "certificate_reduction"
+        },
+        {
+          "from": "transport_curvature_reductions",
+          "relation": "advances_open_target",
+          "to": "erdos_249",
+          "remaining_open_effect": {
+            "remaining_open_proposition_id": "remaining_open.unbounded_certificate_supply",
+            "operation": "re_expresses",
+            "statement": "Re-expresses diagonal non-integrality through several exact transport and curvature observables while leaving every unbounded supply open."
+          }
+        },
+        {
+          "from": "affine_transport_annihilation",
+          "relation": "builds_on",
+          "to": "transport_curvature_reductions"
+        },
+        {
+          "from": "transport_certificate_instances",
+          "relation": "instantiates",
+          "to": "transport_curvature_reductions"
+        },
+        {
+          "from": "first_harmonic_certificate_interface",
+          "relation": "builds_on",
+          "to": "certificate_reduction"
+        },
+        {
+          "from": "first_harmonic_certificate_interface",
+          "relation": "advances_open_target",
+          "to": "erdos_249",
+          "remaining_open_effect": {
+            "remaining_open_proposition_id": "remaining_open.unbounded_certificate_supply",
+            "operation": "re_expresses",
+            "statement": "Turns a cofinal first-harmonic estimate into the existing finite certificate supply; no such estimate is proved."
+          }
+        },
+        {
+          "from": "fixed_precision_transport_no_go",
+          "relation": "builds_on",
+          "to": "transport_curvature_reductions"
         },
         {
           "from": "sigma_transcendence",
@@ -6366,14 +6630,122 @@
         "kind": "theorem",
         "signature": "theorem three_fourths_not_mem_mersenneAchievementSet : (3 / 4 : ℝ) ∉ mersenneAchievementSet",
         "docstring": "Consequently `3/4` is not in the Mersenne achievement set."
+      },
+      {
+        "claim_id": "transport_curvature_reductions",
+        "name": "irrational_totientSeries_of_sharpCurvatureSupply",
+        "module": "Erdos249257/CurvatureCarry.lean",
+        "line": 206,
+        "kind": "theorem",
+        "signature": "theorem irrational_totientSeries_of_sharpCurvatureSupply (hsupply : SharpCurvatureSupply) : Irrational (∑' n : ℕ, (Nat.totient n : ℝ) / 2 ^ n)",
+        "docstring": "The sharp curvature supply is a complete proof socket for #249."
+      },
+      {
+        "claim_id": "transport_curvature_reductions",
+        "name": "irrational_totient_series_of_exponentOnlyThreeTransportSupply",
+        "module": "Erdos249257/ExponentOnlyTransport.lean",
+        "line": 205,
+        "kind": "theorem",
+        "signature": "theorem irrational_totient_series_of_exponentOnlyThreeTransportSupply (hsupply : ExponentOnlyThreeTransportSupply) : Irrational (∑' n : ℕ, (Nat.totient n : ℝ) / 2 ^ n)",
+        "docstring": "The fixed-three transport supply contradicts rational LCM-cone flatness and therefore proves irrationality of the totient series."
+      },
+      {
+        "claim_id": "transport_curvature_reductions",
+        "name": "irrational_totient_series_of_anchoredJoint35ConeSupply",
+        "module": "Erdos249257/JointExponentTransport.lean",
+        "line": 217,
+        "kind": "theorem",
+        "signature": "theorem irrational_totient_series_of_anchoredJoint35ConeSupply (hsupply : AnchoredJoint35ConeSupply) : Irrational (∑' n : ℕ, (Nat.totient n : ℝ) / 2 ^ n)",
+        "docstring": "An unbounded joint certificate supply contradicts rational LCM-cone flatness and proves irrationality of the totient series."
+      },
+      {
+        "claim_id": "transport_curvature_reductions",
+        "name": "irrational_totient_series_of_primeJumpSharpKill_supply",
+        "module": "Erdos249257/PrimeJumpWindow.lean",
+        "line": 193,
+        "kind": "theorem",
+        "signature": "theorem irrational_totient_series_of_primeJumpSharpKill_supply (hsupply : ∀ t₀ : ℕ, ∃ t, t₀ ≤ t ∧ ∃ p L : ℕ, 0 < p ∧ primeJumpSharpKill (periodLcm t) p L) : Irrational (∑' n : ℕ, (Nat.totient n : ℝ) / 2 ^ n)",
+        "docstring": "An unbounded supply of sharp prime-jump window kills on the LCM cone would prove Erdős #249. This is the exact remaining consumer socket; the supply is not asserted here."
+      },
+      {
+        "claim_id": "transport_curvature_reductions",
+        "name": "irrational_totientSeries_of_roughnessBoundaryLatticeSupply",
+        "module": "Erdos249257/ThreeTransportBoundary.lean",
+        "line": 177,
+        "kind": "theorem",
+        "signature": "theorem irrational_totientSeries_of_roughnessBoundaryLatticeSupply (hsupply : RoughnessBoundaryLatticeSupply) : Irrational (∑' n : ℕ, (Nat.totient n : ℝ) / 2 ^ n)",
+        "docstring": "The boundary-certificate supply contradicts eventual LCM-cone flatness."
+      },
+      {
+        "claim_id": "affine_transport_annihilation",
+        "name": "transportResidueKernel_eq_affineState",
+        "module": "Erdos249257/ExponentOnlyTransport.lean",
+        "line": 141,
+        "kind": "theorem",
+        "signature": "theorem transportResidueKernel_eq_affineState {d N : ℕ} (hd : 0 < d) : transportResidueKernel d N = (N : ℝ) * residueSlope d N + residueIntercept d N",
+        "docstring": "The exact kernel is affine in the scale coordinate and periodic in the residue coordinate. This is the state omitted by a residue-permutation-only transport matrix."
+      },
+      {
+        "claim_id": "affine_transport_annihilation",
+        "name": "oldChannel_affine_moment_annihilation",
+        "module": "Erdos249257/JointExponentTransport.lean",
+        "line": 36,
+        "kind": "theorem",
+        "signature": "theorem oldChannel_affine_moment_annihilation {ι : Type*} [Fintype ι] (m : ι → ℕ) (c : ι → ℝ) (hzero : ∑ i, c i = 0) (hfirst : ∑ i, c i * (m i : ℝ) = 0) {d H : ℕ} (hd : 0 < d) (hdH : d ∣ H) : ∑ i, c i * transportResidueKernel d (m i * H) = 0",
+        "docstring": "Any finite real combination with zero constant and first moments kills an old affine residue channel. This is independent of the particular `(3,5)` operator."
+      },
+      {
+        "claim_id": "affine_transport_annihilation",
+        "name": "residueHeckeDefect_eq_postJump_add_migration",
+        "module": "Erdos249257/PrimeJumpMigration.lean",
+        "line": 38,
+        "kind": "theorem",
+        "signature": "theorem residueHeckeDefect_eq_postJump_add_migration (d H p : ℕ) : residueHeckeDefect d H p = postJumpResidueChannel d H p + preJumpMigrationChannel d H p",
+        "docstring": "The actual transition channel is post-jump contribution plus same-channel migration."
+      },
+      {
+        "claim_id": "transport_certificate_instances",
+        "name": "primeJumpSharpKill_twelve_five",
+        "module": "Erdos249257/PrimeJumpWindow.lean",
+        "line": 186,
+        "kind": "theorem",
+        "signature": "theorem primeJumpSharpKill_twelve_five : primeJumpSharpKill 12 5 15",
+        "docstring": "A concrete new-prime-jump deposit."
+      },
+      {
+        "claim_id": "transport_certificate_instances",
+        "name": "sharpThreeTransportCert_60_12",
+        "module": "Erdos249257/ThreeTransportBoundary.lean",
+        "line": 203,
+        "kind": "theorem",
+        "signature": "theorem sharpThreeTransportCert_60_12 : sharpThreeTransportCert 60 12",
+        "docstring": "Kernel-checked finite lattice separation at `t = 6`, `H = 60`."
+      },
+      {
+        "claim_id": "first_harmonic_certificate_interface",
+        "name": "exists_certifiedKill_of_first_harmonic_gap",
+        "module": "Erdos249257/FirstHarmonicGap.lean",
+        "line": 104,
+        "kind": "theorem",
+        "signature": "theorem exists_certifiedKill_of_first_harmonic_gap {h X L : ℕ} (hX : 0 < X) (hroom : 16 * (2 * X + h + L + 2) ≤ 2 ^ L) (hgap : (∑ N ∈ Finset.Ico X (2 * X), windowFirstCos h N L) ≤ (9 / 10 : ℝ) * X) : ∃ N ∈ Finset.Ico X (2 * X), certifiedKill h N L",
+        "docstring": "A constant-saving first-harmonic gap on one dyadic block forces a finite certificate somewhere in that block. Establishing such gaps cofinally is the analytic input still required for #249."
+      },
+      {
+        "claim_id": "fixed_precision_transport_no_go",
+        "name": "fixedPrecisionTropicalNoGo",
+        "module": "Erdos249257/TropicalCurvatureCarry.lean",
+        "line": 137,
+        "kind": "theorem",
+        "signature": "theorem fixedPrecisionTropicalNoGo (u : ℕ) (hu : 0 < u) (symbols : List VUSymbol) (hodd : ∀ σ ∈ symbols, Odd σ.unit) (e : ℤ) : ∃ states : List ℤ, VUOrbit u e symbols states ∧ List.Forall₂ (fun σ e' => |e'| ≤ vuRadius u σ) symbols states",
+        "docstring": "Formal fixed-precision tropical no-go: bounded local valuation--unit data alone never excludes all finite centred carry completions."
       }
     ]
   },
   "expansion": {
     "exhaustive_declaration_atlas": {
       "path": "docs/declaration_atlas.json",
-      "expected_content_digest": "sha256:f5b5f68bc821359291ddbfa98876e4b2840e0d7c8b4366872324543c3ce8d0ce",
-      "expected_source_input_fingerprint": "sha256:6d8d9e3072caaebd401f16eebc075e233414dea2af2126e4a5af17bfb71f79da",
+      "expected_content_digest": "sha256:aaa0b5889c6a995aa64dc1f3b63ac026e56d59a05829dec1ac268e23fba954ea",
+      "expected_source_input_fingerprint": "sha256:608ab90dbae857bf3611ae77f809619e095080c45778e047826cf0c503a2032b",
       "availability": "optional_attached_corpus",
       "check": "python3 scripts/build_declaration_atlas.py --check"
     },
