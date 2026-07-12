@@ -58,6 +58,26 @@ open Finset
 
 /-! ## The scale sits below its own ray point: `t ≤ lcm(1..t)` -/
 
+/-- Consecutive LCM heights are nested by divisibility. -/
+theorem periodLcm_dvd_succ (t : ℕ) : periodLcm t ∣ periodLcm (t + 1) := by
+  change periodLcm t ∣ Nat.lcm (periodLcm t) (t + 1)
+  exact Nat.dvd_lcm_left _ _
+
+/-- A strict LCM jump is at least as long as its starting height. -/
+theorem periodLcm_strict_jump_sub_ge {t : ℕ}
+    (hjump : periodLcm t < periodLcm (t + 1)) :
+    periodLcm t ≤ periodLcm (t + 1) - periodLcm t := by
+  obtain ⟨q, hq⟩ := periodLcm_dvd_succ t
+  have hq2 : 2 ≤ q := by
+    by_contra hnot
+    have hqle : q ≤ 1 := by omega
+    interval_cases q <;> simp_all
+  apply Nat.le_sub_of_add_le
+  calc
+    periodLcm t + periodLcm t = periodLcm t * 2 := by omega
+    _ ≤ periodLcm t * q := Nat.mul_le_mul_left _ hq2
+    _ = periodLcm (t + 1) := hq.symm
+
 lemma le_periodLcm (t : ℕ) : t ≤ periodLcm t := by
   cases t with
   | zero => exact Nat.zero_le _

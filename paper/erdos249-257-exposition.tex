@@ -22,7 +22,7 @@
 % the repository verifies that it matches docs/claims.json and that every
 % \lref/\lrefx/\lloc target resolves to the named declaration at that line.
 % ---------------------------------------------------------------------------
-\newcommand{\commit}{v0.4.0}
+\newcommand{\commit}{v0.5.0}
 \newcommand{\repobase}{https://github.com/wcook04/plectis-lean-erdos249-257/blob/\commit}
 \newcommand{\releaseurl}{https://github.com/wcook04/plectis-lean-erdos249-257/releases/tag/\commit}
 \newcommand{\PK}{Erdos249257}
@@ -75,9 +75,12 @@ $S=\sum_{n\ge1}\ph(n)/2^n$, whose irrationality remains open, we prove that any
 rational representation has denominator greater than
 $\Qzero\approx7.96\times10^{34}$, and formalise an exact reduction of
 irrationality to an unbounded family of finite decidable certificates. We also
-describe the proof architecture and auxiliary rationality criteria based on
-binary carry systems. This work solves neither Erd\H{o}s~\#249 nor the universal
-form of Erd\H{o}s~\#257.
+refine that reduction through an exact full-target interval, a
+squared-Mersenne enclosure, and a fresh-loss projection, and verify 22 explicit
+lcm-diagonal scales through $t=43$.  On the \#257 side we formalise the
+measure-one, nowhere-dense Mersenne achievement set and auxiliary rationality
+criteria based on binary carry systems. This work solves neither
+Erd\H{o}s~\#249 nor the universal form of Erd\H{o}s~\#257.
 \end{abstract}
 
 \medskip
@@ -104,7 +107,7 @@ $A\subseteq\N$. The second problem contains the classical full-support
 Erd\H{o}s--Borwein constant, but the passage from structured supports to an
 arbitrary infinite support remains open.
 
-The development has four principal outputs. First, it formalises the
+The development has five principal outputs. First, it formalises the
 irrationality of $\sum_{n\ge1}(b^n-1)^{-1}$ for every integer $b\ge2$, and of
 several structured infinite-support variants. Second, it places $S$ on the
 same Mersenne--Lambert ladder and proves useful positive, signed, and
@@ -114,6 +117,12 @@ exact finite-certificate reduction: irrationality follows if the certified
 non-integrality witnesses occur at unbounded parameters, and the existence of
 a witness at fixed parameters is equivalent to the corresponding tail
 difference being non-integral.
+The same reduction is then decomposed into an exact target-interval test, a
+Lambert-centred squared-Mersenne enclosure, and finite fresh-loss projection
+conditions; the checked finite segment reaches 22 explicit scales through
+$t=43$.  Fifth, it gives an executable greedy model of the Mersenne achievement
+set, including its compact, perfect, totally disconnected, nowhere-dense, and
+measure-one geometry, while leaving the rational-member question open.
 
 \begin{center}
 \fbox{\begin{minipage}{0.91\textwidth}
@@ -210,8 +219,8 @@ $\sum_{d\ge1}\mu(d)/(2^d-1)=1/2$ and $\sum_{d\ge1}\ph(d)/(2^d-1)=2$, exactly.
 \end{proposition}
 \noindent Formalised: \lref{MersenneLambertLadder.lean}{527}{tsum_moebius_div_two_pow_sub_one_eq_half}
 and \lref{MersenneLambertLadder.lean}{515}{tsum_totient_div_two_pow_sub_one_eq_two}; restated on the
-\#249 series shape at \lrefx{CertificateKernel.lean}{18105}{tsum_moebius_div_two_pow_sub_one_eq_half}
-and \lrefx{CertificateKernel.lean}{18100}{tsum_totient_div_two_pow_sub_one_eq_two}.
+\#249 series shape at \lrefx{CertificateKernel.lean}{18106}{tsum_moebius_div_two_pow_sub_one_eq_half}
+and \lrefx{CertificateKernel.lean}{18101}{tsum_totient_div_two_pow_sub_one_eq_two}.
 
 \begin{proposition}[the positive lift, $L(A)=S$]\label{res:lift}
 With the primitive-conductor weight $A=\ph*\mu$,
@@ -219,7 +228,7 @@ With the primitive-conductor weight $A=\ph*\mu$,
 \sum_{d\ge1}\frac{A(d)}{2^d-1}\;=\;\sum_{n\ge1}\frac{\ph(n)}{2^n}\;=\;S.
 \]
 \end{proposition}
-\noindent Formalised: \lref{CertificateKernel.lean}{18116}{tsum_primWeight_div_two_pow_sub_one_eq_totient_series},
+\noindent Formalised: \lref{CertificateKernel.lean}{18117}{tsum_primWeight_div_two_pow_sub_one_eq_totient_series},
 with the weight $A$ defined at \lrefx{MersenneLambertLadder.lean}{247}{primWeight}. This
 places $S$ in the same $\sum(\cdot)/(2^d-1)$ family as $E$, with a nonnegative weight.
 
@@ -228,7 +237,7 @@ places $S$ in the same $\sum(\cdot)/(2^d-1)$ family as $E$, with a nonnegative w
 S \;=\; \tfrac12 \;+\; \sum_{d\ge1}\frac{\mu(d)}{(2^d-1)^2}.
 \]
 \end{proposition}
-\noindent Formalised: \lref{CertificateKernel.lean}{18125}{totient_series_eq_half_add_moebius_mersenne_square}.
+\noindent Formalised: \lref{CertificateKernel.lean}{18126}{totient_series_eq_half_add_moebius_mersenne_square}.
 Writing $T=\sum_{d\ge1}\mu(d)/(2^d-1)^2$, irrationality of $S$ is equivalent to
 irrationality of $T$, since $S=\tfrac12+T$. The factor $1/(2^d-1)^2$ is the
 probability that $d$ divides two independent fair-coin waiting times
@@ -245,8 +254,8 @@ For every integer $b\ge2$, the series $\displaystyle\sum_{n\ge1}\frac{1}{b^n-1}$
 irrational. In particular the Erd\H{o}s--Borwein constant $E=\sum_{n\ge1}1/(2^n-1)$
 is irrational.
 \end{theorem}
-\noindent Formalised: \lref{CertificateKernel.lean}{7999}{irrational_erdosSum_full_support}
-(all bases) and \lref{CertificateKernel.lean}{8006}{irrational_erdosBorwein_series}
+\noindent Formalised: \lref{CertificateKernel.lean}{8000}{irrational_erdosSum_full_support}
+(all bases) and \lref{CertificateKernel.lean}{8007}{irrational_erdosBorwein_series}
 (the base-$2$ corollary). This is Erd\H{o}s's 1948 theorem~\cite{erdos1948}. In the ladder of
 Section~\ref{sec:ladder} it is the rung $L(\mathbf 1)$, and it is the fixed
 machine-checked point one convolution away from the open $S$.
@@ -256,7 +265,7 @@ direct digit argument: a bounded Bertrand/CRT frame on a first block, a
 middle-window average over divisor pairs with a pigeonhole selection, and an
 explicit closure of the parameters. The Lambert bridge
 $\sum 1/(b^n-1)=\sum_m \tau(m)/b^m$ (divisor-count series) is
-\lrefx{CertificateKernel.lean}{5864}{erdosSum_full_support_eq_tsum_divisor_count} in the source.
+\lrefx{CertificateKernel.lean}{5865}{erdosSum_full_support_eq_tsum_divisor_count} in the source.
 
 \subsection{Named infinite-support cases}
 
@@ -286,16 +295,16 @@ specialisation directly contains case (e)~\cite{lucatachiya}. Their Chowla--Erd\
 large-modulus-prime proof is distinct from the periodic-divisor certificate route
 formalised here, and the full mixed-sign coefficient theorem is not claimed here.}
 Formalised: (a)
-\lrefx{CertificateKernel.lean}{5706}{irrational_erdosSum_factorial_support};
-(b) \lrefx{CertificateKernel.lean}{5730}{irrational_erdosSum_two_pow_support};
-(c) \lrefx{CertificateKernel.lean}{8774}{irrational_erdosSupportSeries_multiples};
-(d) \lrefx{CertificateKernel.lean}{10447}{irrational_erdosSupportSeries_pairwise_coprime};
-(e) \lrefx{CertificateKernel.lean}{11275}{irrational_erdosSupportSeries_eventuallyPeriodic},
-\lrefx{CertificateKernel.lean}{11343}{irrational_erdosSupportSeries_residueClass},
-\lrefx{CertificateKernel.lean}{11357}{irrational_erdosSupportSeries_odd}. The two
+\lrefx{CertificateKernel.lean}{5707}{irrational_erdosSum_factorial_support};
+(b) \lrefx{CertificateKernel.lean}{5731}{irrational_erdosSum_two_pow_support};
+(c) \lrefx{CertificateKernel.lean}{8775}{irrational_erdosSupportSeries_multiples};
+(d) \lrefx{CertificateKernel.lean}{10448}{irrational_erdosSupportSeries_pairwise_coprime};
+(e) \lrefx{CertificateKernel.lean}{11276}{irrational_erdosSupportSeries_eventuallyPeriodic},
+\lrefx{CertificateKernel.lean}{11344}{irrational_erdosSupportSeries_residueClass},
+\lrefx{CertificateKernel.lean}{11358}{irrational_erdosSupportSeries_odd}. The two
 base-$2$ instances that name the problem directly are
-\lrefx{CertificateKernel.lean}{5753}{erdos257_family_factorial_instance} and
-\lrefx{CertificateKernel.lean}{5761}{erdos257_family_two_pow_instance}.
+\lrefx{CertificateKernel.lean}{5754}{erdos257_family_factorial_instance} and
+\lrefx{CertificateKernel.lean}{5762}{erdos257_family_two_pow_instance}.
 
 The prime support is now known unconditionally: Tao and Ter\"av\"ainen proved
 that
@@ -352,7 +361,7 @@ each a mediant/Farey argument that traps any candidate $m/q$ inside a forbidden
 gap. The mediant framework is historically associated with Farey's 1816 note
 on vulgar fractions~\cite{farey1816}; the finite exclusions themselves are
 the Lean-checked arguments of this release. See
-\lrefx{CertificateKernel.lean}{15346}{tsum_totient_div_pow_two_ne_ratCast_of_den_le_4838}
+\lrefx{CertificateKernel.lean}{15347}{tsum_totient_div_pow_two_ne_ratCast_of_den_le_4838}
 for the first rung and \lrefx{GapFareyBound.lean}{80}{gap_check_window_1_120_le_248672326362367909},
 \lrefx{GapFareyBound.lean}{156}{gap_check_window_1_240_le_79639646646701375323355774875831053}
 for the two Farey windows.
@@ -388,9 +397,9 @@ S \;=\; \tfrac12 \;+\; \Pr\!\big(\gcd(X,Y)=1\big)
 \;=\; \tfrac12 \;+\!\!\sum_{\substack{a,b\ge1\\ \gcd(a,b)=1}}\!\! 2^{-(a+b)}.
 \]
 \end{proposition}
-\noindent Formalised: \lref{CertificateKernel.lean}{18228}{totient_series_eq_half_add_visible_coprime_pairs},
+\noindent Formalised: \lref{CertificateKernel.lean}{18229}{totient_series_eq_half_add_visible_coprime_pairs},
 with the underlying lattice identity at
-\lrefx{CertificateKernel.lean}{18215}{tsum_visible_coprime_pairs_eq_totient_series}.
+\lrefx{CertificateKernel.lean}{18216}{tsum_visible_coprime_pairs_eq_totient_series}.
 Base $2$ is the one point where $\Pr(X=a)\Pr(Y=b)=2^{-(a+b)}$ needs no normalising
 constant, so the totient sum and the coprimality probability line up with no
 boundary correction. In this reading, Erd\H{o}s \#249 asks whether two independent
@@ -430,7 +439,7 @@ it did not.
 If for every period $h\ge1$ and every threshold $N_0$ there exist $N\ge N_0$ and
 $L$ with $\textsf{certifiedKill}(h,N,L)$, then $S$ is irrational.
 \end{corollary}
-\noindent Formalised: \lref{TotientTailPeriodKiller.lean}{386}{irrational_totient_series_of_certificate_supply};
+\noindent Formalised: \lref{TotientTailPeriodKiller.lean}{394}{irrational_totient_series_of_certificate_supply};
 the tail $R_N$ and the predicate are
 \lrefx{TotientTailPeriodKiller.lean}{57}{totientTail} and
 \lrefx{TotientTailPeriodKiller.lean}{72}{certifiedKill}.
@@ -446,7 +455,7 @@ Suppose that for every threshold $t_0$ there are parameters $t\ge t_0$ and
 $L$ for which $\textsf{certifiedKill}(M_t,M_t,L)$ holds. Then $S$ is
 irrational.
 \end{corollary}
-\noindent Formalised: \lref{LcmDiagonalReduction.lean}{92}{irrational_totient_series_of_lcm_diagonal_certificate_supply}.
+\noindent Formalised: \lref{LcmDiagonalReduction.lean}{112}{irrational_totient_series_of_lcm_diagonal_certificate_supply}.
 
 \paragraph{Step 3: the cone, flatness, and completeness.} On the cone
 $\{kM_t:k\ge1\}$, rationality forces a single fractional constant across the
@@ -488,18 +497,80 @@ The following are checked by the Lean kernel:
 \begin{itemize}[leftmargin=1.4em]
 \item $\textsf{certifiedKill}(h,12,16)$ for every period $h\in[1,8]$;
 \item certified kills for every period $h\in[1,16]$ at a fixed window;
-\item diagonal certificates $\textsf{certifiedKill}(M_t,M_t,L)$ for $t\in[1,6]$, and at $t=7,8$;
+\item diagonal certificates $\textsf{certifiedKill}(M_t,M_t,L)$ at the 22 scales
+  $t\in\{1,2,3,4,5,7,8,9,11,13,16,17,19,23,25,27,29,31,32,37,41,43\}$;
 \item a tabulated joint cone-vertex certificate.
 \end{itemize}
 \end{example}
-\noindent Formalised: \lrefx{TotientTailPeriodKiller.lean}{396}{certifiedKill_all_small},
-\lrefx{CarrySurvivorExtinction.lean}{324}{certifiedKill_all_upto_sixteen},
-\lrefx{LcmDiagonalReduction.lean}{217}{certifiedKill_periodLcm_diagonal_upto_six}
-(with \lrefx{LcmDiagonalReduction.lean}{222}{certifiedKill_periodLcm_diagonal_at_seven},
-\lrefx{LcmDiagonalReduction.lean}{226}{certifiedKill_periodLcm_diagonal_at_eight}),
+\noindent Formalised: \lrefx{TotientTailPeriodKiller.lean}{404}{certifiedKill_all_small},
+\lrefx{CarrySurvivorExtinction.lean}{555}{certifiedKill_all_upto_sixteen},
+\lrefx{LcmDiagonalReduction.lean}{237}{certifiedKill_periodLcm_diagonal_upto_six}
+(with \lrefx{LcmDiagonalReduction.lean}{242}{certifiedKill_periodLcm_diagonal_at_seven},
+\lrefx{LcmDiagonalReduction.lean}{246}{certifiedKill_periodLcm_diagonal_at_eight}),
+\lrefx{DiagonalPincerCertificatesT43.lean}{1485}{certifiedKill_diagonal_all_imported_through_t43},
 and \lrefx{LcmConeNonflat.lean}{506}{coneNonflatCert_cells}. These instances show
 that each layer of the reduction is non-vacuous and, by completeness, exact. They
 are not evidence that the unbounded supply exists.
+
+\paragraph{An exact target interval.} The diagonal calculation also admits a
+more local normal form.  At scale $t$, write the scaled diagonal difference as
+an integer main term minus a foreign-defect term.  The difference is integral
+exactly when that defect lands in an explicit full-target interval.
+
+\begin{proposition}[diagonal pincer decomposition]\label{res:pincer}
+For every $t$, diagonal integrality is equivalent to the foreign diagonal
+defect meeting the full target.  Consequently, full-target avoidance at
+unbounded scales implies irrationality of $S$.
+\end{proposition}
+\noindent Formalised:
+\lref{DiagonalPincerDecomposition.lean}{215}{diagonal_int_iff_foreignDiagonalDefect_hits_fullTarget}
+and
+\lref{DiagonalPincerDecomposition.lean}{290}{irrational_totientSeries_of_full_target_avoidance_supply}.
+The proposition is an exact reduction; the unbounded avoidance hypothesis is
+still open.
+
+Two algebraic inputs make this interval test explicit.  First, the diagonal
+tail difference has a Lambert-projected centre and a signed squared-Mersenne
+tail with a sharp symmetric bound.
+
+\begin{proposition}[squared-Mersenne enclosure]\label{res:squareenclosure}
+The scaled diagonal tail difference differs from its Lambert-projected centre
+by the squared-Mersenne tail.  Separation of the centre from the full target by
+more than the proved tail bound forces target avoidance.
+\end{proposition}
+\noindent Formalised:
+\lref{SquaredMersenneDiagonalEnclosure.lean}{116}{scaleDiagonalTailDifference_sub_lambertProjectedDiagonal}
+and
+\lref{SquaredMersenneDiagonalEnclosure.lean}{237}{scaleFullTarget_miss_of_lambert_projected_separation}.
+
+Second, the rational M\"obius shadow has an exact reduced denominator, with a
+large explicit divisor coming from upper-half Mersenne factors.
+
+\begin{proposition}[Mersenne-shadow denominator]\label{res:shadowden}
+At lcm height $t$, the reduced denominator of the scaled M\"obius shadow is
+given exactly by the formal denominator formula.  The upper-half Mersenne
+product divides it and yields the stated lower bounds.
+\end{proposition}
+\noindent Formalised:
+\lref{MersenneShadowDenominatorGrowth.lean}{99}{exists_upperHalf_mersenne_channel_dvd_den_with_bounds}
+and
+\lref{MersenneShadowDenominatorGrowth.lean}{147}{lcmHeight_scaledMobiusShadow_den_exact}.
+
+Finally, the remaining fresh-loss term can be represented by a finite integer
+projection, and then by binary suffix data.
+
+\begin{corollary}[fresh-loss projection reduction]\label{res:freshloss}
+The fresh-loss residue certificate is equivalent to its projection
+inequality, and the projection forces full-target avoidance.  Hence an
+unbounded projection supply, or either stronger adjacent-suffix supply stated
+in the formal development, implies irrationality of $S$.
+\end{corollary}
+\noindent Formalised:
+\lref{DiagonalFreshLossBridge.lean}{57}{diagonalFreshLossResidueCert_iff_projectionCert}
+and
+\lref{DiagonalFreshLossBridge.lean}{187}{irrational_totientSeries_of_diagonalFreshLossProjectionSupply}.
+The development proves finite fixtures for this bridge but does not assert an
+unbounded projection or suffix supply.
 
 \paragraph{What is open.} The reduction converts \#249 into the statement that the
 certificate supply is \emph{unbounded}: certificates exist for arbitrarily large
@@ -579,7 +650,7 @@ available in the public repository
 This paper is pinned to the tagged release \href{\releaseurl}{\texttt{\commit}};
 each blue Lean link targets an exact declaration at that tag (for example, the
 base-$2$ corollary in Theorem~\ref{res:full} resolves to
-\lrefx{CertificateKernel.lean}{8006}{irrational_erdosBorwein_series}). The package uses
+\lrefx{CertificateKernel.lean}{8007}{irrational_erdosBorwein_series}). The package uses
 \texttt{leanprover/lean4:v4.29.1} and the Mathlib revision pinned by
 \href{\repobase/lake-manifest.json}{\texttt{lake-manifest.json}}.
 The exact public artefact cited here is release \texttt{\commit}~\cite{artifact}.
@@ -698,14 +769,14 @@ $u(N)=v\,T_c(N)$ for all $N$; and $X_c$ is rational if and only if a tempered
 orbit exists for some multiplier $v\ge1$.
 \end{theorem}
 \noindent Formalised:
-\lref{GenericTailOrbitRigidity.lean}{180}{temperedBinaryOrbit_eq_scaledTail}
+\lref{GenericTailOrbitRigidity.lean}{338}{temperedBinaryOrbit_eq_scaledTail}
 (rigidity) and
-\lref{GenericTailOrbitRigidity.lean}{260}{binaryCoeffSeries_rational_iff_exists_temperedBinaryOrbit}
+\lref{GenericTailOrbitRigidity.lean}{425}{binaryCoeffSeries_rational_iff_exists_temperedBinaryOrbit}
 (the criterion), restated in Mathlib's irrationality vocabulary at
-\lrefx{GenericTailOrbitRigidity.lean}{269}{not_irrational_binaryCoeffSeries_iff_exists_temperedBinaryOrbit}.
+\lrefx{GenericTailOrbitRigidity.lean}{434}{not_irrational_binaryCoeffSeries_iff_exists_temperedBinaryOrbit}.
 The engine is one observation: a real orbit with $d(N+1)=2\,d(N)$ and
 $d(N)=o(2^N)$ vanishes identically
-(\lrefx{GenericTailOrbitRigidity.lean}{159}{doublingOrbit_eq_zero_of_tempered}).
+(\lrefx{GenericTailOrbitRigidity.lean}{314}{doublingOrbit_eq_zero_of_tempered}).
 
 The tempered boundary is essential: the
 homogeneous parasite $N\mapsto2^N$ can be added to any orbit without
@@ -722,7 +793,7 @@ here.
 
 At base $2$ the support series of Section~\ref{sec:eb} is itself a binary
 coefficient series, $\sum_{n\in A}1/(2^n-1)=X_{f_A}$
-(\lrefx{BooleanMobiusCarry.lean}{379}{erdosSupportSeries_two_eq_binaryCoeffSeries}).
+(\lrefx{BooleanMobiusCarry.lean}{376}{erdosSupportSeries_two_eq_binaryCoeffSeries}).
 Two exact coordinate changes then turn a hypothetical rational value into a
 support-free object. The divisor transform and M\"obius inversion below are
 classical Lambert-series infrastructure~\cite{apostol,merca2017,mercaschmidt}; the
@@ -737,29 +808,29 @@ $(\mu*f)(n)\in\{0,1\}$ for all $n\ge1$, satisfies $f=f_B$ for the support
 $B=\{n\ge1:(\mu*f)(n)=1\}$ selected by that transform.
 \end{proposition}
 \noindent Formalised:
-\lref{BooleanMobiusCarry.lean}{95}{positiveSupportBitAF_mul_zeta},
-\lref{BooleanMobiusCarry.lean}{113}{moebius_mul_supportCoeffAF}, and, with no
+\lref{BooleanMobiusCarry.lean}{76}{positiveSupportBitAF_mul_zeta},
+\lref{BooleanMobiusCarry.lean}{94}{moebius_mul_supportCoeffAF}, and, with no
 search or finiteness hypothesis, the converse
-\lref{BooleanMobiusCarry.lean}{190}{eq_supportCoeffAF_booleanMobiusSupport_of_boolean};
+\lref{BooleanMobiusCarry.lean}{180}{eq_supportCoeffAF_booleanMobiusSupport_of_boolean};
 the selected support is
-\lrefx{BooleanMobiusCarry.lean}{158}{booleanMobiusSupport}.
+\lrefx{BooleanMobiusCarry.lean}{139}{booleanMobiusSupport}.
 
 On the carry side, Theorem~\ref{res:rigidity} applies at $c=f_A$: the support
 series is rational exactly when a tempered carry orbit for $f_A$ exists
-(\lrefx{BooleanMobiusCarry.lean}{386}{erdosSupportSeries_rational_iff_exists_temperedCarry});
+(\lrefx{BooleanMobiusCarry.lean}{383}{erdosSupportSeries_rational_iff_exists_temperedCarry});
 a displayed fraction $p/q$ corresponds to an orbit $U$ with multiplier $q$ and
 initial value $U(0)=p$
-(\lrefx{BooleanMobiusCarry.lean}{465}{support_fraction_iff_exists_temperedCarry});
+(\lrefx{BooleanMobiusCarry.lean}{466}{support_fraction_iff_exists_temperedCarry});
 and exact division recovers the coefficient from the orbit,
 $\bigl(2U(N)-U(N+1)\bigr)/q=f_A(N+1)$
-(\lrefx{BooleanMobiusCarry.lean}{494}{temperedCarry_quotient_eq_supportCoeff}).
+(\lrefx{BooleanMobiusCarry.lean}{680}{temperedCarry_quotient_eq_supportCoeff}).
 The elementary divisor-pair bound $\tau(n)\le2\lfloor\sqrt n\rfloor$
-(\lrefx{BooleanMobiusCarry.lean}{218}{card_divisors_le_two_mul_sqrt}) confines
+(\lrefx{BooleanMobiusCarry.lean}{208}{card_divisors_le_two_mul_sqrt}) confines
 the tails to a square-root strip, $T_{f_A}(N)\le2\sqrt N+4$
-(\lrefx{BooleanMobiusCarry.lean}{292}{binaryCoeffTail_supportCoeff_le_two_sqrt_add_four}),
+(\lrefx{BooleanMobiusCarry.lean}{289}{binaryCoeffTail_supportCoeff_le_two_sqrt_add_four}),
 hence every orbit state to $0<U(N)\le q\,(2\sqrt N+4)$
-(\lrefx{BooleanMobiusCarry.lean}{504}{temperedCarry_pos_of_exists_pos_mem},
-\lrefx{BooleanMobiusCarry.lean}{518}{temperedCarry_le_denominator_mul_two_sqrt_add_four});
+(\lrefx{BooleanMobiusCarry.lean}{690}{temperedCarry_pos_of_exists_pos_mem},
+\lrefx{BooleanMobiusCarry.lean}{705}{temperedCarry_le_denominator_mul_two_sqrt_add_four});
 and the strip is strong enough to re-derive the tempered boundary, so the
 analytic side condition can be traded for one inequality. The two coordinate
 changes compose.
@@ -774,20 +845,20 @@ Boolean. The support is not guessed: it is reconstructed from the certificate
 by Proposition~\ref{res:boolmob}.
 \end{theorem}
 \noindent Formalised:
-\lref{BooleanMobiusCarry.lean}{734}{exists_normalized_support_fraction_iff_exists_booleanMobiusCarry},
+\lref{BooleanMobiusCarry.lean}{948}{exists_normalized_support_fraction_iff_exists_booleanMobiusCarry},
 with the certificate packaged as
-\lrefx{BooleanMobiusCarry.lean}{589}{BooleanMobiusCarryCertificate} and the
+\lrefx{BooleanMobiusCarry.lean}{775}{BooleanMobiusCarryCertificate} and the
 quotient normalized at index zero
-(\lrefx{BooleanMobiusCarry.lean}{579}{carryQuotient}).
+(\lrefx{BooleanMobiusCarry.lean}{766}{carryQuotient}).
 
 \begin{example}[the support $\{2,3\}$]
 The support $\{2,3\}$ has value
 $\tfrac13+\tfrac17=\tfrac{10}{21}$
-(\lrefx{BooleanMobiusCarry.lean}{824}{erdosSupportSeries_support23_eq_ten_div_twenty_one}),
+(\lrefx{BooleanMobiusCarry.lean}{1054}{erdosSupportSeries_support23_eq_ten_div_twenty_one}),
 its orbit is the pure period-six cycle $10,20,19,17,13,26$ with multiplier
-$21$ (\lrefx{BooleanMobiusCarry.lean}{863}{carryOrbit23_isTempered}), and the
+$21$ (\lrefx{BooleanMobiusCarry.lean}{1103}{carryOrbit23_isTempered}), and the
 M\"obius transform of the carry quotient recovers exactly $\{2,3\}$
-(\lrefx{BooleanMobiusCarry.lean}{900}{mobius_carryOrbit23_recovers_support}).
+(\lrefx{BooleanMobiusCarry.lean}{1140}{mobius_carryOrbit23_recovers_support}).
 \end{example}
 
 These are coordinates, not by themselves a strategy: nothing here excludes
@@ -816,7 +887,7 @@ $\varepsilon,c,$ and $v$, such that every zero window after $c+N$ satisfies
 The bound is uniform in $A,p,N,$ and $h$.
 \end{theorem}
 \noindent Formalised:
-\lref{SublogDivisorCoverage.lean}{671}{supportCoeffZeroWindow_length_le_eps_logb_add}.
+\lref{SublogDivisorCoverage.lean}{392}{supportCoeffZeroWindow_length_le_eps_logb_add}.
 
 The proof first establishes, for each integer $k\ge2$, the explicit divisor
 estimate
@@ -837,7 +908,7 @@ containing a positive element. Rationality makes the scaled tails integers:
 $u(N)=v\,T_{f_A}(c+N)$ is a positive integer, satisfies the carry recurrence
 $u(N+1)+v\,f_A(c+N+1)=2\,u(N)$, and reduces modulo $v$ to the doubling
 residues $r_N=p\,2^N\bmod v$
-(\lrefx{RationalSupportCarrySkeleton.lean}{736}{exists_shifted_odd_tail_nat_states_of_support_fraction}).
+(\lrefx{RationalSupportCarrySkeleton.lean}{668}{exists_shifted_odd_tail_nat_states_of_support_fraction}).
 Doubling a least residue either stays under $v$ or wraps past it exactly once,
 so each step emits a wrap digit $k_N=\lfloor2r_N/v\rfloor\in\{0,1\}$, and over
 any cycle length $h$ with $2^h\equiv1\pmod v$ the repetend identity holds:
@@ -847,12 +918,12 @@ any cycle length $h$ with $2^h\equiv1\pmod v$ the repetend identity holds:
 w=\sum_{N<h}k_N,
 \]
 with $w\ge1$ when $p$ is coprime to $v>1$. Formalised:
-\lref{RationalSupportCarrySkeleton.lean}{209}{sum_doublingResidue_eq_mul_wrapCount}
-and \lrefx{RationalSupportCarrySkeleton.lean}{219}{doublingWrapCount_pos};
+\lref{RationalSupportCarrySkeleton.lean}{171}{sum_doublingResidue_eq_mul_wrapCount}
+and \lrefx{RationalSupportCarrySkeleton.lean}{181}{doublingWrapCount_pos};
 residues, digits, and counts are
-\lrefx{RationalSupportCarrySkeleton.lean}{73}{doublingResidue},
-\lrefx{RationalSupportCarrySkeleton.lean}{77}{doublingWrapDigit},
-\lrefx{RationalSupportCarrySkeleton.lean}{81}{doublingWrapCount}.
+\lrefx{RationalSupportCarrySkeleton.lean}{35}{doublingResidue},
+\lrefx{RationalSupportCarrySkeleton.lean}{39}{doublingWrapDigit},
+\lrefx{RationalSupportCarrySkeleton.lean}{43}{doublingWrapCount}.
 
 \begin{proposition}[one-wrap classification]\label{res:onewrap}
 Let $v>1$ be odd, $p$ coprime to $v$, and $h\ge1$ with $2^h\equiv1\pmod v$.
@@ -861,33 +932,33 @@ residue is a power of two: $r_0=2^a$ for some $a<h$.
 \end{proposition}
 \noindent The one-wrap cycles are thus exactly the Mersenne repetends
 $2^a/(2^h-1)$. Formalised:
-\lref{RationalSupportCarrySkeleton.lean}{454}{one_doublingWrap_classification},
+\lref{RationalSupportCarrySkeleton.lean}{415}{one_doublingWrap_classification},
 from the generic closed-cycle form
-\lrefx{RationalSupportCarrySkeleton.lean}{392}{one_wrap_cycle_classification},
+\lrefx{RationalSupportCarrySkeleton.lean}{353}{one_wrap_cycle_classification},
 and instantiated at the true order $h=\operatorname{ord}_v(2)$
-(\lrefx{RationalSupportCarrySkeleton.lean}{518}{one_oddOrder_doublingWrap_classification},
-with \lrefx{RationalSupportCarrySkeleton.lean}{475}{oddDoublingOrder}). The
+(\lrefx{RationalSupportCarrySkeleton.lean}{478}{one_oddOrder_doublingWrap_classification},
+with \lrefx{RationalSupportCarrySkeleton.lean}{436}{oddDoublingOrder}). The
 classification is algebraic; a finite check of $446$ coprime starting residues
 across twelve modulus/order rows is retained as kernel-checked validation, not
 as the proof
-(\lrefx{RationalSupportCarrySkeleton.lean}{2327}{orderWrapValidatedStartCount_eq_446},
-\lrefx{RationalSupportCarrySkeleton.lean}{2331}{orderWrapValidation446_passes},
-\lrefx{RationalSupportCarrySkeleton.lean}{2337}{orderWrap_minima_table_passes}).
+(\lrefx{RationalSupportCarrySkeleton.lean}{2450}{orderWrapValidatedStartCount_eq_446},
+\lrefx{RationalSupportCarrySkeleton.lean}{2454}{orderWrapValidation446_passes},
+\lrefx{RationalSupportCarrySkeleton.lean}{2460}{orderWrap_minima_table_passes}).
 
 The analytic bridge is Ces\`aro averaging. Write $\rho(A)=\sum_{a\in A}1/a$
 for the reciprocal mass
-(\lrefx{RationalSupportCarrySkeleton.lean}{858}{reciprocalMass}). When the
+(\lrefx{RationalSupportCarrySkeleton.lean}{790}{reciprocalMass}). When the
 reciprocal family is summable, the mean of $f_A(1),\dots,f_A(N)$ converges to
 $\rho(A)$ --- the density of the multiples of $a$, summed over the support ---
 and the mean of the scaled tails has the same limit
-(\lref{RationalSupportCarrySkeleton.lean}{989}{tendsto_supportCoeff_mean_reciprocalMass},
-\lrefx{RationalSupportCarrySkeleton.lean}{1112}{tendsto_binaryCoeffTail_supportCoeff_mean_reciprocalMass}).
+(\lref{RationalSupportCarrySkeleton.lean}{945}{tendsto_supportCoeff_mean_reciprocalMass},
+\lrefx{RationalSupportCarrySkeleton.lean}{1036}{tendsto_binaryCoeffTail_supportCoeff_mean_reciprocalMass}).
 The divergent case is carried as an explicit disjunction, not through the
 convention that a divergent \texttt{tsum} is zero
-(\lrefx{RationalSupportCarrySkeleton.lean}{864}{ReciprocalMassDivergesOrAtLeast}).
+(\lrefx{RationalSupportCarrySkeleton.lean}{796}{ReciprocalMassDivergesOrAtLeast}).
 Each tail state splits exactly as $u(N)=v\,e_N+r_N$ with integral excess
 $e_N=\lfloor u(N)/v\rfloor\ge0$
-(\lrefx{RationalSupportCarrySkeleton.lean}{557}{oddTailExcess}).
+(\lrefx{RationalSupportCarrySkeleton.lean}{501}{oddTailExcess}).
 
 \begin{proposition}[order-wrap lower bound, with exact excess mean]\label{res:orderwrap}
 Let $A$ and $p/(2^c v)$ be as above with $v>1$ odd, and let $w$ be the wrap
@@ -901,16 +972,16 @@ the excess $e_N$ converges automatically, and
 \]
 \end{proposition}
 \noindent Formalised:
-\lref{RationalSupportCarrySkeleton.lean}{1519}{support_fraction_oddOrder_wrapRatio_le_reciprocalMass},
-\lref{RationalSupportCarrySkeleton.lean}{1543}{one_div_oddOrder_le_reciprocalMass_of_support_fraction},
+\lref{RationalSupportCarrySkeleton.lean}{1454}{support_fraction_oddOrder_wrapRatio_le_reciprocalMass},
+\lref{RationalSupportCarrySkeleton.lean}{1478}{one_div_oddOrder_le_reciprocalMass_of_support_fraction},
 the form retaining the divergent alternative
 \lloc{RationalSupportCarrySkeleton.lean}{1582},
 and the excess mean
-\lref{RationalSupportCarrySkeleton.lean}{1431}{tendsto_oddTailExcess_mean}
+\lref{RationalSupportCarrySkeleton.lean}{1334}{tendsto_oddTailExcess_mean}
 (fraction-facing shifted form
-\lrefx{RationalSupportCarrySkeleton.lean}{1613}{exists_shifted_oddTailExcess_mean_of_support_fraction},
+\lrefx{RationalSupportCarrySkeleton.lean}{1577}{exists_shifted_oddTailExcess_mean_of_support_fraction},
 named-limit form
-\lrefx{RationalSupportCarrySkeleton.lean}{1445}{reciprocalMass_eq_wrapRatio_add_oddTailExcessMean}).
+\lrefx{RationalSupportCarrySkeleton.lean}{1353}{reciprocalMass_eq_wrapRatio_add_oddTailExcessMean}).
 A rational value thus ties the odd part of its denominator to the sparsity of
 its support: a summable support with small $\rho(A)$ can only display
 denominators whose odd part has small multiplicative order of $2$.
@@ -930,13 +1001,13 @@ while the exact carry equation $f_A(n)+e_n=k_{n-1}+2e_{n-1}$ with
 $k_{n-1}\le1$ lets one step absorb at most one unit --- so the preceding
 excess must spike to at least $\lceil(|F|-1)/2\rceil$, and the spikes recur
 with density $1/L$. Formalised:
-\lref{RationalSupportCarrySkeleton.lean}{1924}{booleanCollision_wrap_bound_of_common_multiple}
+\lref{RationalSupportCarrySkeleton.lean}{2037}{booleanCollision_wrap_bound_of_common_multiple}
 (denominator-shifted form
 \lloc{RationalSupportCarrySkeleton.lean}{1863}),
 the carry equation
-\lrefx{RationalSupportCarrySkeleton.lean}{1734}{supportCoeff_add_oddTailExcess_succ_eq_wrap_add_two_excess},
+\lrefx{RationalSupportCarrySkeleton.lean}{1651}{supportCoeff_add_oddTailExcess_succ_eq_wrap_add_two_excess},
 and the dyadic corollary
-\lref{RationalSupportCarrySkeleton.lean}{2074}{dyadic_support_fraction_reciprocalMass_diverges_or_gt_one}
+\lref{RationalSupportCarrySkeleton.lean}{2200}{dyadic_support_fraction_reciprocalMass_diverges_or_gt_one}
 (via \lloc{RationalSupportCarrySkeleton.lean}{2003}).
 
 \begin{theorem}[carry states are unbounded over infinite supports]\label{res:unbounded}
@@ -947,13 +1018,13 @@ with $u(N)>B$.
 \noindent The proof picks $2B+1$ positive support elements; at a common
 multiple $L$ of all of them, the local inequality $1+v\,|F|\le2\,u(L-c-1)$
 pushes the state past $B$. Formalised:
-\lref{RationalSupportCarrySkeleton.lean}{2251}{exists_unbounded_shifted_odd_tail_nat_state_of_support_fraction},
+\lref{RationalSupportCarrySkeleton.lean}{2377}{exists_unbounded_shifted_odd_tail_nat_state_of_support_fraction},
 from
-\lrefx{RationalSupportCarrySkeleton.lean}{2194}{shifted_state_unbounded_of_infinite_support}
+\lrefx{RationalSupportCarrySkeleton.lean}{2320}{shifted_state_unbounded_of_infinite_support}
 and the local inequality
-\lrefx{RationalSupportCarrySkeleton.lean}{2102}{one_add_mul_card_le_two_mul_shifted_state};
+\lrefx{RationalSupportCarrySkeleton.lean}{2228}{one_add_mul_card_le_two_mul_shifted_state};
 the $\{2,3\}$ fixture revalidates it at sixty-six common multiples
-(\lrefx{RationalSupportCarrySkeleton.lean}{2276}{carryOrbit23_common_multiple_bound_validation66}).
+(\lrefx{RationalSupportCarrySkeleton.lean}{2401}{carryOrbit23_common_multiple_bound_validation66}).
 So a rational value over an infinite support cannot run on a bounded carry
 alphabet. That closes finite-state readings of the carry system; it does not
 close the problem. Nothing in the constraints above
@@ -973,8 +1044,8 @@ exponent $n$, and let
 the \emph{Mersenne achievement set}, the exponent $0$ being normalised away as
 analytically invisible. Coding by supports of positive exponents is literally
 the formal support series
-(\lrefx{GreedyAchievementSet.lean}{505}{positiveMersenneSupportValue_eq_erdosSupportSeries};
-the set is \lrefx{GreedyAchievementSet.lean}{522}{mersenneAchievementSet}). In
+(\lrefx{GreedyAchievementSet.lean}{500}{positiveMersenneSupportValue_eq_erdosSupportSeries};
+the set is \lrefx{GreedyAchievementSet.lean}{517}{mersenneAchievementSet}). In
 this language the base-$2$ \#257 statement reads: the rational members of
 $\mathcal A$ are exactly the finite subset sums. Nothing below decides that.
 Kova\v{c} and Tao verify, for every fixed integer $t\ge2$, that
@@ -998,16 +1069,32 @@ $\mathcal A$ has a unique support, which the greedy recursion recovers bit by
 bit.
 \end{theorem}
 \noindent Formalised:
-\lref{GreedyAchievementSet.lean}{212}{mersenneTail_lt_weight},
-\lref{GreedyAchievementSet.lean}{434}{mersenneGap_isBigOWith} (explicit bound
-\lrefx{GreedyAchievementSet.lean}{409}{mersenneGap_asymptotic_bound}),
-\lref{GreedyAchievementSet.lean}{738}{mem_mersenneAchievementSet_iff_greedy_survival},
+\lref{GreedyAchievementSet.lean}{180}{mersenneTail_lt_weight},
+\lref{GreedyAchievementSet.lean}{419}{mersenneGap_isBigOWith} (explicit bound
+\lrefx{GreedyAchievementSet.lean}{394}{mersenneGap_asymptotic_bound}),
+\lref{GreedyAchievementSet.lean}{1183}{mem_mersenneAchievementSet_iff_greedy_survival},
 and
-\lref{GreedyAchievementSet.lean}{747}{positiveMersenneSupportValue_injective_normalized},
+\lref{GreedyAchievementSet.lean}{1192}{positiveMersenneSupportValue_injective_normalized},
 transferred to the kernel series at
-\lrefx{GreedyAchievementSet.lean}{756}{erdosSupportSeries_two_injective_normalized}.
+\lrefx{GreedyAchievementSet.lean}{1201}{erdosSupportSeries_two_injective_normalized}.
 The nonnegativity guard in the membership criterion is necessary: without it a
 negative target would survive every level while lying outside $\mathcal A$.
+
+The binary coding also permits the global geometry to be checked directly.
+
+\begin{proposition}[fat-Cantor geometry]\label{res:greedytopology}
+The achievement set $\mathcal A$ is compact, perfect, totally disconnected,
+and nowhere dense.  Its Lebesgue measure is exactly one.
+\end{proposition}
+\noindent Formalised:
+\lref{GreedyAchievementSet.lean}{942}{volume_mersenneAchievementSet},
+\lref{GreedyAchievementSet.lean}{1285}{perfect_mersenneAchievementSet},
+\lref{GreedyAchievementSet.lean}{1301}{isTotallyDisconnected_mersenneAchievementSet},
+and
+\lref{GreedyAchievementSet.lean}{1310}{isNowhereDense_mersenneAchievementSet}.
+Kova\v{c}--Tao supply the strict-tail Cantor-set context cited above.  The
+formalisation records these exact properties without making a novelty or
+priority claim for them.
 
 \begin{proposition}[exact rational runs and finite non-membership certificates]\label{res:death}
 The greedy recursion executed in exact rational arithmetic agrees step by step
@@ -1019,18 +1106,17 @@ rational number already known to lie in $\mathcal A$ has computable support
 bits.
 \end{proposition}
 \noindent Formalised:
-\lref{GreedyAchievementSet.lean}{575}{cast_greedyMersenneRemainderRat};
-\lref{GreedyAchievementSet.lean}{815}{certifiedGreedyMersenneDeath_not_mem},
+\lref{GreedyAchievementSet.lean}{1008}{cast_greedyMersenneRemainderRat};
+\lref{GreedyAchievementSet.lean}{1391}{certifiedGreedyMersenneDeath_not_mem},
 with the certificate
-\lrefx{GreedyAchievementSet.lean}{809}{CertifiedGreedyMersenneDeath} and the
-enclosure \lrefx{GreedyAchievementSet.lean}{776}{mersenneTailUpperRat};
-\lref{GreedyAchievementSet.lean}{837}{three_fourths_not_mem_mersenneAchievementSet};
-and \lref{GreedyAchievementSet.lean}{911}{rational_member_support_bit_iff}.
+\lrefx{GreedyAchievementSet.lean}{1385}{CertifiedGreedyMersenneDeath} and the
+enclosure \lrefx{GreedyAchievementSet.lean}{1352}{mersenneTailUpperRat};
+\lref{GreedyAchievementSet.lean}{1413}{three_fourths_not_mem_mersenneAchievementSet};
+and \lref{GreedyAchievementSet.lean}{1497}{rational_member_support_bit_iff}.
 The certificates are one-sided: survival through any finite depth proves
 nothing about membership, and no decidability of membership in $\mathcal A$ is
-asserted. We do not formalise the topological or measure-theoretic geometry of
-$\mathcal A$; in particular, no ``fat Cantor set'' statement is claimed.
-These criteria do not exclude rational values for either open series.
+asserted.  Neither the global geometry nor the finite death certificates
+exclude rational values for either open series.
 
 \section{Index of principal declarations}\label{app:index}
 
@@ -1042,30 +1128,35 @@ Each row links to the declaration at release \href{\releaseurl}{\texttt{\commit}
 \toprule
 informal statement & linked Lean module\\
 \midrule
-$\sum 1/(b^n-1)$ irrational, all $b\ge2$ & \lrefx{CertificateKernel.lean}{7999}{irrational_erdosSum_full_support}\ (\texttt{CertificateKernel})\\
-Erd\H{o}s--Borwein $E$ irrational & \lrefx{CertificateKernel.lean}{8006}{irrational_erdosBorwein_series}\ (\texttt{CertificateKernel})\\
-factorial support & \lrefx{CertificateKernel.lean}{5706}{irrational_erdosSum_factorial_support}\ (\texttt{CertificateKernel})\\
-power-of-two support & \lrefx{CertificateKernel.lean}{5730}{irrational_erdosSum_two_pow_support}\ (\texttt{CertificateKernel})\\
-pairwise-coprime supports & \lrefx{CertificateKernel.lean}{10447}{irrational_erdosSupportSeries_pairwise_coprime}\ (\texttt{CertificateKernel})\\
+$\sum 1/(b^n-1)$ irrational, all $b\ge2$ & \lrefx{CertificateKernel.lean}{8000}{irrational_erdosSum_full_support}\ (\texttt{CertificateKernel})\\
+Erd\H{o}s--Borwein $E$ irrational & \lrefx{CertificateKernel.lean}{8007}{irrational_erdosBorwein_series}\ (\texttt{CertificateKernel})\\
+factorial support & \lrefx{CertificateKernel.lean}{5707}{irrational_erdosSum_factorial_support}\ (\texttt{CertificateKernel})\\
+power-of-two support & \lrefx{CertificateKernel.lean}{5731}{irrational_erdosSum_two_pow_support}\ (\texttt{CertificateKernel})\\
+pairwise-coprime supports & \lrefx{CertificateKernel.lean}{10448}{irrational_erdosSupportSeries_pairwise_coprime}\ (\texttt{CertificateKernel})\\
 $L(\mu)=1/2$ & \lrefx{MersenneLambertLadder.lean}{527}{tsum_moebius_div_two_pow_sub_one_eq_half}\ (\texttt{MersenneLambertLadder})\\
 $L(\ph)=2$ & \lrefx{MersenneLambertLadder.lean}{515}{tsum_totient_div_two_pow_sub_one_eq_two}\ (\texttt{MersenneLambertLadder})\\
-positive lift $L(A)=S$ & \lrefx{CertificateKernel.lean}{18116}{tsum_primWeight_div_two_pow_sub_one_eq_totient_series}\ (\texttt{CertificateKernel})\\
-M\"obius-square lens & \lrefx{CertificateKernel.lean}{18125}{totient_series_eq_half_add_moebius_mersenne_square}\ (\texttt{CertificateKernel})\\
-$S=\tfrac12+\Pr(\gcd=1)$ & \lrefx{CertificateKernel.lean}{18228}{totient_series_eq_half_add_visible_coprime_pairs}\ (\texttt{CertificateKernel})\\
-$S\ne p/q$ for $q\le\Qzero$ & \lrefx{CertificateKernel.lean}{18055}{tsum_totient_div_pow_two_ne_ratCast_of_den_le_79639646646701375323355774875831053}\ (\texttt{CertificateKernel})\\
-tail-period reduction & \lrefx{TotientTailPeriodKiller.lean}{386}{irrational_totient_series_of_certificate_supply}\ (\texttt{TotientTailPeriodKiller})\\
-diagonal reduction & \lrefx{LcmDiagonalReduction.lean}{92}{irrational_totient_series_of_lcm_diagonal_certificate_supply}\ (\texttt{LcmDiagonalReduction})\\
+positive lift $L(A)=S$ & \lrefx{CertificateKernel.lean}{18117}{tsum_primWeight_div_two_pow_sub_one_eq_totient_series}\ (\texttt{CertificateKernel})\\
+M\"obius-square lens & \lrefx{CertificateKernel.lean}{18126}{totient_series_eq_half_add_moebius_mersenne_square}\ (\texttt{CertificateKernel})\\
+$S=\tfrac12+\Pr(\gcd=1)$ & \lrefx{CertificateKernel.lean}{18229}{totient_series_eq_half_add_visible_coprime_pairs}\ (\texttt{CertificateKernel})\\
+$S\ne p/q$ for $q\le\Qzero$ & \lrefx{CertificateKernel.lean}{18056}{tsum_totient_div_pow_two_ne_ratCast_of_den_le_79639646646701375323355774875831053}\ (\texttt{CertificateKernel})\\
+tail-period reduction & \lrefx{TotientTailPeriodKiller.lean}{394}{irrational_totient_series_of_certificate_supply}\ (\texttt{TotientTailPeriodKiller})\\
+diagonal reduction & \lrefx{LcmDiagonalReduction.lean}{112}{irrational_totient_series_of_lcm_diagonal_certificate_supply}\ (\texttt{LcmDiagonalReduction})\\
 cone flatness from rationality & \lrefx{LcmConeFlatness.lean}{90}{rational_totient_series_forces_lcm_cone_flatness}\ (\texttt{LcmConeFlatness})\\
 certificate completeness & \lrefx{LcmConeFlatness.lean}{316}{exists_certifiedKill_iff_tail_diff_notMem_int}\ (\texttt{LcmConeFlatness})\\
 joint cone refuter & \lrefx{LcmConeNonflat.lean}{126}{exists_nonintegral_pair_of_coneNonflatCert}\ (\texttt{LcmConeNonflat})\\
-verified finite instances & \lrefx{TotientTailPeriodKiller.lean}{396}{certifiedKill_all_small}\ (\texttt{TotientTailPeriodKiller})\\
-tail-orbit rationality criterion & \lrefx{GenericTailOrbitRigidity.lean}{260}{binaryCoeffSeries_rational_iff_exists_temperedBinaryOrbit}\ (\texttt{GenericTailOrbitRigidity})\\
-Boolean carry certificate $\Leftrightarrow$ support fraction & \lrefx{BooleanMobiusCarry.lean}{734}{exists_normalized_support_fraction_iff_exists_booleanMobiusCarry}\ (\texttt{BooleanMobiusCarry})\\
-one-wrap classification & \lrefx{RationalSupportCarrySkeleton.lean}{454}{one_doublingWrap_classification}\ (\texttt{RationalSupportCarrySkeleton})\\
-order-wrap mass bound & \lrefx{RationalSupportCarrySkeleton.lean}{1543}{one_div_oddOrder_le_reciprocalMass_of_support_fraction}\ (\texttt{RationalSupportCarrySkeleton})\\
-unbounded carry states & \lrefx{RationalSupportCarrySkeleton.lean}{2251}{exists_unbounded_shifted_odd_tail_nat_state_of_support_fraction}\ (\texttt{RationalSupportCarrySkeleton})\\
-sublogarithmic zero windows & \lrefx{SublogDivisorCoverage.lean}{671}{supportCoeffZeroWindow_length_le_eps_logb_add}\ (\texttt{SublogDivisorCoverage})\\
-greedy membership criterion & \lrefx{GreedyAchievementSet.lean}{738}{mem_mersenneAchievementSet_iff_greedy_survival}\ (\texttt{GreedyAchievementSet})\\
+verified finite instances & \lrefx{TotientTailPeriodKiller.lean}{404}{certifiedKill_all_small}\ (\texttt{TotientTailPeriodKiller})\\
+full-target diagonal reduction & \lrefx{DiagonalPincerDecomposition.lean}{215}{diagonal_int_iff_foreignDiagonalDefect_hits_fullTarget}\ (\texttt{DiagonalPincerDecomposition})\\
+squared-Mersenne enclosure & \lrefx{SquaredMersenneDiagonalEnclosure.lean}{116}{scaleDiagonalTailDifference_sub_lambertProjectedDiagonal}\ (\texttt{SquaredMersenneDiagonalEnclosure})\\
+exact Mersenne-shadow denominator & \lrefx{MersenneShadowDenominatorGrowth.lean}{147}{lcmHeight_scaledMobiusShadow_den_exact}\ (\texttt{MersenneShadowDenominatorGrowth})\\
+fresh-loss projection reduction & \lrefx{DiagonalFreshLossBridge.lean}{187}{irrational_totientSeries_of_diagonalFreshLossProjectionSupply}\ (\texttt{DiagonalFreshLossBridge})\\
+tail-orbit rationality criterion & \lrefx{GenericTailOrbitRigidity.lean}{425}{binaryCoeffSeries_rational_iff_exists_temperedBinaryOrbit}\ (\texttt{GenericTailOrbitRigidity})\\
+Boolean carry certificate $\Leftrightarrow$ support fraction & \lrefx{BooleanMobiusCarry.lean}{948}{exists_normalized_support_fraction_iff_exists_booleanMobiusCarry}\ (\texttt{BooleanMobiusCarry})\\
+one-wrap classification & \lrefx{RationalSupportCarrySkeleton.lean}{415}{one_doublingWrap_classification}\ (\texttt{RationalSupportCarrySkeleton})\\
+order-wrap mass bound & \lrefx{RationalSupportCarrySkeleton.lean}{1478}{one_div_oddOrder_le_reciprocalMass_of_support_fraction}\ (\texttt{RationalSupportCarrySkeleton})\\
+unbounded carry states & \lrefx{RationalSupportCarrySkeleton.lean}{2377}{exists_unbounded_shifted_odd_tail_nat_state_of_support_fraction}\ (\texttt{RationalSupportCarrySkeleton})\\
+sublogarithmic zero windows & \lrefx{SublogDivisorCoverage.lean}{392}{supportCoeffZeroWindow_length_le_eps_logb_add}\ (\texttt{SublogDivisorCoverage})\\
+greedy membership criterion & \lrefx{GreedyAchievementSet.lean}{1183}{mem_mersenneAchievementSet_iff_greedy_survival}\ (\texttt{GreedyAchievementSet})\\
+Mersenne achievement set: measure one and nowhere dense & \lrefx{GreedyAchievementSet.lean}{942}{volume_mersenneAchievementSet}, \lrefx{GreedyAchievementSet.lean}{1310}{isNowhereDense_mersenneAchievementSet}\ (\texttt{GreedyAchievementSet})\\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -1139,8 +1230,8 @@ greedy membership criterion & \lrefx{GreedyAchievementSet.lean}{738}{mem_mersenn
 \bibitem{erdosproblems} T.~Bloom (ed.), \emph{Erd\H{o}s Problems}, entries 249 and 257,
   \href{https://www.erdosproblems.com}{\texttt{erdosproblems.com}}, accessed July 2026.
 \bibitem{artifact} W.~Cook, \emph{Erd\H{o}s \#249/\#257 Lean formalisation},
-  public source artefact, release \texttt{v0.4.0} (2026),
-  \href{https://github.com/wcook04/plectis-lean-erdos249-257/releases/tag/v0.4.0}{GitHub repository}.
+  public source artefact, release \texttt{v0.5.0} (2026),
+  \href{https://github.com/wcook04/plectis-lean-erdos249-257/releases/tag/v0.5.0}{GitHub repository}.
 \end{thebibliography}
 
 \end{document}

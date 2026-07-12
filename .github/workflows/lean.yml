@@ -23,7 +23,9 @@ jobs:
           auto-config: false
           build: false
       - name: Memory-bounded Lean build
-        run: python3 scripts/lean_fast_build.py --jobs 2
+        # Drain independent Lucas modules without Lake's unbounded ready-set
+        # fan-out; the final ordinary build remains the authority check.
+        run: python3 scripts/lean_fast_build.py --jobs 4
       - name: Build downstream consumer example
         run: lake build Examples
 
@@ -32,7 +34,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # corpus descriptor resolves the pinned v0.4.0 proof-source tag
+          fetch-depth: 0 # corpus descriptor resolves the pinned proof-source tag
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"

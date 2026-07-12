@@ -87,6 +87,57 @@ def internal_imports(path: Path) -> list[str]:
     return re.findall(r"^import (Erdos249257(?:\.[A-Za-z0-9_]+)+)\s*$", read(path), re.M)
 
 
+def lean_code_without_comments_and_strings(text: str) -> str:
+    """Remove nested Lean comments and strings while preserving newlines."""
+    out: list[str] = []
+    index = 0
+    block_depth = 0
+    in_string = False
+    while index < len(text):
+        if block_depth:
+            if text.startswith("/-", index):
+                block_depth += 1
+                out.extend("  ")
+                index += 2
+            elif text.startswith("-/", index):
+                block_depth -= 1
+                out.extend("  ")
+                index += 2
+            else:
+                out.append("\n" if text[index] == "\n" else " ")
+                index += 1
+        elif in_string:
+            if text[index] == "\\" and index + 1 < len(text):
+                out.extend("  ")
+                index += 2
+            elif text[index] == '"':
+                in_string = False
+                out.append(" ")
+                index += 1
+            else:
+                out.append("\n" if text[index] == "\n" else " ")
+                index += 1
+        elif text.startswith("--", index):
+            end = text.find("\n", index)
+            if end < 0:
+                out.extend(" " * (len(text) - index))
+                break
+            out.extend(" " * (end - index))
+            index = end
+        elif text.startswith("/-", index):
+            block_depth = 1
+            out.extend("  ")
+            index += 2
+        elif text[index] == '"':
+            in_string = True
+            out.append(" ")
+            index += 1
+        else:
+            out.append(text[index])
+            index += 1
+    return "".join(out)
+
+
 def main() -> int:
     cache: dict[str, list[str]] = {}
 
@@ -323,6 +374,16 @@ def main() -> int:
     check(methodology_check.returncode == 0,
           f"methodology projection drift: {methodology_check.stdout.strip() or methodology_check.stderr.strip()}")
 
+    module_graph_check = subprocess.run(
+        [sys.executable, str(ROOT / "scripts" / "build_module_graph.py"), "--check"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    check(module_graph_check.returncode == 0,
+          f"module graph drift: {module_graph_check.stdout.strip() or module_graph_check.stderr.strip()}")
+
     atlas_check = subprocess.run(
         [sys.executable, str(ROOT / "scripts" / "build_declaration_atlas.py"), "--check"],
         cwd=ROOT,
@@ -332,6 +393,16 @@ def main() -> int:
     )
     check(atlas_check.returncode == 0,
           f"declaration atlas drift: {atlas_check.stdout.strip() or atlas_check.stderr.strip()}")
+
+    coordinate_check = subprocess.run(
+        [sys.executable, str(ROOT / "scripts" / "refresh_source_coordinates.py"), "--check"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    check(coordinate_check.returncode == 0,
+          f"source-coordinate drift: {coordinate_check.stdout.strip() or coordinate_check.stderr.strip()}")
 
     corpus_check = subprocess.run(
         [sys.executable, str(ROOT / "scripts" / "build_corpus_descriptor.py"), "--check"],
@@ -363,7 +434,7 @@ def main() -> int:
     trust_re = re.compile(r"^\s*(sorry\b|admit\b|axiom\s)|native_decide", re.M)
     example_sources = sorted((ROOT / "examples").rglob("*.lean")) if (ROOT / "examples").is_dir() else []
     for lean in sorted((ROOT / "Erdos249257").rglob("*.lean")) + [ROOT / "Erdos249257.lean"] + example_sources:
-        m = trust_re.search(read(lean))
+        m = trust_re.search(lean_code_without_comments_and_strings(read(lean)))
         check(m is None,
               f"proof-trust violation in {lean.relative_to(ROOT)}: {m.group(0).strip() if m else ''}")
 

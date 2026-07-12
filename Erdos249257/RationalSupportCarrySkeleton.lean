@@ -5,60 +5,23 @@ import Mathlib.Analysis.Asymptotics.SpecificAsymptotics
 /-!
 # Rational-support carry skeleton: residue wraps and reciprocal mass
 
-Throughout, `A` is a set of positive exponents and the series in question
-is `erdosSupportSeries 2 A`.  Everything in this module extracts arithmetic
-from one assumption: that this series is rational, with displayed
-denominator `2^c * v` for odd `v`.
-
-The finite algebra begins with the binary repetend identity: the least
-positive residues of `p * 2^n` modulo `v` in a complete doubling cycle
+This module formalizes the formal development.s T9 order-wrap layer, T10
+Boolean-collision strengthening, and T13 common-multiple carry
+unboundedness for Erdős #257.  Its finite algebra begins with the binary
+repetend identity: the least positive residues in a complete doubling cycle
 satisfy
 
-`sum residues = odd modulus * number of wraps`
+`sum residues = odd modulus * number of wraps`.
 
-(`sum_doublingResidue_eq_mul_wrapCount`).  The analytic bridge identifies
-the Cesàro mean of the true support tails with the reciprocal mass
-`ρ(A) = ∑_{a ∈ A} 1/a` (`tendsto_supportCoeff_mean_reciprocalMass`).
-Together these give the main theorems:
+The analytic bridge identifies the Cesàro mean of the true support tails
+with the reciprocal mass `sum_{a in A} 1/a`.  Together these give the
+order-sensitive lower bound and the exact excess-mean identity.  The
+one-wrap case is classified algebraically, not by the earlier 446-orbit
+finite check; those checks are validation only.
 
-* **Order-wrap lower bound.**  A rational value with reduced numerator
-  modulo the odd part `v` forces `1/ord_v(2) ≤ ρ(A)`, unless the
-  reciprocal mass diverges
-  (`support_fraction_one_div_oddOrder_reciprocalMassDivergesOrAtLeast`).
-* **Exact excess-mean identity.**  `ρ(A) = w/h + lim mean(excess)`, where
-  `w` is the wrap count of the residue cycle and `h` its period
-  (`reciprocalMass_eq_wrapRatio_add_oddTailExcessMean`).
-* **One-wrap classification.**  A single wrap per cycle forces a Mersenne
-  modulus `v = 2^h - 1` and a power-of-two starting residue
-  (`one_doublingWrap_classification`), proved algebraically; the finite
-  kernel-checked rows at the end of the file are validation only.
-* **Boolean-collision strengthening.**  Collisions at common multiples of
-  a finite support fragment add `⌈(|F|-1)/2⌉ / L` on top of the wrap mean
-  (`booleanCollision_wrap_bound_of_common_multiple`), with the strict
-  dyadic corollary
-  (`dyadic_support_fraction_reciprocalMass_diverges_or_gt_one`).
-* **Carry unboundedness.**  Over an infinite support the shifted carry
-  state is globally unbounded
-  (`exists_unbounded_shifted_odd_tail_nat_state_of_support_fraction`).
-
-Exponent zero remains excluded from literal support semantics.
-
-Two layers should be distinguished.  The residue recurrence,
-multiplicative-order periodicity, wrap digits, and cycle-sum identity are
-ordinary radix-expansion and repetend algebra, and the identification of
-the divisor-count mean with the reciprocal mass is standard divisor-sum
-averaging; no novelty is claimed for that machinery.  The coupled
-consequences — the exact excess-mean decomposition, the reciprocal-mass
-lower bound through the multiplicative order of 2, the common-multiple
-collision strengthening, and the unboundedness of the positive carry
-state for every infinite rational support — are novelty candidates: we
-currently know no direct antecedent, but an exact theorem-level
-comparison against the Lambert-series, radix-expansion, and
-achievement-set literature has not yet been carried out, so no priority
-is asserted.
-
-Nothing here proves or refutes universal Erdős #257, and Erdős #249 also
-remains open.
+Exponent zero remains excluded from literal support semantics.  No novelty or priority claim is made for the new
+theorems in this file.  Nothing here proves or refutes
+universal Erdős #257, and Erdős #249 also remains open.
 -/
 
 namespace Erdos249257
@@ -67,9 +30,8 @@ open ArithmeticFunction Filter Set
 
 /-! ## Canonical doubling residues and wrap digits -/
 
-/-- Least nonnegative residue of `p*2^n` modulo `v`.  Under the
-coprimality hypotheses used below it is automatically the least *positive*
-residue. -/
+/-- Least nonnegative residue of `p*2^n` modulo `v`.  Under the T9
+coprimality hypotheses it is automatically the least *positive* residue. -/
 def doublingResidue (p v n : ℕ) : ℕ := (p * 2 ^ n) % v
 
 /-- The quotient expelled when a least residue is doubled.  Since the
@@ -81,7 +43,7 @@ def doublingWrapDigit (p v n : ℕ) : ℕ :=
 def doublingWrapCount (p v h : ℕ) : ℕ :=
   ∑ n ∈ Finset.range h, doublingWrapDigit p v n
 
-/-- The period hypothesis, separated from minimality: `h>0` and
+/-- The formal development.s period hypothesis, separated from minimality: `h>0` and
 `2^h = 1 (mod v)`.  Substituting the multiplicative order supplies this. -/
 def IsDoublingPeriod (v h : ℕ) : Prop :=
   0 < h ∧ Nat.ModEq v (2 ^ h) 1
@@ -386,9 +348,8 @@ private theorem two_pow_sub_one_mod_two {h : ℕ} (hh : 0 < h) :
   rw [heq]
   simp [Nat.add_mod]
 
-/-- Full algebraic classification of a one-wrap closed cycle with reduced
-starting residue: the modulus is Mersenne and the start is a power of
-two. -/
+/-- Full algebraic classification of a one-wrap positive closed cycle.  Its
+starting residue is a power of two and its modulus is Mersenne. -/
 theorem one_wrap_cycle_classification
     (v h : ℕ) (r wrap : ℕ → ℕ)
     (hh : 0 < h) (hrcop : (r 0).Coprime v)
@@ -513,8 +474,7 @@ theorem oddOrder_doublingWrapCount_pos
   exact doublingWrapCount_pos p hv hvodd hpv
     (oddDoublingOrder_isPeriod hv hvodd)
 
-/-- One-wrap classification instantiated at the actual multiplicative
-order. -/
+/-- Order-instantiated one-wrap classification in the notation of T9. -/
 theorem one_oddOrder_doublingWrap_classification
     (p : ℕ) {v : ℕ} (hv : 1 < v) (hvodd : Odd v)
     (hpv : p.Coprime v)
@@ -528,56 +488,18 @@ theorem one_oddOrder_doublingWrap_classification
 /-! ## Odd-denominator tail states -/
 
 /-- A natural state which is simultaneously the odd-denominator scaling of
-the true support tail and, modulo `v`, the canonical doubling residue of a
-numerator.  The rational-fraction bridge below constructs this state after
-removing the power of two from a displayed denominator. -/
+the true support tail and the canonical doubling residue of a numerator.
+The rational-fraction bridge below constructs this state after removing the
+power of two from a displayed denominator. -/
 def IsOddSupportTailState
     (A : Set ℕ) (p v : ℕ) (u : ℕ → ℕ) : Prop :=
   (∀ N : ℕ,
       (u N : ℝ) = (v : ℝ) * binaryCoeffTail (supportCoeff A) N) ∧
     (∀ N : ℕ, u N % v = doublingResidue p v N)
 
-/-- Odd tail state after removing the power-of-two part of a displayed
-denominator. -/
-def IsShiftedOddSupportTailState
-    (A : Set ℕ) (p v c : ℕ) (u : ℕ → ℕ) : Prop :=
-  (∀ N : ℕ,
-      (u N : ℝ) = (v : ℝ) *
-        binaryCoeffTail (supportCoeff A) (c + N)) ∧
-    (∀ N : ℕ, u N % v = doublingResidue p v N)
-
-/-- The unshifted state is exactly the shifted state at `c = 0`. -/
-private theorem IsOddSupportTailState.shifted_zero
-    {A : Set ℕ} {p v : ℕ} {u : ℕ → ℕ}
-    (hstate : IsOddSupportTailState A p v u) :
-    IsShiftedOddSupportTailState A p v 0 u :=
-  ⟨fun N => by simpa using hstate.1 N, hstate.2⟩
-
 /-- Integral excess of an odd tail state above its least residue. -/
 def oddTailExcess (u : ℕ → ℕ) (v N : ℕ) : ℕ :=
   u N / v
-
-/-- Exact pointwise decomposition of a genuine shifted odd tail state into
-its least residue and a nonnegative integral excess. -/
-theorem shiftedOddSupportTail_eq_residue_div_add_excess
-    (A : Set ℕ) (p c : ℕ) {v : ℕ} (hv : 0 < v) (u : ℕ → ℕ)
-    (hstate : IsShiftedOddSupportTailState A p v c u) (N : ℕ) :
-    binaryCoeffTail (supportCoeff A) (c + N) =
-      (doublingResidue p v N : ℝ) / (v : ℝ) +
-        (oddTailExcess u v N : ℝ) := by
-  have hdecomp :
-      u N = v * oddTailExcess u v N + doublingResidue p v N := by
-    rw [oddTailExcess, ← hstate.2 N]
-    exact (Nat.div_add_mod (u N) v).symm
-  have hdecompR :
-      (u N : ℝ) =
-        (v * oddTailExcess u v N + doublingResidue p v N : ℕ) := by
-    exact_mod_cast hdecomp
-  rw [hstate.1 N] at hdecompR
-  push_cast at hdecompR
-  have hvR : (v : ℝ) ≠ 0 := by positivity
-  field_simp
-  nlinarith
 
 /-- Exact pointwise decomposition of a genuine odd tail state into its least
 residue and a nonnegative integral excess. -/
@@ -587,13 +509,23 @@ theorem oddSupportTail_eq_residue_div_add_excess
     binaryCoeffTail (supportCoeff A) N =
       (doublingResidue p v N : ℝ) / (v : ℝ) +
         (oddTailExcess u v N : ℝ) := by
-  simpa using shiftedOddSupportTail_eq_residue_div_add_excess
-    A p 0 hv u hstate.shifted_zero N
+  have hdecomp :
+      u N = v * oddTailExcess u v N + doublingResidue p v N := by
+    rw [oddTailExcess, ← hstate.2 N]
+    exact (Nat.div_add_mod (u N) v).symm
+  have hdecompR := congrArg (fun x : ℕ ↦ (x : ℝ)) hdecomp
+  change (u N : ℝ) =
+    (v * oddTailExcess u v N + doublingResidue p v N : ℕ) at hdecompR
+  rw [hstate.1 N] at hdecompR
+  push_cast at hdecompR
+  have hvR : (v : ℝ) ≠ 0 := by positivity
+  field_simp
+  nlinarith
 
 /-- Exact block identity: a complete residue cycle contributes its wrap
 count, and every additional lift of a tail state contributes one nonnegative
 integer.  This is the finite algebra behind both the order lower bound and
-the exact excess-mean identity. -/
+the formal development.s exact excess-mean identity. -/
 theorem sum_supportTail_block_eq_wrapCount_add_excess
     (A : Set ℕ) (p : ℕ) {v h : ℕ} (hv : 0 < v)
     (hperiod : IsDoublingPeriod v h) (u : ℕ → ℕ)
@@ -912,26 +844,50 @@ theorem sum_supportCoeff_range_eq_sum_div (A : Set ℕ) (N : ℕ) :
 theorem tendsto_nat_div_frequency (a : ℕ) (ha : 0 < a) :
     Tendsto (fun N : ℕ => ((N / a : ℕ) : ℝ) / (N : ℝ)) atTop
       (nhds ((1 : ℝ) / (a : ℝ))) := by
-  have haR : (0 : ℝ) < (a : ℝ) := by exact_mod_cast ha
-  have h :=
-    (tendsto_nat_floor_mul_div_atTop
-      (by positivity : (0 : ℝ) ≤ 1 / (a : ℝ))).comp
-      tendsto_natCast_atTop_atTop
-  refine h.congr fun N => ?_
-  simp only [Function.comp_apply]
-  have hfloor : ⌊1 / (a : ℝ) * (N : ℝ)⌋₊ = N / a := by
-    rw [one_div, inv_mul_eq_div, Nat.floor_eq_iff (by positivity)]
-    refine ⟨?_, ?_⟩
-    · rw [le_div_iff₀ haR]
-      exact_mod_cast Nat.div_mul_le_self N a
-    · rw [div_lt_iff₀ haR]
-      have hmod := Nat.div_add_mod N a
-      have hlt := Nat.mod_lt N ha
-      have hkey : N < a * (N / a) + a := by omega
-      have hkeyR : (N : ℝ) < (a : ℝ) * ((N / a : ℕ) : ℝ) + (a : ℝ) := by
-        exact_mod_cast hkey
-      nlinarith
-  rw [hfloor]
+  let rem : ℕ → ℝ := fun N =>
+    ((N % a : ℕ) : ℝ) / ((a : ℝ) * (N : ℝ))
+  have hrem_nonneg : ∀ N : ℕ, 0 ≤ rem N := by
+    intro N
+    exact div_nonneg (by positivity) (by positivity)
+  have hrem_le : ∀ N : ℕ, rem N ≤ ((N : ℝ)⁻¹) := by
+    intro N
+    rcases Nat.eq_zero_or_pos N with rfl | hN
+    · simp [rem]
+    · have haR : (0 : ℝ) < (a : ℝ) := by exact_mod_cast ha
+      have hN0 : (0 : ℝ) ≤ (N : ℝ)⁻¹ := inv_nonneg.mpr (by positivity)
+      have hmod : ((N % a : ℕ) : ℝ) / (a : ℝ) ≤ 1 := by
+        rw [div_le_one haR]
+        exact_mod_cast (Nat.mod_lt N ha).le
+      calc
+        rem N = (((N % a : ℕ) : ℝ) / (a : ℝ)) * (N : ℝ)⁻¹ := by
+          simp only [rem]
+          field_simp
+        _ ≤ 1 * (N : ℝ)⁻¹ := mul_le_mul_of_nonneg_right hmod hN0
+        _ = (N : ℝ)⁻¹ := one_mul _
+  have hrem : Tendsto rem atTop (nhds 0) := by
+    apply squeeze_zero'
+      (Filter.Eventually.of_forall hrem_nonneg)
+      (Filter.Eventually.of_forall hrem_le)
+    exact tendsto_inv_atTop_nhds_zero_nat
+  have hformula : ∀ᶠ N : ℕ in atTop,
+      ((N / a : ℕ) : ℝ) / (N : ℝ) = (1 : ℝ) / (a : ℝ) - rem N := by
+    filter_upwards [eventually_gt_atTop (0 : ℕ)] with N hN
+    have hNne : (N : ℝ) ≠ 0 := by positivity
+    have hane : (a : ℝ) ≠ 0 := by positivity
+    have hdivmod :
+        (a : ℝ) * ((N / a : ℕ) : ℝ) + ((N % a : ℕ) : ℝ) = (N : ℝ) := by
+      exact_mod_cast Nat.div_add_mod N a
+    simp only [rem]
+    field_simp
+    linarith
+  have hconst :
+      Tendsto (fun _ : ℕ => (1 : ℝ) / (a : ℝ)) atTop
+        (nhds ((1 : ℝ) / (a : ℝ))) := tendsto_const_nhds
+  have hsub :
+      Tendsto (fun N : ℕ => (1 : ℝ) / (a : ℝ) - rem N) atTop
+        (nhds ((1 : ℝ) / (a : ℝ))) := by
+    simpa using hconst.sub hrem
+  exact hsub.congr' (hformula.mono fun _ h => h.symm)
 
 theorem tendsto_divisorFrequency (A : Set ℕ) (a : ℕ) :
     Tendsto (fun N : ℕ => divisorFrequency A N a) atTop
@@ -984,7 +940,7 @@ theorem tsum_divisorFrequency_eq_supportCoeff_mean (A : Set ℕ) (N : ℕ) :
     have hdiv : N / a = 0 := Nat.div_eq_of_lt (by omega)
     simp [divisorFrequency, hdiv]
 
-/-- **Analytic core.** For a support with summable reciprocals, the
+/-- **Analytic T9 core.** For a support with summable reciprocals, the
 Cesàro mean of its divisor-count coefficient tends exactly to `ρ(A)`. -/
 theorem tendsto_supportCoeff_mean_reciprocalMass
     (A : Set ℕ) (hsum : Summable (reciprocalSupportTerm A)) :
@@ -1015,49 +971,6 @@ theorem le_reciprocalMass_of_eventually_le_supportCoeff_mean
 noncomputable def cesaroMean (x : ℕ → ℝ) (N : ℕ) : ℝ :=
   (∑ n ∈ Finset.range N, x n) / (N : ℝ)
 
-/-- Removing or adding a fixed finite prefix does not change a Cesàro
-limit. -/
-theorem tendsto_cesaroMean_shift
-    (x : ℕ → ℝ) (limit : ℝ) (c : ℕ)
-    (hlimit : Tendsto (cesaroMean x) atTop (nhds limit)) :
-    Tendsto (cesaroMean (fun n : ℕ => x (c + n))) atTop (nhds limit) := by
-  have hshift :
-      Tendsto (fun N : ℕ => cesaroMean x (c + N)) atTop (nhds limit) := by
-    simpa [add_comm] using hlimit.comp (tendsto_add_atTop_nat c)
-  have hratio :
-      Tendsto (fun N : ℕ => ((c + N : ℕ) : ℝ) / (N : ℝ))
-        atTop (nhds 1) := by
-    have hcinv :
-        Tendsto (fun N : ℕ => (c : ℝ) * (N : ℝ)⁻¹)
-          atTop (nhds 0) :=
-      by simpa only [mul_zero] using
-        tendsto_inv_atTop_nhds_zero_nat.const_mul (c : ℝ)
-    have hone : Tendsto (fun _ : ℕ => (1 : ℝ)) atTop (nhds 1) :=
-      tendsto_const_nhds
-    have htmp := hone.add hcinv
-    simpa only [add_zero] using htmp.congr'
-      ((eventually_gt_atTop (0 : ℕ)).mono fun N hN => by
-        have hN0 : (N : ℝ) ≠ 0 := by positivity
-        push_cast
-        field_simp
-        ring)
-  let pref : ℝ := ∑ n ∈ Finset.range c, x n
-  have hprefix :
-      Tendsto (fun N : ℕ => pref / (N : ℝ)) atTop (nhds 0) := by
-    simpa [div_eq_mul_inv] using
-      tendsto_inv_atTop_nhds_zero_nat.const_mul pref
-  have hmain := (hshift.mul hratio).sub hprefix
-  simpa only [mul_one, sub_zero] using hmain.congr'
-    ((eventually_gt_atTop (0 : ℕ)).mono fun N hN => by
-      rw [cesaroMean, cesaroMean]
-      have hsum := Finset.sum_range_add (f := x) c N
-      have hN0 : (N : ℝ) ≠ 0 := by positivity
-      have hcN0 : ((c + N : ℕ) : ℝ) ≠ 0 := by positivity
-      dsimp [pref]
-      rw [hsum]
-      field_simp
-      ring)
-
 /-- Finite telescoping of the binary-tail recurrence. -/
 theorem sum_supportCoeff_cast_eq_sum_binaryCoeffTail_add_boundary
     (A : Set ℕ) (N : ℕ) :
@@ -1075,11 +988,22 @@ theorem sum_supportCoeff_cast_eq_sum_binaryCoeffTail_add_boundary
 
 theorem tendsto_sqrt_nat_div_nat_zero :
     Tendsto (fun N : ℕ => Real.sqrt (N : ℝ) / (N : ℝ)) atTop (nhds 0) := by
+  have hsqrtTop :
+      Tendsto (fun N : ℕ => Real.sqrt (N : ℝ)) atTop atTop :=
+    Real.tendsto_sqrt_atTop.comp tendsto_natCast_atTop_atTop
   have hinv :
       Tendsto (fun N : ℕ => (Real.sqrt (N : ℝ))⁻¹) atTop (nhds 0) :=
-    tendsto_inv_atTop_zero.comp
-      (Real.tendsto_sqrt_atTop.comp tendsto_natCast_atTop_atTop)
-  exact hinv.congr fun N => Real.sqrt_div_self.symm
+    tendsto_inv_atTop_zero.comp hsqrtTop
+  apply hinv.congr'
+  filter_upwards [eventually_gt_atTop (0 : ℕ)] with N hN
+  have hsqrtne : Real.sqrt (N : ℝ) ≠ 0 := by positivity
+  have hsq : Real.sqrt (N : ℝ) ^ 2 = (N : ℝ) :=
+    Real.sq_sqrt (by positivity)
+  calc
+    (Real.sqrt (N : ℝ))⁻¹ =
+        Real.sqrt (N : ℝ) / Real.sqrt (N : ℝ) ^ 2 := by field_simp
+    _ = Real.sqrt (N : ℝ) / (N : ℝ) :=
+      congrArg (fun x : ℝ => Real.sqrt (N : ℝ) / x) hsq
 
 theorem tendsto_binaryCoeffTail_supportCoeff_div_nat_zero (A : Set ℕ) :
     Tendsto
@@ -1106,9 +1030,9 @@ theorem tendsto_binaryCoeffTail_supportCoeff_div_nat_zero (A : Set ℕ) :
     hupper
 
 /-- The Cesàro mean of scaled binary support tails has the same limit as
-the coefficient mean, namely reciprocal mass.  This is the direct
-order-wrap interface because a rational carry decomposes each tail into a
-periodic residue fraction plus a nonnegative integral excess. -/
+the coefficient mean, namely reciprocal mass.  This is the direct T9
+interface because a rational carry decomposes each tail into a periodic
+residue fraction plus a nonnegative integral excess. -/
 theorem tendsto_binaryCoeffTail_supportCoeff_mean_reciprocalMass
     (A : Set ℕ) (hsum : Summable (reciprocalSupportTerm A)) :
     Tendsto (cesaroMean (binaryCoeffTail (supportCoeff A))) atTop
@@ -1191,7 +1115,7 @@ theorem div_le_of_tendsto_cesaroMean_of_block_lower_bound
   exact ge_of_tendsto (hlimit.comp hmulTop)
     ((eventually_gt_atTop (0 : ℕ)).mono fun M hM => hmean M hM)
 
-/-- Direct order-wrap handoff: a length-`h` block lower bound `w` on genuine
+/-- Direct T9 handoff: a length-`h` block lower bound `w` on genuine
 support tails yields `ρ(A) ≥ w/h`. -/
 theorem wrapRatio_le_reciprocalMass_of_binaryCoeffTail_blocks
     (A : Set ℕ) (hsum : Summable (reciprocalSupportTerm A))
@@ -1256,13 +1180,16 @@ theorem tendsto_cesaroMean_of_constant_blocks
     (hblock : ∀ q : ℕ,
       ∑ j ∈ Finset.range h, x (q * h + j) = blockSum) :
     Tendsto (cesaroMean x) atTop (nhds (blockSum / (h : ℝ))) := by
+  have hbase0 := (tendsto_nat_div_frequency h hh).mul_const blockSum
   have hbase :
       Tendsto
         (fun N : ℕ =>
           ((N / h : ℕ) : ℝ) * blockSum / (N : ℝ))
         atTop (nhds (blockSum / (h : ℝ))) := by
-    simpa [div_mul_eq_mul_div, one_div, inv_mul_eq_div] using
-      (tendsto_nat_div_frequency h hh).mul_const blockSum
+    convert hbase0 using 1
+    · funext N
+      ring
+    · ring_nf
   have hupper :
       Tendsto (fun N : ℕ => (h : ℝ) / (N : ℝ)) atTop (nhds 0) := by
     simpa [div_eq_mul_inv] using
@@ -1401,33 +1328,9 @@ theorem tendsto_cesaroMean_normalizedDoublingResidue
         push_cast
         field_simp
 
-/-- The shifted odd-tail excess has limit `ρ(A) - w/h`. -/
-theorem tendsto_shiftedOddTailExcess_mean
-    (A : Set ℕ) (hsum : Summable (reciprocalSupportTerm A))
-    (p c : ℕ) {v h : ℕ} (hv : 0 < v)
-    (hperiod : IsDoublingPeriod v h) (u : ℕ → ℕ)
-    (hstate : IsShiftedOddSupportTailState A p v c u) :
-    Tendsto
-      (cesaroMean (fun N : ℕ => (oddTailExcess u v N : ℝ)))
-      atTop
-      (nhds (reciprocalMass A -
-        (doublingWrapCount p v h : ℝ) / (h : ℝ))) := by
-  have htail := tendsto_cesaroMean_shift
-    (binaryCoeffTail (supportCoeff A)) (reciprocalMass A) c
-    (tendsto_binaryCoeffTail_supportCoeff_mean_reciprocalMass A hsum)
-  have hresidue :=
-    tendsto_cesaroMean_normalizedDoublingResidue p hv hperiod
-  have hdiff := htail.sub hresidue
-  simpa only using hdiff.congr'
-    (Filter.Eventually.of_forall fun N => by
-      simp only [cesaroMean, ← sub_div, ← Finset.sum_sub_distrib]
-      refine congrArg (fun x : ℝ => x / (N : ℝ)) ?_
-      refine Finset.sum_congr rfl fun n _ => ?_
-      linarith [shiftedOddSupportTail_eq_residue_div_add_excess
-        A p c hv u hstate n])
-
-/-- The exact mean-excess statement in its strongest canonical form: the
-mean excess exists automatically and its limit is `ρ(A) - w/h`. -/
+/-- The formal development.s exact mean-excess statement in its strongest canonical
+form: the mean excess exists automatically and its limit is
+`ρ(A) - w/h`. -/
 theorem tendsto_oddTailExcess_mean
     (A : Set ℕ) (hsum : Summable (reciprocalSupportTerm A))
     (p : ℕ) {v h : ℕ} (hv : 0 < v)
@@ -1437,9 +1340,14 @@ theorem tendsto_oddTailExcess_mean
       (cesaroMean (fun N : ℕ => (oddTailExcess u v N : ℝ)))
       atTop
       (nhds (reciprocalMass A -
-        (doublingWrapCount p v h : ℝ) / (h : ℝ))) :=
-  tendsto_shiftedOddTailExcess_mean A hsum p 0 hv hperiod u
-    hstate.shifted_zero
+        (doublingWrapCount p v h : ℝ) / (h : ℝ))) := by
+  apply tendsto_cesaroMean_excess_of_binaryCoeffTail_decomposition
+    A hsum
+    (fun N : ℕ => (doublingResidue p v N : ℝ) / (v : ℝ))
+    (fun N : ℕ => (oddTailExcess u v N : ℝ))
+    ((doublingWrapCount p v h : ℝ) / (h : ℝ))
+  · exact oddSupportTail_eq_residue_div_add_excess A p hv u hstate
+  · exact tendsto_cesaroMean_normalizedDoublingResidue p hv hperiod
 
 /-- Explicit named-limit form of `ρ = w/h + lim mean(excess)`. -/
 theorem reciprocalMass_eq_wrapRatio_add_oddTailExcessMean
@@ -1511,10 +1419,37 @@ theorem tendsto_shifted_binaryCoeffTail_supportCoeff_mean_reciprocalMass
     Tendsto
       (cesaroMean (fun N : ℕ =>
         binaryCoeffTail (supportCoeff A) (c + N)))
-      atTop (nhds (reciprocalMass A)) :=
-  tendsto_cesaroMean_shift (binaryCoeffTail (supportCoeff A))
-    (reciprocalMass A) c
-    (tendsto_binaryCoeffTail_supportCoeff_mean_reciprocalMass A hsum)
+      atTop (nhds (reciprocalMass A)) := by
+  let x : ℕ → ℝ := binaryCoeffTail (supportCoeff A)
+  have hmean :
+      Tendsto (fun N : ℕ => cesaroMean x (c + N)) atTop
+        (nhds (reciprocalMass A)) := by
+    exact
+      (tendsto_binaryCoeffTail_supportCoeff_mean_reciprocalMass A hsum).comp
+        (by simpa [add_comm] using tendsto_add_atTop_nat c)
+  have hratio :
+      Tendsto (fun N : ℕ => ((c + N : ℕ) : ℝ) / (N : ℝ)) atTop
+        (nhds (1 : ℝ)) := by
+    simpa using
+      (tendsto_add_mul_div_add_mul_atTop_nhds
+        (𝕜 := ℝ) (c : ℝ) 0 1 (d := 1) one_ne_zero)
+  have hprefix :
+      Tendsto
+        (fun N : ℕ => (∑ n ∈ Finset.range c, x n) / (N : ℝ))
+        atTop (nhds 0) :=
+    tendsto_const_div_atTop_nhds_zero_nat
+      (∑ n ∈ Finset.range c, x n)
+  have hlim := (hmean.mul hratio).sub hprefix
+  simpa only [mul_one, sub_zero] using hlim.congr'
+    (Filter.Eventually.of_forall fun N => by
+      rw [cesaroMean, cesaroMean]
+      have hsplit := Finset.sum_range_add (f := x) c N
+      have hcast : ((c + N : ℕ) : ℝ) = (c : ℝ) + (N : ℝ) := by norm_num
+      rw [hcast]
+      by_cases hN : (N : ℝ) = 0
+      · simp [hN]
+      · field_simp
+        linarith)
 
 theorem support_fraction_oddOrder_wrapRatio_le_reciprocalMass
     (A : Set ℕ) (hA : ∃ a : ℕ, 0 < a ∧ a ∈ A)
@@ -1578,7 +1513,7 @@ theorem support_fraction_oddOrder_wrapRatio_reciprocalMassDivergesOrAtLeast
   · exact Or.inl hsum
 
 /-- For a reduced numerator modulo the odd part, rationality forces the
-`1/ord_v(2)` reciprocal-mass lower bound. -/
+development's `1/ord_v(2)` reciprocal-mass lower bound. -/
 theorem support_fraction_one_div_oddOrder_reciprocalMassDivergesOrAtLeast
     (A : Set ℕ) (hA : ∃ a : ℕ, 0 < a ∧ a ∈ A)
     (p : ℤ) (c : ℕ) {v : ℕ} (hv : 1 < v) (hvodd : Odd v)
@@ -1606,9 +1541,38 @@ theorem tendsto_shifted_tail_excess_mean
       (cesaroMean (fun N : ℕ => ((u N / v : ℕ) : ℝ)))
       atTop
       (nhds (reciprocalMass A -
-        (doublingWrapCount p v h : ℝ) / (h : ℝ))) :=
-  tendsto_shiftedOddTailExcess_mean A hsum p c hv hperiod u
-    ⟨htail, fun N => hmod N⟩
+        (doublingWrapCount p v h : ℝ) / (h : ℝ))) := by
+  have hdecomp : ∀ N : ℕ,
+      binaryCoeffTail (supportCoeff A) (c + N) =
+        (doublingResidue p v N : ℝ) / (v : ℝ) +
+          ((u N / v : ℕ) : ℝ) := by
+    intro N
+    have hres : u N % v = doublingResidue p v N := by
+      simpa [Nat.ModEq, doublingResidue] using hmod N
+    have hnat :
+        u N = v * (u N / v) + doublingResidue p v N := by
+      rw [← hres]
+      exact (Nat.div_add_mod (u N) v).symm
+    have hreal := congrArg (fun n : ℕ => (n : ℝ)) hnat
+    change (u N : ℝ) =
+      (v * (u N / v) + doublingResidue p v N : ℕ) at hreal
+    rw [htail N] at hreal
+    push_cast at hreal
+    have hvR : (v : ℝ) ≠ 0 := by positivity
+    field_simp
+    nlinarith
+  have htailMean :=
+    tendsto_shifted_binaryCoeffTail_supportCoeff_mean_reciprocalMass
+      A hsum c
+  have hresidueMean :=
+    tendsto_cesaroMean_normalizedDoublingResidue p hv hperiod
+  have hlim := htailMean.sub hresidueMean
+  simpa only using hlim.congr'
+    (Filter.Eventually.of_forall fun N => by
+      simp only [cesaroMean, ← sub_div, ← Finset.sum_sub_distrib]
+      refine congrArg (fun x : ℝ => x / (N : ℝ)) ?_
+      refine Finset.sum_congr rfl fun n _ => ?_
+      linarith [hdecomp n])
 
 theorem exists_shifted_oddTailExcess_mean_of_support_fraction
     (A : Set ℕ) (hA : ∃ a : ℕ, 0 < a ∧ a ∈ A)
@@ -1636,11 +1600,16 @@ theorem exists_shifted_oddTailExcess_mean_of_support_fraction
   exact tendsto_shifted_tail_excess_mean
     A hsum c p.toNat hv hperiod u htail hmod
 
-/-! ## Boolean-collision strengthening -/
+/-! ## Boolean-collision strengthening (T10) -/
 
 /-- The natural-number realization of `ceil ((m - 1) / 2)` for positive
 cardinalities.  For `m > 0`, this is exactly `m / 2`. -/
 def booleanCollisionSurplus (m : ℕ) : ℕ := m / 2
+
+theorem booleanCollisionSurplus_eq_ceil_sub_one_half
+    {m : ℕ} (hm : 0 < m) :
+    booleanCollisionSurplus m = (m - 1 + 1) / 2 := by
+  simp [booleanCollisionSurplus, Nat.sub_add_cancel hm]
 
 /-- Every marked support divisor of `n` contributes a distinct unit to
 `supportCoeff A n`. -/
@@ -1677,24 +1646,23 @@ theorem booleanCollisionSurplus_le_of_supportCoeff_carry
   · exact hepsilon
   · exact hcarry
 
-/-- The quotient excess of a genuine shifted odd tail state satisfies the
-exact Boolean carry equation. -/
-theorem shiftedSupportCoeff_add_oddTailExcess_succ_eq_wrap_add_two_excess
-    (A : Set ℕ) (p c : ℕ) {v : ℕ} (hv : 0 < v) (u : ℕ → ℕ)
-    (hstate : IsShiftedOddSupportTailState A p v c u) (N : ℕ) :
-    supportCoeff A (c + N + 1) + oddTailExcess u v (N + 1) =
+/-- The quotient excess of a genuine odd tail state satisfies the exact
+Boolean carry equation. -/
+theorem supportCoeff_add_oddTailExcess_succ_eq_wrap_add_two_excess
+    (A : Set ℕ) (p : ℕ) {v : ℕ} (hv : 0 < v) (u : ℕ → ℕ)
+    (hstate : IsOddSupportTailState A p v u) (N : ℕ) :
+    supportCoeff A (N + 1) + oddTailExcess u v (N + 1) =
       doublingWrapDigit p v N + 2 * oddTailExcess u v N := by
   have huRecR :
       (u (N + 1) : ℝ) +
-          (v : ℝ) * (supportCoeff A (c + N + 1) : ℝ) =
+          (v : ℝ) * (supportCoeff A (N + 1) : ℝ) =
         2 * (u N : ℝ) := by
     rw [hstate.1 (N + 1), hstate.1 N,
-      show c + (N + 1) = (c + N) + 1 by omega,
       binaryCoeffTail_succ
-        (supportCoeff A) (supportCoeff_le_self A) (c + N)]
+        (supportCoeff A) (supportCoeff_le_self A) N]
     ring
   have huRec :
-      u (N + 1) + v * supportCoeff A (c + N + 1) = 2 * u N := by
+      u (N + 1) + v * supportCoeff A (N + 1) = 2 * u N := by
     exact_mod_cast huRecR
   have hdecomp : ∀ j : ℕ,
       u j = v * oddTailExcess u v j + doublingResidue p v j := by
@@ -1703,16 +1671,14 @@ theorem shiftedSupportCoeff_add_oddTailExcess_succ_eq_wrap_add_two_excess
     exact (Nat.div_add_mod (u j) v).symm
   have hresidue := doublingResidue_carry p v N
   have hmulPlus :
-      v * (supportCoeff A (c + N + 1) +
-            oddTailExcess u v (N + 1)) +
+      v * (supportCoeff A (N + 1) + oddTailExcess u v (N + 1)) +
           doublingResidue p v (N + 1) =
         v * (doublingWrapDigit p v N + 2 * oddTailExcess u v N) +
           doublingResidue p v (N + 1) := by
     calc
-      v * (supportCoeff A (c + N + 1) +
-              oddTailExcess u v (N + 1)) +
+      v * (supportCoeff A (N + 1) + oddTailExcess u v (N + 1)) +
             doublingResidue p v (N + 1) =
-          u (N + 1) + v * supportCoeff A (c + N + 1) := by
+          u (N + 1) + v * supportCoeff A (N + 1) := by
             rw [hdecomp (N + 1)]
             ring
       _ = 2 * u N := huRec
@@ -1726,52 +1692,32 @@ theorem shiftedSupportCoeff_add_oddTailExcess_succ_eq_wrap_add_two_excess
       _ = v * (doublingWrapDigit p v N +
             2 * oddTailExcess u v N) +
             doublingResidue p v (N + 1) := by ring
-  have hmul := Nat.add_right_cancel hmulPlus
+  have hmul :
+      v * (supportCoeff A (N + 1) + oddTailExcess u v (N + 1)) =
+        v * (doublingWrapDigit p v N + 2 * oddTailExcess u v N) :=
+    Nat.add_right_cancel hmulPlus
   exact Nat.eq_of_mul_eq_mul_left hv hmul
 
-/-- The quotient excess of a genuine odd tail state satisfies the exact
-Boolean carry equation. -/
-theorem supportCoeff_add_oddTailExcess_succ_eq_wrap_add_two_excess
-    (A : Set ℕ) (p : ℕ) {v : ℕ} (hv : 0 < v) (u : ℕ → ℕ)
-    (hstate : IsOddSupportTailState A p v u) (N : ℕ) :
-    supportCoeff A (N + 1) + oddTailExcess u v (N + 1) =
-      doublingWrapDigit p v N + 2 * oddTailExcess u v N := by
-  simpa using
-    shiftedSupportCoeff_add_oddTailExcess_succ_eq_wrap_add_two_excess
-      A p 0 hv u hstate.shifted_zero N
-
-/-- At every common multiple of a finite support fragment past the shift,
-the preceding shifted odd-tail excess carries the collision surplus. -/
-theorem booleanCollisionSurplus_le_shiftedOddTailExcess
-    (A : Set ℕ) (F : Finset ℕ) (p c : ℕ) {v : ℕ} (hv : 0 < v)
-    (u : ℕ → ℕ) (hstate : IsShiftedOddSupportTailState A p v c u)
-    {n : ℕ} (hcn : c < n)
-    (hFA : ∀ a ∈ F, a ∈ A) (hFdvd : ∀ a ∈ F, a ∣ n) :
-    booleanCollisionSurplus F.card ≤ oddTailExcess u v (n - c - 1) := by
-  have hindex : c + (n - c - 1) + 1 = n := by omega
-  apply booleanCollisionSurplus_le_of_supportCoeff_carry
-    A F n (Nat.ne_of_gt (lt_of_le_of_lt (Nat.zero_le c) hcn)) hFA hFdvd
-    (doublingWrapDigit p v (n - c - 1))
-    (oddTailExcess u v (n - c - 1))
-    (oddTailExcess u v ((n - c - 1) + 1))
-  · exact doublingWrapDigit_le_one p hv (n - c - 1)
-  · simpa [hindex] using
-      shiftedSupportCoeff_add_oddTailExcess_succ_eq_wrap_add_two_excess
-        A p c hv u hstate (n - c - 1)
-
 /-- At every common multiple of a finite support fragment, the preceding
-odd-tail excess carries the collision surplus. -/
+odd-tail excess carries the formal development.s collision surplus. -/
 theorem booleanCollisionSurplus_le_oddTailExcess
     (A : Set ℕ) (F : Finset ℕ) (p : ℕ) {v : ℕ} (hv : 0 < v)
     (u : ℕ → ℕ) (hstate : IsOddSupportTailState A p v u)
     {n : ℕ} (hn : 0 < n)
     (hFA : ∀ a ∈ F, a ∈ A) (hFdvd : ∀ a ∈ F, a ∣ n) :
     booleanCollisionSurplus F.card ≤ oddTailExcess u v (n - 1) := by
-  simpa using booleanCollisionSurplus_le_shiftedOddTailExcess
-    A F p 0 hv u hstate.shifted_zero hn hFA hFdvd
+  have hnEq : n - 1 + 1 = n := Nat.sub_add_cancel hn
+  apply booleanCollisionSurplus_le_of_supportCoeff_carry
+    A F n hn.ne' hFA hFdvd
+    (doublingWrapDigit p v (n - 1))
+    (oddTailExcess u v (n - 1)) (oddTailExcess u v n)
+  · exact doublingWrapDigit_le_one p hv (n - 1)
+  · simpa [hnEq] using
+      supportCoeff_add_oddTailExcess_succ_eq_wrap_add_two_excess
+        A p hv u hstate (n - 1)
 
 /-- A periodic arithmetic progression of excess spikes contributes at
-least `q / L` to every Cesàro limit.  The residue `r` handles a finite
+least `q / L` to every Cesaro limit.  The residue `r` handles a finite
 denominator shift. -/
 theorem periodic_spike_div_le_of_tendsto_cesaroMean
     (k : ℕ → ℕ) (limit : ℝ) (L q r : ℕ)
@@ -1829,6 +1775,49 @@ theorem periodic_spike_div_le_of_tendsto_cesaroMean
   exact ge_of_tendsto (hlimit.comp hmulTop)
     ((eventually_gt_atTop (0 : ℕ)).mono fun K hK => hmean K hK)
 
+/-- Removing or adding a fixed finite prefix does not change a Cesaro
+limit. -/
+theorem tendsto_cesaroMean_shift
+    (x : ℕ → ℝ) (limit : ℝ) (c : ℕ)
+    (hlimit : Tendsto (cesaroMean x) atTop (nhds limit)) :
+    Tendsto (cesaroMean (fun n : ℕ => x (c + n))) atTop (nhds limit) := by
+  have hshift :
+      Tendsto (fun N : ℕ => cesaroMean x (c + N)) atTop (nhds limit) := by
+    simpa [add_comm] using hlimit.comp (tendsto_add_atTop_nat c)
+  have hratio :
+      Tendsto (fun N : ℕ => ((c + N : ℕ) : ℝ) / (N : ℝ))
+        atTop (nhds 1) := by
+    have hcinv :
+        Tendsto (fun N : ℕ => (c : ℝ) * (N : ℝ)⁻¹)
+          atTop (nhds 0) :=
+      by simpa only [mul_zero] using
+        tendsto_inv_atTop_nhds_zero_nat.const_mul (c : ℝ)
+    have hone : Tendsto (fun _ : ℕ => (1 : ℝ)) atTop (nhds 1) :=
+      tendsto_const_nhds
+    have htmp := hone.add hcinv
+    simpa only [add_zero] using htmp.congr'
+      ((eventually_gt_atTop (0 : ℕ)).mono fun N hN => by
+        have hN0 : (N : ℝ) ≠ 0 := by positivity
+        push_cast
+        field_simp
+        ring)
+  let pref : ℝ := ∑ n ∈ Finset.range c, x n
+  have hprefix :
+      Tendsto (fun N : ℕ => pref / (N : ℝ)) atTop (nhds 0) := by
+    simpa [div_eq_mul_inv] using
+      tendsto_inv_atTop_nhds_zero_nat.const_mul pref
+  have hmain := (hshift.mul hratio).sub hprefix
+  simpa only [mul_one, sub_zero] using hmain.congr'
+    ((eventually_gt_atTop (0 : ℕ)).mono fun N hN => by
+      rw [cesaroMean, cesaroMean]
+      have hsum := Finset.sum_range_add (f := x) c N
+      have hN0 : (N : ℝ) ≠ 0 := by positivity
+      have hcN0 : ((c + N : ℕ) : ℝ) ≠ 0 := by positivity
+      dsimp [pref]
+      rw [hsum]
+      field_simp
+      ring)
+
 /-- Offset-free version of the progression-density lemma.  A fixed
 preperiod does not affect the density `1/L`. -/
 theorem periodic_spike_div_le_of_tendsto_cesaroMean_offset
@@ -1845,21 +1834,132 @@ theorem periodic_spike_div_le_of_tendsto_cesaroMean_offset
     simpa [add_assoc] using hspike j
   · exact hshift
 
-/-! ### Shifted Boolean collision (the `2^c v` normalization) -/
+/-! ### Shifted odd-denominator states (the `2^c v` normalization) -/
 
-/-- Index bookkeeping for excess spikes at the common multiples
-`(c + 1 + j) * L`: the preceding shifted index lies in the arithmetic
-progression with offset `(c + 1) * L - c - 1` and step `L`. -/
-private theorem common_multiple_sub_shift_index
-    {c L : ℕ} (hL : 0 < L) (j : ℕ) :
-    (c + 1 + j) * L - c - 1 = ((c + 1) * L - c - 1) + j * L := by
-  have hle : c + 1 ≤ (c + 1) * L := by nlinarith
-  have hsplit : (c + 1 + j) * L = (c + 1) * L + j * L := by ring
-  omega
+/-- Odd tail state after removing the power-of-two part of a displayed
+denominator. -/
+def IsShiftedOddSupportTailState
+    (A : Set ℕ) (p v c : ℕ) (u : ℕ → ℕ) : Prop :=
+  (∀ N : ℕ,
+      (u N : ℝ) = (v : ℝ) *
+        binaryCoeffTail (supportCoeff A) (c + N)) ∧
+    (∀ N : ℕ, u N % v = doublingResidue p v N)
 
-/-- Full shifted Boolean-collision inequality for a displayed denominator
-`2^c v`.  The hypothesis says `L` is a common multiple of the marked
-support fragment; taking `L = lcm(F)` gives the sharpest instance. -/
+theorem shiftedOddSupportTail_eq_residue_div_add_excess
+    (A : Set ℕ) (p c : ℕ) {v : ℕ} (hv : 0 < v) (u : ℕ → ℕ)
+    (hstate : IsShiftedOddSupportTailState A p v c u) (N : ℕ) :
+    binaryCoeffTail (supportCoeff A) (c + N) =
+      (doublingResidue p v N : ℝ) / (v : ℝ) +
+        (oddTailExcess u v N : ℝ) := by
+  have hdecomp :
+      u N = v * oddTailExcess u v N + doublingResidue p v N := by
+    rw [oddTailExcess, ← hstate.2 N]
+    exact (Nat.div_add_mod (u N) v).symm
+  have hdecompR :
+      (u N : ℝ) =
+        (v * oddTailExcess u v N + doublingResidue p v N : ℕ) := by
+    exact_mod_cast hdecomp
+  rw [hstate.1 N] at hdecompR
+  push_cast at hdecompR
+  have hvR : (v : ℝ) ≠ 0 := by positivity
+  field_simp
+  nlinarith
+
+theorem shiftedSupportCoeff_add_oddTailExcess_succ_eq_wrap_add_two_excess
+    (A : Set ℕ) (p c : ℕ) {v : ℕ} (hv : 0 < v) (u : ℕ → ℕ)
+    (hstate : IsShiftedOddSupportTailState A p v c u) (N : ℕ) :
+    supportCoeff A (c + N + 1) + oddTailExcess u v (N + 1) =
+      doublingWrapDigit p v N + 2 * oddTailExcess u v N := by
+  have huRecR :
+      (u (N + 1) : ℝ) +
+          (v : ℝ) * (supportCoeff A (c + N + 1) : ℝ) =
+        2 * (u N : ℝ) := by
+    rw [hstate.1 (N + 1), hstate.1 N,
+      show c + (N + 1) = (c + N) + 1 by omega,
+      binaryCoeffTail_succ
+        (supportCoeff A) (supportCoeff_le_self A) (c + N)]
+    ring
+  have huRec :
+      u (N + 1) + v * supportCoeff A (c + N + 1) = 2 * u N := by
+    exact_mod_cast huRecR
+  have hdecomp : ∀ j : ℕ,
+      u j = v * oddTailExcess u v j + doublingResidue p v j := by
+    intro j
+    rw [oddTailExcess, ← hstate.2 j]
+    exact (Nat.div_add_mod (u j) v).symm
+  have hresidue := doublingResidue_carry p v N
+  have hmulPlus :
+      v * (supportCoeff A (c + N + 1) +
+            oddTailExcess u v (N + 1)) +
+          doublingResidue p v (N + 1) =
+        v * (doublingWrapDigit p v N + 2 * oddTailExcess u v N) +
+          doublingResidue p v (N + 1) := by
+    calc
+      v * (supportCoeff A (c + N + 1) +
+              oddTailExcess u v (N + 1)) +
+            doublingResidue p v (N + 1) =
+          u (N + 1) + v * supportCoeff A (c + N + 1) := by
+            rw [hdecomp (N + 1)]
+            ring
+      _ = 2 * u N := huRec
+      _ = 2 * (v * oddTailExcess u v N +
+            doublingResidue p v N) := by rw [hdecomp N]
+      _ = v * (2 * oddTailExcess u v N) +
+            2 * doublingResidue p v N := by ring
+      _ = v * (2 * oddTailExcess u v N) +
+            (v * doublingWrapDigit p v N +
+              doublingResidue p v (N + 1)) := by rw [hresidue]
+      _ = v * (doublingWrapDigit p v N +
+            2 * oddTailExcess u v N) +
+            doublingResidue p v (N + 1) := by ring
+  have hmul := Nat.add_right_cancel hmulPlus
+  exact Nat.eq_of_mul_eq_mul_left hv hmul
+
+theorem booleanCollisionSurplus_le_shiftedOddTailExcess
+    (A : Set ℕ) (F : Finset ℕ) (p c : ℕ) {v : ℕ} (hv : 0 < v)
+    (u : ℕ → ℕ) (hstate : IsShiftedOddSupportTailState A p v c u)
+    {n : ℕ} (hcn : c < n)
+    (hFA : ∀ a ∈ F, a ∈ A) (hFdvd : ∀ a ∈ F, a ∣ n) :
+    booleanCollisionSurplus F.card ≤ oddTailExcess u v (n - c - 1) := by
+  have hindex : c + (n - c - 1) + 1 = n := by omega
+  apply booleanCollisionSurplus_le_of_supportCoeff_carry
+    A F n (Nat.ne_of_gt (lt_of_le_of_lt (Nat.zero_le c) hcn)) hFA hFdvd
+    (doublingWrapDigit p v (n - c - 1))
+    (oddTailExcess u v (n - c - 1))
+    (oddTailExcess u v ((n - c - 1) + 1))
+  · exact doublingWrapDigit_le_one p hv (n - c - 1)
+  · simpa [hindex] using
+      shiftedSupportCoeff_add_oddTailExcess_succ_eq_wrap_add_two_excess
+        A p c hv u hstate (n - c - 1)
+
+/-- The shifted odd-tail excess has limit `rho(A) - w/h`. -/
+theorem tendsto_shiftedOddTailExcess_mean
+    (A : Set ℕ) (hsum : Summable (reciprocalSupportTerm A))
+    (p c : ℕ) {v h : ℕ} (hv : 0 < v)
+    (hperiod : IsDoublingPeriod v h) (u : ℕ → ℕ)
+    (hstate : IsShiftedOddSupportTailState A p v c u) :
+    Tendsto
+      (cesaroMean (fun N : ℕ => (oddTailExcess u v N : ℝ)))
+      atTop
+      (nhds (reciprocalMass A -
+        (doublingWrapCount p v h : ℝ) / (h : ℝ))) := by
+  have htail := tendsto_cesaroMean_shift
+    (binaryCoeffTail (supportCoeff A)) (reciprocalMass A) c
+    (tendsto_binaryCoeffTail_supportCoeff_mean_reciprocalMass A hsum)
+  have hresidue :=
+    tendsto_cesaroMean_normalizedDoublingResidue p hv hperiod
+  have hdiff := htail.sub hresidue
+  simpa only using hdiff.congr'
+    (Filter.Eventually.of_forall fun N => by
+      simp only [cesaroMean, ← sub_div, ← Finset.sum_sub_distrib]
+      refine congrArg (fun x : ℝ => x / (N : ℝ)) ?_
+      refine Finset.sum_congr rfl fun n _ => ?_
+      linarith [shiftedOddSupportTail_eq_residue_div_add_excess
+        A p c hv u hstate n])
+
+/-- Full shifted T10 inequality for a displayed denominator `2^c v`.
+The hypothesis says `L` is a common multiple of the marked support
+fragment; taking `L = lcm(F)` gives the finite statement. -/
 theorem shiftedBooleanCollision_wrap_bound_of_common_multiple
     (A : Set ℕ) (F : Finset ℕ) (p c : ℕ)
     (hsum : Summable (reciprocalSupportTerm A))
@@ -1881,8 +1981,21 @@ theorem shiftedBooleanCollision_wrap_bound_of_common_multiple
     have hcn : c < n := by
       dsimp [n]
       nlinarith
-    have hnIndex : n - c - 1 = r + j * L :=
-      common_multiple_sub_shift_index hL j
+    have hnIndex : n - c - 1 = r + j * L := by
+      have hle : c + 1 ≤ (c + 1) * L := by nlinarith
+      have hcancel :
+          (c + 1) * L - c - 1 + (c + 1) = (c + 1) * L := by
+        omega
+      apply Nat.add_right_cancel (m := c + 1)
+      calc
+        n - c - 1 + (c + 1) = n := by omega
+        _ = (c + 1 + j) * L := rfl
+        _ = (c + 1) * L + j * L := by ring
+        _ = ((c + 1) * L - c - 1 + (c + 1)) + j * L := by
+          rw [hcancel]
+        _ = (r + j * L) + (c + 1) := by
+          dsimp [r]
+          ring
     rw [← hnIndex]
     apply booleanCollisionSurplus_le_shiftedOddTailExcess
       A F p c hv u hstate hcn hFA
@@ -1895,8 +2008,8 @@ theorem shiftedBooleanCollision_wrap_bound_of_common_multiple
     L (booleanCollisionSurplus F.card) r hL hspike hexcess
   linarith
 
-/-- Analytic fan-in for the collision inequality once a carry excess has a
-spike on one residue class modulo `L`. -/
+/-- Analytic fan-in matching the exact T10 inequality once a carry excess
+has a spike on one residue class modulo `L`. -/
 theorem wrapRatio_add_collisionSurplus_div_le_reciprocalMass
     (A : Set ℕ) (hsum : Summable (reciprocalSupportTerm A))
     (p : ℕ) {v h : ℕ} (hv : 0 < v)
@@ -1918,7 +2031,7 @@ theorem wrapRatio_add_collisionSurplus_div_le_reciprocalMass
       L q r hL hr hspike hexcess
   linarith
 
-/-- Canonical unshifted Boolean-collision theorem.  If every element of `F` divides
+/-- Canonical unshifted T10 theorem.  If every element of `F` divides
 `L`, then collisions at the positive multiples of `L` force the full
 `ceil ((|F|-1)/2) / L` gain above the residue-wrap mean. -/
 theorem booleanCollision_wrap_bound_of_common_multiple
@@ -1957,7 +2070,7 @@ theorem booleanCollision_wrap_bound_of_common_multiple
 /-! ### Strict dyadic corollary -/
 
 /-- A positive integer sequence with a density-`1/L` family of values at
-least two has Cesàro limit strictly greater than one. -/
+least two has Cesaro limit strictly greater than one. -/
 theorem one_lt_of_tendsto_cesaroMean_of_positive_two_spikes
     (k : ℕ → ℕ) (limit : ℝ) (L r : ℕ) (hL : 0 < L)
     (hpos : ∀ n : ℕ, 0 < k n)
@@ -2036,8 +2149,21 @@ theorem one_lt_reciprocalMass_of_dyadic_support_fraction_of_two_pos_mem
     have hcn : c < n := by
       dsimp [n]
       nlinarith
-    have hnIndex : n - c - 1 = r + j * L :=
-      common_multiple_sub_shift_index hL j
+    have hnIndex : n - c - 1 = r + j * L := by
+      have hcancel :
+          (c + 1) * L - c - 1 + (c + 1) = (c + 1) * L := by
+        have : c + 1 ≤ (c + 1) * L := by nlinarith
+        omega
+      apply Nat.add_right_cancel (m := c + 1)
+      calc
+        n - c - 1 + (c + 1) = n := by omega
+        _ = (c + 1 + j) * L := rfl
+        _ = (c + 1) * L + j * L := by ring
+        _ = ((c + 1) * L - c - 1 + (c + 1)) + j * L := by
+          rw [hcancel]
+        _ = (r + j * L) + (c + 1) := by
+          dsimp [r]
+          ring
     have hcoeff : 2 ≤ supportCoeff A n := by
       have hLn : L ∣ n := dvd_mul_left L (c + 1 + j)
       have haL : a ∣ L := Nat.dvd_lcm_left a b
@@ -2093,9 +2219,9 @@ theorem dyadic_support_fraction_reciprocalMass_diverges_or_gt_one
       A hsum p c ha (Nat.pos_of_ne_zero hb0) hba.symm haA hbA hvalue
   · exact Or.inl hsum
 
-/-! ## Carry unbounded at common multiples -/
+/-! ## Carry unbounded at common multiples (T13) -/
 
-/-- The division-free local carry inequality.  A finite marked support
+/-- The division-free local T13 inequality.  A finite marked support
 fragment contributes at least its cardinality to the coefficient at a
 common multiple, while positivity of the next carry contributes the extra
 one.  The shifted index is `L - c - 1`, not `L - 1`. -/
@@ -2134,7 +2260,7 @@ theorem one_add_mul_card_le_two_mul_state
   · exact hFA
   · exact hFdvd
 
-/-- Natural ceiling form of the shifted carry inequality. -/
+/-- Natural ceiling form of the shifted T13 inequality. -/
 theorem one_add_mul_card_ceil_half_le_shifted_state
     (A : Set ℕ) (F : Finset ℕ) (c v L : ℕ) (u : ℕ → ℕ)
     (hcL : c < L) (hpos : ∀ n : ℕ, 0 < u n)
@@ -2146,7 +2272,7 @@ theorem one_add_mul_card_ceil_half_le_shifted_state
     A F c v L u hcL hpos hrec hFA hFdvd
   omega
 
-/-- Ordinary real half form of the shifted carry inequality. -/
+/-- Ordinary real half form of the shifted T13 inequality. -/
 theorem one_add_mul_card_half_le_shifted_state
     (A : Set ℕ) (F : Finset ℕ) (c v L : ℕ) (u : ℕ → ℕ)
     (hcL : c < L) (hpos : ∀ n : ℕ, 0 < u n)
@@ -2162,7 +2288,7 @@ theorem one_add_mul_card_half_le_shifted_state
     exact_mod_cast hraw
   linarith
 
-/-- Fraction-facing local wrapper.  It preserves every clause of the
+/-- Fraction-facing local T13 wrapper.  It preserves every clause of the
 existing shifted natural-state constructor and adds the raw common-multiple
 bound without changing that constructor's API. -/
 theorem exists_shifted_odd_tail_nat_state_with_common_multiple_bound_of_support_fraction
@@ -2187,7 +2313,7 @@ theorem exists_shifted_odd_tail_nat_state_with_common_multiple_bound_of_support_
   exact one_add_mul_card_le_two_mul_shifted_state
     A F c v L u hcL hpos hrec hFA hFdvd
 
-/-- The unboundedness core: every positive shifted recurrence over an
+/-- The complete T13 core: every positive shifted recurrence over an
 infinite support is globally unbounded.  The proof selects `2B+1` positive
 support elements and uses their product, multiplied by `c+1`, as an
 explicit common multiple. -/
@@ -2245,7 +2371,7 @@ theorem shifted_state_unbounded_of_infinite_support
   refine ⟨L - c - 1, ?_⟩
   omega
 
-/-- Canonical fraction-facing unboundedness theorem.  Every infinite rational support
+/-- Canonical fraction-facing T13 theorem.  Every infinite rational support
 admits the existing shifted natural tail state, and that state is globally
 unbounded. -/
 theorem exists_unbounded_shifted_odd_tail_nat_state_of_support_fraction
@@ -2269,10 +2395,9 @@ theorem exists_unbounded_shifted_odd_tail_nat_state_of_support_fraction
   exact shifted_state_unbounded_of_infinite_support
     A hAinf c v hv u hpos hrec
 
-/-- Finite regression check on the `{2,3}` support family: every tested
-common multiple hits the exact preceding carry value `26`, clearing the
-common-multiple bound.  The range `0 ≤ k < 66` corresponds to the 66
-checked indices `6(k+1)-1`. -/
+/-- Every tested common multiple in the formal development.s `{2,3}` regression family
+hits the exact preceding carry value `26`.  The range `0 ≤ k < 66`
+corresponds to the 66 checked indices `6(k+1)-1`. -/
 theorem carryOrbit23_common_multiple_bound_validation66 :
     ∀ k ∈ Finset.range 66,
       (1 : ℤ) + 21 * ({2, 3} : Finset ℕ).card ≤
@@ -2281,7 +2406,7 @@ theorem carryOrbit23_common_multiple_bound_validation66 :
   have hmod : (6 * k + 5) % 6 = 5 := by omega
   simp [carryOrbit23, hmod]
 
-/-! ## Kernel-checked finite validation -/
+/-! ## Kernel-checked finite validation from the formal development -/
 
 /-- Reduced numerator starts modulo `v`, represented as a computable list for
 the native finite certificate. -/
@@ -2302,9 +2427,7 @@ def orderWrapValidationRow (v h : ℕ) : Bool :=
         (decide (doublingWrapCount p v h = 1) ==
           (decide (v = 2 ^ h - 1) && isPowerOfTwoOrbitStart p v h))
 
-/-- The twelve modulus/order rows of the finite validation; together they
-carry `446` coprime starting residues
-(`orderWrapValidatedStartCount_eq_446`). -/
+/-- The twelve modulus/order rows in the 446-orbit validation. -/
 def orderWrapValidationRows : List (ℕ × ℕ) :=
   [(3, 2), (5, 4), (7, 3), (9, 6), (11, 10), (13, 12),
     (15, 4), (21, 6), (31, 5), (33, 10), (63, 6), (341, 10)]
@@ -2332,7 +2455,7 @@ theorem orderWrapValidation446_passes :
     orderWrapValidation446 = true := by decide
 
 set_option maxRecDepth 100000 in
-/-- The minimum wrap ratios on these rows are respectively
+/-- The formal development.s minimum ratios are respectively
 `1/2, 2/4, 1/3, 1/4, 1/5`. -/
 theorem orderWrap_minima_table_passes :
     wrapMinimumCertificate 3 2 1 = true ∧

@@ -88,11 +88,11 @@ def build() -> dict[str, Any]:
         "docs/declaration_atlas.json",
         "docs/methodology.json",
     )
-    origin_main = git("rev-parse", "--verify", "origin/main", check=False)
+    local_main = git("rev-parse", "--verify", "main", check=False)
     publication_state = (
-        "published_origin_main"
-        if origin_main and is_ancestor(navigation_commit, origin_main)
-        else "navigation_snapshot_unpublished"
+        "main_history_snapshot"
+        if local_main and is_ancestor(navigation_commit, local_main)
+        else "detached_navigation_snapshot"
     )
 
     atlas_by_declaration = {
@@ -154,7 +154,7 @@ def build() -> dict[str, Any]:
                 "commit": navigation_commit,
                 "authority_role": "machine_readable_navigation_anchor",
                 "publication_state": publication_state,
-                "published_ref": "origin/main" if publication_state == "published_origin_main" else None,
+                "published_ref": "main" if publication_state == "main_history_snapshot" else None,
                 "repository_resolution": f"{repository}/tree/{navigation_commit}",
             },
             "content": {

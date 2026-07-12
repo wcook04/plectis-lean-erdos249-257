@@ -113,8 +113,206 @@ lemma totientTail_succ (M : ℕ) :
       _ = totientTail M := hsplit
   linarith
 
+/-- **Exact tail-window split.**  The first `L` binary digits of `R_M` are
+the finite window already used by the certificate kernel; the remaining
+endpoint is exactly `2⁻ᴸ R_{M+L}`.  This is the general coboundary identity
+behind every later sliding-suffix specialization. -/
+lemma totientTail_eq_partial_add_shifted (M L : ℕ) :
+    totientTail M
+      = (∑ j ∈ Finset.range L,
+          (Nat.totient (M + 1 + j) : ℝ) / 2 ^ (j + 1))
+        + totientTail (M + L) / 2 ^ L := by
+  rw [totientTail_eq_partial_add_tail]
+  congr 1
+  unfold totientTail
+  rw [← tsum_div_const]
+  refine tsum_congr fun j => ?_
+  rw [show M + 1 + (j + L) = M + L + 1 + j by omega,
+    show (j + L) + 1 = (j + 1) + L by omega, pow_add,
+    div_mul_eq_div_div]
+
 /-- The window step `a_n = φ(n+h) - φ(n)` driving the carry recurrence. -/
 def deltaTotient (h n : ℕ) : ℤ := (Nat.totient (n + h) : ℤ) - (Nat.totient n : ℤ)
+
+/-- The fresh totient forcing letter is bounded by its later argument.  This is
+the arithmetic input that makes the depth barrier strict: at depth `L` the
+new letter has size at most `N + h + L + 1`, one less than the endpoint
+corridor radius. -/
+lemma abs_deltaTotient_le (h n : ℕ) :
+    |deltaTotient h n| ≤ (n + h : ℕ) := by
+  unfold deltaTotient
+  rw [abs_le]
+  constructor
+  · have hφn : (Nat.totient n : ℤ) ≤ n := by exact_mod_cast Nat.totient_le n
+    have hφnh_nonneg : (0 : ℤ) ≤ Nat.totient (n + h) := by positivity
+    push_cast
+    omega
+  · have hφnh : (Nat.totient (n + h) : ℤ) ≤ n + h := by
+      exact_mod_cast Nat.totient_le (n + h)
+    have hφn_nonneg : (0 : ℤ) ≤ Nat.totient n := by positivity
+    push_cast
+    omega
+
+/-- **Exact depth recurrence for the endpoint word.**  Increasing certificate
+depth doubles the existing signed window and appends exactly one fresh
+totient-difference letter.  This is a depth recurrence with explicit input,
+not the autonomous temporal recurrence ruled out by the finite-state no-go. -/
+lemma windowDiscrepancy_succ (h N L : ℕ) :
+    windowDiscrepancy h N (L + 1)
+      = 2 * windowDiscrepancy h N L + deltaTotient h (N + L + 1) := by
+  unfold windowDiscrepancy deltaTotient
+  rw [Finset.sum_range_succ]
+  simp only [Nat.add_sub_cancel]
+  rw [Finset.mul_sum]
+  congr 1
+  · refine Finset.sum_congr rfl fun j hj => ?_
+    have hjL : j < L := Finset.mem_range.mp hj
+    rw [show L - j = (L - 1 - j) + 1 by omega, pow_succ]
+    ring
+  · simp only [Nat.sub_self, pow_zero, mul_one]
+    rw [show N + h + 1 + L = N + L + 1 + h by omega,
+      show N + 1 + L = N + L + 1 by omega]
+
+/-- **Depth barrier.**  Once an endpoint certificate fires, every deeper
+window fires as well.  The proof uses the exact input-driven recurrence and
+the strict totient bound; no finite state or empirical residue table enters.
+Equivalently, endpoint survival is prefix-closed in certificate depth. -/
+theorem certifiedKill_succ {h N L : ℕ} (hcert : certifiedKill h N L) :
+    certifiedKill h N (L + 1) := by
+  rcases hcert with ⟨hlow, hhigh⟩
+  set B : ℤ := N + h + L + 2
+  set P : ℤ := 2 ^ L
+  set A : ℤ := windowDiscrepancy h N L
+  set r : ℤ := A % P
+  set d : ℤ := deltaTotient h (N + L + 1)
+  have hPpos : 0 < P := by simp [P]
+  have hdabs : |d| ≤ B - 1 := by
+    have hd := abs_deltaTotient_le h (N + L + 1)
+    dsimp [d, B]
+    push_cast at hd ⊢
+    omega
+  have hd := abs_le.mp hdabs
+  have hx0 : 0 ≤ 2 * r + d := by
+    change B < r at hlow
+    linarith
+  have hxP : 2 * r + d < P * 2 := by
+    change r < P - B at hhigh
+    linarith
+  have hAdiv : P * (A / P) + r = A := by
+    change P * (A / P) + A % P = A
+    exact Int.mul_ediv_add_emod A P
+  have hrewrite : 2 * A + d = P * (2 * (A / P)) + (2 * r + d) := by
+    linarith
+  have hmod : (2 * A + d) % (P * 2) = 2 * r + d := by
+    rw [hrewrite]
+    have hmul : P * (2 * (A / P)) = (P * 2) * (A / P) := by ring
+    rw [hmul, show (P * 2) * (A / P) + (2 * r + d)
+        = (2 * r + d) + (P * 2) * (A / P) by ring,
+      Int.add_mul_emod_self_left, Int.emod_eq_of_lt hx0 hxP]
+  unfold certifiedKill
+  rw [windowDiscrepancy_succ, show (2 : ℤ) ^ (L + 1) = P * 2 by simp [P, pow_succ]]
+  change B + 1 < (2 * A + d) % (P * 2) ∧
+    (2 * A + d) % (P * 2) < P * 2 - (B + 1)
+  rw [hmod]
+  change B < r at hlow
+  change r < P - B at hhigh
+  constructor <;> linarith
+
+/-- A successful depth is an absorbing proof state: appending any finite
+suffix of the totient forcing word cannot recreate an endpoint survivor. -/
+theorem certifiedKill_add {h N L : ℕ} (hcert : certifiedKill h N L) :
+    ∀ k : ℕ, certifiedKill h N (L + k) := by
+  intro k
+  induction k with
+  | zero => simpa using hcert
+  | succ k ih =>
+      simpa [Nat.add_assoc] using certifiedKill_succ ih
+
+/-- The signed endpoint-survivor fibre at depth `L`.  Its elements are the
+integer representatives of the exact discrepancy residue that still fit in
+the analytic endpoint corridor. -/
+def endpointSurvivor (h N L : ℕ) (z : ℤ) : Prop :=
+  |z| ≤ (N + h + L + 2 : ℤ) ∧
+    z % 2 ^ L = windowDiscrepancy h N L % 2 ^ L
+
+instance (h N L : ℕ) (z : ℤ) : Decidable (endpointSurvivor h N L z) :=
+  inferInstanceAs (Decidable (_ ∧ _))
+
+/-- A central-arc certificate empties the signed endpoint-survivor fibre. -/
+theorem no_endpointSurvivor_of_certifiedKill {h N L : ℕ}
+    (hcert : certifiedKill h N L) :
+    ∀ z : ℤ, ¬ endpointSurvivor h N L z := by
+  intro z hz
+  rcases hcert with ⟨hlow, hhigh⟩
+  rcases hz with ⟨hzabs, hzmod⟩
+  set B : ℤ := N + h + L + 2
+  set P : ℤ := 2 ^ L
+  set A : ℤ := windowDiscrepancy h N L
+  set r : ℤ := A % P
+  have hPpos : 0 < P := by simp [P]
+  have hzdecomp : P * (z / P) + r = z := by
+    have hzmod' : z % P = A % P := by simpa [r] using hzmod
+    change P * (z / P) + A % P = z
+    rw [← hzmod']
+    exact Int.mul_ediv_add_emod z P
+  have hzbox := abs_le.mp hzabs
+  by_cases hq : 0 ≤ z / P
+  · have hnonneg : 0 ≤ P * (z / P) := mul_nonneg hPpos.le hq
+    change B < r at hlow
+    linarith
+  · have hqneg : z / P ≤ -1 := by omega
+    have hmultiple : P * (z / P) ≤ -P := by nlinarith
+    change r < P - B at hhigh
+    linarith
+
+/-- Under the natural dyadic-room condition, fibre emptiness is not merely a
+consequence of `certifiedKill`: it is exactly the central-arc certificate. -/
+theorem certifiedKill_of_no_endpointSurvivor {h N L : ℕ}
+    (hroom : (2 * (N + h + L + 2) : ℤ) < 2 ^ L)
+    (hempty : ∀ z : ℤ, ¬ endpointSurvivor h N L z) :
+    certifiedKill h N L := by
+  set B : ℤ := N + h + L + 2
+  set P : ℤ := 2 ^ L
+  set A : ℤ := windowDiscrepancy h N L
+  set r : ℤ := A % P
+  have hPpos : 0 < P := by simp [P]
+  have hr0 : 0 ≤ r := by
+    exact Int.emod_nonneg A hPpos.ne'
+  have hrP : r < P := Int.emod_lt_of_pos A hPpos
+  have hBP : B < P := by
+    change 2 * B < P at hroom
+    have hB0 : 0 ≤ B := by positivity
+    linarith
+  unfold certifiedKill
+  change B < r ∧ r < P - B
+  constructor
+  · by_contra h
+    have hrB : r ≤ B := le_of_not_gt h
+    apply hempty r
+    constructor
+    · rw [abs_of_nonneg hr0]
+      exact hrB
+    · change r % P = r
+      exact Int.emod_eq_of_lt hr0 hrP
+  · by_contra h
+    have hrlo : P - B ≤ r := le_of_not_gt h
+    apply hempty (r - P)
+    constructor
+    · have hz0 : r - P ≤ 0 := by linarith
+      rw [abs_of_nonpos hz0]
+      linarith
+    · change (r - P) % P = r
+      rw [show r - P = r + P * (-1) by ring,
+        Int.add_mul_emod_self_left, Int.emod_eq_of_lt hr0 hrP]
+
+/-- Paper-facing form of the survivor-kernel bridge: once the depth floor is
+available, `certifiedKill` is equivalent to exact emptiness of the signed
+endpoint fibre. -/
+theorem certifiedKill_iff_endpointSurvivor_empty {h N L : ℕ}
+    (hroom : (2 * (N + h + L + 2) : ℤ) < 2 ^ L) :
+    certifiedKill h N L ↔ ∀ z : ℤ, ¬ endpointSurvivor h N L z :=
+  ⟨no_endpointSurvivor_of_certifiedKill,
+    certifiedKill_of_no_endpointSurvivor hroom⟩
 
 /-- The tail difference obeys the exact carry recurrence
 `D_h(M+1) = 2·D_h(M) - a_{M+1}`. -/
@@ -128,6 +326,39 @@ lemma tail_diff_succ (h M : ℕ) :
   push_cast
   rw [show M + 1 + h = M + h + 1 from by omega]
   ring
+
+/-- **Exact endpoint telescoping for every tail difference.**  The first `L`
+dyadic digits are the signed increment prefix, and the only remainder is the
+translated tail difference scaled by `2⁻ᴸ`.  On the LCM diagonal this is the
+dyadic-cocycle collapse: sliding a suffix exposes no independent arithmetic
+sample beyond the original carry orbit. -/
+lemma tail_diff_eq_increment_prefix_add_shifted (h N L : ℕ) :
+    totientTail (N + h) - totientTail N
+      = (∑ j ∈ Finset.range L,
+          (deltaTotient h (N + 1 + j) : ℝ) / 2 ^ (j + 1))
+        + (totientTail (N + L + h) - totientTail (N + L)) / 2 ^ L := by
+  rw [totientTail_eq_partial_add_shifted (N + h) L,
+    totientTail_eq_partial_add_shifted N L]
+  rw [show
+      (∑ j ∈ Finset.range L,
+          (Nat.totient (N + h + 1 + j) : ℝ) / 2 ^ (j + 1))
+          + totientTail (N + h + L) / 2 ^ L
+          - ((∑ j ∈ Finset.range L,
+              (Nat.totient (N + 1 + j) : ℝ) / 2 ^ (j + 1))
+            + totientTail (N + L) / 2 ^ L)
+        = ((∑ j ∈ Finset.range L,
+              (Nat.totient (N + h + 1 + j) : ℝ) / 2 ^ (j + 1))
+            - ∑ j ∈ Finset.range L,
+              (Nat.totient (N + 1 + j) : ℝ) / 2 ^ (j + 1))
+          + (totientTail (N + h + L) - totientTail (N + L)) / 2 ^ L by ring,
+    ← Finset.sum_sub_distrib]
+  congr 1
+  · refine Finset.sum_congr rfl fun j _ => ?_
+    unfold deltaTotient
+    push_cast
+    rw [show N + h + 1 + j = N + 1 + j + h by omega]
+    ring
+  · rw [show N + h + L = N + L + h by omega]
 
 /-! ## The integer carry orbit and the survivor certificate -/
 
@@ -338,6 +569,9 @@ theorem totient_series_ne_rat_of_den_dvd_upto_sixteen (r : ℚ) (h : ℕ)
     (h1 : 1 ≤ h) (h16 : h ≤ 16) (hdvd : (r.den : ℕ) ∣ 2 ^ 14 * (2 ^ h - 1)) :
     (∑' n : ℕ, (Nat.totient n : ℝ) / 2 ^ n) ≠ (r : ℝ) := fun hS =>
   tail_diff_not_int_upto_sixteen h h1 h16 (tail_diff_int_of_den_dvd r hS h 14 hdvd)
+
+#print axioms totientTail_eq_partial_add_shifted
+#print axioms tail_diff_eq_increment_prefix_add_shifted
 
 end TotientTailPeriodKiller
 end Erdos249257

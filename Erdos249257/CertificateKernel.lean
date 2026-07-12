@@ -22,6 +22,7 @@ import Erdos249257.GapFareyBound
 import Erdos249257.MersenneLambertLadder
 import Erdos249257.GeometricCoprimality
 import Erdos249257.GcdMomentCalculus
+import Erdos249257.SternBrocotRunGeometry
 import Erdos249257.TotientTailPeriodKiller
 import Erdos249257.CarrySurvivorExtinction
 import Erdos249257.LcmDiagonalReduction
@@ -5778,8 +5779,8 @@ with the divisor-count series `∑ τ(m) / b^m` (Mathlib's
 `irrational_erdosSum_full_support_of_near_int` reduces full-support
 (Erdős–Borwein) irrationality to producing near-integer witnesses for the
 divisor-count series — the exact obligation Erdős's 1948 congruence
-construction discharges.  These near-integer witnesses are left unbuilt on this route;
-full-support irrationality itself is proved separately (`irrational_erdosSum_full_support`). -/
+construction discharges.  Those witnesses are not constructed here:
+full-support irrationality is *not* claimed. -/
 
 /-- **Second irrationality engine: integer-dilation near-integer criterion.**
 If for every positive `q` some integer dilation `m * ξ` lies within `1 / q`
@@ -18358,6 +18359,68 @@ theorem tendsto_stern_brocot_cylinder_mass (a b : ℕ+) :
     Filter.Tendsto (fun dp : ℕ => GcdMomentCalculus.sternBrocotDepthMass dp a b)
       Filter.atTop (nhds (1 / (((2 : ℝ) ^ (a : ℕ) - 1) * ((2 : ℝ) ^ (b : ℕ) - 1)))) :=
   GcdMomentCalculus.tendsto_sternBrocotDepthMass a b
+
+/-! ## Induced Stern–Brocot runs: Fibonacci pressure and the denominator knife-edge
+
+Raw tree depth has parabolic cusp branches of only linear height.  Grouping
+maximal same-direction runs exposes the correct unconditional scale: an
+alternating word with `r` nonempty runs has height at least `F_{r+3}`, with
+equality on the all-unit spine.  The run continuant below is tied back to the
+literal mediant word, not asserted as an independent coordinate.
+
+The natural invariant-coordinate exponents along that spine sum to
+`F_{r+3}-2`.  Thus run induction creates Fibonacci analytic pressure but the
+naive Mersenne clearing cost lies on the same exponential scale.  These facts
+do not supply a denominator surplus and do not prove #249; they isolate the
+arithmetic obligation any external cocycle or period identity must beat.
+-/
+
+/-- Exact transport from alternating run lengths to the literal
+Stern–Brocot pair. -/
+theorem stern_brocot_pair_of_run_lengths
+    (newest : SternBrocotRunGeometry.LR) (ns : List ℕ) :
+    SternBrocotRunGeometry.sbPair (SternBrocotRunGeometry.runWord newest ns) =
+      match newest with
+      | .left => SternBrocotRunGeometry.runBoundaryPair ns
+      | .right =>
+          ((SternBrocotRunGeometry.runBoundaryPair ns).2,
+            (SternBrocotRunGeometry.runBoundaryPair ns).1) :=
+  SternBrocotRunGeometry.sbPair_runWord newest ns
+
+/-- Fibonacci minimum height for positive alternating run lengths. -/
+theorem stern_brocot_run_height_fib_lower
+    (newest : SternBrocotRunGeometry.LR) (ns : List ℕ)
+    (hpos : ∀ n ∈ ns, 0 < n) :
+    Nat.fib (ns.length + 3) ≤
+      SternBrocotRunGeometry.sbHeight (SternBrocotRunGeometry.runWord newest ns) :=
+  SternBrocotRunGeometry.sbHeight_runWord_fib_lower newest ns hpos
+
+/-- The all-unit alternating spine attains the Fibonacci floor exactly. -/
+theorem stern_brocot_unit_run_height_eq_fib (r : ℕ) :
+    SternBrocotRunGeometry.runHeight (List.replicate r 1) = Nat.fib (r + 3) :=
+  SternBrocotRunGeometry.runHeight_replicate_one r
+
+/-- Exact two-run height, the finite identity behind the second induced
+Lambert layer. -/
+theorem stern_brocot_two_run_height (m n : ℕ) :
+    SternBrocotRunGeometry.runHeight [m, n] = (m + 1) * (n + 1) + 1 :=
+  SternBrocotRunGeometry.runHeight_pair m n
+
+/-- Exact first two induced contributions: the root has mass `1/4`, and the
+two one-run cusps together have mass `1/2`. -/
+theorem stern_brocot_zero_run_mass_eq_quarter :
+    SternBrocotRunGeometry.zeroRunMass = 1 / 4 :=
+  SternBrocotRunGeometry.zeroRunMass_eq_quarter
+
+theorem stern_brocot_one_run_mass_eq_half :
+    SternBrocotRunGeometry.oneRunMass = 1 / 2 :=
+  SternBrocotRunGeometry.oneRunMass_eq_half
+
+/-- Natural run-resolvent exponent clearing is exactly two below the
+Fibonacci height scale. -/
+theorem stern_brocot_natural_run_denominator_exponent_add_two (r : ℕ) :
+    SternBrocotRunGeometry.naturalRunDenominatorExponent r + 2 = Nat.fib (r + 3) :=
+  SternBrocotRunGeometry.naturalRunDenominatorExponent_add_two r
 
 /-! ## Wave 21: the totient-tail period killer — rationality itself is the enemy
 

@@ -25,6 +25,7 @@ Read order for humans:
 | Wave 30 | referenced in `LcmConeNonflat.lean` | Small-prime support of the cone-window argument |
 | Generated certificates | `GeneratedCertificates.lean` + `GeneratedCertificates/*` | Generated finite certificate layers, not waves |
 | Carry trunk | five post-wave modules under `Erdos249257/` | Not waves; a shared binary-carry layer over the kernel, see below |
+| Diagonal pincer frontier | exact decomposition modules, algebraic support, and finite prime-certificate shards | Post-wave #249 work; sharpens the open certificate-supply obligation without closing it |
 
 ## Waves 17–25 (named modules)
 
@@ -48,16 +49,40 @@ These five modules are **not waves**. They form a shared binary-carry layer adde
 
 | Module | What it proves | Main theorems | Depends on |
 |---|---|---|---|
-| `GenericTailOrbitRigidity` | For coefficients `c(n) ≤ n`, the binary series `∑ c(n)/2ⁿ` is rational exactly when a tempered integer carry orbit exists (`u(N+1) = 2·u(N) − v·c(N+1)` with `u(N)/2ᴺ → 0`); every such orbit is rigid, equal to the scaled analytic tail `v·T_c(N)`. The tempered boundary is essential; positivity alone is deliberately not offered as an equivalent criterion. | `temperedBinaryOrbit_eq_scaledTail`, `binaryCoeffSeries_rational_iff_exists_temperedBinaryOrbit` | `CertificateKernel` |
-| `GreedyAchievementSet` | Greedy geometry for the Mersenne achievement set (values `∑_{n∈A} 1/(2ⁿ−1)`): strict superincreasing tail inequalities, the quantitative gap asymptotic `(2/3)·4⁻ⁿ + O(8⁻ⁿ)`, exact real and rational greedy recurrences, membership ⇔ all-level greedy survival, sound one-sided finite rational death certificates (the exact level-one certificate excludes `3/4`), and uniqueness of normalised support coding. Certificates prove nonmembership only. | `mem_mersenneAchievementSet_iff_greedy_survival`, `certifiedGreedyMersenneDeath_not_mem`, `three_fourths_not_mem_mersenneAchievementSet` | `CertificateKernel` |
-| `BooleanMobiusCarry` | Boolean–Möbius carry coordinates for support series: the Lambert coefficient `f_A(n) = #{a ∈ A : a ∣ n}` satisfies `f_A = 1_A * ζ` and `μ * f_A = 1_A` on positive integers; rationality of the support series is equivalent to a tempered carry orbit whose carry quotient is exactly `f_A`; normalised nonempty supports with value `p/q` correspond exactly to quotient-only Boolean Möbius carry certificates. Worked support `{2,3}`: value `10/21`, period-six orbit `10, 20, 19, 17, 13, 26`. | `erdosSupportSeries_rational_iff_exists_temperedCarry`, `exists_normalized_support_fraction_iff_exists_booleanMobiusCarry`, `mobius_carryQuotient_recovers_support` | `GenericTailOrbitRigidity` |
+| `GenericTailOrbitRigidity` | For coefficients `c(n) ≤ n`, the binary series `∑ c(n)/2ⁿ` is rational exactly when a tempered integer carry orbit exists (`u(N+1) = 2·u(N) − v·c(N+1)` with `u(N)/2ᴺ → 0`); every such orbit is rigid, equal to the scaled analytic tail `v·T_c(N)`. Balanced pulses also prove unbounded exact successor fan-out, ruling out a generic autonomous finite-state decoder. | `temperedBinaryOrbit_eq_scaledTail`, `binaryCoeffSeries_rational_iff_exists_temperedBinaryOrbit`, `balancedPulse_no_autonomous_decoder` | `CertificateKernel` |
+| `GreedyAchievementSet` | Greedy geometry for the Mersenne achievement set (values `∑_{n∈A} 1/(2ⁿ−1)`): strict superincreasing tail inequalities, the quantitative gap asymptotic `(2/3)·4⁻ⁿ + O(8⁻ⁿ)`, compact/perfect/totally-disconnected/nowhere-dense structure with Lebesgue measure one, exact real and rational greedy recurrences, membership ⇔ all-level greedy survival, sound one-sided finite rational death certificates (the exact level-one certificate excludes `3/4`), and uniqueness of normalised support coding. Certificates prove nonmembership only. | `volume_mersenneAchievementSet`, `isNowhereDense_mersenneAchievementSet`, `mem_mersenneAchievementSet_iff_greedy_survival`, `certifiedGreedyMersenneDeath_not_mem` | `CertificateKernel` |
+| `BooleanMobiusCarry` | Boolean–Möbius carry coordinates for support series: the Lambert coefficient `f_A(n) = #{a ∈ A : a ∣ n}` satisfies `f_A = 1_A * ζ` and `μ * f_A = 1_A` on positive integers; rationality of the support series is equivalent to a tempered carry orbit whose carry quotient is exactly `f_A`; normalised nonempty supports with value `p/q` correspond exactly to quotient-only Boolean Möbius carry certificates. The displayed value `1/2` has a canonical affine-orbit criterion. Worked support `{2,3}`: value `10/21`, period-six orbit `10, 20, 19, 17, 13, 26`. | `erdosSupportSeries_rational_iff_exists_temperedCarry`, `exists_normalized_support_fraction_iff_exists_booleanMobiusCarry`, `support_half_iff_affineBinaryOrbit_tempered` | `GenericTailOrbitRigidity` |
 | `RationalSupportCarrySkeleton` | Residue wraps and reciprocal mass: the binary repetend identity (least positive residues in a complete doubling cycle sum to odd modulus × number of wraps), an algebraic one-wrap classification, the Cesàro identification of mean support tails with the reciprocal mass `∑_{a∈A} 1/a`, the exact excess-mean identity, the rationality-forced lower bound `1/ord_v(2)` on reciprocal mass, the dyadic strengthening (mass divergent or `> 1` for infinite dyadic-rational supports), and global unboundedness of the positive carry state attached to any infinite support with rational value. | `sum_doublingResidue_eq_mul_wrapCount`, `one_div_oddOrder_le_reciprocalMass_of_support_fraction`, `dyadic_support_fraction_reciprocalMass_diverges_or_gt_one`, `exists_unbounded_shifted_odd_tail_nat_state_of_support_fraction` | `BooleanMobiusCarry` |
 | `SublogDivisorCoverage` | **Sublogarithmic divisor coverage.** If an Erdős support series has a rational value, consecutive zero windows in its divisor-count coefficient `f_A` have length at most `ε log₂(N+1) + O_{ε,c,v}(1)` for every `ε > 0`, uniformly in the support. The proof composes an explicit fixed-power divisor bound (`τ(n)^k ≤ (k^{2^k})^k n`), a binary-tail estimate, and the exact carry recurrence. This constrains support coverage; it does not solve universal #257. | `supportCoeffZeroWindow_length_le_eps_logb_add` | `RationalSupportCarrySkeleton` |
 
 None of these modules claims a solution of Erdős #249 or #257. The contribution boundary is theorem-family-specific: the carry recurrence and strict-tail geometry have direct prior art (Wang–Grau Ribas; Kovač–Tao); Möbius inversion, repetend algebra, and divisor averaging are classical; the converse/rigidity, certificate-normal-form, and coupled reciprocal-mass families remain exact-source-comparison candidates. No priority claim is made.
 
+## Diagonal pincer frontier (post-wave #249 band)
+
+This band refines the lcm-diagonal reduction.  Its main reading chain is
+`DiagonalPincerDecomposition → SquaredMersenneDiagonalEnclosure →
+DiagonalFreshLossBridge`.  The first module makes diagonal integrality exactly
+equivalent to a foreign-defect term hitting a full-target interval.  The second
+centres the diagonal expression at a Lambert projection and bounds the signed
+squared-Mersenne tail.  The third turns the remaining fresh loss into an exact
+integer projection and then into binary suffix conditions.  Every
+irrationality theorem in this band retains an explicit unbounded-supply
+hypothesis.
+
+`DiagonalPincerCertificates` and the `DiagonalPincerCertificatesT*`
+aggregators assemble 22 checked scales through `t = 43`; the many
+`DiagonalPincerPrimeCertificates.*` files are finite proof shards, not separate
+mathematical claims.  The denominator/cyclotomic chain
+`RadicalMobiusShadow → RepunitMobiusNumerator → CyclicTensorMobiusShadow →
+CyclotomicProjectionOfShadow → PrimePowerJumpDynamics →
+MersenneShadowCyclotomicNoncollapse → MersenneShadowDenominatorGrowth`
+supplies exact rational-denominator information used by the frontier.  The
+remaining named modules provide finite identities or conditional interfaces;
+their headers state the boundary locally.
+
 ## Package shape
 
 - `CertificateKernel.lean` (~0.85 MB, 18,887 lines, 483 theorems): the assembled microkernel. Imports all nine wave modules plus Mathlib number theory (`NumberTheory.Real.Irrational`, cyclotomic eval/expand/roots, `TsumDivisorsAntidiagonal`, factorisation, `Bertrand`, geometric and infinite sums).
 - `GeneratedCertificates.lean` (~1.18 MB, 27,728 lines, 1,026 theorems) plus three shards (`b10_L6_A11`, `b2_L105_A75047`, `b2_L210_A21371`): machine-generated finite certificate instances. Names encode base `b`, window/level `L`, and the residue/bound `A`. Each is checked by `decide` in the Lean kernel.
-- More than 1,600 theorem declarations across the package; zero uses of `native_decide`, zero `sorry`/`admit`, no additional axioms (enforced by `scripts/check_release.py`).
+- The diagonal-pincer family adds 480 isolated prime-certificate modules and the `T19` through `T43` aggregators.  The shards are intentionally indexed through the aggregators rather than presented as 480 separate mathematical claims.
+- More than 6,200 declarations across 531 source modules (including the root); zero uses of `native_decide`, zero `sorry`/`admit`, no additional axioms (enforced by `scripts/check_release.py`).

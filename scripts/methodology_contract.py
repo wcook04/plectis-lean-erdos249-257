@@ -365,6 +365,7 @@ def render_markdown(methodology: dict[str, Any], claims: dict[str, Any]) -> str:
     non_claims_by_id = {row["id"]: row for row in claims.get("non_claims", [])}
     evidence_classes = methodology["evidence_classes"]
 
+    # REUSE-IgnoreStart
     lines = [
         "<!-- SPDX-FileCopyrightText: 2026 Will Cook -->",
         "<!-- SPDX-License-Identifier: Apache-2.0 -->",
@@ -373,6 +374,7 @@ def render_markdown(methodology: dict[str, Any], claims: dict[str, Any]) -> str:
         f"# {methodology['title']}",
         "",
     ]
+    # REUSE-IgnoreEnd
     for paragraph in methodology["human_preamble"]:
         lines.extend([paragraph, ""])
 

@@ -7,7 +7,7 @@ A guide to this repository for mathematicians who do not read Lean.
 
 `erdos249-257-exposition.tex` states, in ordinary notation, what the Lean development
 proves, cites, and leaves open. Every formal statement links to the exact source
-line on GitHub, pinned to the release tag `v0.4.0`, so a reader can go from a
+line on GitHub, pinned to the release tag `v0.5.0`, so a reader can go from a
 sentence of prose to the checked proof in one click. The visible link text is
 intentionally quiet; the file, line, and declaration remain in each link target
 and are verified against the released source by `scripts/check_release.py`. The

@@ -1,0 +1,100 @@
+#!/usr/bin/env python3
+# SPDX-FileCopyrightText: 2026 Will Cook
+# SPDX-License-Identifier: Apache-2.0
+"""Refresh the exact Lean import graph embedded in ``docs/claims.json``.
+
+Roles are authored navigation metadata and are therefore preserved when a
+module already has one.  Paths and import edges are derived mechanically from
+the public Lean source; this script does not alter claims or argument edges.
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import re
+import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
+CLAIMS = ROOT / "docs" / "claims.json"
+IMPORT_RE = re.compile(r"^import (Erdos249257(?:\.[A-Za-z0-9_]+)+)\s*$", re.M)
+
+NEW_ROLES = {
+    "Erdos249257.ActualForeignResidueProjection": "Finite foreign-residue projection consumer",
+    "Erdos249257.BinaryTailWindowTransfer": "Binary tail-window transfer interfaces",
+    "Erdos249257.CyclicTensorMobiusShadow": "Cyclic tensor identities for the Mobius shadow",
+    "Erdos249257.CyclotomicProjectionOfShadow": "Cyclotomic projections of the Mobius shadow",
+    "Erdos249257.DiagonalFreshLossBridge": "Fresh-loss projection and suffix-supply reduction",
+    "Erdos249257.DiagonalPincerCertificates": "Finite diagonal-pincer certificate base",
+    "Erdos249257.DiagonalPincerDecomposition": "Exact diagonal-pincer target decomposition",
+    "Erdos249257.DyadicPrefixCompression": "Dyadic prefix compression identities",
+    "Erdos249257.FullTargetPrimeAdjunctionNoGo": "Prime-adjunction obstruction for the full target",
+    "Erdos249257.LambertDiagonalEnclosure": "Lambert diagonal enclosure reduction",
+    "Erdos249257.MersenneShadowCyclotomicNoncollapse": "Cyclotomic noncollapse in the Mersenne shadow",
+    "Erdos249257.MersenneShadowDenominatorGrowth": "Exact denominator growth in the Mersenne shadow",
+    "Erdos249257.PrimePowerJumpDynamics": "Prime-power jump dynamics",
+    "Erdos249257.PrimitiveRationalGapSupply": "Conditional primitive rational-gap supply interface",
+    "Erdos249257.PrimitiveSupportBridge": "Conditional primitive-support bridge",
+    "Erdos249257.RadicalMobiusShadow": "Radical structure of the Mobius shadow",
+    "Erdos249257.RationalDenominatorSurvival": "Rational denominator-survival identities",
+    "Erdos249257.RepunitMobiusNumerator": "Repunit and Mobius-numerator identities",
+    "Erdos249257.SquaredMersenneDiagonalEnclosure": "Sharp squared-Mersenne diagonal enclosure",
+    "Erdos249257.SternBrocotRunGeometry": "Stern-Brocot run geometry",
+    "Erdos249257.SupportDilationDifferences": "Finite support-dilation difference identities",
+}
+
+
+def module_id(path: Path) -> str:
+    return ".".join(path.relative_to(ROOT).with_suffix("").parts)
+
+
+def default_role(module: str) -> str:
+    if ".DiagonalPincerPrimeCertificates." in module:
+        return "Finite diagonal prime-certificate shard"
+    if module.startswith("Erdos249257.DiagonalPincerCertificatesT"):
+        return "Finite diagonal-pincer certificate extension"
+    if ".GeneratedCertificates." in module:
+        return "Generated finite certificate shard"
+    return NEW_ROLES.get(module, "Lean proof module")
+
+
+def build_graph(data: dict[str, object]) -> dict[str, object]:
+    machine = data["machine_readable_paper"]
+    current = machine["module_graph"]
+    roles = {row["id"]: row["role"] for row in current["nodes"]}
+    nodes = []
+    for path in sorted((ROOT / "Erdos249257").rglob("*.lean")):
+        module = module_id(path)
+        nodes.append(
+            {
+                "id": module,
+                "path": path.relative_to(ROOT).as_posix(),
+                "role": roles.get(module, default_role(module)),
+                "imports": IMPORT_RE.findall(path.read_text(encoding="utf-8")),
+            }
+        )
+    return {"root": "Erdos249257.lean", "nodes": nodes}
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--check", action="store_true")
+    args = parser.parse_args()
+    data = json.loads(CLAIMS.read_text(encoding="utf-8"))
+    expected = build_graph(data)
+    actual = data["machine_readable_paper"]["module_graph"]
+    if args.check:
+        if actual != expected:
+            print("module graph is stale; run python3 scripts/build_module_graph.py")
+            return 1
+        print(f"module graph current: {len(expected['nodes'])} modules")
+        return 0
+    data["machine_readable_paper"]["module_graph"] = expected
+    CLAIMS.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    print(f"wrote docs/claims.json module graph: {len(expected['nodes'])} modules")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

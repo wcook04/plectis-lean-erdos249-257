@@ -571,7 +571,10 @@ private lemma summable_moebius_div_mersenne :
     div_le_div_iff₀ h1 h2]
   nlinarith [mul_le_mul_of_nonneg_right hmu h2.le]
 
-private lemma summable_moebius_div_mersenne_sq :
+/-- Absolute convergence of the squared-Mersenne Möbius series.  This is
+public because finite-enclosure owners need to split the series at a cutoff
+without duplicating the Lambert-ladder convergence proof. -/
+theorem summable_moebius_div_mersenne_sq :
     Summable (fun d : ℕ+ =>
       ((moebius (d : ℕ) : ℤ) : ℝ) / ((2 : ℝ) ^ (d : ℕ) - 1) ^ 2) := by
   have hgeo : Summable (fun d : ℕ+ => 2 * ((1 : ℝ) / 2) ^ (d : ℕ)) := by

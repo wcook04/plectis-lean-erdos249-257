@@ -63,6 +63,8 @@ Run the focused public-surface gate after documentation or registry changes:
 ```sh
 python3 scripts/check_release.py
 python3 scripts/test_methodology_contract.py
+python3 scripts/build_module_graph.py --check
+python3 scripts/refresh_source_coordinates.py --check
 ```
 
 Run the full proof authority check after Lean changes:
@@ -76,6 +78,14 @@ anchors, the machine-readable module and argument graphs, the exhaustive
 declaration atlas, scope, metadata, licensing, and proof-trust guards. Do not
 add `sorry`, `admit`, `axiom`, or `native_decide`; finite computations use
 kernel-checked `decide`.
+
+After adding, removing, or rewiring Lean modules, run
+`python3 scripts/build_module_graph.py` before the other projections.  It
+derives paths and imports from source while preserving authored module roles;
+it does not author claims or paper prose.
+After declaration lines move, rebuild the declaration atlas and run
+`python3 scripts/refresh_source_coordinates.py`; it changes coordinates only,
+never declaration names or mathematical prose.
 
 A separate diagnostic checks that a cold clone stays readable:
 

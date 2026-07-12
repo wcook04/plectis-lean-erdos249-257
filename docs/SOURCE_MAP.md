@@ -41,18 +41,48 @@ Supporting ladder modules:
 - `Erdos249257.GeometricCoprimality`
 - `Erdos249257.GcdMomentCalculus`
 
+## #249 / diagonal pincer frontier
+
+Read this band after the certificate reductions above.  It sharpens the same
+open obligation; it does not prove the required unbounded supply.
+
+- `Erdos249257.DiagonalPincerDecomposition` — exact full-target interval
+  characterisation and the target-avoidance-to-irrationality reduction.
+- `Erdos249257.SquaredMersenneDiagonalEnclosure` — Lambert-projected centre,
+  exact signed square tail, and a sharp separation criterion.
+- `Erdos249257.DiagonalFreshLossBridge` — exact fresh-loss projection and
+  stronger adjacent-suffix supply interfaces.
+- `Erdos249257.DiagonalPincerCertificates` and
+  `Erdos249257.DiagonalPincerCertificatesT*` — the finite diagonal segment,
+  currently assembled at 22 explicit scales through `t = 43`.
+- `Erdos249257.DiagonalPincerPrimeCertificates.*` — finite prime certificate
+  shards used by that assembled segment; read the aggregators first.
+
+Algebraic support for the same band:
+
+- `MersenneShadowCyclotomicNoncollapse → MersenneShadowDenominatorGrowth`
+- `RadicalMobiusShadow → RepunitMobiusNumerator → CyclicTensorMobiusShadow`
+- `CyclotomicProjectionOfShadow → PrimePowerJumpDynamics`
+- `RationalDenominatorSurvival`, `LambertDiagonalEnclosure`,
+  `FullTargetPrimeAdjunctionNoGo`, and `DyadicPrefixCompression`
+
+Exploratory exact interfaces with explicit conditional boundaries live in
+`PrimitiveRationalGapSupply`, `PrimitiveSupportBridge`,
+`ActualForeignResidueProjection`, `SternBrocotRunGeometry`, and
+`SupportDilationDifferences`.
+
 ## Binary-carry trunk (post-wave carry layer)
 
 Builds on `Erdos249257.CertificateKernel`; not part of the wave chronology. Reading order: `GenericTailOrbitRigidity → GreedyAchievementSet → BooleanMobiusCarry → RationalSupportCarrySkeleton → SublogDivisorCoverage`.
 
 - `Erdos249257.GenericTailOrbitRigidity`
-- Relevant declarations include: `temperedBinaryOrbit_eq_scaledTail`, `binaryCoeffSeries_rational_iff_exists_temperedBinaryOrbit`, `not_irrational_binaryCoeffSeries_iff_exists_temperedBinaryOrbit`
+- Relevant declarations include: `temperedBinaryOrbit_eq_scaledTail`, `binaryCoeffSeries_rational_iff_exists_temperedBinaryOrbit`, `balancedPulse_fanout_unbounded`, `balancedPulse_no_autonomous_decoder`
 
 - `Erdos249257.GreedyAchievementSet`
-- Relevant declarations include: `mem_mersenneAchievementSet_iff_greedy_survival`, `certifiedGreedyMersenneDeath_not_mem`, `three_fourths_not_mem_mersenneAchievementSet`, `rational_member_support_bit_iff`
+- Relevant declarations include: `volume_mersenneAchievementSet`, `perfect_mersenneAchievementSet`, `isNowhereDense_mersenneAchievementSet`, `mem_mersenneAchievementSet_iff_greedy_survival`, `certifiedGreedyMersenneDeath_not_mem`, `three_fourths_not_mem_mersenneAchievementSet`, `rational_member_support_bit_iff`, `half_mem_mersenneAchievementSet_of_prefixForcingChain` (conditional interface only)
 
 - `Erdos249257.BooleanMobiusCarry`
-- Relevant declarations include: `erdosSupportSeries_rational_iff_exists_temperedCarry`, `support_fraction_iff_exists_temperedCarry`, `exists_normalized_support_fraction_iff_exists_booleanMobiusCarry`, `mobius_carryQuotient_recovers_support`
+- Relevant declarations include: `erdosSupportSeries_rational_iff_exists_temperedCarry`, `support_fraction_iff_exists_temperedCarry`, `exists_normalized_support_fraction_iff_exists_booleanMobiusCarry`, `mobius_carryQuotient_recovers_support`, `support_half_iff_affineBinaryOrbit_tempered`
 
 - `Erdos249257.RationalSupportCarrySkeleton`
 - Relevant declarations include: `sum_doublingResidue_eq_mul_wrapCount`, `one_div_oddOrder_le_reciprocalMass_of_support_fraction`, `reciprocalMass_eq_residueMean_add_excessMean`, `dyadic_support_fraction_reciprocalMass_diverges_or_gt_one`, `exists_unbounded_shifted_odd_tail_nat_state_of_support_fraction`
@@ -68,3 +98,8 @@ Builds on `Erdos249257.CertificateKernel`; not part of the wave chronology. Read
 
 - `Erdos249257.GeneratedCertificates`
 - `Erdos249257.GeneratedCertificates.*`
+
+The complete 530-module import graph and every declaration are generated in
+`docs/claims.json::machine_readable_paper.module_graph` and
+`docs/declaration_atlas.json`; use those surfaces when a grouped route above is
+not specific enough.

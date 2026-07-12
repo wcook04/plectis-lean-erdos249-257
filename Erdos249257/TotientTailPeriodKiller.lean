@@ -73,6 +73,14 @@ def certifiedKill (h N L : ℕ) : Prop :=
   (N + h + L + 2 : ℤ) < windowDiscrepancy h N L % 2 ^ L ∧
     windowDiscrepancy h N L % 2 ^ L < 2 ^ L - (N + h + L + 2)
 
+/-- Every endpoint certificate has enough dyadic room for both excluded
+boundary arcs.  In particular, certificate depth cannot remain fixed while
+`N+h` tends to infinity. -/
+theorem certifiedKill_depth_floor {h N L : ℕ} (hcert : certifiedKill h N L) :
+    (2 * (N + h + L + 2) : ℤ) < 2 ^ L := by
+  rcases hcert with ⟨hleft, hright⟩
+  linarith
+
 instance (h N L : ℕ) : Decidable (certifiedKill h N L) :=
   inferInstanceAs (Decidable (_ ∧ _))
 

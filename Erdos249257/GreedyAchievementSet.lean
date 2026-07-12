@@ -1,64 +1,52 @@
 import Erdos249257.CertificateKernel
+import Mathlib.Analysis.Normed.Group.FunctionSeries
+import Mathlib.MeasureTheory.Group.Measure
+import Mathlib.MeasureTheory.Measure.Lebesgue.Basic
+import Mathlib.MeasureTheory.Measure.MeasureSpace
 import Mathlib.Order.Filter.AtTopBot.Basic
+import Mathlib.Topology.GDelta.Basic
+import Mathlib.Topology.Order.IntermediateValue
+import Mathlib.Topology.Perfect
 
 /-!
 # Greedy geometry for the Mersenne achievement set
 
 For positive exponents put `w(n) = 1 / (2^n - 1)` and let `T(n)` be the
-mass strictly after exponent `n`.  The Mersenne achievement set is the set
-of reals obtainable as subset sums of these weights.  This file formalizes
-the greedy analysis of that set, supporting infrastructure for the study of
-Erdős problem #257:
+mass strictly after exponent `n`.  This file formalizes the dependency-critical
+part of the greedy-achievement route for Erdős problem #257:
 
-* summability, the exact tail recurrence, and strict superincreasingness
-  (`mersenneTail_lt_weight`): every positive-index weight exceeds the
-  entire tail after it;
-* the quantitative gap asymptotic `w_n - T_n = (2/3)·4⁻ⁿ + O(8⁻ⁿ)`, with
-  the explicit constant `3` (`mersenneGap_isBigOWith`);
-* normalized support coding through the certificate kernel's
-  `erdosSupportSeries` (`positiveMersenneSupportValue_eq_erdosSupportSeries`);
-* exact real and rational greedy recurrences, agreeing under casting
-  (`cast_greedyMersenneRemainderRat`);
-* the greedy membership criterion
-  (`mem_mersenneAchievementSet_iff_greedy_survival`): a real belongs to the
-  achievement set exactly when it is nonnegative and every greedy residual
-  is at most the remaining tail — the nonnegativity guard is necessary;
-* finite rational upper enclosures for tails and sound death certificates
-  (`certifiedGreedyMersenneDeath_not_mem`), with the exact level-one
-  certificate excluding `3/4`
-  (`three_fourths_not_mem_mersenneAchievementSet`);
-* uniqueness of normalized support coding
-  (`positiveMersenneSupportValue_injective_normalized`), and computable
-  support bits for a rational value already known to belong to the
-  achievement set (`rational_member_support_bit_iff`).
+* summability, tail recurrence, and the strict superincreasing inequality;
+* the quantitative gap asymptotic `(2/3)·4⁻ⁿ + O(8⁻ⁿ)` with an explicit
+  higher-channel remainder bound;
+* normalized support coding through the existing `erdosSupportSeries`;
+* compactness and perfection from a continuous injective binary coding;
+* nested finite-cylinder stages, their exact Lebesgue measures, and continuity
+  from above;
+* the measure-one and nowhere-dense conclusions, hence the precise fat-Cantor
+  status of the achievement set;
+* exact real and rational greedy recurrences;
+* the all-level survival characterization, with the necessary nonnegativity
+  guard made explicit;
+* finite rational upper enclosures for tails and sound death certificates;
+* the exact level-one death certificate for `3/4`;
+* uniqueness of normalized support coding and computability of the digits of
+  a rational value already known to belong to the achievement set.
 
 `CertifiedGreedyMersenneDeath` is one-sided: a certificate proves
-nonmembership, while failure to find a certificate, or survival through any
-finite depth, proves nothing about membership.  The index-zero support bit
-is normalized away because its analytic weight is zero.  Nothing here
-settles Erdős #257, and no finite computation is promoted to an
-infinite-support claim.
+nonmembership, while
+failure to find a certificate or survival through any finite depth proves
+nothing about membership.  The index-zero support bit is normalized away
+because its analytic weight is zero.  Nothing here settles the universal
+problem, and no finite computation is promoted to an infinite-support claim.
 
-The core geometry here is known: Kovač and Tao, *On several irrationality
-problems for Ahmes series* (arXiv:2406.17593), prove that subsums of
-`1/(t^n − 1)` are mutually distinct and form a Cantor set via exactly the
-strict domination of each weight over its tail, and the same
-tail-versus-term relation drives the classical achievement-set literature.
-What this module contributes is operational: the two-scale gap asymptotic,
-the exact all-level greedy-survival characterisation, cast-coherent real
-and rational greedy recurrences, and a decidable one-sided finite
-non-membership certificate with a kernel-checked fixture.  These are
-quantitative sharpenings and executable formal interfaces over known
-geometry, not priority claims.
-
-NON_CLAIM: this module does not formalize the measure-one, perfect, or
-nowhere-dense geometry of the achievement set.  In particular, the name
-“fat Cantor set” is not promoted to a Lean-checked theorem here.
+No novelty or priority claim is made for the theorems in this file.
 -/
 
 namespace Erdos249257
 
-open Filter Set
+open scoped ENNReal
+
+open Filter Set MeasureTheory Topology
 
 /-! ## Weights and tails -/
 
@@ -82,25 +70,19 @@ noncomputable def mersenneWeight (n : ℕ) : ℝ :=
     ((mersenneWeightRat n : ℚ) : ℝ) = mersenneWeight n := by
   simp [mersenneWeightRat, mersenneWeight]
 
+theorem mersenneWeight_pos {n : ℕ} (hn : 0 < n) :
+    0 < mersenneWeight n := by
+  unfold mersenneWeight
+  have hpow : (1 : ℝ) < 2 ^ n :=
+    one_lt_pow₀ (by norm_num) (Nat.ne_of_gt hn)
+  exact one_div_pos.mpr (sub_pos.mpr hpow)
+
 theorem mersenneWeightRat_pos {n : ℕ} (hn : 0 < n) :
     0 < mersenneWeightRat n := by
   unfold mersenneWeightRat
   have hpow : (1 : ℚ) < 2 ^ n :=
     one_lt_pow₀ (by norm_num) (Nat.ne_of_gt hn)
   exact one_div_pos.mpr (sub_pos.mpr hpow)
-
-/-- Real positivity is the cast image of the exact rational proof. -/
-theorem mersenneWeight_pos {n : ℕ} (hn : 0 < n) :
-    0 < mersenneWeight n := by
-  rw [← cast_mersenneWeightRat]
-  exact_mod_cast mersenneWeightRat_pos hn
-
-/-- The real weight is nonnegative at every index, including the
-normalized-away index zero. -/
-private theorem mersenneWeight_nonneg (n : ℕ) : 0 ≤ mersenneWeight n := by
-  rcases Nat.eq_zero_or_pos n with rfl | hn
-  · simp
-  · exact (mersenneWeight_pos hn).le
 
 /-- The positive-index Mersenne weights form a summable real series. -/
 theorem summable_mersenneWeight :
@@ -109,37 +91,23 @@ theorem summable_mersenneWeight :
     (summable_erdos_term 2 (by norm_num) (fun k : ℕ => k + 1)
       (fun _ _ h => Nat.add_lt_add_right h 1) (by norm_num))
 
-/-- Shifting the start of a summable positive-index family preserves
-summability; shared by the tail, suffix, and envelope constructions. -/
-private theorem summable_shift_add {f : ℕ → ℝ}
-    (hf : Summable fun k : ℕ => f (k + 1)) (n : ℕ) :
-    Summable fun k : ℕ => f (n + k + 1) := by
-  have h := (summable_nat_add_iff n).mpr hf
-  simpa [Nat.add_assoc, Nat.add_comm, Nat.add_left_comm] using h
-
-/-- The shifted geometric envelope shared by all three channel estimates. -/
-private theorem summable_geometric_shift_add
-    {r : ℝ} (hr0 : 0 ≤ r) (hr1 : r < 1) (n : ℕ) :
-    Summable fun k : ℕ => r ^ (n + k + 1) :=
-  summable_shift_add
-    ((summable_nat_add_iff 1).mpr (summable_geometric_of_lt_one hr0 hr1)) n
-
 /-- The remaining mass after processing exponents `1, ..., n`. -/
 noncomputable def mersenneTail (n : ℕ) : ℝ :=
   ∑' k : ℕ, mersenneWeight (n + k + 1)
 
 theorem summable_mersenneTail (n : ℕ) :
-    Summable (fun k : ℕ => mersenneWeight (n + k + 1)) :=
-  summable_shift_add summable_mersenneWeight n
+    Summable (fun k : ℕ => mersenneWeight (n + k + 1)) := by
+  have h := (summable_nat_add_iff n).mpr summable_mersenneWeight
+  simpa [Nat.add_assoc, Nat.add_comm, Nat.add_left_comm] using h
 
 theorem mersenneTail_nonneg (n : ℕ) : 0 ≤ mersenneTail n := by
   unfold mersenneTail
-  exact tsum_nonneg fun k => mersenneWeight_nonneg _
+  exact tsum_nonneg fun k => (mersenneWeight_pos (by omega : 0 < n + k + 1)).le
 
 theorem mersenneTail_pos (n : ℕ) : 0 < mersenneTail n := by
   unfold mersenneTail
   exact (summable_mersenneTail n).tsum_pos
-    (fun k => mersenneWeight_nonneg _)
+    (fun k => (mersenneWeight_pos (by omega : 0 < n + k + 1)).le)
     0 (mersenneWeight_pos (by omega : 0 < n + 0 + 1))
 
 /-- Splitting off the next positive exponent gives the exact tail recurrence. -/
@@ -183,7 +151,7 @@ theorem mersenneWeight_add_le_geometric (n j : ℕ) (hn : 0 < n) :
           rw [pow_succ]
           ring
 
-/-- A simple closed-form upper enclosure for the remaining infinite tail. -/
+/-- A simple exact-rational upper enclosure for the remaining infinite tail. -/
 theorem mersenneTail_le_two_mul_weight (n : ℕ) :
     mersenneTail n ≤ 2 * mersenneWeight (n + 1) := by
   have hf := summable_mersenneTail n
@@ -309,21 +277,24 @@ theorem tsum_geometric_nat_add_succ
 
 theorem tsum_half_nat_add_succ (n : ℕ) :
     ∑' k : ℕ, ((1 : ℝ) / 2) ^ (n + k + 1) = ((1 : ℝ) / 2) ^ n := by
-  rw [tsum_geometric_nat_add_succ _ (by norm_num) (by norm_num), pow_succ]
+  rw [tsum_geometric_nat_add_succ _ (by norm_num) (by norm_num)]
+  rw [pow_succ]
   norm_num
   ring
 
 theorem tsum_quarter_nat_add_succ (n : ℕ) :
     ∑' k : ℕ, ((1 : ℝ) / 4) ^ (n + k + 1)
       = (1 / 3 : ℝ) * ((1 : ℝ) / 4) ^ n := by
-  rw [tsum_geometric_nat_add_succ _ (by norm_num) (by norm_num), pow_succ]
+  rw [tsum_geometric_nat_add_succ _ (by norm_num) (by norm_num)]
+  rw [pow_succ]
   norm_num
   ring
 
 theorem tsum_eighth_nat_add_succ (n : ℕ) :
     ∑' k : ℕ, ((1 : ℝ) / 8) ^ (n + k + 1)
       = (1 / 7 : ℝ) * ((1 : ℝ) / 8) ^ n := by
-  rw [tsum_geometric_nat_add_succ _ (by norm_num) (by norm_num), pow_succ]
+  rw [tsum_geometric_nat_add_succ _ (by norm_num) (by norm_num)]
+  rw [pow_succ]
   norm_num
   ring
 
@@ -333,12 +304,17 @@ noncomputable def mersenneWeightRemainderTail (n : ℕ) : ℝ :=
   ∑' k : ℕ, mersenneWeightRemainder (n + k + 1)
 
 theorem summable_mersenneWeightRemainderTail (n : ℕ) :
-    Summable (fun k : ℕ => mersenneWeightRemainder (n + k + 1)) :=
-  Summable.of_nonneg_of_le
+    Summable (fun k : ℕ => mersenneWeightRemainder (n + k + 1)) := by
+  have hgeo : Summable (fun k : ℕ =>
+      2 * ((1 : ℝ) / 8) ^ (n + k + 1)) := by
+    have hbase := summable_geometric_of_lt_one
+      (by norm_num : (0 : ℝ) ≤ 1 / 8) (by norm_num : (1 : ℝ) / 8 < 1)
+    have hshift := (summable_nat_add_iff (n + 1)).mpr hbase
+    have hmul := hshift.mul_left 2
+    simpa [Nat.add_assoc, Nat.add_comm, Nat.add_left_comm] using hmul
+  exact Summable.of_nonneg_of_le
     (fun k => mersenneWeightRemainder_nonneg (by omega))
-    (fun k => mersenneWeightRemainder_le (by omega))
-    ((summable_geometric_shift_add (r := (1 : ℝ) / 8)
-      (by norm_num) (by norm_num) n).mul_left 2)
+    (fun k => mersenneWeightRemainder_le (by omega)) hgeo
 
 theorem mersenneWeightRemainderTail_nonneg (n : ℕ) :
     0 ≤ mersenneWeightRemainderTail n := by
@@ -350,9 +326,12 @@ theorem mersenneWeightRemainderTail_le (n : ℕ) :
     mersenneWeightRemainderTail n
       ≤ (2 / 7 : ℝ) * ((1 : ℝ) / 8) ^ n := by
   have henv : Summable (fun k : ℕ =>
-      2 * ((1 : ℝ) / 8) ^ (n + k + 1)) :=
-    (summable_geometric_shift_add (r := (1 : ℝ) / 8)
-      (by norm_num) (by norm_num) n).mul_left 2
+      2 * ((1 : ℝ) / 8) ^ (n + k + 1)) := by
+    have hbase := summable_geometric_of_lt_one
+      (by norm_num : (0 : ℝ) ≤ 1 / 8) (by norm_num : (1 : ℝ) / 8 < 1)
+    have hshift := (summable_nat_add_iff (n + 1)).mpr hbase
+    have hmul := hshift.mul_left 2
+    simpa [Nat.add_assoc, Nat.add_comm, Nat.add_left_comm] using hmul
   calc
     mersenneWeightRemainderTail n
         ≤ ∑' k : ℕ, 2 * ((1 : ℝ) / 8) ^ (n + k + 1) := by
@@ -370,10 +349,16 @@ theorem mersenneTail_eq_two_channels_add_remainderTail (n : ℕ) :
       = ((1 : ℝ) / 2) ^ n
         + (1 / 3 : ℝ) * ((1 : ℝ) / 4) ^ n
         + mersenneWeightRemainderTail n := by
-  have hhalf : Summable (fun k : ℕ => ((1 : ℝ) / 2) ^ (n + k + 1)) :=
-    summable_geometric_shift_add (by norm_num) (by norm_num) n
-  have hquarter : Summable (fun k : ℕ => ((1 : ℝ) / 4) ^ (n + k + 1)) :=
-    summable_geometric_shift_add (by norm_num) (by norm_num) n
+  have hhalf : Summable (fun k : ℕ => ((1 : ℝ) / 2) ^ (n + k + 1)) := by
+    have hbase := summable_geometric_of_lt_one
+      (by norm_num : (0 : ℝ) ≤ 1 / 2) (by norm_num : (1 : ℝ) / 2 < 1)
+    have hshift := (summable_nat_add_iff (n + 1)).mpr hbase
+    simpa [Nat.add_assoc, Nat.add_comm, Nat.add_left_comm] using hshift
+  have hquarter : Summable (fun k : ℕ => ((1 : ℝ) / 4) ^ (n + k + 1)) := by
+    have hbase := summable_geometric_of_lt_one
+      (by norm_num : (0 : ℝ) ≤ 1 / 4) (by norm_num : (1 : ℝ) / 4 < 1)
+    have hshift := (summable_nat_add_iff (n + 1)).mpr hbase
+    simpa [Nat.add_assoc, Nat.add_comm, Nat.add_left_comm] using hshift
   have hrem := summable_mersenneWeightRemainderTail n
   calc
     mersenneTail n
@@ -405,7 +390,7 @@ theorem mersenneGap_sub_main_eq_remainder_sub_tail
     mersenneTail_eq_two_channels_add_remainderTail]
   ring
 
-/-- Explicit norm certificate for the gap asymptotic. -/
+/-- Explicit norm certificate for the formal development.s gap asymptotic. -/
 theorem mersenneGap_asymptotic_bound {n : ℕ} (hn : 0 < n) :
     ‖(mersenneWeight n - mersenneTail n)
         - (2 / 3 : ℝ) * ((1 : ℝ) / 4) ^ n‖
@@ -429,7 +414,7 @@ theorem mersenneGap_asymptotic_bound {n : ℕ} (hn : 0 < n) :
       rw [abs_of_nonneg hpow]
       nlinarith
 
-/-- **Gap asymptotic.**  In positive indexing,
+/-- **gap asymptotic.**  In positive indexing,
 `w_n - T_n = (2/3)·4⁻ⁿ + O(8⁻ⁿ)`, with an explicit valid `O` constant `3`. -/
 theorem mersenneGap_isBigOWith :
     Asymptotics.IsBigOWith 3 atTop
@@ -452,28 +437,39 @@ theorem summable_positiveMersenneSupportIndicator (A : Set ℕ) :
     Summable (fun k : ℕ => Set.indicator A mersenneWeight (k + 1)) := by
   have h := summable_mersenneWeight.indicator {k : ℕ | k + 1 ∈ A}
   refine h.congr fun k => ?_
-  by_cases hk : k + 1 ∈ A <;> simp [hk]
+  by_cases hk : k + 1 ∈ A
+  · simp [hk]
+  · simp [hk]
 
 /-- The portion of a support code strictly after exponent `n`. -/
 noncomputable def positiveMersenneSupportSuffix (A : Set ℕ) (n : ℕ) : ℝ :=
   ∑' k : ℕ, Set.indicator A mersenneWeight (n + k + 1)
 
 theorem summable_positiveMersenneSupportSuffix (A : Set ℕ) (n : ℕ) :
-    Summable (fun k : ℕ => Set.indicator A mersenneWeight (n + k + 1)) :=
-  summable_shift_add (summable_positiveMersenneSupportIndicator A) n
+    Summable (fun k : ℕ => Set.indicator A mersenneWeight (n + k + 1)) := by
+  have h := (summable_nat_add_iff n).mpr
+    (summable_positiveMersenneSupportIndicator A)
+  simpa [Nat.add_assoc, Nat.add_comm, Nat.add_left_comm] using h
 
 theorem positiveMersenneSupportSuffix_nonneg (A : Set ℕ) (n : ℕ) :
     0 ≤ positiveMersenneSupportSuffix A n := by
   unfold positiveMersenneSupportSuffix
-  exact tsum_nonneg fun k =>
-    Set.indicator_nonneg (fun m _ => mersenneWeight_nonneg m) _
+  exact tsum_nonneg fun k => by
+    by_cases hk : n + k + 1 ∈ A
+    · rw [Set.indicator_of_mem hk]
+      exact (mersenneWeight_pos (by omega)).le
+    · rw [Set.indicator_of_notMem hk]
 
 /-- A coded suffix is bounded by the full remaining mass. -/
 theorem positiveMersenneSupportSuffix_le_tail (A : Set ℕ) (n : ℕ) :
     positiveMersenneSupportSuffix A n ≤ mersenneTail n := by
   unfold positiveMersenneSupportSuffix mersenneTail
   exact (summable_positiveMersenneSupportSuffix A n).tsum_le_tsum
-    (fun k => Set.indicator_le_self' (fun m _ => mersenneWeight_nonneg m) _)
+    (fun k => by
+      by_cases hk : n + k + 1 ∈ A
+      · rw [Set.indicator_of_mem hk]
+      · rw [Set.indicator_of_notMem hk]
+        exact (mersenneWeight_pos (by omega)).le)
     (summable_mersenneTail n)
 
 /-- Exact recurrence for a coded support suffix. -/
@@ -500,8 +496,7 @@ theorem positiveMersenneSupportValue_eq_prefix_add_suffix
   simpa [positiveMersenneSupportValue, positiveMersenneSupportSuffix,
     Nat.add_assoc, Nat.add_comm, Nat.add_left_comm] using h.symm
 
-/-- The reindexed support value is exactly the certificate kernel's #257
-support series. -/
+/-- The reindexed support value is exactly the existing #257 support series. -/
 theorem positiveMersenneSupportValue_eq_erdosSupportSeries (A : Set ℕ) :
     positiveMersenneSupportValue A = erdosSupportSeries 2 A := by
   have hwhole : Summable (fun a : ℕ => Set.indicator A mersenneWeight a) := by
@@ -521,6 +516,444 @@ theorem positiveMersenneSupportValue_eq_erdosSupportSeries (A : Set ℕ) :
 normalized away. -/
 def mersenneAchievementSet : Set ℝ :=
   {x : ℝ | ∃ A : Set ℕ, 0 ∉ A ∧ x = positiveMersenneSupportValue A}
+
+/-! ## Binary coding, compactness, and perfection -/
+
+/-- One term of the binary coding of the achievement set. -/
+noncomputable def mersenneDigitTerm (k : ℕ) (b : ℕ → Fin 2) : ℝ :=
+  ((b k : ℕ) : ℝ) * mersenneWeight (k + 1)
+
+/-- The support value coded by a binary sequence. -/
+noncomputable def positiveMersenneDigitValue (b : ℕ → Fin 2) : ℝ :=
+  ∑' k : ℕ, mersenneDigitTerm k b
+
+/-- The normalized positive support represented by a binary sequence. -/
+def mersenneDigitSupport (b : ℕ → Fin 2) : Set ℕ :=
+  {m : ℕ | ∃ k : ℕ, m = k + 1 ∧ b k = 1}
+
+@[simp] theorem zero_not_mem_mersenneDigitSupport (b : ℕ → Fin 2) :
+    0 ∉ mersenneDigitSupport b := by
+  simp [mersenneDigitSupport]
+
+@[simp] theorem succ_mem_mersenneDigitSupport_iff (b : ℕ → Fin 2) (k : ℕ) :
+    k + 1 ∈ mersenneDigitSupport b ↔ b k = 1 := by
+  constructor
+  · rintro ⟨j, hj, hb⟩
+    have hjk : j = k := by omega
+    simpa [hjk] using hb
+  · intro hb
+    exact ⟨k, rfl, hb⟩
+
+theorem positiveMersenneDigitValue_eq_supportValue (b : ℕ → Fin 2) :
+    positiveMersenneDigitValue b
+      = positiveMersenneSupportValue (mersenneDigitSupport b) := by
+  unfold positiveMersenneDigitValue positiveMersenneSupportValue
+  apply tsum_congr
+  intro k
+  by_cases hbk : b k = 0
+  · simp [mersenneDigitTerm, mersenneDigitSupport, hbk]
+  · have hbk' : b k = 1 := Fin.eq_one_of_ne_zero (b k) hbk
+    simp [mersenneDigitTerm, mersenneDigitSupport, hbk']
+
+theorem continuous_mersenneDigitTerm (k : ℕ) :
+    Continuous (mersenneDigitTerm k) := by
+  unfold mersenneDigitTerm
+  fun_prop
+
+theorem norm_mersenneDigitTerm_le (k : ℕ) (b : ℕ → Fin 2) :
+    ‖mersenneDigitTerm k b‖ ≤ mersenneWeight (k + 1) := by
+  by_cases hbk : b k = 0
+  · simp [mersenneDigitTerm, hbk,
+      (mersenneWeight_pos (n := k + 1) (by omega)).le]
+  · have hbk' : b k = 1 := Fin.eq_one_of_ne_zero (b k) hbk
+    simp only [mersenneDigitTerm, hbk', Fin.val_one, Nat.cast_one, one_mul,
+      Real.norm_eq_abs]
+    rw [abs_of_pos (mersenneWeight_pos (n := k + 1) (by omega))]
+
+/-- The binary support coding is continuous in the product topology. -/
+theorem continuous_positiveMersenneDigitValue :
+    Continuous positiveMersenneDigitValue := by
+  unfold positiveMersenneDigitValue
+  exact continuous_tsum continuous_mersenneDigitTerm
+    summable_mersenneWeight norm_mersenneDigitTerm_le
+
+/-- The binary coding has exactly the normalized Mersenne achievement set as
+its range. -/
+theorem range_positiveMersenneDigitValue_eq :
+    Set.range positiveMersenneDigitValue = mersenneAchievementSet := by
+  classical
+  ext x
+  constructor
+  · rintro ⟨b, rfl⟩
+    exact ⟨mersenneDigitSupport b, zero_not_mem_mersenneDigitSupport b,
+      positiveMersenneDigitValue_eq_supportValue b⟩
+  · rintro ⟨A, hA0, rfl⟩
+    let b : ℕ → Fin 2 := fun k => if k + 1 ∈ A then 1 else 0
+    refine ⟨b, ?_⟩
+    unfold positiveMersenneDigitValue positiveMersenneSupportValue
+    apply tsum_congr
+    intro k
+    by_cases hk : k + 1 ∈ A
+    · simp [mersenneDigitTerm, b, hk]
+    · simp [mersenneDigitTerm, b, hk]
+
+/-- **compactness.**  The achievement set is the continuous image
+of compact binary sequence space. -/
+theorem isCompact_mersenneAchievementSet : IsCompact mersenneAchievementSet := by
+  rw [← range_positiveMersenneDigitValue_eq, ← Set.image_univ]
+  exact isCompact_univ.image continuous_positiveMersenneDigitValue
+
+theorem isClosed_mersenneAchievementSet : IsClosed mersenneAchievementSet :=
+  isCompact_mersenneAchievementSet.isClosed
+
+/-! ## Nested cylinder stages -/
+
+/-- Starting after exponent `n`, retain `depth` binary choices and replace the
+unresolved suffix by its full interval enclosure. -/
+noncomputable def mersenneCylinderStageFrom (n : ℕ) : ℕ → Set ℝ
+  | 0 => Set.Icc 0 (mersenneTail n)
+  | depth + 1 =>
+      mersenneCylinderStageFrom (n + 1) depth ∪
+        (fun x : ℝ => mersenneWeight (n + 1) + x) ''
+          mersenneCylinderStageFrom (n + 1) depth
+
+/-- The depth-`n` cylinder enclosure of the full achievement set. -/
+noncomputable def mersenneCylinderStage (depth : ℕ) : Set ℝ :=
+  mersenneCylinderStageFrom 0 depth
+
+/-- Every tail-cylinder stage stays inside its unresolved convex hull. -/
+theorem mersenneCylinderStageFrom_subset_Icc (n depth : ℕ) :
+    mersenneCylinderStageFrom n depth ⊆ Set.Icc 0 (mersenneTail n) := by
+  induction depth generalizing n with
+  | zero =>
+      intro x hx
+      simpa [mersenneCylinderStageFrom] using hx
+  | succ depth ih =>
+      intro x hx
+      simp only [mersenneCylinderStageFrom, Set.mem_union] at hx
+      rcases hx with hx | hx
+      · have hxb := ih (n := n + 1) hx
+        have hrec := mersenneTail_eq_weight_add n
+        have hw := mersenneWeight_pos (n := n + 1) (by omega)
+        exact ⟨hxb.1, by linarith [hxb.2]⟩
+      · rcases hx with ⟨y, hy, rfl⟩
+        have hyb := ih (n := n + 1) hy
+        have hrec := mersenneTail_eq_weight_add n
+        have hw := mersenneWeight_pos (n := n + 1) (by omega)
+        exact ⟨by linarith [hyb.1], by linarith [hyb.2]⟩
+
+theorem isCompact_mersenneCylinderStageFrom (n depth : ℕ) :
+    IsCompact (mersenneCylinderStageFrom n depth) := by
+  induction depth generalizing n with
+  | zero => simpa [mersenneCylinderStageFrom] using
+      (isCompact_Icc : IsCompact (Set.Icc (0 : ℝ) (mersenneTail n)))
+  | succ depth ih =>
+      rw [mersenneCylinderStageFrom]
+      exact (ih (n := n + 1)).union
+        ((ih (n := n + 1)).image (continuous_const.add continuous_id))
+
+theorem isClosed_mersenneCylinderStageFrom (n depth : ℕ) :
+    IsClosed (mersenneCylinderStageFrom n depth) :=
+  (isCompact_mersenneCylinderStageFrom n depth).isClosed
+
+theorem measurableSet_mersenneCylinderStageFrom (n depth : ℕ) :
+    MeasurableSet (mersenneCylinderStageFrom n depth) :=
+  (isClosed_mersenneCylinderStageFrom n depth).measurableSet
+
+/-- Strict superincreasingness separates the two children at every cylinder
+split. -/
+theorem disjoint_mersenneCylinderStageFrom_split (n depth : ℕ) :
+    Disjoint (mersenneCylinderStageFrom (n + 1) depth)
+      ((fun x : ℝ => mersenneWeight (n + 1) + x) ''
+        mersenneCylinderStageFrom (n + 1) depth) := by
+  rw [Set.disjoint_left]
+  intro x hx hx'
+  rcases hx' with ⟨y, hy, rfl⟩
+  have hxb := mersenneCylinderStageFrom_subset_Icc (n + 1) depth hx
+  have hyb := mersenneCylinderStageFrom_subset_Icc (n + 1) depth hy
+  have hgap := mersenneTail_lt_weight (n := n + 1) (by omega)
+  linarith [hxb.2, hyb.1]
+
+/-- Increasing the retained depth shrinks the cylinder enclosure. -/
+theorem mersenneCylinderStageFrom_succ_subset (n depth : ℕ) :
+    mersenneCylinderStageFrom n (depth + 1)
+      ⊆ mersenneCylinderStageFrom n depth := by
+  induction depth generalizing n with
+  | zero => exact mersenneCylinderStageFrom_subset_Icc n 1
+  | succ depth ih =>
+      intro x hx
+      simp only [mersenneCylinderStageFrom, Set.mem_union] at hx ⊢
+      rcases hx with hx | hx
+      · exact Or.inl (ih (n := n + 1) hx)
+      · rcases hx with ⟨y, hy, rfl⟩
+        exact Or.inr ⟨y, ih (n := n + 1) hy, rfl⟩
+
+theorem antitone_mersenneCylinderStageFrom (n : ℕ) :
+    Antitone (mersenneCylinderStageFrom n) :=
+  antitone_nat_of_succ_le (mersenneCylinderStageFrom_succ_subset n)
+
+theorem antitone_mersenneCylinderStage : Antitone mersenneCylinderStage := by
+  intro a b hab
+  exact antitone_mersenneCylinderStageFrom 0 hab
+
+@[simp] theorem positiveMersenneSupportSuffix_zero_index (A : Set ℕ) :
+    positiveMersenneSupportSuffix A 0 = positiveMersenneSupportValue A := by
+  unfold positiveMersenneSupportSuffix positiveMersenneSupportValue
+  congr 1
+  funext k
+  congr 2
+  omega
+
+/-- Removing the current exponent shifts a coded suffix by one place. -/
+theorem positiveMersenneSupportSuffix_diff_current (A : Set ℕ) (n : ℕ) :
+    positiveMersenneSupportSuffix (A \ {n + 1}) n
+      = positiveMersenneSupportSuffix A (n + 1) := by
+  rw [positiveMersenneSupportSuffix_eq_indicator_add]
+  have hnot : n + 1 ∉ A \ {n + 1} := by simp
+  rw [Set.indicator_of_notMem hnot, zero_add]
+  unfold positiveMersenneSupportSuffix
+  apply tsum_congr
+  intro k
+  have hne : n + 1 + k ≠ n := by omega
+  by_cases hk : n + 1 + k + 1 ∈ A <;> simp [hk, hne]
+
+/-- Inserting the current exponent splits off exactly its weight. -/
+theorem positiveMersenneSupportSuffix_insert_current (A : Set ℕ) (n : ℕ) :
+    positiveMersenneSupportSuffix (insert (n + 1) A) n
+      = mersenneWeight (n + 1) + positiveMersenneSupportSuffix A (n + 1) := by
+  rw [positiveMersenneSupportSuffix_eq_indicator_add,
+    Set.indicator_of_mem (Set.mem_insert (n + 1) A)]
+  congr 1
+  unfold positiveMersenneSupportSuffix
+  apply tsum_congr
+  intro k
+  have hne : n + 1 + k ≠ n := by omega
+  by_cases hk : n + 1 + k + 1 ∈ A <;> simp [hk, hne]
+
+/-- Every coded suffix belongs to every corresponding finite-cylinder
+enclosure. -/
+theorem positiveMersenneSupportSuffix_mem_cylinderStageFrom
+    (A : Set ℕ) (n depth : ℕ) :
+    positiveMersenneSupportSuffix A n ∈ mersenneCylinderStageFrom n depth := by
+  induction depth generalizing n with
+  | zero =>
+      exact ⟨positiveMersenneSupportSuffix_nonneg A n,
+        positiveMersenneSupportSuffix_le_tail A n⟩
+  | succ depth ih =>
+      simp only [mersenneCylinderStageFrom, Set.mem_union]
+      by_cases hA : n + 1 ∈ A
+      · rw [positiveMersenneSupportSuffix_eq_indicator_add,
+          Set.indicator_of_mem hA]
+        exact Or.inr ⟨positiveMersenneSupportSuffix A (n + 1),
+          ih (n := n + 1), rfl⟩
+      · rw [positiveMersenneSupportSuffix_eq_indicator_add,
+          Set.indicator_of_notMem hA, zero_add]
+        exact Or.inl (ih (n := n + 1))
+
+theorem mersenneAchievementSet_subset_cylinderStage (depth : ℕ) :
+    mersenneAchievementSet ⊆ mersenneCylinderStage depth := by
+  rintro x ⟨A, hA0, rfl⟩
+  simpa [mersenneCylinderStage] using
+    positiveMersenneSupportSuffix_mem_cylinderStageFrom A 0 depth
+
+/-- Every point of a finite-cylinder stage is within the unresolved tail of
+an actual normalized support value. -/
+theorem exists_normalized_support_near_of_mem_cylinderStageFrom
+    {x : ℝ} {n depth : ℕ} (hx : x ∈ mersenneCylinderStageFrom n depth) :
+    ∃ A : Set ℕ, 0 ∉ A ∧
+      dist x (positiveMersenneSupportSuffix A n) ≤ mersenneTail (n + depth) := by
+  induction depth generalizing n x with
+  | zero =>
+      have hxb : x ∈ Set.Icc 0 (mersenneTail n) := by
+        simpa [mersenneCylinderStageFrom] using hx
+      refine ⟨∅, by simp, ?_⟩
+      simpa [positiveMersenneSupportSuffix, Real.dist_eq,
+        abs_of_nonneg hxb.1] using hxb.2
+  | succ depth ih =>
+      simp only [mersenneCylinderStageFrom, Set.mem_union] at hx
+      rcases hx with hx | hx
+      · rcases ih (n := n + 1) hx with ⟨A, hA0, hdist⟩
+        refine ⟨A \ {n + 1}, by simpa using hA0, ?_⟩
+        rw [positiveMersenneSupportSuffix_diff_current]
+        have hidx : n + 1 + depth = n + (depth + 1) := by omega
+        simpa only [hidx] using hdist
+      · rcases hx with ⟨y, hy, rfl⟩
+        rcases ih (n := n + 1) hy with ⟨A, hA0, hdist⟩
+        refine ⟨insert (n + 1) A, ?_, ?_⟩
+        · simpa using hA0
+        · rw [positiveMersenneSupportSuffix_insert_current]
+          have hidx : n + 1 + depth = n + (depth + 1) := by omega
+          simpa only [dist_add_left, hidx] using hdist
+
+/-- The achievement set is exactly the decreasing intersection of its finite
+cylinder enclosures. -/
+theorem mersenneAchievementSet_eq_iInter_cylinderStage :
+    mersenneAchievementSet = ⋂ depth : ℕ, mersenneCylinderStage depth := by
+  apply Set.Subset.antisymm
+  · intro x hx
+    exact Set.mem_iInter.2 fun depth =>
+      mersenneAchievementSet_subset_cylinderStage depth hx
+  · intro x hx
+    have hstage : ∀ depth : ℕ, x ∈ mersenneCylinderStage depth :=
+      Set.mem_iInter.1 hx
+    have happ (depth : ℕ) :
+        ∃ A : Set ℕ, 0 ∉ A ∧
+          dist x (positiveMersenneSupportValue A) ≤ mersenneTail depth := by
+      simpa [mersenneCylinderStage] using
+        (exists_normalized_support_near_of_mem_cylinderStageFrom
+          (n := 0) (depth := depth) (hstage depth))
+    let A : ℕ → Set ℕ := fun depth => Classical.choose (happ depth)
+    let y : ℕ → ℝ := fun depth => positiveMersenneSupportValue (A depth)
+    have hspec (depth : ℕ) := Classical.choose_spec (happ depth)
+    have hy_mem (depth : ℕ) : y depth ∈ mersenneAchievementSet := by
+      exact ⟨A depth, (hspec depth).1, rfl⟩
+    have hdist_le (depth : ℕ) : dist (y depth) x ≤ mersenneTail depth := by
+      simpa [y, dist_comm] using (hspec depth).2
+    have hdist_tendsto : Tendsto (fun depth => dist (y depth) x)
+        atTop (nhds 0) :=
+      tendsto_of_tendsto_of_tendsto_of_le_of_le tendsto_const_nhds
+        tendsto_mersenneTail_zero (fun _ => dist_nonneg) hdist_le
+    have hy_tendsto : Tendsto y atTop (nhds x) :=
+      tendsto_iff_dist_tendsto_zero.2 hdist_tendsto
+    exact isClosed_mersenneAchievementSet.mem_of_tendsto hy_tendsto
+      (Filter.Eventually.of_forall hy_mem)
+
+/-! ## Exact cylinder measures and the measure-one limit -/
+
+/-- A depth-`d` tail stage is a disjoint union of `2^d` intervals, each of
+length `mersenneTail (n+d)`. -/
+theorem volume_mersenneCylinderStageFrom (n depth : ℕ) :
+    volume (mersenneCylinderStageFrom n depth)
+      = (2 : ℝ≥0∞) ^ depth * ENNReal.ofReal (mersenneTail (n + depth)) := by
+  induction depth generalizing n with
+  | zero =>
+      rw [mersenneCylinderStageFrom, Real.volume_Icc]
+      simp
+  | succ depth ih =>
+      rw [mersenneCylinderStageFrom]
+      have hmeas : MeasurableSet
+          ((fun x : ℝ => mersenneWeight (n + 1) + x) ''
+            mersenneCylinderStageFrom (n + 1) depth) :=
+        ((isCompact_mersenneCylinderStageFrom (n + 1) depth).image
+          (continuous_const.add continuous_id)).isClosed.measurableSet
+      rw [measure_union (disjoint_mersenneCylinderStageFrom_split n depth) hmeas]
+      rw [Set.image_add_left, measure_preimage_add, ih]
+      calc
+        (2 : ℝ≥0∞) ^ depth * ENNReal.ofReal (mersenneTail (n + 1 + depth))
+              + (2 : ℝ≥0∞) ^ depth * ENNReal.ofReal (mersenneTail (n + 1 + depth))
+            = 2 * ((2 : ℝ≥0∞) ^ depth *
+                ENNReal.ofReal (mersenneTail (n + 1 + depth))) := by ring
+        _ = (2 : ℝ≥0∞) ^ (depth + 1) *
+              ENNReal.ofReal (mersenneTail (n + (depth + 1))) := by
+          rw [pow_succ]
+          rw [show n + 1 + depth = n + (depth + 1) by omega]
+          ring
+
+theorem volume_mersenneCylinderStage (depth : ℕ) :
+    volume (mersenneCylinderStage depth)
+      = (2 : ℝ≥0∞) ^ depth * ENNReal.ofReal (mersenneTail depth) := by
+  simpa [mersenneCylinderStage] using volume_mersenneCylinderStageFrom 0 depth
+
+/-- The higher-channel part of the scaled unresolved tail vanishes. -/
+theorem tendsto_two_pow_mul_mersenneWeightRemainderTail_zero :
+    Tendsto
+      (fun n : ℕ => (2 : ℝ) ^ n * mersenneWeightRemainderTail n)
+      atTop (nhds 0) := by
+  have hup0 : Tendsto (fun n : ℕ => ((1 : ℝ) / 4) ^ n)
+      atTop (nhds 0) :=
+    tendsto_pow_atTop_nhds_zero_of_lt_one
+      (by norm_num : (0 : ℝ) ≤ 1 / 4)
+      (by norm_num : (1 : ℝ) / 4 < 1)
+  have hup : Tendsto (fun n : ℕ => (2 / 7 : ℝ) * ((1 : ℝ) / 4) ^ n)
+      atTop (nhds 0) := by
+    simpa using hup0.const_mul (2 / 7 : ℝ)
+  apply squeeze_zero'
+  · exact Filter.Eventually.of_forall fun n =>
+      mul_nonneg (pow_nonneg (by norm_num) n)
+        (mersenneWeightRemainderTail_nonneg n)
+  · exact Filter.Eventually.of_forall fun n => by
+      calc
+        (2 : ℝ) ^ n * mersenneWeightRemainderTail n
+            ≤ (2 : ℝ) ^ n *
+                ((2 / 7 : ℝ) * ((1 : ℝ) / 8) ^ n) :=
+              mul_le_mul_of_nonneg_left (mersenneWeightRemainderTail_le n)
+                (pow_nonneg (by norm_num) n)
+        _ = (2 / 7 : ℝ) * ((1 : ℝ) / 4) ^ n := by
+              calc
+                (2 : ℝ) ^ n * ((2 / 7 : ℝ) * ((1 : ℝ) / 8) ^ n)
+                    = (2 / 7 : ℝ) *
+                        ((2 : ℝ) ^ n * ((1 : ℝ) / 8) ^ n) := by ring
+                _ = (2 / 7 : ℝ) * ((1 : ℝ) / 4) ^ n := by
+                      rw [← mul_pow]
+                      norm_num
+  · exact hup
+
+/-- The total length of the level-`n` cylinder cover tends to one. -/
+theorem tendsto_two_pow_mul_mersenneTail_one :
+    Tendsto (fun n : ℕ => (2 : ℝ) ^ n * mersenneTail n)
+      atTop (nhds 1) := by
+  have hhalf : Tendsto (fun n : ℕ => ((1 : ℝ) / 2) ^ n)
+      atTop (nhds 0) :=
+    tendsto_pow_atTop_nhds_zero_of_lt_one
+      (by norm_num) (by norm_num)
+  have hone : Tendsto (fun _ : ℕ => (1 : ℝ)) atTop (nhds 1) :=
+    tendsto_const_nhds
+  have hlim :=
+    (hone.add (hhalf.const_mul (1 / 3 : ℝ))).add
+      tendsto_two_pow_mul_mersenneWeightRemainderTail_zero
+  convert hlim using 1
+  · funext n
+    rw [mersenneTail_eq_two_channels_add_remainderTail]
+    have hfirst : (2 : ℝ) ^ n * ((1 : ℝ) / 2) ^ n = 1 := by
+      rw [← mul_pow]
+      norm_num
+    have hsecond : (2 : ℝ) ^ n * ((1 : ℝ) / 4) ^ n =
+        ((1 : ℝ) / 2) ^ n := by
+      rw [← mul_pow]
+      norm_num
+    rw [mul_add, mul_add, hfirst]
+    rw [show (2 : ℝ) ^ n *
+        ((1 / 3 : ℝ) * ((1 : ℝ) / 4) ^ n) =
+          (1 / 3 : ℝ) * ((1 : ℝ) / 2) ^ n by
+      calc
+        (2 : ℝ) ^ n * ((1 / 3 : ℝ) * ((1 : ℝ) / 4) ^ n)
+            = (1 / 3 : ℝ) *
+                ((2 : ℝ) ^ n * ((1 : ℝ) / 4) ^ n) := by ring
+        _ = (1 / 3 : ℝ) * ((1 : ℝ) / 2) ^ n := by rw [hsecond]]
+  · norm_num
+
+theorem tendsto_volume_mersenneCylinderStage_one :
+    Tendsto (fun depth : ℕ => volume (mersenneCylinderStage depth))
+      atTop (nhds 1) := by
+  have hreal := ENNReal.tendsto_ofReal tendsto_two_pow_mul_mersenneTail_one
+  have heq : (fun depth : ℕ => volume (mersenneCylinderStage depth)) =
+      (fun depth : ℕ =>
+        ENNReal.ofReal ((2 : ℝ) ^ depth * mersenneTail depth)) := by
+    funext depth
+    rw [volume_mersenneCylinderStage,
+      ENNReal.ofReal_mul (pow_nonneg (by norm_num) depth),
+      ENNReal.ofReal_pow (by norm_num : (0 : ℝ) ≤ 2)]
+    norm_num
+  rw [heq]
+  simpa using hreal
+
+/-- **measure one.**  Continuity from above transfers the exact
+cylinder measures to their decreasing intersection. -/
+theorem volume_mersenneAchievementSet : volume mersenneAchievementSet = 1 := by
+  have hfinite : ∃ depth : ℕ,
+      volume (mersenneCylinderStage depth) ≠ ∞ := by
+    refine ⟨0, ?_⟩
+    rw [volume_mersenneCylinderStage]
+    simp
+  have hcont := tendsto_measure_iInter_atTop (μ := volume)
+    (fun depth => (measurableSet_mersenneCylinderStageFrom 0 depth).nullMeasurableSet)
+    antitone_mersenneCylinderStage hfinite
+  have hcont' : Tendsto
+      (fun depth : ℕ => volume (mersenneCylinderStage depth))
+      atTop (nhds (volume mersenneAchievementSet)) := by
+    rw [mersenneAchievementSet_eq_iInter_cylinderStage]
+    simpa [mersenneCylinderStage, Function.comp_def] using hcont
+  exact tendsto_nhds_unique hcont' tendsto_volume_mersenneCylinderStage_one
 
 /-! ## Exact greedy recurrences -/
 
@@ -578,15 +1011,28 @@ theorem greedyMersenneRemainder_nonneg {x : ℝ} (hx : 0 ≤ x) (n : ℕ) :
   induction n with
   | zero => rfl
   | succ n ih =>
-      have hiff : mersenneWeightRat (n + 1) ≤ greedyMersenneRemainderRat x n
-          ↔ mersenneWeight (n + 1) ≤ greedyMersenneRemainder (x : ℝ) n := by
-        rw [← ih, ← cast_mersenneWeightRat]
-        exact Rat.cast_le.symm
       rw [greedyMersenneRemainderRat_succ, greedyMersenneRemainder_succ]
       by_cases h : mersenneWeightRat (n + 1) ≤ greedyMersenneRemainderRat x n
-      · rw [if_pos h, if_pos (hiff.mp h), Rat.cast_sub,
-          cast_mersenneWeightRat, ih]
-      · rw [if_neg h, if_neg (h ∘ hiff.mpr), ih]
+      · have h' : mersenneWeight (n + 1)
+            ≤ greedyMersenneRemainder (x : ℝ) n := by
+          have hc : ((mersenneWeightRat (n + 1) : ℚ) : ℝ)
+              ≤ ((greedyMersenneRemainderRat x n : ℚ) : ℝ) := by
+            exact_mod_cast h
+          rw [← ih]
+          simpa using hc
+        rw [if_pos h, if_pos h']
+        push_cast
+        rw [cast_mersenneWeightRat, ih]
+      · have h' : ¬ mersenneWeight (n + 1)
+            ≤ greedyMersenneRemainder (x : ℝ) n := by
+          intro hreal
+          apply h
+          rw [← ih] at hreal
+          have hc : ((mersenneWeightRat (n + 1) : ℚ) : ℝ)
+              ≤ ((greedyMersenneRemainderRat x n : ℚ) : ℝ) := by
+            simpa using hreal
+          exact_mod_cast hc
+        rw [if_neg h, if_neg h', ih]
 
 /-- The set of positive exponents selected by the real greedy recursion. -/
 noncomputable def greedyMersenneSupport (x : ℝ) : Set ℕ :=
@@ -692,9 +1138,8 @@ theorem greedy_survives_of_mem_mersenneAchievementSet {x : ℝ}
   rw [greedyMersenneRemainder_supportValue]
   exact positiveMersenneSupportSuffix_le_tail A n
 
-/-- If every greedy residual stays at or below the remaining mass, the
-residuals converge to zero.  The nonnegativity guard excludes the false
-negative-target variant. -/
+/-- If all greedy residuals stay below the remaining mass, they converge to
+zero.  The nonnegativity guard excludes the false negative-target variant. -/
 theorem tendsto_greedyMersenneRemainder_zero {x : ℝ} (hx : 0 ≤ x)
     (hsurvive : ∀ n : ℕ, greedyMersenneRemainder x n ≤ mersenneTail n) :
     Tendsto (greedyMersenneRemainder x) atTop (nhds 0) := by
@@ -760,6 +1205,137 @@ theorem erdosSupportSeries_two_injective_normalized
   apply positiveMersenneSupportValue_injective_normalized hA0 hB0
   simpa only [positiveMersenneSupportValue_eq_erdosSupportSeries] using hvalue
 
+/-! ## No isolated points -/
+
+/-- Strict superincreasingness makes the binary coding injective. -/
+theorem positiveMersenneDigitValue_injective :
+    Function.Injective positiveMersenneDigitValue := by
+  intro b c hbc
+  have hsupp : mersenneDigitSupport b = mersenneDigitSupport c :=
+    positiveMersenneSupportValue_injective_normalized
+      (zero_not_mem_mersenneDigitSupport b)
+      (zero_not_mem_mersenneDigitSupport c) (by
+        rw [← positiveMersenneDigitValue_eq_supportValue,
+          ← positiveMersenneDigitValue_eq_supportValue]
+        exact hbc)
+  funext k
+  have hk : b k = 1 ↔ c k = 1 := by
+    simpa only [succ_mem_mersenneDigitSupport_iff] using
+      Set.ext_iff.mp hsupp (k + 1)
+  by_cases hb1 : b k = 1
+  · rw [hb1, hk.mp hb1]
+  · have hb0 : b k = 0 := by
+      by_contra hb0
+      exact hb1 (Fin.eq_one_of_ne_zero (b k) hb0)
+    have hc1 : c k ≠ 1 := fun hc1 => hb1 (hk.mpr hc1)
+    have hc0 : c k = 0 := by
+      by_contra hc0
+      exact hc1 (Fin.eq_one_of_ne_zero (c k) hc0)
+    rw [hb0, hc0]
+
+/-- Flip one binary coordinate. -/
+def mersenneBitFlip (a : Fin 2) : Fin 2 :=
+  if a = 0 then 1 else 0
+
+theorem mersenneBitFlip_ne (a : Fin 2) : mersenneBitFlip a ≠ a := by
+  by_cases ha : a = 0
+  · simp [mersenneBitFlip, ha]
+  · have ha1 : a = 1 := Fin.eq_one_of_ne_zero a ha
+    simp [mersenneBitFlip, ha1]
+
+/-- Cantor binary space has no isolated points.  This is proved directly from
+the finite-coordinate basis of the product topology. -/
+theorem preperfect_univ_mersenneDigits :
+    Preperfect (Set.univ : Set (ℕ → Fin 2)) := by
+  rw [preperfect_iff_nhds]
+  intro b _ U hU
+  rw [nhds_pi, Filter.mem_pi'] at hU
+  rcases hU with ⟨I, t, ht, hsub⟩
+  obtain ⟨n, hn⟩ := Infinite.exists_notMem_finset I
+  let b' := Function.update b n (mersenneBitFlip (b n))
+  refine ⟨b', ⟨?_, Set.mem_univ b'⟩, ?_⟩
+  · apply hsub
+    intro i hi
+    have hin : i ≠ n := by
+      intro h
+      apply hn
+      simpa [h] using hi
+    change Function.update b n (mersenneBitFlip (b n)) i ∈ t i
+    simpa [Function.update, hin] using mem_of_mem_nhds (ht i)
+  · intro h
+    have hnEq := congrFun h n
+    change Function.update b n (mersenneBitFlip (b n)) n = b n at hnEq
+    exact mersenneBitFlip_ne (b n) (by simpa [Function.update] using hnEq)
+
+theorem preperfect_range_positiveMersenneDigitValue :
+    Preperfect (Set.range positiveMersenneDigitValue) := by
+  rw [preperfect_iff_nhds]
+  rintro x ⟨b, rfl⟩ U hU
+  have hpre := (preperfect_iff_nhds.mp preperfect_univ_mersenneDigits)
+    b (Set.mem_univ b)
+    (positiveMersenneDigitValue ⁻¹' U)
+    (continuous_positiveMersenneDigitValue.continuousAt hU)
+  rcases hpre with ⟨c, hc, hcb⟩
+  refine ⟨positiveMersenneDigitValue c, ⟨hc.1, ⟨c, rfl⟩⟩, ?_⟩
+  intro h
+  exact hcb (positiveMersenneDigitValue_injective h)
+
+/-- **perfection.**  The compact achievement set has no isolated
+points. -/
+theorem perfect_mersenneAchievementSet : Perfect mersenneAchievementSet := by
+  refine ⟨isClosed_mersenneAchievementSet, ?_⟩
+  rw [← range_positiveMersenneDigitValue_eq]
+  exact preperfect_range_positiveMersenneDigitValue
+
+/-! ## Total disconnectedness and nowhere density -/
+
+theorem isEmbedding_positiveMersenneDigitValue :
+    IsEmbedding positiveMersenneDigitValue := by
+  have hclosed : IsClosedMap positiveMersenneDigitValue := by
+    intro s hs
+    exact (hs.isCompact.image continuous_positiveMersenneDigitValue).isClosed
+  exact (IsClosedEmbedding.of_continuous_injective_isClosedMap
+    continuous_positiveMersenneDigitValue
+    positiveMersenneDigitValue_injective hclosed).isEmbedding
+
+theorem isTotallyDisconnected_mersenneAchievementSet :
+    IsTotallyDisconnected mersenneAchievementSet := by
+  rw [← range_positiveMersenneDigitValue_eq]
+  exact isEmbedding_positiveMersenneDigitValue.isTotallyDisconnected_range.mpr
+    inferInstance
+
+/-- **nowhere density.**  If the closed achievement set contained
+an open ball, total disconnectedness would put a complementary point between
+two points of that ball. -/
+theorem isNowhereDense_mersenneAchievementSet :
+    IsNowhereDense mersenneAchievementSet := by
+  rw [isClosed_mersenneAchievementSet.isNowhereDense_iff]
+  apply eq_empty_iff_forall_notMem.mpr
+  intro x hx
+  have hxK : x ∈ mersenneAchievementSet := interior_subset hx
+  have hnhds : mersenneAchievementSet ∈ 𝓝 x :=
+    mem_interior_iff_mem_nhds.mp hx
+  rcases Metric.mem_nhds_iff.mp hnhds with ⟨ε, hε, hball⟩
+  let y : ℝ := x + ε / 2
+  have hxy : x < y := by dsimp [y]; linarith
+  have hyball : y ∈ Metric.ball x ε := by
+    rw [Metric.mem_ball, Real.dist_eq]
+    dsimp [y]
+    rw [abs_of_nonneg (by linarith)]
+    linarith
+  have hyK : y ∈ mersenneAchievementSet := hball hyball
+  rcases (isTotallyDisconnected_iff_lt.mp
+      isTotallyDisconnected_mersenneAchievementSet)
+      x hxK y hyK hxy with ⟨z, hzK, hxyz⟩
+  have hxz : x < z := hxyz.1
+  have hzy : z < y := hxyz.2
+  apply hzK
+  apply hball
+  rw [Metric.mem_ball, Real.dist_eq]
+  rw [abs_of_pos (sub_pos.mpr hxz)]
+  dsimp [y] at hzy
+  linarith
+
 /-! ## Finite exact-rational death certificates -/
 
 /-- Split a tail after any finite lookahead. -/
@@ -791,7 +1367,7 @@ theorem mersenneTail_lt_cast_tailUpperRat (n lookahead : ℕ) :
   rw [hcast]
   linarith
 
-/-- Semantic greedy death: the residual at the given level is already larger
+/-- Semantic greedy death: the current nonnegative residual is already larger
 than all remaining available mass. -/
 def GreedyMersenneDeath (x : ℝ) (level : ℕ) : Prop :=
   mersenneTail level < greedyMersenneRemainder x level
@@ -871,7 +1447,7 @@ theorem greedyMersenneRat_prefix_add_remainder (x : ℚ) (n : ℕ) :
         exact ih
 
 /-- The finite prefix selected by the rational greedy run is exactly an
-instance of the certificate kernel's `finiteErdosSum`. -/
+instance of the existing audited finite Erdős sum. -/
 theorem finiteErdosSum_greedyMersennePrefixRat (x : ℚ) (n : ℕ) :
     finiteErdosSum (greedyMersennePrefixRat x n) 2
       = ∑ k ∈ Finset.range n,
@@ -887,8 +1463,8 @@ theorem finiteErdosSum_greedyMersennePrefixRat (x : ℚ) (n : ℕ) :
       intro a b hab
       exact Nat.add_right_cancel hab)
 
-/-- Exact interface to the certificate kernel: the rational greedy residual
-is the target minus a `finiteErdosSum`. -/
+/-- Exact interface to the finite denominator/noncollapse kernel: the rational
+greedy residual is the target minus an audited `finiteErdosSum`. -/
 theorem greedyMersenneRemainderRat_eq_sub_finiteErdosSum
     (x : ℚ) (n : ℕ) :
     greedyMersenneRemainderRat x n
@@ -902,8 +1478,18 @@ comparison after casting. -/
 theorem rational_greedy_take_iff_real (x : ℚ) (n : ℕ) :
     mersenneWeightRat (n + 1) ≤ greedyMersenneRemainderRat x n
       ↔ mersenneWeight (n + 1) ≤ greedyMersenneRemainder (x : ℝ) n := by
-  rw [← cast_greedyMersenneRemainderRat, ← cast_mersenneWeightRat]
-  exact Rat.cast_le.symm
+  constructor
+  · intro h
+    have hc : ((mersenneWeightRat (n + 1) : ℚ) : ℝ)
+        ≤ ((greedyMersenneRemainderRat x n : ℚ) : ℝ) := by
+      exact_mod_cast h
+    simpa using hc
+  · intro h
+    rw [← cast_greedyMersenneRemainderRat x n] at h
+    have hc : ((mersenneWeightRat (n + 1) : ℚ) : ℝ)
+        ≤ ((greedyMersenneRemainderRat x n : ℚ) : ℝ) := by
+      simpa using h
+    exact_mod_cast hc
 
 /-- A rational value already known to have normalized support has computable
 support bits, recovered by the exact rational greedy recurrence.  This does
@@ -923,7 +1509,7 @@ theorem rational_member_support_bit_iff
 
 /-! ## Exact regression fixtures -/
 
-/-- An exact worked prefix identity.  Selecting exponents
+/-- The formal development.s exact worked prefix identity.  Selecting exponents
 `{2,3,6,7,14}` from the target `1/2` leaves the rational residual
 `1/688086`. -/
 theorem half_sub_five_term_prefix_eq :
@@ -931,5 +1517,440 @@ theorem half_sub_five_term_prefix_eq :
       - finiteErdosSum ({2, 3, 6, 7, 14} : Finset ℕ) 2
       = 1 / 688086 := by
   norm_num [finiteErdosSum]
+
+/-! ## Half-prefix forcing and the dyadic boundary obstruction
+
+The finite greedy computation for the target `1/2` admits a sharper
+interpretation than level-by-level survival.  Splitting each Mersenne weight
+into its binary skeleton and a positive correction turns a sufficiently long
+support prefix into a narrow interval for the correction value.  If those
+intervals are trapped in compatible dyadic cylinders of unbounded depth, the
+correction and complementary-binary values coincide, giving an exact support
+identity.  This section formalizes that coinductive limit interface and the
+elementary arithmetic at a crossed dyadic boundary.  It does *not* prove that
+the generated forcing chain is unbounded.
+-/
+
+/-- The unresolved correction after exponent `n`: the full Mersenne tail
+minus its binary skeleton. -/
+noncomputable def mersenneCorrectionTail (n : ℕ) : ℝ :=
+  mersenneTail n - ((1 : ℝ) / 2) ^ n
+
+/-- The checked two-channel expansion is exactly the correction-tail
+decomposition used by prefix forcing. -/
+theorem mersenneCorrectionTail_eq (n : ℕ) :
+    mersenneCorrectionTail n
+      = (1 / 3 : ℝ) * ((1 : ℝ) / 4) ^ n
+        + mersenneWeightRemainderTail n := by
+  rw [mersenneCorrectionTail, mersenneTail_eq_two_channels_add_remainderTail]
+  ring
+
+theorem mersenneCorrectionTail_nonneg (n : ℕ) :
+    0 ≤ mersenneCorrectionTail n := by
+  rw [mersenneCorrectionTail_eq]
+  exact add_nonneg (mul_nonneg (by norm_num) (by positivity))
+    (mersenneWeightRemainderTail_nonneg n)
+
+/-- Explicit enclosure for the unresolved correction. -/
+theorem mersenneCorrectionTail_le (n : ℕ) :
+    mersenneCorrectionTail n
+      ≤ (1 / 3 : ℝ) * ((1 : ℝ) / 4) ^ n
+        + (2 / 7 : ℝ) * ((1 : ℝ) / 8) ^ n := by
+  rw [mersenneCorrectionTail_eq]
+  exact add_le_add (le_refl _) (mersenneWeightRemainderTail_le n)
+
+/-- The Mersenne part of the greedy prefix for the target `1/2`. -/
+noncomputable def halfGreedyMersennePrefix (n : ℕ) : ℝ :=
+  ∑ k ∈ Finset.range n,
+    Set.indicator (greedyMersenneSupport (1 / 2 : ℝ)) mersenneWeight (k + 1)
+
+/-- The binary-skeleton part selected by the same finite greedy prefix. -/
+noncomputable def halfGreedyDyadicPrefix (n : ℕ) : ℝ :=
+  ∑ k ∈ Finset.range n,
+    Set.indicator (greedyMersenneSupport (1 / 2 : ℝ))
+      (fun m : ℕ => ((1 : ℝ) / 2) ^ m) (k + 1)
+
+/-- The selected correction prefix `E_N`.  Exponent one is harmless because
+the greedy run for `1/2` omits it. -/
+noncomputable def halfGreedyCorrectionPrefix (n : ℕ) : ℝ :=
+  halfGreedyMersennePrefix n - halfGreedyDyadicPrefix n
+
+/-- The complementary dyadic prefix `C_N`.  For positive `n`, the omitted
+exponent-one digit and the finite geometric sum reduce this to
+`1/2 - 2^{-n}` minus the selected dyadic prefix. -/
+noncomputable def halfGreedyComplementPrefix (n : ℕ) : ℝ :=
+  (1 / 2 : ℝ) - ((1 : ℝ) / 2) ^ n - halfGreedyDyadicPrefix n
+
+/-- The finite correction/complement difference is exactly the dyadic
+boundary minus the greedy residual. -/
+theorem halfGreedyCorrectionPrefix_sub_complementPrefix (n : ℕ) :
+    halfGreedyCorrectionPrefix n - halfGreedyComplementPrefix n
+      = ((1 : ℝ) / 2) ^ n
+        - greedyMersenneRemainder (1 / 2 : ℝ) n := by
+  have hprefix := greedyMersenne_prefix_add_remainder (1 / 2 : ℝ) n
+  change (1 / 2 : ℝ) = halfGreedyMersennePrefix n
+    + greedyMersenneRemainder (1 / 2 : ℝ) n at hprefix
+  unfold halfGreedyCorrectionPrefix halfGreedyComplementPrefix
+  linarith
+
+/-- The complete correction enclosure is trapped in the current
+complementary dyadic cylinder exactly on the residual self-trapping strip. -/
+theorem halfGreedyCorrectionInterval_subset_complementInterval_iff (n : ℕ) :
+    Set.Icc (halfGreedyCorrectionPrefix n)
+        (halfGreedyCorrectionPrefix n + mersenneCorrectionTail n) ⊆
+      Set.Icc (halfGreedyComplementPrefix n)
+        (halfGreedyComplementPrefix n + ((1 : ℝ) / 2) ^ n) ↔
+      mersenneCorrectionTail n
+          ≤ greedyMersenneRemainder (1 / 2 : ℝ) n ∧
+        greedyMersenneRemainder (1 / 2 : ℝ) n
+          ≤ ((1 : ℝ) / 2) ^ n := by
+  have hdiff := halfGreedyCorrectionPrefix_sub_complementPrefix n
+  have heta := mersenneCorrectionTail_nonneg n
+  constructor
+  · intro hsubset
+    have hlower := hsubset
+      (show halfGreedyCorrectionPrefix n ∈
+          Set.Icc (halfGreedyCorrectionPrefix n)
+            (halfGreedyCorrectionPrefix n + mersenneCorrectionTail n) by
+        exact ⟨le_rfl, le_add_of_nonneg_right heta⟩)
+    have hupper := hsubset
+      (show halfGreedyCorrectionPrefix n + mersenneCorrectionTail n ∈
+          Set.Icc (halfGreedyCorrectionPrefix n)
+            (halfGreedyCorrectionPrefix n + mersenneCorrectionTail n) by
+        exact ⟨le_add_of_nonneg_right heta, le_rfl⟩)
+    obtain ⟨hlow1, hlow2⟩ := Set.mem_Icc.mp hlower
+    obtain ⟨hup1, hup2⟩ := Set.mem_Icc.mp hupper
+    constructor <;> linarith
+  · rintro ⟨hetaRem, hremDyadic⟩ z ⟨hzLower, hzUpper⟩
+    constructor <;> linarith
+
+/-- The complementary part of the surviving tail mass. -/
+noncomputable def greedyMersenneComplementRemainder (x : ℝ) (n : ℕ) : ℝ :=
+  mersenneTail n - greedyMersenneRemainder x n
+
+/-- Signed difference between the residual and its complementary tail bin. -/
+noncomputable def greedyMersenneSignedBalance (x : ℝ) (n : ℕ) : ℝ :=
+  greedyMersenneRemainder x n - greedyMersenneComplementRemainder x n
+
+/-- The positive gap between one Mersenne weight and the tail after it. -/
+noncomputable def mersenneGap (n : ℕ) : ℝ :=
+  mersenneWeight n - mersenneTail n
+
+theorem greedyMersenneSignedBalance_eq (x : ℝ) (n : ℕ) :
+    greedyMersenneSignedBalance x n
+      = 2 * greedyMersenneRemainder x n - mersenneTail n := by
+  unfold greedyMersenneSignedBalance greedyMersenneComplementRemainder
+  ring
+
+theorem mersenneGap_pos {n : ℕ} (hn : 0 < n) :
+    0 < mersenneGap n := by
+  unfold mersenneGap
+  exact sub_pos.mpr (mersenneTail_lt_weight hn)
+
+/-- In the signed-balance coordinate, the self-trapping strip is the centered
+interval of radius `2^{-N} - η_N`. -/
+theorem halfGreedy_selfTrapping_iff_abs_signedBalance_le (n : ℕ) :
+    (mersenneCorrectionTail n
+        ≤ greedyMersenneRemainder (1 / 2 : ℝ) n ∧
+      greedyMersenneRemainder (1 / 2 : ℝ) n
+        ≤ ((1 : ℝ) / 2) ^ n) ↔
+      |greedyMersenneSignedBalance (1 / 2 : ℝ) n|
+        ≤ ((1 : ℝ) / 2) ^ n - mersenneCorrectionTail n := by
+  rw [greedyMersenneSignedBalance_eq, abs_le]
+  unfold mersenneCorrectionTail
+  constructor <;> rintro ⟨h₁, h₂⟩ <;> constructor <;> linarith
+
+/-- Exact one-step affine recurrence before folding: a selected weight moves
+the balance left by that weight, while an omitted weight moves it right. -/
+theorem greedyMersenneSignedBalance_succ (x : ℝ) (n : ℕ) :
+    greedyMersenneSignedBalance x (n + 1)
+      = if mersenneWeight (n + 1) ≤ greedyMersenneRemainder x n then
+          greedyMersenneSignedBalance x n - mersenneWeight (n + 1)
+        else
+          greedyMersenneSignedBalance x n + mersenneWeight (n + 1) := by
+  rw [greedyMersenneSignedBalance_eq, greedyMersenneSignedBalance_eq,
+    greedyMersenneRemainder_succ]
+  have htail := mersenneTail_eq_weight_add n
+  split_ifs <;> linarith
+
+/-- For a currently surviving residual, survival of the next greedy step is
+equivalent to the signed balance avoiding the open gap around zero. -/
+theorem greedyMersenne_next_survives_iff_gap_le_abs_signedBalance
+    {x : ℝ} {n : ℕ}
+    (_hremNonneg : 0 ≤ greedyMersenneRemainder x n)
+    (hremTail : greedyMersenneRemainder x n ≤ mersenneTail n) :
+    greedyMersenneRemainder x (n + 1) ≤ mersenneTail (n + 1) ↔
+      mersenneGap (n + 1) ≤ |greedyMersenneSignedBalance x n| := by
+  have htailRec := mersenneTail_eq_weight_add n
+  have hgapPos := mersenneGap_pos (n := n + 1) (by omega)
+  rw [greedyMersenneRemainder_succ]
+  by_cases htake :
+      mersenneWeight (n + 1) ≤ greedyMersenneRemainder x n
+  · rw [if_pos htake]
+    have hbalanceNonneg :
+        0 ≤ greedyMersenneSignedBalance x n := by
+      rw [greedyMersenneSignedBalance_eq]
+      unfold mersenneGap at hgapPos
+      linarith
+    rw [abs_of_nonneg hbalanceNonneg]
+    constructor <;> intro _
+    · rw [greedyMersenneSignedBalance_eq]
+      unfold mersenneGap
+      linarith
+    · linarith
+  · rw [if_neg htake]
+    constructor
+    · intro hnext
+      have hbalanceNonpos :
+          greedyMersenneSignedBalance x n ≤ 0 := by
+        rw [greedyMersenneSignedBalance_eq]
+        linarith
+      rw [abs_of_nonpos hbalanceNonpos]
+      rw [greedyMersenneSignedBalance_eq]
+      unfold mersenneGap
+      linarith
+    · intro hgap
+      by_contra hnotNext
+      have hnextLt :
+          mersenneTail (n + 1) < greedyMersenneRemainder x n :=
+        lt_of_not_ge hnotNext
+      have hbalanceLtGap :
+          |greedyMersenneSignedBalance x n| < mersenneGap (n + 1) := by
+        rw [abs_lt]
+        rw [greedyMersenneSignedBalance_eq]
+        unfold mersenneGap
+        constructor <;> linarith
+      linarith
+
+/-- On a surviving next step, the signed balance follows the exact folded
+subtraction recurrence. -/
+theorem abs_greedyMersenneSignedBalance_succ
+    {x : ℝ} {n : ℕ}
+    (_hremTail : greedyMersenneRemainder x n ≤ mersenneTail n)
+    (hnext : greedyMersenneRemainder x (n + 1) ≤ mersenneTail (n + 1)) :
+    |greedyMersenneSignedBalance x (n + 1)|
+      = abs (|greedyMersenneSignedBalance x n| - mersenneWeight (n + 1)) := by
+  rw [greedyMersenneSignedBalance_succ]
+  by_cases htake :
+      mersenneWeight (n + 1) ≤ greedyMersenneRemainder x n
+  · rw [if_pos htake]
+    have hbalanceNonneg :
+        0 ≤ greedyMersenneSignedBalance x n := by
+      rw [greedyMersenneSignedBalance_eq]
+      have htailGap := mersenneTail_lt_weight (n := n + 1) (by omega)
+      have htail := mersenneTail_eq_weight_add n
+      linarith
+    rw [abs_of_nonneg hbalanceNonneg]
+  · rw [if_neg htake]
+    have hnext' :
+        greedyMersenneRemainder x n ≤ mersenneTail (n + 1) := by
+      rw [greedyMersenneRemainder_succ, if_neg htake] at hnext
+      exact hnext
+    have hbalanceNonpos :
+        greedyMersenneSignedBalance x n ≤ 0 := by
+      rw [greedyMersenneSignedBalance_eq, mersenneTail_eq_weight_add]
+      have hweightPos := mersenneWeight_pos (n := n + 1) (by omega)
+      linarith
+    rw [abs_of_nonpos hbalanceNonpos, ← abs_neg]
+    congr 1
+    ring
+
+/-- The selected part of the binary skeleton, indexed exactly like
+`positiveMersenneSupportValue`. -/
+noncomputable def positiveDyadicSupportValue (A : Set ℕ) : ℝ :=
+  ∑' k : ℕ, Set.indicator A (fun n : ℕ => ((1 : ℝ) / 2) ^ n) (k + 1)
+
+theorem summable_positiveDyadicSupportIndicator (A : Set ℕ) :
+    Summable (fun k : ℕ =>
+      Set.indicator A (fun n : ℕ => ((1 : ℝ) / 2) ^ n) (k + 1)) := by
+  have hbase : Summable (fun k : ℕ => ((1 : ℝ) / 2) ^ k) :=
+    summable_geometric_of_lt_one (by norm_num) (by norm_num)
+  have hshift := (summable_nat_add_iff 1).mpr hbase
+  have hindicator := hshift.indicator {k : ℕ | k + 1 ∈ A}
+  refine hindicator.congr fun k => ?_
+  by_cases hk : k + 1 ∈ A
+  · simp [hk]
+  · simp [hk]
+
+/-- The correction side of the half fixed-point equation. -/
+noncomputable def halfCorrectionValue (A : Set ℕ) : ℝ :=
+  positiveMersenneSupportValue A - positiveDyadicSupportValue A
+
+/-- The complementary binary side of the half fixed-point equation.  For a
+support omitting exponent one this is the sum of the complementary digits
+from exponent two onward. -/
+noncomputable def halfComplementValue (A : Set ℕ) : ℝ :=
+  (1 / 2 : ℝ) - positiveDyadicSupportValue A
+
+/-- The complementary value is genuinely the binary number whose digits from
+exponent two onward are the complements of the support digits. -/
+theorem halfComplementValue_eq_tsum_complement
+    (A : Set ℕ) (hA1 : 1 ∉ A) :
+    halfComplementValue A =
+      ∑' k : ℕ, Set.indicator Aᶜ
+        (fun n : ℕ => ((1 : ℝ) / 2) ^ n) (k + 2) := by
+  have hbase : Summable (fun k : ℕ => ((1 : ℝ) / 2) ^ k) :=
+    summable_geometric_of_lt_one (by norm_num) (by norm_num)
+  have hfull : Summable (fun k : ℕ => ((1 : ℝ) / 2) ^ (k + 2)) := by
+    have hshift := (summable_nat_add_iff 2).mpr hbase
+    simpa [Nat.add_comm] using hshift
+  have hselected : Summable (fun k : ℕ =>
+      Set.indicator A (fun n : ℕ => ((1 : ℝ) / 2) ^ n) (k + 2)) := by
+    have hshift := (summable_nat_add_iff 1).mpr
+      (summable_positiveDyadicSupportIndicator A)
+    simpa [Nat.add_assoc, Nat.add_comm, Nat.add_left_comm] using hshift
+  have hselectedShift : positiveDyadicSupportValue A =
+      ∑' k : ℕ, Set.indicator A
+        (fun n : ℕ => ((1 : ℝ) / 2) ^ n) (k + 2) := by
+    unfold positiveDyadicSupportValue
+    have hsplit := (summable_positiveDyadicSupportIndicator A).tsum_eq_zero_add
+    simpa [Set.indicator_of_notMem hA1, Nat.add_assoc, Nat.add_comm,
+      Nat.add_left_comm] using hsplit
+  have hfullSum : (∑' k : ℕ, ((1 : ℝ) / 2) ^ (k + 2)) =
+      (1 / 2 : ℝ) := by
+    calc
+      (∑' k : ℕ, ((1 : ℝ) / 2) ^ (k + 2))
+          = ∑' k : ℕ, ((1 : ℝ) / 2) ^ (1 + k + 1) := by
+              apply tsum_congr
+              intro k
+              congr 1
+              omega
+      _ = (1 / 2 : ℝ) := by simpa using tsum_half_nat_add_succ 1
+  calc
+    halfComplementValue A
+        = (∑' k : ℕ, ((1 : ℝ) / 2) ^ (k + 2))
+          - ∑' k : ℕ, Set.indicator A
+              (fun n : ℕ => ((1 : ℝ) / 2) ^ n) (k + 2) := by
+            rw [halfComplementValue, hselectedShift, hfullSum]
+    _ = ∑' k : ℕ, (((1 : ℝ) / 2) ^ (k + 2)
+          - Set.indicator A (fun n : ℕ => ((1 : ℝ) / 2) ^ n) (k + 2)) := by
+            rw [hfull.tsum_sub hselected]
+    _ = ∑' k : ℕ, Set.indicator Aᶜ
+          (fun n : ℕ => ((1 : ℝ) / 2) ^ n) (k + 2) := by
+            apply tsum_congr
+            intro k
+            by_cases hk : k + 2 ∈ A
+            · simp [hk]
+            · simp [hk]
+
+/-- Exact correction/complement reframe of a value-`1/2` support. -/
+theorem positiveMersenneSupportValue_eq_half_iff_correction_eq_complement
+    (A : Set ℕ) :
+    positiveMersenneSupportValue A = (1 / 2 : ℝ) ↔
+      halfCorrectionValue A = halfComplementValue A := by
+  unfold halfCorrectionValue halfComplementValue
+  constructor <;> intro h <;> linarith
+
+/-- An all-level prefix-forcing witness.  The interval
+`[correctionLower k, correctionUpper k]` is the complete correction enclosure
+at macrostep `k`; `interval_trapped` puts that whole enclosure in one dyadic
+cylinder.  The complementary binary value lies in the same cylinder, and the
+cylinder depths tend to infinity.
+
+The finite-word construction that produces these data is deliberately kept
+outside the structure: different evaluators may supply the same analytic
+certificate without creating a second achievement-set model. -/
+structure HalfPrefixForcingChain (A : Set ℕ) where
+  depth : ℕ → ℕ
+  cellLeft : ℕ → ℝ
+  correctionLower : ℕ → ℝ
+  correctionUpper : ℕ → ℝ
+  correction_mem : ∀ k : ℕ,
+    halfCorrectionValue A ∈ Set.Icc (correctionLower k) (correctionUpper k)
+  interval_trapped : ∀ k : ℕ,
+    Set.Icc (correctionLower k) (correctionUpper k) ⊆
+      Set.Icc (cellLeft k) (cellLeft k + ((1 : ℝ) / 2) ^ (depth k))
+  complement_mem : ∀ k : ℕ,
+    halfComplementValue A ∈
+      Set.Icc (cellLeft k) (cellLeft k + ((1 : ℝ) / 2) ^ (depth k))
+  depth_tendsto : Tendsto depth atTop atTop
+
+/-- Two values trapped in the same unbounded sequence of dyadic cylinders
+are equal.  This is the analytic coinduction step: every finite macrostep
+contributes a genuine error bound, and only unboundedness is asymptotic. -/
+theorem HalfPrefixForcingChain.correction_eq_complement
+    {A : Set ℕ} (chain : HalfPrefixForcingChain A) :
+    halfCorrectionValue A = halfComplementValue A := by
+  have hcorrectionCell : ∀ k : ℕ,
+      halfCorrectionValue A ∈
+        Set.Icc (chain.cellLeft k)
+          (chain.cellLeft k + ((1 : ℝ) / 2) ^ (chain.depth k)) := by
+    intro k
+    exact chain.interval_trapped k (chain.correction_mem k)
+  have hdist : ∀ k : ℕ,
+      |halfCorrectionValue A - halfComplementValue A|
+        ≤ ((1 : ℝ) / 2) ^ (chain.depth k) := by
+    intro k
+    rcases hcorrectionCell k with ⟨hBL, hBR⟩
+    rcases chain.complement_mem k with ⟨hCL, hCR⟩
+    have hpowNonneg : 0 ≤ ((1 : ℝ) / 2) ^ (chain.depth k) := by positivity
+    rw [abs_le]
+    constructor <;> linarith
+  have hpow : Tendsto (fun k : ℕ => ((1 : ℝ) / 2) ^ (chain.depth k))
+      atTop (nhds 0) :=
+    (tendsto_pow_atTop_nhds_zero_of_lt_one (by norm_num) (by norm_num)).comp
+      chain.depth_tendsto
+  have hconstZero : Tendsto (fun _ : ℕ => (0 : ℝ)) atTop (nhds 0) :=
+    tendsto_const_nhds
+  have hconstDist : Tendsto
+      (fun _ : ℕ => |halfCorrectionValue A - halfComplementValue A|)
+      atTop (nhds 0) :=
+    tendsto_of_tendsto_of_tendsto_of_le_of_le' hconstZero hpow
+      (Filter.Eventually.of_forall fun _ => abs_nonneg _)
+      (Filter.Eventually.of_forall hdist)
+  have hzero : |halfCorrectionValue A - halfComplementValue A| = 0 :=
+    tendsto_nhds_unique tendsto_const_nhds hconstDist
+  exact sub_eq_zero.mp (abs_eq_zero.mp hzero)
+
+/-- Unbounded prefix forcing constructs an exact value-`1/2` support.  The
+normalization hypotheses make the support genuinely positive-indexed and
+give the intended complementary-digit interpretation. -/
+theorem half_mem_mersenneAchievementSet_of_prefixForcingChain
+    (A : Set ℕ) (hA0 : 0 ∉ A) (_hA1 : 1 ∉ A)
+    (chain : HalfPrefixForcingChain A) :
+    (1 / 2 : ℝ) ∈ mersenneAchievementSet := by
+  refine ⟨A, hA0, ?_⟩
+  exact (positiveMersenneSupportValue_eq_half_iff_correction_eq_complement A).2
+    chain.correction_eq_complement |>.symm
+
+/-- An interval of width at most one crosses at most one integer.  Applied
+after scaling a correction interval by `4^N`, this isolates the unique
+boundary whose two-adic divisibility controls the forcing defect. -/
+theorem integer_crossing_unique {x τ : ℝ} (hτ : τ ≤ 1)
+    {m₁ m₂ : ℤ}
+    (hm₁L : x < (m₁ : ℝ)) (hm₁R : (m₁ : ℝ) < x + τ)
+    (hm₂L : x < (m₂ : ℝ)) (hm₂R : (m₂ : ℝ) < x + τ) :
+    m₁ = m₂ := by
+  by_contra hne
+  rcases lt_or_gt_of_ne hne with hlt | hgt
+  · have hstep : m₁ + 1 ≤ m₂ := by omega
+    have hstepR : (m₁ : ℝ) + 1 ≤ (m₂ : ℝ) := by exact_mod_cast hstep
+    linarith
+  · have hstep : m₂ + 1 ≤ m₁ := by omega
+    have hstepR : (m₂ : ℝ) + 1 ≤ (m₁ : ℝ) := by exact_mod_cast hstep
+    linarith
+
+/-- Cancelling an explicit power of two from a boundary on the `4^N` grid.
+When `q` is odd and `v` is the exact two-adic valuation of the numerator,
+the right-hand denominator has the reduced dyadic depth `2*N-v`. -/
+theorem dyadicBoundary_cancel_powTwo (N v q : ℕ) (hv : v ≤ 2 * N) :
+    (((2 ^ v * q : ℕ) : ℝ) / (4 : ℝ) ^ N)
+      = (q : ℝ) / (2 : ℝ) ^ (2 * N - v) := by
+  have hpow : (4 : ℝ) ^ N = (2 : ℝ) ^ (2 * N) := by
+    rw [show (4 : ℝ) = 2 ^ 2 by norm_num, ← pow_mul]
+  have hadd : v + (2 * N - v) = 2 * N := Nat.add_sub_of_le hv
+  rw [hpow, ← hadd, pow_add]
+  push_cast
+  field_simp
+  congr 2
+  omega
+
+/-- The exact growth criterion once a crossed boundary has forcing depth
+`2*N-v-1`: strict extension beyond `N` is equivalent to excluding
+`v ≥ N-1`. -/
+theorem crossedBoundary_forceDepth_gt_iff
+    {N v : ℕ} (hN : 1 < N) :
+    N < 2 * N - v - 1 ↔ v < N - 1 := by
+  omega
 
 end Erdos249257

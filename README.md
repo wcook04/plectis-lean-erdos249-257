@@ -7,7 +7,7 @@ Machine-checked results around two Erdős irrationality problems. **This release
 
 [![Lean CI](https://github.com/wcook04/plectis-lean-erdos249-257/actions/workflows/lean.yml/badge.svg)](https://github.com/wcook04/plectis-lean-erdos249-257/actions/workflows/lean.yml)
 
-Erdős #249 asks whether the totient constant `S = ∑_{n≥1} φ(n)/2ⁿ` is irrational. Erdős #257 asks whether `∑_{n∈A} 1/(2ⁿ − 1)` is irrational for every infinite `A ⊆ ℕ`. This Lean 4 (Mathlib) development verifies the irrationality of the Erdős–Borwein series `∑ 1/(bⁿ − 1)` for every integer base `b ≥ 2` and for several structured infinite supports; proves unconditionally that `S ≠ p/q` for every denominator `q` up to about `7.96 × 10³⁴`; and reduces the irrationality of `S`, exactly, to an unbounded supply of finite decidable certificates. A binary-carry layer then pins down what a rational value of either series would force: tempered carry orbits, reciprocal-mass lower bounds, unbounded carry states, and sublogarithmic zero windows in divisor coverage.
+Erdős #249 asks whether the totient constant `S = ∑_{n≥1} φ(n)/2ⁿ` is irrational. Erdős #257 asks whether `∑_{n∈A} 1/(2ⁿ − 1)` is irrational for every infinite `A ⊆ ℕ`. This Lean 4 (Mathlib) development verifies the irrationality of the Erdős–Borwein series `∑ 1/(bⁿ − 1)` for every integer base `b ≥ 2` and for several structured infinite supports; proves unconditionally that `S ≠ p/q` for every denominator `q` up to about `7.96 × 10³⁴`; and reduces the irrationality of `S`, exactly, to an unbounded supply of finite decidable certificates. The reduction is refined through a full-target diagonal pincer, a squared-Mersenne enclosure, and a fresh-loss projection, with 22 explicit lcm-diagonal scales checked through `t = 43`. A binary-carry and achievement-set layer records the measure-one nowhere-dense Mersenne value set and pins down what a rational value would force: tempered carry orbits, reciprocal-mass lower bounds, unbounded carry states, and sublogarithmic zero windows in divisor coverage.
 
 Everything needed to build and check the release is in this repository. There is no `sorry`, no `admit`, and no project-defined `axiom` declaration; finite computations use `decide`, whose proof terms are checked by the Lean kernel (`native_decide` is never used). Toolchain `leanprover/lean4:v4.29.1`; Mathlib pinned by [`lake-manifest.json`](lake-manifest.json).
 
@@ -23,7 +23,9 @@ Statuses use the release taxonomy declared once in [`docs/claims.json`](docs/cla
 | `S ≠ p/q` for every `q ≤ 7.96 × 10³⁴` | **unconditional progress** | `tsum_totient_div_pow_two_ne_ratCast_of_den_le_79639646646701375323355774875831053` |
 | Unbounded certificate supply ⟹ `S` irrational (period ⟹ lcm-diagonal ⟹ cone) | **conditional reduction** | `irrational_totient_series_of_certificate_supply`, `irrational_totient_series_of_lcm_diagonal_certificate_supply` |
 | A certificate exists ⟺ the tail difference is non-integral | **proved here** | `exists_certifiedKill_iff_tail_diff_notMem_int` |
-| Initial certified-kill segment and generated certificate shards | **verified finite instance** | `certifiedKill_all_small`, `certifiedKill_periodLcm_diagonal_upto_six` |
+| Initial certified-kill segment, including 22 lcm-diagonal scales through `t = 43` | **verified finite instance** | `certifiedKill_all_small`, `certifiedKill_diagonal_all_imported_through_t43` |
+| Full-target diagonal pincer and fresh-loss projection supplies ⟹ `S` irrational | **conditional reduction** | `diagonal_int_iff_foreignDiagonalDefect_hits_fullTarget`, `irrational_totientSeries_of_full_target_avoidance_supply`, `irrational_totientSeries_of_diagonalFreshLossProjectionSupply` |
+| Sharp squared-Mersenne enclosure and exact Mersenne-shadow denominator | **proved here** | `scaleDiagonalTailDifference_sub_lambertProjectedDiagonal`, `lcmHeight_scaledMobiusShadow_den_exact` |
 | Rationality forces sublogarithmic divisor-coverage zero windows | **proved here** | `supportCoeffZeroWindow_length_le_eps_logb_add` |
 | Transcendence of `∑ σ(m)/2^m` (Nesterenko); prime-support irrationality (Tao–Teräväinen) | **cited only** | — |
 | Erdős #249; the universal Erdős #257 | **open** | — |
@@ -82,6 +84,8 @@ import Erdos249257
 | `tsum_totient_div_pow_two_ne_ratCast_of_den_le_79639646646701375323355774875831053` | the denominator exclusion for `S` | [`CertificateKernel`](Erdos249257/CertificateKernel.lean) |
 | `totient_series_eq_half_add_moebius_mersenne_square` | the Möbius-square lens `S = 1/2 + ∑ μ(d)/(2^d−1)²` | [`CertificateKernel`](Erdos249257/CertificateKernel.lean) |
 | `irrational_totient_series_of_lcm_diagonal_certificate_supply` | the one-parameter #249 reduction | [`LcmDiagonalReduction`](Erdos249257/LcmDiagonalReduction.lean) |
+| `irrational_totientSeries_of_full_target_avoidance_supply` | the exact full-target #249 reduction | [`DiagonalPincerDecomposition`](Erdos249257/DiagonalPincerDecomposition.lean) |
+| `irrational_totientSeries_of_diagonalFreshLossProjectionSupply` | the fresh-loss projection reduction | [`DiagonalFreshLossBridge`](Erdos249257/DiagonalFreshLossBridge.lean) |
 | `binaryCoeffSeries_rational_iff_exists_temperedBinaryOrbit` | rationality ⟺ tempered carry orbit | [`GenericTailOrbitRigidity`](Erdos249257/GenericTailOrbitRigidity.lean) |
 | `supportCoeffZeroWindow_length_le_eps_logb_add` | sublogarithmic zero windows from rationality | [`SublogDivisorCoverage`](Erdos249257/SublogDivisorCoverage.lean) |
 
@@ -91,7 +95,7 @@ A minimal downstream consumer lives in [`examples/Examples.lean`](examples/Examp
 
 ## Citation, licence, and support
 
-Cite the tagged release `v0.4.0` using [`CITATION.cff`](CITATION.cff); for the mathematics, cite the exposition included in the release. Code, scripts, and documentation are licensed Apache-2.0; the manuscript layer (paper source, rendered PDF, banner) is CC-BY-4.0; the map is [`REUSE.toml`](REUSE.toml) with licence texts under [`LICENSES/`](LICENSES/).
+Cite the tagged release `v0.5.0` using [`CITATION.cff`](CITATION.cff); for the mathematics, cite the exposition included in the release. Code, scripts, and documentation are licensed Apache-2.0; the manuscript layer (paper source, rendered PDF, banner) is CC-BY-4.0; the map is [`REUSE.toml`](REUSE.toml) with licence texts under [`LICENSES/`](LICENSES/).
 
 This release is a pinned scholarly artefact. Error reports are welcome through the GitHub issue forms (mathematical discrepancy, build failure, broken link, exposition correction); [`CONTRIBUTING.md`](CONTRIBUTING.md) explains the release-pinning rule and the local checks, and [`SECURITY.md`](SECURITY.md) the private reporting route. Substantial changes land only as a new tagged release with refreshed claim and citation metadata.
 

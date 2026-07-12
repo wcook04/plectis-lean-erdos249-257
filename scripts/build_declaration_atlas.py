@@ -98,7 +98,10 @@ def build() -> dict[str, object]:
             if not match:
                 continue
             kind, name = match.groups()
-            generated = "/GeneratedCertificates" in rel
+            generated = (
+                "/GeneratedCertificates" in rel
+                or "/DiagonalPincerPrimeCertificates/" in rel
+            )
             row: dict[str, object] = {
                 "id": f"{rel}:{index + 1}:{name}",
                 "name": name,

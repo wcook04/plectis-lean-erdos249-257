@@ -45,6 +45,8 @@ lake exe cache get                 # fetch the prebuilt Mathlib cache
 lake build                         # elaborate and kernel-check the library
 lake build Examples                # build the downstream consumer example
 python3 scripts/check_release.py   # cross-surface release checks
+python3 scripts/build_module_graph.py --check  # exact public Lean import graph
+python3 scripts/refresh_source_coordinates.py --check  # claim/paper line pins
 python3 scripts/test_methodology_contract.py  # adversarial claim-transition fixtures
 python3 -m pip install cffconvert reuse  # once, for metadata and licence checks
 python3 scripts/check_metadata.py  # CITATION.cff schema validation (same command as CI)
