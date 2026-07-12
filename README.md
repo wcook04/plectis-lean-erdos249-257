@@ -26,6 +26,8 @@ Statuses use the release taxonomy declared once in [`docs/claims.json`](docs/cla
 | Initial certified-kill segment, including 22 lcm-diagonal scales through `t = 43` | **verified finite instance** | `certifiedKill_all_small`, `certifiedKill_diagonal_all_imported_through_t43` |
 | Full-target diagonal pincer and fresh-loss projection supplies ⟹ `S` irrational | **conditional reduction** | `diagonal_int_iff_foreignDiagonalDefect_hits_fullTarget`, `irrational_totientSeries_of_full_target_avoidance_supply`, `irrational_totientSeries_of_diagonalFreshLossProjectionSupply` |
 | Sharp squared-Mersenne enclosure and exact Mersenne-shadow denominator | **proved here** | `scaleDiagonalTailDifference_sub_lambertProjectedDiagonal`, `lcmHeight_scaledMobiusShadow_den_exact` |
+| Transport/curvature windows, affine old-channel annihilation, and fixed-precision no-go | **proved here / conditional reduction** | `transportResidueKernel_eq_affineState`, `oldChannel_affine_moment_annihilation`, `fixedPrecisionTropicalNoGo` |
+| Prime-jump `(12,5,15)` and balanced-transport `(60,12)` certificates | **verified finite instance** | `primeJumpSharpKill_twelve_five`, `sharpThreeTransportCert_60_12` |
 | Rationality forces sublogarithmic divisor-coverage zero windows | **proved here** | `supportCoeffZeroWindow_length_le_eps_logb_add` |
 | Transcendence of `∑ σ(m)/2^m` (Nesterenko); prime-support irrationality (Tao–Teräväinen) | **cited only** | — |
 | Erdős #249; the universal Erdős #257 | **open** | — |
@@ -37,6 +39,7 @@ The conditional reduction is exact: producing the unbounded certificate supply i
 - **Machine-readable paper and agent map** — [`docs/claims.json`](docs/claims.json): the single checked map of claim status, paper anchors, principal Lean declarations, module dependencies, argument relationships, and explicit non-claims. The generated [`docs/corpus_descriptor.json`](docs/corpus_descriptor.json) gives external agents a compact dual-anchored corpus identity, while [`docs/declaration_atlas.json`](docs/declaration_atlas.json) exposes every public Lean declaration and import edge. Agent harnesses should begin with [`AGENTS.md`](AGENTS.md).
 - **Method and claim discipline** — [`METHODOLOGY.md`](METHODOLOGY.md) records how this repository keeps checked Lean statements, finite computations, exact reductions, public claims, and the remaining open problems distinct. Its machine-readable source is [`docs/methodology.json`](docs/methodology.json).
 - **The paper** — [`erdos249-257-exposition.pdf`](erdos249-257-exposition.pdf): the full argument in ordinary notation, no Lean required. Every formal statement links to the exact declaration at the pinned release. Source and build in [`paper/`](paper/).
+- **Transport/curvature companion** — [`erdos249-transport-curvature.pdf`](erdos249-transport-curvature.pdf): the affine transport, sharp finite consumers, first-harmonic interface, and fixed-precision strategy boundary, with every unbounded-supply hypothesis left explicit.
 - **Module reference and chronology** — [`docs/WAVE_INDEX.md`](docs/WAVE_INDEX.md): what each module establishes, in development order.
 - **Declaration routes** — [`docs/SOURCE_MAP.md`](docs/SOURCE_MAP.md): intention-based routes to the principal declarations.
 - **Neighbouring problems** — [`docs/RELATED_PROBLEMS.md`](docs/RELATED_PROBLEMS.md): where this sits among Erdős #249/#257/#1049/#69/#250/#258.
@@ -86,6 +89,9 @@ import Erdos249257
 | `irrational_totient_series_of_lcm_diagonal_certificate_supply` | the one-parameter #249 reduction | [`LcmDiagonalReduction`](Erdos249257/LcmDiagonalReduction.lean) |
 | `irrational_totientSeries_of_full_target_avoidance_supply` | the exact full-target #249 reduction | [`DiagonalPincerDecomposition`](Erdos249257/DiagonalPincerDecomposition.lean) |
 | `irrational_totientSeries_of_diagonalFreshLossProjectionSupply` | the fresh-loss projection reduction | [`DiagonalFreshLossBridge`](Erdos249257/DiagonalFreshLossBridge.lean) |
+| `transportResidueKernel_eq_affineState` | the exact periodic slope-and-intercept state | [`ExponentOnlyTransport`](Erdos249257/ExponentOnlyTransport.lean) |
+| `oldChannel_affine_moment_annihilation` | two-moment annihilation of every old divisor channel | [`JointExponentTransport`](Erdos249257/JointExponentTransport.lean) |
+| `fixedPrecisionTropicalNoGo` | bounded local signatures always admit a centred completion | [`TropicalCurvatureCarry`](Erdos249257/TropicalCurvatureCarry.lean) |
 | `binaryCoeffSeries_rational_iff_exists_temperedBinaryOrbit` | rationality ⟺ tempered carry orbit | [`GenericTailOrbitRigidity`](Erdos249257/GenericTailOrbitRigidity.lean) |
 | `supportCoeffZeroWindow_length_le_eps_logb_add` | sublogarithmic zero windows from rationality | [`SublogDivisorCoverage`](Erdos249257/SublogDivisorCoverage.lean) |
 
@@ -95,7 +101,7 @@ A minimal downstream consumer lives in [`examples/Examples.lean`](examples/Examp
 
 ## Citation, licence, and support
 
-Cite the tagged release `v0.5.0` using [`CITATION.cff`](CITATION.cff); for the mathematics, cite the exposition included in the release. Code, scripts, and documentation are licensed Apache-2.0; the manuscript layer (paper source, rendered PDF, banner) is CC-BY-4.0; the map is [`REUSE.toml`](REUSE.toml) with licence texts under [`LICENSES/`](LICENSES/).
+Cite the tagged release `v0.6.0` using [`CITATION.cff`](CITATION.cff); for the mathematics, cite the exposition and transport/curvature companion included in the release. Code, scripts, and documentation are licensed Apache-2.0; the manuscript layer (paper source, rendered PDFs, banner) is CC-BY-4.0; the map is [`REUSE.toml`](REUSE.toml) with licence texts under [`LICENSES/`](LICENSES/).
 
 This release is a pinned scholarly artefact. Error reports are welcome through the GitHub issue forms (mathematical discrepancy, build failure, broken link, exposition correction); [`CONTRIBUTING.md`](CONTRIBUTING.md) explains the release-pinning rule and the local checks, and [`SECURITY.md`](SECURITY.md) the private reporting route. Substantial changes land only as a new tagged release with refreshed claim and citation metadata.
 

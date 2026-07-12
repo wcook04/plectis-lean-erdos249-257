@@ -1,0 +1,251 @@
+% SPDX-FileCopyrightText: 2026 Will Cook
+% SPDX-License-Identifier: CC-BY-4.0
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,seqsplit}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[colorlinks=true,linkcolor=black,urlcolor=RoyalBlue,citecolor=black]{hyperref}
+\newcommand{\commit}{v0.6.0}
+\newcommand{\repobase}{https://github.com/wcook04/plectis-lean-erdos249-257/blob/\commit}
+\newcommand{\PK}{Erdos249257}
+\newcommand{\idn}[1]{\texttt{\expandafter\seqsplit\expandafter{\detokenize{#1}}}}
+\newcommand{\lref}[3]{\href{\repobase/\PK/#1\#L#2}{\texttt{Lean}}}
+\emergencystretch=2em
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\theoremstyle{remark}\newtheorem*{remark}{Remark}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\ph}{\varphi}
+\title{Transport and Curvature Certificates for the Totient Constant\\
+{\large a Lean~4 companion to the Erd\H{o}s~\#249 formalisation}}
+\author{Will Cook}
+\date{July 2026}
+
+\begin{document}
+\sloppy
+\maketitle
+\begin{abstract}
+Let $S=\sum_{n\geq1}\ph(n)/2^n$ and
+$R_N=\sum_{j\geq1}\ph(N+j)/2^j$.  The irrationality of $S$ is
+Erd\H{o}s Problem~249 and remains open.  We formalise exact secondary
+reductions built from finite differences of the tails $R_N$: curvature,
+exponent-transport and prime-jump commutators, and an anchored four-vertex
+operator at $H,3H,5H,15H$.  Each object splits into an integer dyadic window
+and a rigorously bounded tail, giving a decidable modular certificate for
+non-integrality.  We prove that old M\"obius divisor channels are affine and
+are annihilated by the relevant moments, isolate the new-channel migration at
+a prime jump, and show that every fixed-precision valuation--unit word admits
+a centred completion.  The finite consumers and no-go theorem are
+unconditional; every irrationality conclusion remains conditional on an
+explicitly named unbounded supply.  No such supply, and hence no solution of
+Problem~249, is claimed.
+\end{abstract}
+
+\section{Scope and logical boundary}\label{sec:scope}
+The main exposition~\cite{mainpaper} develops the direct certificate reduction
+for $S$, proves an unconditional denominator exclusion, and records the open
+boundary.  This companion studies finite-difference operators on the same
+tail sequence.  They annihilate affine contributions from divisor channels
+already present at an lcm height, but the remaining new channels must still be
+shown to produce non-integral values at unboundedly many heights.  Thus every
+endpoint below has the form
+\[
+ \text{unbounded supply of finite certificates}\Longrightarrow S\notin\mathbb Q,
+\]
+with the antecedent open.  A certificate at one height is finite evidence,
+not evidence for the cofinal quantifier.  The fixed-precision no-go theorem is
+a boundary on one local strategy, not a global impossibility result.
+
+The Lambert-series background is classical.  The open problem is recorded in
+the Erd\H{o}s--Graham collection and maintained catalogue
+\cite{erdosgraham1980,erdosproblems}.  We make no priority claim for finite
+differences or affine moment cancellation as general techniques.  The
+contribution here is their precise integration into checked identities,
+finite consumers, conditional sockets, and an obstruction theorem.
+
+\section{Dyadic windows}\label{sec:windows}
+For a finite integer combination $X(H)=\sum_i c_iR_{m_iH}$, truncate each
+tail at depth $L$.  Multiplication by $2^L$ gives
+\[
+ 2^LX(H)=A(H,L)+E(H,L),
+\]
+where $A(H,L)\in\Z$ is computable.  If $|E(H,L)|\le B(H,L)$, then
+$X(H)\notin\Z$ whenever
+\[
+ B(H,L)<A(H,L)\bmod2^L<2^L-B(H,L).
+\]
+The reusable soundness theorem is
+\idn{notMem_int_of_window_remainder_bound}
+\lref{PrimeJumpWindow.lean}{53}{notMem_int_of_window_remainder_bound}.
+Lean checks the exact decomposition, radius, and concrete modular arithmetic;
+an external analytic or arithmetic argument must provide unbounded instances.
+
+\section{Curvature on the lcm cone}\label{sec:curvature}
+Set
+\[
+ Q_H=R_{4H}-3R_{2H}+2R_H.
+\]
+Its depth-$L$ window $C(H,L)$ satisfies
+\[
+ 2^LQ_H=C(H,L)+E_C(H,L),\qquad |E_C(H,L)|\le6H+3L+3.
+\]
+The exact split and bound are
+\idn{two_pow_mul_curvature_eq_window_add_shifted}
+\lref{CurvatureCarry.lean}{119}{two_pow_mul_curvature_eq_window_add_shifted}
+and \idn{abs_curvatureShiftedTail_le}
+\lref{CurvatureCarry.lean}{137}{abs_curvatureShiftedTail_le}.
+The central residue criterion therefore proves $Q_H\notin\Z$ by
+\idn{curvature_notMem_int_of_sharpCurvatureCert}
+\lref{CurvatureCarry.lean}{159}{curvature_notMem_int_of_sharpCurvatureCert}.
+An unbounded supply implies irrationality through
+\idn{irrational_totientSeries_of_sharpCurvatureSupply}
+\lref{CurvatureCarry.lean}{206}{irrational_totientSeries_of_sharpCurvatureSupply},
+but that supply is not proved.
+
+The window evolves by
+$C(H,L+1)=2C(H,L)+d(H,L+1)$, checked in
+\idn{curvatureWindow_succ}
+\lref{CurvatureCarry.lean}{259}{curvatureWindow_succ}.  Exact phase-certificate
+and common-carrier formulas expose possible routes to a supply theorem without
+asserting one.
+
+\section{Exponent transport and affine cancellation}\label{sec:transport}
+If $p\mid H$, multiplication by $p$ adds no squarefree divisor support:
+\[
+ d\mid pH\Longleftrightarrow d\mid H\qquad(d\text{ squarefree}).
+\]
+This is \idn{squarefree_dvd_mul_iff_of_dvd}
+\lref{ExponentOnlyTransport.lean}{36}{squarefree_dvd_mul_iff_of_dvd}.
+The exact residue kernel is affine, not merely periodic:
+\[
+ K_d(N)=N\,a_d(N)+b_d(N),
+\]
+where both $a_d$ and $b_d$ are periodic modulo $d$.  The decomposition is
+\idn{transportResidueKernel_eq_affineState}
+\lref{ExponentOnlyTransport.lean}{141}{transportResidueKernel_eq_affineState}.
+Keeping both blocks prevents an intercept-only matrix calculation from being
+misread as global non-cancellation.  The exact $H\mapsto3H$ two-block transfer
+is \idn{residueTransportDefect_three_eq_affineState}
+\lref{ExponentOnlyTransport.lean}{176}{residueTransportDefect_three_eq_affineState}.
+
+Every old channel $d\mid H$ is killed by the first-order defect
+\idn{residueTransportDefect_eq_zero_of_dvd}
+\lref{ExponentOnlyTransport.lean}{112}{residueTransportDefect_eq_zero_of_dvd}.
+The endpoint
+\idn{irrational_totient_series_of_exponentOnlyThreeTransportSupply}
+\lref{ExponentOnlyTransport.lean}{205}{irrational_totient_series_of_exponentOnlyThreeTransportSupply}
+is conditional on a named fixed-three tower supply.
+
+More generally, coefficients satisfying $\sum_i c_i=\sum_i c_im_i=0$
+annihilate every old affine channel.  This is
+\idn{oldChannel_affine_moment_annihilation}
+\lref{JointExponentTransport.lean}{36}{oldChannel_affine_moment_annihilation}.
+For $q(X,Y)=XY-3X-2Y+4$, the vanishing $q(1,1)=q(3,5)=0$ gives
+\[
+ K_d(15H)-3K_d(3H)-2K_d(5H)+4K_d(H)=0\quad(d\mid H),
+\]
+checked by \idn{joint35_oldChannel_zero}
+\lref{JointExponentTransport.lean}{71}{joint35_oldChannel_zero}.
+The associated window radius is $19H+5L+5$; its finite consumer is
+\idn{joint35Cone_notMem_int_of_cert}
+\lref{JointExponentTransport.lean}{172}{joint35Cone_notMem_int_of_cert}.
+The conditional endpoint is
+\idn{irrational_totient_series_of_anchoredJoint35ConeSupply}
+\lref{JointExponentTransport.lean}{217}{irrational_totient_series_of_anchoredJoint35ConeSupply}.
+
+\section{Prime jumps and three-transport boundaries}\label{sec:primejump}
+When $p\nmid H$, a jump from $H$ to $pH$ creates new squarefree support.  The
+residue Hecke defect splits into a post-jump channel and an explicit migration
+correction in \idn{residueHeckeDefect_eq_postJump_add_migration}
+\lref{PrimeJumpMigration.lean}{38}{residueHeckeDefect_eq_postJump_add_migration}.
+For $d\mid H$ the total old-channel defect is zero
+\lref{PrimeJumpMigration.lean}{46}{residueHeckeDefect_eq_zero_of_dvd}; the
+$(d,H,p)=(5,12,5)$ calculation records the two cancelling terms.
+
+Set
+\[
+ J(H,p)=(R_{2pH}-R_{pH})-p(R_{2H}-R_H).
+\]
+Its exact remainder radius is $3pH+(p+1)(L+2)$, proved with the window split by
+\idn{primeJumpTailCommutator_eq_window_add_remainder}
+\lref{PrimeJumpWindow.lean}{91}{primeJumpTailCommutator_eq_window_add_remainder}.
+The finite consumer is
+\idn{primeJumpTailCommutator_notMem_int_of_sharpKill}
+\lref{PrimeJumpWindow.lean}{178}{primeJumpTailCommutator_notMem_int_of_sharpKill}.
+Lean verifies $(H,p,L)=(12,5,15)$ in
+\idn{primeJumpSharpKill_twelve_five}
+\lref{PrimeJumpWindow.lean}{186}{primeJumpSharpKill_twelve_five}; this is one
+finite deposit, not an unbounded sequence.
+
+The balanced vertices $H,2H,3H,6H$ give a related radius $9H+4L+4$.
+The consumer is \idn{threeTransport_notMem_int_of_cert}
+\lref{ThreeTransportBoundary.lean}{126}{threeTransport_notMem_int_of_cert};
+the irrationality theorem
+\idn{irrational_totientSeries_of_roughnessBoundaryLatticeSupply}
+\lref{ThreeTransportBoundary.lean}{177}{irrational_totientSeries_of_roughnessBoundaryLatticeSupply}
+is conditional.  The concrete check $(H,L)=(60,12)$ is
+\idn{sharpThreeTransportCert_60_12}
+\lref{ThreeTransportBoundary.lean}{203}{sharpThreeTransportCert_60_12}.
+
+\section{A first-harmonic interface}\label{sec:harmonic}
+For the window discrepancy $A(h,N,L)$ define
+\[
+ W_1(h,N,L)=\cos\left(2\pi\frac{A(h,N,L)\bmod2^L}{2^L}\right).
+\]
+Assume $N\in[X,2X)$ and $16(2X+h+L+2)\le2^L$.  If every $N$ failed the
+central-residue certificate, each phase would lie within $\pi/8$ of an
+integer turn, so each cosine would exceed $9/10$.  Hence
+\[
+ \sum_{X\le N<2X}W_1(h,N,L)\le\frac9{10}X
+\]
+forces a certificate in the block.  This implication is
+\idn{exists_certifiedKill_of_first_harmonic_gap}
+\lref{FirstHarmonicGap.lean}{104}{exists_certifiedKill_of_first_harmonic_gap}.
+No cofinal exponential-sum estimate establishing its hypothesis is proved.
+
+\section{Fixed local precision cannot finish the argument}\label{sec:nogo}
+A finite valuation--unit symbol records a bounded amount of local transport
+data.  For every positive precision $u$, every finite compatible word admits
+a prefix-locked centred completion.  Thus no finite word over this fixed local
+alphabet excludes all centred endpoints.  The exact statement is
+\idn{fixedPrecisionTropicalNoGo}
+\lref{TropicalCurvatureCarry.lean}{137}{fixedPrecisionTropicalNoGo}.
+This does not say curvature certificates are rare.  A proof may use precision
+growing with scale, global correlations, or a harmonic gap.  It rules out only
+the inference that a bounded local signature alone forces escape.
+
+\section{Statement matrix and open boundary}\label{sec:index}
+\begin{center}\small
+\begin{tabular}{@{}p{0.24\textwidth}p{0.46\textwidth}p{0.2\textwidth}@{}}
+\toprule Layer & Checked statement & Status \\
+\midrule
+Curvature & exact split, radius, recurrence, consumer & unconditional \\
+Exponent transport & stable support, affine state, cancellation & unconditional \\
+Joint $(3,5)$ transport & moment annihilation and consumer & unconditional \\
+Prime jump & migration, sharp window, $(12,5,15)$ & finite \\
+Three transport & sharp window and $(60,12)$ & finite \\
+First harmonic & cosine gap forces a certificate & conditional input \\
+Tropical signature & fixed precision has a completion & no-go \\
+Irrationality of $S$ & follows from a named unbounded supply & supply open \\
+\bottomrule
+\end{tabular}
+\end{center}
+The development proves no cofinal supply of curvature, prime-jump, joint, or
+three-transport certificates, and no cofinal first-harmonic gap.  It therefore
+does not prove Erd\H{o}s~\#249.
+
+\begin{thebibliography}{9}
+\bibitem{erdosgraham1980} P.~Erd\H{o}s and R.~L. Graham,
+\emph{Old and New Problems and Results in Combinatorial Number Theory},
+Monographies de l'Enseignement Math\'ematique 28 (1980), 61--62,
+\href{https://mathweb.ucsd.edu/~ronspubs/80_11_number_theory.pdf}{scan}.
+\bibitem{erdosproblems} T.~Bloom (ed.), \emph{Erd\H{o}s Problems}, entry 249,
+\href{https://www.erdosproblems.com/249}{\texttt{erdosproblems.com/249}},
+accessed July 2026.
+\bibitem{mainpaper} W.~Cook, \emph{Erd\H{o}s Problems 249 and 257 in Lean~4:
+formalised results, certificate reductions, and open questions}, companion
+exposition in this release.
+\end{thebibliography}
+\end{document}

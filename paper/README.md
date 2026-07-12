@@ -7,7 +7,7 @@ A guide to this repository for mathematicians who do not read Lean.
 
 `erdos249-257-exposition.tex` states, in ordinary notation, what the Lean development
 proves, cites, and leaves open. Every formal statement links to the exact source
-line on GitHub, pinned to the release tag `v0.5.0`, so a reader can go from a
+line on GitHub, pinned to the release tag `v0.6.0`, so a reader can go from a
 sentence of prose to the checked proof in one click. The visible link text is
 intentionally quiet; the file, line, and declaration remain in each link target
 and are verified against the released source by `scripts/check_release.py`. The
@@ -16,6 +16,11 @@ are the sources it links to.
 
 The manuscript layer (this `.tex` and the rendered PDF) is licensed CC-BY-4.0;
 see `REUSE.toml` at the repository root.
+
+`erdos249-transport-curvature.tex` is the technical companion for the
+transport/curvature frontier. It separates unconditional affine-channel
+cancellation, sharp finite consumers, and the fixed-precision no-go theorem
+from the explicitly open unbounded-supply and first-harmonic hypotheses.
 
 ## Build
 
@@ -30,7 +35,8 @@ pdflatex erdos249-257-exposition.tex && pdflatex erdos249-257-exposition.tex
 make
 ```
 
-The output is `erdos249-257-exposition.pdf`.
+The outputs are `erdos249-257-exposition.pdf` and
+`erdos249-transport-curvature.pdf`.
 
 ## Contents
 

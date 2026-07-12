@@ -18,7 +18,10 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 CLAIMS = ROOT / "docs" / "claims.json"
 ATLAS = ROOT / "docs" / "declaration_atlas.json"
-PAPER = ROOT / "paper" / "erdos249-257-exposition.tex"
+PAPERS = (
+    ROOT / "paper" / "erdos249-257-exposition.tex",
+    ROOT / "paper" / "erdos249-transport-curvature.tex",
+)
 LINK_RE = re.compile(r"\\(lrefx?)\{([^}]+)\}\{\d+\}\{([^}]+)\}")
 
 
@@ -33,7 +36,7 @@ def declaration_lines() -> dict[tuple[str, str], int]:
     return {key: values[0] for key, values in rows.items()}
 
 
-def render() -> tuple[str, str]:
+def render() -> tuple[str, dict[Path, str]]:
     lines = declaration_lines()
     claims = json.loads(CLAIMS.read_text(encoding="utf-8"))
     for claim in claims["claims"]:
@@ -43,8 +46,6 @@ def render() -> tuple[str, str]:
                 raise RuntimeError(f"claim declaration absent from atlas: {key}")
             decl["line"] = lines[key]
 
-    paper = PAPER.read_text(encoding="utf-8")
-
     def replace(match: re.Match[str]) -> str:
         macro, filename, name = match.groups()
         key = (f"Erdos249257/{filename}", name)
@@ -52,28 +53,33 @@ def render() -> tuple[str, str]:
             raise RuntimeError(f"paper declaration absent from atlas: {key}")
         return f"\\{macro}{{{filename}}}{{{lines[key]}}}{{{name}}}"
 
-    paper = LINK_RE.sub(replace, paper)
-    return json.dumps(claims, ensure_ascii=False, indent=2) + "\n", paper
+    papers = {
+        path: LINK_RE.sub(replace, path.read_text(encoding="utf-8"))
+        for path in PAPERS
+    }
+    return json.dumps(claims, ensure_ascii=False, indent=2) + "\n", papers
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--check", action="store_true")
     args = parser.parse_args()
-    claims, paper = render()
+    claims, papers = render()
     if args.check:
         stale = []
         if CLAIMS.read_text(encoding="utf-8") != claims:
             stale.append("docs/claims.json")
-        if PAPER.read_text(encoding="utf-8") != paper:
-            stale.append("paper/erdos249-257-exposition.tex")
+        for path, paper in papers.items():
+            if path.read_text(encoding="utf-8") != paper:
+                stale.append(str(path.relative_to(ROOT)))
         if stale:
             print("source coordinates are stale: " + ", ".join(stale))
             return 1
         print("source coordinates current")
         return 0
     CLAIMS.write_text(claims, encoding="utf-8")
-    PAPER.write_text(paper, encoding="utf-8")
+    for path, paper in papers.items():
+        path.write_text(paper, encoding="utf-8")
     print("refreshed claim and paper source coordinates")
     return 0
 

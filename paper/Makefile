@@ -4,18 +4,19 @@
 #     https://tectonic-typesetting.github.io
 # Fallback: a standard TeX Live install (run pdflatex twice for the TOC/refs).
 
-PAPER = erdos249-257-exposition
+PAPERS = erdos249-257-exposition erdos249-transport-curvature
 
 .PHONY: all clean
 
-all: $(PAPER).pdf
+all: $(PAPERS:%=%.pdf)
 
-$(PAPER).pdf: $(PAPER).tex
+%.pdf: %.tex
 	@if command -v tectonic >/dev/null 2>&1; then \
-	  tectonic $(PAPER).tex ; \
+	  tectonic $< ; \
 	else \
-	  pdflatex $(PAPER).tex && pdflatex $(PAPER).tex ; \
+	  pdflatex $< && pdflatex $< ; \
 	fi
 
 clean:
-	rm -f $(PAPER).pdf $(PAPER).aux $(PAPER).log $(PAPER).out $(PAPER).toc
+	rm -f $(PAPERS:%=%.pdf) $(PAPERS:%=%.aux) $(PAPERS:%=%.log) \
+	  $(PAPERS:%=%.out) $(PAPERS:%=%.toc)

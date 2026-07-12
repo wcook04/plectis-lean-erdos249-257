@@ -13,8 +13,9 @@ mathematical priority. Formalisation/software dependencies are recorded in
 [CITATION.cff](../CITATION.cff); the Erdős Problems catalogue supplies
 numbering and status context rather than mathematical priority.
 
-The [exposition](../paper/erdos249-257-exposition.tex) is the complete
-mathematics bibliography. [CITATION.cff](../CITATION.cff) is intentionally
+The [exposition](../paper/erdos249-257-exposition.tex) and the
+[transport/curvature companion](../paper/erdos249-transport-curvature.tex)
+together form the mathematics bibliography. [CITATION.cff](../CITATION.cff) is intentionally
 selected release/software citation metadata: it supplies the recommended
 citation for this version and selected foundational or software references,
 not a duplicate bibliography. This map explains why the principal sources are
@@ -27,6 +28,7 @@ credited.
 | P. Erdős, [*On arithmetical properties of Lambert series* (1948)](https://users.renyi.hu/~p_erdos/1948-04.pdf) | Full-support Erdős--Borwein irrationality formalised here. | The formalisation is a checked rendering, not a priority claim. |
 | P. Erdős, [*On the irrationality of certain series* (Math. Student 36, 1968)](https://users.renyi.hu/~p_erdos/1969-09.pdf) | Pairwise-coprime support condition. | Only that classical family is attributed to this source; it does not settle universal #257. |
 | P. B. Borwein, [*On the irrationality of certain series* (1992)](https://doi.org/10.1017/S030500410007081X) | Broader irrationality theorem containing the relevant Mersenne--Lambert specialisation. | Context for the full-support family, not a proof route for the new #249 reductions. |
+| Finite-difference and affine-moment transport used in the companion | General algebraic techniques, applied here to exact Möbius residue kernels and totient-tail windows. The primary-source search found no cited theorem matching the release's combined curvature, prime-jump, anchored `(3,5)`, or fixed-precision no-go statements. | Absence of an identified match is not a novelty claim. The release claims only the pinned Lean theorems and keeps the open supply hypotheses explicit; a closer theorem-level antecedent should be added if identified. |
 | T. M. Apostol, [*Introduction to Analytic Number Theory* (1976)](https://doi.org/10.1007/978-1-4757-5579-4); M. Merca, [*The Lambert series factorization theorem* (2017)](https://doi.org/10.1007/s11139-016-9856-3); M. Merca and M. D. Schmidt, [*Generating Special Arithmetic Functions by Lambert Series Factorizations* (2019)](https://doi.org/10.55016/ojs/cdm.v14i1.62425) | Apostol supplies the classical Dirichlet/Möbius background; Merca gives the modern factorisation theorem and Merca--Schmidt its synthesis/unification treatment. | The release uses classical transforms and claims a Lean-checked composition, not new Möbius inversion, Lambert identities, or the cited factorisation theorems. |
 | Y. V. Nesterenko, [*Modular functions and transcendence questions* (1996)](https://doi.org/10.1070/SM1996v187n09ABEH000158) | Direct source for the cited-only transcendence of the divisor-sum ladder rung \(L(\mathrm{Id})=\sum_{m\geq1}\sigma(m)/2^m\). | This positions one ladder row only; no part of its modular-transcendence proof is formalised here. |
 | K. Postelmans and W. Van Assche, [*Irrationality of \(\zeta_q(1)\) and \(\zeta_q(2)\)* (2007)](https://doi.org/10.1016/j.jnt.2006.11.011) | Primary source for the cited-only linear independence of \(1,\zeta_q(1),\zeta_q(2)\) when \(q^{-1}\) is an integer of absolute value greater than one. At \(q=1/2\), this implies the irrationality of the squared-ladder value \(L_2(\mathbf1)=\zeta_{1/2}(2)-\zeta_{1/2}(1)\). | The release formalises the identity placing \(L_2(\mathbf1)\) in this q-zeta family, not the Hermite--Padé proof. Linear independence of the constant-weight row gives no irrationality transfer to the Möbius row \(L_2(\mu)=S-1/2\), which remains open. |

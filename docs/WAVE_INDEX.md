@@ -80,6 +80,18 @@ supplies exact rational-denominator information used by the frontier.  The
 remaining named modules provide finite identities or conditional interfaces;
 their headers state the boundary locally.
 
+## Transport and curvature companion band
+
+This post-wave #249 band forms a second, self-contained reading chain:
+`CurvatureCarry → ExponentOnlyTransport → JointExponentTransport`, with
+`PrimeJumpMigration → PrimeJumpWindow`, `ThreeTransportBoundary`,
+`FirstHarmonicGap`, and `TropicalCurvatureCarry` as adjacent branches.  It
+proves exact dyadic window decompositions, affine old-channel annihilation,
+new-channel migration, two concrete finite certificates, and a
+fixed-precision strategy no-go.  It does not prove an unbounded certificate
+supply or a first-harmonic estimate, so #249 remains open.  The mathematical
+argument is given separately in `paper/erdos249-transport-curvature.tex`.
+
 ## Package shape
 
 - `CertificateKernel.lean` (~0.85 MB, 18,887 lines, 483 theorems): the assembled microkernel. Imports all nine wave modules plus Mathlib number theory (`NumberTheory.Real.Irrational`, cyclotomic eval/expand/roots, `TsumDivisorsAntidiagonal`, factorisation, `Bertrand`, geometric and infinite sums).

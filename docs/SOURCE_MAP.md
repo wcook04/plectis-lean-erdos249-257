@@ -71,6 +71,36 @@ Exploratory exact interfaces with explicit conditional boundaries live in
 `ActualForeignResidueProjection`, `SternBrocotRunGeometry`, and
 `SupportDilationDifferences`.
 
+### Transport and curvature companion band
+
+Read `CurvatureCarry → ExponentOnlyTransport → JointExponentTransport` for the
+main proof spine, then `PrimeJumpMigration → PrimeJumpWindow` and
+`ThreeTransportBoundary` for the new-prime and balanced finite consumers.
+`FirstHarmonicGap` is the analytic interface: a constant-saving cosine bound
+forces a direct certificate, but no cofinal estimate is asserted.
+`TropicalCurvatureCarry` is a proved negative result showing that bounded
+valuation–unit precision alone cannot exclude all centred completions.
+
+- `CurvatureCarry` — exact curvature window, sharp radius, recurrence, and
+  conditional unbounded-supply endpoints.
+- `ExponentOnlyTransport` — squarefree support stability and the exact
+  periodic affine slope/intercept state.
+- `JointExponentTransport` — universal two-moment old-channel annihilation and
+  the anchored `(3,5)` four-vertex consumer.
+- `PrimeJumpMigration` / `PrimeJumpWindow` — migrated-channel correction,
+  sharp direct radius, and the finite `(12,5,15)` certificate.
+- `ThreeTransportBoundary` — balanced `(1,2,3,6)` consumer and the finite
+  `(60,12)` certificate.
+- `FirstHarmonicGap` — deterministic conversion of a blockwise harmonic gap
+  into a direct certificate.
+- `TropicalCurvatureCarry` — fixed-precision local-signature no-go theorem.
+
+The technical exposition is `paper/erdos249-transport-curvature.tex`.  This
+band is included as a separate companion because it has its own definitions
+and proof spine; folding it into the principal paper would obscure the latter's
+global result map.  Every irrationality endpoint in the band remains a
+conditional reduction.
+
 ### Paper-curation boundary
 
 The paper treats `GcdMomentCalculus` as supporting mathematical exposition: its
@@ -113,7 +143,7 @@ Builds on `Erdos249257.CertificateKernel`; not part of the wave chronology. Read
 - `Erdos249257.GeneratedCertificates`
 - `Erdos249257.GeneratedCertificates.*`
 
-The complete 530-module import graph and every declaration are generated in
+The complete 538-module import graph and every declaration are generated in
 `docs/claims.json::machine_readable_paper.module_graph` and
 `docs/declaration_atlas.json`; use those surfaces when a grouped route above is
 not specific enough.

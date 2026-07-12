@@ -4,21 +4,21 @@
   "projection_not_authority": true,
   "proof_authority": "Lean source checked by the pinned Lean kernel",
   "argument_authority": "docs/claims.json::machine_readable_paper.argument_graph",
-  "source_fingerprint": "sha256:6d8d9e3072caaebd401f16eebc075e233414dea2af2126e4a5af17bfb71f79da",
+  "source_fingerprint": "sha256:608ab90dbae857bf3611ae77f809619e095080c45778e047826cf0c503a2032b",
   "summary": {
-    "module_count": 531,
-    "declaration_count": 6218,
-    "theorem_like_count": 5771,
+    "module_count": 539,
+    "declaration_count": 6328,
+    "theorem_like_count": 5826,
     "generated_certificate_declaration_count": 1681,
-    "principal_claim_link_count": 36,
+    "principal_claim_link_count": 48,
     "kind_counts": {
       "abbrev": 1,
-      "def": 435,
-      "inductive": 2,
+      "def": 487,
+      "inductive": 3,
       "instance": 3,
-      "lemma": 332,
-      "structure": 6,
-      "theorem": 5439
+      "lemma": 336,
+      "structure": 8,
+      "theorem": 5490
     }
   },
   "modules": [
@@ -58,7 +58,13 @@
         "Erdos249257.DiagonalPincerCertificatesT41",
         "Erdos249257.DiagonalPincerCertificatesT43",
         "Erdos249257.PrimitiveRationalGapSupply",
-        "Erdos249257.PrimitiveSupportBridge"
+        "Erdos249257.PrimitiveSupportBridge",
+        "Erdos249257.TropicalCurvatureCarry",
+        "Erdos249257.ThreeTransportBoundary",
+        "Erdos249257.FirstHarmonicGap",
+        "Erdos249257.JointExponentTransport",
+        "Erdos249257.PrimeJumpMigration",
+        "Erdos249257.PrimeJumpWindow"
       ],
       "declaration_count": 0,
       "kind_counts": {}
@@ -137,6 +143,20 @@
         "lemma": 275,
         "structure": 1,
         "theorem": 512
+      }
+    },
+    {
+      "id": "Erdos249257.CurvatureCarry",
+      "path": "Erdos249257/CurvatureCarry.lean",
+      "imports": [
+        "Erdos249257.LcmConeFlatness"
+      ],
+      "declaration_count": 25,
+      "kind_counts": {
+        "def": 13,
+        "lemma": 1,
+        "structure": 1,
+        "theorem": 10
       }
     },
     {
@@ -6106,6 +6126,31 @@
       }
     },
     {
+      "id": "Erdos249257.ExponentOnlyTransport",
+      "path": "Erdos249257/ExponentOnlyTransport.lean",
+      "imports": [
+        "Erdos249257.LcmConeFlatness"
+      ],
+      "declaration_count": 20,
+      "kind_counts": {
+        "def": 10,
+        "theorem": 10
+      }
+    },
+    {
+      "id": "Erdos249257.FirstHarmonicGap",
+      "path": "Erdos249257/FirstHarmonicGap.lean",
+      "imports": [
+        "Erdos249257.LcmConeFlatness"
+      ],
+      "declaration_count": 4,
+      "kind_counts": {
+        "def": 1,
+        "lemma": 2,
+        "theorem": 1
+      }
+    },
+    {
       "id": "Erdos249257.FullTargetPrimeAdjunctionNoGo",
       "path": "Erdos249257/FullTargetPrimeAdjunctionNoGo.lean",
       "imports": [
@@ -6232,6 +6277,19 @@
       }
     },
     {
+      "id": "Erdos249257.JointExponentTransport",
+      "path": "Erdos249257/JointExponentTransport.lean",
+      "imports": [
+        "Erdos249257.CurvatureCarry",
+        "Erdos249257.ExponentOnlyTransport"
+      ],
+      "declaration_count": 16,
+      "kind_counts": {
+        "def": 8,
+        "theorem": 8
+      }
+    },
+    {
       "id": "Erdos249257.LambertDiagonalEnclosure",
       "path": "Erdos249257/LambertDiagonalEnclosure.lean",
       "imports": [
@@ -6316,6 +6374,30 @@
       "declaration_count": 14,
       "kind_counts": {
         "theorem": 14
+      }
+    },
+    {
+      "id": "Erdos249257.PrimeJumpMigration",
+      "path": "Erdos249257/PrimeJumpMigration.lean",
+      "imports": [
+        "Erdos249257.ActualForeignResidueProjection"
+      ],
+      "declaration_count": 7,
+      "kind_counts": {
+        "def": 3,
+        "theorem": 4
+      }
+    },
+    {
+      "id": "Erdos249257.PrimeJumpWindow",
+      "path": "Erdos249257/PrimeJumpWindow.lean",
+      "imports": [
+        "Erdos249257.LcmConeNonflat"
+      ],
+      "declaration_count": 10,
+      "kind_counts": {
+        "def": 5,
+        "theorem": 5
       }
     },
     {
@@ -6447,6 +6529,19 @@
       }
     },
     {
+      "id": "Erdos249257.ThreeTransportBoundary",
+      "path": "Erdos249257/ThreeTransportBoundary.lean",
+      "imports": [
+        "Erdos249257.CurvatureCarry",
+        "Erdos249257.ExponentOnlyTransport"
+      ],
+      "declaration_count": 17,
+      "kind_counts": {
+        "def": 7,
+        "theorem": 10
+      }
+    },
+    {
       "id": "Erdos249257.TotientTailPeriodKiller",
       "path": "Erdos249257/TotientTailPeriodKiller.lean",
       "imports": [],
@@ -6455,6 +6550,21 @@
         "def": 4,
         "lemma": 10,
         "theorem": 9
+      }
+    },
+    {
+      "id": "Erdos249257.TropicalCurvatureCarry",
+      "path": "Erdos249257/TropicalCurvatureCarry.lean",
+      "imports": [
+        "Erdos249257.CurvatureCarry"
+      ],
+      "declaration_count": 11,
+      "kind_counts": {
+        "def": 5,
+        "inductive": 1,
+        "lemma": 1,
+        "structure": 1,
+        "theorem": 3
       }
     }
   ],
@@ -16912,6 +17022,283 @@
       "generated_certificate": false,
       "claim_ids": [],
       "docstring": "**Seed-lift**: a small seed menu firing at its own floor inflates to every supermenu at every deeper depth (depth monotonicity up, menu monotonicity out). For supply it suffices that some prefix seed fires at its floor for arbitrarily large `t`."
+    },
+    {
+      "id": "Erdos249257/CurvatureCarry.lean:27:curvatureTail",
+      "name": "curvatureTail",
+      "kind": "def",
+      "module": "Erdos249257/CurvatureCarry.lean",
+      "line": 27,
+      "signature": "noncomputable def curvatureTail (H : ℕ) : ℝ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The affine curvature of the three LCM-cone tail vertices `H, 2H, 4H`."
+    },
+    {
+      "id": "Erdos249257/CurvatureCarry.lean:31:curvatureWindow",
+      "name": "curvatureWindow",
+      "kind": "def",
+      "module": "Erdos249257/CurvatureCarry.lean",
+      "line": 31,
+      "signature": "def curvatureWindow (H L : ℕ) : ℤ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The signed depth-`L` integer window for `curvatureTail`."
+    },
+    {
+      "id": "Erdos249257/CurvatureCarry.lean:35:curvatureShiftedTail",
+      "name": "curvatureShiftedTail",
+      "kind": "def",
+      "module": "Erdos249257/CurvatureCarry.lean",
+      "line": 35,
+      "signature": "noncomputable def curvatureShiftedTail (H L : ℕ) : ℝ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The shifted tail left after truncating `curvatureTail` at depth `L`."
+    },
+    {
+      "id": "Erdos249257/CurvatureCarry.lean:40:curvatureDrive",
+      "name": "curvatureDrive",
+      "kind": "def",
+      "module": "Erdos249257/CurvatureCarry.lean",
+      "line": 40,
+      "signature": "def curvatureDrive (H s : ℕ) : ℤ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The fresh integer letter appended to the curvature word at offset `s`."
+    },
+    {
+      "id": "Erdos249257/CurvatureCarry.lean:46:abs_curvatureDrive_le",
+      "name": "abs_curvatureDrive_le",
+      "kind": "theorem",
+      "module": "Erdos249257/CurvatureCarry.lean",
+      "line": 46,
+      "signature": "theorem abs_curvatureDrive_le (H s : ℕ) : |curvatureDrive H s| ≤ (6 * H + 3 * s : ℤ)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The curvature drive has a uniform elementary bound. This deliberately uses only `Nat.totient_le`; no factorisation or finite fixture enters."
+    },
+    {
+      "id": "Erdos249257/CurvatureCarry.lean:62:sharpCurvatureRadius",
+      "name": "sharpCurvatureRadius",
+      "kind": "def",
+      "module": "Erdos249257/CurvatureCarry.lean",
+      "line": 62,
+      "signature": "def sharpCurvatureRadius (H L : ℕ) : ℤ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The sharp direct curvature edge radius."
+    },
+    {
+      "id": "Erdos249257/CurvatureCarry.lean:66:totientTail_le_succ",
+      "name": "totientTail_le_succ",
+      "kind": "lemma",
+      "module": "Erdos249257/CurvatureCarry.lean",
+      "line": 66,
+      "signature": "lemma totientTail_le_succ (M : ℕ) (hM : 1 ≤ M) : totientTail M ≤ (M : ℝ) + 1",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "For a positive starting index, the elementary totient tail bound improves from `R_M <= M + 2` to `R_M <= M + 1`, using `phi(n) <= n - 1` termwise."
+    },
+    {
+      "id": "Erdos249257/CurvatureCarry.lean:119:two_pow_mul_curvature_eq_window_add_shifted",
+      "name": "two_pow_mul_curvature_eq_window_add_shifted",
+      "kind": "theorem",
+      "module": "Erdos249257/CurvatureCarry.lean",
+      "line": 119,
+      "signature": "theorem two_pow_mul_curvature_eq_window_add_shifted (H L : ℕ) : (2 : ℝ) ^ L * curvatureTail H = (curvatureWindow H L : ℝ) + curvatureShiftedTail H L",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Exact curvature prefix/tail split."
+    },
+    {
+      "id": "Erdos249257/CurvatureCarry.lean:137:abs_curvatureShiftedTail_le",
+      "name": "abs_curvatureShiftedTail_le",
+      "kind": "theorem",
+      "module": "Erdos249257/CurvatureCarry.lean",
+      "line": 137,
+      "signature": "theorem abs_curvatureShiftedTail_le (H L : ℕ) (hH : 1 ≤ H) : |curvatureShiftedTail H L| ≤ (sharpCurvatureRadius H L : ℝ)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The direct shifted curvature tail lies in the sharp symmetric strip."
+    },
+    {
+      "id": "Erdos249257/CurvatureCarry.lean:151:sharpCurvatureCert",
+      "name": "sharpCurvatureCert",
+      "kind": "def",
+      "module": "Erdos249257/CurvatureCarry.lean",
+      "line": 151,
+      "signature": "def sharpCurvatureCert (H L : ℕ) : Prop",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The direct residue-gap certificate for curvature."
+    },
+    {
+      "id": "Erdos249257/CurvatureCarry.lean:159:curvature_notMem_int_of_sharpCurvatureCert",
+      "name": "curvature_notMem_int_of_sharpCurvatureCert",
+      "kind": "theorem",
+      "module": "Erdos249257/CurvatureCarry.lean",
+      "line": 159,
+      "signature": "theorem curvature_notMem_int_of_sharpCurvatureCert {H L : ℕ} (hH : 1 ≤ H) (hcert : sharpCurvatureCert H L) : curvatureTail H ∉ Set.range ((↑) : ℤ → ℝ)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A sharp curvature residue gap directly excludes integral curvature."
+    },
+    {
+      "id": "Erdos249257/CurvatureCarry.lean:197:SharpCurvatureSupply",
+      "name": "SharpCurvatureSupply",
+      "kind": "def",
+      "module": "Erdos249257/CurvatureCarry.lean",
+      "line": 197,
+      "signature": "def SharpCurvatureSupply : Prop",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The unbounded direct-curvature certificate supply."
+    },
+    {
+      "id": "Erdos249257/CurvatureCarry.lean:202:SharpCurvatureAnyDepthSupply",
+      "name": "SharpCurvatureAnyDepthSupply",
+      "kind": "def",
+      "module": "Erdos249257/CurvatureCarry.lean",
+      "line": 202,
+      "signature": "def SharpCurvatureAnyDepthSupply : Prop",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The depth need not be tied to the old LCM height. This is the correct consumer for a phase-separation certificate found later in a successor block."
+    },
+    {
+      "id": "Erdos249257/CurvatureCarry.lean:206:irrational_totientSeries_of_sharpCurvatureSupply",
+      "name": "irrational_totientSeries_of_sharpCurvatureSupply",
+      "kind": "theorem",
+      "module": "Erdos249257/CurvatureCarry.lean",
+      "line": 206,
+      "signature": "theorem irrational_totientSeries_of_sharpCurvatureSupply (hsupply : SharpCurvatureSupply) : Irrational (∑' n : ℕ, (Nat.totient n : ℝ) / 2 ^ n)",
+      "generated_certificate": false,
+      "claim_ids": [
+        "transport_curvature_reductions"
+      ],
+      "docstring": "The sharp curvature supply is a complete proof socket for #249."
+    },
+    {
+      "id": "Erdos249257/CurvatureCarry.lean:234:irrational_totientSeries_of_sharpCurvatureAnyDepthSupply",
+      "name": "irrational_totientSeries_of_sharpCurvatureAnyDepthSupply",
+      "kind": "theorem",
+      "module": "Erdos249257/CurvatureCarry.lean",
+      "line": 234,
+      "signature": "theorem irrational_totientSeries_of_sharpCurvatureAnyDepthSupply (hsupply : SharpCurvatureAnyDepthSupply) : Irrational (∑' n : ℕ, (Nat.totient n : ℝ) / 2 ^ n)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Arbitrarily large sharp curvature certificates at arbitrary depths still contradict the same LCM-cone flatness conclusion."
+    },
+    {
+      "id": "Erdos249257/CurvatureCarry.lean:259:curvatureWindow_succ",
+      "name": "curvatureWindow_succ",
+      "kind": "theorem",
+      "module": "Erdos249257/CurvatureCarry.lean",
+      "line": 259,
+      "signature": "theorem curvatureWindow_succ (H L : ℕ) : curvatureWindow H (L + 1) = 2 * curvatureWindow H L + curvatureDrive H (L + 1)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The curvature word is an exact input-driven doubling recurrence."
+    },
+    {
+      "id": "Erdos249257/CurvatureCarry.lean:268:curvatureCarryOrbit",
+      "name": "curvatureCarryOrbit",
+      "kind": "def",
+      "module": "Erdos249257/CurvatureCarry.lean",
+      "line": 268,
+      "signature": "def curvatureCarryOrbit (H m : ℕ) (e : ℤ) : ℕ → ℤ | 0 => e | j + 1 => 2 * curvatureCarryOrbit H m e j + curvatureDrive H (m + j + 1) /-- An entering phase remains inside the sharp corridor throughout a block. -/ def curvatureBlockLocked (H m r : ℕ) (e : ℤ) : Prop",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Exact affine curvature orbit launched at depth `m`."
+    },
+    {
+      "id": "Erdos249257/CurvatureCarry.lean:273:curvatureBlockLocked",
+      "name": "curvatureBlockLocked",
+      "kind": "def",
+      "module": "Erdos249257/CurvatureCarry.lean",
+      "line": 273,
+      "signature": "def curvatureBlockLocked (H m r : ℕ) (e : ℤ) : Prop",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "An entering phase remains inside the sharp corridor throughout a block."
+    },
+    {
+      "id": "Erdos249257/CurvatureCarry.lean:278:curvatureEndpointSurvivor",
+      "name": "curvatureEndpointSurvivor",
+      "kind": "def",
+      "module": "Erdos249257/CurvatureCarry.lean",
+      "line": 278,
+      "signature": "def curvatureEndpointSurvivor (H L : ℕ) (e : ℤ) : Prop",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Signed survivor fibre at one depth. The congruence records the complete prefix history exposed to a suffix checker."
+    },
+    {
+      "id": "Erdos249257/CurvatureCarry.lean:283:curvatureCarryOrbit_curvatureWindow",
+      "name": "curvatureCarryOrbit_curvatureWindow",
+      "kind": "theorem",
+      "module": "Erdos249257/CurvatureCarry.lean",
+      "line": 283,
+      "signature": "theorem curvatureCarryOrbit_curvatureWindow (H m j : ℕ) : curvatureCarryOrbit H m (curvatureWindow H m) j = curvatureWindow H (m + j)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The affine orbit starting from the genuine prefix window is exactly the curvature window at every later depth."
+    },
+    {
+      "id": "Erdos249257/CurvatureCarry.lean:294:CurvaturePhaseCertificate",
+      "name": "CurvaturePhaseCertificate",
+      "kind": "structure",
+      "module": "Erdos249257/CurvatureCarry.lean",
+      "line": 294,
+      "signature": "structure CurvaturePhaseCertificate (H m r : ℕ)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Proof-valued phase-fibre certificate. A future reflected checker may produce this structure from exact arithmetic receipts; the final `sharp` field is the small kernel-facing conclusion."
+    },
+    {
+      "id": "Erdos249257/CurvatureCarry.lean:303:CurvaturePhaseCertificateSupply",
+      "name": "CurvaturePhaseCertificateSupply",
+      "kind": "def",
+      "module": "Erdos249257/CurvatureCarry.lean",
+      "line": 303,
+      "signature": "def CurvaturePhaseCertificateSupply : Prop",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Arbitrarily large proof-producing phase certificates."
+    },
+    {
+      "id": "Erdos249257/CurvatureCarry.lean:308:irrational_totientSeries_of_phaseCertificateSupply",
+      "name": "irrational_totientSeries_of_phaseCertificateSupply",
+      "kind": "theorem",
+      "module": "Erdos249257/CurvatureCarry.lean",
+      "line": 308,
+      "signature": "theorem irrational_totientSeries_of_phaseCertificateSupply (hsupply : CurvaturePhaseCertificateSupply) : Irrational (∑' n : ℕ, (Nat.totient n : ℝ) / 2 ^ n)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Phase-certificate supply feeds the any-depth curvature consumer."
+    },
+    {
+      "id": "Erdos249257/CurvatureCarry.lean:317:scaledRoughLoss",
+      "name": "scaledRoughLoss",
+      "kind": "def",
+      "module": "Erdos249257/CurvatureCarry.lean",
+      "line": 317,
+      "signature": "def scaledRoughLoss (g n : ℕ) : ℤ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A denominator-free rough loss scaled by an arbitrary common carrier `g`."
+    },
+    {
+      "id": "Erdos249257/CurvatureCarry.lean:323:curvatureDrive_commonCarrier",
+      "name": "curvatureDrive_commonCarrier",
+      "kind": "theorem",
+      "module": "Erdos249257/CurvatureCarry.lean",
+      "line": 323,
+      "signature": "theorem curvatureDrive_commonCarrier (g H s : ℕ) : (g : ℤ) * curvatureDrive H s = 3 * scaledRoughLoss g (2 * H + s) - 2 * scaledRoughLoss g (H + s) - scaledRoughLoss g (4 * H + s)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The exact common-carrier identity. No divisibility or factorisation hypothesis is needed at this scaled level; choosing `g` as a smooth carrier can be deferred to downstream arithmetic."
     },
     {
       "id": "Erdos249257/CyclicTensorMobiusShadow.lean:21:cyclicModulus",
@@ -49492,6 +49879,274 @@
       "docstring": "Conditional wrapper for `F={2,3,6,7,14}` with the exact `13/42` residual wrap ratio."
     },
     {
+      "id": "Erdos249257/ExponentOnlyTransport.lean:36:squarefree_dvd_mul_iff_of_dvd",
+      "name": "squarefree_dvd_mul_iff_of_dvd",
+      "kind": "theorem",
+      "module": "Erdos249257/ExponentOnlyTransport.lean",
+      "line": 36,
+      "signature": "theorem squarefree_dvd_mul_iff_of_dvd {p H d : ℕ} (hpH : p ∣ H) (hsq : Squarefree d) : d ∣ p * H ↔ d ∣ H",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "If `p` is already a divisor of `H`, multiplication by `p` adds no squarefree divisor channels. This is stronger than the prime-power-jump specialization: the exponent and primality of `p` are not needed."
+    },
+    {
+      "id": "Erdos249257/ExponentOnlyTransport.lean:56:squarefree_dvd_prime_mul_iff_of_prime_dvd",
+      "name": "squarefree_dvd_prime_mul_iff_of_prime_dvd",
+      "kind": "theorem",
+      "module": "Erdos249257/ExponentOnlyTransport.lean",
+      "line": 56,
+      "signature": "theorem squarefree_dvd_prime_mul_iff_of_prime_dvd {p H d : ℕ} (_hp : p.Prime) (hpH : p ∣ H) (hsq : Squarefree d) : d ∣ p * H ↔ d ∣ H",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Prime-form API used by the exponent-only LCM jump."
+    },
+    {
+      "id": "Erdos249257/ExponentOnlyTransport.lean:62:mobius_ne_zero_dvd_mul_iff_of_dvd",
+      "name": "mobius_ne_zero_dvd_mul_iff_of_dvd",
+      "kind": "theorem",
+      "module": "Erdos249257/ExponentOnlyTransport.lean",
+      "line": 62,
+      "signature": "theorem mobius_ne_zero_dvd_mul_iff_of_dvd {p H d : ℕ} (hpH : p ∣ H) (hmu : ArithmeticFunction.moebius d ≠ 0) : d ∣ p * H ↔ d ∣ H",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The nonzero Möbius support is unchanged across `H -> pH` once `p ∣ H`."
+    },
+    {
+      "id": "Erdos249257/ExponentOnlyTransport.lean:72:transportResidueOffset",
+      "name": "transportResidueOffset",
+      "kind": "def",
+      "module": "Erdos249257/ExponentOnlyTransport.lean",
+      "line": 72,
+      "signature": "def transportResidueOffset (d N : ℕ) : ℕ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Least positive shift sending `N` to a multiple of `d`."
+    },
+    {
+      "id": "Erdos249257/ExponentOnlyTransport.lean:76:transportResidueKernel",
+      "name": "transportResidueKernel",
+      "kind": "def",
+      "module": "Erdos249257/ExponentOnlyTransport.lean",
+      "line": 76,
+      "signature": "noncomputable def transportResidueKernel (d N : ℕ) : ℝ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Exact Möbius residue kernel, stated locally so this disjoint transport owner can be validated independently of adjacent projection files."
+    },
+    {
+      "id": "Erdos249257/ExponentOnlyTransport.lean:84:transportResidueIncrement",
+      "name": "transportResidueIncrement",
+      "kind": "def",
+      "module": "Erdos249257/ExponentOnlyTransport.lean",
+      "line": 84,
+      "signature": "noncomputable def transportResidueIncrement (d H : ℕ) : ℝ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Diagonal increment of the exact transport kernel."
+    },
+    {
+      "id": "Erdos249257/ExponentOnlyTransport.lean:88:residueTransportDefect",
+      "name": "residueTransportDefect",
+      "kind": "def",
+      "module": "Erdos249257/ExponentOnlyTransport.lean",
+      "line": 88,
+      "signature": "noncomputable def residueTransportDefect (d H p : ℕ) : ℝ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Channelwise first-order transport of the diagonal residue increment."
+    },
+    {
+      "id": "Erdos249257/ExponentOnlyTransport.lean:92:transportResidueIncrement_of_dvd",
+      "name": "transportResidueIncrement_of_dvd",
+      "kind": "theorem",
+      "module": "Erdos249257/ExponentOnlyTransport.lean",
+      "line": 92,
+      "signature": "theorem transportResidueIncrement_of_dvd {d H : ℕ} (hd : 0 < d) (hdvd : d ∣ H) : transportResidueIncrement d H = ((ArithmeticFunction.moebius d : ℤ) : ℝ) * (H : ℝ) / ((d : ℝ) * ((2 : ℝ) ^ d - 1))",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A divisor channel has the standard linear form."
+    },
+    {
+      "id": "Erdos249257/ExponentOnlyTransport.lean:112:residueTransportDefect_eq_zero_of_dvd",
+      "name": "residueTransportDefect_eq_zero_of_dvd",
+      "kind": "theorem",
+      "module": "Erdos249257/ExponentOnlyTransport.lean",
+      "line": 112,
+      "signature": "theorem residueTransportDefect_eq_zero_of_dvd {d H p : ℕ} (hd : 0 < d) (hdH : d ∣ H) : residueTransportDefect d H p = 0",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Every old divisor channel is annihilated exactly by first-order transport."
+    },
+    {
+      "id": "Erdos249257/ExponentOnlyTransport.lean:125:residueSlope",
+      "name": "residueSlope",
+      "kind": "def",
+      "module": "Erdos249257/ExponentOnlyTransport.lean",
+      "line": 125,
+      "signature": "noncomputable def residueSlope (d N : ℕ) : ℝ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Periodic coefficient of the linear-in-`N` part of the residue kernel."
+    },
+    {
+      "id": "Erdos249257/ExponentOnlyTransport.lean:131:residueIntercept",
+      "name": "residueIntercept",
+      "kind": "def",
+      "module": "Erdos249257/ExponentOnlyTransport.lean",
+      "line": 131,
+      "signature": "noncomputable def residueIntercept (d N : ℕ) : ℝ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Periodic intercept of the residue kernel."
+    },
+    {
+      "id": "Erdos249257/ExponentOnlyTransport.lean:141:transportResidueKernel_eq_affineState",
+      "name": "transportResidueKernel_eq_affineState",
+      "kind": "theorem",
+      "module": "Erdos249257/ExponentOnlyTransport.lean",
+      "line": 141,
+      "signature": "theorem transportResidueKernel_eq_affineState {d N : ℕ} (hd : 0 < d) : transportResidueKernel d N = (N : ℝ) * residueSlope d N + residueIntercept d N",
+      "generated_certificate": false,
+      "claim_ids": [
+        "affine_transport_annihilation"
+      ],
+      "docstring": "The exact kernel is affine in the scale coordinate and periodic in the residue coordinate. This is the state omitted by a residue-permutation-only transport matrix."
+    },
+    {
+      "id": "Erdos249257/ExponentOnlyTransport.lean:153:residueSlope_add_period",
+      "name": "residueSlope_add_period",
+      "kind": "theorem",
+      "module": "Erdos249257/ExponentOnlyTransport.lean",
+      "line": 153,
+      "signature": "theorem residueSlope_add_period {d N : ℕ} (_hd : 0 < d) : residueSlope d (N + d) = residueSlope d N",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The slope state is periodic modulo the channel index."
+    },
+    {
+      "id": "Erdos249257/ExponentOnlyTransport.lean:158:residueIntercept_add_period",
+      "name": "residueIntercept_add_period",
+      "kind": "theorem",
+      "module": "Erdos249257/ExponentOnlyTransport.lean",
+      "line": 158,
+      "signature": "theorem residueIntercept_add_period {d N : ℕ} (_hd : 0 < d) : residueIntercept d (N + d) = residueIntercept d N",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The intercept state is periodic modulo the channel index."
+    },
+    {
+      "id": "Erdos249257/ExponentOnlyTransport.lean:163:threeTransportSlopePart",
+      "name": "threeTransportSlopePart",
+      "kind": "def",
+      "module": "Erdos249257/ExponentOnlyTransport.lean",
+      "line": 163,
+      "signature": "noncomputable def threeTransportSlopePart (d H : ℕ) : ℝ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Linear block of the four-vertex `H -> 3H` transport."
+    },
+    {
+      "id": "Erdos249257/ExponentOnlyTransport.lean:169:threeTransportInterceptPart",
+      "name": "threeTransportInterceptPart",
+      "kind": "def",
+      "module": "Erdos249257/ExponentOnlyTransport.lean",
+      "line": 169,
+      "signature": "noncomputable def threeTransportInterceptPart (d H : ℕ) : ℝ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Constant block of the four-vertex `H -> 3H` transport."
+    },
+    {
+      "id": "Erdos249257/ExponentOnlyTransport.lean:176:residueTransportDefect_three_eq_affineState",
+      "name": "residueTransportDefect_three_eq_affineState",
+      "kind": "theorem",
+      "module": "Erdos249257/ExponentOnlyTransport.lean",
+      "line": 176,
+      "signature": "theorem residueTransportDefect_three_eq_affineState {d H : ℕ} (hd : 0 < d) : residueTransportDefect d H 3 = threeTransportSlopePart d H + threeTransportInterceptPart d H",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Exact first-order affine transfer. Both blocks are present; invertibility of a constant residue-permutation block alone cannot prove this expression is nonzero or prevent cancellation between channel indices."
+    },
+    {
+      "id": "Erdos249257/ExponentOnlyTransport.lean:192:threeTransportTailCommutator",
+      "name": "threeTransportTailCommutator",
+      "kind": "def",
+      "module": "Erdos249257/ExponentOnlyTransport.lean",
+      "line": 192,
+      "signature": "noncomputable def threeTransportTailCommutator (H : ℕ) : ℝ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The actual four-vertex transport on the totient tail."
+    },
+    {
+      "id": "Erdos249257/ExponentOnlyTransport.lean:197:ExponentOnlyThreeTransportSupply",
+      "name": "ExponentOnlyThreeTransportSupply",
+      "kind": "def",
+      "module": "Erdos249257/ExponentOnlyTransport.lean",
+      "line": 197,
+      "signature": "def ExponentOnlyThreeTransportSupply : Prop",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Exact unresolved supply on the fixed `3^a` LCM tower."
+    },
+    {
+      "id": "Erdos249257/ExponentOnlyTransport.lean:205:irrational_totient_series_of_exponentOnlyThreeTransportSupply",
+      "name": "irrational_totient_series_of_exponentOnlyThreeTransportSupply",
+      "kind": "theorem",
+      "module": "Erdos249257/ExponentOnlyTransport.lean",
+      "line": 205,
+      "signature": "theorem irrational_totient_series_of_exponentOnlyThreeTransportSupply (hsupply : ExponentOnlyThreeTransportSupply) : Irrational (∑' n : ℕ, (Nat.totient n : ℝ) / 2 ^ n)",
+      "generated_certificate": false,
+      "claim_ids": [
+        "transport_curvature_reductions"
+      ],
+      "docstring": "The fixed-three transport supply contradicts rational LCM-cone flatness and therefore proves irrationality of the totient series."
+    },
+    {
+      "id": "Erdos249257/FirstHarmonicGap.lean:27:windowFirstCos",
+      "name": "windowFirstCos",
+      "kind": "def",
+      "module": "Erdos249257/FirstHarmonicGap.lean",
+      "line": 27,
+      "signature": "noncomputable def windowFirstCos (h N L : ℕ) : ℝ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Real part of the first additive character of the endpoint discrepancy modulo `2^L`."
+    },
+    {
+      "id": "Erdos249257/FirstHarmonicGap.lean:33:nine_tenths_lt_cos_pi_div_eight",
+      "name": "nine_tenths_lt_cos_pi_div_eight",
+      "kind": "lemma",
+      "module": "Erdos249257/FirstHarmonicGap.lean",
+      "line": 33,
+      "signature": "private lemma nine_tenths_lt_cos_pi_div_eight : (9 / 10 : ℝ) < Real.cos (Real.pi / 8)",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/FirstHarmonicGap.lean:44:windowFirstCos_gt_of_not_certifiedKill",
+      "name": "windowFirstCos_gt_of_not_certifiedKill",
+      "kind": "lemma",
+      "module": "Erdos249257/FirstHarmonicGap.lean",
+      "line": 44,
+      "signature": "private lemma windowFirstCos_gt_of_not_certifiedKill {h X L N : ℕ} (hN : N < 2 * X) (hroom : 16 * (2 * X + h + L + 2) ≤ 2 ^ L) (hnot : ¬ certifiedKill h N L) : (9 / 10 : ℝ) < windowFirstCos h N L",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/FirstHarmonicGap.lean:104:exists_certifiedKill_of_first_harmonic_gap",
+      "name": "exists_certifiedKill_of_first_harmonic_gap",
+      "kind": "theorem",
+      "module": "Erdos249257/FirstHarmonicGap.lean",
+      "line": 104,
+      "signature": "theorem exists_certifiedKill_of_first_harmonic_gap {h X L : ℕ} (hX : 0 < X) (hroom : 16 * (2 * X + h + L + 2) ≤ 2 ^ L) (hgap : (∑ N ∈ Finset.Ico X (2 * X), windowFirstCos h N L) ≤ (9 / 10 : ℝ) * X) : ∃ N ∈ Finset.Ico X (2 * X), certifiedKill h N L",
+      "generated_certificate": false,
+      "claim_ids": [
+        "first_harmonic_certificate_interface"
+      ],
+      "docstring": "A constant-saving first-harmonic gap on one dyadic block forces a finite certificate somewhere in that block. Establishing such gaps cofinally is the analytic input still required for #249."
+    },
+    {
       "id": "Erdos249257/FullTargetPrimeAdjunctionNoGo.lean:18:controlling",
       "name": "controlling",
       "kind": "theorem",
@@ -64333,6 +64988,185 @@
       "docstring": "The exact growth criterion once a crossed boundary has forcing depth `2*N-v-1`: strict extension beyond `N` is equivalent to excluding `v ≥ N-1`."
     },
     {
+      "id": "Erdos249257/JointExponentTransport.lean:36:oldChannel_affine_moment_annihilation",
+      "name": "oldChannel_affine_moment_annihilation",
+      "kind": "theorem",
+      "module": "Erdos249257/JointExponentTransport.lean",
+      "line": 36,
+      "signature": "theorem oldChannel_affine_moment_annihilation {ι : Type*} [Fintype ι] (m : ι → ℕ) (c : ι → ℝ) (hzero : ∑ i, c i = 0) (hfirst : ∑ i, c i * (m i : ℝ) = 0) {d H : ℕ} (hd : 0 < d) (hdH : d ∣ H) : ∑ i, c i * transportResidueKernel d (m i * H) = 0",
+      "generated_certificate": false,
+      "claim_ids": [
+        "affine_transport_annihilation"
+      ],
+      "docstring": "Any finite real combination with zero constant and first moments kills an old affine residue channel. This is independent of the particular `(3,5)` operator."
+    },
+    {
+      "id": "Erdos249257/JointExponentTransport.lean:71:joint35_oldChannel_zero",
+      "name": "joint35_oldChannel_zero",
+      "kind": "theorem",
+      "module": "Erdos249257/JointExponentTransport.lean",
+      "line": 71,
+      "signature": "theorem joint35_oldChannel_zero {d H : ℕ} (hd : 0 < d) (hdH : d ∣ H) : transportResidueKernel d (15 * H) - 3 * transportResidueKernel d (3 * H) - 2 * transportResidueKernel d (5 * H) + 4 * transportResidueKernel d H = 0",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The primitive joint `(3,5)` observable kills every old divisor channel."
+    },
+    {
+      "id": "Erdos249257/JointExponentTransport.lean:108:joint35ConeTail",
+      "name": "joint35ConeTail",
+      "kind": "def",
+      "module": "Erdos249257/JointExponentTransport.lean",
+      "line": 108,
+      "signature": "noncomputable def joint35ConeTail (H : ℕ) : ℝ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The curvature-preserving four-vertex cone observable."
+    },
+    {
+      "id": "Erdos249257/JointExponentTransport.lean:113:joint35ConeWindow",
+      "name": "joint35ConeWindow",
+      "kind": "def",
+      "module": "Erdos249257/JointExponentTransport.lean",
+      "line": 113,
+      "signature": "def joint35ConeWindow (H L : ℕ) : ℤ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The integer window obtained from the three cone differences based at `H`."
+    },
+    {
+      "id": "Erdos249257/JointExponentTransport.lean:119:joint35ConeShiftedTail",
+      "name": "joint35ConeShiftedTail",
+      "kind": "def",
+      "module": "Erdos249257/JointExponentTransport.lean",
+      "line": 119,
+      "signature": "noncomputable def joint35ConeShiftedTail (H L : ℕ) : ℝ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The shifted tail left after truncating the joint observable at depth `L`."
+    },
+    {
+      "id": "Erdos249257/JointExponentTransport.lean:124:sharpJoint35ConeRadius",
+      "name": "sharpJoint35ConeRadius",
+      "kind": "def",
+      "module": "Erdos249257/JointExponentTransport.lean",
+      "line": 124,
+      "signature": "def sharpJoint35ConeRadius (H L : ℕ) : ℤ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Sharp symmetric error radius for the joint four-vertex window."
+    },
+    {
+      "id": "Erdos249257/JointExponentTransport.lean:127:two_pow_mul_joint35Cone_eq_window_add_shifted",
+      "name": "two_pow_mul_joint35Cone_eq_window_add_shifted",
+      "kind": "theorem",
+      "module": "Erdos249257/JointExponentTransport.lean",
+      "line": 127,
+      "signature": "theorem two_pow_mul_joint35Cone_eq_window_add_shifted (H L : ℕ) : (2 : ℝ) ^ L * joint35ConeTail H = (joint35ConeWindow H L : ℝ) + joint35ConeShiftedTail H L",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Exact joint prefix/tail split."
+    },
+    {
+      "id": "Erdos249257/JointExponentTransport.lean:148:abs_joint35ConeShiftedTail_le",
+      "name": "abs_joint35ConeShiftedTail_le",
+      "kind": "theorem",
+      "module": "Erdos249257/JointExponentTransport.lean",
+      "line": 148,
+      "signature": "theorem abs_joint35ConeShiftedTail_le (H L : ℕ) (hH : 1 ≤ H) : |joint35ConeShiftedTail H L| ≤ (sharpJoint35ConeRadius H L : ℝ)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The shifted joint tail lies in the sharp symmetric strip."
+    },
+    {
+      "id": "Erdos249257/JointExponentTransport.lean:164:sharpJoint35ConeCert",
+      "name": "sharpJoint35ConeCert",
+      "kind": "def",
+      "module": "Erdos249257/JointExponentTransport.lean",
+      "line": 164,
+      "signature": "def sharpJoint35ConeCert (H L : ℕ) : Prop",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A dyadic residue separated from both endpoint error bands."
+    },
+    {
+      "id": "Erdos249257/JointExponentTransport.lean:172:joint35Cone_notMem_int_of_cert",
+      "name": "joint35Cone_notMem_int_of_cert",
+      "kind": "theorem",
+      "module": "Erdos249257/JointExponentTransport.lean",
+      "line": 172,
+      "signature": "theorem joint35Cone_notMem_int_of_cert {H L : ℕ} (hH : 1 ≤ H) (hcert : sharpJoint35ConeCert H L) : joint35ConeTail H ∉ Set.range ((↑) : ℤ → ℝ)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A sharp joint residue gap excludes integral four-vertex curvature."
+    },
+    {
+      "id": "Erdos249257/JointExponentTransport.lean:211:AnchoredJoint35ConeSupply",
+      "name": "AnchoredJoint35ConeSupply",
+      "kind": "def",
+      "module": "Erdos249257/JointExponentTransport.lean",
+      "line": 211,
+      "signature": "def AnchoredJoint35ConeSupply : Prop",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The only open arithmetic throat for this anchored joint observable."
+    },
+    {
+      "id": "Erdos249257/JointExponentTransport.lean:217:irrational_totient_series_of_anchoredJoint35ConeSupply",
+      "name": "irrational_totient_series_of_anchoredJoint35ConeSupply",
+      "kind": "theorem",
+      "module": "Erdos249257/JointExponentTransport.lean",
+      "line": 217,
+      "signature": "theorem irrational_totient_series_of_anchoredJoint35ConeSupply (hsupply : AnchoredJoint35ConeSupply) : Irrational (∑' n : ℕ, (Nat.totient n : ℝ) / 2 ^ n)",
+      "generated_certificate": false,
+      "claim_ids": [
+        "transport_curvature_reductions"
+      ],
+      "docstring": "An unbounded joint certificate supply contradicts rational LCM-cone flatness and proves irrationality of the totient series."
+    },
+    {
+      "id": "Erdos249257/JointExponentTransport.lean:241:joint35ConeDrive",
+      "name": "joint35ConeDrive",
+      "kind": "def",
+      "module": "Erdos249257/JointExponentTransport.lean",
+      "line": 241,
+      "signature": "def joint35ConeDrive (H s : ℕ) : ℤ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The new integer letter appended to the joint window at offset `s`."
+    },
+    {
+      "id": "Erdos249257/JointExponentTransport.lean:246:joint35ConeWindow_succ",
+      "name": "joint35ConeWindow_succ",
+      "kind": "theorem",
+      "module": "Erdos249257/JointExponentTransport.lean",
+      "line": 246,
+      "signature": "theorem joint35ConeWindow_succ (H L : ℕ) : joint35ConeWindow H (L + 1) = 2 * joint35ConeWindow H L + joint35ConeDrive H (L + 1)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The joint window is an exact input-driven doubling recurrence."
+    },
+    {
+      "id": "Erdos249257/JointExponentTransport.lean:256:joint35TransportTail",
+      "name": "joint35TransportTail",
+      "kind": "def",
+      "module": "Erdos249257/JointExponentTransport.lean",
+      "line": 256,
+      "signature": "noncomputable def joint35TransportTail (H : ℕ) : ℝ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Eight-vertex compatibility object for the existing diagonal increment owner. It is not a second supply hypothesis."
+    },
+    {
+      "id": "Erdos249257/JointExponentTransport.lean:259:joint35TransportTail_expand",
+      "name": "joint35TransportTail_expand",
+      "kind": "theorem",
+      "module": "Erdos249257/JointExponentTransport.lean",
+      "line": 259,
+      "signature": "theorem joint35TransportTail_expand (H : ℕ) : joint35TransportTail H = (totientTail (30 * H) - totientTail (15 * H)) - 3 * (totientTail (6 * H) - totientTail (3 * H)) - 2 * (totientTail (10 * H) - totientTail (5 * H)) + 4 * (totientTail (2 * H) - totientTail H)",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
       "id": "Erdos249257/LambertDiagonalEnclosure.lean:24:ForeignResidueTailLimit",
       "name": "ForeignResidueTailLimit",
       "kind": "def",
@@ -66166,6 +67000,199 @@
       "generated_certificate": false,
       "claim_ids": [],
       "docstring": "Boundary regression: at `t = 5` the surviving product is `(2^3 - 1)(2^5 - 1) = 217`."
+    },
+    {
+      "id": "Erdos249257/PrimeJumpMigration.lean:23:residueHeckeDefect",
+      "name": "residueHeckeDefect",
+      "kind": "def",
+      "module": "Erdos249257/PrimeJumpMigration.lean",
+      "line": 23,
+      "signature": "noncomputable def residueHeckeDefect (d H p : ℕ) : ℝ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Contribution of residue channel `d` to `D(pH) - p D(H)`."
+    },
+    {
+      "id": "Erdos249257/PrimeJumpMigration.lean:28:postJumpResidueChannel",
+      "name": "postJumpResidueChannel",
+      "kind": "def",
+      "module": "Erdos249257/PrimeJumpMigration.lean",
+      "line": 28,
+      "signature": "noncomputable def postJumpResidueChannel (d H p : ℕ) : ℝ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The divisor value seen after the jump. For a newly absorbed channel this is the explicit post-jump contribution."
+    },
+    {
+      "id": "Erdos249257/PrimeJumpMigration.lean:33:preJumpMigrationChannel",
+      "name": "preJumpMigrationChannel",
+      "kind": "def",
+      "module": "Erdos249257/PrimeJumpMigration.lean",
+      "line": 33,
+      "signature": "noncomputable def preJumpMigrationChannel (d H p : ℕ) : ℝ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The pre-jump value of the same channel, transported with coefficient `-p`. This is the migration term omitted by a post-jump-only split."
+    },
+    {
+      "id": "Erdos249257/PrimeJumpMigration.lean:38:residueHeckeDefect_eq_postJump_add_migration",
+      "name": "residueHeckeDefect_eq_postJump_add_migration",
+      "kind": "theorem",
+      "module": "Erdos249257/PrimeJumpMigration.lean",
+      "line": 38,
+      "signature": "theorem residueHeckeDefect_eq_postJump_add_migration (d H p : ℕ) : residueHeckeDefect d H p = postJumpResidueChannel d H p + preJumpMigrationChannel d H p",
+      "generated_certificate": false,
+      "claim_ids": [
+        "affine_transport_annihilation"
+      ],
+      "docstring": "The actual transition channel is post-jump contribution plus same-channel migration."
+    },
+    {
+      "id": "Erdos249257/PrimeJumpMigration.lean:46:residueHeckeDefect_eq_zero_of_dvd",
+      "name": "residueHeckeDefect_eq_zero_of_dvd",
+      "kind": "theorem",
+      "module": "Erdos249257/PrimeJumpMigration.lean",
+      "line": 46,
+      "signature": "theorem residueHeckeDefect_eq_zero_of_dvd {d H p : ℕ} (hd : 0 < d) (hdvd : d ∣ H) : residueHeckeDefect d H p = 0",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Every carrier already dividing `H` cancels exactly in the prime-jump commutator. No analytic estimate is used."
+    },
+    {
+      "id": "Erdos249257/PrimeJumpMigration.lean:58:residueHeckeDefect_five_twelve",
+      "name": "residueHeckeDefect_five_twelve",
+      "kind": "theorem",
+      "module": "Erdos249257/PrimeJumpMigration.lean",
+      "line": 58,
+      "signature": "theorem residueHeckeDefect_five_twelve : residueHeckeDefect 5 12 5 = (10228 : ℝ) / 961",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "At the first new-prime jump, the `d = 5` transition channel is positive: the pre-jump migration reverses the sign of its negative post-jump divisor contribution."
+    },
+    {
+      "id": "Erdos249257/PrimeJumpMigration.lean:66:postJumpResidueChannel_five_twelve",
+      "name": "postJumpResidueChannel_five_twelve",
+      "kind": "theorem",
+      "module": "Erdos249257/PrimeJumpMigration.lean",
+      "line": 66,
+      "signature": "theorem postJumpResidueChannel_five_twelve : postJumpResidueChannel 5 12 5 = -(12 : ℝ) / 31",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The post-jump part of the same fixture is negative."
+    },
+    {
+      "id": "Erdos249257/PrimeJumpWindow.lean:21:diagonalTailDifferenceAt",
+      "name": "diagonalTailDifferenceAt",
+      "kind": "def",
+      "module": "Erdos249257/PrimeJumpWindow.lean",
+      "line": 21,
+      "signature": "noncomputable def diagonalTailDifferenceAt (H : ℕ) : ℝ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The diagonal tail difference `D(H) = R_(2H) - R_H`."
+    },
+    {
+      "id": "Erdos249257/PrimeJumpWindow.lean:25:primeJumpTailCommutator",
+      "name": "primeJumpTailCommutator",
+      "kind": "def",
+      "module": "Erdos249257/PrimeJumpWindow.lean",
+      "line": 25,
+      "signature": "noncomputable def primeJumpTailCommutator (H p : ℕ) : ℝ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The prime-jump commutator `J(H,p) = D(pH) - p D(H)`."
+    },
+    {
+      "id": "Erdos249257/PrimeJumpWindow.lean:30:primeJumpWindowCommutator",
+      "name": "primeJumpWindowCommutator",
+      "kind": "def",
+      "module": "Erdos249257/PrimeJumpWindow.lean",
+      "line": 30,
+      "signature": "def primeJumpWindowCommutator (H p L : ℕ) : ℤ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Integer depth-`L` numerator of the four-vertex commutator, with vertices ordered as `H, 2H, pH, 2pH`."
+    },
+    {
+      "id": "Erdos249257/PrimeJumpWindow.lean:37:primeJumpSharpRadius",
+      "name": "primeJumpSharpRadius",
+      "kind": "def",
+      "module": "Erdos249257/PrimeJumpWindow.lean",
+      "line": 37,
+      "signature": "def primeJumpSharpRadius (H p L : ℕ) : ℤ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Exact direct tail radius for the four-vertex commutator."
+    },
+    {
+      "id": "Erdos249257/PrimeJumpWindow.lean:42:primeJumpSharpKill",
+      "name": "primeJumpSharpKill",
+      "kind": "def",
+      "module": "Erdos249257/PrimeJumpWindow.lean",
+      "line": 42,
+      "signature": "def primeJumpSharpKill (H p L : ℕ) : Prop",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Decidable direct consumer: the four-vertex window stays outside the sharp tail band around the integer lattice."
+    },
+    {
+      "id": "Erdos249257/PrimeJumpWindow.lean:53:notMem_int_of_window_remainder_bound",
+      "name": "notMem_int_of_window_remainder_bound",
+      "kind": "theorem",
+      "module": "Erdos249257/PrimeJumpWindow.lean",
+      "line": 53,
+      "signature": "theorem notMem_int_of_window_remainder_bound {x e : ℝ} {A R : ℤ} {L : ℕ} (hsplit : x = (A : ℝ) / 2 ^ L + e) (hbound : |e * 2 ^ L| ≤ (R : ℝ)) (hleft : R < A % 2 ^ L) (hright : A % 2 ^ L < 2 ^ L - R) : x ∉ Set.range ((↑) : ℤ → ℝ)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Generic modular soundness lemma for an integer window with a real remainder bounded after multiplication by `2^L`."
+    },
+    {
+      "id": "Erdos249257/PrimeJumpWindow.lean:91:primeJumpTailCommutator_eq_window_add_remainder",
+      "name": "primeJumpTailCommutator_eq_window_add_remainder",
+      "kind": "theorem",
+      "module": "Erdos249257/PrimeJumpWindow.lean",
+      "line": 91,
+      "signature": "theorem primeJumpTailCommutator_eq_window_add_remainder (H p L : ℕ) : ∃ e : ℝ, primeJumpTailCommutator H p = (primeJumpWindowCommutator H p L : ℝ) / 2 ^ L + e ∧ |e * 2 ^ L| ≤ (primeJumpSharpRadius H p L : ℝ)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Exact partial-window decomposition of the prime-jump commutator."
+    },
+    {
+      "id": "Erdos249257/PrimeJumpWindow.lean:178:primeJumpTailCommutator_notMem_int_of_sharpKill",
+      "name": "primeJumpTailCommutator_notMem_int_of_sharpKill",
+      "kind": "theorem",
+      "module": "Erdos249257/PrimeJumpWindow.lean",
+      "line": 178,
+      "signature": "theorem primeJumpTailCommutator_notMem_int_of_sharpKill {H p L : ℕ} (hkill : primeJumpSharpKill H p L) : primeJumpTailCommutator H p ∉ Set.range ((↑) : ℤ → ℝ)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "**Sharp direct soundness.** A central four-vertex residue proves that the actual prime-jump commutator is nonintegral. The radius is `3pH`, not the larger two-cell disjunction radius `4pH`."
+    },
+    {
+      "id": "Erdos249257/PrimeJumpWindow.lean:186:primeJumpSharpKill_twelve_five",
+      "name": "primeJumpSharpKill_twelve_five",
+      "kind": "theorem",
+      "module": "Erdos249257/PrimeJumpWindow.lean",
+      "line": 186,
+      "signature": "theorem primeJumpSharpKill_twelve_five : primeJumpSharpKill 12 5 15",
+      "generated_certificate": false,
+      "claim_ids": [
+        "transport_certificate_instances"
+      ],
+      "docstring": "A concrete new-prime-jump deposit."
+    },
+    {
+      "id": "Erdos249257/PrimeJumpWindow.lean:193:irrational_totient_series_of_primeJumpSharpKill_supply",
+      "name": "irrational_totient_series_of_primeJumpSharpKill_supply",
+      "kind": "theorem",
+      "module": "Erdos249257/PrimeJumpWindow.lean",
+      "line": 193,
+      "signature": "theorem irrational_totient_series_of_primeJumpSharpKill_supply (hsupply : ∀ t₀ : ℕ, ∃ t, t₀ ≤ t ∧ ∃ p L : ℕ, 0 < p ∧ primeJumpSharpKill (periodLcm t) p L) : Irrational (∑' n : ℕ, (Nat.totient n : ℝ) / 2 ^ n)",
+      "generated_certificate": false,
+      "claim_ids": [
+        "transport_curvature_reductions"
+      ],
+      "docstring": "An unbounded supply of sharp prime-jump window kills on the LCM cone would prove Erdős #249. This is the exact remaining consumer socket; the supply is not asserted here."
     },
     {
       "id": "Erdos249257/PrimePowerJumpDynamics.lean:25:divisors_mul_prime_split",
@@ -69634,6 +70661,197 @@
       "claim_ids": []
     },
     {
+      "id": "Erdos249257/ThreeTransportBoundary.lean:24:threeTransportTail",
+      "name": "threeTransportTail",
+      "kind": "def",
+      "module": "Erdos249257/ThreeTransportBoundary.lean",
+      "line": 24,
+      "signature": "noncomputable def threeTransportTail (H : ℕ) : ℝ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The balanced four-ray tail word on multipliers `(1,2,3,6)`."
+    },
+    {
+      "id": "Erdos249257/ThreeTransportBoundary.lean:29:threeTransportDrive",
+      "name": "threeTransportDrive",
+      "kind": "def",
+      "module": "Erdos249257/ThreeTransportBoundary.lean",
+      "line": 29,
+      "signature": "def threeTransportDrive (H s : ℕ) : ℤ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The exact integer letter at boundary offset `s`."
+    },
+    {
+      "id": "Erdos249257/ThreeTransportBoundary.lean:34:threeTransportWindow",
+      "name": "threeTransportWindow",
+      "kind": "def",
+      "module": "Erdos249257/ThreeTransportBoundary.lean",
+      "line": 34,
+      "signature": "def threeTransportWindow (H L : ℕ) : ℤ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The dyadic depth-`L` boundary window."
+    },
+    {
+      "id": "Erdos249257/ThreeTransportBoundary.lean:38:threeTransportShiftedTail",
+      "name": "threeTransportShiftedTail",
+      "kind": "def",
+      "module": "Erdos249257/ThreeTransportBoundary.lean",
+      "line": 38,
+      "signature": "noncomputable def threeTransportShiftedTail (H L : ℕ) : ℝ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The shifted tail left after truncating at depth `L`."
+    },
+    {
+      "id": "Erdos249257/ThreeTransportBoundary.lean:44:threeTransportRadius",
+      "name": "threeTransportRadius",
+      "kind": "def",
+      "module": "Erdos249257/ThreeTransportBoundary.lean",
+      "line": 44,
+      "signature": "def threeTransportRadius (H L : ℕ) : ℤ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The symmetric edge radius forced by the positive and negative stencil masses: both sides have multiplier mass `4` and first moment `9`."
+    },
+    {
+      "id": "Erdos249257/ThreeTransportBoundary.lean:48:abs_threeTransportDrive_le",
+      "name": "abs_threeTransportDrive_le",
+      "kind": "theorem",
+      "module": "Erdos249257/ThreeTransportBoundary.lean",
+      "line": 48,
+      "signature": "theorem abs_threeTransportDrive_le (H s : ℕ) : |threeTransportDrive H s| ≤ (9 * H + 4 * s : ℤ)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The boundary letter itself already has the sharp elementary pointwise bound obtained by grouping the positive and negative stencil parts."
+    },
+    {
+      "id": "Erdos249257/ThreeTransportBoundary.lean:67:two_pow_mul_threeTransport_eq_window_add_shifted",
+      "name": "two_pow_mul_threeTransport_eq_window_add_shifted",
+      "kind": "theorem",
+      "module": "Erdos249257/ThreeTransportBoundary.lean",
+      "line": 67,
+      "signature": "theorem two_pow_mul_threeTransport_eq_window_add_shifted (H L : ℕ) : (2 : ℝ) ^ L * threeTransportTail H = (threeTransportWindow H L : ℝ) + threeTransportShiftedTail H L",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Exact prefix/tail split for the balanced four-ray word."
+    },
+    {
+      "id": "Erdos249257/ThreeTransportBoundary.lean:86:abs_threeTransportShiftedTail_le",
+      "name": "abs_threeTransportShiftedTail_le",
+      "kind": "theorem",
+      "module": "Erdos249257/ThreeTransportBoundary.lean",
+      "line": 86,
+      "signature": "theorem abs_threeTransportShiftedTail_le (H L : ℕ) (hH : 1 ≤ H) : |threeTransportShiftedTail H L| ≤ (threeTransportRadius H L : ℝ)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The shifted tail lies in the sharp symmetric strip."
+    },
+    {
+      "id": "Erdos249257/ThreeTransportBoundary.lean:102:threeTransportWindow_succ",
+      "name": "threeTransportWindow_succ",
+      "kind": "theorem",
+      "module": "Erdos249257/ThreeTransportBoundary.lean",
+      "line": 102,
+      "signature": "theorem threeTransportWindow_succ (H L : ℕ) : threeTransportWindow H (L + 1) = 2 * threeTransportWindow H L + threeTransportDrive H (L + 1)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The boundary word is an exact input-driven doubling recurrence."
+    },
+    {
+      "id": "Erdos249257/ThreeTransportBoundary.lean:111:sharpThreeTransportCert",
+      "name": "sharpThreeTransportCert",
+      "kind": "def",
+      "module": "Erdos249257/ThreeTransportBoundary.lean",
+      "line": 111,
+      "signature": "def sharpThreeTransportCert (H L : ℕ) : Prop",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The exact decidable lattice-separation certificate."
+    },
+    {
+      "id": "Erdos249257/ThreeTransportBoundary.lean:119:sharpThreeTransportCert_depth_floor",
+      "name": "sharpThreeTransportCert_depth_floor",
+      "kind": "theorem",
+      "module": "Erdos249257/ThreeTransportBoundary.lean",
+      "line": 119,
+      "signature": "theorem sharpThreeTransportCert_depth_floor {H L : ℕ} (hcert : sharpThreeTransportCert H L) : (2 * threeTransportRadius H L : ℤ) < 2 ^ L",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Every certificate has enough dyadic room for both excluded boundary arcs."
+    },
+    {
+      "id": "Erdos249257/ThreeTransportBoundary.lean:126:threeTransport_notMem_int_of_cert",
+      "name": "threeTransport_notMem_int_of_cert",
+      "kind": "theorem",
+      "module": "Erdos249257/ThreeTransportBoundary.lean",
+      "line": 126,
+      "signature": "theorem threeTransport_notMem_int_of_cert {H L : ℕ} (hH : 1 ≤ H) (hcert : sharpThreeTransportCert H L) : threeTransportTail H ∉ Set.range ((↑) : ℤ → ℝ)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A sharp residue gap excludes integral three-transport curvature."
+    },
+    {
+      "id": "Erdos249257/ThreeTransportBoundary.lean:166:threeTransportTail_eq_commutator",
+      "name": "threeTransportTail_eq_commutator",
+      "kind": "theorem",
+      "module": "Erdos249257/ThreeTransportBoundary.lean",
+      "line": 166,
+      "signature": "theorem threeTransportTail_eq_commutator (H : ℕ) : threeTransportTail H = ExponentOnlyTransport.threeTransportTailCommutator H",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The new boundary word agrees definitionally with the earlier exponent-only transport commutator."
+    },
+    {
+      "id": "Erdos249257/ThreeTransportBoundary.lean:173:RoughnessBoundaryLatticeSupply",
+      "name": "RoughnessBoundaryLatticeSupply",
+      "kind": "def",
+      "module": "Erdos249257/ThreeTransportBoundary.lean",
+      "line": 173,
+      "signature": "def RoughnessBoundaryLatticeSupply : Prop",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Arbitrarily large exact boundary certificates. This is the sole open producer socket in this module."
+    },
+    {
+      "id": "Erdos249257/ThreeTransportBoundary.lean:177:irrational_totientSeries_of_roughnessBoundaryLatticeSupply",
+      "name": "irrational_totientSeries_of_roughnessBoundaryLatticeSupply",
+      "kind": "theorem",
+      "module": "Erdos249257/ThreeTransportBoundary.lean",
+      "line": 177,
+      "signature": "theorem irrational_totientSeries_of_roughnessBoundaryLatticeSupply (hsupply : RoughnessBoundaryLatticeSupply) : Irrational (∑' n : ℕ, (Nat.totient n : ℝ) / 2 ^ n)",
+      "generated_certificate": false,
+      "claim_ids": [
+        "transport_curvature_reductions"
+      ],
+      "docstring": "The boundary-certificate supply contradicts eventual LCM-cone flatness."
+    },
+    {
+      "id": "Erdos249257/ThreeTransportBoundary.lean:197:threeTransportWindow_60_12",
+      "name": "threeTransportWindow_60_12",
+      "kind": "theorem",
+      "module": "Erdos249257/ThreeTransportBoundary.lean",
+      "line": 197,
+      "signature": "theorem threeTransportWindow_60_12 : threeTransportWindow 60 12 = 19316",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "An exact balanced boundary word at the lcm height `H = lcm(1,…,6)`."
+    },
+    {
+      "id": "Erdos249257/ThreeTransportBoundary.lean:203:sharpThreeTransportCert_60_12",
+      "name": "sharpThreeTransportCert_60_12",
+      "kind": "theorem",
+      "module": "Erdos249257/ThreeTransportBoundary.lean",
+      "line": 203,
+      "signature": "theorem sharpThreeTransportCert_60_12 : sharpThreeTransportCert 60 12",
+      "generated_certificate": false,
+      "claim_ids": [
+        "transport_certificate_instances"
+      ],
+      "docstring": "Kernel-checked finite lattice separation at `t = 6`, `H = 60`."
+    },
+    {
       "id": "Erdos249257/TotientTailPeriodKiller.lean:57:totientTail",
       "name": "totientTail",
       "kind": "def",
@@ -69886,6 +71104,128 @@
       "generated_certificate": false,
       "claim_ids": [],
       "docstring": "**Concrete denominator exclusion.** The totient series equals no rational whose denominator divides `2¹²·(2ʰ-1)` for some `1 ≤ h ≤ 8`: no dyadic rational with denominator up to `2¹²`, and no `k/(2ᵃ·m)` with `a ≤ 12` and the multiplicative order of `2` mod `m` at most `8`."
+    },
+    {
+      "id": "Erdos249257/TropicalCurvatureCarry.lean:26:VUSymbol",
+      "name": "VUSymbol",
+      "kind": "structure",
+      "module": "Erdos249257/TropicalCurvatureCarry.lean",
+      "line": 26,
+      "signature": "structure VUSymbol",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A nonzero 2-adic valuation--unit symbol. `valuation` records the power of two and `unit` is an odd representative of the retained unit bits."
+    },
+    {
+      "id": "Erdos249257/TropicalCurvatureCarry.lean:32:VUCompatible",
+      "name": "VUCompatible",
+      "kind": "def",
+      "module": "Erdos249257/TropicalCurvatureCarry.lean",
+      "line": 32,
+      "signature": "def VUCompatible (u : ℕ) (σ : VUSymbol) (c : ℤ) : Prop",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Integers carrying the fixed-precision symbol `σ` are obtained by varying an unrestricted high quotient `z`."
+    },
+    {
+      "id": "Erdos249257/TropicalCurvatureCarry.lean:38:vuModulus",
+      "name": "vuModulus",
+      "kind": "def",
+      "module": "Erdos249257/TropicalCurvatureCarry.lean",
+      "line": 38,
+      "signature": "def vuModulus (u : ℕ) (σ : VUSymbol) : ℤ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The modulus left by retaining `u` unit bits at valuation `σ.valuation`."
+    },
+    {
+      "id": "Erdos249257/TropicalCurvatureCarry.lean:42:vuRadius",
+      "name": "vuRadius",
+      "kind": "def",
+      "module": "Erdos249257/TropicalCurvatureCarry.lean",
+      "line": 42,
+      "signature": "def vuRadius (u : ℕ) (σ : VUSymbol) : ℤ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Half of `vuModulus`, available when at least one unit bit is retained."
+    },
+    {
+      "id": "Erdos249257/TropicalCurvatureCarry.lean:46:vuBaseDigit",
+      "name": "vuBaseDigit",
+      "kind": "def",
+      "module": "Erdos249257/TropicalCurvatureCarry.lean",
+      "line": 46,
+      "signature": "def vuBaseDigit (σ : VUSymbol) : ℤ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The least representative of the valuation--unit cylinder."
+    },
+    {
+      "id": "Erdos249257/TropicalCurvatureCarry.lean:51:vuCentredStep",
+      "name": "vuCentredStep",
+      "kind": "def",
+      "module": "Erdos249257/TropicalCurvatureCarry.lean",
+      "line": 51,
+      "signature": "def vuCentredStep (u : ℕ) (σ : VUSymbol) (e : ℤ) : ℤ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Recenter `2e + vuBaseDigit σ` in the symmetric interval of radius `vuRadius u σ`."
+    },
+    {
+      "id": "Erdos249257/TropicalCurvatureCarry.lean:56:vuModulus_eq_two_mul_radius",
+      "name": "vuModulus_eq_two_mul_radius",
+      "kind": "lemma",
+      "module": "Erdos249257/TropicalCurvatureCarry.lean",
+      "line": 56,
+      "signature": "lemma vuModulus_eq_two_mul_radius (u : ℕ) (σ : VUSymbol) (hu : 0 < u) : vuModulus u σ = 2 * vuRadius u σ",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/TropicalCurvatureCarry.lean:69:vu_step_has_centred_completion",
+      "name": "vu_step_has_centred_completion",
+      "kind": "theorem",
+      "module": "Erdos249257/TropicalCurvatureCarry.lean",
+      "line": 69,
+      "signature": "theorem vu_step_has_centred_completion (u : ℕ) (σ : VUSymbol) (hu : 0 < u) (hodd : Odd σ.unit) (e : ℤ) : ∃ c e' : ℤ, VUCompatible u σ c ∧ e' = 2 * e + c ∧ |e'| ≤ vuRadius u σ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Every one-step fixed-precision symbol has a compatible digit that recentres an arbitrary incoming carry state."
+    },
+    {
+      "id": "Erdos249257/TropicalCurvatureCarry.lean:106:VUOrbit",
+      "name": "VUOrbit",
+      "kind": "inductive",
+      "module": "Erdos249257/TropicalCurvatureCarry.lean",
+      "line": 106,
+      "signature": "inductive VUOrbit (u : ℕ) : ℤ → List VUSymbol → List ℤ → Prop | nil (e : ℤ) : VUOrbit u e [] [] | cons (e c e' : ℤ) (σ : VUSymbol) (symbols : List VUSymbol) (states : List ℤ) (hcompat : VUCompatible u σ c) (hstep : e' = 2 * e + c) (htail : VUOrbit u e' symbols states) : VUOrbit u e (σ :: symbols) (e' :: states) /-- Every finite word of odd valuation--unit symbols has a compatible carry orbit centred at every prefix. The initial state is arbitrary. -/ theorem vu_word_has_prefix_locked_completion (u : ℕ) (hu : 0 < u) (symbols : List VUSymbol) (hodd : ∀ σ ∈ symbols, Odd σ.unit) (e : ℤ) : ∃ states : List ℤ, VUOrbit u e symbols states ∧ List.Forall₂ (fun σ e' => |e'| ≤ vuRadius u σ) symbols states",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "An exact finite carry orbit whose successive input digits realise the listed valuation--unit symbols."
+    },
+    {
+      "id": "Erdos249257/TropicalCurvatureCarry.lean:115:vu_word_has_prefix_locked_completion",
+      "name": "vu_word_has_prefix_locked_completion",
+      "kind": "theorem",
+      "module": "Erdos249257/TropicalCurvatureCarry.lean",
+      "line": 115,
+      "signature": "theorem vu_word_has_prefix_locked_completion (u : ℕ) (hu : 0 < u) (symbols : List VUSymbol) (hodd : ∀ σ ∈ symbols, Odd σ.unit) (e : ℤ) : ∃ states : List ℤ, VUOrbit u e symbols states ∧ List.Forall₂ (fun σ e' => |e'| ≤ vuRadius u σ) symbols states",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Every finite word of odd valuation--unit symbols has a compatible carry orbit centred at every prefix. The initial state is arbitrary."
+    },
+    {
+      "id": "Erdos249257/TropicalCurvatureCarry.lean:137:fixedPrecisionTropicalNoGo",
+      "name": "fixedPrecisionTropicalNoGo",
+      "kind": "theorem",
+      "module": "Erdos249257/TropicalCurvatureCarry.lean",
+      "line": 137,
+      "signature": "theorem fixedPrecisionTropicalNoGo (u : ℕ) (hu : 0 < u) (symbols : List VUSymbol) (hodd : ∀ σ ∈ symbols, Odd σ.unit) (e : ℤ) : ∃ states : List ℤ, VUOrbit u e symbols states ∧ List.Forall₂ (fun σ e' => |e'| ≤ vuRadius u σ) symbols states",
+      "generated_certificate": false,
+      "claim_ids": [
+        "fixed_precision_transport_no_go"
+      ],
+      "docstring": "Formal fixed-precision tropical no-go: bounded local valuation--unit data alone never excludes all finite centred carry completions."
     }
   ],
   "drilldown": {

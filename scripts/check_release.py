@@ -259,16 +259,20 @@ def main() -> int:
     check(toolchain == release["lean_toolchain"],
           f"lean-toolchain {toolchain} != claims.json {release['lean_toolchain']}")
 
-    paper = read(ROOT / "paper" / "erdos249-257-exposition.tex")
-    m = re.search(r"\\newcommand\{\\commit\}\{([^}]+)\}", paper)
-    check(m is not None and m.group(1) == tag,
-          f"paper \\commit pin {m.group(1) if m else '<missing>'} != release tag {tag}")
-    check("blob/main" not in paper,
-          "paper links a floating branch (blob/main); pin every link to the release tag")
+    paper_rows = [machine_paper["paper"], *machine_paper["paper"].get("companion_sources", [])]
+    paper_sources = [(row["source"], read(ROOT / row["source"])) for row in paper_rows]
+    paper = paper_sources[0][1]
+    all_paper = "\n".join(text for _path, text in paper_sources)
+    for paper_path, paper_text in paper_sources:
+        m = re.search(r"\\newcommand\{\\commit\}\{([^}]+)\}", paper_text)
+        check(m is not None and m.group(1) == tag,
+              f"{paper_path} \\commit pin {m.group(1) if m else '<missing>'} != release tag {tag}")
+        check("blob/main" not in paper_text,
+              f"{paper_path} links a floating branch (blob/main); pin every link to the release tag")
     for claim in data["claims"]:
         label = claim.get("paper_label")
         if label:
-            check(re.search(rf"\\label\{{{re.escape(label)}\}}", paper) is not None,
+            check(re.search(rf"\\label\{{{re.escape(label)}\}}", all_paper) is not None,
                   f"claim {claim['id']}: paper label {label!r} does not exist")
     index_label = machine_paper["paper"]["principal_declaration_index_label"]
     check(re.search(rf"\\label\{{{re.escape(index_label)}\}}", paper) is not None,
@@ -286,18 +290,19 @@ def main() -> int:
                   f"{decl['module']}:{decl['line']} (±{LINE_WINDOW})")
 
     # --- 4. paper source links ----------------------------------------------
-    for macro, fname, line_s, name in re.findall(
-            r"\\(lref|lrefx|lloc)\{([^}]+)\}\{(\d+)\}(?:\{([^}]*)\})?", paper):
-        rel = f"Erdos249257/{fname}"
-        lines = module_lines(cache, rel)
-        if lines is None:
-            fail(f"paper \\{macro}: file {rel} not found")
-            continue
-        line = int(line_s)
-        check(line <= len(lines), f"paper \\{macro}: {rel}:{line} beyond end of file")
-        if macro in ("lref", "lrefx") and name and line <= len(lines):
-            check(name_at_line(lines, name, line),
-                  f"paper \\{macro}: {name} not at {rel}:{line} (±{LINE_WINDOW})")
+    for paper_path, paper_text in paper_sources:
+        for macro, fname, line_s, name in re.findall(
+                r"\\(lref|lrefx|lloc)\{([^}]+)\}\{(\d+)\}(?:\{([^}]*)\})?", paper_text):
+            rel = f"Erdos249257/{fname}"
+            lines = module_lines(cache, rel)
+            if lines is None:
+                fail(f"{paper_path} \\{macro}: file {rel} not found")
+                continue
+            line = int(line_s)
+            check(line <= len(lines), f"{paper_path} \\{macro}: {rel}:{line} beyond end of file")
+            if macro in ("lref", "lrefx") and name and line <= len(lines):
+                check(name_at_line(lines, name, line),
+                      f"{paper_path} \\{macro}: {name} not at {rel}:{line} (±{LINE_WINDOW})")
 
     # --- 5. SCOPE.md ----------------------------------------------------------
     scope = read(ROOT / "SCOPE.md")
