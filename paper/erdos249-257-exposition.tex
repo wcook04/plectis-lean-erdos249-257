@@ -260,12 +260,50 @@ is irrational.
 Section~\ref{sec:ladder} it is the rung $L(\mathbf 1)$, and it is the fixed
 machine-checked point one convolution away from the open $S$.
 
-The proof runs through the certificate machine of the kernel rather than through a
-direct digit argument: a bounded Bertrand/CRT frame on a first block, a
-middle-window average over divisor pairs with a pigeonhole selection, and an
-explicit closure of the parameters. The Lambert bridge
-$\sum 1/(b^n-1)=\sum_m \tau(m)/b^m$ (divisor-count series) is
-\lrefx{CertificateKernel.lean}{5865}{erdosSum_full_support_eq_tsum_divisor_count} in the source.
+The proof begins with the Lambert identity
+\[
+ \sum_{n\geq 1}\frac{1}{b^n-1}
+   =\sum_{m\geq 1}\frac{\tau(m)}{b^m},
+\]
+where $\tau(m)$ is the number of positive divisors of $m$
+(\lrefx{CertificateKernel.lean}{5865}{erdosSum_full_support_eq_tsum_divisor_count}).
+If the right-hand side were rational with reduced denominator $q$, then a
+non-integral integer multiple could not lie at distance less than $1/q$ from an
+integer.  It is therefore enough, for every $q$, to construct $N$ such that
+$b^N\sum_m\tau(m)b^{-m}$ is non-integral but lies within $1/q$ of an integer.
+This elementary near-integer criterion is formalised at
+\lrefx{CertificateKernel.lean}{5792}{irrational_of_int_mul_near_int}.
+
+The construction of $N$ is divided into three finite parts.  First, a bounded
+Bertrand argument supplies disjoint prime blocks, and the Chinese remainder
+theorem chooses an arithmetic progression on which
+\[
+        b^r\mid \tau(N+r) \qquad (1\leq r\leq K).
+\]
+These divisibilities make the first $K$ terms of the shifted tail integral.
+The multiplicativity step that converts prescribed prime valuations into the
+displayed divisibility is
+\lrefx{CertificateKernel.lean}{6177}{bpow_dvd_card_divisors_of_exact_prime_block}.
+Second, divisor pairing bounds the average of the weighted middle window
+\[
+   \sum_{K<r\leq L}\tau(N+r)b^{L-r}
+\]
+along that progression.  A pigeonhole choice then selects one translate with a
+small middle contribution; see
+\lrefx{CertificateKernel.lean}{7246}{exists_first_block_progression_with_selected_weighted_middle}.
+Third, the elementary estimate $\tau(n)\leq n$ controls the infinite tail after
+$L$.  The parameters are chosen so that the middle and far-tail bounds together
+are smaller than $1/q$; the shifted tail is strictly positive because every
+divisor count is positive, so the resulting dilation is not an integer.
+
+Thus the analytic series is consumed only at the Lambert identity and the
+geometric tail estimate.  The remaining proof is a finite CRT construction,
+divisor counting, and explicit parameter arithmetic.  The final certificate
+existence theorem holds for every $b\geq2$ and every precision $q$
+(\lrefx{CertificateKernel.lean}{7859}{exists_weighted_block_certificates}); its
+composition with the near-integer criterion is the theorem cited above.  This
+is a formalisation of the classical full-support theorem, not a new
+irrationality result.
 
 \subsection{Named infinite-support cases}
 
@@ -512,10 +550,38 @@ and \lrefx{LcmConeNonflat.lean}{506}{coneNonflatCert_cells}. These instances sho
 that each layer of the reduction is non-vacuous and, by completeness, exact. They
 are not evidence that the unbounded supply exists.
 
+The first row of this finite table can be read without any search procedure.
+Take $(h,N,L)=(1,12,16)$.  The integer in the definition is
+\[
+ \Delta_{1,12,16}
+ =\sum_{j=0}^{15}\bigl(\ph(14+j)-\ph(13+j)\bigr)2^{15-j}
+ =-143140.
+\]
+Its least nonnegative residue modulo $2^{16}$ is $53468$.  The tail allowance
+is $N+h+L+2=31$, and hence
+\[
+       31<53468<65536-31=65505.
+\]
+This is precisely $\textsf{certifiedKill}(1,12,16)$.  The soundness theorem
+(\lrefx{TotientTailPeriodKiller.lean}{262}{tail_diff_notMem_int_of_certifiedKill})
+therefore gives $R_{13}-R_{12}\notin\Z$.  It is one exact non-integral tail
+difference, not an assertion that such differences occur at unbounded scales.
+
 \paragraph{An exact target interval.} The diagonal calculation also admits a
-more local normal form.  At scale $t$, write the scaled diagonal difference as
-an integer main term minus a foreign-defect term.  The difference is integral
-exactly when that defect lands in an explicit full-target interval.
+more local normal form.  Put $H_t=M_t$ and
+\[
+ D_t=R_{2H_t}-R_{H_t}.
+\]
+The formal development separates an exact rational M\"obius shadow
+$Q_t=a_t/d_t$ in lowest terms and defines the remaining \emph{foreign defect}
+by $F_t=D_t-Q_t$.  The full target is the residue class of $-a_t$ modulo $d_t$:
+\[
+ \textsf{FullTargetHit}(t)
+ \quad\Longleftrightarrow\quad
+ \exists k\in\Z,\qquad d_tF_t=-a_t+d_tk.
+\]
+Since $D_t=a_t/d_t+F_t$, this is exactly the condition $D_t\in\Z$; no
+complementary term is discarded or assigned a conjectural sign.
 
 \begin{proposition}[diagonal pincer decomposition]\label{res:pincer}
 For every $t$, diagonal integrality is equivalent to the foreign diagonal
@@ -529,9 +595,20 @@ and
 The proposition is an exact reduction; the unbounded avoidance hypothesis is
 still open.
 
-Two algebraic inputs make this interval test explicit.  First, the diagonal
-tail difference has a Lambert-projected centre and a signed squared-Mersenne
-tail with a sharp symmetric bound.
+Two algebraic inputs make this interval test explicit.  First, truncate the
+M\"obius-square identity of Proposition~\ref{res:lens} after $D$ terms.  The
+resulting rational quantity gives a Lambert-projected centre $C_{H,D}$ for the
+scaled diagonal difference.  The error is exactly a signed squared-Mersenne
+tail:
+\[
+ \textsf{scaledDiagonal}(H)-C_{H,D}
+   =c_H\sum_{d>D}\frac{\mu(d)}{(2^d-1)^2},
+\]
+where $c_H$ is the explicit diagonal coefficient in the formal source.  The
+absolute value of the sum is bounded geometrically by
+$4/[3(2^{D+1}-1)^2]$.  Thus a rational separation of the centre from every
+integer by more than the scaled bound proves target avoidance; the argument
+does not estimate the sign of the tail.
 
 \begin{proposition}[squared-Mersenne enclosure]\label{res:squareenclosure}
 The scaled diagonal tail difference differs from its Lambert-projected centre
@@ -543,8 +620,18 @@ more than the proved tail bound forces target avoidance.
 and
 \lref{SquaredMersenneDiagonalEnclosure.lean}{237}{scaleFullTarget_miss_of_lambert_projected_separation}.
 
-Second, the rational M\"obius shadow has an exact reduced denominator, with a
-large explicit divisor coming from upper-half Mersenne factors.
+Second, the rational M\"obius shadow has an exact reduced denominator.  If
+$r_t$ is the square-free kernel of $H_t$, $s_t=H_t/r_t$, and $J(r_t)$ is the
+odd Jordan scalar defined in the algebraic shadow chain, then
+\[
+ d_t=
+ \frac{2^{r_t}-1}
+ {\gcd\!\bigl(2^{r_t}-1,\,s_t\lvert J(r_t)\rvert\bigr)}.
+\]
+For $t\geq5$, the product of the Mersenne factors $2^p-1$ over primes
+$t/2<p\leq t$ divides $d_t$; in particular $d_t\geq2^{t/2}$.  This is a
+denominator theorem for $Q_t$ only.  Cancellation by $F_t$ is exactly what the
+full-target condition retains.
 
 \begin{proposition}[Mersenne-shadow denominator]\label{res:shadowden}
 At lcm height $t$, the reduced denominator of the scaled M\"obius shadow is
@@ -557,7 +644,19 @@ and
 \lref{MersenneShadowDenominatorGrowth.lean}{147}{lcmHeight_scaledMobiusShadow_den_exact}.
 
 Finally, the remaining fresh-loss term can be represented by a finite integer
-projection, and then by binary suffix data.
+projection, and then by binary suffix data.  At depth $L$, define
+\[
+ W_{t,L}=P_L(2H_t)-P_L(H_t),\qquad
+ \rho_{t,L}=W_{t,L}\bmod 2^L,
+\]
+where $P_L(M)$ is the length-$L$ window numerator from Step~1.  The finite
+residue certificate is the asymmetric safe interval
+\[
+ H_t+L+2<\rho_{t,L}<2^L-(2H_t+L+2).
+\]
+The two unequal margins are the tail bounds at the two cone vertices $H_t$ and
+$2H_t$; replacing them by a symmetric slogan would lose part of the checked
+statement.
 
 \begin{corollary}[fresh-loss projection reduction]\label{res:freshloss}
 The fresh-loss residue certificate is equivalent to its projection
