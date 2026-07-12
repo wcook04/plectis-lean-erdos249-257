@@ -71,6 +71,20 @@ Exploratory exact interfaces with explicit conditional boundaries live in
 `ActualForeignResidueProjection`, `SternBrocotRunGeometry`, and
 `SupportDilationDifferences`.
 
+### Paper-curation boundary
+
+The paper treats `GcdMomentCalculus` as supporting mathematical exposition: its
+squared Lambert transform, gcd moments, reduced-direction law, and cylinder
+recursion explain the representation containing the #249 Möbius-square atom.
+`FullTargetPrimeAdjunctionNoGo` is included as a proved negative result because
+it closes a recurring prime-adjunction strategy without changing the open
+claim. `SternBrocotRunGeometry` remains source-map-only supporting
+combinatorics: its continuant/Fibonacci stability theorems are exact, but no
+principal claim or current argument edge consumes them. Promoting that module
+to a paper result would therefore confuse formal infrastructure with a new
+contribution; the cylinder law actually used in the exposition is owned by
+`GcdMomentCalculus`.
+
 ## Binary-carry trunk (post-wave carry layer)
 
 Builds on `Erdos249257.CertificateKernel`; not part of the wave chronology. Reading order: `GenericTailOrbitRigidity → GreedyAchievementSet → BooleanMobiusCarry → RationalSupportCarrySkeleton → SublogDivisorCoverage`.

@@ -245,6 +245,73 @@ probability that $d$ divides two independent fair-coin waiting times
 tail differences of Section~\ref{sec:reduction} are three readings of the same
 quantity.
 
+\subsection{The squared transform and gcd moments}\label{sec:squared}
+
+The square in Proposition~\ref{res:lens} is not an isolated identity.  For an
+arithmetic function $f$, put
+\[
+ L_2(f)=\sum_{d\geq1}\frac{f(d)}{(2^d-1)^2}.
+\]
+If $X$ and $Y$ are the independent waiting times used in
+Section~\ref{sec:geom}, then
+\[
+ \Pr(d\mid\gcd(X,Y))=Pr(d\mid X)\Pr(d\mid Y)
+     =\frac{1}{(2^d-1)^2}.
+\]
+Consequently $L_2(f)$ is the divisor calculus of the random gcd, just as
+$L(f)$ is the divisor calculus of one waiting time.  More precisely, the
+formal transfer theorem gives, for $0\leq r<1$ and $|f(d)|\leq d$,
+\[
+ \sum_{d\geq1}f(d)\left(\frac{r^d}{1-r^d}\right)^2
+ =\sum_{n\geq1}\left(\sum_{e\mid n}f(e)\left(\frac ne-1\right)\right)r^n.
+\]
+Formalised:
+\lref{GcdMomentCalculus.lean}{105}{tsum_lambert_linear_weight_sq_pure}.
+
+\begin{proposition}[the squared Lambert ladder]\label{res:gcdmoment}
+At $r=1/2$ the following identities hold:
+\begin{align*}
+ L_2(\mu)&=S-\tfrac12,\\
+ L_2(\mathbf 1)&=
+   \sum_{n\geq1}\frac{\sigma(n)-\tau(n)}{2^n},\\
+ L_2(\ph)&=
+   \sum_{n\geq1}\frac{P(n)-n}{2^n},
+ \qquad
+ P(n)=\sum_{e\mid n}\ph(e)\frac ne.
+\end{align*}
+Here $P$ is Pillai's gcd-sum function.  The three rows are respectively the
+coprime probability, the expected divisor count of $\gcd(X,Y)$, and the
+expected value of $\gcd(X,Y)$.
+\end{proposition}
+\noindent The first row is Proposition~\ref{res:lens}.  The second and third
+are formalised at
+\lref{GcdMomentCalculus.lean}{216}{tsum_one_div_mersenne_sq_eq_sigma_sub_tau_series}
+and
+\lref{GcdMomentCalculus.lean}{235}{tsum_totient_div_mersenne_sq_eq_gcd_moment_series}.
+In the standard notation
+$\zeta_q(s)=\sum_{n\geq1}\sigma_{s-1}(n)q^n$, the middle value is
+$\zeta_{1/2}(2)-\zeta_{1/2}(1)$.  Postelmans--Van Assche prove that
+$1,\zeta_q(1),\zeta_q(2)$ are linearly independent over $\Q$ when
+$q^{-1}\in\Z\setminus\{-1,1\}$~\cite{postelmansvanassche}; hence this middle
+value is irrational.  Their Hermite--Pad\'e argument is cited only and is not
+formalised here.  It does not transfer irrationality to the M\"obius row:
+$L_2(\mu)=S-1/2$ remains precisely the open arithmetic atom.
+
+The same pair calculus has a reduced-direction identity
+\[
+ \sum_{\substack{a,b\geq1\\(a,b)=1}}\frac{1}{2^{a+b}-1}=1,
+\]
+formalised at
+\lref{GcdMomentCalculus.lean}{349}{tsum_pos_coprime_inv_mersenne_eq_one}.
+Its Stern--Brocot cylinder mass
+$C(a,b)=((2^a-1)(2^b-1))^{-1}$ satisfies an exact parent--children recursion,
+and the depth-$d$ unfolding converges to $C(a,b)$ with error at most
+$(2/3)^dC(a,b)$; see
+\lrefx{GcdMomentCalculus.lean}{474}{cylinderMass_split} and
+\lrefx{GcdMomentCalculus.lean}{525}{sternBrocotDepthMass_error}.
+These are exact representations of the same positive mass.  They do not by
+themselves supply an irrationality criterion for $S$.
+
 \section{Erd\H{o}s--Borwein-type irrationality (the \#257 direction)}\label{sec:eb}
 
 \subsection{Full support: the Erd\H{o}s--Borwein constant, every base}
@@ -670,6 +737,25 @@ and
 \lref{DiagonalFreshLossBridge.lean}{187}{irrational_totientSeries_of_diagonalFreshLossProjectionSupply}.
 The development proves finite fixtures for this bridge but does not assert an
 unbounded projection or suffix supply.
+
+\paragraph{A closed prime-adjunction route.} One tempting way to seek an
+unbounded obstruction is to compare the full target at $H$, $pH$, $qH$, and
+$pqH$.  The formal development rules out this route in its unprojected form.
+For every positive $k$, the actual diagonal satisfies an affine transport law
+\[
+ D_{kH}=Q_k(H)D_H+Z_k(H),
+ \qquad Q_k(H)\in\N,\quad Z_k(H)\in\Z.
+\]
+Hence integrality at $H$ propagates to every multiple, and the four target hits
+at the prime-adjunction diamond are equivalent to the single hit at its root
+(\lref{FullTargetPrimeAdjunctionNoGo.lean}{196}{fullTarget_primeAdjunction_diamond_iff_root}).
+The corresponding transport of the complete foreign defect has zero diamond
+curvature
+(\lrefx{FullTargetPrimeAdjunctionNoGo.lean}{247}{foreignTransportCorrection_primeAdjunction_flat}).
+Thus explicit-shadow fibres alone cannot create a holonomy obstruction.  A
+future positive route would need a separately defined projection together with
+a theorem controlling what that projection discards.  This is a proved
+obstruction to one strategy, not progress on the unbounded-supply proposition.
 
 \paragraph{What is open.} The reduction converts \#249 into the statement that the
 certificate supply is \emph{unbounded}: certificates exist for arbitrarily large
@@ -1236,6 +1322,8 @@ $L(\mu)=1/2$ & \lrefx{MersenneLambertLadder.lean}{527}{tsum_moebius_div_two_pow_
 $L(\ph)=2$ & \lrefx{MersenneLambertLadder.lean}{515}{tsum_totient_div_two_pow_sub_one_eq_two}\ (\texttt{MersenneLambertLadder})\\
 positive lift $L(A)=S$ & \lrefx{CertificateKernel.lean}{18117}{tsum_primWeight_div_two_pow_sub_one_eq_totient_series}\ (\texttt{CertificateKernel})\\
 M\"obius-square lens & \lrefx{CertificateKernel.lean}{18126}{totient_series_eq_half_add_moebius_mersenne_square}\ (\texttt{CertificateKernel})\\
+$L_2(\mathbf1)$ and $L_2(\ph)$ gcd moments & \lrefx{GcdMomentCalculus.lean}{216}{tsum_one_div_mersenne_sq_eq_sigma_sub_tau_series}, \lrefx{GcdMomentCalculus.lean}{235}{tsum_totient_div_mersenne_sq_eq_gcd_moment_series}\ (\texttt{GcdMomentCalculus})\\
+Stern--Brocot cylinder recursion and rate & \lrefx{GcdMomentCalculus.lean}{474}{cylinderMass_split}, \lrefx{GcdMomentCalculus.lean}{525}{sternBrocotDepthMass_error}\ (\texttt{GcdMomentCalculus})\\
 $S=\tfrac12+\Pr(\gcd=1)$ & \lrefx{CertificateKernel.lean}{18229}{totient_series_eq_half_add_visible_coprime_pairs}\ (\texttt{CertificateKernel})\\
 $S\ne p/q$ for $q\le\Qzero$ & \lrefx{CertificateKernel.lean}{18056}{tsum_totient_div_pow_two_ne_ratCast_of_den_le_79639646646701375323355774875831053}\ (\texttt{CertificateKernel})\\
 tail-period reduction & \lrefx{TotientTailPeriodKiller.lean}{394}{irrational_totient_series_of_certificate_supply}\ (\texttt{TotientTailPeriodKiller})\\
@@ -1248,6 +1336,7 @@ full-target diagonal reduction & \lrefx{DiagonalPincerDecomposition.lean}{215}{d
 squared-Mersenne enclosure & \lrefx{SquaredMersenneDiagonalEnclosure.lean}{116}{scaleDiagonalTailDifference_sub_lambertProjectedDiagonal}\ (\texttt{SquaredMersenneDiagonalEnclosure})\\
 exact Mersenne-shadow denominator & \lrefx{MersenneShadowDenominatorGrowth.lean}{147}{lcmHeight_scaledMobiusShadow_den_exact}\ (\texttt{MersenneShadowDenominatorGrowth})\\
 fresh-loss projection reduction & \lrefx{DiagonalFreshLossBridge.lean}{187}{irrational_totientSeries_of_diagonalFreshLossProjectionSupply}\ (\texttt{DiagonalFreshLossBridge})\\
+prime-adjunction diamond no-go & \lrefx{FullTargetPrimeAdjunctionNoGo.lean}{196}{fullTarget_primeAdjunction_diamond_iff_root}\ (\texttt{FullTargetPrimeAdjunctionNoGo})\\
 tail-orbit rationality criterion & \lrefx{GenericTailOrbitRigidity.lean}{425}{binaryCoeffSeries_rational_iff_exists_temperedBinaryOrbit}\ (\texttt{GenericTailOrbitRigidity})\\
 Boolean carry certificate $\Leftrightarrow$ support fraction & \lrefx{BooleanMobiusCarry.lean}{948}{exists_normalized_support_fraction_iff_exists_booleanMobiusCarry}\ (\texttt{BooleanMobiusCarry})\\
 one-wrap classification & \lrefx{RationalSupportCarrySkeleton.lean}{415}{one_doublingWrap_classification}\ (\texttt{RationalSupportCarrySkeleton})\\
@@ -1263,6 +1352,7 @@ Mersenne achievement set: measure one and nowhere dense & \lrefx{GreedyAchieveme
 \clearpage
 \begin{thebibliography}{11}
 \small
+\setlength{\itemsep}{0pt}
 \bibitem{erdos1948} P.~Erd\H{o}s, \emph{On arithmetical properties of Lambert series},
   J. Indian Math. Soc. (N.S.) \textbf{12} (1948), 63--66,
   \href{https://users.renyi.hu/~p_erdos/1948-04.pdf}{archive scan}.
@@ -1303,6 +1393,10 @@ Mersenne achievement set: measure one and nowhere dense & \lrefx{GreedyAchieveme
 \bibitem{nesterenko} Yu.~V. Nesterenko, \emph{Modular functions and transcendence questions},
   Mat. Sb. \textbf{187} (1996), no.~9, 65--96; English transl., Sb. Math. \textbf{187} (1996), no.~9, 1319--1348,
   doi:\href{https://doi.org/10.1070/SM1996v187n09ABEH000158}{10.1070/SM1996v187n09ABEH000158}.
+\bibitem{postelmansvanassche} K.~Postelmans and W.~Van Assche,
+  \emph{Irrationality of $\zeta_q(1)$ and $\zeta_q(2)$},
+  J. Number Theory \textbf{126} (2007), no.~1, 119--154,
+  doi:\href{https://doi.org/10.1016/j.jnt.2006.11.011}{10.1016/j.jnt.2006.11.011}.
 \bibitem{lucatachiya} F.~Luca and Y.~Tachiya, \emph{Irrationality of Lambert series associated
   with a periodic sequence}, Int. J. Number Theory \textbf{10} (2014), no.~3, 623--636,
   doi:\href{https://doi.org/10.1142/S1793042113501121}{10.1142/S1793042113501121}.
