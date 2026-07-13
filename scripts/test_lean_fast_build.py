@@ -81,6 +81,12 @@ class LeanFastBuildTests(unittest.TestCase):
             with self.assertRaisesRegex(RuntimeError, "bad revision"):
                 fast.changed_targets("missing", {})
 
+    def test_no_change_main_skips_module_discovery(self) -> None:
+        with mock.patch.object(fast, "changed_lean_paths", return_value=set()), mock.patch.object(
+            fast, "discover", side_effect=AssertionError("discovery should be skipped")
+        ):
+            self.assertEqual(fast.main(["--changed-from", "HEAD", "--plan"]), 0)
+
     def test_config_change_makes_module_stale(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

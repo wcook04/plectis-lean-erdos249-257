@@ -80,10 +80,8 @@ def resolve_targets(
     return resolved
 
 
-def changed_targets(
-    base: str, modules: dict[str, Path], root: Path = ROOT
-) -> list[str]:
-    """Return changed local Lean modules relative to ``base``."""
+def changed_lean_paths(base: str, root: Path = ROOT) -> set[Path]:
+    """Return tracked or untracked Lean paths changed relative to ``base``."""
 
     commands = (
         ["git", "diff", "--name-only", "--diff-filter=ACMR", base, "--", "*.lean"],
@@ -106,8 +104,26 @@ def changed_targets(
             for line in completed.stdout.splitlines()
             if line.strip()
         )
+    return changed_paths
+
+
+def changed_targets_from_paths(
+    changed_paths: Iterable[Path], modules: dict[str, Path]
+) -> list[str]:
     modules_by_path = {source.resolve(): name for name, source in modules.items()}
-    return sorted(modules_by_path[path] for path in changed_paths if path in modules_by_path)
+    return sorted(
+        modules_by_path[path.resolve()]
+        for path in changed_paths
+        if path.resolve() in modules_by_path
+    )
+
+
+def changed_targets(
+    base: str, modules: dict[str, Path], root: Path = ROOT
+) -> list[str]:
+    """Return changed local Lean modules relative to ``base``."""
+
+    return changed_targets_from_paths(changed_lean_paths(base, root), modules)
 
 
 def reachable(roots: Iterable[str], graph: dict[str, set[str]]) -> set[str]:
@@ -190,20 +206,25 @@ def main(argv: list[str] | None = None) -> int:
         parser.error("--jobs must be at least 1")
 
     root = ROOT
-    modules = discover(root)
-    graph = local_graph(modules)
     try:
         if args.changed_from is not None:
             if args.targets:
                 parser.error("positional targets and --changed-from are mutually exclusive")
-            target_modules = changed_targets(args.changed_from, modules, root)
-            if not target_modules:
+            changed_paths = changed_lean_paths(args.changed_from, root)
+            if not changed_paths:
                 print(f"lean-fast-build: no changed Lean modules relative to {args.changed_from}")
                 return 0
+            modules = discover(root)
+            target_modules = changed_targets_from_paths(changed_paths, modules)
+            if not target_modules:
+                print(f"lean-fast-build: no changed local Lean modules relative to {args.changed_from}")
+                return 0
         else:
+            modules = discover(root)
             target_modules = resolve_targets(args.targets, modules, root)
     except (RuntimeError, ValueError) as error:
         parser.error(str(error))
+    graph = local_graph(modules)
     build_waves = waves(reachable(target_modules, graph), graph)
     pending = [
         [name for name in wave if stale(name, modules, graph, root)]
