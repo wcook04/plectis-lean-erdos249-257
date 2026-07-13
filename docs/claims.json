@@ -5296,7 +5296,7 @@
     "lean_toolchain": "leanprover/lean4:v4.29.1",
     "repository": "https://github.com/wcook04/plectis-lean-erdos249-257",
     "formal_source": {
-      "ref": "d79020b9327bd49b8f0d971a8c9c718b296fe663",
+      "ref": "fe21f3af4a7eab45044438f9848c6dff10f95f17",
       "ref_kind": "commit",
       "publication_state": "committed_checkpoint_pending_remote_publication",
       "relationship_to_last_tag": "post_tag_checkpoint"
@@ -5320,7 +5320,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 985
+        "line": 1003
       }
     },
     {
@@ -5331,7 +5331,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 994
+        "line": 1012
       }
     },
     {
@@ -5342,7 +5342,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 1001
+        "line": 1019
       }
     }
   ],
@@ -5686,6 +5686,31 @@
           "name": "squareCRT_clean_block_can_be_nonzero",
           "module": "Erdos249257/SquareCRTCube.lean",
           "line": 303
+        }
+      ]
+    },
+    {
+      "id": "signed_dyadic_moment_substrate",
+      "label": "Signed dyadic-moment algebra",
+      "status": "proved here",
+      "statement": "A rectangular determinant expansion over all maps and a unique-largest-dyadic-exponent parity lemma are formalised. The latter makes a cleared finite dyadic sum odd, hence nonzero, when its selected numerator is odd and its exponent is strictly largest. This is finite algebraic substrate only: it proves neither non-vanishing of the actual totient Hankel determinants nor an irrationality criterion.",
+      "paper_label": "res:signedmoment",
+      "readme_headline": false,
+      "declarations": [
+        {
+          "name": "det_mul_rectangular",
+          "module": "Erdos249257/SignedQMomentObstruction.lean",
+          "line": 28
+        },
+        {
+          "name": "scaled_dyadic_sum_odd",
+          "module": "Erdos249257/SignedQMomentObstruction.lean",
+          "line": 77
+        },
+        {
+          "name": "scaled_dyadic_sum_ne_zero",
+          "module": "Erdos249257/SignedQMomentObstruction.lean",
+          "line": 95
         }
       ]
     },

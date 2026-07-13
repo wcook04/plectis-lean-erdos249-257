@@ -10,7 +10,7 @@
     "declaration_count": 6388,
     "theorem_like_count": 5871,
     "generated_certificate_declaration_count": 1681,
-    "principal_claim_link_count": 60,
+    "principal_claim_link_count": 63,
     "kind_counts": {
       "abbrev": 1,
       "def": 502,
@@ -69997,7 +69997,9 @@
       "line": 28,
       "signature": "theorem det_mul_rectangular {R ι κ : Type*} [CommRing R] [Fintype ι] [DecidableEq ι] [Fintype κ] (M : Matrix ι κ R) (N : Matrix κ ι R) : Matrix.det (M * N) = ∑ p : ι → κ, Matrix.det (fun i j ↦ M i (p j)) * ∏ i, N (p i) i",
       "generated_certificate": false,
-      "claim_ids": []
+      "claim_ids": [
+        "signed_dyadic_moment_substrate"
+      ]
     },
     {
       "id": "Erdos249257/SignedQMomentObstruction.lean:46:finiteSignedMomentMatrix",
@@ -70039,7 +70041,9 @@
       "line": 77,
       "signature": "theorem scaled_dyadic_sum_odd {α : Type*} (s : Finset α) (u : α → ℤ) (e : α → ℕ) (m : α) (hm : m ∈ s) (hu : ¬ Even (u m)) (hmax : ∀ i ∈ s, i ≠ m → e i < e m) : (∑ i ∈ s, u i * (2 : ℤ) ^ (e m - e i)) % 2 = 1",
       "generated_certificate": false,
-      "claim_ids": [],
+      "claim_ids": [
+        "signed_dyadic_moment_substrate"
+      ],
       "docstring": "If one dyadic denominator exponent is uniquely largest and its numerator is odd, the common numerator obtained by clearing that denominator is odd."
     },
     {
@@ -70050,7 +70054,9 @@
       "line": 95,
       "signature": "theorem scaled_dyadic_sum_ne_zero {α : Type*} (s : Finset α) (u : α → ℤ) (e : α → ℕ) (m : α) (hm : m ∈ s) (hu : ¬ Even (u m)) (hmax : ∀ i ∈ s, i ≠ m → e i < e m) : (∑ i ∈ s, u i * (2 : ℤ) ^ (e m - e i)) ≠ 0",
       "generated_certificate": false,
-      "claim_ids": [],
+      "claim_ids": [
+        "signed_dyadic_moment_substrate"
+      ],
       "docstring": "The same unique-terminal hypothesis gives non-vanishing after common dyadic denominator clearing."
     },
     {

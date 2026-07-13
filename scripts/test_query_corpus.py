@@ -120,6 +120,18 @@ def main() -> int:
     }
     assert square_crt_claim["lean_source_identity"] == adelic["lean_source_identity"]
 
+    signed_moment_claim = query("--claim", "signed_dyadic_moment_substrate")
+    assert signed_moment_claim["claim"]["status"] == "proved here"
+    assert "neither non-vanishing of the actual totient Hankel determinants" in (
+        signed_moment_claim["claim"]["statement"]
+    )
+    assert signed_moment_claim["claim"]["declarations"][0] == {
+        "name": "det_mul_rectangular",
+        "module": "Erdos249257/SignedQMomentObstruction.lean",
+        "line": 28,
+    }
+    assert signed_moment_claim["lean_source_identity"] == square_crt_claim["lean_source_identity"]
+
     paper_label = query("--paper-label", "res:farey")
     assert paper_label["kind"] == "paper_label"
     assert paper_label["paper"] == claim["paper"]
