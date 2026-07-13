@@ -5020,6 +5020,21 @@
           "to": "diagonal_pincer_reduction"
         },
         {
+          "from": "canonical_jump_slack_reduction",
+          "relation": "builds_on",
+          "to": "diagonal_fresh_loss_reduction"
+        },
+        {
+          "from": "canonical_jump_slack_reduction",
+          "relation": "advances_open_target",
+          "to": "erdos_249",
+          "remaining_open_effect": {
+            "remaining_open_proposition_id": "remaining_open.unbounded_certificate_supply",
+            "operation": "re_expresses",
+            "statement": "Re-expresses the canonical strict-jump centrality supply as the sign of one exact integer slack; cofinal nonnegative slack remains open."
+          }
+        },
+        {
           "from": "diagonal_pincer_reduction",
           "relation": "builds_on",
           "to": "squared_mersenne_enclosure"
@@ -5077,6 +5092,21 @@
             "remaining_open_proposition_id": "remaining_open.universal_257_all_infinite_supports",
             "operation": "constrains",
             "statement": "Provides exact global geometry and finite non-membership tests for the value set without proving the universal irrationality statement."
+          }
+        },
+        {
+          "from": "half_second_channel_reduction",
+          "relation": "builds_on",
+          "to": "greedy_achievement_geometry"
+        },
+        {
+          "from": "half_second_channel_reduction",
+          "relation": "advances_open_target",
+          "to": "universal_257",
+          "remaining_open_effect": {
+            "remaining_open_proposition_id": "remaining_open.universal_257_all_infinite_supports",
+            "operation": "re_expresses",
+            "statement": "Reduces membership of the target one half to an exact rational separation statement from level seven onward; it neither proves that statement nor settles arbitrary infinite supports."
           }
         },
         {
@@ -5162,7 +5192,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 887
+        "line": 946
       }
     },
     {
@@ -5173,7 +5203,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 896
+        "line": 955
       }
     },
     {
@@ -5184,7 +5214,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 903
+        "line": 962
       }
     }
   ],
@@ -5414,6 +5444,34 @@
       ]
     },
     {
+      "id": "canonical_jump_slack_reduction",
+      "label": "Canonical strict-jump slack reduction",
+      "status": "conditional reduction",
+      "statement": "The two canonical adjacent-suffix central-band inequalities are equivalent to nonnegativity of one explicit integer slack. Cofinal nonnegative slack at strict lcm jumps implies irrationality of the totient constant; that cofinal sign statement remains open.",
+      "remaining_open_proposition_ids": [
+        "remaining_open.unbounded_certificate_supply"
+      ],
+      "paper_label": "res:slackfrontier",
+      "readme_headline": false,
+      "declarations": [
+        {
+          "name": "canonicalAdjacentSuffixCentral_iff_slack_nonneg",
+          "module": "Erdos249257/DiagonalFreshLossBridge.lean",
+          "line": 619
+        },
+        {
+          "name": "canonicalAdjacentSuffixJumpCentralSupply_iff_slackSupply",
+          "module": "Erdos249257/DiagonalFreshLossBridge.lean",
+          "line": 636
+        },
+        {
+          "name": "irrational_totientSeries_of_canonicalAdjacentSuffixJumpSlackSupply",
+          "module": "Erdos249257/DiagonalFreshLossBridge.lean",
+          "line": 710
+        }
+      ]
+    },
+    {
       "id": "squared_mersenne_enclosure",
       "label": "Sharp squared-Mersenne diagonal enclosure",
       "status": "proved here",
@@ -5574,6 +5632,34 @@
           "name": "three_fourths_not_mem_mersenneAchievementSet",
           "module": "Erdos249257/GreedyAchievementSet.lean",
           "line": 1413
+        }
+      ]
+    },
+    {
+      "id": "half_second_channel_reduction",
+      "label": "Exact rational second-channel reduction for the target one half",
+      "status": "conditional reduction",
+      "statement": "A decidable rational separation predicate controls the greedy Mersenne orbit for the target 1/2. Lean verifies levels 1 through 6 exactly; proving the predicate for every n >= 7 would place 1/2 in the Mersenne achievement set. The universal tail statement remains open.",
+      "remaining_open_proposition_ids": [
+        "remaining_open.universal_257_all_infinite_supports"
+      ],
+      "paper_label": "res:secondfrontier",
+      "readme_headline": false,
+      "declarations": [
+        {
+          "name": "HalfSecondChannelSeparatedRat",
+          "module": "Erdos249257/GreedyAchievementSet.lean",
+          "line": 1899
+        },
+        {
+          "name": "halfSecondChannelSeparatedRat_of_pos_le_six",
+          "module": "Erdos249257/GreedyAchievementSet.lean",
+          "line": 1927
+        },
+        {
+          "name": "half_mem_mersenneAchievementSet_of_secondChannelSeparationRat_from_seven",
+          "module": "Erdos249257/GreedyAchievementSet.lean",
+          "line": 2105
         }
       ]
     },

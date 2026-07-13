@@ -884,6 +884,65 @@ verified artefact.
 The remaining questions can be stated without reference to the size of the
 formal development.
 
+\subsection{Exact-arithmetic frontier as of 13 July 2026}
+
+Two further reductions put the current proof obligations into scalar exact
+arithmetic.  They do not change the status of either problem.
+
+For \#249, let $m_t$ be the canonical adjacent-suffix depth and let $d_t$ be
+the corresponding residue in $[0,2^{m_t})$.  Define
+\[
+  \sigma_t=\min\bigl(d_t-2^{m_t-5},
+    (2^{m_t}-2^{m_t-5})-d_t\bigr)\in\Z.
+\]
+
+\begin{proposition}[canonical strict-jump slack]\label{res:slackfrontier}
+The canonical residue lies in the central band
+$[2^{m_t-5},2^{m_t}-2^{m_t-5}]$ if and only if $\sigma_t\ge0$.
+If nonnegative slack occurs at arbitrarily large strict jumps
+$M_t<M_{t+1}$, then $S$ is irrational.
+\end{proposition}
+\noindent Formalised:
+\lrefx{DiagonalFreshLossBridge.lean}{619}{canonicalAdjacentSuffixCentral_iff_slack_nonneg},
+\lrefx{DiagonalFreshLossBridge.lean}{636}{canonicalAdjacentSuffixJumpCentralSupply_iff_slackSupply},
+and
+\lref{DiagonalFreshLossBridge.lean}{710}{irrational_totientSeries_of_canonicalAdjacentSuffixJumpSlackSupply}.
+The proposition is an equivalence and a conditional consumer.  It does not
+prove that $\sigma_t$ is nonnegative cofinally.
+
+For \#257, write $r_n$ for the exact greedy residual of the target $1/2$ and
+put
+\[
+  u_n=4^n(2r_n-2^{-n}).
+\]
+The second-channel condition is the rational inequality
+\[
+  \frac16+\frac{37}{56}2^{-n}\le \left|u_n-\frac13\right|.
+\]
+
+\begin{proposition}[rational second-channel reduction]\label{res:secondfrontier}
+The second-channel condition is decidable over $\Q$ and holds for
+$1\le n\le6$.  If it holds for every $n\ge7$, then
+$1/2$ belongs to the Mersenne achievement set $\mathcal A$.
+\end{proposition}
+\noindent Formalised:
+\lrefx{GreedyAchievementSet.lean}{1899}{HalfSecondChannelSeparatedRat},
+\lrefx{GreedyAchievementSet.lean}{1927}{halfSecondChannelSeparatedRat_of_pos_le_six},
+and
+\lref{GreedyAchievementSet.lean}{2105}{half_mem_mersenneAchievementSet_of_secondChannelSeparationRat_from_seven}.
+This reduces the remaining tail to a universal exact-rational statement; it
+does not prove that statement, and membership alone is not the universal
+\#257 theorem.
+
+Exact-arithmetic probes used during proof search found no violation of the
+second-channel inequality through $n=4000$, and found nonnegative canonical
+slack at every tested index through $t=52$, including all $22$ strict lcm
+jumps in that range.  These are finite computations outside the Lean proof
+authority.  In particular, they do not supply either universal quantifier.
+Their value is diagnostic: the \#257 computation points to an invariant of
+the rational orbit $u_n$, while the \#249 computation points to a sign or
+recurrence argument for $\sigma_t$ across fresh prime-power lcm jumps.
+
 \begin{problem}[Erd\H{o}s \#249]
 Prove that
 \[

@@ -1755,6 +1755,363 @@ theorem abs_greedyMersenneSignedBalance_succ
     congr 1
     ring
 
+/-! ## Greedy shadows and the second-channel separation interface -/
+
+/-- The Erdős–Borwein constant, expressed in the positive Mersenne-tail
+coordinate already used throughout this file. -/
+noncomputable def erdosBorweinMersenneConstant : ℝ :=
+  mersenneTail 0
+
+/-- The total mass of the first `n` positive Mersenne weights. -/
+noncomputable def mersennePrefixMass (n : ℕ) : ℝ :=
+  ∑ k ∈ Finset.range n, mersenneWeight (k + 1)
+
+/-- The mass selected by an arbitrary support through exponent `n`. -/
+noncomputable def mersenneSupportPrefix (A : Set ℕ) (n : ℕ) : ℝ :=
+  ∑ k ∈ Finset.range n, Set.indicator A mersenneWeight (k + 1)
+
+theorem mersenneSupportPrefix_succ (A : Set ℕ) (n : ℕ) :
+    mersenneSupportPrefix A (n + 1)
+      = mersenneSupportPrefix A n
+        + Set.indicator A mersenneWeight (n + 1) := by
+  unfold mersenneSupportPrefix
+  rw [Finset.sum_range_succ]
+
+/-- The signed Mersenne shadow associated with an arbitrary support prefix. -/
+noncomputable def mersenneShadowOfPrefix (A : Set ℕ) (n : ℕ) : ℝ :=
+  1 + mersennePrefixMass n - 2 * mersenneSupportPrefix A n
+
+/-- The shadow of the actual greedy prefix for the target `1/2`. -/
+noncomputable def halfGreedyMersenneShadow (n : ℕ) : ℝ :=
+  1 + mersennePrefixMass n - 2 * halfGreedyMersennePrefix n
+
+theorem erdosBorweinMersenneConstant_eq_prefix_add_tail (n : ℕ) :
+    erdosBorweinMersenneConstant = mersennePrefixMass n + mersenneTail n := by
+  rw [erdosBorweinMersenneConstant, mersennePrefixMass]
+  simpa using mersenneTail_eq_prefix_add_tail 0 n
+
+/-- Exact shadow/signed-balance duality.  This turns a death-hole hit into an
+Archimedean near-hit of the Erdős–Borwein constant without introducing a new
+dynamical model. -/
+theorem halfGreedyMersenneShadow_sub_constant_eq_signedBalance (n : ℕ) :
+    halfGreedyMersenneShadow n - erdosBorweinMersenneConstant
+      = greedyMersenneSignedBalance (1 / 2 : ℝ) n := by
+  have htotal := erdosBorweinMersenneConstant_eq_prefix_add_tail n
+  have hprefix := greedyMersenne_prefix_add_remainder (1 / 2 : ℝ) n
+  change (1 / 2 : ℝ) = halfGreedyMersennePrefix n
+    + greedyMersenneRemainder (1 / 2 : ℝ) n at hprefix
+  rw [greedyMersenneSignedBalance_eq]
+  unfold halfGreedyMersenneShadow
+  linarith
+
+/-- Once strict superincreasingness supplies a tail-sized separation from a
+competing prefix, the surviving greedy prefix is strictly closer to the
+Erdős–Borwein constant.  This is the reusable analytic core of the proposed
+global nearest-shadow argument. -/
+theorem halfGreedyShadow_closer_of_prefix_separation
+    {n : ℕ}
+    (hsurvive :
+      greedyMersenneRemainder (1 / 2 : ℝ) n ≤ mersenneTail n)
+    {A : Set ℕ}
+    (hseparate :
+      mersenneTail n <
+        |mersenneSupportPrefix A n - halfGreedyMersennePrefix n|) :
+    |erdosBorweinMersenneConstant - halfGreedyMersenneShadow n|
+      < |erdosBorweinMersenneConstant - mersenneShadowOfPrefix A n| := by
+  have hremNonneg := greedyMersenneRemainder_nonneg
+    (x := (1 / 2 : ℝ)) (by norm_num) n
+  have hprefix := greedyMersenne_prefix_add_remainder (1 / 2 : ℝ) n
+  change (1 / 2 : ℝ) = halfGreedyMersennePrefix n
+    + greedyMersenneRemainder (1 / 2 : ℝ) n at hprefix
+  have htotal := erdosBorweinMersenneConstant_eq_prefix_add_tail n
+  let b : ℝ := mersenneTail n
+    - 2 * greedyMersenneRemainder (1 / 2 : ℝ) n
+  let d : ℝ := mersenneSupportPrefix A n - halfGreedyMersennePrefix n
+  have hb : |b| ≤ mersenneTail n := by
+    dsimp [b]
+    rw [abs_le]
+    constructor <;> linarith
+  have hd : mersenneTail n < |d| := by
+    simpa [d] using hseparate
+  have htriangle : 2 * |d| ≤ |b + 2 * d| + |b| := by
+    calc
+      2 * |d| = |2 * d| := by rw [abs_mul]; norm_num
+      _ = |(b + 2 * d) + (-b)| := by congr 1 <;> ring
+      _ ≤ |b + 2 * d| + |-b| := abs_add_le _ _
+      _ = |b + 2 * d| + |b| := by rw [abs_neg]
+  have hcloser : |b| < |b + 2 * d| := by
+    linarith
+  have hgreedy :
+      erdosBorweinMersenneConstant - halfGreedyMersenneShadow n = b := by
+    unfold halfGreedyMersenneShadow
+    dsimp [b]
+    linarith
+  have hother :
+      erdosBorweinMersenneConstant - mersenneShadowOfPrefix A n
+        = b + 2 * d := by
+    unfold mersenneShadowOfPrefix
+    dsimp [b, d]
+    linarith
+  rw [hgreedy, hother]
+  exact hcloser
+
+/-- Under current survival, next-step survival is exactly separation of the
+greedy shadow from the open Mersenne-gap neighbourhood of the constant. -/
+theorem halfGreedy_next_survives_iff_shadow_separated
+    {n : ℕ}
+    (hsurvive :
+      greedyMersenneRemainder (1 / 2 : ℝ) n ≤ mersenneTail n) :
+    greedyMersenneRemainder (1 / 2 : ℝ) (n + 1)
+        ≤ mersenneTail (n + 1) ↔
+      mersenneGap (n + 1) ≤
+        |halfGreedyMersenneShadow n - erdosBorweinMersenneConstant| := by
+  have hnonneg := greedyMersenneRemainder_nonneg
+    (x := (1 / 2 : ℝ)) (by norm_num) n
+  simpa [halfGreedyMersenneShadow_sub_constant_eq_signedBalance] using
+    (greedyMersenne_next_survives_iff_gap_le_abs_signedBalance
+      hnonneg hsurvive)
+
+/-- The normalized phase at the first scale where the second geometric
+channel of the Mersenne tail is visible. -/
+noncomputable def greedyMersenneSecondChannelPhase (n : ℕ) : ℝ :=
+  (4 : ℝ) ^ n *
+    (2 * greedyMersenneRemainder (1 / 2 : ℝ) n
+      - ((1 : ℝ) / 2) ^ n)
+
+/-- Exact rational model of the second-channel phase.  The unresolved
+separation producer is arithmetic over `ℚ`; real analysis is needed only by
+its already-landed consumer. -/
+def greedyMersenneSecondChannelPhaseRat (n : ℕ) : ℚ :=
+  (4 : ℚ) ^ n *
+    (2 * greedyMersenneRemainderRat (1 / 2 : ℚ) n
+      - ((1 : ℚ) / 2) ^ n)
+
+@[simp] theorem cast_greedyMersenneSecondChannelPhaseRat (n : ℕ) :
+    ((greedyMersenneSecondChannelPhaseRat n : ℚ) : ℝ)
+      = greedyMersenneSecondChannelPhase n := by
+  unfold greedyMersenneSecondChannelPhaseRat
+    greedyMersenneSecondChannelPhase
+  push_cast
+  rw [cast_greedyMersenneRemainderRat]
+  norm_num
+
+/-- Decidable rational form of the shrinking-hole avoidance condition. -/
+def HalfSecondChannelSeparatedRat (n : ℕ) : Prop :=
+  (1 / 6 : ℚ) + (37 / 56 : ℚ) * ((1 : ℚ) / 2) ^ n
+    ≤ |greedyMersenneSecondChannelPhaseRat n - 1 / 3|
+
+instance (n : ℕ) : Decidable (HalfSecondChannelSeparatedRat n) :=
+  by
+    unfold HalfSecondChannelSeparatedRat
+    infer_instance
+
+/-- The rational certificate casts directly to the real separation estimate
+consumed by the greedy-survival theorem. -/
+theorem secondChannelSeparation_of_rat {n : ℕ}
+    (h : HalfSecondChannelSeparatedRat n) :
+    (1 / 6 : ℝ) + (37 / 56 : ℝ) * ((1 : ℝ) / 2) ^ n
+      ≤ |greedyMersenneSecondChannelPhase n - 1 / 3| := by
+  unfold HalfSecondChannelSeparatedRat at h
+  have hc :
+      (((1 / 6 : ℚ) + (37 / 56 : ℚ) * ((1 : ℚ) / 2) ^ n : ℚ) : ℝ)
+        ≤ ((|greedyMersenneSecondChannelPhaseRat n - 1 / 3| : ℚ) : ℝ) := by
+    exact_mod_cast h
+  rw [Rat.cast_abs] at hc
+  push_cast at hc
+  norm_num at hc
+  exact hc
+
+/-- Exact finite certificate for the only small levels visible in the
+second-channel numerics.  The infinite producer can therefore start at
+`n = 7`, where the observed margin is already large. -/
+theorem halfSecondChannelSeparatedRat_of_pos_le_six
+    {n : ℕ} (hn : 0 < n) (h6 : n ≤ 6) :
+    HalfSecondChannelSeparatedRat n := by
+  interval_cases n <;>
+    norm_num [HalfSecondChannelSeparatedRat,
+      greedyMersenneSecondChannelPhaseRat, greedyMersenneRemainderRat,
+      mersenneWeightRat] at hn ⊢
+
+/-- Exact decomposition of the scaled signed balance into its second-channel
+phase, the universal `1/3` centre, and the higher-channel tail. -/
+theorem four_pow_mul_signedBalance_eq_secondChannelPhase_sub (n : ℕ) :
+    (4 : ℝ) ^ n * greedyMersenneSignedBalance (1 / 2 : ℝ) n
+      = greedyMersenneSecondChannelPhase n - 1 / 3
+        - (4 : ℝ) ^ n * mersenneWeightRemainderTail n := by
+  have hfour :
+      (4 : ℝ) ^ n * ((1 : ℝ) / 4) ^ n = 1 := by
+    rw [← mul_pow]
+    norm_num
+  rw [greedyMersenneSignedBalance_eq,
+    greedyMersenneSecondChannelPhase,
+    mersenneTail_eq_two_channels_add_remainderTail]
+  nlinarith
+
+/-- Scaling the higher-channel tail by `4^n` leaves an explicit exponentially
+small error. -/
+theorem four_pow_mul_mersenneWeightRemainderTail_le (n : ℕ) :
+    (4 : ℝ) ^ n * mersenneWeightRemainderTail n
+      ≤ (2 / 7 : ℝ) * ((1 : ℝ) / 2) ^ n := by
+  have hscale :
+      (4 : ℝ) ^ n * ((1 : ℝ) / 8) ^ n
+        = ((1 : ℝ) / 2) ^ n := by
+    rw [← mul_pow]
+    norm_num
+  calc
+    (4 : ℝ) ^ n * mersenneWeightRemainderTail n
+        ≤ (4 : ℝ) ^ n *
+            ((2 / 7 : ℝ) * ((1 : ℝ) / 8) ^ n) :=
+          mul_le_mul_of_nonneg_left (mersenneWeightRemainderTail_le n)
+            (by positivity)
+    _ = (2 / 7 : ℝ) *
+          ((4 : ℝ) ^ n * ((1 : ℝ) / 8) ^ n) := by ring
+    _ = (2 / 7 : ℝ) * ((1 : ℝ) / 2) ^ n := by rw [hscale]
+
+/-- The next Mersenne gap at second-channel scale, including the exact
+higher-channel error budget used by the separation consumer. -/
+theorem four_pow_mul_next_mersenneGap_le (n : ℕ) :
+    (4 : ℝ) ^ n * mersenneGap (n + 1)
+      ≤ (1 / 6 : ℝ) + (3 / 8 : ℝ) * ((1 : ℝ) / 2) ^ n := by
+  have h := mersenneGap_asymptotic_bound (n := n + 1) (by omega)
+  change ‖mersenneGap (n + 1)
+      - (2 / 3 : ℝ) * ((1 : ℝ) / 4) ^ (n + 1)‖
+      ≤ 3 * ‖((1 : ℝ) / 8) ^ (n + 1)‖ at h
+  rw [Real.norm_eq_abs, Real.norm_eq_abs,
+    abs_of_nonneg (by positivity :
+      0 ≤ ((1 : ℝ) / 8) ^ (n + 1))] at h
+  have hu := (abs_le.mp h).2
+  have hmul := mul_le_mul_of_nonneg_left hu
+    (show 0 ≤ (4 : ℝ) ^ n by positivity)
+  have hmain :
+      (4 : ℝ) ^ n *
+          ((2 / 3 : ℝ) * ((1 : ℝ) / 4) ^ (n + 1))
+        = (1 / 6 : ℝ) := by
+    rw [pow_succ]
+    have hfour :
+        (4 : ℝ) ^ n * ((1 : ℝ) / 4) ^ n = 1 := by
+      rw [← mul_pow]
+      norm_num
+    nlinarith
+  have herr :
+      (4 : ℝ) ^ n *
+          (3 * ((1 : ℝ) / 8) ^ (n + 1))
+        = (3 / 8 : ℝ) * ((1 : ℝ) / 2) ^ n := by
+    rw [pow_succ]
+    have hscale :
+        (4 : ℝ) ^ n * ((1 : ℝ) / 8) ^ n
+          = ((1 : ℝ) / 2) ^ n := by
+      rw [← mul_pow]
+      norm_num
+    nlinarith
+  nlinarith
+
+/-- A clean second-channel separation estimate is sufficient for one more
+greedy survival step.  The constant `37/56 = 2/7 + 3/8` is exactly the sum
+of the scaled higher-tail and gap-error budgets. -/
+theorem halfGreedy_next_survives_of_secondChannelSeparation
+    {n : ℕ}
+    (hsurvive :
+      greedyMersenneRemainder (1 / 2 : ℝ) n ≤ mersenneTail n)
+    (hseparate :
+      (1 / 6 : ℝ) + (37 / 56 : ℝ) * ((1 : ℝ) / 2) ^ n
+        ≤ |greedyMersenneSecondChannelPhase n - 1 / 3|) :
+    greedyMersenneRemainder (1 / 2 : ℝ) (n + 1)
+      ≤ mersenneTail (n + 1) := by
+  let scale : ℝ := (4 : ℝ) ^ n
+  have hscalePos : 0 < scale := by
+    dsimp [scale]
+    positivity
+  have hremNonneg : 0 ≤ mersenneWeightRemainderTail n :=
+    mersenneWeightRemainderTail_nonneg n
+  have hdecomp :
+      greedyMersenneSecondChannelPhase n - 1 / 3
+        = scale * greedyMersenneSignedBalance (1 / 2 : ℝ) n
+          + scale * mersenneWeightRemainderTail n := by
+    have hid := four_pow_mul_signedBalance_eq_secondChannelPhase_sub n
+    dsimp [scale]
+    linarith
+  have htriangle :
+      |greedyMersenneSecondChannelPhase n - 1 / 3|
+        ≤ scale * |greedyMersenneSignedBalance (1 / 2 : ℝ) n|
+          + scale * mersenneWeightRemainderTail n := by
+    rw [hdecomp]
+    calc
+      |scale * greedyMersenneSignedBalance (1 / 2 : ℝ) n
+          + scale * mersenneWeightRemainderTail n|
+          ≤ |scale * greedyMersenneSignedBalance (1 / 2 : ℝ) n|
+              + |scale * mersenneWeightRemainderTail n| := abs_add_le _ _
+      _ = scale * |greedyMersenneSignedBalance (1 / 2 : ℝ) n|
+            + scale * mersenneWeightRemainderTail n := by
+          rw [abs_mul, abs_mul, abs_of_pos hscalePos,
+            abs_of_nonneg hremNonneg]
+  have hremScaled :
+      scale * mersenneWeightRemainderTail n
+        ≤ (2 / 7 : ℝ) * ((1 : ℝ) / 2) ^ n := by
+    simpa [scale] using four_pow_mul_mersenneWeightRemainderTail_le n
+  have hgapScaled :
+      scale * mersenneGap (n + 1)
+        ≤ (1 / 6 : ℝ) +
+            (3 / 8 : ℝ) * ((1 : ℝ) / 2) ^ n := by
+    simpa [scale] using four_pow_mul_next_mersenneGap_le n
+  have hscaled :
+      scale * mersenneGap (n + 1)
+        ≤ scale * |greedyMersenneSignedBalance (1 / 2 : ℝ) n| := by
+    nlinarith
+  have hgap :
+      mersenneGap (n + 1)
+        ≤ |greedyMersenneSignedBalance (1 / 2 : ℝ) n| :=
+    le_of_mul_le_mul_left hscaled hscalePos
+  exact (greedyMersenne_next_survives_iff_gap_le_abs_signedBalance
+    (greedyMersenneRemainder_nonneg (x := (1 / 2 : ℝ)) (by norm_num) n)
+    hsurvive).2 hgap
+
+/-- An all-level second-channel separation theorem would decide the concrete
+membership question `1/2 ∈ K`.  All analytic error accounting and the finite
+base cases are discharged here; the hypothesis is precisely the remaining
+shrinking-hole avoidance obligation. -/
+theorem half_mem_mersenneAchievementSet_of_secondChannelSeparation
+    (hseparate : ∀ n : ℕ, 0 < n →
+      (1 / 6 : ℝ) + (37 / 56 : ℝ) * ((1 : ℝ) / 2) ^ n
+        ≤ |greedyMersenneSecondChannelPhase n - 1 / 3|) :
+    (1 / 2 : ℝ) ∈ mersenneAchievementSet := by
+  apply mem_mersenneAchievementSet_of_greedy_survival (by norm_num)
+  have hzero :
+      greedyMersenneRemainder (1 / 2 : ℝ) 0 ≤ mersenneTail 0 := by
+    have htail := mersenneTail_eq_weight_add 0
+    have htailNonneg := mersenneTail_nonneg 1
+    norm_num [mersenneWeight] at htail ⊢
+    linarith
+  have hone :
+      greedyMersenneRemainder (1 / 2 : ℝ) 1 ≤ mersenneTail 1 := by
+    have htail1 := mersenneTail_eq_weight_add 1
+    have htail2 := mersenneTail_eq_weight_add 2
+    have htail3 := mersenneTail_eq_weight_add 3
+    have htailNonneg := mersenneTail_nonneg 4
+    norm_num [greedyMersenneRemainder_succ, mersenneWeight] at htail1 htail2 htail3 ⊢
+    linarith
+  intro n
+  cases n with
+  | zero => exact hzero
+  | succ n =>
+      induction n with
+      | zero => exact hone
+      | succ n ih =>
+          exact halfGreedy_next_survives_of_secondChannelSeparation ih
+            (hseparate (n + 1) (by omega))
+
+/-- Proof-search form of the half-membership consumer: all levels through six
+are checked exactly, and the remaining hypothesis is a decidable statement
+about the rational greedy orbit only. -/
+theorem half_mem_mersenneAchievementSet_of_secondChannelSeparationRat_from_seven
+    (hseparate : ∀ n : ℕ, 7 ≤ n → HalfSecondChannelSeparatedRat n) :
+    (1 / 2 : ℝ) ∈ mersenneAchievementSet := by
+  apply half_mem_mersenneAchievementSet_of_secondChannelSeparation
+  intro n hn
+  apply secondChannelSeparation_of_rat
+  by_cases h6 : n ≤ 6
+  · exact halfSecondChannelSeparatedRat_of_pos_le_six hn h6
+  · exact hseparate n (by omega)
+
 /-- The selected part of the binary skeleton, indexed exactly like
 `positiveMersenneSupportValue`. -/
 noncomputable def positiveDyadicSupportValue (A : Set ℕ) : ℝ :=

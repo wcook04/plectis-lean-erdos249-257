@@ -4,21 +4,21 @@
   "projection_not_authority": true,
   "proof_authority": "Lean source checked by the pinned Lean kernel",
   "argument_authority": "docs/claims.json::machine_readable_paper.argument_graph",
-  "source_fingerprint": "sha256:608ab90dbae857bf3611ae77f809619e095080c45778e047826cf0c503a2032b",
+  "source_fingerprint": "sha256:b3bbe9c8be22e8e1169e0d0b2f0f272a169de021f2d919d0993eee854f9f6578",
   "summary": {
     "module_count": 539,
-    "declaration_count": 6328,
-    "theorem_like_count": 5826,
+    "declaration_count": 6355,
+    "theorem_like_count": 5843,
     "generated_certificate_declaration_count": 1681,
-    "principal_claim_link_count": 48,
+    "principal_claim_link_count": 54,
     "kind_counts": {
       "abbrev": 1,
-      "def": 487,
+      "def": 497,
       "inductive": 3,
       "instance": 3,
       "lemma": 336,
       "structure": 8,
-      "theorem": 5490
+      "theorem": 5507
     }
   },
   "modules": [
@@ -192,10 +192,10 @@
         "Erdos249257.DiagonalPincerDecomposition",
         "Erdos249257.LcmConeNonflat"
       ],
-      "declaration_count": 36,
+      "declaration_count": 41,
       "kind_counts": {
-        "def": 11,
-        "theorem": 25
+        "def": 13,
+        "theorem": 28
       }
     },
     {
@@ -6268,12 +6268,12 @@
       "imports": [
         "Erdos249257.CertificateKernel"
       ],
-      "declaration_count": 160,
+      "declaration_count": 182,
       "kind_counts": {
-        "def": 32,
+        "def": 40,
         "instance": 1,
         "structure": 1,
-        "theorem": 126
+        "theorem": 140
       }
     },
     {
@@ -18190,119 +18190,179 @@
       "docstring": "The prime-power-jump-aligned producer throat. Repeated LCM heights carry no new arithmetic state, so it is enough to establish canonical centrality at arbitrarily large strict jumps."
     },
     {
-      "id": "Erdos249257/DiagonalFreshLossBridge.lean:611:canonicalAdjacentSuffixCentralSupply_of_jump",
+      "id": "Erdos249257/DiagonalFreshLossBridge.lean:613:canonicalAdjacentSuffixCentralSlack",
+      "name": "canonicalAdjacentSuffixCentralSlack",
+      "kind": "def",
+      "module": "Erdos249257/DiagonalFreshLossBridge.lean",
+      "line": 613,
+      "signature": "def canonicalAdjacentSuffixCentralSlack (t : ℕ) : ℤ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Signed distance of the canonical adjacent residue from the nearer edge of the fixed central band. Nonnegative slack is exactly the two-sided centrality condition; this scalar is the proof-oriented cocycle to study at strict LCM jumps."
+    },
+    {
+      "id": "Erdos249257/DiagonalFreshLossBridge.lean:619:canonicalAdjacentSuffixCentral_iff_slack_nonneg",
+      "name": "canonicalAdjacentSuffixCentral_iff_slack_nonneg",
+      "kind": "theorem",
+      "module": "Erdos249257/DiagonalFreshLossBridge.lean",
+      "line": 619,
+      "signature": "theorem canonicalAdjacentSuffixCentral_iff_slack_nonneg (t : ℕ) : (2 ^ (canonicalAdjacentSuffixDepth t - 5) ≤ diagonalAdjacentSuffixResidue t 0 (canonicalAdjacentSuffixDepth t) ∧ diagonalAdjacentSuffixResidue t 0 (canonicalAdjacentSuffixDepth t) ≤ 2 ^ canonicalAdjacentSuffixDepth t - 2 ^ (canonicalAdjacentSuffixDepth t - 5)) ↔ 0 ≤ canonicalAdjacentSuffixCentralSlack t",
+      "generated_certificate": false,
+      "claim_ids": [
+        "canonical_jump_slack_reduction"
+      ],
+      "docstring": "The two central-band inequalities collapse to one exact integer sign."
+    },
+    {
+      "id": "Erdos249257/DiagonalFreshLossBridge.lean:631:CanonicalAdjacentSuffixJumpSlackSupply",
+      "name": "CanonicalAdjacentSuffixJumpSlackSupply",
+      "kind": "def",
+      "module": "Erdos249257/DiagonalFreshLossBridge.lean",
+      "line": 631,
+      "signature": "def CanonicalAdjacentSuffixJumpSlackSupply : Prop",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Scalar strict-jump producer. This is equivalent to the original two-sided producer but exposes a single integer observable for recurrence, congruence, and exact-computation arguments."
+    },
+    {
+      "id": "Erdos249257/DiagonalFreshLossBridge.lean:636:canonicalAdjacentSuffixJumpCentralSupply_iff_slackSupply",
+      "name": "canonicalAdjacentSuffixJumpCentralSupply_iff_slackSupply",
+      "kind": "theorem",
+      "module": "Erdos249257/DiagonalFreshLossBridge.lean",
+      "line": 636,
+      "signature": "theorem canonicalAdjacentSuffixJumpCentralSupply_iff_slackSupply : CanonicalAdjacentSuffixJumpCentralSupply ↔ CanonicalAdjacentSuffixJumpSlackSupply",
+      "generated_certificate": false,
+      "claim_ids": [
+        "canonical_jump_slack_reduction"
+      ]
+    },
+    {
+      "id": "Erdos249257/DiagonalFreshLossBridge.lean:652:canonicalAdjacentSuffixCentralSupply_of_jump",
       "name": "canonicalAdjacentSuffixCentralSupply_of_jump",
       "kind": "theorem",
       "module": "Erdos249257/DiagonalFreshLossBridge.lean",
-      "line": 611,
+      "line": 652,
       "signature": "theorem canonicalAdjacentSuffixCentralSupply_of_jump (hsupply : CanonicalAdjacentSuffixJumpCentralSupply) : CanonicalAdjacentSuffixCentralSupply",
       "generated_certificate": false,
       "claim_ids": [],
       "docstring": "Restricting the producer to strict LCM jumps still supplies the canonical centrality interface."
     },
     {
-      "id": "Erdos249257/DiagonalFreshLossBridge.lean:620:diagonalAdjacentSuffixGapSupply_of_canonical",
+      "id": "Erdos249257/DiagonalFreshLossBridge.lean:661:diagonalAdjacentSuffixGapSupply_of_canonical",
       "name": "diagonalAdjacentSuffixGapSupply_of_canonical",
       "kind": "theorem",
       "module": "Erdos249257/DiagonalFreshLossBridge.lean",
-      "line": 620,
+      "line": 661,
       "signature": "theorem diagonalAdjacentSuffixGapSupply_of_canonical (hsupply : CanonicalAdjacentSuffixCentralSupply) : DiagonalAdjacentSuffixGapSupply",
       "generated_certificate": false,
       "claim_ids": [],
       "docstring": "Canonical centrality supplies the existing adjacent-gap interface; the guard-bit and width obligations are discharged uniformly."
     },
     {
-      "id": "Erdos249257/DiagonalFreshLossBridge.lean:633:diagonalFreshLossProjectionSupply_of_adjacentSuffixGapSupply",
+      "id": "Erdos249257/DiagonalFreshLossBridge.lean:674:diagonalFreshLossProjectionSupply_of_adjacentSuffixGapSupply",
       "name": "diagonalFreshLossProjectionSupply_of_adjacentSuffixGapSupply",
       "kind": "theorem",
       "module": "Erdos249257/DiagonalFreshLossBridge.lean",
-      "line": 633,
+      "line": 674,
       "signature": "theorem diagonalFreshLossProjectionSupply_of_adjacentSuffixGapSupply (hsupply : DiagonalAdjacentSuffixGapSupply) : DiagonalFreshLossProjectionSupply",
       "generated_certificate": false,
       "claim_ids": []
     },
     {
-      "id": "Erdos249257/DiagonalFreshLossBridge.lean:645:irrational_totientSeries_of_diagonalAdjacentSuffixGapSupply",
+      "id": "Erdos249257/DiagonalFreshLossBridge.lean:686:irrational_totientSeries_of_diagonalAdjacentSuffixGapSupply",
       "name": "irrational_totientSeries_of_diagonalAdjacentSuffixGapSupply",
       "kind": "theorem",
       "module": "Erdos249257/DiagonalFreshLossBridge.lean",
-      "line": 645,
+      "line": 686,
       "signature": "theorem irrational_totientSeries_of_diagonalAdjacentSuffixGapSupply (hsupply : DiagonalAdjacentSuffixGapSupply) : Irrational (∑' n : ℕ, (Nat.totient n : ℝ) / 2 ^ n)",
       "generated_certificate": false,
       "claim_ids": [],
       "docstring": "The adjacent integer-gap interface is already sufficient for the global irrationality consumer."
     },
     {
-      "id": "Erdos249257/DiagonalFreshLossBridge.lean:653:irrational_totientSeries_of_canonicalAdjacentSuffixCentralSupply",
+      "id": "Erdos249257/DiagonalFreshLossBridge.lean:694:irrational_totientSeries_of_canonicalAdjacentSuffixCentralSupply",
       "name": "irrational_totientSeries_of_canonicalAdjacentSuffixCentralSupply",
       "kind": "theorem",
       "module": "Erdos249257/DiagonalFreshLossBridge.lean",
-      "line": 653,
+      "line": 694,
       "signature": "theorem irrational_totientSeries_of_canonicalAdjacentSuffixCentralSupply (hsupply : CanonicalAdjacentSuffixCentralSupply) : Irrational (∑' n : ℕ, (Nat.totient n : ℝ) / 2 ^ n)",
       "generated_certificate": false,
       "claim_ids": [],
       "docstring": "Canonical adjacent-suffix centrality is sufficient for Erdős #249's irrationality target through the already-landed adjacent-gap consumer."
     },
     {
-      "id": "Erdos249257/DiagonalFreshLossBridge.lean:661:irrational_totientSeries_of_canonicalAdjacentSuffixJumpCentralSupply",
+      "id": "Erdos249257/DiagonalFreshLossBridge.lean:702:irrational_totientSeries_of_canonicalAdjacentSuffixJumpCentralSupply",
       "name": "irrational_totientSeries_of_canonicalAdjacentSuffixJumpCentralSupply",
       "kind": "theorem",
       "module": "Erdos249257/DiagonalFreshLossBridge.lean",
-      "line": 661,
+      "line": 702,
       "signature": "theorem irrational_totientSeries_of_canonicalAdjacentSuffixJumpCentralSupply (hsupply : CanonicalAdjacentSuffixJumpCentralSupply) : Irrational (∑' n : ℕ, (Nat.totient n : ℝ) / 2 ^ n)",
       "generated_certificate": false,
       "claim_ids": [],
       "docstring": "Centrality at arbitrarily large strict LCM jumps already closes the irrationality consumer."
     },
     {
-      "id": "Erdos249257/DiagonalFreshLossBridge.lean:672:diagonalFreshLossProjectionCell_seven",
+      "id": "Erdos249257/DiagonalFreshLossBridge.lean:710:irrational_totientSeries_of_canonicalAdjacentSuffixJumpSlackSupply",
+      "name": "irrational_totientSeries_of_canonicalAdjacentSuffixJumpSlackSupply",
+      "kind": "theorem",
+      "module": "Erdos249257/DiagonalFreshLossBridge.lean",
+      "line": 710,
+      "signature": "theorem irrational_totientSeries_of_canonicalAdjacentSuffixJumpSlackSupply (hsupply : CanonicalAdjacentSuffixJumpSlackSupply) : Irrational (∑' n : ℕ, (Nat.totient n : ℝ) / 2 ^ n)",
+      "generated_certificate": false,
+      "claim_ids": [
+        "canonical_jump_slack_reduction"
+      ],
+      "docstring": "Nonnegative canonical slack at arbitrarily large strict LCM jumps closes the same irrationality consumer."
+    },
+    {
+      "id": "Erdos249257/DiagonalFreshLossBridge.lean:721:diagonalFreshLossProjectionCell_seven",
       "name": "diagonalFreshLossProjectionCell_seven",
       "kind": "theorem",
       "module": "Erdos249257/DiagonalFreshLossBridge.lean",
-      "line": 672,
+      "line": 721,
       "signature": "theorem diagonalFreshLossProjectionCell_seven : (2 * periodLcm 7 + 13 + 2 : ℤ) < 2 ^ 13 ∧ diagonalFreshLossProjectionCert 7 13",
       "generated_certificate": false,
       "claim_ids": [],
       "docstring": "At `t = 7`, depth `13` gives the exact diagonal projection and its floor. This is a bridge fixture, not evidence for an unbounded supply."
     },
     {
-      "id": "Erdos249257/DiagonalFreshLossBridge.lean:678:diagonalFreshLossResidueCell_seven",
+      "id": "Erdos249257/DiagonalFreshLossBridge.lean:727:diagonalFreshLossResidueCell_seven",
       "name": "diagonalFreshLossResidueCell_seven",
       "kind": "theorem",
       "module": "Erdos249257/DiagonalFreshLossBridge.lean",
-      "line": 678,
+      "line": 727,
       "signature": "theorem diagonalFreshLossResidueCell_seven : diagonalFreshLossResidueCert 7 13",
       "generated_certificate": false,
       "claim_ids": []
     },
     {
-      "id": "Erdos249257/DiagonalFreshLossBridge.lean:684:foreignDiagonalDefect_misses_fullTarget_seven_via_projection",
+      "id": "Erdos249257/DiagonalFreshLossBridge.lean:733:foreignDiagonalDefect_misses_fullTarget_seven_via_projection",
       "name": "foreignDiagonalDefect_misses_fullTarget_seven_via_projection",
       "kind": "theorem",
       "module": "Erdos249257/DiagonalFreshLossBridge.lean",
-      "line": 684,
+      "line": 733,
       "signature": "theorem foreignDiagonalDefect_misses_fullTarget_seven_via_projection : ¬ForeignDiagonalDefectHitsFullTarget 7",
       "generated_certificate": false,
       "claim_ids": [],
       "docstring": "The existing `t = 7` full-target miss can be recovered through the new operational composition seam."
     },
     {
-      "id": "Erdos249257/DiagonalFreshLossBridge.lean:693:diagonalSuffixCell_seven",
+      "id": "Erdos249257/DiagonalFreshLossBridge.lean:742:diagonalSuffixCell_seven",
       "name": "diagonalSuffixCell_seven",
       "kind": "theorem",
       "module": "Erdos249257/DiagonalFreshLossBridge.lean",
-      "line": 693,
+      "line": 742,
       "signature": "theorem diagonalSuffixCell_seven : (periodLcm 7 + (1 + 12) + 2 : ℤ) < diagonalSuffixResidue 7 1 12 ∧ diagonalSuffixResidue 7 1 12 < 2 ^ 12 - (2 * periodLcm 7 + (1 + 12) + 2)",
       "generated_certificate": false,
       "claim_ids": [],
       "docstring": "At `t = 7`, the cut `J = 1` with suffix length `m = 12` is centrally placed: the last twelve bits alone recover the landed `(7, 13)` projection. A bridge fixture, not evidence for an unbounded supply."
     },
     {
-      "id": "Erdos249257/DiagonalFreshLossBridge.lean:701:foreignDiagonalDefect_misses_fullTarget_seven_via_suffix",
+      "id": "Erdos249257/DiagonalFreshLossBridge.lean:750:foreignDiagonalDefect_misses_fullTarget_seven_via_suffix",
       "name": "foreignDiagonalDefect_misses_fullTarget_seven_via_suffix",
       "kind": "theorem",
       "module": "Erdos249257/DiagonalFreshLossBridge.lean",
-      "line": 701,
+      "line": 750,
       "signature": "theorem foreignDiagonalDefect_misses_fullTarget_seven_via_suffix : ¬ForeignDiagonalDefectHitsFullTarget 7",
       "generated_certificate": false,
       "claim_ids": [],
@@ -64857,131 +64917,376 @@
       "docstring": "On a surviving next step, the signed balance follows the exact folded subtraction recurrence."
     },
     {
-      "id": "Erdos249257/GreedyAchievementSet.lean:1760:positiveDyadicSupportValue",
+      "id": "Erdos249257/GreedyAchievementSet.lean:1762:erdosBorweinMersenneConstant",
+      "name": "erdosBorweinMersenneConstant",
+      "kind": "def",
+      "module": "Erdos249257/GreedyAchievementSet.lean",
+      "line": 1762,
+      "signature": "noncomputable def erdosBorweinMersenneConstant : ℝ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The Erdős–Borwein constant, expressed in the positive Mersenne-tail coordinate already used throughout this file."
+    },
+    {
+      "id": "Erdos249257/GreedyAchievementSet.lean:1766:mersennePrefixMass",
+      "name": "mersennePrefixMass",
+      "kind": "def",
+      "module": "Erdos249257/GreedyAchievementSet.lean",
+      "line": 1766,
+      "signature": "noncomputable def mersennePrefixMass (n : ℕ) : ℝ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The total mass of the first `n` positive Mersenne weights."
+    },
+    {
+      "id": "Erdos249257/GreedyAchievementSet.lean:1770:mersenneSupportPrefix",
+      "name": "mersenneSupportPrefix",
+      "kind": "def",
+      "module": "Erdos249257/GreedyAchievementSet.lean",
+      "line": 1770,
+      "signature": "noncomputable def mersenneSupportPrefix (A : Set ℕ) (n : ℕ) : ℝ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The mass selected by an arbitrary support through exponent `n`."
+    },
+    {
+      "id": "Erdos249257/GreedyAchievementSet.lean:1773:mersenneSupportPrefix_succ",
+      "name": "mersenneSupportPrefix_succ",
+      "kind": "theorem",
+      "module": "Erdos249257/GreedyAchievementSet.lean",
+      "line": 1773,
+      "signature": "theorem mersenneSupportPrefix_succ (A : Set ℕ) (n : ℕ) : mersenneSupportPrefix A (n + 1) = mersenneSupportPrefix A n + Set.indicator A mersenneWeight (n + 1)",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/GreedyAchievementSet.lean:1781:mersenneShadowOfPrefix",
+      "name": "mersenneShadowOfPrefix",
+      "kind": "def",
+      "module": "Erdos249257/GreedyAchievementSet.lean",
+      "line": 1781,
+      "signature": "noncomputable def mersenneShadowOfPrefix (A : Set ℕ) (n : ℕ) : ℝ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The signed Mersenne shadow associated with an arbitrary support prefix."
+    },
+    {
+      "id": "Erdos249257/GreedyAchievementSet.lean:1785:halfGreedyMersenneShadow",
+      "name": "halfGreedyMersenneShadow",
+      "kind": "def",
+      "module": "Erdos249257/GreedyAchievementSet.lean",
+      "line": 1785,
+      "signature": "noncomputable def halfGreedyMersenneShadow (n : ℕ) : ℝ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The shadow of the actual greedy prefix for the target `1/2`."
+    },
+    {
+      "id": "Erdos249257/GreedyAchievementSet.lean:1788:erdosBorweinMersenneConstant_eq_prefix_add_tail",
+      "name": "erdosBorweinMersenneConstant_eq_prefix_add_tail",
+      "kind": "theorem",
+      "module": "Erdos249257/GreedyAchievementSet.lean",
+      "line": 1788,
+      "signature": "theorem erdosBorweinMersenneConstant_eq_prefix_add_tail (n : ℕ) : erdosBorweinMersenneConstant = mersennePrefixMass n + mersenneTail n",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/GreedyAchievementSet.lean:1796:halfGreedyMersenneShadow_sub_constant_eq_signedBalance",
+      "name": "halfGreedyMersenneShadow_sub_constant_eq_signedBalance",
+      "kind": "theorem",
+      "module": "Erdos249257/GreedyAchievementSet.lean",
+      "line": 1796,
+      "signature": "theorem halfGreedyMersenneShadow_sub_constant_eq_signedBalance (n : ℕ) : halfGreedyMersenneShadow n - erdosBorweinMersenneConstant = greedyMersenneSignedBalance (1 / 2 : ℝ) n",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Exact shadow/signed-balance duality. This turns a death-hole hit into an Archimedean near-hit of the Erdős–Borwein constant without introducing a new dynamical model."
+    },
+    {
+      "id": "Erdos249257/GreedyAchievementSet.lean:1811:halfGreedyShadow_closer_of_prefix_separation",
+      "name": "halfGreedyShadow_closer_of_prefix_separation",
+      "kind": "theorem",
+      "module": "Erdos249257/GreedyAchievementSet.lean",
+      "line": 1811,
+      "signature": "theorem halfGreedyShadow_closer_of_prefix_separation {n : ℕ} (hsurvive : greedyMersenneRemainder (1 / 2 : ℝ) n ≤ mersenneTail n) {A : Set ℕ} (hseparate : mersenneTail n < |mersenneSupportPrefix A n - halfGreedyMersennePrefix n|) : |erdosBorweinMersenneConstant - halfGreedyMersenneShadow n| < |erdosBorweinMersenneConstant - mersenneShadowOfPrefix A n|",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Once strict superincreasingness supplies a tail-sized separation from a competing prefix, the surviving greedy prefix is strictly closer to the Erdős–Borwein constant. This is the reusable analytic core of the proposed global nearest-shadow argument."
+    },
+    {
+      "id": "Erdos249257/GreedyAchievementSet.lean:1860:halfGreedy_next_survives_iff_shadow_separated",
+      "name": "halfGreedy_next_survives_iff_shadow_separated",
+      "kind": "theorem",
+      "module": "Erdos249257/GreedyAchievementSet.lean",
+      "line": 1860,
+      "signature": "theorem halfGreedy_next_survives_iff_shadow_separated {n : ℕ} (hsurvive : greedyMersenneRemainder (1 / 2 : ℝ) n ≤ mersenneTail n) : greedyMersenneRemainder (1 / 2 : ℝ) (n + 1) ≤ mersenneTail (n + 1) ↔ mersenneGap (n + 1) ≤ |halfGreedyMersenneShadow n - erdosBorweinMersenneConstant|",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Under current survival, next-step survival is exactly separation of the greedy shadow from the open Mersenne-gap neighbourhood of the constant."
+    },
+    {
+      "id": "Erdos249257/GreedyAchievementSet.lean:1876:greedyMersenneSecondChannelPhase",
+      "name": "greedyMersenneSecondChannelPhase",
+      "kind": "def",
+      "module": "Erdos249257/GreedyAchievementSet.lean",
+      "line": 1876,
+      "signature": "noncomputable def greedyMersenneSecondChannelPhase (n : ℕ) : ℝ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The normalized phase at the first scale where the second geometric channel of the Mersenne tail is visible."
+    },
+    {
+      "id": "Erdos249257/GreedyAchievementSet.lean:1884:greedyMersenneSecondChannelPhaseRat",
+      "name": "greedyMersenneSecondChannelPhaseRat",
+      "kind": "def",
+      "module": "Erdos249257/GreedyAchievementSet.lean",
+      "line": 1884,
+      "signature": "def greedyMersenneSecondChannelPhaseRat (n : ℕ) : ℚ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Exact rational model of the second-channel phase. The unresolved separation producer is arithmetic over `ℚ`; real analysis is needed only by its already-landed consumer."
+    },
+    {
+      "id": "Erdos249257/GreedyAchievementSet.lean:1889:cast_greedyMersenneSecondChannelPhaseRat",
+      "name": "cast_greedyMersenneSecondChannelPhaseRat",
+      "kind": "theorem",
+      "module": "Erdos249257/GreedyAchievementSet.lean",
+      "line": 1889,
+      "signature": "@[simp] theorem cast_greedyMersenneSecondChannelPhaseRat (n : ℕ) : ((greedyMersenneSecondChannelPhaseRat n : ℚ) : ℝ) = greedyMersenneSecondChannelPhase n",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/GreedyAchievementSet.lean:1899:HalfSecondChannelSeparatedRat",
+      "name": "HalfSecondChannelSeparatedRat",
+      "kind": "def",
+      "module": "Erdos249257/GreedyAchievementSet.lean",
+      "line": 1899,
+      "signature": "def HalfSecondChannelSeparatedRat (n : ℕ) : Prop",
+      "generated_certificate": false,
+      "claim_ids": [
+        "half_second_channel_reduction"
+      ],
+      "docstring": "Decidable rational form of the shrinking-hole avoidance condition."
+    },
+    {
+      "id": "Erdos249257/GreedyAchievementSet.lean:1910:secondChannelSeparation_of_rat",
+      "name": "secondChannelSeparation_of_rat",
+      "kind": "theorem",
+      "module": "Erdos249257/GreedyAchievementSet.lean",
+      "line": 1910,
+      "signature": "theorem secondChannelSeparation_of_rat {n : ℕ} (h : HalfSecondChannelSeparatedRat n) : (1 / 6 : ℝ) + (37 / 56 : ℝ) * ((1 : ℝ) / 2) ^ n ≤ |greedyMersenneSecondChannelPhase n - 1 / 3|",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The rational certificate casts directly to the real separation estimate consumed by the greedy-survival theorem."
+    },
+    {
+      "id": "Erdos249257/GreedyAchievementSet.lean:1927:halfSecondChannelSeparatedRat_of_pos_le_six",
+      "name": "halfSecondChannelSeparatedRat_of_pos_le_six",
+      "kind": "theorem",
+      "module": "Erdos249257/GreedyAchievementSet.lean",
+      "line": 1927,
+      "signature": "theorem halfSecondChannelSeparatedRat_of_pos_le_six {n : ℕ} (hn : 0 < n) (h6 : n ≤ 6) : HalfSecondChannelSeparatedRat n",
+      "generated_certificate": false,
+      "claim_ids": [
+        "half_second_channel_reduction"
+      ],
+      "docstring": "Exact finite certificate for the only small levels visible in the second-channel numerics. The infinite producer can therefore start at `n = 7`, where the observed margin is already large."
+    },
+    {
+      "id": "Erdos249257/GreedyAchievementSet.lean:1937:four_pow_mul_signedBalance_eq_secondChannelPhase_sub",
+      "name": "four_pow_mul_signedBalance_eq_secondChannelPhase_sub",
+      "kind": "theorem",
+      "module": "Erdos249257/GreedyAchievementSet.lean",
+      "line": 1937,
+      "signature": "theorem four_pow_mul_signedBalance_eq_secondChannelPhase_sub (n : ℕ) : (4 : ℝ) ^ n * greedyMersenneSignedBalance (1 / 2 : ℝ) n = greedyMersenneSecondChannelPhase n - 1 / 3 - (4 : ℝ) ^ n * mersenneWeightRemainderTail n",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Exact decomposition of the scaled signed balance into its second-channel phase, the universal `1/3` centre, and the higher-channel tail."
+    },
+    {
+      "id": "Erdos249257/GreedyAchievementSet.lean:1952:four_pow_mul_mersenneWeightRemainderTail_le",
+      "name": "four_pow_mul_mersenneWeightRemainderTail_le",
+      "kind": "theorem",
+      "module": "Erdos249257/GreedyAchievementSet.lean",
+      "line": 1952,
+      "signature": "theorem four_pow_mul_mersenneWeightRemainderTail_le (n : ℕ) : (4 : ℝ) ^ n * mersenneWeightRemainderTail n ≤ (2 / 7 : ℝ) * ((1 : ℝ) / 2) ^ n",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Scaling the higher-channel tail by `4^n` leaves an explicit exponentially small error."
+    },
+    {
+      "id": "Erdos249257/GreedyAchievementSet.lean:1972:four_pow_mul_next_mersenneGap_le",
+      "name": "four_pow_mul_next_mersenneGap_le",
+      "kind": "theorem",
+      "module": "Erdos249257/GreedyAchievementSet.lean",
+      "line": 1972,
+      "signature": "theorem four_pow_mul_next_mersenneGap_le (n : ℕ) : (4 : ℝ) ^ n * mersenneGap (n + 1) ≤ (1 / 6 : ℝ) + (3 / 8 : ℝ) * ((1 : ℝ) / 2) ^ n",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The next Mersenne gap at second-channel scale, including the exact higher-channel error budget used by the separation consumer."
+    },
+    {
+      "id": "Erdos249257/GreedyAchievementSet.lean:2011:halfGreedy_next_survives_of_secondChannelSeparation",
+      "name": "halfGreedy_next_survives_of_secondChannelSeparation",
+      "kind": "theorem",
+      "module": "Erdos249257/GreedyAchievementSet.lean",
+      "line": 2011,
+      "signature": "theorem halfGreedy_next_survives_of_secondChannelSeparation {n : ℕ} (hsurvive : greedyMersenneRemainder (1 / 2 : ℝ) n ≤ mersenneTail n) (hseparate : (1 / 6 : ℝ) + (37 / 56 : ℝ) * ((1 : ℝ) / 2) ^ n ≤ |greedyMersenneSecondChannelPhase n - 1 / 3|) : greedyMersenneRemainder (1 / 2 : ℝ) (n + 1) ≤ mersenneTail (n + 1)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A clean second-channel separation estimate is sufficient for one more greedy survival step. The constant `37/56 = 2/7 + 3/8` is exactly the sum of the scaled higher-tail and gap-error budgets."
+    },
+    {
+      "id": "Erdos249257/GreedyAchievementSet.lean:2072:half_mem_mersenneAchievementSet_of_secondChannelSeparation",
+      "name": "half_mem_mersenneAchievementSet_of_secondChannelSeparation",
+      "kind": "theorem",
+      "module": "Erdos249257/GreedyAchievementSet.lean",
+      "line": 2072,
+      "signature": "theorem half_mem_mersenneAchievementSet_of_secondChannelSeparation (hseparate : ∀ n : ℕ, 0 < n → (1 / 6 : ℝ) + (37 / 56 : ℝ) * ((1 : ℝ) / 2) ^ n ≤ |greedyMersenneSecondChannelPhase n - 1 / 3|) : (1 / 2 : ℝ) ∈ mersenneAchievementSet",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "An all-level second-channel separation theorem would decide the concrete membership question `1/2 ∈ K`. All analytic error accounting and the finite base cases are discharged here; the hypothesis is precisely the remaining shrinking-hole avoidance obligation."
+    },
+    {
+      "id": "Erdos249257/GreedyAchievementSet.lean:2105:half_mem_mersenneAchievementSet_of_secondChannelSeparationRat_from_seven",
+      "name": "half_mem_mersenneAchievementSet_of_secondChannelSeparationRat_from_seven",
+      "kind": "theorem",
+      "module": "Erdos249257/GreedyAchievementSet.lean",
+      "line": 2105,
+      "signature": "theorem half_mem_mersenneAchievementSet_of_secondChannelSeparationRat_from_seven (hseparate : ∀ n : ℕ, 7 ≤ n → HalfSecondChannelSeparatedRat n) : (1 / 2 : ℝ) ∈ mersenneAchievementSet",
+      "generated_certificate": false,
+      "claim_ids": [
+        "half_second_channel_reduction"
+      ],
+      "docstring": "Proof-search form of the half-membership consumer: all levels through six are checked exactly, and the remaining hypothesis is a decidable statement about the rational greedy orbit only."
+    },
+    {
+      "id": "Erdos249257/GreedyAchievementSet.lean:2117:positiveDyadicSupportValue",
       "name": "positiveDyadicSupportValue",
       "kind": "def",
       "module": "Erdos249257/GreedyAchievementSet.lean",
-      "line": 1760,
+      "line": 2117,
       "signature": "noncomputable def positiveDyadicSupportValue (A : Set ℕ) : ℝ",
       "generated_certificate": false,
       "claim_ids": [],
       "docstring": "The selected part of the binary skeleton, indexed exactly like `positiveMersenneSupportValue`."
     },
     {
-      "id": "Erdos249257/GreedyAchievementSet.lean:1763:summable_positiveDyadicSupportIndicator",
+      "id": "Erdos249257/GreedyAchievementSet.lean:2120:summable_positiveDyadicSupportIndicator",
       "name": "summable_positiveDyadicSupportIndicator",
       "kind": "theorem",
       "module": "Erdos249257/GreedyAchievementSet.lean",
-      "line": 1763,
+      "line": 2120,
       "signature": "theorem summable_positiveDyadicSupportIndicator (A : Set ℕ) : Summable (fun k : ℕ => Set.indicator A (fun n : ℕ => ((1 : ℝ) / 2) ^ n) (k + 1))",
       "generated_certificate": false,
       "claim_ids": []
     },
     {
-      "id": "Erdos249257/GreedyAchievementSet.lean:1776:halfCorrectionValue",
+      "id": "Erdos249257/GreedyAchievementSet.lean:2133:halfCorrectionValue",
       "name": "halfCorrectionValue",
       "kind": "def",
       "module": "Erdos249257/GreedyAchievementSet.lean",
-      "line": 1776,
+      "line": 2133,
       "signature": "noncomputable def halfCorrectionValue (A : Set ℕ) : ℝ",
       "generated_certificate": false,
       "claim_ids": [],
       "docstring": "The correction side of the half fixed-point equation."
     },
     {
-      "id": "Erdos249257/GreedyAchievementSet.lean:1782:halfComplementValue",
+      "id": "Erdos249257/GreedyAchievementSet.lean:2139:halfComplementValue",
       "name": "halfComplementValue",
       "kind": "def",
       "module": "Erdos249257/GreedyAchievementSet.lean",
-      "line": 1782,
+      "line": 2139,
       "signature": "noncomputable def halfComplementValue (A : Set ℕ) : ℝ",
       "generated_certificate": false,
       "claim_ids": [],
       "docstring": "The complementary binary side of the half fixed-point equation. For a support omitting exponent one this is the sum of the complementary digits from exponent two onward."
     },
     {
-      "id": "Erdos249257/GreedyAchievementSet.lean:1787:halfComplementValue_eq_tsum_complement",
+      "id": "Erdos249257/GreedyAchievementSet.lean:2144:halfComplementValue_eq_tsum_complement",
       "name": "halfComplementValue_eq_tsum_complement",
       "kind": "theorem",
       "module": "Erdos249257/GreedyAchievementSet.lean",
-      "line": 1787,
+      "line": 2144,
       "signature": "theorem halfComplementValue_eq_tsum_complement (A : Set ℕ) (hA1 : 1 ∉ A) : halfComplementValue A = ∑' k : ℕ, Set.indicator Aᶜ (fun n : ℕ => ((1 : ℝ) / 2) ^ n) (k + 2)",
       "generated_certificate": false,
       "claim_ids": [],
       "docstring": "The complementary value is genuinely the binary number whose digits from exponent two onward are the complements of the support digits."
     },
     {
-      "id": "Erdos249257/GreedyAchievementSet.lean:1837:positiveMersenneSupportValue_eq_half_iff_correction_eq_complement",
+      "id": "Erdos249257/GreedyAchievementSet.lean:2194:positiveMersenneSupportValue_eq_half_iff_correction_eq_complement",
       "name": "positiveMersenneSupportValue_eq_half_iff_correction_eq_complement",
       "kind": "theorem",
       "module": "Erdos249257/GreedyAchievementSet.lean",
-      "line": 1837,
+      "line": 2194,
       "signature": "theorem positiveMersenneSupportValue_eq_half_iff_correction_eq_complement (A : Set ℕ) : positiveMersenneSupportValue A = (1 / 2 : ℝ) ↔ halfCorrectionValue A = halfComplementValue A",
       "generated_certificate": false,
       "claim_ids": [],
       "docstring": "Exact correction/complement reframe of a value-`1/2` support."
     },
     {
-      "id": "Erdos249257/GreedyAchievementSet.lean:1853:HalfPrefixForcingChain",
+      "id": "Erdos249257/GreedyAchievementSet.lean:2210:HalfPrefixForcingChain",
       "name": "HalfPrefixForcingChain",
       "kind": "structure",
       "module": "Erdos249257/GreedyAchievementSet.lean",
-      "line": 1853,
+      "line": 2210,
       "signature": "structure HalfPrefixForcingChain (A : Set ℕ)",
       "generated_certificate": false,
       "claim_ids": [],
       "docstring": "An all-level prefix-forcing witness. The interval `[correctionLower k, correctionUpper k]` is the complete correction enclosure at macrostep `k`; `interval_trapped` puts that whole enclosure in one dyadic cylinder. The complementary binary value lies in the same cylinder, and the cylinder depths tend to infinity. The finite-word construction that produces these data is deliberately kept outside the structure: different evaluators may supply the same analytic certificate without creating a second achievement-set model."
     },
     {
-      "id": "Erdos249257/GreedyAchievementSet.lean:1871:HalfPrefixForcingChain.correction_eq_complement",
+      "id": "Erdos249257/GreedyAchievementSet.lean:2228:HalfPrefixForcingChain.correction_eq_complement",
       "name": "HalfPrefixForcingChain.correction_eq_complement",
       "kind": "theorem",
       "module": "Erdos249257/GreedyAchievementSet.lean",
-      "line": 1871,
+      "line": 2228,
       "signature": "theorem HalfPrefixForcingChain.correction_eq_complement {A : Set ℕ} (chain : HalfPrefixForcingChain A) : halfCorrectionValue A = halfComplementValue A",
       "generated_certificate": false,
       "claim_ids": [],
       "docstring": "Two values trapped in the same unbounded sequence of dyadic cylinders are equal. This is the analytic coinduction step: every finite macrostep contributes a genuine error bound, and only unboundedness is asymptotic."
     },
     {
-      "id": "Erdos249257/GreedyAchievementSet.lean:1908:half_mem_mersenneAchievementSet_of_prefixForcingChain",
+      "id": "Erdos249257/GreedyAchievementSet.lean:2265:half_mem_mersenneAchievementSet_of_prefixForcingChain",
       "name": "half_mem_mersenneAchievementSet_of_prefixForcingChain",
       "kind": "theorem",
       "module": "Erdos249257/GreedyAchievementSet.lean",
-      "line": 1908,
+      "line": 2265,
       "signature": "theorem half_mem_mersenneAchievementSet_of_prefixForcingChain (A : Set ℕ) (hA0 : 0 ∉ A) (_hA1 : 1 ∉ A) (chain : HalfPrefixForcingChain A) : (1 / 2 : ℝ) ∈ mersenneAchievementSet",
       "generated_certificate": false,
       "claim_ids": [],
       "docstring": "Unbounded prefix forcing constructs an exact value-`1/2` support. The normalization hypotheses make the support genuinely positive-indexed and give the intended complementary-digit interpretation."
     },
     {
-      "id": "Erdos249257/GreedyAchievementSet.lean:1919:integer_crossing_unique",
+      "id": "Erdos249257/GreedyAchievementSet.lean:2276:integer_crossing_unique",
       "name": "integer_crossing_unique",
       "kind": "theorem",
       "module": "Erdos249257/GreedyAchievementSet.lean",
-      "line": 1919,
+      "line": 2276,
       "signature": "theorem integer_crossing_unique {x τ : ℝ} (hτ : τ ≤ 1) {m₁ m₂ : ℤ} (hm₁L : x < (m₁ : ℝ)) (hm₁R : (m₁ : ℝ) < x + τ) (hm₂L : x < (m₂ : ℝ)) (hm₂R : (m₂ : ℝ) < x + τ) : m₁ = m₂",
       "generated_certificate": false,
       "claim_ids": [],
       "docstring": "An interval of width at most one crosses at most one integer. Applied after scaling a correction interval by `4^N`, this isolates the unique boundary whose two-adic divisibility controls the forcing defect."
     },
     {
-      "id": "Erdos249257/GreedyAchievementSet.lean:1936:dyadicBoundary_cancel_powTwo",
+      "id": "Erdos249257/GreedyAchievementSet.lean:2293:dyadicBoundary_cancel_powTwo",
       "name": "dyadicBoundary_cancel_powTwo",
       "kind": "theorem",
       "module": "Erdos249257/GreedyAchievementSet.lean",
-      "line": 1936,
+      "line": 2293,
       "signature": "theorem dyadicBoundary_cancel_powTwo (N v q : ℕ) (hv : v ≤ 2 * N) : (((2 ^ v * q : ℕ) : ℝ) / (4 : ℝ) ^ N) = (q : ℝ) / (2 : ℝ) ^ (2 * N - v)",
       "generated_certificate": false,
       "claim_ids": [],
       "docstring": "Cancelling an explicit power of two from a boundary on the `4^N` grid. When `q` is odd and `v` is the exact two-adic valuation of the numerator, the right-hand denominator has the reduced dyadic depth `2*N-v`."
     },
     {
-      "id": "Erdos249257/GreedyAchievementSet.lean:1951:crossedBoundary_forceDepth_gt_iff",
+      "id": "Erdos249257/GreedyAchievementSet.lean:2308:crossedBoundary_forceDepth_gt_iff",
       "name": "crossedBoundary_forceDepth_gt_iff",
       "kind": "theorem",
       "module": "Erdos249257/GreedyAchievementSet.lean",
-      "line": 1951,
+      "line": 2308,
       "signature": "theorem crossedBoundary_forceDepth_gt_iff {N v : ℕ} (hN : 1 < N) : N < 2 * N - v - 1 ↔ v < N - 1",
       "generated_certificate": false,
       "claim_ids": [],

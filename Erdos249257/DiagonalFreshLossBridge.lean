@@ -606,6 +606,47 @@ def CanonicalAdjacentSuffixJumpCentralSupply : Prop :=
           2 ^ canonicalAdjacentSuffixDepth t -
             2 ^ (canonicalAdjacentSuffixDepth t - 5)
 
+/-- Signed distance of the canonical adjacent residue from the nearer edge of
+the fixed central band.  Nonnegative slack is exactly the two-sided
+centrality condition; this scalar is the proof-oriented cocycle to study at
+strict LCM jumps. -/
+def canonicalAdjacentSuffixCentralSlack (t : ℕ) : ℤ :=
+  let m := canonicalAdjacentSuffixDepth t
+  let d := diagonalAdjacentSuffixResidue t 0 m
+  min (d - 2 ^ (m - 5)) ((2 ^ m - 2 ^ (m - 5)) - d)
+
+/-- The two central-band inequalities collapse to one exact integer sign. -/
+theorem canonicalAdjacentSuffixCentral_iff_slack_nonneg (t : ℕ) :
+    (2 ^ (canonicalAdjacentSuffixDepth t - 5) ≤
+          diagonalAdjacentSuffixResidue t 0 (canonicalAdjacentSuffixDepth t) ∧
+        diagonalAdjacentSuffixResidue t 0 (canonicalAdjacentSuffixDepth t) ≤
+          2 ^ canonicalAdjacentSuffixDepth t -
+            2 ^ (canonicalAdjacentSuffixDepth t - 5)) ↔
+      0 ≤ canonicalAdjacentSuffixCentralSlack t := by
+  simp [canonicalAdjacentSuffixCentralSlack]
+
+/-- Scalar strict-jump producer.  This is equivalent to the original
+two-sided producer but exposes a single integer observable for recurrence,
+congruence, and exact-computation arguments. -/
+def CanonicalAdjacentSuffixJumpSlackSupply : Prop :=
+  ∀ t₀ : ℕ, ∃ t, max 3 t₀ ≤ t ∧
+    periodLcm t < periodLcm (t + 1) ∧
+      0 ≤ canonicalAdjacentSuffixCentralSlack t
+
+theorem canonicalAdjacentSuffixJumpCentralSupply_iff_slackSupply :
+    CanonicalAdjacentSuffixJumpCentralSupply ↔
+      CanonicalAdjacentSuffixJumpSlackSupply := by
+  constructor
+  · intro hsupply t₀
+    obtain ⟨t, ht, hjump, hlo, hhi⟩ := hsupply t₀
+    exact ⟨t, ht, hjump,
+      (canonicalAdjacentSuffixCentral_iff_slack_nonneg t).1 ⟨hlo, hhi⟩⟩
+  · intro hsupply t₀
+    obtain ⟨t, ht, hjump, hslack⟩ := hsupply t₀
+    obtain ⟨hlo, hhi⟩ :=
+      (canonicalAdjacentSuffixCentral_iff_slack_nonneg t).2 hslack
+    exact ⟨t, ht, hjump, hlo, hhi⟩
+
 /-- Restricting the producer to strict LCM jumps still supplies the canonical
 centrality interface. -/
 theorem canonicalAdjacentSuffixCentralSupply_of_jump
@@ -663,6 +704,14 @@ theorem irrational_totientSeries_of_canonicalAdjacentSuffixJumpCentralSupply
     Irrational (∑' n : ℕ, (Nat.totient n : ℝ) / 2 ^ n) := by
   exact irrational_totientSeries_of_canonicalAdjacentSuffixCentralSupply
     (canonicalAdjacentSuffixCentralSupply_of_jump hsupply)
+
+/-- Nonnegative canonical slack at arbitrarily large strict LCM jumps closes
+the same irrationality consumer. -/
+theorem irrational_totientSeries_of_canonicalAdjacentSuffixJumpSlackSupply
+    (hsupply : CanonicalAdjacentSuffixJumpSlackSupply) :
+    Irrational (∑' n : ℕ, (Nat.totient n : ℝ) / 2 ^ n) := by
+  apply irrational_totientSeries_of_canonicalAdjacentSuffixJumpCentralSupply
+  exact (canonicalAdjacentSuffixJumpCentralSupply_iff_slackSupply).2 hsupply
 
 /-! ## Kernel-checked composition fixture -/
 
@@ -722,6 +771,7 @@ theorem foreignDiagonalDefect_misses_fullTarget_seven_via_suffix :
 #print axioms irrational_totientSeries_of_diagonalAdjacentSuffixGapSupply
 #print axioms irrational_totientSeries_of_canonicalAdjacentSuffixCentralSupply
 #print axioms irrational_totientSeries_of_canonicalAdjacentSuffixJumpCentralSupply
+#print axioms irrational_totientSeries_of_canonicalAdjacentSuffixJumpSlackSupply
 #print axioms foreignDiagonalDefect_misses_fullTarget_seven_via_suffix
 
 end Erdos249257.DiagonalFreshLossBridge

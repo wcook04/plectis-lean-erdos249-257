@@ -23,10 +23,10 @@ Erdős #257.**
 | Checked surface | Scale |
 |---|---:|
 | Lean modules | 539 |
-| Lean declarations | 6,328 |
-| Theorem-like declarations | 5,826 |
+| Lean declarations | 6,355 |
+| Theorem-like declarations | 5,843 |
 | Generated certificate declarations | 1,681 |
-| Principal claim-to-Lean links | 48 |
+| Principal claim-to-Lean links | 54 |
 | Exact remaining open propositions | 3 |
 
 These are generated navigation counts, not a claim that every declaration is a
