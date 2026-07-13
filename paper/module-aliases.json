@@ -1,0 +1,150 @@
+{
+  "schema": "erdos249257-paper-module-aliases/1",
+  "artifact_role": "paper_sigil_to_lean_module_navigation_crosswalk",
+  "authority_posture": "generated_navigation_projection_not_proof_authority",
+  "heuristic": "Each CamelCase component contributes at most its first three characters.",
+  "alias_count": 28,
+  "aliases": [
+    {
+      "sigil": "BooMobCar",
+      "module": "BooleanMobiusCarry.lean",
+      "path": "Erdos249257/BooleanMobiusCarry.lean"
+    },
+    {
+      "sigil": "CarSurExt",
+      "module": "CarrySurvivorExtinction.lean",
+      "path": "Erdos249257/CarrySurvivorExtinction.lean"
+    },
+    {
+      "sigil": "CerKer",
+      "module": "CertificateKernel.lean",
+      "path": "Erdos249257/CertificateKernel.lean"
+    },
+    {
+      "sigil": "CurCar",
+      "module": "CurvatureCarry.lean",
+      "path": "Erdos249257/CurvatureCarry.lean"
+    },
+    {
+      "sigil": "DiaFreLosBri",
+      "module": "DiagonalFreshLossBridge.lean",
+      "path": "Erdos249257/DiagonalFreshLossBridge.lean"
+    },
+    {
+      "sigil": "DiaPinCerT43",
+      "module": "DiagonalPincerCertificatesT43.lean",
+      "path": "Erdos249257/DiagonalPincerCertificatesT43.lean"
+    },
+    {
+      "sigil": "DiaPinDec",
+      "module": "DiagonalPincerDecomposition.lean",
+      "path": "Erdos249257/DiagonalPincerDecomposition.lean"
+    },
+    {
+      "sigil": "ExpOnlTra",
+      "module": "ExponentOnlyTransport.lean",
+      "path": "Erdos249257/ExponentOnlyTransport.lean"
+    },
+    {
+      "sigil": "FirHarGap",
+      "module": "FirstHarmonicGap.lean",
+      "path": "Erdos249257/FirstHarmonicGap.lean"
+    },
+    {
+      "sigil": "FulTarPriAdjNoGo",
+      "module": "FullTargetPrimeAdjunctionNoGo.lean",
+      "path": "Erdos249257/FullTargetPrimeAdjunctionNoGo.lean"
+    },
+    {
+      "sigil": "GapFarBou",
+      "module": "GapFareyBound.lean",
+      "path": "Erdos249257/GapFareyBound.lean"
+    },
+    {
+      "sigil": "GcdMomCal",
+      "module": "GcdMomentCalculus.lean",
+      "path": "Erdos249257/GcdMomentCalculus.lean"
+    },
+    {
+      "sigil": "GenTaiOrbRig",
+      "module": "GenericTailOrbitRigidity.lean",
+      "path": "Erdos249257/GenericTailOrbitRigidity.lean"
+    },
+    {
+      "sigil": "GreAchSet",
+      "module": "GreedyAchievementSet.lean",
+      "path": "Erdos249257/GreedyAchievementSet.lean"
+    },
+    {
+      "sigil": "JoiExpTra",
+      "module": "JointExponentTransport.lean",
+      "path": "Erdos249257/JointExponentTransport.lean"
+    },
+    {
+      "sigil": "LcmConFla",
+      "module": "LcmConeFlatness.lean",
+      "path": "Erdos249257/LcmConeFlatness.lean"
+    },
+    {
+      "sigil": "LcmConNon",
+      "module": "LcmConeNonflat.lean",
+      "path": "Erdos249257/LcmConeNonflat.lean"
+    },
+    {
+      "sigil": "LcmDiaRed",
+      "module": "LcmDiagonalReduction.lean",
+      "path": "Erdos249257/LcmDiagonalReduction.lean"
+    },
+    {
+      "sigil": "MerLamLad",
+      "module": "MersenneLambertLadder.lean",
+      "path": "Erdos249257/MersenneLambertLadder.lean"
+    },
+    {
+      "sigil": "MerShaDenGro",
+      "module": "MersenneShadowDenominatorGrowth.lean",
+      "path": "Erdos249257/MersenneShadowDenominatorGrowth.lean"
+    },
+    {
+      "sigil": "PriJumMig",
+      "module": "PrimeJumpMigration.lean",
+      "path": "Erdos249257/PrimeJumpMigration.lean"
+    },
+    {
+      "sigil": "PriJumWin",
+      "module": "PrimeJumpWindow.lean",
+      "path": "Erdos249257/PrimeJumpWindow.lean"
+    },
+    {
+      "sigil": "RatSupCarSke",
+      "module": "RationalSupportCarrySkeleton.lean",
+      "path": "Erdos249257/RationalSupportCarrySkeleton.lean"
+    },
+    {
+      "sigil": "SquMerDiaEnc",
+      "module": "SquaredMersenneDiagonalEnclosure.lean",
+      "path": "Erdos249257/SquaredMersenneDiagonalEnclosure.lean"
+    },
+    {
+      "sigil": "SubDivCov",
+      "module": "SublogDivisorCoverage.lean",
+      "path": "Erdos249257/SublogDivisorCoverage.lean"
+    },
+    {
+      "sigil": "ThrTraBou",
+      "module": "ThreeTransportBoundary.lean",
+      "path": "Erdos249257/ThreeTransportBoundary.lean"
+    },
+    {
+      "sigil": "TotTaiPerKil",
+      "module": "TotientTailPeriodKiller.lean",
+      "path": "Erdos249257/TotientTailPeriodKiller.lean"
+    },
+    {
+      "sigil": "TroCurCar",
+      "module": "TropicalCurvatureCarry.lean",
+      "path": "Erdos249257/TropicalCurvatureCarry.lean"
+    }
+  ],
+  "validation": "python3 scripts/build_paper_module_aliases.py --check"
+}

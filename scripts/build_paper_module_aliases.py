@@ -6,6 +6,7 @@
 from __future__ import annotations
 
 import argparse
+import json
 import re
 import sys
 from pathlib import Path
@@ -18,6 +19,7 @@ PAPERS = (
     PAPER_DIR / "erdos249-transport-curvature.tex",
 )
 OUTPUT = PAPER_DIR / "module-aliases.tex"
+JSON_OUTPUT = PAPER_DIR / "module-aliases.json"
 LINK_RE = re.compile(r"\\(?:lrefx?|lloc)\{([^}]+\.lean)\}")
 
 
@@ -45,7 +47,7 @@ def referenced_modules() -> list[str]:
     return sorted(modules)
 
 
-def render(modules: list[str]) -> str:
+def aliases_for_modules(modules: list[str]) -> dict[str, str]:
     aliases = {module: module_alias(module) for module in modules}
     collisions: dict[str, list[str]] = {}
     for module, alias in aliases.items():
@@ -55,6 +57,10 @@ def render(modules: list[str]) -> str:
         details = "; ".join(f"{alias}: {', '.join(names)}"
                             for alias, names in sorted(duplicates.items()))
         raise ValueError(f"paper module alias collision(s): {details}")
+    return aliases
+
+
+def render_tex(aliases: dict[str, str]) -> str:
 
     lines = [
         "% SPDX-FileCopyrightText: 2026 Will Cook",
@@ -70,23 +76,55 @@ def render(modules: list[str]) -> str:
     return "\n".join(lines) + "\n"
 
 
+def render_json(aliases: dict[str, str]) -> str:
+    payload = {
+        "schema": "erdos249257-paper-module-aliases/1",
+        "artifact_role": "paper_sigil_to_lean_module_navigation_crosswalk",
+        "authority_posture": "generated_navigation_projection_not_proof_authority",
+        "heuristic": "Each CamelCase component contributes at most its first three characters.",
+        "alias_count": len(aliases),
+        "aliases": [
+            {
+                "sigil": alias,
+                "module": module,
+                "path": f"Erdos249257/{module}",
+            }
+            for module, alias in aliases.items()
+        ],
+        "validation": "python3 scripts/build_paper_module_aliases.py --check",
+    }
+    return json.dumps(payload, ensure_ascii=False, indent=2) + "\n"
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--check", action="store_true", help="fail if the generated file is stale")
     args = parser.parse_args()
 
     modules = referenced_modules()
-    expected = render(modules)
+    aliases = aliases_for_modules(modules)
+    expected_tex = render_tex(aliases)
+    expected_json = render_json(aliases)
     if args.check:
-        actual = OUTPUT.read_text(encoding="utf-8") if OUTPUT.is_file() else ""
-        if actual != expected:
-            print("paper/module-aliases.tex is stale; run python3 scripts/build_paper_module_aliases.py")
+        actual_tex = OUTPUT.read_text(encoding="utf-8") if OUTPUT.is_file() else ""
+        actual_json = JSON_OUTPUT.read_text(encoding="utf-8") if JSON_OUTPUT.is_file() else ""
+        stale = []
+        if actual_tex != expected_tex:
+            stale.append(str(OUTPUT.relative_to(ROOT)))
+        if actual_json != expected_json:
+            stale.append(str(JSON_OUTPUT.relative_to(ROOT)))
+        if stale:
+            print(f"{', '.join(stale)} stale; run python3 scripts/build_paper_module_aliases.py")
             return 1
         print(f"paper module aliases current: {len(modules)} unique modules")
         return 0
 
-    OUTPUT.write_text(expected, encoding="utf-8")
-    print(f"wrote {OUTPUT.relative_to(ROOT)} with {len(modules)} unique module aliases")
+    OUTPUT.write_text(expected_tex, encoding="utf-8")
+    JSON_OUTPUT.write_text(expected_json, encoding="utf-8")
+    print(
+        f"wrote {OUTPUT.relative_to(ROOT)} and {JSON_OUTPUT.relative_to(ROOT)} "
+        f"with {len(modules)} unique module aliases"
+    )
     return 0
 
 

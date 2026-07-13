@@ -86,6 +86,7 @@ python3 scripts/query_corpus.py --format card
 python3 scripts/query_corpus.py --claim denominator_exclusion
 python3 scripts/query_corpus.py --declaration irrational_erdosSum_full_support
 python3 scripts/query_corpus.py --module Erdos249257/CertificateKernel.lean
+python3 scripts/query_corpus.py --module CerKer
 python3 scripts/query_corpus.py --route instant_orientation
 python3 scripts/query_corpus.py --search totient --limit 10
 ```

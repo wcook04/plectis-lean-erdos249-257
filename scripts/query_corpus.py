@@ -88,6 +88,10 @@ def compact_declaration(row: dict[str, Any]) -> dict[str, Any]:
 def module_packet(handle: str, limit: int) -> dict[str, Any]:
     atlas = load("docs/declaration_atlas.json")
     claims = load("docs/claims.json")
+    aliases = load("paper/module-aliases.json")["aliases"]
+    alias = next((row for row in aliases if row["sigil"].casefold() == handle.casefold()), None)
+    if alias is not None:
+        handle = alias["path"]
     normalized = handle.replace(".", "/") + ".lean" if "/" not in handle else handle
     normalized = normalized.removeprefix("./")
     module = next(
@@ -115,6 +119,9 @@ def module_packet(handle: str, limit: int) -> dict[str, Any]:
         "kind": "module",
         "authority_posture": "atlas_navigation_projection_not_proof_authority",
         "module": module,
+        "paper_sigil": next(
+            (row["sigil"] for row in aliases if row["path"] == module["path"]), None
+        ),
         "attached_claims": claim_rows,
         "declaration_preview": [compact_declaration(row) for row in declarations[:limit]],
         "declaration_preview_receipt": {
@@ -150,6 +157,8 @@ def search_packet(query: str, limit: int) -> dict[str, Any]:
     claims = load("docs/claims.json")
     atlas = load("docs/declaration_atlas.json")
     orientation = load("docs/orientation.json")
+    aliases = load("paper/module-aliases.json")["aliases"]
+    sigil_by_path = {row["path"]: row["sigil"] for row in aliases}
     ranked: list[tuple[int, str, dict[str, Any]]] = []
 
     for claim in claims["claims"]:
@@ -178,7 +187,11 @@ def search_packet(query: str, limit: int) -> dict[str, Any]:
             ranked.append((rank, f"declaration:{row['module']}:{row['line']}:{row['name']}", result))
 
     for row in atlas["modules"]:
-        rank = search_rank(query, row["id"], row["path"])
+        sigil = sigil_by_path.get(row["path"])
+        ranks = [search_rank(query, row["id"], row["path"])]
+        if sigil:
+            ranks.append(search_rank(query, sigil, row["id"] + " " + row["path"]))
+        rank = min((value for value in ranks if value is not None), default=None)
         if rank is not None:
             ranked.append(
                 (
@@ -188,6 +201,7 @@ def search_packet(query: str, limit: int) -> dict[str, Any]:
                         "kind": "module",
                         "id": row["id"],
                         "path": row["path"],
+                        "paper_sigil": sigil,
                         "declaration_count": row["declaration_count"],
                         "import_count": len(row["imports"]),
                     },
@@ -249,7 +263,8 @@ def render_card(packet: dict[str, Any]) -> str:
         module = packet["module"]
         return (
             f"module {module['id']} | {module['path']} | declarations={module['declaration_count']} "
-            f"| imports={len(module['imports'])} | claims={len(packet['attached_claims'])}"
+            f"| imports={len(module['imports'])} | claims={len(packet['attached_claims'])} "
+            f"| paper_sigil={packet.get('paper_sigil') or 'none'}"
         )
     if kind == "search":
         rows = [

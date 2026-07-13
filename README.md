@@ -38,6 +38,8 @@ For one bounded lookup, run `python3 scripts/query_corpus.py --claim <id>`,
 `--declaration <Lean_name>`, `--module <path_or_id>`, or `--route <id>`. If you
 do not yet know the handle, use `--search <text> --limit <1..100>`; every JSON
 response is capped at 64 KB and points back to an exhaustive owner.
+Paper sigils are handles too: `--module CerKer` resolves the displayed sigil
+through [`paper/module-aliases.json`](paper/module-aliases.json).
 
 The Plectis site is an introduction, not a proof certificate. The exposition
 explains the mathematics. The checked Lean source establishes the formal

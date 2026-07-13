@@ -61,6 +61,18 @@ def main() -> int:
     assert module["declaration_preview_receipt"]["omitted"] > 0
     assert "declaration_kind" in module["declaration_preview"][0]
 
+    aliases = json.loads((ROOT / "paper" / "module-aliases.json").read_text(encoding="utf-8"))
+    assert aliases["alias_count"] == len(aliases["aliases"])
+    assert len({row["sigil"] for row in aliases["aliases"]}) == aliases["alias_count"]
+    for row in aliases["aliases"]:
+        resolved = query("--module", row["sigil"], "--limit", "1")
+        assert resolved["module"]["path"] == row["path"]
+        assert resolved["paper_sigil"] == row["sigil"]
+
+    sigil_search = query("--search", "CerKer", "--limit", "1")
+    assert sigil_search["results"][0]["kind"] == "module"
+    assert sigil_search["results"][0]["path"] == "Erdos249257/CertificateKernel.lean"
+
     search = query("--search", " denominator_exclusion ", "--limit", "5")
     assert search["match_count"] >= 1
     assert search["results"][0]["kind"] == "claim"
@@ -84,7 +96,7 @@ def main() -> int:
     assert invalid_limit.returncode == 2
     assert "--limit must be between 1 and 100" in invalid_limit.stderr
 
-    print("test_query_corpus: bounded summary, typed lookup, search, ranking, and error paths passed")
+    print("test_query_corpus: bounded lookup, sigil round trips, search, ranking, and errors passed")
     return 0
 
 

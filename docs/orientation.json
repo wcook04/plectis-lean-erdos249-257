@@ -325,6 +325,7 @@
     "mathematical_methodology": "docs/methodology.json",
     "human_exposition": "erdos249-257-exposition.pdf",
     "technical_companion": "erdos249-transport-curvature.pdf",
+    "paper_source_sigils": "paper/module-aliases.json",
     "source_by_question": "docs/SOURCE_MAP.md",
     "development_chronology": "docs/WAVE_INDEX.md",
     "supported_root_import": "Erdos249257.lean"
@@ -338,7 +339,7 @@
     "summary": "python3 scripts/query_corpus.py --format card",
     "claim": "python3 scripts/query_corpus.py --claim <claim_id>",
     "declaration": "python3 scripts/query_corpus.py --declaration <Lean_name>",
-    "module": "python3 scripts/query_corpus.py --module <path_or_id>",
+    "module": "python3 scripts/query_corpus.py --module <path_or_id_or_paper_sigil>",
     "reading_route": "python3 scripts/query_corpus.py --route <route_id>",
     "search": "python3 scripts/query_corpus.py --search <text> [--limit 1..100]"
   },
