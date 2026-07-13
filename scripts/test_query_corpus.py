@@ -266,6 +266,10 @@ def main() -> int:
 
     route = query("--route", "instant_orientation")
     assert route["route"]["read"][0] == "docs/orientation.json"
+    assert "docs/claims.json" not in route["route"]["read"]
+    assert route["route"]["query_steps"]
+    assert route["route"]["authority_owners"]
+    assert route["route"]["adjacent_handle_classes"]
 
     unknown = run("--claim", "does_not_exist")
     assert unknown.returncode == 2

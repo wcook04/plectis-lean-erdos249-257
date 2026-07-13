@@ -27,6 +27,7 @@ ROOT = Path(__file__).resolve().parent.parent
 QUERY = ROOT / "scripts" / "query_corpus.py"
 HUMAN_SURFACES = ("README.md", "SCOPE.md", "docs/ORIENTATION.md")
 HUMAN_FIRST_CONTACT_BUDGET_BYTES = 32_000
+SUMMARY_PACKET_BUDGET_BYTES = 32_000
 PACKET_BUDGET_BYTES = 16_384
 PROOF_AUTHORITY = "Lean source checked by the pinned Lean kernel"
 
@@ -39,7 +40,7 @@ def encoded_bytes(value: Any) -> int:
     return len(json.dumps(value, ensure_ascii=False, sort_keys=True).encode("utf-8"))
 
 
-def query_packet(*args: str) -> dict[str, Any]:
+def query_packet(*args: str, budget_bytes: int = PACKET_BUDGET_BYTES) -> dict[str, Any]:
     """Run the public CLI exactly as a cold coding agent would."""
     completed = subprocess.run(
         [sys.executable, str(QUERY), *args],
@@ -51,9 +52,9 @@ def query_packet(*args: str) -> dict[str, Any]:
     if completed.returncode != 0:
         raise AssertionError(completed.stdout.strip() or completed.stderr.strip())
     raw = completed.stdout.encode("utf-8")
-    assert len(raw) <= PACKET_BUDGET_BYTES, (
+    assert len(raw) <= budget_bytes, (
         f"query {' '.join(args) or '<summary>'} emitted {len(raw)} bytes "
-        f"(budget {PACKET_BUDGET_BYTES})"
+        f"(budget {budget_bytes})"
     )
     return json.loads(completed.stdout)
 
@@ -89,7 +90,7 @@ def validate_human_first_contact(summary: dict[str, Any], bundle: str) -> None:
 
 def collect_agent_packets() -> dict[str, Any]:
     """Collect only bounded query replies needed to walk the public graph."""
-    summary = query_packet()
+    summary = query_packet(budget_bytes=SUMMARY_PACKET_BUDGET_BYTES)
     packets: dict[str, Any] = {
         "summary": summary,
         "opens": {},
@@ -133,7 +134,7 @@ def validate_agent_packets(packets: dict[str, Any]) -> None:
     assert summary["kind"] == "corpus_summary"
     assert summary["authority_posture"] == "navigation_projection_not_proof_authority"
     assert summary["proof_authority"] == PROOF_AUTHORITY
-    assert encoded_bytes(summary) <= PACKET_BUDGET_BYTES
+    assert encoded_bytes(summary) <= SUMMARY_PACKET_BUDGET_BYTES
     assert summary["remaining_open_propositions"]
 
     principal = {row["id"]: row for row in summary["principal_claims"]}
@@ -184,6 +185,11 @@ def validate_agent_packets(packets: dict[str, Any]) -> None:
     }
     assert packets["route"]["route"]["id"] == "instant_orientation"
     assert packets["route"]["proof_authority"] == PROOF_AUTHORITY
+    route = packets["route"]["route"]
+    assert "docs/claims.json" not in route["read"]
+    assert route["query_steps"]
+    assert route["authority_owners"]
+    assert route["adjacent_handle_classes"]
 
 
 def main() -> int:

@@ -873,7 +873,16 @@ def search_packet(query: str, limit: int) -> dict[str, Any]:
             )
 
     for row in orientation["reading_routes"]:
-        rank = search_rank(query, row["id"], row["intent"] + " " + " ".join(row["read"]))
+        route_haystack = " ".join(
+            [
+                row["intent"],
+                *row["read"],
+                *row["query_steps"],
+                *row["authority_owners"],
+                *row["adjacent_handle_classes"],
+            ]
+        )
+        rank = search_rank(query, row["id"], route_haystack)
         if rank is not None:
             ranked.append((rank, f"route:{row['id']}", {"kind": "reading_route", **row}))
 
@@ -979,7 +988,10 @@ def render_card(packet: dict[str, Any]) -> str:
         return "\n".join(rows)
     if kind == "reading_route":
         route = packet["route"]
-        return f"route {route['id']} | {route['intent']} | {' -> '.join(route['read'])}"
+        return (
+            f"route {route['id']} | {route['intent']} | read={' -> '.join(route['read'])} "
+            f"| next={route['query_steps'][0]}"
+        )
     scale = packet["scale"]
     return (
         f"corpus {packet['release']['tag']} | modules={scale['module_count']} "

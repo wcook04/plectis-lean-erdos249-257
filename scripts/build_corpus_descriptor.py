@@ -238,6 +238,11 @@ def render_orientation_markdown(orientation: dict[str, Any]) -> str:
     for route in orientation["reading_routes"]:
         paths = " → ".join(f"`{path}`" for path in route["read"])
         lines.append(f"- **{route['intent']}** (`{route['id']}`): {paths}")
+        lines.append(f"  - Bounded queries: {'; '.join(f'`{step}`' for step in route['query_steps'])}")
+        lines.append(
+            "  - Authority owners: "
+            + ", ".join(f"`{owner}`" for owner in route["authority_owners"])
+        )
     lines.extend(
         [
             "",

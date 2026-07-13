@@ -26,11 +26,11 @@
     "content": {
       "machine_readable_paper": {
         "path": "docs/claims.json::machine_readable_paper",
-        "content_digest": "sha256:c7d48e588a5e4062b1dda95cde4175aeeffa8718c25919bff9786a7f17da92ec"
+        "content_digest": "sha256:294b3fbc2059287536b6b3a655daa5674bb96b43d57746efa175d11d2fda5739"
       },
       "claims_document": {
         "path": "docs/claims.json",
-        "content_digest": "sha256:09a7477aade48cd5928892e50fb613cc51777a3f3c3666eb3ba742ac282ab034"
+        "content_digest": "sha256:1058968b9fb33390085248a9f5317bb24b7fbca8b8dc7702368b44a529b00987"
       },
       "declaration_atlas": {
         "path": "docs/declaration_atlas.json",
@@ -43,7 +43,7 @@
       },
       "bounded_orientation": {
         "path": "docs/orientation.json",
-        "content_digest": "sha256:0421667be91939c741e8361f1d290a5015b690789ab3fc70c848040a5207f2c5"
+        "content_digest": "sha256:f76079fd53cee026ecdc2398b9f85e6655ab4eece30d1e2d4c5add1c905b099b"
       },
       "human_exposition": {
         "source_path": "paper/erdos249-257-exposition.tex",
@@ -977,7 +977,7 @@
   "expansion": {
     "machine_readable_paper": {
       "path": "docs/claims.json::machine_readable_paper",
-      "expected_content_digest": "sha256:c7d48e588a5e4062b1dda95cde4175aeeffa8718c25919bff9786a7f17da92ec",
+      "expected_content_digest": "sha256:294b3fbc2059287536b6b3a655daa5674bb96b43d57746efa175d11d2fda5739",
       "contains": [
         "all_claims",
         "authored_argument_graph",

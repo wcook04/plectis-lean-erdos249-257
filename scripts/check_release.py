@@ -172,11 +172,24 @@ def main() -> int:
     machine_paper = data["machine_readable_paper"]
     check(machine_paper.get("schema") == "erdos249257-machine-readable-paper/1",
           "machine_readable_paper has an unsupported schema")
+    exhaustive_route_reads = {"docs/claims.json", "docs/declaration_atlas.json", "docs/methodology.json"}
     for route in machine_paper["entrypoints"]:
         check(bool(route.get("id")) and bool(route.get("intent")) and bool(route.get("read")),
               "every machine-readable-paper entrypoint needs id, intent, and read paths")
+        check(bool(route.get("query_steps")) and bool(route.get("authority_owners"))
+              and bool(route.get("adjacent_handle_classes")),
+              f"route {route.get('id')!r} lacks bounded query, authority-owner, or adjacent-handle data")
+        check(not (set(route.get("read", [])) & exhaustive_route_reads),
+              f"route {route.get('id')!r} sends first contact to an exhaustive owner")
         for rel in route.get("read", []):
             check((ROOT / rel).is_file(), f"machine-readable-paper entrypoint path does not exist: {rel}")
+        for owner in route.get("authority_owners", []):
+            rel = str(owner).split("::", 1)[0]
+            check((ROOT / rel).is_file(),
+                  f"route {route.get('id')!r} authority owner does not exist: {rel}")
+        for step in route.get("query_steps", []):
+            check(step.startswith("python3 scripts/query_corpus.py --"),
+                  f"route {route.get('id')!r} query step is not a typed corpus query: {step}")
 
     module_nodes = machine_paper["module_graph"]["nodes"]
     module_ids = [node["id"] for node in module_nodes]

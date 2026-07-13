@@ -52,12 +52,24 @@ settle the open proposition attached to it.
 
 ## Read by intent
 
-- **Understand what this repository proves, reduces, cites, and leaves open.** (`instant_orientation`): `docs/orientation.json` → `docs/claims.json` → `SCOPE.md` → `README.md`
-- **Trace one mathematical claim from exposition to checked source.** (`follow_one_claim`): `docs/claims.json` → `paper/erdos249-257-exposition.tex` → `paper/erdos249-transport-curvature.tex` → `Erdos249257.lean`
-- **See how the #249 reduction, #257 families, carry trunk, and open targets relate.** (`understand_argument_topology`): `docs/claims.json` → `docs/SOURCE_MAP.md` → `docs/WAVE_INDEX.md`
-- **Understand the cited mathematical sources, their precise relationship to the release, and the priority boundary.** (`trace_prior_art`): `docs/PRIOR_ART.md` → `paper/erdos249-257-exposition.tex` → `paper/erdos249-transport-curvature.tex` → `CITATION.cff`
-- **Understand the mathematical method, the evidence required for claim transitions, and the exact remaining open propositions.** (`understand_methodology_and_open_boundary`): `docs/methodology.json` → `METHODOLOGY.md` → `docs/claims.json` → `SCOPE.md`
+- **Understand what this repository proves, reduces, cites, and leaves open.** (`instant_orientation`): `docs/orientation.json` → `SCOPE.md` → `README.md`
+  - Bounded queries: `python3 scripts/query_corpus.py --format card`; `python3 scripts/query_corpus.py --open <remaining_open_proposition_id>`; `python3 scripts/query_corpus.py --claim <claim_id>`
+  - Authority owners: `docs/claims.json::claims`, `docs/claims.json::remaining_open_propositions`, `docs/methodology.json`
+- **Trace one mathematical claim from exposition to checked source.** (`follow_one_claim`): `docs/orientation.json` → `docs/ORIENTATION.md`
+  - Bounded queries: `python3 scripts/query_corpus.py --claim <claim_id>`; `python3 scripts/query_corpus.py --paper-label <TeX_label>`; `python3 scripts/query_corpus.py --declaration <Lean_declaration>`; `python3 scripts/query_corpus.py --source <module.lean:line>`; `python3 scripts/query_corpus.py --module <module_or_paper_sigil>`
+  - Authority owners: `docs/claims.json::claims`, `paper/erdos249-257-exposition.tex`, `paper/erdos249-transport-curvature.tex`, `Erdos249257.lean`
+- **See how the #249 reduction, #257 families, carry trunk, and open targets relate.** (`understand_argument_topology`): `docs/orientation.json` → `docs/SOURCE_MAP.md` → `docs/WAVE_INDEX.md`
+  - Bounded queries: `python3 scripts/query_corpus.py --claim <claim_id>`; `python3 scripts/query_corpus.py --open <remaining_open_proposition_id>`; `python3 scripts/query_corpus.py --search <term> --limit <1..100>`
+  - Authority owners: `docs/claims.json::machine_readable_paper.argument_graph`, `docs/SOURCE_MAP.md`, `docs/WAVE_INDEX.md`
+- **Understand the cited mathematical sources, their precise relationship to the release, and the priority boundary.** (`trace_prior_art`): `docs/PRIOR_ART.md` → `CITATION.cff` → `docs/orientation.json`
+  - Bounded queries: `python3 scripts/query_corpus.py --artifact docs/PRIOR_ART.md`; `python3 scripts/query_corpus.py --paper-label <TeX_label>`; `python3 scripts/query_corpus.py --artifact <content_digest>`
+  - Authority owners: `docs/PRIOR_ART.md`, `CITATION.cff`, `paper/erdos249-257-exposition.tex`, `paper/erdos249-transport-curvature.tex`
+- **Understand the mathematical method, the evidence required for claim transitions, and the exact remaining open propositions.** (`understand_methodology_and_open_boundary`): `METHODOLOGY.md` → `SCOPE.md` → `docs/orientation.json`
+  - Bounded queries: `python3 scripts/query_corpus.py --open <remaining_open_proposition_id>`; `python3 scripts/query_corpus.py --claim <claim_id>`; `python3 scripts/query_corpus.py --route instant_orientation`
+  - Authority owners: `docs/methodology.json`, `docs/claims.json::remaining_open_propositions`, `SCOPE.md`
 - **Modify a formal or editorial surface without allowing status or source coordinates to drift.** (`change_or_verify_release`): `AGENTS.md` → `scripts/check_release.py` → `CONTRIBUTING.md`
+  - Bounded queries: `python3 scripts/query_corpus.py --artifact <path_or_sha256>`; `python3 scripts/query_corpus.py --declaration <Lean_declaration>`; `python3 scripts/query_corpus.py --source <module.lean:line>`
+  - Authority owners: `docs/claims.json`, `docs/methodology.json`, `scripts/check_release.py`, `Erdos249257.lean`
 
 ## Drill down
 
