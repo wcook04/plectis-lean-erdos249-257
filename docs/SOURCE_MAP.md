@@ -143,7 +143,8 @@ Builds on `Erdos249257.CertificateKernel`; not part of the wave chronology. Read
 - `Erdos249257.GeneratedCertificates`
 - `Erdos249257.GeneratedCertificates.*`
 
-The complete 538-module import graph and every declaration are generated in
+The complete import graph and every declaration are generated in
 `docs/claims.json::machine_readable_paper.module_graph` and
 `docs/declaration_atlas.json`; use those surfaces when a grouped route above is
-not specific enough.
+not specific enough. Current corpus counts live in the generated
+`docs/ORIENTATION.md`, not in this authored route map.
