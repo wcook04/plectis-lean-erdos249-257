@@ -191,32 +191,58 @@ def olean(name: str, root: Path = ROOT) -> Path:
     return root / ".lake" / "build" / "lib" / "lean" / Path(*name.split(".")).with_suffix(".olean")
 
 
+def file_mtime_ns(path: Path) -> int | None:
+    try:
+        return path.stat().st_mtime_ns
+    except FileNotFoundError:
+        return None
+
+
+def project_config_mtime_ns(root: Path = ROOT) -> int | None:
+    mtimes = [
+        mtime
+        for name in ("lakefile.toml", "lakefile.lean", "lake-manifest.json", "lean-toolchain")
+        if (mtime := file_mtime_ns(root / name)) is not None
+    ]
+    return max(mtimes, default=None)
+
+
+def olean_mtimes(names: Iterable[str], root: Path = ROOT) -> dict[str, int | None]:
+    return {name: file_mtime_ns(olean(name, root)) for name in names}
+
+
 def stale(
     name: str,
     modules: dict[str, Path],
     graph: dict[str, set[str]],
     root: Path = ROOT,
+    *,
+    cached_olean_mtimes: dict[str, int | None] | None = None,
+    cached_config_mtime_ns: int | None = None,
 ) -> bool:
-    output = olean(name, root)
-    if not output.is_file():
+    timestamp = (
+        cached_olean_mtimes.get(name)
+        if cached_olean_mtimes is not None
+        else file_mtime_ns(olean(name, root))
+    )
+    if timestamp is None:
         return True
-    timestamp = output.stat().st_mtime_ns
     if modules[name].stat().st_mtime_ns > timestamp:
         return True
-    if any(
-        not olean(dep, root).is_file() or olean(dep, root).stat().st_mtime_ns > timestamp
-        for dep in graph[name]
-    ):
-        return True
-    return any(
-        config.is_file() and config.stat().st_mtime_ns > timestamp
-        for config in (
-            root / "lakefile.toml",
-            root / "lakefile.lean",
-            root / "lake-manifest.json",
-            root / "lean-toolchain",
+    for dependency in graph[name]:
+        dependency_timestamp = (
+            cached_olean_mtimes.get(dependency)
+            if cached_olean_mtimes is not None
+            else file_mtime_ns(olean(dependency, root))
         )
+        if dependency_timestamp is None or dependency_timestamp > timestamp:
+            return True
+    config_timestamp = (
+        cached_config_mtime_ns
+        if cached_olean_mtimes is not None
+        else project_config_mtime_ns(root)
     )
+    return config_timestamp is not None and config_timestamp > timestamp
 
 
 def build_one(name: str, root: Path = ROOT) -> tuple[str, int, float]:
@@ -278,8 +304,21 @@ def main(argv: list[str] | None = None) -> int:
         parser.error(str(error))
     graph = reachable_graph(target_modules, modules)
     build_waves = waves(reachable(target_modules, graph), graph)
+    output_mtimes = olean_mtimes(graph, root)
+    config_mtime = project_config_mtime_ns(root)
     pending = [
-        [name for name in wave if stale(name, modules, graph, root)]
+        [
+            name
+            for name in wave
+            if stale(
+                name,
+                modules,
+                graph,
+                root,
+                cached_olean_mtimes=output_mtimes,
+                cached_config_mtime_ns=config_mtime,
+            )
+        ]
         for wave in build_waves
     ]
     pending = [wave for wave in pending if wave]

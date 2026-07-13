@@ -155,6 +155,25 @@ class LeanFastBuildTests(unittest.TestCase):
             os.utime(config, ns=(3_000_000_000, 3_000_000_000))
             self.assertTrue(fast.stale("Pkg.Leaf", modules, graph, root))
 
+    def test_stale_accepts_precomputed_build_metadata(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            source = root / "Pkg" / "Leaf.lean"
+            source.parent.mkdir()
+            source.write_text("-- source\n", encoding="utf-8")
+            os.utime(source, ns=(1_000_000_000, 1_000_000_000))
+
+            self.assertFalse(
+                fast.stale(
+                    "Pkg.Leaf",
+                    {"Pkg.Leaf": source},
+                    {"Pkg.Leaf": set()},
+                    root,
+                    cached_olean_mtimes={"Pkg.Leaf": 2_000_000_000},
+                    cached_config_mtime_ns=1_500_000_000,
+                )
+            )
+
     def test_cycle_is_rejected(self) -> None:
         graph = {"A": {"B"}, "B": {"A"}}
         with self.assertRaisesRegex(RuntimeError, "cycle"):
