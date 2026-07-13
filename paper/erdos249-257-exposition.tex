@@ -22,7 +22,7 @@
 % the repository verifies that it matches docs/claims.json and that every
 % \lref/\lrefx/\lloc target resolves to the named declaration at that line.
 % ---------------------------------------------------------------------------
-\newcommand{\commit}{717c1edf32710afbb5d88531440435b27407b543}
+\newcommand{\commit}{bd5d618dca4b84b301e360a19dc3c48378737384}
 \newcommand{\repobase}{https://github.com/wcook04/plectis-lean-erdos249-257/blob/\commit}
 \newcommand{\sourceurl}{https://github.com/wcook04/plectis-lean-erdos249-257/tree/\commit}
 \newcommand{\rootbase}{https://github.com/wcook04/plectis-lean-erdos249-257/blob/main}
@@ -839,6 +839,24 @@ The unformalised producer is the all-level construction of the separated
 minors (by a CRT--Dirichlet argument); the interface does not provide those
 certificates for every $e$, and it gives no irrationality criterion for $S$.
 
+\begin{proposition}[residual-gauge obstruction for monomial minors]\label{res:residualgauge}
+Let a monomial matrix have a common nonzero residual weight in each column.
+The residual weights act by a right diagonal gauge, and therefore preserve
+determinant nonvanishing.  If one exponent is $1$, the inverse-phase locked
+gauge makes that row identically $1$ while preserving a nonzero determinant
+whenever the coefficient-side determinant is nonzero.  If the residual is
+allowed to depend on both row and column, it reconstructs a consecutive-power
+matrix whose zeroth row is identically $1$.
+\end{proposition}
+\noindent Formalised:
+\lrefx{ResidualGaugeObstruction.lean}{55}{det_residualMonomialMatrix_ne_zero_iff},
+\lrefx{ResidualGaugeObstruction.lean}{94}{locked_reconstruction_preserves_nonzero_minor}, and
+\lrefx{ResidualGaugeObstruction.lean}{145}{rowReconstruction_zero_row_one}.
+Thus a residual-blind rank, determinant, or conditioning criterion alone cannot
+exclude the target.  The proposition does not exclude a criterion that also
+uses an arithmetic coupling identity, and it gives no irrationality criterion
+for $S$.
+
 \paragraph{What is open.} The reduction converts \#249 into the statement that the
 certificate supply is \emph{unbounded}: certificates exist for arbitrarily large
 parameters. By Proposition~\ref{res:complete} this is equivalent to the
@@ -1511,6 +1529,7 @@ scalar-localisation height obstruction & \lrefx{AdelicHeightObstruction.lean}{23
 square-CRT correction suppression & \lrefx{SquareCRTCube.lean}{198}{exists_squareCRT_clean_totient_family}\ (\texttt{SquareCRTCube})\\
 signed dyadic-moment algebra & \lrefx{SignedQMomentObstruction.lean}{28}{det_mul_rectangular}\ (\texttt{SignedQMomentObstruction})\\
 dyadic totient certificate interface & \lrefx{TotientMahlerDefect.lean}{98}{finrank_canonicalTotientKernel_eq_of_certificate}\ (\texttt{TotientMahlerDefect})\\
+residual-gauge obstruction for monomial minors & \lrefx{ResidualGaugeObstruction.lean}{55}{det_residualMonomialMatrix_ne_zero_iff}\ (\texttt{ResidualGaugeObstruction})\\
 tail-orbit rationality criterion & \lrefx{GenericTailOrbitRigidity.lean}{425}{binaryCoeffSeries_rational_iff_exists_temperedBinaryOrbit}\ (\texttt{GenericTailOrbitRigidity})\\
 Boolean carry certificate $\Leftrightarrow$ support fraction & \lrefx{BooleanMobiusCarry.lean}{948}{exists_normalized_support_fraction_iff_exists_booleanMobiusCarry}\ (\texttt{BooleanMobiusCarry})\\
 one-wrap classification & \lrefx{RationalSupportCarrySkeleton.lean}{415}{one_doublingWrap_classification}\ (\texttt{RationalSupportCarrySkeleton})\\

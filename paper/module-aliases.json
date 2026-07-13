@@ -3,7 +3,7 @@
   "artifact_role": "paper_sigil_to_lean_module_navigation_crosswalk",
   "authority_posture": "generated_navigation_projection_not_proof_authority",
   "heuristic": "Each CamelCase component contributes at most its first three characters.",
-  "alias_count": 32,
+  "alias_count": 33,
   "aliases": [
     {
       "sigil": "AdeHeiObs",
@@ -124,6 +124,11 @@
       "sigil": "RatSupCarSke",
       "module": "RationalSupportCarrySkeleton.lean",
       "path": "Erdos249257/RationalSupportCarrySkeleton.lean"
+    },
+    {
+      "sigil": "ResGauObs",
+      "module": "ResidualGaugeObstruction.lean",
+      "path": "Erdos249257/ResidualGaugeObstruction.lean"
     },
     {
       "sigil": "SigQMomObs",

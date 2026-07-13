@@ -144,6 +144,23 @@ def main() -> int:
     }
     assert dyadic_totient_claim["lean_source_identity"] == signed_moment_claim["lean_source_identity"]
 
+    residual_gauge_claim = query("--claim", "residual_gauge_obstruction")
+    assert residual_gauge_claim["claim"]["status"] == "proved here"
+    assert "cannot exclude the target" in residual_gauge_claim["claim"]["statement"]
+    assert residual_gauge_claim["claim"]["declarations"][0] == {
+        "name": "det_residualMonomialMatrix_ne_zero_iff",
+        "module": "Erdos249257/ResidualGaugeObstruction.lean",
+        "line": 55,
+    }
+    assert residual_gauge_claim["lean_source_identity"] == dyadic_totient_claim["lean_source_identity"]
+    residual_gauge_paper = query("--paper-label", "res:residualgauge")
+    assert residual_gauge_paper["attachment_receipt"]["complete"] is True
+    assert [row["declaration"] for row in residual_gauge_paper["source_links"]] == [
+        "det_residualMonomialMatrix_ne_zero_iff",
+        "locked_reconstruction_preserves_nonzero_minor",
+        "rowReconstruction_zero_row_one",
+    ]
+
     paper_label = query("--paper-label", "res:farey")
     assert paper_label["kind"] == "paper_label"
     assert paper_label["paper"] == claim["paper"]

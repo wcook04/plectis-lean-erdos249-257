@@ -5308,7 +5308,7 @@
     "lean_toolchain": "leanprover/lean4:v4.29.1",
     "repository": "https://github.com/wcook04/plectis-lean-erdos249-257",
     "formal_source": {
-      "ref": "717c1edf32710afbb5d88531440435b27407b543",
+      "ref": "bd5d618dca4b84b301e360a19dc3c48378737384",
       "ref_kind": "commit",
       "publication_state": "committed_checkpoint_pending_remote_publication",
       "relationship_to_last_tag": "post_tag_checkpoint"
@@ -5332,7 +5332,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 1019
+        "line": 1037
       }
     },
     {
@@ -5343,7 +5343,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 1028
+        "line": 1046
       }
     },
     {
@@ -5354,7 +5354,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 1035
+        "line": 1053
       }
     }
   ],
@@ -5748,6 +5748,31 @@
           "name": "false_of_compressedAdjointCertificate",
           "module": "Erdos249257/TotientMahlerDefect.lean",
           "line": 197
+        }
+      ]
+    },
+    {
+      "id": "residual_gauge_obstruction",
+      "label": "Residual-gauge obstruction for monomial minors",
+      "status": "proved here",
+      "statement": "For a residual-weighted monomial matrix, common nonzero residual weights act by a right diagonal gauge and preserve determinant nonvanishing. Under the locked inverse-phase gauge, an exponent-one row is identically 1 even when the determinant remains nonzero; allowing row-dependent residuals reconstructs a consecutive-power matrix with zeroth row identically 1. Thus residual-blind rank, determinant, and conditioning criteria alone cannot exclude the target. This does not rule out a criterion with an additional arithmetic coupling identity, and it gives no irrationality criterion.",
+      "paper_label": "res:residualgauge",
+      "readme_headline": false,
+      "declarations": [
+        {
+          "name": "det_residualMonomialMatrix_ne_zero_iff",
+          "module": "Erdos249257/ResidualGaugeObstruction.lean",
+          "line": 55
+        },
+        {
+          "name": "locked_reconstruction_preserves_nonzero_minor",
+          "module": "Erdos249257/ResidualGaugeObstruction.lean",
+          "line": 94
+        },
+        {
+          "name": "rowReconstruction_zero_row_one",
+          "module": "Erdos249257/ResidualGaugeObstruction.lean",
+          "line": 145
         }
       ]
     },

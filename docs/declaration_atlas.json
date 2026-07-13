@@ -10,7 +10,7 @@
     "declaration_count": 6418,
     "theorem_like_count": 5890,
     "generated_certificate_declaration_count": 1681,
-    "principal_claim_link_count": 66,
+    "principal_claim_link_count": 69,
     "kind_counts": {
       "abbrev": 2,
       "def": 510,
@@ -70065,7 +70065,9 @@
       "line": 55,
       "signature": "theorem det_residualMonomialMatrix_ne_zero_iff {d : ℕ} (e : Fin d → ℕ) (W z : Fin d → ℂ) (hW : ∏ j, W j ≠ 0) : Matrix.det (residualMonomialMatrix e W z) ≠ 0 ↔ Matrix.det (phasePowerMatrix e z) ≠ 0",
       "generated_certificate": false,
-      "claim_ids": [],
+      "claim_ids": [
+        "residual_gauge_obstruction"
+      ],
       "docstring": "Nonzero column gauges preserve determinant nonvanishing at every rank."
     },
     {
@@ -70120,7 +70122,9 @@
       "line": 94,
       "signature": "theorem locked_reconstruction_preserves_nonzero_minor {d : ℕ} (e : Fin d → ℕ) (z : Fin d → ℂ) (i : Fin d) (hi : e i = 1) (hz : ∀ j, z j ≠ 0) (hdet : Matrix.det (phasePowerMatrix e z) ≠ 0) : Matrix.det (residualMonomialMatrix e (lockedResidual z) z) ≠ 0 ∧ ∀ j, residualMonomialMatrix e (lockedResidual z) z i j = 1",
       "generated_certificate": false,
-      "claim_ids": [],
+      "claim_ids": [
+        "residual_gauge_obstruction"
+      ],
       "docstring": "The locked bad row and a nonzero coefficient-side determinant coexist. This is the all-rank countermodel to a residual-blind minor certificate."
     },
     {
@@ -70175,7 +70179,9 @@
       "line": 145,
       "signature": "theorem rowReconstruction_zero_row_one {d : ℕ} (e : Fin d → ℕ) (z : Fin d → ℂ) (hz : ∀ j, z j ≠ 0) (i : Fin d) (hi : i.1 = 0) : ∀ j, rowResidualMonomialMatrix e (rowReconstructingResidual e z) z i j = 1",
       "generated_certificate": false,
-      "claim_ids": [],
+      "claim_ids": [
+        "residual_gauge_obstruction"
+      ],
       "docstring": "The reconstructed zeroth row is identically `1`. Thus even allowing row-dependent unit residuals does not let a fixed-rank nonzero minor exclude the locked affine target without an additional arithmetic coupling law."
     },
     {
