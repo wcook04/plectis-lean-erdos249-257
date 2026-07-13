@@ -103,6 +103,14 @@
         "check": "python3 scripts/build_corpus_descriptor.py --check"
       },
       {
+        "id": "external_corpus_descriptor",
+        "path": "docs/corpus_descriptor.json",
+        "role": "Generated registration envelope for external mathematical-corpus systems, with bounded inline handles and digest-bound expansion paths.",
+        "authority": "navigation_projection_not_proof_authority",
+        "build": "python3 scripts/build_corpus_descriptor.py",
+        "check": "python3 scripts/build_corpus_descriptor.py --check"
+      },
+      {
         "id": "exhaustive_declaration_atlas",
         "path": "docs/declaration_atlas.json",
         "role": "Generated index of every public Lean declaration, source coordinate, signature excerpt, module import edge, generated-certificate marker, and principal-claim link.",

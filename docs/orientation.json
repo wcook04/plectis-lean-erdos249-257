@@ -340,5 +340,21 @@
     "declaration": "python3 scripts/query_corpus.py --declaration <Lean_name>",
     "module": "python3 scripts/query_corpus.py --module <path_or_id>",
     "reading_route": "python3 scripts/query_corpus.py --route <route_id>"
+  },
+  "external_registration": {
+    "path": "docs/corpus_descriptor.json",
+    "schema": "erdos249257-corpus-descriptor/3",
+    "maximum_bytes": 64000,
+    "inline": [
+      "release_identity",
+      "content_digests",
+      "principal_claim_handles",
+      "root_module_topology"
+    ],
+    "expands_to": [
+      "docs/claims.json",
+      "docs/declaration_atlas.json",
+      "docs/methodology.json"
+    ]
   }
 }

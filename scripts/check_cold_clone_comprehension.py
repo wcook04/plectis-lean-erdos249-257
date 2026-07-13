@@ -177,6 +177,23 @@ def build_questions(
                 ["Principal claim routes"],
             ],
         },
+        {
+            "id": "q9_external_registration",
+            "question": "How does an external system register and expand the corpus?",
+            "machine_all": [
+                "erdos249257-corpus-descriptor/3",
+                "principal_declaration_handles",
+                "module_topology",
+                "migration_from_v2",
+                "expected_content_digest",
+            ],
+            "human_groups": [
+                ["External corpus registration"],
+                ["erdos249257-corpus-descriptor/3"],
+                ["below 64 KB"],
+                ["digest-bound expansion files"],
+            ],
+        },
     ]
 
 

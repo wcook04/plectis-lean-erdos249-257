@@ -69,6 +69,14 @@ settle the open proposition attached to it.
 - Transport and curvature companion: [`erdos249-transport-curvature.pdf`](../erdos249-transport-curvature.pdf)
 - Machine form of this page: [`docs/orientation.json`](orientation.json)
 
+## External corpus registration
+
+[`docs/corpus_descriptor.json`](corpus_descriptor.json) uses schema
+`erdos249257-corpus-descriptor/3`. The release gate keeps it below 64 KB.
+It carries release identities, content digests, principal claim and declaration
+handles, and the root module topology. Complete claims, module imports,
+declaration prose, and methodology remain in their digest-bound expansion files.
+
 ## Query one handle
 
 The read-only query helper returns bounded JSON by default:

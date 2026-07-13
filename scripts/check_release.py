@@ -423,8 +423,19 @@ def main() -> int:
           f"corpus descriptor drift: {corpus_check.stdout.strip() or corpus_check.stderr.strip()}")
 
     descriptor = json.loads(read(ROOT / "docs" / "corpus_descriptor.json"))
-    check(descriptor.get("schema") == "erdos249257-corpus-descriptor/2",
-          "corpus descriptor must use schema erdos249257-corpus-descriptor/2")
+    check(descriptor.get("schema") == "erdos249257-corpus-descriptor/3",
+          "corpus descriptor must use schema erdos249257-corpus-descriptor/3")
+    descriptor_path = ROOT / "docs" / "corpus_descriptor.json"
+    check(len(descriptor_path.read_bytes()) <= 64_000,
+          "corpus descriptor exceeds the 64 KB registration-envelope budget")
+    compact_graph = descriptor.get("compact_graph", {})
+    check("module_graph" not in compact_graph and "high_salience_declarations" not in compact_graph,
+          "corpus descriptor re-embedded an exhaustive graph removed in schema 3")
+    module_topology = compact_graph.get("module_topology", {})
+    check(module_topology.get("node_count") == len(machine_paper["module_graph"]["nodes"]),
+          "corpus descriptor module count drifted from the machine-readable paper")
+    check(module_topology.get("full_graph") == "docs/claims.json::machine_readable_paper.module_graph",
+          "corpus descriptor does not route to the complete module graph")
     methodology_content = descriptor.get("identity", {}).get("content", {}).get("methodology_contract", {})
     check(methodology_content.get("path") == "docs/methodology.json",
           "corpus descriptor does not register docs/methodology.json")

@@ -24,9 +24,6 @@ import sys
 from pathlib import Path
 from typing import Any
 
-from methodology_contract import MUTATION_FIXTURE_IDS
-
-
 ROOT = Path(__file__).resolve().parent.parent
 OUTPUT = ROOT / "docs" / "corpus_descriptor.json"
 ORIENTATION_JSON = ROOT / "docs" / "orientation.json"
@@ -140,6 +137,13 @@ def build_orientation(claims: dict[str, Any], atlas: dict[str, Any]) -> dict[str
             "module": "python3 scripts/query_corpus.py --module <path_or_id>",
             "reading_route": "python3 scripts/query_corpus.py --route <route_id>",
         },
+        "external_registration": {
+            "path": "docs/corpus_descriptor.json",
+            "schema": "erdos249257-corpus-descriptor/3",
+            "maximum_bytes": 64_000,
+            "inline": ["release_identity", "content_digests", "principal_claim_handles", "root_module_topology"],
+            "expands_to": ["docs/claims.json", "docs/declaration_atlas.json", "docs/methodology.json"],
+        },
     }
 
 
@@ -219,6 +223,14 @@ def render_orientation_markdown(orientation: dict[str, Any]) -> str:
             "- Transport and curvature companion: [`erdos249-transport-curvature.pdf`](../erdos249-transport-curvature.pdf)",
             "- Machine form of this page: [`docs/orientation.json`](orientation.json)",
             "",
+            "## External corpus registration",
+            "",
+            "[`docs/corpus_descriptor.json`](corpus_descriptor.json) uses schema",
+            "`erdos249257-corpus-descriptor/3`. The release gate keeps it below 64 KB.",
+            "It carries release identities, content digests, principal claim and declaration",
+            "handles, and the root module topology. Complete claims, module imports,",
+            "declaration prose, and methodology remain in their digest-bound expansion files.",
+            "",
             "## Query one handle",
             "",
             "The read-only query helper returns bounded JSON by default:",
@@ -261,45 +273,17 @@ def build() -> dict[str, Any]:
         else "detached_navigation_snapshot"
     )
 
-    atlas_by_declaration = {
-        (str(row["module"]), str(row["name"])): row
-        for row in atlas["declarations"]
-    }
-    compact_claims: list[dict[str, Any]] = []
-    high_salience_declarations: list[dict[str, Any]] = []
-    for claim in claims["claims"]:
-        declaration_rows: list[dict[str, Any]] = []
-        for declaration in claim["declarations"]:
-            key = (str(declaration["module"]), str(declaration["name"]))
-            atlas_row = atlas_by_declaration.get(key, {})
-            row = {
-                "name": declaration["name"],
-                "module": declaration["module"],
-                "line": declaration["line"],
-                "kind": atlas_row.get("kind"),
-                "signature": atlas_row.get("signature"),
-                "docstring": atlas_row.get("docstring"),
-            }
-            declaration_rows.append(row)
-            high_salience_declarations.append({"claim_id": claim["id"], **row})
-        compact_claim = {
-            "id": claim["id"],
-            "label": claim["label"],
-            "status": claim["status"],
-            "statement": claim["statement"],
-            "paper_label": claim.get("paper_label"),
-            "readme_headline": bool(claim.get("readme_headline")),
-            "declarations": declaration_rows,
-        }
-        if claim.get("remaining_open_proposition_ids"):
-            compact_claim["remaining_open_proposition_ids"] = claim["remaining_open_proposition_ids"]
-        if claim.get("bounded_domain"):
-            compact_claim["bounded_domain"] = claim["bounded_domain"]
-        compact_claims.append(compact_claim)
+    orientation = build_orientation(claims, atlas)
+    root_module = next(row for row in atlas["modules"] if row["path"] == "Erdos249257.lean")
+    principal_declaration_handles = [
+        {"claim_id": claim["id"], **declaration}
+        for claim in orientation["principal_claims"]
+        for declaration in claim["declarations"]
+    ]
 
     repository = str(release["repository"])
     return {
-        "schema": "erdos249257-corpus-descriptor/2",
+        "schema": "erdos249257-corpus-descriptor/3",
         "artifact_role": "self_describing_external_mathematical_corpus_root",
         "corpus_id": "plectis_lean_erdos249_257_public",
         "authority_posture": {
@@ -341,6 +325,10 @@ def build() -> dict[str, Any]:
                     "path": "docs/methodology.json",
                     "content_digest": file_digest(METHODOLOGY_PATH),
                 },
+                "bounded_orientation": {
+                    "path": "docs/orientation.json",
+                    "content_digest": canonical_digest(orientation),
+                },
             },
         },
         "schemas": {
@@ -362,59 +350,50 @@ def build() -> dict[str, Any]:
         },
         "retrieval_modes": {
             "global": {
-                "source": "compact_graph",
-                "supports": ["proved_open_boundary", "principal_argument_routes", "module_topology", "mathematical_methodology_and_claim_transition_rules"],
+                "source": "docs/orientation.json and compact_graph",
+                "supports": ["proved_open_boundary", "principal_claim_routes", "release_scale", "root_module_topology"],
             },
             "concept": {
-                "source": "compact_graph.high_salience_declarations_then_attached_atlas",
+                "source": "scripts/query_corpus.py then attached claims or atlas",
                 "supports": ["name", "signature", "docstring", "bounded_module_neighbourhood"],
             },
             "premise_chain": {
-                "source": "authored_argument_edges_and_module_imports",
+                "source": "docs/claims.json::machine_readable_paper.argument_graph and module_graph",
                 "boundary": "The public atlas does not claim elaborator-derived declaration dependencies or accessibility annotations.",
             },
         },
         "summary": atlas["summary"],
         "compact_graph": {
             "status_taxonomy": claims["status_taxonomy"],
-            "claims": compact_claims,
+            "principal_claims": orientation["principal_claims"],
             "non_claims": claims["non_claims"],
             "remaining_open_propositions": claims["remaining_open_propositions"],
-            "module_graph": machine_paper["module_graph"],
+            "module_topology": {
+                "root": machine_paper["module_graph"]["root"],
+                "node_count": len(machine_paper["module_graph"]["nodes"]),
+                "root_imports": root_module["imports"],
+                "full_graph": "docs/claims.json::machine_readable_paper.module_graph",
+            },
             "argument_graph": machine_paper["argument_graph"],
             "methodology_capsule": {
                 "path": "docs/methodology.json",
                 "human_projection": "METHODOLOGY.md",
                 "artifact_role": methodology["artifact_role"],
                 "human_capsule": methodology["human_capsule"],
-                "mathematical_research_cycle": methodology["mathematical_research_cycle"],
-                "public_claim_cycle": methodology["public_claim_cycle"],
                 "method_axiom_ids": [row["id"] for row in methodology["method_axioms"]],
                 "transition_contract_ids": [row["id"] for row in methodology["transition_contracts"]],
-                "worked_example_ids": [row["id"] for row in methodology["worked_examples"]],
                 "change_classes": methodology["change_classes"],
-                "human_review_triggers": methodology["human_review_triggers"],
-                "forbidden_effect_vocabulary": methodology["forbidden_effect_vocabulary"],
-                "negative_fixture_ids": sorted(MUTATION_FIXTURE_IDS),
-                "local_instances": {
-                    row["id"]: row["local_instances"] for row in methodology["method_axioms"]
-                },
-                "rules_by_change_class": {
-                    change_type: [
-                        rule["id"]
-                        for rule in (
-                            *methodology["method_axioms"],
-                            *methodology["principles"],
-                            *methodology["anti_principles"],
-                        )
-                        if f"change_type:{change_type}" in rule["applies_to"]
-                    ]
-                    for change_type in methodology["change_types"]
-                },
+                "full_contract": "docs/methodology.json",
             },
-            "high_salience_declarations": high_salience_declarations,
+            "principal_declaration_handles": principal_declaration_handles,
         },
         "expansion": {
+            "machine_readable_paper": {
+                "path": "docs/claims.json::machine_readable_paper",
+                "expected_content_digest": canonical_digest(machine_paper),
+                "contains": ["all_claims", "authored_argument_graph", "complete_module_import_graph"],
+                "query": "python3 scripts/query_corpus.py --claim <claim_id>",
+            },
             "exhaustive_declaration_atlas": {
                 "path": "docs/declaration_atlas.json",
                 "expected_content_digest": file_digest(ATLAS_PATH),
@@ -427,6 +406,15 @@ def build() -> dict[str, Any]:
                 "expected_content_digest": file_digest(METHODOLOGY_PATH),
                 "human_projection": "METHODOLOGY.md",
                 "check": "python3 scripts/build_methodology.py --check",
+            },
+        },
+        "migration_from_v2": {
+            "reason": "Version 2 embedded exhaustive graphs and full declaration prose in a surface described as compact.",
+            "field_replacements": {
+                "compact_graph.claims": "compact_graph.principal_claims; expand through docs/claims.json or query_corpus.py",
+                "compact_graph.module_graph": "compact_graph.module_topology; expand through docs/claims.json::machine_readable_paper.module_graph",
+                "compact_graph.high_salience_declarations": "compact_graph.principal_declaration_handles; expand through docs/declaration_atlas.json or query_corpus.py",
+                "compact_graph.methodology_capsule extended fields": "docs/methodology.json",
             },
         },
         "checks": {
