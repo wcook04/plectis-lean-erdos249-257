@@ -11,6 +11,7 @@ import subprocess
 import sys
 from pathlib import Path
 
+import query_corpus
 from query_corpus import (
     artifact_inventory,
     artifact_packet,
@@ -162,6 +163,31 @@ def main() -> int:
     unknown_paper_label = run("--paper-label", "prop:not-a-real-label")
     assert unknown_paper_label.returncode == 2
     assert "unknown paper label" in unknown_paper_label.stderr
+
+    original_anchor_inventory = query_corpus.paper_anchor_inventory
+    query_corpus.paper_anchor_inventory = lambda: [  # type: ignore[method-assign]
+        {
+            "canonical_handle": "ambiguous:anchor",
+            "label": "ambiguous:anchor",
+            "paper": {"source_ref": "paper/a.tex:10"},
+        },
+        {
+            "canonical_handle": "ambiguous:anchor",
+            "label": "ambiguous:anchor",
+            "paper": {"source_ref": "paper/b.tex:20"},
+        },
+    ]
+    try:
+        try:
+            paper_anchor_packet("ambiguous:anchor")
+        except ValueError as error:
+            assert "ambiguous paper anchor" in str(error)
+            assert "paper/a.tex:10" in str(error)
+            assert "paper/b.tex:20" in str(error)
+        else:
+            raise AssertionError("ambiguous paper anchor must not select an arbitrary match")
+    finally:
+        query_corpus.paper_anchor_inventory = original_anchor_inventory  # type: ignore[method-assign]
 
     open_expectations = {
         "remaining_open.erdos_249_irrationality": ("erdos_249", 1),

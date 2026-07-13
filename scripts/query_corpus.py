@@ -388,6 +388,9 @@ def paper_anchor_packet(handle: str, kind: str = "paper_anchor") -> dict[str, An
     ]
     if not matches:
         raise KeyError(f"unknown paper anchor: {handle}")
+    if len(matches) != 1:
+        locations = ", ".join(sorted(row["paper"]["source_ref"] for row in matches))
+        raise ValueError(f"ambiguous paper anchor {handle!r}: {locations}")
     anchor = matches[0]
     return {
         "kind": kind,
