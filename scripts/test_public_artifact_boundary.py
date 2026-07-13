@@ -8,6 +8,7 @@ from __future__ import annotations
 import json
 import subprocess
 import sys
+from copy import deepcopy
 from pathlib import Path
 
 
@@ -30,44 +31,89 @@ def summary_packet() -> dict[str, object]:
     return json.loads(completed.stdout)
 
 
-def main() -> int:
-    """Assert that every first-contact surface preserves the public membrane."""
-    agents = read("AGENTS.md")
-    assert "not an entrypoint into any private development system" in agents
-    assert "Work only from the files\nin this repository" in agents
-    assert "never infer unpublished results or private machinery" in agents
+def boundary_errors(
+    agents: str,
+    scope: str,
+    readme: str,
+    claims: dict[str, object],
+    methodology: dict[str, object],
+    summary: dict[str, object],
+) -> list[str]:
+    """Return every missing public-proof boundary required at first contact."""
+    errors: list[str] = []
+    for phrase in (
+        "not an entrypoint into any private development system",
+        "Work only from the files\nin this repository",
+        "never infer unpublished results or private machinery",
+    ):
+        if phrase not in agents:
+            errors.append(f"agent entry lost public-boundary phrase: {phrase}")
+    for phrase in (
+        "Unreleased work, private repositories",
+        "not part of\nthe public proof artefact",
+    ):
+        if phrase not in scope:
+            errors.append(f"scope lost public-boundary phrase: {phrase}")
+    if "do not infer results from private or unreleased work" not in readme:
+        errors.append("README lost private-or-unreleased inference boundary")
 
-    scope = read("SCOPE.md")
-    assert "Unreleased work, private repositories" in scope
-    assert "not part of\nthe public proof artefact" in scope
-
-    readme = read("README.md")
-    assert "do not infer results from private or unreleased work" in readme
-
-    claims = json.loads(read("docs/claims.json"))
     non_claims = {row["id"] for row in claims["non_claims"]}
-    assert {
+    required_non_claims = {
         "not_private_root_equivalence",
         "not_hidden_proof_body_authority",
         "not_provider_proof_authority",
-    } <= non_claims
+    }
+    missing_non_claims = sorted(required_non_claims - non_claims)
+    if missing_non_claims:
+        errors.append(f"claim registry lost public-boundary non-claims: {missing_non_claims}")
 
-    methodology = json.loads(read("docs/methodology.json"))
     anti_principles = {row["id"]: row["statement"] for row in methodology["anti_principles"]}
-    assert "anti_principle.do_not_treat_graph_model_or_private_work_as_proof" in anti_principles
-    assert "private proof sketch is not public proof authority" in anti_principles[
-        "anti_principle.do_not_treat_graph_model_or_private_work_as_proof"
-    ]
+    private_work_rule = anti_principles.get(
+        "anti_principle.do_not_treat_graph_model_or_private_work_as_proof", ""
+    )
+    if "private proof sketch is not public proof authority" not in private_work_rule:
+        errors.append("methodology lost private-proof authority boundary")
 
-    summary = summary_packet()
     projected_non_claims = {row["id"] for row in summary["non_claims"]}
-    assert non_claims <= projected_non_claims
-    assert "not_private_root_equivalence" in projected_non_claims
-    assert "not_hidden_proof_body_authority" in projected_non_claims
+    missing_projected = sorted(required_non_claims - projected_non_claims)
+    if missing_projected:
+        errors.append(f"bounded query lost public-boundary non-claims: {missing_projected}")
+    return errors
+
+
+def main() -> int:
+    """Assert that every first-contact surface preserves the public membrane."""
+    agents = read("AGENTS.md")
+    scope = read("SCOPE.md")
+    readme = read("README.md")
+    claims = json.loads(read("docs/claims.json"))
+    methodology = json.loads(read("docs/methodology.json"))
+    summary = summary_packet()
+    assert not boundary_errors(agents, scope, readme, claims, methodology, summary)
+
+    missing_agent_rule = agents.replace(
+        "never infer unpublished results or private machinery", "", 1
+    )
+    assert any(
+        "agent entry lost public-boundary phrase" in error
+        for error in boundary_errors(
+            missing_agent_rule, scope, readme, claims, methodology, summary
+        )
+    )
+    missing_projection = deepcopy(summary)
+    missing_projection["non_claims"] = [
+        row for row in summary["non_claims"] if row["id"] != "not_hidden_proof_body_authority"
+    ]
+    assert any(
+        "bounded query lost public-boundary non-claims" in error
+        for error in boundary_errors(
+            agents, scope, readme, claims, methodology, missing_projection
+        )
+    )
 
     print(
         "test_public_artifact_boundary: first-contact surfaces reject "
-        "private or unpublished proof authority"
+        "private or unpublished proof authority; 2 negative fixtures rejected"
     )
     return 0
 
