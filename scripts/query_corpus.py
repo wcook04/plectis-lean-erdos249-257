@@ -35,24 +35,156 @@ def compact_claim(claim: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def paper_anchor_inventory() -> list[dict[str, Any]]:
+    """Derive typed human-paper anchors without promoting them to claim authority."""
+    claims = load("docs/claims.json")
+    paper = claims["machine_readable_paper"]["paper"]
+    paper_rows = [paper, *paper.get("companion_sources", [])]
+    claims_by_label: dict[str, list[dict[str, Any]]] = {}
+    for claim in claims["claims"]:
+        label = claim.get("paper_label")
+        if label:
+            claims_by_label.setdefault(label, []).append(compact_claim(claim))
+
+    inventory: list[dict[str, Any]] = []
+    for paper_row in paper_rows:
+        relative = paper_row["source"]
+        path = ROOT / relative
+        text = path.read_text(encoding="utf-8")
+        lines = text.splitlines()
+        environments = set(re.findall(r"\\newtheorem\*?\{([^}]+)\}", text))
+        starts: list[dict[str, Any]] = []
+
+        section_pattern = re.compile(
+            r"\\(?P<kind>section|subsection|subsubsection)\{(?P<title>[^\n}]*)\}"
+            r"[^\n]*?\\label\{(?P<label>[^}]+)\}"
+        )
+        for match in section_pattern.finditer(text):
+            starts.append(
+                {
+                    "offset": match.start(),
+                    "anchor_kind": match.group("kind"),
+                    "title": match.group("title"),
+                    "label": match.group("label"),
+                    "environment": None,
+                }
+            )
+
+        if environments:
+            environment_pattern = re.compile(
+                r"\\begin\{(?P<environment>"
+                + "|".join(re.escape(name) for name in sorted(environments))
+                + r")\}(?:\[(?P<title>[^]]*)\])?"
+            )
+            for match in environment_pattern.finditer(text):
+                environment = match.group("environment")
+                end_marker = rf"\end{{{environment}}}"
+                end = text.find(end_marker, match.end())
+                if end < 0:
+                    end = match.end()
+                else:
+                    end += len(end_marker)
+                body = text[match.start():end]
+                label_match = re.search(r"\\label\{([^}]+)\}", body)
+                starts.append(
+                    {
+                        "offset": match.start(),
+                        "anchor_kind": "formal_environment",
+                        "title": match.group("title"),
+                        "label": label_match.group(1) if label_match else None,
+                        "environment": environment,
+                    }
+                )
+
+        starts.sort(key=lambda row: row["offset"])
+        for index, start in enumerate(starts):
+            region_end = starts[index + 1]["offset"] if index + 1 < len(starts) else len(text)
+            region = text[start["offset"]:region_end]
+            line = text.count("\n", 0, start["offset"]) + 1
+            label = start["label"]
+            source_ref = f"{relative}:{line}"
+            attached_claims = sorted(claims_by_label.get(label, []), key=lambda row: row["id"])
+            if attached_claims:
+                anchor_class = "registered_claim_anchor"
+            elif start["anchor_kind"] == "formal_environment":
+                anchor_class = "authored_formal_anchor_without_registered_claim"
+            else:
+                anchor_class = "section_navigation_anchor"
+
+            source_links = []
+            for link in re.finditer(
+                r"\\(?P<macro>lref|lrefx|lloc)\{(?P<file>[^}]+)\}\{(?P<line>\d+)\}"
+                r"(?:\{(?P<name>[^}]*)\})?",
+                region,
+            ):
+                module = f"Erdos249257/{link.group('file')}"
+                source_links.append(
+                    {
+                        "edge_kind": "authored_source_link",
+                        "macro": link.group("macro"),
+                        "module": module,
+                        "line": int(link.group("line")),
+                        "source_ref": f"{module}:{link.group('line')}",
+                        "declaration": link.group("name") or None,
+                    }
+                )
+
+            inventory.append(
+                {
+                    "canonical_handle": label or source_ref,
+                    "label": label,
+                    "paper": {
+                        "label": label,
+                        "source": relative,
+                        "line": line,
+                        "source_ref": source_ref,
+                        "rendered": paper_row["rendered"],
+                    },
+                    "anchor_kind": start["anchor_kind"],
+                    "environment": start["environment"],
+                    "title": start["title"],
+                    "anchor_class": anchor_class,
+                    "authority_posture": "authored_exposition_navigation_not_proof_authority",
+                    "attached_claims": attached_claims,
+                    "source_links": source_links,
+                }
+            )
+
+    for index, row in enumerate(inventory):
+        same_paper_before = [
+            candidate
+            for candidate in inventory[:index]
+            if candidate["paper"]["source"] == row["paper"]["source"]
+        ]
+        same_paper_after = [
+            candidate
+            for candidate in inventory[index + 1:]
+            if candidate["paper"]["source"] == row["paper"]["source"]
+        ]
+        row["anchor_neighbourhood"] = {
+            "previous": same_paper_before[-1]["canonical_handle"] if same_paper_before else None,
+            "next": same_paper_after[0]["canonical_handle"] if same_paper_after else None,
+        }
+        row["cardinality_receipt"] = {
+            "attached_claim_count": len(row["attached_claims"]),
+            "source_link_count": len(row["source_links"]),
+            "complete": True,
+        }
+    return inventory
+
+
 def paper_label_index() -> dict[str, dict[str, Any]]:
     index: dict[str, dict[str, Any]] = {}
-    for path in sorted((ROOT / "paper").glob("erdos*.tex")):
-        relative = str(path.relative_to(ROOT))
-        for line_number, line in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
-            for label in re.findall(r"\\label\{([^}]+)\}", line):
-                if label in index:
-                    raise ValueError(
-                        f"duplicate paper label {label!r}: "
-                        f"{index[label]['source_ref']} and {relative}:{line_number}"
-                    )
-                index[label] = {
-                    "label": label,
-                    "source": relative,
-                    "line": line_number,
-                    "source_ref": f"{relative}:{line_number}",
-                    "rendered": f"{path.stem}.pdf",
-                }
+    for anchor in paper_anchor_inventory():
+        label = anchor["label"]
+        if label is None:
+            continue
+        if label in index:
+            raise ValueError(
+                f"duplicate paper label {label!r}: "
+                f"{index[label]['source_ref']} and {anchor['paper']['source_ref']}"
+            )
+        index[label] = anchor["paper"]
     return index
 
 
@@ -108,25 +240,45 @@ def claim_packet(claim_id: str) -> dict[str, Any]:
     }
 
 
-def paper_label_packet(label: str) -> dict[str, Any]:
-    claims = load("docs/claims.json")
-    coordinate = paper_coordinate(label, paper_label_index())
-    attached_claims = [
-        compact_claim(row) for row in claims["claims"] if row.get("paper_label") == label
+def paper_anchor_packet(handle: str, kind: str = "paper_anchor") -> dict[str, Any]:
+    matches = [
+        row
+        for row in paper_anchor_inventory()
+        if handle in (row["canonical_handle"], row["label"], row["paper"]["source_ref"])
     ]
+    if not matches:
+        raise KeyError(f"unknown paper anchor: {handle}")
+    anchor = matches[0]
     return {
-        "kind": "paper_label",
+        "kind": kind,
         "authority_posture": "navigation_projection_not_proof_authority",
-        "paper": coordinate,
-        "attached_claims": attached_claims,
+        "canonical_handle": anchor["canonical_handle"],
+        "paper": anchor["paper"],
+        "anchor_class": anchor["anchor_class"],
+        "environment": anchor["environment"],
+        "title": anchor["title"],
+        "attached_claims": anchor["attached_claims"],
+        "source_links": anchor["source_links"],
+        "anchor_neighbourhood": anchor["anchor_neighbourhood"],
         "attachment_receipt": {
-            "claim_count": len(attached_claims),
+            "claim_count": len(anchor["attached_claims"]),
+            "source_link_count": len(anchor["source_links"]),
             "complete": True,
-            "owner": "docs/claims.json",
+            "owners": [anchor["paper"]["source"], "docs/claims.json"],
         },
-        "follow": "python3 scripts/query_corpus.py --claim <attached_claim_id>",
+        "follow": {
+            "claim": "python3 scripts/query_corpus.py --claim <attached_claim_id>",
+            "declaration": "python3 scripts/query_corpus.py --declaration <source_link.declaration>",
+            "adjacent_anchor": "python3 scripts/query_corpus.py --paper-anchor <canonical_handle>",
+        },
         "validation": "python3 scripts/check_release.py",
     }
+
+
+def paper_label_packet(label: str) -> dict[str, Any]:
+    if label not in paper_label_index():
+        raise ValueError(f"unknown paper label: {label}")
+    return paper_anchor_packet(label, kind="paper_label")
 
 
 def open_proposition_packet(open_id: str) -> dict[str, Any]:
@@ -183,6 +335,7 @@ def declaration_packet(name: str, limit: int) -> dict[str, Any]:
     sigil_by_path = {row["path"]: row["sigil"] for row in aliases}
     repository = claims["release"]["repository"].rstrip("/")
     tag = claims["release"]["tag"]
+    paper_anchors = paper_anchor_inventory()
     decorated = []
     for match in matches[:limit]:
         attached_claims = []
@@ -205,6 +358,25 @@ def declaration_packet(name: str, limit: int) -> dict[str, Any]:
                     "Unclassified module",
                 ),
                 "attached_claims": attached_claims,
+                "paper_anchors": [
+                    {
+                        "canonical_handle": anchor["canonical_handle"],
+                        "paper": anchor["paper"],
+                        "anchor_class": anchor["anchor_class"],
+                    }
+                    for anchor in paper_anchors
+                    if any(
+                        link["module"] == match["module"]
+                        and (
+                            link["declaration"] == match["name"]
+                            or (
+                                link["declaration"] is None
+                                and abs(link["line"] - match["line"]) <= 3
+                            )
+                        )
+                        for link in anchor["source_links"]
+                    )
+                ],
             }
         )
     return {
@@ -343,6 +515,38 @@ def search_packet(query: str, limit: int) -> dict[str, Any]:
     roles = module_roles(claims)
     ranked: list[tuple[int, str, dict[str, Any]]] = []
 
+    for anchor in paper_anchor_inventory():
+        primary = anchor["label"] or anchor["canonical_handle"]
+        rank = search_rank(
+            query,
+            primary,
+            " ".join(
+                str(value)
+                for value in (
+                    anchor["title"],
+                    anchor["environment"],
+                    anchor["anchor_class"],
+                    anchor["paper"]["source_ref"],
+                )
+                if value
+            ),
+        )
+        if rank is not None:
+            ranked.append(
+                (
+                    rank,
+                    f"paper_anchor:{anchor['canonical_handle']}",
+                    {
+                        "kind": "paper_anchor",
+                        "canonical_handle": anchor["canonical_handle"],
+                        "label": anchor["label"],
+                        "title": anchor["title"],
+                        "anchor_class": anchor["anchor_class"],
+                        "source_ref": anchor["paper"]["source_ref"],
+                    },
+                )
+            )
+
     for proposition in claims["remaining_open_propositions"]:
         rank = search_rank(
             query,
@@ -421,7 +625,7 @@ def search_packet(query: str, limit: int) -> dict[str, Any]:
         "results": results[:limit],
         "omitted_match_count": max(0, len(results) - limit),
         "limit": limit,
-        "next": "Use the typed handle with --claim, --open, --declaration, --module, or --route.",
+        "next": "Use the typed handle with --claim, --paper-anchor, --open, --declaration, --module, or --route.",
     }
 
 
@@ -463,6 +667,12 @@ def render_card(packet: dict[str, Any]) -> str:
         return (
             f"paper {paper['label']} | {paper['source_ref']} | rendered={paper['rendered']} "
             f"| claims={claim_ids}"
+        )
+    if kind == "paper_anchor":
+        paper = packet["paper"]
+        return (
+            f"paper anchor {packet['canonical_handle']} | {packet['anchor_class']} "
+            f"| {paper['source_ref']} | title={packet.get('title') or 'none'}"
         )
     if kind == "declaration":
         return "\n".join(
@@ -509,6 +719,7 @@ def main() -> int:
     group = parser.add_mutually_exclusive_group()
     group.add_argument("--claim", metavar="ID")
     group.add_argument("--paper-label", metavar="LABEL")
+    group.add_argument("--paper-anchor", metavar="LABEL_OR_SOURCE_REF")
     group.add_argument("--open", metavar="ID")
     group.add_argument("--declaration", metavar="NAME")
     group.add_argument("--module", metavar="PATH_OR_ID")
@@ -524,6 +735,8 @@ def main() -> int:
             packet = claim_packet(args.claim)
         elif args.paper_label:
             packet = paper_label_packet(args.paper_label)
+        elif args.paper_anchor:
+            packet = paper_anchor_packet(args.paper_anchor)
         elif args.open:
             packet = open_proposition_packet(args.open)
         elif args.declaration:

@@ -41,6 +41,7 @@ import sys
 from pathlib import Path
 
 from methodology_contract import mutation_fixture_errors, render_markdown, validate_contract
+from query_corpus import paper_anchor_inventory
 
 ROOT = Path(__file__).resolve().parent.parent
 ERRORS: list[str] = []
@@ -279,6 +280,32 @@ def main() -> int:
         if label:
             check(re.search(rf"\\label\{{{re.escape(label)}\}}", all_paper) is not None,
                   f"claim {claim['id']}: paper label {label!r} does not exist")
+    paper_anchors = paper_anchor_inventory()
+    anchor_labels = [row["label"] for row in paper_anchors if row["label"]]
+    check(len(anchor_labels) == len(set(anchor_labels)),
+          "authored papers contain duplicate semantic-anchor labels")
+    check(all(row.get("anchor_class") for row in paper_anchors),
+          "every authored paper semantic anchor must have an explicit classification")
+    check(all(
+        row["anchor_class"] in {
+            "registered_claim_anchor",
+            "authored_formal_anchor_without_registered_claim",
+            "section_navigation_anchor",
+        }
+        for row in paper_anchors
+    ), "authored paper semantic anchor has an unsupported classification")
+    claim_ids_by_label: dict[str, set[str]] = {}
+    for claim in data["claims"]:
+        if claim.get("paper_label"):
+            claim_ids_by_label.setdefault(claim["paper_label"], set()).add(claim["id"])
+    for anchor in paper_anchors:
+        observed_claim_ids = {row["id"] for row in anchor["attached_claims"]}
+        expected_claim_ids = claim_ids_by_label.get(anchor["label"], set())
+        check(observed_claim_ids == expected_claim_ids,
+              f"paper anchor {anchor['canonical_handle']}: attached claim set drifted")
+        if anchor["anchor_kind"] == "formal_environment":
+            check(anchor["anchor_class"] != "section_navigation_anchor",
+                  f"formal paper anchor {anchor['canonical_handle']} classified as navigation-only")
     index_label = machine_paper["paper"]["principal_declaration_index_label"]
     check(re.search(rf"\\label\{{{re.escape(index_label)}\}}", paper) is not None,
           f"machine-readable paper index label {index_label!r} does not exist")

@@ -42,7 +42,8 @@ in this repository, and never infer unpublished results or private machinery.
    `docs/WAVE_INDEX.md` for mathematical chronology.
 
 For a bounded lookup, use `python3 scripts/query_corpus.py --claim <id>`,
-`--paper-label <TeX_label>`, `--open <remaining_open.id>`, `--declaration <Lean_name>`,
+`--paper-label <TeX_label>`, `--paper-anchor <TeX_label_or_source_ref>`,
+`--open <remaining_open.id>`, `--declaration <Lean_name>`,
 `--module <path_or_id>`, or `--route <id>`. Use
 `--search <text> --limit <1..100>` when the typed handle is not yet known.
 JSON responses are capped at 64 KB; exhaustive data remains in the routed owner.
@@ -50,6 +51,10 @@ Visible paper sigils resolve directly (`--module CerKer`); their generated
 crosswalk is `paper/module-aliases.json`.
 Visible TeX labels resolve in reverse (`--paper-label res:farey`) to
 their exact paper coordinate and every attached claim.
+Every theorem-like or section anchor in either authored paper is classified by
+`--paper-anchor`; unlabeled formal results keep their exact TeX source coordinate
+as the handle instead of receiving a fabricated label or claim identity. These
+packets also expose exact paper-to-Lean source links and adjacent paper handles.
 Module packets carry the authored role plus bounded imports, reverse importers,
 attached claims, and declaration previews; use their receipts before expanding.
 Claim packets carry a resolved local argument neighbourhood; follow adjacent
@@ -59,7 +64,8 @@ paper; do not assume every label lives in the principal exposition.
 Each exact ID in `remaining_open_propositions` is directly queryable with
 `--open`; do not substitute a finite or conditional progress claim for it.
 Declaration packets provide the pinned source URL, module role/sigil, attached
-claims, and their paper coordinates; unclaimed declarations say so explicitly.
+claims, and both claim-owned and local-result paper coordinates; declarations
+with neither relation say so explicitly.
 The helper reads the registry and atlas; it is navigation, not proof authority.
 
 ## Authority and change order

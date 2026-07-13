@@ -339,6 +339,7 @@
     "summary": "python3 scripts/query_corpus.py --format card",
     "claim": "python3 scripts/query_corpus.py --claim <claim_id>",
     "paper_label": "python3 scripts/query_corpus.py --paper-label <TeX_label>",
+    "paper_anchor": "python3 scripts/query_corpus.py --paper-anchor <TeX_label_or_source_ref>",
     "open_proposition": "python3 scripts/query_corpus.py --open <remaining_open.id>",
     "declaration": "python3 scripts/query_corpus.py --declaration <Lean_name>",
     "module": "python3 scripts/query_corpus.py --module <path_or_id_or_paper_sigil>",

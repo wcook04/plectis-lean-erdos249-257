@@ -43,7 +43,7 @@
       },
       "bounded_orientation": {
         "path": "docs/orientation.json",
-        "content_digest": "sha256:6388b9601610ae4f5de18dedcf360a7d022a1e509e6d1978be3f7951c2832701"
+        "content_digest": "sha256:8acc1faff8ac1a8b20834b4f6ccb450cba2dbc521daab1a6f35c47bde7461364"
       },
       "human_exposition": {
         "source_path": "paper/erdos249-257-exposition.tex",
@@ -90,6 +90,9 @@
     "pinned_declaration_source_urls": true,
     "digest_bound_human_papers": true,
     "paper_sigil_crosswalk": true,
+    "typed_human_paper_anchor_resolution": true,
+    "unlabelled_formal_anchor_source_coordinate_handles": true,
+    "declaration_to_human_paper_anchor_reverse_links": true,
     "declaration_level_proof_dependencies": false,
     "typed_remaining_open_propositions": true,
     "claim_transition_requirements": true,

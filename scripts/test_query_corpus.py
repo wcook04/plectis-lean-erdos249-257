@@ -72,6 +72,11 @@ def main() -> int:
     assert paper_label["kind"] == "paper_label"
     assert paper_label["paper"]["source_ref"] == "paper/erdos249-257-exposition.tex:457"
     assert paper_label["attached_claims"][0]["id"] == "denominator_exclusion"
+    assert paper_label["anchor_class"] == "registered_claim_anchor"
+    assert any(
+        row["source_ref"] == "Erdos249257/CertificateKernel.lean:18055"
+        for row in paper_label["source_links"]
+    )
     shared_paper_label = query("--paper-label", "res:full")
     assert shared_paper_label["attachment_receipt"]["claim_count"] == 2
     assert {row["id"] for row in shared_paper_label["attached_claims"]} == {
@@ -82,6 +87,24 @@ def main() -> int:
     assert companion_paper_label["paper"]["source"] == (
         "paper/erdos249-transport-curvature.tex"
     )
+    local_result = query("--paper-anchor", "res:lift")
+    assert local_result["anchor_class"] == "authored_formal_anchor_without_registered_claim"
+    assert local_result["attachment_receipt"]["claim_count"] == 0
+    assert local_result["source_links"][0]["declaration"] == (
+        "tsum_primWeight_div_two_pow_sub_one_eq_totient_series"
+    )
+    unlabelled_result = query("--paper-anchor", "paper/erdos249-257-exposition.tex:227")
+    assert unlabelled_result["paper"]["label"] is None
+    assert unlabelled_result["anchor_class"] == (
+        "authored_formal_anchor_without_registered_claim"
+    )
+    assert unlabelled_result["source_links"][0]["declaration"] == (
+        "tsum_moebius_div_two_pow_sub_one_eq_half"
+    )
+    navigation_anchor = query("--paper-anchor", "sec:intro")
+    assert navigation_anchor["anchor_class"] == "section_navigation_anchor"
+    assert query("--paper-anchor", "app:index")["anchor_neighbourhood"]["next"] is None
+    assert query("--paper-anchor", "sec:scope")["anchor_neighbourhood"]["previous"] is None
     unknown_paper_label = run("--paper-label", "prop:not-a-real-label")
     assert unknown_paper_label.returncode == 2
     assert "unknown paper label" in unknown_paper_label.stderr
@@ -113,6 +136,7 @@ def main() -> int:
         "https://github.com/wcook04/plectis-lean-erdos249-257/blob/v0.6.0/"
     )
     assert declaration["matches"][0]["attached_claims"][0]["paper"]["label"] == "res:farey"
+    assert declaration["matches"][0]["paper_anchors"][0]["canonical_handle"] == "res:farey"
 
     reduction_declaration = query(
         "--declaration", "irrational_totient_series_of_certificate_supply"
@@ -128,6 +152,12 @@ def main() -> int:
 
     unlinked = query("--declaration", "totientTail_pos")["matches"][0]
     assert unlinked["attached_claims"] == []
+
+    local_declaration = query(
+        "--declaration", "tsum_primWeight_div_two_pow_sub_one_eq_totient_series"
+    )["matches"][0]
+    assert local_declaration["attached_claims"] == []
+    assert local_declaration["paper_anchors"][0]["canonical_handle"] == "res:lift"
 
     module_run = run("--module", "Erdos249257/CertificateKernel.lean")
     assert module_run.returncode == 0
@@ -175,6 +205,12 @@ def main() -> int:
     sigil_search = query("--search", "CerKer", "--limit", "1")
     assert sigil_search["results"][0]["kind"] == "module"
     assert sigil_search["results"][0]["path"] == "Erdos249257/CertificateKernel.lean"
+
+    anchor_search = query("--search", "positive lift", "--limit", "5")
+    assert any(
+        row["kind"] == "paper_anchor" and row["canonical_handle"] == "res:lift"
+        for row in anchor_search["results"]
+    )
 
     search = query("--search", " denominator_exclusion ", "--limit", "5")
     assert search["match_count"] >= 1

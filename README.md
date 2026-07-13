@@ -54,7 +54,8 @@ release scale, exact open boundary, principal claim routes, and the next
 authoritative surface for each kind of question.
 
 For one bounded lookup, run `python3 scripts/query_corpus.py --claim <id>`,
-`--paper-label <TeX_label>`, `--open <remaining_open.id>`, `--declaration <Lean_name>`,
+`--paper-label <TeX_label>`, `--paper-anchor <TeX_label_or_source_ref>`,
+`--open <remaining_open.id>`, `--declaration <Lean_name>`,
 `--module <path_or_id>`, or `--route <id>`. If you
 do not yet know the handle, use `--search <text> --limit <1..100>`; every JSON
 response is capped at 64 KB and points back to an exhaustive owner.
@@ -63,6 +64,10 @@ through [`paper/module-aliases.json`](paper/module-aliases.json).
 Paper proposition and result labels are reverse handles: for example,
 `--paper-label res:farey` returns its exact source coordinate and all
 claims attached to that label.
+The broader `--paper-anchor` route classifies every theorem-like and section
+anchor in both authored papers. An unlabeled formal result is addressed by its
+TeX source coordinate, without inventing a claim or label, and carries its
+exact paper-to-Lean links plus adjacent paper handles.
 Module packets include the authored role, attached claims, bounded declaration
 preview, direct imports, and reverse importers.
 Claim packets resolve adjacent argument-graph IDs into labels, statuses, and
@@ -72,7 +77,8 @@ claims in the technical companion rather than assuming the main exposition.
 Open-proposition packets list the exact open target and every linked or directly
 advancing public claim without weakening the proposition into a progress claim.
 Declaration packets return a pinned Lean URL, module role and sigil, attached
-claim summaries, and exact paper coordinates when the declaration is claimed.
+claim summaries, and exact paper coordinates for both registered claims and
+claim-free local results when the paper provides a source link.
 
 The Plectis site is an introduction, not a proof certificate. The exposition
 explains the mathematics. The checked Lean source establishes the formal
