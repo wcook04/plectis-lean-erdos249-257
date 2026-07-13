@@ -1,53 +1,79 @@
 #!/usr/bin/env python3
 # SPDX-FileCopyrightText: 2026 Will Cook
 # SPDX-License-Identifier: Apache-2.0
-"""Adversarial checks for the cold-clone comprehension diagnostic."""
+"""Adversarial tests for bounded cold-clone comprehension."""
 
 from __future__ import annotations
 
-import json
+import copy
 
 import check_cold_clone_comprehension as diagnostic
 
 
-def without_tokens(bundle: str, tokens: list[str | None]) -> str:
-    for token in tokens:
-        if token:
-            bundle = bundle.replace(token, "")
-    return bundle
+def assert_rejected(packets: dict, label: str) -> None:
+    try:
+        diagnostic.validate_agent_packets(packets)
+    except AssertionError:
+        return
+    raise AssertionError(f"semantic mutation escaped: {label}")
 
 
 def main() -> int:
-    claims = json.loads(diagnostic.read("docs/claims.json"))
-    methodology = json.loads(diagnostic.read("docs/methodology.json"))
-    orientation = json.loads(diagnostic.read("docs/orientation.json"))
-    questions = diagnostic.build_questions(claims, methodology, orientation)
+    packets = diagnostic.collect_agent_packets()
+    summary = packets["summary"]
     human_bundle = "\n".join(diagnostic.read(path) for path in diagnostic.HUMAN_SURFACES)
-    machine_bundle = "\n".join(diagnostic.read(path) for path in diagnostic.MACHINE_SURFACES)
+    diagnostic.validate_human_first_contact(summary, human_bundle)
+    diagnostic.validate_agent_packets(packets)
 
-    checks = 0
-    for question in questions:
-        machine_ok, _ = diagnostic.probe(question["machine_all"], machine_bundle, "all")
-        human_ok, _ = diagnostic.probe_groups(question["human_groups"], human_bundle)
-        assert machine_ok and human_ok, f"baseline failed for {question['id']}"
-        checks += 1
-
-        for token in question["machine_all"]:
-            mutated = without_tokens(machine_bundle, [token])
-            mutation_ok, _ = diagnostic.probe(question["machine_all"], mutated, "all")
-            assert not mutation_ok, f"machine-token deletion escaped for {question['id']}: {token}"
+    checks = 2
+    for alternatives in diagnostic.human_requirements(summary):
+        mutated = human_bundle
+        for token in alternatives:
+            mutated = mutated.replace(token, "")
+        try:
+            diagnostic.validate_human_first_contact(summary, mutated)
+        except AssertionError:
             checks += 1
+        else:
+            raise AssertionError(f"human semantic-anchor deletion escaped: {alternatives}")
 
-        for group in question["human_groups"]:
-            mutated = without_tokens(human_bundle, group)
-            mutation_ok, _ = diagnostic.probe_groups(question["human_groups"], mutated)
-            assert not mutation_ok, f"human semantic-group deletion escaped for {question['id']}: {group}"
-            checks += 1
+    mutated = copy.deepcopy(packets)
+    mutated["summary"]["proof_authority"] = "unverified"
+    assert_rejected(mutated, "proof authority")
+    checks += 1
 
-    mutation_count = checks - len(questions)
+    mutated = copy.deepcopy(packets)
+    mutated["summary"]["remaining_open_propositions"] = []
+    assert_rejected(mutated, "open boundary")
+    checks += 1
+
+    conditional = next(
+        claim_id for claim_id, packet in packets["claims"].items()
+        if packet["claim"]["status"] == "conditional reduction"
+    )
+    mutated = copy.deepcopy(packets)
+    mutated["claims"][conditional]["claim"]["remaining_open_proposition_ids"] = []
+    assert_rejected(mutated, "conditional-open link")
+    checks += 1
+
+    finite = next(
+        claim_id for claim_id, packet in packets["claims"].items()
+        if packet["claim"]["status"] == "verified finite instance"
+    )
+    mutated = copy.deepcopy(packets)
+    mutated["claims"][finite]["claim"].pop("bounded_domain", None)
+    assert_rejected(mutated, "finite bound")
+    checks += 1
+
+    source_key = next(iter(packets["sources"]))
+    mutated = copy.deepcopy(packets)
+    mutated["sources"][source_key]["source"]["source_ref"] = "wrong.lean:1"
+    assert_rejected(mutated, "source coordinate")
+    checks += 1
+
     print(
-        "test_cold_clone_comprehension: baseline passed; "
-        f"all {mutation_count} semantic-anchor deletions were rejected"
+        "test_cold_clone_comprehension: bounded baseline passed; "
+        f"{checks - 2} semantic mutations were rejected"
     )
     return 0
 

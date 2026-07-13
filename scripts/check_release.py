@@ -571,6 +571,26 @@ def main() -> int:
     )
     check(query_check.returncode == 0,
           f"corpus query surface failed: {query_check.stdout.strip() or query_check.stderr.strip()}")
+    cold_clone_check = subprocess.run(
+        [sys.executable, str(ROOT / "scripts" / "check_cold_clone_comprehension.py")],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    check(cold_clone_check.returncode == 0,
+          "bounded cold-clone comprehension failed: "
+          f"{cold_clone_check.stdout.strip() or cold_clone_check.stderr.strip()}")
+    cold_clone_adversarial = subprocess.run(
+        [sys.executable, str(ROOT / "scripts" / "test_cold_clone_comprehension.py")],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    check(cold_clone_adversarial.returncode == 0,
+          "bounded cold-clone adversarial check failed: "
+          f"{cold_clone_adversarial.stdout.strip() or cold_clone_adversarial.stderr.strip()}")
 
     # --- 9. proof-trust guard ------------------------------------------------------
     # Covers the library, its root, and the downstream examples: everything

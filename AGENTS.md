@@ -142,11 +142,12 @@ python3 scripts/check_cold_clone_comprehension.py
 python3 scripts/test_cold_clone_comprehension.py
 ```
 
-It derives the proved/open distinctions from the claim registry and confirms
-both the prose surfaces and the machine surfaces still let a reader recover
-them. It measures availability, not mathematical correctness, and is not part
-of the release gate; a failure means a projection or route dropped a
-distinction and should be repaired.
-The companion adversarial test removes each machine token and each grouped
-human semantic anchor in turn; every such mutation must make the diagnostic
-fail, so generic vocabulary cannot masquerade as comprehension.
+It proves the first-contact boundary through a compact human bundle and the
+same bounded public query packets a cold coding agent would follow; it does
+not concatenate the claim registry, methodology, or declaration atlas as
+evidence. It checks navigation semantics and response budgets, not Lean proof
+correctness, and runs in the release gate. A failure means a projection, route,
+or typed handle dropped a distinction and should be repaired.
+The companion adversarial test removes human semantic anchors and mutates proof
+authority, open-boundary, finite-bound, source-coordinate, and graph-link
+facts; every mutation must make the evaluator fail.
