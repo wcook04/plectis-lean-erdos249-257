@@ -54,12 +54,15 @@ release scale, exact open boundary, principal claim routes, and the next
 authoritative surface for each kind of question.
 
 For one bounded lookup, run `python3 scripts/query_corpus.py --claim <id>`,
-`--open <remaining_open.id>`, `--declaration <Lean_name>`,
+`--paper-label <TeX_label>`, `--open <remaining_open.id>`, `--declaration <Lean_name>`,
 `--module <path_or_id>`, or `--route <id>`. If you
 do not yet know the handle, use `--search <text> --limit <1..100>`; every JSON
 response is capped at 64 KB and points back to an exhaustive owner.
 Paper sigils are handles too: `--module CerKer` resolves the displayed sigil
 through [`paper/module-aliases.json`](paper/module-aliases.json).
+Paper proposition and result labels are reverse handles: for example,
+`--paper-label res:farey` returns its exact source coordinate and all
+claims attached to that label.
 Module packets include the authored role, attached claims, bounded declaration
 preview, direct imports, and reverse importers.
 Claim packets resolve adjacent argument-graph IDs into labels, statuses, and

@@ -146,6 +146,7 @@ def build_orientation(claims: dict[str, Any], atlas: dict[str, Any]) -> dict[str
         "queries": {
             "summary": "python3 scripts/query_corpus.py --format card",
             "claim": "python3 scripts/query_corpus.py --claim <claim_id>",
+            "paper_label": "python3 scripts/query_corpus.py --paper-label <TeX_label>",
             "open_proposition": "python3 scripts/query_corpus.py --open <remaining_open.id>",
             "declaration": "python3 scripts/query_corpus.py --declaration <Lean_name>",
             "module": "python3 scripts/query_corpus.py --module <path_or_id_or_paper_sigil>",
@@ -270,6 +271,7 @@ def render_orientation_markdown(orientation: dict[str, Any]) -> str:
             "```sh",
             "python3 scripts/query_corpus.py --format card",
             "python3 scripts/query_corpus.py --claim denominator_exclusion",
+            "python3 scripts/query_corpus.py --paper-label res:farey",
             "python3 scripts/query_corpus.py --open remaining_open.unbounded_certificate_supply",
             "python3 scripts/query_corpus.py --declaration irrational_erdosSum_full_support",
             "python3 scripts/query_corpus.py --module Erdos249257/CertificateKernel.lean",

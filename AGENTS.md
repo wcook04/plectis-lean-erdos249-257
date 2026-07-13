@@ -42,12 +42,14 @@ in this repository, and never infer unpublished results or private machinery.
    `docs/WAVE_INDEX.md` for mathematical chronology.
 
 For a bounded lookup, use `python3 scripts/query_corpus.py --claim <id>`,
-`--open <remaining_open.id>`, `--declaration <Lean_name>`,
+`--paper-label <TeX_label>`, `--open <remaining_open.id>`, `--declaration <Lean_name>`,
 `--module <path_or_id>`, or `--route <id>`. Use
 `--search <text> --limit <1..100>` when the typed handle is not yet known.
 JSON responses are capped at 64 KB; exhaustive data remains in the routed owner.
 Visible paper sigils resolve directly (`--module CerKer`); their generated
 crosswalk is `paper/module-aliases.json`.
+Visible TeX labels resolve in reverse (`--paper-label res:farey`) to
+their exact paper coordinate and every attached claim.
 Module packets carry the authored role plus bounded imports, reverse importers,
 attached claims, and declaration previews; use their receipts before expanding.
 Claim packets carry a resolved local argument neighbourhood; follow adjacent

@@ -108,6 +108,27 @@ def claim_packet(claim_id: str) -> dict[str, Any]:
     }
 
 
+def paper_label_packet(label: str) -> dict[str, Any]:
+    claims = load("docs/claims.json")
+    coordinate = paper_coordinate(label, paper_label_index())
+    attached_claims = [
+        compact_claim(row) for row in claims["claims"] if row.get("paper_label") == label
+    ]
+    return {
+        "kind": "paper_label",
+        "authority_posture": "navigation_projection_not_proof_authority",
+        "paper": coordinate,
+        "attached_claims": attached_claims,
+        "attachment_receipt": {
+            "claim_count": len(attached_claims),
+            "complete": True,
+            "owner": "docs/claims.json",
+        },
+        "follow": "python3 scripts/query_corpus.py --claim <attached_claim_id>",
+        "validation": "python3 scripts/check_release.py",
+    }
+
+
 def open_proposition_packet(open_id: str) -> dict[str, Any]:
     claims = load("docs/claims.json")
     proposition = next(
@@ -436,6 +457,13 @@ def render_card(packet: dict[str, Any]) -> str:
             f"| incoming={len(neighbourhood['incoming'])} | outgoing={len(neighbourhood['outgoing'])} "
             f"| declarations={decls}"
         )
+    if kind == "paper_label":
+        paper = packet["paper"]
+        claim_ids = ",".join(row["id"] for row in packet["attached_claims"]) or "none"
+        return (
+            f"paper {paper['label']} | {paper['source_ref']} | rendered={paper['rendered']} "
+            f"| claims={claim_ids}"
+        )
     if kind == "declaration":
         return "\n".join(
             f"declaration {row['name']} | {row['kind']} | {row['module']}:{row['line']} | claims={','.join(row['claim_ids']) or 'none'}"
@@ -480,6 +508,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     group = parser.add_mutually_exclusive_group()
     group.add_argument("--claim", metavar="ID")
+    group.add_argument("--paper-label", metavar="LABEL")
     group.add_argument("--open", metavar="ID")
     group.add_argument("--declaration", metavar="NAME")
     group.add_argument("--module", metavar="PATH_OR_ID")
@@ -493,6 +522,8 @@ def main() -> int:
     try:
         if args.claim:
             packet = claim_packet(args.claim)
+        elif args.paper_label:
+            packet = paper_label_packet(args.paper_label)
         elif args.open:
             packet = open_proposition_packet(args.open)
         elif args.declaration:

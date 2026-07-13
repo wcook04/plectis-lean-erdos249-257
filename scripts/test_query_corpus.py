@@ -68,6 +68,24 @@ def main() -> int:
     assert companion["paper"]["rendered"] == "erdos249-transport-curvature.pdf"
     assert query("--claim", "erdos_249")["paper"] is None
 
+    paper_label = query("--paper-label", "res:farey")
+    assert paper_label["kind"] == "paper_label"
+    assert paper_label["paper"]["source_ref"] == "paper/erdos249-257-exposition.tex:457"
+    assert paper_label["attached_claims"][0]["id"] == "denominator_exclusion"
+    shared_paper_label = query("--paper-label", "res:full")
+    assert shared_paper_label["attachment_receipt"]["claim_count"] == 2
+    assert {row["id"] for row in shared_paper_label["attached_claims"]} == {
+        "eb_constant",
+        "eb_full_support",
+    }
+    companion_paper_label = query("--paper-label", "sec:curvature")
+    assert companion_paper_label["paper"]["source"] == (
+        "paper/erdos249-transport-curvature.tex"
+    )
+    unknown_paper_label = run("--paper-label", "prop:not-a-real-label")
+    assert unknown_paper_label.returncode == 2
+    assert "unknown paper label" in unknown_paper_label.stderr
+
     open_expectations = {
         "remaining_open.erdos_249_irrationality": ("erdos_249", 1),
         "remaining_open.unbounded_certificate_supply": ("erdos_249", 5),
