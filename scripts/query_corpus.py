@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 from pathlib import Path
 from typing import Any
@@ -34,6 +35,36 @@ def compact_claim(claim: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def paper_label_index() -> dict[str, dict[str, Any]]:
+    index: dict[str, dict[str, Any]] = {}
+    for path in sorted((ROOT / "paper").glob("erdos*.tex")):
+        relative = str(path.relative_to(ROOT))
+        for line_number, line in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
+            for label in re.findall(r"\\label\{([^}]+)\}", line):
+                if label in index:
+                    raise ValueError(
+                        f"duplicate paper label {label!r}: "
+                        f"{index[label]['source_ref']} and {relative}:{line_number}"
+                    )
+                index[label] = {
+                    "label": label,
+                    "source": relative,
+                    "line": line_number,
+                    "source_ref": f"{relative}:{line_number}",
+                    "rendered": f"{path.stem}.pdf",
+                }
+    return index
+
+
+def paper_coordinate(label: str | None, index: dict[str, dict[str, Any]]) -> dict[str, Any] | None:
+    if label is None:
+        return None
+    coordinate = index.get(label)
+    if coordinate is None:
+        raise ValueError(f"unknown paper label: {label}")
+    return coordinate
+
+
 def claim_packet(claim_id: str) -> dict[str, Any]:
     claims = load("docs/claims.json")
     claim_index = {row["id"]: row for row in claims["claims"]}
@@ -41,6 +72,7 @@ def claim_packet(claim_id: str) -> dict[str, Any]:
     if claim is None:
         raise KeyError(f"unknown claim id: {claim_id}")
     graph = claims["machine_readable_paper"]["argument_graph"]
+    label_index = paper_label_index()
     edges = graph["edges"]
     incoming = [row for row in edges if row["to"] == claim_id]
     outgoing = [row for row in edges if row["from"] == claim_id]
@@ -71,11 +103,7 @@ def claim_packet(claim_id: str) -> dict[str, Any]:
         "remaining_open_propositions": [
             row for row in claims["remaining_open_propositions"] if row["id"] in open_ids
         ],
-        "paper": {
-            "source": claims["machine_readable_paper"]["paper"]["source"],
-            "rendered": claims["machine_readable_paper"]["paper"]["rendered"],
-            "label": claim.get("paper_label"),
-        },
+        "paper": paper_coordinate(claim.get("paper_label"), label_index),
         "validation": "python3 scripts/check_release.py",
     }
 
@@ -123,15 +151,51 @@ def open_proposition_packet(open_id: str) -> dict[str, Any]:
 
 def declaration_packet(name: str, limit: int) -> dict[str, Any]:
     atlas = load("docs/declaration_atlas.json")
+    claims = load("docs/claims.json")
+    aliases = load("paper/module-aliases.json")["aliases"]
     matches = [row for row in atlas["declarations"] if row["name"] == name]
     if not matches:
         raise KeyError(f"unknown declaration name: {name}")
+    claim_index = {row["id"]: row for row in claims["claims"]}
+    roles = module_roles(claims)
+    label_index = paper_label_index()
+    sigil_by_path = {row["path"]: row["sigil"] for row in aliases}
+    repository = claims["release"]["repository"].rstrip("/")
+    tag = claims["release"]["tag"]
+    decorated = []
+    for match in matches[:limit]:
+        attached_claims = []
+        for claim_id in match.get("claim_ids", []):
+            claim = claim_index[claim_id]
+            attached_claims.append(
+                {
+                    **compact_claim(claim),
+                    "paper": paper_coordinate(claim.get("paper_label"), label_index),
+                }
+            )
+        decorated.append(
+            {
+                **match,
+                "source_ref": f"{match['module']}:{match['line']}",
+                "source_url": f"{repository}/blob/{tag}/{match['module']}#L{match['line']}",
+                "paper_sigil": sigil_by_path.get(match["module"]),
+                "module_role": roles.get(
+                    match["module"].removesuffix(".lean").replace("/", "."),
+                    "Unclassified module",
+                ),
+                "attached_claims": attached_claims,
+            }
+        )
     return {
         "kind": "declaration",
         "authority_posture": "atlas_navigation_projection_not_proof_authority",
-        "matches": matches[:limit],
+        "matches": decorated,
         "match_count": len(matches),
         "omitted_match_count": max(0, len(matches) - limit),
+        "follow": {
+            "claim": "python3 scripts/query_corpus.py --claim <claim_id>",
+            "module": "python3 scripts/query_corpus.py --module <module_or_sigil>",
+        },
         "validation": "python3 scripts/build_declaration_atlas.py --check",
     }
 
@@ -142,6 +206,7 @@ def compact_declaration(row: dict[str, Any]) -> dict[str, Any]:
         "declaration_kind": row["kind"],
         "module": row["module"],
         "line": row["line"],
+        "source_ref": f"{row['module']}:{row['line']}",
         "claim_ids": row.get("claim_ids", []),
         "generated_certificate": bool(row.get("generated_certificate")),
     }

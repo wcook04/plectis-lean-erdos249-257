@@ -86,6 +86,8 @@ Claim packets resolve adjacent argument edges into labels, statuses, and
 relation meanings, so each neighbour can be followed as another handle.
 Every exact remaining-open proposition ID is itself a typed handle whose
 packet preserves the open target and lists linked progress claims.
+Claim paper labels resolve to exact TeX files and lines across both papers;
+declaration packets add pinned Lean URLs, module context, and attached claims.
 
 ```sh
 python3 scripts/query_corpus.py --format card

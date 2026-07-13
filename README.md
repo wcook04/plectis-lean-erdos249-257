@@ -64,8 +64,12 @@ Module packets include the authored role, attached claims, bounded declaration
 preview, direct imports, and reverse importers.
 Claim packets resolve adjacent argument-graph IDs into labels, statuses, and
 relation meanings, so each neighbouring claim is another executable handle.
+They also resolve the paper label to its actual TeX file and line, including
+claims in the technical companion rather than assuming the main exposition.
 Open-proposition packets list the exact open target and every linked or directly
 advancing public claim without weakening the proposition into a progress claim.
+Declaration packets return a pinned Lean URL, module role and sigil, attached
+claim summaries, and exact paper coordinates when the declaration is claimed.
 
 The Plectis site is an introduction, not a proof certificate. The exposition
 explains the mathematics. The checked Lean source establishes the formal

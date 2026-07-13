@@ -6,6 +6,7 @@
 from __future__ import annotations
 
 import json
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -53,6 +54,19 @@ def main() -> int:
     assert "certificate_completeness" in incoming_ids
     assert "first_harmonic_certificate_interface" in incoming_ids
     assert reduction["argument_neighbourhood"]["outgoing"][0]["neighbour"]["status"] == "open"
+    assert reduction["paper"]["source_ref"] == "paper/erdos249-257-exposition.tex:568"
+
+    claims_document = json.loads((ROOT / "docs" / "claims.json").read_text(encoding="utf-8"))
+    labelled_claims = [row for row in claims_document["claims"] if row.get("paper_label")]
+    for row in labelled_claims:
+        packet = query("--claim", row["id"])
+        paper = packet["paper"]
+        source_line = (ROOT / paper["source"]).read_text(encoding="utf-8").splitlines()[paper["line"] - 1]
+        assert re.search(rf"\\label\{{{re.escape(row['paper_label'])}\}}", source_line)
+    companion = query("--claim", "transport_curvature_reductions")
+    assert companion["paper"]["source"] == "paper/erdos249-transport-curvature.tex"
+    assert companion["paper"]["rendered"] == "erdos249-transport-curvature.pdf"
+    assert query("--claim", "erdos_249")["paper"] is None
 
     open_expectations = {
         "remaining_open.erdos_249_irrationality": ("erdos_249", 1),
@@ -76,6 +90,26 @@ def main() -> int:
     )
     assert declaration["match_count"] == 1
     assert declaration["matches"][0]["claim_ids"] == ["denominator_exclusion"]
+    assert declaration["matches"][0]["source_ref"] == "Erdos249257/CertificateKernel.lean:18056"
+    assert declaration["matches"][0]["source_url"].startswith(
+        "https://github.com/wcook04/plectis-lean-erdos249-257/blob/v0.6.0/"
+    )
+    assert declaration["matches"][0]["attached_claims"][0]["paper"]["label"] == "res:farey"
+
+    reduction_declaration = query(
+        "--declaration", "irrational_totient_series_of_certificate_supply"
+    )["matches"][0]
+    assert reduction_declaration["source_ref"] == (
+        "Erdos249257/TotientTailPeriodKiller.lean:394"
+    )
+    assert reduction_declaration["paper_sigil"] == "TotTaiPerKil"
+    assert reduction_declaration["module_role"] == "Tail-period certificate reduction"
+    assert reduction_declaration["attached_claims"][0]["paper"]["source_ref"] == (
+        "paper/erdos249-257-exposition.tex:568"
+    )
+
+    unlinked = query("--declaration", "totientTail_pos")["matches"][0]
+    assert unlinked["attached_claims"] == []
 
     module_run = run("--module", "Erdos249257/CertificateKernel.lean")
     assert module_run.returncode == 0
