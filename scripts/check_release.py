@@ -422,6 +422,16 @@ def main() -> int:
     check(corpus_check.returncode == 0,
           f"corpus descriptor drift: {corpus_check.stdout.strip() or corpus_check.stderr.strip()}")
 
+    paper_alias_check = subprocess.run(
+        [sys.executable, str(ROOT / "scripts" / "build_paper_module_aliases.py"), "--check"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    check(paper_alias_check.returncode == 0,
+          f"paper module alias drift: {paper_alias_check.stdout.strip() or paper_alias_check.stderr.strip()}")
+
     descriptor = json.loads(read(ROOT / "docs" / "corpus_descriptor.json"))
     check(descriptor.get("schema") == "erdos249257-corpus-descriptor/3",
           "corpus descriptor must use schema erdos249257-corpus-descriptor/3")

@@ -26,14 +26,15 @@
 \newcommand{\repobase}{https://github.com/wcook04/plectis-lean-erdos249-257/blob/\commit}
 \newcommand{\releaseurl}{https://github.com/wcook04/plectis-lean-erdos249-257/releases/tag/\commit}
 \newcommand{\PK}{Erdos249257}
+\input{module-aliases.tex}
 % \idn: typeset a Lean identifier (underscores literal, breakable across lines).
 \newcommand{\idn}[1]{\texttt{\expandafter\seqsplit\expandafter{\detokenize{#1}}}}
 % The source coordinates remain in every hyperlink target and in the verifier's
-% manifest. The paper shows the same quiet face for every source link, so
-% declaration identifiers remain machine-readable without dominating prose.
-\newcommand{\lref}[3]{\href{\repobase/\PK/#1\#L#2}{\texttt{Lean}}}
-\newcommand{\lrefx}[3]{\href{\repobase/\PK/#1\#L#2}{\texttt{Lean}}}
-\newcommand{\lloc}[2]{\href{\repobase/\PK/#1\#L#2}{\texttt{Lean}}}
+% manifest. The visible sigil identifies the source module without letting long
+% declaration identifiers dominate the prose.
+\newcommand{\lref}[3]{\href{\repobase/\PK/#1\#L#2}{\texttt{\modulesigil{#1}}}}
+\newcommand{\lrefx}[3]{\href{\repobase/\PK/#1\#L#2}{\texttt{\modulesigil{#1}}}}
+\newcommand{\lloc}[2]{\href{\repobase/\PK/#1\#L#2}{\texttt{\modulesigil{#1}}}}
 % \rref{rootfile}: link a repository-root file at the pinned release.
 \newcommand{\rref}[1]{\href{\repobase/\detokenize{#1}}{\texttt{\detokenize{#1}}}}
 \emergencystretch=2em
@@ -1346,7 +1347,7 @@ Each row links to the declaration at release \href{\releaseurl}{\texttt{\commit}
 \footnotesize
 \begin{tabular}{@{}p{7.2cm}p{7.8cm}@{}}
 \toprule
-informal statement & linked Lean module\\
+informal statement & linked Lean source\\
 \midrule
 $\sum 1/(b^n-1)$ irrational, all $b\ge2$ & \lrefx{CertificateKernel.lean}{8000}{irrational_erdosSum_full_support}\ (\texttt{CertificateKernel})\\
 Erd\H{o}s--Borwein $E$ irrational & \lrefx{CertificateKernel.lean}{8007}{irrational_erdosBorwein_series}\ (\texttt{CertificateKernel})\\

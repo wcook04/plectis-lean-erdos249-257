@@ -10,8 +10,9 @@
 \newcommand{\commit}{v0.6.0}
 \newcommand{\repobase}{https://github.com/wcook04/plectis-lean-erdos249-257/blob/\commit}
 \newcommand{\PK}{Erdos249257}
+\input{module-aliases.tex}
 \newcommand{\idn}[1]{\texttt{\expandafter\seqsplit\expandafter{\detokenize{#1}}}}
-\newcommand{\lref}[3]{\href{\repobase/\PK/#1\#L#2}{\texttt{Lean}}}
+\newcommand{\lref}[3]{\href{\repobase/\PK/#1\#L#2}{\texttt{\modulesigil{#1}}}}
 \emergencystretch=2em
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{proposition}[theorem]{Proposition}
