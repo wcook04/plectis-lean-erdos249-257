@@ -54,6 +54,22 @@ def main() -> int:
     assert "first_harmonic_certificate_interface" in incoming_ids
     assert reduction["argument_neighbourhood"]["outgoing"][0]["neighbour"]["status"] == "open"
 
+    open_expectations = {
+        "remaining_open.erdos_249_irrationality": ("erdos_249", 1),
+        "remaining_open.unbounded_certificate_supply": ("erdos_249", 5),
+        "remaining_open.universal_257_all_infinite_supports": ("universal_257", 4),
+    }
+    for open_id, (target, advancing_count) in open_expectations.items():
+        open_packet = query("--open", open_id)
+        assert open_packet["kind"] == "open_proposition"
+        assert open_packet["status"] == "open"
+        assert open_packet["open_target"]["id"] == target
+        assert len(open_packet["advancing_claims"]) == advancing_count
+
+    open_search = query("--search", "remaining_open.unbounded_certificate_supply", "--limit", "1")
+    assert open_search["results"][0]["kind"] == "open_proposition"
+    assert open_search["results"][0]["id"] == "remaining_open.unbounded_certificate_supply"
+
     declaration = query(
         "--declaration",
         "tsum_totient_div_pow_two_ne_ratCast_of_den_le_79639646646701375323355774875831053",
@@ -126,6 +142,10 @@ def main() -> int:
     unknown = run("--claim", "does_not_exist")
     assert unknown.returncode == 2
     assert "unknown claim id" in unknown.stderr
+
+    unknown_open = run("--open", "remaining_open.does_not_exist")
+    assert unknown_open.returncode == 2
+    assert "unknown remaining-open proposition id" in unknown_open.stderr
 
     invalid_limit = run("--search", "totient", "--limit", "101")
     assert invalid_limit.returncode == 2

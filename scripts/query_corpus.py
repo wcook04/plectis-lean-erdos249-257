@@ -80,6 +80,47 @@ def claim_packet(claim_id: str) -> dict[str, Any]:
     }
 
 
+def open_proposition_packet(open_id: str) -> dict[str, Any]:
+    claims = load("docs/claims.json")
+    proposition = next(
+        (row for row in claims["remaining_open_propositions"] if row["id"] == open_id), None
+    )
+    if proposition is None:
+        raise KeyError(f"unknown remaining-open proposition id: {open_id}")
+    claim_index = {row["id"]: row for row in claims["claims"]}
+    linked_claims = [
+        compact_claim(row)
+        for row in claims["claims"]
+        if open_id in row.get("remaining_open_proposition_ids", [])
+        and row["id"] != proposition["open_target_claim"]
+    ]
+    advancing_claims = []
+    for edge in claims["machine_readable_paper"]["argument_graph"]["edges"]:
+        effect = edge.get("remaining_open_effect")
+        if not effect or effect.get("remaining_open_proposition_id") != open_id:
+            continue
+        advancing_claims.append(
+            {
+                "claim": compact_claim(claim_index[edge["from"]]),
+                "relation": edge["relation"],
+                "operation": effect["operation"],
+                "effect": effect["statement"],
+            }
+        )
+    return {
+        "kind": "open_proposition",
+        "authority_posture": "authored_open_boundary_navigation_not_proof_authority",
+        "open_proposition": proposition,
+        "status": "open",
+        "open_target": compact_claim(claim_index[proposition["open_target_claim"]]),
+        "linked_claims": linked_claims,
+        "advancing_claims": advancing_claims,
+        "follow": "python3 scripts/query_corpus.py --claim <claim_id>",
+        "source": "docs/claims.json::remaining_open_propositions",
+        "validation": "python3 scripts/check_release.py",
+    }
+
+
 def declaration_packet(name: str, limit: int) -> dict[str, Any]:
     atlas = load("docs/declaration_atlas.json")
     matches = [row for row in atlas["declarations"] if row["name"] == name]
@@ -216,6 +257,21 @@ def search_packet(query: str, limit: int) -> dict[str, Any]:
     roles = module_roles(claims)
     ranked: list[tuple[int, str, dict[str, Any]]] = []
 
+    for proposition in claims["remaining_open_propositions"]:
+        rank = search_rank(
+            query,
+            proposition["id"],
+            proposition["statement"] + " " + proposition["open_target_claim"],
+        )
+        if rank is not None:
+            ranked.append(
+                (
+                    rank,
+                    f"open_proposition:{proposition['id']}",
+                    {"kind": "open_proposition", **proposition},
+                )
+            )
+
     for claim in claims["claims"]:
         rank = search_rank(
             query,
@@ -279,7 +335,7 @@ def search_packet(query: str, limit: int) -> dict[str, Any]:
         "results": results[:limit],
         "omitted_match_count": max(0, len(results) - limit),
         "limit": limit,
-        "next": "Use the typed handle with --claim, --declaration, --module, or --route.",
+        "next": "Use the typed handle with --claim, --open, --declaration, --module, or --route.",
     }
 
 
@@ -320,6 +376,13 @@ def render_card(packet: dict[str, Any]) -> str:
             f"declaration {row['name']} | {row['kind']} | {row['module']}:{row['line']} | claims={','.join(row['claim_ids']) or 'none'}"
             for row in packet["matches"]
         )
+    if kind == "open_proposition":
+        proposition = packet["open_proposition"]
+        return (
+            f"open {proposition['id']} | target={packet['open_target']['id']} "
+            f"| linked_claims={len(packet['linked_claims'])} "
+            f"| advancing_claims={len(packet['advancing_claims'])}"
+        )
     if kind == "module":
         module = packet["module"]
         dependency = packet["dependency_neighbourhood"]["receipt"]
@@ -352,6 +415,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     group = parser.add_mutually_exclusive_group()
     group.add_argument("--claim", metavar="ID")
+    group.add_argument("--open", metavar="ID")
     group.add_argument("--declaration", metavar="NAME")
     group.add_argument("--module", metavar="PATH_OR_ID")
     group.add_argument("--route", metavar="ID")
@@ -364,6 +428,8 @@ def main() -> int:
     try:
         if args.claim:
             packet = claim_packet(args.claim)
+        elif args.open:
+            packet = open_proposition_packet(args.open)
         elif args.declaration:
             packet = declaration_packet(args.declaration, args.limit)
         elif args.module:

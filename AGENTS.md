@@ -40,7 +40,8 @@ in this repository, and never infer unpublished results or private machinery.
    `docs/WAVE_INDEX.md` for mathematical chronology.
 
 For a bounded lookup, use `python3 scripts/query_corpus.py --claim <id>`,
-`--declaration <Lean_name>`, `--module <path_or_id>`, or `--route <id>`. Use
+`--open <remaining_open.id>`, `--declaration <Lean_name>`,
+`--module <path_or_id>`, or `--route <id>`. Use
 `--search <text> --limit <1..100>` when the typed handle is not yet known.
 JSON responses are capped at 64 KB; exhaustive data remains in the routed owner.
 Visible paper sigils resolve directly (`--module CerKer`); their generated
@@ -49,6 +50,8 @@ Module packets carry the authored role plus bounded imports, reverse importers,
 attached claims, and declaration previews; use their receipts before expanding.
 Claim packets carry a resolved local argument neighbourhood; follow adjacent
 claim IDs with another `--claim` query instead of loading the complete graph.
+Each exact ID in `remaining_open_propositions` is directly queryable with
+`--open`; do not substitute a finite or conditional progress claim for it.
 The helper reads the registry and atlas; it is navigation, not proof authority.
 
 ## Authority and change order

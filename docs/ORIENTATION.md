@@ -84,10 +84,13 @@ Module packets include authored roles and both sides of the direct import
 neighbourhood, with truncation receipts pointing to the exhaustive graph.
 Claim packets resolve adjacent argument edges into labels, statuses, and
 relation meanings, so each neighbour can be followed as another handle.
+Every exact remaining-open proposition ID is itself a typed handle whose
+packet preserves the open target and lists linked progress claims.
 
 ```sh
 python3 scripts/query_corpus.py --format card
 python3 scripts/query_corpus.py --claim denominator_exclusion
+python3 scripts/query_corpus.py --open remaining_open.unbounded_certificate_supply
 python3 scripts/query_corpus.py --declaration irrational_erdosSum_full_support
 python3 scripts/query_corpus.py --module Erdos249257/CertificateKernel.lean
 python3 scripts/query_corpus.py --module CerKer

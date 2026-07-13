@@ -43,7 +43,7 @@
       },
       "bounded_orientation": {
         "path": "docs/orientation.json",
-        "content_digest": "sha256:f6f0c5f433ce9288c68c892eeebcfc8656d2aff7f21d9fc9cc6e8c0d554352d9"
+        "content_digest": "sha256:6086b8c904658631089ab91d9f8e1fcc1f23cd28324bb11dd6ab928127cbddb1"
       }
     }
   },
@@ -61,6 +61,7 @@
     "exhaustive_declaration_lookup": "attached_atlas",
     "bounded_reverse_module_importers": true,
     "resolved_local_claim_argument_neighbourhood": true,
+    "direct_remaining_open_proposition_lookup": true,
     "declaration_level_proof_dependencies": false,
     "typed_remaining_open_propositions": true,
     "claim_transition_requirements": true,

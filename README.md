@@ -54,7 +54,8 @@ release scale, exact open boundary, principal claim routes, and the next
 authoritative surface for each kind of question.
 
 For one bounded lookup, run `python3 scripts/query_corpus.py --claim <id>`,
-`--declaration <Lean_name>`, `--module <path_or_id>`, or `--route <id>`. If you
+`--open <remaining_open.id>`, `--declaration <Lean_name>`,
+`--module <path_or_id>`, or `--route <id>`. If you
 do not yet know the handle, use `--search <text> --limit <1..100>`; every JSON
 response is capped at 64 KB and points back to an exhaustive owner.
 Paper sigils are handles too: `--module CerKer` resolves the displayed sigil
@@ -63,6 +64,8 @@ Module packets include the authored role, attached claims, bounded declaration
 preview, direct imports, and reverse importers.
 Claim packets resolve adjacent argument-graph IDs into labels, statuses, and
 relation meanings, so each neighbouring claim is another executable handle.
+Open-proposition packets list the exact open target and every linked or directly
+advancing public claim without weakening the proposition into a progress claim.
 
 The Plectis site is an introduction, not a proof certificate. The exposition
 explains the mathematics. The checked Lean source establishes the formal
