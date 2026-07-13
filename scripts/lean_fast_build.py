@@ -57,14 +57,50 @@ def discover(root: Path = ROOT) -> dict[str, Path]:
     return modules
 
 
+def code_without_comments(line: str, block_depth: int) -> tuple[str, int]:
+    """Remove nested Lean comments from one header line."""
+
+    code: list[str] = []
+    index = 0
+    while index < len(line):
+        if block_depth:
+            if line.startswith("/-", index):
+                block_depth += 1
+                index += 2
+            elif line.startswith("-/", index):
+                block_depth -= 1
+                index += 2
+            else:
+                index += 1
+        elif line.startswith("--", index):
+            break
+        elif line.startswith("/-", index):
+            block_depth = 1
+            index += 2
+        else:
+            code.append(line[index])
+            index += 1
+    return "".join(code), block_depth
+
+
 def local_imports(source: Path, modules: dict[str, Path]) -> set[str]:
-    return {
-        match.group(1)
-        for line in source.read_text(encoding="utf-8").splitlines()
-        if "import" in line
-        and (match := IMPORT_RE.match(line))
-        and match.group(1) in modules
-    }
+    """Read only the Lean header, where import commands are legal."""
+
+    imports: set[str] = set()
+    block_depth = 0
+    with source.open(encoding="utf-8") as lines:
+        for raw_line in lines:
+            code, block_depth = code_without_comments(raw_line, block_depth)
+            stripped = code.strip()
+            if not stripped or stripped == "prelude":
+                continue
+            match = IMPORT_RE.match(stripped)
+            if match:
+                if match.group(1) in modules:
+                    imports.add(match.group(1))
+                continue
+            break
+    return imports
 
 
 def local_graph(modules: dict[str, Path]) -> dict[str, set[str]]:

@@ -62,6 +62,28 @@ class LeanFastBuildTests(unittest.TestCase):
 
             self.assertEqual(fast.local_imports(source, modules), {"Pkg.Local"})
 
+    def test_local_imports_reads_only_the_lean_header(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            source = Path(directory) / "Main.lean"
+            source.write_text(
+                """prelude
+/- outer comment
+   /- nested import Pkg.Commented -/
+-/
+import Pkg.Local -- retained
+def marker := True
+import Pkg.TooLate
+""",
+                encoding="utf-8",
+            )
+            modules = {
+                "Pkg.Commented": Path(directory) / "Commented.lean",
+                "Pkg.Local": Path(directory) / "Local.lean",
+                "Pkg.TooLate": Path(directory) / "TooLate.lean",
+            }
+
+            self.assertEqual(fast.local_imports(source, modules), {"Pkg.Local"})
+
     def test_build_wave_reports_only_failed_modules(self) -> None:
         results = {
             "Pkg.Good": ("Pkg.Good", 0, 0.1),
