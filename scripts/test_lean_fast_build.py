@@ -106,6 +106,27 @@ class LeanFastBuildTests(unittest.TestCase):
         with self.assertRaisesRegex(RuntimeError, "cycle"):
             fast.waves({"A", "B"}, graph)
 
+    def test_focused_main_uses_focused_final_lake_authority(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            source = root / "Pkg" / "Leaf.lean"
+            output = root / ".lake" / "build" / "lib" / "lean" / "Pkg" / "Leaf.olean"
+            source.parent.mkdir()
+            output.parent.mkdir(parents=True)
+            source.write_text("-- source\n", encoding="utf-8")
+            output.write_text("olean\n", encoding="utf-8")
+            os.utime(source, ns=(1_000_000_000, 1_000_000_000))
+            os.utime(output, ns=(2_000_000_000, 2_000_000_000))
+            completed = fast.subprocess.CompletedProcess([], 0, "", "")
+            with mock.patch.object(fast, "ROOT", root), mock.patch.object(
+                fast.subprocess, "run", return_value=completed
+            ) as run:
+                self.assertEqual(fast.main(["Pkg/Leaf.lean"]), 0)
+
+            self.assertEqual(run.call_count, 1)
+            self.assertEqual(run.call_args.args[0], ["lake", "build", "+Pkg.Leaf"])
+            self.assertEqual(run.call_args.kwargs["cwd"], root)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -173,7 +173,7 @@ def build_one(name: str, root: Path = ROOT) -> tuple[str, int, float]:
     return name, result.returncode, time.monotonic() - started
 
 
-def main() -> int:
+def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("targets", nargs="*", help="local module name or .lean path; defaults to Erdos249257")
     parser.add_argument(
@@ -185,26 +185,30 @@ def main() -> int:
     )
     parser.add_argument("--jobs", type=int, default=default_jobs())
     parser.add_argument("--plan", action="store_true")
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
     if args.jobs < 1:
         parser.error("--jobs must be at least 1")
 
-    modules = discover()
+    root = ROOT
+    modules = discover(root)
     graph = local_graph(modules)
     try:
         if args.changed_from is not None:
             if args.targets:
                 parser.error("positional targets and --changed-from are mutually exclusive")
-            target_modules = changed_targets(args.changed_from, modules)
+            target_modules = changed_targets(args.changed_from, modules, root)
             if not target_modules:
                 print(f"lean-fast-build: no changed Lean modules relative to {args.changed_from}")
                 return 0
         else:
-            target_modules = resolve_targets(args.targets, modules)
+            target_modules = resolve_targets(args.targets, modules, root)
     except (RuntimeError, ValueError) as error:
         parser.error(str(error))
     build_waves = waves(reachable(target_modules, graph), graph)
-    pending = [[name for name in wave if stale(name, modules, graph)] for wave in build_waves]
+    pending = [
+        [name for name in wave if stale(name, modules, graph, root)]
+        for wave in build_waves
+    ]
     pending = [wave for wave in pending if wave]
     print(
         f"lean-fast-build: targets={','.join(target_modules)}; "
@@ -216,9 +220,9 @@ def main() -> int:
         return 0
 
     for wave in pending:
-        current = [name for name in wave if stale(name, modules, graph)]
+        current = [name for name in wave if stale(name, modules, graph, root)]
         with ThreadPoolExecutor(max_workers=args.jobs) as executor:
-            futures = [executor.submit(build_one, name) for name in current]
+            futures = [executor.submit(build_one, name, root) for name in current]
             failed = []
             for future in as_completed(futures):
                 name, code, duration = future.result()
@@ -231,7 +235,7 @@ def main() -> int:
     print("lean-fast-build: final Lake authority check")
     focused = bool(args.targets) or args.changed_from is not None
     final_targets = [f"+{name}" for name in target_modules] if focused else []
-    return subprocess.run(["lake", "build", *final_targets], cwd=ROOT, check=False).returncode
+    return subprocess.run(["lake", "build", *final_targets], cwd=root, check=False).returncode
 
 
 if __name__ == "__main__":
