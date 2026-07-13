@@ -48,11 +48,13 @@ def discover(root: Path = ROOT) -> dict[str, Path]:
         # Path.rglob still pays to enumerate the complete dependency cache.
         dirnames[:] = [name for name in dirnames if not name.startswith(".")]
         directory_path = Path(directory)
+        module_prefix = directory_path.relative_to(root).parts
         for filename in filenames:
             if not filename.endswith(".lean") or filename.startswith("_"):
                 continue
             source = directory_path / filename
-            modules[module_name(source, root)] = source
+            module = ".".join((*module_prefix, filename[:-5]))
+            modules[module] = source
     return modules
 
 
