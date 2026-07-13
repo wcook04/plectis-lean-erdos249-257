@@ -207,8 +207,17 @@ def project_config_mtime_ns(root: Path = ROOT) -> int | None:
     return max(mtimes, default=None)
 
 
-def olean_mtimes(names: Iterable[str], root: Path = ROOT) -> dict[str, int | None]:
-    return {name: file_mtime_ns(olean(name, root)) for name in names}
+def olean_mtime_ns(
+    name: str,
+    root: Path = ROOT,
+    cache: dict[str, int | None] | None = None,
+) -> int | None:
+    if cache is not None and name in cache:
+        return cache[name]
+    mtime = file_mtime_ns(olean(name, root))
+    if cache is not None:
+        cache[name] = mtime
+    return mtime
 
 
 def stale(
@@ -220,20 +229,14 @@ def stale(
     cached_olean_mtimes: dict[str, int | None] | None = None,
     cached_config_mtime_ns: int | None = None,
 ) -> bool:
-    timestamp = (
-        cached_olean_mtimes.get(name)
-        if cached_olean_mtimes is not None
-        else file_mtime_ns(olean(name, root))
-    )
+    timestamp = olean_mtime_ns(name, root, cached_olean_mtimes)
     if timestamp is None:
         return True
     if modules[name].stat().st_mtime_ns > timestamp:
         return True
     for dependency in graph[name]:
-        dependency_timestamp = (
-            cached_olean_mtimes.get(dependency)
-            if cached_olean_mtimes is not None
-            else file_mtime_ns(olean(dependency, root))
+        dependency_timestamp = olean_mtime_ns(
+            dependency, root, cached_olean_mtimes
         )
         if dependency_timestamp is None or dependency_timestamp > timestamp:
             return True
@@ -304,7 +307,7 @@ def main(argv: list[str] | None = None) -> int:
         parser.error(str(error))
     graph = reachable_graph(target_modules, modules)
     build_waves = waves(reachable(target_modules, graph), graph)
-    output_mtimes = olean_mtimes(graph, root)
+    output_mtimes: dict[str, int | None] = {}
     config_mtime = project_config_mtime_ns(root)
     pending = [
         [
