@@ -4,8 +4,8 @@
 """Build the public corpus descriptor and bounded orientation projections.
 
 The descriptor is a self-describing navigation root for external agents.  It
-keeps the proof-bearing release identity distinct from the later navigation
-snapshot, carries content digests for the human papers, machine-readable paper,
+keeps the last tagged release distinct from the exact formal-source checkpoint
+and from the later navigation snapshot, carries content digests for the human papers, machine-readable paper,
 source-sigil crosswalk, methodology contract, and exhaustive atlas, and embeds
 only compact navigation data.  It does not duplicate the full declaration
 atlas or acquire proof authority.
@@ -119,6 +119,8 @@ def build_orientation(claims: dict[str, Any], atlas: dict[str, Any]) -> dict[str
             "version": claims["release"]["version"],
             "tag": claims["release"]["tag"],
             "lean_toolchain": claims["release"]["lean_toolchain"],
+            "formal_source_ref": claims["release"]["formal_source"]["ref"],
+            "formal_source_publication_state": claims["release"]["formal_source"]["publication_state"],
         },
         "scale": atlas["summary"],
         "status_taxonomy": claims["status_taxonomy"],
@@ -414,8 +416,9 @@ def build() -> dict[str, Any]:
     machine_paper = claims["machine_readable_paper"]
     release = claims["release"]
 
-    formal_tag = str(release["tag"])
-    formal_commit = git("rev-parse", f"{formal_tag}^{{commit}}")
+    formal_source = release["formal_source"]
+    formal_ref = str(formal_source["ref"])
+    formal_commit = git("rev-parse", f"{formal_ref}^{{commit}}")
     navigation_commit = git(
         "log",
         "-1",
@@ -454,10 +457,17 @@ def build() -> dict[str, Any]:
         },
         "identity": {
             "formal_source": {
-                "tag": formal_tag,
+                "ref": formal_ref,
+                "ref_kind": formal_source["ref_kind"],
                 "resolved_commit": formal_commit,
+                "publication_state": formal_source["publication_state"],
+                "relationship_to_last_tag": formal_source["relationship_to_last_tag"],
+                "last_release": {
+                    "version": release["version"],
+                    "tag": release["tag"],
+                },
                 "lean_toolchain": release["lean_toolchain"],
-                "authority_role": "proof_bearing_release_anchor",
+                "authority_role": "proof_bearing_committed_source_anchor",
             },
             "navigation_snapshot": {
                 "commit": navigation_commit,

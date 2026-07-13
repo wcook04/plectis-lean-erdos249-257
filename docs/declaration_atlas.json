@@ -4,13 +4,13 @@
   "projection_not_authority": true,
   "proof_authority": "Lean source checked by the pinned Lean kernel",
   "argument_authority": "docs/claims.json::machine_readable_paper.argument_graph",
-  "source_fingerprint": "sha256:b3bbe9c8be22e8e1169e0d0b2f0f272a169de021f2d919d0993eee854f9f6578",
+  "source_fingerprint": "sha256:24add812189ed26c491553d34e4a214a0f5e335edaca5886d2df2371d1a55c03",
   "summary": {
-    "module_count": 539,
-    "declaration_count": 6355,
-    "theorem_like_count": 5843,
+    "module_count": 540,
+    "declaration_count": 6362,
+    "theorem_like_count": 5850,
     "generated_certificate_declaration_count": 1681,
-    "principal_claim_link_count": 54,
+    "principal_claim_link_count": 56,
     "kind_counts": {
       "abbrev": 1,
       "def": 497,
@@ -18,7 +18,7 @@
       "instance": 3,
       "lemma": 336,
       "structure": 8,
-      "theorem": 5507
+      "theorem": 5514
     }
   },
   "modules": [
@@ -64,7 +64,8 @@
         "Erdos249257.FirstHarmonicGap",
         "Erdos249257.JointExponentTransport",
         "Erdos249257.PrimeJumpMigration",
-        "Erdos249257.PrimeJumpWindow"
+        "Erdos249257.PrimeJumpWindow",
+        "Erdos249257.AdelicHeightObstruction"
       ],
       "declaration_count": 0,
       "kind_counts": {}
@@ -80,6 +81,17 @@
       "kind_counts": {
         "def": 16,
         "theorem": 16
+      }
+    },
+    {
+      "id": "Erdos249257.AdelicHeightObstruction",
+      "path": "Erdos249257/AdelicHeightObstruction.lean",
+      "imports": [
+        "Erdos249257.RationalDenominatorSurvival"
+      ],
+      "declaration_count": 7,
+      "kind_counts": {
+        "theorem": 7
       }
     },
     {
@@ -6920,6 +6932,87 @@
       "generated_certificate": false,
       "claim_ids": [],
       "docstring": "Once the finite residue/kernel bridge supplies agreement, the canonical sharp square-tail enclosure immediately turns corrected residue separation into an actual full-target miss."
+    },
+    {
+      "id": "Erdos249257/AdelicHeightObstruction.lean:23:scalarLocalization_complement_dvd",
+      "name": "scalarLocalization_complement_dvd",
+      "kind": "theorem",
+      "module": "Erdos249257/AdelicHeightObstruction.lean",
+      "line": 23,
+      "signature": "theorem scalarLocalization_complement_dvd (x : ℚ) (c : ℤ) {H : ℕ} (hH : H ∣ x.den) (hscaled : ((c : ℚ) * x).den ∣ H) : x.den / H ∣ c.natAbs",
+      "generated_certificate": false,
+      "claim_ids": [
+        "adelic_height_obstruction"
+      ],
+      "docstring": "If a scalar multiple of a reduced rational has denominator contained in `H`, then the complementary denominator `x.den / H` divides the scalar. This is the exact scalar-localisation tax: shrinking the displayed denominator to a surviving channel does not discard the complement; it moves that complement into the coefficient."
+    },
+    {
+      "id": "Erdos249257/AdelicHeightObstruction.lean:45:scalarLocalization_divisor_dvd_coefficient",
+      "name": "scalarLocalization_divisor_dvd_coefficient",
+      "kind": "theorem",
+      "module": "Erdos249257/AdelicHeightObstruction.lean",
+      "line": 45,
+      "signature": "theorem scalarLocalization_divisor_dvd_coefficient (x : ℚ) (c : ℤ) {H R : ℕ} (hH : H ∣ x.den) (hscaled : ((c : ℚ) * x).den ∣ H) (hR : R ∣ x.den / H) : R ∣ c.natAbs",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Any prescribed divisor of the complementary denominator must already divide the scalar coefficient. This is the form used to compare a desired 2-adic gain with the Archimedean size paid by the localiser."
+    },
+    {
+      "id": "Erdos249257/AdelicHeightObstruction.lean:56:scalarLocalization_integer_eq_mul_num",
+      "name": "scalarLocalization_integer_eq_mul_num",
+      "kind": "theorem",
+      "module": "Erdos249257/AdelicHeightObstruction.lean",
+      "line": 56,
+      "signature": "theorem scalarLocalization_integer_eq_mul_num (x : ℚ) (c : ℤ) {H : ℕ} (hH : H ∣ x.den) (hscaled : ((c : ℚ) * x).den ∣ H) : ∃ t : ℤ, (H : ℚ) * (c : ℚ) * x = (t : ℚ) * x.num",
+      "generated_certificate": false,
+      "claim_ids": [
+        "adelic_height_obstruction"
+      ],
+      "docstring": "After scalar localisation, the resulting channel-cleared rational is an integer multiple of the *original reduced numerator*. This is the equality form of height conservation: the omitted denominator has been transferred to the coefficient exactly, not erased."
+    },
+    {
+      "id": "Erdos249257/AdelicHeightObstruction.lean:77:positiveRat_numDivisor_mul_lt_two_mul_den",
+      "name": "positiveRat_numDivisor_mul_lt_two_mul_den",
+      "kind": "theorem",
+      "module": "Erdos249257/AdelicHeightObstruction.lean",
+      "line": 77,
+      "signature": "theorem positiveRat_numDivisor_mul_lt_two_mul_den (x : ℚ) {N M : ℕ} (hx : 0 < x) (hM : 0 < M) (hNnum : N ∣ x.num.natAbs) (hlt : x < (2 : ℚ) / M) : N * M < 2 * x.den",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Elementary real/2-adic height conservation in an integral form. If a positive rational `x` is smaller than `2 / M` and `N` divides its reduced numerator, then `N * M < 2 * x.den`. Taking `N = 2^r` gives the denominator lower bound needed for synchronized tails, without introducing a global prefix LCM."
+    },
+    {
+      "id": "Erdos249257/AdelicHeightObstruction.lean:96:positiveRat_twoPow_mul_lt_two_mul_den",
+      "name": "positiveRat_twoPow_mul_lt_two_mul_den",
+      "kind": "theorem",
+      "module": "Erdos249257/AdelicHeightObstruction.lean",
+      "line": 96,
+      "signature": "theorem positiveRat_twoPow_mul_lt_two_mul_den (x : ℚ) {r M : ℕ} (hx : 0 < x) (hM : 0 < M) (hpow : 2 ^ r ∣ x.num.natAbs) (hlt : x < (2 : ℚ) / M) : 2 ^ r * M < 2 * x.den",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The 2-power specialization used by a synchronized rational tail."
+    },
+    {
+      "id": "Erdos249257/AdelicHeightObstruction.lean:103:positiveRat_mersenne_height",
+      "name": "positiveRat_mersenne_height",
+      "kind": "theorem",
+      "module": "Erdos249257/AdelicHeightObstruction.lean",
+      "line": 103,
+      "signature": "theorem positiveRat_mersenne_height (x : ℚ) {r n : ℕ} (hx : 0 < x) (hn : 0 < n) (hpow : 2 ^ r ∣ x.num.natAbs) (hlt : x < (2 : ℚ) / (2 ^ n - 1 : ℕ)) : 2 ^ r * (2 ^ n - 1) < 2 * x.den",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Mersenne-denominator form of the elementary adelic height bound."
+    },
+    {
+      "id": "Erdos249257/AdelicHeightObstruction.lean:120:linearDescender_eq_smul_eval",
+      "name": "linearDescender_eq_smul_eval",
+      "kind": "theorem",
+      "module": "Erdos249257/AdelicHeightObstruction.lean",
+      "line": 120,
+      "signature": "theorem linearDescender_eq_smul_eval {V W : Type*} [AddCommGroup V] [Module ℚ V] [AddCommGroup W] [Module ℚ W] (ev : V →ₗ[ℚ] ℚ) (Λ : V →ₗ[ℚ] W) (hker : LinearMap.ker ev ≤ LinearMap.ker Λ) (he : ∃ e : V, ev e = 1) : ∃ w₀ : W, ∀ v : V, Λ v = ev v • w₀",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A linear channel that kills every scalar relation is only the original evaluation followed by multiplication by one fixed vector. Thus a rational-linear cyclotomic or residue channel cannot descend from equality of scalar values while retaining independent denominator information. The explicit preimage of `1` is the minimal surjectivity hypothesis needed for the one-dimensional quotient argument."
     },
     {
       "id": "Erdos249257/BinaryTailWindowTransfer.lean:28:CoeffZeroWindow",

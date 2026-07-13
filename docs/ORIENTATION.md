@@ -15,11 +15,11 @@ Lean kernel remains proof authority.
 
 | Surface | Count |
 |---|---:|
-| Lean modules | 539 |
-| Lean declarations | 6,355 |
-| Theorem-like declarations | 5,843 |
+| Lean modules | 540 |
+| Lean declarations | 6,362 |
+| Theorem-like declarations | 5,850 |
 | Generated certificate declarations | 1,681 |
-| Principal claim links | 54 |
+| Principal claim links | 56 |
 
 The exhaustive declaration and import index is
 [`docs/declaration_atlas.json`](declaration_atlas.json). Generated certificate
@@ -32,7 +32,7 @@ The authored prior-art record, not this table, is the source for antecedents.
 
 | Status | Exact public meaning |
 |---|---|
-| proved here | Lean theorem in the pinned public release; no novelty assertion is implied |
+| proved here | Lean theorem in the committed formal-source checkpoint; no novelty assertion is implied |
 | formalised here | Known mathematics represented and checked in Lean |
 | unconditional progress | Genuine theorem that does not settle the open problem |
 | conditional reduction | Exact implication whose remaining hypothesis is open |
@@ -58,6 +58,7 @@ The authored prior-art record, not this table, is the source for antecedents.
 | `certificate_completeness` | proved here | `res:complete` | `exists_certifiedKill_iff_tail_diff_notMem_int` in `Erdos249257/LcmConeFlatness.lean:316` |
 | `certified_kill_instances` | verified finite instance | `res:deposits` | `certifiedKill_all_small` in `Erdos249257/TotientTailPeriodKiller.lean:404` |
 | `diagonal_pincer_reduction` | conditional reduction | `res:pincer` | `diagonal_int_iff_foreignDiagonalDefect_hits_fullTarget` in `Erdos249257/DiagonalPincerDecomposition.lean:215` |
+| `adelic_height_obstruction` | proved here | `res:adelic` | `scalarLocalization_complement_dvd` in `Erdos249257/AdelicHeightObstruction.lean:23` |
 | `sublog_zero_windows` | proved here | `res:sublog` | `supportCoeffZeroWindow_length_le_eps_logb_add` in `Erdos249257/SublogDivisorCoverage.lean:392` |
 
 Each row is only an entry handle. Read the claim statement and every attached

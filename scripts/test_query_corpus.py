@@ -52,7 +52,17 @@ def run(*args: str) -> subprocess.CompletedProcess[str]:
 def main() -> int:
     summary = query()
     assert summary["kind"] == "corpus_summary"
-    assert summary["scale"]["module_count"] == 539
+    claims_document = json.loads((ROOT / "docs" / "claims.json").read_text(encoding="utf-8"))
+    module_graph = claims_document["machine_readable_paper"]["module_graph"]
+    assert module_graph["root"] == "Erdos249257.lean"
+    assert summary["scale"]["module_count"] == len(module_graph["nodes"]) + 1
+    descriptor = json.loads((ROOT / "docs" / "corpus_descriptor.json").read_text(encoding="utf-8"))
+    formal_source = claims_document["release"]["formal_source"]
+    assert descriptor["identity"]["formal_source"]["ref"] == formal_source["ref"]
+    assert descriptor["identity"]["formal_source"]["resolved_commit"] == formal_source["ref"]
+    assert descriptor["identity"]["formal_source"]["publication_state"] == (
+        "committed_checkpoint_pending_remote_publication"
+    )
 
     claim = query("--claim", "denominator_exclusion")
     assert claim["claim"]["status"] == "unconditional progress"
@@ -67,9 +77,11 @@ def main() -> int:
     assert "certificate_completeness" in incoming_ids
     assert "first_harmonic_certificate_interface" in incoming_ids
     assert reduction["argument_neighbourhood"]["outgoing"][0]["neighbour"]["status"] == "open"
-    assert reduction["paper"]["source_ref"] == "paper/erdos249-257-exposition.tex:568"
+    reduction_claim = next(
+        row for row in claims_document["claims"] if row["id"] == "certificate_reduction"
+    )
+    assert reduction["paper"]["label"] == reduction_claim["paper_label"]
 
-    claims_document = json.loads((ROOT / "docs" / "claims.json").read_text(encoding="utf-8"))
     labelled_claims = [row for row in claims_document["claims"] if row.get("paper_label")]
     for row in labelled_claims:
         packet = query("--claim", row["id"])
@@ -81,9 +93,16 @@ def main() -> int:
     assert companion["paper"]["rendered"] == "erdos249-transport-curvature.pdf"
     assert query("--claim", "erdos_249")["paper"] is None
 
+    adelic = query("--claim", "adelic_height_obstruction")
+    assert adelic["claim"]["status"] == "proved here"
+    assert "not an irrationality criterion" in adelic["claim"]["statement"]
+    assert adelic["claim"]["declarations"][0]["module"] == (
+        "Erdos249257/AdelicHeightObstruction.lean"
+    )
+
     paper_label = query("--paper-label", "res:farey")
     assert paper_label["kind"] == "paper_label"
-    assert paper_label["paper"]["source_ref"] == "paper/erdos249-257-exposition.tex:457"
+    assert paper_label["paper"] == claim["paper"]
     assert paper_label["attached_claims"][0]["id"] == "denominator_exclusion"
     assert paper_label["anchor_class"] == "registered_claim_anchor"
     assert any(
@@ -106,7 +125,17 @@ def main() -> int:
     assert local_result["source_links"][0]["declaration"] == (
         "tsum_primWeight_div_two_pow_sub_one_eq_totient_series"
     )
-    unlabelled_result = query("--paper-anchor", "paper/erdos249-257-exposition.tex:227")
+    unlabelled_declaration = query(
+        "--declaration", "tsum_moebius_div_two_pow_sub_one_eq_half"
+    )["matches"]
+    unlabelled_handle = next(
+        anchor["canonical_handle"]
+        for row in unlabelled_declaration
+        if row["module"] == "Erdos249257/CertificateKernel.lean"
+        for anchor in row["paper_anchors"]
+        if anchor["anchor_class"] == "authored_formal_anchor_without_registered_claim"
+    )
+    unlabelled_result = query("--paper-anchor", unlabelled_handle)
     assert unlabelled_result["paper"]["label"] is None
     assert unlabelled_result["anchor_class"] == (
         "authored_formal_anchor_without_registered_claim"
@@ -168,9 +197,7 @@ def main() -> int:
     )
     assert reduction_declaration["paper_sigil"] == "TotTaiPerKil"
     assert reduction_declaration["module_role"] == "Tail-period certificate reduction"
-    assert reduction_declaration["attached_claims"][0]["paper"]["source_ref"] == (
-        "paper/erdos249-257-exposition.tex:568"
-    )
+    assert reduction_declaration["attached_claims"][0]["paper"] == reduction["paper"]
 
     unlinked = query("--declaration", "totientTail_pos")["matches"][0]
     assert unlinked["attached_claims"] == []

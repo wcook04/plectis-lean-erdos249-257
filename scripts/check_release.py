@@ -9,8 +9,9 @@ This script verifies that every other public surface agrees with it:
   1. claims.json is well formed, every claim status is in the taxonomy, typed
      remaining-open propositions resolve, and the machine-readable paper graph
      resolves to real public files and claim ids.
-  2. Release identity: lakefile.toml, CITATION.cff, and the paper's pinned
-     artefact reference all state the same version/tag.
+  2. Release identity: lakefile.toml and CITATION.cff state the last tagged
+     release, while the main exposition pin agrees with the exact committed
+     formal-source checkpoint named in the registry.
   3. Every claimed Lean declaration exists in the stated module at the
      stated line.
   4. Every paper source link (\\lref / \\lrefx / \\lloc) resolves: the file
@@ -76,11 +77,27 @@ def read(path: Path) -> str:
     return path.read_text(encoding="utf-8")
 
 
-def module_lines(cache: dict[str, list[str]], rel: str) -> list[str] | None:
-    if rel not in cache:
-        p = ROOT / rel
-        cache[rel] = read(p).splitlines() if p.is_file() else None
-    return cache[rel]
+def module_lines(
+    cache: dict[tuple[str, str | None], list[str] | None],
+    rel: str,
+    source_ref: str | None = None,
+) -> list[str] | None:
+    """Read a module from the worktree or from the exact pinned Git tree."""
+    key = (rel, source_ref)
+    if key not in cache:
+        if source_ref is None:
+            path = ROOT / rel
+            cache[key] = read(path).splitlines() if path.is_file() else None
+        else:
+            completed = subprocess.run(
+                ["git", "show", f"{source_ref}:{rel}"],
+                cwd=ROOT,
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+            cache[key] = completed.stdout.splitlines() if completed.returncode == 0 else None
+    return cache[key]
 
 
 def name_at_line(lines: list[str], name: str, line: int) -> bool:
@@ -146,7 +163,7 @@ def lean_code_without_comments_and_strings(text: str) -> str:
 
 
 def main() -> int:
-    cache: dict[str, list[str]] = {}
+    cache: dict[tuple[str, str | None], list[str] | None] = {}
 
     # --- 1. claims.json ---------------------------------------------------
     claims_path = ROOT / "docs" / "claims.json"
@@ -157,6 +174,21 @@ def main() -> int:
     release = data["release"]
     version, tag = release["version"], release["tag"]
     check(tag == f"v{version}", f"release tag {tag} does not match version {version}")
+    formal_source = release.get("formal_source")
+    check(isinstance(formal_source, dict), "release must name a formal_source checkpoint")
+    formal_ref = formal_source.get("ref") if isinstance(formal_source, dict) else None
+    check(isinstance(formal_ref, str) and re.fullmatch(r"[0-9a-f]{40}", formal_ref or "") is not None,
+          "release.formal_source.ref must be a full lowercase Git commit id")
+    if isinstance(formal_source, dict):
+        check(formal_source.get("ref_kind") == "commit",
+              "release.formal_source.ref_kind must be 'commit'")
+        check(formal_source.get("publication_state") in {
+            "committed_checkpoint_pending_remote_publication",
+            "published_committed_checkpoint",
+        }, "release.formal_source has an unsupported publication_state")
+        check(formal_source.get("relationship_to_last_tag") in {
+            "at_last_tag", "post_tag_checkpoint",
+        }, "release.formal_source has an unsupported relationship_to_last_tag")
     claim_ids = [claim["id"] for claim in data["claims"]]
     check(len(claim_ids) == len(set(claim_ids)), "docs/claims.json contains duplicate claim ids")
     claim_id_set = set(claim_ids)
@@ -286,16 +318,25 @@ def main() -> int:
     check(toolchain == release["lean_toolchain"],
           f"lean-toolchain {toolchain} != claims.json {release['lean_toolchain']}")
 
-    paper_rows = [machine_paper["paper"], *machine_paper["paper"].get("companion_sources", [])]
+    main_paper_row = machine_paper["paper"]
+    paper_rows = [main_paper_row, *main_paper_row.get("companion_sources", [])]
     paper_sources = [(row["source"], read(ROOT / row["source"])) for row in paper_rows]
     paper = paper_sources[0][1]
     all_paper = "\n".join(text for _path, text in paper_sources)
-    for paper_path, paper_text in paper_sources:
+    check(subprocess.run(["git", "rev-parse", "--verify", f"{formal_ref}^{{commit}}"], cwd=ROOT,
+                         capture_output=True, text=True, check=False).returncode == 0,
+          f"release.formal_source.ref {formal_ref!r} does not resolve to a local commit")
+    for index, (paper_path, paper_text) in enumerate(paper_sources):
         m = re.search(r"\\newcommand\{\\commit\}\{([^}]+)\}", paper_text)
-        check(m is not None and m.group(1) == tag,
-              f"{paper_path} \\commit pin {m.group(1) if m else '<missing>'} != release tag {tag}")
-        check("blob/main" not in paper_text,
-              f"{paper_path} links a floating branch (blob/main); pin every link to the release tag")
+        expected_pin = formal_ref if index == 0 else tag
+        check(m is not None and m.group(1) == expected_pin,
+              f"{paper_path} \\commit pin {m.group(1) if m else '<missing>'} != expected {expected_pin}")
+        if index == 0:
+            check(paper_text.count("blob/main") == 1 and "\\newcommand{\\rootbase}" in paper_text,
+                  f"{paper_path} may use blob/main only for the explicit \\rref root-navigation base")
+        else:
+            check("blob/main" not in paper_text,
+                  f"{paper_path} links a floating branch (blob/main)")
     for claim in data["claims"]:
         label = claim.get("paper_label")
         if label:
@@ -356,7 +397,7 @@ def main() -> int:
     # --- 3. claimed declarations -------------------------------------------
     for claim in data["claims"]:
         for decl in claim["declarations"]:
-            lines = module_lines(cache, decl["module"])
+            lines = module_lines(cache, decl["module"], formal_ref)
             if lines is None:
                 fail(f"claim {claim['id']}: module {decl['module']} not found")
                 continue
@@ -365,13 +406,14 @@ def main() -> int:
                   f"{decl['module']}:{decl['line']} (±{LINE_WINDOW})")
 
     # --- 4. paper source links ----------------------------------------------
-    for paper_path, paper_text in paper_sources:
+    for index, (paper_path, paper_text) in enumerate(paper_sources):
+        source_ref = formal_ref if index == 0 else tag
         for macro, fname, line_s, name in re.findall(
                 r"\\(lref|lrefx|lloc)\{([^}]+)\}\{(\d+)\}(?:\{([^}]*)\})?", paper_text):
             rel = f"Erdos249257/{fname}"
-            lines = module_lines(cache, rel)
+            lines = module_lines(cache, rel, source_ref)
             if lines is None:
-                fail(f"{paper_path} \\{macro}: file {rel} not found")
+                fail(f"{paper_path} \\{macro}: file {rel} not found at {source_ref}")
                 continue
             line = int(line_s)
             check(line <= len(lines), f"{paper_path} \\{macro}: {rel}:{line} beyond end of file")

@@ -11,10 +11,17 @@
   },
   "identity": {
     "formal_source": {
-      "tag": "v0.6.0",
-      "resolved_commit": "c2975740da4ecbfc91faee2a2d9947d49e21e334",
+      "ref": "7f8c2feb039f46758c56842782e53437ba99d52e",
+      "ref_kind": "commit",
+      "resolved_commit": "7f8c2feb039f46758c56842782e53437ba99d52e",
+      "publication_state": "committed_checkpoint_pending_remote_publication",
+      "relationship_to_last_tag": "post_tag_checkpoint",
+      "last_release": {
+        "version": "0.6.0",
+        "tag": "v0.6.0"
+      },
       "lean_toolchain": "leanprover/lean4:v4.29.1",
-      "authority_role": "proof_bearing_release_anchor"
+      "authority_role": "proof_bearing_committed_source_anchor"
     },
     "navigation_snapshot": {
       "commit": "47832a30cb3e3185098dcbc474f696c969f2a881",
@@ -26,16 +33,16 @@
     "content": {
       "machine_readable_paper": {
         "path": "docs/claims.json::machine_readable_paper",
-        "content_digest": "sha256:294b3fbc2059287536b6b3a655daa5674bb96b43d57746efa175d11d2fda5739"
+        "content_digest": "sha256:f99a693b24a06439aa6adfe939a58f94d1472be21b864c695c61255b5d197228"
       },
       "claims_document": {
         "path": "docs/claims.json",
-        "content_digest": "sha256:1058968b9fb33390085248a9f5317bb24b7fbca8b8dc7702368b44a529b00987"
+        "content_digest": "sha256:a8150eb64eb0c6a4c73cb4433bd2b63d492f3e06b05b50f57c85709d8ef2fc9d"
       },
       "declaration_atlas": {
         "path": "docs/declaration_atlas.json",
-        "content_digest": "sha256:44e4739938ea6ba632413d6e6560f545784ec3eff2519b91aa84b65e539db71c",
-        "source_input_fingerprint": "sha256:b3bbe9c8be22e8e1169e0d0b2f0f272a169de021f2d919d0993eee854f9f6578"
+        "content_digest": "sha256:114b924b29525806a47d5c4bfa1e2ad173aba784961d422a71dc75c2c30eeed0",
+        "source_input_fingerprint": "sha256:24add812189ed26c491553d34e4a214a0f5e335edaca5886d2df2371d1a55c03"
       },
       "methodology_contract": {
         "path": "docs/methodology.json",
@@ -43,13 +50,13 @@
       },
       "bounded_orientation": {
         "path": "docs/orientation.json",
-        "content_digest": "sha256:f76079fd53cee026ecdc2398b9f85e6655ab4eece30d1e2d4c5add1c905b099b"
+        "content_digest": "sha256:b3b67d31dfe3e1454316b29519ca53b76668d03f85846835078d6f2609bc577f"
       },
       "human_exposition": {
         "source_path": "paper/erdos249-257-exposition.tex",
-        "source_content_digest": "sha256:0a5c9dddeb25d35aae4972da4c538e986610d9347eefd0bc692ca34e5caf17dc",
+        "source_content_digest": "sha256:79ff4e8d5c54eb8d2c12679a58f310180a94fa68020f0cd177588f2457f7ba60",
         "rendered_path": "erdos249-257-exposition.pdf",
-        "rendered_content_digest": "sha256:f18f9443895bc414e83f3753ed91387383d981e2ccc4dfaf78296102363aa782",
+        "rendered_content_digest": "sha256:b8ec00c65eeeeaf9400544630c3ed1fa3f04080b714330fc98918f40c1c02891",
         "artifact_role": "authored_mathematician_facing_exposition",
         "authority_posture": "authored_editorial_surface_not_Lean_proof_authority"
       },
@@ -57,13 +64,13 @@
         "source_path": "paper/erdos249-transport-curvature.tex",
         "source_content_digest": "sha256:62f22972f12a6bda9c523f13c75fc7553729d5104cec905f7d915f7ca4e4168d",
         "rendered_path": "erdos249-transport-curvature.pdf",
-        "rendered_content_digest": "sha256:601c18e29d0b43b63f52c5a4b10b60f5140d10a520c36820706609b72f3eeef0",
+        "rendered_content_digest": "sha256:aa52f6d9e085289858c8130a8bd04ffdd73313046d0b33d0c4fc68dfcd966e3e",
         "artifact_role": "authored_transport_and_curvature_companion",
         "authority_posture": "authored_editorial_surface_not_Lean_proof_authority"
       },
       "paper_source_sigils": {
         "path": "paper/module-aliases.json",
-        "content_digest": "sha256:6d7bfef0775e2150000e08eb713928f284128ed00ca2d51b20e75c633bdb6e81",
+        "content_digest": "sha256:0e68bce48f6b13518d9c7a49d31f6665b54524c6aa8b9988b9bfc71781e1669d",
         "schema": "erdos249257-paper-module-aliases/1",
         "artifact_role": "paper_sigil_to_lean_module_navigation_crosswalk",
         "authority_posture": "generated_navigation_projection_not_proof_authority"
@@ -125,11 +132,11 @@
     }
   },
   "summary": {
-    "module_count": 539,
-    "declaration_count": 6355,
-    "theorem_like_count": 5843,
+    "module_count": 540,
+    "declaration_count": 6362,
+    "theorem_like_count": 5850,
     "generated_certificate_declaration_count": 1681,
-    "principal_claim_link_count": 54,
+    "principal_claim_link_count": 56,
     "kind_counts": {
       "abbrev": 1,
       "def": 497,
@@ -137,12 +144,12 @@
       "instance": 3,
       "lemma": 336,
       "structure": 8,
-      "theorem": 5507
+      "theorem": 5514
     }
   },
   "compact_graph": {
     "status_taxonomy": {
-      "proved here": "Lean theorem in the pinned public release; no novelty assertion is implied",
+      "proved here": "Lean theorem in the committed formal-source checkpoint; no novelty assertion is implied",
       "formalised here": "Known mathematics represented and checked in Lean",
       "unconditional progress": "Genuine theorem that does not settle the open problem",
       "conditional reduction": "Exact implication whose remaining hypothesis is open",
@@ -316,6 +323,24 @@
         ]
       },
       {
+        "id": "adelic_height_obstruction",
+        "status": "proved here",
+        "statement": "If H divides the reduced denominator of a rational x and the reduced denominator of c·x divides H for an integer c, then the complementary factor x.den/H divides |c|. Scalar localisation transfers, rather than discards, that denominator information; this local obstruction is not an irrationality criterion.",
+        "paper_label": "res:adelic",
+        "declarations": [
+          {
+            "name": "scalarLocalization_complement_dvd",
+            "module": "Erdos249257/AdelicHeightObstruction.lean",
+            "line": 23
+          },
+          {
+            "name": "scalarLocalization_integer_eq_mul_num",
+            "module": "Erdos249257/AdelicHeightObstruction.lean",
+            "line": 56
+          }
+        ]
+      },
+      {
         "id": "sublog_zero_windows",
         "status": "proved here",
         "statement": "A rational support-series value forces every zero window in the divisor-count coefficient to have length at most ε·log₂(N+1) + O_{ε,c,v}(1), uniformly in the support. This constrains coverage; it does not solve universal #257.",
@@ -367,7 +392,7 @@
           "source": "paper/erdos249-257-exposition.tex",
           "environment": "problem",
           "title": "Erd\\H{o}s \\#249",
-          "line": 946
+          "line": 963
         }
       },
       {
@@ -378,7 +403,7 @@
           "source": "paper/erdos249-257-exposition.tex",
           "environment": "problem",
           "title": "unbounded certificate supply",
-          "line": 955
+          "line": 972
         }
       },
       {
@@ -389,13 +414,13 @@
           "source": "paper/erdos249-257-exposition.tex",
           "environment": "problem",
           "title": "universal Erd\\H{o}s \\#257",
-          "line": 962
+          "line": 979
         }
       }
     ],
     "module_topology": {
       "root": "Erdos249257.lean",
-      "node_count": 538,
+      "node_count": 539,
       "root_imports": [
         "Erdos249257.CertificateKernel",
         "Erdos249257.GeneratedCertificates",
@@ -435,7 +460,8 @@
         "Erdos249257.FirstHarmonicGap",
         "Erdos249257.JointExponentTransport",
         "Erdos249257.PrimeJumpMigration",
-        "Erdos249257.PrimeJumpWindow"
+        "Erdos249257.PrimeJumpWindow",
+        "Erdos249257.AdelicHeightObstruction"
       ],
       "full_graph": "docs/claims.json::machine_readable_paper.module_graph"
     },
@@ -967,6 +993,18 @@
         "line": 290
       },
       {
+        "claim_id": "adelic_height_obstruction",
+        "name": "scalarLocalization_complement_dvd",
+        "module": "Erdos249257/AdelicHeightObstruction.lean",
+        "line": 23
+      },
+      {
+        "claim_id": "adelic_height_obstruction",
+        "name": "scalarLocalization_integer_eq_mul_num",
+        "module": "Erdos249257/AdelicHeightObstruction.lean",
+        "line": 56
+      },
+      {
         "claim_id": "sublog_zero_windows",
         "name": "supportCoeffZeroWindow_length_le_eps_logb_add",
         "module": "Erdos249257/SublogDivisorCoverage.lean",
@@ -977,7 +1015,7 @@
   "expansion": {
     "machine_readable_paper": {
       "path": "docs/claims.json::machine_readable_paper",
-      "expected_content_digest": "sha256:294b3fbc2059287536b6b3a655daa5674bb96b43d57746efa175d11d2fda5739",
+      "expected_content_digest": "sha256:f99a693b24a06439aa6adfe939a58f94d1472be21b864c695c61255b5d197228",
       "contains": [
         "all_claims",
         "authored_argument_graph",
@@ -987,8 +1025,8 @@
     },
     "exhaustive_declaration_atlas": {
       "path": "docs/declaration_atlas.json",
-      "expected_content_digest": "sha256:44e4739938ea6ba632413d6e6560f545784ec3eff2519b91aa84b65e539db71c",
-      "expected_source_input_fingerprint": "sha256:b3bbe9c8be22e8e1169e0d0b2f0f272a169de021f2d919d0993eee854f9f6578",
+      "expected_content_digest": "sha256:114b924b29525806a47d5c4bfa1e2ad173aba784961d422a71dc75c2c30eeed0",
+      "expected_source_input_fingerprint": "sha256:24add812189ed26c491553d34e4a214a0f5e335edaca5886d2df2371d1a55c03",
       "availability": "optional_attached_corpus",
       "check": "python3 scripts/build_declaration_atlas.py --check"
     },
@@ -1000,21 +1038,21 @@
     },
     "human_exposition": {
       "source_path": "paper/erdos249-257-exposition.tex",
-      "expected_source_content_digest": "sha256:0a5c9dddeb25d35aae4972da4c538e986610d9347eefd0bc692ca34e5caf17dc",
+      "expected_source_content_digest": "sha256:79ff4e8d5c54eb8d2c12679a58f310180a94fa68020f0cd177588f2457f7ba60",
       "rendered_path": "erdos249-257-exposition.pdf",
-      "expected_rendered_content_digest": "sha256:f18f9443895bc414e83f3753ed91387383d981e2ccc4dfaf78296102363aa782",
+      "expected_rendered_content_digest": "sha256:b8ec00c65eeeeaf9400544630c3ed1fa3f04080b714330fc98918f40c1c02891",
       "authority_posture": "authored_editorial_surface_not_Lean_proof_authority"
     },
     "technical_companion": {
       "source_path": "paper/erdos249-transport-curvature.tex",
       "expected_source_content_digest": "sha256:62f22972f12a6bda9c523f13c75fc7553729d5104cec905f7d915f7ca4e4168d",
       "rendered_path": "erdos249-transport-curvature.pdf",
-      "expected_rendered_content_digest": "sha256:601c18e29d0b43b63f52c5a4b10b60f5140d10a520c36820706609b72f3eeef0",
+      "expected_rendered_content_digest": "sha256:aa52f6d9e085289858c8130a8bd04ffdd73313046d0b33d0c4fc68dfcd966e3e",
       "authority_posture": "authored_editorial_surface_not_Lean_proof_authority"
     },
     "paper_source_sigils": {
       "path": "paper/module-aliases.json",
-      "expected_content_digest": "sha256:6d7bfef0775e2150000e08eb713928f284128ed00ca2d51b20e75c633bdb6e81",
+      "expected_content_digest": "sha256:0e68bce48f6b13518d9c7a49d31f6665b54524c6aa8b9988b9bfc71781e1669d",
       "schema": "erdos249257-paper-module-aliases/1",
       "check": "python3 scripts/build_paper_module_aliases.py --check"
     }

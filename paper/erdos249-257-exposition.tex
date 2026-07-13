@@ -3,7 +3,7 @@
 %
 % A mathematician-facing exposition of the Erdos249257 Lean
 % development. Every formalised statement links to the exact Lean source line
-% at the pinned release. Build with `tectonic erdos249-257-exposition.tex` or `make`.
+% at the pinned formal-source checkpoint. Build with `tectonic erdos249-257-exposition.tex` or `make`.
 \documentclass[11pt]{article}
 
 \usepackage[T1]{fontenc}
@@ -17,14 +17,15 @@
 \usepackage[colorlinks=true,linkcolor=black,urlcolor=RoyalBlue,citecolor=black]{hyperref}
 
 % ---------------------------------------------------------------------------
-% Drill-down machinery: each anchor links to the GitHub blob at the pinned
-% release tag. \commit names the released tree; scripts/check_release.py in
+% Drill-down machinery: each formal anchor links to the GitHub blob at the
+% pinned formal-source commit. \commit names that checkpoint; scripts/check_release.py in
 % the repository verifies that it matches docs/claims.json and that every
 % \lref/\lrefx/\lloc target resolves to the named declaration at that line.
 % ---------------------------------------------------------------------------
-\newcommand{\commit}{v0.6.0}
+\newcommand{\commit}{7f8c2feb039f46758c56842782e53437ba99d52e}
 \newcommand{\repobase}{https://github.com/wcook04/plectis-lean-erdos249-257/blob/\commit}
-\newcommand{\releaseurl}{https://github.com/wcook04/plectis-lean-erdos249-257/releases/tag/\commit}
+\newcommand{\sourceurl}{https://github.com/wcook04/plectis-lean-erdos249-257/tree/\commit}
+\newcommand{\rootbase}{https://github.com/wcook04/plectis-lean-erdos249-257/blob/main}
 \newcommand{\PK}{Erdos249257}
 \input{module-aliases.tex}
 % \idn: typeset a Lean identifier (underscores literal, breakable across lines).
@@ -35,8 +36,8 @@
 \newcommand{\lref}[3]{\href{\repobase/\PK/#1\#L#2}{\texttt{\modulesigil{#1}}}}
 \newcommand{\lrefx}[3]{\href{\repobase/\PK/#1\#L#2}{\texttt{\modulesigil{#1}}}}
 \newcommand{\lloc}[2]{\href{\repobase/\PK/#1\#L#2}{\texttt{\modulesigil{#1}}}}
-% \rref{rootfile}: link a repository-root file at the pinned release.
-\newcommand{\rref}[1]{\href{\repobase/\detokenize{#1}}{\texttt{\detokenize{#1}}}}
+% \rref{rootfile}: link a repository-root navigation file at the public main branch.
+\newcommand{\rref}[1]{\href{\rootbase/\detokenize{#1}}{\texttt{\detokenize{#1}}}}
 \emergencystretch=2em
 
 \newtheorem{theorem}{Theorem}[section]
@@ -475,7 +476,7 @@ The bound is reached by a ladder of finite, elementary exclusions,
 each a mediant/Farey argument that traps any candidate $m/q$ inside a forbidden
 gap. The mediant framework is historically associated with Farey's 1816 note
 on vulgar fractions~\cite{farey1816}; the finite exclusions themselves are
-the Lean-checked arguments of this release. See
+Lean-checked arguments in the formal-source checkpoint. See
 \lrefx{CertificateKernel.lean}{15347}{tsum_totient_div_pow_two_ne_ratCast_of_den_le_4838}
 for the first rung and \lrefx{GapFareyBound.lean}{80}{gap_check_window_1_120_le_248672326362367909},
 \lrefx{GapFareyBound.lean}{156}{gap_check_window_1_240_le_79639646646701375323355774875831053}
@@ -767,6 +768,21 @@ future positive route would need a separately defined projection together with
 a theorem controlling what that projection discards.  This is a proved
 obstruction to one strategy, not progress on the unbounded-supply proposition.
 
+\begin{proposition}[scalar-localisation obstruction]\label{res:adelic}
+Let $x\in\Q$ and $c\in\Z$.  If $H\mid\operatorname{den}(x)$ and the reduced denominator
+of $cx$ divides $H$, then
+\[
+ \frac{\operatorname{den}(x)}{H}\mid |c|.
+\]
+\end{proposition}
+\noindent Formalised:
+\lrefx{AdelicHeightObstruction.lean}{23}{scalarLocalization_complement_dvd}
+and \lrefx{AdelicHeightObstruction.lean}{56}{scalarLocalization_integer_eq_mul_num}.
+Thus a scalar localisation can move a complementary denominator factor into
+its coefficient, but cannot erase it.  This rules out a scalar-denominator
+shortcut of that form.  It neither proves full-target avoidance nor supplies
+any certificates, so it gives no irrationality criterion for $S$.
+
 \paragraph{What is open.} The reduction converts \#249 into the statement that the
 certificate supply is \emph{unbounded}: certificates exist for arbitrarily large
 parameters. By Proposition~\ref{res:complete} this is equivalent to the
@@ -840,15 +856,16 @@ proofs above.
 
 The Lean~4 proof assistant~\cite{lean} and Mathlib library~\cite{mathlib} check
 the development. The source, exact informal-to-formal links, and build metadata are
-available in the public repository
+maintained in the repository
 \href{https://github.com/wcook04/plectis-lean-erdos249-257}{\texttt{plectis-lean-erdos249-257}}.
-This paper is pinned to the tagged release \href{\releaseurl}{\texttt{\commit}};
-each blue source sigil targets an exact declaration at that tag (for example, the
+This paper is pinned to the committed formal-source checkpoint
+\href{\sourceurl}{\texttt{\commit}};
+each blue source sigil targets an exact declaration at that revision (for example, the
 base-$2$ corollary in Theorem~\ref{res:full} resolves to
 \lrefx{CertificateKernel.lean}{8007}{irrational_erdosBorwein_series}). The package uses
 \texttt{leanprover/lean4:v4.29.1} and the Mathlib revision pinned by
 \href{\repobase/lake-manifest.json}{\texttt{lake-manifest.json}}.
-The exact public artefact cited here is release \texttt{\commit}~\cite{artifact}.
+The exact formal-source revision cited here is \texttt{\commit}~\cite{artifact}.
 
 There is no \texttt{sorry} or \texttt{admit} in the package. Finite
 computations use \texttt{decide}, whose proof terms are checked by the Lean
@@ -862,11 +879,11 @@ The second command elaborates every declaration and kernel-checks every proof
 term against the pinned Mathlib dependency. Continuous integration executes
 the same build. Appendix~\ref{app:index} gives a compact map of the principal
 informal statements to declarations. The repository's claim registry
-(\rref{docs/claims.json}) records each public claim once, and
+(\rref{docs/claims.json}) records each registered claim once, and
 \rref{scripts/check_release.py} verifies that this paper's source links, the
 repository documentation, and the release metadata all agree with it,
 including that every source sigil above resolves to the named declaration at the
-stated line of the released source.
+stated line of the named formal-source checkpoint.
 
 \section{Complements and further questions}\label{sec:further}
 
@@ -983,11 +1000,11 @@ obstructions uniformly, not merely extend the finite range already checked.
 
 \subsection*{Statements and declarations}
 
-\paragraph{Artefact and data availability.} The complete formal artefact is
-the tagged public release \href{\releaseurl}{\texttt{\commit}} of the
-repository, including the Lean sources, the pinned toolchain and Mathlib
-manifest, the generated certificate files, and this manuscript's source.
-Section~\ref{sec:verify} gives the verification route.
+\paragraph{Artefact and data availability.} The pinned formal-source revision
+\href{\sourceurl}{\texttt{\commit}} contains the Lean sources, pinned toolchain,
+Mathlib manifest, and generated certificate files used by the source sigils.
+The claim registry and this manuscript are repository navigation surfaces rather
+than proof authority; Section~\ref{sec:verify} gives the verification route.
 
 \paragraph{Use of AI assistance.} Large-language-model assistants were used
 during development for proof drafting, refactoring, and prose editing. Every
@@ -1402,7 +1419,7 @@ exclude rational values for either open series.
 
 \section{Index of principal declarations}\label{app:index}
 
-Each row links to the declaration at release \href{\releaseurl}{\texttt{\commit}}.
+Each row links to the declaration at source revision \href{\sourceurl}{\texttt{\commit}}.
 
 \begin{center}
 \footnotesize
@@ -1434,6 +1451,7 @@ squared-Mersenne enclosure & \lrefx{SquaredMersenneDiagonalEnclosure.lean}{116}{
 exact Mersenne-shadow denominator & \lrefx{MersenneShadowDenominatorGrowth.lean}{147}{lcmHeight_scaledMobiusShadow_den_exact}\ (\texttt{MersenneShadowDenominatorGrowth})\\
 fresh-loss projection reduction & \lrefx{DiagonalFreshLossBridge.lean}{187}{irrational_totientSeries_of_diagonalFreshLossProjectionSupply}\ (\texttt{DiagonalFreshLossBridge})\\
 prime-adjunction diamond no-go & \lrefx{FullTargetPrimeAdjunctionNoGo.lean}{196}{fullTarget_primeAdjunction_diamond_iff_root}\ (\texttt{FullTargetPrimeAdjunctionNoGo})\\
+scalar-localisation height obstruction & \lrefx{AdelicHeightObstruction.lean}{23}{scalarLocalization_complement_dvd}\ (\texttt{AdelicHeightObstruction})\\
 tail-orbit rationality criterion & \lrefx{GenericTailOrbitRigidity.lean}{425}{binaryCoeffSeries_rational_iff_exists_temperedBinaryOrbit}\ (\texttt{GenericTailOrbitRigidity})\\
 Boolean carry certificate $\Leftrightarrow$ support fraction & \lrefx{BooleanMobiusCarry.lean}{948}{exists_normalized_support_fraction_iff_exists_booleanMobiusCarry}\ (\texttt{BooleanMobiusCarry})\\
 one-wrap classification & \lrefx{RationalSupportCarrySkeleton.lean}{415}{one_doublingWrap_classification}\ (\texttt{RationalSupportCarrySkeleton})\\

@@ -6,14 +6,16 @@
   "release": {
     "version": "0.6.0",
     "tag": "v0.6.0",
-    "lean_toolchain": "leanprover/lean4:v4.29.1"
+    "lean_toolchain": "leanprover/lean4:v4.29.1",
+    "formal_source_ref": "7f8c2feb039f46758c56842782e53437ba99d52e",
+    "formal_source_publication_state": "committed_checkpoint_pending_remote_publication"
   },
   "scale": {
-    "module_count": 539,
-    "declaration_count": 6355,
-    "theorem_like_count": 5843,
+    "module_count": 540,
+    "declaration_count": 6362,
+    "theorem_like_count": 5850,
     "generated_certificate_declaration_count": 1681,
-    "principal_claim_link_count": 54,
+    "principal_claim_link_count": 56,
     "kind_counts": {
       "abbrev": 1,
       "def": 497,
@@ -21,11 +23,11 @@
       "instance": 3,
       "lemma": 336,
       "structure": 8,
-      "theorem": 5507
+      "theorem": 5514
     }
   },
   "status_taxonomy": {
-    "proved here": "Lean theorem in the pinned public release; no novelty assertion is implied",
+    "proved here": "Lean theorem in the committed formal-source checkpoint; no novelty assertion is implied",
     "formalised here": "Known mathematics represented and checked in Lean",
     "unconditional progress": "Genuine theorem that does not settle the open problem",
     "conditional reduction": "Exact implication whose remaining hypothesis is open",
@@ -42,7 +44,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 946
+        "line": 963
       }
     },
     {
@@ -53,7 +55,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 955
+        "line": 972
       }
     },
     {
@@ -64,7 +66,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 962
+        "line": 979
       }
     }
   ],
@@ -257,6 +259,24 @@
       ],
       "remaining_open_proposition_ids": [
         "remaining_open.unbounded_certificate_supply"
+      ]
+    },
+    {
+      "id": "adelic_height_obstruction",
+      "status": "proved here",
+      "statement": "If H divides the reduced denominator of a rational x and the reduced denominator of c·x divides H for an integer c, then the complementary factor x.den/H divides |c|. Scalar localisation transfers, rather than discards, that denominator information; this local obstruction is not an irrationality criterion.",
+      "paper_label": "res:adelic",
+      "declarations": [
+        {
+          "name": "scalarLocalization_complement_dvd",
+          "module": "Erdos249257/AdelicHeightObstruction.lean",
+          "line": 23
+        },
+        {
+          "name": "scalarLocalization_integer_eq_mul_num",
+          "module": "Erdos249257/AdelicHeightObstruction.lean",
+          "line": 56
+        }
       ]
     },
     {
