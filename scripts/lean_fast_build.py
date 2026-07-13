@@ -58,17 +58,18 @@ def discover(root: Path = ROOT) -> dict[str, Path]:
     return modules
 
 
+def local_imports(source: Path, modules: dict[str, Path]) -> set[str]:
+    return {
+        match.group(1)
+        for line in source.read_text(encoding="utf-8").splitlines()
+        if "import" in line
+        and (match := IMPORT_RE.match(line))
+        and match.group(1) in modules
+    }
+
+
 def local_graph(modules: dict[str, Path]) -> dict[str, set[str]]:
-    graph: dict[str, set[str]] = {}
-    for name, source in modules.items():
-        graph[name] = {
-            match.group(1)
-            for line in source.read_text(encoding="utf-8").splitlines()
-            if "import" in line
-            and (match := IMPORT_RE.match(line))
-            and match.group(1) in modules
-        }
-    return graph
+    return {name: local_imports(source, modules) for name, source in modules.items()}
 
 
 def reachable_graph(
@@ -82,13 +83,7 @@ def reachable_graph(
         module = pending.pop()
         if module in graph:
             continue
-        imports = {
-            match.group(1)
-            for line in modules[module].read_text(encoding="utf-8").splitlines()
-            if "import" in line
-            and (match := IMPORT_RE.match(line))
-            and match.group(1) in modules
-        }
+        imports = local_imports(modules[module], modules)
         graph[module] = imports
         pending.extend(imports - graph.keys())
     return graph

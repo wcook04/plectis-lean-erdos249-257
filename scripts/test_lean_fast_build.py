@@ -51,6 +51,17 @@ class LeanFastBuildTests(unittest.TestCase):
                 {"Pkg.Main": {"Pkg.Base"}, "Pkg.Base": set()},
             )
 
+    def test_local_imports_filters_comments_and_external_modules(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            source = Path(directory) / "Main.lean"
+            source.write_text(
+                "-- import Pkg.Commented\nimport Pkg.Local\nimport Mathlib\n",
+                encoding="utf-8",
+            )
+            modules = {"Pkg.Local": Path(directory) / "Local.lean"}
+
+            self.assertEqual(fast.local_imports(source, modules), {"Pkg.Local"})
+
     def test_discovery_ignores_ephemeral_underscore_modules(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
