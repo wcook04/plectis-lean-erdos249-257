@@ -341,6 +341,13 @@ def main() -> int:
     assert signed_moment["dependency_neighbourhood"]["receipt"]["imports_total"] == 0
     assert signed_moment["dependency_neighbourhood"]["receipt"]["importers_total"] == 1
 
+    totient_mahler = query("--module", "Erdos249257.TotientMahlerDefect", "--limit", "3")
+    assert totient_mahler["module"]["role"] == (
+        "Finite dyadic-totient rank and certificate interface"
+    )
+    assert totient_mahler["dependency_neighbourhood"]["receipt"]["imports_total"] == 0
+    assert totient_mahler["dependency_neighbourhood"]["receipt"]["importers_total"] == 1
+
     aliases = json.loads((ROOT / "paper" / "module-aliases.json").read_text(encoding="utf-8"))
     assert aliases["alias_count"] == len(aliases["aliases"])
     assert len({row["sigil"] for row in aliases["aliases"]}) == aliases["alias_count"]

@@ -4,21 +4,21 @@
   "projection_not_authority": true,
   "proof_authority": "Lean source checked by the pinned Lean kernel",
   "argument_authority": "docs/claims.json::machine_readable_paper.argument_graph",
-  "source_fingerprint": "sha256:d5719429c35e4df5e13aed4ecac07f8164bcebf0e820a48b7c9739cdf88ea713",
+  "source_fingerprint": "sha256:9d6a1a81e4414f93633ca32d3addf6eee7b9d25de721627c157a890f5e9a03b4",
   "summary": {
-    "module_count": 542,
-    "declaration_count": 6388,
-    "theorem_like_count": 5871,
+    "module_count": 543,
+    "declaration_count": 6403,
+    "theorem_like_count": 5880,
     "generated_certificate_declaration_count": 1681,
     "principal_claim_link_count": 63,
     "kind_counts": {
-      "abbrev": 1,
-      "def": 502,
+      "abbrev": 2,
+      "def": 505,
       "inductive": 3,
       "instance": 3,
       "lemma": 336,
-      "structure": 8,
-      "theorem": 5535
+      "structure": 10,
+      "theorem": 5544
     }
   },
   "modules": [
@@ -67,7 +67,8 @@
         "Erdos249257.PrimeJumpWindow",
         "Erdos249257.AdelicHeightObstruction",
         "Erdos249257.SquareCRTCube",
-        "Erdos249257.SignedQMomentObstruction"
+        "Erdos249257.SignedQMomentObstruction",
+        "Erdos249257.TotientMahlerDefect"
       ],
       "declaration_count": 0,
       "kind_counts": {}
@@ -6573,6 +6574,18 @@
       "kind_counts": {
         "def": 7,
         "theorem": 10
+      }
+    },
+    {
+      "id": "Erdos249257.TotientMahlerDefect",
+      "path": "Erdos249257/TotientMahlerDefect.lean",
+      "imports": [],
+      "declaration_count": 15,
+      "kind_counts": {
+        "abbrev": 1,
+        "def": 3,
+        "structure": 2,
+        "theorem": 9
       }
     },
     {
@@ -71568,6 +71581,171 @@
         "transport_certificate_instances"
       ],
       "docstring": "Kernel-checked finite lattice separation at `t = 6`, `H = 60`."
+    },
+    {
+      "id": "Erdos249257/TotientMahlerDefect.lean:32:totientKernelSeq",
+      "name": "totientKernelSeq",
+      "kind": "def",
+      "module": "Erdos249257/TotientMahlerDefect.lean",
+      "line": 32,
+      "signature": "def totientKernelSeq (j r : ℕ) : ℕ → ℚ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The `(j,r)` dyadic-kernel channel of Euler's totient, viewed over `ℚ`."
+    },
+    {
+      "id": "Erdos249257/TotientMahlerDefect.lean:37:TotientCanonicalIndex",
+      "name": "TotientCanonicalIndex",
+      "kind": "abbrev",
+      "module": "Erdos249257/TotientMahlerDefect.lean",
+      "line": 37,
+      "signature": "abbrev TotientCanonicalIndex (e : ℕ)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The canonical channels through level `e`: the two zero-residue base channels, followed by every odd residue at levels `1,...,e`."
+    },
+    {
+      "id": "Erdos249257/TotientMahlerDefect.lean:41:canonicalTotientKernelFamily",
+      "name": "canonicalTotientKernelFamily",
+      "kind": "def",
+      "module": "Erdos249257/TotientMahlerDefect.lean",
+      "line": 41,
+      "signature": "def canonicalTotientKernelFamily (e : ℕ) : TotientCanonicalIndex e → ℕ → ℚ | Sum.inl i => totientKernelSeq i.val 0 | Sum.inr ⟨j, r⟩ => totientKernelSeq (j.val + 1) (2 * r.val + 1) /-- The canonical family has exactly `2^e+1` channels. -/ theorem card_totientCanonicalIndex (e : ℕ) : Fintype.card (TotientCanonicalIndex e) = 2 ^ e + 1",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The canonical family indexed without duplicate even-residue channels."
+    },
+    {
+      "id": "Erdos249257/TotientMahlerDefect.lean:47:card_totientCanonicalIndex",
+      "name": "card_totientCanonicalIndex",
+      "kind": "theorem",
+      "module": "Erdos249257/TotientMahlerDefect.lean",
+      "line": 47,
+      "signature": "theorem card_totientCanonicalIndex (e : ℕ) : Fintype.card (TotientCanonicalIndex e) = 2 ^ e + 1",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The canonical family has exactly `2^e+1` channels."
+    },
+    {
+      "id": "Erdos249257/TotientMahlerDefect.lean:61:evaluationLinearMap",
+      "name": "evaluationLinearMap",
+      "kind": "def",
+      "module": "Erdos249257/TotientMahlerDefect.lean",
+      "line": 61,
+      "signature": "def evaluationLinearMap {ι : Type*} [Fintype ι] (rowIndex : ι → ℕ) : (ℕ → ℚ) →ₗ[ℚ] (ι → ℚ)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Pull a finite family of sequences back along a finite family of evaluation points."
+    },
+    {
+      "id": "Erdos249257/TotientMahlerDefect.lean:69:SeparatedMinorCertificate",
+      "name": "SeparatedMinorCertificate",
+      "kind": "structure",
+      "module": "Erdos249257/TotientMahlerDefect.lean",
+      "line": 69,
+      "signature": "structure SeparatedMinorCertificate {ι : Type*} [Fintype ι] [DecidableEq ι] (family : ι → ℕ → ℚ)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A square nonzero evaluation minor. This is the exact finite object needed to turn number-theoretic row construction into linear independence."
+    },
+    {
+      "id": "Erdos249257/TotientMahlerDefect.lean:77:linearIndependent_of_separatedMinorCertificate",
+      "name": "linearIndependent_of_separatedMinorCertificate",
+      "kind": "theorem",
+      "module": "Erdos249257/TotientMahlerDefect.lean",
+      "line": 77,
+      "signature": "theorem linearIndependent_of_separatedMinorCertificate {ι : Type*} [Fintype ι] [DecidableEq ι] (family : ι → ℕ → ℚ) (cert : SeparatedMinorCertificate family) : LinearIndependent ℚ family",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A nonzero square evaluation minor proves that the underlying functions are linearly independent."
+    },
+    {
+      "id": "Erdos249257/TotientMahlerDefect.lean:88:finrank_canonicalTotientKernel_eq_of_linearIndependent",
+      "name": "finrank_canonicalTotientKernel_eq_of_linearIndependent",
+      "kind": "theorem",
+      "module": "Erdos249257/TotientMahlerDefect.lean",
+      "line": 88,
+      "signature": "theorem finrank_canonicalTotientKernel_eq_of_linearIndependent (e : ℕ) (hcanon : LinearIndependent ℚ (canonicalTotientKernelFamily e)) : finrank ℚ (Submodule.span ℚ (Set.range (canonicalTotientKernelFamily e))) = 2 ^ e + 1",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Linear independence of the canonical family gives its exact finite-level dimension. This is the producer-neutral endpoint consumed both by explicit minors and by a future adaptive CRT--Dirichlet proof."
+    },
+    {
+      "id": "Erdos249257/TotientMahlerDefect.lean:98:finrank_canonicalTotientKernel_eq_of_certificate",
+      "name": "finrank_canonicalTotientKernel_eq_of_certificate",
+      "kind": "theorem",
+      "module": "Erdos249257/TotientMahlerDefect.lean",
+      "line": 98,
+      "signature": "theorem finrank_canonicalTotientKernel_eq_of_certificate (e : ℕ) (cert : SeparatedMinorCertificate (canonicalTotientKernelFamily e)) : finrank ℚ (Submodule.span ℚ (Set.range (canonicalTotientKernelFamily e))) = 2 ^ e + 1",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A separated minor for the canonical family gives the exact finite-level dimension promised by the dyadic rank route. The remaining all-level task is to construct this certificate by CRT and Dirichlet for each `e`."
+    },
+    {
+      "id": "Erdos249257/TotientMahlerDefect.lean:107:totient_two_pow_succ_mul_of_odd",
+      "name": "totient_two_pow_succ_mul_of_odd",
+      "kind": "theorem",
+      "module": "Erdos249257/TotientMahlerDefect.lean",
+      "line": 107,
+      "signature": "theorem totient_two_pow_succ_mul_of_odd (t m : ℕ) (hm : Odd m) : Nat.totient (2 ^ (t + 1) * m) = 2 ^ t * Nat.totient m",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Totient of an odd number multiplied by a positive power of two."
+    },
+    {
+      "id": "Erdos249257/TotientMahlerDefect.lean:127:totient_two_pow_mul_two",
+      "name": "totient_two_pow_mul_two",
+      "kind": "theorem",
+      "module": "Erdos249257/TotientMahlerDefect.lean",
+      "line": 127,
+      "signature": "theorem totient_two_pow_mul_two (j n : ℕ) : Nat.totient (2 ^ j * (2 * n)) = 2 ^ j * Nat.totient (2 * n)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Repeated doubling scales the totient once the argument is already even."
+    },
+    {
+      "id": "Erdos249257/TotientMahlerDefect.lean:147:totientKernel_zero_residue",
+      "name": "totientKernel_zero_residue",
+      "kind": "theorem",
+      "module": "Erdos249257/TotientMahlerDefect.lean",
+      "line": 147,
+      "signature": "theorem totientKernel_zero_residue (j n : ℕ) : totientKernelSeq (j + 1) 0 n = (2 ^ j : ℚ) * totientKernelSeq 1 0 n",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Every positive zero-residue channel is a scalar multiple of the first zero-residue channel."
+    },
+    {
+      "id": "Erdos249257/TotientMahlerDefect.lean:156:totientKernel_even_residue_reduce",
+      "name": "totientKernel_even_residue_reduce",
+      "kind": "theorem",
+      "module": "Erdos249257/TotientMahlerDefect.lean",
+      "line": 156,
+      "signature": "theorem totientKernel_even_residue_reduce (j t s n : ℕ) (ht : t + 1 < j) (hs : Odd s) : totientKernelSeq j (2 ^ (t + 1) * s) n = (2 ^ t : ℚ) * totientKernelSeq (j - (t + 1)) s n",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Exact reduction of an even residue to its odd-core channel."
+    },
+    {
+      "id": "Erdos249257/TotientMahlerDefect.lean:185:CompressedAdjointCertificate",
+      "name": "CompressedAdjointCertificate",
+      "kind": "structure",
+      "module": "Erdos249257/TotientMahlerDefect.lean",
+      "line": 185,
+      "signature": "structure CompressedAdjointCertificate (v : ℕ)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The exact proof object required from a future totient-specific compressed adjoint construction."
+    },
+    {
+      "id": "Erdos249257/TotientMahlerDefect.lean:197:false_of_compressedAdjointCertificate",
+      "name": "false_of_compressedAdjointCertificate",
+      "kind": "theorem",
+      "module": "Erdos249257/TotientMahlerDefect.lean",
+      "line": 197,
+      "signature": "theorem false_of_compressedAdjointCertificate {v : ℕ} (cert : CompressedAdjointCertificate v) : False",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A compressed-adjoint certificate is impossible: its boundary is both a nonzero multiple of `Q*v` and strictly smaller than `Q*v`."
     },
     {
       "id": "Erdos249257/TotientTailPeriodKiller.lean:57:totientTail",
