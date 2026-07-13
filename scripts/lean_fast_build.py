@@ -62,7 +62,9 @@ def local_graph(modules: dict[str, Path]) -> dict[str, set[str]]:
         graph[name] = {
             match.group(1)
             for line in source.read_text(encoding="utf-8").splitlines()
-            if (match := IMPORT_RE.match(line)) and match.group(1) in modules
+            if "import" in line
+            and (match := IMPORT_RE.match(line))
+            and match.group(1) in modules
         }
     return graph
 
