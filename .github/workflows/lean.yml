@@ -44,6 +44,8 @@ jobs:
         run: python3 scripts/test_release_source_identity.py
       - name: Test scope source-identity boundary
         run: python3 scripts/test_scope_source_identity.py
+      - name: Test public-artifact boundary
+        run: python3 scripts/test_public_artifact_boundary.py
       - name: Cross-surface release checks
         run: python3 scripts/check_release.py
       - name: Install metadata validators
