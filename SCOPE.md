@@ -5,14 +5,17 @@
 
 This release does not prove the irrationality of the Erdős #249 totient
 constant, and does not prove the universal form of Erdős #257. Its claims
-apply only to the source and dependencies identified by the release tag and
-commit.
+apply only to the source and dependencies identified by the immutable
+formal-source checkpoint in [`docs/claims.json`](docs/claims.json). The last
+release tag remains the citation and release identity; it can differ from that
+checkpoint.
 
-Mathematical proof authority is the published Lean source checked by the
-pinned Lean kernel. Unreleased work, private repositories, generated prose,
-provider output, and hidden proof sketches are not part of the public proof
-artefact. Later work is out of scope until it is included in a new tagged
-release.
+Mathematical proof authority is Lean source at that declared checkpoint after
+checking by the pinned Lean kernel. Unreleased work, private repositories,
+generated prose, provider output, and hidden proof sketches are not part of
+the public proof artefact. Work later than the declared checkpoint is out of
+scope even if it checks locally; a later tagged release is a separate citation
+and release action, not a substitute for an exact proof-source identity.
 
 ## Machine identifiers
 

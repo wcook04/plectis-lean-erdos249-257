@@ -42,6 +42,8 @@ jobs:
           python-version: "3.12"
       - name: Test immutable release source resolution
         run: python3 scripts/test_release_source_identity.py
+      - name: Test scope source-identity boundary
+        run: python3 scripts/test_scope_source_identity.py
       - name: Cross-surface release checks
         run: python3 scripts/check_release.py
       - name: Install metadata validators
