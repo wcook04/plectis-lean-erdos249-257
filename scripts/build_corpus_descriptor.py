@@ -5,9 +5,10 @@
 
 The descriptor is a self-describing navigation root for external agents.  It
 keeps the proof-bearing release identity distinct from the later navigation
-snapshot, carries content digests for the machine-readable paper, methodology
-contract, and exhaustive atlas, and embeds only compact navigation data.  It
-does not duplicate the full declaration atlas or acquire proof authority.
+snapshot, carries content digests for the human papers, machine-readable paper,
+source-sigil crosswalk, methodology contract, and exhaustive atlas, and embeds
+only compact navigation data.  It does not duplicate the full declaration
+atlas or acquire proof authority.
 
 The companion orientation JSON and Markdown are deliberately small first-read
 surfaces. They expose scale, the proved/open boundary, principal claims, and
@@ -33,6 +34,11 @@ WAVE_INDEX_PATH = ROOT / "docs" / "WAVE_INDEX.md"
 CLAIMS_PATH = ROOT / "docs" / "claims.json"
 ATLAS_PATH = ROOT / "docs" / "declaration_atlas.json"
 METHODOLOGY_PATH = ROOT / "docs" / "methodology.json"
+MAIN_PAPER_TEX = ROOT / "paper" / "erdos249-257-exposition.tex"
+MAIN_PAPER_PDF = ROOT / "erdos249-257-exposition.pdf"
+COMPANION_PAPER_TEX = ROOT / "paper" / "erdos249-transport-curvature.tex"
+COMPANION_PAPER_PDF = ROOT / "erdos249-transport-curvature.pdf"
+PAPER_ALIASES_PATH = ROOT / "paper" / "module-aliases.json"
 README_SCALE_BEGIN = "<!-- BEGIN generated_corpus_at_a_glance -->"
 README_SCALE_END = "<!-- END generated_corpus_at_a_glance -->"
 WAVE_SHAPE_BEGIN = "<!-- BEGIN generated_package_shape -->"
@@ -151,7 +157,14 @@ def build_orientation(claims: dict[str, Any], atlas: dict[str, Any]) -> dict[str
             "schema": "erdos249257-corpus-descriptor/3",
             "maximum_bytes": 64_000,
             "inline": ["release_identity", "content_digests", "principal_claim_handles", "root_module_topology"],
-            "expands_to": ["docs/claims.json", "docs/declaration_atlas.json", "docs/methodology.json"],
+            "expands_to": [
+                "docs/claims.json",
+                "docs/declaration_atlas.json",
+                "docs/methodology.json",
+                "erdos249-257-exposition.pdf",
+                "erdos249-transport-curvature.pdf",
+                "paper/module-aliases.json",
+            ],
         },
     }
 
@@ -238,7 +251,8 @@ def render_orientation_markdown(orientation: dict[str, Any]) -> str:
             "`erdos249257-corpus-descriptor/3`. The release gate keeps it below 64 KB.",
             "It carries release identities, content digests, principal claim and declaration",
             "handles, and the root module topology. Complete claims, module imports,",
-            "declaration prose, and methodology remain in their digest-bound expansion files.",
+            "declaration prose, methodology, both authored papers, and the paper-to-Lean",
+            "source-sigil crosswalk remain in their digest-bound expansion files.",
             "",
             "## Query one handle",
             "",
@@ -371,6 +385,7 @@ def build() -> dict[str, Any]:
     claims = json.loads(CLAIMS_PATH.read_text(encoding="utf-8"))
     atlas = json.loads(ATLAS_PATH.read_text(encoding="utf-8"))
     methodology = json.loads(METHODOLOGY_PATH.read_text(encoding="utf-8"))
+    paper_aliases = json.loads(PAPER_ALIASES_PATH.read_text(encoding="utf-8"))
     machine_paper = claims["machine_readable_paper"]
     release = claims["release"]
 
@@ -448,6 +463,29 @@ def build() -> dict[str, Any]:
                     "path": "docs/orientation.json",
                     "content_digest": canonical_digest(orientation),
                 },
+                "human_exposition": {
+                    "source_path": "paper/erdos249-257-exposition.tex",
+                    "source_content_digest": file_digest(MAIN_PAPER_TEX),
+                    "rendered_path": "erdos249-257-exposition.pdf",
+                    "rendered_content_digest": file_digest(MAIN_PAPER_PDF),
+                    "artifact_role": "authored_mathematician_facing_exposition",
+                    "authority_posture": "authored_editorial_surface_not_Lean_proof_authority",
+                },
+                "technical_companion": {
+                    "source_path": "paper/erdos249-transport-curvature.tex",
+                    "source_content_digest": file_digest(COMPANION_PAPER_TEX),
+                    "rendered_path": "erdos249-transport-curvature.pdf",
+                    "rendered_content_digest": file_digest(COMPANION_PAPER_PDF),
+                    "artifact_role": "authored_transport_and_curvature_companion",
+                    "authority_posture": "authored_editorial_surface_not_Lean_proof_authority",
+                },
+                "paper_source_sigils": {
+                    "path": "paper/module-aliases.json",
+                    "content_digest": file_digest(PAPER_ALIASES_PATH),
+                    "schema": paper_aliases["schema"],
+                    "artifact_role": paper_aliases["artifact_role"],
+                    "authority_posture": paper_aliases["authority_posture"],
+                },
             },
         },
         "schemas": {
@@ -455,6 +493,7 @@ def build() -> dict[str, Any]:
             "machine_readable_paper": machine_paper["schema"],
             "declaration_atlas": atlas["schema"],
             "methodology": methodology["schema"],
+            "paper_module_aliases": paper_aliases["schema"],
         },
         "capabilities": {
             "global_argument_graph": True,
@@ -467,6 +506,8 @@ def build() -> dict[str, Any]:
             "direct_remaining_open_proposition_lookup": True,
             "exact_cross_paper_claim_coordinates": True,
             "pinned_declaration_source_urls": True,
+            "digest_bound_human_papers": True,
+            "paper_sigil_crosswalk": True,
             "declaration_level_proof_dependencies": False,
             "typed_remaining_open_propositions": True,
             "claim_transition_requirements": True,
@@ -530,6 +571,26 @@ def build() -> dict[str, Any]:
                 "expected_content_digest": file_digest(METHODOLOGY_PATH),
                 "human_projection": "METHODOLOGY.md",
                 "check": "python3 scripts/build_methodology.py --check",
+            },
+            "human_exposition": {
+                "source_path": "paper/erdos249-257-exposition.tex",
+                "expected_source_content_digest": file_digest(MAIN_PAPER_TEX),
+                "rendered_path": "erdos249-257-exposition.pdf",
+                "expected_rendered_content_digest": file_digest(MAIN_PAPER_PDF),
+                "authority_posture": "authored_editorial_surface_not_Lean_proof_authority",
+            },
+            "technical_companion": {
+                "source_path": "paper/erdos249-transport-curvature.tex",
+                "expected_source_content_digest": file_digest(COMPANION_PAPER_TEX),
+                "rendered_path": "erdos249-transport-curvature.pdf",
+                "expected_rendered_content_digest": file_digest(COMPANION_PAPER_PDF),
+                "authority_posture": "authored_editorial_surface_not_Lean_proof_authority",
+            },
+            "paper_source_sigils": {
+                "path": "paper/module-aliases.json",
+                "expected_content_digest": file_digest(PAPER_ALIASES_PATH),
+                "schema": paper_aliases["schema"],
+                "check": "python3 scripts/build_paper_module_aliases.py --check",
             },
         },
         "migration_from_v2": {

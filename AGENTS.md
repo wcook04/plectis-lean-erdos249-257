@@ -24,8 +24,10 @@ in this repository, and never infer unpublished results or private machinery.
 4. Read `docs/corpus_descriptor.json` when another agent or system needs to
    register this repository as a mathematical corpus. It separates the pinned
    proof-source tag from the later navigation snapshot and content digests, and
-   carries bounded principal handles plus digest-bound expansion routes. The
-   release gate keeps this registration envelope below 64 KB.
+   carries bounded principal handles plus digest-bound expansion routes for both
+   authored papers and the paper-to-Lean source-sigil crosswalk. These authored
+   surfaces remain distinct from Lean proof authority. The release gate keeps
+   this registration envelope below 64 KB.
 5. Read `SCOPE.md` before describing what the project proves. Erdős #249 and
    the universal form of #257 remain open.
 6. For one claim, follow its `paper_label` into

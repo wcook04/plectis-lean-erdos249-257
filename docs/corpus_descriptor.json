@@ -43,7 +43,30 @@
       },
       "bounded_orientation": {
         "path": "docs/orientation.json",
-        "content_digest": "sha256:6086b8c904658631089ab91d9f8e1fcc1f23cd28324bb11dd6ab928127cbddb1"
+        "content_digest": "sha256:ca974ad392bb05f31c86ef16aabf19beab55ebd4de352a35f7df50a73996dfde"
+      },
+      "human_exposition": {
+        "source_path": "paper/erdos249-257-exposition.tex",
+        "source_content_digest": "sha256:adda47a8b109f45c4a8cb20a49502ab75c782406ddc8ec8f3596ecb630459476",
+        "rendered_path": "erdos249-257-exposition.pdf",
+        "rendered_content_digest": "sha256:db89b9d7efecfb4918fab393c423e5a8e0744ae8cd3c9963cfb7c8594f2ef081",
+        "artifact_role": "authored_mathematician_facing_exposition",
+        "authority_posture": "authored_editorial_surface_not_Lean_proof_authority"
+      },
+      "technical_companion": {
+        "source_path": "paper/erdos249-transport-curvature.tex",
+        "source_content_digest": "sha256:62f22972f12a6bda9c523f13c75fc7553729d5104cec905f7d915f7ca4e4168d",
+        "rendered_path": "erdos249-transport-curvature.pdf",
+        "rendered_content_digest": "sha256:601c18e29d0b43b63f52c5a4b10b60f5140d10a520c36820706609b72f3eeef0",
+        "artifact_role": "authored_transport_and_curvature_companion",
+        "authority_posture": "authored_editorial_surface_not_Lean_proof_authority"
+      },
+      "paper_source_sigils": {
+        "path": "paper/module-aliases.json",
+        "content_digest": "sha256:6d7bfef0775e2150000e08eb713928f284128ed00ca2d51b20e75c633bdb6e81",
+        "schema": "erdos249257-paper-module-aliases/1",
+        "artifact_role": "paper_sigil_to_lean_module_navigation_crosswalk",
+        "authority_posture": "generated_navigation_projection_not_proof_authority"
       }
     }
   },
@@ -51,7 +74,8 @@
     "claims": "erdos249257-claims/3",
     "machine_readable_paper": "erdos249257-machine-readable-paper/1",
     "declaration_atlas": "erdos249257-declaration-atlas/1",
-    "methodology": "erdos249257-methodology/2"
+    "methodology": "erdos249257-methodology/2",
+    "paper_module_aliases": "erdos249257-paper-module-aliases/1"
   },
   "capabilities": {
     "global_argument_graph": true,
@@ -64,6 +88,8 @@
     "direct_remaining_open_proposition_lookup": true,
     "exact_cross_paper_claim_coordinates": true,
     "pinned_declaration_source_urls": true,
+    "digest_bound_human_papers": true,
+    "paper_sigil_crosswalk": true,
     "declaration_level_proof_dependencies": false,
     "typed_remaining_open_propositions": true,
     "claim_transition_requirements": true,
@@ -918,6 +944,26 @@
       "expected_content_digest": "sha256:6f209a96135bb6c1675192074ebd80c1c4a56285c30de3891e3803f5aa02fa84",
       "human_projection": "METHODOLOGY.md",
       "check": "python3 scripts/build_methodology.py --check"
+    },
+    "human_exposition": {
+      "source_path": "paper/erdos249-257-exposition.tex",
+      "expected_source_content_digest": "sha256:adda47a8b109f45c4a8cb20a49502ab75c782406ddc8ec8f3596ecb630459476",
+      "rendered_path": "erdos249-257-exposition.pdf",
+      "expected_rendered_content_digest": "sha256:db89b9d7efecfb4918fab393c423e5a8e0744ae8cd3c9963cfb7c8594f2ef081",
+      "authority_posture": "authored_editorial_surface_not_Lean_proof_authority"
+    },
+    "technical_companion": {
+      "source_path": "paper/erdos249-transport-curvature.tex",
+      "expected_source_content_digest": "sha256:62f22972f12a6bda9c523f13c75fc7553729d5104cec905f7d915f7ca4e4168d",
+      "rendered_path": "erdos249-transport-curvature.pdf",
+      "expected_rendered_content_digest": "sha256:601c18e29d0b43b63f52c5a4b10b60f5140d10a520c36820706609b72f3eeef0",
+      "authority_posture": "authored_editorial_surface_not_Lean_proof_authority"
+    },
+    "paper_source_sigils": {
+      "path": "paper/module-aliases.json",
+      "expected_content_digest": "sha256:6d7bfef0775e2150000e08eb713928f284128ed00ca2d51b20e75c633bdb6e81",
+      "schema": "erdos249257-paper-module-aliases/1",
+      "check": "python3 scripts/build_paper_module_aliases.py --check"
     }
   },
   "migration_from_v2": {

@@ -75,7 +75,8 @@ settle the open proposition attached to it.
 `erdos249257-corpus-descriptor/3`. The release gate keeps it below 64 KB.
 It carries release identities, content digests, principal claim and declaration
 handles, and the root module topology. Complete claims, module imports,
-declaration prose, and methodology remain in their digest-bound expansion files.
+declaration prose, methodology, both authored papers, and the paper-to-Lean
+source-sigil crosswalk remain in their digest-bound expansion files.
 
 ## Query one handle
 

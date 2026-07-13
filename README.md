@@ -128,7 +128,8 @@ mathematical boundary.
   [`docs/orientation.json`](docs/orientation.json).
 - **External corpus registration:**
   [`docs/corpus_descriptor.json`](docs/corpus_descriptor.json), a bounded
-  envelope with digest-bound expansion paths.
+  envelope with digest-bound expansion paths for both authored papers, the
+  machine-readable paper, and the paper-to-Lean source-sigil crosswalk.
 - **Method:** [`METHODOLOGY.md`](METHODOLOGY.md), generated from
   [`docs/methodology.json`](docs/methodology.json).
 - **Lean routes by question:** [`docs/SOURCE_MAP.md`](docs/SOURCE_MAP.md).

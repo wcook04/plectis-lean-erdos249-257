@@ -33,6 +33,7 @@ Stdlib only; run from the repository root:  python3 scripts/check_release.py
 
 from __future__ import annotations
 
+import hashlib
 import json
 import re
 import subprocess
@@ -63,6 +64,10 @@ def check(ok: bool, msg: str) -> None:
     CHECKS += 1
     if not ok:
         fail(msg)
+
+
+def file_digest(path: Path) -> str:
+    return "sha256:" + hashlib.sha256(path.read_bytes()).hexdigest()
 
 
 def read(path: Path) -> str:
@@ -456,6 +461,37 @@ def main() -> int:
           "corpus descriptor methodology capsule drifted from docs/methodology.json")
     check(methodology_capsule.get("change_classes") == methodology.get("change_classes"),
           "corpus descriptor methodology capsule does not carry the change-class matrix")
+    descriptor_content = descriptor.get("identity", {}).get("content", {})
+    paper_aliases = json.loads(read(ROOT / "paper" / "module-aliases.json"))
+    paper_artifacts = {
+        "human_exposition": (
+            "paper/erdos249-257-exposition.tex",
+            "erdos249-257-exposition.pdf",
+        ),
+        "technical_companion": (
+            "paper/erdos249-transport-curvature.tex",
+            "erdos249-transport-curvature.pdf",
+        ),
+    }
+    for content_id, (source_path, rendered_path) in paper_artifacts.items():
+        content = descriptor_content.get(content_id, {})
+        check(content.get("source_path") == source_path,
+              f"corpus descriptor {content_id} source path is missing or incorrect")
+        check(content.get("rendered_path") == rendered_path,
+              f"corpus descriptor {content_id} rendered path is missing or incorrect")
+        check(content.get("source_content_digest") == file_digest(ROOT / source_path),
+              f"corpus descriptor {content_id} source digest drifted")
+        check(content.get("rendered_content_digest") == file_digest(ROOT / rendered_path),
+              f"corpus descriptor {content_id} rendered digest drifted")
+        check(content.get("authority_posture") == "authored_editorial_surface_not_Lean_proof_authority",
+              f"corpus descriptor {content_id} does not preserve the proof-authority boundary")
+    sigils = descriptor_content.get("paper_source_sigils", {})
+    check(sigils.get("path") == "paper/module-aliases.json",
+          "corpus descriptor does not register the paper source-sigil crosswalk")
+    check(sigils.get("content_digest") == file_digest(ROOT / "paper" / "module-aliases.json"),
+          "corpus descriptor paper source-sigil digest drifted")
+    check(descriptor.get("schemas", {}).get("paper_module_aliases") == paper_aliases.get("schema"),
+          "corpus descriptor paper source-sigil schema drifted")
 
     orientation_path = ROOT / "docs" / "orientation.json"
     orientation = json.loads(read(orientation_path))
