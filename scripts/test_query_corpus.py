@@ -60,6 +60,31 @@ def main() -> int:
     assert len(module["declaration_preview"]) == 20
     assert module["declaration_preview_receipt"]["omitted"] > 0
     assert "declaration_kind" in module["declaration_preview"][0]
+    assert module["module"]["role"] == "Assembled theorem kernel and headline interfaces"
+    neighbourhood = module["dependency_neighbourhood"]
+    assert neighbourhood["receipt"]["imports_total"] == 10
+    assert neighbourhood["receipt"]["importers_total"] == 7
+    assert len(neighbourhood["importers"]) == 7
+    assert neighbourhood["receipt"]["importers_omitted"] == 0
+
+    certificate_hub = query("--module", "Erdos249257.DiagonalPincerCertificates")
+    hub_neighbourhood = certificate_hub["dependency_neighbourhood"]
+    assert hub_neighbourhood["receipt"]["importers_total"] == 481
+    assert len(hub_neighbourhood["importers"]) == 20
+    assert hub_neighbourhood["receipt"]["importers_omitted"] == 461
+
+    root = query("--module", "Erdos249257.lean", "--limit", "3")
+    assert root["module"]["role"] == "Supported package root import"
+    assert root["dependency_neighbourhood"]["receipt"]["importers_total"] == 0
+    assert root["dependency_neighbourhood"]["receipt"]["imports_total"] > 3
+
+    leaf = query("--module", "Erdos249257.GeneratedCertificates.b10_L6_A11", "--limit", "3")
+    assert leaf["module"]["role"] == "Generated finite certificate shard"
+    assert leaf["dependency_neighbourhood"]["imports"][0]["id"] == "Erdos249257.CertificateKernel"
+    assert any(
+        row["id"] == "Erdos249257.GeneratedCertificates"
+        for row in leaf["dependency_neighbourhood"]["importers"]
+    )
 
     aliases = json.loads((ROOT / "paper" / "module-aliases.json").read_text(encoding="utf-8"))
     assert aliases["alias_count"] == len(aliases["aliases"])

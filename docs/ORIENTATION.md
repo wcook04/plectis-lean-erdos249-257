@@ -80,6 +80,8 @@ declaration prose, and methodology remain in their digest-bound expansion files.
 ## Query one handle
 
 The read-only query helper returns bounded JSON by default:
+Module packets include authored roles and both sides of the direct import
+neighbourhood, with truncation receipts pointing to the exhaustive graph.
 
 ```sh
 python3 scripts/query_corpus.py --format card

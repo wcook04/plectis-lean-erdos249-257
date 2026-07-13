@@ -59,6 +59,7 @@
     "principal_claim_declaration_links": true,
     "high_salience_signatures": true,
     "exhaustive_declaration_lookup": "attached_atlas",
+    "bounded_reverse_module_importers": true,
     "declaration_level_proof_dependencies": false,
     "typed_remaining_open_propositions": true,
     "claim_transition_requirements": true,

@@ -85,6 +85,22 @@ def compact_declaration(row: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def module_roles(claims: dict[str, Any]) -> dict[str, str]:
+    nodes = claims["machine_readable_paper"]["module_graph"]["nodes"]
+    roles = {row["id"]: row["role"] for row in nodes}
+    roles["Erdos249257"] = "Supported package root import"
+    return roles
+
+
+def compact_module(row: dict[str, Any], roles: dict[str, str]) -> dict[str, Any]:
+    return {
+        "id": row["id"],
+        "path": row["path"],
+        "role": roles.get(row["id"], "Unclassified module"),
+        "declaration_count": row["declaration_count"],
+    }
+
+
 def module_packet(handle: str, limit: int) -> dict[str, Any]:
     atlas = load("docs/declaration_atlas.json")
     claims = load("docs/claims.json")
@@ -104,6 +120,10 @@ def module_packet(handle: str, limit: int) -> dict[str, Any]:
     )
     if module is None:
         raise KeyError(f"unknown module handle: {handle}")
+    roles = module_roles(claims)
+    module_view = {**module, "role": roles.get(module["id"], "Unclassified module")}
+    imported_rows = [row for row in atlas["modules"] if row["id"] in module["imports"]]
+    importer_rows = [row for row in atlas["modules"] if module["id"] in row["imports"]]
     declarations = [
         row for row in atlas["declarations"] if row["module"] == module["path"]
     ]
@@ -118,7 +138,7 @@ def module_packet(handle: str, limit: int) -> dict[str, Any]:
     return {
         "kind": "module",
         "authority_posture": "atlas_navigation_projection_not_proof_authority",
-        "module": module,
+        "module": module_view,
         "paper_sigil": next(
             (row["sigil"] for row in aliases if row["path"] == module["path"]), None
         ),
@@ -130,6 +150,19 @@ def module_packet(handle: str, limit: int) -> dict[str, Any]:
             "omitted": max(0, len(declarations) - limit),
             "expand": f"python3 scripts/query_corpus.py --search {module['path']} --limit {MAX_LIMIT}",
             "exhaustive": "docs/declaration_atlas.json",
+        },
+        "dependency_neighbourhood": {
+            "imports": [compact_module(row, roles) for row in imported_rows[:limit]],
+            "importers": [compact_module(row, roles) for row in importer_rows[:limit]],
+            "receipt": {
+                "imports_total": len(imported_rows),
+                "imports_emitted": min(len(imported_rows), limit),
+                "imports_omitted": max(0, len(imported_rows) - limit),
+                "importers_total": len(importer_rows),
+                "importers_emitted": min(len(importer_rows), limit),
+                "importers_omitted": max(0, len(importer_rows) - limit),
+                "exhaustive": "docs/claims.json::machine_readable_paper.module_graph",
+            },
         },
         "validation": "python3 scripts/build_declaration_atlas.py --check",
     }
@@ -159,6 +192,7 @@ def search_packet(query: str, limit: int) -> dict[str, Any]:
     orientation = load("docs/orientation.json")
     aliases = load("paper/module-aliases.json")["aliases"]
     sigil_by_path = {row["path"]: row["sigil"] for row in aliases}
+    roles = module_roles(claims)
     ranked: list[tuple[int, str, dict[str, Any]]] = []
 
     for claim in claims["claims"]:
@@ -202,6 +236,7 @@ def search_packet(query: str, limit: int) -> dict[str, Any]:
                         "id": row["id"],
                         "path": row["path"],
                         "paper_sigil": sigil,
+                        "role": roles.get(row["id"], "Unclassified module"),
                         "declaration_count": row["declaration_count"],
                         "import_count": len(row["imports"]),
                     },
@@ -261,10 +296,12 @@ def render_card(packet: dict[str, Any]) -> str:
         )
     if kind == "module":
         module = packet["module"]
+        dependency = packet["dependency_neighbourhood"]["receipt"]
         return (
             f"module {module['id']} | {module['path']} | declarations={module['declaration_count']} "
-            f"| imports={len(module['imports'])} | claims={len(packet['attached_claims'])} "
-            f"| paper_sigil={packet.get('paper_sigil') or 'none'}"
+            f"| imports={dependency['imports_total']} | importers={dependency['importers_total']} "
+            f"| claims={len(packet['attached_claims'])} | paper_sigil={packet.get('paper_sigil') or 'none'} "
+            f"| role={module['role']}"
         )
     if kind == "search":
         rows = [

@@ -59,6 +59,8 @@ do not yet know the handle, use `--search <text> --limit <1..100>`; every JSON
 response is capped at 64 KB and points back to an exhaustive owner.
 Paper sigils are handles too: `--module CerKer` resolves the displayed sigil
 through [`paper/module-aliases.json`](paper/module-aliases.json).
+Module packets include the authored role, attached claims, bounded declaration
+preview, direct imports, and reverse importers.
 
 The Plectis site is an introduction, not a proof certificate. The exposition
 explains the mathematics. The checked Lean source establishes the formal

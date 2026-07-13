@@ -45,6 +45,8 @@ For a bounded lookup, use `python3 scripts/query_corpus.py --claim <id>`,
 JSON responses are capped at 64 KB; exhaustive data remains in the routed owner.
 Visible paper sigils resolve directly (`--module CerKer`); their generated
 crosswalk is `paper/module-aliases.json`.
+Module packets carry the authored role plus bounded imports, reverse importers,
+attached claims, and declaration previews; use their receipts before expanding.
 The helper reads the registry and atlas; it is navigation, not proof authority.
 
 ## Authority and change order
