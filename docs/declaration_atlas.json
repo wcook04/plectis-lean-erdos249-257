@@ -4,21 +4,21 @@
   "projection_not_authority": true,
   "proof_authority": "Lean source checked by the pinned Lean kernel",
   "argument_authority": "docs/claims.json::machine_readable_paper.argument_graph",
-  "source_fingerprint": "sha256:41c625c9eea379b73fbb833976fb0aafaed5d91425966efe797b7ba43e71c732",
+  "source_fingerprint": "sha256:d5719429c35e4df5e13aed4ecac07f8164bcebf0e820a48b7c9739cdf88ea713",
   "summary": {
-    "module_count": 541,
-    "declaration_count": 6379,
-    "theorem_like_count": 5866,
+    "module_count": 542,
+    "declaration_count": 6388,
+    "theorem_like_count": 5871,
     "generated_certificate_declaration_count": 1681,
     "principal_claim_link_count": 60,
     "kind_counts": {
       "abbrev": 1,
-      "def": 498,
+      "def": 502,
       "inductive": 3,
       "instance": 3,
       "lemma": 336,
       "structure": 8,
-      "theorem": 5530
+      "theorem": 5535
     }
   },
   "modules": [
@@ -66,7 +66,8 @@
         "Erdos249257.PrimeJumpMigration",
         "Erdos249257.PrimeJumpWindow",
         "Erdos249257.AdelicHeightObstruction",
-        "Erdos249257.SquareCRTCube"
+        "Erdos249257.SquareCRTCube",
+        "Erdos249257.SignedQMomentObstruction"
       ],
       "declaration_count": 0,
       "kind_counts": {}
@@ -6488,6 +6489,16 @@
       "kind_counts": {
         "def": 4,
         "theorem": 17
+      }
+    },
+    {
+      "id": "Erdos249257.SignedQMomentObstruction",
+      "path": "Erdos249257/SignedQMomentObstruction.lean",
+      "imports": [],
+      "declaration_count": 9,
+      "kind_counts": {
+        "def": 4,
+        "theorem": 5
       }
     },
     {
@@ -69977,6 +69988,103 @@
       "generated_certificate": false,
       "claim_ids": [],
       "docstring": "Evaluation at `X = 2` recovers the integral numerator already owned by `RadicalMobiusShadow`. The theorem deliberately retains the squarefree boundary of T1."
+    },
+    {
+      "id": "Erdos249257/SignedQMomentObstruction.lean:28:det_mul_rectangular",
+      "name": "det_mul_rectangular",
+      "kind": "theorem",
+      "module": "Erdos249257/SignedQMomentObstruction.lean",
+      "line": 28,
+      "signature": "theorem det_mul_rectangular {R ι κ : Type*} [CommRing R] [Fintype ι] [DecidableEq ι] [Fintype κ] (M : Matrix ι κ R) (N : Matrix κ ι R) : Matrix.det (M * N) = ∑ p : ι → κ, Matrix.det (fun i j ↦ M i (p j)) * ∏ i, N (p i) i",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/SignedQMomentObstruction.lean:46:finiteSignedMomentMatrix",
+      "name": "finiteSignedMomentMatrix",
+      "kind": "def",
+      "module": "Erdos249257/SignedQMomentObstruction.lean",
+      "line": 46,
+      "signature": "def finiteSignedMomentMatrix {R κ : Type*} [CommRing R] [Fintype κ] (n : ℕ) (w x : κ → R) : Matrix (Fin n) (Fin n) R",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A finite signed moment matrix on an arbitrary finite atom type. Here `w` is the full atom mass (for the target application, `w N = a N * x N`)."
+    },
+    {
+      "id": "Erdos249257/SignedQMomentObstruction.lean:53:even_finset_sum",
+      "name": "even_finset_sum",
+      "kind": "theorem",
+      "module": "Erdos249257/SignedQMomentObstruction.lean",
+      "line": 53,
+      "signature": "private theorem even_finset_sum {α : Type*} (s : Finset α) (f : α → ℤ) (h : ∀ i ∈ s, Even (f i)) : Even (∑ i ∈ s, f i)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A finite signed moment matrix on an arbitrary finite atom type. Here `w` is the full atom mass (for the target application, `w N = a N * x N`). -/ def finiteSignedMomentMatrix {R κ : Type*} [CommRing R] [Fintype κ] (n : ℕ) (w x : κ → R) : Matrix (Fin n) (Fin n) R := fun i j ↦ ∑ a : κ, w a * x a ^ (i.1 + j.1) /-! ## Unique-terminal dyadic parity"
+    },
+    {
+      "id": "Erdos249257/SignedQMomentObstruction.lean:62:not_even_finset_sum_of_unique_not_even",
+      "name": "not_even_finset_sum_of_unique_not_even",
+      "kind": "theorem",
+      "module": "Erdos249257/SignedQMomentObstruction.lean",
+      "line": 62,
+      "signature": "private theorem not_even_finset_sum_of_unique_not_even {α : Type*} (s : Finset α) (f : α → ℤ) (m : α) (hm : m ∈ s) (hodd : ¬ Even (f m)) (heven : ∀ i ∈ s, i ≠ m → Even (f i)) : ¬ Even (∑ i ∈ s, f i)",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/SignedQMomentObstruction.lean:77:scaled_dyadic_sum_odd",
+      "name": "scaled_dyadic_sum_odd",
+      "kind": "theorem",
+      "module": "Erdos249257/SignedQMomentObstruction.lean",
+      "line": 77,
+      "signature": "theorem scaled_dyadic_sum_odd {α : Type*} (s : Finset α) (u : α → ℤ) (e : α → ℕ) (m : α) (hm : m ∈ s) (hu : ¬ Even (u m)) (hmax : ∀ i ∈ s, i ≠ m → e i < e m) : (∑ i ∈ s, u i * (2 : ℤ) ^ (e m - e i)) % 2 = 1",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "If one dyadic denominator exponent is uniquely largest and its numerator is odd, the common numerator obtained by clearing that denominator is odd."
+    },
+    {
+      "id": "Erdos249257/SignedQMomentObstruction.lean:95:scaled_dyadic_sum_ne_zero",
+      "name": "scaled_dyadic_sum_ne_zero",
+      "kind": "theorem",
+      "module": "Erdos249257/SignedQMomentObstruction.lean",
+      "line": 95,
+      "signature": "theorem scaled_dyadic_sum_ne_zero {α : Type*} (s : Finset α) (u : α → ℤ) (e : α → ℕ) (m : α) (hm : m ∈ s) (hu : ¬ Even (u m)) (hmax : ∀ i ∈ s, i ≠ m → e i < e m) : (∑ i ∈ s, u i * (2 : ℤ) ^ (e m - e i)) ≠ 0",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The same unique-terminal hypothesis gives non-vanishing after common dyadic denominator clearing."
+    },
+    {
+      "id": "Erdos249257/SignedQMomentObstruction.lean:107:truncatedMoment",
+      "name": "truncatedMoment",
+      "kind": "def",
+      "module": "Erdos249257/SignedQMomentObstruction.lean",
+      "line": 107,
+      "signature": "def truncatedMoment (a : ℕ → ℤ) (Y k : ℕ) : ℚ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The finite signed `q = 1/2` moment used by the Möbius Hankel lane."
+    },
+    {
+      "id": "Erdos249257/SignedQMomentObstruction.lean:112:hankelMatrix",
+      "name": "hankelMatrix",
+      "kind": "def",
+      "module": "Erdos249257/SignedQMomentObstruction.lean",
+      "line": 112,
+      "signature": "def hankelMatrix (m : ℕ → ℚ) (n : ℕ) : Matrix (Fin n) (Fin n) ℚ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Hankel matrix associated to a moment sequence."
+    },
+    {
+      "id": "Erdos249257/SignedQMomentObstruction.lean:116:hankelDet",
+      "name": "hankelDet",
+      "kind": "def",
+      "module": "Erdos249257/SignedQMomentObstruction.lean",
+      "line": 116,
+      "signature": "def hankelDet (m : ℕ → ℚ) (n : ℕ) : ℚ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Order-`n` Hankel determinant associated to a moment sequence."
     },
     {
       "id": "Erdos249257/SquareCRTCube.lean:34:totient_mul_prime_cocycle",

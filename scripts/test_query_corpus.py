@@ -322,6 +322,13 @@ def main() -> int:
     assert square_crt["dependency_neighbourhood"]["receipt"]["imports_total"] == 0
     assert square_crt["dependency_neighbourhood"]["receipt"]["importers_total"] == 1
 
+    signed_moment = query("--module", "Erdos249257.SignedQMomentObstruction", "--limit", "3")
+    assert signed_moment["module"]["role"] == (
+        "Finite signed-moment determinant and dyadic-parity substrate"
+    )
+    assert signed_moment["dependency_neighbourhood"]["receipt"]["imports_total"] == 0
+    assert signed_moment["dependency_neighbourhood"]["receipt"]["importers_total"] == 1
+
     aliases = json.loads((ROOT / "paper" / "module-aliases.json").read_text(encoding="utf-8"))
     assert aliases["alias_count"] == len(aliases["aliases"])
     assert len({row["sigil"] for row in aliases["aliases"]}) == aliases["alias_count"]

@@ -40,3 +40,4 @@ import Erdos249257.PrimeJumpMigration
 import Erdos249257.PrimeJumpWindow
 import Erdos249257.AdelicHeightObstruction
 import Erdos249257.SquareCRTCube
+import Erdos249257.SignedQMomentObstruction
