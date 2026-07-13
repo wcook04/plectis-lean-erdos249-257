@@ -45,6 +45,8 @@ For a bounded lookup, use `python3 scripts/query_corpus.py --claim <id>`,
 `--paper-label <TeX_label>`, `--paper-anchor <TeX_label_or_source_ref>`,
 `--open <remaining_open.id>`, `--declaration <Lean_name>`,
 `--source <module.lean:line>`, `--module <path_or_id>`, or `--route <id>`. Use
+`--artifact <registered_path_or_sha256>` for a descriptor-registered artefact
+or content identity. Use
 `--search <text> --limit <1..100>` when the typed handle is not yet known.
 JSON responses are capped at 64 KB; exhaustive data remains in the routed owner.
 Visible paper sigils resolve directly (`--module CerKer`); their generated
@@ -71,6 +73,10 @@ returns the pinned line, its module identity, declarations within the release
 checker tolerance, and their claim and paper-anchor routes. A source line with
 no nearby declaration remains an honest module/line handle with bounded nearest
 declarations; it is not silently promoted to a theorem.
+Descriptor-registered source papers, PDFs, JSON owners, JSON fragments, and
+their `sha256:` identities round-trip through `--artifact`. The packet preserves
+one-to-many digest cardinality and routes into the owning claim, declaration,
+paper-anchor, module, methodology, or orientation surface without embedding it.
 The helper reads the registry and atlas; it is navigation, not proof authority.
 
 ## Authority and change order

@@ -289,6 +289,30 @@ def main() -> int:
             assert anchor["canonical_handle"] in reverse_anchors
     assert source_link_count > 100
 
+    descriptor = json.loads(
+        (ROOT / "docs" / "corpus_descriptor.json").read_text(encoding="utf-8")
+    )
+    claims_identity = descriptor["identity"]["content"]["claims_document"]
+    claims_artifact = query("--artifact", "docs/claims.json")
+    assert claims_artifact["matches"][0]["artifact_id"] == "claims_document"
+    assert claims_artifact["matches"][0]["content_digest"] == claims_identity["content_digest"]
+    claims_by_digest = query("--artifact", claims_identity["content_digest"])
+    assert claims_by_digest["matches"][0]["artifact_handle"] == "docs/claims.json"
+    machine_paper_artifact = query(
+        "--artifact", "docs/claims.json::machine_readable_paper"
+    )
+    assert machine_paper_artifact["matches"][0]["artifact_kind"] == "json_fragment"
+    exposition_artifact = query("--artifact", "erdos249-257-exposition.pdf")
+    assert exposition_artifact["matches"][0]["artifact_kind"] == (
+        "authored_paper_rendered"
+    )
+    artifact_search = query("--search", claims_identity["content_digest"], "--limit", "1")
+    assert artifact_search["results"][0]["kind"] == "artifact"
+
+    unknown_artifact = run("--artifact", "sha256:" + "0" * 64)
+    assert unknown_artifact.returncode == 2
+    assert "unknown registered artifact" in unknown_artifact.stderr
+
     invalid_limit = run("--search", "totient", "--limit", "101")
     assert invalid_limit.returncode == 2
     assert "--limit must be between 1 and 100" in invalid_limit.stderr

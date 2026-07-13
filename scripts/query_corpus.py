@@ -29,6 +29,86 @@ def load(rel: str) -> dict[str, Any]:
     return json.loads((ROOT / rel).read_text(encoding="utf-8"))
 
 
+@lru_cache(maxsize=1)
+def artifact_inventory() -> list[dict[str, Any]]:
+    """Flatten the descriptor's registered content identities into handles."""
+    descriptor = load("docs/corpus_descriptor.json")
+    inventory: list[dict[str, Any]] = []
+    follow_by_id = {
+        "machine_readable_paper": ["--claim <claim_id>", "--open <remaining_open.id>"],
+        "claims_document": ["--claim <claim_id>", "--open <remaining_open.id>"],
+        "declaration_atlas": ["--declaration <Lean_name>", "--source <module.lean:line>"],
+        "methodology_contract": ["docs/methodology.json"],
+        "bounded_orientation": ["--route <route_id>"],
+        "human_exposition": ["--paper-anchor <TeX_label_or_source_ref>"],
+        "technical_companion": ["--paper-anchor <TeX_label_or_source_ref>"],
+        "paper_source_sigils": ["--module <paper_sigil>"],
+    }
+    for artifact_id, row in descriptor["identity"]["content"].items():
+        common = {
+            "artifact_id": artifact_id,
+            "artifact_role": row.get("artifact_role", artifact_id),
+            "authority_posture": row.get(
+                "authority_posture", "registered_navigation_artifact_not_proof_authority"
+            ),
+            "follow": follow_by_id.get(artifact_id, []),
+            "validation": "python3 scripts/build_corpus_descriptor.py --check",
+        }
+        if row.get("path") and row.get("content_digest"):
+            path = row["path"]
+            file_path = path.split("::", 1)[0]
+            inventory.append(
+                {
+                    **common,
+                    "artifact_kind": "json_fragment" if "::" in path else "registered_file",
+                    "artifact_handle": path,
+                    "file_path": file_path,
+                    "fragment": path.split("::", 1)[1] if "::" in path else None,
+                    "content_digest": row["content_digest"],
+                    "size_bytes": (ROOT / file_path).stat().st_size,
+                }
+            )
+        for variant in ("source", "rendered"):
+            path = row.get(f"{variant}_path")
+            digest = row.get(f"{variant}_content_digest")
+            if path and digest:
+                inventory.append(
+                    {
+                        **common,
+                        "artifact_kind": f"authored_paper_{variant}",
+                        "artifact_handle": path,
+                        "file_path": path,
+                        "fragment": None,
+                        "content_digest": digest,
+                        "size_bytes": (ROOT / path).stat().st_size,
+                    }
+                )
+    return sorted(inventory, key=lambda row: (row["artifact_handle"], row["artifact_id"]))
+
+
+def artifact_packet(handle: str) -> dict[str, Any]:
+    matches = [
+        row
+        for row in artifact_inventory()
+        if handle in (row["artifact_handle"], row["content_digest"])
+    ]
+    if not matches:
+        raise KeyError(f"unknown registered artifact or content digest: {handle}")
+    return {
+        "kind": "artifact",
+        "authority_posture": "descriptor_registered_content_identity_not_proof_authority",
+        "handle": handle,
+        "matches": matches,
+        "cardinality_receipt": {
+            "match_count": len(matches),
+            "complete": True,
+            "owner": "docs/corpus_descriptor.json::identity.content",
+        },
+        "expansion": "docs/corpus_descriptor.json",
+        "validation": "python3 scripts/build_corpus_descriptor.py --check",
+    }
+
+
 def compact_claim(claim: dict[str, Any]) -> dict[str, Any]:
     return {
         "id": claim["id"],
@@ -668,6 +748,35 @@ def search_packet(query: str, limit: int) -> dict[str, Any]:
     roles = module_roles(claims)
     ranked: list[tuple[int, str, dict[str, Any]]] = []
 
+    for artifact in artifact_inventory():
+        rank = search_rank(
+            query,
+            artifact["artifact_handle"],
+            " ".join(
+                str(value)
+                for value in (
+                    artifact["artifact_id"],
+                    artifact["artifact_kind"],
+                    artifact["artifact_role"],
+                    artifact["content_digest"],
+                )
+            ),
+        )
+        if rank is not None:
+            ranked.append(
+                (
+                    rank,
+                    f"artifact:{artifact['artifact_handle']}:{artifact['artifact_id']}",
+                    {
+                        "kind": "artifact",
+                        "artifact_id": artifact["artifact_id"],
+                        "artifact_handle": artifact["artifact_handle"],
+                        "artifact_kind": artifact["artifact_kind"],
+                        "content_digest": artifact["content_digest"],
+                    },
+                )
+            )
+
     for anchor in paper_anchor_inventory():
         primary = anchor["label"] or anchor["canonical_handle"]
         rank = search_rank(
@@ -778,7 +887,7 @@ def search_packet(query: str, limit: int) -> dict[str, Any]:
         "results": results[:limit],
         "omitted_match_count": max(0, len(results) - limit),
         "limit": limit,
-        "next": "Use the typed handle with --claim, --paper-anchor, --open, --declaration, --source, --module, or --route.",
+        "next": "Use the typed handle with --claim, --paper-anchor, --open, --declaration, --source, --module, --artifact, or --route.",
     }
 
 
@@ -838,6 +947,12 @@ def render_card(packet: dict[str, Any]) -> str:
             f"source {source['source_ref']} | module={source['module_id']} "
             f"| nearby_declarations={len(packet['nearby_declarations'])}"
         )
+    if kind == "artifact":
+        match = packet["matches"][0]
+        return (
+            f"artifact {match['artifact_handle']} | {match['artifact_kind']} "
+            f"| digest={match['content_digest']} | matches={len(packet['matches'])}"
+        )
     if kind == "open_proposition":
         proposition = packet["open_proposition"]
         return (
@@ -882,6 +997,7 @@ def main() -> int:
     group.add_argument("--open", metavar="ID")
     group.add_argument("--declaration", metavar="NAME")
     group.add_argument("--source", metavar="MODULE_DOT_LEAN:LINE")
+    group.add_argument("--artifact", metavar="PATH_OR_SHA256")
     group.add_argument("--module", metavar="PATH_OR_ID")
     group.add_argument("--route", metavar="ID")
     group.add_argument("--search", metavar="TEXT")
@@ -903,6 +1019,8 @@ def main() -> int:
             packet = declaration_packet(args.declaration, args.limit)
         elif args.source:
             packet = source_coordinate_packet(args.source, args.limit)
+        elif args.artifact:
+            packet = artifact_packet(args.artifact)
         elif args.module:
             packet = module_packet(args.module, args.limit)
         elif args.route:

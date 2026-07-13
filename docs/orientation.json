@@ -361,6 +361,7 @@
     "open_proposition": "python3 scripts/query_corpus.py --open <remaining_open.id>",
     "declaration": "python3 scripts/query_corpus.py --declaration <Lean_name>",
     "source_coordinate": "python3 scripts/query_corpus.py --source <module.lean:line>",
+    "artifact_or_digest": "python3 scripts/query_corpus.py --artifact <path_or_sha256>",
     "module": "python3 scripts/query_corpus.py --module <path_or_id_or_paper_sigil>",
     "reading_route": "python3 scripts/query_corpus.py --route <route_id>",
     "search": "python3 scripts/query_corpus.py --search <text> [--limit 1..100]"

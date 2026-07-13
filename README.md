@@ -57,6 +57,8 @@ For one bounded lookup, run `python3 scripts/query_corpus.py --claim <id>`,
 `--paper-label <TeX_label>`, `--paper-anchor <TeX_label_or_source_ref>`,
 `--open <remaining_open.id>`, `--declaration <Lean_name>`,
 `--source <module.lean:line>`, `--module <path_or_id>`, or `--route <id>`. If you
+hold a descriptor-registered path or `sha256:` content identity, resolve it with
+`--artifact <path_or_sha256>`. If you
 do not yet know the handle, use `--search <text> --limit <1..100>`; every JSON
 response is capped at 64 KB and points back to an exhaustive owner.
 Paper sigils are handles too: `--module CerKer` resolves the displayed sigil
@@ -83,6 +85,10 @@ An exact Lean `path:line` is directly queryable with `--source`; the packet
 preserves the requested pinned line and returns only a bounded declaration
 window plus nearest-declaration receipts, so an arbitrary source line is never
 misrepresented as a theorem.
+Registered paper sources, PDFs, JSON owners and JSON fragments also round-trip
+from either path or digest through `--artifact`; the response preserves
+cardinality and points to the relevant bounded query instead of embedding the
+artefact.
 
 The Plectis site is an introduction, not a proof certificate. The exposition
 explains the mathematics. The checked Lean source establishes the formal
