@@ -11,7 +11,6 @@ targets from Git, including untracked Lean files.
 from __future__ import annotations
 
 import argparse
-from concurrent.futures import ThreadPoolExecutor, as_completed
 import os
 from pathlib import Path
 import re
@@ -221,6 +220,22 @@ def build_one(name: str, root: Path = ROOT) -> tuple[str, int, float]:
     return name, result.returncode, time.monotonic() - started
 
 
+def build_wave(names: Iterable[str], jobs: int, root: Path = ROOT) -> list[str]:
+    """Build one dependency-ready wave with a bounded worker pool."""
+
+    from concurrent.futures import ThreadPoolExecutor, as_completed
+
+    with ThreadPoolExecutor(max_workers=jobs) as executor:
+        futures = [executor.submit(build_one, name, root) for name in names]
+        failed = []
+        for future in as_completed(futures):
+            name, code, duration = future.result()
+            print(f"lean-fast-build: {name} -> {code} ({duration:.1f}s)")
+            if code:
+                failed.append(name)
+    return failed
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("targets", nargs="*", help="local module name or .lean path; defaults to Erdos249257")
@@ -274,16 +289,9 @@ def main(argv: list[str] | None = None) -> int:
 
     for wave in pending:
         current = [name for name in wave if stale(name, modules, graph, root)]
-        with ThreadPoolExecutor(max_workers=args.jobs) as executor:
-            futures = [executor.submit(build_one, name, root) for name in current]
-            failed = []
-            for future in as_completed(futures):
-                name, code, duration = future.result()
-                print(f"lean-fast-build: {name} -> {code} ({duration:.1f}s)")
-                if code:
-                    failed.append(name)
-            if failed:
-                raise RuntimeError("module prebuild failed: " + ", ".join(sorted(failed)))
+        failed = build_wave(current, args.jobs, root)
+        if failed:
+            raise RuntimeError("module prebuild failed: " + ", ".join(sorted(failed)))
 
     print("lean-fast-build: final Lake authority check")
     focused = bool(args.targets) or args.changed_from is not None

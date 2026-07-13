@@ -62,6 +62,21 @@ class LeanFastBuildTests(unittest.TestCase):
 
             self.assertEqual(fast.local_imports(source, modules), {"Pkg.Local"})
 
+    def test_build_wave_reports_only_failed_modules(self) -> None:
+        results = {
+            "Pkg.Good": ("Pkg.Good", 0, 0.1),
+            "Pkg.Bad": ("Pkg.Bad", 1, 0.2),
+        }
+        with mock.patch.object(
+            fast,
+            "build_one",
+            side_effect=lambda name, root=fast.ROOT: results[name],
+        ):
+            self.assertEqual(
+                fast.build_wave(["Pkg.Good", "Pkg.Bad"], jobs=2),
+                ["Pkg.Bad"],
+            )
+
     def test_discovery_ignores_ephemeral_underscore_modules(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
