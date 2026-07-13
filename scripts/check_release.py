@@ -289,6 +289,7 @@ def main() -> int:
     check(all(
         row["anchor_class"] in {
             "registered_claim_anchor",
+            "remaining_open_proposition_anchor",
             "authored_formal_anchor_without_registered_claim",
             "section_navigation_anchor",
         }
@@ -303,9 +304,30 @@ def main() -> int:
         expected_claim_ids = claim_ids_by_label.get(anchor["label"], set())
         check(observed_claim_ids == expected_claim_ids,
               f"paper anchor {anchor['canonical_handle']}: attached claim set drifted")
+        observed_open_ids = {row["id"] for row in anchor["attached_open_propositions"]}
+        expected_open_ids = {
+            row["id"]
+            for row in data["remaining_open_propositions"]
+            if row.get("paper_anchor")
+            and row["paper_anchor"]["source"] == anchor["paper"]["source"]
+            and row["paper_anchor"]["environment"] == anchor["environment"]
+            and row["paper_anchor"]["title"] == anchor["title"]
+        }
+        check(observed_open_ids == expected_open_ids,
+              f"paper anchor {anchor['canonical_handle']}: open proposition set drifted")
+        if anchor["environment"] == "problem":
+            check(anchor["anchor_class"] == "remaining_open_proposition_anchor",
+                  f"problem paper anchor {anchor['canonical_handle']} is not typed as remaining open")
         if anchor["anchor_kind"] == "formal_environment":
             check(anchor["anchor_class"] != "section_navigation_anchor",
                   f"formal paper anchor {anchor['canonical_handle']} classified as navigation-only")
+    routed_open_ids = {
+        row["id"]
+        for anchor in paper_anchors
+        for row in anchor["attached_open_propositions"]
+    }
+    check(routed_open_ids == {row["id"] for row in data["remaining_open_propositions"]},
+          "every remaining-open proposition must resolve to exactly one authored problem anchor")
     index_label = machine_paper["paper"]["principal_declaration_index_label"]
     check(re.search(rf"\\label\{{{re.escape(index_label)}\}}", paper) is not None,
           f"machine-readable paper index label {index_label!r} does not exist")

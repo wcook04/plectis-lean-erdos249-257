@@ -45,6 +45,15 @@ def paper_anchor_inventory() -> list[dict[str, Any]]:
         label = claim.get("paper_label")
         if label:
             claims_by_label.setdefault(label, []).append(compact_claim(claim))
+    open_by_anchor = {
+        (
+            row["paper_anchor"]["source"],
+            row["paper_anchor"]["environment"],
+            row["paper_anchor"]["title"],
+        ): row
+        for row in claims["remaining_open_propositions"]
+        if row.get("paper_anchor")
+    }
 
     inventory: list[dict[str, Any]] = []
     for paper_row in paper_rows:
@@ -104,7 +113,13 @@ def paper_anchor_inventory() -> list[dict[str, Any]]:
             label = start["label"]
             source_ref = f"{relative}:{line}"
             attached_claims = sorted(claims_by_label.get(label, []), key=lambda row: row["id"])
-            if attached_claims:
+            open_proposition = open_by_anchor.get(
+                (relative, start["environment"], start["title"])
+            )
+            attached_open_propositions = [open_proposition] if open_proposition else []
+            if attached_open_propositions:
+                anchor_class = "remaining_open_proposition_anchor"
+            elif attached_claims:
                 anchor_class = "registered_claim_anchor"
             elif start["anchor_kind"] == "formal_environment":
                 anchor_class = "authored_formal_anchor_without_registered_claim"
@@ -146,6 +161,7 @@ def paper_anchor_inventory() -> list[dict[str, Any]]:
                     "anchor_class": anchor_class,
                     "authority_posture": "authored_exposition_navigation_not_proof_authority",
                     "attached_claims": attached_claims,
+                    "attached_open_propositions": attached_open_propositions,
                     "source_links": source_links,
                 }
             )
@@ -167,6 +183,7 @@ def paper_anchor_inventory() -> list[dict[str, Any]]:
         }
         row["cardinality_receipt"] = {
             "attached_claim_count": len(row["attached_claims"]),
+            "attached_open_proposition_count": len(row["attached_open_propositions"]),
             "source_link_count": len(row["source_links"]),
             "complete": True,
         }
@@ -258,10 +275,12 @@ def paper_anchor_packet(handle: str, kind: str = "paper_anchor") -> dict[str, An
         "environment": anchor["environment"],
         "title": anchor["title"],
         "attached_claims": anchor["attached_claims"],
+        "attached_open_propositions": anchor["attached_open_propositions"],
         "source_links": anchor["source_links"],
         "anchor_neighbourhood": anchor["anchor_neighbourhood"],
         "attachment_receipt": {
             "claim_count": len(anchor["attached_claims"]),
+            "open_proposition_count": len(anchor["attached_open_propositions"]),
             "source_link_count": len(anchor["source_links"]),
             "complete": True,
             "owners": [anchor["paper"]["source"], "docs/claims.json"],
@@ -308,6 +327,18 @@ def open_proposition_packet(open_id: str) -> dict[str, Any]:
                 "effect": effect["statement"],
             }
         )
+    paper_anchor = next(
+        (
+            {
+                "canonical_handle": anchor["canonical_handle"],
+                "paper": anchor["paper"],
+                "anchor_class": anchor["anchor_class"],
+            }
+            for anchor in paper_anchor_inventory()
+            if any(row["id"] == open_id for row in anchor["attached_open_propositions"])
+        ),
+        None,
+    )
     return {
         "kind": "open_proposition",
         "authority_posture": "authored_open_boundary_navigation_not_proof_authority",
@@ -316,6 +347,7 @@ def open_proposition_packet(open_id: str) -> dict[str, Any]:
         "open_target": compact_claim(claim_index[proposition["open_target_claim"]]),
         "linked_claims": linked_claims,
         "advancing_claims": advancing_claims,
+        "paper_anchor": paper_anchor,
         "follow": "python3 scripts/query_corpus.py --claim <claim_id>",
         "source": "docs/claims.json::remaining_open_propositions",
         "validation": "python3 scripts/check_release.py",

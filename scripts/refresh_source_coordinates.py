@@ -25,6 +25,21 @@ PAPERS = (
 LINK_RE = re.compile(r"\\(lrefx?)\{([^}]+)\}\{\d+\}\{([^}]+)\}")
 
 
+def paper_anchor_line(anchor: dict[str, object]) -> int:
+    path = ROOT / str(anchor["source"])
+    text = path.read_text(encoding="utf-8")
+    pattern = re.compile(
+        rf"\\begin\{{{re.escape(str(anchor['environment']))}\}}"
+        rf"\[{re.escape(str(anchor['title']))}\]"
+    )
+    matches = list(pattern.finditer(text))
+    if len(matches) != 1:
+        raise RuntimeError(
+            f"paper anchor must resolve exactly once: {anchor} (matches={len(matches)})"
+        )
+    return text.count("\n", 0, matches[0].start()) + 1
+
+
 def declaration_lines() -> dict[tuple[str, str], int]:
     atlas = json.loads(ATLAS.read_text(encoding="utf-8"))
     rows: dict[tuple[str, str], list[int]] = {}
@@ -45,6 +60,10 @@ def render() -> tuple[str, dict[Path, str]]:
             if key not in lines:
                 raise RuntimeError(f"claim declaration absent from atlas: {key}")
             decl["line"] = lines[key]
+    for proposition in claims["remaining_open_propositions"]:
+        anchor = proposition.get("paper_anchor")
+        if anchor:
+            anchor["line"] = paper_anchor_line(anchor)
 
     def replace(match: re.Match[str]) -> str:
         macro, filename, name = match.groups()

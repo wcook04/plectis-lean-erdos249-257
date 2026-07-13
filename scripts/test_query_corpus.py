@@ -120,6 +120,15 @@ def main() -> int:
         assert open_packet["status"] == "open"
         assert open_packet["open_target"]["id"] == target
         assert len(open_packet["advancing_claims"]) == advancing_count
+        assert open_packet["paper_anchor"]["anchor_class"] == (
+            "remaining_open_proposition_anchor"
+        )
+        reverse_open = query(
+            "--paper-anchor", open_packet["paper_anchor"]["canonical_handle"]
+        )
+        assert [row["id"] for row in reverse_open["attached_open_propositions"]] == [
+            open_id
+        ]
 
     open_search = query("--search", "remaining_open.unbounded_certificate_supply", "--limit", "1")
     assert open_search["results"][0]["kind"] == "open_proposition"

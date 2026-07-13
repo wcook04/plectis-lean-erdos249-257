@@ -5157,17 +5157,35 @@
     {
       "id": "remaining_open.erdos_249_irrationality",
       "open_target_claim": "erdos_249",
-      "statement": "Prove that S = ∑ φ(n)/2ⁿ is irrational, with no bound on a possible rational denominator."
+      "statement": "Prove that S = ∑ φ(n)/2ⁿ is irrational, with no bound on a possible rational denominator.",
+      "paper_anchor": {
+        "source": "paper/erdos249-257-exposition.tex",
+        "environment": "problem",
+        "title": "Erd\\H{o}s \\#249",
+        "line": 887
+      }
     },
     {
       "id": "remaining_open.unbounded_certificate_supply",
       "open_target_claim": "erdos_249",
-      "statement": "Produce certified non-integrality witnesses at unbounded parameters, equivalently along the lcm diagonal."
+      "statement": "Produce certified non-integrality witnesses at unbounded parameters, equivalently along the lcm diagonal.",
+      "paper_anchor": {
+        "source": "paper/erdos249-257-exposition.tex",
+        "environment": "problem",
+        "title": "unbounded certificate supply",
+        "line": 896
+      }
     },
     {
       "id": "remaining_open.universal_257_all_infinite_supports",
       "open_target_claim": "universal_257",
-      "statement": "Prove irrationality for every infinite support A, not only the named support families formalised here."
+      "statement": "Prove irrationality for every infinite support A, not only the named support families formalised here.",
+      "paper_anchor": {
+        "source": "paper/erdos249-257-exposition.tex",
+        "environment": "problem",
+        "title": "universal Erd\\H{o}s \\#257",
+        "line": 903
+      }
     }
   ],
   "claims": [
