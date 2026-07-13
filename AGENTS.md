@@ -47,6 +47,8 @@ Visible paper sigils resolve directly (`--module CerKer`); their generated
 crosswalk is `paper/module-aliases.json`.
 Module packets carry the authored role plus bounded imports, reverse importers,
 attached claims, and declaration previews; use their receipts before expanding.
+Claim packets carry a resolved local argument neighbourhood; follow adjacent
+claim IDs with another `--claim` query instead of loading the complete graph.
 The helper reads the registry and atlas; it is navigation, not proof authority.
 
 ## Authority and change order

@@ -25,19 +25,49 @@ def load(rel: str) -> dict[str, Any]:
     return json.loads((ROOT / rel).read_text(encoding="utf-8"))
 
 
+def compact_claim(claim: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "id": claim["id"],
+        "label": claim["label"],
+        "status": claim["status"],
+        "paper_label": claim.get("paper_label"),
+    }
+
+
 def claim_packet(claim_id: str) -> dict[str, Any]:
     claims = load("docs/claims.json")
-    claim = next((row for row in claims["claims"] if row["id"] == claim_id), None)
+    claim_index = {row["id"]: row for row in claims["claims"]}
+    claim = claim_index.get(claim_id)
     if claim is None:
         raise KeyError(f"unknown claim id: {claim_id}")
-    edges = claims["machine_readable_paper"]["argument_graph"]["edges"]
+    graph = claims["machine_readable_paper"]["argument_graph"]
+    edges = graph["edges"]
+    incoming = [row for row in edges if row["to"] == claim_id]
+    outgoing = [row for row in edges if row["from"] == claim_id]
+
+    def resolved_edge(edge: dict[str, Any], neighbour_key: str) -> dict[str, Any]:
+        row = {
+            "relation": edge["relation"],
+            "relation_meaning": graph["edge_semantics"][edge["relation"]],
+            "neighbour": compact_claim(claim_index[edge[neighbour_key]]),
+        }
+        if "remaining_open_effect" in edge:
+            row["remaining_open_effect"] = edge["remaining_open_effect"]
+        return row
+
     open_ids = set(claim.get("remaining_open_proposition_ids", []))
     return {
         "kind": "claim",
         "authority_posture": "navigation_projection_not_proof_authority",
         "claim": claim,
-        "incoming_edges": [row for row in edges if row["to"] == claim_id],
-        "outgoing_edges": [row for row in edges if row["from"] == claim_id],
+        "incoming_edges": incoming,
+        "outgoing_edges": outgoing,
+        "argument_neighbourhood": {
+            "incoming": [resolved_edge(row, "from") for row in incoming],
+            "outgoing": [resolved_edge(row, "to") for row in outgoing],
+            "exhaustive": "docs/claims.json::machine_readable_paper.argument_graph",
+            "follow": "python3 scripts/query_corpus.py --claim <neighbour_id>",
+        },
         "remaining_open_propositions": [
             row for row in claims["remaining_open_propositions"] if row["id"] in open_ids
         ],
@@ -62,15 +92,6 @@ def declaration_packet(name: str, limit: int) -> dict[str, Any]:
         "match_count": len(matches),
         "omitted_match_count": max(0, len(matches) - limit),
         "validation": "python3 scripts/build_declaration_atlas.py --check",
-    }
-
-
-def compact_claim(claim: dict[str, Any]) -> dict[str, Any]:
-    return {
-        "id": claim["id"],
-        "label": claim["label"],
-        "status": claim["status"],
-        "paper_label": claim.get("paper_label"),
     }
 
 
@@ -288,7 +309,12 @@ def render_card(packet: dict[str, Any]) -> str:
     if kind == "claim":
         claim = packet["claim"]
         decls = ", ".join(row["name"] for row in claim["declarations"]) or "none"
-        return f"claim {claim['id']} | {claim['status']} | paper={claim.get('paper_label')} | declarations={decls}"
+        neighbourhood = packet["argument_neighbourhood"]
+        return (
+            f"claim {claim['id']} | {claim['status']} | paper={claim.get('paper_label')} "
+            f"| incoming={len(neighbourhood['incoming'])} | outgoing={len(neighbourhood['outgoing'])} "
+            f"| declarations={decls}"
+        )
     if kind == "declaration":
         return "\n".join(
             f"declaration {row['name']} | {row['kind']} | {row['module']}:{row['line']} | claims={','.join(row['claim_ids']) or 'none'}"

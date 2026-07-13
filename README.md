@@ -61,6 +61,8 @@ Paper sigils are handles too: `--module CerKer` resolves the displayed sigil
 through [`paper/module-aliases.json`](paper/module-aliases.json).
 Module packets include the authored role, attached claims, bounded declaration
 preview, direct imports, and reverse importers.
+Claim packets resolve adjacent argument-graph IDs into labels, statuses, and
+relation meanings, so each neighbouring claim is another executable handle.
 
 The Plectis site is an introduction, not a proof certificate. The exposition
 explains the mathematics. The checked Lean source establishes the formal
