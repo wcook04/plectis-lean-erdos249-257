@@ -32,6 +32,25 @@ class LeanFastBuildTests(unittest.TestCase):
         self.assertEqual(selected, {"Left", "Shared"})
         self.assertEqual(fast.waves(selected, graph), [["Shared"], ["Left"]])
 
+    def test_reachable_graph_skips_unrelated_modules(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            modules = {}
+            for name, source_text in {
+                "Pkg.Base": "-- base\n",
+                "Pkg.Main": "import Pkg.Base\n",
+                "Other.Expensive": "-- unrelated\n",
+            }.items():
+                source = root / Path(*name.split(".")).with_suffix(".lean")
+                source.parent.mkdir(parents=True, exist_ok=True)
+                source.write_text(source_text, encoding="utf-8")
+                modules[name] = source
+
+            self.assertEqual(
+                fast.reachable_graph(["Pkg.Main"], modules),
+                {"Pkg.Main": {"Pkg.Base"}, "Pkg.Base": set()},
+            )
+
     def test_discovery_ignores_ephemeral_underscore_modules(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

@@ -69,6 +69,29 @@ def local_graph(modules: dict[str, Path]) -> dict[str, set[str]]:
     return graph
 
 
+def reachable_graph(
+    roots: Iterable[str], modules: dict[str, Path]
+) -> dict[str, set[str]]:
+    """Parse only the local import cone reachable from ``roots``."""
+
+    graph: dict[str, set[str]] = {}
+    pending = list(roots)
+    while pending:
+        module = pending.pop()
+        if module in graph:
+            continue
+        imports = {
+            match.group(1)
+            for line in modules[module].read_text(encoding="utf-8").splitlines()
+            if "import" in line
+            and (match := IMPORT_RE.match(line))
+            and match.group(1) in modules
+        }
+        graph[module] = imports
+        pending.extend(imports - graph.keys())
+    return graph
+
+
 def resolve_targets(
     targets: Iterable[str], modules: dict[str, Path], root: Path = ROOT
 ) -> list[str]:
@@ -236,7 +259,7 @@ def main(argv: list[str] | None = None) -> int:
             target_modules = resolve_targets(args.targets, modules, root)
     except (RuntimeError, ValueError) as error:
         parser.error(str(error))
-    graph = local_graph(modules)
+    graph = reachable_graph(target_modules, modules)
     build_waves = waves(reachable(target_modules, graph), graph)
     pending = [
         [name for name in wave if stale(name, modules, graph, root)]
