@@ -139,14 +139,19 @@ def changed_lean_paths(base: str, root: Path = ROOT) -> set[Path]:
 
 
 def changed_targets_from_paths(
-    changed_paths: Iterable[Path], modules: dict[str, Path]
+    changed_paths: Iterable[Path], modules: dict[str, Path], root: Path = ROOT
 ) -> list[str]:
-    modules_by_path = {source.resolve(): name for name, source in modules.items()}
-    return sorted(
-        modules_by_path[path.resolve()]
-        for path in changed_paths
-        if path.resolve() in modules_by_path
-    )
+    resolved_root = root.resolve()
+    changed: set[str] = set()
+    for path in changed_paths:
+        resolved_path = path.resolve()
+        try:
+            name = module_name(resolved_path, resolved_root)
+        except ValueError:
+            continue
+        if name in modules and modules[name].resolve() == resolved_path:
+            changed.add(name)
+    return sorted(changed)
 
 
 def changed_targets(
@@ -154,7 +159,7 @@ def changed_targets(
 ) -> list[str]:
     """Return changed local Lean modules relative to ``base``."""
 
-    return changed_targets_from_paths(changed_lean_paths(base, root), modules)
+    return changed_targets_from_paths(changed_lean_paths(base, root), modules, root)
 
 
 def reachable(roots: Iterable[str], graph: dict[str, set[str]]) -> set[str]:
@@ -262,7 +267,7 @@ def main(argv: list[str] | None = None) -> int:
                 print(f"lean-fast-build: no changed Lean modules relative to {args.changed_from}")
                 return 0
             modules = discover(root)
-            target_modules = changed_targets_from_paths(changed_paths, modules)
+            target_modules = changed_targets_from_paths(changed_paths, modules, root)
             if not target_modules:
                 print(f"lean-fast-build: no changed local Lean modules relative to {args.changed_from}")
                 return 0
