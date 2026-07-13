@@ -44,6 +44,7 @@
 \theoremstyle{definition}
 \newtheorem{definition}[theorem]{Definition}
 \newtheorem{example}[theorem]{Example}
+\newtheorem{problem}[theorem]{Problem}
 \theoremstyle{remark}
 \newtheorem*{remark}{Remark}
 
@@ -864,7 +865,7 @@ repository documentation, and the release metadata all agree with it,
 including that every Lean link above resolves to the named declaration at the
 stated line of the released source.
 
-\section{Conclusion}\label{sec:conclusion}
+\section{Complements and further questions}\label{sec:further}
 
 The formalisation establishes checked results in two directions and leaves two
 exact frontiers. It
@@ -876,6 +877,34 @@ complete. The unresolved \#249 step is precisely that unboundedness; the
 unresolved \#257 step is the passage from the formalised support classes to
 every infinite support. Neither frontier is softened by the size of the
 verified artefact.
+
+The remaining questions can be stated without reference to the size of the
+formal development.
+
+\begin{problem}[Erd\H{o}s \#249]
+Prove that
+\[
+  \sum_{n\ge1}\frac{\ph(n)}{2^n}
+\]
+is irrational, without imposing a bound on the denominator of a possible
+rational representation.
+\end{problem}
+
+\begin{problem}[unbounded certificate supply]
+Produce certified non-integrality witnesses at unbounded parameters,
+equivalently along the lcm diagonal. This is the open hypothesis in
+Corollary~\ref{res:diag}; the verified scales in Example~\ref{res:deposits}
+form a finite initial set and do not establish it.
+\end{problem}
+
+\begin{problem}[universal Erd\H{o}s \#257]
+Prove that
+\[
+  \sum_{n\in A}\frac{1}{2^n-1}
+\]
+is irrational for every infinite set $A\subseteq\N$, rather than only for the
+support families in Theorem~\ref{res:support}.
+\end{problem}
 
 On the \#257 side, rationality would impose two complementary forms of
 rigidity: divisor-coverage zero windows have length $o(\log N)$, whereas an
