@@ -5,7 +5,7 @@
 
 Availability, not correctness. From a fresh clone, can a human reader (using the
 prose surfaces) and an agent (using the machine surfaces) each recover the same
-seven distinctions the release is built to keep straight? The canonical answers
+core distinctions the release is built to keep straight? The canonical answers
 are derived from docs/claims.json and docs/methodology.json, so this check
 follows the registry rather than a hand-maintained answer key. Human evidence is
 grouped by meaning: every semantic group must have an anchor, so a generic word
@@ -179,19 +179,28 @@ def build_questions(
         },
         {
             "id": "q9_external_registration",
-            "question": "How does an external system register and expand the corpus?",
+            "question": "How does an external system register and expand the corpus, including its authored papers?",
             "machine_all": [
                 "erdos249257-corpus-descriptor/3",
                 "principal_declaration_handles",
                 "module_topology",
                 "migration_from_v2",
                 "expected_content_digest",
+                "human_exposition",
+                "technical_companion",
+                "paper_source_sigils",
+                "source_content_digest",
+                "rendered_content_digest",
+                "authored_editorial_surface_not_Lean_proof_authority",
             ],
             "human_groups": [
                 ["External corpus registration"],
                 ["erdos249257-corpus-descriptor/3"],
                 ["below 64 KB"],
                 ["digest-bound expansion files"],
+                ["both authored papers"],
+                ["paper-to-Lean source-sigil crosswalk"],
+                ["remain distinct from Lean proof authority"],
             ],
         },
     ]

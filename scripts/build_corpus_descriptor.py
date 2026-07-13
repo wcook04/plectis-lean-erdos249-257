@@ -253,6 +253,7 @@ def render_orientation_markdown(orientation: dict[str, Any]) -> str:
             "handles, and the root module topology. Complete claims, module imports,",
             "declaration prose, methodology, both authored papers, and the paper-to-Lean",
             "source-sigil crosswalk remain in their digest-bound expansion files.",
+            "These authored surfaces remain distinct from Lean proof authority.",
             "",
             "## Query one handle",
             "",
