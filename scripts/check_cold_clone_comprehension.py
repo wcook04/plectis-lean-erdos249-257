@@ -74,6 +74,13 @@ def human_requirements(summary: dict[str, Any]) -> list[list[str]]:
         [conditional["statement"], "unbounded certificate supply"],
         [finite["statement"], "verified finite instance"],
     ]
+    for status in (
+        "formalised here",
+        "unconditional progress",
+        "conditional reduction",
+        "verified finite instance",
+    ):
+        requirements.append([summary["status_taxonomy"][status]])
     requirements.extend(
         [[row["id"], row["statement"]] for row in summary["remaining_open_propositions"]]
     )

@@ -25,6 +25,21 @@ The exhaustive declaration and import index is
 [`docs/declaration_atlas.json`](declaration_atlas.json). Generated certificate
 shards are counted as formal source, not as separate mathematical claims.
 
+## What a claim status asserts
+
+A status states the exact public evidence claim, not a priority or novelty claim.
+The authored prior-art record, not this table, is the source for antecedents.
+
+| Status | Exact public meaning |
+|---|---|
+| proved here | Lean theorem in the pinned public release; no novelty assertion is implied |
+| formalised here | Known mathematics represented and checked in Lean |
+| unconditional progress | Genuine theorem that does not settle the open problem |
+| conditional reduction | Exact implication whose remaining hypothesis is open |
+| verified finite instance | Kernel-checked computation at a bounded range |
+| cited only | External theorem used for positioning, not formalised |
+| open | Not proved by this release |
+
 ## Exact open boundary
 
 - `remaining_open.erdos_249_irrationality` — Prove that S = ∑ φ(n)/2ⁿ is irrational, with no bound on a possible rational denominator.

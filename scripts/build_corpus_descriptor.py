@@ -203,11 +203,23 @@ def render_orientation_markdown(orientation: dict[str, Any]) -> str:
         "The exhaustive declaration and import index is",
         "[`docs/declaration_atlas.json`](declaration_atlas.json). Generated certificate",
         "shards are counted as formal source, not as separate mathematical claims.",
-        "",
-        "## Exact open boundary",
-        "",
     ]
     # REUSE-IgnoreEnd
+    lines.extend(
+        [
+            "",
+            "## What a claim status asserts",
+            "",
+            "A status states the exact public evidence claim, not a priority or novelty claim.",
+            "The authored prior-art record, not this table, is the source for antecedents.",
+            "",
+            "| Status | Exact public meaning |",
+            "|---|---|",
+        ]
+    )
+    for status, meaning in orientation["status_taxonomy"].items():
+        lines.append(f"| {status} | {meaning} |")
+    lines.extend(["", "## Exact open boundary", ""])
     for row in orientation["remaining_open_propositions"]:
         lines.append(f"- `{row['id']}` — {row['statement']}")
     lines.extend(["", "## Principal claim routes", ""])

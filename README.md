@@ -103,13 +103,15 @@ time; its explanation is not proof authority.
 ## What this release establishes
 
 - **Erdős-Borwein and named #257 support cases.** For every integer base
-  `b ≥ 2`, the full-support series `∑ 1/(bⁿ - 1)` is irrational. The development
-  also treats several named infinite supports, including factorials, powers of
+  `b ≥ 2`, the full-support series `∑ 1/(bⁿ - 1)` is irrational. This is the
+  classical Erdős theorem formalised in Lean here. The development also
+  formalises several named infinite supports, including factorials, powers of
   two, multiples, pairwise-coprime supports, and eventually periodic supports.
 - **An unconditional exclusion for #249.** If the totient constant
   `S = ∑ φ(n)/2ⁿ` is rational, its denominator is greater than
   `79 639 646 646 701 375 323 355 774 875 831 053`, approximately
-  `7.96 × 10³⁴`. This is not a proof that `S` is irrational.
+  `7.96 × 10³⁴`. This is a Lean theorem in this release, not a proof that `S`
+  is irrational.
 - **An exact finite-certificate reduction for #249.** Irrationality follows from
   certified non-integrality witnesses at unbounded parameters. The existence of
   that unbounded certificate supply remains open. The release verifies 22
@@ -117,8 +119,12 @@ time; its explanation is not proof authority.
   not change the unbounded quantifier.
 - **Necessary conditions for rational support values.** The formal development
   records carry-orbit, reciprocal-mass, unbounded-state, achievement-set, and
-  sublogarithmic divisor-coverage constraints. These do not prove the universal
-  #257 statement.
+  sublogarithmic divisor-coverage constraints as Lean theorems in this release.
+  These do not prove the universal #257 statement.
+
+The generated [orientation](docs/ORIENTATION.md) gives the exact meaning of
+every status label. Status records what is formalised, proved, reduced, or
+verified in this release; it is not a claim of mathematical priority or novelty.
 
 The [exposition](erdos249-257-exposition.pdf) states each result with its
 hypotheses and proof status. The
