@@ -32,6 +32,12 @@ The Plectis site is an introduction, not a proof certificate. The exposition
 explains the mathematics. The checked Lean source establishes the formal
 statements.
 
+The source tree is large enough that opening modules at random is not a useful
+reading strategy. For source inspection, use Claude Code, Codex, Cursor, or
+another coding harness that can read the repository and run its local checks.
+The harness should follow the maintained routes below and trace one claim at a
+time; its explanation is not proof authority.
+
 ## What this release establishes
 
 - **Erdős-Borwein and named #257 support cases.** For every integer base
@@ -86,6 +92,59 @@ mathematical boundary.
 
 Long Lean identifiers are kept out of the main reading path. The source map and
 declaration atlas are the maintained indexes.
+
+## Read it with a coding agent
+
+Clone the repository, open it in Claude Code, Codex, Cursor, or another coding
+harness with filesystem and terminal access, and give it a mathematical
+question rather than asking it to summarise every file. A useful starting
+prompt is:
+
+```text
+Read AGENTS.md, docs/claims.json, SCOPE.md, and the exposition PDF first.
+For the claim or question I give you, trace its paper anchor, status, Lean
+declaration, source module, and direct dependencies. State separately what is
+proved, what is conditional, what is verified only at finite parameters, and
+what remains open. Cite exact repository paths. Run scripts/check_release.py
+before reporting, and do not infer results from private or unreleased work.
+```
+
+Then ask it to trace one item, for example the denominator exclusion, the
+finite-certificate reduction, one named #257 support family, or the
+sublogarithmic zero-window theorem. The maintained claim and source maps make
+those bounded walks possible; a whole-repository summary usually hides the
+distinction between a theorem, a reduction, and a finite certificate.
+
+## How the repository fits together
+
+The published package has one supported root import,
+[`Erdos249257.lean`](Erdos249257.lean). Beneath it, the source is organised into
+four reader-facing layers:
+
+- **Assembled kernel.** [`CertificateKernel.lean`](Erdos249257/CertificateKernel.lean)
+  contains the common series machinery, the full-support Erdős-Borwein theorem,
+  named support-family interfaces, and the unconditional #249 denominator
+  exclusion.
+- **The #249 reduction spine.** The period-killer, lcm-diagonal, cone, diagonal
+  pincer, fresh-loss, and transport modules turn the open irrationality problem
+  into exact certificate or avoidance obligations. Finite certificate modules
+  verify explicit parameters; they do not supply the unbounded family that the
+  reduction requires.
+- **The #257 carry trunk.** The tail-orbit, achievement-set, Boolean-Möbius
+  carry, reciprocal-mass, and divisor-coverage modules describe what a rational
+  support value would force. They give exact criteria and necessary conditions,
+  not the universal #257 theorem.
+- **The reading and audit layer.** The exposition gives the authored
+  mathematical account. [`docs/claims.json`](docs/claims.json) binds statuses,
+  paper anchors, declarations, modules, and argument edges. The
+  [`source map`](docs/SOURCE_MAP.md) gives grouped routes, while the generated
+  [`declaration atlas`](docs/declaration_atlas.json) covers every public
+  declaration. `scripts/check_release.py` checks that these surfaces still
+  agree with the source and the stated open boundary.
+
+[`docs/SOURCE_MAP.md`](docs/SOURCE_MAP.md) gives the exact module order within
+each band. [`docs/WAVE_INDEX.md`](docs/WAVE_INDEX.md) gives the development
+chronology; it is not the recommended first reading order.
 
 <details>
 <summary>Principal Lean declaration anchors</summary>
