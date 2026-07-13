@@ -48,6 +48,7 @@ ERRORS: list[str] = []
 CHECKS = 0
 
 LINE_WINDOW = 3  # declaration name must appear within this many lines of the stated line
+MAX_ROUTE_FIRST_CONTACT_BYTES = 48_000
 
 README_BANNED_PHRASES = [
     "Ramanujan Machine Challenge",
@@ -181,8 +182,15 @@ def main() -> int:
               f"route {route.get('id')!r} lacks bounded query, authority-owner, or adjacent-handle data")
         check(not (set(route.get("read", [])) & exhaustive_route_reads),
               f"route {route.get('id')!r} sends first contact to an exhaustive owner")
+        first_contact_bytes = 0
         for rel in route.get("read", []):
-            check((ROOT / rel).is_file(), f"machine-readable-paper entrypoint path does not exist: {rel}")
+            path = ROOT / rel
+            check(path.is_file(), f"machine-readable-paper entrypoint path does not exist: {rel}")
+            if path.is_file():
+                first_contact_bytes += path.stat().st_size
+        check(first_contact_bytes <= MAX_ROUTE_FIRST_CONTACT_BYTES,
+              f"route {route.get('id')!r} first-contact bundle is {first_contact_bytes} bytes "
+              f"(budget {MAX_ROUTE_FIRST_CONTACT_BYTES})")
         for owner in route.get("authority_owners", []):
             rel = str(owner).split("::", 1)[0]
             check((ROOT / rel).is_file(),

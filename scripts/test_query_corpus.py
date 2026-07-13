@@ -380,6 +380,7 @@ def main() -> int:
         route_view = route_packet(route_row["id"])
         closure_checks += 1
         assert route_view["route"]["id"] == route_row["id"]
+        assert sum((ROOT / path).stat().st_size for path in route_row["read"]) <= 48_000
 
     assert closure_checks > 150
 
