@@ -39,6 +39,9 @@ class LeanFastBuildTests(unittest.TestCase):
             source.parent.mkdir()
             source.write_text("-- source\n", encoding="utf-8")
             (root / "_axcheck.lean").write_text("#check True\n", encoding="utf-8")
+            hidden = root / ".lake" / "Fake.lean"
+            hidden.parent.mkdir()
+            hidden.write_text("#check False\n", encoding="utf-8")
 
             self.assertEqual(set(fast.discover(root)), {"Pkg.Leaf"})
 

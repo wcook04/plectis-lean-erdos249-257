@@ -42,12 +42,18 @@ def module_name(source: Path, root: Path = ROOT) -> str:
 
 
 def discover(root: Path = ROOT) -> dict[str, Path]:
-    return {
-        module_name(source, root): source
-        for source in root.rglob("*.lean")
-        if not any(part.startswith(".") for part in source.relative_to(root).parts)
-        and not source.name.startswith("_")
-    }
+    modules: dict[str, Path] = {}
+    for directory, dirnames, filenames in os.walk(root):
+        # Prune .lake and other hidden trees before traversal; filtering after
+        # Path.rglob still pays to enumerate the complete dependency cache.
+        dirnames[:] = [name for name in dirnames if not name.startswith(".")]
+        directory_path = Path(directory)
+        for filename in filenames:
+            if not filename.endswith(".lean") or filename.startswith("_"):
+                continue
+            source = directory_path / filename
+            modules[module_name(source, root)] = source
+    return modules
 
 
 def local_graph(modules: dict[str, Path]) -> dict[str, set[str]]:
