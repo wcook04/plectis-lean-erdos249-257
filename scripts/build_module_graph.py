@@ -25,6 +25,7 @@ NEW_ROLES = {
     "Erdos249257.SquareCRTCube": "Finite square-CRT correction-suppression mechanism",
     "Erdos249257.SignedQMomentObstruction": "Finite signed-moment determinant and dyadic-parity substrate",
     "Erdos249257.TotientMahlerDefect": "Finite dyadic-totient rank and certificate interface",
+    "Erdos249257.ResidualGaugeObstruction": "Residual-gauge obstruction for monomial minor criteria",
     "Erdos249257.BinaryTailWindowTransfer": "Binary tail-window transfer interfaces",
     "Erdos249257.CyclicTensorMobiusShadow": "Cyclic tensor identities for the Mobius shadow",
     "Erdos249257.CyclotomicProjectionOfShadow": "Cyclotomic projections of the Mobius shadow",

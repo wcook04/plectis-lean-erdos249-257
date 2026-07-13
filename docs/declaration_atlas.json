@@ -4,21 +4,21 @@
   "projection_not_authority": true,
   "proof_authority": "Lean source checked by the pinned Lean kernel",
   "argument_authority": "docs/claims.json::machine_readable_paper.argument_graph",
-  "source_fingerprint": "sha256:9d6a1a81e4414f93633ca32d3addf6eee7b9d25de721627c157a890f5e9a03b4",
+  "source_fingerprint": "sha256:ab30ae51efdb27cf03a1a71e7b63f9720947f3155c39bc2f8129c3db0fc68620",
   "summary": {
-    "module_count": 543,
-    "declaration_count": 6403,
-    "theorem_like_count": 5880,
+    "module_count": 544,
+    "declaration_count": 6418,
+    "theorem_like_count": 5890,
     "generated_certificate_declaration_count": 1681,
     "principal_claim_link_count": 66,
     "kind_counts": {
       "abbrev": 2,
-      "def": 505,
+      "def": 510,
       "inductive": 3,
       "instance": 3,
       "lemma": 336,
       "structure": 10,
-      "theorem": 5544
+      "theorem": 5554
     }
   },
   "modules": [
@@ -68,7 +68,8 @@
         "Erdos249257.AdelicHeightObstruction",
         "Erdos249257.SquareCRTCube",
         "Erdos249257.SignedQMomentObstruction",
-        "Erdos249257.TotientMahlerDefect"
+        "Erdos249257.TotientMahlerDefect",
+        "Erdos249257.ResidualGaugeObstruction"
       ],
       "declaration_count": 0,
       "kind_counts": {}
@@ -6490,6 +6491,16 @@
       "kind_counts": {
         "def": 4,
         "theorem": 17
+      }
+    },
+    {
+      "id": "Erdos249257.ResidualGaugeObstruction",
+      "path": "Erdos249257/ResidualGaugeObstruction.lean",
+      "imports": [],
+      "declaration_count": 15,
+      "kind_counts": {
+        "def": 5,
+        "theorem": 10
       }
     },
     {
@@ -70001,6 +70012,171 @@
       "generated_certificate": false,
       "claim_ids": [],
       "docstring": "Evaluation at `X = 2` recovers the integral numerator already owned by `RadicalMobiusShadow`. The theorem deliberately retains the squarefree boundary of T1."
+    },
+    {
+      "id": "Erdos249257/ResidualGaugeObstruction.lean:24:phasePowerMatrix",
+      "name": "phasePowerMatrix",
+      "kind": "def",
+      "module": "Erdos249257/ResidualGaugeObstruction.lean",
+      "line": 24,
+      "signature": "def phasePowerMatrix {d : ℕ} (e : Fin d → ℕ) (z : Fin d → ℂ) : Matrix (Fin d) (Fin d) ℂ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The coefficient-side monomial matrix before residual column scaling."
+    },
+    {
+      "id": "Erdos249257/ResidualGaugeObstruction.lean:30:residualMonomialMatrix",
+      "name": "residualMonomialMatrix",
+      "kind": "def",
+      "module": "Erdos249257/ResidualGaugeObstruction.lean",
+      "line": 30,
+      "signature": "def residualMonomialMatrix {d : ℕ} (e : Fin d → ℕ) (W z : Fin d → ℂ) : Matrix (Fin d) (Fin d) ℂ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A common residual weight applied to every row of a supplier column."
+    },
+    {
+      "id": "Erdos249257/ResidualGaugeObstruction.lean:36:residualMonomialMatrix_eq_mul_diagonal",
+      "name": "residualMonomialMatrix_eq_mul_diagonal",
+      "kind": "theorem",
+      "module": "Erdos249257/ResidualGaugeObstruction.lean",
+      "line": 36,
+      "signature": "theorem residualMonomialMatrix_eq_mul_diagonal {d : ℕ} (e : Fin d → ℕ) (W z : Fin d → ℂ) : residualMonomialMatrix e W z = phasePowerMatrix e z * Matrix.diagonal W",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Common residual weights are exactly a right diagonal gauge action."
+    },
+    {
+      "id": "Erdos249257/ResidualGaugeObstruction.lean:47:det_residualMonomialMatrix",
+      "name": "det_residualMonomialMatrix",
+      "kind": "theorem",
+      "module": "Erdos249257/ResidualGaugeObstruction.lean",
+      "line": 47,
+      "signature": "theorem det_residualMonomialMatrix {d : ℕ} (e : Fin d → ℕ) (W z : Fin d → ℂ) : Matrix.det (residualMonomialMatrix e W z) = Matrix.det (phasePowerMatrix e z) * ∏ j, W j",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Determinants factor into the coefficient-side determinant and the product of residual column gauges."
+    },
+    {
+      "id": "Erdos249257/ResidualGaugeObstruction.lean:55:det_residualMonomialMatrix_ne_zero_iff",
+      "name": "det_residualMonomialMatrix_ne_zero_iff",
+      "kind": "theorem",
+      "module": "Erdos249257/ResidualGaugeObstruction.lean",
+      "line": 55,
+      "signature": "theorem det_residualMonomialMatrix_ne_zero_iff {d : ℕ} (e : Fin d → ℕ) (W z : Fin d → ℂ) (hW : ∏ j, W j ≠ 0) : Matrix.det (residualMonomialMatrix e W z) ≠ 0 ↔ Matrix.det (phasePowerMatrix e z) ≠ 0",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Nonzero column gauges preserve determinant nonvanishing at every rank."
+    },
+    {
+      "id": "Erdos249257/ResidualGaugeObstruction.lean:64:norm_det_residualMonomialMatrix",
+      "name": "norm_det_residualMonomialMatrix",
+      "kind": "theorem",
+      "module": "Erdos249257/ResidualGaugeObstruction.lean",
+      "line": 64,
+      "signature": "theorem norm_det_residualMonomialMatrix {d : ℕ} (e : Fin d → ℕ) (W z : Fin d → ℂ) (hW : ∀ j, ‖W j‖ = 1) : ‖Matrix.det (residualMonomialMatrix e W z)‖ = ‖Matrix.det (phasePowerMatrix e z)‖",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Unit residual gauges preserve determinant magnitude."
+    },
+    {
+      "id": "Erdos249257/ResidualGaugeObstruction.lean:73:lockedResidual",
+      "name": "lockedResidual",
+      "kind": "def",
+      "module": "Erdos249257/ResidualGaugeObstruction.lean",
+      "line": 73,
+      "signature": "noncomputable def lockedResidual {d : ℕ} (z : Fin d → ℂ) : Fin d → ℂ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The locked reconstruction gauge is the inverse pivot phase."
+    },
+    {
+      "id": "Erdos249257/ResidualGaugeObstruction.lean:77:norm_lockedResidual",
+      "name": "norm_lockedResidual",
+      "kind": "theorem",
+      "module": "Erdos249257/ResidualGaugeObstruction.lean",
+      "line": 77,
+      "signature": "theorem norm_lockedResidual {d : ℕ} (z : Fin d → ℂ) (hz : ∀ j, ‖z j‖ = 1) : ∀ j, ‖lockedResidual z j‖ = 1",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Unit pivot phases give unit locked residuals."
+    },
+    {
+      "id": "Erdos249257/ResidualGaugeObstruction.lean:85:residualMonomialMatrix_locked_row_one",
+      "name": "residualMonomialMatrix_locked_row_one",
+      "kind": "theorem",
+      "module": "Erdos249257/ResidualGaugeObstruction.lean",
+      "line": 85,
+      "signature": "theorem residualMonomialMatrix_locked_row_one {d : ℕ} (e : Fin d → ℕ) (z : Fin d → ℂ) (i : Fin d) (hi : e i = 1) (hz : ∀ j, z j ≠ 0) : ∀ j, residualMonomialMatrix e (lockedResidual z) z i j = 1",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Under the locked gauge, any exponent-one row is identically the bad target phase `1`, while the other rows remain available to carry rank."
+    },
+    {
+      "id": "Erdos249257/ResidualGaugeObstruction.lean:94:locked_reconstruction_preserves_nonzero_minor",
+      "name": "locked_reconstruction_preserves_nonzero_minor",
+      "kind": "theorem",
+      "module": "Erdos249257/ResidualGaugeObstruction.lean",
+      "line": 94,
+      "signature": "theorem locked_reconstruction_preserves_nonzero_minor {d : ℕ} (e : Fin d → ℕ) (z : Fin d → ℂ) (i : Fin d) (hi : e i = 1) (hz : ∀ j, z j ≠ 0) (hdet : Matrix.det (phasePowerMatrix e z) ≠ 0) : Matrix.det (residualMonomialMatrix e (lockedResidual z) z) ≠ 0 ∧ ∀ j, residualMonomialMatrix e (lockedResidual z) z i j = 1",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The locked bad row and a nonzero coefficient-side determinant coexist. This is the all-rank countermodel to a residual-blind minor certificate."
+    },
+    {
+      "id": "Erdos249257/ResidualGaugeObstruction.lean:110:rowResidualMonomialMatrix",
+      "name": "rowResidualMonomialMatrix",
+      "kind": "def",
+      "module": "Erdos249257/ResidualGaugeObstruction.lean",
+      "line": 110,
+      "signature": "def rowResidualMonomialMatrix {d : ℕ} (e : Fin d → ℕ) (W : Fin d → Fin d → ℂ) (z : Fin d → ℂ) : Matrix (Fin d) (Fin d) ℂ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Monomial rows with a residual allowed to vary across both rows and columns."
+    },
+    {
+      "id": "Erdos249257/ResidualGaugeObstruction.lean:117:rowReconstructingResidual",
+      "name": "rowReconstructingResidual",
+      "kind": "def",
+      "module": "Erdos249257/ResidualGaugeObstruction.lean",
+      "line": 117,
+      "signature": "noncomputable def rowReconstructingResidual {d : ℕ} (e : Fin d → ℕ) (z : Fin d → ℂ) : Fin d → Fin d → ℂ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A row-dependent residual can reconstruct the ordinary consecutive-power matrix for arbitrary requested exponents."
+    },
+    {
+      "id": "Erdos249257/ResidualGaugeObstruction.lean:124:rowResidualMonomialMatrix_reconstructs_phasePowerMatrix",
+      "name": "rowResidualMonomialMatrix_reconstructs_phasePowerMatrix",
+      "kind": "theorem",
+      "module": "Erdos249257/ResidualGaugeObstruction.lean",
+      "line": 124,
+      "signature": "theorem rowResidualMonomialMatrix_reconstructs_phasePowerMatrix {d : ℕ} (e : Fin d → ℕ) (z : Fin d → ℂ) (hz : ∀ j, z j ≠ 0) : rowResidualMonomialMatrix e (rowReconstructingResidual e z) z = phasePowerMatrix (fun i : Fin d ↦ i.1) z",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The explicit row-dependent residual relaxation reconstructs an ordinary Vandermonde-shaped consecutive-power matrix exactly."
+    },
+    {
+      "id": "Erdos249257/ResidualGaugeObstruction.lean:135:norm_rowReconstructingResidual",
+      "name": "norm_rowReconstructingResidual",
+      "kind": "theorem",
+      "module": "Erdos249257/ResidualGaugeObstruction.lean",
+      "line": 135,
+      "signature": "theorem norm_rowReconstructingResidual {d : ℕ} (e : Fin d → ℕ) (z : Fin d → ℂ) (hz : ∀ j, ‖z j‖ = 1) : ∀ i j, ‖rowReconstructingResidual e z i j‖ = 1",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "When the pivot phases are unit, every entry of the reconstructing row-dependent residual is also unit."
+    },
+    {
+      "id": "Erdos249257/ResidualGaugeObstruction.lean:145:rowReconstruction_zero_row_one",
+      "name": "rowReconstruction_zero_row_one",
+      "kind": "theorem",
+      "module": "Erdos249257/ResidualGaugeObstruction.lean",
+      "line": 145,
+      "signature": "theorem rowReconstruction_zero_row_one {d : ℕ} (e : Fin d → ℕ) (z : Fin d → ℂ) (hz : ∀ j, z j ≠ 0) (i : Fin d) (hi : i.1 = 0) : ∀ j, rowResidualMonomialMatrix e (rowReconstructingResidual e z) z i j = 1",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The reconstructed zeroth row is identically `1`. Thus even allowing row-dependent unit residuals does not let a fixed-rank nonzero minor exclude the locked affine target without an additional arithmetic coupling law."
     },
     {
       "id": "Erdos249257/SignedQMomentObstruction.lean:28:det_mul_rectangular",
