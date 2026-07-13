@@ -303,6 +303,13 @@ def main() -> int:
         for row in leaf["dependency_neighbourhood"]["importers"]
     )
 
+    square_crt = query("--module", "Erdos249257.SquareCRTCube", "--limit", "3")
+    assert square_crt["module"]["role"] == (
+        "Finite square-CRT correction-suppression mechanism"
+    )
+    assert square_crt["dependency_neighbourhood"]["receipt"]["imports_total"] == 0
+    assert square_crt["dependency_neighbourhood"]["receipt"]["importers_total"] == 1
+
     aliases = json.loads((ROOT / "paper" / "module-aliases.json").read_text(encoding="utf-8"))
     assert aliases["alias_count"] == len(aliases["aliases"])
     assert len({row["sigil"] for row in aliases["aliases"]}) == aliases["alias_count"]

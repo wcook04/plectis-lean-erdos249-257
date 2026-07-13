@@ -4,21 +4,21 @@
   "projection_not_authority": true,
   "proof_authority": "Lean source checked by the pinned Lean kernel",
   "argument_authority": "docs/claims.json::machine_readable_paper.argument_graph",
-  "source_fingerprint": "sha256:24add812189ed26c491553d34e4a214a0f5e335edaca5886d2df2371d1a55c03",
+  "source_fingerprint": "sha256:41c625c9eea379b73fbb833976fb0aafaed5d91425966efe797b7ba43e71c732",
   "summary": {
-    "module_count": 540,
-    "declaration_count": 6362,
-    "theorem_like_count": 5850,
+    "module_count": 541,
+    "declaration_count": 6379,
+    "theorem_like_count": 5866,
     "generated_certificate_declaration_count": 1681,
     "principal_claim_link_count": 56,
     "kind_counts": {
       "abbrev": 1,
-      "def": 497,
+      "def": 498,
       "inductive": 3,
       "instance": 3,
       "lemma": 336,
       "structure": 8,
-      "theorem": 5514
+      "theorem": 5530
     }
   },
   "modules": [
@@ -65,7 +65,8 @@
         "Erdos249257.JointExponentTransport",
         "Erdos249257.PrimeJumpMigration",
         "Erdos249257.PrimeJumpWindow",
-        "Erdos249257.AdelicHeightObstruction"
+        "Erdos249257.AdelicHeightObstruction",
+        "Erdos249257.SquareCRTCube"
       ],
       "declaration_count": 0,
       "kind_counts": {}
@@ -6487,6 +6488,16 @@
       "kind_counts": {
         "def": 4,
         "theorem": 17
+      }
+    },
+    {
+      "id": "Erdos249257.SquareCRTCube",
+      "path": "Erdos249257/SquareCRTCube.lean",
+      "imports": [],
+      "declaration_count": 17,
+      "kind_counts": {
+        "def": 1,
+        "theorem": 16
       }
     },
     {
@@ -69966,6 +69977,193 @@
       "generated_certificate": false,
       "claim_ids": [],
       "docstring": "Evaluation at `X = 2` recovers the integral numerator already owned by `RadicalMobiusShadow`. The theorem deliberately retains the squarefree boundary of T1."
+    },
+    {
+      "id": "Erdos249257/SquareCRTCube.lean:34:totient_mul_prime_cocycle",
+      "name": "totient_mul_prime_cocycle",
+      "kind": "theorem",
+      "module": "Erdos249257/SquareCRTCube.lean",
+      "line": 34,
+      "signature": "theorem totient_mul_prime_cocycle {p m : ℕ} (hp : p.Prime) : Nat.totient (p * m) = (p - 1) * Nat.totient m + if p ∣ m then Nat.totient m else 0",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Exact prime-dilation cocycle for Euler's totient. The second summand is the weighted correction which square localization removes on a finite horizon."
+    },
+    {
+      "id": "Erdos249257/SquareCRTCube.lean:48:totient_dilation_clean_of_square_residue",
+      "name": "totient_dilation_clean_of_square_residue",
+      "kind": "theorem",
+      "module": "Erdos249257/SquareCRTCube.lean",
+      "line": 48,
+      "signature": "theorem totient_dilation_clean_of_square_residue {p A a t h : ℕ} (hp : p.Prime) (hclean : ¬p ∣ a + h) : Nat.totient (A + p * (a + p * t) + p * h - A) = (p - 1) * Nat.totient (a + p * t + h)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "General square-witness form. The equality `n = A + p * (a + p*t)` is the quotient-bearing form of `n ≡ A + p*a [MOD p^2]`. If `p ∤ a+h`, the cofactor at shift `h` is clean."
+    },
+    {
+      "id": "Erdos249257/SquareCRTCube.lean:70:totient_dilation_clean_of_square_witness",
+      "name": "totient_dilation_clean_of_square_witness",
+      "kind": "theorem",
+      "module": "Erdos249257/SquareCRTCube.lean",
+      "line": 70,
+      "signature": "theorem totient_dilation_clean_of_square_witness {p A t h : ℕ} (hp : p.Prime) (hh : 0 < h) (hhp : h < p) : Nat.totient (A + p ^ 2 * t + p * h - A) = (p - 1) * Nat.totient (p * t + h)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Canonical anchor residue `a = 0`. The hypotheses `0 < h < p` make the whole horizon `1 ≤ h ≤ J < p` clean after imposing `n = A + p^2*t`."
+    },
+    {
+      "id": "Erdos249257/SquareCRTCube.lean:87:exists_square_witness_of_modEq",
+      "name": "exists_square_witness_of_modEq",
+      "kind": "theorem",
+      "module": "Erdos249257/SquareCRTCube.lean",
+      "line": 87,
+      "signature": "theorem exists_square_witness_of_modEq {p r n : ℕ} (hrn : r ≤ n) (hmod : n ≡ r [MOD p ^ 2]) : ∃ t : ℕ, n = r + p ^ 2 * t",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "An ordered square congruence has the quotient witness used by the clean dilation theorem."
+    },
+    {
+      "id": "Erdos249257/SquareCRTCube.lean:98:totient_dilation_clean_of_square_modEq",
+      "name": "totient_dilation_clean_of_square_modEq",
+      "kind": "theorem",
+      "module": "Erdos249257/SquareCRTCube.lean",
+      "line": 98,
+      "signature": "theorem totient_dilation_clean_of_square_modEq {p A a n h : ℕ} (hp : p.Prime) (hresidue : A + p * a ≤ n) (hmod : n ≡ A + p * a [MOD p ^ 2]) (hclean : ¬p ∣ a + h) : ∃ t : ℕ, n = A + p * (a + p * t) ∧ Nat.totient (n + p * h - A) = (p - 1) * Nat.totient (a + p * t + h)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Direct `Nat.ModEq` adapter: once the CRT representative is at least its target residue, the congruence produces a cofactor and the correction-free totient identity at every clean shift."
+    },
+    {
+      "id": "Erdos249257/SquareCRTCube.lean:118:pairwise_coprime_prime_squares",
+      "name": "pairwise_coprime_prime_squares",
+      "kind": "theorem",
+      "module": "Erdos249257/SquareCRTCube.lean",
+      "line": 118,
+      "signature": "theorem pairwise_coprime_prime_squares {ι : Type*} {E : Finset ι} {p : ι → ℕ} (hprime : ∀ i ∈ E, (p i).Prime) (hinj : Set.InjOn p (E : Set ι)) : Set.Pairwise (E : Set ι) (fun i j => Nat.Coprime (p i ^ 2) (p j ^ 2))",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Distinct prime labels have pairwise-coprime square moduli."
+    },
+    {
+      "id": "Erdos249257/SquareCRTCube.lean:131:exists_squareCRT_base",
+      "name": "exists_squareCRT_base",
+      "kind": "theorem",
+      "module": "Erdos249257/SquareCRTCube.lean",
+      "line": 131,
+      "signature": "theorem exists_squareCRT_base {ι : Type*} [DecidableEq ι] (E : Finset ι) (p A a : ι → ℕ) (hmod : ∀ i ∈ E, p i ^ 2 ≠ 0) (hcop : Set.Pairwise (E : Set ι) (fun i j => Nat.Coprime (p i ^ 2) (p j ^ 2))) : ∃ n : ℕ, n < ∏ i ∈ E, p i ^ 2 ∧ ∀ i ∈ E, n ≡ A i + p i * a i [MOD p i ^ 2]",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A finite family of pairwise-coprime square congruences has a simultaneous representative strictly below the product of the square moduli."
+    },
+    {
+      "id": "Erdos249257/SquareCRTCube.lean:148:exists_squareCRT_base_of_distinct_primes",
+      "name": "exists_squareCRT_base_of_distinct_primes",
+      "kind": "theorem",
+      "module": "Erdos249257/SquareCRTCube.lean",
+      "line": 148,
+      "signature": "theorem exists_squareCRT_base_of_distinct_primes {ι : Type*} [DecidableEq ι] (E : Finset ι) (p A a : ι → ℕ) (hprime : ∀ i ∈ E, (p i).Prime) (hinj : Set.InjOn p (E : Set ι)) : ∃ n : ℕ, n < ∏ i ∈ E, p i ^ 2 ∧ ∀ i ∈ E, n ≡ A i + p i * a i [MOD p i ^ 2]",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Prime-specialized square CRT, including the least-base bound."
+    },
+    {
+      "id": "Erdos249257/SquareCRTCube.lean:164:exists_large_squareCRT_base",
+      "name": "exists_large_squareCRT_base",
+      "kind": "theorem",
+      "module": "Erdos249257/SquareCRTCube.lean",
+      "line": 164,
+      "signature": "theorem exists_large_squareCRT_base {ι : Type*} [DecidableEq ι] (E : Finset ι) (p A a : ι → ℕ) (B : ℕ) (hmod : ∀ i ∈ E, p i ^ 2 ≠ 0) (hcop : Set.Pairwise (E : Set ι) (fun i j => Nat.Coprime (p i ^ 2) (p j ^ 2))) : ∃ n : ℕ, B < n ∧ n < (∏ i ∈ E, p i ^ 2) * (B + 2) ∧ ∀ i ∈ E, n ≡ A i + p i * a i [MOD p i ^ 2]",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The least CRT representative can be lifted above any prescribed anchor floor at a cost of less than one additional block of `B+1` square moduli. This is the exact finite-family version of the least-admissible-base ledger."
+    },
+    {
+      "id": "Erdos249257/SquareCRTCube.lean:198:exists_squareCRT_clean_totient_family",
+      "name": "exists_squareCRT_clean_totient_family",
+      "kind": "theorem",
+      "module": "Erdos249257/SquareCRTCube.lean",
+      "line": 198,
+      "signature": "theorem exists_squareCRT_clean_totient_family {ι : Type*} [DecidableEq ι] (E : Finset ι) (p A a : ι → ℕ) (hprime : ∀ i ∈ E, (p i).Prime) (hinj : Set.InjOn p (E : Set ι)) : ∃ n : ℕ, n < (∏ i ∈ E, p i ^ 2) * (E.sup (fun i => A i + p i * a i) + 2) ∧ ∀ i ∈ E, ∀ h : ℕ, ¬p i ∣ a i + h → ∃ t : ℕ, n = A i + p i * (a i + p i * t) ∧ Nat.totient (n + p i * h - A i) = (p i - 1) * Nat.totient (a i + p i * t + h)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Simultaneous square-CRT correction suppression on a finite family. One common base works at every label and every shift whose chosen cofactor residue avoids zero modulo the corresponding prime."
+    },
+    {
+      "id": "Erdos249257/SquareCRTCube.lean:228:exists_squareCRT_clean_horizon",
+      "name": "exists_squareCRT_clean_horizon",
+      "kind": "theorem",
+      "module": "Erdos249257/SquareCRTCube.lean",
+      "line": 228,
+      "signature": "theorem exists_squareCRT_clean_horizon {ι : Type*} [DecidableEq ι] (E : Finset ι) (p A : ι → ℕ) (J : ℕ) (hprime : ∀ i ∈ E, (p i).Prime) (hinj : Set.InjOn p (E : Set ι)) (horizon : ∀ i ∈ E, J < p i) : ∃ n : ℕ, n < (∏ i ∈ E, p i ^ 2) * (E.sup A + 2) ∧ ∀ i ∈ E, ∀ h : ℕ, 0 < h → h ≤ J → ∃ t : ℕ, n = A i + p i ^ 2 * t ∧ Nat.totient (n + p i * h - A i) = (p i - 1) * Nat.totient (p i * t + h)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Canonical finite-horizon corollary. If every distinct construction prime exceeds `J`, the residue choice `a = 0` removes every totient dilation correction simultaneously for all `1 ≤ h ≤ J`."
+    },
+    {
+      "id": "Erdos249257/SquareCRTCube.lean:264:alternating_powerset_sum_eq_zero_of_insert_invariant",
+      "name": "alternating_powerset_sum_eq_zero_of_insert_invariant",
+      "kind": "theorem",
+      "module": "Erdos249257/SquareCRTCube.lean",
+      "line": 264,
+      "signature": "theorem alternating_powerset_sum_eq_zero_of_insert_invariant {ι : Type*} [DecidableEq ι] {s : Finset ι} {i : ι} (hi : i ∉ s) (f : Finset ι → ℤ) (hinv : ∀ t ∈ s.powerset, f (insert i t) = f t) : ∑ t ∈ (insert i s).powerset, (-1 : ℤ) ^ t.card * f t = 0",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Alternating Boolean-cube terms cancel exactly when insertion of one coordinate does not change the underlying term. This is the algebraic core of the first-`k` Hilbert-cube cancellation, separated from all totient and CRT hypotheses."
+    },
+    {
+      "id": "Erdos249257/SquareCRTCube.lean:280:actualOneCubeCoeff",
+      "name": "actualOneCubeCoeff",
+      "kind": "def",
+      "module": "Erdos249257/SquareCRTCube.lean",
+      "line": 280,
+      "signature": "def actualOneCubeCoeff (n r0 r1 : ℕ) : ℤ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "One-dimensional actual-totient cube coefficient."
+    },
+    {
+      "id": "Erdos249257/SquareCRTCube.lean:285:squareCRT_clean_block_can_vanish",
+      "name": "squareCRT_clean_block_can_vanish",
+      "kind": "theorem",
+      "module": "Erdos249257/SquareCRTCube.lean",
+      "line": 285,
+      "signature": "theorem squareCRT_clean_block_can_vanish : (13 : ℕ).Prime ∧ (5 : ℕ).Prime ∧ 52 ≡ 52 [MOD 13 ^ 2] ∧ 52 ≡ 2 [MOD 5 ^ 2] ∧ actualOneCubeCoeff 52 13 13 = 0 ∧ actualOneCubeCoeff 52 26 18 = 0",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A clean square-localized cube need not separate: the returned minimal `k = 1`, `J = 2` model has both finite coefficients equal to zero."
+    },
+    {
+      "id": "Erdos249257/SquareCRTCube.lean:294:squareCRT_vanishing_countermodel_is_clean",
+      "name": "squareCRT_vanishing_countermodel_is_clean",
+      "kind": "theorem",
+      "module": "Erdos249257/SquareCRTCube.lean",
+      "line": 294,
+      "signature": "theorem squareCRT_vanishing_countermodel_is_clean : Nat.totient (13 * (4 + 1)) = (13 - 1) * Nat.totient (4 + 1) ∧ Nat.totient (5 * (12 + 1)) = (5 - 1) * Nat.totient (12 + 1) ∧ Nat.totient (13 * (4 + 2)) = (13 - 1) * Nat.totient (4 + 2) ∧ Nat.totient (5 * (12 + 2)) = (5 - 1) * Nat.totient (12 + 2)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The vanishing witness is genuinely correction-free at both vertices and both controlled shifts, not merely an equality of unrelated totient values."
+    },
+    {
+      "id": "Erdos249257/SquareCRTCube.lean:303:squareCRT_clean_block_can_be_nonzero",
+      "name": "squareCRT_clean_block_can_be_nonzero",
+      "kind": "theorem",
+      "module": "Erdos249257/SquareCRTCube.lean",
+      "line": 303,
+      "signature": "theorem squareCRT_clean_block_can_be_nonzero : (3 : ℕ).Prime ∧ (5 : ℕ).Prime ∧ 27 ≡ 0 [MOD 3 ^ 2] ∧ 27 ≡ 2 [MOD 5 ^ 2] ∧ actualOneCubeCoeff 27 3 3 = 0 ∧ actualOneCubeCoeff 27 6 8 = -4",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Correction suppression is not identically trivial: a nearby clean cube has a nonzero second coefficient."
+    },
+    {
+      "id": "Erdos249257/SquareCRTCube.lean:311:squareCRT_nonzero_countermodel_is_clean",
+      "name": "squareCRT_nonzero_countermodel_is_clean",
+      "kind": "theorem",
+      "module": "Erdos249257/SquareCRTCube.lean",
+      "line": 311,
+      "signature": "theorem squareCRT_nonzero_countermodel_is_clean : Nat.totient (3 * (9 + 1)) = (3 - 1) * Nat.totient (9 + 1) ∧ Nat.totient (5 * (5 + 1)) = (5 - 1) * Nat.totient (5 + 1) ∧ Nat.totient (3 * (9 + 2)) = (3 - 1) * Nat.totient (9 + 2) ∧ Nat.totient (5 * (5 + 2)) = (5 - 1) * Nat.totient (5 + 2)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The nonzero witness is also clean at both vertices and both shifts."
     },
     {
       "id": "Erdos249257/SquaredMersenneDiagonalEnclosure.lean:22:mobiusSquarePartialRat",
