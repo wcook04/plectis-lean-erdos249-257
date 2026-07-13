@@ -31,7 +31,7 @@ there rather than implied by the release tag.
 | Lean declarations | 6,403 |
 | Theorem-like declarations | 5,880 |
 | Generated certificate declarations | 1,681 |
-| Principal claim-to-Lean links | 63 |
+| Principal claim-to-Lean links | 66 |
 | Exact remaining open propositions | 3 |
 
 These are generated navigation counts, not a claim that every declaration is a

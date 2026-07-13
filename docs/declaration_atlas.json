@@ -10,7 +10,7 @@
     "declaration_count": 6403,
     "theorem_like_count": 5880,
     "generated_certificate_declaration_count": 1681,
-    "principal_claim_link_count": 63,
+    "principal_claim_link_count": 66,
     "kind_counts": {
       "abbrev": 2,
       "def": 505,
@@ -71678,7 +71678,9 @@
       "line": 98,
       "signature": "theorem finrank_canonicalTotientKernel_eq_of_certificate (e : ℕ) (cert : SeparatedMinorCertificate (canonicalTotientKernelFamily e)) : finrank ℚ (Submodule.span ℚ (Set.range (canonicalTotientKernelFamily e))) = 2 ^ e + 1",
       "generated_certificate": false,
-      "claim_ids": [],
+      "claim_ids": [
+        "dyadic_totient_certificate_interface"
+      ],
       "docstring": "A separated minor for the canonical family gives the exact finite-level dimension promised by the dyadic rank route. The remaining all-level task is to construct this certificate by CRT and Dirichlet for each `e`."
     },
     {
@@ -71722,7 +71724,9 @@
       "line": 156,
       "signature": "theorem totientKernel_even_residue_reduce (j t s n : ℕ) (ht : t + 1 < j) (hs : Odd s) : totientKernelSeq j (2 ^ (t + 1) * s) n = (2 ^ t : ℚ) * totientKernelSeq (j - (t + 1)) s n",
       "generated_certificate": false,
-      "claim_ids": [],
+      "claim_ids": [
+        "dyadic_totient_certificate_interface"
+      ],
       "docstring": "Exact reduction of an even residue to its odd-core channel."
     },
     {
@@ -71744,7 +71748,9 @@
       "line": 197,
       "signature": "theorem false_of_compressedAdjointCertificate {v : ℕ} (cert : CompressedAdjointCertificate v) : False",
       "generated_certificate": false,
-      "claim_ids": [],
+      "claim_ids": [
+        "dyadic_totient_certificate_interface"
+      ],
       "docstring": "A compressed-adjoint certificate is impossible: its boundary is both a nonzero multiple of `Q*v` and strictly smaller than `Q*v`."
     },
     {

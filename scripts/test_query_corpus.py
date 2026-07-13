@@ -132,6 +132,18 @@ def main() -> int:
     }
     assert signed_moment_claim["lean_source_identity"] == square_crt_claim["lean_source_identity"]
 
+    dyadic_totient_claim = query("--claim", "dyadic_totient_certificate_interface")
+    assert dyadic_totient_claim["claim"]["status"] == "proved here"
+    assert "No theorem here produces the separated minors for all e" in (
+        dyadic_totient_claim["claim"]["statement"]
+    )
+    assert dyadic_totient_claim["claim"]["declarations"][0] == {
+        "name": "finrank_canonicalTotientKernel_eq_of_certificate",
+        "module": "Erdos249257/TotientMahlerDefect.lean",
+        "line": 98,
+    }
+    assert dyadic_totient_claim["lean_source_identity"] == signed_moment_claim["lean_source_identity"]
+
     paper_label = query("--paper-label", "res:farey")
     assert paper_label["kind"] == "paper_label"
     assert paper_label["paper"] == claim["paper"]

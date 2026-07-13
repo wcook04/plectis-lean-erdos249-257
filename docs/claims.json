@@ -5302,7 +5302,7 @@
     "lean_toolchain": "leanprover/lean4:v4.29.1",
     "repository": "https://github.com/wcook04/plectis-lean-erdos249-257",
     "formal_source": {
-      "ref": "fe21f3af4a7eab45044438f9848c6dff10f95f17",
+      "ref": "717c1edf32710afbb5d88531440435b27407b543",
       "ref_kind": "commit",
       "publication_state": "committed_checkpoint_pending_remote_publication",
       "relationship_to_last_tag": "post_tag_checkpoint"
@@ -5326,7 +5326,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 1003
+        "line": 1019
       }
     },
     {
@@ -5337,7 +5337,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 1012
+        "line": 1028
       }
     },
     {
@@ -5348,7 +5348,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 1019
+        "line": 1035
       }
     }
   ],
@@ -5717,6 +5717,31 @@
           "name": "scaled_dyadic_sum_ne_zero",
           "module": "Erdos249257/SignedQMomentObstruction.lean",
           "line": 95
+        }
+      ]
+    },
+    {
+      "id": "dyadic_totient_certificate_interface",
+      "label": "Dyadic totient certificate interface",
+      "status": "proved here",
+      "statement": "At every fixed level e, a separated nonzero evaluation minor for the canonical dyadic totient-kernel family yields dimension 2^e + 1; even residue channels reduce exactly to odd-core channels. A compressed-adjoint certificate satisfying the stated divisibility and strict-boundary conditions is impossible. No theorem here produces the separated minors for all e, and no irrationality criterion is obtained.",
+      "paper_label": "res:dyadictotient",
+      "readme_headline": false,
+      "declarations": [
+        {
+          "name": "finrank_canonicalTotientKernel_eq_of_certificate",
+          "module": "Erdos249257/TotientMahlerDefect.lean",
+          "line": 98
+        },
+        {
+          "name": "totientKernel_even_residue_reduce",
+          "module": "Erdos249257/TotientMahlerDefect.lean",
+          "line": 156
+        },
+        {
+          "name": "false_of_compressedAdjointCertificate",
+          "module": "Erdos249257/TotientMahlerDefect.lean",
+          "line": 197
         }
       ]
     },
