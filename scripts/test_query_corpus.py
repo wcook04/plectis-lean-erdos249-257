@@ -16,6 +16,7 @@ from query_corpus import (
     artifact_packet,
     claim_packet,
     declaration_packet,
+    lean_source_identity_for_paper,
     load,
     open_proposition_packet,
     paper_anchor_inventory,
@@ -91,6 +92,8 @@ def main() -> int:
     companion = query("--claim", "transport_curvature_reductions")
     assert companion["paper"]["source"] == "paper/erdos249-transport-curvature.tex"
     assert companion["paper"]["rendered"] == "erdos249-transport-curvature.pdf"
+    assert companion["lean_source_identity"]["ref"] == claims_document["release"]["tag"]
+    assert companion["lean_source_identity"]["ref_kind"] == "tag"
     assert query("--claim", "erdos_249")["paper"] is None
 
     adelic = query("--claim", "adelic_height_obstruction")
@@ -99,6 +102,10 @@ def main() -> int:
     assert adelic["claim"]["declarations"][0]["module"] == (
         "Erdos249257/AdelicHeightObstruction.lean"
     )
+    assert adelic["lean_source_identity"] == {
+        **formal_source,
+        "repository": claims_document["release"]["repository"],
+    }
 
     paper_label = query("--paper-label", "res:farey")
     assert paper_label["kind"] == "paper_label"
@@ -107,6 +114,11 @@ def main() -> int:
     assert paper_label["anchor_class"] == "registered_claim_anchor"
     assert any(
         row["source_ref"] == "Erdos249257/CertificateKernel.lean:18055"
+        for row in paper_label["source_links"]
+    )
+    assert paper_label["lean_source_identity"] == adelic["lean_source_identity"]
+    assert all(
+        row["source_identity"] == paper_label["lean_source_identity"]
         for row in paper_label["source_links"]
     )
     shared_paper_label = query("--paper-label", "res:full")
@@ -184,8 +196,11 @@ def main() -> int:
     assert declaration["matches"][0]["claim_ids"] == ["denominator_exclusion"]
     assert declaration["matches"][0]["source_ref"] == "Erdos249257/CertificateKernel.lean:18056"
     assert declaration["matches"][0]["source_url"].startswith(
-        "https://github.com/wcook04/plectis-lean-erdos249-257/blob/v0.6.0/"
+        "https://github.com/wcook04/plectis-lean-erdos249-257/blob/"
+        + formal_source["ref"]
+        + "/"
     )
+    assert declaration["matches"][0]["lean_source_identity"] == adelic["lean_source_identity"]
     assert declaration["matches"][0]["attached_claims"][0]["paper"]["label"] == "res:farey"
     assert declaration["matches"][0]["paper_anchors"][0]["canonical_handle"] == "res:farey"
 
@@ -215,6 +230,7 @@ def main() -> int:
     assert source_coordinate["source"]["source_url"].endswith(
         "/Erdos249257/CertificateKernel.lean#L18055"
     )
+    assert source_coordinate["source"]["lean_source_identity"] == adelic["lean_source_identity"]
     source_declaration = source_coordinate["nearby_declarations"][0]
     assert source_declaration["name"] == (
         "tsum_totient_div_pow_two_ne_ratCast_of_den_le_79639646646701375323355774875831053"
@@ -363,6 +379,10 @@ def main() -> int:
         claim_view = claim_packet(claim_row["id"])
         closure_checks += 1
         assert claim_view["claim"]["id"] == claim_row["id"]
+        assert claim_view["lean_source_identity"] == lean_source_identity_for_paper(
+            claims_document,
+            claim_view["paper"]["source"] if claim_view["paper"] else None,
+        )
         if claim_row.get("paper_label"):
             paper_view = paper_anchor_packet(claim_row["paper_label"])
             closure_checks += 1
@@ -393,6 +413,11 @@ def main() -> int:
         anchor_view = paper_anchor_packet(anchor_row["canonical_handle"])
         closure_checks += 1
         assert anchor_view["anchor_class"] == anchor_row["anchor_class"]
+        assert anchor_view["lean_source_identity"] == anchor_row["paper"]["lean_source_identity"]
+        assert all(
+            link["source_identity"] == anchor_view["lean_source_identity"]
+            for link in anchor_view["source_links"]
+        )
 
     for artifact_row in artifact_inventory():
         for handle in (artifact_row["artifact_handle"], artifact_row["content_digest"]):

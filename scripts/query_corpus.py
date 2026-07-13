@@ -29,6 +29,38 @@ def load(rel: str) -> dict[str, Any]:
     return json.loads((ROOT / rel).read_text(encoding="utf-8"))
 
 
+def formal_source_identity(claims: dict[str, Any]) -> dict[str, Any]:
+    """Return the immutable Lean checkpoint that owns the claim registry."""
+    release = claims["release"]
+    return {
+        **release["formal_source"],
+        "repository": release["repository"],
+    }
+
+
+def lean_source_identity_for_paper(
+    claims: dict[str, Any], paper_source: str | None
+) -> dict[str, Any]:
+    """Return the immutable Lean identity used by one authored paper.
+
+    The principal exposition is pinned to the current committed formal-source
+    checkpoint. Technical companions retain their tagged-release source pin.
+    Both are immutable, but callers must not silently substitute one for the
+    other.
+    """
+    release = claims["release"]
+    principal_source = claims["machine_readable_paper"]["paper"]["source"]
+    if paper_source in (None, principal_source):
+        return formal_source_identity(claims)
+    return {
+        "ref": release["tag"],
+        "ref_kind": "tag",
+        "publication_state": "published_last_tag",
+        "relationship_to_last_tag": "at_last_tag",
+        "repository": release["repository"],
+    }
+
+
 @lru_cache(maxsize=1)
 def artifact_inventory() -> list[dict[str, Any]]:
     """Flatten the descriptor's registered content identities into handles."""
@@ -142,6 +174,7 @@ def paper_anchor_inventory() -> list[dict[str, Any]]:
     inventory: list[dict[str, Any]] = []
     for paper_row in paper_rows:
         relative = paper_row["source"]
+        lean_source_identity = lean_source_identity_for_paper(claims, relative)
         path = ROOT / relative
         text = path.read_text(encoding="utf-8")
         lines = text.splitlines()
@@ -224,6 +257,7 @@ def paper_anchor_inventory() -> list[dict[str, Any]]:
                         "module": module,
                         "line": int(link.group("line")),
                         "source_ref": f"{module}:{link.group('line')}",
+                        "source_identity": dict(lean_source_identity),
                         "declaration": link.group("name") or None,
                     }
                 )
@@ -238,6 +272,7 @@ def paper_anchor_inventory() -> list[dict[str, Any]]:
                         "line": line,
                         "source_ref": source_ref,
                         "rendered": paper_row["rendered"],
+                        "lean_source_identity": dict(lean_source_identity),
                     },
                     "anchor_kind": start["anchor_kind"],
                     "environment": start["environment"],
@@ -325,6 +360,9 @@ def claim_packet(claim_id: str) -> dict[str, Any]:
     return {
         "kind": "claim",
         "authority_posture": "navigation_projection_not_proof_authority",
+        "lean_source_identity": lean_source_identity_for_paper(
+            claims, claim.get("paper_label") and label_index[claim["paper_label"]]["source"]
+        ),
         "claim": claim,
         "incoming_edges": incoming,
         "outgoing_edges": outgoing,
@@ -356,6 +394,7 @@ def paper_anchor_packet(handle: str, kind: str = "paper_anchor") -> dict[str, An
         "authority_posture": "navigation_projection_not_proof_authority",
         "canonical_handle": anchor["canonical_handle"],
         "paper": anchor["paper"],
+        "lean_source_identity": anchor["paper"]["lean_source_identity"],
         "anchor_class": anchor["anchor_class"],
         "environment": anchor["environment"],
         "title": anchor["title"],
@@ -450,8 +489,9 @@ def declaration_packet(name: str, limit: int) -> dict[str, Any]:
     roles = module_roles(claims)
     label_index = paper_label_index()
     sigil_by_path = {row["path"]: row["sigil"] for row in aliases}
-    repository = claims["release"]["repository"].rstrip("/")
-    tag = claims["release"]["tag"]
+    lean_source_identity = formal_source_identity(claims)
+    repository = lean_source_identity["repository"].rstrip("/")
+    source_ref = lean_source_identity["ref"]
     paper_anchors = paper_anchor_inventory()
     declarations_by_module: dict[str, list[dict[str, Any]]] = {}
     for row in atlas["declarations"]:
@@ -473,7 +513,8 @@ def declaration_packet(name: str, limit: int) -> dict[str, Any]:
             {
                 **match,
                 "source_ref": f"{match['module']}:{match['line']}",
-                "source_url": f"{repository}/blob/{tag}/{match['module']}#L{match['line']}",
+                "source_url": f"{repository}/blob/{source_ref}/{match['module']}#L{match['line']}",
+                "lean_source_identity": dict(lean_source_identity),
                 "paper_sigil": sigil_by_path.get(match["module"]),
                 "module_role": roles.get(
                     match["module"].removesuffix(".lean").replace("/", "."),
@@ -583,8 +624,9 @@ def source_coordinate_packet(source_ref: str, limit: int) -> dict[str, Any]:
     before = [row for row in module_declarations if row["line"] < line]
     after = [row for row in module_declarations if row["line"] > line]
     roles = module_roles(claims)
-    repository = claims["release"]["repository"].rstrip("/")
-    tag = claims["release"]["tag"]
+    lean_source_identity = formal_source_identity(claims)
+    repository = lean_source_identity["repository"].rstrip("/")
+    source_ref = lean_source_identity["ref"]
     return {
         "kind": "source_coordinate",
         "authority_posture": "source_coordinate_navigation_not_proof_authority",
@@ -592,7 +634,8 @@ def source_coordinate_packet(source_ref: str, limit: int) -> dict[str, Any]:
             "module": module_path,
             "line": line,
             "source_ref": f"{module_path}:{line}",
-            "source_url": f"{repository}/blob/{tag}/{module_path}#L{line}",
+            "source_url": f"{repository}/blob/{source_ref}/{module_path}#L{line}",
+            "lean_source_identity": lean_source_identity,
             "module_id": module["id"],
             "module_role": roles.get(module["id"], "Unclassified module"),
             "paper_sigil": next(
@@ -691,6 +734,7 @@ def module_packet(handle: str, limit: int) -> dict[str, Any]:
     return {
         "kind": "module",
         "authority_posture": "atlas_navigation_projection_not_proof_authority",
+        "lean_source_identity": formal_source_identity(claims),
         "module": module_view,
         "paper_sigil": next(
             (row["sigil"] for row in aliases if row["path"] == module["path"]), None
