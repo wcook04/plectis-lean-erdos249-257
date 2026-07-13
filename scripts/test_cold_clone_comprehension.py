@@ -20,7 +20,8 @@ def without_tokens(bundle: str, tokens: list[str | None]) -> str:
 def main() -> int:
     claims = json.loads(diagnostic.read("docs/claims.json"))
     methodology = json.loads(diagnostic.read("docs/methodology.json"))
-    questions = diagnostic.build_questions(claims, methodology)
+    orientation = json.loads(diagnostic.read("docs/orientation.json"))
+    questions = diagnostic.build_questions(claims, methodology, orientation)
     human_bundle = "\n".join(diagnostic.read(path) for path in diagnostic.HUMAN_SURFACES)
     machine_bundle = "\n".join(diagnostic.read(path) for path in diagnostic.MACHINE_SURFACES)
 

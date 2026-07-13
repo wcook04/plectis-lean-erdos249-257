@@ -32,13 +32,14 @@ ROOT = Path(__file__).resolve().parent.parent
 # Human reader: the text-available prose surfaces. The paper is the third human
 # surface named in the design, but it ships as a compiled PDF, so it is excluded
 # from this text probe rather than silently assumed to carry the tokens.
-HUMAN_SURFACES = ["README.md", "METHODOLOGY.md", "SCOPE.md"]
+HUMAN_SURFACES = ["README.md", "METHODOLOGY.md", "SCOPE.md", "docs/ORIENTATION.md"]
 # Agent reader: the structured machine surfaces.
 MACHINE_SURFACES = [
     "docs/claims.json",
     "docs/methodology.json",
     "docs/corpus_descriptor.json",
     "docs/declaration_atlas.json",
+    "docs/orientation.json",
 ]
 
 
@@ -56,7 +57,9 @@ def first_decl_name(claim: dict[str, Any]) -> str | None:
     return decls[0]["name"] if decls else None
 
 
-def build_questions(claims: dict[str, Any], methodology: dict[str, Any]) -> list[dict[str, Any]]:
+def build_questions(
+    claims: dict[str, Any], methodology: dict[str, Any], orientation: dict[str, Any]
+) -> list[dict[str, Any]]:
     """Derive each question's recoverable tokens from the live registry.
 
     machine_all: every token must appear in the machine bundle (structured data
@@ -156,6 +159,24 @@ def build_questions(claims: dict[str, Any], methodology: dict[str, Any]) -> list
             "machine_all": [row["id"] for row in required_review],
             "human_groups": [[row["summary"]] for row in required_review],
         },
+        {
+            "id": "q8_scale_and_drilldown",
+            "question": "How large is the checked corpus, and where does a reader drill down?",
+            "machine_all": [
+                orientation["schema"],
+                str(orientation["scale"]["module_count"]),
+                str(orientation["scale"]["declaration_count"]),
+                "principal_claims",
+                "drilldowns",
+            ],
+            "human_groups": [
+                ["Corpus orientation"],
+                [f"{orientation['scale']['module_count']:,}"],
+                [f"{orientation['scale']['declaration_count']:,}"],
+                ["Exact open boundary"],
+                ["Principal claim routes"],
+            ],
+        },
     ]
 
 
@@ -182,10 +203,11 @@ def probe_groups(
 def main() -> int:
     claims = json.loads(read("docs/claims.json"))
     methodology = json.loads(read("docs/methodology.json"))
+    orientation = json.loads(read("docs/orientation.json"))
     human_bundle = "\n".join(read(s) for s in HUMAN_SURFACES)
     machine_bundle = "\n".join(read(s) for s in MACHINE_SURFACES)
 
-    questions = build_questions(claims, methodology)
+    questions = build_questions(claims, methodology, orientation)
     failures: list[str] = []
 
     print("Cold-clone comprehension diagnostic (availability, not correctness)")

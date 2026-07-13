@@ -357,6 +357,8 @@ def main() -> int:
     # --- 8. agent entry ------------------------------------------------------------
     agents = read(ROOT / "AGENTS.md")
     for required in (
+        "docs/orientation.json",
+        "docs/ORIENTATION.md",
         "docs/claims.json",
         "docs/corpus_descriptor.json",
         "docs/methodology.json",
@@ -432,6 +434,27 @@ def main() -> int:
           "corpus descriptor methodology capsule drifted from docs/methodology.json")
     check(methodology_capsule.get("change_classes") == methodology.get("change_classes"),
           "corpus descriptor methodology capsule does not carry the change-class matrix")
+
+    orientation_path = ROOT / "docs" / "orientation.json"
+    orientation = json.loads(read(orientation_path))
+    declaration_atlas = json.loads(read(ROOT / "docs" / "declaration_atlas.json"))
+    check(orientation.get("schema") == "erdos249257-orientation/1",
+          "orientation projection must use schema erdos249257-orientation/1")
+    check(orientation.get("scale") == declaration_atlas.get("summary"),
+          "orientation scale drifted from the declaration atlas")
+    expected_principal_ids = [
+        claim["id"] for claim in data["claims"] if claim.get("readme_headline")
+    ]
+    actual_principal_ids = [
+        claim.get("id") for claim in orientation.get("principal_claims", [])
+    ]
+    check(actual_principal_ids == expected_principal_ids,
+          "orientation principal claims drifted from README-headline claims")
+    check(len(orientation_path.read_bytes()) <= 32_000,
+          "orientation JSON exceeds the 32 KB bounded first-read budget")
+    for target in orientation.get("drilldowns", {}).values():
+        rel = str(target).split("::", 1)[0]
+        check((ROOT / rel).is_file(), f"orientation drilldown path does not exist: {rel}")
 
     # --- 9. proof-trust guard ------------------------------------------------------
     # Covers the library, its root, and the downstream examples: everything

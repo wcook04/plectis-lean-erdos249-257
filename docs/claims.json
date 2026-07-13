@@ -17,6 +17,7 @@
         "id": "instant_orientation",
         "intent": "Understand what this repository proves, reduces, cites, and leaves open.",
         "read": [
+          "docs/orientation.json",
           "docs/claims.json",
           "SCOPE.md",
           "README.md"
@@ -85,6 +86,22 @@
       ]
     },
     "projections": [
+      {
+        "id": "bounded_machine_orientation",
+        "path": "docs/orientation.json",
+        "role": "Generated first-read capsule of release scale, the proved/open boundary, principal claim routes, and typed drilldowns.",
+        "authority": "navigation_projection_not_proof_authority",
+        "build": "python3 scripts/build_corpus_descriptor.py",
+        "check": "python3 scripts/build_corpus_descriptor.py --check"
+      },
+      {
+        "id": "bounded_human_orientation",
+        "path": "docs/ORIENTATION.md",
+        "role": "Generated human projection of the same bounded first-read capsule.",
+        "authority": "navigation_projection_not_proof_authority",
+        "build": "python3 scripts/build_corpus_descriptor.py",
+        "check": "python3 scripts/build_corpus_descriptor.py --check"
+      },
       {
         "id": "exhaustive_declaration_atlas",
         "path": "docs/declaration_atlas.json",

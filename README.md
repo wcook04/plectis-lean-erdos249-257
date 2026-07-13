@@ -28,6 +28,12 @@ Erdős #257.**
 4. Use [`docs/claims.json`](docs/claims.json) for the exact release status,
    declaration coordinates, argument map, and explicit non-claims.
 
+For a bounded view of the whole public corpus before drilling down, use the
+generated [corpus orientation](docs/ORIENTATION.md), or
+[`docs/orientation.json`](docs/orientation.json) from an agent. It shows the
+release scale, exact open boundary, principal claim routes, and the next
+authoritative surface for each kind of question.
+
 The Plectis site is an introduction, not a proof certificate. The exposition
 explains the mathematics. The checked Lean source establishes the formal
 statements.
@@ -81,6 +87,8 @@ mathematical boundary.
 - **Mathematics:** [`erdos249-257-exposition.pdf`](erdos249-257-exposition.pdf)
   and its [LaTeX source](paper/erdos249-257-exposition.tex).
 - **Exact claim status:** [`docs/claims.json`](docs/claims.json).
+- **Bounded corpus map:** [`docs/ORIENTATION.md`](docs/ORIENTATION.md) and
+  [`docs/orientation.json`](docs/orientation.json).
 - **Method:** [`METHODOLOGY.md`](METHODOLOGY.md), generated from
   [`docs/methodology.json`](docs/methodology.json).
 - **Lean routes by question:** [`docs/SOURCE_MAP.md`](docs/SOURCE_MAP.md).
@@ -101,7 +109,8 @@ question rather than asking it to summarise every file. A useful starting
 prompt is:
 
 ```text
-Read AGENTS.md, docs/claims.json, SCOPE.md, and the exposition PDF first.
+Read AGENTS.md and docs/orientation.json first. Then select one claim and read
+its row in docs/claims.json, SCOPE.md, and the exposition PDF.
 For the claim or question I give you, trace its paper anchor, status, Lean
 declaration, source module, and direct dependencies. State separately what is
 proved, what is conditional, what is verified only at finite parameters, and
