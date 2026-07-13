@@ -13,6 +13,7 @@ import argparse
 import json
 import re
 import sys
+from functools import lru_cache
 from pathlib import Path
 from typing import Any
 
@@ -20,8 +21,10 @@ ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_LIMIT = 20
 MAX_LIMIT = 100
 OUTPUT_BUDGET_BYTES = 64_000
+SOURCE_LINE_WINDOW = 3
 
 
+@lru_cache(maxsize=None)
 def load(rel: str) -> dict[str, Any]:
     return json.loads((ROOT / rel).read_text(encoding="utf-8"))
 
@@ -35,6 +38,7 @@ def compact_claim(claim: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+@lru_cache(maxsize=1)
 def paper_anchor_inventory() -> list[dict[str, Any]]:
     """Derive typed human-paper anchors without promoting them to claim authority."""
     claims = load("docs/claims.json")
@@ -190,6 +194,7 @@ def paper_anchor_inventory() -> list[dict[str, Any]]:
     return inventory
 
 
+@lru_cache(maxsize=1)
 def paper_label_index() -> dict[str, dict[str, Any]]:
     index: dict[str, dict[str, Any]] = {}
     for anchor in paper_anchor_inventory():
@@ -368,6 +373,11 @@ def declaration_packet(name: str, limit: int) -> dict[str, Any]:
     repository = claims["release"]["repository"].rstrip("/")
     tag = claims["release"]["tag"]
     paper_anchors = paper_anchor_inventory()
+    declarations_by_module: dict[str, list[dict[str, Any]]] = {}
+    for row in atlas["declarations"]:
+        declarations_by_module.setdefault(row["module"], []).append(row)
+    for rows in declarations_by_module.values():
+        rows.sort(key=lambda row: (row["line"], row["name"]))
     decorated = []
     for match in matches[:limit]:
         attached_claims = []
@@ -403,7 +413,20 @@ def declaration_packet(name: str, limit: int) -> dict[str, Any]:
                             link["declaration"] == match["name"]
                             or (
                                 link["declaration"] is None
-                                and abs(link["line"] - match["line"]) <= 3
+                                and (
+                                    abs(link["line"] - match["line"]) <= SOURCE_LINE_WINDOW
+                                    or (
+                                        match["line"] <= link["line"]
+                                        and link["line"] < next(
+                                            (
+                                                row["line"]
+                                                for row in declarations_by_module[match["module"]]
+                                                if row["line"] > match["line"]
+                                            ),
+                                            10**18,
+                                        )
+                                    )
+                                )
                             )
                         )
                         for link in anchor["source_links"]
@@ -420,6 +443,104 @@ def declaration_packet(name: str, limit: int) -> dict[str, Any]:
         "follow": {
             "claim": "python3 scripts/query_corpus.py --claim <claim_id>",
             "module": "python3 scripts/query_corpus.py --module <module_or_sigil>",
+        },
+        "validation": "python3 scripts/build_declaration_atlas.py --check",
+    }
+
+
+def source_coordinate_packet(source_ref: str, limit: int) -> dict[str, Any]:
+    match = re.fullmatch(r"(.+\.lean):(\d+)", source_ref.strip())
+    if match is None:
+        raise ValueError("source coordinate must have the form <module.lean>:<positive_line>")
+    module_path = match.group(1).removeprefix("./")
+    line = int(match.group(2))
+    if line < 1:
+        raise ValueError("source coordinate line must be positive")
+
+    atlas = load("docs/declaration_atlas.json")
+    claims = load("docs/claims.json")
+    aliases = load("paper/module-aliases.json")["aliases"]
+    module = next((row for row in atlas["modules"] if row["path"] == module_path), None)
+    if module is None:
+        raise KeyError(f"unknown Lean source module: {module_path}")
+    source_lines = (ROOT / module_path).read_text(encoding="utf-8").splitlines()
+    if line > len(source_lines):
+        raise ValueError(
+            f"source coordinate line {line} exceeds {module_path} length {len(source_lines)}"
+        )
+
+    module_declarations = sorted(
+        (row for row in atlas["declarations"] if row["module"] == module_path),
+        key=lambda row: (row["line"], row["name"]),
+    )
+    window_declarations = sorted(
+        (
+            row
+            for row in module_declarations
+            if abs(row["line"] - line) <= SOURCE_LINE_WINDOW
+        ),
+        key=lambda row: (abs(row["line"] - line), row["line"], row["name"]),
+    )
+    containing = next(
+        (row for row in reversed(module_declarations) if row["line"] <= line),
+        None,
+    )
+    candidates = list(window_declarations)
+    if containing is not None and containing not in candidates:
+        candidates.append(containing)
+    candidates.sort(key=lambda row: (abs(row["line"] - line), row["line"], row["name"]))
+    decorated = []
+    for row in candidates[:limit]:
+        declaration = declaration_packet(row["name"], MAX_LIMIT)
+        decorated.append(
+            next(
+                candidate
+                for candidate in declaration["matches"]
+                if candidate["module"] == module_path and candidate["line"] == row["line"]
+            )
+        )
+
+    before = [row for row in module_declarations if row["line"] < line]
+    after = [row for row in module_declarations if row["line"] > line]
+    roles = module_roles(claims)
+    repository = claims["release"]["repository"].rstrip("/")
+    tag = claims["release"]["tag"]
+    return {
+        "kind": "source_coordinate",
+        "authority_posture": "source_coordinate_navigation_not_proof_authority",
+        "source": {
+            "module": module_path,
+            "line": line,
+            "source_ref": f"{module_path}:{line}",
+            "source_url": f"{repository}/blob/{tag}/{module_path}#L{line}",
+            "module_id": module["id"],
+            "module_role": roles.get(module["id"], "Unclassified module"),
+            "paper_sigil": next(
+                (row["sigil"] for row in aliases if row["path"] == module_path), None
+            ),
+        },
+        "nearby_declarations": decorated,
+        "coordinate_receipt": {
+            "line_exists": True,
+            "declaration_window": SOURCE_LINE_WINDOW,
+            "source_span_posture": (
+                "nearest_preceding_atlas_declaration_until_next_declaration_lexical_projection"
+            ),
+            "containing_declaration": (
+                compact_declaration(containing) if containing is not None else None
+            ),
+            "nearby_total": len(candidates),
+            "nearby_emitted": min(len(candidates), limit),
+            "nearby_omitted": max(0, len(candidates) - limit),
+            "exact_declaration_count": sum(row["line"] == line for row in candidates),
+            "nearest_before": compact_declaration(before[-1]) if before else None,
+            "nearest_after": compact_declaration(after[0]) if after else None,
+            "exhaustive_owner": "docs/declaration_atlas.json",
+        },
+        "follow": {
+            "declaration": "python3 scripts/query_corpus.py --declaration <nearby_declaration.name>",
+            "module": f"python3 scripts/query_corpus.py --module {module_path}",
+            "paper_anchor": "python3 scripts/query_corpus.py --paper-anchor <nearby_declaration.paper_anchor>",
         },
         "validation": "python3 scripts/build_declaration_atlas.py --check",
     }
@@ -657,7 +778,7 @@ def search_packet(query: str, limit: int) -> dict[str, Any]:
         "results": results[:limit],
         "omitted_match_count": max(0, len(results) - limit),
         "limit": limit,
-        "next": "Use the typed handle with --claim, --paper-anchor, --open, --declaration, --module, or --route.",
+        "next": "Use the typed handle with --claim, --paper-anchor, --open, --declaration, --source, --module, or --route.",
     }
 
 
@@ -711,6 +832,12 @@ def render_card(packet: dict[str, Any]) -> str:
             f"declaration {row['name']} | {row['kind']} | {row['module']}:{row['line']} | claims={','.join(row['claim_ids']) or 'none'}"
             for row in packet["matches"]
         )
+    if kind == "source_coordinate":
+        source = packet["source"]
+        return (
+            f"source {source['source_ref']} | module={source['module_id']} "
+            f"| nearby_declarations={len(packet['nearby_declarations'])}"
+        )
     if kind == "open_proposition":
         proposition = packet["open_proposition"]
         return (
@@ -754,6 +881,7 @@ def main() -> int:
     group.add_argument("--paper-anchor", metavar="LABEL_OR_SOURCE_REF")
     group.add_argument("--open", metavar="ID")
     group.add_argument("--declaration", metavar="NAME")
+    group.add_argument("--source", metavar="MODULE_DOT_LEAN:LINE")
     group.add_argument("--module", metavar="PATH_OR_ID")
     group.add_argument("--route", metavar="ID")
     group.add_argument("--search", metavar="TEXT")
@@ -773,6 +901,8 @@ def main() -> int:
             packet = open_proposition_packet(args.open)
         elif args.declaration:
             packet = declaration_packet(args.declaration, args.limit)
+        elif args.source:
+            packet = source_coordinate_packet(args.source, args.limit)
         elif args.module:
             packet = module_packet(args.module, args.limit)
         elif args.route:

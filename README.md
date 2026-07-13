@@ -56,7 +56,7 @@ authoritative surface for each kind of question.
 For one bounded lookup, run `python3 scripts/query_corpus.py --claim <id>`,
 `--paper-label <TeX_label>`, `--paper-anchor <TeX_label_or_source_ref>`,
 `--open <remaining_open.id>`, `--declaration <Lean_name>`,
-`--module <path_or_id>`, or `--route <id>`. If you
+`--source <module.lean:line>`, `--module <path_or_id>`, or `--route <id>`. If you
 do not yet know the handle, use `--search <text> --limit <1..100>`; every JSON
 response is capped at 64 KB and points back to an exhaustive owner.
 Paper sigils are handles too: `--module CerKer` resolves the displayed sigil
@@ -79,6 +79,10 @@ advancing public claim without weakening the proposition into a progress claim.
 Declaration packets return a pinned Lean URL, module role and sigil, attached
 claim summaries, and exact paper coordinates for both registered claims and
 claim-free local results when the paper provides a source link.
+An exact Lean `path:line` is directly queryable with `--source`; the packet
+preserves the requested pinned line and returns only a bounded declaration
+window plus nearest-declaration receipts, so an arbitrary source line is never
+misrepresented as a theorem.
 
 The Plectis site is an introduction, not a proof certificate. The exposition
 explains the mathematics. The checked Lean source establishes the formal

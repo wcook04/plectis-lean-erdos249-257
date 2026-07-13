@@ -11,6 +11,8 @@ import subprocess
 import sys
 from pathlib import Path
 
+from query_corpus import paper_anchor_inventory, source_coordinate_packet
+
 ROOT = Path(__file__).resolve().parent.parent
 SCRIPT = ROOT / "scripts" / "query_corpus.py"
 
@@ -168,6 +170,24 @@ def main() -> int:
     assert local_declaration["attached_claims"] == []
     assert local_declaration["paper_anchors"][0]["canonical_handle"] == "res:lift"
 
+    source_coordinate = query(
+        "--source", "Erdos249257/CertificateKernel.lean:18055"
+    )
+    assert source_coordinate["kind"] == "source_coordinate"
+    assert source_coordinate["source"]["source_url"].endswith(
+        "/Erdos249257/CertificateKernel.lean#L18055"
+    )
+    source_declaration = source_coordinate["nearby_declarations"][0]
+    assert source_declaration["name"] == (
+        "tsum_totient_div_pow_two_ne_ratCast_of_den_le_79639646646701375323355774875831053"
+    )
+    assert source_declaration["attached_claims"][0]["id"] == "denominator_exclusion"
+    assert source_declaration["paper_anchors"][0]["canonical_handle"] == "res:farey"
+    nondeclaration_source = query("--source", "Erdos249257/CertificateKernel.lean:1")
+    assert nondeclaration_source["source"]["line"] == 1
+    assert nondeclaration_source["coordinate_receipt"]["line_exists"] is True
+    assert nondeclaration_source["coordinate_receipt"]["nearest_after"] is not None
+
     module_run = run("--module", "Erdos249257/CertificateKernel.lean")
     assert module_run.returncode == 0
     assert len(module_run.stdout.encode("utf-8")) <= 64_000
@@ -243,6 +263,31 @@ def main() -> int:
     unknown_open = run("--open", "remaining_open.does_not_exist")
     assert unknown_open.returncode == 2
     assert "unknown remaining-open proposition id" in unknown_open.stderr
+
+    unknown_source = run("--source", "Erdos249257/NotAModule.lean:1")
+    assert unknown_source.returncode == 2
+    assert "unknown Lean source module" in unknown_source.stderr
+
+    invalid_source_line = run("--source", "Erdos249257/CertificateKernel.lean:999999")
+    assert invalid_source_line.returncode == 2
+    assert "exceeds" in invalid_source_line.stderr
+
+    source_link_count = 0
+    for anchor in paper_anchor_inventory():
+        for link in anchor["source_links"]:
+            source_link_count += 1
+            packet = source_coordinate_packet(link["source_ref"], 20)
+            assert packet["coordinate_receipt"]["line_exists"] is True
+            names = {row["name"] for row in packet["nearby_declarations"]}
+            if link["declaration"]:
+                assert link["declaration"] in names
+            reverse_anchors = {
+                paper_anchor["canonical_handle"]
+                for row in packet["nearby_declarations"]
+                for paper_anchor in row["paper_anchors"]
+            }
+            assert anchor["canonical_handle"] in reverse_anchors
+    assert source_link_count > 100
 
     invalid_limit = run("--search", "totient", "--limit", "101")
     assert invalid_limit.returncode == 2
