@@ -136,6 +136,7 @@ def build_orientation(claims: dict[str, Any], atlas: dict[str, Any]) -> dict[str
             "declaration": "python3 scripts/query_corpus.py --declaration <Lean_name>",
             "module": "python3 scripts/query_corpus.py --module <path_or_id>",
             "reading_route": "python3 scripts/query_corpus.py --route <route_id>",
+            "search": "python3 scripts/query_corpus.py --search <text> [--limit 1..100]",
         },
         "external_registration": {
             "path": "docs/corpus_descriptor.json",
@@ -241,6 +242,7 @@ def render_orientation_markdown(orientation: dict[str, Any]) -> str:
             "python3 scripts/query_corpus.py --declaration irrational_erdosSum_full_support",
             "python3 scripts/query_corpus.py --module Erdos249257/CertificateKernel.lean",
             "python3 scripts/query_corpus.py --route instant_orientation",
+            "python3 scripts/query_corpus.py --search totient --limit 10",
             "```",
             "",
         ]

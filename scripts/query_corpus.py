@@ -16,6 +16,9 @@ from pathlib import Path
 from typing import Any
 
 ROOT = Path(__file__).resolve().parent.parent
+DEFAULT_LIMIT = 20
+MAX_LIMIT = 100
+OUTPUT_BUDGET_BYTES = 64_000
 
 
 def load(rel: str) -> dict[str, Any]:
@@ -47,7 +50,7 @@ def claim_packet(claim_id: str) -> dict[str, Any]:
     }
 
 
-def declaration_packet(name: str) -> dict[str, Any]:
+def declaration_packet(name: str, limit: int) -> dict[str, Any]:
     atlas = load("docs/declaration_atlas.json")
     matches = [row for row in atlas["declarations"] if row["name"] == name]
     if not matches:
@@ -55,13 +58,34 @@ def declaration_packet(name: str) -> dict[str, Any]:
     return {
         "kind": "declaration",
         "authority_posture": "atlas_navigation_projection_not_proof_authority",
-        "matches": matches,
+        "matches": matches[:limit],
         "match_count": len(matches),
+        "omitted_match_count": max(0, len(matches) - limit),
         "validation": "python3 scripts/build_declaration_atlas.py --check",
     }
 
 
-def module_packet(handle: str) -> dict[str, Any]:
+def compact_claim(claim: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "id": claim["id"],
+        "label": claim["label"],
+        "status": claim["status"],
+        "paper_label": claim.get("paper_label"),
+    }
+
+
+def compact_declaration(row: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "name": row["name"],
+        "declaration_kind": row["kind"],
+        "module": row["module"],
+        "line": row["line"],
+        "claim_ids": row.get("claim_ids", []),
+        "generated_certificate": bool(row.get("generated_certificate")),
+    }
+
+
+def module_packet(handle: str, limit: int) -> dict[str, Any]:
     atlas = load("docs/declaration_atlas.json")
     claims = load("docs/claims.json")
     normalized = handle.replace(".", "/") + ".lean" if "/" not in handle else handle
@@ -86,14 +110,106 @@ def module_packet(handle: str) -> dict[str, Any]:
             for claim_id in row.get("claim_ids", [])
         }
     )
-    claim_rows = [row for row in claims["claims"] if row["id"] in attached_claim_ids]
+    claim_rows = [compact_claim(row) for row in claims["claims"] if row["id"] in attached_claim_ids]
     return {
         "kind": "module",
         "authority_posture": "atlas_navigation_projection_not_proof_authority",
         "module": module,
         "attached_claims": claim_rows,
-        "declarations": declarations,
+        "declaration_preview": [compact_declaration(row) for row in declarations[:limit]],
+        "declaration_preview_receipt": {
+            "total": len(declarations),
+            "emitted": min(len(declarations), limit),
+            "omitted": max(0, len(declarations) - limit),
+            "expand": f"python3 scripts/query_corpus.py --search {module['path']} --limit {MAX_LIMIT}",
+            "exhaustive": "docs/declaration_atlas.json",
+        },
         "validation": "python3 scripts/build_declaration_atlas.py --check",
+    }
+
+
+def search_rank(query: str, primary: str, haystack: str) -> int | None:
+    needle = query.casefold()
+    key = primary.casefold()
+    body = haystack.casefold()
+    if needle == key:
+        return 0
+    if key.startswith(needle):
+        return 1
+    if needle in key:
+        return 2
+    if needle in body:
+        return 3
+    return None
+
+
+def search_packet(query: str, limit: int) -> dict[str, Any]:
+    query = query.strip()
+    if not query:
+        raise ValueError("search query must not be empty")
+    claims = load("docs/claims.json")
+    atlas = load("docs/declaration_atlas.json")
+    orientation = load("docs/orientation.json")
+    ranked: list[tuple[int, str, dict[str, Any]]] = []
+
+    for claim in claims["claims"]:
+        rank = search_rank(
+            query,
+            claim["id"],
+            " ".join(
+                str(value)
+                for value in (claim["label"], claim["statement"], claim["status"], claim.get("paper_label"))
+                if value
+            ),
+        )
+        if rank is not None:
+            ranked.append((rank, f"claim:{claim['id']}", {"kind": "claim", **compact_claim(claim)}))
+
+    for row in atlas["declarations"]:
+        rank = search_rank(
+            query,
+            row["name"],
+            " ".join(str(value) for value in (row["signature"], row.get("docstring"), row["module"]) if value),
+        )
+        if rank is not None:
+            result = {"kind": "declaration", **compact_declaration(row)}
+            if row.get("signature"):
+                result["signature_excerpt"] = str(row["signature"])[:240]
+            ranked.append((rank, f"declaration:{row['module']}:{row['line']}:{row['name']}", result))
+
+    for row in atlas["modules"]:
+        rank = search_rank(query, row["id"], row["path"])
+        if rank is not None:
+            ranked.append(
+                (
+                    rank,
+                    f"module:{row['id']}",
+                    {
+                        "kind": "module",
+                        "id": row["id"],
+                        "path": row["path"],
+                        "declaration_count": row["declaration_count"],
+                        "import_count": len(row["imports"]),
+                    },
+                )
+            )
+
+    for row in orientation["reading_routes"]:
+        rank = search_rank(query, row["id"], row["intent"] + " " + " ".join(row["read"]))
+        if rank is not None:
+            ranked.append((rank, f"route:{row['id']}", {"kind": "reading_route", **row}))
+
+    ranked.sort(key=lambda item: (item[0], item[1]))
+    results = [item[2] for item in ranked]
+    return {
+        "kind": "search",
+        "authority_posture": "navigation_projection_not_proof_authority",
+        "query": query,
+        "match_count": len(results),
+        "results": results[:limit],
+        "omitted_match_count": max(0, len(results) - limit),
+        "limit": limit,
+        "next": "Use the typed handle with --claim, --declaration, --module, or --route.",
     }
 
 
@@ -135,6 +251,14 @@ def render_card(packet: dict[str, Any]) -> str:
             f"module {module['id']} | {module['path']} | declarations={module['declaration_count']} "
             f"| imports={len(module['imports'])} | claims={len(packet['attached_claims'])}"
         )
+    if kind == "search":
+        rows = [
+            f"search {packet['query']!r} | matches={packet['match_count']} | emitted={len(packet['results'])}"
+        ]
+        for result in packet["results"]:
+            handle = result.get("id") or result.get("name")
+            rows.append(f"{result['kind']} | {handle}")
+        return "\n".join(rows)
     if kind == "reading_route":
         route = packet["route"]
         return f"route {route['id']} | {route['intent']} | {' -> '.join(route['read'])}"
@@ -153,26 +277,39 @@ def main() -> int:
     group.add_argument("--declaration", metavar="NAME")
     group.add_argument("--module", metavar="PATH_OR_ID")
     group.add_argument("--route", metavar="ID")
+    group.add_argument("--search", metavar="TEXT")
+    parser.add_argument("--limit", type=int, default=DEFAULT_LIMIT)
     parser.add_argument("--format", choices=("json", "card"), default="json")
     args = parser.parse_args()
+    if not 1 <= args.limit <= MAX_LIMIT:
+        parser.error(f"--limit must be between 1 and {MAX_LIMIT}")
     try:
         if args.claim:
             packet = claim_packet(args.claim)
         elif args.declaration:
-            packet = declaration_packet(args.declaration)
+            packet = declaration_packet(args.declaration, args.limit)
         elif args.module:
-            packet = module_packet(args.module)
+            packet = module_packet(args.module, args.limit)
         elif args.route:
             packet = route_packet(args.route)
+        elif args.search:
+            packet = search_packet(args.search, args.limit)
         else:
             packet = summary_packet()
-    except (KeyError, json.JSONDecodeError, OSError) as exc:
+    except (KeyError, ValueError, json.JSONDecodeError, OSError) as exc:
         print(f"query_corpus: {exc}", file=sys.stderr)
         return 2
     if args.format == "card":
         print(render_card(packet))
     else:
-        print(json.dumps(packet, ensure_ascii=False, indent=2))
+        encoded = json.dumps(packet, ensure_ascii=False, indent=2) + "\n"
+        if len(encoded.encode("utf-8")) > OUTPUT_BUDGET_BYTES:
+            print(
+                f"query_corpus: response exceeds {OUTPUT_BUDGET_BYTES} bytes; lower --limit or use --format card",
+                file=sys.stderr,
+            )
+            return 2
+        print(encoded, end="")
     return 0
 
 
