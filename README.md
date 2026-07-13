@@ -1,123 +1,158 @@
 <!-- SPDX-FileCopyrightText: 2026 Will Cook -->
 <!-- SPDX-License-Identifier: Apache-2.0 -->
 
-# Erdős #249/#257: a Lean 4 formalisation
+# Erdős Problems 249 and 257 in Lean 4
 
-Machine-checked results around two Erdős irrationality problems. **This release does not solve either open problem**; it formalises irrationality for named support families, an unconditional denominator exclusion, exact certificate reductions, and rationality-forced carry constraints. It states its own boundary precisely.
+Formalised results, certificate reductions, and open questions.
 
+[**Plectis website**](https://wcook04.github.io/plectis/) ·
+[Plectis source](https://github.com/wcook04/plectis) ·
+[**Exposition PDF**](erdos249-257-exposition.pdf) ·
+[Release v0.6.0](https://github.com/wcook04/plectis-lean-erdos249-257/releases/tag/v0.6.0) ·
 [![Lean CI](https://github.com/wcook04/plectis-lean-erdos249-257/actions/workflows/lean.yml/badge.svg)](https://github.com/wcook04/plectis-lean-erdos249-257/actions/workflows/lean.yml)
 
-Erdős #249 asks whether the totient constant `S = ∑_{n≥1} φ(n)/2ⁿ` is irrational. Erdős #257 asks whether `∑_{n∈A} 1/(2ⁿ − 1)` is irrational for every infinite `A ⊆ ℕ`. This Lean 4 (Mathlib) development verifies the irrationality of the Erdős–Borwein series `∑ 1/(bⁿ − 1)` for every integer base `b ≥ 2` and for several structured infinite supports; proves unconditionally that `S ≠ p/q` for every denominator `q` up to about `7.96 × 10³⁴`; and reduces the irrationality of `S`, exactly, to an unbounded supply of finite decidable certificates. The reduction is refined through a full-target diagonal pincer, a squared-Mersenne enclosure, and a fresh-loss projection, with 22 explicit lcm-diagonal scales checked through `t = 43`. A binary-carry and achievement-set layer records the measure-one nowhere-dense Mersenne value set and pins down what a rational value would force: tempered carry orbits, reciprocal-mass lower bounds, unbounded carry states, and sublogarithmic zero windows in divisor coverage.
+This is the standalone Lean 4 development behind the Erdős #249/#257 example on
+Plectis. It contains machine-checked results around two open irrationality
+problems. **This release does not solve Erdős #249 or the universal form of
+Erdős #257.**
 
-Everything needed to build and check the release is in this repository. There is no `sorry`, no `admit`, and no project-defined `axiom` declaration; finite computations use `decide`, whose proof terms are checked by the Lean kernel (`native_decide` is never used). Toolchain `leanprover/lean4:v4.29.1`; Mathlib pinned by [`lake-manifest.json`](lake-manifest.json).
+## Read this first
 
-## What is proved, reduced, and open
+1. [Open Plectis](https://wcook04.github.io/plectis/) for the plain account of
+   where this project sits and what the public claim is.
+2. [Read the exposition PDF](erdos249-257-exposition.pdf) for the mathematics in
+   ordinary notation. It is the canonical human-readable account; this README
+   is only a route into it.
+3. Follow the links in the paper to the Lean source. Source checked by the
+   pinned Lean kernel is proof authority.
+4. Use [`docs/claims.json`](docs/claims.json) for the exact release status,
+   declaration coordinates, argument map, and explicit non-claims.
 
-Statuses use the release taxonomy declared once in [`docs/claims.json`](docs/claims.json); `scripts/check_release.py` fails the build if this table drifts from it.
+The Plectis site is an introduction, not a proof certificate. The exposition
+explains the mathematics. The checked Lean source establishes the formal
+statements.
 
-| Result | Status | Lean declaration |
-|---|---|---|
-| `∑ 1/(bⁿ − 1)` irrational for every base `b ≥ 2` (Erdős, 1948) | **formalised here** | `irrational_erdosSum_full_support` |
-| The Erdős–Borwein constant `E` is irrational | **formalised here** | `irrational_erdosBorwein_series` |
-| Named infinite-support families: factorial, powers of two, multiples, pairwise-coprime, eventually periodic | **formalised here** | `erdos257_family_factorial_instance`, `erdos257_family_two_pow_instance`, `irrational_erdosSupportSeries_pairwise_coprime` |
-| `S ≠ p/q` for every `q ≤ 7.96 × 10³⁴` | **unconditional progress** | `tsum_totient_div_pow_two_ne_ratCast_of_den_le_79639646646701375323355774875831053` |
-| Unbounded certificate supply ⟹ `S` irrational (period ⟹ lcm-diagonal ⟹ cone) | **conditional reduction** | `irrational_totient_series_of_certificate_supply`, `irrational_totient_series_of_lcm_diagonal_certificate_supply` |
-| A certificate exists ⟺ the tail difference is non-integral | **proved here** | `exists_certifiedKill_iff_tail_diff_notMem_int` |
-| Initial certified-kill segment, including 22 lcm-diagonal scales through `t = 43` | **verified finite instance** | `certifiedKill_all_small`, `certifiedKill_diagonal_all_imported_through_t43` |
-| Full-target diagonal pincer and fresh-loss projection supplies ⟹ `S` irrational | **conditional reduction** | `diagonal_int_iff_foreignDiagonalDefect_hits_fullTarget`, `irrational_totientSeries_of_full_target_avoidance_supply`, `irrational_totientSeries_of_diagonalFreshLossProjectionSupply` |
-| Sharp squared-Mersenne enclosure and exact Mersenne-shadow denominator | **proved here** | `scaleDiagonalTailDifference_sub_lambertProjectedDiagonal`, `lcmHeight_scaledMobiusShadow_den_exact` |
-| Transport/curvature windows, affine old-channel annihilation, and fixed-precision no-go | **proved here / conditional reduction** | `transportResidueKernel_eq_affineState`, `oldChannel_affine_moment_annihilation`, `fixedPrecisionTropicalNoGo` |
-| Prime-jump `(12,5,15)` and balanced-transport `(60,12)` certificates | **verified finite instance** | `primeJumpSharpKill_twelve_five`, `sharpThreeTransportCert_60_12` |
-| Rationality forces sublogarithmic divisor-coverage zero windows | **proved here** | `supportCoeffZeroWindow_length_le_eps_logb_add` |
-| Transcendence of `∑ σ(m)/2^m` (Nesterenko); prime-support irrationality (Tao–Teräväinen) | **cited only** | — |
-| Erdős #249; the universal Erdős #257 | **open** | — |
+## What this release establishes
 
-The conditional reduction is exact: producing the unbounded certificate supply is the untouched analytic core of #249, and the proved support families are not the universal #257 statement. The scope statement lives in [`SCOPE.md`](SCOPE.md).
+- **Erdős-Borwein and named #257 support cases.** For every integer base
+  `b ≥ 2`, the full-support series `∑ 1/(bⁿ - 1)` is irrational. The development
+  also treats several named infinite supports, including factorials, powers of
+  two, multiples, pairwise-coprime supports, and eventually periodic supports.
+- **An unconditional exclusion for #249.** If the totient constant
+  `S = ∑ φ(n)/2ⁿ` is rational, its denominator is greater than
+  `79 639 646 646 701 375 323 355 774 875 831 053`, approximately
+  `7.96 × 10³⁴`. This is not a proof that `S` is irrational.
+- **An exact finite-certificate reduction for #249.** Irrationality follows from
+  certified non-integrality witnesses at unbounded parameters. The existence of
+  that unbounded certificate supply remains open. The release verifies 22
+  explicit lcm-diagonal scales through `t = 43`; a verified finite instance does
+  not change the unbounded quantifier.
+- **Necessary conditions for rational support values.** The formal development
+  records carry-orbit, reciprocal-mass, unbounded-state, achievement-set, and
+  sublogarithmic divisor-coverage constraints. These do not prove the universal
+  #257 statement.
 
-## Start here
+The [exposition](erdos249-257-exposition.pdf) states each result with its
+hypotheses and proof status. The
+[transport and curvature companion](erdos249-transport-curvature.pdf) gives the
+separate technical account of the affine transport and fixed-precision
+boundary.
 
-- **Machine-readable paper and agent map** — [`docs/claims.json`](docs/claims.json): the single checked map of claim status, paper anchors, principal Lean declarations, module dependencies, argument relationships, and explicit non-claims. The generated [`docs/corpus_descriptor.json`](docs/corpus_descriptor.json) gives external agents a compact dual-anchored corpus identity, while [`docs/declaration_atlas.json`](docs/declaration_atlas.json) exposes every public Lean declaration and import edge. Agent harnesses should begin with [`AGENTS.md`](AGENTS.md).
-- **Method and claim discipline** — [`METHODOLOGY.md`](METHODOLOGY.md) records how this repository keeps checked Lean statements, finite computations, exact reductions, public claims, and the remaining open problems distinct. Its machine-readable source is [`docs/methodology.json`](docs/methodology.json).
-- **The paper** — [`erdos249-257-exposition.pdf`](erdos249-257-exposition.pdf): the full argument in ordinary notation, no Lean required. Every formal statement links to the exact declaration at the pinned release. Source and build in [`paper/`](paper/).
-- **Transport/curvature companion** — [`erdos249-transport-curvature.pdf`](erdos249-transport-curvature.pdf): the affine transport, sharp finite consumers, first-harmonic interface, and fixed-precision strategy boundary, with every unbounded-supply hypothesis left explicit.
-- **Module reference and chronology** — [`docs/WAVE_INDEX.md`](docs/WAVE_INDEX.md): what each module establishes, in development order.
-- **Declaration routes** — [`docs/SOURCE_MAP.md`](docs/SOURCE_MAP.md): intention-based routes to the principal declarations.
-- **Neighbouring problems** — [`docs/RELATED_PROBLEMS.md`](docs/RELATED_PROBLEMS.md): where this sits among Erdős #249/#257/#1049/#69/#250/#258.
-- **Prior-art map** — [`docs/PRIOR_ART.md`](docs/PRIOR_ART.md): what each principal source contributes, and the boundary between citation, formalisation, and priority.
-- **Scope** — [`SCOPE.md`](SCOPE.md): what this release deliberately does not claim.
+## What remains open
+
+- Prove that `S = ∑ φ(n)/2ⁿ` is irrational without placing a bound on a possible
+  rational denominator.
+- Produce the unbounded certificate supply required by the exact #249
+  reduction.
+- Prove irrationality of `∑_{n∈A} 1/(2ⁿ - 1)` for every infinite
+  `A ⊆ ℕ`, rather than only the named support families formalised here.
+
+[`SCOPE.md`](SCOPE.md) is the short boundary statement. The paper gives the full
+mathematical boundary.
+
+## Find the right source
+
+- **Mathematics:** [`erdos249-257-exposition.pdf`](erdos249-257-exposition.pdf)
+  and its [LaTeX source](paper/erdos249-257-exposition.tex).
+- **Exact claim status:** [`docs/claims.json`](docs/claims.json).
+- **Method:** [`METHODOLOGY.md`](METHODOLOGY.md), generated from
+  [`docs/methodology.json`](docs/methodology.json).
+- **Lean routes by question:** [`docs/SOURCE_MAP.md`](docs/SOURCE_MAP.md).
+- **Complete declaration index:** Appendix B of the exposition and
+  [`docs/declaration_atlas.json`](docs/declaration_atlas.json).
+- **Development chronology:** [`docs/WAVE_INDEX.md`](docs/WAVE_INDEX.md).
+- **Prior art:** [`docs/PRIOR_ART.md`](docs/PRIOR_ART.md).
+- **Agent entry:** [`AGENTS.md`](AGENTS.md).
+
+Long Lean identifiers are kept out of the main reading path. The source map and
+declaration atlas are the maintained indexes.
+
+<details>
+<summary>Principal Lean declaration anchors</summary>
+
+These names are included for source search and automated release checks. The
+paper and source map explain what they say.
+
+- `irrational_erdosSum_full_support`
+- `irrational_erdosBorwein_series`
+- `erdos257_family_factorial_instance`
+- `tsum_totient_div_pow_two_ne_ratCast_of_den_le_79639646646701375323355774875831053`
+- `irrational_totient_series_of_certificate_supply`
+- `exists_certifiedKill_iff_tail_diff_notMem_int`
+- `certifiedKill_all_small`
+- `diagonal_int_iff_foreignDiagonalDefect_hits_fullTarget`
+- `supportCoeffZeroWindow_length_le_eps_logb_add`
+
+</details>
 
 ## Build and verify
 
+The project uses `leanprover/lean4:v4.29.1` with Mathlib pinned by
+[`lake-manifest.json`](lake-manifest.json).
+
 ```sh
-lake exe cache get   # fetch the prebuilt Mathlib cache
-lake build           # elaborate and kernel-check the whole package
+lake exe cache get
+lake build
 ```
 
-On memory-constrained machines, use the bounded build wrapper instead:
+On a memory-constrained machine:
 
 ```sh
 python3 scripts/lean_fast_build.py --jobs 2
 ```
 
-Lake 5 can start every ready local module at once; this wrapper prebuilds stale
-modules in dependency order with at most two Lean processes, then runs the
-ordinary `lake build` authority check. Set `--jobs` higher only after measuring
-memory headroom.
-
-The build is heavy (thousands of `decide`-discharged certificates); continuous integration runs it on every push. The release surfaces are checked separately:
+Check the public release surfaces separately:
 
 ```sh
-python3 scripts/check_release.py   # claim registry, paper links, metadata, scope, licences
-python3 scripts/test_methodology_contract.py  # invalid claim-transition mutations must fail
+python3 scripts/check_release.py
+python3 scripts/test_methodology_contract.py
 ```
 
-The checker verifies that the paper's source links resolve to the named declarations at the stated lines, that README/paper/`CITATION.cff`/`SCOPE.md` agree with the claim registry, that no Lean source uses `sorry`/`admit`/`axiom`/`native_decide` (the downstream examples included), and that every licence in use has its text under `LICENSES/`.
+There is no `sorry`, `admit`, project-defined `axiom`, or `native_decide` in the
+checked source. Finite computations use `decide`, whose proof terms are checked
+by the Lean kernel.
 
-## Headline Lean interface
+## Use as a Lean package
 
-The supported entry point is the root import:
+Import the supported root:
 
 ```lean
 import Erdos249257
 ```
 
-| Declaration | Statement | Module |
-|---|---|---|
-| `irrational_erdosSum_full_support` | `∑ 1/(bⁿ − 1)` irrational, all `b ≥ 2` | [`CertificateKernel`](Erdos249257/CertificateKernel.lean) |
-| `tsum_totient_div_pow_two_ne_ratCast_of_den_le_79639646646701375323355774875831053` | the denominator exclusion for `S` | [`CertificateKernel`](Erdos249257/CertificateKernel.lean) |
-| `totient_series_eq_half_add_moebius_mersenne_square` | the Möbius-square lens `S = 1/2 + ∑ μ(d)/(2^d−1)²` | [`CertificateKernel`](Erdos249257/CertificateKernel.lean) |
-| `irrational_totient_series_of_lcm_diagonal_certificate_supply` | the one-parameter #249 reduction | [`LcmDiagonalReduction`](Erdos249257/LcmDiagonalReduction.lean) |
-| `irrational_totientSeries_of_full_target_avoidance_supply` | the exact full-target #249 reduction | [`DiagonalPincerDecomposition`](Erdos249257/DiagonalPincerDecomposition.lean) |
-| `irrational_totientSeries_of_diagonalFreshLossProjectionSupply` | the fresh-loss projection reduction | [`DiagonalFreshLossBridge`](Erdos249257/DiagonalFreshLossBridge.lean) |
-| `transportResidueKernel_eq_affineState` | the exact periodic slope-and-intercept state | [`ExponentOnlyTransport`](Erdos249257/ExponentOnlyTransport.lean) |
-| `oldChannel_affine_moment_annihilation` | two-moment annihilation of every old divisor channel | [`JointExponentTransport`](Erdos249257/JointExponentTransport.lean) |
-| `fixedPrecisionTropicalNoGo` | bounded local signatures always admit a centred completion | [`TropicalCurvatureCarry`](Erdos249257/TropicalCurvatureCarry.lean) |
-| `binaryCoeffSeries_rational_iff_exists_temperedBinaryOrbit` | rationality ⟺ tempered carry orbit | [`GenericTailOrbitRigidity`](Erdos249257/GenericTailOrbitRigidity.lean) |
-| `supportCoeffZeroWindow_length_le_eps_logb_add` | sublogarithmic zero windows from rationality | [`SublogDivisorCoverage`](Erdos249257/SublogDivisorCoverage.lean) |
+[`examples/Examples.lean`](examples/Examples.lean) is the minimal downstream
+consumer. It imports the package root and derives the base-3 instance of the
+full-support theorem.
 
-The exhaustive declaration map, with one row per principal statement, is Appendix B of the paper.
+## Citation and licence
 
-A minimal downstream consumer lives in [`examples/Examples.lean`](examples/Examples.lean): it imports the package root exactly as an external project would and re-derives a corollary (the base-3 instance of the headline theorem) through this interface. CI builds it with `lake build Examples` on every push, so the package is checked to be externally usable, not merely internally buildable.
+Cite release `v0.6.0` using [`CITATION.cff`](CITATION.cff). For the mathematics,
+cite the exposition included in the release.
 
-## Citation, licence, and support
+Code, scripts, and documentation are Apache-2.0. The manuscript layer, including
+the paper source and rendered PDFs, is CC-BY-4.0. The complete licence map is in
+[`REUSE.toml`](REUSE.toml).
 
-Cite the tagged release `v0.6.0` using [`CITATION.cff`](CITATION.cff); for the mathematics, cite the exposition and transport/curvature companion included in the release. Code, scripts, and documentation are licensed Apache-2.0; the manuscript layer (paper source, rendered PDFs, banner) is CC-BY-4.0; the map is [`REUSE.toml`](REUSE.toml) with licence texts under [`LICENSES/`](LICENSES/).
-
-This release is a pinned scholarly artefact. Error reports are welcome through the GitHub issue forms (mathematical discrepancy, build failure, broken link, exposition correction); [`CONTRIBUTING.md`](CONTRIBUTING.md) explains the release-pinning rule and the local checks, and [`SECURITY.md`](SECURITY.md) the private reporting route. Substantial changes land only as a new tagged release with refreshed claim and citation metadata.
-
-## Prior art and attribution
-
-The exposition credits sources beside the theorem families they inform. In
-particular, the full-support irrationality theorem is due to Erdős, and Peter
-Borwein gave a later general irrationality result that includes the relevant
-Mersenne--Lambert specialisation. The bibliography also distinguishes the
-classical support and Lambert-series literature from the Kovač--Tao and
-Wang--Grau Ribas antecedents for the achievement-set and carry discussions.
-Crandall's binary-expansion work and Campbell's subsequent binary-digit result
-are included as adjacent context only: neither is an input to, nor formalised
-by, this release. These citations supply provenance; they do not expand the
-claims or priority asserted here.
-
----
-
-*Project context.* This formalisation is one lane of a broader programme; the adjacent public claim-testing surface is [Plectis](https://github.com/wcook04/plectis). None of that tooling is proof authority here: the proof authority is the Lean source in this repository, checked by the Lean kernel.
+Errors and corrections are welcome through the repository issue forms.
+[`CONTRIBUTING.md`](CONTRIBUTING.md) explains the release-pinning rule and local
+checks; [`SECURITY.md`](SECURITY.md) gives the private reporting route.
