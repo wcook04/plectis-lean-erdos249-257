@@ -44,6 +44,33 @@ class LeanFastBuildTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "unknown local Lean target"):
                 fast.resolve_targets(["Pkg.Missing"], modules, root)
 
+    def test_changed_targets_combines_tracked_and_untracked_modules(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            tracked = root / "Pkg" / "Tracked.lean"
+            untracked = root / "Pkg" / "Untracked.lean"
+            tracked.parent.mkdir()
+            tracked.write_text("-- tracked\n", encoding="utf-8")
+            untracked.write_text("-- untracked\n", encoding="utf-8")
+            modules = {"Pkg.Tracked": tracked, "Pkg.Untracked": untracked}
+            results = [
+                fast.subprocess.CompletedProcess([], 0, "Pkg/Tracked.lean\nREADME.md\n", ""),
+                fast.subprocess.CompletedProcess([], 0, "Pkg/Untracked.lean\n", ""),
+            ]
+            with mock.patch.object(fast.subprocess, "run", side_effect=results) as run:
+                self.assertEqual(
+                    fast.changed_targets("HEAD~1", modules, root),
+                    ["Pkg.Tracked", "Pkg.Untracked"],
+                )
+            self.assertEqual(run.call_count, 2)
+            self.assertIn("HEAD~1", run.call_args_list[0].args[0])
+
+    def test_changed_targets_reports_git_failure(self) -> None:
+        failed = fast.subprocess.CompletedProcess([], 128, "", "bad revision")
+        with mock.patch.object(fast.subprocess, "run", return_value=failed):
+            with self.assertRaisesRegex(RuntimeError, "bad revision"):
+                fast.changed_targets("missing", {})
+
     def test_config_change_makes_module_stale(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

@@ -4,7 +4,8 @@
 The optional targets may be module names or ``.lean`` paths.  With no targets,
 the public root module is built.  Focused targets keep the edit/test loop from
 paying for every public certificate module while preserving an ordinary Lake
-build as the final authority check.
+build as the final authority check.  ``--changed-from`` derives those focused
+targets from Git, including untracked Lean files.
 """
 
 from __future__ import annotations
@@ -78,6 +79,36 @@ def resolve_targets(
     return resolved
 
 
+def changed_targets(
+    base: str, modules: dict[str, Path], root: Path = ROOT
+) -> list[str]:
+    """Return changed local Lean modules relative to ``base``."""
+
+    commands = (
+        ["git", "diff", "--name-only", "--diff-filter=ACMR", base, "--", "*.lean"],
+        ["git", "ls-files", "--others", "--exclude-standard", "--", "*.lean"],
+    )
+    changed_paths: set[Path] = set()
+    for command in commands:
+        completed = subprocess.run(
+            command,
+            cwd=root,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        if completed.returncode:
+            detail = completed.stderr.strip() or f"exit {completed.returncode}"
+            raise RuntimeError(f"cannot resolve changed Lean targets: {detail}")
+        changed_paths.update(
+            (root / line).resolve()
+            for line in completed.stdout.splitlines()
+            if line.strip()
+        )
+    modules_by_path = {source.resolve(): name for name, source in modules.items()}
+    return sorted(modules_by_path[path] for path in changed_paths if path in modules_by_path)
+
+
 def reachable(roots: Iterable[str], graph: dict[str, set[str]]) -> set[str]:
     result: set[str] = set()
     stack = list(roots)
@@ -144,6 +175,13 @@ def build_one(name: str, root: Path = ROOT) -> tuple[str, int, float]:
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("targets", nargs="*", help="local module name or .lean path; defaults to Erdos249257")
+    parser.add_argument(
+        "--changed-from",
+        nargs="?",
+        const="HEAD",
+        metavar="REF",
+        help="build changed Lean modules relative to REF (default: HEAD), plus untracked Lean files",
+    )
     parser.add_argument("--jobs", type=int, default=default_jobs())
     parser.add_argument("--plan", action="store_true")
     args = parser.parse_args()
@@ -153,8 +191,16 @@ def main() -> int:
     modules = discover()
     graph = local_graph(modules)
     try:
-        target_modules = resolve_targets(args.targets, modules)
-    except ValueError as error:
+        if args.changed_from is not None:
+            if args.targets:
+                parser.error("positional targets and --changed-from are mutually exclusive")
+            target_modules = changed_targets(args.changed_from, modules)
+            if not target_modules:
+                print(f"lean-fast-build: no changed Lean modules relative to {args.changed_from}")
+                return 0
+        else:
+            target_modules = resolve_targets(args.targets, modules)
+    except (RuntimeError, ValueError) as error:
         parser.error(str(error))
     build_waves = waves(reachable(target_modules, graph), graph)
     pending = [[name for name in wave if stale(name, modules, graph)] for wave in build_waves]
@@ -182,7 +228,8 @@ def main() -> int:
                 raise RuntimeError("module prebuild failed: " + ", ".join(sorted(failed)))
 
     print("lean-fast-build: final Lake authority check")
-    final_targets = [] if not args.targets else [f"+{name}" for name in target_modules]
+    focused = bool(args.targets) or args.changed_from is not None
+    final_targets = [f"+{name}" for name in target_modules] if focused else []
     return subprocess.run(["lake", "build", *final_targets], cwd=ROOT, check=False).returncode
 
 
