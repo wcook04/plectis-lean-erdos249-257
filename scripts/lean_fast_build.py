@@ -74,16 +74,20 @@ def resolve_targets(
 ) -> list[str]:
     requested = list(targets) or ["Erdos249257"]
     resolved: list[str] = []
-    modules_by_path = {source.resolve(): name for name, source in modules.items()}
     for target in requested:
         candidate = target.removeprefix("+")
         if candidate in modules:
             resolved.append(candidate)
             continue
         target_path = (root / candidate).resolve()
-        if target_path.suffix == ".lean" and target_path in modules_by_path:
-            resolved.append(modules_by_path[target_path])
-            continue
+        if target_path.suffix == ".lean":
+            try:
+                path_module = module_name(target_path, root.resolve())
+            except ValueError:
+                path_module = None
+            if path_module in modules and modules[path_module].resolve() == target_path:
+                resolved.append(path_module)
+                continue
         raise ValueError(f"unknown local Lean target: {target}")
     return resolved
 
