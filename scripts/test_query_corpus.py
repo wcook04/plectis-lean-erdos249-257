@@ -11,7 +11,18 @@ import subprocess
 import sys
 from pathlib import Path
 
-from query_corpus import paper_anchor_inventory, source_coordinate_packet
+from query_corpus import (
+    artifact_inventory,
+    artifact_packet,
+    claim_packet,
+    declaration_packet,
+    load,
+    open_proposition_packet,
+    paper_anchor_inventory,
+    paper_anchor_packet,
+    route_packet,
+    source_coordinate_packet,
+)
 
 ROOT = Path(__file__).resolve().parent.parent
 SCRIPT = ROOT / "scripts" / "query_corpus.py"
@@ -113,8 +124,8 @@ def main() -> int:
 
     open_expectations = {
         "remaining_open.erdos_249_irrationality": ("erdos_249", 1),
-        "remaining_open.unbounded_certificate_supply": ("erdos_249", 5),
-        "remaining_open.universal_257_all_infinite_supports": ("universal_257", 4),
+        "remaining_open.unbounded_certificate_supply": ("erdos_249", 6),
+        "remaining_open.universal_257_all_infinite_supports": ("universal_257", 5),
     }
     for open_id, (target, advancing_count) in open_expectations.items():
         open_packet = query("--open", open_id)
@@ -313,11 +324,69 @@ def main() -> int:
     assert unknown_artifact.returncode == 2
     assert "unknown registered artifact" in unknown_artifact.stderr
 
+    # Exhaustive populated-owner closure matrix. These assertions are derived
+    # from the current owners, so corpus growth creates a failing orphan instead
+    # of requiring a hand-maintained count or specimen list.
+    closure_checks = 0
+    for claim_row in claims_document["claims"]:
+        claim_view = claim_packet(claim_row["id"])
+        closure_checks += 1
+        assert claim_view["claim"]["id"] == claim_row["id"]
+        if claim_row.get("paper_label"):
+            paper_view = paper_anchor_packet(claim_row["paper_label"])
+            closure_checks += 1
+            assert claim_row["id"] in {
+                row["id"] for row in paper_view["attached_claims"]
+            }
+        for declaration_row in claim_row["declarations"]:
+            declaration_view = declaration_packet(declaration_row["name"], 100)
+            closure_checks += 1
+            exact_rows = [
+                row
+                for row in declaration_view["matches"]
+                if row["module"] == declaration_row["module"]
+                and row["line"] == declaration_row["line"]
+            ]
+            assert len(exact_rows) == 1
+            assert claim_row["id"] in exact_rows[0]["claim_ids"]
+
+    for open_row in claims_document["remaining_open_propositions"]:
+        open_view = open_proposition_packet(open_row["id"])
+        closure_checks += 1
+        assert open_view["paper_anchor"] is not None
+        assert open_view["paper_anchor"]["anchor_class"] == (
+            "remaining_open_proposition_anchor"
+        )
+
+    for anchor_row in paper_anchor_inventory():
+        anchor_view = paper_anchor_packet(anchor_row["canonical_handle"])
+        closure_checks += 1
+        assert anchor_view["anchor_class"] == anchor_row["anchor_class"]
+
+    for artifact_row in artifact_inventory():
+        for handle in (artifact_row["artifact_handle"], artifact_row["content_digest"]):
+            artifact_view = artifact_packet(handle)
+            closure_checks += 1
+            assert artifact_row["artifact_handle"] in {
+                row["artifact_handle"] for row in artifact_view["matches"]
+            }
+
+    orientation_document = load("docs/orientation.json")
+    for route_row in orientation_document["reading_routes"]:
+        route_view = route_packet(route_row["id"])
+        closure_checks += 1
+        assert route_view["route"]["id"] == route_row["id"]
+
+    assert closure_checks > 150
+
     invalid_limit = run("--search", "totient", "--limit", "101")
     assert invalid_limit.returncode == 2
     assert "--limit must be between 1 and 100" in invalid_limit.stderr
 
-    print("test_query_corpus: bounded lookup, sigil round trips, search, ranking, and errors passed")
+    print(
+        "test_query_corpus: bounded lookup and exhaustive populated-owner closure "
+        f"passed ({closure_checks} closure checks)"
+    )
     return 0
 
 

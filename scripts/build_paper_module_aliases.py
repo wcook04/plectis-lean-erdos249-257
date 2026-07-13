@@ -62,6 +62,7 @@ def aliases_for_modules(modules: list[str]) -> dict[str, str]:
 
 def render_tex(aliases: dict[str, str]) -> str:
 
+    # REUSE-IgnoreStart — these strings are emitted into the generated TeX file.
     lines = [
         "% SPDX-FileCopyrightText: 2026 Will Cook",
         "% SPDX-License-Identifier: CC-BY-4.0",
@@ -69,6 +70,7 @@ def render_tex(aliases: dict[str, str]) -> str:
         "% Each CamelCase component contributes at most its first three characters.",
         r"\newcommand{\modulesigil}[1]{\csname modulesigil@#1\endcsname}",
     ]
+    # REUSE-IgnoreEnd
     for module, alias in aliases.items():
         lines.append(
             rf"\expandafter\def\csname modulesigil@{module}\endcsname{{{alias}}}"

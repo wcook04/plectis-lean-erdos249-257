@@ -175,6 +175,7 @@ def build_orientation(claims: dict[str, Any], atlas: dict[str, Any]) -> dict[str
 
 def render_orientation_markdown(orientation: dict[str, Any]) -> str:
     scale = orientation["scale"]
+    # REUSE-IgnoreStart — these strings are emitted into the generated projection.
     lines = [
         "<!--",
         "SPDX-FileCopyrightText: 2026 Will Cook",
@@ -206,6 +207,7 @@ def render_orientation_markdown(orientation: dict[str, Any]) -> str:
         "## Exact open boundary",
         "",
     ]
+    # REUSE-IgnoreEnd
     for row in orientation["remaining_open_propositions"]:
         lines.append(f"- `{row['id']}` — {row['statement']}")
     lines.extend(["", "## Principal claim routes", ""])
