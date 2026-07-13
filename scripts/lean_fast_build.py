@@ -46,6 +46,7 @@ def discover(root: Path = ROOT) -> dict[str, Path]:
         module_name(source, root): source
         for source in root.rglob("*.lean")
         if not any(part.startswith(".") for part in source.relative_to(root).parts)
+        and not source.name.startswith("_")
     }
 
 

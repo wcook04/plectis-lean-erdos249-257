@@ -32,6 +32,16 @@ class LeanFastBuildTests(unittest.TestCase):
         self.assertEqual(selected, {"Left", "Shared"})
         self.assertEqual(fast.waves(selected, graph), [["Shared"], ["Left"]])
 
+    def test_discovery_ignores_ephemeral_underscore_modules(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            source = root / "Pkg" / "Leaf.lean"
+            source.parent.mkdir()
+            source.write_text("-- source\n", encoding="utf-8")
+            (root / "_axcheck.lean").write_text("#check True\n", encoding="utf-8")
+
+            self.assertEqual(set(fast.discover(root)), {"Pkg.Leaf"})
+
     def test_resolve_targets_accepts_module_and_path(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
