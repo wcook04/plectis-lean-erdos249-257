@@ -34,6 +34,9 @@ generated [corpus orientation](docs/ORIENTATION.md), or
 release scale, exact open boundary, principal claim routes, and the next
 authoritative surface for each kind of question.
 
+For one bounded lookup, run `python3 scripts/query_corpus.py --claim <id>`,
+`--declaration <Lean_name>`, `--module <path_or_id>`, or `--route <id>`.
+
 The Plectis site is an introduction, not a proof certificate. The exposition
 explains the mathematics. The checked Lean source establishes the formal
 statements.

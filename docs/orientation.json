@@ -333,5 +333,12 @@
     "release": "python3 scripts/check_release.py",
     "cold_clone_comprehension": "python3 scripts/check_cold_clone_comprehension.py",
     "orientation_freshness": "python3 scripts/build_corpus_descriptor.py --check"
+  },
+  "queries": {
+    "summary": "python3 scripts/query_corpus.py --format card",
+    "claim": "python3 scripts/query_corpus.py --claim <claim_id>",
+    "declaration": "python3 scripts/query_corpus.py --declaration <Lean_name>",
+    "module": "python3 scripts/query_corpus.py --module <path_or_id>",
+    "reading_route": "python3 scripts/query_corpus.py --route <route_id>"
   }
 }

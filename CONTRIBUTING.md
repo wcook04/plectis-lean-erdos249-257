@@ -53,6 +53,7 @@ python3 scripts/check_metadata.py  # CITATION.cff schema validation (same comman
 reuse lint                         # licence validation
 python3 scripts/check_cold_clone_comprehension.py  # diagnostic (not a gate): cold-clone readability
 python3 scripts/test_cold_clone_comprehension.py  # adversarial self-test for the diagnostic
+python3 scripts/test_query_corpus.py  # bounded claim/declaration/module/route queries
 ```
 
 CI runs the build and release-surface checks on every push. The cold-clone

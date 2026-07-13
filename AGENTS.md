@@ -38,6 +38,10 @@ in this repository, and never infer unpublished results or private machinery.
    topology. Use `docs/SOURCE_MAP.md` for intention-based routes and
    `docs/WAVE_INDEX.md` for mathematical chronology.
 
+For a bounded lookup, use `python3 scripts/query_corpus.py --claim <id>`,
+`--declaration <Lean_name>`, `--module <path_or_id>`, or `--route <id>`.
+The helper reads the registry and atlas; it is navigation, not proof authority.
+
 ## Authority and change order
 
 - Lean source checked by the pinned Lean kernel is proof authority.
@@ -71,6 +75,7 @@ python3 scripts/test_methodology_contract.py
 python3 scripts/build_module_graph.py --check
 python3 scripts/refresh_source_coordinates.py --check
 python3 scripts/build_corpus_descriptor.py --check
+python3 scripts/test_query_corpus.py
 ```
 
 Run the full proof authority check after Lean changes:

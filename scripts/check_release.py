@@ -366,6 +366,7 @@ def main() -> int:
         "SCOPE.md",
         "Erdos249257.lean",
         "scripts/check_release.py",
+        "scripts/query_corpus.py",
     ):
         check(required in agents, f"AGENTS.md does not route through {required}")
     check("remain open" in agents, "AGENTS.md must preserve the open-problem boundary")
@@ -455,6 +456,15 @@ def main() -> int:
     for target in orientation.get("drilldowns", {}).values():
         rel = str(target).split("::", 1)[0]
         check((ROOT / rel).is_file(), f"orientation drilldown path does not exist: {rel}")
+    query_check = subprocess.run(
+        [sys.executable, str(ROOT / "scripts" / "test_query_corpus.py")],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    check(query_check.returncode == 0,
+          f"corpus query surface failed: {query_check.stdout.strip() or query_check.stderr.strip()}")
 
     # --- 9. proof-trust guard ------------------------------------------------------
     # Covers the library, its root, and the downstream examples: everything

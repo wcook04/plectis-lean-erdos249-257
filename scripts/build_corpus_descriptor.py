@@ -133,6 +133,13 @@ def build_orientation(claims: dict[str, Any], atlas: dict[str, Any]) -> dict[str
             "cold_clone_comprehension": "python3 scripts/check_cold_clone_comprehension.py",
             "orientation_freshness": "python3 scripts/build_corpus_descriptor.py --check",
         },
+        "queries": {
+            "summary": "python3 scripts/query_corpus.py --format card",
+            "claim": "python3 scripts/query_corpus.py --claim <claim_id>",
+            "declaration": "python3 scripts/query_corpus.py --declaration <Lean_name>",
+            "module": "python3 scripts/query_corpus.py --module <path_or_id>",
+            "reading_route": "python3 scripts/query_corpus.py --route <route_id>",
+        },
     }
 
 
@@ -211,6 +218,18 @@ def render_orientation_markdown(orientation: dict[str, Any]) -> str:
             "- Human mathematical account: [`erdos249-257-exposition.pdf`](../erdos249-257-exposition.pdf)",
             "- Transport and curvature companion: [`erdos249-transport-curvature.pdf`](../erdos249-transport-curvature.pdf)",
             "- Machine form of this page: [`docs/orientation.json`](orientation.json)",
+            "",
+            "## Query one handle",
+            "",
+            "The read-only query helper returns bounded JSON by default:",
+            "",
+            "```sh",
+            "python3 scripts/query_corpus.py --format card",
+            "python3 scripts/query_corpus.py --claim denominator_exclusion",
+            "python3 scripts/query_corpus.py --declaration irrational_erdosSum_full_support",
+            "python3 scripts/query_corpus.py --module Erdos249257/CertificateKernel.lean",
+            "python3 scripts/query_corpus.py --route instant_orientation",
+            "```",
             "",
         ]
     )
