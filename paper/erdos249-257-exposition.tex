@@ -139,9 +139,11 @@ families toward \#257, not the universal quantifier.
 The formalisation-specific contribution is a common architecture in which an
 infinite irrationality question is converted into finite arithmetic checked by
 the Lean kernel, while the remaining analytic uniformity statement is exposed
-rather than hidden inside computation. Exact links from the informal statements to the pinned source are
-kept as quiet hyperlinks; the complete declaration map is in
-Appendix~\ref{app:index}.
+rather than hidden inside computation. Exact links from the informal statements
+to the pinned source are kept as quiet blue sigils. Each CamelCase component of
+a module contributes at most its first three letters: for example,
+\texttt{CertificateKernel} becomes \texttt{CerKer}. The complete declaration
+map pairs every sigil with its full module name in Appendix~\ref{app:index}.
 
 The transport and curvature frontier has its own technical companion in this
 release.  It develops affine residue-state cancellation, sharp four-vertex
@@ -841,7 +843,7 @@ the development. The source, exact informal-to-formal links, and build metadata 
 available in the public repository
 \href{https://github.com/wcook04/plectis-lean-erdos249-257}{\texttt{plectis-lean-erdos249-257}}.
 This paper is pinned to the tagged release \href{\releaseurl}{\texttt{\commit}};
-each blue Lean link targets an exact declaration at that tag (for example, the
+each blue source sigil targets an exact declaration at that tag (for example, the
 base-$2$ corollary in Theorem~\ref{res:full} resolves to
 \lrefx{CertificateKernel.lean}{8007}{irrational_erdosBorwein_series}). The package uses
 \texttt{leanprover/lean4:v4.29.1} and the Mathlib revision pinned by
@@ -863,7 +865,7 @@ informal statements to declarations. The repository's claim registry
 (\rref{docs/claims.json}) records each public claim once, and
 \rref{scripts/check_release.py} verifies that this paper's source links, the
 repository documentation, and the release metadata all agree with it,
-including that every Lean link above resolves to the named declaration at the
+including that every source sigil above resolves to the named declaration at the
 stated line of the released source.
 
 \section{Complements and further questions}\label{sec:further}
