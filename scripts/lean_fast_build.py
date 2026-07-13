@@ -290,19 +290,45 @@ def build_one(name: str, root: Path = ROOT) -> tuple[str, int, float]:
     return name, result.returncode, time.monotonic() - started
 
 
+def build_batch(
+    names: Iterable[str],
+    root: Path = ROOT,
+) -> tuple[list[str], int, float]:
+    """Build one bounded target batch through a single Lake invocation."""
+
+    batch = list(names)
+    started = time.monotonic()
+    result = subprocess.run(
+        ["lake", "build", *(f"+{name}" for name in batch)],
+        cwd=root,
+        check=False,
+    )
+    return batch, result.returncode, time.monotonic() - started
+
+
 def build_wave(names: Iterable[str], jobs: int, root: Path = ROOT) -> list[str]:
-    """Build one dependency-ready wave with a bounded worker pool."""
+    """Build one wave in bounded Lake batches, isolating failures individually."""
 
-    from concurrent.futures import ThreadPoolExecutor, as_completed
-
-    with ThreadPoolExecutor(max_workers=jobs) as executor:
-        futures = [executor.submit(build_one, name, root) for name in names]
-        failed = []
-        for future in as_completed(futures):
-            name, code, duration = future.result()
-            print(f"lean-fast-build: {name} -> {code} ({duration:.1f}s)")
-            if code:
-                failed.append(name)
+    modules = list(names)
+    failed: list[str] = []
+    for start in range(0, len(modules), jobs):
+        batch = modules[start : start + jobs]
+        built, code, duration = build_batch(batch, root)
+        print(
+            f"lean-fast-build: {','.join(built)} -> {code} "
+            f"({duration:.1f}s, batch={len(built)})"
+        )
+        if not code:
+            continue
+        print("lean-fast-build: batch failed; isolating targets")
+        for name in batch:
+            isolated_name, isolated_code, isolated_duration = build_one(name, root)
+            print(
+                f"lean-fast-build: {isolated_name} -> {isolated_code} "
+                f"({isolated_duration:.1f}s, isolated)"
+            )
+            if isolated_code:
+                failed.append(isolated_name)
     return failed
 
 

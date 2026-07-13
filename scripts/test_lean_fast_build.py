@@ -91,6 +91,10 @@ import Pkg.TooLate
         }
         with mock.patch.object(
             fast,
+            "build_batch",
+            return_value=(["Pkg.Good", "Pkg.Bad"], 1, 0.2),
+        ), mock.patch.object(
+            fast,
             "build_one",
             side_effect=lambda name, root=fast.ROOT: results[name],
         ):
@@ -98,6 +102,26 @@ import Pkg.TooLate
                 fast.build_wave(["Pkg.Good", "Pkg.Bad"], jobs=2),
                 ["Pkg.Bad"],
             )
+
+    def test_build_wave_batches_targets_to_the_worker_bound(self) -> None:
+        batches: list[list[str]] = []
+
+        def build_batch(names, root=fast.ROOT):
+            batch = list(names)
+            batches.append(batch)
+            return batch, 0, 0.1
+
+        with mock.patch.object(fast, "build_batch", side_effect=build_batch), mock.patch.object(
+            fast,
+            "build_one",
+            side_effect=AssertionError("successful batches must not rebuild individually"),
+        ):
+            self.assertEqual(
+                fast.build_wave(["Pkg.A", "Pkg.B", "Pkg.C"], jobs=2),
+                [],
+            )
+
+        self.assertEqual(batches, [["Pkg.A", "Pkg.B"], ["Pkg.C"]])
 
     def test_discovery_ignores_ephemeral_underscore_modules(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
