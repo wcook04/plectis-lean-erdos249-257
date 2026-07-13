@@ -108,6 +108,18 @@ def main() -> int:
         "repository": claims_document["release"]["repository"],
     }
 
+    square_crt_claim = query("--claim", "square_crt_correction_suppression")
+    assert square_crt_claim["claim"]["status"] == "proved here"
+    assert "neither an unbounded certificate family nor an irrationality criterion" in (
+        square_crt_claim["claim"]["statement"]
+    )
+    assert square_crt_claim["claim"]["declarations"][0] == {
+        "name": "exists_squareCRT_clean_totient_family",
+        "module": "Erdos249257/SquareCRTCube.lean",
+        "line": 198,
+    }
+    assert square_crt_claim["lean_source_identity"] == adelic["lean_source_identity"]
+
     paper_label = query("--paper-label", "res:farey")
     assert paper_label["kind"] == "paper_label"
     assert paper_label["paper"] == claim["paper"]

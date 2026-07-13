@@ -22,7 +22,7 @@
 % the repository verifies that it matches docs/claims.json and that every
 % \lref/\lrefx/\lloc target resolves to the named declaration at that line.
 % ---------------------------------------------------------------------------
-\newcommand{\commit}{7f8c2feb039f46758c56842782e53437ba99d52e}
+\newcommand{\commit}{d79020b9327bd49b8f0d971a8c9c718b296fe663}
 \newcommand{\repobase}{https://github.com/wcook04/plectis-lean-erdos249-257/blob/\commit}
 \newcommand{\sourceurl}{https://github.com/wcook04/plectis-lean-erdos249-257/tree/\commit}
 \newcommand{\rootbase}{https://github.com/wcook04/plectis-lean-erdos249-257/blob/main}
@@ -783,6 +783,28 @@ its coefficient, but cannot erase it.  This rules out a scalar-denominator
 shortcut of that form.  It neither proves full-target avoidance nor supplies
 any certificates, so it gives no irrationality criterion for $S$.
 
+\begin{proposition}[square-CRT correction suppression]\label{res:squarecrt}
+Let $E$ be a finite family indexed by distinct primes $p_i$, with prescribed
+anchors $A_i$ and residues $a_i$.  There is a bounded common base $n$ such
+that, for each $i\in E$ and each shift $h$ with $p_i\nmid a_i+h$, one has
+\[
+ n=A_i+p_i(a_i+p_i t)\quad\text{and}\quad
+ \ph(n+p_i h-A_i)=(p_i-1)\ph(a_i+p_i t+h)
+\]
+for a suitable $t\in\N$.  In particular, if every $p_i$ exceeds a fixed
+horizon $J$, the choice $a_i=0$ works simultaneously for all $1\le h\le J$.
+\end{proposition}
+\noindent Formalised:
+\lrefx{SquareCRTCube.lean}{198}{exists_squareCRT_clean_totient_family}
+and \lrefx{SquareCRTCube.lean}{228}{exists_squareCRT_clean_horizon}.
+The finite mechanism does not force a cube coefficient to be nonzero: there
+is a checked clean two-step cube with both displayed coefficients zero
+(\lrefx{SquareCRTCube.lean}{285}{squareCRT_clean_block_can_vanish}) and a
+separate checked clean cube with second coefficient $-4$
+(\lrefx{SquareCRTCube.lean}{303}{squareCRT_clean_block_can_be_nonzero}).
+Thus the result gives neither an unbounded certificate supply nor an
+irrationality criterion for $S$.
+
 \paragraph{What is open.} The reduction converts \#249 into the statement that the
 certificate supply is \emph{unbounded}: certificates exist for arbitrarily large
 parameters. By Proposition~\ref{res:complete} this is equivalent to the
@@ -1452,6 +1474,7 @@ exact Mersenne-shadow denominator & \lrefx{MersenneShadowDenominatorGrowth.lean}
 fresh-loss projection reduction & \lrefx{DiagonalFreshLossBridge.lean}{187}{irrational_totientSeries_of_diagonalFreshLossProjectionSupply}\ (\texttt{DiagonalFreshLossBridge})\\
 prime-adjunction diamond no-go & \lrefx{FullTargetPrimeAdjunctionNoGo.lean}{196}{fullTarget_primeAdjunction_diamond_iff_root}\ (\texttt{FullTargetPrimeAdjunctionNoGo})\\
 scalar-localisation height obstruction & \lrefx{AdelicHeightObstruction.lean}{23}{scalarLocalization_complement_dvd}\ (\texttt{AdelicHeightObstruction})\\
+square-CRT correction suppression & \lrefx{SquareCRTCube.lean}{198}{exists_squareCRT_clean_totient_family}\ (\texttt{SquareCRTCube})\\
 tail-orbit rationality criterion & \lrefx{GenericTailOrbitRigidity.lean}{425}{binaryCoeffSeries_rational_iff_exists_temperedBinaryOrbit}\ (\texttt{GenericTailOrbitRigidity})\\
 Boolean carry certificate $\Leftrightarrow$ support fraction & \lrefx{BooleanMobiusCarry.lean}{948}{exists_normalized_support_fraction_iff_exists_booleanMobiusCarry}\ (\texttt{BooleanMobiusCarry})\\
 one-wrap classification & \lrefx{RationalSupportCarrySkeleton.lean}{415}{one_doublingWrap_classification}\ (\texttt{RationalSupportCarrySkeleton})\\

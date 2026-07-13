@@ -10,7 +10,7 @@
     "declaration_count": 6379,
     "theorem_like_count": 5866,
     "generated_certificate_declaration_count": 1681,
-    "principal_claim_link_count": 56,
+    "principal_claim_link_count": 60,
     "kind_counts": {
       "abbrev": 1,
       "def": 498,
@@ -70085,7 +70085,9 @@
       "line": 198,
       "signature": "theorem exists_squareCRT_clean_totient_family {ι : Type*} [DecidableEq ι] (E : Finset ι) (p A a : ι → ℕ) (hprime : ∀ i ∈ E, (p i).Prime) (hinj : Set.InjOn p (E : Set ι)) : ∃ n : ℕ, n < (∏ i ∈ E, p i ^ 2) * (E.sup (fun i => A i + p i * a i) + 2) ∧ ∀ i ∈ E, ∀ h : ℕ, ¬p i ∣ a i + h → ∃ t : ℕ, n = A i + p i * (a i + p i * t) ∧ Nat.totient (n + p i * h - A i) = (p i - 1) * Nat.totient (a i + p i * t + h)",
       "generated_certificate": false,
-      "claim_ids": [],
+      "claim_ids": [
+        "square_crt_correction_suppression"
+      ],
       "docstring": "Simultaneous square-CRT correction suppression on a finite family. One common base works at every label and every shift whose chosen cofactor residue avoids zero modulo the corresponding prime."
     },
     {
@@ -70096,7 +70098,9 @@
       "line": 228,
       "signature": "theorem exists_squareCRT_clean_horizon {ι : Type*} [DecidableEq ι] (E : Finset ι) (p A : ι → ℕ) (J : ℕ) (hprime : ∀ i ∈ E, (p i).Prime) (hinj : Set.InjOn p (E : Set ι)) (horizon : ∀ i ∈ E, J < p i) : ∃ n : ℕ, n < (∏ i ∈ E, p i ^ 2) * (E.sup A + 2) ∧ ∀ i ∈ E, ∀ h : ℕ, 0 < h → h ≤ J → ∃ t : ℕ, n = A i + p i ^ 2 * t ∧ Nat.totient (n + p i * h - A i) = (p i - 1) * Nat.totient (p i * t + h)",
       "generated_certificate": false,
-      "claim_ids": [],
+      "claim_ids": [
+        "square_crt_correction_suppression"
+      ],
       "docstring": "Canonical finite-horizon corollary. If every distinct construction prime exceeds `J`, the residue choice `a = 0` removes every totient dilation correction simultaneously for all `1 ≤ h ≤ J`."
     },
     {
@@ -70129,7 +70133,9 @@
       "line": 285,
       "signature": "theorem squareCRT_clean_block_can_vanish : (13 : ℕ).Prime ∧ (5 : ℕ).Prime ∧ 52 ≡ 52 [MOD 13 ^ 2] ∧ 52 ≡ 2 [MOD 5 ^ 2] ∧ actualOneCubeCoeff 52 13 13 = 0 ∧ actualOneCubeCoeff 52 26 18 = 0",
       "generated_certificate": false,
-      "claim_ids": [],
+      "claim_ids": [
+        "square_crt_correction_suppression"
+      ],
       "docstring": "A clean square-localized cube need not separate: the returned minimal `k = 1`, `J = 2` model has both finite coefficients equal to zero."
     },
     {
@@ -70151,7 +70157,9 @@
       "line": 303,
       "signature": "theorem squareCRT_clean_block_can_be_nonzero : (3 : ℕ).Prime ∧ (5 : ℕ).Prime ∧ 27 ≡ 0 [MOD 3 ^ 2] ∧ 27 ≡ 2 [MOD 5 ^ 2] ∧ actualOneCubeCoeff 27 3 3 = 0 ∧ actualOneCubeCoeff 27 6 8 = -4",
       "generated_certificate": false,
-      "claim_ids": [],
+      "claim_ids": [
+        "square_crt_correction_suppression"
+      ],
       "docstring": "Correction suppression is not identically trivial: a nearby clean cube has a nonzero second coefficient."
     },
     {

@@ -5290,7 +5290,7 @@
     "lean_toolchain": "leanprover/lean4:v4.29.1",
     "repository": "https://github.com/wcook04/plectis-lean-erdos249-257",
     "formal_source": {
-      "ref": "7f8c2feb039f46758c56842782e53437ba99d52e",
+      "ref": "d79020b9327bd49b8f0d971a8c9c718b296fe663",
       "ref_kind": "commit",
       "publication_state": "committed_checkpoint_pending_remote_publication",
       "relationship_to_last_tag": "post_tag_checkpoint"
@@ -5314,7 +5314,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 963
+        "line": 985
       }
     },
     {
@@ -5325,7 +5325,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 972
+        "line": 994
       }
     },
     {
@@ -5336,7 +5336,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 979
+        "line": 1001
       }
     }
   ],
@@ -5650,6 +5650,36 @@
           "name": "scalarLocalization_integer_eq_mul_num",
           "module": "Erdos249257/AdelicHeightObstruction.lean",
           "line": 56
+        }
+      ]
+    },
+    {
+      "id": "square_crt_correction_suppression",
+      "label": "Square-CRT correction suppression",
+      "status": "proved here",
+      "statement": "For every finite family of distinct primes and prescribed anchors, a bounded simultaneous square-CRT base removes the prime-dilation correction at every admissible finite shift. Checked clean cubes can have vanishing coefficients and can also have a nonzero coefficient; this finite mechanism supplies neither an unbounded certificate family nor an irrationality criterion for the totient constant.",
+      "paper_label": "res:squarecrt",
+      "readme_headline": false,
+      "declarations": [
+        {
+          "name": "exists_squareCRT_clean_totient_family",
+          "module": "Erdos249257/SquareCRTCube.lean",
+          "line": 198
+        },
+        {
+          "name": "exists_squareCRT_clean_horizon",
+          "module": "Erdos249257/SquareCRTCube.lean",
+          "line": 228
+        },
+        {
+          "name": "squareCRT_clean_block_can_vanish",
+          "module": "Erdos249257/SquareCRTCube.lean",
+          "line": 285
+        },
+        {
+          "name": "squareCRT_clean_block_can_be_nonzero",
+          "module": "Erdos249257/SquareCRTCube.lean",
+          "line": 303
         }
       ]
     },
