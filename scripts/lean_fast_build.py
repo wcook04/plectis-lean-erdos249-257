@@ -1,5 +1,11 @@
 #!/usr/bin/env python3
-"""Build stale local Lean modules with bounded memory, then verify with Lake."""
+"""Build stale local Lean modules with bounded memory, then verify with Lake.
+
+The optional targets may be module names or ``.lean`` paths.  With no targets,
+the public root module is built.  Focused targets keep the edit/test loop from
+paying for every public certificate module while preserving an ordinary Lake
+build as the final authority check.
+"""
 
 from __future__ import annotations
 
@@ -11,6 +17,7 @@ import re
 import subprocess
 import sys
 import time
+from typing import Iterable
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -26,18 +33,18 @@ def default_jobs() -> int:
             pass
     cpu_count = max(1, os.cpu_count() or 1)
     interactive_reserve = max(1, cpu_count // 4)
-    return max(1, (cpu_count - interactive_reserve) // 2)
+    return min(2, max(1, (cpu_count - interactive_reserve) // 2))
 
 
-def module_name(source: Path) -> str:
-    return ".".join(source.relative_to(ROOT).with_suffix("").parts)
+def module_name(source: Path, root: Path = ROOT) -> str:
+    return ".".join(source.relative_to(root).with_suffix("").parts)
 
 
-def discover() -> dict[str, Path]:
+def discover(root: Path = ROOT) -> dict[str, Path]:
     return {
-        module_name(source): source
-        for source in ROOT.rglob("*.lean")
-        if not any(part.startswith(".") for part in source.relative_to(ROOT).parts)
+        module_name(source, root): source
+        for source in root.rglob("*.lean")
+        if not any(part.startswith(".") for part in source.relative_to(root).parts)
     }
 
 
@@ -52,9 +59,28 @@ def local_graph(modules: dict[str, Path]) -> dict[str, set[str]]:
     return graph
 
 
-def reachable(root: str, graph: dict[str, set[str]]) -> set[str]:
+def resolve_targets(
+    targets: Iterable[str], modules: dict[str, Path], root: Path = ROOT
+) -> list[str]:
+    requested = list(targets) or ["Erdos249257"]
+    resolved: list[str] = []
+    modules_by_path = {source.resolve(): name for name, source in modules.items()}
+    for target in requested:
+        candidate = target.removeprefix("+")
+        if candidate in modules:
+            resolved.append(candidate)
+            continue
+        target_path = (root / candidate).resolve()
+        if target_path.suffix == ".lean" and target_path in modules_by_path:
+            resolved.append(modules_by_path[target_path])
+            continue
+        raise ValueError(f"unknown local Lean target: {target}")
+    return resolved
+
+
+def reachable(roots: Iterable[str], graph: dict[str, set[str]]) -> set[str]:
     result: set[str] = set()
-    stack = [root]
+    stack = list(roots)
     while stack:
         item = stack.pop()
         if item not in result:
@@ -77,28 +103,47 @@ def waves(selected: set[str], graph: dict[str, set[str]]) -> list[list[str]]:
     return result
 
 
-def olean(name: str) -> Path:
-    return ROOT / ".lake" / "build" / "lib" / "lean" / Path(*name.split(".")).with_suffix(".olean")
+def olean(name: str, root: Path = ROOT) -> Path:
+    return root / ".lake" / "build" / "lib" / "lean" / Path(*name.split(".")).with_suffix(".olean")
 
 
-def stale(name: str, modules: dict[str, Path], graph: dict[str, set[str]]) -> bool:
-    output = olean(name)
+def stale(
+    name: str,
+    modules: dict[str, Path],
+    graph: dict[str, set[str]],
+    root: Path = ROOT,
+) -> bool:
+    output = olean(name, root)
     if not output.is_file():
         return True
     timestamp = output.stat().st_mtime_ns
     if modules[name].stat().st_mtime_ns > timestamp:
         return True
-    return any(not olean(dep).is_file() or olean(dep).stat().st_mtime_ns > timestamp for dep in graph[name])
+    if any(
+        not olean(dep, root).is_file() or olean(dep, root).stat().st_mtime_ns > timestamp
+        for dep in graph[name]
+    ):
+        return True
+    return any(
+        config.is_file() and config.stat().st_mtime_ns > timestamp
+        for config in (
+            root / "lakefile.toml",
+            root / "lakefile.lean",
+            root / "lake-manifest.json",
+            root / "lean-toolchain",
+        )
+    )
 
 
-def build_one(name: str) -> tuple[str, int, float]:
+def build_one(name: str, root: Path = ROOT) -> tuple[str, int, float]:
     started = time.monotonic()
-    result = subprocess.run(["lake", "build", f"+{name}"], cwd=ROOT, check=False)
+    result = subprocess.run(["lake", "build", f"+{name}"], cwd=root, check=False)
     return name, result.returncode, time.monotonic() - started
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("targets", nargs="*", help="local module name or .lean path; defaults to Erdos249257")
     parser.add_argument("--jobs", type=int, default=default_jobs())
     parser.add_argument("--plan", action="store_true")
     args = parser.parse_args()
@@ -107,10 +152,17 @@ def main() -> int:
 
     modules = discover()
     graph = local_graph(modules)
-    build_waves = waves(reachable("Erdos249257", graph), graph)
+    try:
+        target_modules = resolve_targets(args.targets, modules)
+    except ValueError as error:
+        parser.error(str(error))
+    build_waves = waves(reachable(target_modules, graph), graph)
     pending = [[name for name in wave if stale(name, modules, graph)] for wave in build_waves]
     pending = [wave for wave in pending if wave]
-    print(f"lean-fast-build: {sum(map(len, pending))} stale/missing module(s), jobs={args.jobs}")
+    print(
+        f"lean-fast-build: targets={','.join(target_modules)}; "
+        f"{sum(map(len, pending))} stale/missing module(s), jobs={args.jobs}"
+    )
     if args.plan:
         for index, wave in enumerate(pending, 1):
             print(f"wave {index}: {' '.join(wave)}")
@@ -130,7 +182,8 @@ def main() -> int:
                 raise RuntimeError("module prebuild failed: " + ", ".join(sorted(failed)))
 
     print("lean-fast-build: final Lake authority check")
-    return subprocess.run(["lake", "build"], cwd=ROOT, check=False).returncode
+    final_targets = [] if not args.targets else [f"+{name}" for name in target_modules]
+    return subprocess.run(["lake", "build", *final_targets], cwd=ROOT, check=False).returncode
 
 
 if __name__ == "__main__":
