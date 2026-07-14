@@ -1246,6 +1246,22 @@ $\ph(n)\le n$ for the \#249 coefficients, and $f_A(n)\le\tau(n)\le n$ for the
 instantiate the criterion on supports; the totient instantiation is not taken
 here.
 
+\begin{proposition}[finite-level carry anti-compression]\label{res:carryrank}
+Suppose a tempered integral carry orbit for the totient sequence has positive
+multiplier.  If the canonical level-$e$ totient kernel family is linearly
+independent, then the span of its canonical carry sections has dimension at
+least $2^e-1$.  Consequently, an all-level independence producer together
+with rationality of the totient coefficient series would force one tempered
+carry orbit with unbounded finite-level section ranks.
+\end{proposition}
+\noindent Formalised:
+\lref{TotientCarryKernelRigidity.lean}{211}{finrank_canonicalCarryKernel_ge_of_linearIndependent}
+and
+\lref{TotientCarryKernelRigidity.lean}{261}{not_irrational_totientSeries_implies_unbounded_carryRank}.
+The all-level independence producer is not supplied here.  Thus the
+proposition records an exact conditional anti-compression consequence, not an
+irrationality criterion for $S$.
+
 \subsection{Boolean--M\"obius carry coordinates (the \#257 direction)}
 
 At base $2$ the support series of Section~\ref{sec:eb} is itself a binary

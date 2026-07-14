@@ -54,3 +54,4 @@ import Erdos249257.PrimitiveDeterminantLift
 import Erdos249257.PrimitiveWeightCertificate
 import Erdos249257.MersenneTailAtoms
 import Erdos249257.MobiusSignSupportNoGo
+import Erdos249257.TotientCarryKernelRigidity

@@ -4,21 +4,21 @@
   "projection_not_authority": true,
   "proof_authority": "Lean source checked by the pinned Lean kernel",
   "argument_authority": "docs/claims.json::machine_readable_paper.argument_graph",
-  "source_fingerprint": "sha256:e6ea6659582e5ac319e1713d2f7000a2a9b682592aac3bd7297bc8a821271b3a",
+  "source_fingerprint": "sha256:d34f8a1ceb264195776995ed8cf00cb6e2391bd86c2843f61ed4c0d4dcec140c",
   "summary": {
-    "module_count": 552,
-    "declaration_count": 6627,
-    "theorem_like_count": 6038,
+    "module_count": 553,
+    "declaration_count": 6649,
+    "theorem_like_count": 6051,
     "generated_certificate_declaration_count": 1681,
-    "principal_claim_link_count": 89,
+    "principal_claim_link_count": 91,
     "kind_counts": {
-      "abbrev": 2,
-      "def": 571,
+      "abbrev": 4,
+      "def": 578,
       "inductive": 3,
       "instance": 3,
       "lemma": 350,
       "structure": 10,
-      "theorem": 5688
+      "theorem": 5701
     }
   },
   "modules": [
@@ -80,7 +80,8 @@
         "Erdos249257.PrimitiveDeterminantLift",
         "Erdos249257.PrimitiveWeightCertificate",
         "Erdos249257.MersenneTailAtoms",
-        "Erdos249257.MobiusSignSupportNoGo"
+        "Erdos249257.MobiusSignSupportNoGo",
+        "Erdos249257.TotientCarryKernelRigidity"
       ],
       "declaration_count": 0,
       "kind_counts": {}
@@ -6696,6 +6697,20 @@
       "kind_counts": {
         "def": 7,
         "theorem": 10
+      }
+    },
+    {
+      "id": "Erdos249257.TotientCarryKernelRigidity",
+      "path": "Erdos249257/TotientCarryKernelRigidity.lean",
+      "imports": [
+        "Erdos249257.GenericTailOrbitRigidity",
+        "Erdos249257.TotientMahlerDefect"
+      ],
+      "declaration_count": 22,
+      "kind_counts": {
+        "abbrev": 2,
+        "def": 7,
+        "theorem": 13
       }
     },
     {
@@ -74167,6 +74182,252 @@
         "transport_certificate_instances"
       ],
       "docstring": "Kernel-checked finite lattice separation at `t = 6`, `H = 60`."
+    },
+    {
+      "id": "Erdos249257/TotientCarryKernelRigidity.lean:24:carryDerivative",
+      "name": "carryDerivative",
+      "kind": "def",
+      "module": "Erdos249257/TotientCarryKernelRigidity.lean",
+      "line": 24,
+      "signature": "def carryDerivative (u : ℕ → ℤ) (n : ℕ) : ℤ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The discrete derivative naturally recovered from a binary carry orbit."
+    },
+    {
+      "id": "Erdos249257/TotientCarryKernelRigidity.lean:29:carryDerivative_eq_scaledCoeff_of_recurrence",
+      "name": "carryDerivative_eq_scaledCoeff_of_recurrence",
+      "kind": "theorem",
+      "module": "Erdos249257/TotientCarryKernelRigidity.lean",
+      "line": 29,
+      "signature": "theorem carryDerivative_eq_scaledCoeff_of_recurrence {c : ℕ → ℕ} {v : ℕ} {u : ℕ → ℤ} (hrec : ∀ N : ℕ, u (N + 1) = 2 * u N - ((v * c (N + 1) : ℕ) : ℤ)) {n : ℕ} (hn : 0 < n) : carryDerivative u n = ((v * c n : ℕ) : ℤ)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Any exact binary-orbit recurrence recovers its coefficient at every positive index through `carryDerivative`. Temperedness is not needed."
+    },
+    {
+      "id": "Erdos249257/TotientCarryKernelRigidity.lean:43:totient_temperedOrbit_derivative",
+      "name": "totient_temperedOrbit_derivative",
+      "kind": "theorem",
+      "module": "Erdos249257/TotientCarryKernelRigidity.lean",
+      "line": 43,
+      "signature": "theorem totient_temperedOrbit_derivative {v : ℕ} {u : ℕ → ℤ} (hu : IsTemperedBinaryOrbit Nat.totient v u) {n : ℕ} (hn : 0 < n) : carryDerivative u n = ((v * Nat.totient n : ℕ) : ℤ)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A tempered totient orbit recovers the scaled totient sequence through its discrete carry derivative."
+    },
+    {
+      "id": "Erdos249257/TotientCarryKernelRigidity.lean:52:totient_carryDerivative_coprime_mul",
+      "name": "totient_carryDerivative_coprime_mul",
+      "kind": "theorem",
+      "module": "Erdos249257/TotientCarryKernelRigidity.lean",
+      "line": 52,
+      "signature": "theorem totient_carryDerivative_coprime_mul {v : ℕ} {u : ℕ → ℤ} (hu : IsTemperedBinaryOrbit Nat.totient v u) {m n : ℕ} (hm : 0 < m) (hn : 0 < n) (hcop : Nat.Coprime m n) : (v : ℤ) * carryDerivative u (m * n) = carryDerivative u m * carryDerivative u n",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The carry derivative inherits Euler totient's multiplicativity on coprime positive arguments."
+    },
+    {
+      "id": "Erdos249257/TotientCarryKernelRigidity.lean:68:totient_carryDerivative_gcd_mul",
+      "name": "totient_carryDerivative_gcd_mul",
+      "kind": "theorem",
+      "module": "Erdos249257/TotientCarryKernelRigidity.lean",
+      "line": 68,
+      "signature": "theorem totient_carryDerivative_gcd_mul {v : ℕ} {u : ℕ → ℤ} (hu : IsTemperedBinaryOrbit Nat.totient v u) {m n : ℕ} (hm : 0 < m) (hn : 0 < n) : carryDerivative u (m * n) * carryDerivative u (m.gcd n) = (m.gcd n : ℤ) * carryDerivative u m * carryDerivative u n",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "GCD-corrected multiplicativity of the carry derivative. Unlike the coprime specialization, this identity retains the exact non-coprime defect."
+    },
+    {
+      "id": "Erdos249257/TotientCarryKernelRigidity.lean:88:carryKernelSeq",
+      "name": "carryKernelSeq",
+      "kind": "def",
+      "module": "Erdos249257/TotientCarryKernelRigidity.lean",
+      "line": 88,
+      "signature": "def carryKernelSeq (u : ℕ → ℤ) (j r : ℕ) : ℕ → ℚ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A dyadic section of an integer carry orbit, viewed over `ℚ`."
+    },
+    {
+      "id": "Erdos249257/TotientCarryKernelRigidity.lean:94:totient_carryKernel_diff",
+      "name": "totient_carryKernel_diff",
+      "kind": "theorem",
+      "module": "Erdos249257/TotientCarryKernelRigidity.lean",
+      "line": 94,
+      "signature": "theorem totient_carryKernel_diff {v : ℕ} {u : ℕ → ℤ} (hu : IsTemperedBinaryOrbit Nat.totient v u) {j r : ℕ} (hr : 0 < r) : (fun n => (v : ℚ) * totientKernelSeq j r n) = fun n => 2 * carryKernelSeq u j (r - 1) n - carryKernelSeq u j r n",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Every positive-residue totient-kernel channel is a two-term difference of adjacent carry-kernel channels. This is the exact coefficient-to-carry bridge used by rank-transfer arguments."
+    },
+    {
+      "id": "Erdos249257/TotientCarryKernelRigidity.lean:111:TotientOddIndex",
+      "name": "TotientOddIndex",
+      "kind": "abbrev",
+      "module": "Erdos249257/TotientCarryKernelRigidity.lean",
+      "line": 111,
+      "signature": "abbrev TotientOddIndex (e : ℕ)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The odd canonical dyadic channels through levels `1,...,e`."
+    },
+    {
+      "id": "Erdos249257/TotientCarryKernelRigidity.lean:115:TotientCarryIndex",
+      "name": "TotientCarryIndex",
+      "kind": "abbrev",
+      "module": "Erdos249257/TotientCarryKernelRigidity.lean",
+      "line": 115,
+      "signature": "abbrev TotientCarryIndex (e : ℕ)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The full carry-section family through levels `1,...,e`."
+    },
+    {
+      "id": "Erdos249257/TotientCarryKernelRigidity.lean:119:canonicalTotientOddKernelFamily",
+      "name": "canonicalTotientOddKernelFamily",
+      "kind": "def",
+      "module": "Erdos249257/TotientCarryKernelRigidity.lean",
+      "line": 119,
+      "signature": "def canonicalTotientOddKernelFamily (e : ℕ) : TotientOddIndex e → ℕ → ℚ | ⟨j, r⟩ => totientKernelSeq (j.val + 1) (2 * r.val + 1) /-- Every carry section through levels `1,...,e`, without quotienting or identifying residue channels. -/ def canonicalCarryKernelFamily (u : ℕ → ℤ) (e : ℕ) : TotientCarryIndex e → ℕ → ℚ | ⟨j, r⟩ => carryKernelSeq u (j.val + 1) r.val /-- Embed an odd-channel index as its even predecessor carry section. -/ def carryEvenIndex {e : ℕ} : TotientOddIndex e → TotientCarryIndex e | ⟨j, r⟩ => ⟨j, ⟨2 * r.val,",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The odd-residue part of the canonical totient family."
+    },
+    {
+      "id": "Erdos249257/TotientCarryKernelRigidity.lean:125:canonicalCarryKernelFamily",
+      "name": "canonicalCarryKernelFamily",
+      "kind": "def",
+      "module": "Erdos249257/TotientCarryKernelRigidity.lean",
+      "line": 125,
+      "signature": "def canonicalCarryKernelFamily (u : ℕ → ℤ) (e : ℕ) : TotientCarryIndex e → ℕ → ℚ | ⟨j, r⟩ => carryKernelSeq u (j.val + 1) r.val /-- Embed an odd-channel index as its even predecessor carry section. -/ def carryEvenIndex {e : ℕ} : TotientOddIndex e → TotientCarryIndex e | ⟨j, r⟩ => ⟨j, ⟨2 * r.val,",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Every carry section through levels `1,...,e`, without quotienting or identifying residue channels."
+    },
+    {
+      "id": "Erdos249257/TotientCarryKernelRigidity.lean:130:carryEvenIndex",
+      "name": "carryEvenIndex",
+      "kind": "def",
+      "module": "Erdos249257/TotientCarryKernelRigidity.lean",
+      "line": 130,
+      "signature": "def carryEvenIndex {e : ℕ} : TotientOddIndex e → TotientCarryIndex e | ⟨j, r⟩ => ⟨j, ⟨2 * r.val,",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Embed an odd-channel index as its even predecessor carry section."
+    },
+    {
+      "id": "Erdos249257/TotientCarryKernelRigidity.lean:136:carryOddIndex",
+      "name": "carryOddIndex",
+      "kind": "def",
+      "module": "Erdos249257/TotientCarryKernelRigidity.lean",
+      "line": 136,
+      "signature": "def carryOddIndex {e : ℕ} : TotientOddIndex e → TotientCarryIndex e | ⟨j, r⟩ => ⟨j, ⟨2 * r.val + 1,",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Embed an odd-channel index as the corresponding odd carry section."
+    },
+    {
+      "id": "Erdos249257/TotientCarryKernelRigidity.lean:142:canonicalCarryDifferenceFamily",
+      "name": "canonicalCarryDifferenceFamily",
+      "kind": "def",
+      "module": "Erdos249257/TotientCarryKernelRigidity.lean",
+      "line": 142,
+      "signature": "def canonicalCarryDifferenceFamily (u : ℕ → ℤ) (e : ℕ) : TotientOddIndex e → ℕ → ℚ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The carry differences that recover the odd canonical totient channels."
+    },
+    {
+      "id": "Erdos249257/TotientCarryKernelRigidity.lean:148:card_totientOddIndex",
+      "name": "card_totientOddIndex",
+      "kind": "theorem",
+      "module": "Erdos249257/TotientCarryKernelRigidity.lean",
+      "line": 148,
+      "signature": "theorem card_totientOddIndex (e : ℕ) : Fintype.card (TotientOddIndex e) = 2 ^ e - 1",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "There are exactly `2^e-1` odd canonical channels through level `e`."
+    },
+    {
+      "id": "Erdos249257/TotientCarryKernelRigidity.lean:160:linearIndependent_totientOddKernelFamily",
+      "name": "linearIndependent_totientOddKernelFamily",
+      "kind": "theorem",
+      "module": "Erdos249257/TotientCarryKernelRigidity.lean",
+      "line": 160,
+      "signature": "theorem linearIndependent_totientOddKernelFamily (e : ℕ) (hcanon : LinearIndependent ℚ (canonicalTotientKernelFamily e)) : LinearIndependent ℚ (canonicalTotientOddKernelFamily e)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Linear independence of the full canonical family restricts to the odd canonical channels."
+    },
+    {
+      "id": "Erdos249257/TotientCarryKernelRigidity.lean:172:linearIndependent_totientOddKernelFamily_of_certificate",
+      "name": "linearIndependent_totientOddKernelFamily_of_certificate",
+      "kind": "theorem",
+      "module": "Erdos249257/TotientCarryKernelRigidity.lean",
+      "line": 172,
+      "signature": "theorem linearIndependent_totientOddKernelFamily_of_certificate (e : ℕ) (cert : SeparatedMinorCertificate (canonicalTotientKernelFamily e)) : LinearIndependent ℚ (canonicalTotientOddKernelFamily e)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A separated minor for the canonical family already certifies independence of all its odd channels."
+    },
+    {
+      "id": "Erdos249257/TotientCarryKernelRigidity.lean:182:canonicalCarryDifferenceFamily_eq_smul_totient",
+      "name": "canonicalCarryDifferenceFamily_eq_smul_totient",
+      "kind": "theorem",
+      "module": "Erdos249257/TotientCarryKernelRigidity.lean",
+      "line": 182,
+      "signature": "theorem canonicalCarryDifferenceFamily_eq_smul_totient {v : ℕ} {u : ℕ → ℤ} (hu : IsTemperedBinaryOrbit Nat.totient v u) (e : ℕ) : canonicalCarryDifferenceFamily u e = fun i => (v : ℚ) • canonicalTotientOddKernelFamily e i",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The recurrence identifies the canonical carry differences with the odd totient channels, scaled by the orbit multiplier."
+    },
+    {
+      "id": "Erdos249257/TotientCarryKernelRigidity.lean:197:canonicalCarryDifferenceFamily_mem_span",
+      "name": "canonicalCarryDifferenceFamily_mem_span",
+      "kind": "theorem",
+      "module": "Erdos249257/TotientCarryKernelRigidity.lean",
+      "line": 197,
+      "signature": "theorem canonicalCarryDifferenceFamily_mem_span (u : ℕ → ℤ) (e : ℕ) (i : TotientOddIndex e) : canonicalCarryDifferenceFamily u e i ∈ Submodule.span ℚ (Set.range (canonicalCarryKernelFamily u e))",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Every canonical carry difference lies in the span of the full finite-level carry family."
+    },
+    {
+      "id": "Erdos249257/TotientCarryKernelRigidity.lean:211:finrank_canonicalCarryKernel_ge_of_linearIndependent",
+      "name": "finrank_canonicalCarryKernel_ge_of_linearIndependent",
+      "kind": "theorem",
+      "module": "Erdos249257/TotientCarryKernelRigidity.lean",
+      "line": 211,
+      "signature": "theorem finrank_canonicalCarryKernel_ge_of_linearIndependent {v : ℕ} {u : ℕ → ℤ} (hv : 0 < v) (hu : IsTemperedBinaryOrbit Nat.totient v u) (e : ℕ) (hcanon : LinearIndependent ℚ (canonicalTotientKernelFamily e)) : 2 ^ e - 1 ≤ finrank ℚ (Submodule.span ℚ (Set.range (canonicalCarryKernelFamily u e)))",
+      "generated_certificate": false,
+      "claim_ids": [
+        "totient_carry_kernel_anti_compression"
+      ],
+      "docstring": "**Finite-level carry anti-compression.** A nonzero-multiplier orbit whose canonical totient family is linearly independent must retain at least `2^e-1` dimensions among its carry sections through level `e`. Temperedness is not used beyond supplying the exact recurrence through the existing orbit interface."
+    },
+    {
+      "id": "Erdos249257/TotientCarryKernelRigidity.lean:245:finrank_canonicalCarryKernel_ge_of_certificate",
+      "name": "finrank_canonicalCarryKernel_ge_of_certificate",
+      "kind": "theorem",
+      "module": "Erdos249257/TotientCarryKernelRigidity.lean",
+      "line": 245,
+      "signature": "theorem finrank_canonicalCarryKernel_ge_of_certificate {v : ℕ} {u : ℕ → ℤ} (hv : 0 < v) (hu : IsTemperedBinaryOrbit Nat.totient v u) (e : ℕ) (cert : SeparatedMinorCertificate (canonicalTotientKernelFamily e)) : 2 ^ e - 1 ≤ finrank ℚ (Submodule.span ℚ (Set.range (canonicalCarryKernelFamily u e)))",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Certificate-facing form of `finrank_canonicalCarryKernel_ge_of_linearIndependent`. This is immediately usable with the existing finite separated-minor owner."
+    },
+    {
+      "id": "Erdos249257/TotientCarryKernelRigidity.lean:261:not_irrational_totientSeries_implies_unbounded_carryRank",
+      "name": "not_irrational_totientSeries_implies_unbounded_carryRank",
+      "kind": "theorem",
+      "module": "Erdos249257/TotientCarryKernelRigidity.lean",
+      "line": 261,
+      "signature": "theorem not_irrational_totientSeries_implies_unbounded_carryRank (hcanon : ∀ e : ℕ, LinearIndependent ℚ (canonicalTotientKernelFamily e)) (hirr : ¬ Irrational (binaryCoeffSeries Nat.totient)) : ∃ v : ℕ, 0 < v ∧ ∃ u : ℕ → ℤ, IsTemperedBinaryOrbit Nat.totient v u ∧ ∀ e : ℕ, 2 ^ e - 1 ≤ finrank ℚ (Submodule.span ℚ (Set.range (canonicalCarryKernelFamily u e)))",
+      "generated_certificate": false,
+      "claim_ids": [
+        "totient_carry_kernel_anti_compression"
+      ],
+      "docstring": "Rationality of the totient coefficient series, together with an all-level canonical independence producer, yields one tempered integral carry whose finite-level section ranks grow at least as `2^e-1`. This theorem records the exact endpoint composition without asserting that the still-open adaptive-row producer has already been formalized."
     },
     {
       "id": "Erdos249257/TotientMahlerDefect.lean:32:totientKernelSeq",

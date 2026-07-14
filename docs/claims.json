@@ -5118,6 +5118,15 @@
           ]
         },
         {
+          "id": "Erdos249257.TotientCarryKernelRigidity",
+          "path": "Erdos249257/TotientCarryKernelRigidity.lean",
+          "role": "Lean proof module",
+          "imports": [
+            "Erdos249257.GenericTailOrbitRigidity",
+            "Erdos249257.TotientMahlerDefect"
+          ]
+        },
+        {
           "id": "Erdos249257.TotientMahlerDefect",
           "path": "Erdos249257/TotientMahlerDefect.lean",
           "role": "Finite dyadic-totient rank and certificate interface",
@@ -5613,6 +5622,26 @@
           "name": "half_add_one_div_sixty_three_le_tsum_negativeMobius",
           "module": "Erdos249257/MobiusSignSupportNoGo.lean",
           "line": 150
+        }
+      ]
+    },
+    {
+      "id": "totient_carry_kernel_anti_compression",
+      "label": "Conditional carry-kernel anti-compression",
+      "status": "conditional reduction",
+      "statement": "A positive-multiplier tempered totient carry orbit has canonical carry-section span dimension at least 2^e − 1 whenever the canonical level-e totient kernel family is linearly independent. Therefore an all-level independence producer, together with rationality of the totient coefficient series, would force unbounded finite-level carry ranks. The all-level producer is not supplied, so this is not an irrationality criterion for S.",
+      "paper_label": "res:carryrank",
+      "readme_headline": false,
+      "declarations": [
+        {
+          "name": "finrank_canonicalCarryKernel_ge_of_linearIndependent",
+          "module": "Erdos249257/TotientCarryKernelRigidity.lean",
+          "line": 211
+        },
+        {
+          "name": "not_irrational_totientSeries_implies_unbounded_carryRank",
+          "module": "Erdos249257/TotientCarryKernelRigidity.lean",
+          "line": 261
         }
       ]
     },
