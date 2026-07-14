@@ -173,6 +173,25 @@ lemma windowDiscrepancy_succ (h N L : ℕ) :
     rw [show N + h + 1 + L = N + L + 1 + h by omega,
       show N + 1 + L = N + L + 1 by omega]
 
+/-- **Exact spatial recurrence for a fixed-depth window.**  Sliding the base
+from `N` to `N+1` expels the head letter with weight `2^L`, doubles the old
+window, and appends one fresh endpoint letter.  Modulo `2^L` only the doubled
+residue and the fresh endpoint remain.  The natural bound
+`abs_deltaTotient_le` already places that endpoint inside the certificate
+corridor, so this identity alone is not a one-step anti-trapping theorem. -/
+theorem windowDiscrepancy_slide (h N L : ℕ) :
+    windowDiscrepancy h (N + 1) L =
+      2 * windowDiscrepancy h N L
+      - deltaTotient h (N + 1) * 2 ^ L
+      + deltaTotient h (N + L + 1) := by
+  induction L with
+  | zero =>
+      simp [windowDiscrepancy]
+  | succ L ih =>
+      rw [windowDiscrepancy_succ, windowDiscrepancy_succ, ih, pow_succ]
+      rw [show N + 1 + L + 1 = N + (L + 1) + 1 by omega]
+      ring
+
 /-- **Depth barrier.**  Once an endpoint certificate fires, every deeper
 window fires as well.  The proof uses the exact input-driven recurrence and
 the strict totient bound; no finite state or empirical residue table enters.

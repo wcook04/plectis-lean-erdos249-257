@@ -24,11 +24,11 @@
       "authority_role": "proof_bearing_committed_source_anchor"
     },
     "navigation_snapshot": {
-      "commit": "bd5d618dca4b84b301e360a19dc3c48378737384",
+      "commit": "18b51f01b66772f1b14d3a3700f4eb273e9458cf",
       "authority_role": "machine_readable_navigation_anchor",
       "publication_state": "main_history_snapshot",
       "published_ref": "main",
-      "repository_resolution": "https://github.com/wcook04/plectis-lean-erdos249-257/tree/bd5d618dca4b84b301e360a19dc3c48378737384"
+      "repository_resolution": "https://github.com/wcook04/plectis-lean-erdos249-257/tree/18b51f01b66772f1b14d3a3700f4eb273e9458cf"
     },
     "content": {
       "machine_readable_paper": {
@@ -41,8 +41,8 @@
       },
       "declaration_atlas": {
         "path": "docs/declaration_atlas.json",
-        "content_digest": "sha256:d3f2287d4500b9ef721ef58c9c387747ed6fffc519edffbac832db90fb02992e",
-        "source_input_fingerprint": "sha256:ab30ae51efdb27cf03a1a71e7b63f9720947f3155c39bc2f8129c3db0fc68620"
+        "content_digest": "sha256:583761d58c10761be91b67c3ff9652b5259ef99acee9640dd058716ea60485ef",
+        "source_input_fingerprint": "sha256:1cebfc516d3cceeca8c565a30d4df9859a1e3ec620fbfd3a095a8da7e21e7a64"
       },
       "methodology_contract": {
         "path": "docs/methodology.json",
@@ -50,11 +50,11 @@
       },
       "bounded_orientation": {
         "path": "docs/orientation.json",
-        "content_digest": "sha256:ba285c347c2e57bca938d6640da33c1d76c09714622adc7de77a659a5dafcd96"
+        "content_digest": "sha256:cd89a1f98b1a4a6e4a16c0dc53f1aaacd761a1807248655886e45c59de3706ff"
       },
       "human_exposition": {
         "source_path": "paper/erdos249-257-exposition.tex",
-        "source_content_digest": "sha256:9bd9c48abc160e05860f9ac9c50aa70f9a83fcc661f67656183e2aeee22d36de",
+        "source_content_digest": "sha256:57e67ec6c2b60f1b75562f4b4c46519819ab3e6adee2a25d84e4b84690d02c5d",
         "rendered_path": "erdos249-257-exposition.pdf",
         "rendered_content_digest": "sha256:b8ec00c65eeeeaf9400544630c3ed1fa3f04080b714330fc98918f40c1c02891",
         "artifact_role": "authored_mathematician_facing_exposition",
@@ -133,8 +133,8 @@
   },
   "summary": {
     "module_count": 544,
-    "declaration_count": 6418,
-    "theorem_like_count": 5890,
+    "declaration_count": 6419,
+    "theorem_like_count": 5891,
     "generated_certificate_declaration_count": 1681,
     "principal_claim_link_count": 69,
     "kind_counts": {
@@ -144,7 +144,7 @@
       "instance": 3,
       "lemma": 336,
       "structure": 10,
-      "theorem": 5554
+      "theorem": 5555
     }
   },
   "compact_graph": {
@@ -465,7 +465,8 @@
         "Erdos249257.SquareCRTCube",
         "Erdos249257.SignedQMomentObstruction",
         "Erdos249257.TotientMahlerDefect",
-        "Erdos249257.ResidualGaugeObstruction"
+        "Erdos249257.ResidualGaugeObstruction",
+        "Erdos249257.CarrySurvivorExtinction"
       ],
       "full_graph": "docs/claims.json::machine_readable_paper.module_graph"
     },
@@ -1029,8 +1030,8 @@
     },
     "exhaustive_declaration_atlas": {
       "path": "docs/declaration_atlas.json",
-      "expected_content_digest": "sha256:d3f2287d4500b9ef721ef58c9c387747ed6fffc519edffbac832db90fb02992e",
-      "expected_source_input_fingerprint": "sha256:ab30ae51efdb27cf03a1a71e7b63f9720947f3155c39bc2f8129c3db0fc68620",
+      "expected_content_digest": "sha256:583761d58c10761be91b67c3ff9652b5259ef99acee9640dd058716ea60485ef",
+      "expected_source_input_fingerprint": "sha256:1cebfc516d3cceeca8c565a30d4df9859a1e3ec620fbfd3a095a8da7e21e7a64",
       "availability": "optional_attached_corpus",
       "check": "python3 scripts/build_declaration_atlas.py --check"
     },
@@ -1042,7 +1043,7 @@
     },
     "human_exposition": {
       "source_path": "paper/erdos249-257-exposition.tex",
-      "expected_source_content_digest": "sha256:9bd9c48abc160e05860f9ac9c50aa70f9a83fcc661f67656183e2aeee22d36de",
+      "expected_source_content_digest": "sha256:57e67ec6c2b60f1b75562f4b4c46519819ab3e6adee2a25d84e4b84690d02c5d",
       "rendered_path": "erdos249-257-exposition.pdf",
       "expected_rendered_content_digest": "sha256:b8ec00c65eeeeaf9400544630c3ed1fa3f04080b714330fc98918f40c1c02891",
       "authority_posture": "authored_editorial_surface_not_Lean_proof_authority"
