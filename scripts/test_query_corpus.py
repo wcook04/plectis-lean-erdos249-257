@@ -244,7 +244,7 @@ def main() -> int:
 
     open_expectations = {
         "remaining_open.erdos_249_irrationality": ("erdos_249", 1),
-        "remaining_open.unbounded_certificate_supply": ("erdos_249", 7),
+        "remaining_open.unbounded_certificate_supply": ("erdos_249", 8),
         "remaining_open.universal_257_all_infinite_supports": ("universal_257", 5),
     }
     for open_id, (target, advancing_count) in open_expectations.items():
@@ -333,8 +333,8 @@ def main() -> int:
     assert module["module"]["role"] == "Assembled theorem kernel and headline interfaces"
     neighbourhood = module["dependency_neighbourhood"]
     assert neighbourhood["receipt"]["imports_total"] == 10
-    assert neighbourhood["receipt"]["importers_total"] == 7
-    assert len(neighbourhood["importers"]) == 7
+    assert neighbourhood["receipt"]["importers_total"] == 8
+    assert len(neighbourhood["importers"]) == 8
     assert neighbourhood["receipt"]["importers_omitted"] == 0
 
     certificate_hub = query("--module", "Erdos249257.DiagonalPincerCertificates")
@@ -375,7 +375,7 @@ def main() -> int:
         "Finite dyadic-totient rank and certificate interface"
     )
     assert totient_mahler["dependency_neighbourhood"]["receipt"]["imports_total"] == 0
-    assert totient_mahler["dependency_neighbourhood"]["receipt"]["importers_total"] == 1
+    assert totient_mahler["dependency_neighbourhood"]["receipt"]["importers_total"] == 2
 
     aliases = json.loads((ROOT / "paper" / "module-aliases.json").read_text(encoding="utf-8"))
     assert aliases["alias_count"] == len(aliases["aliases"])

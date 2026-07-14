@@ -234,6 +234,36 @@ implies irrationality of the totient constant, by
 \lref{AdjacentPhaseSeparation.lean}{295}{irrational_totient_series_of_adjacentPhaseSeparation}.
 No cofinal adjacent-pair separation is proved here.
 
+\section{Pivot anti-reconstruction and window-pair geometry}\label{sec:pivot}
+The first-harmonic phase of a finite window is the exact additive character of
+its dyadic discrepancy residue.  It differs from the corresponding infinite
+tail-orbit phase by the explicitly bounded omitted tail.  On a finite supplier
+fibre, the anchored defect is the squared distance of the window phases from
+the constant phase $1$; its centred form is the usual pairwise-energy identity.
+Thus a counted family of separated phase pairs of sufficient total squared
+chord mass produces a finite certificate.
+
+The formal module records several equivalent ways to route a cofinal arithmetic
+producer through this finite consumer.  In particular, a cofinal pivot
+anti-reconstruction bound, a cofinal centred reconstruction-variance bound, or
+a cofinal counted-separated-pairs bound is sufficient for irrationality of
+$S$.  The direct finite consumer is
+\idn{exists_certifiedKill_of_pivotFiberSeparatedPairs}
+\lref{PivotAntiReconstruction.lean}{1105}{exists_certifiedKill_of_pivotFiberSeparatedPairs},
+and the anti-reconstruction endpoint is
+\idn{irrational_totient_series_of_pivotAntiReconstruction}
+\lref{PivotAntiReconstruction.lean}{1502}{irrational_totient_series_of_pivotAntiReconstruction}.
+
+There is also an exact fibre-free formulation: the cofinal window-pair
+predicate is equivalent to irrationality of $S$, not merely sufficient for it.
+The reverse implication uses the expansive doubling orbit to obtain adjacent
+infinite-tail separation and then chooses a finite window depth.  This is
+formalised by
+\idn{dtwWindowSeparatedPairs_iff_irrational_totient_series}
+\lref{PivotAntiReconstruction.lean}{1744}{dtwWindowSeparatedPairs_iff_irrational_totient_series}.
+The module does not prove any of these cofinal arithmetic producers, so it does
+not settle Erd\H{o}s~\#249.
+
 \section{Fixed local precision cannot finish the argument}\label{sec:nogo}
 A finite valuation--unit symbol records a bounded amount of local transport
 data.  For every positive precision $u$, every finite compatible word admits
@@ -257,6 +287,7 @@ Prime jump & migration, sharp window, $(12,5,15)$ & finite \\
 Three transport & sharp window and $(60,12)$ & finite \\
 First harmonic & cosine gap forces a certificate & conditional input \\
 Adjacent phases & squared chord separation forces a certificate & conditional input \\
+Pivot anti-reconstruction & pairwise phase energy and exact window-pair endpoint & conditional / equivalence \\
 Tropical signature & fixed precision has a completion & no-go \\
 Irrationality of $S$ & follows from a named unbounded supply & supply open \\
 \bottomrule

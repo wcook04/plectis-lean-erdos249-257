@@ -3,7 +3,7 @@
   "artifact_role": "paper_sigil_to_lean_module_navigation_crosswalk",
   "authority_posture": "generated_navigation_projection_not_proof_authority",
   "heuristic": "Each CamelCase component contributes at most its first three characters.",
-  "alias_count": 39,
+  "alias_count": 40,
   "aliases": [
     {
       "sigil": "AdeHeiObs",
@@ -124,6 +124,11 @@
       "sigil": "MobSigSupNoGo",
       "module": "MobiusSignSupportNoGo.lean",
       "path": "Erdos249257/MobiusSignSupportNoGo.lean"
+    },
+    {
+      "sigil": "PivAntRec",
+      "module": "PivotAntiReconstruction.lean",
+      "path": "Erdos249257/PivotAntiReconstruction.lean"
     },
     {
       "sigil": "PriJumMig",

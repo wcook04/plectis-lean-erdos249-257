@@ -4973,6 +4973,14 @@
           ]
         },
         {
+          "id": "Erdos249257.PivotAntiReconstruction",
+          "path": "Erdos249257/PivotAntiReconstruction.lean",
+          "role": "Lean proof module",
+          "imports": [
+            "Erdos249257.AdjacentPhaseSeparation"
+          ]
+        },
+        {
           "id": "Erdos249257.PrimeJumpMigration",
           "path": "Erdos249257/PrimeJumpMigration.lean",
           "role": "Lean proof module",
@@ -5379,6 +5387,21 @@
           }
         },
         {
+          "from": "pivot_anti_reconstruction_reduction",
+          "relation": "builds_on",
+          "to": "adjacent_phase_separation_reduction"
+        },
+        {
+          "from": "pivot_anti_reconstruction_reduction",
+          "relation": "advances_open_target",
+          "to": "erdos_249",
+          "remaining_open_effect": {
+            "remaining_open_proposition_id": "remaining_open.unbounded_certificate_supply",
+            "operation": "re_expresses",
+            "statement": "Re-expresses the missing supply as cofinal pivot anti-reconstruction or window-pair separation; no cofinal arithmetic producer is proved."
+          }
+        },
+        {
           "from": "fixed_precision_transport_no_go",
           "relation": "builds_on",
           "to": "transport_curvature_reductions"
@@ -5630,6 +5653,9 @@
       "label": "Conditional carry-kernel anti-compression",
       "status": "conditional reduction",
       "statement": "A positive-multiplier tempered totient carry orbit has canonical carry-section span dimension at least 2^e − 1 whenever the canonical level-e totient kernel family is linearly independent. Therefore an all-level independence producer, together with rationality of the totient coefficient series, would force unbounded finite-level carry ranks. The all-level producer is not supplied, so this is not an irrationality criterion for S.",
+      "remaining_open_proposition_ids": [
+        "remaining_open.unbounded_certificate_supply"
+      ],
       "paper_label": "res:carryrank",
       "readme_headline": false,
       "declarations": [
@@ -6312,6 +6338,34 @@
           "name": "irrational_totient_series_of_adjacentPhaseSeparation",
           "module": "Erdos249257/AdjacentPhaseSeparation.lean",
           "line": 295
+        }
+      ]
+    },
+    {
+      "id": "pivot_anti_reconstruction_reduction",
+      "label": "Pivot anti-reconstruction and window-pair reduction",
+      "status": "conditional reduction",
+      "statement": "On a finite supplier fibre, sufficient counted phase-pair separation feeds a certified non-integrality witness through exact reconstruction-defect and variance identities. Cofinal pivot anti-reconstruction, reconstruction variance, or counted-pair producers imply irrationality of S. The fibre-free cofinal window-pair predicate is exactly equivalent to irrationality of S. No cofinal arithmetic producer is proved.",
+      "remaining_open_proposition_ids": [
+        "remaining_open.unbounded_certificate_supply"
+      ],
+      "paper_label": "sec:pivot",
+      "readme_headline": false,
+      "declarations": [
+        {
+          "name": "exists_certifiedKill_of_pivotFiberSeparatedPairs",
+          "module": "Erdos249257/PivotAntiReconstruction.lean",
+          "line": 1105
+        },
+        {
+          "name": "irrational_totient_series_of_pivotAntiReconstruction",
+          "module": "Erdos249257/PivotAntiReconstruction.lean",
+          "line": 1502
+        },
+        {
+          "name": "dtwWindowSeparatedPairs_iff_irrational_totient_series",
+          "module": "Erdos249257/PivotAntiReconstruction.lean",
+          "line": 1744
         }
       ]
     },
