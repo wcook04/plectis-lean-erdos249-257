@@ -50,3 +50,5 @@ import Erdos249257.FirstHarmonicPivot
 import Erdos249257.GapFareyBound
 import Erdos249257.IncidenceQuotientHermitePade
 import Erdos249257.LcmConeFlatness
+import Erdos249257.PrimitiveDeterminantLift
+import Erdos249257.PrimitiveWeightCertificate

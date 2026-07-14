@@ -4,21 +4,21 @@
   "projection_not_authority": true,
   "proof_authority": "Lean source checked by the pinned Lean kernel",
   "argument_authority": "docs/claims.json::machine_readable_paper.argument_graph",
-  "source_fingerprint": "sha256:a57e1e88b39721c3a1034dbe0383e43baca161247df3eee3ab7e6d03c449d3e2",
+  "source_fingerprint": "sha256:518cc00fe5c8d8ef38fd87bddbdd9351f56d3af12ba4745167aceb0e1414143c",
   "summary": {
-    "module_count": 548,
-    "declaration_count": 6582,
-    "theorem_like_count": 6008,
+    "module_count": 550,
+    "declaration_count": 6604,
+    "theorem_like_count": 6022,
     "generated_certificate_declaration_count": 1681,
-    "principal_claim_link_count": 78,
+    "principal_claim_link_count": 84,
     "kind_counts": {
       "abbrev": 2,
-      "def": 556,
+      "def": 564,
       "inductive": 3,
       "instance": 3,
       "lemma": 350,
       "structure": 10,
-      "theorem": 5658
+      "theorem": 5672
     }
   },
   "modules": [
@@ -76,7 +76,9 @@
         "Erdos249257.FirstHarmonicPivot",
         "Erdos249257.GapFareyBound",
         "Erdos249257.IncidenceQuotientHermitePade",
-        "Erdos249257.LcmConeFlatness"
+        "Erdos249257.LcmConeFlatness",
+        "Erdos249257.PrimitiveDeterminantLift",
+        "Erdos249257.PrimitiveWeightCertificate"
       ],
       "declaration_count": 0,
       "kind_counts": {}
@@ -6486,6 +6488,18 @@
       }
     },
     {
+      "id": "Erdos249257.PrimitiveDeterminantLift",
+      "path": "Erdos249257/PrimitiveDeterminantLift.lean",
+      "imports": [
+        "Erdos249257.MersenneLambertLadder"
+      ],
+      "declaration_count": 12,
+      "kind_counts": {
+        "def": 4,
+        "theorem": 8
+      }
+    },
+    {
       "id": "Erdos249257.PrimitiveRationalGapSupply",
       "path": "Erdos249257/PrimitiveRationalGapSupply.lean",
       "imports": [
@@ -6506,6 +6520,18 @@
       "kind_counts": {
         "def": 6,
         "theorem": 9
+      }
+    },
+    {
+      "id": "Erdos249257.PrimitiveWeightCertificate",
+      "path": "Erdos249257/PrimitiveWeightCertificate.lean",
+      "imports": [
+        "Erdos249257.CertificateKernel"
+      ],
+      "declaration_count": 10,
+      "kind_counts": {
+        "def": 4,
+        "theorem": 6
       }
     },
     {
@@ -69732,6 +69758,142 @@
       "docstring": "Explicit `Φ₂` quotient for the corresponding old fibre."
     },
     {
+      "id": "Erdos249257/PrimitiveDeterminantLift.lean:30:primEulerCoord",
+      "name": "primEulerCoord",
+      "kind": "def",
+      "module": "Erdos249257/PrimitiveDeterminantLift.lean",
+      "line": 30,
+      "signature": "def primEulerCoord (n : ℕ) : ℚ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The rational primitive Euler/Witt coordinate `A(n) / n`."
+    },
+    {
+      "id": "Erdos249257/PrimitiveDeterminantLift.lean:35:IntegralPrimitiveEulerJet",
+      "name": "IntegralPrimitiveEulerJet",
+      "kind": "def",
+      "module": "Erdos249257/PrimitiveDeterminantLift.lean",
+      "line": 35,
+      "signature": "def IntegralPrimitiveEulerJet (N D : ℕ) : Prop",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A common positive index `D` clears every primitive Euler coordinate up to the jet horizon `N`."
+    },
+    {
+      "id": "Erdos249257/PrimitiveDeterminantLift.lean:40:integral_primEulerCoord_iff_dvd",
+      "name": "integral_primEulerCoord_iff_dvd",
+      "kind": "theorem",
+      "module": "Erdos249257/PrimitiveDeterminantLift.lean",
+      "line": 40,
+      "signature": "theorem integral_primEulerCoord_iff_dvd {n D : ℕ} (hn : n ≠ 0) : (∃ z : ℤ, (D : ℚ) * primEulerCoord n = (z : ℚ)) ↔ (n : ℤ) ∣ (D : ℤ) * primWeight n",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Clearing `A(n) / n` is equivalent to the elementary divisibility condition `n ∣ D A(n)`."
+    },
+    {
+      "id": "Erdos249257/PrimitiveDeterminantLift.lean:69:primWeight_apply_prime_sq",
+      "name": "primWeight_apply_prime_sq",
+      "kind": "theorem",
+      "module": "Erdos249257/PrimitiveDeterminantLift.lean",
+      "line": 69,
+      "signature": "theorem primWeight_apply_prime_sq {p : ℕ} (hp : p.Prime) : primWeight (p ^ 2) = ((p - 1 : ℕ) : ℤ) ^ 2",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Prime-square value `A(p²) = (p-1)²`."
+    },
+    {
+      "id": "Erdos249257/PrimitiveDeterminantLift.lean:79:prime_not_dvd_primWeight_prime_sq",
+      "name": "prime_not_dvd_primWeight_prime_sq",
+      "kind": "theorem",
+      "module": "Erdos249257/PrimitiveDeterminantLift.lean",
+      "line": 79,
+      "signature": "theorem prime_not_dvd_primWeight_prime_sq {p : ℕ} (hp : p.Prime) : ¬ (p : ℤ) ∣ primWeight (p ^ 2)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The prime `p` does not divide its prime-square primitive numerator."
+    },
+    {
+      "id": "Erdos249257/PrimitiveDeterminantLift.lean:97:oddPrime_dvd_index_of_integral_jet",
+      "name": "oddPrime_dvd_index_of_integral_jet",
+      "kind": "theorem",
+      "module": "Erdos249257/PrimitiveDeterminantLift.lean",
+      "line": 97,
+      "signature": "theorem oddPrime_dvd_index_of_integral_jet {N D p : ℕ} (hjet : IntegralPrimitiveEulerJet N D) (hp : p.Prime) (hpodd : p ≠ 2) (hpN : p ≤ N) : p ∣ D",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Every odd prime at or below the jet horizon divides the common index."
+    },
+    {
+      "id": "Erdos249257/PrimitiveDeterminantLift.lean:111:primeSq_dvd_index_of_integral_jet",
+      "name": "primeSq_dvd_index_of_integral_jet",
+      "kind": "theorem",
+      "module": "Erdos249257/PrimitiveDeterminantLift.lean",
+      "line": 111,
+      "signature": "theorem primeSq_dvd_index_of_integral_jet {N D p : ℕ} (hjet : IntegralPrimitiveEulerJet N D) (hp : p.Prime) (hpSqN : p ^ 2 ≤ N) : p ^ 2 ∣ D",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A prime whose square lies below the jet horizon contributes two copies to the common index."
+    },
+    {
+      "id": "Erdos249257/PrimitiveDeterminantLift.lean:127:four_dvd_index_of_integral_jet",
+      "name": "four_dvd_index_of_integral_jet",
+      "kind": "theorem",
+      "module": "Erdos249257/PrimitiveDeterminantLift.lean",
+      "line": 127,
+      "signature": "theorem four_dvd_index_of_integral_jet {N D : ℕ} (hjet : IntegralPrimitiveEulerJet N D) (hN : 4 ≤ N) : 4 ∣ D",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The exceptional prime `2` first contributes at the coordinate `n = 4`."
+    },
+    {
+      "id": "Erdos249257/PrimitiveDeterminantLift.lean:135:localPrimitiveIndex",
+      "name": "localPrimitiveIndex",
+      "kind": "def",
+      "module": "Erdos249257/PrimitiveDeterminantLift.lean",
+      "line": 135,
+      "signature": "def localPrimitiveIndex (N p : ℕ) : ℕ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The local index required at one prime through horizon `N`. The prime `2` contributes only its square, while an odd prime contributes once at `p` and a second time at `p²`."
+    },
+    {
+      "id": "Erdos249257/PrimitiveDeterminantLift.lean:143:twoTierPrimorial",
+      "name": "twoTierPrimorial",
+      "kind": "def",
+      "module": "Erdos249257/PrimitiveDeterminantLift.lean",
+      "line": 143,
+      "signature": "def twoTierPrimorial (N : ℕ) : ℕ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Lcm form of the two-tier primorial index through horizon `N`."
+    },
+    {
+      "id": "Erdos249257/PrimitiveDeterminantLift.lean:148:twoTierPrimorial_dvd_of_integral_jet",
+      "name": "twoTierPrimorial_dvd_of_integral_jet",
+      "kind": "theorem",
+      "module": "Erdos249257/PrimitiveDeterminantLift.lean",
+      "line": 148,
+      "signature": "theorem twoTierPrimorial_dvd_of_integral_jet {N D : ℕ} (hN : 4 ≤ N) (hjet : IntegralPrimitiveEulerJet N D) : twoTierPrimorial N ∣ D",
+      "generated_certificate": false,
+      "claim_ids": [
+        "primitive_coordinate_index_obstruction"
+      ],
+      "docstring": "The complete finite-jet obstruction: the two-tier primorial divides every common index clearing all primitive Euler coordinates through `N`."
+    },
+    {
+      "id": "Erdos249257/PrimitiveDeterminantLift.lean:169:no_fixed_integral_primitive_euler_index",
+      "name": "no_fixed_integral_primitive_euler_index",
+      "kind": "theorem",
+      "module": "Erdos249257/PrimitiveDeterminantLift.lean",
+      "line": 169,
+      "signature": "theorem no_fixed_integral_primitive_euler_index (D : ℕ) (hD : 0 < D) : ¬ ∀ n : ℕ, 0 < n → ∃ z : ℤ, (D : ℚ) * primEulerCoord n = (z : ℚ)",
+      "generated_certificate": false,
+      "claim_ids": [
+        "primitive_coordinate_index_obstruction"
+      ],
+      "docstring": "No fixed positive integer clears all normalized primitive coordinates."
+    },
+    {
       "id": "Erdos249257/PrimitiveRationalGapSupply.lean:32:positive_rational_difference_lower_bound",
       "name": "positive_rational_difference_lower_bound",
       "kind": "theorem",
@@ -69928,6 +70090,124 @@
       "generated_certificate": false,
       "claim_ids": [],
       "docstring": "The same elementary pressure excludes a next support exponent whose power of two is larger than `4qD`."
+    },
+    {
+      "id": "Erdos249257/PrimitiveWeightCertificate.lean:21:primitiveCarry",
+      "name": "primitiveCarry",
+      "kind": "def",
+      "module": "Erdos249257/PrimitiveWeightCertificate.lean",
+      "line": 21,
+      "signature": "def primitiveCarry (N K : ℕ) : ℕ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The dyadic carry residue used by the landed totient gap consumer."
+    },
+    {
+      "id": "Erdos249257/PrimitiveWeightCertificate.lean:30:ReducedDenominatorUnitGapCert",
+      "name": "ReducedDenominatorUnitGapCert",
+      "kind": "def",
+      "module": "Erdos249257/PrimitiveWeightCertificate.lean",
+      "line": 30,
+      "signature": "def ReducedDenominatorUnitGapCert (u N K : ℕ) : Prop",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A reduced-denominator unit-gap certificate. Writing `u * primitiveCarry N K = J * 2^K + W`, the positive tail can only cross the integers `J+1, ..., J+L`, where `L = (W + u*(N+K+2))/2^K`. The certificate says that every such candidate is a nonunit modulo the odd reduced denominator `u`."
+    },
+    {
+      "id": "Erdos249257/PrimitiveWeightCertificate.lean:39:reducedDenominatorCandidateCount",
+      "name": "reducedDenominatorCandidateCount",
+      "kind": "def",
+      "module": "Erdos249257/PrimitiveWeightCertificate.lean",
+      "line": 39,
+      "signature": "def reducedDenominatorCandidateCount (u N K : ℕ) : ℕ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The exact candidate count associated to a unit-gap certificate."
+    },
+    {
+      "id": "Erdos249257/PrimitiveWeightCertificate.lean:47:PrimitiveReducedDenominatorUnitGapSupply",
+      "name": "PrimitiveReducedDenominatorUnitGapSupply",
+      "kind": "def",
+      "module": "Erdos249257/PrimitiveWeightCertificate.lean",
+      "line": 47,
+      "signature": "def PrimitiveReducedDenominatorUnitGapSupply : Prop",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The exact residual supply exposed by the reduced-denominator consumer. It is deliberately a proposition, not an axiom or a claimed theorem."
+    },
+    {
+      "id": "Erdos249257/PrimitiveWeightCertificate.lean:54:reducedDenominatorUnitGapCert_prime_pow_iff",
+      "name": "reducedDenominatorUnitGapCert_prime_pow_iff",
+      "kind": "theorem",
+      "module": "Erdos249257/PrimitiveWeightCertificate.lean",
+      "line": 54,
+      "signature": "theorem reducedDenominatorUnitGapCert_prime_pow_iff {p e N K : ℕ} (hp : Nat.Prime p) (he : 0 < e) : ReducedDenominatorUnitGapCert (p ^ e) N K ↔ let M",
+      "generated_certificate": false,
+      "claim_ids": [
+        "primitive_unit_gap_ceiling"
+      ],
+      "docstring": "At a prime-power reduced denominator, nonunits are exactly multiples of the underlying prime. Since two consecutive integers are coprime, the unit-gap extension can admit at most one candidate lattice point."
+    },
+    {
+      "id": "Erdos249257/PrimitiveWeightCertificate.lean:111:reducedDenominatorCandidateCount_prime_pow_le_one",
+      "name": "reducedDenominatorCandidateCount_prime_pow_le_one",
+      "kind": "theorem",
+      "module": "Erdos249257/PrimitiveWeightCertificate.lean",
+      "line": 111,
+      "signature": "theorem reducedDenominatorCandidateCount_prime_pow_le_one {p e N K : ℕ} (hp : Nat.Prime p) (he : 0 < e) (hcert : ReducedDenominatorUnitGapCert (p ^ e) N K) : reducedDenominatorCandidateCount (p ^ e) N K ≤ 1",
+      "generated_certificate": false,
+      "claim_ids": [
+        "primitive_unit_gap_ceiling"
+      ],
+      "docstring": "Numerical form of the prime-power ceiling: a certified interval for an odd prime power contains zero or one candidate, never two."
+    },
+    {
+      "id": "Erdos249257/PrimitiveWeightCertificate.lean:127:primitiveReducedDenominatorUnitGapSupply_prime_power_projection",
+      "name": "primitiveReducedDenominatorUnitGapSupply_prime_power_projection",
+      "kind": "theorem",
+      "module": "Erdos249257/PrimitiveWeightCertificate.lean",
+      "line": 127,
+      "signature": "theorem primitiveReducedDenominatorUnitGapSupply_prime_power_projection (hsupply : PrimitiveReducedDenominatorUnitGapSupply) {p e a : ℕ} (hp : Nat.Prime p) (hpodd : Odd p) (he : 0 < e) : ∃ N K : ℕ, a ≤ N ∧ 0 < K ∧ ReducedDenominatorUnitGapCert (p ^ e) N K ∧ reducedDenominatorCandidateCount (p ^ e) N K ≤ 1",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Every hypothetical all-denominator unit-gap supply must in particular solve the depth-growing zero-or-one-candidate problem for every odd prime power. This is the formal residual/no-go boundary, not a supply result."
+    },
+    {
+      "id": "Erdos249257/PrimitiveWeightCertificate.lean:141:reducedDenominatorUnitGapCert_three_window_3_5",
+      "name": "reducedDenominatorUnitGapCert_three_window_3_5",
+      "kind": "theorem",
+      "module": "Erdos249257/PrimitiveWeightCertificate.lean",
+      "line": 141,
+      "signature": "theorem reducedDenominatorUnitGapCert_three_window_3_5 : ReducedDenominatorUnitGapCert 3 3 5",
+      "generated_certificate": false,
+      "claim_ids": [
+        "primitive_unit_gap_ceiling"
+      ],
+      "docstring": "The first strict strengthening over the ordinary empty-gap certificate: at `(u,N,K)=(3,3,5)` the dyadic interval contains the single integer `3`, which is forbidden because it is a nonunit modulo the reduced denominator."
+    },
+    {
+      "id": "Erdos249257/PrimitiveWeightCertificate.lean:147:not_ordinary_gap_certificate_three_window_3_5",
+      "name": "not_ordinary_gap_certificate_three_window_3_5",
+      "kind": "theorem",
+      "module": "Erdos249257/PrimitiveWeightCertificate.lean",
+      "line": 147,
+      "signature": "theorem not_ordinary_gap_certificate_three_window_3_5 : ¬ ((3 * primitiveCarry 3 5) % 2 ^ 5 + 3 * (3 + 5 + 2) < 2 ^ 5)",
+      "generated_certificate": false,
+      "claim_ids": [
+        "primitive_unit_gap_ceiling"
+      ],
+      "docstring": "The same row is not an ordinary empty-gap certificate: its scaled residue plus tail height is `38`, while the dyadic modulus is `32`."
+    },
+    {
+      "id": "Erdos249257/PrimitiveWeightCertificate.lean:152:primitiveCarry_three_window_3_5",
+      "name": "primitiveCarry_three_window_3_5",
+      "kind": "theorem",
+      "module": "Erdos249257/PrimitiveWeightCertificate.lean",
+      "line": 152,
+      "signature": "theorem primitiveCarry_three_window_3_5 : primitiveCarry 3 5 = 24",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Exact arithmetic in the strict-strengthening regression row."
     },
     {
       "id": "Erdos249257/RadicalMobiusShadow.lean:27:sum_powerset_singleton",

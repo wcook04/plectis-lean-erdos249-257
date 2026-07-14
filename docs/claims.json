@@ -4980,6 +4980,14 @@
           ]
         },
         {
+          "id": "Erdos249257.PrimitiveDeterminantLift",
+          "path": "Erdos249257/PrimitiveDeterminantLift.lean",
+          "role": "Lean proof module",
+          "imports": [
+            "Erdos249257.MersenneLambertLadder"
+          ]
+        },
+        {
           "id": "Erdos249257.PrimitiveRationalGapSupply",
           "path": "Erdos249257/PrimitiveRationalGapSupply.lean",
           "role": "Conditional primitive rational-gap supply interface",
@@ -4993,6 +5001,14 @@
           "role": "Conditional primitive-support bridge",
           "imports": [
             "Erdos249257.BooleanMobiusCarry"
+          ]
+        },
+        {
+          "id": "Erdos249257.PrimitiveWeightCertificate",
+          "path": "Erdos249257/PrimitiveWeightCertificate.lean",
+          "role": "Lean proof module",
+          "imports": [
+            "Erdos249257.CertificateKernel"
           ]
         },
         {
@@ -5155,6 +5171,11 @@
           "from": "certificate_completeness",
           "relation": "makes_exact",
           "to": "certificate_reduction"
+        },
+        {
+          "from": "primitive_coordinate_index_obstruction",
+          "relation": "builds_on",
+          "to": "mersenne_lambert_ladder"
         },
         {
           "from": "certified_kill_instances",
@@ -5380,7 +5401,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 1054
+        "line": 1108
       }
     },
     {
@@ -5391,7 +5412,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 1063
+        "line": 1117
       }
     },
     {
@@ -5402,7 +5423,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 1070
+        "line": 1124
       }
     }
   ],
@@ -5482,6 +5503,56 @@
           "name": "totient_series_eq_half_add_moebius_mersenne_square",
           "module": "Erdos249257/CertificateKernel.lean",
           "line": 18126
+        }
+      ]
+    },
+    {
+      "id": "primitive_coordinate_index_obstruction",
+      "label": "Primitive Euler-coordinate finite-jet obstruction",
+      "status": "proved here",
+      "statement": "For the primitive-conductor weight A = φ*μ, every positive index clearing the normalized coordinates A(n)/n through horizon N is divisible by the two-tier primorial: 4 at the prime 2 once N ≥ 4, p² for odd p with p² ≤ N, and p otherwise. Hence no fixed positive index clears all normalized coordinates. This is a finite Euler/Witt-coordinate obstruction only; it gives no irrationality criterion for S.",
+      "paper_label": "res:primitiveindex",
+      "readme_headline": false,
+      "declarations": [
+        {
+          "name": "twoTierPrimorial_dvd_of_integral_jet",
+          "module": "Erdos249257/PrimitiveDeterminantLift.lean",
+          "line": 148
+        },
+        {
+          "name": "no_fixed_integral_primitive_euler_index",
+          "module": "Erdos249257/PrimitiveDeterminantLift.lean",
+          "line": 169
+        }
+      ]
+    },
+    {
+      "id": "primitive_unit_gap_ceiling",
+      "label": "Prime-power reduced-denominator unit-gap ceiling",
+      "status": "proved here",
+      "statement": "For the reduced-denominator unit-gap predicate at an odd prime power p^e, the candidate interval is empty or has exactly one candidate divisible by p; in particular its count is at most one. The exact row (u,N,K) = (3,3,5) satisfies the unit-gap predicate while the corresponding ordinary empty-gap inequality fails. This is a finite certificate-level strengthening, not an unbounded supply theorem or an irrationality criterion for S.",
+      "paper_label": "res:unitgap",
+      "readme_headline": false,
+      "declarations": [
+        {
+          "name": "reducedDenominatorUnitGapCert_prime_pow_iff",
+          "module": "Erdos249257/PrimitiveWeightCertificate.lean",
+          "line": 54
+        },
+        {
+          "name": "reducedDenominatorCandidateCount_prime_pow_le_one",
+          "module": "Erdos249257/PrimitiveWeightCertificate.lean",
+          "line": 111
+        },
+        {
+          "name": "reducedDenominatorUnitGapCert_three_window_3_5",
+          "module": "Erdos249257/PrimitiveWeightCertificate.lean",
+          "line": 141
+        },
+        {
+          "name": "not_ordinary_gap_certificate_three_window_3_5",
+          "module": "Erdos249257/PrimitiveWeightCertificate.lean",
+          "line": 147
         }
       ]
     },

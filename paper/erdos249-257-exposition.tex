@@ -243,6 +243,37 @@ With the primitive-conductor weight $A=\ph*\mu$,
 with the weight $A$ defined at \lrefx{MersenneLambertLadder.lean}{247}{primWeight}. This
 places $S$ in the same $\sum(\cdot)/(2^d-1)$ family as $E$, with a nonnegative weight.
 
+\subsection{Finite primitive-coordinate obstruction}\label{sec:primitiveindex}
+
+The weight $A$ also has finite rational coordinates independent of the
+Lambert-series identity.  Put $a_n=A(n)/n$.  For $N,D\in\N$, say that $D$
+clears the primitive Euler coordinates through $N$ when $D a_n\in\Z$ for all
+$1\leq n\leq N$.  Define
+\[
+ \lambda_N(p)=
+ \begin{cases}
+  4,&p=2\text{ and }4\leq N,\\
+  p^2,&p\text{ is odd prime and }p^2\leq N,\\
+  p,&p\text{ is odd prime and }p\leq N<p^2,\\
+  1,&\text{otherwise},
+ \end{cases}
+ \qquad
+ T_N=\mathop{\mathrm{lcm}}_{p\leq N}\lambda_N(p).
+\]
+
+\begin{proposition}[primitive-coordinate finite-jet obstruction]\label{res:primitiveindex}
+If $N\geq4$ and $D$ clears the primitive Euler coordinates through $N$, then
+$T_N\mid D$.  Consequently no fixed positive integer clears all coordinates
+$a_n$.
+\end{proposition}
+\noindent Formalised:
+\lref{PrimitiveDeterminantLift.lean}{148}{twoTierPrimorial_dvd_of_integral_jet}
+and
+\lref{PrimitiveDeterminantLift.lean}{169}{no_fixed_integral_primitive_euler_index}.
+The proposition concerns only these normalized finite coordinates.  It makes
+no statement about arbitrary integral power-series jets, and it gives no
+irrationality criterion for $S$.
+
 \begin{proposition}[the M\"obius-square lens]\label{res:lens}
 \[
 S \;=\; \tfrac12 \;+\; \sum_{d\ge1}\frac{\mu(d)}{(2^d-1)^2}.
@@ -609,6 +640,29 @@ can interrogate a menu of cone vertices at once and is sharper than any pairwise
 test: it refutes the single-fractional-part model that rationality predicts on a
 finite sample of cone vertices
 (\lref{LcmConeNonflat.lean}{126}{exists_nonintegral_pair_of_coneNonflatCert}).
+
+\paragraph{A reduced-denominator finite predicate.}  Separately, the formal
+development records a stricter finite condition for an odd reduced denominator
+$u$.  Its predicate $\textsf{ReducedDenominatorUnitGapCert}(u,N,K)$ asks that
+every candidate integer in the associated dyadic tail interval be non-coprime
+to $u$.  At a prime power $u=p^e$, the condition is equivalent to the exact
+alternative that the interval has no candidate, or that it has one candidate
+and $p$ divides that candidate.  Thus such an interval has at most one
+candidate.
+
+\begin{proposition}[prime-power unit-gap ceiling]\label{res:unitgap}
+For every prime power $p^e$ with $e>0$, a
+$\textsf{ReducedDenominatorUnitGapCert}(p^e,N,K)$ has candidate count at most
+one.  The row $(u,N,K)=(3,3,5)$ satisfies this predicate, although its
+corresponding ordinary empty-gap inequality fails.
+\end{proposition}
+\noindent Formalised:
+\lref{PrimitiveWeightCertificate.lean}{54}{reducedDenominatorUnitGapCert_prime_pow_iff},
+\lrefx{PrimitiveWeightCertificate.lean}{111}{reducedDenominatorCandidateCount_prime_pow_le_one},
+\lrefx{PrimitiveWeightCertificate.lean}{141}{reducedDenominatorUnitGapCert_three_window_3_5}, and
+\lrefx{PrimitiveWeightCertificate.lean}{147}{not_ordinary_gap_certificate_three_window_3_5}.
+This is a finite certificate-level strengthening.  We do not establish that
+rationality of $S$ supplies these predicates at unbounded parameters.
 
 \paragraph{The certificates are non-empty.} The initial segment of the required
 supply is machine-checked, so the reduction is not vacuous. By completeness, each
