@@ -5380,7 +5380,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 1037
+        "line": 1044
       }
     },
     {
@@ -5391,7 +5391,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 1046
+        "line": 1053
       }
     },
     {
@@ -5402,7 +5402,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 1053
+        "line": 1060
       }
     }
   ],
@@ -5507,7 +5507,7 @@
       "id": "certificate_reduction",
       "label": "Exact reduction of #249 to finite decidable certificates",
       "status": "conditional reduction",
-      "statement": "If certified non-integrality witnesses occur at unbounded parameters (equivalently on the lcm diagonal), then S is irrational. The unboundedness of the supply is the remaining open hypothesis.",
+      "statement": "S is irrational if and only if certified non-integrality witnesses occur at unbounded parameters; the lcm-diagonal reduction is a sufficient one-parameter form of that supply. The unboundedness of the supply is the remaining open hypothesis.",
       "remaining_open_proposition_ids": [
         "remaining_open.unbounded_certificate_supply"
       ],
@@ -5528,6 +5528,11 @@
           "name": "rational_totient_series_forces_lcm_cone_flatness",
           "module": "Erdos249257/LcmConeFlatness.lean",
           "line": 90
+        },
+        {
+          "name": "irrational_totient_series_iff_certificate_supply",
+          "module": "Erdos249257/LcmConeFlatness.lean",
+          "line": 412
         }
       ]
     },
@@ -5535,7 +5540,7 @@
       "id": "certificate_completeness",
       "label": "Certificate completeness",
       "status": "proved here",
-      "statement": "A certified kill exists at fixed parameters exactly when the corresponding tail difference is non-integral, so the finite computation loses no information.",
+      "statement": "At fixed parameters, a certified kill exists exactly when the corresponding tail difference is non-integral. At every positive shift, integrality of one tail difference forces S to be rational; thus irrationality is equivalent to pointwise non-integrality, and to pointwise finite certificates.",
       "paper_label": "res:complete",
       "readme_headline": true,
       "declarations": [
@@ -5543,6 +5548,21 @@
           "name": "exists_certifiedKill_iff_tail_diff_notMem_int",
           "module": "Erdos249257/LcmConeFlatness.lean",
           "line": 316
+        },
+        {
+          "name": "tail_diff_mem_int_iff_scaled_series_mem_int",
+          "module": "Erdos249257/LcmConeFlatness.lean",
+          "line": 327
+        },
+        {
+          "name": "irrational_totient_series_iff_all_tail_diffs_nonintegral",
+          "module": "Erdos249257/LcmConeFlatness.lean",
+          "line": 386
+        },
+        {
+          "name": "irrational_totient_series_iff_pointwise_certificates",
+          "module": "Erdos249257/LcmConeFlatness.lean",
+          "line": 399
         }
       ]
     },

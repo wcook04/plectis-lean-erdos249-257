@@ -551,11 +551,11 @@ finite object here because a rational $S$ would pin the tail difference to an
 integer, and a residue that stays a fixed distance from $0$ is a finite proof that
 it did not.
 
-\begin{corollary}[tail-period reduction]\label{res:red21}
-If for every period $h\ge1$ and every threshold $N_0$ there exist $N\ge N_0$ and
-$L$ with $\textsf{certifiedKill}(h,N,L)$, then $S$ is irrational.
+\begin{corollary}[exact tail-period normal form]\label{res:red21}
+$S$ is irrational if and only if, for every period $h\ge1$ and every threshold
+$N_0$, there exist $N\ge N_0$ and $L$ with $\textsf{certifiedKill}(h,N,L)$.
 \end{corollary}
-\noindent Formalised: \lref{TotientTailPeriodKiller.lean}{394}{irrational_totient_series_of_certificate_supply};
+\noindent Formalised: \lref{LcmConeFlatness.lean}{412}{irrational_totient_series_iff_certificate_supply};
 the tail $R_N$ and the predicate are
 \lrefx{TotientTailPeriodKiller.lean}{57}{totientTail} and
 \lrefx{TotientTailPeriodKiller.lean}{72}{certifiedKill}.
@@ -597,6 +597,13 @@ R_{N+h}-R_N\notin\Z.
 \]
 \end{proposition}
 \noindent Formalised: \lref{LcmConeFlatness.lean}{316}{exists_certifiedKill_iff_tail_diff_notMem_int}.
+Conversely, integrality of one positive-shift tail difference forces $S$ to be
+rational.  Thus $S$ is irrational if and only if every positive-shift tail
+difference is non-integral, equivalently if every such pair admits a finite
+certificate.  These normal forms are formalised at
+\lrefx{LcmConeFlatness.lean}{357}{not_irrational_of_tail_diff_mem_int},
+\lrefx{LcmConeFlatness.lean}{386}{irrational_totient_series_iff_all_tail_diffs_nonintegral},
+and \lrefx{LcmConeFlatness.lean}{399}{irrational_totient_series_iff_pointwise_certificates}.
 Finite certificates witness non-integrality. A joint refuter
 can interrogate a menu of cone vertices at once and is sharper than any pairwise
 test: it refutes the single-fractional-part model that rationality predicts on a

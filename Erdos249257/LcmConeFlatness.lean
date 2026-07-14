@@ -319,6 +319,106 @@ theorem exists_certifiedKill_iff_tail_diff_notMem_int (h N : ℕ) :
   ⟨fun ⟨_, hkill⟩ => tail_diff_notMem_int_of_certifiedKill hkill,
     exists_certifiedKill_of_tail_diff_notMem_int⟩
 
+/-! ## The exact irrationality normal form -/
+
+/-- Integrality of one shifted tail difference is exactly integrality of the
+corresponding integer multiple `2^N (2^h - 1) S` of the #249 constant.
+This is the algebraic converse left implicit by the period-killer reduction. -/
+theorem tail_diff_mem_int_iff_scaled_series_mem_int (h N : ℕ) :
+    (totientTail (N + h) - totientTail N ∈ Set.range ((↑) : ℤ → ℝ)) ↔
+    ((2 : ℝ) ^ N * ((2 : ℝ) ^ h - 1) *
+        (∑' n : ℕ, (Nat.totient n : ℝ) / 2 ^ n)
+      ∈ Set.range ((↑) : ℤ → ℝ)) := by
+  have h1 := two_pow_mul_totient_series_eq (N + h)
+  have h2 := two_pow_mul_totient_series_eq N
+  have hrel :
+      (2 : ℝ) ^ N * ((2 : ℝ) ^ h - 1) *
+          (∑' n : ℕ, (Nat.totient n : ℝ) / 2 ^ n)
+        = ((totientPrefix (N + h) : ℤ) - (totientPrefix N : ℤ) : ℤ) +
+          (totientTail (N + h) - totientTail N) := by
+    rw [show (2 : ℝ) ^ (N + h) = 2 ^ N * 2 ^ h by rw [pow_add]] at h1
+    push_cast
+    linarith
+  constructor
+  · rintro ⟨z, hz⟩
+    refine ⟨((totientPrefix (N + h) : ℤ) - (totientPrefix N : ℤ)) + z, ?_⟩
+    rw [hrel, ← hz]
+    push_cast
+    ring
+  · rintro ⟨z, hz⟩
+    refine ⟨z - ((totientPrefix (N + h) : ℤ) - (totientPrefix N : ℤ)), ?_⟩
+    rw [hrel] at hz
+    push_cast at hz ⊢
+    linarith
+
+/-- One integral tail difference at a positive shift already makes the #249
+constant rational.  Thus a perpetually trapped single pair is not merely a
+failure of the certificate route: it resolves #249 in the opposite direction. -/
+theorem not_irrational_of_tail_diff_mem_int {h N : ℕ} (hh : 0 < h)
+    (hint : totientTail (N + h) - totientTail N ∈
+      Set.range ((↑) : ℤ → ℝ)) :
+    ¬ Irrational (∑' n : ℕ, (Nat.totient n : ℝ) / 2 ^ n) := by
+  obtain ⟨z, hz⟩ := (tail_diff_mem_int_iff_scaled_series_mem_int h N).mp hint
+  intro hirr
+  apply hirr
+  let K : ℕ := 2 ^ N * (2 ^ h - 1)
+  have hKpos : 0 < K := by
+    dsimp [K]
+    have hpow : 1 < 2 ^ h := one_lt_pow₀ (by omega) hh.ne'
+    exact Nat.mul_pos (by positivity) (Nat.sub_pos_of_lt hpow)
+  refine ⟨(z : ℚ) / K, ?_⟩
+  rw [Rat.cast_div, Rat.cast_intCast, Rat.cast_natCast]
+  have hKreal : (K : ℝ) = (2 : ℝ) ^ N * ((2 : ℝ) ^ h - 1) := by
+    dsimp [K]
+    rw [Nat.cast_mul, Nat.cast_sub (Nat.one_le_pow h 2 (by omega))]
+    push_cast
+    norm_num
+  rw [hKreal]
+  have hKrealpos : 0 < (2 : ℝ) ^ N * ((2 : ℝ) ^ h - 1) := by
+    rw [← hKreal]
+    exact_mod_cast hKpos
+  apply (div_eq_iff hKrealpos.ne').2
+  rw [hz]
+  ring
+
+/-- #249 is equivalent to pointwise non-integrality of every positive shifted
+tail difference. -/
+theorem irrational_totient_series_iff_all_tail_diffs_nonintegral :
+    Irrational (∑' n : ℕ, (Nat.totient n : ℝ) / 2 ^ n) ↔
+      ∀ h : ℕ, 0 < h → ∀ N : ℕ,
+        totientTail (N + h) - totientTail N ∉ Set.range ((↑) : ℤ → ℝ) := by
+  constructor
+  · intro hirr h hh N hint
+    exact not_irrational_of_tail_diff_mem_int hh hint hirr
+  · intro hnon
+    refine irrational_totient_series_of_certificate_supply fun h hh N₀ => ?_
+    exact ⟨N₀, le_rfl, exists_certifiedKill_of_tail_diff_notMem_int (hnon h hh N₀)⟩
+
+/-- Certificate completeness turns the pointwise non-integrality normal form
+into a pointwise finite-receipt normal form. -/
+theorem irrational_totient_series_iff_pointwise_certificates :
+    Irrational (∑' n : ℕ, (Nat.totient n : ℝ) / 2 ^ n) ↔
+      ∀ h : ℕ, 0 < h → ∀ N : ℕ, ∃ L, certifiedKill h N L := by
+  constructor
+  · intro hirr h hh N
+    exact exists_certifiedKill_of_tail_diff_notMem_int
+      (irrational_totient_series_iff_all_tail_diffs_nonintegral.mp hirr h hh N)
+  · intro hpoint
+    exact irrational_totient_series_of_certificate_supply fun h hh N₀ =>
+      ⟨N₀, le_rfl, hpoint h hh N₀⟩
+
+/-- The wave-21 cofinal certificate supply is not a weaker large-measure
+surrogate: together with completeness it is exactly equivalent to #249. -/
+theorem irrational_totient_series_iff_certificate_supply :
+    Irrational (∑' n : ℕ, (Nat.totient n : ℝ) / 2 ^ n) ↔
+      ∀ h : ℕ, 0 < h → ∀ N₀ : ℕ,
+        ∃ N, N₀ ≤ N ∧ ∃ L, certifiedKill h N L := by
+  constructor
+  · intro hirr h hh N₀
+    exact ⟨N₀, le_rfl,
+      (irrational_totient_series_iff_pointwise_certificates.mp hirr) h hh N₀⟩
+  · exact irrational_totient_series_of_certificate_supply
+
 /-- The wave-23 predicate `P t` in pure form: a diagonal certificate depth
 exists iff the diagonal tail difference is a non-integer. -/
 theorem periodLcm_diagonal_kill_iff_tail_diff_notMem_int (t : ℕ) :

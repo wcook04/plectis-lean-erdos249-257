@@ -4,13 +4,13 @@
   "projection_not_authority": true,
   "proof_authority": "Lean source checked by the pinned Lean kernel",
   "argument_authority": "docs/claims.json::machine_readable_paper.argument_graph",
-  "source_fingerprint": "sha256:541652822f129d1e99ab92a604e39691d133a945c1e7e9546771fca63eae532a",
+  "source_fingerprint": "sha256:6f2097ee0967ffa45bbb09ac9c8609c99f363b0d857a622fd5a4cca9752359b3",
   "summary": {
     "module_count": 548,
-    "declaration_count": 6520,
-    "theorem_like_count": 5953,
+    "declaration_count": 6525,
+    "theorem_like_count": 5958,
     "generated_certificate_declaration_count": 1681,
-    "principal_claim_link_count": 72,
+    "principal_claim_link_count": 76,
     "kind_counts": {
       "abbrev": 2,
       "def": 549,
@@ -18,7 +18,7 @@
       "instance": 3,
       "lemma": 350,
       "structure": 10,
-      "theorem": 5603
+      "theorem": 5608
     }
   },
   "modules": [
@@ -75,7 +75,8 @@
         "Erdos249257.AdjacentPhaseSeparation",
         "Erdos249257.FirstHarmonicPivot",
         "Erdos249257.GapFareyBound",
-        "Erdos249257.IncidenceQuotientHermitePade"
+        "Erdos249257.IncidenceQuotientHermitePade",
+        "Erdos249257.LcmConeFlatness"
       ],
       "declaration_count": 0,
       "kind_counts": {}
@@ -6380,11 +6381,11 @@
       "imports": [
         "Erdos249257.LcmDiagonalReduction"
       ],
-      "declaration_count": 20,
+      "declaration_count": 25,
       "kind_counts": {
         "def": 2,
         "lemma": 4,
-        "theorem": 14
+        "theorem": 19
       }
     },
     {
@@ -66902,132 +66903,195 @@
       "docstring": "**Certificate completeness, iff form.** Some depth certifies `(h, N)` exactly when the tail difference is a non-integer. Finite certificates are receipts; non-integrality is the object."
     },
     {
-      "id": "Erdos249257/LcmConeFlatness.lean:324:periodLcm_diagonal_kill_iff_tail_diff_notMem_int",
+      "id": "Erdos249257/LcmConeFlatness.lean:327:tail_diff_mem_int_iff_scaled_series_mem_int",
+      "name": "tail_diff_mem_int_iff_scaled_series_mem_int",
+      "kind": "theorem",
+      "module": "Erdos249257/LcmConeFlatness.lean",
+      "line": 327,
+      "signature": "theorem tail_diff_mem_int_iff_scaled_series_mem_int (h N : ℕ) : (totientTail (N + h) - totientTail N ∈ Set.range ((↑) : ℤ → ℝ)) ↔ ((2 : ℝ) ^ N * ((2 : ℝ) ^ h - 1) * (∑' n : ℕ, (Nat.totient n : ℝ) / 2 ^ n) ∈ Set.range ((↑) : ℤ → ℝ))",
+      "generated_certificate": false,
+      "claim_ids": [
+        "certificate_completeness"
+      ],
+      "docstring": "Integrality of one shifted tail difference is exactly integrality of the corresponding integer multiple `2^N (2^h - 1) S` of the #249 constant. This is the algebraic converse left implicit by the period-killer reduction."
+    },
+    {
+      "id": "Erdos249257/LcmConeFlatness.lean:357:not_irrational_of_tail_diff_mem_int",
+      "name": "not_irrational_of_tail_diff_mem_int",
+      "kind": "theorem",
+      "module": "Erdos249257/LcmConeFlatness.lean",
+      "line": 357,
+      "signature": "theorem not_irrational_of_tail_diff_mem_int {h N : ℕ} (hh : 0 < h) (hint : totientTail (N + h) - totientTail N ∈ Set.range ((↑) : ℤ → ℝ)) : ¬ Irrational (∑' n : ℕ, (Nat.totient n : ℝ) / 2 ^ n)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "One integral tail difference at a positive shift already makes the #249 constant rational. Thus a perpetually trapped single pair is not merely a failure of the certificate route: it resolves #249 in the opposite direction."
+    },
+    {
+      "id": "Erdos249257/LcmConeFlatness.lean:386:irrational_totient_series_iff_all_tail_diffs_nonintegral",
+      "name": "irrational_totient_series_iff_all_tail_diffs_nonintegral",
+      "kind": "theorem",
+      "module": "Erdos249257/LcmConeFlatness.lean",
+      "line": 386,
+      "signature": "theorem irrational_totient_series_iff_all_tail_diffs_nonintegral : Irrational (∑' n : ℕ, (Nat.totient n : ℝ) / 2 ^ n) ↔ ∀ h : ℕ, 0 < h → ∀ N : ℕ, totientTail (N + h) - totientTail N ∉ Set.range ((↑) : ℤ → ℝ)",
+      "generated_certificate": false,
+      "claim_ids": [
+        "certificate_completeness"
+      ],
+      "docstring": "#249 is equivalent to pointwise non-integrality of every positive shifted tail difference."
+    },
+    {
+      "id": "Erdos249257/LcmConeFlatness.lean:399:irrational_totient_series_iff_pointwise_certificates",
+      "name": "irrational_totient_series_iff_pointwise_certificates",
+      "kind": "theorem",
+      "module": "Erdos249257/LcmConeFlatness.lean",
+      "line": 399,
+      "signature": "theorem irrational_totient_series_iff_pointwise_certificates : Irrational (∑' n : ℕ, (Nat.totient n : ℝ) / 2 ^ n) ↔ ∀ h : ℕ, 0 < h → ∀ N : ℕ, ∃ L, certifiedKill h N L",
+      "generated_certificate": false,
+      "claim_ids": [
+        "certificate_completeness"
+      ],
+      "docstring": "Certificate completeness turns the pointwise non-integrality normal form into a pointwise finite-receipt normal form."
+    },
+    {
+      "id": "Erdos249257/LcmConeFlatness.lean:412:irrational_totient_series_iff_certificate_supply",
+      "name": "irrational_totient_series_iff_certificate_supply",
+      "kind": "theorem",
+      "module": "Erdos249257/LcmConeFlatness.lean",
+      "line": 412,
+      "signature": "theorem irrational_totient_series_iff_certificate_supply : Irrational (∑' n : ℕ, (Nat.totient n : ℝ) / 2 ^ n) ↔ ∀ h : ℕ, 0 < h → ∀ N₀ : ℕ, ∃ N, N₀ ≤ N ∧ ∃ L, certifiedKill h N L",
+      "generated_certificate": false,
+      "claim_ids": [
+        "certificate_reduction"
+      ],
+      "docstring": "The wave-21 cofinal certificate supply is not a weaker large-measure surrogate: together with completeness it is exactly equivalent to #249."
+    },
+    {
+      "id": "Erdos249257/LcmConeFlatness.lean:424:periodLcm_diagonal_kill_iff_tail_diff_notMem_int",
       "name": "periodLcm_diagonal_kill_iff_tail_diff_notMem_int",
       "kind": "theorem",
       "module": "Erdos249257/LcmConeFlatness.lean",
-      "line": 324,
+      "line": 424,
       "signature": "theorem periodLcm_diagonal_kill_iff_tail_diff_notMem_int (t : ℕ) : (∃ L, certifiedKill (periodLcm t) (periodLcm t) L) ↔ totientTail (periodLcm t + periodLcm t) - totientTail (periodLcm t) ∉ Set.range ((↑) : ℤ → ℝ)",
       "generated_certificate": false,
       "claim_ids": [],
       "docstring": "The wave-23 predicate `P t` in pure form: a diagonal certificate depth exists iff the diagonal tail difference is a non-integer."
     },
     {
-      "id": "Erdos249257/LcmConeFlatness.lean:336:irrational_totient_series_of_lcm_diagonal_nonintegrality_supply",
+      "id": "Erdos249257/LcmConeFlatness.lean:436:irrational_totient_series_of_lcm_diagonal_nonintegrality_supply",
       "name": "irrational_totient_series_of_lcm_diagonal_nonintegrality_supply",
       "kind": "theorem",
       "module": "Erdos249257/LcmConeFlatness.lean",
-      "line": 336,
+      "line": 436,
       "signature": "theorem irrational_totient_series_of_lcm_diagonal_nonintegrality_supply (hsupply : ∀ t₀ : ℕ, ∃ t, t₀ ≤ t ∧ totientTail (periodLcm t + periodLcm t) - totientTail (periodLcm t) ∉ Set.range ((↑) : ℤ → ℝ)) : Irrational (∑' n : ℕ, (Nat.totient n : ℝ) / 2 ^ n)",
       "generated_certificate": false,
       "claim_ids": [],
       "docstring": "**The diagonal frontier without certificate vocabulary.** If the diagonal tail difference `R_{2H_t} - R_{H_t}` is a non-integer for arbitrarily large `t`, the totient series is irrational. (Completeness converts each non-integrality into a finite decidable certificate.)"
     },
     {
-      "id": "Erdos249257/LcmConeFlatness.lean:347:irrational_totient_series_of_lcm_cone_nonintegrality_supply",
+      "id": "Erdos249257/LcmConeFlatness.lean:447:irrational_totient_series_of_lcm_cone_nonintegrality_supply",
       "name": "irrational_totient_series_of_lcm_cone_nonintegrality_supply",
       "kind": "theorem",
       "module": "Erdos249257/LcmConeFlatness.lean",
-      "line": 347,
+      "line": 447,
       "signature": "theorem irrational_totient_series_of_lcm_cone_nonintegrality_supply (hsupply : ∀ t₀ : ℕ, ∃ t, t₀ ≤ t ∧ ∃ q m : ℕ, 0 < q ∧ totientTail (q * periodLcm t + m * periodLcm t) - totientTail (q * periodLcm t) ∉ Set.range ((↑) : ℤ → ℝ)) : Irrational (∑' n : ℕ, (Nat.totient n : ℝ) / 2 ^ n)",
       "generated_certificate": false,
       "claim_ids": [],
       "docstring": "**The cone frontier in pure form**: one non-integral cone difference at arbitrarily large scale proves #249 — no certificate vocabulary at all."
     },
     {
-      "id": "Erdos249257/LcmConeFlatness.lean:362:windowDiscrepancy2",
+      "id": "Erdos249257/LcmConeFlatness.lean:462:windowDiscrepancy2",
       "name": "windowDiscrepancy2",
       "kind": "def",
       "module": "Erdos249257/LcmConeFlatness.lean",
-      "line": 362,
+      "line": 462,
       "signature": "def windowDiscrepancy2 (h N L : ℕ) : ℤ",
       "generated_certificate": false,
       "claim_ids": [],
       "docstring": "Second-difference window discrepancy `A₂ = A(h, N+h, L) - A(h, N, L)`: the depth-`L` truncation of `2^L·((R_{N+2h} - R_{N+h}) - (R_{N+h} - R_N))`."
     },
     {
-      "id": "Erdos249257/LcmConeFlatness.lean:369:certifiedRank2Kill",
+      "id": "Erdos249257/LcmConeFlatness.lean:469:certifiedRank2Kill",
       "name": "certifiedRank2Kill",
       "kind": "def",
       "module": "Erdos249257/LcmConeFlatness.lean",
-      "line": 369,
+      "line": 469,
       "signature": "def certifiedRank2Kill (h N L : ℕ) : Prop",
       "generated_certificate": false,
       "claim_ids": [],
       "docstring": "The decidable rank-2 certificate: the residue of `A₂` modulo `2^L` avoids the radius-`2(N+2h+L+2)` neighbourhood of `0`. The doubled radius pays for two window truncations; in exchange the second difference cancels the whole `H·C` clean shadow on the lcm cone."
     },
     {
-      "id": "Erdos249257/LcmConeFlatness.lean:378:second_diff_notMem_int_of_certifiedRank2Kill",
+      "id": "Erdos249257/LcmConeFlatness.lean:478:second_diff_notMem_int_of_certifiedRank2Kill",
       "name": "second_diff_notMem_int_of_certifiedRank2Kill",
       "kind": "theorem",
       "module": "Erdos249257/LcmConeFlatness.lean",
-      "line": 378,
+      "line": 478,
       "signature": "theorem second_diff_notMem_int_of_certifiedRank2Kill {h N L : ℕ} (hcert : certifiedRank2Kill h N L) : (totientTail (N + 2 * h) - totientTail (N + h)) - (totientTail (N + h) - totientTail N) ∉ Set.range ((↑) : ℤ → ℝ)",
       "generated_certificate": false,
       "claim_ids": [],
       "docstring": "**Rank-2 soundness.** A certified rank-2 residue proves the second difference `(R_{N+2h} - R_{N+h}) - (R_{N+h} - R_N)` is not an integer."
     },
     {
-      "id": "Erdos249257/LcmConeFlatness.lean:472:irrational_totient_series_of_lcm_qray_rank2_supply",
+      "id": "Erdos249257/LcmConeFlatness.lean:572:irrational_totient_series_of_lcm_qray_rank2_supply",
       "name": "irrational_totient_series_of_lcm_qray_rank2_supply",
       "kind": "theorem",
       "module": "Erdos249257/LcmConeFlatness.lean",
-      "line": 472,
+      "line": 572,
       "signature": "theorem irrational_totient_series_of_lcm_qray_rank2_supply (hsupply : ∀ t₀ : ℕ, ∃ t, t₀ ≤ t ∧ ∃ q L : ℕ, 0 < q ∧ certifiedRank2Kill (periodLcm t) (q * periodLcm t) L) : Irrational (∑' n : ℕ, (Nat.totient n : ℝ) / 2 ^ n)",
       "generated_certificate": false,
       "claim_ids": [],
       "docstring": "**Rank-2 cone supply.** Certified second-difference kills along the q-rays of the lcm cone — `(h, N) = (H_t, q·H_t)` — at arbitrarily large `t` prove #249: rationality flattens the cone, so BOTH first differences are forced integral and their difference is an integer."
     },
     {
-      "id": "Erdos249257/LcmConeFlatness.lean:496:certifiedKill_lcm_cone_cells",
+      "id": "Erdos249257/LcmConeFlatness.lean:596:certifiedKill_lcm_cone_cells",
       "name": "certifiedKill_lcm_cone_cells",
       "kind": "theorem",
       "module": "Erdos249257/LcmConeFlatness.lean",
-      "line": 496,
+      "line": 596,
       "signature": "theorem certifiedKill_lcm_cone_cells : certifiedKill (1 * periodLcm 2) (3 * periodLcm 2) 6 ∧ certifiedKill (2 * periodLcm 3) (2 * periodLcm 3) 7 ∧ certifiedKill (3 * periodLcm 3) (1 * periodLcm 3) 8",
       "generated_certificate": false,
       "claim_ids": [],
       "docstring": "Cone-lattice deposits beyond the diagonal: kills at `(h, N) = (m·H_t, q·H_t)` for `(t, q, m) = (2, 3, 1)`, `(3, 2, 2)`, `(3, 1, 3)` — the first machine-checked annihilators off the diagonal, witnessing the cone supply shape at its probe-tabulated depths."
     },
     {
-      "id": "Erdos249257/LcmConeFlatness.lean:503:certifiedRank2Kill_example",
+      "id": "Erdos249257/LcmConeFlatness.lean:603:certifiedRank2Kill_example",
       "name": "certifiedRank2Kill_example",
       "kind": "theorem",
       "module": "Erdos249257/LcmConeFlatness.lean",
-      "line": 503,
+      "line": 603,
       "signature": "theorem certifiedRank2Kill_example : certifiedRank2Kill 1 8 9",
       "generated_certificate": false,
       "claim_ids": [],
       "docstring": "A machine-checked rank-2 kill: the second difference at `(h, N) = (1, 8)` is certified non-integral at depth `9` (totient arguments ≤ 19)."
     },
     {
-      "id": "Erdos249257/LcmConeFlatness.lean:511:rank2_kill_sound_but_not_shallower_at_cell",
+      "id": "Erdos249257/LcmConeFlatness.lean:611:rank2_kill_sound_but_not_shallower_at_cell",
       "name": "rank2_kill_sound_but_not_shallower_at_cell",
       "kind": "theorem",
       "module": "Erdos249257/LcmConeFlatness.lean",
-      "line": 511,
+      "line": 611,
       "signature": "theorem rank2_kill_sound_but_not_shallower_at_cell : certifiedKill 1 8 8 ∧ (∀ L ∈ Finset.Icc 1 8, ¬ certifiedRank2Kill 1 8 L) ∧ certifiedRank2Kill 1 8 9",
       "generated_certificate": false,
       "claim_ids": [],
       "docstring": "**The measured wave-24 verdict, kernel-checked at the fixture cell**: rank-2 is SOUND but NOT shallower. At `(h, N) = (1, 8)` the rank-1 certificate fires at depth `8` while no rank-2 certificate exists at any depth `≤ 8`. (Probe, `t ≤ 20`: rank-1 at least as shallow in 30 of 40 cells, median depth delta `+1` against rank-2 — the advisory-1 promotion gate is measured and denied.)"
     },
     {
-      "id": "Erdos249257/LcmConeFlatness.lean:518:second_diff_not_int_example",
+      "id": "Erdos249257/LcmConeFlatness.lean:618:second_diff_not_int_example",
       "name": "second_diff_not_int_example",
       "kind": "theorem",
       "module": "Erdos249257/LcmConeFlatness.lean",
-      "line": 518,
+      "line": 618,
       "signature": "theorem second_diff_not_int_example : (totientTail (8 + 2 * 1) - totientTail (8 + 1)) - (totientTail (8 + 1) - totientTail 8) ∉ Set.range ((↑) : ℤ → ℝ)",
       "generated_certificate": false,
       "claim_ids": [],
       "docstring": "Concrete rank-2 non-integrality: `(R₁₀ - R₉) - (R₉ - R₈)` is not an integer — the first machine-checked second-difference obstruction."
     },
     {
-      "id": "Erdos249257/LcmConeFlatness.lean:526:tail_diff_not_int_periodLcm_diagonal_seven_eight",
+      "id": "Erdos249257/LcmConeFlatness.lean:626:tail_diff_not_int_periodLcm_diagonal_seven_eight",
       "name": "tail_diff_not_int_periodLcm_diagonal_seven_eight",
       "kind": "theorem",
       "module": "Erdos249257/LcmConeFlatness.lean",
-      "line": 526,
+      "line": 626,
       "signature": "theorem tail_diff_not_int_periodLcm_diagonal_seven_eight : (totientTail (periodLcm 7 + periodLcm 7) - totientTail (periodLcm 7) ∉ Set.range ((↑) : ℤ → ℝ)) ∧ (totientTail (periodLcm 8 + periodLcm 8) - totientTail (periodLcm 8) ∉ Set.range ((↑) : ℤ → ℝ))",
       "generated_certificate": false,
       "claim_ids": [],

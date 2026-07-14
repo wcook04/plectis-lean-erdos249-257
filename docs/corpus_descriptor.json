@@ -24,11 +24,11 @@
       "authority_role": "proof_bearing_committed_source_anchor"
     },
     "navigation_snapshot": {
-      "commit": "0f254eee9c42e184b073e4d473a6f56446d46fe4",
+      "commit": "3c64066449e2ffc06c3c10440f5de1526e11c40b",
       "authority_role": "machine_readable_navigation_anchor",
       "publication_state": "main_history_snapshot",
       "published_ref": "main",
-      "repository_resolution": "https://github.com/wcook04/plectis-lean-erdos249-257/tree/0f254eee9c42e184b073e4d473a6f56446d46fe4"
+      "repository_resolution": "https://github.com/wcook04/plectis-lean-erdos249-257/tree/3c64066449e2ffc06c3c10440f5de1526e11c40b"
     },
     "content": {
       "machine_readable_paper": {
@@ -37,12 +37,12 @@
       },
       "claims_document": {
         "path": "docs/claims.json",
-        "content_digest": "sha256:03ae42c75317ae9a0f46d5a8798ced4ad291f4a00f89f6184b96ada51f9f5814"
+        "content_digest": "sha256:4a2aacf0f51acb6c6af721bb3053b3c100012cf47e298dc1f1d8731eb69fd27f"
       },
       "declaration_atlas": {
         "path": "docs/declaration_atlas.json",
-        "content_digest": "sha256:00f63c1d4cd63abbad974d5955549ce4e5a1937725b9be087c76b12ad1f3c16f",
-        "source_input_fingerprint": "sha256:541652822f129d1e99ab92a604e39691d133a945c1e7e9546771fca63eae532a"
+        "content_digest": "sha256:4ab51dbb521ba5a301043102e13e946a2329e0accebb2662f0527b7665a19a66",
+        "source_input_fingerprint": "sha256:6f2097ee0967ffa45bbb09ac9c8609c99f363b0d857a622fd5a4cca9752359b3"
       },
       "methodology_contract": {
         "path": "docs/methodology.json",
@@ -50,11 +50,11 @@
       },
       "bounded_orientation": {
         "path": "docs/orientation.json",
-        "content_digest": "sha256:19fd4f2a1ae6c5bea44f5aded51e6e76899efeda7c6b4ce89297c35345717233"
+        "content_digest": "sha256:792e0a8e3b080aaa638c7977e11ed81bbafbe66ff57882ec38f5708231c442ea"
       },
       "human_exposition": {
         "source_path": "paper/erdos249-257-exposition.tex",
-        "source_content_digest": "sha256:f19d8154b43103b045b462f28ddfd8c1695fe87593c87e1650a24a039992cedb",
+        "source_content_digest": "sha256:05ce4761d487f443686553581f1cb6284d7adb677ea597f4438c7c6387396049",
         "rendered_path": "erdos249-257-exposition.pdf",
         "rendered_content_digest": "sha256:b8ec00c65eeeeaf9400544630c3ed1fa3f04080b714330fc98918f40c1c02891",
         "artifact_role": "authored_mathematician_facing_exposition",
@@ -133,10 +133,10 @@
   },
   "summary": {
     "module_count": 548,
-    "declaration_count": 6520,
-    "theorem_like_count": 5953,
+    "declaration_count": 6525,
+    "theorem_like_count": 5958,
     "generated_certificate_declaration_count": 1681,
-    "principal_claim_link_count": 72,
+    "principal_claim_link_count": 76,
     "kind_counts": {
       "abbrev": 2,
       "def": 549,
@@ -144,7 +144,7 @@
       "instance": 3,
       "lemma": 350,
       "structure": 10,
-      "theorem": 5603
+      "theorem": 5608
     }
   },
   "compact_graph": {
@@ -229,7 +229,7 @@
       {
         "id": "certificate_reduction",
         "status": "conditional reduction",
-        "statement": "If certified non-integrality witnesses occur at unbounded parameters (equivalently on the lcm diagonal), then S is irrational. The unboundedness of the supply is the remaining open hypothesis.",
+        "statement": "S is irrational if and only if certified non-integrality witnesses occur at unbounded parameters; the lcm-diagonal reduction is a sufficient one-parameter form of that supply. The unboundedness of the supply is the remaining open hypothesis.",
         "paper_label": "res:diag",
         "declarations": [
           {
@@ -246,6 +246,11 @@
             "name": "rational_totient_series_forces_lcm_cone_flatness",
             "module": "Erdos249257/LcmConeFlatness.lean",
             "line": 90
+          },
+          {
+            "name": "irrational_totient_series_iff_certificate_supply",
+            "module": "Erdos249257/LcmConeFlatness.lean",
+            "line": 412
           }
         ],
         "remaining_open_proposition_ids": [
@@ -255,13 +260,28 @@
       {
         "id": "certificate_completeness",
         "status": "proved here",
-        "statement": "A certified kill exists at fixed parameters exactly when the corresponding tail difference is non-integral, so the finite computation loses no information.",
+        "statement": "At fixed parameters, a certified kill exists exactly when the corresponding tail difference is non-integral. At every positive shift, integrality of one tail difference forces S to be rational; thus irrationality is equivalent to pointwise non-integrality, and to pointwise finite certificates.",
         "paper_label": "res:complete",
         "declarations": [
           {
             "name": "exists_certifiedKill_iff_tail_diff_notMem_int",
             "module": "Erdos249257/LcmConeFlatness.lean",
             "line": 316
+          },
+          {
+            "name": "tail_diff_mem_int_iff_scaled_series_mem_int",
+            "module": "Erdos249257/LcmConeFlatness.lean",
+            "line": 327
+          },
+          {
+            "name": "irrational_totient_series_iff_all_tail_diffs_nonintegral",
+            "module": "Erdos249257/LcmConeFlatness.lean",
+            "line": 386
+          },
+          {
+            "name": "irrational_totient_series_iff_pointwise_certificates",
+            "module": "Erdos249257/LcmConeFlatness.lean",
+            "line": 399
           }
         ]
       },
@@ -392,7 +412,7 @@
           "source": "paper/erdos249-257-exposition.tex",
           "environment": "problem",
           "title": "Erd\\H{o}s \\#249",
-          "line": 1037
+          "line": 1044
         }
       },
       {
@@ -403,7 +423,7 @@
           "source": "paper/erdos249-257-exposition.tex",
           "environment": "problem",
           "title": "unbounded certificate supply",
-          "line": 1046
+          "line": 1053
         }
       },
       {
@@ -414,7 +434,7 @@
           "source": "paper/erdos249-257-exposition.tex",
           "environment": "problem",
           "title": "universal Erd\\H{o}s \\#257",
-          "line": 1053
+          "line": 1060
         }
       }
     ],
@@ -471,7 +491,8 @@
         "Erdos249257.AdjacentPhaseSeparation",
         "Erdos249257.FirstHarmonicPivot",
         "Erdos249257.GapFareyBound",
-        "Erdos249257.IncidenceQuotientHermitePade"
+        "Erdos249257.IncidenceQuotientHermitePade",
+        "Erdos249257.LcmConeFlatness"
       ],
       "full_graph": "docs/claims.json::machine_readable_paper.module_graph"
     },
@@ -970,10 +991,34 @@
         "line": 90
       },
       {
+        "claim_id": "certificate_reduction",
+        "name": "irrational_totient_series_iff_certificate_supply",
+        "module": "Erdos249257/LcmConeFlatness.lean",
+        "line": 412
+      },
+      {
         "claim_id": "certificate_completeness",
         "name": "exists_certifiedKill_iff_tail_diff_notMem_int",
         "module": "Erdos249257/LcmConeFlatness.lean",
         "line": 316
+      },
+      {
+        "claim_id": "certificate_completeness",
+        "name": "tail_diff_mem_int_iff_scaled_series_mem_int",
+        "module": "Erdos249257/LcmConeFlatness.lean",
+        "line": 327
+      },
+      {
+        "claim_id": "certificate_completeness",
+        "name": "irrational_totient_series_iff_all_tail_diffs_nonintegral",
+        "module": "Erdos249257/LcmConeFlatness.lean",
+        "line": 386
+      },
+      {
+        "claim_id": "certificate_completeness",
+        "name": "irrational_totient_series_iff_pointwise_certificates",
+        "module": "Erdos249257/LcmConeFlatness.lean",
+        "line": 399
       },
       {
         "claim_id": "certified_kill_instances",
@@ -1050,8 +1095,8 @@
     },
     "exhaustive_declaration_atlas": {
       "path": "docs/declaration_atlas.json",
-      "expected_content_digest": "sha256:00f63c1d4cd63abbad974d5955549ce4e5a1937725b9be087c76b12ad1f3c16f",
-      "expected_source_input_fingerprint": "sha256:541652822f129d1e99ab92a604e39691d133a945c1e7e9546771fca63eae532a",
+      "expected_content_digest": "sha256:4ab51dbb521ba5a301043102e13e946a2329e0accebb2662f0527b7665a19a66",
+      "expected_source_input_fingerprint": "sha256:6f2097ee0967ffa45bbb09ac9c8609c99f363b0d857a622fd5a4cca9752359b3",
       "availability": "optional_attached_corpus",
       "check": "python3 scripts/build_declaration_atlas.py --check"
     },
@@ -1063,7 +1108,7 @@
     },
     "human_exposition": {
       "source_path": "paper/erdos249-257-exposition.tex",
-      "expected_source_content_digest": "sha256:f19d8154b43103b045b462f28ddfd8c1695fe87593c87e1650a24a039992cedb",
+      "expected_source_content_digest": "sha256:05ce4761d487f443686553581f1cb6284d7adb677ea597f4438c7c6387396049",
       "rendered_path": "erdos249-257-exposition.pdf",
       "expected_rendered_content_digest": "sha256:b8ec00c65eeeeaf9400544630c3ed1fa3f04080b714330fc98918f40c1c02891",
       "authority_posture": "authored_editorial_surface_not_Lean_proof_authority"
