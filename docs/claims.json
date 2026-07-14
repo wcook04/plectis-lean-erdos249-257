@@ -4956,6 +4956,23 @@
           ]
         },
         {
+          "id": "Erdos249257.MersenneTailAtoms",
+          "path": "Erdos249257/MersenneTailAtoms.lean",
+          "role": "Lean proof module",
+          "imports": [
+            "Erdos249257.MersenneLambertLadder"
+          ]
+        },
+        {
+          "id": "Erdos249257.MobiusSignSupportNoGo",
+          "path": "Erdos249257/MobiusSignSupportNoGo.lean",
+          "role": "Lean proof module",
+          "imports": [
+            "Erdos249257.GreedyAchievementSet",
+            "Erdos249257.MersenneLambertLadder"
+          ]
+        },
+        {
           "id": "Erdos249257.PrimeJumpMigration",
           "path": "Erdos249257/PrimeJumpMigration.lean",
           "role": "Lean proof module",
@@ -5401,7 +5418,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 1108
+        "line": 1121
       }
     },
     {
@@ -5412,7 +5429,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 1117
+        "line": 1130
       }
     },
     {
@@ -5423,7 +5440,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 1124
+        "line": 1137
       }
     }
   ],
@@ -5553,6 +5570,49 @@
           "name": "not_ordinary_gap_certificate_three_window_3_5",
           "module": "Erdos249257/PrimitiveWeightCertificate.lean",
           "line": 147
+        }
+      ]
+    },
+    {
+      "id": "mersenne_tail_atom_boundary",
+      "label": "Finite Mersenne tail-atom determinant boundary",
+      "status": "proved here",
+      "statement": "A pointed Mersenne tail atom has the exact doubling-and-wrap carry law. For any finite atom matrix, clearing the product of its column Mersenne denominators yields the integral numerator determinant; a nonzero cleared weighted minor therefore has absolute value at least one. This is a finite-denominator boundary for an atom-minor route, not an irrationality criterion for S.",
+      "readme_headline": false,
+      "declarations": [
+        {
+          "name": "mersenneTailAtom_step",
+          "module": "Erdos249257/MersenneTailAtoms.lean",
+          "line": 28
+        },
+        {
+          "name": "mersenneAtom_denominatorProduct_mul_det",
+          "module": "Erdos249257/MersenneTailAtoms.lean",
+          "line": 122
+        },
+        {
+          "name": "one_le_abs_weightedMersenneAtom_cleared_det",
+          "module": "Erdos249257/MersenneTailAtoms.lean",
+          "line": 181
+        }
+      ]
+    },
+    {
+      "id": "mobius_sign_support_no_go",
+      "label": "Möbius-sign support one-half no-go",
+      "status": "proved here",
+      "statement": "The Boolean support selected by the negative Möbius values has sum 1/2 plus the positive Möbius tail and is therefore at least 1/2 + 1/63. This closes the sign-truncation route to the target value 1/2; it does not exclude another infinite Boolean support with that value.",
+      "readme_headline": false,
+      "declarations": [
+        {
+          "name": "tsum_negativeMobius_eq_half_add_positiveMobiusTail",
+          "module": "Erdos249257/MobiusSignSupportNoGo.lean",
+          "line": 111
+        },
+        {
+          "name": "half_add_one_div_sixty_three_le_tsum_negativeMobius",
+          "module": "Erdos249257/MobiusSignSupportNoGo.lean",
+          "line": 150
         }
       ]
     },

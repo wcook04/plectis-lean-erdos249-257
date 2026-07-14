@@ -4,21 +4,21 @@
   "projection_not_authority": true,
   "proof_authority": "Lean source checked by the pinned Lean kernel",
   "argument_authority": "docs/claims.json::machine_readable_paper.argument_graph",
-  "source_fingerprint": "sha256:518cc00fe5c8d8ef38fd87bddbdd9351f56d3af12ba4745167aceb0e1414143c",
+  "source_fingerprint": "sha256:e6ea6659582e5ac319e1713d2f7000a2a9b682592aac3bd7297bc8a821271b3a",
   "summary": {
-    "module_count": 550,
-    "declaration_count": 6604,
-    "theorem_like_count": 6022,
+    "module_count": 552,
+    "declaration_count": 6627,
+    "theorem_like_count": 6038,
     "generated_certificate_declaration_count": 1681,
-    "principal_claim_link_count": 84,
+    "principal_claim_link_count": 89,
     "kind_counts": {
       "abbrev": 2,
-      "def": 564,
+      "def": 571,
       "inductive": 3,
       "instance": 3,
       "lemma": 350,
       "structure": 10,
-      "theorem": 5672
+      "theorem": 5688
     }
   },
   "modules": [
@@ -78,7 +78,9 @@
         "Erdos249257.IncidenceQuotientHermitePade",
         "Erdos249257.LcmConeFlatness",
         "Erdos249257.PrimitiveDeterminantLift",
-        "Erdos249257.PrimitiveWeightCertificate"
+        "Erdos249257.PrimitiveWeightCertificate",
+        "Erdos249257.MersenneTailAtoms",
+        "Erdos249257.MobiusSignSupportNoGo"
       ],
       "declaration_count": 0,
       "kind_counts": {}
@@ -6450,6 +6452,31 @@
       "declaration_count": 14,
       "kind_counts": {
         "theorem": 14
+      }
+    },
+    {
+      "id": "Erdos249257.MersenneTailAtoms",
+      "path": "Erdos249257/MersenneTailAtoms.lean",
+      "imports": [
+        "Erdos249257.MersenneLambertLadder"
+      ],
+      "declaration_count": 10,
+      "kind_counts": {
+        "def": 4,
+        "theorem": 6
+      }
+    },
+    {
+      "id": "Erdos249257.MobiusSignSupportNoGo",
+      "path": "Erdos249257/MobiusSignSupportNoGo.lean",
+      "imports": [
+        "Erdos249257.GreedyAchievementSet",
+        "Erdos249257.MersenneLambertLadder"
+      ],
+      "declaration_count": 13,
+      "kind_counts": {
+        "def": 3,
+        "theorem": 10
       }
     },
     {
@@ -69311,6 +69338,262 @@
       "generated_certificate": false,
       "claim_ids": [],
       "docstring": "Boundary regression: at `t = 5` the surviving product is `(2^3 - 1)(2^5 - 1) = 217`."
+    },
+    {
+      "id": "Erdos249257/MersenneTailAtoms.lean:23:mersenneTailAtom",
+      "name": "mersenneTailAtom",
+      "kind": "def",
+      "module": "Erdos249257/MersenneTailAtoms.lean",
+      "line": 23,
+      "signature": "noncomputable def mersenneTailAtom (d : ℕ+) (N : ℕ) : ℚ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The periodic tail atom of positive conductor `d` at index `N`."
+    },
+    {
+      "id": "Erdos249257/MersenneTailAtoms.lean:28:mersenneTailAtom_step",
+      "name": "mersenneTailAtom_step",
+      "kind": "theorem",
+      "module": "Erdos249257/MersenneTailAtoms.lean",
+      "line": 28,
+      "signature": "theorem mersenneTailAtom_step (d : ℕ+) (N : ℕ) : 2 * mersenneTailAtom d N - mersenneTailAtom d (N + 1) = if (d : ℕ) ∣ N + 1 then 1 else 0",
+      "generated_certificate": false,
+      "claim_ids": [
+        "mersenne_tail_atom_boundary"
+      ],
+      "docstring": "A periodic atom advances by doubling except at its unique wrap point, where the Mersenne numerator contributes exactly one carry."
+    },
+    {
+      "id": "Erdos249257/MersenneTailAtoms.lean:79:mersenneAtomNumeratorMatrix",
+      "name": "mersenneAtomNumeratorMatrix",
+      "kind": "def",
+      "module": "Erdos249257/MersenneTailAtoms.lean",
+      "line": 79,
+      "signature": "def mersenneAtomNumeratorMatrix {m : ℕ} (d : Fin m → ℕ+) (idx : Fin m → Fin m → ℕ) : Matrix (Fin m) (Fin m) ℤ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Integer numerator matrix for a finite family of pointed atoms."
+    },
+    {
+      "id": "Erdos249257/MersenneTailAtoms.lean:86:mersenneAtomMatrix",
+      "name": "mersenneAtomMatrix",
+      "kind": "def",
+      "module": "Erdos249257/MersenneTailAtoms.lean",
+      "line": 86,
+      "signature": "noncomputable def mersenneAtomMatrix {m : ℕ} (d : Fin m → ℕ+) (idx : Fin m → Fin m → ℕ) : Matrix (Fin m) (Fin m) ℚ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Rational matrix formed from a finite family of pointed atoms, with one conductor (and therefore one Mersenne denominator) assigned to each column."
+    },
+    {
+      "id": "Erdos249257/MersenneTailAtoms.lean:94:det_mersenneAtomMatrix",
+      "name": "det_mersenneAtomMatrix",
+      "kind": "theorem",
+      "module": "Erdos249257/MersenneTailAtoms.lean",
+      "line": 94,
+      "signature": "theorem det_mersenneAtomMatrix {m : ℕ} (d : Fin m → ℕ+) (idx : Fin m → Fin m → ℕ) : Matrix.det (mersenneAtomMatrix d idx) = ((Matrix.det (mersenneAtomNumeratorMatrix d idx) : ℤ) : ℚ) / ∏ j, ((2 : ℚ) ^ (d j : ℕ) - 1)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Exact finite atom determinant factorisation. The numerator is literally the cast of an integer determinant; all apparent smallness is carried by the same column denominators that must be cleared to recover integrality."
+    },
+    {
+      "id": "Erdos249257/MersenneTailAtoms.lean:122:mersenneAtom_denominatorProduct_mul_det",
+      "name": "mersenneAtom_denominatorProduct_mul_det",
+      "kind": "theorem",
+      "module": "Erdos249257/MersenneTailAtoms.lean",
+      "line": 122,
+      "signature": "theorem mersenneAtom_denominatorProduct_mul_det {m : ℕ} (d : Fin m → ℕ+) (idx : Fin m → Fin m → ℕ) : (∏ j, ((2 : ℚ) ^ (d j : ℕ) - 1)) * Matrix.det (mersenneAtomMatrix d idx) = ((Matrix.det (mersenneAtomNumeratorMatrix d idx) : ℤ) : ℚ)",
+      "generated_certificate": false,
+      "claim_ids": [
+        "mersenne_tail_atom_boundary"
+      ],
+      "docstring": "Clearing the finite Mersenne denominator product recovers the integer numerator determinant exactly."
+    },
+    {
+      "id": "Erdos249257/MersenneTailAtoms.lean:138:one_le_abs_mersenneAtom_cleared_det",
+      "name": "one_le_abs_mersenneAtom_cleared_det",
+      "kind": "theorem",
+      "module": "Erdos249257/MersenneTailAtoms.lean",
+      "line": 138,
+      "signature": "theorem one_le_abs_mersenneAtom_cleared_det {m : ℕ} (d : Fin m → ℕ+) (idx : Fin m → Fin m → ℕ) (hdet : Matrix.det (mersenneAtomNumeratorMatrix d idx) ≠ 0) : (1 : ℚ) ≤ |(∏ j, ((2 : ℚ) ^ (d j : ℕ) - 1)) * Matrix.det (mersenneAtomMatrix d idx)|",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Height-tight finite-atom boundary: a nonzero numerator determinant gives a cleared rational minor whose absolute value is at least one."
+    },
+    {
+      "id": "Erdos249257/MersenneTailAtoms.lean:151:weightedMersenneAtomMatrix",
+      "name": "weightedMersenneAtomMatrix",
+      "kind": "def",
+      "module": "Erdos249257/MersenneTailAtoms.lean",
+      "line": 151,
+      "signature": "noncomputable def weightedMersenneAtomMatrix {m : ℕ} (d : Fin m → ℕ+) (idx : Fin m → Fin m → ℕ) (w : Fin m → ℤ) : Matrix (Fin m) (Fin m) ℚ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Column-weighted atom matrix. In the totient application the weights are `v * A(d_j)`, hence integers supplied by the rationality multiplier and the primitive-conductor arithmetic."
+    },
+    {
+      "id": "Erdos249257/MersenneTailAtoms.lean:158:weightedMersenneAtom_denominatorProduct_mul_det",
+      "name": "weightedMersenneAtom_denominatorProduct_mul_det",
+      "kind": "theorem",
+      "module": "Erdos249257/MersenneTailAtoms.lean",
+      "line": 158,
+      "signature": "theorem weightedMersenneAtom_denominatorProduct_mul_det {m : ℕ} (d : Fin m → ℕ+) (idx : Fin m → Fin m → ℕ) (w : Fin m → ℤ) : (∏ j, ((2 : ℚ) ^ (d j : ℕ) - 1)) * Matrix.det (weightedMersenneAtomMatrix d idx w) = ((Matrix.det (mersenneAtomNumeratorMatrix d idx) * ∏ j, w j : ℤ) : ℚ)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Integer weights do not create an extra height surplus: after the same Mersenne clearing, they multiply the integer numerator determinant."
+    },
+    {
+      "id": "Erdos249257/MersenneTailAtoms.lean:181:one_le_abs_weightedMersenneAtom_cleared_det",
+      "name": "one_le_abs_weightedMersenneAtom_cleared_det",
+      "kind": "theorem",
+      "module": "Erdos249257/MersenneTailAtoms.lean",
+      "line": 181,
+      "signature": "theorem one_le_abs_weightedMersenneAtom_cleared_det {m : ℕ} (d : Fin m → ℕ+) (idx : Fin m → Fin m → ℕ) (w : Fin m → ℤ) (hdet : Matrix.det (mersenneAtomNumeratorMatrix d idx) * ∏ j, w j ≠ 0) : (1 : ℚ) ≤ |(∏ j, ((2 : ℚ) ^ (d j : ℕ) - 1)) * Matrix.det (weightedMersenneAtomMatrix d idx w)|",
+      "generated_certificate": false,
+      "claim_ids": [
+        "mersenne_tail_atom_boundary"
+      ],
+      "docstring": "Weighted height-tight boundary in absolute-value form."
+    },
+    {
+      "id": "Erdos249257/MobiusSignSupportNoGo.lean:30:positiveMobiusTailTerm",
+      "name": "positiveMobiusTailTerm",
+      "kind": "def",
+      "module": "Erdos249257/MobiusSignSupportNoGo.lean",
+      "line": 30,
+      "signature": "noncomputable def positiveMobiusTailTerm (d : ℕ+) : ℝ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The positive Möbius tail, with the exceptional `d = 1` term removed."
+    },
+    {
+      "id": "Erdos249257/MobiusSignSupportNoGo.lean:34:negativeMobiusTerm",
+      "name": "negativeMobiusTerm",
+      "kind": "def",
+      "module": "Erdos249257/MobiusSignSupportNoGo.lean",
+      "line": 34,
+      "signature": "noncomputable def negativeMobiusTerm (d : ℕ+) : ℝ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The Boolean support term selected by the negative Möbius sign."
+    },
+    {
+      "id": "Erdos249257/MobiusSignSupportNoGo.lean:38:mobiusOneTerm",
+      "name": "mobiusOneTerm",
+      "kind": "def",
+      "module": "Erdos249257/MobiusSignSupportNoGo.lean",
+      "line": 38,
+      "signature": "noncomputable def mobiusOneTerm (d : ℕ+) : ℝ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The single `d = 1` term in the signed Möbius Lambert series."
+    },
+    {
+      "id": "Erdos249257/MobiusSignSupportNoGo.lean:41:summable_mersenneWeight_pnat",
+      "name": "summable_mersenneWeight_pnat",
+      "kind": "theorem",
+      "module": "Erdos249257/MobiusSignSupportNoGo.lean",
+      "line": 41,
+      "signature": "private theorem summable_mersenneWeight_pnat : Summable (fun d : ℕ+ => mersenneWeight (d : ℕ))",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/MobiusSignSupportNoGo.lean:46:summable_positiveMobiusTailTerm",
+      "name": "summable_positiveMobiusTailTerm",
+      "kind": "theorem",
+      "module": "Erdos249257/MobiusSignSupportNoGo.lean",
+      "line": 46,
+      "signature": "theorem summable_positiveMobiusTailTerm : Summable positiveMobiusTailTerm",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/MobiusSignSupportNoGo.lean:59:summable_negativeMobiusTerm",
+      "name": "summable_negativeMobiusTerm",
+      "kind": "theorem",
+      "module": "Erdos249257/MobiusSignSupportNoGo.lean",
+      "line": 59,
+      "signature": "theorem summable_negativeMobiusTerm : Summable negativeMobiusTerm",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/MobiusSignSupportNoGo.lean:72:summable_mobiusOneTerm",
+      "name": "summable_mobiusOneTerm",
+      "kind": "theorem",
+      "module": "Erdos249257/MobiusSignSupportNoGo.lean",
+      "line": 72,
+      "signature": "theorem summable_mobiusOneTerm : Summable mobiusOneTerm",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/MobiusSignSupportNoGo.lean:82:mobius_mersenne_term_eq",
+      "name": "mobius_mersenne_term_eq",
+      "kind": "theorem",
+      "module": "Erdos249257/MobiusSignSupportNoGo.lean",
+      "line": 82,
+      "signature": "theorem mobius_mersenne_term_eq (d : ℕ+) : ((moebius (d : ℕ) : ℤ) : ℝ) * mersenneWeight (d : ℕ) = mobiusOneTerm d + positiveMobiusTailTerm d - negativeMobiusTerm d",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Pointwise sign separation of the signed Möbius term."
+    },
+    {
+      "id": "Erdos249257/MobiusSignSupportNoGo.lean:100:tsum_mobiusOneTerm",
+      "name": "tsum_mobiusOneTerm",
+      "kind": "theorem",
+      "module": "Erdos249257/MobiusSignSupportNoGo.lean",
+      "line": 100,
+      "signature": "theorem tsum_mobiusOneTerm : ∑' d : ℕ+, mobiusOneTerm d = 1",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/MobiusSignSupportNoGo.lean:111:tsum_negativeMobius_eq_half_add_positiveMobiusTail",
+      "name": "tsum_negativeMobius_eq_half_add_positiveMobiusTail",
+      "kind": "theorem",
+      "module": "Erdos249257/MobiusSignSupportNoGo.lean",
+      "line": 111,
+      "signature": "theorem tsum_negativeMobius_eq_half_add_positiveMobiusTail : (∑' d : ℕ+, negativeMobiusTerm d) = 1 / 2 + ∑' d : ℕ+, positiveMobiusTailTerm d",
+      "generated_certificate": false,
+      "claim_ids": [
+        "mobius_sign_support_no_go"
+      ],
+      "docstring": "Exact sign-separation identity. The negative-Möbius Boolean support overshoots `1/2` by the complete positive-Möbius tail."
+    },
+    {
+      "id": "Erdos249257/MobiusSignSupportNoGo.lean:142:moebius_six",
+      "name": "moebius_six",
+      "kind": "theorem",
+      "module": "Erdos249257/MobiusSignSupportNoGo.lean",
+      "line": 142,
+      "signature": "private theorem moebius_six : moebius 6 = 1",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/MobiusSignSupportNoGo.lean:150:half_add_one_div_sixty_three_le_tsum_negativeMobius",
+      "name": "half_add_one_div_sixty_three_le_tsum_negativeMobius",
+      "kind": "theorem",
+      "module": "Erdos249257/MobiusSignSupportNoGo.lean",
+      "line": 150,
+      "signature": "theorem half_add_one_div_sixty_three_le_tsum_negativeMobius : (1 : ℝ) / 2 + 1 / 63 ≤ ∑' d : ℕ+, negativeMobiusTerm d",
+      "generated_certificate": false,
+      "claim_ids": [
+        "mobius_sign_support_no_go"
+      ],
+      "docstring": "Quantitative no-go: sign truncation overshoots by at least `1/63`."
+    },
+    {
+      "id": "Erdos249257/MobiusSignSupportNoGo.lean:164:half_lt_tsum_negativeMobius",
+      "name": "half_lt_tsum_negativeMobius",
+      "kind": "theorem",
+      "module": "Erdos249257/MobiusSignSupportNoGo.lean",
+      "line": 164,
+      "signature": "theorem half_lt_tsum_negativeMobius : (1 : ℝ) / 2 < ∑' d : ℕ+, negativeMobiusTerm d",
+      "generated_certificate": false,
+      "claim_ids": []
     },
     {
       "id": "Erdos249257/PrimeJumpMigration.lean:23:residueHeckeDefect",

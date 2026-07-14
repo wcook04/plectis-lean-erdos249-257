@@ -274,6 +274,19 @@ The proposition concerns only these normalized finite coordinates.  It makes
 no statement about arbitrary integral power-series jets, and it gives no
 irrationality criterion for $S$.
 
+\paragraph{Finite Mersenne atoms.}  For a positive conductor $d$ and tail
+index $N$, the pointed atom $2^{N\bmod d}/(2^d-1)$ obeys the exact doubling
+step with one carry at each wrap.  For any finite matrix of such atoms, clearing
+the product of the column Mersenne denominators recovers an integer determinant.
+Thus a nonzero cleared minor has absolute value at least one; integer column
+weights do not create an additional height surplus.
+\noindent Formalised:
+\lref{MersenneTailAtoms.lean}{28}{mersenneTailAtom_step},
+\lrefx{MersenneTailAtoms.lean}{122}{mersenneAtom_denominatorProduct_mul_det}, and
+\lrefx{MersenneTailAtoms.lean}{181}{one_le_abs_weightedMersenneAtom_cleared_det}.
+This is a finite-denominator boundary for an atom-minor route, not an
+irrationality criterion for $S$.
+
 \begin{proposition}[the M\"obius-square lens]\label{res:lens}
 \[
 S \;=\; \tfrac12 \;+\; \sum_{d\ge1}\frac{\mu(d)}{(2^d-1)^2}.
@@ -1243,6 +1256,17 @@ support-free object. The divisor transform and M\"obius inversion below are
 classical Lambert-series infrastructure~\cite{apostol,merca2017,mercaschmidt}; the
 contribution here is their Lean-checked composition with the tempered carry
 interface.
+
+The signed identity $L(\mu)=1/2$ does not by itself provide a Boolean support
+for the target value.  If the negative M\"obius indices are selected and the
+positive indices (apart from $1$) are discarded, the selected support sum is
+exactly $1/2$ plus the positive M\"obius tail, hence exceeds $1/2$ by at least
+$1/63$ from the index $6$.  This closes one sign-truncation route only; it does
+not exclude another infinite Boolean support with value $1/2$.
+\noindent Formalised:
+\lref{MobiusSignSupportNoGo.lean}{111}{tsum_negativeMobius_eq_half_add_positiveMobiusTail}
+and
+\lref{MobiusSignSupportNoGo.lean}{150}{half_add_one_div_sixty_three_le_tsum_negativeMobius}.
 
 \begin{proposition}[Boolean M\"obius inversion, both directions]\label{res:boolmob}
 On positive integers, $f_A=\mathbf 1_A*\zeta$ and $\mu*f_A=\mathbf 1_A$, where
