@@ -244,7 +244,7 @@ def main() -> int:
 
     open_expectations = {
         "remaining_open.erdos_249_irrationality": ("erdos_249", 1),
-        "remaining_open.unbounded_certificate_supply": ("erdos_249", 6),
+        "remaining_open.unbounded_certificate_supply": ("erdos_249", 7),
         "remaining_open.universal_257_all_infinite_supports": ("universal_257", 5),
     }
     for open_id, (target, advancing_count) in open_expectations.items():

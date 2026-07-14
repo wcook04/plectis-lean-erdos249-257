@@ -250,6 +250,23 @@
           ]
         },
         {
+          "id": "Erdos249257.AdjacentCarryTube",
+          "path": "Erdos249257/AdjacentCarryTube.lean",
+          "role": "Lean proof module",
+          "imports": [
+            "Erdos249257.AdjacentPhaseSeparation"
+          ]
+        },
+        {
+          "id": "Erdos249257.AdjacentPhaseSeparation",
+          "path": "Erdos249257/AdjacentPhaseSeparation.lean",
+          "role": "Lean proof module",
+          "imports": [
+            "Erdos249257.FirstHarmonicPivot",
+            "Erdos249257.CarrySurvivorExtinction"
+          ]
+        },
+        {
           "id": "Erdos249257.BinaryTailWindowTransfer",
           "path": "Erdos249257/BinaryTailWindowTransfer.lean",
           "role": "Binary tail-window transfer interfaces",
@@ -4777,6 +4794,14 @@
           ]
         },
         {
+          "id": "Erdos249257.FirstHarmonicPivot",
+          "path": "Erdos249257/FirstHarmonicPivot.lean",
+          "role": "Lean proof module",
+          "imports": [
+            "Erdos249257.FirstHarmonicGap"
+          ]
+        },
+        {
           "id": "Erdos249257.FullTargetPrimeAdjunctionNoGo",
           "path": "Erdos249257/FullTargetPrimeAdjunctionNoGo.lean",
           "role": "Prime-adjunction obstruction for the full target",
@@ -5281,6 +5306,21 @@
             "remaining_open_proposition_id": "remaining_open.unbounded_certificate_supply",
             "operation": "re_expresses",
             "statement": "Turns a cofinal first-harmonic estimate into the existing finite certificate supply; no such estimate is proved."
+          }
+        },
+        {
+          "from": "adjacent_phase_separation_reduction",
+          "relation": "builds_on",
+          "to": "first_harmonic_certificate_interface"
+        },
+        {
+          "from": "adjacent_phase_separation_reduction",
+          "relation": "advances_open_target",
+          "to": "erdos_249",
+          "remaining_open_effect": {
+            "remaining_open_proposition_id": "remaining_open.unbounded_certificate_supply",
+            "operation": "re_expresses",
+            "statement": "Re-expresses the missing supply as cofinal adjacent-pair phase separation; no such supply is proved."
           }
         },
         {
@@ -6030,7 +6070,7 @@
       "id": "first_harmonic_certificate_interface",
       "label": "First-harmonic gap implies a finite certificate",
       "status": "conditional reduction",
-      "statement": "Under the explicit dyadic room inequality, a constant-saving first-harmonic bound on one block forces a certified non-integrality witness in that block. No cofinal harmonic estimate is asserted.",
+      "statement": "Under the explicit dyadic room inequality, a constant-saving first-harmonic bound on one block, or on any nonempty finite set of indices below its right endpoint, forces a certified non-integrality witness in that set. No cofinal harmonic estimate is asserted.",
       "remaining_open_proposition_ids": [
         "remaining_open.unbounded_certificate_supply"
       ],
@@ -6038,9 +6078,37 @@
       "readme_headline": false,
       "declarations": [
         {
-          "name": "exists_certifiedKill_of_first_harmonic_gap",
+          "name": "exists_certifiedKill_of_first_harmonic_gap_subset",
           "module": "Erdos249257/FirstHarmonicGap.lean",
           "line": 104
+        },
+        {
+          "name": "exists_certifiedKill_of_first_harmonic_gap",
+          "module": "Erdos249257/FirstHarmonicGap.lean",
+          "line": 128
+        }
+      ]
+    },
+    {
+      "id": "adjacent_phase_separation_reduction",
+      "label": "Adjacent-pair phase separation reduction",
+      "status": "conditional reduction",
+      "statement": "At scales satisfying the explicit dyadic room inequality, a squared chordal separation of at least 19/25 between two adjacent first-harmonic phases in a dyadic block forces a certified non-integrality witness at one of the two indices. A cofinal supply of such adjacent pairs implies irrationality of the totient constant; no such supply is proved.",
+      "remaining_open_proposition_ids": [
+        "remaining_open.unbounded_certificate_supply"
+      ],
+      "paper_label": "sec:adjacentphase",
+      "readme_headline": false,
+      "declarations": [
+        {
+          "name": "exists_certifiedKill_of_phasePairSeparation",
+          "module": "Erdos249257/AdjacentPhaseSeparation.lean",
+          "line": 258
+        },
+        {
+          "name": "irrational_totient_series_of_adjacentPhaseSeparation",
+          "module": "Erdos249257/AdjacentPhaseSeparation.lean",
+          "line": 295
         }
       ]
     },

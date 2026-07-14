@@ -4,21 +4,21 @@
   "projection_not_authority": true,
   "proof_authority": "Lean source checked by the pinned Lean kernel",
   "argument_authority": "docs/claims.json::machine_readable_paper.argument_graph",
-  "source_fingerprint": "sha256:1cebfc516d3cceeca8c565a30d4df9859a1e3ec620fbfd3a095a8da7e21e7a64",
+  "source_fingerprint": "sha256:91266fd06b6698b7e094f640aa50ff3d6ebec8b5b096d26b12ab3cf4af1348ae",
   "summary": {
-    "module_count": 544,
-    "declaration_count": 6419,
-    "theorem_like_count": 5891,
+    "module_count": 547,
+    "declaration_count": 6505,
+    "theorem_like_count": 5942,
     "generated_certificate_declaration_count": 1681,
-    "principal_claim_link_count": 69,
+    "principal_claim_link_count": 72,
     "kind_counts": {
       "abbrev": 2,
-      "def": 510,
+      "def": 545,
       "inductive": 3,
       "instance": 3,
-      "lemma": 336,
+      "lemma": 350,
       "structure": 10,
-      "theorem": 5555
+      "theorem": 5592
     }
   },
   "modules": [
@@ -70,7 +70,10 @@
         "Erdos249257.SignedQMomentObstruction",
         "Erdos249257.TotientMahlerDefect",
         "Erdos249257.ResidualGaugeObstruction",
-        "Erdos249257.CarrySurvivorExtinction"
+        "Erdos249257.CarrySurvivorExtinction",
+        "Erdos249257.AdjacentCarryTube",
+        "Erdos249257.AdjacentPhaseSeparation",
+        "Erdos249257.FirstHarmonicPivot"
       ],
       "declaration_count": 0,
       "kind_counts": {}
@@ -97,6 +100,32 @@
       "declaration_count": 7,
       "kind_counts": {
         "theorem": 7
+      }
+    },
+    {
+      "id": "Erdos249257.AdjacentCarryTube",
+      "path": "Erdos249257/AdjacentCarryTube.lean",
+      "imports": [
+        "Erdos249257.AdjacentPhaseSeparation"
+      ],
+      "declaration_count": 23,
+      "kind_counts": {
+        "def": 4,
+        "lemma": 14,
+        "theorem": 5
+      }
+    },
+    {
+      "id": "Erdos249257.AdjacentPhaseSeparation",
+      "path": "Erdos249257/AdjacentPhaseSeparation.lean",
+      "imports": [
+        "Erdos249257.FirstHarmonicPivot",
+        "Erdos249257.CarrySurvivorExtinction"
+      ],
+      "declaration_count": 17,
+      "kind_counts": {
+        "def": 5,
+        "theorem": 12
       }
     },
     {
@@ -6160,11 +6189,23 @@
       "imports": [
         "Erdos249257.LcmConeFlatness"
       ],
-      "declaration_count": 4,
+      "declaration_count": 5,
       "kind_counts": {
         "def": 1,
         "lemma": 2,
-        "theorem": 1
+        "theorem": 2
+      }
+    },
+    {
+      "id": "Erdos249257.FirstHarmonicPivot",
+      "path": "Erdos249257/FirstHarmonicPivot.lean",
+      "imports": [
+        "Erdos249257.FirstHarmonicGap"
+      ],
+      "declaration_count": 45,
+      "kind_counts": {
+        "def": 26,
+        "theorem": 19
       }
     },
     {
@@ -7060,6 +7101,446 @@
       "generated_certificate": false,
       "claim_ids": [],
       "docstring": "A linear channel that kills every scalar relation is only the original evaluation followed by multiplication by one fixed vector. Thus a rational-linear cyclotomic or residue channel cannot descend from equality of scalar values while retaining independent denominator information. The explicit preimage of `1` is the minimal surjectivity hypothesis needed for the one-dimensional quotient argument."
+    },
+    {
+      "id": "Erdos249257/AdjacentCarryTube.lean:29:AdjacentRobustFailureAt",
+      "name": "AdjacentRobustFailureAt",
+      "kind": "def",
+      "module": "Erdos249257/AdjacentCarryTube.lean",
+      "line": 29,
+      "signature": "def AdjacentRobustFailureAt (h N L : ℕ) : Prop",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Failure of the robust adjacent certificate arc."
+    },
+    {
+      "id": "Erdos249257/AdjacentCarryTube.lean:34:adjacentSignedLift",
+      "name": "adjacentSignedLift",
+      "kind": "def",
+      "module": "Erdos249257/AdjacentCarryTube.lean",
+      "line": 34,
+      "signature": "def adjacentSignedLift (h N L : ℕ) : ℤ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The unique short signed representative selected by a robust adjacent failure: the low residue itself, or the high residue translated by `-2^L`."
+    },
+    {
+      "id": "Erdos249257/AdjacentCarryTube.lean:42:adjacentWindowLift",
+      "name": "adjacentWindowLift",
+      "kind": "def",
+      "module": "Erdos249257/AdjacentCarryTube.lean",
+      "line": 42,
+      "signature": "def adjacentWindowLift (h N L : ℕ) : ℤ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The adjacent signed lift translated back to the original window coordinate."
+    },
+    {
+      "id": "Erdos249257/AdjacentCarryTube.lean:46:adjacentCarryState",
+      "name": "adjacentCarryState",
+      "kind": "def",
+      "module": "Erdos249257/AdjacentCarryTube.lean",
+      "line": 46,
+      "signature": "def adjacentCarryState (h N L : ℕ) : ℤ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The carry coordinate conjugate to the adjacent signed state."
+    },
+    {
+      "id": "Erdos249257/AdjacentCarryTube.lean:49:eq_of_modEq_of_strict_sub_bounds",
+      "name": "eq_of_modEq_of_strict_sub_bounds",
+      "kind": "lemma",
+      "module": "Erdos249257/AdjacentCarryTube.lean",
+      "line": 49,
+      "signature": "private lemma eq_of_modEq_of_strict_sub_bounds {P a b : ℤ} (hP : 0 < P) (hmod : a ≡ b [ZMOD P]) (hlo : -P < b - a) (hhi : b - a < P) : a = b",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/AdjacentCarryTube.lean:66:adjacentStepResidue_nonneg",
+      "name": "adjacentStepResidue_nonneg",
+      "kind": "lemma",
+      "module": "Erdos249257/AdjacentCarryTube.lean",
+      "line": 66,
+      "signature": "lemma adjacentStepResidue_nonneg (h N L : ℕ) : 0 ≤ adjacentStepResidue h N L",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/AdjacentCarryTube.lean:71:adjacentStepResidue_lt",
+      "name": "adjacentStepResidue_lt",
+      "kind": "lemma",
+      "module": "Erdos249257/AdjacentCarryTube.lean",
+      "line": 71,
+      "signature": "lemma adjacentStepResidue_lt (h N L : ℕ) : adjacentStepResidue h N L < (2 ^ L : ℤ)",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/AdjacentCarryTube.lean:77:adjacentFailure_partition",
+      "name": "adjacentFailure_partition",
+      "kind": "lemma",
+      "module": "Erdos249257/AdjacentCarryTube.lean",
+      "line": 77,
+      "signature": "lemma adjacentFailure_partition {h N L : ℕ} (hfail : AdjacentRobustFailureAt h N L) : adjacentStepResidue h N L < 2 * (N + h + L + 2 : ℤ) ∨ (2 ^ L : ℤ) - 2 * (N + h + L + 2 : ℤ) < adjacentStepResidue h N L",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A robust failure lies on exactly one side of the closed robust arc."
+    },
+    {
+      "id": "Erdos249257/AdjacentCarryTube.lean:87:adjacentSignedLift_mod",
+      "name": "adjacentSignedLift_mod",
+      "kind": "lemma",
+      "module": "Erdos249257/AdjacentCarryTube.lean",
+      "line": 87,
+      "signature": "lemma adjacentSignedLift_mod (h N L : ℕ) : adjacentSignedLift h N L ≡ adjacentStepResidue h N L [ZMOD (2 ^ L : ℤ)]",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The signed lift represents the adjacent residue modulo `2^L`."
+    },
+    {
+      "id": "Erdos249257/AdjacentCarryTube.lean:98:adjacentSignedLift_abs_lt",
+      "name": "adjacentSignedLift_abs_lt",
+      "kind": "lemma",
+      "module": "Erdos249257/AdjacentCarryTube.lean",
+      "line": 98,
+      "signature": "lemma adjacentSignedLift_abs_lt {h N L : ℕ} (hfail : AdjacentRobustFailureAt h N L) : |adjacentSignedLift h N L| < 2 * (N + h + L + 2 : ℤ)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Every robust failure has a canonical representative in the strict `2W` signed interval."
+    },
+    {
+      "id": "Erdos249257/AdjacentCarryTube.lean:114:adjacentSignedLift_exists_unique",
+      "name": "adjacentSignedLift_exists_unique",
+      "kind": "lemma",
+      "module": "Erdos249257/AdjacentCarryTube.lean",
+      "line": 114,
+      "signature": "lemma adjacentSignedLift_exists_unique {h N L : ℕ} (hfail : AdjacentRobustFailureAt h N L) (hroom : 4 * (N + h + L + 2 : ℤ) < (2 ^ L : ℤ)) : ∀ t : ℤ, t ≡ adjacentStepResidue h N L [ZMOD (2 ^ L : ℤ)] → |t| < 2 * (N + h + L + 2 : ℤ) → t = adjacentSignedLift h N L",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Under `4W < 2^L`, the short representative is unique."
+    },
+    {
+      "id": "Erdos249257/AdjacentCarryTube.lean:132:adjacentStepResidue_succ_mod",
+      "name": "adjacentStepResidue_succ_mod",
+      "kind": "lemma",
+      "module": "Erdos249257/AdjacentCarryTube.lean",
+      "line": 132,
+      "signature": "lemma adjacentStepResidue_succ_mod (h N L : ℕ) : adjacentStepResidue h (N + 1) L = (2 * adjacentStepResidue h N L - deltaTotient h (N + L + 1) + deltaTotient h (N + L + 2)) % (2 ^ L : ℤ)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The spatial slide induces the exact adjacent-residue recurrence modulo `2^L`."
+    },
+    {
+      "id": "Erdos249257/AdjacentCarryTube.lean:168:adjacentSignedLift_succ_of_two_failures",
+      "name": "adjacentSignedLift_succ_of_two_failures",
+      "kind": "lemma",
+      "module": "Erdos249257/AdjacentCarryTube.lean",
+      "line": 168,
+      "signature": "lemma adjacentSignedLift_succ_of_two_failures {h N L : ℕ} (hfail : AdjacentRobustFailureAt h N L) (hfail' : AdjacentRobustFailureAt h (N + 1) L) (hroom : 8 * (N + h + L + 3 : ℤ) < (2 ^ L : ℤ)) : adjacentSignedLift h (N + 1) L = 2 * adjacentSignedLift h N L - deltaTotient h (N + L + 1) + deltaTotient h (N + L + 2)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Two consecutive robust failures cannot wrap when the next endpoint has `8W` dyadic room."
+    },
+    {
+      "id": "Erdos249257/AdjacentCarryTube.lean:212:adjacentWindowLift_mod_windowResidue",
+      "name": "adjacentWindowLift_mod_windowResidue",
+      "kind": "lemma",
+      "module": "Erdos249257/AdjacentCarryTube.lean",
+      "line": 212,
+      "signature": "lemma adjacentWindowLift_mod_windowResidue (h N L : ℕ) : adjacentWindowLift h N L ≡ windowDiscrepancy h N L [ZMOD (2 ^ L : ℤ)]",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The original-window lift has the same residue as `windowDiscrepancy`."
+    },
+    {
+      "id": "Erdos249257/AdjacentCarryTube.lean:224:adjacentWindowLift_branch_bounds",
+      "name": "adjacentWindowLift_branch_bounds",
+      "kind": "lemma",
+      "module": "Erdos249257/AdjacentCarryTube.lean",
+      "line": 224,
+      "signature": "lemma adjacentWindowLift_branch_bounds {h N L : ℕ} (hfail : AdjacentRobustFailureAt h N L) : (-(N + h + L + 2 : ℤ) < adjacentWindowLift h N L ∧ adjacentWindowLift h N L < 3 * (N + h + L + 2 : ℤ)) ∨ (-3 * (N + h + L + 2 : ℤ) < adjacentWindowLift h N L ∧ adjacentWindowLift h N L < (N + h + L + 2 : ℤ))",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The low and high signed branches give asymmetric `3W` bounds for the window lift."
+    },
+    {
+      "id": "Erdos249257/AdjacentCarryTube.lean:246:adjacentWindowLift_abs_lt_three",
+      "name": "adjacentWindowLift_abs_lt_three",
+      "kind": "lemma",
+      "module": "Erdos249257/AdjacentCarryTube.lean",
+      "line": 246,
+      "signature": "lemma adjacentWindowLift_abs_lt_three {h N L : ℕ} (hfail : AdjacentRobustFailureAt h N L) : |adjacentWindowLift h N L| < 3 * (N + h + L + 2 : ℤ)",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/AdjacentCarryTube.lean:257:certifiedKill_of_adjacentWindowLift_abs_gt",
+      "name": "certifiedKill_of_adjacentWindowLift_abs_gt",
+      "kind": "theorem",
+      "module": "Erdos249257/AdjacentCarryTube.lean",
+      "line": 257,
+      "signature": "theorem certifiedKill_of_adjacentWindowLift_abs_gt {h N L : ℕ} (hfail : AdjacentRobustFailureAt h N L) (hroom : 4 * (N + h + L + 2 : ℤ) < (2 ^ L : ℤ)) (hout : (N + h + L + 2 : ℤ) < |adjacentWindowLift h N L|) : certifiedKill h N L",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "If the centred original-window lift lies outside the endpoint strip, the same-`N` endpoint certificate already fires."
+    },
+    {
+      "id": "Erdos249257/AdjacentCarryTube.lean:279:tail_diff_notMem_int_of_adjacentWindowLift_abs_eq",
+      "name": "tail_diff_notMem_int_of_adjacentWindowLift_abs_eq",
+      "kind": "theorem",
+      "module": "Erdos249257/AdjacentCarryTube.lean",
+      "line": 279,
+      "signature": "theorem tail_diff_notMem_int_of_adjacentWindowLift_abs_eq {h N L : ℕ} (hroom : 2 * (N + h + L + 2 : ℤ) < (2 ^ L : ℤ)) (heq : |adjacentWindowLift h N L| = (N + h + L + 2 : ℤ)) : totientTail (N + h) - totientTail N ∉ Set.range ((↑) : ℤ → ℝ)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Equality with the endpoint radius is itself a non-integrality certificate, despite not satisfying the strict `certifiedKill` predicate."
+    },
+    {
+      "id": "Erdos249257/AdjacentCarryTube.lean:327:adjacentCarryState_abs_le_of_windowLift_abs_lt",
+      "name": "adjacentCarryState_abs_le_of_windowLift_abs_lt",
+      "kind": "lemma",
+      "module": "Erdos249257/AdjacentCarryTube.lean",
+      "line": 327,
+      "signature": "lemma adjacentCarryState_abs_le_of_windowLift_abs_lt {h N L : ℕ} (hin : |adjacentWindowLift h N L| < (N + h + L + 2 : ℤ)) : |adjacentCarryState h N L| ≤ (N + L + h + 1 : ℤ)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The third branch is the strict initial candidate box of `survivorKill`."
+    },
+    {
+      "id": "Erdos249257/AdjacentCarryTube.lean:336:adjacentFailure_kill_or_boundaryKill_or_strictCarry",
+      "name": "adjacentFailure_kill_or_boundaryKill_or_strictCarry",
+      "kind": "theorem",
+      "module": "Erdos249257/AdjacentCarryTube.lean",
+      "line": 336,
+      "signature": "theorem adjacentFailure_kill_or_boundaryKill_or_strictCarry {h N L : ℕ} (hfail : AdjacentRobustFailureAt h N L) (hroom : 4 * (N + h + L + 2 : ℤ) < (2 ^ L : ℤ)) : certifiedKill h N L ∨ (totientTail (N + h) - totientTail N ∉ Set.range ((↑) : ℤ → ℝ)) ∨ |adjacentCarryState h N L| ≤ (N + L + h + 1 : ℤ)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Correct pointwise interpretation of robust-arc failure."
+    },
+    {
+      "id": "Erdos249257/AdjacentCarryTube.lean:351:adjacentCarryState_succ",
+      "name": "adjacentCarryState_succ",
+      "kind": "lemma",
+      "module": "Erdos249257/AdjacentCarryTube.lean",
+      "line": 351,
+      "signature": "lemma adjacentCarryState_succ {h N L : ℕ} (hfail : AdjacentRobustFailureAt h N L) (hfail' : AdjacentRobustFailureAt h (N + 1) L) (hroom : 8 * (N + h + L + 3 : ℤ) < (2 ^ L : ℤ)) : adjacentCarryState h (N + 1) L = 2 * adjacentCarryState h N L - deltaTotient h (N + L + 1)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "In the strict robust-failure tube, the adjacent carry state obeys the existing carry recurrence."
+    },
+    {
+      "id": "Erdos249257/AdjacentCarryTube.lean:363:adjacentCarryState_eq_carryOrbit",
+      "name": "adjacentCarryState_eq_carryOrbit",
+      "kind": "theorem",
+      "module": "Erdos249257/AdjacentCarryTube.lean",
+      "line": 363,
+      "signature": "theorem adjacentCarryState_eq_carryOrbit {h N L i : ℕ} (hfail : ∀ j, j ≤ i → AdjacentRobustFailureAt h (N + j) L) (hroom : ∀ j, j < i → 8 * (N + j + h + L + 3 : ℤ) < (2 ^ L : ℤ)) : adjacentCarryState h (N + i) L = carryOrbit h (N + L) (adjacentCarryState h N L) i",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Exact affine conjugacy with `carryOrbit` over any robust-failure run."
+    },
+    {
+      "id": "Erdos249257/AdjacentCarryTube.lean:390:exists_adjacent_exit_of_survivorKill",
+      "name": "exists_adjacent_exit_of_survivorKill",
+      "kind": "theorem",
+      "module": "Erdos249257/AdjacentCarryTube.lean",
+      "line": 390,
+      "signature": "theorem exists_adjacent_exit_of_survivorKill {h N L K : ℕ} (hroom : ∀ i, i ≤ K → 8 * (N + i + h + L + 3 : ℤ) < (2 ^ L : ℤ)) (hkill : survivorKill h (N + L) K) : ∃ i ∈ Finset.range (K + 1), certifiedKill h (N + i) L ∨ (totientTail (N + i + h) - totientTail (N + i) ∉ Set.range ((↑) : ℤ → ℝ))",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The existing finite carry certificate forces an adjacent endpoint or boundary exit."
+    },
+    {
+      "id": "Erdos249257/AdjacentPhaseSeparation.lean:31:adjacentStepResidue",
+      "name": "adjacentStepResidue",
+      "kind": "def",
+      "module": "Erdos249257/AdjacentPhaseSeparation.lean",
+      "line": 31,
+      "signature": "def adjacentStepResidue (h N L : ℕ) : ℤ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Canonical residue of the displacement between adjacent fixed-depth window discrepancies."
+    },
+    {
+      "id": "Erdos249257/AdjacentPhaseSeparation.lean:36:AdjacentMiddleThirdAt",
+      "name": "AdjacentMiddleThirdAt",
+      "kind": "def",
+      "module": "Erdos249257/AdjacentPhaseSeparation.lean",
+      "line": 36,
+      "signature": "def AdjacentMiddleThirdAt (h N L : ℕ) : Prop",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The adjacent residue lies in the closed middle third of the dyadic circle."
+    },
+    {
+      "id": "Erdos249257/AdjacentPhaseSeparation.lean:43:AdjacentCertificateArcAt",
+      "name": "AdjacentCertificateArcAt",
+      "kind": "def",
+      "module": "Erdos249257/AdjacentPhaseSeparation.lean",
+      "line": 43,
+      "signature": "def AdjacentCertificateArcAt (h N L : ℕ) : Prop",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A wider adjacent arc that already forces the original endpoint certificate."
+    },
+    {
+      "id": "Erdos249257/AdjacentPhaseSeparation.lean:51:DTWAdjacentMiddleThirdSeparation",
+      "name": "DTWAdjacentMiddleThirdSeparation",
+      "kind": "def",
+      "module": "Erdos249257/AdjacentPhaseSeparation.lean",
+      "line": 51,
+      "signature": "def DTWAdjacentMiddleThirdSeparation : Prop",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Cofinal adjacent middle-third separation. This is a normal form for a possible certificate supply, not an unconditional theorem."
+    },
+    {
+      "id": "Erdos249257/AdjacentPhaseSeparation.lean:62:DTWAdjacentPhaseSeparation",
+      "name": "DTWAdjacentPhaseSeparation",
+      "kind": "def",
+      "module": "Erdos249257/AdjacentPhaseSeparation.lean",
+      "line": 62,
+      "signature": "def DTWAdjacentPhaseSeparation : Prop",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Cofinal separation of an adjacent pair by the norm-square threshold consumed by the two-point first-harmonic argument."
+    },
+    {
+      "id": "Erdos249257/AdjacentPhaseSeparation.lean:74:adjacentStepResidue_eq_translated_windowResidue",
+      "name": "adjacentStepResidue_eq_translated_windowResidue",
+      "kind": "theorem",
+      "module": "Erdos249257/AdjacentPhaseSeparation.lean",
+      "line": 74,
+      "signature": "theorem adjacentStepResidue_eq_translated_windowResidue (h N L : ℕ) : adjacentStepResidue h N L = (windowDiscrepancy h N L + deltaTotient h (N + L + 1)) % (2 ^ L : ℤ)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Sliding by one base point translates the old residue by exactly the fresh endpoint letter."
+    },
+    {
+      "id": "Erdos249257/AdjacentPhaseSeparation.lean:89:windowResidue_eq_adjacentStepResidue_sub_endpoint",
+      "name": "windowResidue_eq_adjacentStepResidue_sub_endpoint",
+      "kind": "theorem",
+      "module": "Erdos249257/AdjacentPhaseSeparation.lean",
+      "line": 89,
+      "signature": "theorem windowResidue_eq_adjacentStepResidue_sub_endpoint (h N L : ℕ) : windowDiscrepancy h N L % (2 ^ L : ℤ) = (adjacentStepResidue h N L - deltaTotient h (N + L + 1)) % (2 ^ L : ℤ)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Exact inverse translation: the adjacent datum together with the known endpoint letter reconstructs the original window residue."
+    },
+    {
+      "id": "Erdos249257/AdjacentPhaseSeparation.lean:103:certifiedKill_of_adjacentCertificateArc",
+      "name": "certifiedKill_of_adjacentCertificateArc",
+      "kind": "theorem",
+      "module": "Erdos249257/AdjacentPhaseSeparation.lean",
+      "line": 103,
+      "signature": "theorem certifiedKill_of_adjacentCertificateArc {h N L : ℕ} (harc : AdjacentCertificateArcAt h N L) : certifiedKill h N L",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The robust adjacent arc forces the original certificate at the same base `N`."
+    },
+    {
+      "id": "Erdos249257/AdjacentPhaseSeparation.lean:134:adjacentMiddleThird_implies_certificateArc",
+      "name": "adjacentMiddleThird_implies_certificateArc",
+      "kind": "theorem",
+      "module": "Erdos249257/AdjacentPhaseSeparation.lean",
+      "line": 134,
+      "signature": "theorem adjacentMiddleThird_implies_certificateArc {h X N L : ℕ} (hNlt : N < 2 * X) (hroom : 16 * (2 * X + h + L + 2) ≤ 2 ^ L) (hmid : AdjacentMiddleThirdAt h N L) : AdjacentCertificateArcAt h N L",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Under the standard dyadic room bound, the middle third is contained in the robust certificate arc."
+    },
+    {
+      "id": "Erdos249257/AdjacentPhaseSeparation.lean:158:certifiedKill_of_adjacentMiddleThird",
+      "name": "certifiedKill_of_adjacentMiddleThird",
+      "kind": "theorem",
+      "module": "Erdos249257/AdjacentPhaseSeparation.lean",
+      "line": 158,
+      "signature": "theorem certifiedKill_of_adjacentMiddleThird {h X N L : ℕ} (hNlt : N < 2 * X) (hroom : 16 * (2 * X + h + L + 2) ≤ 2 ^ L) (hmid : AdjacentMiddleThirdAt h N L) : certifiedKill h N L",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The middle-third event certifies the original base `N`, not merely one member of the adjacent pair."
+    },
+    {
+      "id": "Erdos249257/AdjacentPhaseSeparation.lean:170:tail_diff_eq_windowDiscrepancy_div_add_shifted",
+      "name": "tail_diff_eq_windowDiscrepancy_div_add_shifted",
+      "kind": "theorem",
+      "module": "Erdos249257/AdjacentPhaseSeparation.lean",
+      "line": 170,
+      "signature": "theorem tail_diff_eq_windowDiscrepancy_div_add_shifted (h N L : ℕ) : totientTail (N + h) - totientTail N = ((windowDiscrepancy h N L : ℤ) : ℝ) / 2 ^ L + (totientTail (N + L + h) - totientTail (N + L)) / 2 ^ L",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The finite discrepancy is the exact depth-`L` prefix of the tail difference; the only omitted term is the translated tail difference itself."
+    },
+    {
+      "id": "Erdos249257/AdjacentPhaseSeparation.lean:197:adjacent_step_div_eq_tail_diff_add_error",
+      "name": "adjacent_step_div_eq_tail_diff_add_error",
+      "kind": "theorem",
+      "module": "Erdos249257/AdjacentPhaseSeparation.lean",
+      "line": 197,
+      "signature": "theorem adjacent_step_div_eq_tail_diff_add_error (h N L : ℕ) : (((windowDiscrepancy h (N + 1) L - windowDiscrepancy h N L : ℤ) : ℝ) / 2 ^ L) = (totientTail (N + h) - totientTail N) - (deltaTotient h (N + 1) : ℝ) + ((totientTail (N + L + h) - totientTail (N + L)) - (totientTail (N + L + 1 + h) - totientTail (N + L + 1))) / 2 ^ L",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Exact adjacent-step approximation to the tail class. Modulo integers, the adjacent displacement is the current tail difference plus a translated tail error; hence adjacency exposes no independent arithmetic coordinate."
+    },
+    {
+      "id": "Erdos249257/AdjacentPhaseSeparation.lean:215:abs_adjacent_step_tail_error_lt",
+      "name": "abs_adjacent_step_tail_error_lt",
+      "kind": "theorem",
+      "module": "Erdos249257/AdjacentPhaseSeparation.lean",
+      "line": 215,
+      "signature": "theorem abs_adjacent_step_tail_error_lt (h N L : ℕ) : |((totientTail (N + L + h) - totientTail (N + L)) - (totientTail (N + L + 1 + h) - totientTail (N + L + 1))) / 2 ^ L| < (2 * (N : ℝ) + 2 * L + 2 * h + 5) / 2 ^ L",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The exact adjacent-step error is exponentially small at fixed base: its numerator is bounded by the two adjacent tail strips."
+    },
+    {
+      "id": "Erdos249257/AdjacentPhaseSeparation.lean:240:re_add_le_nine_fifths_of_unit_sq_chord",
+      "name": "re_add_le_nine_fifths_of_unit_sq_chord",
+      "kind": "theorem",
+      "module": "Erdos249257/AdjacentPhaseSeparation.lean",
+      "line": 240,
+      "signature": "theorem re_add_le_nine_fifths_of_unit_sq_chord {z w : ℂ} (hz : ‖z‖ = 1) (hw : ‖w‖ = 1) (hsep : (19 / 25 : ℝ) ≤ ‖z - w‖ ^ 2) : (z + w).re ≤ 9 / 5",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Sharp norm-only conversion from squared chord separation to the `9/10` average consumed by the first-harmonic certificate theorem."
+    },
+    {
+      "id": "Erdos249257/AdjacentPhaseSeparation.lean:258:exists_certifiedKill_of_phasePairSeparation",
+      "name": "exists_certifiedKill_of_phasePairSeparation",
+      "kind": "theorem",
+      "module": "Erdos249257/AdjacentPhaseSeparation.lean",
+      "line": 258,
+      "signature": "theorem exists_certifiedKill_of_phasePairSeparation {h X L N M : ℕ} (hNM : N ≠ M) (hNlt : N < 2 * X) (hMlt : M < 2 * X) (hroom : 16 * (2 * X + h + L + 2) ≤ 2 ^ L) (hsep : (19 / 25 : ℝ) ≤ ‖windowFirstExp h N L - windowFirstExp h M L‖ ^ 2) : ∃ K ∈ ({N, M} : Finset ℕ), certifiedKill h K L",
+      "generated_certificate": false,
+      "claim_ids": [
+        "adjacent_phase_separation_reduction"
+      ],
+      "docstring": "Separation of any two distinct phases in the standard dyadic block forces a certificate at one member of the pair."
+    },
+    {
+      "id": "Erdos249257/AdjacentPhaseSeparation.lean:283:irrational_totient_series_of_adjacentMiddleThirdSeparation",
+      "name": "irrational_totient_series_of_adjacentMiddleThirdSeparation",
+      "kind": "theorem",
+      "module": "Erdos249257/AdjacentPhaseSeparation.lean",
+      "line": 283,
+      "signature": "theorem irrational_totient_series_of_adjacentMiddleThirdSeparation (hsep : DTWAdjacentMiddleThirdSeparation) : Irrational (∑' n : ℕ, (Nat.totient n : ℝ) / 2 ^ n)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A cofinal adjacent middle-third supply proves irrationality through the existing finite certificate consumer."
+    },
+    {
+      "id": "Erdos249257/AdjacentPhaseSeparation.lean:295:irrational_totient_series_of_adjacentPhaseSeparation",
+      "name": "irrational_totient_series_of_adjacentPhaseSeparation",
+      "kind": "theorem",
+      "module": "Erdos249257/AdjacentPhaseSeparation.lean",
+      "line": 295,
+      "signature": "theorem irrational_totient_series_of_adjacentPhaseSeparation (hsep : DTWAdjacentPhaseSeparation) : Irrational (∑' n : ℕ, (Nat.totient n : ℝ) / 2 ^ n)",
+      "generated_certificate": false,
+      "claim_ids": [
+        "adjacent_phase_separation_reduction"
+      ],
+      "docstring": "A cofinal adjacent chord-separation supply also proves irrationality, via the two-element first-harmonic consumer."
     },
     {
       "id": "Erdos249257/BinaryTailWindowTransfer.lean:28:CoeffZeroWindow",
@@ -50345,17 +50826,504 @@
       "claim_ids": []
     },
     {
-      "id": "Erdos249257/FirstHarmonicGap.lean:104:exists_certifiedKill_of_first_harmonic_gap",
-      "name": "exists_certifiedKill_of_first_harmonic_gap",
+      "id": "Erdos249257/FirstHarmonicGap.lean:104:exists_certifiedKill_of_first_harmonic_gap_subset",
+      "name": "exists_certifiedKill_of_first_harmonic_gap_subset",
       "kind": "theorem",
       "module": "Erdos249257/FirstHarmonicGap.lean",
       "line": 104,
+      "signature": "theorem exists_certifiedKill_of_first_harmonic_gap_subset {h X L : ℕ} (T : Finset ℕ) (hTlt : ∀ N ∈ T, N < 2 * X) (hTne : T.Nonempty) (hroom : 16 * (2 * X + h + L + 2) ≤ 2 ^ L) (hgap : (∑ N ∈ T, windowFirstCos h N L) ≤ (9 / 10 : ℝ) * T.card) : ∃ N ∈ T, certifiedKill h N L",
+      "generated_certificate": false,
+      "claim_ids": [
+        "first_harmonic_certificate_interface"
+      ],
+      "docstring": "A first-harmonic saving on any nonempty finite subset of a dyadic block forces a certificate in that subset. This is the subset consumer needed by supplier-fibre arguments; no density or partition hypothesis is used."
+    },
+    {
+      "id": "Erdos249257/FirstHarmonicGap.lean:128:exists_certifiedKill_of_first_harmonic_gap",
+      "name": "exists_certifiedKill_of_first_harmonic_gap",
+      "kind": "theorem",
+      "module": "Erdos249257/FirstHarmonicGap.lean",
+      "line": 128,
       "signature": "theorem exists_certifiedKill_of_first_harmonic_gap {h X L : ℕ} (hX : 0 < X) (hroom : 16 * (2 * X + h + L + 2) ≤ 2 ^ L) (hgap : (∑ N ∈ Finset.Ico X (2 * X), windowFirstCos h N L) ≤ (9 / 10 : ℝ) * X) : ∃ N ∈ Finset.Ico X (2 * X), certifiedKill h N L",
       "generated_certificate": false,
       "claim_ids": [
         "first_harmonic_certificate_interface"
       ],
       "docstring": "A constant-saving first-harmonic gap on one dyadic block forces a finite certificate somewhere in that block. Establishing such gaps cofinally is the analytic input still required for #249."
+    },
+    {
+      "id": "Erdos249257/FirstHarmonicPivot.lean:32:windowFirstAngle",
+      "name": "windowFirstAngle",
+      "kind": "def",
+      "module": "Erdos249257/FirstHarmonicPivot.lean",
+      "line": 32,
+      "signature": "noncomputable def windowFirstAngle (h N L : ℕ) : ℝ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The residue angle used by the first additive character."
+    },
+    {
+      "id": "Erdos249257/FirstHarmonicPivot.lean:38:windowFirstExp",
+      "name": "windowFirstExp",
+      "kind": "def",
+      "module": "Erdos249257/FirstHarmonicPivot.lean",
+      "line": 38,
+      "signature": "noncomputable def windowFirstExp (h N L : ℕ) : ℂ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The complex first additive character of the endpoint discrepancy."
+    },
+    {
+      "id": "Erdos249257/FirstHarmonicPivot.lean:42:windowFirstExp_re",
+      "name": "windowFirstExp_re",
+      "kind": "theorem",
+      "module": "Erdos249257/FirstHarmonicPivot.lean",
+      "line": 42,
+      "signature": "theorem windowFirstExp_re (h N L : ℕ) : (windowFirstExp h N L).re = windowFirstCos h N L",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/FirstHarmonicPivot.lean:48:norm_windowFirstExp",
+      "name": "norm_windowFirstExp",
+      "kind": "theorem",
+      "module": "Erdos249257/FirstHarmonicPivot.lean",
+      "line": 48,
+      "signature": "theorem norm_windowFirstExp (h N L : ℕ) : ‖windowFirstExp h N L‖ = 1",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/FirstHarmonicPivot.lean:53:exists_certifiedKill_of_first_harmonic_norm_gap",
+      "name": "exists_certifiedKill_of_first_harmonic_norm_gap",
+      "kind": "theorem",
+      "module": "Erdos249257/FirstHarmonicPivot.lean",
+      "line": 53,
+      "signature": "theorem exists_certifiedKill_of_first_harmonic_norm_gap {h X L : ℕ} (hX : 0 < X) (hroom : 16 * (2 * X + h + L + 2) ≤ 2 ^ L) (hgap : ‖∑ N ∈ Finset.Ico X (2 * X), windowFirstExp h N L‖ ≤ (21 / 25 : ℝ) * X) : ∃ N ∈ Finset.Ico X (2 * X), certifiedKill h N L",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A complex first-harmonic saving is stronger than the real-part saving used by the certificate theorem."
+    },
+    {
+      "id": "Erdos249257/FirstHarmonicPivot.lean:75:DTWFirstHarmonicNormGap",
+      "name": "DTWFirstHarmonicNormGap",
+      "kind": "def",
+      "module": "Erdos249257/FirstHarmonicPivot.lean",
+      "line": 75,
+      "signature": "def DTWFirstHarmonicNormGap : Prop",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Cofinal complex first-harmonic norm saving. This is a checked direct analytic interface, stronger than the already-landed real-part interface."
+    },
+    {
+      "id": "Erdos249257/FirstHarmonicPivot.lean:83:irrational_totient_series_of_first_harmonic_norm_gap",
+      "name": "irrational_totient_series_of_first_harmonic_norm_gap",
+      "kind": "theorem",
+      "module": "Erdos249257/FirstHarmonicPivot.lean",
+      "line": 83,
+      "signature": "theorem irrational_totient_series_of_first_harmonic_norm_gap (hgap : DTWFirstHarmonicNormGap) : Irrational (∑' n : ℕ, (Nat.totient n : ℝ) / 2 ^ n)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The complex norm gap composes all the way to irrationality."
+    },
+    {
+      "id": "Erdos249257/FirstHarmonicPivot.lean:97:pivotOffset",
+      "name": "pivotOffset",
+      "kind": "def",
+      "module": "Erdos249257/FirstHarmonicPivot.lean",
+      "line": 97,
+      "signature": "def pivotOffset (L s : ℕ) : ℕ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Offset of the pivot argument `N + (L-s+1)`."
+    },
+    {
+      "id": "Erdos249257/FirstHarmonicPivot.lean:102:overlap_weight_identity",
+      "name": "overlap_weight_identity",
+      "kind": "theorem",
+      "module": "Erdos249257/FirstHarmonicPivot.lean",
+      "line": 102,
+      "signature": "theorem overlap_weight_identity {h L t : ℕ} (hht : h ≤ t) (htL : t < L) : (2 : ℤ) ^ (L - 1 - (t - h)) - (2 : ℤ) ^ (L - 1 - t) = ((2 : ℤ) ^ h - 1) * (2 : ℤ) ^ (L - 1 - t)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The two occurrences of an overlap totient value have the advertised net integer weight. Dividing this identity by `2^L` gives the coefficient `(2^h-1)/2^(t+1)` from the paper calculation."
+    },
+    {
+      "id": "Erdos249257/FirstHarmonicPivot.lean:110:pivotPrimeAngle",
+      "name": "pivotPrimeAngle",
+      "kind": "def",
+      "module": "Erdos249257/FirstHarmonicPivot.lean",
+      "line": 110,
+      "signature": "noncomputable def pivotPrimeAngle (h L s m p : ℕ) : ℝ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Real angle of the proposed one-dimensional pivot phase."
+    },
+    {
+      "id": "Erdos249257/FirstHarmonicPivot.lean:117:pivotPrimePhase",
+      "name": "pivotPrimePhase",
+      "kind": "def",
+      "module": "Erdos249257/FirstHarmonicPivot.lean",
+      "line": 117,
+      "signature": "noncomputable def pivotPrimePhase (h L s m p : ℕ) : ℂ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The proposed one-dimensional phase after the identity `φ(mp)=φ(m)(p-1)` has been applied at the overlap pivot."
+    },
+    {
+      "id": "Erdos249257/FirstHarmonicPivot.lean:121:norm_pivotPrimePhase",
+      "name": "norm_pivotPrimePhase",
+      "kind": "theorem",
+      "module": "Erdos249257/FirstHarmonicPivot.lean",
+      "line": 121,
+      "signature": "theorem norm_pivotPrimePhase (h L s m p : ℕ) : ‖pivotPrimePhase h L s m p‖ = 1",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/FirstHarmonicPivot.lean:127:pivotResidualWeight",
+      "name": "pivotResidualWeight",
+      "kind": "def",
+      "module": "Erdos249257/FirstHarmonicPivot.lean",
+      "line": 127,
+      "signature": "noncomputable def pivotResidualWeight (h N L s m p : ℕ) : ℂ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Removing the pivot by division. Division rather than an informal \"independence\" claim makes the residual definition exact."
+    },
+    {
+      "id": "Erdos249257/FirstHarmonicPivot.lean:131:windowFirstExp_eq_residual_mul_pivot",
+      "name": "windowFirstExp_eq_residual_mul_pivot",
+      "kind": "theorem",
+      "module": "Erdos249257/FirstHarmonicPivot.lean",
+      "line": 131,
+      "signature": "theorem windowFirstExp_eq_residual_mul_pivot (h N L s m p : ℕ) : windowFirstExp h N L = pivotResidualWeight h N L s m p * pivotPrimePhase h L s m p",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The pivot and its residual reconstruct the original phase exactly."
+    },
+    {
+      "id": "Erdos249257/FirstHarmonicPivot.lean:138:totient_mul_prime_of_not_dvd",
+      "name": "totient_mul_prime_of_not_dvd",
+      "kind": "theorem",
+      "module": "Erdos249257/FirstHarmonicPivot.lean",
+      "line": 138,
+      "signature": "theorem totient_mul_prime_of_not_dvd {m p : ℕ} (hp : p.Prime) (hpm : ¬p ∣ m) : Nat.totient (m * p) = Nat.totient m * (p - 1)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The elementary arithmetic input used at a clean prime pivot."
+    },
+    {
+      "id": "Erdos249257/FirstHarmonicPivot.lean:144:not_dvd_of_pos_of_lt",
+      "name": "not_dvd_of_pos_of_lt",
+      "kind": "theorem",
+      "module": "Erdos249257/FirstHarmonicPivot.lean",
+      "line": 144,
+      "signature": "theorem not_dvd_of_pos_of_lt {m p : ℕ} (hm : 0 < m) (hmp : m < p) : ¬p ∣ m",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A factor larger than a positive cofactor cannot divide that cofactor."
+    },
+    {
+      "id": "Erdos249257/FirstHarmonicPivot.lean:149:sum_mul_eq_centered_add_mean",
+      "name": "sum_mul_eq_centered_add_mean",
+      "kind": "theorem",
+      "module": "Erdos249257/FirstHarmonicPivot.lean",
+      "line": 149,
+      "signature": "theorem sum_mul_eq_centered_add_mean {α : Type*} [DecidableEq α] (P : Finset α) (W z : α → ℂ) (zbar : ℂ) : (∑ p ∈ P, W p * z p) = (∑ p ∈ P, W p * (z p - zbar)) + zbar * ∑ p ∈ P, W p",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Exact centring identity on one finite supplier fibre."
+    },
+    {
+      "id": "Erdos249257/FirstHarmonicPivot.lean:161:pivotArgument",
+      "name": "pivotArgument",
+      "kind": "def",
+      "module": "Erdos249257/FirstHarmonicPivot.lean",
+      "line": 161,
+      "signature": "def pivotArgument (N L s : ℕ) : ℕ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Actual integer at the selected overlap position."
+    },
+    {
+      "id": "Erdos249257/FirstHarmonicPivot.lean:165:pivotPrime",
+      "name": "pivotPrime",
+      "kind": "def",
+      "module": "Erdos249257/FirstHarmonicPivot.lean",
+      "line": 165,
+      "signature": "def pivotPrime (N L s : ℕ) : ℕ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Canonical large-prime choice: maximum-fold the finite prime-factor set. The fallback value `1` is rejected by `pivotSupplier`."
+    },
+    {
+      "id": "Erdos249257/FirstHarmonicPivot.lean:168:pivotCofactor",
+      "name": "pivotCofactor",
+      "kind": "def",
+      "module": "Erdos249257/FirstHarmonicPivot.lean",
+      "line": 168,
+      "signature": "def pivotCofactor (N L s : ℕ) : ℕ",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/FirstHarmonicPivot.lean:173:pivotPrime_eq_pivotArgument_of_prime",
+      "name": "pivotPrime_eq_pivotArgument_of_prime",
+      "kind": "theorem",
+      "module": "Erdos249257/FirstHarmonicPivot.lean",
+      "line": 173,
+      "signature": "theorem pivotPrime_eq_pivotArgument_of_prime {N L s : ℕ} (hp : (pivotArgument N L s).Prime) : pivotPrime N L s = pivotArgument N L s",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "On a prime pivot argument the canonical maximum-prime-factor selector is the argument itself."
+    },
+    {
+      "id": "Erdos249257/FirstHarmonicPivot.lean:180:pivotCofactor_eq_one_of_pivotArgument_prime",
+      "name": "pivotCofactor_eq_one_of_pivotArgument_prime",
+      "kind": "theorem",
+      "module": "Erdos249257/FirstHarmonicPivot.lean",
+      "line": 180,
+      "signature": "theorem pivotCofactor_eq_one_of_pivotArgument_prime {N L s : ℕ} (hp : (pivotArgument N L s).Prime) : pivotCofactor N L s = 1",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A prime pivot argument has canonical cofactor one."
+    },
+    {
+      "id": "Erdos249257/FirstHarmonicPivot.lean:188:pivotSupplier",
+      "name": "pivotSupplier",
+      "kind": "def",
+      "module": "Erdos249257/FirstHarmonicPivot.lean",
+      "line": 188,
+      "signature": "def pivotSupplier (X L s N : ℕ) : Prop",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Decidable clean-supplier predicate. The explicit multiplication receipt avoids relying on division simplification outside this definition."
+    },
+    {
+      "id": "Erdos249257/FirstHarmonicPivot.lean:198:pivotSupplierBases",
+      "name": "pivotSupplierBases",
+      "kind": "def",
+      "module": "Erdos249257/FirstHarmonicPivot.lean",
+      "line": 198,
+      "signature": "def pivotSupplierBases (X L s : ℕ) : Finset ℕ",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/FirstHarmonicPivot.lean:201:pivotGoodCofactor",
+      "name": "pivotGoodCofactor",
+      "kind": "def",
+      "module": "Erdos249257/FirstHarmonicPivot.lean",
+      "line": 201,
+      "signature": "def pivotGoodCofactor (L s N : ℕ) (η : ℝ) : Prop",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/FirstHarmonicPivot.lean:208:pivotGoodBases",
+      "name": "pivotGoodBases",
+      "kind": "def",
+      "module": "Erdos249257/FirstHarmonicPivot.lean",
+      "line": 208,
+      "signature": "def pivotGoodBases (X L s : ℕ) (η : ℝ) : Finset ℕ",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/FirstHarmonicPivot.lean:211:pivotBadBases",
+      "name": "pivotBadBases",
+      "kind": "def",
+      "module": "Erdos249257/FirstHarmonicPivot.lean",
+      "line": 211,
+      "signature": "def pivotBadBases (X L s : ℕ) (η : ℝ) : Finset ℕ",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/FirstHarmonicPivot.lean:214:pivotNonSupplierBases",
+      "name": "pivotNonSupplierBases",
+      "kind": "def",
+      "module": "Erdos249257/FirstHarmonicPivot.lean",
+      "line": 214,
+      "signature": "def pivotNonSupplierBases (X L s : ℕ) : Finset ℕ",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/FirstHarmonicPivot.lean:217:pivotPhaseAt",
+      "name": "pivotPhaseAt",
+      "kind": "def",
+      "module": "Erdos249257/FirstHarmonicPivot.lean",
+      "line": 217,
+      "signature": "noncomputable def pivotPhaseAt (h N L s : ℕ) : ℂ",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/FirstHarmonicPivot.lean:220:pivotResidualAt",
+      "name": "pivotResidualAt",
+      "kind": "def",
+      "module": "Erdos249257/FirstHarmonicPivot.lean",
+      "line": 220,
+      "signature": "noncomputable def pivotResidualAt (h N L s : ℕ) : ℂ",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/FirstHarmonicPivot.lean:223:windowFirstExp_eq_pivotResidualAt_mul_phase",
+      "name": "windowFirstExp_eq_pivotResidualAt_mul_phase",
+      "kind": "theorem",
+      "module": "Erdos249257/FirstHarmonicPivot.lean",
+      "line": 223,
+      "signature": "theorem windowFirstExp_eq_pivotResidualAt_mul_phase (h N L s : ℕ) : windowFirstExp h N L = pivotResidualAt h N L s * pivotPhaseAt h N L s",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/FirstHarmonicPivot.lean:230:totient_pivotArgument_eq_mul",
+      "name": "totient_pivotArgument_eq_mul",
+      "kind": "theorem",
+      "module": "Erdos249257/FirstHarmonicPivot.lean",
+      "line": 230,
+      "signature": "theorem totient_pivotArgument_eq_mul {X L s N : ℕ} (hN : N ∈ pivotSupplierBases X L s) : Nat.totient (pivotArgument N L s) = Nat.totient (pivotCofactor N L s) * (pivotPrime N L s - 1)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The canonical clean supplier really gives the advertised totient factorisation at the pivot argument."
+    },
+    {
+      "id": "Erdos249257/FirstHarmonicPivot.lean:245:pivotFiber",
+      "name": "pivotFiber",
+      "kind": "def",
+      "module": "Erdos249257/FirstHarmonicPivot.lean",
+      "line": 245,
+      "signature": "def pivotFiber (X L s m : ℕ) : Finset ℕ",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/FirstHarmonicPivot.lean:251:mem_pivotFiber_one_overlap_iff",
+      "name": "mem_pivotFiber_one_overlap_iff",
+      "kind": "theorem",
+      "module": "Erdos249257/FirstHarmonicPivot.lean",
+      "line": 251,
+      "signature": "theorem mem_pivotFiber_one_overlap_iff {h X L N : ℕ} (hX : 4 ≤ X) (hL : h ≤ L) : N ∈ pivotFiber X L (L - h) 1 ↔ X ≤ N ∧ N < 2 * X ∧ (N + h + 1).Prime",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The canonical natural fibre `m=1, s=L-h` is literally the shifted dyadic interval of primes. This is a membership equality for the actual largest-prime supplier set, not a separately sampled prime surrogate."
+    },
+    {
+      "id": "Erdos249257/FirstHarmonicPivot.lean:307:pivotFiberMean",
+      "name": "pivotFiberMean",
+      "kind": "def",
+      "module": "Erdos249257/FirstHarmonicPivot.lean",
+      "line": 307,
+      "signature": "noncomputable def pivotFiberMean (h X L s m : ℕ) : ℂ",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/FirstHarmonicPivot.lean:311:pivotCenteredCorrelation",
+      "name": "pivotCenteredCorrelation",
+      "kind": "def",
+      "module": "Erdos249257/FirstHarmonicPivot.lean",
+      "line": 311,
+      "signature": "noncomputable def pivotCenteredCorrelation (h X L s : ℕ) (η : ℝ) : ℂ",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/FirstHarmonicPivot.lean:317:pivotFiberMeanContribution",
+      "name": "pivotFiberMeanContribution",
+      "kind": "def",
+      "module": "Erdos249257/FirstHarmonicPivot.lean",
+      "line": 317,
+      "signature": "noncomputable def pivotFiberMeanContribution (h X L s : ℕ) (η : ℝ) : ℂ",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/FirstHarmonicPivot.lean:323:pivotBadContribution",
+      "name": "pivotBadContribution",
+      "kind": "def",
+      "module": "Erdos249257/FirstHarmonicPivot.lean",
+      "line": 323,
+      "signature": "noncomputable def pivotBadContribution (h X L s : ℕ) (η : ℝ) : ℂ",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/FirstHarmonicPivot.lean:327:pivotNonSupplierContribution",
+      "name": "pivotNonSupplierContribution",
+      "kind": "def",
+      "module": "Erdos249257/FirstHarmonicPivot.lean",
+      "line": 327,
+      "signature": "noncomputable def pivotNonSupplierContribution (h X L s : ℕ) : ℂ",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/FirstHarmonicPivot.lean:330:pivot_good_split",
+      "name": "pivot_good_split",
+      "kind": "theorem",
+      "module": "Erdos249257/FirstHarmonicPivot.lean",
+      "line": 330,
+      "signature": "private theorem pivot_good_split (h X L s : ℕ) (η : ℝ) : (∑ N ∈ pivotGoodBases X L s η, windowFirstExp h N L) = pivotCenteredCorrelation h X L s η + pivotFiberMeanContribution h X L s η",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/FirstHarmonicPivot.lean:342:windowFirstExp_sum_eq_pivot_decomposition",
+      "name": "windowFirstExp_sum_eq_pivot_decomposition",
+      "kind": "theorem",
+      "module": "Erdos249257/FirstHarmonicPivot.lean",
+      "line": 342,
+      "signature": "theorem windowFirstExp_sum_eq_pivot_decomposition (h X L s : ℕ) (η : ℝ) : (∑ N ∈ Finset.Ico X (2 * X), windowFirstExp h N L) = pivotCenteredCorrelation h X L s η + pivotFiberMeanContribution h X L s η + pivotBadContribution h X L s η + pivotNonSupplierContribution h X L s",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Exact decomposition into the four actual, evaluator-visible terms."
+    },
+    {
+      "id": "Erdos249257/FirstHarmonicPivot.lean:371:PivotBudgetAt",
+      "name": "PivotBudgetAt",
+      "kind": "def",
+      "module": "Erdos249257/FirstHarmonicPivot.lean",
+      "line": 371,
+      "signature": "def PivotBudgetAt (h X L s : ℕ) (η : ℝ) : Prop",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Unlike the earlier `X/2` complex-norm proposal, the consumer only needs a one-sided real bound. With the same other budgets, `14/25` is sufficient."
+    },
+    {
+      "id": "Erdos249257/FirstHarmonicPivot.lean:377:first_harmonic_gap_of_pivotBudgetAt",
+      "name": "first_harmonic_gap_of_pivotBudgetAt",
+      "kind": "theorem",
+      "module": "Erdos249257/FirstHarmonicPivot.lean",
+      "line": 377,
+      "signature": "theorem first_harmonic_gap_of_pivotBudgetAt {h X L s : ℕ} {η : ℝ} (hbudget : PivotBudgetAt h X L s η) : (∑ N ∈ Finset.Ico X (2 * X), windowFirstCos h N L) ≤ (9 / 10 : ℝ) * X",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/FirstHarmonicPivot.lean:397:DTWPivotResidualDecorrelation",
+      "name": "DTWPivotResidualDecorrelation",
+      "kind": "def",
+      "module": "Erdos249257/FirstHarmonicPivot.lean",
+      "line": 397,
+      "signature": "def DTWPivotResidualDecorrelation : Prop",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The genuinely narrower cofinal socket: all four terms are fixed finite sums over canonical largest-prime supplier fibres. The remaining estimate is only `Re centred ≤ 14X/25`, not `‖centred‖ ≤ X/2`."
+    },
+    {
+      "id": "Erdos249257/FirstHarmonicPivot.lean:405:irrational_totient_series_of_pivotResidualDecorrelation",
+      "name": "irrational_totient_series_of_pivotResidualDecorrelation",
+      "kind": "theorem",
+      "module": "Erdos249257/FirstHarmonicPivot.lean",
+      "line": 405,
+      "signature": "theorem irrational_totient_series_of_pivotResidualDecorrelation (hmix : DTWPivotResidualDecorrelation) : Irrational (∑' n : ℕ, (Nat.totient n : ℝ) / 2 ^ n)",
+      "generated_certificate": false,
+      "claim_ids": []
     },
     {
       "id": "Erdos249257/FullTargetPrimeAdjunctionNoGo.lean:18:controlling",

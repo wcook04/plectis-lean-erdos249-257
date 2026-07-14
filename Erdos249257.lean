@@ -44,3 +44,6 @@ import Erdos249257.SignedQMomentObstruction
 import Erdos249257.TotientMahlerDefect
 import Erdos249257.ResidualGaugeObstruction
 import Erdos249257.CarrySurvivorExtinction
+import Erdos249257.AdjacentCarryTube
+import Erdos249257.AdjacentPhaseSeparation
+import Erdos249257.FirstHarmonicPivot

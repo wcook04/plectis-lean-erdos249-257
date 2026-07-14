@@ -207,8 +207,32 @@ integer turn, so each cosine would exceed $9/10$.  Hence
 \]
 forces a certificate in the block.  This implication is
 \idn{exists_certifiedKill_of_first_harmonic_gap}
-\lref{FirstHarmonicGap.lean}{104}{exists_certifiedKill_of_first_harmonic_gap}.
-No cofinal exponential-sum estimate establishing its hypothesis is proved.
+\lref{FirstHarmonicGap.lean}{128}{exists_certifiedKill_of_first_harmonic_gap}.
+More generally, if $T$ is any nonempty finite set of indices below $2X$ and
+\[
+ \sum_{N\in T}W_1(h,N,L)\le\frac9{10}|T|,
+\]
+then a certificate occurs at some $N\in T$.  This subset form is
+\idn{exists_certifiedKill_of_first_harmonic_gap_subset}
+\lref{FirstHarmonicGap.lean}{104}{exists_certifiedKill_of_first_harmonic_gap_subset}.
+No cofinal exponential-sum estimate establishing either hypothesis is proved.
+
+\section{Adjacent-pair phase separation}\label{sec:adjacentphase}
+At a scale satisfying the same room inequality, with $N+1<2X$, suppose that
+the first harmonic phases at two adjacent indices obey
+\[
+ \left\lVert
+ \operatorname{windowFirstExp}(h,N+1,L)-\operatorname{windowFirstExp}(h,N,L)
+ \right\rVert^2\ge\frac{19}{25}.
+\]
+Then a certificate occurs at one of $N$ and $N+1$.  The finite consumer is
+\idn{exists_certifiedKill_of_phasePairSeparation}
+\lref{AdjacentPhaseSeparation.lean}{258}{exists_certifiedKill_of_phasePairSeparation}.
+Consequently, a cofinal supply of adjacent pairs satisfying this inequality
+implies irrationality of the totient constant, by
+\idn{irrational_totient_series_of_adjacentPhaseSeparation}
+\lref{AdjacentPhaseSeparation.lean}{295}{irrational_totient_series_of_adjacentPhaseSeparation}.
+No cofinal adjacent-pair separation is proved here.
 
 \section{Fixed local precision cannot finish the argument}\label{sec:nogo}
 A finite valuation--unit symbol records a bounded amount of local transport
@@ -232,6 +256,7 @@ Joint $(3,5)$ transport & moment annihilation and consumer & unconditional \\
 Prime jump & migration, sharp window, $(12,5,15)$ & finite \\
 Three transport & sharp window and $(60,12)$ & finite \\
 First harmonic & cosine gap forces a certificate & conditional input \\
+Adjacent phases & squared chord separation forces a certificate & conditional input \\
 Tropical signature & fixed precision has a completion & no-go \\
 Irrationality of $S$ & follows from a named unbounded supply & supply open \\
 \bottomrule

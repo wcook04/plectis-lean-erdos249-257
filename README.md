@@ -27,11 +27,11 @@ there rather than implied by the release tag.
 
 | Checked surface | Scale |
 |---|---:|
-| Lean modules | 544 |
-| Lean declarations | 6,419 |
-| Theorem-like declarations | 5,891 |
+| Lean modules | 547 |
+| Lean declarations | 6,505 |
+| Theorem-like declarations | 5,942 |
 | Generated certificate declarations | 1,681 |
-| Principal claim-to-Lean links | 69 |
+| Principal claim-to-Lean links | 72 |
 | Exact remaining open propositions | 3 |
 
 These are generated navigation counts, not a claim that every declaration is a

@@ -98,6 +98,30 @@ private lemma windowFirstCos_gt_of_not_certifiedKill
     rw [hphase, Real.cos_two_pi_sub]
     exact nine_tenths_lt_cos_pi_div_eight.trans_le (hnear_cos s hs0 hsW)
 
+/-- A first-harmonic saving on any nonempty finite subset of a dyadic block
+forces a certificate in that subset.  This is the subset consumer needed by
+supplier-fibre arguments; no density or partition hypothesis is used. -/
+theorem exists_certifiedKill_of_first_harmonic_gap_subset
+    {h X L : ℕ} (T : Finset ℕ)
+    (hTlt : ∀ N ∈ T, N < 2 * X)
+    (hTne : T.Nonempty)
+    (hroom : 16 * (2 * X + h + L + 2) ≤ 2 ^ L)
+    (hgap :
+      (∑ N ∈ T, windowFirstCos h N L)
+        ≤ (9 / 10 : ℝ) * T.card) :
+    ∃ N ∈ T, certifiedKill h N L := by
+  by_contra hnone
+  push Not at hnone
+  have hsum :
+      (∑ _N ∈ T, (9 / 10 : ℝ)) <
+        ∑ N ∈ T, windowFirstCos h N L :=
+    Finset.sum_lt_sum_of_nonempty hTne fun N hN => by
+      exact windowFirstCos_gt_of_not_certifiedKill
+        (hTlt N hN) hroom (hnone N hN)
+  rw [Finset.sum_const] at hsum
+  simp only [nsmul_eq_mul] at hsum
+  nlinarith
+
 /-- A constant-saving first-harmonic gap on one dyadic block forces a finite
 certificate somewhere in that block.  Establishing such gaps cofinally is
 the analytic input still required for #249. -/
