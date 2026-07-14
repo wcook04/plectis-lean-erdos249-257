@@ -244,6 +244,13 @@ theorem mersenneWeightRemainder_nonneg
       (pow_le_pow_of_le_one (by norm_num) (by norm_num) hn).trans
         (by norm_num)))
 
+theorem mersenneWeightRemainder_pos
+    {n : ℕ} (hn : 0 < n) :
+    0 < mersenneWeightRemainder n := by
+  unfold mersenneWeightRemainder
+  exact div_pos (by positivity) (sub_pos.mpr
+    (pow_lt_one₀ (by norm_num) (by norm_num) (Nat.ne_of_gt hn)))
+
 /-- Uniform third-channel bound for one weight. -/
 theorem mersenneWeightRemainder_le
     {n : ℕ} (hn : 0 < n) :
@@ -321,6 +328,13 @@ theorem mersenneWeightRemainderTail_nonneg (n : ℕ) :
   unfold mersenneWeightRemainderTail
   exact tsum_nonneg fun k => mersenneWeightRemainder_nonneg (by omega)
 
+theorem mersenneWeightRemainderTail_pos (n : ℕ) :
+    0 < mersenneWeightRemainderTail n := by
+  unfold mersenneWeightRemainderTail
+  exact (summable_mersenneWeightRemainderTail n).tsum_pos
+    (fun k => (mersenneWeightRemainder_pos (by omega)).le)
+    0 (mersenneWeightRemainder_pos (by omega))
+
 /-- The accumulated higher-channel tail is at most `(2/7)·8⁻ⁿ`. -/
 theorem mersenneWeightRemainderTail_le (n : ℕ) :
     mersenneWeightRemainderTail n
@@ -342,6 +356,46 @@ theorem mersenneWeightRemainderTail_le (n : ℕ) :
     _ = (2 / 7 : ℝ) * ((1 : ℝ) / 8) ^ n := by
       rw [tsum_eighth_nat_add_succ]
       ring
+
+/-- The third geometric channel is a strict lower enclosure of the complete
+higher-channel tail. -/
+theorem one_seventh_eighth_pow_lt_mersenneWeightRemainderTail (n : ℕ) :
+    (1 / 7 : ℝ) * ((1 : ℝ) / 8) ^ n <
+      mersenneWeightRemainderTail n := by
+  have hle : ∀ k : ℕ,
+      ((1 : ℝ) / 8) ^ (n + k + 1) ≤
+        mersenneWeightRemainder (n + k + 1) := by
+    intro k
+    unfold mersenneWeightRemainder
+    have hden : 0 < 1 - ((1 : ℝ) / 2) ^ (n + k + 1) := by
+      exact sub_pos.mpr
+        (pow_lt_one₀ (by norm_num) (by norm_num) (by omega))
+    rw [le_div_iff₀ hden]
+    have hx : 0 ≤ ((1 : ℝ) / 8) ^ (n + k + 1) := by positivity
+    have hy : 0 ≤ ((1 : ℝ) / 2) ^ (n + k + 1) := by positivity
+    have hxy : 0 ≤ ((1 : ℝ) / 8) ^ (n + k + 1) *
+        ((1 : ℝ) / 2) ^ (n + k + 1) := mul_nonneg hx hy
+    nlinarith
+  have hstrict :
+      ((1 : ℝ) / 8) ^ (n + 0 + 1) <
+        mersenneWeightRemainder (n + 0 + 1) := by
+    unfold mersenneWeightRemainder
+    have hden : 0 < 1 - ((1 : ℝ) / 2) ^ (n + 0 + 1) := by
+      exact sub_pos.mpr
+        (pow_lt_one₀ (by norm_num) (by norm_num) (by omega))
+    rw [lt_div_iff₀ hden]
+    have hx : 0 < ((1 : ℝ) / 8) ^ (n + 0 + 1) := by positivity
+    have hy : 0 < ((1 : ℝ) / 2) ^ (n + 0 + 1) := by positivity
+    have hxy : 0 < ((1 : ℝ) / 8) ^ (n + 0 + 1) *
+        ((1 : ℝ) / 2) ^ (n + 0 + 1) := mul_pos hx hy
+    nlinarith
+  have hsum := Summable.tsum_lt_tsum_of_nonneg (i := 0)
+    (f := fun k : ℕ => ((1 : ℝ) / 8) ^ (n + k + 1))
+    (g := fun k : ℕ => mersenneWeightRemainder (n + k + 1))
+    (fun k => by positivity) hle hstrict
+    (summable_mersenneWeightRemainderTail n)
+  rw [tsum_eighth_nat_add_succ] at hsum
+  exact hsum
 
 /-- Exact tail expansion through the second geometric channel. -/
 theorem mersenneTail_eq_two_channels_add_remainderTail (n : ℕ) :
@@ -993,6 +1047,74 @@ theorem greedyMersenneRemainderRat_succ (x : ℚ) (n : ℕ) :
           greedyMersenneRemainderRat x n - mersenneWeightRat (n + 1)
         else greedyMersenneRemainderRat x n := rfl
 
+/-! ## Exact rational sliver coordinates
+
+The sharp skip-branch analysis is most naturally expressed after doubling
+the usual dyadic excess coordinate.  This normalization is deliberate: it
+makes the constant term in a selected-step update exactly `-2`, so the
+limiting affine map is `ρ ↦ 4 * ρ - 2` and its fixed point is `2 / 3`.
+The undoubled coordinate has constant term `-1` and fixed point `1 / 3`.
+-/
+
+/-- Undoubled excess above the dyadic point at scale `n`.  This is the
+coordinate whose finite-level selected-step law has constant term `-1`.
+Keeping it separate from the doubled coordinate prevents the two limiting
+fixed points from being compared under different normalizations. -/
+def mersenneSliverCoordinateRat (n : ℕ) (r : ℚ) : ℚ :=
+  ((2 : ℚ) ^ n * r - 1) * ((2 : ℚ) ^ n - 1)
+
+/-- Doubled excess above the dyadic point at scale `n`.  For an exact
+rational remainder `r`, this is
+`2 * (2^n * r - 1) * (2^n - 1)`. -/
+def sharpMersenneSliverCoordinateRat (n : ℕ) (r : ℚ) : ℚ :=
+  2 * ((2 : ℚ) ^ n * r - 1) * ((2 : ℚ) ^ n - 1)
+
+theorem sharpMersenneSliverCoordinateRat_eq_two_mul (n : ℕ) (r : ℚ) :
+    sharpMersenneSliverCoordinateRat n r =
+      2 * mersenneSliverCoordinateRat n r := by
+  simp [sharpMersenneSliverCoordinateRat, mersenneSliverCoordinateRat, mul_assoc]
+
+/-- Exact selected-step law for the undoubled coordinate.  Its limiting map
+is `ρ ↦ 4 * ρ - 1`, with limiting fixed point `1 / 3`; the `-2` and `2 / 3`
+constants belong to `sharpMersenneSliverCoordinateRat`. -/
+theorem mersenneSliverCoordinateRat_selected_step
+    {n : ℕ} (hn : 0 < n) (r : ℚ) :
+    mersenneSliverCoordinateRat (n + 1)
+        (r - mersenneWeightRat (n + 1)) =
+      (4 + 2 / ((2 : ℚ) ^ n - 1)) *
+          mersenneSliverCoordinateRat n r - 1 := by
+  have hpow : ((2 : ℚ) ^ n - 1) ≠ 0 := by
+    have hlt : (1 : ℚ) < 2 ^ n := one_lt_pow₀ (by norm_num) (Nat.ne_of_gt hn)
+    linarith
+  have hweight : ((2 : ℚ) ^ (n + 1) - 1) ≠ 0 := by
+    have hlt : (1 : ℚ) < 2 ^ (n + 1) :=
+      one_lt_pow₀ (by norm_num) (by omega)
+    linarith
+  unfold mersenneSliverCoordinateRat mersenneWeightRat
+  field_simp [hpow, hweight]
+  ring
+
+/-- Exact finite-level selected-step law for the doubled sliver coordinate.
+The final term is the complete finite-level correction to the limiting map
+`ρ ↦ 4 * ρ - 2`; no asymptotic estimate is used here. -/
+theorem sharpMersenneSliverCoordinateRat_selected_step
+    {n : ℕ} (hn : 0 < n) (r : ℚ) :
+    sharpMersenneSliverCoordinateRat (n + 1)
+        (r - mersenneWeightRat (n + 1)) =
+      4 * sharpMersenneSliverCoordinateRat n r - 2 +
+        2 * sharpMersenneSliverCoordinateRat n r /
+          ((2 : ℚ) ^ n - 1) := by
+  have hpow : ((2 : ℚ) ^ n - 1) ≠ 0 := by
+    have hlt : (1 : ℚ) < 2 ^ n := one_lt_pow₀ (by norm_num) (Nat.ne_of_gt hn)
+    linarith
+  have hweight : ((2 : ℚ) ^ (n + 1) - 1) ≠ 0 := by
+    have hlt : (1 : ℚ) < 2 ^ (n + 1) :=
+      one_lt_pow₀ (by norm_num) (by omega)
+    linarith
+  unfold sharpMersenneSliverCoordinateRat mersenneWeightRat
+  field_simp [hpow, hweight]
+  ring
+
 /-- Greedy subtraction preserves nonnegativity. -/
 theorem greedyMersenneRemainder_nonneg {x : ℝ} (hx : 0 ≤ x) (n : ℕ) :
     0 ≤ greedyMersenneRemainder x n := by
@@ -1034,19 +1156,126 @@ theorem greedyMersenneRemainder_nonneg {x : ℝ} (hx : 0 ≤ x) (n : ℕ) :
           exact_mod_cast hc
         rw [if_neg h, if_neg h', ih]
 
+/-! ## Skipped-branch cap transport -/
+
+/-- The first geometric channel of the Mersenne tail. -/
+noncomputable def halfDyadicCap (n : ℕ) : ℝ :=
+  ((1 : ℝ) / 2) ^ n
+
+/-- The first two geometric channels of the Mersenne tail.  This cap is
+strictly weaker than the dyadic cap while still lying below the full tail. -/
+noncomputable def halfTwoChannelCap (n : ℕ) : ℝ :=
+  ((1 : ℝ) / 2) ^ n
+    + (1 / 3 : ℝ) * ((1 : ℝ) / 4) ^ n
+
+/-- If selected greedy branches transport a cap and skipped branches satisfy
+the next cap directly, then the cap holds at every level.  This isolates the
+only branch on which a channel-cap proof has a genuine arithmetic burden. -/
+theorem greedyMersenneRemainder_le_cap_of_skipBarrier
+    (c : ℕ → ℝ)
+    (hbase : greedyMersenneRemainder (1 / 2 : ℝ) 0 ≤ c 0)
+    (hselected : ∀ n : ℕ,
+      c n - mersenneWeight (n + 1) ≤ c (n + 1))
+    (hskipped : ∀ n : ℕ,
+      ¬ mersenneWeight (n + 1)
+          ≤ greedyMersenneRemainder (1 / 2 : ℝ) n →
+      greedyMersenneRemainder (1 / 2 : ℝ) n ≤ c (n + 1)) :
+    ∀ n : ℕ, greedyMersenneRemainder (1 / 2 : ℝ) n ≤ c n := by
+  intro n
+  induction n with
+  | zero => exact hbase
+  | succ n ih =>
+      rw [greedyMersenneRemainder_succ]
+      by_cases htake :
+          mersenneWeight (n + 1) ≤ greedyMersenneRemainder (1 / 2 : ℝ) n
+      · rw [if_pos htake]
+        exact (sub_le_sub_right ih _).trans (hselected n)
+      · rw [if_neg htake]
+        exact hskipped n htake
+
+/-- The one-channel cap is contained in the two-channel cap. -/
+theorem halfDyadicCap_le_halfTwoChannelCap (n : ℕ) :
+    halfDyadicCap n ≤ halfTwoChannelCap n := by
+  unfold halfDyadicCap halfTwoChannelCap
+  have hquarter : 0 ≤ (1 / 3 : ℝ) * ((1 : ℝ) / 4) ^ n := by positivity
+  linarith
+
+/-- The two-channel cap is a lower enclosure of the exact Mersenne tail. -/
+theorem halfTwoChannelCap_le_mersenneTail (n : ℕ) :
+    halfTwoChannelCap n ≤ mersenneTail n := by
+  rw [mersenneTail_eq_two_channels_add_remainderTail]
+  unfold halfTwoChannelCap
+  exact le_add_of_nonneg_right (mersenneWeightRemainderTail_nonneg n)
+
+/-- The two-channel truncation is strictly below the true tail.  The omitted
+higher channels are the exact positive gap, rather than a factor-two margin
+against a `2 / 3` sliver threshold. -/
+theorem halfTwoChannelCap_lt_mersenneTail (n : ℕ) :
+    halfTwoChannelCap n < mersenneTail n := by
+  rw [mersenneTail_eq_two_channels_add_remainderTail]
+  unfold halfTwoChannelCap
+  have hrem := mersenneWeightRemainderTail_pos n
+  linarith
+
+/-- A selected greedy branch transports the dyadic cap strictly. -/
+theorem halfDyadicCap_selected_strict (n : ℕ) :
+    halfDyadicCap n - mersenneWeight (n + 1)
+      < halfDyadicCap (n + 1) := by
+  rw [mersenneWeight_eq_two_channels_add_remainder (by omega)]
+  unfold halfDyadicCap
+  simp only [pow_succ]
+  have hquarter : 0 < ((1 : ℝ) / 4) ^ n := by positivity
+  have hrem := mersenneWeightRemainder_nonneg (n := n + 1) (by omega)
+  nlinarith
+
+/-- A selected greedy branch transports the two-channel cap strictly. -/
+theorem halfTwoChannelCap_selected_strict (n : ℕ) :
+    halfTwoChannelCap n - mersenneWeight (n + 1)
+      < halfTwoChannelCap (n + 1) := by
+  rw [mersenneWeight_eq_two_channels_add_remainder (by omega)]
+  unfold halfTwoChannelCap
+  simp only [pow_succ]
+  have hrem := mersenneWeightRemainder_pos (n := n + 1) (by omega)
+  nlinarith
+
+/-- Non-strict transport form consumed by the generic skip barrier. -/
+theorem halfDyadicCap_selected (n : ℕ) :
+    halfDyadicCap n - mersenneWeight (n + 1)
+      ≤ halfDyadicCap (n + 1) :=
+  (halfDyadicCap_selected_strict n).le
+
+/-- Non-strict transport form consumed by the generic skip barrier. -/
+theorem halfTwoChannelCap_selected (n : ℕ) :
+    halfTwoChannelCap n - mersenneWeight (n + 1)
+      ≤ halfTwoChannelCap (n + 1) :=
+  (halfTwoChannelCap_selected_strict n).le
+
 /-- The set of positive exponents selected by the real greedy recursion. -/
 noncomputable def greedyMersenneSupport (x : ℝ) : Set ℕ :=
   {m : ℕ | m ≠ 0 ∧
     mersenneWeight m ≤ greedyMersenneRemainder x (m - 1)}
 
+/-- The positive exponents omitted by the real greedy recursion. -/
+noncomputable def greedyMersenneSkippedSupport (x : ℝ) : Set ℕ :=
+  {m : ℕ | m ≠ 0 ∧ m ∉ greedyMersenneSupport x}
+
 @[simp] theorem zero_not_mem_greedyMersenneSupport (x : ℝ) :
     0 ∉ greedyMersenneSupport x := by
   simp [greedyMersenneSupport]
+
+@[simp] theorem zero_not_mem_greedyMersenneSkippedSupport (x : ℝ) :
+    0 ∉ greedyMersenneSkippedSupport x := by
+  simp [greedyMersenneSkippedSupport]
 
 @[simp] theorem succ_mem_greedyMersenneSupport_iff (x : ℝ) (n : ℕ) :
     n + 1 ∈ greedyMersenneSupport x
       ↔ mersenneWeight (n + 1) ≤ greedyMersenneRemainder x n := by
   simp [greedyMersenneSupport]
+
+@[simp] theorem succ_mem_greedyMersenneSkippedSupport_iff (x : ℝ) (n : ℕ) :
+    n + 1 ∈ greedyMersenneSkippedSupport x
+      ↔ ¬ mersenneWeight (n + 1) ≤ greedyMersenneRemainder x n := by
+  simp [greedyMersenneSkippedSupport]
 
 /-- Exact finite-prefix identity for the real greedy recursion. -/
 theorem greedyMersenne_prefix_add_remainder (x : ℝ) (n : ℕ) :
@@ -1177,6 +1406,39 @@ theorem mem_mersenneAchievementSet_of_greedy_survival {x : ℝ} (hx : 0 ≤ x)
     tendsto_nhds_unique htoSum htoX
   exact ⟨A, zero_not_mem_greedyMersenneSupport x, hvalue.symm⟩
 
+/-- It is enough to establish the two-channel cap only when the actual greedy
+orbit skips the next exponent.  Selected branches and the final membership
+composition are discharged here. -/
+theorem half_mem_mersenneAchievementSet_of_skipped_twoChannelCap
+    (hskip : ∀ n : ℕ,
+      ¬ mersenneWeight (n + 1)
+          ≤ greedyMersenneRemainder (1 / 2 : ℝ) n →
+      greedyMersenneRemainder (1 / 2 : ℝ) n
+          ≤ halfTwoChannelCap (n + 1)) :
+    (1 / 2 : ℝ) ∈ mersenneAchievementSet := by
+  have hall : ∀ n : ℕ,
+      greedyMersenneRemainder (1 / 2 : ℝ) n ≤ halfTwoChannelCap n := by
+    apply greedyMersenneRemainder_le_cap_of_skipBarrier
+    · norm_num [halfTwoChannelCap]
+    · exact halfTwoChannelCap_selected
+    · exact hskip
+  apply mem_mersenneAchievementSet_of_greedy_survival (by norm_num)
+  intro n
+  exact (hall n).trans (halfTwoChannelCap_le_mersenneTail n)
+
+/-- The stronger one-channel skipped-branch obligation is therefore also a
+sufficient membership criterion. -/
+theorem half_mem_mersenneAchievementSet_of_skipped_dyadicCap
+    (hskip : ∀ n : ℕ,
+      ¬ mersenneWeight (n + 1)
+          ≤ greedyMersenneRemainder (1 / 2 : ℝ) n →
+      greedyMersenneRemainder (1 / 2 : ℝ) n
+          ≤ halfDyadicCap (n + 1)) :
+    (1 / 2 : ℝ) ∈ mersenneAchievementSet := by
+  apply half_mem_mersenneAchievementSet_of_skipped_twoChannelCap
+  intro n hskipped
+  exact (hskip n hskipped).trans (halfDyadicCap_le_halfTwoChannelCap (n + 1))
+
 /-- **Greedy membership criterion.**  A real target belongs to the Mersenne
 achievement set exactly when it is nonnegative and every residual is at most
 the full remaining tail. -/
@@ -1187,6 +1449,79 @@ theorem mem_mersenneAchievementSet_iff_greedy_survival (x : ℝ) :
   · exact greedy_survives_of_mem_mersenneAchievementSet
   · rintro ⟨hx, hsurvive⟩
     exact mem_mersenneAchievementSet_of_greedy_survival hx hsurvive
+
+/-! ## Fatal-state dichotomy -/
+
+/-- A greedy state is fatal when its residual is already larger than all
+remaining Mersenne mass. -/
+def GreedyMersenneFatalAt (x : ℝ) (n : ℕ) : Prop :=
+  mersenneTail n < greedyMersenneRemainder x n
+
+theorem greedyMersenneFatalAt_iff_not_survives (x : ℝ) (n : ℕ) :
+    GreedyMersenneFatalAt x n ↔
+      ¬ greedyMersenneRemainder x n ≤ mersenneTail n := by
+  simp [GreedyMersenneFatalAt]
+
+/-- Fatality is absorbing: the next exponent is selected and the next state
+is fatal again. -/
+theorem greedyMersenneFatalAt_succ {x : ℝ} {n : ℕ}
+    (hfatal : GreedyMersenneFatalAt x n) :
+    mersenneWeight (n + 1) ≤ greedyMersenneRemainder x n ∧
+      GreedyMersenneFatalAt x (n + 1) := by
+  have htail := mersenneTail_eq_weight_add n
+  have htailNonneg := mersenneTail_nonneg (n + 1)
+  have htake :
+      mersenneWeight (n + 1) ≤ greedyMersenneRemainder x n := by
+    unfold GreedyMersenneFatalAt at hfatal
+    linarith
+  refine ⟨htake, ?_⟩
+  unfold GreedyMersenneFatalAt at hfatal ⊢
+  rw [greedyMersenneRemainder_succ, if_pos htake]
+  linarith
+
+/-- Once a fatal state is reached, every later state is fatal. -/
+theorem greedyMersenneFatalAt_add {x : ℝ} {n : ℕ}
+    (hfatal : GreedyMersenneFatalAt x n) (k : ℕ) :
+    GreedyMersenneFatalAt x (n + k) := by
+  induction k with
+  | zero => simpa using hfatal
+  | succ k ih =>
+      simpa [Nat.add_assoc] using (greedyMersenneFatalAt_succ ih).2
+
+/-- Every exponent after a fatal state is selected by the greedy recursion. -/
+theorem mem_greedyMersenneSupport_of_fatalAt_add_succ
+    {x : ℝ} {n : ℕ} (hfatal : GreedyMersenneFatalAt x n) (k : ℕ) :
+    n + k + 1 ∈ greedyMersenneSupport x := by
+  rw [succ_mem_greedyMersenneSupport_iff]
+  exact (greedyMersenneFatalAt_succ
+    (greedyMersenneFatalAt_add hfatal k)).1
+
+/-- A fatal state leaves only finitely many omitted exponents. -/
+theorem finite_greedyMersenneSkippedSupport_of_fatalAt
+    {x : ℝ} {n : ℕ} (hfatal : GreedyMersenneFatalAt x n) :
+    (greedyMersenneSkippedSupport x).Finite := by
+  refine (Finset.finite_toSet (Finset.range (n + 1))).subset ?_
+  intro m hm
+  rw [Finset.mem_coe, Finset.mem_range]
+  by_contra hnot
+  have hge : n + 1 ≤ m := by omega
+  have hselected := mem_greedyMersenneSupport_of_fatalAt_add_succ
+    hfatal (m - (n + 1))
+  have hmEq : n + (m - (n + 1)) + 1 = m := by omega
+  exact hm.2 (hmEq ▸ hselected)
+
+/-- Infinitely many omitted exponents rule out every fatal state and hence
+force exact achievement-set membership. -/
+theorem mem_mersenneAchievementSet_of_greedySkippedSupport_infinite
+    {x : ℝ} (hx : 0 ≤ x)
+    (hskips : (greedyMersenneSkippedSupport x).Infinite) :
+    x ∈ mersenneAchievementSet := by
+  apply (mem_mersenneAchievementSet_iff_greedy_survival x).2
+  refine ⟨hx, fun n => ?_⟩
+  by_contra hnot
+  have hfatal : GreedyMersenneFatalAt x n :=
+    (greedyMersenneFatalAt_iff_not_survives x n).2 hnot
+  exact hskips (finite_greedyMersenneSkippedSupport_of_fatalAt hfatal)
 
 /-- Strict superincreasingness makes normalized support coding injective. -/
 theorem positiveMersenneSupportValue_injective_normalized
@@ -1551,6 +1886,13 @@ theorem mersenneCorrectionTail_nonneg (n : ℕ) :
   exact add_nonneg (mul_nonneg (by norm_num) (by positivity))
     (mersenneWeightRemainderTail_nonneg n)
 
+theorem mersenneCorrectionTail_pos (n : ℕ) :
+    0 < mersenneCorrectionTail n := by
+  rw [mersenneCorrectionTail_eq]
+  have hquarter : 0 < (1 / 3 : ℝ) * ((1 : ℝ) / 4) ^ n := by positivity
+  have hrem := mersenneWeightRemainderTail_nonneg n
+  linarith
+
 /-- Explicit enclosure for the unresolved correction. -/
 theorem mersenneCorrectionTail_le (n : ℕ) :
     mersenneCorrectionTail n
@@ -1558,6 +1900,329 @@ theorem mersenneCorrectionTail_le (n : ℕ) :
         + (2 / 7 : ℝ) * ((1 : ℝ) / 8) ^ n := by
   rw [mersenneCorrectionTail_eq]
   exact add_le_add (le_refl _) (mersenneWeightRemainderTail_le n)
+
+/-- A simple explicit block length already makes the unresolved correction
+smaller than the higher-channel gap at the starting level.  The sharper
+`ceil(m/2)+1` length is not needed for the cap consumer; `m+1` keeps the
+formal inequality transparent while remaining linear and uniform. -/
+theorem mersenneCorrectionTail_add_self_succ_lt_remainderTail
+    {m : ℕ} (hm : 0 < m) :
+    mersenneCorrectionTail (m + (m + 1)) <
+      mersenneWeightRemainderTail m := by
+  have hcorr := mersenneCorrectionTail_le (m + (m + 1))
+  have hhalf : ((1 : ℝ) / 2) ^ m ≤ (1 : ℝ) / 2 := by
+    calc
+      ((1 : ℝ) / 2) ^ m ≤ ((1 : ℝ) / 2) ^ 1 :=
+        pow_le_pow_of_le_one (by norm_num) (by norm_num) hm
+      _ = (1 : ℝ) / 2 := pow_one _
+  have height : ((1 : ℝ) / 8) ^ m ≤ (1 : ℝ) / 8 := by
+    calc
+      ((1 : ℝ) / 8) ^ m ≤ ((1 : ℝ) / 8) ^ 1 :=
+        pow_le_pow_of_le_one (by norm_num) (by norm_num) hm
+      _ = (1 : ℝ) / 8 := pow_one _
+  have hfour_id :
+      ((1 : ℝ) / 4) ^ (m + (m + 1)) =
+        ((1 : ℝ) / 8) ^ m * ((1 : ℝ) / 2) ^ m * ((1 : ℝ) / 4) := by
+    calc
+      ((1 : ℝ) / 4) ^ (m + (m + 1))
+          = (((1 : ℝ) / 4) * ((1 : ℝ) / 4)) ^ m *
+              ((1 : ℝ) / 4) := by
+            rw [pow_add, pow_succ, mul_pow]
+            ring
+      _ = ((1 : ℝ) / 8) ^ m * ((1 : ℝ) / 2) ^ m *
+              ((1 : ℝ) / 4) := by
+            rw [show ((1 : ℝ) / 4) * ((1 : ℝ) / 4) =
+              ((1 : ℝ) / 8) * ((1 : ℝ) / 2) by norm_num, mul_pow]
+  have height_id :
+      ((1 : ℝ) / 8) ^ (m + (m + 1)) =
+        ((1 : ℝ) / 8) ^ m * ((1 : ℝ) / 8) ^ m * ((1 : ℝ) / 8) := by
+    rw [pow_add, pow_succ]
+    ring
+  have hfour_le :
+      ((1 : ℝ) / 4) ^ (m + (m + 1)) ≤
+        (1 / 8 : ℝ) * ((1 : ℝ) / 8) ^ m := by
+    rw [hfour_id]
+    calc
+      ((1 : ℝ) / 8) ^ m * ((1 : ℝ) / 2) ^ m * ((1 : ℝ) / 4)
+          ≤ ((1 : ℝ) / 8) ^ m * ((1 : ℝ) / 2) * ((1 : ℝ) / 4) := by
+            gcongr
+      _ = (1 / 8 : ℝ) * ((1 : ℝ) / 8) ^ m := by ring
+  have height_le :
+      ((1 : ℝ) / 8) ^ (m + (m + 1)) ≤
+        (1 / 64 : ℝ) * ((1 : ℝ) / 8) ^ m := by
+    rw [height_id]
+    calc
+      ((1 : ℝ) / 8) ^ m * ((1 : ℝ) / 8) ^ m * ((1 : ℝ) / 8)
+          ≤ ((1 : ℝ) / 8) ^ m * ((1 : ℝ) / 8) * ((1 : ℝ) / 8) := by
+            gcongr
+      _ = (1 / 64 : ℝ) * ((1 : ℝ) / 8) ^ m := by ring
+  have hpow : 0 < ((1 : ℝ) / 8) ^ m := by positivity
+  have hsmall :
+      (1 / 3 : ℝ) * ((1 : ℝ) / 4) ^ (m + (m + 1)) +
+          (2 / 7 : ℝ) * ((1 : ℝ) / 8) ^ (m + (m + 1)) <
+        (1 / 7 : ℝ) * ((1 : ℝ) / 8) ^ m := by
+    have hfour_scaled := mul_le_mul_of_nonneg_left hfour_le (by norm_num : (0 : ℝ) ≤ 1 / 3)
+    have height_scaled := mul_le_mul_of_nonneg_left height_le (by norm_num : (0 : ℝ) ≤ 2 / 7)
+    nlinarith
+  exact lt_trans (hcorr.trans_lt hsmall)
+    (one_seventh_eighth_pow_lt_mersenneWeightRemainderTail m)
+
+/-- Sharp explicit block length from the corrected paper analysis:
+`ceil(m/2)+1`, written over naturals as `(m+1)/2+1`. -/
+theorem mersenneCorrectionTail_ceilingHalf_add_one_lt_remainderTail
+    {m : ℕ} (hm : 0 < m) :
+    let J := (m + 1) / 2 + 1
+    mersenneCorrectionTail (m + J) < mersenneWeightRemainderTail m := by
+  dsimp only
+  let J : ℕ := (m + 1) / 2 + 1
+  have hcorr := mersenneCorrectionTail_le (m + J)
+  have hexpFour : 3 * m + 2 ≤ 2 * (m + J) := by
+    dsimp [J]
+    omega
+  have hexpEight : 3 * m + 6 ≤ 3 * (m + J) := by
+    have hJ : 2 ≤ J := by
+      dsimp [J]
+      omega
+    omega
+  have hfour_source :
+      ((1 : ℝ) / 4) ^ (m + J) =
+        ((1 : ℝ) / 2) ^ (2 * (m + J)) := by
+    rw [show ((1 : ℝ) / 4) = ((1 : ℝ) / 2) ^ 2 by norm_num, pow_mul]
+  have hfour_target :
+      (1 / 4 : ℝ) * ((1 : ℝ) / 8) ^ m =
+        ((1 : ℝ) / 2) ^ (3 * m + 2) := by
+    rw [show ((1 : ℝ) / 4) = ((1 : ℝ) / 2) ^ 2 by norm_num,
+      show ((1 : ℝ) / 8) = ((1 : ℝ) / 2) ^ 3 by norm_num,
+      ← pow_mul, ← pow_add]
+    congr 1
+    omega
+  have height_source :
+      ((1 : ℝ) / 8) ^ (m + J) =
+        ((1 : ℝ) / 2) ^ (3 * (m + J)) := by
+    rw [show ((1 : ℝ) / 8) = ((1 : ℝ) / 2) ^ 3 by norm_num, pow_mul]
+  have height_target :
+      (1 / 64 : ℝ) * ((1 : ℝ) / 8) ^ m =
+        ((1 : ℝ) / 2) ^ (3 * m + 6) := by
+    rw [show ((1 : ℝ) / 64) = ((1 : ℝ) / 2) ^ 6 by norm_num,
+      show ((1 : ℝ) / 8) = ((1 : ℝ) / 2) ^ 3 by norm_num,
+      ← pow_mul, ← pow_add]
+    congr 1
+    omega
+  have hfour_le :
+      ((1 : ℝ) / 4) ^ (m + J) ≤
+        (1 / 4 : ℝ) * ((1 : ℝ) / 8) ^ m := by
+    rw [hfour_source, hfour_target]
+    exact pow_le_pow_of_le_one (by norm_num) (by norm_num) hexpFour
+  have height_le :
+      ((1 : ℝ) / 8) ^ (m + J) ≤
+        (1 / 64 : ℝ) * ((1 : ℝ) / 8) ^ m := by
+    rw [height_source, height_target]
+    exact pow_le_pow_of_le_one (by norm_num) (by norm_num) hexpEight
+  have hpow : 0 < ((1 : ℝ) / 8) ^ m := by positivity
+  have hsmall :
+      (1 / 3 : ℝ) * ((1 : ℝ) / 4) ^ (m + J) +
+          (2 / 7 : ℝ) * ((1 : ℝ) / 8) ^ (m + J) <
+        (1 / 7 : ℝ) * ((1 : ℝ) / 8) ^ m := by
+    have hfour_scaled := mul_le_mul_of_nonneg_left hfour_le
+      (by norm_num : (0 : ℝ) ≤ 1 / 3)
+    have height_scaled := mul_le_mul_of_nonneg_left height_le
+      (by norm_num : (0 : ℝ) ≤ 2 / 7)
+    nlinarith
+  exact lt_trans (hcorr.trans_lt hsmall)
+    (one_seventh_eighth_pow_lt_mersenneWeightRemainderTail m)
+
+theorem tendsto_mersenneCorrectionTail_zero :
+    Tendsto mersenneCorrectionTail atTop (nhds 0) := by
+  unfold mersenneCorrectionTail
+  simpa using tendsto_mersenneTail_zero.sub
+    (tendsto_pow_atTop_nhds_zero_of_lt_one (r := (1 : ℝ) / 2)
+      (by norm_num) (by norm_num))
+
+/-! ## Exact finite-block sliver return geometry -/
+
+/-- `C(m,J)`: the exact initial remainder which lands on the dyadic boundary
+after subtracting the next `J` consecutive Mersenne weights. -/
+noncomputable def mersenneForcedReturnThreshold (m J : ℕ) : ℝ :=
+  ((1 : ℝ) / 2) ^ (m + J) +
+    ∑ k ∈ Finset.range J, mersenneWeight (m + k + 1)
+
+@[simp] theorem mersenneForcedReturnThreshold_zero (m : ℕ) :
+    mersenneForcedReturnThreshold m 0 = ((1 : ℝ) / 2) ^ m := by
+  simp [mersenneForcedReturnThreshold]
+
+/-- The threshold is exactly the full tail minus the unresolved correction
+at the post-block level. -/
+theorem mersenneForcedReturnThreshold_eq_tail_sub_correction
+    (m J : ℕ) :
+    mersenneForcedReturnThreshold m J =
+      mersenneTail m - mersenneCorrectionTail (m + J) := by
+  rw [mersenneTail_eq_prefix_add_tail]
+  unfold mersenneForcedReturnThreshold mersenneCorrectionTail
+  ring
+
+/-- Finite-block return is a single exact scalar comparison. -/
+theorem forcedBlock_le_dyadic_iff_le_returnThreshold
+    (m J : ℕ) (r : ℝ) :
+    r - (∑ k ∈ Finset.range J, mersenneWeight (m + k + 1))
+        ≤ ((1 : ℝ) / 2) ^ (m + J) ↔
+      r ≤ mersenneForcedReturnThreshold m J := by
+  constructor <;> intro h <;> unfold mersenneForcedReturnThreshold at * <;>
+    linarith
+
+theorem mersenneForcedReturnThreshold_succ (m J : ℕ) :
+    mersenneForcedReturnThreshold m (J + 1) =
+      mersenneForcedReturnThreshold m J + mersenneWeight (m + J + 1) -
+        ((1 : ℝ) / 2) ^ (m + J + 1) := by
+  unfold mersenneForcedReturnThreshold
+  rw [Finset.sum_range_succ]
+  simp only [pow_succ]
+  ring
+
+/-- Every extra forced take strictly enlarges the return region. -/
+theorem mersenneForcedReturnThreshold_strictMono (m J : ℕ) :
+    mersenneForcedReturnThreshold m J <
+      mersenneForcedReturnThreshold m (J + 1) := by
+  rw [mersenneForcedReturnThreshold_succ]
+  have hweight := mersenneWeight_eq_two_channels_add_remainder
+    (n := m + J + 1) (by omega)
+  have hquarter : 0 < ((1 : ℝ) / 4) ^ (m + J + 1) := by positivity
+  have hrem := mersenneWeightRemainder_nonneg (n := m + J + 1) (by omega)
+  linarith
+
+/-- The finite return thresholds increase to the true separatrix `T_m`. -/
+theorem tendsto_mersenneForcedReturnThreshold (m : ℕ) :
+    Tendsto (fun J : ℕ => mersenneForcedReturnThreshold m J)
+      atTop (nhds (mersenneTail m)) := by
+  have hcorr : Tendsto (fun J : ℕ => mersenneCorrectionTail (m + J))
+      atTop (nhds 0) := by
+    have h := tendsto_mersenneCorrectionTail_zero.comp (tendsto_add_atTop_nat m)
+    simpa [Nat.add_comm] using h
+  have heq : (fun J : ℕ => mersenneForcedReturnThreshold m J) =
+      (fun J : ℕ => mersenneTail m - mersenneCorrectionTail (m + J)) := by
+    funext J
+    exact mersenneForcedReturnThreshold_eq_tail_sub_correction m J
+  rw [heq]
+  have hconst : Tendsto (fun _ : ℕ => mersenneTail m)
+      atTop (nhds (mersenneTail m)) := tendsto_const_nhds
+  simpa using hconst.sub hcorr
+
+/-- Any relaxed state strictly below the full remaining tail returns to the
+dyadic-safe side after finitely many consecutive takes. -/
+theorem exists_forcedBlock_return_of_lt_tail
+    {m : ℕ} {r : ℝ} (hr : r < mersenneTail m) :
+    ∃ J : ℕ,
+      r - (∑ k ∈ Finset.range J, mersenneWeight (m + k + 1))
+        ≤ ((1 : ℝ) / 2) ^ (m + J) := by
+  have hlim := tendsto_mersenneForcedReturnThreshold m
+  obtain ⟨J, hJ⟩ := ((tendsto_order.1 hlim).1 r hr).exists
+  exact ⟨J,
+    (forcedBlock_le_dyadic_iff_le_returnThreshold m J r).2 hJ.le⟩
+
+/-- On the separatrix, subtracting a forced block leaves exactly the later
+tail. -/
+theorem tail_sub_forcedBlock_eq_tail (m J : ℕ) :
+    mersenneTail m -
+        (∑ k ∈ Finset.range J, mersenneWeight (m + k + 1)) =
+      mersenneTail (m + J) := by
+  have htail := mersenneTail_eq_prefix_add_tail m J
+  linarith
+
+/-- Above the separatrix, the positive excess over the tail survives every
+forced block; in particular the state never reaches the dyadic-safe side. -/
+theorem dyadic_lt_forcedBlock_of_tail_lt
+    {m J : ℕ} {r : ℝ} (hr : mersenneTail m < r) :
+    ((1 : ℝ) / 2) ^ (m + J) <
+      r - (∑ k ∈ Finset.range J, mersenneWeight (m + k + 1)) := by
+  have htail := mersenneTail_eq_prefix_add_tail m J
+  have hdyadic : ((1 : ℝ) / 2) ^ (m + J) < mersenneTail (m + J) := by
+    have hcorr := mersenneCorrectionTail_pos (m + J)
+    unfold mersenneCorrectionTail at hcorr
+    linarith
+  linarith
+
+/-- Explicit linear return bound for the two-channel cap.  At every positive
+starting level `m`, `m+1` consecutive forced takes suffice. -/
+theorem halfTwoChannelCap_lt_forcedReturnThreshold_add_one
+    {m : ℕ} (hm : 0 < m) :
+    halfTwoChannelCap m < mersenneForcedReturnThreshold m (m + 1) := by
+  rw [mersenneForcedReturnThreshold_eq_tail_sub_correction,
+    mersenneTail_eq_two_channels_add_remainderTail]
+  unfold halfTwoChannelCap
+  have hsmall := mersenneCorrectionTail_add_self_succ_lt_remainderTail hm
+  linarith
+
+theorem forcedBlock_return_of_le_twoChannelCap_add_one
+    {m : ℕ} (hm : 0 < m) {r : ℝ} (hr : r ≤ halfTwoChannelCap m) :
+    r - (∑ k ∈ Finset.range (m + 1), mersenneWeight (m + k + 1))
+      ≤ ((1 : ℝ) / 2) ^ (m + (m + 1)) := by
+  apply (forcedBlock_le_dyadic_iff_le_returnThreshold m (m + 1) r).2
+  exact hr.trans
+    (halfTwoChannelCap_lt_forcedReturnThreshold_add_one hm).le
+
+/-- Sharp paper-grade return bound for the landed two-channel cap. -/
+theorem halfTwoChannelCap_lt_forcedReturnThreshold_ceilingHalf
+    {m : ℕ} (hm : 0 < m) :
+    let J := (m + 1) / 2 + 1
+    halfTwoChannelCap m < mersenneForcedReturnThreshold m J := by
+  dsimp only
+  rw [mersenneForcedReturnThreshold_eq_tail_sub_correction,
+    mersenneTail_eq_two_channels_add_remainderTail]
+  unfold halfTwoChannelCap
+  have hsmall := mersenneCorrectionTail_ceilingHalf_add_one_lt_remainderTail hm
+  linarith
+
+theorem forcedBlock_return_of_le_twoChannelCap_ceilingHalf
+    {m : ℕ} (hm : 0 < m) {r : ℝ} (hr : r ≤ halfTwoChannelCap m) :
+    let J := (m + 1) / 2 + 1
+    r - (∑ k ∈ Finset.range J, mersenneWeight (m + k + 1))
+      ≤ ((1 : ℝ) / 2) ^ (m + J) := by
+  dsimp only
+  apply (forcedBlock_le_dyadic_iff_le_returnThreshold
+    m ((m + 1) / 2 + 1) r).2
+  exact hr.trans
+    (halfTwoChannelCap_lt_forcedReturnThreshold_ceilingHalf hm).le
+
+/-- The landed two-channel cap is strictly inside the finite-return region
+for some block length.  This is generic return geometry only: proving that
+the actual half orbit satisfies the cap at every skip remains the arithmetic
+producer. -/
+theorem exists_forcedBlock_return_of_le_twoChannelCap
+    {m : ℕ} {r : ℝ} (hr : r ≤ halfTwoChannelCap m) :
+    ∃ J : ℕ,
+      r - (∑ k ∈ Finset.range J, mersenneWeight (m + k + 1))
+        ≤ ((1 : ℝ) / 2) ^ (m + J) := by
+  exact exists_forcedBlock_return_of_lt_tail
+    (hr.trans_lt (halfTwoChannelCap_lt_mersenneTail m))
+
+/-! ## Exact sliver-normalization regression fixtures -/
+
+/-- An undoubled coordinate below `2 / 3` does not force return for a generic
+relaxed sliver state. -/
+theorem undoubled_twoThirds_relaxed_escape_fixture :
+    let r : ℚ := 37 / 280
+    (((1 : ℚ) / 2) ^ 3 < r ∧ r < mersenneWeightRat 3) ∧
+      mersenneSliverCoordinateRat 3 r = 2 / 5 ∧
+      mersenneWeightRat 5 <
+        (r - mersenneWeightRat 4) - mersenneWeightRat 5 := by
+  norm_num [mersenneSliverCoordinateRat, mersenneWeightRat]
+
+/-- Even the doubled coordinate can lie below `2 / 3` while a generic state
+is already above the true tail.  This prevents the limiting frozen-map fixed
+point from being reused as an exact finite separatrix. -/
+theorem doubled_twoThirds_below_but_above_tail_fixture :
+    let r : ℚ := 67 / 512
+    (((1 : ℚ) / 2) ^ 3 < r ∧ r < mersenneWeightRat 3) ∧
+      sharpMersenneSliverCoordinateRat 3 r = 21 / 32 ∧
+      mersenneTail 3 < (r : ℝ) := by
+  dsimp
+  constructor
+  · norm_num [mersenneWeightRat]
+  constructor
+  · norm_num [sharpMersenneSliverCoordinateRat]
+  · rw [mersenneTail_eq_two_channels_add_remainderTail]
+    have hrem := mersenneWeightRemainderTail_le 3
+    norm_num at hrem ⊢
+    linarith
 
 /-- The Mersenne part of the greedy prefix for the target `1/2`. -/
 noncomputable def halfGreedyMersennePrefix (n : ℕ) : ℝ :=
@@ -1762,6 +2427,98 @@ coordinate already used throughout this file. -/
 noncomputable def erdosBorweinMersenneConstant : ℝ :=
   mersenneTail 0
 
+/-- The tail-coordinate version of the Erdős–Borwein constant inherits the
+unconditional irrationality theorem already proved in the certificate
+kernel. -/
+theorem irrational_erdosBorweinMersenneConstant :
+    Irrational erdosBorweinMersenneConstant := by
+  simpa [erdosBorweinMersenneConstant, mersenneTail, mersenneWeight] using
+    irrational_erdosBorwein_series
+
+/-- Selected and omitted positive exponents partition the full
+Erdős–Borwein series. -/
+theorem erdosBorweinMersenneConstant_eq_greedy_add_skipped (x : ℝ) :
+    erdosBorweinMersenneConstant
+      = positiveMersenneSupportValue (greedyMersenneSupport x)
+        + positiveMersenneSupportValue (greedyMersenneSkippedSupport x) := by
+  rw [erdosBorweinMersenneConstant, mersenneTail,
+    positiveMersenneSupportValue, positiveMersenneSupportValue,
+    ← (summable_positiveMersenneSupportIndicator
+      (greedyMersenneSupport x)).tsum_add
+        (summable_positiveMersenneSupportIndicator
+          (greedyMersenneSkippedSupport x))]
+  apply tsum_congr
+  intro k
+  by_cases hk : k + 1 ∈ greedyMersenneSupport x
+  · simp [greedyMersenneSkippedSupport, hk]
+  · simp [greedyMersenneSkippedSupport, hk]
+
+/-- A finite normalized support value is the real cast of its exact rational
+finite Erdős sum. -/
+theorem positiveMersenneSupportValue_eq_cast_finiteErdosSum
+    (F : Finset ℕ) :
+    positiveMersenneSupportValue (↑F : Set ℕ)
+      = ((finiteErdosSum F 2 : ℚ) : ℝ) := by
+  rw [positiveMersenneSupportValue_eq_erdosSupportSeries]
+  calc
+    erdosSupportSeries 2 (↑F : Set ℕ)
+        = ∑ a ∈ F, mersenneWeight a := by
+            unfold erdosSupportSeries
+            rw [tsum_eq_sum (s := F)]
+            · exact Finset.sum_congr rfl fun a ha => by
+                simp [mersenneWeight, ha]
+            · intro a ha
+              simp [ha]
+    _ = ((∑ a ∈ F, mersenneWeightRat a : ℚ) : ℝ) := by
+          push_cast
+          simp only [cast_mersenneWeightRat]
+    _ = ((finiteErdosSum F 2 : ℚ) : ℝ) := by
+          congr 1
+
+/-- If `1/2` is represented, its canonical greedy expansion must omit
+infinitely many positive exponents.  Otherwise the irrational full
+Erdős–Borwein constant would be a rational number plus a finite rational
+Mersenne sum. -/
+theorem infinite_greedyMersenneSkippedSupport_of_half_mem
+    (hhalf : (1 / 2 : ℝ) ∈ mersenneAchievementSet) :
+    (greedyMersenneSkippedSupport (1 / 2 : ℝ)).Infinite := by
+  classical
+  intro hfinite
+  let F : Finset ℕ := hfinite.toFinset
+  have hF : (↑F : Set ℕ) = greedyMersenneSkippedSupport (1 / 2 : ℝ) := by
+    dsimp [F]
+    exact hfinite.coe_toFinset
+  have hgreedy :
+      positiveMersenneSupportValue (greedyMersenneSupport (1 / 2 : ℝ))
+        = (1 / 2 : ℝ) := by
+    rcases hhalf with ⟨A, hA0, hvalue⟩
+    have hsupport : greedyMersenneSupport (1 / 2 : ℝ) = A := by
+      rw [hvalue, greedySupport_supportValue_eq A hA0]
+    rw [hsupport, ← hvalue]
+  have hskipped :
+      positiveMersenneSupportValue (greedyMersenneSkippedSupport (1 / 2 : ℝ))
+        = ((finiteErdosSum F 2 : ℚ) : ℝ) := by
+    rw [← hF]
+    exact positiveMersenneSupportValue_eq_cast_finiteErdosSum F
+  apply (irrational_erdosBorweinMersenneConstant.ne_rat
+    ((1 : ℚ) / 2 + finiteErdosSum F 2))
+  rw [erdosBorweinMersenneConstant_eq_greedy_add_skipped,
+    hgreedy, hskipped]
+  push_cast
+  rfl
+
+/-- **Greedy skip dichotomy for the half target.**  Exact half-membership is
+equivalent to the canonical greedy orbit omitting infinitely many exponents.
+The forward direction uses Erdős–Borwein irrationality; the reverse direction
+uses absorbing fatal states. -/
+theorem half_mem_mersenneAchievementSet_iff_greedySkippedSupport_infinite :
+    (1 / 2 : ℝ) ∈ mersenneAchievementSet ↔
+      (greedyMersenneSkippedSupport (1 / 2 : ℝ)).Infinite := by
+  constructor
+  · exact infinite_greedyMersenneSkippedSupport_of_half_mem
+  · exact mem_mersenneAchievementSet_of_greedySkippedSupport_infinite
+      (by norm_num)
+
 /-- The total mass of the first `n` positive Mersenne weights. -/
 noncomputable def mersennePrefixMass (n : ℕ) : ℝ :=
   ∑ k ∈ Finset.range n, mersenneWeight (k + 1)
@@ -1877,6 +2634,45 @@ noncomputable def greedyMersenneSecondChannelPhase (n : ℕ) : ℝ :=
   (4 : ℝ) ^ n *
     (2 * greedyMersenneRemainder (1 / 2 : ℝ) n
       - ((1 : ℝ) / 2) ^ n)
+
+/-- The existing skipped-branch two-channel cap is exactly the one-sided
+second-channel phase inequality `φ_n ≤ 1 / 6`.  No skip hypothesis is needed
+for this algebraic equivalence; the arithmetic producer is proving the
+inequality at every actual skipped rank. -/
+theorem greedyMersenneSecondChannelPhase_le_one_six_iff_twoChannelCap
+    (n : ℕ) :
+    greedyMersenneSecondChannelPhase n ≤ 1 / 6 ↔
+      greedyMersenneRemainder (1 / 2 : ℝ) n ≤ halfTwoChannelCap (n + 1) := by
+  have hhalf :
+      (4 : ℝ) ^ n * ((1 : ℝ) / 2) ^ n = (2 : ℝ) ^ n := by
+    rw [← mul_pow]
+    norm_num
+  have hquarter :
+      (4 : ℝ) ^ n * ((1 : ℝ) / 4) ^ n = 1 := by
+    rw [← mul_pow]
+    norm_num
+  have hscale : 0 < 2 * (4 : ℝ) ^ n := by positivity
+  have hid :
+      greedyMersenneSecondChannelPhase n - 1 / 6 =
+        2 * (4 : ℝ) ^ n *
+          (greedyMersenneRemainder (1 / 2 : ℝ) n -
+            halfTwoChannelCap (n + 1)) := by
+    unfold greedyMersenneSecondChannelPhase halfTwoChannelCap
+    simp only [pow_succ]
+    nlinarith
+  constructor <;> intro h
+  · have hnonpos :
+        2 * (4 : ℝ) ^ n *
+          (greedyMersenneRemainder (1 / 2 : ℝ) n -
+            halfTwoChannelCap (n + 1)) ≤ 0 := by
+      rw [← hid]
+      linarith
+    exact sub_nonpos.mp (nonpos_of_mul_nonpos_right hnonpos hscale)
+  · have hnonpos :
+        greedyMersenneRemainder (1 / 2 : ℝ) n -
+          halfTwoChannelCap (n + 1) ≤ 0 := sub_nonpos.mpr h
+    rw [← sub_nonpos, hid]
+    exact mul_nonpos_of_nonneg_of_nonpos hscale.le hnonpos
 
 /-- Exact rational model of the second-channel phase.  The unresolved
 separation producer is arithmetic over `ℚ`; real analysis is needed only by

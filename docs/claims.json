@@ -5380,7 +5380,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 1044
+        "line": 1054
       }
     },
     {
@@ -5391,7 +5391,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 1053
+        "line": 1063
       }
     },
     {
@@ -5402,7 +5402,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 1060
+        "line": 1070
       }
     }
   ],
@@ -5929,7 +5929,7 @@
       "id": "greedy_achievement_geometry",
       "label": "Greedy geometry of the Mersenne achievement set",
       "status": "formalised here",
-      "statement": "The Mersenne achievement set is compact, perfect, totally disconnected, nowhere dense, and has Lebesgue measure one. Membership is equivalent to greedy survival at every level; finite exact-rational death certificates soundly prove non-membership (3/4 is excluded at level one). The strict-tail Cantor geometry is recorded by Kovač–Tao; no novelty claim is made for the formalised refinements.",
+      "statement": "The Mersenne achievement set is compact, perfect, totally disconnected, nowhere dense, and has Lebesgue measure one. Membership is equivalent to greedy survival at every level; for the target 1/2 it is exactly equivalent to the canonical greedy orbit omitting infinitely many exponents. Finite exact-rational death certificates soundly prove non-membership (3/4 is excluded at level one). The strict-tail Cantor geometry is recorded by Kovač–Tao; no novelty claim is made for the formalised refinements.",
       "remaining_open_proposition_ids": [
         "remaining_open.universal_257_all_infinite_supports"
       ],
@@ -5939,32 +5939,37 @@
         {
           "name": "volume_mersenneAchievementSet",
           "module": "Erdos249257/GreedyAchievementSet.lean",
-          "line": 942
+          "line": 996
         },
         {
           "name": "perfect_mersenneAchievementSet",
           "module": "Erdos249257/GreedyAchievementSet.lean",
-          "line": 1285
+          "line": 1620
         },
         {
           "name": "isTotallyDisconnected_mersenneAchievementSet",
           "module": "Erdos249257/GreedyAchievementSet.lean",
-          "line": 1301
+          "line": 1636
         },
         {
           "name": "isNowhereDense_mersenneAchievementSet",
           "module": "Erdos249257/GreedyAchievementSet.lean",
-          "line": 1310
+          "line": 1645
         },
         {
           "name": "mem_mersenneAchievementSet_iff_greedy_survival",
           "module": "Erdos249257/GreedyAchievementSet.lean",
-          "line": 1183
+          "line": 1445
         },
         {
           "name": "three_fourths_not_mem_mersenneAchievementSet",
           "module": "Erdos249257/GreedyAchievementSet.lean",
-          "line": 1413
+          "line": 1748
+        },
+        {
+          "name": "half_mem_mersenneAchievementSet_iff_greedySkippedSupport_infinite",
+          "module": "Erdos249257/GreedyAchievementSet.lean",
+          "line": 2514
         }
       ]
     },
@@ -5972,7 +5977,7 @@
       "id": "half_second_channel_reduction",
       "label": "Exact rational second-channel reduction for the target one half",
       "status": "conditional reduction",
-      "statement": "A decidable rational separation predicate controls the greedy Mersenne orbit for the target 1/2. Lean verifies levels 1 through 6 exactly; proving the predicate for every n >= 7 would place 1/2 in the Mersenne achievement set. The universal tail statement remains open.",
+      "statement": "A decidable rational separation predicate controls the greedy Mersenne orbit for the target 1/2. Lean verifies levels 1 through 6 exactly; proving the predicate for every n >= 7 would place 1/2 in the Mersenne achievement set, equivalently would force infinitely many canonical greedy skips. The universal tail statement remains open.",
       "remaining_open_proposition_ids": [
         "remaining_open.universal_257_all_infinite_supports"
       ],
@@ -5982,17 +5987,27 @@
         {
           "name": "HalfSecondChannelSeparatedRat",
           "module": "Erdos249257/GreedyAchievementSet.lean",
-          "line": 1899
+          "line": 2695
         },
         {
           "name": "halfSecondChannelSeparatedRat_of_pos_le_six",
           "module": "Erdos249257/GreedyAchievementSet.lean",
-          "line": 1927
+          "line": 2723
         },
         {
           "name": "half_mem_mersenneAchievementSet_of_secondChannelSeparationRat_from_seven",
           "module": "Erdos249257/GreedyAchievementSet.lean",
-          "line": 2105
+          "line": 2901
+        },
+        {
+          "name": "half_mem_mersenneAchievementSet_of_skipped_twoChannelCap",
+          "module": "Erdos249257/GreedyAchievementSet.lean",
+          "line": 1412
+        },
+        {
+          "name": "half_mem_mersenneAchievementSet_iff_greedySkippedSupport_infinite",
+          "module": "Erdos249257/GreedyAchievementSet.lean",
+          "line": 2514
         }
       ]
     },

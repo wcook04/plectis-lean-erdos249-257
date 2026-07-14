@@ -1024,13 +1024,23 @@ $1\le n\le6$.  If it holds for every $n\ge7$, then
 $1/2$ belongs to the Mersenne achievement set $\mathcal A$.
 \end{proposition}
 \noindent Formalised:
-\lrefx{GreedyAchievementSet.lean}{1899}{HalfSecondChannelSeparatedRat},
-\lrefx{GreedyAchievementSet.lean}{1927}{halfSecondChannelSeparatedRat_of_pos_le_six},
+\lrefx{GreedyAchievementSet.lean}{2695}{HalfSecondChannelSeparatedRat},
+\lrefx{GreedyAchievementSet.lean}{2723}{halfSecondChannelSeparatedRat_of_pos_le_six},
 and
-\lref{GreedyAchievementSet.lean}{2105}{half_mem_mersenneAchievementSet_of_secondChannelSeparationRat_from_seven}.
-This reduces the remaining tail to a universal exact-rational statement; it
-does not prove that statement, and membership alone is not the universal
-\#257 theorem.
+\lref{GreedyAchievementSet.lean}{2901}{half_mem_mersenneAchievementSet_of_secondChannelSeparationRat_from_seven}.
+The membership conclusion is itself exact:
+\[
+  1/2\in\mathcal A
+  \quad\Longleftrightarrow\quad
+  \text{the canonical greedy orbit omits infinitely many exponents}.
+\]
+This is formalised at
+\lref{GreedyAchievementSet.lean}{2514}{half_mem_mersenneAchievementSet_iff_greedySkippedSupport_infinite}.
+The forward implication uses the already formalised irrationality of the full
+Erd\H{o}s--Borwein series; the reverse implication uses the absorbing fatal-state
+criterion.  Thus the second-channel hypothesis is one sufficient route to the
+infinite-skip condition.  It does not prove that condition, and membership alone
+is not the universal \#257 theorem.
 
 Exact-arithmetic probes used during proof search found no violation of the
 second-channel inequality through $n=4000$, and found nonnegative canonical
@@ -1424,8 +1434,8 @@ exponent $n$, and let
 the \emph{Mersenne achievement set}, the exponent $0$ being normalised away as
 analytically invisible. Coding by supports of positive exponents is literally
 the formal support series
-(\lrefx{GreedyAchievementSet.lean}{500}{positiveMersenneSupportValue_eq_erdosSupportSeries};
-the set is \lrefx{GreedyAchievementSet.lean}{517}{mersenneAchievementSet}). In
+(\lrefx{GreedyAchievementSet.lean}{554}{positiveMersenneSupportValue_eq_erdosSupportSeries};
+the set is \lrefx{GreedyAchievementSet.lean}{571}{mersenneAchievementSet}). In
 this language the base-$2$ \#257 statement reads: the rational members of
 $\mathcal A$ are exactly the finite subset sums. Nothing below decides that.
 Kova\v{c} and Tao verify, for every fixed integer $t\ge2$, that
@@ -1450,13 +1460,13 @@ bit.
 \end{theorem}
 \noindent Formalised:
 \lref{GreedyAchievementSet.lean}{180}{mersenneTail_lt_weight},
-\lref{GreedyAchievementSet.lean}{419}{mersenneGap_isBigOWith} (explicit bound
-\lrefx{GreedyAchievementSet.lean}{394}{mersenneGap_asymptotic_bound}),
-\lref{GreedyAchievementSet.lean}{1183}{mem_mersenneAchievementSet_iff_greedy_survival},
+\lref{GreedyAchievementSet.lean}{473}{mersenneGap_isBigOWith} (explicit bound
+\lrefx{GreedyAchievementSet.lean}{448}{mersenneGap_asymptotic_bound}),
+\lref{GreedyAchievementSet.lean}{1445}{mem_mersenneAchievementSet_iff_greedy_survival},
 and
-\lref{GreedyAchievementSet.lean}{1192}{positiveMersenneSupportValue_injective_normalized},
+\lref{GreedyAchievementSet.lean}{1527}{positiveMersenneSupportValue_injective_normalized},
 transferred to the kernel series at
-\lrefx{GreedyAchievementSet.lean}{1201}{erdosSupportSeries_two_injective_normalized}.
+\lrefx{GreedyAchievementSet.lean}{1536}{erdosSupportSeries_two_injective_normalized}.
 The nonnegativity guard in the membership criterion is necessary: without it a
 negative target would survive every level while lying outside $\mathcal A$.
 
@@ -1467,11 +1477,11 @@ The achievement set $\mathcal A$ is compact, perfect, totally disconnected,
 and nowhere dense.  Its Lebesgue measure is exactly one.
 \end{proposition}
 \noindent Formalised:
-\lref{GreedyAchievementSet.lean}{942}{volume_mersenneAchievementSet},
-\lref{GreedyAchievementSet.lean}{1285}{perfect_mersenneAchievementSet},
-\lref{GreedyAchievementSet.lean}{1301}{isTotallyDisconnected_mersenneAchievementSet},
+\lref{GreedyAchievementSet.lean}{996}{volume_mersenneAchievementSet},
+\lref{GreedyAchievementSet.lean}{1620}{perfect_mersenneAchievementSet},
+\lref{GreedyAchievementSet.lean}{1636}{isTotallyDisconnected_mersenneAchievementSet},
 and
-\lref{GreedyAchievementSet.lean}{1310}{isNowhereDense_mersenneAchievementSet}.
+\lref{GreedyAchievementSet.lean}{1645}{isNowhereDense_mersenneAchievementSet}.
 Kova\v{c}--Tao supply the strict-tail Cantor-set context cited above.  The
 formalisation records these exact properties without making a novelty or
 priority claim for them.
@@ -1486,13 +1496,13 @@ rational number already known to lie in $\mathcal A$ has computable support
 bits.
 \end{proposition}
 \noindent Formalised:
-\lref{GreedyAchievementSet.lean}{1008}{cast_greedyMersenneRemainderRat};
-\lref{GreedyAchievementSet.lean}{1391}{certifiedGreedyMersenneDeath_not_mem},
+\lref{GreedyAchievementSet.lean}{1130}{cast_greedyMersenneRemainderRat};
+\lref{GreedyAchievementSet.lean}{1726}{certifiedGreedyMersenneDeath_not_mem},
 with the certificate
-\lrefx{GreedyAchievementSet.lean}{1385}{CertifiedGreedyMersenneDeath} and the
-enclosure \lrefx{GreedyAchievementSet.lean}{1352}{mersenneTailUpperRat};
-\lref{GreedyAchievementSet.lean}{1413}{three_fourths_not_mem_mersenneAchievementSet};
-and \lref{GreedyAchievementSet.lean}{1497}{rational_member_support_bit_iff}.
+\lrefx{GreedyAchievementSet.lean}{1720}{CertifiedGreedyMersenneDeath} and the
+enclosure \lrefx{GreedyAchievementSet.lean}{1687}{mersenneTailUpperRat};
+\lref{GreedyAchievementSet.lean}{1748}{three_fourths_not_mem_mersenneAchievementSet};
+and \lref{GreedyAchievementSet.lean}{1832}{rational_member_support_bit_iff}.
 The certificates are one-sided: survival through any finite depth proves
 nothing about membership, and no decidability of membership in $\mathcal A$ is
 asserted.  Neither the global geometry nor the finite death certificates
@@ -1543,8 +1553,8 @@ one-wrap classification & \lrefx{RationalSupportCarrySkeleton.lean}{415}{one_dou
 order-wrap mass bound & \lrefx{RationalSupportCarrySkeleton.lean}{1478}{one_div_oddOrder_le_reciprocalMass_of_support_fraction}\ (\texttt{RationalSupportCarrySkeleton})\\
 unbounded carry states & \lrefx{RationalSupportCarrySkeleton.lean}{2377}{exists_unbounded_shifted_odd_tail_nat_state_of_support_fraction}\ (\texttt{RationalSupportCarrySkeleton})\\
 sublogarithmic zero windows & \lrefx{SublogDivisorCoverage.lean}{392}{supportCoeffZeroWindow_length_le_eps_logb_add}\ (\texttt{SublogDivisorCoverage})\\
-greedy membership criterion & \lrefx{GreedyAchievementSet.lean}{1183}{mem_mersenneAchievementSet_iff_greedy_survival}\ (\texttt{GreedyAchievementSet})\\
-Mersenne achievement set: measure one and nowhere dense & \lrefx{GreedyAchievementSet.lean}{942}{volume_mersenneAchievementSet}, \lrefx{GreedyAchievementSet.lean}{1310}{isNowhereDense_mersenneAchievementSet}\ (\texttt{GreedyAchievementSet})\\
+greedy membership criterion & \lrefx{GreedyAchievementSet.lean}{1445}{mem_mersenneAchievementSet_iff_greedy_survival}\ (\texttt{GreedyAchievementSet})\\
+Mersenne achievement set: measure one and nowhere dense & \lrefx{GreedyAchievementSet.lean}{996}{volume_mersenneAchievementSet}, \lrefx{GreedyAchievementSet.lean}{1645}{isNowhereDense_mersenneAchievementSet}\ (\texttt{GreedyAchievementSet})\\
 \bottomrule
 \end{tabular}
 \end{center}
