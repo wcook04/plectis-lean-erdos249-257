@@ -37,6 +37,14 @@ but no unboundedness claim is made — that is exactly the untouched analytic co
 
 namespace GapFareyBound
 
+/-- `qstar` is the exact first displayed denominator at which a gap certificate
+fails.  This is the small checker-facing contract emitted by the untrusted
+Stern--Brocot producer: all smaller positive denominators pass, while `qstar`
+itself fails. -/
+def IsFirstGapFailure (V K H qstar : ℕ) : Prop :=
+  (∀ q : ℕ, 0 < q → q < qstar → (q * V) % 2 ^ K + q * H < 2 ^ K) ∧
+    ¬ ((qstar * V) % 2 ^ K + qstar * H < 2 ^ K)
+
 /-- **Mediant / Farey gap lemma.**  If `a/b < r/s < c/d` (with `b, d > 0`) and the
 neighbours are unimodular (`b*c - a*d = 1`), then `b + d ≤ s`.  Elementary:
 `s = b·(c·s - r·d) + d·(r·b - a·s)` and both bracketed factors are `≥ 1`. -/
@@ -130,6 +138,18 @@ theorem gap_check_window_1_120_le_248672326362367909
   have hqQZ : (q : ℤ) ≤ 248672326362367909 := by exact_mod_cast hqQ
   linarith [hfar, hqQZ]
 
+/-- The Farey lower bound at `K = 120` is sharp: the mediant denominator
+`248672326362367910` is the exact first displayed denominator for which the
+gap certificate fails. -/
+theorem gap_check_window_1_120_first_failure :
+    IsFirstGapFailure
+      977330308222705062435708544085600126
+      120 123 248672326362367910 := by
+  constructor
+  · intro q hq hq_lt
+    exact gap_check_window_1_120_le_248672326362367909 q hq (by omega)
+  · norm_num [IsFirstGapFailure]
+
 /-! ## Rung `K = 240`: bound `79639646646701375323355774875831053` (~`7.96×10³⁴`;
 first failing denominator `79639646646701375323355774875831054 = b + d`) -/
 
@@ -199,10 +219,24 @@ theorem gap_check_window_1_240_le_79639646646701375323355774875831053
   have hqQZ : (q : ℤ) ≤ 79639646646701375323355774875831053 := by exact_mod_cast hqQ
   linarith [hfar, hqQZ]
 
+/-- The Farey lower bound at `K = 240` is sharp: the mediant denominator
+`79639646646701375323355774875831054` is the exact first displayed denominator
+for which the gap certificate fails. -/
+theorem gap_check_window_1_240_first_failure :
+    IsFirstGapFailure
+      1299094806818720335611738031537456208600423915562142231419225521361164904
+      240 243 79639646646701375323355774875831054 := by
+  constructor
+  · intro q hq hq_lt
+    exact gap_check_window_1_240_le_79639646646701375323355774875831053 q hq (by omega)
+  · norm_num [IsFirstGapFailure]
+
 -- Axiom audit: every result must rest only on the foundational axioms
 -- (`propext`, `Classical.choice`, `Quot.sound`) — no `sorryAx`, no `Lean.ofReduceBool`.
 #print axioms farey_gap
 #print axioms gap_check_window_1_120_le_248672326362367909
+#print axioms gap_check_window_1_120_first_failure
 #print axioms gap_check_window_1_240_le_79639646646701375323355774875831053
+#print axioms gap_check_window_1_240_first_failure
 
 end GapFareyBound

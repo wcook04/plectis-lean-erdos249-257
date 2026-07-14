@@ -4884,6 +4884,14 @@
           ]
         },
         {
+          "id": "Erdos249257.IncidenceQuotientHermitePade",
+          "path": "Erdos249257/IncidenceQuotientHermitePade.lean",
+          "role": "Lean proof module",
+          "imports": [
+            "Erdos249257.MersenneLambertLadder"
+          ]
+        },
+        {
           "id": "Erdos249257.JointExponentTransport",
           "path": "Erdos249257/JointExponentTransport.lean",
           "role": "Lean proof module",

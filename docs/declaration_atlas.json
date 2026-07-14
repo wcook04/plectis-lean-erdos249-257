@@ -4,21 +4,21 @@
   "projection_not_authority": true,
   "proof_authority": "Lean source checked by the pinned Lean kernel",
   "argument_authority": "docs/claims.json::machine_readable_paper.argument_graph",
-  "source_fingerprint": "sha256:91266fd06b6698b7e094f640aa50ff3d6ebec8b5b096d26b12ab3cf4af1348ae",
+  "source_fingerprint": "sha256:541652822f129d1e99ab92a604e39691d133a945c1e7e9546771fca63eae532a",
   "summary": {
-    "module_count": 547,
-    "declaration_count": 6505,
-    "theorem_like_count": 5942,
+    "module_count": 548,
+    "declaration_count": 6520,
+    "theorem_like_count": 5953,
     "generated_certificate_declaration_count": 1681,
     "principal_claim_link_count": 72,
     "kind_counts": {
       "abbrev": 2,
-      "def": 545,
+      "def": 549,
       "inductive": 3,
       "instance": 3,
       "lemma": 350,
       "structure": 10,
-      "theorem": 5592
+      "theorem": 5603
     }
   },
   "modules": [
@@ -73,7 +73,9 @@
         "Erdos249257.CarrySurvivorExtinction",
         "Erdos249257.AdjacentCarryTube",
         "Erdos249257.AdjacentPhaseSeparation",
-        "Erdos249257.FirstHarmonicPivot"
+        "Erdos249257.FirstHarmonicPivot",
+        "Erdos249257.GapFareyBound",
+        "Erdos249257.IncidenceQuotientHermitePade"
       ],
       "declaration_count": 0,
       "kind_counts": {}
@@ -6225,10 +6227,11 @@
       "id": "Erdos249257.GapFareyBound",
       "path": "Erdos249257/GapFareyBound.lean",
       "imports": [],
-      "declaration_count": 9,
+      "declaration_count": 12,
       "kind_counts": {
+        "def": 1,
         "lemma": 6,
-        "theorem": 3
+        "theorem": 5
       }
     },
     {
@@ -6332,6 +6335,18 @@
         "instance": 1,
         "structure": 1,
         "theorem": 140
+      }
+    },
+    {
+      "id": "Erdos249257.IncidenceQuotientHermitePade",
+      "path": "Erdos249257/IncidenceQuotientHermitePade.lean",
+      "imports": [
+        "Erdos249257.MersenneLambertLadder"
+      ],
+      "declaration_count": 12,
+      "kind_counts": {
+        "def": 3,
+        "theorem": 9
       }
     },
     {
@@ -51576,103 +51591,136 @@
       "docstring": "The complete foreign correction has exactly zero `(p,q)` diamond curvature."
     },
     {
-      "id": "Erdos249257/GapFareyBound.lean:43:farey_gap",
+      "id": "Erdos249257/GapFareyBound.lean:44:IsFirstGapFailure",
+      "name": "IsFirstGapFailure",
+      "kind": "def",
+      "module": "Erdos249257/GapFareyBound.lean",
+      "line": 44,
+      "signature": "def IsFirstGapFailure (V K H qstar : ℕ) : Prop",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "`qstar` is the exact first displayed denominator at which a gap certificate fails. This is the small checker-facing contract emitted by the untrusted Stern--Brocot producer: all smaller positive denominators pass, while `qstar` itself fails."
+    },
+    {
+      "id": "Erdos249257/GapFareyBound.lean:51:farey_gap",
       "name": "farey_gap",
       "kind": "theorem",
       "module": "Erdos249257/GapFareyBound.lean",
-      "line": 43,
+      "line": 51,
       "signature": "theorem farey_gap {a b c d r s : ℤ} (hb : 0 < b) (hd : 0 < d) (hdet : b * c - a * d = 1) (hleft : a * s < r * b) (hright : r * d < c * s) : b + d ≤ s",
       "generated_certificate": false,
       "claim_ids": [],
       "docstring": "**Mediant / Farey gap lemma.** If `a/b < r/s < c/d` (with `b, d > 0`) and the neighbours are unimodular (`b*c - a*d = 1`), then `b + d ≤ s`. Elementary: `s = b·(c·s - r·d) + d·(r·b - a·s)` and both bracketed factors are `≥ 1`."
     },
     {
-      "id": "Erdos249257/GapFareyBound.lean:60:det_one",
+      "id": "Erdos249257/GapFareyBound.lean:68:det_one",
       "name": "det_one",
       "kind": "lemma",
       "module": "Erdos249257/GapFareyBound.lean",
-      "line": 60,
+      "line": 68,
       "signature": "private lemma det_one : (41326538792622579 : ℤ) * 54892391224782222 - 10940721593428627 * 207345787569745331 = 1",
       "generated_certificate": false,
       "claim_ids": [],
       "docstring": "Unimodularity of the two Farey neighbours: `b*c - a*d = 1`."
     },
     {
-      "id": "Erdos249257/GapFareyBound.lean:66:left_in",
+      "id": "Erdos249257/GapFareyBound.lean:74:left_in",
       "name": "left_in",
       "kind": "lemma",
       "module": "Erdos249257/GapFareyBound.lean",
-      "line": 66,
+      "line": 74,
       "signature": "private lemma left_in : (10940721593428627 : ℤ) * 2 ^ 120 < (351897687562210810468098516194744450 - 123) * 41326538792622579",
       "generated_certificate": false,
       "claim_ids": [],
       "docstring": "Left neighbour is strictly below the left endpoint `(V'-123)/2^120`: `a/b < (V'-123)/2^120`, i.e. `a * 2^120 < (V'-123) * b`."
     },
     {
-      "id": "Erdos249257/GapFareyBound.lean:73:right_in",
+      "id": "Erdos249257/GapFareyBound.lean:81:right_in",
       "name": "right_in",
       "kind": "lemma",
       "module": "Erdos249257/GapFareyBound.lean",
-      "line": 73,
+      "line": 81,
       "signature": "private lemma right_in : (351897687562210810468098516194744450 : ℤ) * 207345787569745331 ≤ 54892391224782222 * 2 ^ 120",
       "generated_certificate": false,
       "claim_ids": [],
       "docstring": "Right endpoint `V'/2^120` is `≤` the right neighbour `c/d`: `V' * d ≤ c * 2^120`."
     },
     {
-      "id": "Erdos249257/GapFareyBound.lean:80:gap_check_window_1_120_le_248672326362367909",
+      "id": "Erdos249257/GapFareyBound.lean:88:gap_check_window_1_120_le_248672326362367909",
       "name": "gap_check_window_1_120_le_248672326362367909",
       "kind": "theorem",
       "module": "Erdos249257/GapFareyBound.lean",
-      "line": 80,
+      "line": 88,
       "signature": "theorem gap_check_window_1_120_le_248672326362367909 (q : ℕ) (hq : 0 < q) (hqQ : q ≤ 248672326362367909) : (q * 977330308222705062435708544085600126) % 2 ^ 120 + q * 123 < 2 ^ 120",
       "generated_certificate": false,
       "claim_ids": [],
       "docstring": "**The bound.** Every denominator `q` with `0 < q ≤ 248672326362367909` satisfies the wave-17 gap certificate for the `(N=1, K=120)` window."
     },
     {
-      "id": "Erdos249257/GapFareyBound.lean:137:det_one_240",
+      "id": "Erdos249257/GapFareyBound.lean:144:gap_check_window_1_120_first_failure",
+      "name": "gap_check_window_1_120_first_failure",
+      "kind": "theorem",
+      "module": "Erdos249257/GapFareyBound.lean",
+      "line": 144,
+      "signature": "theorem gap_check_window_1_120_first_failure : IsFirstGapFailure 977330308222705062435708544085600126 120 123 248672326362367910",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The Farey lower bound at `K = 120` is sharp: the mediant denominator `248672326362367910` is the exact first displayed denominator for which the gap certificate fails."
+    },
+    {
+      "id": "Erdos249257/GapFareyBound.lean:157:det_one_240",
       "name": "det_one_240",
       "kind": "lemma",
       "module": "Erdos249257/GapFareyBound.lean",
-      "line": 137,
+      "line": 157,
       "signature": "private lemma det_one_240 : (66013429300517684370587633721421187 : ℤ) * 3607382924184224471122414138260922 - 17476289389455905704261129876428839 * 13626217346183690952768141154409867 = 1",
       "generated_certificate": false,
       "claim_ids": [],
       "docstring": "Unimodularity of the `K = 240` Farey neighbours: `b*c - a*d = 1`."
     },
     {
-      "id": "Erdos249257/GapFareyBound.lean:142:left_in_240",
+      "id": "Erdos249257/GapFareyBound.lean:162:left_in_240",
       "name": "left_in_240",
       "kind": "lemma",
       "module": "Erdos249257/GapFareyBound.lean",
-      "line": 142,
+      "line": 162,
       "signature": "private lemma left_in_240 : (17476289389455905704261129876428839 : ℤ) * 2 ^ 240 < (467752257959663993971559469205462307227059981313476726702380679931454872 - 243) * 66013429300517684370587633721421187",
       "generated_certificate": false,
       "claim_ids": [],
       "docstring": "Left neighbour is strictly below the left endpoint `(V'-243)/2^240`."
     },
     {
-      "id": "Erdos249257/GapFareyBound.lean:148:right_in_240",
+      "id": "Erdos249257/GapFareyBound.lean:168:right_in_240",
       "name": "right_in_240",
       "kind": "lemma",
       "module": "Erdos249257/GapFareyBound.lean",
-      "line": 148,
+      "line": 168,
       "signature": "private lemma right_in_240 : (467752257959663993971559469205462307227059981313476726702380679931454872 : ℤ) * 13626217346183690952768141154409867 ≤ 3607382924184224471122414138260922 * 2 ^ 240",
       "generated_certificate": false,
       "claim_ids": [],
       "docstring": "Right endpoint `V'/2^240` is `≤` the right neighbour `c/d`."
     },
     {
-      "id": "Erdos249257/GapFareyBound.lean:156:gap_check_window_1_240_le_79639646646701375323355774875831053",
+      "id": "Erdos249257/GapFareyBound.lean:176:gap_check_window_1_240_le_79639646646701375323355774875831053",
       "name": "gap_check_window_1_240_le_79639646646701375323355774875831053",
       "kind": "theorem",
       "module": "Erdos249257/GapFareyBound.lean",
-      "line": 156,
+      "line": 176,
       "signature": "theorem gap_check_window_1_240_le_79639646646701375323355774875831053 (q : ℕ) (hq : 0 < q) (hqQ : q ≤ 79639646646701375323355774875831053) : (q * 1299094806818720335611738031537456208600423915562142231419225521361164904) % 2 ^ 240 + q * 243 < 2 ^ 240",
       "generated_certificate": false,
       "claim_ids": [],
       "docstring": "**The `K = 240` bound.** Every denominator `q` with `0 < q ≤ 79639646646701375323355774875831053` satisfies the gap certificate for the `(N=1, K=240)` window."
+    },
+    {
+      "id": "Erdos249257/GapFareyBound.lean:225:gap_check_window_1_240_first_failure",
+      "name": "gap_check_window_1_240_first_failure",
+      "kind": "theorem",
+      "module": "Erdos249257/GapFareyBound.lean",
+      "line": 225,
+      "signature": "theorem gap_check_window_1_240_first_failure : IsFirstGapFailure 1299094806818720335611738031537456208600423915562142231419225521361164904 240 243 79639646646701375323355774875831054",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The Farey lower bound at `K = 240` is sharp: the mediant denominator `79639646646701375323355774875831054` is the exact first displayed denominator for which the gap certificate fails."
     },
     {
       "id": "Erdos249257/GcdMomentCalculus.lean:80:tsum_pnat_pred_mul_geometric",
@@ -66410,6 +66458,135 @@
       "generated_certificate": false,
       "claim_ids": [],
       "docstring": "The exact growth criterion once a crossed boundary has forcing depth `2*N-v-1`: strict extension beyond `N` is equivalent to excluding `v ≥ N-1`."
+    },
+    {
+      "id": "Erdos249257/IncidenceQuotientHermitePade.lean:25:mobiusCompanionCoeff",
+      "name": "mobiusCompanionCoeff",
+      "kind": "def",
+      "module": "Erdos249257/IncidenceQuotientHermitePade.lean",
+      "line": 25,
+      "signature": "def mobiusCompanionCoeff (r n : ℕ) : ℤ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Coefficient of `q^n` in the Möbius companion `M_mu(q^r)`."
+    },
+    {
+      "id": "Erdos249257/IncidenceQuotientHermitePade.lean:30:incidenceMobiusMatrix",
+      "name": "incidenceMobiusMatrix",
+      "kind": "def",
+      "module": "Erdos249257/IncidenceQuotientHermitePade.lean",
+      "line": 30,
+      "signature": "def incidenceMobiusMatrix (N : ℕ) : Matrix (Fin N) (Fin N) ℤ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The finite Möbius-incidence matrix on the positive jet coordinates `q, q^2, ..., q^N`. Columns are companion jets."
+    },
+    {
+      "id": "Erdos249257/IncidenceQuotientHermitePade.lean:33:incidenceMobiusMatrix_apply",
+      "name": "incidenceMobiusMatrix_apply",
+      "kind": "theorem",
+      "module": "Erdos249257/IncidenceQuotientHermitePade.lean",
+      "line": 33,
+      "signature": "@[simp] theorem incidenceMobiusMatrix_apply (N : ℕ) (i j : Fin N) : incidenceMobiusMatrix N i j = if j.val + 1 ∣ i.val + 1 then moebius ((i.val + 1) / (j.val + 1)) else 0",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/IncidenceQuotientHermitePade.lean:38:incidenceMobiusMatrix_diagonal",
+      "name": "incidenceMobiusMatrix_diagonal",
+      "kind": "theorem",
+      "module": "Erdos249257/IncidenceQuotientHermitePade.lean",
+      "line": 38,
+      "signature": "@[simp] theorem incidenceMobiusMatrix_diagonal (N : ℕ) (i : Fin N) : incidenceMobiusMatrix N i i = 1",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/IncidenceQuotientHermitePade.lean:44:incidenceMobiusMatrix_lowerTriangular",
+      "name": "incidenceMobiusMatrix_lowerTriangular",
+      "kind": "theorem",
+      "module": "Erdos249257/IncidenceQuotientHermitePade.lean",
+      "line": 44,
+      "signature": "theorem incidenceMobiusMatrix_lowerTriangular (N : ℕ) : (incidenceMobiusMatrix N).BlockTriangular OrderDual.toDual",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The companion coefficient matrix has no entries strictly above the diagonal."
+    },
+    {
+      "id": "Erdos249257/IncidenceQuotientHermitePade.lean:56:incidenceMobius_det_eq_one",
+      "name": "incidenceMobius_det_eq_one",
+      "kind": "theorem",
+      "module": "Erdos249257/IncidenceQuotientHermitePade.lean",
+      "line": 56,
+      "signature": "theorem incidenceMobius_det_eq_one (N : ℕ) : Matrix.det (incidenceMobiusMatrix N) = 1",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "**Finite incidence unimodularity.** Möbius incidence is an integral change of basis on every positive jet space."
+    },
+    {
+      "id": "Erdos249257/IncidenceQuotientHermitePade.lean:63:incidenceMobius_isUnit",
+      "name": "incidenceMobius_isUnit",
+      "kind": "theorem",
+      "module": "Erdos249257/IncidenceQuotientHermitePade.lean",
+      "line": 63,
+      "signature": "theorem incidenceMobius_isUnit (N : ℕ) : IsUnit (incidenceMobiusMatrix N)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The finite incidence matrix is a unit over `ℤ`; in particular its inverse also has integer entries."
+    },
+    {
+      "id": "Erdos249257/IncidenceQuotientHermitePade.lean:68:mobiusCompanionJet_linearIndependent",
+      "name": "mobiusCompanionJet_linearIndependent",
+      "kind": "theorem",
+      "module": "Erdos249257/IncidenceQuotientHermitePade.lean",
+      "line": 68,
+      "signature": "theorem mobiusCompanionJet_linearIndependent (N : ℕ) : LinearIndependent ℤ (incidenceMobiusMatrix N).col",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Companion jets are linearly independent over `ℤ`."
+    },
+    {
+      "id": "Erdos249257/IncidenceQuotientHermitePade.lean:77:mobiusCompanionJetMap_injective",
+      "name": "mobiusCompanionJetMap_injective",
+      "kind": "theorem",
+      "module": "Erdos249257/IncidenceQuotientHermitePade.lean",
+      "line": 77,
+      "signature": "theorem mobiusCompanionJetMap_injective (N : ℕ) : Function.Injective (incidenceMobiusMatrix N).mulVec",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The evaluated finite companion family has zero kernel. This is the exact finite no-compression statement needed to reject a non-trivial incidence quotient at jet horizon `N`."
+    },
+    {
+      "id": "Erdos249257/IncidenceQuotientHermitePade.lean:81:mobiusCompanionJetMap_eq_zero_iff",
+      "name": "mobiusCompanionJetMap_eq_zero_iff",
+      "kind": "theorem",
+      "module": "Erdos249257/IncidenceQuotientHermitePade.lean",
+      "line": 81,
+      "signature": "theorem mobiusCompanionJetMap_eq_zero_iff (N : ℕ) (c : Fin N → ℤ) : (incidenceMobiusMatrix N).mulVec c = 0 ↔ c = 0",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/IncidenceQuotientHermitePade.lean:92:IsFiniteIncidenceQuotientRelation",
+      "name": "IsFiniteIncidenceQuotientRelation",
+      "kind": "def",
+      "module": "Erdos249257/IncidenceQuotientHermitePade.lean",
+      "line": 92,
+      "signature": "def IsFiniteIncidenceQuotientRelation (N : ℕ) (c : Fin N → ℤ) : Prop",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A finite incidence-quotient relation is a coefficient vector whose actual companion jet evaluates to zero. The definition builds evaluation compatibility into the named class."
+    },
+    {
+      "id": "Erdos249257/IncidenceQuotientHermitePade.lean:97:finiteIncidenceQuotientRelation_iff",
+      "name": "finiteIncidenceQuotientRelation_iff",
+      "kind": "theorem",
+      "module": "Erdos249257/IncidenceQuotientHermitePade.lean",
+      "line": 97,
+      "signature": "theorem finiteIncidenceQuotientRelation_iff (N : ℕ) (c : Fin N → ℤ) : IsFiniteIncidenceQuotientRelation N c ↔ c = 0",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "**Finite incidence-quotient non-compression.** The named class has only the zero relation at every horizon."
     },
     {
       "id": "Erdos249257/JointExponentTransport.lean:36:oldChannel_affine_moment_annihilation",
