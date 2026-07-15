@@ -180,7 +180,7 @@ theorem no_fixed_integral_primitive_euler_index (D : ℕ) (hD : 0 < D) :
   have hpLeD : p ≤ D := Nat.le_of_dvd hD hpdvd
   omega
 
-example : twoTierPrimorial 10 = 1260 := by native_decide
+example : twoTierPrimorial 10 = 1260 := by decide
 
 #print axioms integral_primEulerCoord_iff_dvd
 #print axioms primWeight_apply_prime_sq

@@ -821,7 +821,21 @@ theorem greedyHalf_rankThree_prefix_fixture :
     greedyMersennePrefixRat (1 / 2 : ℚ) 3 = ({2, 3} : Finset ℕ) ∧
       (1 / 2 : ℚ) - finiteErdosSum ({2, 3} : Finset ℕ) 2 = 1 / 42 := by
   constructor
-  · native_decide
+  · classical
+    ext k
+    simp only [greedyMersennePrefixRat, Finset.mem_image, Finset.mem_filter,
+      Finset.mem_range, Finset.mem_insert, Finset.mem_singleton]
+    constructor
+    · rintro ⟨a, ⟨ha, htake⟩, rfl⟩
+      interval_cases a
+      · norm_num [greedyMersenneRemainderRat, mersenneWeightRat] at htake
+      · simp
+      · simp
+    · rintro (rfl | rfl)
+      · refine ⟨1, ⟨by norm_num, ?_⟩, by norm_num⟩
+        norm_num [greedyMersenneRemainderRat, mersenneWeightRat]
+      · refine ⟨2, ⟨by norm_num, ?_⟩, by norm_num⟩
+        norm_num [greedyMersenneRemainderRat, mersenneWeightRat]
   · rw [two_three_dyadicPrefix_fixture.1]
     norm_num
 
@@ -835,7 +849,10 @@ theorem rankThree_rawSafe_but_seamNotEscaped :
       ¬ EvenSeamReachable 2 1 3 := by
   refine ⟨by norm_num [BlockDyadicSafeAt], ?_, by norm_num,
     depth14_evenSeam_three_not_reachable⟩
-  native_decide
+  have hsqrt : Nat.sqrt 6 = 2 := by
+    symm
+    exact Nat.eq_sqrt.2 ⟨by norm_num, by norm_num⟩
+  simp [halfStripBound, hsqrt]
 
 #print axioms halfStripAdmissible_residual_eq
 #print axioms one_sub_pow_mul_halfResidual_eq_tail_sub_centered

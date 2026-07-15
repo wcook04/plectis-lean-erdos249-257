@@ -3400,11 +3400,11 @@ private theorem seamTwoSidedDyadicAt_five :
   let x : SeamRowWord 5 :=
     SeamRowWord.ofList [true, true, false] (by decide)
   have hx : seamSubsetTarget 5 < wordWeightSum 5 x.toNatWord := by
-    native_decide
+    decide
   have hbound := seamAdjacentCut_overshoot_le_candidateExcess
     (s := 5) (by omega) x hx
   have hword : wordWeightSum 5 x.toNatWord = 487 := by
-    native_decide
+    decide
   norm_num [hword, seamSubsetTarget] at hbound ⊢
   omega
 
@@ -3522,7 +3522,7 @@ theorem seamUpperResetDyadicBandEscape_at_thirteen
   intro j hj
   rw [seamUpperReset_band_iff_successorRemainder_avoids hd5 hj hcarry]
   have hrem : seamIntegerGreedyRemainder (13 + 1) = 392 := by
-    native_decide
+    decide
   rw [hrem]
   interval_cases j <;> norm_num
 
@@ -3591,13 +3591,13 @@ exponential barrier; an upper last ancestor is excluded by the band.
 
 private theorem seamIntegerGreedyRemainder_thirteen_ge :
     13 ≤ seamIntegerGreedyRemainder 13 := by
-  native_decide
+  decide
 
 /-- The row-thirteen transition is a concrete non-right producer.  This is
 extracted from the already certified largest-false base at row fourteen. -/
 private theorem thirteen_not_mem_seamGreedyWord_fourteen :
     13 ∉ seamWordSupport (seamGreedyWord (13 + 1)) := by
-  native_decide
+  decide
 
 /-- If the dyadic upper-reset bands are avoided, no seam remainder at or
 after row thirteen can be smaller than its row index.  This is the global

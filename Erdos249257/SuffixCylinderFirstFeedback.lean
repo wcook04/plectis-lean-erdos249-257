@@ -25,47 +25,47 @@ theorem carryOneCoeff_eq_depth13Prefix
 theorem depth13Prefix_coeff_nineteen :
     supportCoeff (wordSupport depth18PrefixWord) 19 = 0 := by
   rw [← wordCoeff_eq_supportCoeff_wordSupport]
-  native_decide
+  decide
 
 theorem depth13Prefix_coeff_twenty :
     supportCoeff (wordSupport depth18PrefixWord) 20 = 1 := by
   rw [← wordCoeff_eq_supportCoeff_wordSupport]
-  native_decide
+  decide
 
 theorem depth13Prefix_coeff_twentyOne :
     supportCoeff (wordSupport depth18PrefixWord) 21 = 2 := by
   rw [← wordCoeff_eq_supportCoeff_wordSupport]
-  native_decide
+  decide
 
 theorem depth13Prefix_coeff_twentyTwo :
     supportCoeff (wordSupport depth18PrefixWord) 22 = 1 := by
   rw [← wordCoeff_eq_supportCoeff_wordSupport]
-  native_decide
+  decide
 
 theorem depth13Prefix_coeff_twentyThree :
     supportCoeff (wordSupport depth18PrefixWord) 23 = 0 := by
   rw [← wordCoeff_eq_supportCoeff_wordSupport]
-  native_decide
+  decide
 
 theorem depth13Prefix_coeff_twentyFour :
     supportCoeff (wordSupport depth18PrefixWord) 24 = 3 := by
   rw [← wordCoeff_eq_supportCoeff_wordSupport]
-  native_decide
+  decide
 
 theorem depth13Prefix_coeff_twentyFive :
     supportCoeff (wordSupport depth18PrefixWord) 25 = 0 := by
   rw [← wordCoeff_eq_supportCoeff_wordSupport]
-  native_decide
+  decide
 
 theorem depth13Prefix_coeff_twentySix :
     supportCoeff (wordSupport depth18PrefixWord) 26 = 1 := by
   rw [← wordCoeff_eq_supportCoeff_wordSupport]
-  native_decide
+  decide
 
 theorem depth13Prefix_coeff_twentySeven :
     supportCoeff (wordSupport depth18PrefixWord) 27 = 1 := by
   rw [← wordCoeff_eq_supportCoeff_wordSupport]
-  native_decide
+  decide
 
 theorem stage18_endpoint_eq : stage18.endpoint = 17 := rfl
 
@@ -157,7 +157,7 @@ theorem depth27_commonRestrictionAt_fourteen :
     (by norm_num) (by unfold halfStripBound; omega)
   · exact depth27SelectedHalfWindow_hasSuffixCylinderAt_thirteen
   · rw [stage27_endpoint_eq]
-    have hB : halfStripBound 27 = 14 := by native_decide
+    have hB : halfStripBound 27 = 14 := by decide
     rw [hB]
     norm_num
 

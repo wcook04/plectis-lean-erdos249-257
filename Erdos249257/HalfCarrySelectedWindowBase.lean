@@ -75,7 +75,7 @@ def depth18TableCheck : Bool :=
 
 /-- Kernel-reflected evaluation of the complete depth-18 table. -/
 theorem depth18TableCheck_eq_true : depth18TableCheck = true := by
-  native_decide
+  decide
 
 theorem depth18EntryCheck_eq_true
     {k : ℕ} (hk : 1 ≤ k) (hk12 : k ≤ 12) :

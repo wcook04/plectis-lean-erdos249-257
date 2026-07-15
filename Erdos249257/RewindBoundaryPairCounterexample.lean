@@ -44,7 +44,7 @@ def depth26FirstTwoCheck : Bool :=
   (List.range 2).all fun j ↦ depth26EntryCheck (j + 1)
 
 theorem depth26FirstTwoCheck_eq_true : depth26FirstTwoCheck = true := by
-  native_decide
+  decide
 
 theorem depth26EntryCheck_eq_true
     {k : ℕ} (hk : 1 ≤ k) (hk2 : k ≤ 2) :
@@ -107,7 +107,7 @@ theorem depth26FirstTwo_selectedRowCoeff_eq_one
   rw [selectedRowCoeff, dif_pos ⟨hk, hk2⟩]
   change (supportCoeff (wordSupport (depth26Word k)) 27 : ℤ) = 1
   rw [← wordCoeff_eq_supportCoeff_wordSupport]
-  interval_cases k <;> native_decide
+  interval_cases k <;> decide
 
 /-- The actual fixed-coefficient constructor step from depth 26 to 27,
 restricted to the same two target carries. -/
