@@ -22,7 +22,7 @@
 % the repository verifies that it matches docs/claims.json and that every
 % \lref/\lrefx/\lloc target resolves to the named declaration at that line.
 % ---------------------------------------------------------------------------
-\newcommand{\commit}{519f9765502de4f066a92d0fdc92dbe3ae495ff0}
+\newcommand{\commit}{7a710d30d2dc43324841d436a65b23e9604aa1e6}
 \newcommand{\repobase}{https://github.com/wcook04/plectis-lean-erdos249-257/blob/\commit}
 \newcommand{\sourceurl}{https://github.com/wcook04/plectis-lean-erdos249-257/tree/\commit}
 \newcommand{\rootbase}{https://github.com/wcook04/plectis-lean-erdos249-257/blob/main}
@@ -756,6 +756,17 @@ and
 An upper carry at most $-8$ even gives a full Mersenne-gap margin,
 \lrefx{HalfCylinderProducerCarrySocket.lean}{190}{producerCarry_le_neg_eight_forces_gap_margin}.
 These are local criteria, not a proof that the required carries occur.
+
+\subsection{Quarter-band endpoint cells}\label{res:quarterband}
+
+For the adjacent seam recurrence, failure of the desired next-row upper bound
+on the middle branch is exactly one multiple-of-four pulse cell,
+\lref{HalfCylinderQuarterBandEndpoints.lean}{153}{seamAdjacentCut_middleNextUpperFailure_iff_pulseCell}.
+On the terminal-reset branch, the same failure is exactly a constrained
+$3\cdot2^{s-1}+k$ pulse cell,
+\lrefx{HalfCylinderQuarterBandEndpoints.lean}{175}{seamAdjacentCut_rightNextUpperFailure_iff_pulseCell}.
+These are arithmetic normal forms for the exceptional cells; no avoidance
+statement for the concrete seam orbit is proved.
 
 \subsection{What stays open}
 

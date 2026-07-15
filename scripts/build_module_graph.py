@@ -59,6 +59,7 @@ NEW_ROLES = {
     "Erdos249257.HalfCylinderLargestSkipInduction": "Largest-skip induction from a first-crossing producer socket",
     "Erdos249257.HalfCylinderFixedTailSocket": "Fixed-tail survival classification for half-cylinder skips",
     "Erdos249257.HalfCylinderProducerCarrySocket": "Producer-carry and future-tail comparison socket",
+    "Erdos249257.HalfCylinderQuarterBandEndpoints": "Quarter-band endpoint cells for adjacent half-cylinder cuts",
     "Erdos249257.HalfTrappingReturnCarry": "Half-trapping reverse-carry interface",
     "Erdos249257.LambertDiagonalEnclosure": "Lambert diagonal enclosure reduction",
     "Erdos249257.LcmFactorIdealPulseObstruction": "LCM factor-ideal anchor-pulse obstruction",

@@ -5070,6 +5070,14 @@
           ]
         },
         {
+          "id": "Erdos249257.HalfCylinderQuarterBandEndpoints",
+          "path": "Erdos249257/HalfCylinderQuarterBandEndpoints.lean",
+          "role": "Quarter-band endpoint cells for adjacent half-cylinder cuts",
+          "imports": [
+            "Erdos249257.HalfCylinderConcreteSeamAdapter"
+          ]
+        },
+        {
           "id": "Erdos249257.HalfCylinderSeamLimit",
           "path": "Erdos249257/HalfCylinderSeamLimit.lean",
           "role": "Seam-limit reduction for the half target",
@@ -5534,6 +5542,11 @@
           "to": "fixed_tail_survival_socket"
         },
         {
+          "from": "quarter_band_endpoint_cells",
+          "relation": "builds_on",
+          "to": "concrete_seam_adapter"
+        },
+        {
           "from": "denominator_exclusion",
           "relation": "advances_open_target",
           "to": "erdos_249",
@@ -5783,7 +5796,7 @@
     "lean_toolchain": "leanprover/lean4:v4.29.1",
     "repository": "https://github.com/wcook04/plectis-lean-erdos249-257",
     "formal_source": {
-      "ref": "519f9765502de4f066a92d0fdc92dbe3ae495ff0",
+      "ref": "7a710d30d2dc43324841d436a65b23e9604aa1e6",
       "ref_kind": "commit",
       "publication_state": "committed_checkpoint_pending_remote_publication",
       "relationship_to_last_tag": "post_tag_checkpoint"
@@ -5807,7 +5820,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 1393
+        "line": 1404
       }
     },
     {
@@ -5818,7 +5831,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 1402
+        "line": 1413
       }
     },
     {
@@ -5829,7 +5842,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 1409
+        "line": 1420
       }
     }
   ],
@@ -6428,6 +6441,29 @@
           "name": "producerCarry_le_neg_eight_forces_gap_margin",
           "module": "Erdos249257/HalfCylinderProducerCarrySocket.lean",
           "line": 190
+        }
+      ]
+    },
+    {
+      "id": "quarter_band_endpoint_cells",
+      "label": "Quarter-band endpoint cells for adjacent half-cylinder cuts",
+      "status": "conditional reduction",
+      "statement": "On the middle and terminal-reset branches of the concrete adjacent seam recurrence, failure of the next-row upper bound is exactly characterized by explicit multiple-of-four pulse cells. The module does not prove that the concrete seam orbit avoids those cells.",
+      "remaining_open_proposition_ids": [
+        "remaining_open.universal_257_all_infinite_supports"
+      ],
+      "paper_label": "res:quarterband",
+      "readme_headline": false,
+      "declarations": [
+        {
+          "name": "seamAdjacentCut_middleNextUpperFailure_iff_pulseCell",
+          "module": "Erdos249257/HalfCylinderQuarterBandEndpoints.lean",
+          "line": 153
+        },
+        {
+          "name": "seamAdjacentCut_rightNextUpperFailure_iff_pulseCell",
+          "module": "Erdos249257/HalfCylinderQuarterBandEndpoints.lean",
+          "line": 175
         }
       ]
     },
