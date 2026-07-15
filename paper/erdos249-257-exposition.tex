@@ -825,6 +825,18 @@ $E' = 2E-C$ and still covers the new carry interval,
 This preserves a finite cylinder invariant; it does not produce the required
 coefficient profile at every later step.
 
+\subsection{Pre-feedback selected-cylinder run}\label{res:prefeedback}
+
+Before the first half-divisor feedback row, Lean constructs a full selected
+window at every depth from $18$ through $27$,
+\lref{SelectedSuffixCylinderPreFeedback.lean}{118}{nonempty_stage_of_eighteen_le_of_le_twentySeven}.
+At depth $27$ the common suffix cylinder remains and its endpoint covers the
+whole protected strip,
+\lrefx{SelectedSuffixCylinderPreFeedback.lean}{141}{depth27SelectedHalfWindow_hasSuffixCylinderAt_thirteen}
+and
+\lrefx{SelectedSuffixCylinderPreFeedback.lean}{147}{depth27SelectedHalfWindow_endpoint_covers_strip}.
+This is a finite run, not an unbounded induction.
+
 \subsection{What stays open}
 
 The universal Erd\H{o}s \#257 statement, irrationality of $\sum_{n\in A}1/(2^n-1)$

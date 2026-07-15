@@ -5359,6 +5359,14 @@
           ]
         },
         {
+          "id": "Erdos249257.SelectedSuffixCylinderPreFeedback",
+          "path": "Erdos249257/SelectedSuffixCylinderPreFeedback.lean",
+          "role": "Selected suffix-cylinder run through the first feedback row",
+          "imports": [
+            "Erdos249257.SelectedSuffixCylinder"
+          ]
+        },
+        {
           "id": "Erdos249257.SignedQMomentObstruction",
           "path": "Erdos249257/SignedQMomentObstruction.lean",
           "role": "Finite signed-moment determinant and dyadic-parity substrate",
@@ -5613,6 +5621,11 @@
           "from": "selected_suffix_cylinder_propagation",
           "relation": "builds_on",
           "to": "selected_window_depth18_base"
+        },
+        {
+          "from": "selected_suffix_pre_feedback_run",
+          "relation": "builds_on",
+          "to": "selected_suffix_cylinder_propagation"
         },
         {
           "from": "denominator_exclusion",
@@ -5888,7 +5901,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 1461
+        "line": 1473
       }
     },
     {
@@ -5899,7 +5912,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 1470
+        "line": 1482
       }
     },
     {
@@ -5910,7 +5923,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 1477
+        "line": 1489
       }
     }
   ],
@@ -6650,6 +6663,35 @@
           "name": "SelectedHalfWindow.hasSuffixCylinderAt_stepExplicit",
           "module": "Erdos249257/SelectedSuffixCylinder.lean",
           "line": 136
+        }
+      ]
+    },
+    {
+      "id": "selected_suffix_pre_feedback_run",
+      "label": "Selected suffix-cylinder run through the first feedback row",
+      "status": "verified finite instance",
+      "bounded_domain": "Each depth N from 18 through 27, including the full protected carry strip at depth 27.",
+      "statement": "Before the first half-divisor feedback row, a common depth-13 prefix supports a full selected window at every depth 18 through 27 while preserving the suffix-cylinder invariant. The depth-27 endpoint covers the full protected strip. This is a finite run, not an unbounded induction.",
+      "remaining_open_proposition_ids": [
+        "remaining_open.universal_257_all_infinite_supports"
+      ],
+      "paper_label": "res:prefeedback",
+      "readme_headline": false,
+      "declarations": [
+        {
+          "name": "nonempty_stage_of_eighteen_le_of_le_twentySeven",
+          "module": "Erdos249257/SelectedSuffixCylinderPreFeedback.lean",
+          "line": 118
+        },
+        {
+          "name": "depth27SelectedHalfWindow_hasSuffixCylinderAt_thirteen",
+          "module": "Erdos249257/SelectedSuffixCylinderPreFeedback.lean",
+          "line": 141
+        },
+        {
+          "name": "depth27SelectedHalfWindow_endpoint_covers_strip",
+          "module": "Erdos249257/SelectedSuffixCylinderPreFeedback.lean",
+          "line": 147
         }
       ]
     },

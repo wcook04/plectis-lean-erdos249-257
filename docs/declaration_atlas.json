@@ -4,21 +4,21 @@
   "projection_not_authority": true,
   "proof_authority": "Lean source checked by the pinned Lean kernel",
   "argument_authority": "docs/claims.json::machine_readable_paper.argument_graph",
-  "source_fingerprint": "sha256:2bbb346c9890114303da1a59852d479e3b5b52cf970c844ba0e568d30b4a7b8e",
+  "source_fingerprint": "sha256:8a9d793d74ef894c60ec716dcca71ca68c11a65a23eb25cba7296e51170ba4b4",
   "summary": {
-    "module_count": 589,
-    "declaration_count": 7605,
-    "theorem_like_count": 6793,
+    "module_count": 590,
+    "declaration_count": 7622,
+    "theorem_like_count": 6797,
     "generated_certificate_declaration_count": 1681,
-    "principal_claim_link_count": 167,
+    "principal_claim_link_count": 170,
     "kind_counts": {
       "abbrev": 6,
-      "def": 781,
+      "def": 793,
       "inductive": 3,
       "instance": 5,
       "lemma": 354,
-      "structure": 17,
-      "theorem": 6439
+      "structure": 18,
+      "theorem": 6443
     }
   },
   "modules": [
@@ -117,7 +117,8 @@
         "Erdos249257.HalfCylinderSeamProducerAlignment",
         "Erdos249257.HalfCarrySelectedWindowBase",
         "Erdos249257.RewindSeamOperationalBridge",
-        "Erdos249257.SelectedSuffixCylinder"
+        "Erdos249257.SelectedSuffixCylinder",
+        "Erdos249257.SelectedSuffixCylinderPreFeedback"
       ],
       "declaration_count": 0,
       "kind_counts": {}
@@ -7088,6 +7089,19 @@
       "kind_counts": {
         "def": 2,
         "theorem": 8
+      }
+    },
+    {
+      "id": "Erdos249257.SelectedSuffixCylinderPreFeedback",
+      "path": "Erdos249257/SelectedSuffixCylinderPreFeedback.lean",
+      "imports": [
+        "Erdos249257.SelectedSuffixCylinder"
+      ],
+      "declaration_count": 17,
+      "kind_counts": {
+        "def": 12,
+        "structure": 1,
+        "theorem": 4
       }
     },
     {
@@ -83019,6 +83033,191 @@
         "selected_suffix_cylinder_propagation"
       ],
       "docstring": "Exact cylinder propagation. The endpoint update is `E' = 2E-C`; the ordinary selected-window buffer also proves that the new endpoint still covers the entire new carry interval."
+    },
+    {
+      "id": "Erdos249257/SelectedSuffixCylinderPreFeedback.lean:28:Stage",
+      "name": "Stage",
+      "kind": "structure",
+      "module": "Erdos249257/SelectedSuffixCylinderPreFeedback.lean",
+      "line": 28,
+      "signature": "structure Stage (N : ℕ)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A full selected window together with the common depth-13 suffix-cylinder data that drives the pre-feedback induction."
+    },
+    {
+      "id": "Erdos249257/SelectedSuffixCylinderPreFeedback.lean:39:Stage.step",
+      "name": "Stage.step",
+      "kind": "def",
+      "module": "Erdos249257/SelectedSuffixCylinderPreFeedback.lean",
+      "line": 39,
+      "signature": "noncomputable def Stage.step {N : ℕ} (S : Stage N) (hhalf : (N + 1) / 2 ≤ 13) : Stage (N + 1)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "One exact pre-feedback step. The half-depth hypothesis makes the common depth-13 restriction sufficient for next-row divisor agreement. The canonical selected successor then preserves the suffix cylinder and updates its endpoint by `E' = 2E - C`."
+    },
+    {
+      "id": "Erdos249257/SelectedSuffixCylinderPreFeedback.lean:81:stage18",
+      "name": "stage18",
+      "kind": "def",
+      "module": "Erdos249257/SelectedSuffixCylinderPreFeedback.lean",
+      "line": 81,
+      "signature": "noncomputable def stage18 : Stage 18",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The executable depth-18 base, now packaged with its endpoint cover."
+    },
+    {
+      "id": "Erdos249257/SelectedSuffixCylinderPreFeedback.lean:86:stage19",
+      "name": "stage19",
+      "kind": "def",
+      "module": "Erdos249257/SelectedSuffixCylinderPreFeedback.lean",
+      "line": 86,
+      "signature": "noncomputable def stage19 : Stage 19",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/SelectedSuffixCylinderPreFeedback.lean:89:stage20",
+      "name": "stage20",
+      "kind": "def",
+      "module": "Erdos249257/SelectedSuffixCylinderPreFeedback.lean",
+      "line": 89,
+      "signature": "noncomputable def stage20 : Stage 20",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/SelectedSuffixCylinderPreFeedback.lean:92:stage21",
+      "name": "stage21",
+      "kind": "def",
+      "module": "Erdos249257/SelectedSuffixCylinderPreFeedback.lean",
+      "line": 92,
+      "signature": "noncomputable def stage21 : Stage 21",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/SelectedSuffixCylinderPreFeedback.lean:95:stage22",
+      "name": "stage22",
+      "kind": "def",
+      "module": "Erdos249257/SelectedSuffixCylinderPreFeedback.lean",
+      "line": 95,
+      "signature": "noncomputable def stage22 : Stage 22",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/SelectedSuffixCylinderPreFeedback.lean:98:stage23",
+      "name": "stage23",
+      "kind": "def",
+      "module": "Erdos249257/SelectedSuffixCylinderPreFeedback.lean",
+      "line": 98,
+      "signature": "noncomputable def stage23 : Stage 23",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/SelectedSuffixCylinderPreFeedback.lean:101:stage24",
+      "name": "stage24",
+      "kind": "def",
+      "module": "Erdos249257/SelectedSuffixCylinderPreFeedback.lean",
+      "line": 101,
+      "signature": "noncomputable def stage24 : Stage 24",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/SelectedSuffixCylinderPreFeedback.lean:104:stage25",
+      "name": "stage25",
+      "kind": "def",
+      "module": "Erdos249257/SelectedSuffixCylinderPreFeedback.lean",
+      "line": 104,
+      "signature": "noncomputable def stage25 : Stage 25",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/SelectedSuffixCylinderPreFeedback.lean:107:stage26",
+      "name": "stage26",
+      "kind": "def",
+      "module": "Erdos249257/SelectedSuffixCylinderPreFeedback.lean",
+      "line": 107,
+      "signature": "noncomputable def stage26 : Stage 26",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/SelectedSuffixCylinderPreFeedback.lean:111:stage27",
+      "name": "stage27",
+      "kind": "def",
+      "module": "Erdos249257/SelectedSuffixCylinderPreFeedback.lean",
+      "line": 111,
+      "signature": "noncomputable def stage27 : Stage 27",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The last step before the half-depth cutoff moves from 13 to 14."
+    },
+    {
+      "id": "Erdos249257/SelectedSuffixCylinderPreFeedback.lean:118:nonempty_stage_of_eighteen_le_of_le_twentySeven",
+      "name": "nonempty_stage_of_eighteen_le_of_le_twentySeven",
+      "kind": "theorem",
+      "module": "Erdos249257/SelectedSuffixCylinderPreFeedback.lean",
+      "line": 118,
+      "signature": "theorem nonempty_stage_of_eighteen_le_of_le_twentySeven {N : ℕ} (h18 : 18 ≤ N) (h27 : N ≤ 27) : Nonempty (Stage N)",
+      "generated_certificate": false,
+      "claim_ids": [
+        "selected_suffix_pre_feedback_run"
+      ],
+      "docstring": "Uniform finite-range form of the pre-feedback construction. This is the consumer-facing statement: every depth from the certified base through the last row before feedback carries a full selected window with the same depth-13 cylinder invariant."
+    },
+    {
+      "id": "Erdos249257/SelectedSuffixCylinderPreFeedback.lean:135:depth27SelectedHalfWindow",
+      "name": "depth27SelectedHalfWindow",
+      "kind": "def",
+      "module": "Erdos249257/SelectedSuffixCylinderPreFeedback.lean",
+      "line": 135,
+      "signature": "noncomputable def depth27SelectedHalfWindow : SelectedHalfWindow 27 (halfStripBound 27)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Full protected selected window at the first feedback depth."
+    },
+    {
+      "id": "Erdos249257/SelectedSuffixCylinderPreFeedback.lean:141:depth27SelectedHalfWindow_hasSuffixCylinderAt_thirteen",
+      "name": "depth27SelectedHalfWindow_hasSuffixCylinderAt_thirteen",
+      "kind": "theorem",
+      "module": "Erdos249257/SelectedSuffixCylinderPreFeedback.lean",
+      "line": 141,
+      "signature": "theorem depth27SelectedHalfWindow_hasSuffixCylinderAt_thirteen : HasSuffixCylinderAt depth27SelectedHalfWindow (by omega : 13 ≤ 27) stage27.endpoint",
+      "generated_certificate": false,
+      "claim_ids": [
+        "selected_suffix_pre_feedback_run"
+      ],
+      "docstring": "Every carry in the depth-27 protected strip shares the depth-13 prefix and has an endpoint-indexed suffix."
+    },
+    {
+      "id": "Erdos249257/SelectedSuffixCylinderPreFeedback.lean:147:depth27SelectedHalfWindow_endpoint_covers_strip",
+      "name": "depth27SelectedHalfWindow_endpoint_covers_strip",
+      "kind": "theorem",
+      "module": "Erdos249257/SelectedSuffixCylinderPreFeedback.lean",
+      "line": 147,
+      "signature": "theorem depth27SelectedHalfWindow_endpoint_covers_strip : halfStripBound 27 ≤ stage27.endpoint",
+      "generated_certificate": false,
+      "claim_ids": [
+        "selected_suffix_pre_feedback_run"
+      ],
+      "docstring": "The propagated endpoint still covers the full depth-27 carry strip."
+    },
+    {
+      "id": "Erdos249257/SelectedSuffixCylinderPreFeedback.lean:153:depth27SelectedHalfWindow_admissible",
+      "name": "depth27SelectedHalfWindow_admissible",
+      "kind": "theorem",
+      "module": "Erdos249257/SelectedSuffixCylinderPreFeedback.lean",
+      "line": 153,
+      "signature": "theorem depth27SelectedHalfWindow_admissible {k : ℕ} (hk : 1 ≤ k) (hkR : k ≤ halfStripBound 27) : HalfStripAdmissible 27 (depth27SelectedHalfWindow.word k hk hkR)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "In particular, the pre-feedback run provides an actual admissible word for every terminal carry in the full depth-27 protected strip."
     },
     {
       "id": "Erdos249257/SignedQMomentObstruction.lean:28:det_mul_rectangular",

@@ -3,7 +3,7 @@
   "artifact_role": "paper_sigil_to_lean_module_navigation_crosswalk",
   "authority_posture": "generated_navigation_projection_not_proof_authority",
   "heuristic": "Each CamelCase component contributes at most its first three characters.",
-  "alias_count": 67,
+  "alias_count": 68,
   "aliases": [
     {
       "sigil": "AdeHeiObs",
@@ -289,6 +289,11 @@
       "sigil": "SelSufCyl",
       "module": "SelectedSuffixCylinder.lean",
       "path": "Erdos249257/SelectedSuffixCylinder.lean"
+    },
+    {
+      "sigil": "SelSufCylPreFee",
+      "module": "SelectedSuffixCylinderPreFeedback.lean",
+      "path": "Erdos249257/SelectedSuffixCylinderPreFeedback.lean"
     },
     {
       "sigil": "SigQMomObs",
