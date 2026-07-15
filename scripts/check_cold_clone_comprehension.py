@@ -33,6 +33,7 @@ PROOF_AUTHORITY = "Lean source checked by the pinned Lean kernel"
 STORY_ROUTES = ("erdos257_half_story", "erdos249_certificate_story")
 STORY_CLAIMS = (
     "greedy_achievement_geometry",
+    "half_greedy_two_thirds_band",
     "half_membership_seam_classification",
     "fatal_gap_right_tail_classification",
     "final_middle_cell_escape",
@@ -220,12 +221,21 @@ def validate_agent_packets(packets: dict[str, Any]) -> None:
     assert [
         step.rsplit(" ", 1)[-1]
         for step in story_routes["erdos257_half_story"]["route"]["query_steps"]
-    ] == list(STORY_CLAIMS[:5])
+    ] == list(STORY_CLAIMS[:6])
     assert story_routes["erdos249_certificate_story"]["route"]["query_steps"][-1].endswith(
         "remaining_open.unbounded_certificate_supply"
     )
 
     story_claims = packets["story_claims"]
+    singleton_band = story_claims["half_greedy_two_thirds_band"]
+    assert ("builds_on", "greedy_achievement_geometry") in {
+        (row["relation"], row["neighbour"]["id"])
+        for row in singleton_band["argument_neighbourhood"]["outgoing"]
+    }
+    assert (
+        "no theorem here says that the actual greedy orbit for 1/2 avoids the band"
+        in singleton_band["claim"]["statement"]
+    )
     half_membership = story_claims["half_membership_seam_classification"]
     assert {
         (row["relation"], row["neighbour"]["id"])

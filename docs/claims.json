@@ -102,6 +102,7 @@
         ],
         "query_steps": [
           "python3 scripts/query_corpus.py --claim greedy_achievement_geometry",
+          "python3 scripts/query_corpus.py --claim half_greedy_two_thirds_band",
           "python3 scripts/query_corpus.py --claim half_membership_seam_classification",
           "python3 scripts/query_corpus.py --claim fatal_gap_right_tail_classification",
           "python3 scripts/query_corpus.py --claim final_middle_cell_escape",
@@ -109,6 +110,7 @@
         ],
         "authority_owners": [
           "Erdos249257/GreedyAchievementSet.lean",
+          "Erdos249257/HalfGreedyTwoThirdsBand.lean",
           "Erdos249257/HalfCylinderFatalGapRightTail.lean",
           "Erdos249257/HalfCylinderFinalMiddleCellEscape.lean",
           "Erdos249257/HalfCylinderLastProducerContradiction.lean",
@@ -6260,6 +6262,21 @@
           }
         },
         {
+          "from": "half_greedy_two_thirds_band",
+          "relation": "builds_on",
+          "to": "greedy_achievement_geometry"
+        },
+        {
+          "from": "half_greedy_two_thirds_band",
+          "relation": "advances_open_target",
+          "to": "universal_257",
+          "remaining_open_effect": {
+            "remaining_open_proposition_id": "remaining_open.universal_257_all_infinite_supports",
+            "operation": "constrains",
+            "statement": "Localizes an unsafe isolated greedy skip to an exact open interval of width below 1/9; it neither proves that the actual half-greedy orbit avoids the interval nor addresses arbitrary infinite supports."
+          }
+        },
+        {
           "from": "half_second_channel_reduction",
           "relation": "builds_on",
           "to": "greedy_achievement_geometry"
@@ -6403,7 +6420,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 1897
+        "line": 1928
       }
     },
     {
@@ -6414,7 +6431,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 1906
+        "line": 1937
       }
     },
     {
@@ -6425,7 +6442,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 1913
+        "line": 1944
       }
     }
   ],
@@ -8333,6 +8350,44 @@
           "name": "half_mem_mersenneAchievementSet_iff_greedySkippedSupport_infinite",
           "module": "Erdos249257/GreedyAchievementSet.lean",
           "line": 2514
+        }
+      ]
+    },
+    {
+      "id": "half_greedy_two_thirds_band",
+      "label": "Two-thirds localization of an unsafe isolated greedy skip",
+      "status": "proved here",
+      "statement": "For a take-skip-take singleton with pre-take reciprocal R and q = 2^b - 1, assuming 0 < R < q, the skipped term is dyadically unsafe exactly when R lies in the open interval (q(2q+1)/(3q+1), 2q(q+1)/(3q+2)). The interval has exact width q^2/((3q+1)(3q+2)) < 1/9 and lies immediately above 2q/3. Integral reciprocals never lie in it; in the corresponding positive odd integer band, the numerator is at least 7. These are local constraints: no theorem here says that the actual greedy orbit for 1/2 avoids the band or identifies the surviving last-producer cells with unsafe skips.",
+      "remaining_open_proposition_ids": [
+        "remaining_open.universal_257_all_infinite_supports"
+      ],
+      "paper_label": "res:twothirdsband",
+      "readme_headline": false,
+      "declarations": [
+        {
+          "name": "singletonUnsafe_iff_twoThirdsBand",
+          "module": "Erdos249257/HalfGreedyTwoThirdsBand.lean",
+          "line": 68
+        },
+        {
+          "name": "band_width",
+          "module": "Erdos249257/HalfGreedyTwoThirdsBand.lean",
+          "line": 95
+        },
+        {
+          "name": "band_width_lt_ninth",
+          "module": "Erdos249257/HalfGreedyTwoThirdsBand.lean",
+          "line": 104
+        },
+        {
+          "name": "not_twoThirdsBand_of_int",
+          "module": "Erdos249257/HalfGreedyTwoThirdsBand.lean",
+          "line": 126
+        },
+        {
+          "name": "seven_le_of_intBand_odd",
+          "module": "Erdos249257/HalfGreedyTwoThirdsBand.lean",
+          "line": 172
         }
       ]
     },

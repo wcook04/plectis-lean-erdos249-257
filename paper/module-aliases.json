@@ -3,7 +3,7 @@
   "artifact_role": "paper_sigil_to_lean_module_navigation_crosswalk",
   "authority_posture": "generated_navigation_projection_not_proof_authority",
   "heuristic": "Each CamelCase component contributes at most its first three characters.",
-  "alias_count": 105,
+  "alias_count": 106,
   "aliases": [
     {
       "sigil": "ActForResPro",
@@ -254,6 +254,11 @@
       "sigil": "HalDivUniDro",
       "module": "HalfDivisorUnitDrop.lean",
       "path": "Erdos249257/HalfDivisorUnitDrop.lean"
+    },
+    {
+      "sigil": "HalGreTwoThiBan",
+      "module": "HalfGreedyTwoThirdsBand.lean",
+      "path": "Erdos249257/HalfGreedyTwoThirdsBand.lean"
     },
     {
       "sigil": "HalTraRetCar",

@@ -15,7 +15,7 @@
     "declaration_count": 12490,
     "theorem_like_count": 11467,
     "generated_certificate_declaration_count": 2923,
-    "principal_claim_link_count": 230,
+    "principal_claim_link_count": 235,
     "kind_counts": {
       "abbrev": 7,
       "def": 980,
@@ -44,7 +44,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 1897
+        "line": 1928
       }
     },
     {
@@ -55,7 +55,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 1906
+        "line": 1937
       }
     },
     {
@@ -66,7 +66,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 1913
+        "line": 1944
       }
     }
   ],
@@ -406,6 +406,7 @@
       ],
       "query_steps": [
         "python3 scripts/query_corpus.py --claim greedy_achievement_geometry",
+        "python3 scripts/query_corpus.py --claim half_greedy_two_thirds_band",
         "python3 scripts/query_corpus.py --claim half_membership_seam_classification",
         "python3 scripts/query_corpus.py --claim fatal_gap_right_tail_classification",
         "python3 scripts/query_corpus.py --claim final_middle_cell_escape",
@@ -413,6 +414,7 @@
       ],
       "authority_owners": [
         "Erdos249257/GreedyAchievementSet.lean",
+        "Erdos249257/HalfGreedyTwoThirdsBand.lean",
         "Erdos249257/HalfCylinderFatalGapRightTail.lean",
         "Erdos249257/HalfCylinderFinalMiddleCellEscape.lean",
         "Erdos249257/HalfCylinderLastProducerContradiction.lean",

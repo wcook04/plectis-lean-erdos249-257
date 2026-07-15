@@ -53,6 +53,13 @@ def main() -> int:
     checks += 1
 
     mutated = copy.deepcopy(packets)
+    mutated["story_claims"]["half_greedy_two_thirds_band"]["claim"]["statement"] = (
+        "The actual greedy orbit for 1/2 avoids the band."
+    )
+    assert_rejected(mutated, "#257 singleton-band orbit boundary")
+    checks += 1
+
+    mutated = copy.deepcopy(packets)
     last_producer = mutated["story_claims"]["last_producer_tail_escape_reduction"]
     last_producer["argument_neighbourhood"]["incoming"] = [
         row

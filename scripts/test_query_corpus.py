@@ -96,11 +96,21 @@ def main() -> int:
     half_route = query("--route", "erdos257_half_story")["route"]
     assert half_route["query_steps"] == [
         "python3 scripts/query_corpus.py --claim greedy_achievement_geometry",
+        "python3 scripts/query_corpus.py --claim half_greedy_two_thirds_band",
         "python3 scripts/query_corpus.py --claim half_membership_seam_classification",
         "python3 scripts/query_corpus.py --claim fatal_gap_right_tail_classification",
         "python3 scripts/query_corpus.py --claim final_middle_cell_escape",
         "python3 scripts/query_corpus.py --claim last_producer_tail_escape_reduction",
     ]
+    singleton_band = query("--claim", "half_greedy_two_thirds_band")
+    assert ("builds_on", "greedy_achievement_geometry") in {
+        (row["relation"], row["neighbour"]["id"])
+        for row in singleton_band["argument_neighbourhood"]["outgoing"]
+    }
+    assert (
+        "no theorem here says that the actual greedy orbit for 1/2 avoids the band"
+        in singleton_band["claim"]["statement"]
+    )
     half_membership = query("--claim", "half_membership_seam_classification")
     assert {
         (row["relation"], row["neighbour"]["id"])
@@ -297,7 +307,7 @@ def main() -> int:
     open_expectations = {
         "remaining_open.erdos_249_irrationality": ("erdos_249", 1),
         "remaining_open.unbounded_certificate_supply": ("erdos_249", 9),
-        "remaining_open.universal_257_all_infinite_supports": ("universal_257", 6),
+        "remaining_open.universal_257_all_infinite_supports": ("universal_257", 7),
     }
     for open_id, (target, advancing_count) in open_expectations.items():
         open_packet = query("--open", open_id)

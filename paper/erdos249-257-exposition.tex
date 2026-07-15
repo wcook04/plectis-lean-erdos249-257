@@ -527,6 +527,37 @@ and
 The rest of this section develops sufficient criteria and finite case analyses
 around this remaining estimate; it may be skipped on a first reading.
 
+\subsection{A narrow obstruction for an isolated skip}\label{res:twothirdsband}
+
+One local configuration admits a particularly simple exact description.
+Suppose the greedy process takes the term at rank $b$, skips the next term,
+and then takes the term after that.  Put $q=2^b-1$, and write the residual
+immediately before the first take as $1/R$.  When $0<R<q$, the intervening
+skip is dyadically unsafe if and only if
+\[
+  \frac{q(2q+1)}{3q+1}<R<\frac{2q(q+1)}{3q+2}.
+\]
+The width of this interval is exactly
+\[
+  \frac{q^2}{(3q+1)(3q+2)}<\frac19,
+\]
+and the whole interval lies between $2q/3$ and $2q/3+2/9$.  Thus an unsafe
+isolated skip is confined to a uniformly narrow window pinned just above two
+thirds of the Mersenne modulus.  No integral reciprocal lies in this window.
+In the corresponding positive odd integer formulation, with residual
+$p/(2D)$, membership in the cleared band forces $p\ge7$.
+
+This is a localizer, not an orbit-level elimination.  It does not show that
+the greedy orbit of $1/2$ avoids the interval, and it does not identify the
+two surviving last-producer coordinates $-2,-1$ with unsafe isolated skips.
+The exact equivalence, width calculation, and arithmetic consequences are
+\lrefx{HalfGreedyTwoThirdsBand.lean}{68}{singletonUnsafe_iff_twoThirdsBand},
+\lrefx{HalfGreedyTwoThirdsBand.lean}{95}{band_width},
+\lrefx{HalfGreedyTwoThirdsBand.lean}{104}{band_width_lt_ninth},
+\lrefx{HalfGreedyTwoThirdsBand.lean}{126}{not_twoThirdsBand_of_int},
+and
+\lref{HalfGreedyTwoThirdsBand.lean}{172}{seven_le_of_intBand_odd}.
+
 \subsection{A conditional orthogonal-petal criterion}\label{res:sunflower}
 
 Let $A$ be a finite-core orthogonal-petal bouquet: outside a finite frame, its
