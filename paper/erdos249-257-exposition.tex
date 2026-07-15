@@ -911,6 +911,11 @@ false to true increases the support coefficient by exactly one:
 \lref{HalfDivisorUnitDrop.lean}{20}{supportCoeff_extend_true_eq_false_add_one_at_double}.
 The same holds for any explicitly identified adjacent boundary pair,
 \lrefx{HalfDivisorUnitDrop.lean}{35}{supportCoeff_boundaryPair_unitDrop_at_double}.
+The rewind adapter transfers such a pair to the next protected seam while
+retaining the exact unit-drop witness,
+\lrefx{RewindHalfDivisorAdapter.lean}{86}{rewindBaseUnitDropAt_of_halfDivisorBoundaryPair}
+and
+\lrefx{RewindHalfDivisorAdapter.lean}{147}{protectedEvenSeamRealizedAt_succ_of_fullStrip_rewindHalfDivisorBoundaryPair}.
 This is the local coefficient input for the rewind-seam profile, not a global
 construction of such boundary pairs.
 

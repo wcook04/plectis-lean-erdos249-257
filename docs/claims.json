@@ -5481,6 +5481,15 @@
           "imports": []
         },
         {
+          "id": "Erdos249257.RewindHalfDivisorAdapter",
+          "path": "Erdos249257/RewindHalfDivisorAdapter.lean",
+          "role": "Lean proof module",
+          "imports": [
+            "Erdos249257.HalfDivisorUnitDrop",
+            "Erdos249257.RewindSeamOperationalBridge"
+          ]
+        },
+        {
           "id": "Erdos249257.RewindSeamOperationalBridge",
           "path": "Erdos249257/RewindSeamOperationalBridge.lean",
           "role": "Operational bridge from rewind seams to protected next-row seams",
@@ -6120,7 +6129,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 1698
+        "line": 1703
       }
     },
     {
@@ -6131,7 +6140,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 1707
+        "line": 1712
       }
     },
     {
@@ -6142,7 +6151,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 1714
+        "line": 1719
       }
     }
   ],
@@ -7002,7 +7011,7 @@
       "id": "half_divisor_unit_drop",
       "label": "Half-divisor unit coefficient drop at the feedback row",
       "status": "proved here",
-      "statement": "At the doubled feedback row, switching only the terminal half-divisor bit from false to true increases the support coefficient by exactly one. The same identity holds for any explicitly identified adjacent boundary pair. This does not construct such pairs globally.",
+      "statement": "At the doubled feedback row, switching only the terminal half-divisor bit from false to true increases the support coefficient by exactly one. The same identity holds for any explicitly identified adjacent boundary pair, and the rewind adapter transfers such a pair to the next protected seam while retaining the unit-drop witness. This does not construct such pairs globally.",
       "readme_headline": false,
       "declarations": [
         {
@@ -7014,6 +7023,16 @@
           "name": "supportCoeff_boundaryPair_unitDrop_at_double",
           "module": "Erdos249257/HalfDivisorUnitDrop.lean",
           "line": 35
+        },
+        {
+          "name": "rewindBaseUnitDropAt_of_halfDivisorBoundaryPair",
+          "module": "Erdos249257/RewindHalfDivisorAdapter.lean",
+          "line": 86
+        },
+        {
+          "name": "protectedEvenSeamRealizedAt_succ_of_fullStrip_rewindHalfDivisorBoundaryPair",
+          "module": "Erdos249257/RewindHalfDivisorAdapter.lean",
+          "line": 147
         }
       ]
     },
