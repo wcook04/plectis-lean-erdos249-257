@@ -942,6 +942,10 @@ and
 \lrefx{SuffixCylinderTwoSheet.lean}{26}{hasSuffixCylinderAt_take}; combining
 them leaves only a realized seam whose exact hole is inside the next strip,
 \lrefx{SuffixCylinderFeedbackFanIn.lean}{62}{CylinderStage.feedbackAdvance_or_protectedSeam_inStrip}.
+The strengthened in-strip alternative retains its two endpoint cylinders,
+complementary literal prefixes, every admissible word off the hole, and the
+canonical parent-failure coordinate required by the finite-gap construction,
+\lrefx{SuffixCylinderInStrip.lean}{665}{CylinderStage.feedbackAdvance_or_inStripTwoSheet}.
 This is a conditional local feedback classification, not a cofinal supply
 theorem: the required crossing coefficient profile is still an input.
 
