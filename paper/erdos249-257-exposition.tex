@@ -968,6 +968,10 @@ Given its explicit next-row arithmetic cell, the promoted stage then advances
 with its coefficient profile and buffer synthesized internally, preserving
 adjacency through the whole feedback operation,
 \lrefx{SuffixCylinderProfiledAutoStep.lean}{110}{ProfiledGapStage.promoteThenAdvance_hasAdjacentPrefixes}.
+If the resulting macro-step swallows the next strip, its coefficient-pulse
+bound forces the preceding gap into the exact quarter-band lower bound;
+this is a quantified residual branch, not an impossibility claim,
+\lrefx{SuffixCylinderProfiledSwallow.lean}{254}{nextBound_le_four_gapWidth_add_two_of_macro_swallow}.
 This is a conditional local feedback classification, not a cofinal supply
 theorem: the required crossing coefficient profile is still an input.
 
