@@ -24,25 +24,25 @@
       "authority_role": "proof_bearing_committed_source_anchor"
     },
     "navigation_snapshot": {
-      "commit": "b9bf64369d57a41500434268cb63a0e416fbbe7e",
+      "commit": "aa2bbb06c46770cc4b12533f05aec5c36b42e2b6",
       "authority_role": "machine_readable_navigation_anchor",
       "publication_state": "main_history_snapshot",
       "published_ref": "main",
-      "repository_resolution": "https://github.com/wcook04/plectis-lean-erdos249-257/tree/b9bf64369d57a41500434268cb63a0e416fbbe7e"
+      "repository_resolution": "https://github.com/wcook04/plectis-lean-erdos249-257/tree/aa2bbb06c46770cc4b12533f05aec5c36b42e2b6"
     },
     "content": {
       "machine_readable_paper": {
         "path": "docs/claims.json::machine_readable_paper",
-        "content_digest": "sha256:4234e0c91e2da30c1be839c2a6d1a306cb3bac3e853a4018f2b14bd8e8a24971"
+        "content_digest": "sha256:7a825f2497b14c6d3f4ffb04cea4b5e091673c627936001a92077438a9195881"
       },
       "claims_document": {
         "path": "docs/claims.json",
-        "content_digest": "sha256:de0055ac27f2f0841db273b69f3bf13160578c414b94fadbe0ecd775c19db7dc"
+        "content_digest": "sha256:45236f8a395aa2dbc4f0c17b72d37ec39a01e89c1924732aa85dffa73b35b633"
       },
       "declaration_atlas": {
         "path": "docs/declaration_atlas.json",
-        "content_digest": "sha256:d4a75dc80ae6cbd35142a0ff5d09d4767faf351903351740f8cdde84f8651472",
-        "source_input_fingerprint": "sha256:3e5239389542747ef39f083c2ae26a3eabafb77f21be99ea851704553eb55797"
+        "content_digest": "sha256:ff4074f047ded3b7fd6575656bafb9647c07d26ec78c4d98bc69a86337e8b32e",
+        "source_input_fingerprint": "sha256:551cf322ebc61dbe08c6a0f4d9e8a656672c3b82aa2552a59dad1500743bd721"
       },
       "methodology_contract": {
         "path": "docs/methodology.json",
@@ -50,7 +50,7 @@
       },
       "bounded_orientation": {
         "path": "docs/orientation.json",
-        "content_digest": "sha256:2b9affaef0a47af0c969cb5674d4e09c28935886fa8ebceabc87c41bcc4b7a27"
+        "content_digest": "sha256:20cce6bb94fcd3f67caf8bd81187ebeee940946ac5c651686fe86ea59e85ac4a"
       },
       "human_exposition": {
         "source_path": "paper/erdos249-257-exposition.tex",
@@ -132,19 +132,19 @@
     }
   },
   "summary": {
-    "module_count": 574,
-    "declaration_count": 7435,
-    "theorem_like_count": 6648,
+    "module_count": 575,
+    "declaration_count": 7442,
+    "theorem_like_count": 6654,
     "generated_certificate_declaration_count": 1681,
     "principal_claim_link_count": 135,
     "kind_counts": {
       "abbrev": 6,
-      "def": 757,
+      "def": 758,
       "inductive": 3,
       "instance": 4,
       "lemma": 354,
       "structure": 17,
-      "theorem": 6294
+      "theorem": 6300
     }
   },
   "compact_graph": {
@@ -440,7 +440,7 @@
     ],
     "module_topology": {
       "root": "Erdos249257.lean",
-      "node_count": 573,
+      "node_count": 574,
       "root_imports": [
         "Erdos249257.CertificateKernel",
         "Erdos249257.GeneratedCertificates",
@@ -518,7 +518,8 @@
         "Erdos249257.HalfCylinderFullShellSeamBridge",
         "Erdos249257.HalfCylinderSkippedEndpointClassifier",
         "Erdos249257.HalfCylinderFloorErrorReset",
-        "Erdos249257.HalfCylinderSeamLimit"
+        "Erdos249257.HalfCylinderSeamLimit",
+        "Erdos249257.HalfCylinderSkippedRankLimit"
       ],
       "full_graph": "docs/claims.json::machine_readable_paper.module_graph"
     },
@@ -1206,7 +1207,7 @@
   "expansion": {
     "machine_readable_paper": {
       "path": "docs/claims.json::machine_readable_paper",
-      "expected_content_digest": "sha256:4234e0c91e2da30c1be839c2a6d1a306cb3bac3e853a4018f2b14bd8e8a24971",
+      "expected_content_digest": "sha256:7a825f2497b14c6d3f4ffb04cea4b5e091673c627936001a92077438a9195881",
       "contains": [
         "all_claims",
         "authored_argument_graph",
@@ -1216,8 +1217,8 @@
     },
     "exhaustive_declaration_atlas": {
       "path": "docs/declaration_atlas.json",
-      "expected_content_digest": "sha256:d4a75dc80ae6cbd35142a0ff5d09d4767faf351903351740f8cdde84f8651472",
-      "expected_source_input_fingerprint": "sha256:3e5239389542747ef39f083c2ae26a3eabafb77f21be99ea851704553eb55797",
+      "expected_content_digest": "sha256:ff4074f047ded3b7fd6575656bafb9647c07d26ec78c4d98bc69a86337e8b32e",
+      "expected_source_input_fingerprint": "sha256:551cf322ebc61dbe08c6a0f4d9e8a656672c3b82aa2552a59dad1500743bd721",
       "availability": "optional_attached_corpus",
       "check": "python3 scripts/build_declaration_atlas.py --check"
     },

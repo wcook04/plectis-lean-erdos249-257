@@ -5020,6 +5020,14 @@
           ]
         },
         {
+          "id": "Erdos249257.HalfCylinderSkippedRankLimit",
+          "path": "Erdos249257/HalfCylinderSkippedRankLimit.lean",
+          "role": "Skipped-rank limit for the half seam",
+          "imports": [
+            "Erdos249257.HalfCylinderSeamLimit"
+          ]
+        },
+        {
           "id": "Erdos249257.HalfTrappingReturnCarry",
           "path": "Erdos249257/HalfTrappingReturnCarry.lean",
           "role": "Half-trapping reverse-carry interface",

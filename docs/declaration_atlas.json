@@ -4,21 +4,21 @@
   "projection_not_authority": true,
   "proof_authority": "Lean source checked by the pinned Lean kernel",
   "argument_authority": "docs/claims.json::machine_readable_paper.argument_graph",
-  "source_fingerprint": "sha256:3e5239389542747ef39f083c2ae26a3eabafb77f21be99ea851704553eb55797",
+  "source_fingerprint": "sha256:551cf322ebc61dbe08c6a0f4d9e8a656672c3b82aa2552a59dad1500743bd721",
   "summary": {
-    "module_count": 574,
-    "declaration_count": 7435,
-    "theorem_like_count": 6648,
+    "module_count": 575,
+    "declaration_count": 7442,
+    "theorem_like_count": 6654,
     "generated_certificate_declaration_count": 1681,
     "principal_claim_link_count": 135,
     "kind_counts": {
       "abbrev": 6,
-      "def": 757,
+      "def": 758,
       "inductive": 3,
       "instance": 4,
       "lemma": 354,
       "structure": 17,
-      "theorem": 6294
+      "theorem": 6300
     }
   },
   "modules": [
@@ -102,7 +102,8 @@
         "Erdos249257.HalfCylinderFullShellSeamBridge",
         "Erdos249257.HalfCylinderSkippedEndpointClassifier",
         "Erdos249257.HalfCylinderFloorErrorReset",
-        "Erdos249257.HalfCylinderSeamLimit"
+        "Erdos249257.HalfCylinderSeamLimit",
+        "Erdos249257.HalfCylinderSkippedRankLimit"
       ],
       "declaration_count": 0,
       "kind_counts": {}
@@ -6568,6 +6569,18 @@
       "kind_counts": {
         "def": 1,
         "theorem": 18
+      }
+    },
+    {
+      "id": "Erdos249257.HalfCylinderSkippedRankLimit",
+      "path": "Erdos249257/HalfCylinderSkippedRankLimit.lean",
+      "imports": [
+        "Erdos249257.HalfCylinderSeamLimit"
+      ],
+      "declaration_count": 7,
+      "kind_counts": {
+        "def": 1,
+        "theorem": 6
       }
     },
     {
@@ -73415,6 +73428,83 @@
       "signature": "theorem alignedSkip_nextMargin_neg (s : ℕ) (hs : 5 ≤ s) (hskip : ¬ mersenneWeight s ≤ greedyMersenneRemainder (1 / 2 : ℝ) (s - 1)) (halign : halfActualSeamWord s = seamGreedyWord s) : greedyHalfFrozenMargin s (s + 1) < 0",
       "generated_certificate": false,
       "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderSkippedRankLimit.lean:21:integerGreedyRemainder_lt_of_get",
+      "name": "integerGreedyRemainder_lt_of_get",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderSkippedRankLimit.lean",
+      "line": 21,
+      "signature": "theorem integerGreedyRemainder_lt_of_get?_eq_false {weights : List ℕ} {C i w : ℕ} (hweight : weights[i]? = some w) (hskip : (integerGreedyBits weights C)[i]? = some false) : integerGreedyRemainder weights C < w",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "If descending integer greedy skips the weight at index `i`, its final remainder is strictly smaller than that weight."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderSkippedRankLimit.lean:58:seamIntegerGreedyRemainder_lt_truncatedWeight_of_false",
+      "name": "seamIntegerGreedyRemainder_lt_truncatedWeight_of_false",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderSkippedRankLimit.lean",
+      "line": 58,
+      "signature": "theorem seamIntegerGreedyRemainder_lt_truncatedWeight_of_false {s : ℕ} (i : Fin (s - 2)) (hskip : seamGreedyWord s i = false) : seamIntegerGreedyRemainder s < truncatedMersenneWeight s ((i : ℕ) + 2)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A false coordinate of the concrete seam-greedy word bounds the exact integer seam remainder by its own truncated weight."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderSkippedRankLimit.lean:80:seamGreedyNormalizedRemainder_lt_mersenneWeight_of_false",
+      "name": "seamGreedyNormalizedRemainder_lt_mersenneWeight_of_false",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderSkippedRankLimit.lean",
+      "line": 80,
+      "signature": "theorem seamGreedyNormalizedRemainder_lt_mersenneWeight_of_false {s : ℕ} (i : Fin (s - 2)) (hskip : seamGreedyWord s i = false) : seamGreedyNormalizedRemainder s < mersenneWeight ((i : ℕ) + 2)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "After normalization by `4^s`, a skipped seam coordinate bounds the row remainder by the corresponding Mersenne weight."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderSkippedRankLimit.lean:99:tendsto_mersenneWeight_atTop_zero",
+      "name": "tendsto_mersenneWeight_atTop_zero",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderSkippedRankLimit.lean",
+      "line": 99,
+      "signature": "theorem tendsto_mersenneWeight_atTop_zero : Tendsto mersenneWeight atTop (nhds 0)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The Mersenne weights tend to zero along increasing ranks."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderSkippedRankLimit.lean:115:SeamGreedyUnboundedSkippedRanksAlong",
+      "name": "SeamGreedyUnboundedSkippedRanksAlong",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderSkippedRankLimit.lean",
+      "line": 115,
+      "signature": "def SeamGreedyUnboundedSkippedRanksAlong (rows : ℕ → ℕ) : Prop",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Along cofinal rows, choose one skipped seam coordinate per row whose rank itself tends to infinity."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderSkippedRankLimit.lean:123:seamGreedyRemainderSubquadraticAlong_of_unboundedSkippedRanks",
+      "name": "seamGreedyRemainderSubquadraticAlong_of_unboundedSkippedRanks",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderSkippedRankLimit.lean",
+      "line": 123,
+      "signature": "theorem seamGreedyRemainderSubquadraticAlong_of_unboundedSkippedRanks (rows : ℕ → ℕ) (hskips : SeamGreedyUnboundedSkippedRanksAlong rows) : SeamGreedyRemainderSubquadraticAlong rows",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Unbounded skipped seam ranks make the normalized integer remainder vanish along the chosen cofinal rows."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderSkippedRankLimit.lean:142:half_mem_mersenneAchievementSet_of_unboundedSkippedRanks",
+      "name": "half_mem_mersenneAchievementSet_of_unboundedSkippedRanks",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderSkippedRankLimit.lean",
+      "line": 142,
+      "signature": "theorem half_mem_mersenneAchievementSet_of_unboundedSkippedRanks (rows : ℕ → ℕ) (hskips : SeamGreedyUnboundedSkippedRanksAlong rows) : (1 / 2 : ℝ) ∈ mersenneAchievementSet",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Cofinal unbounded skipped seam ranks therefore give an exact representation of `1/2` in the Mersenne achievement set."
     },
     {
       "id": "Erdos249257/HalfTrappingReturnCarry.lean:42:relationInvariantLinearChannels_det_eq_zero",
