@@ -4,21 +4,21 @@
   "projection_not_authority": true,
   "proof_authority": "Lean source checked by the pinned Lean kernel",
   "argument_authority": "docs/claims.json::machine_readable_paper.argument_graph",
-  "source_fingerprint": "sha256:7ec8227fffa825bd2211a62591bfa46b934e5a88e1b1bb854c17f43778e236f9",
+  "source_fingerprint": "sha256:58e0ed9bf094a6e9b4b3c703ba175048a601d3d5546453bc1053564e7ec33e15",
   "summary": {
-    "module_count": 587,
-    "declaration_count": 7581,
-    "theorem_like_count": 6773,
+    "module_count": 588,
+    "declaration_count": 7595,
+    "theorem_like_count": 6785,
     "generated_certificate_declaration_count": 1681,
-    "principal_claim_link_count": 163,
+    "principal_claim_link_count": 165,
     "kind_counts": {
       "abbrev": 6,
-      "def": 777,
+      "def": 779,
       "inductive": 3,
       "instance": 5,
       "lemma": 354,
       "structure": 17,
-      "theorem": 6419
+      "theorem": 6431
     }
   },
   "modules": [
@@ -115,7 +115,8 @@
         "Erdos249257.HalfCylinderQuarterBandEndpoints",
         "Erdos249257.HalfCylinderResetDeficitEscape",
         "Erdos249257.HalfCylinderSeamProducerAlignment",
-        "Erdos249257.HalfCarrySelectedWindowBase"
+        "Erdos249257.HalfCarrySelectedWindowBase",
+        "Erdos249257.RewindSeamOperationalBridge"
       ],
       "declaration_count": 0,
       "kind_counts": {}
@@ -7060,6 +7061,19 @@
       "kind_counts": {
         "def": 5,
         "theorem": 10
+      }
+    },
+    {
+      "id": "Erdos249257.RewindSeamOperationalBridge",
+      "path": "Erdos249257/RewindSeamOperationalBridge.lean",
+      "imports": [
+        "Erdos249257.HalfCarrySelectedWindow",
+        "Erdos249257.HalfCarryProtectedSeamConsumer"
+      ],
+      "declaration_count": 14,
+      "kind_counts": {
+        "def": 2,
+        "theorem": 12
       }
     },
     {
@@ -82721,6 +82735,162 @@
         "residual_gauge_obstruction"
       ],
       "docstring": "The reconstructed zeroth row is identically `1`. Thus even allowing row-dependent unit residuals does not let a fixed-rank nonzero minor exclude the locked affine target without an additional arithmetic coupling law."
+    },
+    {
+      "id": "Erdos249257/RewindSeamOperationalBridge.lean:21:seamCut",
+      "name": "seamCut",
+      "kind": "def",
+      "module": "Erdos249257/RewindSeamOperationalBridge.lean",
+      "line": 21,
+      "signature": "def seamCut (cs : List ℕ) : ℕ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Last target carry which rewinds to the left ancestor."
+    },
+    {
+      "id": "Erdos249257/RewindSeamOperationalBridge.lean:23:phase_lt_denom",
+      "name": "phase_lt_denom",
+      "kind": "theorem",
+      "module": "Erdos249257/RewindSeamOperationalBridge.lean",
+      "line": 23,
+      "signature": "theorem phase_lt_denom (cs : List ℕ) : phase cs < denom cs",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/RewindSeamOperationalBridge.lean:26:seamCut_pos",
+      "name": "seamCut_pos",
+      "kind": "theorem",
+      "module": "Erdos249257/RewindSeamOperationalBridge.lean",
+      "line": 26,
+      "signature": "theorem seamCut_pos (cs : List ℕ) : 1 ≤ seamCut cs",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/RewindSeamOperationalBridge.lean:32:rewind_eq_left_iff_le_seamCut",
+      "name": "rewind_eq_left_iff_le_seamCut",
+      "kind": "theorem",
+      "module": "Erdos249257/RewindSeamOperationalBridge.lean",
+      "line": 32,
+      "signature": "theorem rewind_eq_left_iff_le_seamCut (cs : List ℕ) {B k : ℕ} (hk : 1 ≤ k) (hkB : k ≤ B) (hwidth : B ≤ denom cs) : rewind cs k = rewind cs 1 ↔ k ≤ seamCut cs",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The phase formula identifies the left side of the scalar seam exactly."
+    },
+    {
+      "id": "Erdos249257/RewindSeamOperationalBridge.lean:50:seamCut_lt_rightEndpoint",
+      "name": "seamCut_lt_rightEndpoint",
+      "kind": "theorem",
+      "module": "Erdos249257/RewindSeamOperationalBridge.lean",
+      "line": 50,
+      "signature": "theorem seamCut_lt_rightEndpoint (cs : List ℕ) {B : ℕ} (hB : 1 ≤ B) (hwidth : B ≤ denom cs) (hseam : IsSeamPair cs B) : seamCut cs < B",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A genuine seam pair has a nonempty right side inside `[1,B]`."
+    },
+    {
+      "id": "Erdos249257/RewindSeamOperationalBridge.lean:62:rewind_eq_right_iff_seamCut_lt",
+      "name": "rewind_eq_right_iff_seamCut_lt",
+      "kind": "theorem",
+      "module": "Erdos249257/RewindSeamOperationalBridge.lean",
+      "line": 62,
+      "signature": "theorem rewind_eq_right_iff_seamCut_lt (cs : List ℕ) {B k : ℕ} (hk : 1 ≤ k) (hkB : k ≤ B) (hwidth : B ≤ denom cs) (hseam : IsSeamPair cs B) : rewind cs k = rewind cs 1 + 1 ↔ seamCut cs < k",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Inside a seam pair, every target strictly after `seamCut` rewinds to the right adjacent ancestor."
+    },
+    {
+      "id": "Erdos249257/RewindSeamOperationalBridge.lean:84:supportCoeff_nextRow_eq_of_restriction",
+      "name": "supportCoeff_nextRow_eq_of_restriction",
+      "kind": "theorem",
+      "module": "Erdos249257/RewindSeamOperationalBridge.lean",
+      "line": 84,
+      "signature": "theorem supportCoeff_nextRow_eq_of_restriction {M N : ℕ} (hMN : M ≤ N) (hhalf : (N + 1) / 2 ≤ M) (a : HalfWord N) (b : HalfWord M) (hrestrict : restrictWord hMN a = b) : supportCoeff (wordSupport a) (N + 1) = supportCoeff (wordSupport b) (N + 1)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Equality of words after restriction beyond half-depth preserves the next-row proper-divisor coefficient."
+    },
+    {
+      "id": "Erdos249257/RewindSeamOperationalBridge.lean:128:RewindBaseUnitDropAt",
+      "name": "RewindBaseUnitDropAt",
+      "kind": "def",
+      "module": "Erdos249257/RewindSeamOperationalBridge.lean",
+      "line": 128,
+      "signature": "def RewindBaseUnitDropAt {M R₀ : ℕ} (W₀ : SelectedHalfWindow M R₀) (n : ℕ) (cs : List ℕ) (c : ℕ) : Prop",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The sole object-level datum not contained in a scalar rewind seam: at the row being produced, the left adjacent base ancestor has coefficient `c+1` and the right adjacent base ancestor has coefficient `c`."
+    },
+    {
+      "id": "Erdos249257/RewindSeamOperationalBridge.lean:140:nextRow_profile_of_rewindSeam",
+      "name": "nextRow_profile_of_rewindSeam",
+      "kind": "theorem",
+      "module": "Erdos249257/RewindSeamOperationalBridge.lean",
+      "line": 140,
+      "signature": "theorem nextRow_profile_of_rewindSeam {M N R₀ R c : ℕ} (W₀ : SelectedHalfWindow M R₀) (W : SelectedHalfWindow N R) (hMN : M ≤ N) (hhalf : (N + 1) / 2 ≤ M) (cs : List ℕ) (hwidth : R ≤ denom cs) (hprov : W.HasRewindRestrictionAt W₀ hMN cs) (hseam : IsSeamPair cs R) (hbaseProfile : RewindBaseUnitDropAt W₀ (N + 1) cs c) : ∀ h (hh : 1 ≤ h) (hhR : h ≤ R), supportCoeff (wordSupport (W.word h hh hhR)) (N + 1) = if h ≤ seamCut cs then c + 1 else c",
+      "generated_certificate": false,
+      "claim_ids": [
+        "rewind_seam_operational_bridge"
+      ],
+      "docstring": "Exact contribution of rewind provenance in the seam branch. It turns a two-coefficient fact about the adjacent base ancestors into the piecewise coefficient profile of the live selected window."
+    },
+    {
+      "id": "Erdos249257/RewindSeamOperationalBridge.lean:167:halfTerminalReachable_succ_of_selectedParent",
+      "name": "halfTerminalReachable_succ_of_selectedParent",
+      "kind": "theorem",
+      "module": "Erdos249257/RewindSeamOperationalBridge.lean",
+      "line": 167,
+      "signature": "theorem halfTerminalReachable_succ_of_selectedParent {N R h q C : ℕ} (hN : 1 ≤ N) (W : SelectedHalfWindow N R) (hh : 1 ≤ h) (hhR : h ≤ R) (hcoeff : supportCoeff (wordSupport (W.word h hh hhR)) (N + 1) = C) (β : Bool) (hq : (q : ℤ) = 2 * (h : ℤ) - (C : ℤ) - (if β then 1 else 0)) (hqpos : 1 ≤ q) (hqstrip : q ≤ halfStripBound (N + 1)) : HalfTerminalReachable (N + 1) q",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "One chosen parent word realizes either Boolean child at the next row."
+    },
+    {
+      "id": "Erdos249257/RewindSeamOperationalBridge.lean:217:protectedEvenSeamRealizedAt_succ_of_profile",
+      "name": "protectedEvenSeamRealizedAt_succ_of_profile",
+      "kind": "theorem",
+      "module": "Erdos249257/RewindSeamOperationalBridge.lean",
+      "line": 217,
+      "signature": "theorem protectedEvenSeamRealizedAt_succ_of_profile {N R S δ c : ℕ} (hN : 1 ≤ N) (W : SelectedHalfWindow N R) (hSstrip : S ≤ halfStripBound (N + 1)) (h27 : 27 ≤ S) (hbuffer : S + (c + 1) ≤ 2 * R) (hprofile : ∀ h (hh : 1 ≤ h) (hhR : h ≤ R), supportCoeff (wordSupport (W.word h hh hhR)) (N + 1) = if h ≤ δ then c + 1 else c) : ProtectedEvenSeamRealizedAt (N + 1) (δ : ℤ) (c : ℤ)",
+      "generated_certificate": false,
+      "claim_ids": [
+        "rewind_seam_operational_bridge"
+      ],
+      "docstring": "A two-valued next-row coefficient profile realizes the exact scalar one-hole seam at the next depth. The buffer is the usual selected-window headroom, with `c+1` the larger of the two coefficients."
+    },
+    {
+      "id": "Erdos249257/RewindSeamOperationalBridge.lean:317:protectedEvenSeamRealizedAt_succ_of_selectedRowCoeff_threshold",
+      "name": "protectedEvenSeamRealizedAt_succ_of_selectedRowCoeff_threshold",
+      "kind": "theorem",
+      "module": "Erdos249257/RewindSeamOperationalBridge.lean",
+      "line": 317,
+      "signature": "theorem protectedEvenSeamRealizedAt_succ_of_selectedRowCoeff_threshold {N R S δ c : ℕ} (hN : 1 ≤ N) (W : SelectedHalfWindow N R) (hSstrip : S ≤ halfStripBound (N + 1)) (h27 : 27 ≤ S) (hbuffer : S + (c + 1) ≤ 2 * R) (hprofile : ∀ h (_hh : 1 ≤ h) (_hhR : h ≤ R), selectedRowCoeff W h = if h ≤ δ then ((c + 1 : ℕ) : ℤ) else (c : ℤ)) : ProtectedEvenSeamRealizedAt (N + 1) (δ : ℤ) (c : ℤ)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Solver-facing threshold form in the existing `selectedRowCoeff` coordinate. This is the direct executable fan-in from a two-cylinder selected window to the localized seam consumer."
+    },
+    {
+      "id": "Erdos249257/RewindSeamOperationalBridge.lean:339:protectedEvenSeamRealizedAt_succ_of_rewindSeam",
+      "name": "protectedEvenSeamRealizedAt_succ_of_rewindSeam",
+      "kind": "theorem",
+      "module": "Erdos249257/RewindSeamOperationalBridge.lean",
+      "line": 339,
+      "signature": "theorem protectedEvenSeamRealizedAt_succ_of_rewindSeam {M N R₀ R S c : ℕ} (W₀ : SelectedHalfWindow M R₀) (W : SelectedHalfWindow N R) (hMN : M ≤ N) (hhalf : (N + 1) / 2 ≤ M) (cs : List ℕ) (hN : 1 ≤ N) (hwidth : R ≤ denom cs) (hprov : W.HasRewindRestrictionAt W₀ hMN cs) (hseam : IsSeamPair cs R) (hSstrip : S ≤ halfStripBound (N + 1)) (h27 : 27 ≤ S) (hbuffer : S + (c + 1) ≤ 2 * R) (hbaseProfile : RewindBaseUnitDropAt W₀ (N + 1) cs c) : ProtectedEvenSeamRealizedAt (N + 1) (seamCut cs : ℤ) (c : ℤ)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Operational seam fan-in. Exact rewind provenance plus an actual scalar seam pair produces a localized realized seam one row later, provided the adjacent base ancestors have the required unit-drop next-row coefficient profile. No global `IsCanonicalEvenSeam` equivalence is needed."
+    },
+    {
+      "id": "Erdos249257/RewindSeamOperationalBridge.lean:358:protectedEvenSeamRealizedAt_succ_of_fullStrip_rewindSeam",
+      "name": "protectedEvenSeamRealizedAt_succ_of_fullStrip_rewindSeam",
+      "kind": "theorem",
+      "module": "Erdos249257/RewindSeamOperationalBridge.lean",
+      "line": 358,
+      "signature": "theorem protectedEvenSeamRealizedAt_succ_of_fullStrip_rewindSeam {M N R₀ c : ℕ} (W₀ : SelectedHalfWindow M R₀) (W : SelectedHalfWindow N (halfStripBound N)) (hMN : M ≤ N) (hhalf : (N + 1) / 2 ≤ M) (cs : List ℕ) (hN : 1 ≤ N) (hwidth : halfStripBound N ≤ denom cs) (hprov : W.HasRewindRestrictionAt W₀ hMN cs) (hseam : IsSeamPair cs (halfStripBound N)) (h27 : 27 ≤ halfStripBound (N + 1)) (hbaseProfile : RewindBaseUnitDropAt W₀ (N + 1) cs c) : ProtectedEvenSeamRealizedAt (N + 1) (seamCut cs : ℤ) (c : ℤ)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Full-strip specialization: the standard divisor envelope discharges the buffer automatically. Thus the only semantic input not already present in `HasRewindRestrictionAt + IsSeamPair` is the unit coefficient drop between the two adjacent base ancestors."
     },
     {
       "id": "Erdos249257/SignedQMomentObstruction.lean:28:det_mul_rectangular",

@@ -804,6 +804,16 @@ next-row divisor-agreement certificate,
 \lrefx{HalfCarrySelectedWindowBase.lean}{170}{depth18SelectedHalfWindow_nextRowDivisorAgreement}.
 This finite base does not provide selected windows at unbounded depths.
 
+\subsection{Operational rewind-seam bridge}\label{res:rewindseambridge}
+
+For a selected window with a rewind seam, a two-value coefficient profile on
+the adjacent base ancestors induces the live next-row profile,
+\lref{RewindSeamOperationalBridge.lean}{140}{nextRow_profile_of_rewindSeam}.
+Under the stated strip and buffer inequalities, that profile realizes a
+protected one-hole seam at the next row,
+\lrefx{RewindSeamOperationalBridge.lean}{217}{protectedEvenSeamRealizedAt_succ_of_profile}.
+The base-ancestor coefficient drop is an explicit input, not a theorem here.
+
 \subsection{What stays open}
 
 The universal Erd\H{o}s \#257 statement, irrationality of $\sum_{n\in A}1/(2^n-1)$

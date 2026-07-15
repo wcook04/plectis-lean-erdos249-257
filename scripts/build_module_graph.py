@@ -63,6 +63,7 @@ NEW_ROLES = {
     "Erdos249257.HalfCylinderResetDeficitEscape": "Reset-deficit escape geometry for the largest-skip crossing",
     "Erdos249257.HalfCylinderSeamProducerAlignment": "Seam-to-producer carry alignment identity",
     "Erdos249257.HalfCarrySelectedWindowBase": "Computed depth-18 selected half-carry window base",
+    "Erdos249257.RewindSeamOperationalBridge": "Operational bridge from rewind seams to protected next-row seams",
     "Erdos249257.HalfTrappingReturnCarry": "Half-trapping reverse-carry interface",
     "Erdos249257.LambertDiagonalEnclosure": "Lambert diagonal enclosure reduction",
     "Erdos249257.LcmFactorIdealPulseObstruction": "LCM factor-ideal anchor-pulse obstruction",

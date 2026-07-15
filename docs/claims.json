@@ -5341,6 +5341,15 @@
           "imports": []
         },
         {
+          "id": "Erdos249257.RewindSeamOperationalBridge",
+          "path": "Erdos249257/RewindSeamOperationalBridge.lean",
+          "role": "Operational bridge from rewind seams to protected next-row seams",
+          "imports": [
+            "Erdos249257.HalfCarrySelectedWindow",
+            "Erdos249257.HalfCarryProtectedSeamConsumer"
+          ]
+        },
+        {
           "id": "Erdos249257.SignedQMomentObstruction",
           "path": "Erdos249257/SignedQMomentObstruction.lean",
           "role": "Finite signed-moment determinant and dyadic-parity substrate",
@@ -5585,6 +5594,11 @@
           "from": "selected_window_depth18_base",
           "relation": "builds_on",
           "to": "selected_half_carry_window_compactness"
+        },
+        {
+          "from": "rewind_seam_operational_bridge",
+          "relation": "builds_on",
+          "to": "localized_protected_seam_compactness"
         },
         {
           "from": "denominator_exclusion",
@@ -5860,7 +5874,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 1440
+        "line": 1450
       }
     },
     {
@@ -5871,7 +5885,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 1449
+        "line": 1459
       }
     },
     {
@@ -5882,7 +5896,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 1456
+        "line": 1466
       }
     }
   ],
@@ -6576,6 +6590,29 @@
           "name": "depth18SelectedHalfWindow_nextRowDivisorAgreement",
           "module": "Erdos249257/HalfCarrySelectedWindowBase.lean",
           "line": 170
+        }
+      ]
+    },
+    {
+      "id": "rewind_seam_operational_bridge",
+      "label": "Operational bridge from rewind seams to protected next-row seams",
+      "status": "conditional reduction",
+      "statement": "For a selected window with a rewind seam, a two-value coefficient profile on the adjacent base ancestors induces the live next-row profile. Under the stated strip and buffer inequalities, this realizes a protected one-hole seam at the next row. The base-ancestor coefficient drop is not supplied.",
+      "remaining_open_proposition_ids": [
+        "remaining_open.universal_257_all_infinite_supports"
+      ],
+      "paper_label": "res:rewindseambridge",
+      "readme_headline": false,
+      "declarations": [
+        {
+          "name": "nextRow_profile_of_rewindSeam",
+          "module": "Erdos249257/RewindSeamOperationalBridge.lean",
+          "line": 140
+        },
+        {
+          "name": "protectedEvenSeamRealizedAt_succ_of_profile",
+          "module": "Erdos249257/RewindSeamOperationalBridge.lean",
+          "line": 217
         }
       ]
     },
