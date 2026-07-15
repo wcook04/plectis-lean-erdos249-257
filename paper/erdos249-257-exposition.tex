@@ -22,7 +22,7 @@
 % the repository verifies that it matches docs/claims.json and that every
 % \lref/\lrefx/\lloc target resolves to the named declaration at that line.
 % ---------------------------------------------------------------------------
-\newcommand{\commit}{ff8e1198f9b3d9e3e381db1db3e19535e063dcbd}
+\newcommand{\commit}{32a145144c4763c5532b268ade7077d69d7edec8}
 \newcommand{\repobase}{https://github.com/wcook04/plectis-lean-erdos249-257/blob/\commit}
 \newcommand{\sourceurl}{https://github.com/wcook04/plectis-lean-erdos249-257/tree/\commit}
 \newcommand{\rootbase}{https://github.com/wcook04/plectis-lean-erdos249-257/blob/main}
@@ -718,6 +718,18 @@ one:
 \lrefx{HalfCylinderBoundaryPulse.lean}{150}{rowPulse_boundary_of_late_firstCrossing}.
 This supplies the incidence normalization for a producer estimate; it does
 not establish that estimate.
+
+\subsection{Largest-skip induction}\label{res:largestskipinduction}
+
+Let the first-crossing socket assert that a late largest skipped rank either
+remains late at the next row or forces an upper-or-middle successor branch.
+Lean proves that this socket propagates a late largest skipped rank from row
+$14$ onward,
+\lref{HalfCylinderLargestSkipInduction.lean}{90}{LargestSkipLateStepSocket.largestSkipLateAt_succ},
+and hence yields cofinal skipped ranks and membership of $1/2$ in the Mersenne
+achievement set,
+\lrefx{HalfCylinderLargestSkipInduction.lean}{167}{half_mem_mersenneAchievementSet_of_largestSkipLateStepSocket}.
+The first-crossing socket itself remains unproved.
 
 \subsection{What stays open}
 

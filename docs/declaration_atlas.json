@@ -4,21 +4,21 @@
   "projection_not_authority": true,
   "proof_authority": "Lean source checked by the pinned Lean kernel",
   "argument_authority": "docs/claims.json::machine_readable_paper.argument_graph",
-  "source_fingerprint": "sha256:86939e0ef1abcdfafc7f59a5b28a3ac4f1a713c8638e9bea70db4d815399ab52",
+  "source_fingerprint": "sha256:88936366c8db24e8d394f3163fb1fe07eab377bc3c29f9d3681afd70b3ffd82c",
   "summary": {
-    "module_count": 580,
-    "declaration_count": 7519,
-    "theorem_like_count": 6722,
+    "module_count": 581,
+    "declaration_count": 7529,
+    "theorem_like_count": 6730,
     "generated_certificate_declaration_count": 1681,
-    "principal_claim_link_count": 146,
+    "principal_claim_link_count": 149,
     "kind_counts": {
       "abbrev": 6,
-      "def": 767,
+      "def": 769,
       "inductive": 3,
       "instance": 4,
       "lemma": 354,
       "structure": 17,
-      "theorem": 6368
+      "theorem": 6376
     }
   },
   "modules": [
@@ -108,7 +108,8 @@
         "Erdos249257.HalfCylinderFatalGapRightTail",
         "Erdos249257.HalfCylinderHalfMembershipClassification",
         "Erdos249257.HalfCylinderLargestSkipGap",
-        "Erdos249257.HalfCylinderBoundaryPulse"
+        "Erdos249257.HalfCylinderBoundaryPulse",
+        "Erdos249257.HalfCylinderLargestSkipInduction"
       ],
       "declaration_count": 0,
       "kind_counts": {}
@@ -6609,6 +6610,18 @@
       "kind_counts": {
         "def": 3,
         "theorem": 13
+      }
+    },
+    {
+      "id": "Erdos249257.HalfCylinderLargestSkipInduction",
+      "path": "Erdos249257/HalfCylinderLargestSkipInduction.lean",
+      "imports": [
+        "Erdos249257.HalfCylinderLargestSkipGap"
+      ],
+      "declaration_count": 10,
+      "kind_counts": {
+        "def": 2,
+        "theorem": 8
       }
     },
     {
@@ -74001,6 +74014,118 @@
         "largest_skip_gap_propagation"
       ],
       "docstring": "On the `R` branch, the old largest false rank is preserved."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderLargestSkipInduction.lean:27:LargestSkipLateAt",
+      "name": "LargestSkipLateAt",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderLargestSkipInduction.lean",
+      "line": 27,
+      "signature": "def LargestSkipLateAt (s : ℕ) : Prop",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Row `s` has a largest false rank strictly beyond two thirds of the row."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderLargestSkipInduction.lean:34:LargestSkipLateStepSocket",
+      "name": "LargestSkipLateStepSocket",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderLargestSkipInduction.lean",
+      "line": 34,
+      "signature": "def LargestSkipLateStepSocket : Prop",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The sole local arithmetic socket: before a late largest false rank can cross the two-thirds boundary, the concrete successor must take an upper or middle branch."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderLargestSkipInduction.lean:41:seamWeights_fourteen",
+      "name": "seamWeights_fourteen",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderLargestSkipInduction.lean",
+      "line": 41,
+      "signature": "private theorem seamWeights_fourteen : seamWeights 14 = [89478485, 38347922, 17895697, 8659208, 4260880, 2113665, 1052688, 525314, 262400, 131136, 65552, 32772]",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderLargestSkipInduction.lean:61:seamSubsetTarget_fourteen",
+      "name": "seamSubsetTarget_fourteen",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderLargestSkipInduction.lean",
+      "line": 61,
+      "signature": "private theorem seamSubsetTarget_fourteen : seamSubsetTarget 14 = 134201344",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderLargestSkipInduction.lean:65:integerGreedyBits_fourteen",
+      "name": "integerGreedyBits_fourteen",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderLargestSkipInduction.lean",
+      "line": 65,
+      "signature": "private theorem integerGreedyBits_fourteen : integerGreedyBits (seamWeights 14) (seamSubsetTarget 14) = [true, true, false, false, true, true, false, false, false, false, false, false]",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderLargestSkipInduction.lean:73:largestSkipLateAt_fourteen",
+      "name": "largestSkipLateAt_fourteen",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderLargestSkipInduction.lean",
+      "line": 73,
+      "signature": "theorem largestSkipLateAt_fourteen : LargestSkipLateAt 14",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderLargestSkipInduction.lean:90:LargestSkipLateStepSocket.largestSkipLateAt_succ",
+      "name": "LargestSkipLateStepSocket.largestSkipLateAt_succ",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderLargestSkipInduction.lean",
+      "line": 90,
+      "signature": "theorem LargestSkipLateStepSocket.largestSkipLateAt_succ (hstep : LargestSkipLateStepSocket) {s : ℕ} (hs : 14 ≤ s) (hlate : LargestSkipLateAt s) : LargestSkipLateAt (s + 1)",
+      "generated_certificate": false,
+      "claim_ids": [
+        "largest_skip_induction_reduction"
+      ],
+      "docstring": "One local first-crossing step propagates the late largest-skip invariant."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderLargestSkipInduction.lean:120:largestSkipLateAt_of_stepSocket",
+      "name": "largestSkipLateAt_of_stepSocket",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderLargestSkipInduction.lean",
+      "line": 120,
+      "signature": "theorem largestSkipLateAt_of_stepSocket (hstep : LargestSkipLateStepSocket) (s : ℕ) (hs : 14 ≤ s) : LargestSkipLateAt s",
+      "generated_certificate": false,
+      "claim_ids": [
+        "largest_skip_induction_reduction"
+      ],
+      "docstring": "The local socket gives the late largest-skip invariant on every row from fourteen onward."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderLargestSkipInduction.lean:130:seamGreedyUnboundedSkippedRanksAlong_of_largestSkipLateStepSocket",
+      "name": "seamGreedyUnboundedSkippedRanksAlong_of_largestSkipLateStepSocket",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderLargestSkipInduction.lean",
+      "line": 130,
+      "signature": "theorem seamGreedyUnboundedSkippedRanksAlong_of_largestSkipLateStepSocket (hstep : LargestSkipLateStepSocket) : SeamGreedyUnboundedSkippedRanksAlong (fun j : ℕ => 14 + j)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A linear largest false rank on every late row supplies cofinal skipped ranks in exactly the format consumed by the existing compactness theorem."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderLargestSkipInduction.lean:167:half_mem_mersenneAchievementSet_of_largestSkipLateStepSocket",
+      "name": "half_mem_mersenneAchievementSet_of_largestSkipLateStepSocket",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderLargestSkipInduction.lean",
+      "line": 167,
+      "signature": "theorem half_mem_mersenneAchievementSet_of_largestSkipLateStepSocket (hstep : LargestSkipLateStepSocket) : (1 / 2 : ℝ) ∈ mersenneAchievementSet",
+      "generated_certificate": false,
+      "claim_ids": [
+        "largest_skip_induction_reduction"
+      ],
+      "docstring": "The first-crossing socket is sufficient for the desired #257 half-membership endpoint."
     },
     {
       "id": "Erdos249257/HalfCylinderSeamLimit.lean:25:seamGreedyFiniteValue",

@@ -5045,6 +5045,14 @@
           ]
         },
         {
+          "id": "Erdos249257.HalfCylinderLargestSkipInduction",
+          "path": "Erdos249257/HalfCylinderLargestSkipInduction.lean",
+          "role": "Largest-skip induction from a first-crossing producer socket",
+          "imports": [
+            "Erdos249257.HalfCylinderLargestSkipGap"
+          ]
+        },
+        {
           "id": "Erdos249257.HalfCylinderSeamLimit",
           "path": "Erdos249257/HalfCylinderSeamLimit.lean",
           "role": "Seam-limit reduction for the half target",
@@ -5494,6 +5502,11 @@
           "to": "largest_skip_gap_propagation"
         },
         {
+          "from": "largest_skip_induction_reduction",
+          "relation": "builds_on",
+          "to": "largest_skip_gap_propagation"
+        },
+        {
           "from": "denominator_exclusion",
           "relation": "advances_open_target",
           "to": "erdos_249",
@@ -5743,7 +5756,7 @@
     "lean_toolchain": "leanprover/lean4:v4.29.1",
     "repository": "https://github.com/wcook04/plectis-lean-erdos249-257",
     "formal_source": {
-      "ref": "ff8e1198f9b3d9e3e381db1db3e19535e063dcbd",
+      "ref": "32a145144c4763c5532b268ade7077d69d7edec8",
       "ref_kind": "commit",
       "publication_state": "committed_checkpoint_pending_remote_publication",
       "relationship_to_last_tag": "post_tag_checkpoint"
@@ -5767,7 +5780,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 1355
+        "line": 1367
       }
     },
     {
@@ -5778,7 +5791,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 1364
+        "line": 1376
       }
     },
     {
@@ -5789,7 +5802,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 1371
+        "line": 1383
       }
     }
   ],
@@ -6309,6 +6322,34 @@
           "name": "rowPulse_boundary_of_late_firstCrossing",
           "module": "Erdos249257/HalfCylinderBoundaryPulse.lean",
           "line": 150
+        }
+      ]
+    },
+    {
+      "id": "largest_skip_induction_reduction",
+      "label": "Largest-skip induction from a first-crossing producer socket",
+      "status": "conditional reduction",
+      "statement": "If every late largest skipped rank either remains late at the next row or forces an upper-or-middle successor branch, then the late invariant holds from row 14 onward, produces cofinal skipped ranks, and places 1/2 in the Mersenne achievement set. The first-crossing socket is not proved.",
+      "remaining_open_proposition_ids": [
+        "remaining_open.universal_257_all_infinite_supports"
+      ],
+      "paper_label": "res:largestskipinduction",
+      "readme_headline": false,
+      "declarations": [
+        {
+          "name": "LargestSkipLateStepSocket.largestSkipLateAt_succ",
+          "module": "Erdos249257/HalfCylinderLargestSkipInduction.lean",
+          "line": 90
+        },
+        {
+          "name": "largestSkipLateAt_of_stepSocket",
+          "module": "Erdos249257/HalfCylinderLargestSkipInduction.lean",
+          "line": 120
+        },
+        {
+          "name": "half_mem_mersenneAchievementSet_of_largestSkipLateStepSocket",
+          "module": "Erdos249257/HalfCylinderLargestSkipInduction.lean",
+          "line": 167
         }
       ]
     },
