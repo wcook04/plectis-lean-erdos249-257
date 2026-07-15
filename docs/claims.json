@@ -5481,6 +5481,15 @@
           "imports": []
         },
         {
+          "id": "Erdos249257.RewindBoundaryPairCounterexample",
+          "path": "Erdos249257/RewindBoundaryPairCounterexample.lean",
+          "role": "Lean proof module",
+          "imports": [
+            "Erdos249257.RewindHalfDivisorAdapter",
+            "Erdos249257.HalfCarrySelectedWindowBase"
+          ]
+        },
+        {
           "id": "Erdos249257.RewindHalfDivisorAdapter",
           "path": "Erdos249257/RewindHalfDivisorAdapter.lean",
           "role": "Lean proof module",
@@ -6129,7 +6138,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 1703
+        "line": 1714
       }
     },
     {
@@ -6140,7 +6149,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 1712
+        "line": 1723
       }
     },
     {
@@ -6151,7 +6160,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 1719
+        "line": 1730
       }
     }
   ],
@@ -7033,6 +7042,21 @@
           "name": "protectedEvenSeamRealizedAt_succ_of_fullStrip_rewindHalfDivisorBoundaryPair",
           "module": "Erdos249257/RewindHalfDivisorAdapter.lean",
           "line": 147
+        }
+      ]
+    },
+    {
+      "id": "rewind_boundary_pair_obstruction",
+      "label": "Finite rewind boundary-pair obstruction",
+      "status": "proved here",
+      "statement": "A concrete depth-26 selected two-word window has a depth-27 explicit rewind step with history [1], a width-two seam pair, and the doubled-row identity, but no depth-13 half-divisor boundary-pair witness. Therefore scalar one-row seam data alone does not entail the protected boundary predicate required by the cofinal consumer.",
+      "paper_label": "res:rewindboundarycounterexample",
+      "readme_headline": false,
+      "declarations": [
+        {
+          "name": "depth27_actualRewindSeam_not_boundaryPair",
+          "module": "Erdos249257/RewindBoundaryPairCounterexample.lean",
+          "line": 169
         }
       ]
     },

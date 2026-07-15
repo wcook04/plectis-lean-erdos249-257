@@ -919,6 +919,17 @@ and
 This is the local coefficient input for the rewind-seam profile, not a global
 construction of such boundary pairs.
 
+\subsection{A finite rewind-boundary obstruction}\label{res:rewindboundarycounterexample}
+
+The scalar one-row rewind data alone still does not supply that missing
+boundary predicate.  Lean gives a concrete depth-$26$ selected two-word
+window whose depth-$27$ explicit step has rewind history $[1]$, is a width-two
+seam pair, and satisfies the doubled-row identity, but has no depth-$13$
+half-divisor boundary-pair witness:
+\lrefx{RewindBoundaryPairCounterexample.lean}{169}{depth27_actualRewindSeam_not_boundaryPair}.
+Thus the protected-window buffer in the cofinal consumer is a genuine
+hypothesis, not a consequence of the scalar seam facts alone.
+
 \subsection{Concrete producer-carry coordinates}\label{res:producercarrycoordinates}
 
 For every adjacent cut at rank $s\ge5$, Lean identifies the producer carry of
