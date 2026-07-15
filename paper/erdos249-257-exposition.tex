@@ -760,6 +760,16 @@ The stronger square-root lower-bound socket is also sufficient,
 \lrefx{HalfCylinderLastProducerContradiction.lean}{409}{half_mem_mersenneAchievementSet_of_middleProducerSqrtEscape}.
 Neither socket is supplied here.
 
+For finite seam prefixes the remaining tail bound sharpens further: the
+future divisor-incidence tail is bounded by the cardinality of the prefix.
+Thus the explicit row-scale inequality
+\(|c|+\mathrm{belowPulse}+5<4\,\mathrm{remainder}\) is sufficient for
+the same half-membership conclusion,
+\lrefx{HalfCylinderMiddleCarryLowerBound.lean}{1503}{half_mem_mersenneAchievementSet_of_middleProducerCardEscape};
+it is enough in turn that every late middle remainder is at least its row,
+\lrefx{HalfCylinderMiddleCarryLowerBound.lean}{1510}{half_mem_mersenneAchievementSet_of_middleProducerRowEscape}.
+These are exact conditional reductions, not proofs of the row bound.
+
 \subsection{Positive half-membership classification}\label{res:halfmembership}
 
 The complementary branch has an equally exact seam formulation.  Membership

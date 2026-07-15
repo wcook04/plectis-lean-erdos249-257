@@ -5195,6 +5195,15 @@
           ]
         },
         {
+          "id": "Erdos249257.HalfCylinderMiddleCarryLowerBound",
+          "path": "Erdos249257/HalfCylinderMiddleCarryLowerBound.lean",
+          "role": "Lean proof module",
+          "imports": [
+            "Erdos249257.HalfCylinderLastProducerContradiction",
+            "Erdos249257.HalfCylinderResetDeficitEscape"
+          ]
+        },
+        {
           "id": "Erdos249257.HalfCylinderProducerCarrySocket",
           "path": "Erdos249257/HalfCylinderProducerCarrySocket.lean",
           "role": "Producer-carry and future-tail comparison socket",
@@ -6157,7 +6166,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 1732
+        "line": 1742
       }
     },
     {
@@ -6168,7 +6177,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 1741
+        "line": 1751
       }
     },
     {
@@ -6179,7 +6188,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 1748
+        "line": 1758
       }
     }
   ],
@@ -6742,6 +6751,29 @@
           "name": "half_mem_mersenneAchievementSet_of_middleProducerSqrtEscape",
           "module": "Erdos249257/HalfCylinderLastProducerContradiction.lean",
           "line": 409
+        }
+      ]
+    },
+    {
+      "id": "middle_producer_cardinality_reduction",
+      "label": "Finite-prefix middle-producer cardinality reduction",
+      "status": "conditional reduction",
+      "statement": "For a finite seam prefix, the future divisor-incidence tail is at most the prefix cardinality. Hence the explicit inequality card(below support) + belowPulse + 5 < 4 * remainder forces half-membership in the Mersenne achievement set; the still stronger hypothesis that every late middle remainder is at least its row also suffices. Neither arithmetic hypothesis is proved here.",
+      "remaining_open_proposition_ids": [
+        "remaining_open.universal_257_all_infinite_supports"
+      ],
+      "paper_label": "res:fatalright",
+      "readme_headline": false,
+      "declarations": [
+        {
+          "name": "half_mem_mersenneAchievementSet_of_middleProducerCardEscape",
+          "module": "Erdos249257/HalfCylinderMiddleCarryLowerBound.lean",
+          "line": 1503
+        },
+        {
+          "name": "half_mem_mersenneAchievementSet_of_middleProducerRowEscape",
+          "module": "Erdos249257/HalfCylinderMiddleCarryLowerBound.lean",
+          "line": 1510
         }
       ]
     },

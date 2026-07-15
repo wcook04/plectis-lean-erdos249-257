@@ -116,3 +116,4 @@ import Erdos249257.RewindHalfDivisorAdapter
 import Erdos249257.RewindBoundaryPairCounterexample
 import Erdos249257.HalfCylinderFinalMiddleCellEscape
 import Erdos249257.HalfCylinderLastProducerContradiction
+import Erdos249257.HalfCylinderMiddleCarryLowerBound
