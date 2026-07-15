@@ -950,6 +950,11 @@ The one-hole state embeds as a singleton finite gap; provided a common
 next-row coefficient and the stated child-gap and buffer inequalities, this
 two-sheet package advances one row while preserving its complete data,
 \lrefx{SuffixCylinderFiniteGap.lean}{256}{InStripGapStage.advanceOfCommonNextCoeff}.
+After cutoff promotion the two live sheets may have different coefficients.
+The profiled-gap interface retains their independent literal prefixes,
+derives the ready next-row profile, and advances under its explicit gap and
+buffer hypotheses,
+\lrefx{SuffixCylinderProfiledGap.lean}{124}{ProfiledGapStage.advanceOfNextCoeffProfile}.
 This is a conditional local feedback classification, not a cofinal supply
 theorem: the required crossing coefficient profile is still an input.
 
