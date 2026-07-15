@@ -4,21 +4,21 @@
   "projection_not_authority": true,
   "proof_authority": "Lean source checked by the pinned Lean kernel",
   "argument_authority": "docs/claims.json::machine_readable_paper.argument_graph",
-  "source_fingerprint": "sha256:261c1f32b27cb0d0d101d5d838ae80a1e61df47d7d45524b6373f3574b609064",
+  "source_fingerprint": "sha256:26f6ed9f830a456db05378b5887eef742b1122b17a68eeb6b2dd23907d8519e1",
   "summary": {
-    "module_count": 570,
-    "declaration_count": 7303,
-    "theorem_like_count": 6539,
+    "module_count": 571,
+    "declaration_count": 7330,
+    "theorem_like_count": 6563,
     "generated_certificate_declaration_count": 1681,
     "principal_claim_link_count": 135,
     "kind_counts": {
       "abbrev": 6,
-      "def": 734,
+      "def": 737,
       "inductive": 3,
       "instance": 4,
       "lemma": 354,
       "structure": 17,
-      "theorem": 6185
+      "theorem": 6209
     }
   },
   "modules": [
@@ -98,7 +98,8 @@
         "Erdos249257.HalfCylinderIntegerGreedy",
         "Erdos249257.HalfCylinderConcreteSeamAdapter",
         "Erdos249257.HalfCutLocator",
-        "Erdos249257.CampbellShiftSynchronization"
+        "Erdos249257.CampbellShiftSynchronization",
+        "Erdos249257.HalfCylinderFullShellSeamBridge"
       ],
       "declaration_count": 0,
       "kind_counts": {}
@@ -6502,6 +6503,19 @@
       "kind_counts": {
         "def": 7,
         "theorem": 52
+      }
+    },
+    {
+      "id": "Erdos249257.HalfCylinderFullShellSeamBridge",
+      "path": "Erdos249257/HalfCylinderFullShellSeamBridge.lean",
+      "imports": [
+        "Erdos249257.HalfCylinderFiniteShadow",
+        "Erdos249257.HalfCylinderConcreteSeamAdapter"
+      ],
+      "declaration_count": 27,
+      "kind_counts": {
+        "def": 3,
+        "theorem": 24
       }
     },
     {
@@ -71010,6 +71024,303 @@
         "half_cylinder_finite_shadow"
       ],
       "docstring": "The governed first-passage producer closes exact half-membership."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFullShellSeamBridge.lean:22:sqrt_shift_le_sqrt_add_one_add_div",
+      "name": "sqrt_shift_le_sqrt_add_one_add_div",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFullShellSeamBridge.lean",
+      "line": 22,
+      "signature": "theorem sqrt_shift_le_sqrt_add_one_add_div (N j : ℕ) : Nat.sqrt (N + j + 1) ≤ Nat.sqrt N + 1 + j / (Nat.sqrt N + 1)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A shifted natural square root grows much more slowly than the shift. This form is tuned to the binary tail sum."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFullShellSeamBridge.lean:43:binaryCoeffTail_supportCoeff_lt_two_natSqrt_add_three",
+      "name": "binaryCoeffTail_supportCoeff_lt_two_natSqrt_add_three",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFullShellSeamBridge.lean",
+      "line": 43,
+      "signature": "theorem binaryCoeffTail_supportCoeff_lt_two_natSqrt_add_three (A : Set ℕ) (N : ℕ) (hN : 4 ≤ N) : binaryCoeffTail (supportCoeff A) N < 2 * (Nat.sqrt N : ℝ) + 3",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A one-unit sharpening of the generic support-coefficient tail strip. The gain comes from summing the slow square-root growth in blocks of length `sqrt N + 1`, rather than bounding that growth by the row shift itself."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFullShellSeamBridge.lean:126:finiteCoeffWindowNumerator_eq_weighted_sum",
+      "name": "finiteCoeffWindowNumerator_eq_weighted_sum",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFullShellSeamBridge.lean",
+      "line": 126,
+      "signature": "theorem finiteCoeffWindowNumerator_eq_weighted_sum (A : Set ℕ) (n J : ℕ) : finiteCoeffWindowNumerator A n J = ∑ j ∈ Finset.range J, 2 ^ (J - 1 - j) * supportCoeff A (n + j + 1)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Closed weighted-sum form of the recursive finite-window numerator."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFullShellSeamBridge.lean:151:frozenMargin_fullShell_eq_stemTruncatedSum_sub_target",
+      "name": "frozenMargin_fullShell_eq_stemTruncatedSum_sub_target",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFullShellSeamBridge.lean",
+      "line": 151,
+      "signature": "theorem frozenMargin_fullShell_eq_stemTruncatedSum_sub_target (P : Finset ℕ) (n : ℕ) (hn : 2 ≤ n) (hbelow : ∀ d ∈ P, 2 ≤ d ∧ d < n) : (finiteCoeffWindowNumerator (↑P : Set ℕ) n n : ℤ) - (2 : ℤ) ^ n * mobiusCenteredHalfCarry (↑P : Set ℕ) (n - 1) = (stemTruncatedSum n P : ℤ) - (seamSubsetTarget n : ℤ)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "At the full first shell `J=n`, the frozen margin is exactly the signed integer-seam subset-sum defect."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFullShellSeamBridge.lean:224:halfGreedyPrefixSupport_pred_below",
+      "name": "halfGreedyPrefixSupport_pred_below",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFullShellSeamBridge.lean",
+      "line": 224,
+      "signature": "theorem halfGreedyPrefixSupport_pred_below (n : ℕ) (hn : 2 ≤ n) : ∀ d ∈ halfGreedyPrefixSupport (n - 1), 2 ≤ d ∧ d < n",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The rational greedy prefix before rank `n` is supported exactly on the proper exponent range needed by the seam machinery."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFullShellSeamBridge.lean:240:greedyHalfFrozenMargin_fullShell_eq_stemTruncatedSum_sub_target",
+      "name": "greedyHalfFrozenMargin_fullShell_eq_stemTruncatedSum_sub_target",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFullShellSeamBridge.lean",
+      "line": 240,
+      "signature": "theorem greedyHalfFrozenMargin_fullShell_eq_stemTruncatedSum_sub_target (n : ℕ) (hn : 2 ≤ n) : greedyHalfFrozenMargin (n - 1) n = (stemTruncatedSum n (halfGreedyPrefixSupport (n - 1)) : ℤ) - (seamSubsetTarget n : ℤ)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Concrete greedy specialization of the full-shell integer identity."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFullShellSeamBridge.lean:252:greedyHalfFrozenMargin_fullShell_cast_eq_slack_sub_tail",
+      "name": "greedyHalfFrozenMargin_fullShell_cast_eq_slack_sub_tail",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFullShellSeamBridge.lean",
+      "line": 252,
+      "signature": "theorem greedyHalfFrozenMargin_fullShell_cast_eq_slack_sub_tail (k : ℕ) : (greedyHalfFrozenMargin k (k + 1) : ℝ) = (2 : ℝ) ^ (k + 1) * (1 - (2 : ℝ) ^ (k + 1) * greedyMersenneRemainder (1 / 2 : ℝ) k) - binaryCoeffTail (supportCoeff (↑(halfGreedyPrefixSupport k) : Set ℕ)) ((k + 1) + (k + 1))",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Analytic form of the same full-shell margin: amplified dyadic safety slack minus the coefficient tail still pending after row `2(k+1)`."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFullShellSeamBridge.lean:301:greedyHalf_skip_amplified_dyadic_overshoot_lt_two",
+      "name": "greedyHalf_skip_amplified_dyadic_overshoot_lt_two",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFullShellSeamBridge.lean",
+      "line": 301,
+      "signature": "theorem greedyHalf_skip_amplified_dyadic_overshoot_lt_two (n : ℕ) (hn : 2 ≤ n) (hskip : ¬ mersenneWeight n ≤ greedyMersenneRemainder (1 / 2 : ℝ) (n - 1)) : (2 : ℝ) ^ n * ((2 : ℝ) ^ n * greedyMersenneRemainder (1 / 2 : ℝ) (n - 1) - 1) < 2",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A skipped rank can exceed its dyadic boundary by less than two after the full-shell amplification. This is the only use of the skip inequality in the seam adapter."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFullShellSeamBridge.lean:333:neg_greedyHalfFrozenMargin_fullShell_le_halfStripBound",
+      "name": "neg_greedyHalfFrozenMargin_fullShell_le_halfStripBound",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFullShellSeamBridge.lean",
+      "line": 333,
+      "signature": "theorem neg_greedyHalfFrozenMargin_fullShell_le_halfStripBound (n : ℕ) (hn : 3 ≤ n) (hskip : ¬ mersenneWeight n ≤ greedyMersenneRemainder (1 / 2 : ℝ) (n - 1)) (hneg : greedyHalfFrozenMargin (n - 1) n < 0) : -greedyHalfFrozenMargin (n - 1) n ≤ (halfStripBound (2 * n) : ℤ)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "If the full-shell margin is still negative at an actual skip, its integer seam defect lies inside the existing square-root strip."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFullShellSeamBridge.lean:368:neg_greedyHalfFrozenMargin_fullShell_implies_seamRemainder_small",
+      "name": "neg_greedyHalfFrozenMargin_fullShell_implies_seamRemainder_small",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFullShellSeamBridge.lean",
+      "line": 368,
+      "signature": "theorem neg_greedyHalfFrozenMargin_fullShell_implies_seamRemainder_small (n : ℕ) (hn : 3 ≤ n) (hskip : ¬ mersenneWeight n ≤ greedyMersenneRemainder (1 / 2 : ℝ) (n - 1)) (hneg : greedyHalfFrozenMargin (n - 1) n < 0) : 1 ≤ seamIntegerGreedyRemainder n ∧ seamIntegerGreedyRemainder n ≤ halfStripBound (2 * n)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Exact adapter requested by the seam lane: a negative full-shell frozen margin at an actual skipped rank produces the right-hand small integer-greedy remainder statement of `seam_smallPositiveDefect_iff_integerGreedyRemainder`."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFullShellSeamBridge.lean:415:smallPositiveDefect_bits_eq_integerGreedyBits",
+      "name": "smallPositiveDefect_bits_eq_integerGreedyBits",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFullShellSeamBridge.lean",
+      "line": 415,
+      "signature": "theorem smallPositiveDefect_bits_eq_integerGreedyBits {gap B C : ℕ} (hgap : 0 < gap) (hB : B < gap) {weights : List ℕ} (hdom : GapDominates gap weights) {bits : List Bool} (hlen : bits.length = weights.length) (hlt : weightedBoolSum weights bits < C) (hdef : C - weightedBoolSum weights bits ≤ B) : bits = integerGreedyBits weights C",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Any Boolean word giving a positive defect shorter than the separation gap is the descending greedy word itself."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFullShellSeamBridge.lean:442:greedyHalfFrozenMargin_fullShell_neg_of_take",
+      "name": "greedyHalfFrozenMargin_fullShell_neg_of_take",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFullShellSeamBridge.lean",
+      "line": 442,
+      "signature": "theorem greedyHalfFrozenMargin_fullShell_neg_of_take (n : ℕ) (hn : 1 ≤ n) (htake : mersenneWeight n ≤ greedyMersenneRemainder (1 / 2 : ℝ) (n - 1)) : greedyHalfFrozenMargin (n - 1) n < 0",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Taking rank `n` forces the actual full-shell frozen margin to be strictly negative. This is the easy half of the observed sign dichotomy."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFullShellSeamBridge.lean:476:skip_of_fullShell_margin_nonneg",
+      "name": "skip_of_fullShell_margin_nonneg",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFullShellSeamBridge.lean",
+      "line": 476,
+      "signature": "theorem skip_of_fullShell_margin_nonneg (n : ℕ) (hn : 1 ≤ n) (hmargin : 0 ≤ greedyHalfFrozenMargin (n - 1) n) : ¬ mersenneWeight n ≤ greedyMersenneRemainder (1 / 2 : ℝ) (n - 1)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Therefore nonnegativity of the full-shell margin forces an actual skip. The converse is the exact remaining arithmetic direction."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFullShellSeamBridge.lean:487:stemBits_eq_integerGreedyBits_of_skipped_fullShell_neg",
+      "name": "stemBits_eq_integerGreedyBits_of_skipped_fullShell_neg",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFullShellSeamBridge.lean",
+      "line": 487,
+      "signature": "theorem stemBits_eq_integerGreedyBits_of_skipped_fullShell_neg (n : ℕ) (hn : 3 ≤ n) (hskip : ¬ mersenneWeight n ≤ greedyMersenneRemainder (1 / 2 : ℝ) (n - 1)) (hneg : greedyHalfFrozenMargin (n - 1) n < 0) : stemBits n (halfGreedyPrefixSupport (n - 1)) = integerGreedyBits (seamWeights n) (seamSubsetTarget n)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A hypothetical negative full-shell margin at an actual skip aligns the actual finite Mersenne prefix with the integer-seam greedy word exactly."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFullShellSeamBridge.lean:531:greedyHalfFrozenMargin_fullShell_eq_neg_seamRemainder_of_alignment",
+      "name": "greedyHalfFrozenMargin_fullShell_eq_neg_seamRemainder_of_alignment",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFullShellSeamBridge.lean",
+      "line": 531,
+      "signature": "theorem greedyHalfFrozenMargin_fullShell_eq_neg_seamRemainder_of_alignment (n : ℕ) (hn : 3 ≤ n) (halign : stemBits n (halfGreedyPrefixSupport (n - 1)) = integerGreedyBits (seamWeights n) (seamSubsetTarget n)) : greedyHalfFrozenMargin (n - 1) n = -(seamIntegerGreedyRemainder n : ℤ)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Once the actual stem is the descending seam-greedy word, the full-shell margin is exactly the negative integer-greedy seam remainder."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFullShellSeamBridge.lean:569:skipped_fullShell_neg_iff_alignment_and_seamRemainder_pos",
+      "name": "skipped_fullShell_neg_iff_alignment_and_seamRemainder_pos",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFullShellSeamBridge.lean",
+      "line": 569,
+      "signature": "theorem skipped_fullShell_neg_iff_alignment_and_seamRemainder_pos (n : ℕ) (hn : 3 ≤ n) (hskip : ¬ mersenneWeight n ≤ greedyMersenneRemainder (1 / 2 : ℝ) (n - 1)) : greedyHalfFrozenMargin (n - 1) n < 0 ↔ stemBits n (halfGreedyPrefixSupport (n - 1)) = integerGreedyBits (seamWeights n) (seamSubsetTarget n) ∧ 1 ≤ seamIntegerGreedyRemainder n",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "At a genuine skip, negativity of the full-shell margin is equivalent to positive seam remainder together with exact actual/seam word alignment."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFullShellSeamBridge.lean:593:HalfGreedySkippedSeamAlignmentZero",
+      "name": "HalfGreedySkippedSeamAlignmentZero",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderFullShellSeamBridge.lean",
+      "line": 593,
+      "signature": "def HalfGreedySkippedSeamAlignmentZero : Prop",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Exact word-level replacement for the skipped full-shell sign invariant: if a skipped actual word equals the seam-greedy word, its seam remainder must vanish."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFullShellSeamBridge.lean:604:HalfGreedySkippedFullShellNonnegative",
+      "name": "HalfGreedySkippedFullShellNonnegative",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderFullShellSeamBridge.lean",
+      "line": 604,
+      "signature": "def HalfGreedySkippedFullShellNonnegative : Prop",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Direct full-shell sign socket. It asks only that the actual frozen margin has already crossed by the full-shell horizon at every genuine skipped rank; no seam or abstract adjacent-cut coordinate remains in the hypothesis."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFullShellSeamBridge.lean:612:governedFrozenMarginProducer_of_skippedFullShellNonnegative",
+      "name": "governedFrozenMarginProducer_of_skippedFullShellNonnegative",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFullShellSeamBridge.lean",
+      "line": 612,
+      "signature": "theorem governedFrozenMarginProducer_of_skippedFullShellNonnegative (hsign : HalfGreedySkippedFullShellNonnegative) : HalfGreedyGovernedFrozenMarginProducer",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The full-shell sign socket is itself a governed frozen-margin producer, with the two initial ranks discharged directly."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFullShellSeamBridge.lean:633:half_mem_mersenneAchievementSet_of_skippedFullShellNonnegative",
+      "name": "half_mem_mersenneAchievementSet_of_skippedFullShellNonnegative",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFullShellSeamBridge.lean",
+      "line": 633,
+      "signature": "theorem half_mem_mersenneAchievementSet_of_skippedFullShellNonnegative (hsign : HalfGreedySkippedFullShellNonnegative) : (1 / 2 : ℝ) ∈ mersenneAchievementSet",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Final direct consumer for the actual full-shell sign invariant."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFullShellSeamBridge.lean:641:skippedFullShellNonnegative_of_seamAlignmentZero",
+      "name": "skippedFullShellNonnegative_of_seamAlignmentZero",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFullShellSeamBridge.lean",
+      "line": 641,
+      "signature": "theorem skippedFullShellNonnegative_of_seamAlignmentZero (hsafe : HalfGreedySkippedSeamAlignmentZero) : HalfGreedySkippedFullShellNonnegative",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The exact word-level condition implies the skipped full-shell sign invariant."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFullShellSeamBridge.lean:656:seamAlignmentZero_of_skippedFullShellNonnegative",
+      "name": "seamAlignmentZero_of_skippedFullShellNonnegative",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFullShellSeamBridge.lean",
+      "line": 656,
+      "signature": "theorem seamAlignmentZero_of_skippedFullShellNonnegative (hsign : HalfGreedySkippedFullShellNonnegative) : HalfGreedySkippedSeamAlignmentZero",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Conversely, nonnegative skipped margins force zero seam remainder at every aligned skipped word."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFullShellSeamBridge.lean:671:skippedSeamAlignmentZero_iff_skippedFullShellNonnegative",
+      "name": "skippedSeamAlignmentZero_iff_skippedFullShellNonnegative",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFullShellSeamBridge.lean",
+      "line": 671,
+      "signature": "theorem skippedSeamAlignmentZero_iff_skippedFullShellNonnegative : HalfGreedySkippedSeamAlignmentZero ↔ HalfGreedySkippedFullShellNonnegative",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The word-alignment-zero condition and the direct sign socket are exactly equivalent."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFullShellSeamBridge.lean:678:half_mem_mersenneAchievementSet_of_skippedSeamAlignmentZero",
+      "name": "half_mem_mersenneAchievementSet_of_skippedSeamAlignmentZero",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFullShellSeamBridge.lean",
+      "line": 678,
+      "signature": "theorem half_mem_mersenneAchievementSet_of_skippedSeamAlignmentZero (hsafe : HalfGreedySkippedSeamAlignmentZero) : (1 / 2 : ℝ) ∈ mersenneAchievementSet",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Final exact half-membership consumer in word-level seam coordinates."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFullShellSeamBridge.lean:687:HalfGreedySkippedSeamEscape",
+      "name": "HalfGreedySkippedSeamEscape",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderFullShellSeamBridge.lean",
+      "line": 687,
+      "signature": "def HalfGreedySkippedSeamEscape : Prop",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Smallest skip-conditioned seam escape socket needed by the actual half orbit. Exceptional seam rows that are actual takes are deliberately absent."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFullShellSeamBridge.lean:695:governedFrozenMarginProducer_of_skippedSeamEscape",
+      "name": "governedFrozenMarginProducer_of_skippedSeamEscape",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFullShellSeamBridge.lean",
+      "line": 695,
+      "signature": "theorem governedFrozenMarginProducer_of_skippedSeamEscape (hescape : HalfGreedySkippedSeamEscape) : HalfGreedyGovernedFrozenMarginProducer",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The skip-conditioned seam escape socket forces a governed crossing at the full-shell horizon `J=k+1`."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFullShellSeamBridge.lean:722:half_mem_mersenneAchievementSet_of_skippedSeamEscape",
+      "name": "half_mem_mersenneAchievementSet_of_skippedSeamEscape",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFullShellSeamBridge.lean",
+      "line": 722,
+      "signature": "theorem half_mem_mersenneAchievementSet_of_skippedSeamEscape (hescape : HalfGreedySkippedSeamEscape) : (1 / 2 : ℝ) ∈ mersenneAchievementSet",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Final conditional consumer: the skip-conditioned seam escape statement is sufficient for exact half-membership."
     },
     {
       "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:25:truncatedMersenneWeight",
