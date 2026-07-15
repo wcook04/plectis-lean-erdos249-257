@@ -4,21 +4,21 @@
   "projection_not_authority": true,
   "proof_authority": "Lean source checked by the pinned Lean kernel",
   "argument_authority": "docs/claims.json::machine_readable_paper.argument_graph",
-  "source_fingerprint": "sha256:6bebbd3ed4c6b499d29b8b9c4bce180dcdcefbd29ba8fb16be18330c0d8c205b",
+  "source_fingerprint": "sha256:eb0fed8526836af8eccd8da3eb0c96ffcf3966b074e45347c92a1a8626c24484",
   "summary": {
-    "module_count": 591,
-    "declaration_count": 7624,
-    "theorem_like_count": 6799,
+    "module_count": 592,
+    "declaration_count": 7630,
+    "theorem_like_count": 6804,
     "generated_certificate_declaration_count": 1681,
-    "principal_claim_link_count": 175,
+    "principal_claim_link_count": 178,
     "kind_counts": {
       "abbrev": 6,
-      "def": 793,
+      "def": 794,
       "inductive": 3,
       "instance": 5,
       "lemma": 354,
       "structure": 18,
-      "theorem": 6445
+      "theorem": 6450
     }
   },
   "modules": [
@@ -120,7 +120,8 @@
         "Erdos249257.SelectedSuffixCylinder",
         "Erdos249257.SelectedSuffixCylinderPreFeedback",
         "Erdos249257.HalfDivisorUnitDrop",
-        "Erdos249257.ActualForeignResidueProjection"
+        "Erdos249257.ActualForeignResidueProjection",
+        "Erdos249257.CofinalStripReturn"
       ],
       "declaration_count": 0,
       "kind_counts": {}
@@ -249,6 +250,18 @@
         "lemma": 275,
         "structure": 1,
         "theorem": 512
+      }
+    },
+    {
+      "id": "Erdos249257.CofinalStripReturn",
+      "path": "Erdos249257/CofinalStripReturn.lean",
+      "imports": [
+        "Erdos249257.HalfCarryReachability"
+      ],
+      "declaration_count": 6,
+      "kind_counts": {
+        "def": 1,
+        "theorem": 5
       }
     },
     {
@@ -18579,6 +18592,78 @@
       "generated_certificate": false,
       "claim_ids": [],
       "docstring": "**Seed-lift**: a small seed menu firing at its own floor inflates to every supermenu at every deeper depth (depth monotonicity up, menu monotonicity out). For supply it suffices that some prefix seed fires at its floor for arbitrarily large `t`."
+    },
+    {
+      "id": "Erdos249257/CofinalStripReturn.lean:23:scaled_integerHalfCarry_antitone",
+      "name": "scaled_integerHalfCarry_antitone",
+      "kind": "theorem",
+      "module": "Erdos249257/CofinalStripReturn.lean",
+      "line": 23,
+      "signature": "theorem scaled_integerHalfCarry_antitone (A : Set ℕ) : Antitone (fun N : ℕ ↦ (integerHalfCarry A N : ℝ) / (2 : ℝ) ^ N)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The uncentred integer half carry, scaled by its binary place value, is antitone for every support."
+    },
+    {
+      "id": "Erdos249257/CofinalStripReturn.lean:42:tendsto_halfStripBound_succ_div_pow_zero",
+      "name": "tendsto_halfStripBound_succ_div_pow_zero",
+      "kind": "theorem",
+      "module": "Erdos249257/CofinalStripReturn.lean",
+      "line": 42,
+      "signature": "theorem tendsto_halfStripBound_succ_div_pow_zero : Tendsto (fun N : ℕ ↦ (halfStripBound (N + 1) : ℝ) / (2 : ℝ) ^ N) atTop (nhds 0)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The concrete strip envelope is subexponential even when indexed at the successor row corresponding to `integerHalfCarry A N`."
+    },
+    {
+      "id": "Erdos249257/CofinalStripReturn.lean:76:GreedyHalfCarryCofinalStripReturn",
+      "name": "GreedyHalfCarryCofinalStripReturn",
+      "kind": "def",
+      "module": "Erdos249257/CofinalStripReturn.lean",
+      "line": 76,
+      "signature": "def GreedyHalfCarryCofinalStripReturn : Prop",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The actual greedy half carry returns to the square-root strip beyond every requested index. This is weaker than an all-level strip bound."
+    },
+    {
+      "id": "Erdos249257/CofinalStripReturn.lean:84:greedy_integerHalfCarry_scaled_tendsto_zero_of_cofinalStripReturn",
+      "name": "greedy_integerHalfCarry_scaled_tendsto_zero_of_cofinalStripReturn",
+      "kind": "theorem",
+      "module": "Erdos249257/CofinalStripReturn.lean",
+      "line": 84,
+      "signature": "theorem greedy_integerHalfCarry_scaled_tendsto_zero_of_cofinalStripReturn (hreturn : GreedyHalfCarryCofinalStripReturn) : Tendsto (fun N : ℕ ↦ (integerHalfCarry (greedyMersenneSupport (1 / 2 : ℝ)) N : ℝ) / (2 : ℝ) ^ N) atTop (nhds 0)",
+      "generated_certificate": false,
+      "claim_ids": [
+        "cofinal_strip_return_closure"
+      ],
+      "docstring": "Cofinal strip returns force the entire scaled uncentred greedy carry to zero. Antitonicity is the fan-in: after one late return, every still later scaled state is no larger."
+    },
+    {
+      "id": "Erdos249257/CofinalStripReturn.lean:130:greedy_half_infinite_of_cofinalStripReturn",
+      "name": "greedy_half_infinite_of_cofinalStripReturn",
+      "kind": "theorem",
+      "module": "Erdos249257/CofinalStripReturn.lean",
+      "line": 130,
+      "signature": "theorem greedy_half_infinite_of_cofinalStripReturn (hreturn : GreedyHalfCarryCofinalStripReturn) : (greedyMersenneSupport (1 / 2 : ℝ)).Infinite ∧ erdosSupportSeries 2 (greedyMersenneSupport (1 / 2 : ℝ)) = (1 : ℝ) / 2",
+      "generated_certificate": false,
+      "claim_ids": [
+        "cofinal_strip_return_closure"
+      ],
+      "docstring": "Cofinal returns to the square-root strip already give an infinite canonical greedy support with exact Mersenne support-series value `1/2`."
+    },
+    {
+      "id": "Erdos249257/CofinalStripReturn.lean:157:half_mem_mersenneAchievementSet_of_cofinalStripReturn",
+      "name": "half_mem_mersenneAchievementSet_of_cofinalStripReturn",
+      "kind": "theorem",
+      "module": "Erdos249257/CofinalStripReturn.lean",
+      "line": 157,
+      "signature": "theorem half_mem_mersenneAchievementSet_of_cofinalStripReturn (hreturn : GreedyHalfCarryCofinalStripReturn) : (1 / 2 : ℝ) ∈ mersenneAchievementSet",
+      "generated_certificate": false,
+      "claim_ids": [
+        "cofinal_strip_return_closure"
+      ],
+      "docstring": "Achievement-set form of the same closure lemma."
     },
     {
       "id": "Erdos249257/CompositeDilationDefect.lean:21:compositeDilationDefect",

@@ -317,6 +317,14 @@
           ]
         },
         {
+          "id": "Erdos249257.CofinalStripReturn",
+          "path": "Erdos249257/CofinalStripReturn.lean",
+          "role": "Lean proof module",
+          "imports": [
+            "Erdos249257.HalfCarryReachability"
+          ]
+        },
+        {
           "id": "Erdos249257.CompositeDilationDefect",
           "path": "Erdos249257/CompositeDilationDefect.lean",
           "role": "Composite support-dilation defect identity",
@@ -5526,6 +5534,11 @@
           "to": "half_second_channel_reduction"
         },
         {
+          "from": "cofinal_strip_return_closure",
+          "relation": "builds_on",
+          "to": "half_carry_reachability_compactness"
+        },
+        {
           "from": "half_cylinder_finite_shadow",
           "relation": "builds_on",
           "to": "half_carry_reachability_compactness"
@@ -5929,7 +5942,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 1512
+        "line": 1532
       }
     },
     {
@@ -5940,7 +5953,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 1521
+        "line": 1541
       }
     },
     {
@@ -5951,7 +5964,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 1528
+        "line": 1548
       }
     }
   ],
@@ -6145,6 +6158,34 @@
           "name": "exists_infinite_support_half_of_canonicalEvenSeamSupply",
           "module": "Erdos249257/HalfCarryReachability.lean",
           "line": 1027
+        }
+      ]
+    },
+    {
+      "id": "cofinal_strip_return_closure",
+      "label": "Cofinal square-root-strip return closure",
+      "status": "conditional reduction",
+      "statement": "The binary-scaled uncentred greedy half carry is antitone, and the square-root strip envelope divided by 2^N tends to zero. Therefore cofinal returns of the canonical greedy carry to that strip force the scaled carry to tend to zero and yield membership of 1/2 in the Mersenne achievement set. The cofinal return hypothesis is not proved.",
+      "remaining_open_proposition_ids": [
+        "remaining_open.universal_257_all_infinite_supports"
+      ],
+      "paper_label": "res:cofinalstripreturn",
+      "readme_headline": false,
+      "declarations": [
+        {
+          "name": "greedy_integerHalfCarry_scaled_tendsto_zero_of_cofinalStripReturn",
+          "module": "Erdos249257/CofinalStripReturn.lean",
+          "line": 84
+        },
+        {
+          "name": "greedy_half_infinite_of_cofinalStripReturn",
+          "module": "Erdos249257/CofinalStripReturn.lean",
+          "line": 130
+        },
+        {
+          "name": "half_mem_mersenneAchievementSet_of_cofinalStripReturn",
+          "module": "Erdos249257/CofinalStripReturn.lean",
+          "line": 157
         }
       ]
     },

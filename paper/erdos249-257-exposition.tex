@@ -564,6 +564,26 @@ and compactness then produces an infinite support with sum exactly $1/2$:
 Thus the formal result is a conditional reduction.  It does not establish the
 canonical seam supply and does not prove Erd\H{o}s~\#257.
 
+\paragraph{Cofinal strip returns.}  The all-level strip hypothesis can be
+weakened for the canonical greedy half carry.  Its uncentred, binary-scaled
+form is antitone.  Consequently, if it returns to the square-root strip
+cofinally, then one sufficiently late return bounds every later scaled carry;
+the strip envelope divided by $2^N$ tends to zero.  The resulting tempered
+centred carry gives an infinite greedy support with support-series value
+$1/2$.
+
+\begin{proposition}[cofinal strip-return closure]\label{res:cofinalstripreturn}
+If the canonical greedy half carry returns cofinally to the stated
+square-root strip, then $1/2$ belongs to the Mersenne achievement set.
+\end{proposition}
+\noindent Formalised:
+\lref{CofinalStripReturn.lean}{84}{greedy_integerHalfCarry_scaled_tendsto_zero_of_cofinalStripReturn}
+and
+\lref{CofinalStripReturn.lean}{157}{half_mem_mersenneAchievementSet_of_cofinalStripReturn}.
+The cofinal return condition itself is not established.  This is a weaker
+producer socket than a uniform strip bound, not an unconditional membership
+theorem.
+
 \subsection{Finite shadows of the half cylinder}\label{res:halfcylindershadow}
 
 For an admissible finite word, the residual from $1/2$ is given exactly by its

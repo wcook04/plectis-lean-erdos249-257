@@ -3,7 +3,7 @@
   "artifact_role": "paper_sigil_to_lean_module_navigation_crosswalk",
   "authority_posture": "generated_navigation_projection_not_proof_authority",
   "heuristic": "Each CamelCase component contributes at most its first three characters.",
-  "alias_count": 70,
+  "alias_count": 71,
   "aliases": [
     {
       "sigil": "ActForResPro",
@@ -34,6 +34,11 @@
       "sigil": "CerKer",
       "module": "CertificateKernel.lean",
       "path": "Erdos249257/CertificateKernel.lean"
+    },
+    {
+      "sigil": "CofStrRet",
+      "module": "CofinalStripReturn.lean",
+      "path": "Erdos249257/CofinalStripReturn.lean"
     },
     {
       "sigil": "ComDilDef",
