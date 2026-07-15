@@ -27,11 +27,11 @@ there rather than implied by the release tag.
 
 | Checked surface | Scale |
 |---|---:|
-| Lean modules | 557 |
-| Lean declarations | 6,873 |
-| Theorem-like declarations | 6,221 |
+| Lean modules | 558 |
+| Lean declarations | 6,878 |
+| Theorem-like declarations | 6,224 |
 | Generated certificate declarations | 1,681 |
-| Principal claim-to-Lean links | 103 |
+| Principal claim-to-Lean links | 106 |
 | Exact remaining open propositions | 3 |
 
 These are generated navigation counts, not a claim that every declaration is a
@@ -141,6 +141,9 @@ time; its explanation is not proof authority.
   finite defect when a composite support element dilates a divisor-count
   coefficient, together with a bouquet-local defect bound. It is a local
   identity, not a correlation estimate or irrationality result.
+- **Mixed prime-power support layers.** Two distinct exact valuation layers
+  commute and recover an iterated support pullback. This is finite coefficient
+  algebra, not a decimation or irrationality argument.
 - **An LCM factor-ideal no-go.** A synthetic affine carry can satisfy the
   homogeneous LCM factor ideal, the stated whole-ray anchors, and every finite
   integer shift-polynomial test while remaining a strict survivor. This rules

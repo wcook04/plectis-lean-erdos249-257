@@ -38,6 +38,7 @@ NEW_ROLES = {
     "Erdos249257.LambertDiagonalEnclosure": "Lambert diagonal enclosure reduction",
     "Erdos249257.LcmFactorIdealPulseObstruction": "LCM factor-ideal anchor-pulse obstruction",
     "Erdos249257.MersenneShadowCyclotomicNoncollapse": "Cyclotomic noncollapse in the Mersenne shadow",
+    "Erdos249257.MaximalOmegaLayer": "Mixed prime-power support-layer identities",
     "Erdos249257.MersenneShadowDenominatorGrowth": "Exact denominator growth in the Mersenne shadow",
     "Erdos249257.PrimePowerJumpDynamics": "Prime-power jump dynamics",
     "Erdos249257.PrimitiveRationalGapSupply": "Conditional primitive rational-gap supply interface",

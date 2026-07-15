@@ -521,6 +521,19 @@ This records the local correction needed when dilation is not prime.  It does
 not prove a correlation estimate, the sunflower tail selector, or an
 irrationality statement.
 
+\subsection{Mixed prime-power layers}\label{res:mixedlayer}
+
+The one-prime-power layer has a two-signature extension.  Exact $p$-adic and
+$q$-adic layer operators commute, and, for distinct primes with the residual
+argument coprime to $pq$, their composite extracts the iterated exact-valuation
+pullback of the support coefficient.  This is formalised by
+\lref{MaximalOmegaLayer.lean}{39}{mixedPrimePowerLayerTwo_supportCoeffInt}.
+The singleton support $\{12\}$ gives a checked $(2^2,3)$ fixture with value
+one at residual argument $1$:
+\lrefx{MaximalOmegaLayer.lean}{65}{mixedPrimePowerLayerTwo_twelve_fixture}.
+These are finite coefficient identities.  They do not provide a decimation
+transport, a bounded-$\Omega$ conclusion, or an irrationality theorem.
+
 \subsection{What stays open}
 
 The universal Erd\H{o}s \#257 statement, irrationality of $\sum_{n\in A}1/(2^n-1)$

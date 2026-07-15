@@ -4,21 +4,21 @@
   "projection_not_authority": true,
   "proof_authority": "Lean source checked by the pinned Lean kernel",
   "argument_authority": "docs/claims.json::machine_readable_paper.argument_graph",
-  "source_fingerprint": "sha256:d49290a73eed8f73c988630101a033db08914d51a5e898a6ad23708b61abc6fd",
+  "source_fingerprint": "sha256:becc34b0a8230e63969177b2e5ca9fea7d6e52a120b8e4d35e9db1a8c6e8c64e",
   "summary": {
-    "module_count": 557,
-    "declaration_count": 6873,
-    "theorem_like_count": 6221,
+    "module_count": 558,
+    "declaration_count": 6878,
+    "theorem_like_count": 6224,
     "generated_certificate_declaration_count": 1681,
-    "principal_claim_link_count": 103,
+    "principal_claim_link_count": 106,
     "kind_counts": {
       "abbrev": 4,
-      "def": 631,
+      "def": 633,
       "inductive": 3,
       "instance": 3,
       "lemma": 354,
       "structure": 11,
-      "theorem": 5867
+      "theorem": 5870
     }
   },
   "modules": [
@@ -85,7 +85,8 @@
         "Erdos249257.PivotAntiReconstruction",
         "Erdos249257.LcmFactorIdealPulseObstruction",
         "Erdos249257.SupportSunflowerDichotomy",
-        "Erdos249257.CompositeDilationDefect"
+        "Erdos249257.CompositeDilationDefect",
+        "Erdos249257.MaximalOmegaLayer"
       ],
       "declaration_count": 0,
       "kind_counts": {}
@@ -6450,6 +6451,18 @@
         "def": 18,
         "lemma": 4,
         "theorem": 52
+      }
+    },
+    {
+      "id": "Erdos249257.MaximalOmegaLayer",
+      "path": "Erdos249257/MaximalOmegaLayer.lean",
+      "imports": [
+        "Erdos249257.SupportSunflowerDichotomy"
+      ],
+      "declaration_count": 5,
+      "kind_counts": {
+        "def": 2,
+        "theorem": 3
       }
     },
     {
@@ -69184,6 +69197,67 @@
       "signature": "theorem lcmAnchorPulse_t3_strict_survivor (i : ℕ) : |lcmAnchorPulseState 3 i| < (12 + i + 2 : ℕ)",
       "generated_certificate": false,
       "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/MaximalOmegaLayer.lean:19:primePowerLayer",
+      "name": "primePowerLayer",
+      "kind": "def",
+      "module": "Erdos249257/MaximalOmegaLayer.lean",
+      "line": 19,
+      "signature": "def primePowerLayer (p e : ℕ) (g : ℕ → ℤ) (n : ℕ) : ℤ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The signed coefficient layer between exact `p`-adic levels `e-1` and `e`."
+    },
+    {
+      "id": "Erdos249257/MaximalOmegaLayer.lean:24:mixedPrimePowerLayerTwo",
+      "name": "mixedPrimePowerLayerTwo",
+      "kind": "def",
+      "module": "Erdos249257/MaximalOmegaLayer.lean",
+      "line": 24,
+      "signature": "def mixedPrimePowerLayerTwo (p e q f : ℕ) (g : ℕ → ℤ) (n : ℕ) : ℤ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The two-signature mixed layer. Further list-level iteration can use this as its checked algebraic step without committing to a factorization API."
+    },
+    {
+      "id": "Erdos249257/MaximalOmegaLayer.lean:29:primePowerLayer_comm",
+      "name": "primePowerLayer_comm",
+      "kind": "theorem",
+      "module": "Erdos249257/MaximalOmegaLayer.lean",
+      "line": 29,
+      "signature": "theorem primePowerLayer_comm (p e q f : ℕ) (g : ℕ → ℤ) (n : ℕ) : primePowerLayer q f (primePowerLayer p e g) n = primePowerLayer p e (primePowerLayer q f g) n",
+      "generated_certificate": false,
+      "claim_ids": [
+        "mixed_prime_power_layer_identity"
+      ],
+      "docstring": "Prime-power layer operators commute as integer finite differences."
+    },
+    {
+      "id": "Erdos249257/MaximalOmegaLayer.lean:39:mixedPrimePowerLayerTwo_supportCoeffInt",
+      "name": "mixedPrimePowerLayerTwo_supportCoeffInt",
+      "kind": "theorem",
+      "module": "Erdos249257/MaximalOmegaLayer.lean",
+      "line": 39,
+      "signature": "theorem mixedPrimePowerLayerTwo_supportCoeffInt (A : Set ℕ) {p e q f n : ℕ} (hp : p.Prime) (he : 0 < e) (hq : q.Prime) (hf : 0 < f) (hpq : p ≠ q) (hn : n.Coprime (p * q)) : mixedPrimePowerLayerTwo p e q f (supportCoeffInt A) n = supportCoeffInt (exactPrimePowerPullback q f (exactPrimePowerPullback p e A)) n",
+      "generated_certificate": false,
+      "claim_ids": [
+        "mixed_prime_power_layer_identity"
+      ],
+      "docstring": "Two distinct exact prime-power layers extract the iterated exact-valuation pullback. This is the mixed repeated-prime algebra missing from the distinct-prime dilation owner."
+    },
+    {
+      "id": "Erdos249257/MaximalOmegaLayer.lean:65:mixedPrimePowerLayerTwo_twelve_fixture",
+      "name": "mixedPrimePowerLayerTwo_twelve_fixture",
+      "kind": "theorem",
+      "module": "Erdos249257/MaximalOmegaLayer.lean",
+      "line": 65,
+      "signature": "theorem mixedPrimePowerLayerTwo_twelve_fixture : mixedPrimePowerLayerTwo 2 2 3 1 (supportCoeffInt ({12} : Set ℕ)) 1 = 1",
+      "generated_certificate": false,
+      "claim_ids": [
+        "mixed_prime_power_layer_identity"
+      ],
+      "docstring": "Regression for the mixed `2^2`/`3` signature: the singleton support `{12}` contributes exactly one at residual argument `1`."
     },
     {
       "id": "Erdos249257/MersenneLambertLadder.lean:61:summable_lambert_pair",

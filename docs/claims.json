@@ -4952,6 +4952,14 @@
           ]
         },
         {
+          "id": "Erdos249257.MaximalOmegaLayer",
+          "path": "Erdos249257/MaximalOmegaLayer.lean",
+          "role": "Mixed prime-power support-layer identities",
+          "imports": [
+            "Erdos249257.SupportSunflowerDichotomy"
+          ]
+        },
+        {
           "id": "Erdos249257.MersenneLambertLadder",
           "path": "Erdos249257/MersenneLambertLadder.lean",
           "role": "Mersenne-Lambert identities",
@@ -5224,6 +5232,11 @@
           "from": "composite_dilation_defect_identity",
           "relation": "builds_on",
           "to": "orthogonal_petal_sunflower_reduction"
+        },
+        {
+          "from": "mixed_prime_power_layer_identity",
+          "relation": "builds_on",
+          "to": "composite_dilation_defect_identity"
         },
         {
           "from": "denominator_exclusion",
@@ -5499,7 +5512,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 1157
+        "line": 1170
       }
     },
     {
@@ -5510,7 +5523,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 1166
+        "line": 1179
       }
     },
     {
@@ -5521,7 +5534,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 1173
+        "line": 1186
       }
     }
   ],
@@ -5634,6 +5647,31 @@
           "name": "compositeDilationDefect_two_six_fixture",
           "module": "Erdos249257/CompositeDilationDefect.lean",
           "line": 218
+        }
+      ]
+    },
+    {
+      "id": "mixed_prime_power_layer_identity",
+      "label": "Mixed prime-power support-layer identity",
+      "status": "proved here",
+      "statement": "Exact p-adic and q-adic coefficient-layer operators commute. For distinct primes and a residual argument coprime to their product, the two-layer operator on the support coefficient equals the iterated exact-prime-power pullback. The checked singleton {12} fixture has mixed (2²,3) layer value one at residual argument one. This is finite coefficient algebra only, with no decimation transport, bounded-Ω endpoint, or irrationality theorem.",
+      "paper_label": "res:mixedlayer",
+      "readme_headline": false,
+      "declarations": [
+        {
+          "name": "primePowerLayer_comm",
+          "module": "Erdos249257/MaximalOmegaLayer.lean",
+          "line": 29
+        },
+        {
+          "name": "mixedPrimePowerLayerTwo_supportCoeffInt",
+          "module": "Erdos249257/MaximalOmegaLayer.lean",
+          "line": 39
+        },
+        {
+          "name": "mixedPrimePowerLayerTwo_twelve_fixture",
+          "module": "Erdos249257/MaximalOmegaLayer.lean",
+          "line": 65
         }
       ]
     },
