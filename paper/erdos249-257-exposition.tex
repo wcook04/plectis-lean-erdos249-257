@@ -507,6 +507,20 @@ The tail-selection predicate itself is not proved here.  Thus this is a
 conditional reduction for one structured support family, not a further
 unconditional case of Erd\H{o}s~\#257.
 
+\subsection{Composite dilation defects}\label{res:compositedefect}
+
+For a support divisor count $f_A(x)=\#\{d\in A:d\mid x\}$, multiplication by
+a composite support element $a$ has an exact correction term.  Besides the
+distinguished divisor $a$, the new divisors are counted by a finite defect
+which excludes divisors already present at $x$.  The formal identity is
+\lref{CompositeDilationDefect.lean}{30}{supportCoeff_mul_eq_add_defect}.
+For a finite-core orthogonal-petal bouquet, the defect at a ray is bounded by
+the finite exceptional frame plus the divisor count of the petal support:
+\lrefx{CompositeDilationDefect.lean}{151}{compositeDilationDefect_le_exceptional_add_petalCoeff}.
+This records the local correction needed when dilation is not prime.  It does
+not prove a correlation estimate, the sunflower tail selector, or an
+irrationality statement.
+
 \subsection{What stays open}
 
 The universal Erd\H{o}s \#257 statement, irrationality of $\sum_{n\in A}1/(2^n-1)$

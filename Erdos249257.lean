@@ -58,3 +58,4 @@ import Erdos249257.TotientCarryKernelRigidity
 import Erdos249257.PivotAntiReconstruction
 import Erdos249257.LcmFactorIdealPulseObstruction
 import Erdos249257.SupportSunflowerDichotomy
+import Erdos249257.CompositeDilationDefect

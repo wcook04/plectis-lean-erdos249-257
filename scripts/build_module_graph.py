@@ -28,6 +28,7 @@ NEW_ROLES = {
     "Erdos249257.ResidualGaugeObstruction": "Residual-gauge obstruction for monomial minor criteria",
     "Erdos249257.BinaryTailWindowTransfer": "Binary tail-window transfer interfaces",
     "Erdos249257.CyclicTensorMobiusShadow": "Cyclic tensor identities for the Mobius shadow",
+    "Erdos249257.CompositeDilationDefect": "Composite support-dilation defect identity",
     "Erdos249257.CyclotomicProjectionOfShadow": "Cyclotomic projections of the Mobius shadow",
     "Erdos249257.DiagonalFreshLossBridge": "Fresh-loss projection and suffix-supply reduction",
     "Erdos249257.DiagonalPincerCertificates": "Finite diagonal-pincer certificate base",

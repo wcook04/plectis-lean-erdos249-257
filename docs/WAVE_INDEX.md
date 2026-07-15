@@ -63,6 +63,11 @@ records an explicit alternating-core squared-prime-petal support. Its uniform
 tail-selection hypothesis is not proved, so it adds no unconditional support
 family.
 
+`CompositeDilationDefect` supplies the exact finite correction when a
+composite support element dilates the divisor-count coefficient, and bounds
+that correction for orthogonal-petal bouquets. It is a local identity, not a
+correlation or irrationality theorem.
+
 ## Diagonal pincer frontier (post-wave #249 band)
 
 This band refines the lcm-diagonal reduction.  Its main reading chain is
@@ -108,7 +113,7 @@ given separately in `paper/erdos249-transport-curvature.tex`.
 - `CertificateKernel.lean` (0.83 MiB, 18,950 lines, 840 declarations; 512 theorems and 275 lemmas): the assembled microkernel and headline interfaces.
 - `GeneratedCertificates.lean` (1.18 MiB, 27,728 lines, 1,174 declarations) plus 3 generated shards: finite certificate instances checked by the Lean kernel.
 - The diagonal-pincer family contains 480 isolated prime-certificate modules and 10 scale aggregators. The shards are indexed through aggregators rather than presented as separate mathematical claims.
-- Entire checked corpus: 556 modules, 6,865 declarations, 6,214 theorem-like declarations, and 1,681 generated-certificate declarations. The release gate rejects `sorry`, `admit`, custom `axiom` declarations, and `native_decide`.
+- Entire checked corpus: 557 modules, 6,873 declarations, 6,221 theorem-like declarations, and 1,681 generated-certificate declarations. The release gate rejects `sorry`, `admit`, custom `axiom` declarations, and `native_decide`.
 
 These are generated inventory facts, not mathematical claim counts. The declaration atlas
 and Lean source remain the drilldown owners.

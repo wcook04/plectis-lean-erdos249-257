@@ -4,21 +4,21 @@
   "projection_not_authority": true,
   "proof_authority": "Lean source checked by the pinned Lean kernel",
   "argument_authority": "docs/claims.json::machine_readable_paper.argument_graph",
-  "source_fingerprint": "sha256:1044e01d1676969dbea10249705dd79be8d670a0a288f56735af1a57352c257d",
+  "source_fingerprint": "sha256:d49290a73eed8f73c988630101a033db08914d51a5e898a6ad23708b61abc6fd",
   "summary": {
-    "module_count": 556,
-    "declaration_count": 6865,
-    "theorem_like_count": 6214,
+    "module_count": 557,
+    "declaration_count": 6873,
+    "theorem_like_count": 6221,
     "generated_certificate_declaration_count": 1681,
-    "principal_claim_link_count": 100,
+    "principal_claim_link_count": 103,
     "kind_counts": {
       "abbrev": 4,
-      "def": 630,
+      "def": 631,
       "inductive": 3,
       "instance": 3,
       "lemma": 354,
       "structure": 11,
-      "theorem": 5860
+      "theorem": 5867
     }
   },
   "modules": [
@@ -84,7 +84,8 @@
         "Erdos249257.TotientCarryKernelRigidity",
         "Erdos249257.PivotAntiReconstruction",
         "Erdos249257.LcmFactorIdealPulseObstruction",
-        "Erdos249257.SupportSunflowerDichotomy"
+        "Erdos249257.SupportSunflowerDichotomy",
+        "Erdos249257.CompositeDilationDefect"
       ],
       "declaration_count": 0,
       "kind_counts": {}
@@ -200,6 +201,19 @@
         "lemma": 275,
         "structure": 1,
         "theorem": 512
+      }
+    },
+    {
+      "id": "Erdos249257.CompositeDilationDefect",
+      "path": "Erdos249257/CompositeDilationDefect.lean",
+      "imports": [
+        "Erdos249257.SupportDilationDifferences",
+        "Erdos249257.SupportSunflowerDichotomy"
+      ],
+      "declaration_count": 8,
+      "kind_counts": {
+        "def": 1,
+        "theorem": 7
       }
     },
     {
@@ -17783,6 +17797,100 @@
       "generated_certificate": false,
       "claim_ids": [],
       "docstring": "**Seed-lift**: a small seed menu firing at its own floor inflates to every supermenu at every deeper depth (depth monotonicity up, menu monotonicity out). For supply it suffices that some prefix seed fires at its floor for arbitrarily large `t`."
+    },
+    {
+      "id": "Erdos249257/CompositeDilationDefect.lean:21:compositeDilationDefect",
+      "name": "compositeDilationDefect",
+      "kind": "def",
+      "module": "Erdos249257/CompositeDilationDefect.lean",
+      "line": 21,
+      "signature": "noncomputable def compositeDilationDefect (A : Set ℕ) (a x : ℕ) : ℕ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Support divisors created by multiplication by `a`, excluding the distinguished divisor `a` itself."
+    },
+    {
+      "id": "Erdos249257/CompositeDilationDefect.lean:30:supportCoeff_mul_eq_add_defect",
+      "name": "supportCoeff_mul_eq_add_defect",
+      "kind": "theorem",
+      "module": "Erdos249257/CompositeDilationDefect.lean",
+      "line": 30,
+      "signature": "theorem supportCoeff_mul_eq_add_defect (A : Set ℕ) {a x : ℕ} (ha : a ∈ A) (ha0 : 0 < a) (hx0 : 0 < x) : supportCoeff A (a * x) = supportCoeff A x + (if a ∣ x then 0 else 1) + compositeDilationDefect A a x",
+      "generated_certificate": false,
+      "claim_ids": [
+        "composite_dilation_defect_identity"
+      ],
+      "docstring": "Exact composite replacement for the prime-dilation identity. The new support divisors split into the distinguished member `a` (when it was not already present at `x`) and the composite dilation defect."
+    },
+    {
+      "id": "Erdos249257/CompositeDilationDefect.lean:103:compositeDilationDefect_eq_zero_of_prime_support",
+      "name": "compositeDilationDefect_eq_zero_of_prime_support",
+      "kind": "theorem",
+      "module": "Erdos249257/CompositeDilationDefect.lean",
+      "line": 103,
+      "signature": "theorem compositeDilationDefect_eq_zero_of_prime_support (A : Set ℕ) {p x : ℕ} (hp : p.Prime) (hAprime : ∀ d ∈ A, d.Prime) : compositeDilationDefect A p x = 0",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "On a support consisting only of primes, no composite dilation defect can survive. Thus the composite identity specializes exactly to the familiar prime-support formula."
+    },
+    {
+      "id": "Erdos249257/CompositeDilationDefect.lean:119:supportCoeff_mul_prime_support",
+      "name": "supportCoeff_mul_prime_support",
+      "kind": "theorem",
+      "module": "Erdos249257/CompositeDilationDefect.lean",
+      "line": 119,
+      "signature": "theorem supportCoeff_mul_prime_support (A : Set ℕ) {p x : ℕ} (hp : p.Prime) (hpA : p ∈ A) (hx0 : 0 < x) (hAprime : ∀ d ∈ A, d.Prime) : supportCoeff A (p * x) = supportCoeff A x + (if p ∣ x then 0 else 1)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Prime-support specialization of `supportCoeff_mul_eq_add_defect`."
+    },
+    {
+      "id": "Erdos249257/CompositeDilationDefect.lean:133:mem_compositeDilationDefect_bouquet_imp_exceptional_or_petal_dvd",
+      "name": "mem_compositeDilationDefect_bouquet_imp_exceptional_or_petal_dvd",
+      "kind": "theorem",
+      "module": "Erdos249257/CompositeDilationDefect.lean",
+      "line": 133,
+      "signature": "theorem mem_compositeDilationDefect_bouquet_imp_exceptional_or_petal_dvd {A : Set ℕ} (hB : OrthogonalPetalBouquet A) (i x d : ℕ) (hdiv : d ∣ hB.ray i * x) (hdA : d ∈ A) (hdne : d ≠ hB.ray i) : d ∈ hB.exceptional ∨ ∃ j : ℕ, j ≠ i ∧ d = hB.ray j ∧ hB.petal j ∣ x",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Every individual bouquet defect is a local signed cost. It is either an exceptional finite-core channel, or it comes from a unique foreign ray whose petal already divides the undilated argument. This is the pointwise engine behind the bound by `exceptional.card + supportCoeff (Set.range petal) x`; it makes no appeal to lower-rank irrationality."
+    },
+    {
+      "id": "Erdos249257/CompositeDilationDefect.lean:151:compositeDilationDefect_le_exceptional_add_petalCoeff",
+      "name": "compositeDilationDefect_le_exceptional_add_petalCoeff",
+      "kind": "theorem",
+      "module": "Erdos249257/CompositeDilationDefect.lean",
+      "line": 151,
+      "signature": "theorem compositeDilationDefect_le_exceptional_add_petalCoeff {A : Set ℕ} (hB : OrthogonalPetalBouquet A) (i x : ℕ) (hx : 0 < x) : compositeDilationDefect A (hB.ray i) x ≤ hB.exceptional.card + supportCoeff (Set.range hB.petal) x",
+      "generated_certificate": false,
+      "claim_ids": [
+        "composite_dilation_defect_identity"
+      ],
+      "docstring": "Cardinal form of the local bouquet defect budget. Exceptional channels cost at most the finite frame cardinality. Every remaining defect injects, via its unique ray index, into a petal divisor of `x`."
+    },
+    {
+      "id": "Erdos249257/CompositeDilationDefect.lean:218:compositeDilationDefect_two_six_fixture",
+      "name": "compositeDilationDefect_two_six_fixture",
+      "kind": "theorem",
+      "module": "Erdos249257/CompositeDilationDefect.lean",
+      "line": 218,
+      "signature": "theorem compositeDilationDefect_two_six_fixture : compositeDilationDefect ({2, 6} : Set ℕ) 6 1 = 1",
+      "generated_certificate": false,
+      "claim_ids": [
+        "composite_dilation_defect_identity"
+      ],
+      "docstring": "The smallest composite-defect witness: multiplying by `6` creates both the distinguished support member `6` and the lower-rank support divisor `2`."
+    },
+    {
+      "id": "Erdos249257/CompositeDilationDefect.lean:224:supportCoeff_mul_eq_add_defect_two_six_fixture",
+      "name": "supportCoeff_mul_eq_add_defect_two_six_fixture",
+      "kind": "theorem",
+      "module": "Erdos249257/CompositeDilationDefect.lean",
+      "line": 224,
+      "signature": "theorem supportCoeff_mul_eq_add_defect_two_six_fixture : supportCoeff ({2, 6} : Set ℕ) (6 * 1) = supportCoeff ({2, 6} : Set ℕ) 1 + 1 + compositeDilationDefect ({2, 6} : Set ℕ) 6 1",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The exact identity on the same fixture records the extra defect term."
     },
     {
       "id": "Erdos249257/CurvatureCarry.lean:27:curvatureTail",

@@ -308,6 +308,15 @@
           ]
         },
         {
+          "id": "Erdos249257.CompositeDilationDefect",
+          "path": "Erdos249257/CompositeDilationDefect.lean",
+          "role": "Composite support-dilation defect identity",
+          "imports": [
+            "Erdos249257.SupportDilationDifferences",
+            "Erdos249257.SupportSunflowerDichotomy"
+          ]
+        },
+        {
           "id": "Erdos249257.CurvatureCarry",
           "path": "Erdos249257/CurvatureCarry.lean",
           "role": "Lean proof module",
@@ -5212,6 +5221,11 @@
           }
         },
         {
+          "from": "composite_dilation_defect_identity",
+          "relation": "builds_on",
+          "to": "orthogonal_petal_sunflower_reduction"
+        },
+        {
           "from": "denominator_exclusion",
           "relation": "advances_open_target",
           "to": "erdos_249",
@@ -5485,7 +5499,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 1143
+        "line": 1157
       }
     },
     {
@@ -5496,7 +5510,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 1152
+        "line": 1166
       }
     },
     {
@@ -5507,7 +5521,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 1159
+        "line": 1173
       }
     }
   ],
@@ -5595,6 +5609,31 @@
           "name": "alternatingPrimeSquareSupport_cardFactors_eq_three",
           "module": "Erdos249257/SupportSunflowerDichotomy.lean",
           "line": 343
+        }
+      ]
+    },
+    {
+      "id": "composite_dilation_defect_identity",
+      "label": "Composite dilation defect identity",
+      "status": "proved here",
+      "statement": "For every positive support element a and positive x, the divisor-count coefficient at a·x is the coefficient at x, plus the distinguished new divisor when a does not divide x, plus an exact finite composite-dilation defect. For a finite-core orthogonal-petal bouquet, the ray defect is bounded by the finite exceptional-frame cardinality plus the petal-support divisor count. This local identity supplies no correlation estimate, tail selector, or irrationality theorem.",
+      "paper_label": "res:compositedefect",
+      "readme_headline": false,
+      "declarations": [
+        {
+          "name": "supportCoeff_mul_eq_add_defect",
+          "module": "Erdos249257/CompositeDilationDefect.lean",
+          "line": 30
+        },
+        {
+          "name": "compositeDilationDefect_le_exceptional_add_petalCoeff",
+          "module": "Erdos249257/CompositeDilationDefect.lean",
+          "line": 151
+        },
+        {
+          "name": "compositeDilationDefect_two_six_fixture",
+          "module": "Erdos249257/CompositeDilationDefect.lean",
+          "line": 218
         }
       ]
     },

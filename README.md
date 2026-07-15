@@ -27,11 +27,11 @@ there rather than implied by the release tag.
 
 | Checked surface | Scale |
 |---|---:|
-| Lean modules | 556 |
-| Lean declarations | 6,865 |
-| Theorem-like declarations | 6,214 |
+| Lean modules | 557 |
+| Lean declarations | 6,873 |
+| Theorem-like declarations | 6,221 |
 | Generated certificate declarations | 1,681 |
-| Principal claim-to-Lean links | 100 |
+| Principal claim-to-Lean links | 103 |
 | Exact remaining open propositions | 3 |
 
 These are generated navigation counts, not a claim that every declaration is a
@@ -137,6 +137,10 @@ time; its explanation is not proof authority.
   forced-carry certificates and hence irrationality at base 2. The selector is
   not proved, so this is a reduction rather than a new unconditional support
   family.
+- **A composite-dilation correction.** The public source gives the exact
+  finite defect when a composite support element dilates a divisor-count
+  coefficient, together with a bouquet-local defect bound. It is a local
+  identity, not a correlation estimate or irrationality result.
 - **An LCM factor-ideal no-go.** A synthetic affine carry can satisfy the
   homogeneous LCM factor ideal, the stated whole-ray anchors, and every finite
   integer shift-polynomial test while remaining a strict survivor. This rules
