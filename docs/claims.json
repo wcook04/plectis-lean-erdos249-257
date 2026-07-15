@@ -359,12 +359,30 @@
           ]
         },
         {
+          "id": "Erdos249257.DiagonalFlexibleOddWindowAffine",
+          "path": "Erdos249257/DiagonalFlexibleOddWindowAffine.lean",
+          "role": "Lean proof module",
+          "imports": [
+            "Erdos249257.DiagonalFlexibleOddWindowSupply"
+          ]
+        },
+        {
+          "id": "Erdos249257.DiagonalFlexibleOddWindowSupply",
+          "path": "Erdos249257/DiagonalFlexibleOddWindowSupply.lean",
+          "role": "Lean proof module",
+          "imports": [
+            "Erdos249257.DiagonalFreshLossBridge"
+          ]
+        },
+        {
           "id": "Erdos249257.DiagonalFreshLossBridge",
           "path": "Erdos249257/DiagonalFreshLossBridge.lean",
           "role": "Fresh-loss projection and suffix-supply reduction",
           "imports": [
             "Erdos249257.DiagonalPincerDecomposition",
-            "Erdos249257.LcmConeNonflat"
+            "Erdos249257.LcmConeNonflat",
+            "Erdos249257.LcmFactorIdealPulseObstruction",
+            "Erdos249257.RepunitMobiusNumerator"
           ]
         },
         {
@@ -6023,7 +6041,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 1662
+        "line": 1679
       }
     },
     {
@@ -6034,7 +6052,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 1671
+        "line": 1688
       }
     },
     {
@@ -6045,7 +6063,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 1678
+        "line": 1695
       }
     }
   ],
@@ -7238,12 +7256,12 @@
         {
           "name": "diagonalFreshLossResidueCert_iff_projectionCert",
           "module": "Erdos249257/DiagonalFreshLossBridge.lean",
-          "line": 57
+          "line": 61
         },
         {
           "name": "irrational_totientSeries_of_diagonalFreshLossProjectionSupply",
           "module": "Erdos249257/DiagonalFreshLossBridge.lean",
-          "line": 187
+          "line": 191
         }
       ]
     },
@@ -7272,6 +7290,49 @@
           "name": "oldFivePoint_sub_secondBranchAdverseDeficit_le_actual",
           "module": "Erdos249257/FreshPrimeDeficitDecomposition.lean",
           "line": 269
+        }
+      ]
+    },
+    {
+      "id": "flexible_odd_window_reduction",
+      "label": "Flexible three-rank odd-window reduction",
+      "status": "conditional reduction",
+      "statement": "At an analytically admissible odd power-of-two rank, centrality in any one of the canonical odd rank or its next two base-four successors supplies the existing adjacent-suffix gap interface and hence irrationality. The remaining assertion is a cofinal three-rank band supply; no such supply is proved.",
+      "remaining_open_proposition_ids": [
+        "remaining_open.unbounded_certificate_supply"
+      ],
+      "paper_label": "res:flexibleoddwindow",
+      "readme_headline": false,
+      "declarations": [
+        {
+          "name": "diagonalAdjacentSuffixGapSupply_of_powerTwoOddGuardThreeRankBand",
+          "module": "Erdos249257/DiagonalFlexibleOddWindowSupply.lean",
+          "line": 93
+        },
+        {
+          "name": "irrational_totientSeries_of_powerTwoOddGuardThreeRankBandSupply",
+          "module": "Erdos249257/DiagonalFlexibleOddWindowSupply.lean",
+          "line": 136
+        }
+      ]
+    },
+    {
+      "id": "flexible_odd_window_affine_frontier",
+      "label": "Affine three-scale frontier for the flexible odd window",
+      "status": "conditional reduction",
+      "statement": "Under the stated short-correction bounds, the three half-word central-band predicates are exactly a three-scale affine escape disjunction. A uniform correction envelope alone cannot force that escape, as a zero-start affine orbit remains inside every scaled edge tube. Thus arithmetic state-correction correlation remains required.",
+      "paper_label": "res:flexibleoddaffine",
+      "readme_headline": false,
+      "declarations": [
+        {
+          "name": "zeroAffineOrbit_stays_in_scaled_edge",
+          "module": "Erdos249257/DiagonalFlexibleOddWindowAffine.lean",
+          "line": 225
+        },
+        {
+          "name": "threeRankBandAt_iff_threeScaleAffineEscapeAt_of_shortCorrections",
+          "module": "Erdos249257/DiagonalFlexibleOddWindowAffine.lean",
+          "line": 236
         }
       ]
     },
@@ -7340,17 +7401,17 @@
         {
           "name": "canonicalAdjacentSuffixCentral_iff_slack_nonneg",
           "module": "Erdos249257/DiagonalFreshLossBridge.lean",
-          "line": 619
+          "line": 2469
         },
         {
           "name": "canonicalAdjacentSuffixJumpCentralSupply_iff_slackSupply",
           "module": "Erdos249257/DiagonalFreshLossBridge.lean",
-          "line": 636
+          "line": 2559
         },
         {
           "name": "irrational_totientSeries_of_canonicalAdjacentSuffixJumpSlackSupply",
           "module": "Erdos249257/DiagonalFreshLossBridge.lean",
-          "line": 710
+          "line": 2731
         }
       ]
     },

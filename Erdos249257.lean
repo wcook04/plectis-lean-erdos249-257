@@ -101,3 +101,5 @@ import Erdos249257.PowerTwoBitLift
 import Erdos249257.TerminalOnlyScaledVanishing
 import Erdos249257.Totient827ParitySocketCeiling
 import Erdos249257.HalfCylinderProducerLowerBound
+import Erdos249257.DiagonalFlexibleOddWindowAffine
+import Erdos249257.DiagonalFlexibleOddWindowSupply

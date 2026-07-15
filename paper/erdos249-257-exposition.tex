@@ -1297,11 +1297,28 @@ unbounded projection supply, or either stronger adjacent-suffix supply stated
 in the formal development, implies irrationality of $S$.
 \end{corollary}
 \noindent Formalised:
-\lref{DiagonalFreshLossBridge.lean}{57}{diagonalFreshLossResidueCert_iff_projectionCert}
+\lref{DiagonalFreshLossBridge.lean}{61}{diagonalFreshLossResidueCert_iff_projectionCert}
 and
-\lref{DiagonalFreshLossBridge.lean}{187}{irrational_totientSeries_of_diagonalFreshLossProjectionSupply}.
+\lref{DiagonalFreshLossBridge.lean}{191}{irrational_totientSeries_of_diagonalFreshLossProjectionSupply}.
 The development proves finite fixtures for this bridge but does not assert an
 unbounded projection or suffix supply.
+
+\paragraph{Flexible odd three-rank window.}\label{res:flexibleoddwindow}
+At an analytically admissible odd power-of-two rank, centrality at any one of
+the canonical odd rank or its next two base-four successors yields the landed
+adjacent-suffix gap interface,
+\lref{DiagonalFlexibleOddWindowSupply.lean}{93}{diagonalAdjacentSuffixGapSupply_of_powerTwoOddGuardThreeRankBand}.
+Thus a cofinal three-rank band supply implies irrationality,
+\lrefx{DiagonalFlexibleOddWindowSupply.lean}{136}{irrational_totientSeries_of_powerTwoOddGuardThreeRankBandSupply};
+that supply is not proved.
+
+\paragraph{Affine frontier for that window.}\label{res:flexibleoddaffine}
+With the stated short-correction bounds, the three central-band predicates are
+equivalent to one three-scale affine escape condition,
+\lref{DiagonalFlexibleOddWindowAffine.lean}{236}{threeRankBandAt_iff_threeScaleAffineEscapeAt_of_shortCorrections}.
+A zero-start affine orbit shows that a uniform correction envelope alone does
+not force escape at any finite number of ranks,
+\lrefx{DiagonalFlexibleOddWindowAffine.lean}{225}{zeroAffineOrbit_stays_in_scaled_edge}.
 
 \paragraph{Fresh-prime deficit decomposition.}  The literal foreign channel
 also has an endpoint form suited to curvature tests.  Retain only the prime
@@ -1609,10 +1626,10 @@ If nonnegative slack occurs at arbitrarily large strict jumps
 $M_t<M_{t+1}$, then $S$ is irrational.
 \end{proposition}
 \noindent Formalised:
-\lrefx{DiagonalFreshLossBridge.lean}{619}{canonicalAdjacentSuffixCentral_iff_slack_nonneg},
-\lrefx{DiagonalFreshLossBridge.lean}{636}{canonicalAdjacentSuffixJumpCentralSupply_iff_slackSupply},
+\lrefx{DiagonalFreshLossBridge.lean}{2469}{canonicalAdjacentSuffixCentral_iff_slack_nonneg},
+\lrefx{DiagonalFreshLossBridge.lean}{2559}{canonicalAdjacentSuffixJumpCentralSupply_iff_slackSupply},
 and
-\lref{DiagonalFreshLossBridge.lean}{710}{irrational_totientSeries_of_canonicalAdjacentSuffixJumpSlackSupply}.
+\lref{DiagonalFreshLossBridge.lean}{2731}{irrational_totientSeries_of_canonicalAdjacentSuffixJumpSlackSupply}.
 The proposition is an equivalence and a conditional consumer.  It does not
 prove that $\sigma_t$ is nonnegative cofinally.
 
@@ -2175,7 +2192,7 @@ verified finite instances & \lrefx{TotientTailPeriodKiller.lean}{404}{certifiedK
 full-target diagonal reduction & \lrefx{DiagonalPincerDecomposition.lean}{215}{diagonal_int_iff_foreignDiagonalDefect_hits_fullTarget}\ (\texttt{DiagonalPincerDecomposition})\\
 squared-Mersenne enclosure & \lrefx{SquaredMersenneDiagonalEnclosure.lean}{116}{scaleDiagonalTailDifference_sub_lambertProjectedDiagonal}\ (\texttt{SquaredMersenneDiagonalEnclosure})\\
 exact Mersenne-shadow denominator & \lrefx{MersenneShadowDenominatorGrowth.lean}{147}{lcmHeight_scaledMobiusShadow_den_exact}\ (\texttt{MersenneShadowDenominatorGrowth})\\
-fresh-loss projection reduction & \lrefx{DiagonalFreshLossBridge.lean}{187}{irrational_totientSeries_of_diagonalFreshLossProjectionSupply}\ (\texttt{DiagonalFreshLossBridge})\\
+fresh-loss projection reduction & \lrefx{DiagonalFreshLossBridge.lean}{191}{irrational_totientSeries_of_diagonalFreshLossProjectionSupply}\ (\texttt{DiagonalFreshLossBridge})\\
 prime-adjunction diamond no-go & \lrefx{FullTargetPrimeAdjunctionNoGo.lean}{196}{fullTarget_primeAdjunction_diamond_iff_root}\ (\texttt{FullTargetPrimeAdjunctionNoGo})\\
 scalar-localisation height obstruction & \lrefx{AdelicHeightObstruction.lean}{23}{scalarLocalization_complement_dvd}\ (\texttt{AdelicHeightObstruction})\\
 square-CRT correction suppression & \lrefx{SquareCRTCube.lean}{198}{exists_squareCRT_clean_totient_family}\ (\texttt{SquareCRTCube})\\
