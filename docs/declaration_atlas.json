@@ -4,13 +4,13 @@
   "projection_not_authority": true,
   "proof_authority": "Lean source checked by the pinned Lean kernel",
   "argument_authority": "docs/claims.json::machine_readable_paper.argument_graph",
-  "source_fingerprint": "sha256:82cc97c94fc58e3d160f9123eff737bff0fc6377aebabff0df77dc14ac095678",
+  "source_fingerprint": "sha256:ed5affcf6ee517fc31729c63fd33adcd9edca1be2338dce72f81af81668a7014",
   "summary": {
-    "module_count": 584,
-    "declaration_count": 7551,
-    "theorem_like_count": 6750,
+    "module_count": 585,
+    "declaration_count": 7563,
+    "theorem_like_count": 6762,
     "generated_certificate_declaration_count": 1681,
-    "principal_claim_link_count": 156,
+    "principal_claim_link_count": 159,
     "kind_counts": {
       "abbrev": 6,
       "def": 770,
@@ -18,7 +18,7 @@
       "instance": 5,
       "lemma": 354,
       "structure": 17,
-      "theorem": 6396
+      "theorem": 6408
     }
   },
   "modules": [
@@ -112,7 +112,8 @@
         "Erdos249257.HalfCylinderLargestSkipInduction",
         "Erdos249257.HalfCylinderFixedTailSocket",
         "Erdos249257.HalfCylinderProducerCarrySocket",
-        "Erdos249257.HalfCylinderQuarterBandEndpoints"
+        "Erdos249257.HalfCylinderQuarterBandEndpoints",
+        "Erdos249257.HalfCylinderResetDeficitEscape"
       ],
       "declaration_count": 0,
       "kind_counts": {}
@@ -6661,6 +6662,17 @@
       "kind_counts": {
         "instance": 1,
         "theorem": 8
+      }
+    },
+    {
+      "id": "Erdos249257.HalfCylinderResetDeficitEscape",
+      "path": "Erdos249257/HalfCylinderResetDeficitEscape.lean",
+      "imports": [
+        "Erdos249257.HalfCylinderLargestSkipGap"
+      ],
+      "declaration_count": 12,
+      "kind_counts": {
+        "theorem": 12
       }
     },
     {
@@ -74419,6 +74431,140 @@
       "claim_ids": [
         "quarter_band_endpoint_cells"
       ]
+    },
+    {
+      "id": "Erdos249257/HalfCylinderResetDeficitEscape.lean:53:seamAdjacentCut_gap_eq",
+      "name": "seamAdjacentCut_gap_eq",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderResetDeficitEscape.lean",
+      "line": 53,
+      "signature": "theorem seamAdjacentCut_gap_eq {s : ℕ} (hs : 3 ≤ s) : (seamPerturbedFamily s hs).gap = 2 ^ (s + 1)",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderResetDeficitEscape.lean:56:seamAdjacentCut_terminalWeight_eq",
+      "name": "seamAdjacentCut_terminalWeight_eq",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderResetDeficitEscape.lean",
+      "line": 56,
+      "signature": "theorem seamAdjacentCut_terminalWeight_eq {s : ℕ} (hs : 5 ≤ s) : (seamAdjacentCut s hs).terminalWeight = 2 * 2 ^ (s + 1) + 4",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderResetDeficitEscape.lean:59:seamAdjacentCut_belowPulse_le",
+      "name": "seamAdjacentCut_belowPulse_le",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderResetDeficitEscape.lean",
+      "line": 59,
+      "signature": "theorem seamAdjacentCut_belowPulse_le {s : ℕ} (hs : 5 ≤ s) : (seamAdjacentCut s hs).belowPulse ≤ 2 * (s - 2)",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderResetDeficitEscape.lean:63:seamAdjacentCut_abovePulse_le",
+      "name": "seamAdjacentCut_abovePulse_le",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderResetDeficitEscape.lean",
+      "line": 63,
+      "signature": "theorem seamAdjacentCut_abovePulse_le {s : ℕ} (hs : 5 ≤ s) : (seamAdjacentCut s hs).abovePulse ≤ 2 * (s - 2)",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderResetDeficitEscape.lean:68:seamGreedy_weight_add_remainder",
+      "name": "seamGreedy_weight_add_remainder",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderResetDeficitEscape.lean",
+      "line": 68,
+      "signature": "theorem seamGreedy_weight_add_remainder {s : ℕ} (hs : 5 ≤ s) : wordWeightSum s (seamGreedyWord s).toNatWord + seamIntegerGreedyRemainder s = seamSubsetTarget s",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The greedy word weight and the greedy remainder split the target."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderResetDeficitEscape.lean:79:upperOrMiddle_of_four_mul_remainder_lt",
+      "name": "upperOrMiddle_of_four_mul_remainder_lt",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderResetDeficitEscape.lean",
+      "line": 79,
+      "signature": "theorem upperOrMiddle_of_four_mul_remainder_lt {s : ℕ} (hs : 5 ≤ s) (hsmall : 4 * seamIntegerGreedyRemainder s < 2 ^ (s + 1) + 4) : SeamGreedyUpperOrMiddleAt s hs",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A remainder strictly below a quarter of the doubled gap forces an upper-or-middle successor: the new terminal weight cannot be paid."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderResetDeficitEscape.lean:96:seamGreedy_weight_eq_largestSkipLowerWord",
+      "name": "seamGreedy_weight_eq_largestSkipLowerWord",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderResetDeficitEscape.lean",
+      "line": 96,
+      "signature": "theorem seamGreedy_weight_eq_largestSkipLowerWord {s d : ℕ} {u : Finset ℕ} (hu : ∀ e ∈ u, 2 ≤ e ∧ e < d) (hd2 : 2 ≤ d) (hds : d < s) (hsupp : seamWordSupport (seamGreedyWord s) = u ∪ Finset.Ico (d + 1) s) : wordWeightSum s (largestSkipLowerWord s d u).toNatWord = wordWeightSum s (seamGreedyWord s).toNatWord",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The greedy word has the same weight as the lower adjacent word carried by its largest-false-rank decomposition."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderResetDeficitEscape.lean:117:three_mul_remainder_lt_exactLateGap",
+      "name": "three_mul_remainder_lt_exactLateGap",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderResetDeficitEscape.lean",
+      "line": 117,
+      "signature": "theorem three_mul_remainder_lt_exactLateGap {s d : ℕ} (hs : 5 ≤ s) (hd : IsLargestFalseRank (seamGreedyWord s) d) (hlate : 2 * s < 3 * d) : 3 * seamIntegerGreedyRemainder s < 3 * 2 ^ (s + 1) + 2 * 4 ^ (s - d) + 4",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Strip invariant: at a late largest false rank the greedy remainder is strictly below the exact adjacent gap (division-free three-fold form)."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderResetDeficitEscape.lean:150:successorCarries_of_twelve_mul_remainder_ge",
+      "name": "successorCarries_of_twelve_mul_remainder_ge",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderResetDeficitEscape.lean",
+      "line": 150,
+      "signature": "theorem successorCarries_of_twelve_mul_remainder_ge {s d : ℕ} (hs : 5 ≤ s) (hd : IsLargestFalseRank (seamGreedyWord s) d) (hlate : 2 * s < 3 * d) (hbig : 4 * (3 * 2 ^ (s + 1) + 2 * 4 ^ (s - d) + 4) + 3 * (2 * (s - 2)) ≤ 12 * seamIntegerGreedyRemainder s + 3 * 2 ^ (s + 1)) : (seamAdjacentCut s hs).successorCarries",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Carry threshold: once twelve times the remainder reaches the explicit gap-and-pulse budget, the successor carries into the upper word."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderResetDeficitEscape.lean:200:rightBranch_remainder_window",
+      "name": "rightBranch_remainder_window",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderResetDeficitEscape.lean",
+      "line": 200,
+      "signature": "theorem rightBranch_remainder_window {s d : ℕ} (hs : 5 ≤ s) (hd : IsLargestFalseRank (seamGreedyWord s) d) (hlate : 2 * s < 3 * d) (hR : ¬ SeamGreedyUpperOrMiddleAt s hs) : 2 ^ (s + 1) + 4 ≤ 4 * seamIntegerGreedyRemainder s ∧ 12 * seamIntegerGreedyRemainder s + 3 * 2 ^ (s + 1) < 4 * (3 * 2 ^ (s + 1) + 2 * 4 ^ (s - d) + 4) + 3 * (2 * (s - 2))",
+      "generated_certificate": false,
+      "claim_ids": [
+        "reset_deficit_escape_geometry"
+      ],
+      "docstring": "A right branch at a late row pins the greedy remainder into one explicit interval: above the quarter point, and strictly below the carry threshold. At the boundary cells `3*d ∈ {2*s+1, 2*s+2}` the emptiness of this interval for the actual orbit is exactly the remaining socket."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderResetDeficitEscape.lean:218:rightBranch_remainder_succ_eq",
+      "name": "rightBranch_remainder_succ_eq",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderResetDeficitEscape.lean",
+      "line": 218,
+      "signature": "theorem rightBranch_remainder_succ_eq {s : ℕ} (hs : 5 ≤ s) (hR : ¬ SeamGreedyUpperOrMiddleAt s hs) : seamIntegerGreedyRemainder (s + 1) + 2 ^ (s + 1) + (seamAdjacentCut s hs).belowPulse + 4 = 4 * seamIntegerGreedyRemainder s",
+      "generated_certificate": false,
+      "claim_ids": [
+        "reset_deficit_escape_geometry"
+      ],
+      "docstring": "Exact right-branch remainder recurrence."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderResetDeficitEscape.lean:261:upperOrMiddle_within_of_two_pow_deficit",
+      "name": "upperOrMiddle_within_of_two_pow_deficit",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderResetDeficitEscape.lean",
+      "line": 261,
+      "signature": "theorem upperOrMiddle_within_of_two_pow_deficit : ∀ k s : ℕ, 5 ≤ s → seamIntegerGreedyRemainder s ≤ 2 ^ s → 2 ^ s ≤ 2 ^ k * (2 ^ s - seamIntegerGreedyRemainder s) → ∃ t : ℕ, s ≤ t ∧ t ≤ s + k ∧ ∃ h : 5 ≤ t, SeamGreedyUpperOrMiddleAt t h",
+      "generated_certificate": false,
+      "claim_ids": [
+        "reset_deficit_escape_geometry"
+      ],
+      "docstring": "Deficit-side run law: once the doubled-scale deficit `2^s - rem(s)` reaches `2^(s-k)` (stated multiplicatively to avoid truncated subtraction in the exponent), an upper-or-middle branch fires within `k` rows. Contrapositive: an all-right run of length `k` from row `s` forces `rem(s)` within `2^(s-k)` of the half-point `2^s`."
     },
     {
       "id": "Erdos249257/HalfCylinderSeamLimit.lean:25:seamGreedyFiniteValue",

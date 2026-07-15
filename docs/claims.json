@@ -5078,6 +5078,14 @@
           ]
         },
         {
+          "id": "Erdos249257.HalfCylinderResetDeficitEscape",
+          "path": "Erdos249257/HalfCylinderResetDeficitEscape.lean",
+          "role": "Reset-deficit escape geometry for the largest-skip crossing",
+          "imports": [
+            "Erdos249257.HalfCylinderLargestSkipGap"
+          ]
+        },
+        {
           "id": "Erdos249257.HalfCylinderSeamLimit",
           "path": "Erdos249257/HalfCylinderSeamLimit.lean",
           "role": "Seam-limit reduction for the half target",
@@ -5547,6 +5555,11 @@
           "to": "concrete_seam_adapter"
         },
         {
+          "from": "reset_deficit_escape_geometry",
+          "relation": "builds_on",
+          "to": "largest_skip_gap_propagation"
+        },
+        {
           "from": "denominator_exclusion",
           "relation": "advances_open_target",
           "to": "erdos_249",
@@ -5796,7 +5809,7 @@
     "lean_toolchain": "leanprover/lean4:v4.29.1",
     "repository": "https://github.com/wcook04/plectis-lean-erdos249-257",
     "formal_source": {
-      "ref": "7a710d30d2dc43324841d436a65b23e9604aa1e6",
+      "ref": "c0b65494d2ef1ea071cc2d3549d079b3b5705a8d",
       "ref_kind": "commit",
       "publication_state": "committed_checkpoint_pending_remote_publication",
       "relationship_to_last_tag": "post_tag_checkpoint"
@@ -5820,7 +5833,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 1404
+        "line": 1417
       }
     },
     {
@@ -5831,7 +5844,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 1413
+        "line": 1426
       }
     },
     {
@@ -5842,7 +5855,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 1420
+        "line": 1433
       }
     }
   ],
@@ -6464,6 +6477,34 @@
           "name": "seamAdjacentCut_rightNextUpperFailure_iff_pulseCell",
           "module": "Erdos249257/HalfCylinderQuarterBandEndpoints.lean",
           "line": 175
+        }
+      ]
+    },
+    {
+      "id": "reset_deficit_escape_geometry",
+      "label": "Reset-deficit escape geometry for the largest-skip crossing",
+      "status": "conditional reduction",
+      "statement": "A right branch at a late largest skipped rank pins the integer-greedy remainder into an explicit interval and satisfies an exact affine recurrence. A doubled-scale deficit forces an upper-or-middle branch within the stated run length. The global anti-concentration needed to exclude the pinned interval is not proved.",
+      "remaining_open_proposition_ids": [
+        "remaining_open.universal_257_all_infinite_supports"
+      ],
+      "paper_label": "res:resetdeficit",
+      "readme_headline": false,
+      "declarations": [
+        {
+          "name": "rightBranch_remainder_window",
+          "module": "Erdos249257/HalfCylinderResetDeficitEscape.lean",
+          "line": 200
+        },
+        {
+          "name": "rightBranch_remainder_succ_eq",
+          "module": "Erdos249257/HalfCylinderResetDeficitEscape.lean",
+          "line": 218
+        },
+        {
+          "name": "upperOrMiddle_within_of_two_pow_deficit",
+          "module": "Erdos249257/HalfCylinderResetDeficitEscape.lean",
+          "line": 261
         }
       ]
     },
