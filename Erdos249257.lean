@@ -110,3 +110,4 @@ import Erdos249257.DiagonalPincerCertificatesT53
 import Erdos249257.DiagonalPincerCertificatesT59
 import Erdos249257.DiagonalPincerCertificatesT61
 import Erdos249257.DiagonalPincerCertificateT64Endpoint
+import Erdos249257.DiagonalPincerCertificatesT64

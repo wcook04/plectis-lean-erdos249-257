@@ -11,19 +11,19 @@
     "formal_source_publication_state": "committed_checkpoint_pending_remote_publication"
   },
   "scale": {
-    "module_count": 607,
-    "declaration_count": 11550,
-    "theorem_like_count": 10621,
+    "module_count": 608,
+    "declaration_count": 11966,
+    "theorem_like_count": 11035,
     "generated_certificate_declaration_count": 2923,
     "principal_claim_link_count": 201,
     "kind_counts": {
       "abbrev": 6,
-      "def": 893,
+      "def": 895,
       "inductive": 4,
       "instance": 5,
       "lemma": 354,
       "structure": 21,
-      "theorem": 10267
+      "theorem": 10681
     }
   },
   "status_taxonomy": {
@@ -227,7 +227,7 @@
     {
       "id": "certified_kill_instances",
       "status": "verified finite instance",
-      "statement": "Kernel-checked certified kills for small periods and at 27 explicit lcm-diagonal scales through t = 61, plus finite certificate shards, each discharged by decide.",
+      "statement": "Kernel-checked certified kills for small periods and at 28 explicit lcm-diagonal scales through t = 64, plus finite certificate shards, each discharged by decide.",
       "paper_label": "res:deposits",
       "declarations": [
         {
@@ -251,9 +251,9 @@
           "line": 246
         },
         {
-          "name": "certifiedKill_diagonal_all_imported_through_t61",
-          "module": "Erdos249257/DiagonalPincerCertificatesT61.lean",
-          "line": 1974
+          "name": "certifiedKill_diagonal_all_imported_through_t64",
+          "module": "Erdos249257/DiagonalPincerCertificatesT64.lean",
+          "line": 1967
         }
       ],
       "remaining_open_proposition_ids": [
