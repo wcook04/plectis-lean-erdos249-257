@@ -5657,6 +5657,14 @@
           ]
         },
         {
+          "id": "Erdos249257.SuffixCylinderProfiledAutoStep",
+          "path": "Erdos249257/SuffixCylinderProfiledAutoStep.lean",
+          "role": "Lean proof module",
+          "imports": [
+            "Erdos249257.SuffixCylinderProfiledPromotionAdjacency"
+          ]
+        },
+        {
           "id": "Erdos249257.SuffixCylinderProfiledGap",
           "path": "Erdos249257/SuffixCylinderProfiledGap.lean",
           "role": "Lean proof module",
@@ -6283,7 +6291,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 1799
+        "line": 1803
       }
     },
     {
@@ -6294,7 +6302,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 1808
+        "line": 1812
       }
     },
     {
@@ -6305,7 +6313,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 1815
+        "line": 1819
       }
     }
   ],
@@ -7260,6 +7268,11 @@
           "name": "ProfiledGapStage.promoteCutoff_hasAdjacentPrefixes",
           "module": "Erdos249257/SuffixCylinderProfiledPromotionAdjacency.lean",
           "line": 65
+        },
+        {
+          "name": "ProfiledGapStage.promoteThenAdvance_hasAdjacentPrefixes",
+          "module": "Erdos249257/SuffixCylinderProfiledAutoStep.lean",
+          "line": 110
         }
       ]
     },
