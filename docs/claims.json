@@ -5013,6 +5013,14 @@
           ]
         },
         {
+          "id": "Erdos249257.HalfCylinderHalfMembershipClassification",
+          "path": "Erdos249257/HalfCylinderHalfMembershipClassification.lean",
+          "role": "Positive half-membership classification in seam coordinates",
+          "imports": [
+            "Erdos249257.HalfCylinderFatalGapRightTail"
+          ]
+        },
+        {
           "id": "Erdos249257.HalfCylinderIntegerGreedy",
           "path": "Erdos249257/HalfCylinderIntegerGreedy.lean",
           "role": "Integer-greedy first-wrap seam reduction",
@@ -5455,6 +5463,11 @@
           "to": "concrete_seam_adapter"
         },
         {
+          "from": "half_membership_seam_classification",
+          "relation": "builds_on",
+          "to": "fatal_gap_right_tail_classification"
+        },
+        {
           "from": "denominator_exclusion",
           "relation": "advances_open_target",
           "to": "erdos_249",
@@ -5728,7 +5741,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 1311
+        "line": 1325
       }
     },
     {
@@ -5739,7 +5752,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 1320
+        "line": 1334
       }
     },
     {
@@ -5750,7 +5763,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 1327
+        "line": 1341
       }
     }
   ],
@@ -6191,6 +6204,34 @@
           "name": "seamGreedyEventuallyRight_iff_exists_isLastHalfGreedySkip",
           "module": "Erdos249257/HalfCylinderFatalGapRightTail.lean",
           "line": 802
+        }
+      ]
+    },
+    {
+      "id": "half_membership_seam_classification",
+      "label": "Positive half-membership classification in seam coordinates",
+      "status": "proved here",
+      "statement": "Membership of 1/2 in the Mersenne achievement set is equivalent to false successor terminal bits beyond every bound, to a cofinal sequence of such bits, and to a cofinal integer-seam sequence whose skipped ranks tend to infinity. These equivalences do not establish that any positive producer exists.",
+      "remaining_open_proposition_ids": [
+        "remaining_open.universal_257_all_infinite_supports"
+      ],
+      "paper_label": "res:halfmembership",
+      "readme_headline": false,
+      "declarations": [
+        {
+          "name": "half_mem_mersenneAchievementSet_iff_unboundedTerminalFalse",
+          "module": "Erdos249257/HalfCylinderHalfMembershipClassification.lean",
+          "line": 126
+        },
+        {
+          "name": "half_mem_mersenneAchievementSet_iff_cofinalTerminalFalse",
+          "module": "Erdos249257/HalfCylinderHalfMembershipClassification.lean",
+          "line": 203
+        },
+        {
+          "name": "half_mem_mersenneAchievementSet_iff_exists_unboundedSkippedRanksAlong",
+          "module": "Erdos249257/HalfCylinderHalfMembershipClassification.lean",
+          "line": 213
         }
       ]
     },

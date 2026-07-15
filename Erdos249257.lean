@@ -79,3 +79,4 @@ import Erdos249257.HalfCylinderSeamLimit
 import Erdos249257.HalfCylinderSkippedRankLimit
 import Erdos249257.HalfCylinderFalseBitSupply
 import Erdos249257.HalfCylinderFatalGapRightTail
+import Erdos249257.HalfCylinderHalfMembershipClassification

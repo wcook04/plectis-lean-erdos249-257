@@ -675,6 +675,20 @@ Thus this module gives an exact classification of the nonmembership branch.
 It neither decides whether $1/2$ belongs to the achievement set nor proves
 the universal Erd\H{o}s~\#257 statement.
 
+\subsection{Positive half-membership classification}\label{res:halfmembership}
+
+The complementary branch has an equally exact seam formulation.  Membership
+of $1/2$ in the Mersenne achievement set is equivalent to false successor
+terminal bits beyond every bound,
+\lref{HalfCylinderHalfMembershipClassification.lean}{126}{half_mem_mersenneAchievementSet_iff_unboundedTerminalFalse};
+equivalently, it is equivalent to a cofinal sequence of such false terminals,
+\lrefx{HalfCylinderHalfMembershipClassification.lean}{203}{half_mem_mersenneAchievementSet_iff_cofinalTerminalFalse}.
+It is also equivalent to a cofinal integer-seam sequence with skipped ranks
+tending to infinity,
+\lrefx{HalfCylinderHalfMembershipClassification.lean}{213}{half_mem_mersenneAchievementSet_iff_exists_unboundedSkippedRanksAlong}.
+These equivalences isolate the positive arithmetic producer; they do not
+establish that the producer exists.
+
 \subsection{What stays open}
 
 The universal Erd\H{o}s \#257 statement, irrationality of $\sum_{n\in A}1/(2^n-1)$

@@ -4,21 +4,21 @@
   "projection_not_authority": true,
   "proof_authority": "Lean source checked by the pinned Lean kernel",
   "argument_authority": "docs/claims.json::machine_readable_paper.argument_graph",
-  "source_fingerprint": "sha256:a71f95a963cf3f850bb6f68ad018428e668124fe530a88d13d147bbaa198bb45",
+  "source_fingerprint": "sha256:a528a04d7961c8aff99e425bfca630329d6dcef7d199a75fdccfe4ac68ddd988",
   "summary": {
-    "module_count": 577,
-    "declaration_count": 7477,
-    "theorem_like_count": 6687,
+    "module_count": 578,
+    "declaration_count": 7494,
+    "theorem_like_count": 6700,
     "generated_certificate_declaration_count": 1681,
-    "principal_claim_link_count": 138,
+    "principal_claim_link_count": 141,
     "kind_counts": {
       "abbrev": 6,
-      "def": 760,
+      "def": 764,
       "inductive": 3,
       "instance": 4,
       "lemma": 354,
       "structure": 17,
-      "theorem": 6333
+      "theorem": 6346
     }
   },
   "modules": [
@@ -105,7 +105,8 @@
         "Erdos249257.HalfCylinderSeamLimit",
         "Erdos249257.HalfCylinderSkippedRankLimit",
         "Erdos249257.HalfCylinderFalseBitSupply",
-        "Erdos249257.HalfCylinderFatalGapRightTail"
+        "Erdos249257.HalfCylinderFatalGapRightTail",
+        "Erdos249257.HalfCylinderHalfMembershipClassification"
       ],
       "declaration_count": 0,
       "kind_counts": {}
@@ -6558,6 +6559,18 @@
       "kind_counts": {
         "def": 3,
         "theorem": 24
+      }
+    },
+    {
+      "id": "Erdos249257.HalfCylinderHalfMembershipClassification",
+      "path": "Erdos249257/HalfCylinderHalfMembershipClassification.lean",
+      "imports": [
+        "Erdos249257.HalfCylinderFatalGapRightTail"
+      ],
+      "declaration_count": 17,
+      "kind_counts": {
+        "def": 4,
+        "theorem": 13
       }
     },
     {
@@ -72517,6 +72530,199 @@
       "generated_certificate": false,
       "claim_ids": [],
       "docstring": "Final conditional consumer: the skip-conditioned seam escape statement is sufficient for exact half-membership."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderHalfMembershipClassification.lean:29:SeamGreedyUnboundedTerminalFalse",
+      "name": "SeamGreedyUnboundedTerminalFalse",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderHalfMembershipClassification.lean",
+      "line": 29,
+      "signature": "def SeamGreedyUnboundedTerminalFalse : Prop",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "False successor terminal bits occur beyond every requested seam row."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderHalfMembershipClassification.lean:36:SeamGreedyCofinalTerminalFalse",
+      "name": "SeamGreedyCofinalTerminalFalse",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderHalfMembershipClassification.lean",
+      "line": 36,
+      "signature": "def SeamGreedyCofinalTerminalFalse : Prop",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A cofinal sequence consists entirely of false successor terminal bits."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderHalfMembershipClassification.lean:46:SeamGreedyUpperOrMiddleAt",
+      "name": "SeamGreedyUpperOrMiddleAt",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderHalfMembershipClassification.lean",
+      "line": 46,
+      "signature": "def SeamGreedyUpperOrMiddleAt (s : ℕ) (hs : 5 ≤ s) : Prop",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The arithmetic `U/M` producer at row `s`: either the old successor carries to the upper word, or there is no carry and the new terminal weight exceeds the explicit prefix remainder."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderHalfMembershipClassification.lean:57:seamGreedy_terminal_false_iff_upperOrMiddle",
+      "name": "seamGreedy_terminal_false_iff_upperOrMiddle",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderHalfMembershipClassification.lean",
+      "line": 57,
+      "signature": "theorem seamGreedy_terminal_false_iff_upperOrMiddle (s : ℕ) (hs : 5 ≤ s) : SeamRowWord.terminal (by omega) (seamGreedyWord (s + 1)) = false ↔ SeamGreedyUpperOrMiddleAt s hs",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Exact local removal of the empirical `U/M/R` labels: a false successor terminal is equivalent to the source-level upper-or-middle arithmetic disjunction."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderHalfMembershipClassification.lean:92:SeamGreedyUnboundedUpperOrMiddle",
+      "name": "SeamGreedyUnboundedUpperOrMiddle",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderHalfMembershipClassification.lean",
+      "line": 92,
+      "signature": "def SeamGreedyUnboundedUpperOrMiddle : Prop",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Upper-or-middle arithmetic transitions occur beyond every requested row."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderHalfMembershipClassification.lean:98:unboundedTerminalFalse_iff_unboundedUpperOrMiddle",
+      "name": "unboundedTerminalFalse_iff_unboundedUpperOrMiddle",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderHalfMembershipClassification.lean",
+      "line": 98,
+      "signature": "theorem unboundedTerminalFalse_iff_unboundedUpperOrMiddle : SeamGreedyUnboundedTerminalFalse ↔ SeamGreedyUnboundedUpperOrMiddle",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The Boolean terminal producer and its exact arithmetic branch classification are equivalent beyond every bound."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderHalfMembershipClassification.lean:112:half_mem_mersenneAchievementSet_iff_not_seamGreedyEventuallyRight",
+      "name": "half_mem_mersenneAchievementSet_iff_not_seamGreedyEventuallyRight",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderHalfMembershipClassification.lean",
+      "line": 112,
+      "signature": "theorem half_mem_mersenneAchievementSet_iff_not_seamGreedyEventuallyRight : (1 / 2 : ℝ) ∈ mersenneAchievementSet ↔ ¬ SeamGreedyEventuallyRight",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Half membership excludes an eventual right seam tail."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderHalfMembershipClassification.lean:126:half_mem_mersenneAchievementSet_iff_unboundedTerminalFalse",
+      "name": "half_mem_mersenneAchievementSet_iff_unboundedTerminalFalse",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderHalfMembershipClassification.lean",
+      "line": 126,
+      "signature": "theorem half_mem_mersenneAchievementSet_iff_unboundedTerminalFalse : (1 / 2 : ℝ) ∈ mersenneAchievementSet ↔ SeamGreedyUnboundedTerminalFalse",
+      "generated_certificate": false,
+      "claim_ids": [
+        "half_membership_seam_classification"
+      ],
+      "docstring": "Exact positive complement of the eventual-terminal classification: half membership is equivalent to false successor terminal bits beyond every bound."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderHalfMembershipClassification.lean:156:half_mem_mersenneAchievementSet_iff_unboundedUpperOrMiddle",
+      "name": "half_mem_mersenneAchievementSet_iff_unboundedUpperOrMiddle",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderHalfMembershipClassification.lean",
+      "line": 156,
+      "signature": "theorem half_mem_mersenneAchievementSet_iff_unboundedUpperOrMiddle : (1 / 2 : ℝ) ∈ mersenneAchievementSet ↔ SeamGreedyUnboundedUpperOrMiddle",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Strongest current arithmetic socket: half membership is exactly cofinal occurrence of the explicit upper-or-middle successor disjunction."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderHalfMembershipClassification.lean:164:unboundedTerminalFalse_iff_not_seamGreedyEventuallyRight",
+      "name": "unboundedTerminalFalse_iff_not_seamGreedyEventuallyRight",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderHalfMembershipClassification.lean",
+      "line": 164,
+      "signature": "theorem unboundedTerminalFalse_iff_not_seamGreedyEventuallyRight : SeamGreedyUnboundedTerminalFalse ↔ ¬ SeamGreedyEventuallyRight",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The unbounded-terminal predicate is precisely failure of eventual right extension."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderHalfMembershipClassification.lean:172:cofinalTerminalFalse_of_unboundedTerminalFalse",
+      "name": "cofinalTerminalFalse_of_unboundedTerminalFalse",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderHalfMembershipClassification.lean",
+      "line": 172,
+      "signature": "theorem cofinalTerminalFalse_of_unboundedTerminalFalse (hunbounded : SeamGreedyUnboundedTerminalFalse) : SeamGreedyCofinalTerminalFalse",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Choice turns the beyond-every-bound form into one cofinal false-terminal sequence."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderHalfMembershipClassification.lean:186:unboundedTerminalFalse_of_cofinalTerminalFalse",
+      "name": "unboundedTerminalFalse_of_cofinalTerminalFalse",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderHalfMembershipClassification.lean",
+      "line": 186,
+      "signature": "theorem unboundedTerminalFalse_of_cofinalTerminalFalse (hcofinal : SeamGreedyCofinalTerminalFalse) : SeamGreedyUnboundedTerminalFalse",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A cofinal false-terminal sequence is, in particular, unbounded."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderHalfMembershipClassification.lean:196:unboundedTerminalFalse_iff_cofinalTerminalFalse",
+      "name": "unboundedTerminalFalse_iff_cofinalTerminalFalse",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderHalfMembershipClassification.lean",
+      "line": 196,
+      "signature": "theorem unboundedTerminalFalse_iff_cofinalTerminalFalse : SeamGreedyUnboundedTerminalFalse ↔ SeamGreedyCofinalTerminalFalse",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The quantifier and cofinal-sequence forms of terminal-false supply are exactly equivalent."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderHalfMembershipClassification.lean:203:half_mem_mersenneAchievementSet_iff_cofinalTerminalFalse",
+      "name": "half_mem_mersenneAchievementSet_iff_cofinalTerminalFalse",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderHalfMembershipClassification.lean",
+      "line": 203,
+      "signature": "theorem half_mem_mersenneAchievementSet_iff_cofinalTerminalFalse : (1 / 2 : ℝ) ∈ mersenneAchievementSet ↔ SeamGreedyCofinalTerminalFalse",
+      "generated_certificate": false,
+      "claim_ids": [
+        "half_membership_seam_classification"
+      ],
+      "docstring": "Cofinal false successor terminals are an exact half-membership endpoint."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderHalfMembershipClassification.lean:213:half_mem_mersenneAchievementSet_iff_exists_unboundedSkippedRanksAlong",
+      "name": "half_mem_mersenneAchievementSet_iff_exists_unboundedSkippedRanksAlong",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderHalfMembershipClassification.lean",
+      "line": 213,
+      "signature": "theorem half_mem_mersenneAchievementSet_iff_exists_unboundedSkippedRanksAlong : (1 / 2 : ℝ) ∈ mersenneAchievementSet ↔ ∃ rows : ℕ → ℕ, SeamGreedyUnboundedSkippedRanksAlong rows",
+      "generated_certificate": false,
+      "claim_ids": [
+        "half_membership_seam_classification"
+      ],
+      "docstring": "Half membership is also equivalent to existence of a cofinal seam sequence whose skipped ranks themselves tend to infinity. The forward direction uses the terminal coordinate as the skipped coordinate; the reverse direction is the existing compactness consumer."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderHalfMembershipClassification.lean:228:unboundedTerminalFalse_iff_greedyMersenneSkippedSupport_infinite",
+      "name": "unboundedTerminalFalse_iff_greedyMersenneSkippedSupport_infinite",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderHalfMembershipClassification.lean",
+      "line": 228,
+      "signature": "theorem unboundedTerminalFalse_iff_greedyMersenneSkippedSupport_infinite : SeamGreedyUnboundedTerminalFalse ↔ (greedyMersenneSkippedSupport (1 / 2 : ℝ)).Infinite",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Integer-seam cofinal false terminals and infinitude of the actual real greedy skipped support are the same endpoint."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderHalfMembershipClassification.lean:235:half_mem_mersenneAchievementSet_iff_no_lastHalfGreedySkip",
+      "name": "half_mem_mersenneAchievementSet_iff_no_lastHalfGreedySkip",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderHalfMembershipClassification.lean",
+      "line": 235,
+      "signature": "theorem half_mem_mersenneAchievementSet_iff_no_lastHalfGreedySkip : (1 / 2 : ℝ) ∈ mersenneAchievementSet ↔ ¬ ∃ M : ℕ, IsLastHalfGreedySkip M",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Equivalent no-final-skip form of the positive classification."
     },
     {
       "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:25:truncatedMersenneWeight",
