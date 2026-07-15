@@ -57,6 +57,12 @@ These five modules are **not waves**. They form a shared binary-carry layer adde
 
 None of these modules claims a solution of Erdős #249 or #257. The contribution boundary is theorem-family-specific: the carry recurrence and strict-tail geometry have direct prior art (Wang–Grau Ribas; Kovač–Tao); Möbius inversion, repetend algebra, and divisor averaging are classical; the converse/rigidity, certificate-normal-form, and coupled reciprocal-mass families remain exact-source-comparison candidates. No priority claim is made.
 
+`SupportSunflowerDichotomy` is an adjacent conditional #257 route. It gives
+the exact carry conversion for finite-core orthogonal-petal bouquets and
+records an explicit alternating-core squared-prime-petal support. Its uniform
+tail-selection hypothesis is not proved, so it adds no unconditional support
+family.
+
 ## Diagonal pincer frontier (post-wave #249 band)
 
 This band refines the lcm-diagonal reduction.  Its main reading chain is
@@ -102,7 +108,7 @@ given separately in `paper/erdos249-transport-curvature.tex`.
 - `CertificateKernel.lean` (0.83 MiB, 18,950 lines, 840 declarations; 512 theorems and 275 lemmas): the assembled microkernel and headline interfaces.
 - `GeneratedCertificates.lean` (1.18 MiB, 27,728 lines, 1,174 declarations) plus 3 generated shards: finite certificate instances checked by the Lean kernel.
 - The diagonal-pincer family contains 480 isolated prime-certificate modules and 10 scale aggregators. The shards are indexed through aggregators rather than presented as separate mathematical claims.
-- Entire checked corpus: 555 modules, 6,817 declarations, 6,178 theorem-like declarations, and 1,681 generated-certificate declarations. The release gate rejects `sorry`, `admit`, custom `axiom` declarations, and `native_decide`.
+- Entire checked corpus: 556 modules, 6,865 declarations, 6,214 theorem-like declarations, and 1,681 generated-certificate declarations. The release gate rejects `sorry`, `admit`, custom `axiom` declarations, and `native_decide`.
 
 These are generated inventory facts, not mathematical claim counts. The declaration atlas
 and Lean source remain the drilldown owners.

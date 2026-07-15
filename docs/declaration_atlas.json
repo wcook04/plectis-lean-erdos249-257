@@ -4,21 +4,21 @@
   "projection_not_authority": true,
   "proof_authority": "Lean source checked by the pinned Lean kernel",
   "argument_authority": "docs/claims.json::machine_readable_paper.argument_graph",
-  "source_fingerprint": "sha256:ccfac75100342633baeb7100a62c224de11bd30eb6e297c8ea1fa72e5d5ee115",
+  "source_fingerprint": "sha256:1044e01d1676969dbea10249705dd79be8d670a0a288f56735af1a57352c257d",
   "summary": {
-    "module_count": 555,
-    "declaration_count": 6817,
-    "theorem_like_count": 6178,
+    "module_count": 556,
+    "declaration_count": 6865,
+    "theorem_like_count": 6214,
     "generated_certificate_declaration_count": 1681,
-    "principal_claim_link_count": 97,
+    "principal_claim_link_count": 100,
     "kind_counts": {
       "abbrev": 4,
-      "def": 619,
+      "def": 630,
       "inductive": 3,
       "instance": 3,
       "lemma": 354,
-      "structure": 10,
-      "theorem": 5824
+      "structure": 11,
+      "theorem": 5860
     }
   },
   "modules": [
@@ -83,7 +83,8 @@
         "Erdos249257.MobiusSignSupportNoGo",
         "Erdos249257.TotientCarryKernelRigidity",
         "Erdos249257.PivotAntiReconstruction",
-        "Erdos249257.LcmFactorIdealPulseObstruction"
+        "Erdos249257.LcmFactorIdealPulseObstruction",
+        "Erdos249257.SupportSunflowerDichotomy"
       ],
       "declaration_count": 0,
       "kind_counts": {}
@@ -6713,6 +6714,21 @@
       "kind_counts": {
         "def": 6,
         "theorem": 15
+      }
+    },
+    {
+      "id": "Erdos249257.SupportSunflowerDichotomy",
+      "path": "Erdos249257/SupportSunflowerDichotomy.lean",
+      "imports": [
+        "Erdos249257.CertificateKernel",
+        "Erdos249257.GenericTailOrbitRigidity",
+        "Erdos249257.SupportDilationDifferences"
+      ],
+      "declaration_count": 48,
+      "kind_counts": {
+        "def": 11,
+        "structure": 1,
+        "theorem": 36
       }
     },
     {
@@ -75871,6 +75887,527 @@
       "signature": "theorem iteratedDilationDifference_supportTwoThree_fixture : iteratedDilationDifference [2, 3] (supportCoeffInt supportTwoThree) 5 = 0",
       "generated_certificate": false,
       "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/SupportSunflowerDichotomy.lean:38:OrthogonalPetalBouquet",
+      "name": "OrthogonalPetalBouquet",
+      "kind": "structure",
+      "module": "Erdos249257/SupportSunflowerDichotomy.lean",
+      "line": 38,
+      "signature": "structure OrthogonalPetalBouquet (A : Set ℕ)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A finite-core orthogonal petal bouquet. Every exceptional element and every ray core is absorbed by one fixed positive integer `Q`; the residual petals are nontrivial, coprime to `Q`, globally pairwise coprime, and have summable reciprocal mass. The support equation is deliberately set-valued, so duplicate bookkeeping cannot change the Boolean divisor transform."
+    },
+    {
+      "id": "Erdos249257/SupportSunflowerDichotomy.lean:58:ray",
+      "name": "ray",
+      "kind": "def",
+      "module": "Erdos249257/SupportSunflowerDichotomy.lean",
+      "line": 58,
+      "signature": "def ray {A : Set ℕ} (hB : OrthogonalPetalBouquet A) (i : ℕ) : ℕ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The support ray attached to an index."
+    },
+    {
+      "id": "Erdos249257/SupportSunflowerDichotomy.lean:61:ray_pos",
+      "name": "ray_pos",
+      "kind": "theorem",
+      "module": "Erdos249257/SupportSunflowerDichotomy.lean",
+      "line": 61,
+      "signature": "theorem ray_pos {A : Set ℕ} (hB : OrthogonalPetalBouquet A) (i : ℕ) : 0 < hB.ray i",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/SupportSunflowerDichotomy.lean:66:ray_mem",
+      "name": "ray_mem",
+      "kind": "theorem",
+      "module": "Erdos249257/SupportSunflowerDichotomy.lean",
+      "line": 66,
+      "signature": "theorem ray_mem {A : Set ℕ} (hB : OrthogonalPetalBouquet A) (i : ℕ) : hB.ray i ∈ A",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/SupportSunflowerDichotomy.lean:80:exceptional_ne_ray",
+      "name": "exceptional_ne_ray",
+      "kind": "theorem",
+      "module": "Erdos249257/SupportSunflowerDichotomy.lean",
+      "line": 80,
+      "signature": "theorem exceptional_ne_ray {A : Set ℕ} (hB : OrthogonalPetalBouquet A) {d : ℕ} (hd : d ∈ hB.exceptional) (i : ℕ) : d ≠ hB.ray i",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Exceptional frame elements cannot coincide with a ray. Thus the support equation is automatically a disjoint decomposition, rather than requiring a redundant field in the structure."
+    },
+    {
+      "id": "Erdos249257/SupportSunflowerDichotomy.lean:96:ray_injective",
+      "name": "ray_injective",
+      "kind": "theorem",
+      "module": "Erdos249257/SupportSunflowerDichotomy.lean",
+      "line": 96,
+      "signature": "theorem ray_injective {A : Set ℕ} (hB : OrthogonalPetalBouquet A) : Function.Injective hB.ray",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Orthogonal petals force distinct support rays even when their cores can repeat."
+    },
+    {
+      "id": "Erdos249257/SupportSunflowerDichotomy.lean:112:petal_injective",
+      "name": "petal_injective",
+      "kind": "theorem",
+      "module": "Erdos249257/SupportSunflowerDichotomy.lean",
+      "line": 112,
+      "signature": "theorem petal_injective {A : Set ℕ} (hB : OrthogonalPetalBouquet A) : Function.Injective hB.petal",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/SupportSunflowerDichotomy.lean:124:rayIndex",
+      "name": "rayIndex",
+      "kind": "def",
+      "module": "Erdos249257/SupportSunflowerDichotomy.lean",
+      "line": 124,
+      "signature": "noncomputable def rayIndex {A : Set ℕ} (hB : OrthogonalPetalBouquet A) (d : ℕ) : ℕ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Canonical inverse index on the ray range; values away from the range are irrelevant."
+    },
+    {
+      "id": "Erdos249257/SupportSunflowerDichotomy.lean:129:ray_rayIndex_eq",
+      "name": "ray_rayIndex_eq",
+      "kind": "theorem",
+      "module": "Erdos249257/SupportSunflowerDichotomy.lean",
+      "line": 129,
+      "signature": "theorem ray_rayIndex_eq {A : Set ℕ} (hB : OrthogonalPetalBouquet A) {d : ℕ} (hd : d ∈ Set.range hB.ray) : hB.ray (hB.rayIndex d) = d",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/SupportSunflowerDichotomy.lean:141:petal_dvd_of_ray_dvd",
+      "name": "petal_dvd_of_ray_dvd",
+      "kind": "theorem",
+      "module": "Erdos249257/SupportSunflowerDichotomy.lean",
+      "line": 141,
+      "signature": "theorem petal_dvd_of_ray_dvd {A : Set ℕ} (hB : OrthogonalPetalBouquet A) {i j x : ℕ} (hji : j ≠ i) (hdiv : hB.ray j ∣ hB.ray i * x) : hB.petal j ∣ x",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A foreign ray that appears after dilation by a selected ray pays its own petal locally: orthogonality removes the selected ray, leaving a divisor of the undilated argument."
+    },
+    {
+      "id": "Erdos249257/SupportSunflowerDichotomy.lean:152:infinite",
+      "name": "infinite",
+      "kind": "theorem",
+      "module": "Erdos249257/SupportSunflowerDichotomy.lean",
+      "line": 152,
+      "signature": "theorem infinite {A : Set ℕ} (hB : OrthogonalPetalBouquet A) : A.Infinite",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The ray part, hence the whole bouquet support, is infinite."
+    },
+    {
+      "id": "Erdos249257/SupportSunflowerDichotomy.lean:159:frameStep",
+      "name": "frameStep",
+      "kind": "def",
+      "module": "Erdos249257/SupportSunflowerDichotomy.lean",
+      "line": 159,
+      "signature": "def frameStep {A : Set ℕ} (hB : OrthogonalPetalBouquet A) (F : Finset ℕ) : ℕ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The selected frame step. It absorbs the fixed core and the petals at the finitely many promoted ray indices."
+    },
+    {
+      "id": "Erdos249257/SupportSunflowerDichotomy.lean:163:core_dvd_frameStep",
+      "name": "core_dvd_frameStep",
+      "kind": "theorem",
+      "module": "Erdos249257/SupportSunflowerDichotomy.lean",
+      "line": 163,
+      "signature": "theorem core_dvd_frameStep {A : Set ℕ} (hB : OrthogonalPetalBouquet A) (F : Finset ℕ) (i : ℕ) : hB.core i ∣ hB.frameStep F",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/SupportSunflowerDichotomy.lean:169:petal_coprime_frameStep",
+      "name": "petal_coprime_frameStep",
+      "kind": "theorem",
+      "module": "Erdos249257/SupportSunflowerDichotomy.lean",
+      "line": 169,
+      "signature": "theorem petal_coprime_frameStep {A : Set ℕ} (hB : OrthogonalPetalBouquet A) (F : Finset ℕ) {i : ℕ} (hi : i ∉ F) : Nat.Coprime (hB.petal i) (hB.frameStep F)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "An unselected petal stays coprime to the entire enlarged frame."
+    },
+    {
+      "id": "Erdos249257/SupportSunflowerDichotomy.lean:183:gcd_ray_frameStep",
+      "name": "gcd_ray_frameStep",
+      "kind": "theorem",
+      "module": "Erdos249257/SupportSunflowerDichotomy.lean",
+      "line": 183,
+      "signature": "theorem gcd_ray_frameStep {A : Set ℕ} (hB : OrthogonalPetalBouquet A) (F : Finset ℕ) {i : ℕ} (hi : i ∉ F) : Nat.gcd (hB.ray i) (hB.frameStep F) = hB.core i",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Persistent reduced modulus: after any finite frame is assembled, every unselected ray has gcd exactly its core."
+    },
+    {
+      "id": "Erdos249257/SupportSunflowerDichotomy.lean:192:ray_div_gcd_frameStep",
+      "name": "ray_div_gcd_frameStep",
+      "kind": "theorem",
+      "module": "Erdos249257/SupportSunflowerDichotomy.lean",
+      "line": 192,
+      "signature": "theorem ray_div_gcd_frameStep {A : Set ℕ} (hB : OrthogonalPetalBouquet A) (F : Finset ℕ) {i : ℕ} (hi : i ∉ F) : hB.ray i / Nat.gcd (hB.ray i) (hB.frameStep F) = hB.petal i",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Consequently the exact reduced modulus of an unselected ray is its petal, independently of the size of the selected frame."
+    },
+    {
+      "id": "Erdos249257/SupportSunflowerDichotomy.lean:201:exists_pos_mem",
+      "name": "exists_pos_mem",
+      "kind": "theorem",
+      "module": "Erdos249257/SupportSunflowerDichotomy.lean",
+      "line": 201,
+      "signature": "theorem exists_pos_mem {A : Set ℕ} (hB : OrthogonalPetalBouquet A) : ∃ a : ℕ, 0 < a ∧ a ∈ A",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Every bouquet contains a positive support element, as needed by the far-tail positivity clause of the carry consumer."
+    },
+    {
+      "id": "Erdos249257/SupportSunflowerDichotomy.lean:205:cardFactors_le_of_dvd",
+      "name": "cardFactors_le_of_dvd",
+      "kind": "theorem",
+      "module": "Erdos249257/SupportSunflowerDichotomy.lean",
+      "line": 205,
+      "signature": "private theorem cardFactors_le_of_dvd {a Q : ℕ} (ha : 0 < a) (hQ : 0 < Q) (had : a ∣ Q) : ArithmeticFunction.cardFactors a ≤ ArithmeticFunction.cardFactors Q",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/SupportSunflowerDichotomy.lean:219:cardFactors_le_of_mem",
+      "name": "cardFactors_le_of_mem",
+      "kind": "theorem",
+      "module": "Erdos249257/SupportSunflowerDichotomy.lean",
+      "line": 219,
+      "signature": "theorem cardFactors_le_of_mem {A : Set ℕ} (hB : OrthogonalPetalBouquet A) {R a : ℕ} (hpetal : ∀ i, ArithmeticFunction.cardFactors (hB.petal i) ≤ R) (haA : a ∈ A) : ArithmeticFunction.cardFactors a ≤ ArithmeticFunction.cardFactors hB.Q + R",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A uniform petal-rank ceiling gives a genuine bounded-`Ω` support. The fixed contribution is paid once by `Ω(Q)`, while each ray pays only its own petal rank."
+    },
+    {
+      "id": "Erdos249257/SupportSunflowerDichotomy.lean:239:alternatingPrimeCore",
+      "name": "alternatingPrimeCore",
+      "kind": "def",
+      "module": "Erdos249257/SupportSunflowerDichotomy.lean",
+      "line": 239,
+      "signature": "def alternatingPrimeCore (i : ℕ) : ℕ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Alternate between the two fixed cores `2` and `3`."
+    },
+    {
+      "id": "Erdos249257/SupportSunflowerDichotomy.lean:244:primeSquarePetal",
+      "name": "primeSquarePetal",
+      "kind": "def",
+      "module": "Erdos249257/SupportSunflowerDichotomy.lean",
+      "line": 244,
+      "signature": "noncomputable def primeSquarePetal (i : ℕ) : ℕ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The square of the `(i + 2)`-nd prime. Starting at index two excludes both fixed core primes."
+    },
+    {
+      "id": "Erdos249257/SupportSunflowerDichotomy.lean:248:alternatingPrimeSquareSupport",
+      "name": "alternatingPrimeSquareSupport",
+      "kind": "def",
+      "module": "Erdos249257/SupportSunflowerDichotomy.lean",
+      "line": 248,
+      "signature": "def alternatingPrimeSquareSupport : Set ℕ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "An explicit infinite support with genuinely different fixed cores."
+    },
+    {
+      "id": "Erdos249257/SupportSunflowerDichotomy.lean:251:alternatingPrimeCore_pos",
+      "name": "alternatingPrimeCore_pos",
+      "kind": "theorem",
+      "module": "Erdos249257/SupportSunflowerDichotomy.lean",
+      "line": 251,
+      "signature": "private theorem alternatingPrimeCore_pos (i : ℕ) : 0 < alternatingPrimeCore i",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/SupportSunflowerDichotomy.lean:255:alternatingPrimeCore_dvd_six",
+      "name": "alternatingPrimeCore_dvd_six",
+      "kind": "theorem",
+      "module": "Erdos249257/SupportSunflowerDichotomy.lean",
+      "line": 255,
+      "signature": "private theorem alternatingPrimeCore_dvd_six (i : ℕ) : alternatingPrimeCore i ∣ 6",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/SupportSunflowerDichotomy.lean:259:primeSquarePetal_one_lt",
+      "name": "primeSquarePetal_one_lt",
+      "kind": "theorem",
+      "module": "Erdos249257/SupportSunflowerDichotomy.lean",
+      "line": 259,
+      "signature": "private theorem primeSquarePetal_one_lt (i : ℕ) : 1 < primeSquarePetal i",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/SupportSunflowerDichotomy.lean:265:primeSquarePetal_coprime_six",
+      "name": "primeSquarePetal_coprime_six",
+      "kind": "theorem",
+      "module": "Erdos249257/SupportSunflowerDichotomy.lean",
+      "line": 265,
+      "signature": "private theorem primeSquarePetal_coprime_six (i : ℕ) : Nat.Coprime (primeSquarePetal i) 6",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/SupportSunflowerDichotomy.lean:285:primeSquarePetal_pairwise",
+      "name": "primeSquarePetal_pairwise",
+      "kind": "theorem",
+      "module": "Erdos249257/SupportSunflowerDichotomy.lean",
+      "line": 285,
+      "signature": "private theorem primeSquarePetal_pairwise (i j : ℕ) (hij : i ≠ j) : Nat.Coprime (primeSquarePetal i) (primeSquarePetal j)",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/SupportSunflowerDichotomy.lean:296:summable_inv_primeSquarePetal",
+      "name": "summable_inv_primeSquarePetal",
+      "kind": "theorem",
+      "module": "Erdos249257/SupportSunflowerDichotomy.lean",
+      "line": 296,
+      "signature": "private theorem summable_inv_primeSquarePetal : Summable (fun i => (1 : ℝ) / (primeSquarePetal i : ℝ))",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/SupportSunflowerDichotomy.lean:319:alternatingPrimeSquareBouquet",
+      "name": "alternatingPrimeSquareBouquet",
+      "kind": "def",
+      "module": "Erdos249257/SupportSunflowerDichotomy.lean",
+      "line": 319,
+      "signature": "noncomputable def alternatingPrimeSquareBouquet : OrthogonalPetalBouquet alternatingPrimeSquareSupport",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Concrete witness for the orthogonal-petal interface. It has no exceptional part, frame `Q = 6`, alternating cores `2,3`, and squared-prime petals."
+    },
+    {
+      "id": "Erdos249257/SupportSunflowerDichotomy.lean:337:alternatingPrimeSquareSupport_infinite",
+      "name": "alternatingPrimeSquareSupport_infinite",
+      "kind": "theorem",
+      "module": "Erdos249257/SupportSunflowerDichotomy.lean",
+      "line": 337,
+      "signature": "theorem alternatingPrimeSquareSupport_infinite : alternatingPrimeSquareSupport.Infinite",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The explicit alternating-core support is infinite."
+    },
+    {
+      "id": "Erdos249257/SupportSunflowerDichotomy.lean:343:alternatingPrimeSquareSupport_cardFactors_eq_three",
+      "name": "alternatingPrimeSquareSupport_cardFactors_eq_three",
+      "kind": "theorem",
+      "module": "Erdos249257/SupportSunflowerDichotomy.lean",
+      "line": 343,
+      "signature": "theorem alternatingPrimeSquareSupport_cardFactors_eq_three {a : ℕ} (ha : a ∈ alternatingPrimeSquareSupport) : ArithmeticFunction.cardFactors a = 3",
+      "generated_certificate": false,
+      "claim_ids": [
+        "orthogonal_petal_sunflower_reduction"
+      ],
+      "docstring": "Every member of the explicit support has exactly three prime factors with multiplicity: one fixed core prime and a squared petal prime."
+    },
+    {
+      "id": "Erdos249257/SupportSunflowerDichotomy.lean:360:alternatingPrimeSquareBouquet_uses_two_cores",
+      "name": "alternatingPrimeSquareBouquet_uses_two_cores",
+      "kind": "theorem",
+      "module": "Erdos249257/SupportSunflowerDichotomy.lean",
+      "line": 360,
+      "signature": "theorem alternatingPrimeSquareBouquet_uses_two_cores : alternatingPrimeSquareBouquet.core 0 = 2 ∧ alternatingPrimeSquareBouquet.core 1 = 3",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A small non-vacuity receipt: both fixed cores actually occur."
+    },
+    {
+      "id": "Erdos249257/SupportSunflowerDichotomy.lean:370:SunflowerForcedCarrySupply",
+      "name": "SunflowerForcedCarrySupply",
+      "kind": "def",
+      "module": "Erdos249257/SupportSunflowerDichotomy.lean",
+      "line": 370,
+      "signature": "def SunflowerForcedCarrySupply (A : Set ℕ) : Prop",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The unresolved analytic supply in the bounded-`Ω`, reciprocal-summable sunflower route. Its conclusion is exactly the carry-aware certificate data consumed by the landed arbitrary-support irrationality theorem."
+    },
+    {
+      "id": "Erdos249257/SupportSunflowerDichotomy.lean:381:irrational_erdosSupportSeries_of_sunflower_forcedCarry_supply",
+      "name": "irrational_erdosSupportSeries_of_sunflower_forcedCarry_supply",
+      "kind": "theorem",
+      "module": "Erdos249257/SupportSunflowerDichotomy.lean",
+      "line": 381,
+      "signature": "theorem irrational_erdosSupportSeries_of_sunflower_forcedCarry_supply (A : Set ℕ) (hsupply : SunflowerForcedCarrySupply A) : Irrational (erdosSupportSeries 2 A)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Closing the named forced-carry socket would prove irrationality for that support by the existing carry-aware certificate kernel."
+    },
+    {
+      "id": "Erdos249257/SupportSunflowerDichotomy.lean:395:SunflowerForcedSlotCarrySelection",
+      "name": "SunflowerForcedSlotCarrySelection",
+      "kind": "def",
+      "module": "Erdos249257/SupportSunflowerDichotomy.lean",
+      "line": 395,
+      "signature": "def SunflowerForcedSlotCarrySelection (A : Set ℕ) : Prop",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The exact finite selector produced by the persistent-reduced-modulus argument. The first clause fixes the undamped carry slot. The second clause is the finite, natural-number form of a uniform binary-tail bound: every middle window beginning after that slot has normalized cost at most `16`. Keeping this predicate separate from `SunflowerForcedCarrySupply` records the real remaining mathematical seam. It contains no rationality hypothesis and refers directly to the genuine Boolean divisor transform `supportCoeff A`."
+    },
+    {
+      "id": "Erdos249257/SupportSunflowerDichotomy.lean:406:SunflowerForcedSlotTailSelection",
+      "name": "SunflowerForcedSlotTailSelection",
+      "kind": "def",
+      "module": "Erdos249257/SupportSunflowerDichotomy.lean",
+      "line": 406,
+      "signature": "def SunflowerForcedSlotTailSelection (A : Set ℕ) : Prop",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Analytic form of the forced-slot selector. This is the statement proved directly by the orthogonal-bouquet averaging argument."
+    },
+    {
+      "id": "Erdos249257/SupportSunflowerDichotomy.lean:415:forcedSlotCarrySelection_of_tailSelection",
+      "name": "forcedSlotCarrySelection_of_tailSelection",
+      "kind": "theorem",
+      "module": "Erdos249257/SupportSunflowerDichotomy.lean",
+      "line": 415,
+      "signature": "theorem forcedSlotCarrySelection_of_tailSelection (A : Set ℕ) (htail : SunflowerForcedSlotTailSelection A) : SunflowerForcedSlotCarrySelection A",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A uniform real binary-tail bound pays every finite natural middle-window budget. This bridge keeps the analytic bouquet proof and the exact carry consumer cleanly separated."
+    },
+    {
+      "id": "Erdos249257/SupportSunflowerDichotomy.lean:483:sunflowerForcedCarrySupply_of_forcedSlotCarrySelection",
+      "name": "sunflowerForcedCarrySupply_of_forcedSlotCarrySelection",
+      "kind": "theorem",
+      "module": "Erdos249257/SupportSunflowerDichotomy.lean",
+      "line": 483,
+      "signature": "theorem sunflowerForcedCarrySupply_of_forcedSlotCarrySelection (A : Set ℕ) (hA : ∃ a : ℕ, 0 < a ∧ a ∈ A) (hselection : SunflowerForcedSlotCarrySelection A) : SunflowerForcedCarrySupply A",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A forced-slot selector composes unconditionally into the landed carry supply as soon as the support has one positive member. This is the exact consumer bridge needed by the orthogonal-petal bouquet argument; in particular, no multiplicative decimation or layer-rationality transport is used. The proof chooses an explicit later scale. `param_linear_le_two_pow` absorbs the linear far-tail term, while the selector's `16 * 2^(L-K)` budget is paid by choosing `K = 16*q + 1`."
+    },
+    {
+      "id": "Erdos249257/SupportSunflowerDichotomy.lean:531:sunflowerForcedCarrySupply_of_orthogonalPetalBouquet",
+      "name": "sunflowerForcedCarrySupply_of_orthogonalPetalBouquet",
+      "kind": "theorem",
+      "module": "Erdos249257/SupportSunflowerDichotomy.lean",
+      "line": 531,
+      "signature": "theorem sunflowerForcedCarrySupply_of_orthogonalPetalBouquet {A : Set ℕ} (hB : OrthogonalPetalBouquet A) (hselection : SunflowerForcedSlotTailSelection A) : SunflowerForcedCarrySupply A",
+      "generated_certificate": false,
+      "claim_ids": [
+        "orthogonal_petal_sunflower_reduction"
+      ],
+      "docstring": "Exact bouquet composition endpoint. The sole remaining hypothesis is the analytic selector proved by the persistent-reduced-modulus averaging argument; all carry arithmetic and support positivity are discharged here."
+    },
+    {
+      "id": "Erdos249257/SupportSunflowerDichotomy.lean:540:irrational_erdosSupportSeries_of_orthogonalPetalBouquet",
+      "name": "irrational_erdosSupportSeries_of_orthogonalPetalBouquet",
+      "kind": "theorem",
+      "module": "Erdos249257/SupportSunflowerDichotomy.lean",
+      "line": 540,
+      "signature": "theorem irrational_erdosSupportSeries_of_orthogonalPetalBouquet {A : Set ℕ} (hB : OrthogonalPetalBouquet A) (hselection : SunflowerForcedSlotTailSelection A) : Irrational (erdosSupportSeries 2 A)",
+      "generated_certificate": false,
+      "claim_ids": [
+        "orthogonal_petal_sunflower_reduction"
+      ],
+      "docstring": "Conditional headline for the bouquet lane, with the remaining selector named at exactly its mathematical boundary."
+    },
+    {
+      "id": "Erdos249257/SupportSunflowerDichotomy.lean:551:card_filter_dvd_progression_le_reduced",
+      "name": "card_filter_dvd_progression_le_reduced",
+      "kind": "theorem",
+      "module": "Erdos249257/SupportSunflowerDichotomy.lean",
+      "line": 551,
+      "signature": "theorem card_filter_dvd_progression_le_reduced (M c a Y : ℕ) (ha : 0 < a) : ((Finset.range Y).filter (fun y => a ∣ M * y + c)).card ≤ Y / (a / Nat.gcd a M) + 1",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Divisibility along `M * y + c` occupies at most one residue class modulo the reduced modulus `a / gcd a M`. This is the valid replacement for applying the coprime progression bound when support strays share factors with the CRT frame."
+    },
+    {
+      "id": "Erdos249257/SupportSunflowerDichotomy.lean:612:gcd_dvd_offset_sub_of_dvd_progression",
+      "name": "gcd_dvd_offset_sub_of_dvd_progression",
+      "kind": "theorem",
+      "module": "Erdos249257/SupportSunflowerDichotomy.lean",
+      "line": 612,
+      "signature": "theorem gcd_dvd_offset_sub_of_dvd_progression (M x a y r s : ℕ) (hframe : M ∣ x + r) (hhit : a ∣ x + y * M + s) : Nat.gcd a M ∣ s - r",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "If the frame step divides a distinguished slot, every later hit by a support divisor is spaced from that slot by `gcd a M`. This is the exact arithmetic source of the geometric damping in the repaired middle-window estimate."
+    },
+    {
+      "id": "Erdos249257/SupportSunflowerDichotomy.lean:631:gcd_le_offset_sub_of_dvd_progression",
+      "name": "gcd_le_offset_sub_of_dvd_progression",
+      "kind": "theorem",
+      "module": "Erdos249257/SupportSunflowerDichotomy.lean",
+      "line": 631,
+      "signature": "theorem gcd_le_offset_sub_of_dvd_progression (M x a y r s : ℕ) (hframe : M ∣ x + r) (hhit : a ∣ x + y * M + s) (hrs : r < s) : Nat.gcd a M ≤ s - r",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A nontrivial later hit cannot occur before the gcd spacing."
+    },
+    {
+      "id": "Erdos249257/SupportSunflowerDichotomy.lean:640:exactPrimePowerPullback",
+      "name": "exactPrimePowerPullback",
+      "kind": "def",
+      "module": "Erdos249257/SupportSunflowerDichotomy.lean",
+      "line": 640,
+      "signature": "def exactPrimePowerPullback (p e : ℕ) (A : Set ℕ) : Set ℕ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Support elements with exact `p`-adic exponent `e`, after removing the prime-power layer."
+    },
+    {
+      "id": "Erdos249257/SupportSunflowerDichotomy.lean:643:filter_range_succ_card",
+      "name": "filter_range_succ_card",
+      "kind": "theorem",
+      "module": "Erdos249257/SupportSunflowerDichotomy.lean",
+      "line": 643,
+      "signature": "private theorem filter_range_succ_card (P : ℕ → Prop) [DecidablePred P] (e : ℕ) : ((Finset.range (e + 1)).filter P).card = ((Finset.range e).filter P).card + if P e then 1 else 0",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/SupportSunflowerDichotomy.lean:655:supportCoeff_prime_power_layer",
+      "name": "supportCoeff_prime_power_layer",
+      "kind": "theorem",
+      "module": "Erdos249257/SupportSunflowerDichotomy.lean",
+      "line": 655,
+      "signature": "theorem supportCoeff_prime_power_layer (A : Set ℕ) {p e n : ℕ} (hp : p.Prime) (he : 0 < e) (hnp : n.Coprime p) : supportCoeff A (p ^ e * n) = supportCoeff A (p ^ (e - 1) * n) + supportCoeff (exactPrimePowerPullback p e A) n",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The new divisor layer between `p^(e-1) * n` and `p^e * n` is exactly the prescribed valuation pullback, provided the residual argument is coprime to `p`."
+    },
+    {
+      "id": "Erdos249257/SupportSunflowerDichotomy.lean:702:supportCoeffInt_prime_power_layer",
+      "name": "supportCoeffInt_prime_power_layer",
+      "kind": "theorem",
+      "module": "Erdos249257/SupportSunflowerDichotomy.lean",
+      "line": 702,
+      "signature": "theorem supportCoeffInt_prime_power_layer (A : Set ℕ) {p e n : ℕ} (hp : p.Prime) (he : 0 < e) (hnp : n.Coprime p) : supportCoeffInt A (p ^ e * n) - supportCoeffInt A (p ^ (e - 1) * n) = supportCoeffInt (exactPrimePowerPullback p e A) n",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Integer-difference form consumed by valuation-signature operators."
+    },
+    {
+      "id": "Erdos249257/SupportSunflowerDichotomy.lean:718:supportCoeffInt_prime_power_layer_fixture",
+      "name": "supportCoeffInt_prime_power_layer_fixture",
+      "kind": "theorem",
+      "module": "Erdos249257/SupportSunflowerDichotomy.lean",
+      "line": 718,
+      "signature": "theorem supportCoeffInt_prime_power_layer_fixture : supportCoeffInt ({8} : Set ℕ) (2 ^ 3 * 1) - supportCoeffInt ({8} : Set ℕ) (2 ^ (3 - 1) * 1) = 1",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Moving-prime-power regression: the exact third `2`-adic layer of the singleton support `{8}` contributes one new divisor at residual argument `1`."
     },
     {
       "id": "Erdos249257/ThreeTransportBoundary.lean:24:threeTransportTail",

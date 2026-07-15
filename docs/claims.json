@@ -5127,6 +5127,16 @@
           ]
         },
         {
+          "id": "Erdos249257.SupportSunflowerDichotomy",
+          "path": "Erdos249257/SupportSunflowerDichotomy.lean",
+          "role": "Conditional orthogonal-petal support reduction",
+          "imports": [
+            "Erdos249257.CertificateKernel",
+            "Erdos249257.GenericTailOrbitRigidity",
+            "Erdos249257.SupportDilationDifferences"
+          ]
+        },
+        {
           "id": "Erdos249257.ThreeTransportBoundary",
           "path": "Erdos249257/ThreeTransportBoundary.lean",
           "role": "Lean proof module",
@@ -5189,6 +5199,16 @@
             "remaining_open_proposition_id": "remaining_open.universal_257_all_infinite_supports",
             "operation": "narrows",
             "statement": "Proves the claim for named infinite-support families while leaving arbitrary infinite supports open."
+          }
+        },
+        {
+          "from": "orthogonal_petal_sunflower_reduction",
+          "relation": "advances_open_target",
+          "to": "universal_257",
+          "remaining_open_effect": {
+            "remaining_open_proposition_id": "remaining_open.universal_257_all_infinite_supports",
+            "operation": "re_expresses",
+            "statement": "For finite-core orthogonal-petal bouquets, reduces irrationality at base 2 to the stated uniform tail-selection predicate; that selector is not proved."
           }
         },
         {
@@ -5465,7 +5485,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 1121
+        "line": 1143
       }
     },
     {
@@ -5476,7 +5496,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 1130
+        "line": 1152
       }
     },
     {
@@ -5487,7 +5507,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 1137
+        "line": 1159
       }
     }
   ],
@@ -5547,6 +5567,34 @@
           "name": "irrational_erdosSupportSeries_pairwise_coprime",
           "module": "Erdos249257/CertificateKernel.lean",
           "line": 10448
+        }
+      ]
+    },
+    {
+      "id": "orthogonal_petal_sunflower_reduction",
+      "label": "Conditional orthogonal-petal sunflower reduction",
+      "status": "conditional reduction",
+      "statement": "For a finite-core orthogonal-petal bouquet at base 2, the exact uniform tail-selection predicate implies a forced-carry certificate supply and hence irrationality of the associated support series. Lean formalises the carry conversion and an explicit infinite alternating-core, squared-prime-petal bouquet whose elements have three prime factors with multiplicity. The tail-selection predicate itself is not proved, so this does not add an unconditional #257 support family.",
+      "remaining_open_proposition_ids": [
+        "remaining_open.universal_257_all_infinite_supports"
+      ],
+      "paper_label": "res:sunflower",
+      "readme_headline": false,
+      "declarations": [
+        {
+          "name": "sunflowerForcedCarrySupply_of_orthogonalPetalBouquet",
+          "module": "Erdos249257/SupportSunflowerDichotomy.lean",
+          "line": 531
+        },
+        {
+          "name": "irrational_erdosSupportSeries_of_orthogonalPetalBouquet",
+          "module": "Erdos249257/SupportSunflowerDichotomy.lean",
+          "line": 540
+        },
+        {
+          "name": "alternatingPrimeSquareSupport_cardFactors_eq_three",
+          "module": "Erdos249257/SupportSunflowerDichotomy.lean",
+          "line": 343
         }
       ]
     },

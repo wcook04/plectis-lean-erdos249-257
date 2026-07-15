@@ -27,11 +27,11 @@ there rather than implied by the release tag.
 
 | Checked surface | Scale |
 |---|---:|
-| Lean modules | 555 |
-| Lean declarations | 6,817 |
-| Theorem-like declarations | 6,178 |
+| Lean modules | 556 |
+| Lean declarations | 6,865 |
+| Theorem-like declarations | 6,214 |
 | Generated certificate declarations | 1,681 |
-| Principal claim-to-Lean links | 97 |
+| Principal claim-to-Lean links | 100 |
 | Exact remaining open propositions | 3 |
 
 These are generated navigation counts, not a claim that every declaration is a
@@ -132,6 +132,11 @@ time; its explanation is not proof authority.
   release: a scalar channel transfers that factor into its coefficient rather
   than discarding it. It neither supplies certificates nor proves irrationality
   of the totient constant.
+- **A conditional sunflower route for #257.** For finite-core orthogonal-petal
+  supports, an explicit uniform tail-selection predicate yields the existing
+  forced-carry certificates and hence irrationality at base 2. The selector is
+  not proved, so this is a reduction rather than a new unconditional support
+  family.
 - **An LCM factor-ideal no-go.** A synthetic affine carry can satisfy the
   homogeneous LCM factor ideal, the stated whole-ray anchors, and every finite
   integer shift-polynomial test while remaining a strict survivor. This rules

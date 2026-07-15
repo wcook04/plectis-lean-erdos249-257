@@ -485,6 +485,28 @@ prime-valuation-deficit witness forces the multiplicative order of the base modu
 the relevant modulus not to collapse, which rules out the long repeated digit
 blocks a rational value would require.
 
+\subsection{A conditional orthogonal-petal route}\label{res:sunflower}
+
+Let $A$ be a finite-core orthogonal-petal bouquet: outside a finite frame, its
+elements have the form $c_i p_i$, where the cores $c_i$ divide one fixed
+integer and the nontrivial petals $p_i$ are pairwise coprime to that frame and
+to one another, with summable reciprocal mass.  The formal construction also
+contains an explicit infinite example with alternating cores $2$ and $3$ and
+squared prime petals; every member of this support has exactly three prime
+factors with multiplicity.
+
+For such a bouquet, the remaining input is an exact tail-selection predicate:
+at every positive binary scale it chooses a carry slot with a normalized tail
+at most $16$.  Lean proves that this predicate supplies the needed forced-carry
+certificates and hence irrationality of the base-$2$ support series.  The
+endpoint is
+\lref{SupportSunflowerDichotomy.lean}{540}{irrational_erdosSupportSeries_of_orthogonalPetalBouquet},
+with the carry bridge at
+\lrefx{SupportSunflowerDichotomy.lean}{531}{sunflowerForcedCarrySupply_of_orthogonalPetalBouquet}.
+The tail-selection predicate itself is not proved here.  Thus this is a
+conditional reduction for one structured support family, not a further
+unconditional case of Erd\H{o}s~\#257.
+
 \subsection{What stays open}
 
 The universal Erd\H{o}s \#257 statement, irrationality of $\sum_{n\in A}1/(2^n-1)$

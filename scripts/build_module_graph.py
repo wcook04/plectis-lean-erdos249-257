@@ -47,6 +47,7 @@ NEW_ROLES = {
     "Erdos249257.SquaredMersenneDiagonalEnclosure": "Sharp squared-Mersenne diagonal enclosure",
     "Erdos249257.SternBrocotRunGeometry": "Stern-Brocot run geometry",
     "Erdos249257.SupportDilationDifferences": "Finite support-dilation difference identities",
+    "Erdos249257.SupportSunflowerDichotomy": "Conditional orthogonal-petal support reduction",
 }
 
 
