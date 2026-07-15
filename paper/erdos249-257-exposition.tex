@@ -955,6 +955,10 @@ The profiled-gap interface retains their independent literal prefixes,
 derives the ready next-row profile, and advances under its explicit gap and
 buffer hypotheses,
 \lrefx{SuffixCylinderProfiledGap.lean}{124}{ProfiledGapStage.advanceOfNextCoeffProfile}.
+At the next cutoff boundary, the lower and upper sheets respectively gain
+their forced false and true prefix bits; the upper endpoint is adjusted by
+the corresponding head weight,
+\lrefx{SuffixCylinderProfiledPromotion.lean}{107}{selectedHalfIntervalPromoteHigh}.
 This is a conditional local feedback classification, not a cofinal supply
 theorem: the required crossing coefficient profile is still an input.
 

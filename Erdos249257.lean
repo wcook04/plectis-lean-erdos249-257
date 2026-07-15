@@ -128,3 +128,4 @@ import Erdos249257.SuffixCylinderInStrip
 import Erdos249257.SuffixCylinderFiniteGap
 import Erdos249257.SuffixCylinderFirstFeedback
 import Erdos249257.SuffixCylinderProfiledGap
+import Erdos249257.SuffixCylinderProfiledPromotion
