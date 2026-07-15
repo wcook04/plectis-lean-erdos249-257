@@ -114,53 +114,51 @@ $A\subseteq\N$. The second problem contains the classical full-support
 Erd\H{o}s--Borwein constant, but the passage from structured supports to an
 arbitrary infinite support remains open.
 
-The development has five principal outputs. First, it formalises the
-irrationality of $\sum_{n\ge1}(b^n-1)^{-1}$ for every integer $b\ge2$, and of
-several structured infinite-support variants. Second, it places $S$ on the
-same Mersenne--Lambert ladder and proves useful positive, signed, and
-probabilistic representations. Third, it gives the unconditional denominator
-bound $q>\Qzero$ for any rational expression $S=p/q$. Fourth, it proves an
-exact finite-certificate reduction: irrationality follows if the certified
-non-integrality witnesses occur at unbounded parameters, and the existence of
-a witness at fixed parameters is equivalent to the corresponding tail
-difference being non-integral.
-The same reduction is then decomposed into an exact target-interval test, a
-Lambert-centred squared-Mersenne enclosure, and finite fresh-loss projection
-conditions; the checked finite segment reaches 28 explicit scales through
-$t=64$.  Fifth, it gives an executable greedy model of the Mersenne achievement
-set, including its compact, perfect, totally disconnected, nowhere-dense, and
-measure-one geometry, while leaving the rational-member question open.
+Across the two directions, exact tail and carry identities separate finite
+arithmetic, checked by Lean, from an analytic or combinatorial uniformity
+statement.  This is a common proof architecture, not an assertion that the two
+open problems are equivalent.  The present status is as follows.
 
 \begin{center}
-\fbox{\begin{minipage}{0.91\textwidth}
-\textbf{Scope.} The irrationality of $S$ and the universal infinite-support
-statement remain open. The denominator theorem and certificate reduction are
-unconditional and conditional progress toward \#249, respectively;
-neither is presented as a solution. The support theorems establish named
-families toward \#257, not the universal quantifier.
-\end{minipage}}
+\small
+\begin{tabular}{@{}p{1.25cm}p{6.15cm}p{6.15cm}@{}}
+\toprule
+problem & checked here & exact open edge\\
+\midrule
+\#249 &
+Any rational expression $S=p/q$ has $q>\Qzero\approx7.96\times10^{34}$.
+At fixed parameters, non-integrality of the relevant tail difference is
+equivalent to a finite certificate; 28 lcm-diagonal scales are verified
+through $t=64$. &
+Produce these certificates at unbounded parameters.  No such supply theorem is
+proved, so the irrationality of $S$ remains open.\\[4pt]
+\#257 &
+The full-support series is irrational in every integer base $b\ge2$, and
+several named infinite-support families are formalised.  For the value $1/2$,
+membership is equivalent to infinitely many greedy skips; the upper
+last-producer branch and the middle coordinate $-3$ are eliminated. &
+Treat every infinite support.  For the $1/2$ test value, the remaining checked
+endpoint is a tail estimate for the middle coordinates $-2$ and $-1$.\\
+\bottomrule
+\end{tabular}
 \end{center}
 
-The checked library contains many identities, equivalences, rigidity
-statements, case eliminations, finite certificates, and scoped no-go theorems.
-The available development did not exhaustively test every cross-composition of
-these results.  We therefore state their hypotheses and logical dependencies
-explicitly, so that they can be reused, challenged, or strengthened.  Neither
-the size of the library nor an unexplored composition is evidence that a
-solution is latent in it.
+The checked library also contains identities, rigidity statements, finite
+certificates, and scoped no-go theorems.  Their hypotheses and logical
+dependencies are stated explicitly.  Neither the size of the library nor an
+unexplored composition is evidence that a solution is latent in it.
 
-The formalisation-specific contribution is a common architecture in which an
-infinite irrationality question is converted into finite arithmetic checked by
-the Lean kernel, while the remaining analytic uniformity statement is exposed
-rather than hidden inside computation.  Small blue source marks connect the
-statements to the formal proof and may be ignored on a first reading; the full
-cross-reference is confined to Appendix~\ref{app:index}.
-
-The transport and curvature frontier has its own technical companion in this
-release.  It develops affine residue-state cancellation, sharp four-vertex
-non-integrality criteria, a first-harmonic criterion, and a fixed-precision
-obstruction.  Those results retain explicit unbounded-supply hypotheses and do
-not alter the open status of \#249.
+\paragraph{Reading map.}
+Section~\ref{sec:ladder} gives the common Mersenne--Lambert transform.
+Section~\ref{sec:eb} treats the \#257 direction and begins its half-value
+analysis with a one-page account of the exact residual.  Section~\ref{sec:249}
+treats \#249 and likewise begins with the certificate argument in one page.
+Sections~\ref{sec:architecture} and~\ref{sec:verify} describe the formalisation
+and its verification; the appendices contain auxiliary carry criteria and the
+source cross-reference.  Small blue source marks may be ignored on a
+first reading.  The separate transport-and-curvature companion develops the
+technical affine and first-harmonic material without changing the open status
+of \#249.
 
 The prior-art boundary is theorem-specific. Chowla had conjectured the broader
 rational-argument irrationality question for

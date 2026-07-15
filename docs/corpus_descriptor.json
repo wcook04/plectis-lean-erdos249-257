@@ -24,11 +24,11 @@
       "authority_role": "proof_bearing_committed_source_anchor"
     },
     "navigation_snapshot": {
-      "commit": "34a28a7e0dbc23a546dc70651d8391f9e595794f",
+      "commit": "5932a99b80017e3fb2a5bacf34af9d1abc649fd3",
       "authority_role": "machine_readable_navigation_anchor",
       "publication_state": "main_history_snapshot",
       "published_ref": "main",
-      "repository_resolution": "https://github.com/wcook04/plectis-lean-erdos249-257/tree/34a28a7e0dbc23a546dc70651d8391f9e595794f"
+      "repository_resolution": "https://github.com/wcook04/plectis-lean-erdos249-257/tree/5932a99b80017e3fb2a5bacf34af9d1abc649fd3"
     },
     "content": {
       "machine_readable_paper": {
@@ -37,7 +37,7 @@
       },
       "claims_document": {
         "path": "docs/claims.json",
-        "content_digest": "sha256:e6da0849534a3b968a2cef05699503e513b9db0f6942e9a2672ce68232aca6d9"
+        "content_digest": "sha256:371673361da1717565842b2da10a56243f781e8fc41cb5f53d9852fb9f018de1"
       },
       "declaration_atlas": {
         "path": "docs/declaration_atlas.json",
@@ -50,13 +50,13 @@
       },
       "bounded_orientation": {
         "path": "docs/orientation.json",
-        "content_digest": "sha256:1854ce3ceaaf3e1af4892cfd8fc750b128e9b053c2011c50f1cd6628beafc94e"
+        "content_digest": "sha256:ddb1388b10a95ea61ae2bafafa1102d4f4491ee7d16ee5a95c517c2bb1f422a7"
       },
       "human_exposition": {
         "source_path": "paper/erdos249-257-exposition.tex",
-        "source_content_digest": "sha256:520684c1077daea64acd2d1b1736ad7d73804ad7fdd188f704cead77c941d9c8",
+        "source_content_digest": "sha256:7ae1af4f4622ba76e15a989d4f01abf72fbec5140a4f091b953d6e404bac0041",
         "rendered_path": "erdos249-257-exposition.pdf",
-        "rendered_content_digest": "sha256:44ac20a747e809a573ff73e56433c04e9d2b69519361cd61d7c9b7562cb0570d",
+        "rendered_content_digest": "sha256:36f4e682f09a6f761ef3742aa20d71ab861e99f6c1b1880200006323992d12ed",
         "artifact_role": "authored_mathematician_facing_exposition",
         "authority_posture": "authored_editorial_surface_not_Lean_proof_authority"
       },
@@ -412,7 +412,7 @@
           "source": "paper/erdos249-257-exposition.tex",
           "environment": "problem",
           "title": "Erd\\H{o}s \\#249",
-          "line": 1928
+          "line": 1926
         }
       },
       {
@@ -423,7 +423,7 @@
           "source": "paper/erdos249-257-exposition.tex",
           "environment": "problem",
           "title": "unbounded certificate supply",
-          "line": 1937
+          "line": 1935
         }
       },
       {
@@ -434,7 +434,7 @@
           "source": "paper/erdos249-257-exposition.tex",
           "environment": "problem",
           "title": "universal Erd\\H{o}s \\#257",
-          "line": 1944
+          "line": 1942
         }
       }
     ],
@@ -1456,9 +1456,9 @@
     },
     "human_exposition": {
       "source_path": "paper/erdos249-257-exposition.tex",
-      "expected_source_content_digest": "sha256:520684c1077daea64acd2d1b1736ad7d73804ad7fdd188f704cead77c941d9c8",
+      "expected_source_content_digest": "sha256:7ae1af4f4622ba76e15a989d4f01abf72fbec5140a4f091b953d6e404bac0041",
       "rendered_path": "erdos249-257-exposition.pdf",
-      "expected_rendered_content_digest": "sha256:44ac20a747e809a573ff73e56433c04e9d2b69519361cd61d7c9b7562cb0570d",
+      "expected_rendered_content_digest": "sha256:36f4e682f09a6f761ef3742aa20d71ab861e99f6c1b1880200006323992d12ed",
       "authority_posture": "authored_editorial_surface_not_Lean_proof_authority"
     },
     "technical_companion": {

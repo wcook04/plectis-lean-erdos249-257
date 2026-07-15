@@ -41,52 +41,27 @@ in this repository, and never infer unpublished results or private machinery.
    topology. Use `docs/SOURCE_MAP.md` for intention-based routes and
    `docs/WAVE_INDEX.md` for mathematical chronology.
 
-For a bounded lookup, use `python3 scripts/query_corpus.py --claim <id>`,
-`--paper-label <TeX_label>`, `--paper-anchor <TeX_label_or_source_ref>`,
-`--open <remaining_open.id>`, `--declaration <Lean_name>`,
-`--source <module.lean:line>`, `--module <path_or_id>`, or `--route <id>`. Use
-`--artifact <registered_path_or_sha256>` for a descriptor-registered artefact
-or content identity. Use
-`--connections <module_or_declaration> --query "<task>"` after selecting a
-Lean module or declaration. It returns the source-current public projection of
-the shared Lean connection-card contract: directional imports, named consumer
-declarations, bounded prerequisite interfaces, source digests, and the exact
-refresh route. This is equivalent in navigation grammar to private claim-local
-cards, but it is public-only and carries no private claim, unpublished-source,
-or proof authority. Consume it before introducing a parallel public result or
-changing claim prose.
-Use
-`--search <text> --limit <1..100>` when the typed handle is not yet known.
-JSON responses are capped at 64 KB; exhaustive data remains in the routed owner.
-Visible paper sigils resolve directly (`--module CerKer`); their generated
-crosswalk is `paper/module-aliases.json`.
-Visible TeX labels resolve in reverse (`--paper-label res:farey`) to
-their exact paper coordinate and every attached claim.
-Every theorem-like or section anchor in either authored paper is classified by
-`--paper-anchor`; unlabeled formal results keep their exact TeX source coordinate
-as the handle instead of receiving a fabricated label or claim identity. These
-packets also expose exact paper-to-Lean source links and adjacent paper handles.
-Module packets carry the authored role plus bounded imports, reverse importers,
-attached claims, and declaration previews; use their receipts before expanding.
-Claim packets carry a resolved local argument neighbourhood; follow adjacent
-claim IDs with another `--claim` query instead of loading the complete graph.
-The `paper` object is an exact TeX source coordinate and may point to either
-paper; do not assume every label lives in the principal exposition.
-Each exact ID in `remaining_open_propositions` is directly queryable with
-`--open`; do not substitute a finite or conditional progress claim for it.
-Declaration packets provide the pinned source URL, module role/sigil, attached
-claims, and both claim-owned and local-result paper coordinates; declarations
-with neither relation say so explicitly.
-Exact Lean coordinates are handles too: `--source Erdos249257/CertificateKernel.lean:18055`
-returns the pinned line, its module identity, declarations within the release
-checker tolerance, and their claim and paper-anchor routes. A source line with
-no nearby declaration remains an honest module/line handle with bounded nearest
-declarations; it is not silently promoted to a theorem.
-Descriptor-registered source papers, PDFs, JSON owners, JSON fragments, and
-their `sha256:` identities round-trip through `--artifact`. The packet preserves
-one-to-many digest cardinality and routes into the owning claim, declaration,
-paper-anchor, module, methodology, or orientation surface without embedding it.
-The helper reads the registry and atlas; it is navigation, not proof authority.
+For a bounded lookup, use `python3 scripts/query_corpus.py` with one typed
+handle:
+
+- `--claim <id>`, `--open <remaining_open.id>`, or `--route <id>` for the
+  mathematical story and exact frontier;
+- `--paper-label <label>` or `--paper-anchor <label_or_source_ref>` for authored
+  exposition;
+- `--declaration <name>`, `--source <module.lean:line>`, or `--module <path_or_id>`
+  for checked source;
+- `--artifact <path_or_sha256>` for a registered paper, PDF, JSON owner, or
+  content identity;
+- `--connections <module_or_declaration> --query "<task>"` after choosing a
+  source handle; and
+- `--search <text> --limit <1..100>` only when no typed handle is known.
+
+Run `python3 scripts/query_corpus.py --help` for the full grammar. Responses are
+capped at 64 KB and route exhaustive data back to its owner. Follow adjacent
+claim IDs one packet at a time; do not load the complete graph to orient. An
+exact open-proposition ID must not be replaced by finite or conditional
+progress. A paper label, declaration, source line, module sigil, or digest is a
+navigation handle, not a fabricated claim and not proof authority.
 
 ## Authority and change order
 

@@ -24,8 +24,8 @@ This script verifies that every other public surface agrees with it:
      text under LICENSES/.
   8. AGENTS.md routes agent harnesses through the public machine-readable paper
      without weakening the proof or open-problem boundary.
-  9. Proof-trust guard: no sorry/admit/native_decide/axiom in the Lean
-     sources.
+  9. Proof-trust guard: no sorry/admit/axiom or native evaluator in the
+     Lean sources.
  10. The methodology source, generated root projection, claim-transition
      requirements, descriptor capsule, and entry routes agree.
 
@@ -56,6 +56,13 @@ README_BANNED_PHRASES = [
     "publication status",
     "ai_workflow` is a private",
 ]
+
+PROOF_TRUST_RE = re.compile(
+    r"^\s*(?:sorry\b|admit\b|axiom\s)"
+    r"|native_decide"
+    r"|\bdecide[^\n]*(?:\+native\b|native\s*:=\s*true\b)",
+    re.M,
+)
 
 
 def fail(msg: str) -> None:
@@ -201,8 +208,57 @@ def lean_code_without_comments_and_strings(text: str) -> str:
     return "".join(out)
 
 
+def proof_trust_violation(text: str) -> str | None:
+    """Return the first executable proof-trust violation, if any."""
+    # Most source files contain none of the four candidate words.  Avoid the
+    # character-by-character comment/string pass for that overwhelmingly
+    # common case; candidate-bearing files still receive the exact scan.
+    if PROOF_TRUST_RE.search(text) is None:
+        return None
+    match = PROOF_TRUST_RE.search(lean_code_without_comments_and_strings(text))
+    return match.group(0).strip() if match else None
+
+
+def check_proof_trust() -> None:
+    """Run the cheap proof-trust gate before any expensive release checks."""
+    # Pin the lexical boundary: prose and strings are harmless, executable
+    # native reduction is not.  These fixtures keep future scanner edits from
+    # silently weakening or over-broadening the release contract.
+    check(proof_trust_violation("theorem bad : True := by native_decide\n") == "native_decide",
+          "proof-trust scanner must reject executable native reduction")
+    check(proof_trust_violation("theorem bad : True := by decide +native\n") == "decide +native",
+          "proof-trust scanner must reject the native decide alias")
+    check(proof_trust_violation(
+        "theorem bad : True := by decide (config := { native := true })\n"
+    ) == "decide (config := { native := true",
+          "proof-trust scanner must reject native evaluation through configuration")
+    check(proof_trust_violation("/- native_decide -/\ntheorem ok : True := by trivial\n") is None,
+          "proof-trust scanner must ignore comments")
+    check(proof_trust_violation('def label := "native_decide"\n') is None,
+          "proof-trust scanner must ignore strings")
+    example_sources = sorted((ROOT / "examples").rglob("*.lean")) if (ROOT / "examples").is_dir() else []
+    lean_sources = (
+        sorted((ROOT / "Erdos249257").rglob("*.lean"))
+        + [ROOT / "Erdos249257.lean"]
+        + example_sources
+    )
+    for lean in lean_sources:
+        violation = proof_trust_violation(read(lean))
+        check(violation is None,
+              f"proof-trust violation in {lean.relative_to(ROOT)}: {violation or ''}")
+
+
 def main() -> int:
     cache: dict[tuple[str, str | None], list[str] | None] = {}
+
+    # Fail fast on the cheapest high-severity invariant.  In particular, do
+    # not spend the corpus-query budget before rejecting untrusted proof code.
+    check_proof_trust()
+    if ERRORS:
+        print(f"check_release: {len(ERRORS)} proof-trust failure(s) across {CHECKS} checks")
+        for err in ERRORS:
+            print(f"  FAIL {err}")
+        return 1
 
     # --- 1. claims.json ---------------------------------------------------
     claims_path = ROOT / "docs" / "claims.json"
@@ -670,16 +726,11 @@ def main() -> int:
     )
     check(query_check.returncode == 0,
           f"corpus query surface failed: {query_check.stdout.strip() or query_check.stderr.strip()}")
-    cold_clone_check = subprocess.run(
-        [sys.executable, str(ROOT / "scripts" / "check_cold_clone_comprehension.py")],
-        cwd=ROOT,
-        capture_output=True,
-        text=True,
-        check=False,
-    )
-    check(cold_clone_check.returncode == 0,
-          "bounded cold-clone comprehension failed: "
-          f"{cold_clone_check.stdout.strip() or cold_clone_check.stderr.strip()}")
+    # The adversarial program starts by running the complete baseline against
+    # one collected packet set, then mutates that same set.  Running the
+    # standalone diagnostic here as well would repeat every bounded query.
+    # Keep the diagnostic as a user-facing command, but execute the combined
+    # baseline-plus-adversarial program once in the release gate.
     cold_clone_adversarial = subprocess.run(
         [sys.executable, str(ROOT / "scripts" / "test_cold_clone_comprehension.py")],
         cwd=ROOT,
@@ -688,18 +739,8 @@ def main() -> int:
         check=False,
     )
     check(cold_clone_adversarial.returncode == 0,
-          "bounded cold-clone adversarial check failed: "
+          "bounded cold-clone baseline/adversarial check failed: "
           f"{cold_clone_adversarial.stdout.strip() or cold_clone_adversarial.stderr.strip()}")
-
-    # --- 9. proof-trust guard ------------------------------------------------------
-    # Covers the library, its root, and the downstream examples: everything
-    # shipped as Lean source obeys the same no-sorry/no-axiom contract.
-    trust_re = re.compile(r"^\s*(sorry\b|admit\b|axiom\s)|native_decide", re.M)
-    example_sources = sorted((ROOT / "examples").rglob("*.lean")) if (ROOT / "examples").is_dir() else []
-    for lean in sorted((ROOT / "Erdos249257").rglob("*.lean")) + [ROOT / "Erdos249257.lean"] + example_sources:
-        m = trust_re.search(lean_code_without_comments_and_strings(read(lean)))
-        check(m is None,
-              f"proof-trust violation in {lean.relative_to(ROOT)}: {m.group(0).strip() if m else ''}")
 
     # --- report ---------------------------------------------------------------------
     if ERRORS:

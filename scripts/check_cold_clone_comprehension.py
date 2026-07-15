@@ -26,10 +26,18 @@ from typing import Any
 ROOT = Path(__file__).resolve().parent.parent
 QUERY = ROOT / "scripts" / "query_corpus.py"
 HUMAN_SURFACES = ("README.md", "SCOPE.md", "docs/ORIENTATION.md")
-HUMAN_FIRST_CONTACT_BUDGET_BYTES = 32_000
+HUMAN_SURFACE_BUDGET_BYTES = {
+    "README.md": 9_000,
+    "SCOPE.md": 4_000,
+    "docs/ORIENTATION.md": 16_000,
+}
+README_FIRST_MINUTE_BUDGET_BYTES = 6_000
 SUMMARY_PACKET_BUDGET_BYTES = 32_000
 PACKET_BUDGET_BYTES = 16_384
 PROOF_AUTHORITY = "Lean source checked by the pinned Lean kernel"
+GATEWAY_PAPER = "paper/erdos249-257-exposition.tex"
+GATEWAY_OPENING_BUDGET_BYTES = 7_500
+CLAUDE_ENTRY_BUDGET_BYTES = 1_500
 STORY_ROUTES = ("erdos257_half_story", "erdos249_certificate_story")
 STORY_CLAIMS = (
     "greedy_achievement_geometry",
@@ -71,40 +79,175 @@ def query_packet(*args: str, budget_bytes: int = PACKET_BUDGET_BYTES) -> dict[st
     return json.loads(completed.stdout)
 
 
-def human_requirements(summary: dict[str, Any]) -> list[list[str]]:
-    conditional = next(
-        row for row in summary["principal_claims"] if row["status"] == "conditional reduction"
+def human_tasks(summary: dict[str, Any]) -> dict[str, list[list[str]]]:
+    """Facts a reader must recover from the README's first-minute prefix.
+
+    Each task contains conjunctions of semantic anchor groups.  Alternatives
+    within one group permit harmless wording changes; satisfying one task with
+    tokens scattered across three documents is deliberately impossible.
+    """
+    open_rows = {row["id"]: row for row in summary["remaining_open_propositions"]}
+    return {
+        "identity_and_public_boundary": [
+            ["self-contained public"],
+            ["Plectis"],
+            ["not an entrypoint into any private development system"],
+        ],
+        "state_both_problems": [
+            ["Erdős #249 asks whether"],
+            ["S = ∑ φ(n)/2ⁿ"],
+            ["Erdős #257 asks whether"],
+            ["∑_{n∈A} 1/(2ⁿ - 1)"],
+            ["every infinite", "for every infinite"],
+        ],
+        "distinguish_release_source_and_authority": [
+            ["latest tagged release and citation anchor"],
+            ["formal-source checkpoint"],
+            ["not a new tagged release"],
+            [PROOF_AUTHORITY],
+        ],
+        "recover_headline_statuses": [
+            ["formalised here"],
+            ["unconditional progress"],
+            ["conditional reduction"],
+            ["verified finite instance"],
+            ["does not show that the actual orbit avoids", "does not show the actual orbit avoids"],
+        ],
+        "name_exact_open_frontier": [
+            [open_rows["remaining_open.erdos_249_irrationality"]["statement"],
+             "Prove that `S = ∑ φ(n)/2ⁿ` is irrational"],
+            [open_rows["remaining_open.unbounded_certificate_supply"]["statement"],
+             "Produce the unbounded certificate supply"],
+            [open_rows["remaining_open.universal_257_all_infinite_supports"]["statement"],
+             "Prove irrationality of `∑_{n∈A} 1/(2ⁿ - 1)` for every infinite"],
+        ],
+        "choose_a_next_read": [
+            ["Exposition PDF"],
+            ["AGENTS.md"],
+            ["docs/orientation.json"],
+            ["docs/SOURCE_MAP.md"],
+        ],
+    }
+
+
+def first_bytes(text: str, limit: int) -> str:
+    return text.encode("utf-8")[:limit].decode("utf-8", errors="ignore")
+
+
+def normalized(text: str) -> str:
+    return " ".join(text.split())
+
+
+def contains_any(text: str, alternatives: list[str]) -> bool:
+    compact = normalized(text)
+    return any(normalized(token) in compact for token in alternatives)
+
+
+def validate_human_first_contact(
+    summary: dict[str, Any], surfaces: dict[str, str]
+) -> None:
+    assert set(surfaces) == set(HUMAN_SURFACES)
+    for path, budget in HUMAN_SURFACE_BUDGET_BYTES.items():
+        size = len(surfaces[path].encode("utf-8"))
+        assert size <= budget, f"{path} is {size} bytes (budget {budget})"
+
+    readme_prefix = first_bytes(surfaces["README.md"], README_FIRST_MINUTE_BUDGET_BYTES)
+    section_order = (
+        "## The two problems",
+        "## What the formal source establishes",
+        "## What remains open",
+        "## Read or run it",
     )
-    finite = next(
-        row for row in summary["principal_claims"] if row["status"] == "verified finite instance"
+    positions = [readme_prefix.find(heading) for heading in section_order]
+    assert all(position >= 0 for position in positions), (
+        f"README first-minute prefix lost section sequence {section_order}"
     )
-    requirements = [
-        ["Corpus orientation"],
-        ["proof authority"],
-        ["Lean kernel", "pinned Lean kernel"],
-        ["does not prove the irrationality", "does not solve either open problem"],
-        [conditional["statement"], "unbounded certificate supply"],
-        [finite["statement"], "verified finite instance"],
-    ]
+    assert positions == sorted(positions), "README first-minute sections are out of order"
+
+    for task_id, requirements in human_tasks(summary).items():
+        for alternatives in requirements:
+            assert contains_any(readme_prefix, alternatives), (
+                f"README first-minute task {task_id!r} lost semantic anchor group "
+                f"{alternatives}"
+            )
+
+    scope = surfaces["SCOPE.md"]
+    assert contains_any(scope, ["does not prove"])
+    assert contains_any(scope, ["formal-source checkpoint"])
+    orientation = surfaces["docs/ORIENTATION.md"]
     for status in (
         "formalised here",
         "unconditional progress",
         "conditional reduction",
         "verified finite instance",
     ):
-        requirements.append([summary["status_taxonomy"][status]])
-    requirements.extend(
-        [[row["id"], row["statement"]] for row in summary["remaining_open_propositions"]]
+        assert contains_any(orientation, [summary["status_taxonomy"][status]])
+    for row in summary["remaining_open_propositions"]:
+        assert row["id"] in orientation and contains_any(orientation, [row["statement"]])
+
+
+def validate_gateway_opening(paper: str) -> None:
+    """Check that the authored introduction works without source inventory."""
+    start = paper.index(r"\section{Introduction}")
+    end = paper.index(r"\section{The Mersenne--Lambert ladder}")
+    opening = paper[start:end]
+    size = len(opening.encode("utf-8"))
+    assert size <= GATEWAY_OPENING_BUDGET_BYTES, (
+        f"gateway introduction is {size} bytes (budget {GATEWAY_OPENING_BUDGET_BYTES})"
     )
-    return requirements
-
-
-def validate_human_first_contact(summary: dict[str, Any], bundle: str) -> None:
-    assert len(bundle.encode("utf-8")) <= HUMAN_FIRST_CONTACT_BUDGET_BYTES
-    for alternatives in human_requirements(summary):
-        assert any(token in bundle for token in alternatives), (
-            f"human first contact lost semantic anchor group {alternatives}"
+    requirements = {
+        "both_problem_statements": [
+            [r"Erd\H{o}s~\#249 asks whether"],
+            [r"Erd\H{o}s~\#257 asks whether"],
+        ],
+        "status_table": [
+            ["problem & checked here & exact open edge"],
+            [r"q>\Qzero\approx7.96\times10^{34}"],
+            ["28 lcm-diagonal scales"],
+        ],
+        "exact_residuals": [
+            ["Produce these certificates at unbounded parameters"],
+            [r"middle coordinates $-2$ and $-1$"],
+        ],
+        "common_architecture": [
+            ["exact tail and carry identities separate finite arithmetic"],
+            ["not an assertion that the two open problems are equivalent"],
+        ],
+        "reading_map": [
+            [r"\paragraph{Reading map.}"],
+            [r"Section~\ref{sec:eb}"],
+            [r"Section~\ref{sec:249}"],
+        ],
+    }
+    for task_id, groups in requirements.items():
+        for alternatives in groups:
+            assert contains_any(opening, alternatives), (
+                f"gateway opening task {task_id!r} lost {alternatives}"
+            )
+    for source_inventory_token in (r"\lref", r"\idn", ".lean", "module inventory"):
+        assert source_inventory_token not in opening, (
+            f"gateway opening exposes source-inventory token {source_inventory_token!r}"
         )
+
+
+def validate_cross_agent_entry(agents: str, claude: str) -> None:
+    """Keep one shared semantic core with a small Claude-native adapter."""
+    assert len(claude.encode("utf-8")) <= CLAUDE_ENTRY_BUDGET_BYTES
+    for token in (
+        "docs/orientation.json",
+        "docs/claims.json",
+        "Lean source checked by the pinned Lean kernel",
+        "not an entrypoint into any private development system",
+    ):
+        assert contains_any(agents, [token]), f"AGENTS.md lost shared invariant {token!r}"
+    for token in (
+        "@AGENTS.md",
+        "Claude-specific deltas only",
+        "docs/orientation.json",
+        "not an entrypoint into any private development system",
+    ):
+        assert contains_any(claude, [token]), f"CLAUDE.md lost native adapter token {token!r}"
+    assert "## First read" not in claude, "CLAUDE.md duplicated the shared first-read manual"
 
 
 def collect_agent_packets() -> dict[str, Any]:
@@ -264,8 +407,10 @@ def validate_agent_packets(packets: dict[str, Any]) -> None:
 def main() -> int:
     packets = collect_agent_packets()
     summary = packets["summary"]
-    human_bundle = "\n".join(read(path) for path in HUMAN_SURFACES)
-    validate_human_first_contact(summary, human_bundle)
+    human_surfaces = {path: read(path) for path in HUMAN_SURFACES}
+    validate_human_first_contact(summary, human_surfaces)
+    validate_gateway_opening(read(GATEWAY_PAPER))
+    validate_cross_agent_entry(read("AGENTS.md"), read("CLAUDE.md"))
     validate_agent_packets(packets)
     query_count = (
         1

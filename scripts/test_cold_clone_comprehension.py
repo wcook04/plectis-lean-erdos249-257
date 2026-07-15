@@ -18,24 +18,73 @@ def assert_rejected(packets: dict, label: str) -> None:
     raise AssertionError(f"semantic mutation escaped: {label}")
 
 
+def assert_human_rejected(summary: dict, surfaces: dict[str, str], label: str) -> None:
+    try:
+        diagnostic.validate_human_first_contact(summary, surfaces)
+    except AssertionError:
+        return
+    raise AssertionError(f"human first-contact mutation escaped: {label}")
+
+
 def main() -> int:
     packets = diagnostic.collect_agent_packets()
     summary = packets["summary"]
-    human_bundle = "\n".join(diagnostic.read(path) for path in diagnostic.HUMAN_SURFACES)
-    diagnostic.validate_human_first_contact(summary, human_bundle)
+    human_surfaces = {
+        path: diagnostic.read(path) for path in diagnostic.HUMAN_SURFACES
+    }
+    diagnostic.validate_human_first_contact(summary, human_surfaces)
+    gateway_paper = diagnostic.read(diagnostic.GATEWAY_PAPER)
+    diagnostic.validate_gateway_opening(gateway_paper)
+    agents = diagnostic.read("AGENTS.md")
+    claude = diagnostic.read("CLAUDE.md")
+    diagnostic.validate_cross_agent_entry(agents, claude)
     diagnostic.validate_agent_packets(packets)
 
     checks = 2
-    for alternatives in diagnostic.human_requirements(summary):
-        mutated = human_bundle
-        for token in alternatives:
-            mutated = mutated.replace(token, "")
-        try:
-            diagnostic.validate_human_first_contact(summary, mutated)
-        except AssertionError:
+    for task_id, requirements in diagnostic.human_tasks(summary).items():
+        for alternatives in requirements:
+            mutated = copy.deepcopy(human_surfaces)
+            mutated["README.md"] = diagnostic.normalized(mutated["README.md"])
+            for token in alternatives:
+                mutated["README.md"] = mutated["README.md"].replace(
+                    diagnostic.normalized(token), ""
+                )
+            assert_human_rejected(summary, mutated, f"{task_id}: {alternatives}")
             checks += 1
-        else:
-            raise AssertionError(f"human semantic-anchor deletion escaped: {alternatives}")
+
+    mutated = copy.deepcopy(human_surfaces)
+    mutated["README.md"] = mutated["README.md"].replace(
+        "## What remains open", "## Deferred questions"
+    )
+    assert_human_rejected(summary, mutated, "first-minute section contract")
+    checks += 1
+
+    mutated_paper = gateway_paper.replace(
+        "Produce these certificates at unbounded parameters", ""
+    )
+    try:
+        diagnostic.validate_gateway_opening(mutated_paper)
+    except AssertionError:
+        checks += 1
+    else:
+        raise AssertionError("gateway exact-open-edge deletion escaped")
+
+    mutated_paper = gateway_paper.replace(
+        r"\paragraph{Reading map.}", r"\paragraph{Reading map.}\lref{Fake.lean}{1}{fake}"
+    )
+    try:
+        diagnostic.validate_gateway_opening(mutated_paper)
+    except AssertionError:
+        checks += 1
+    else:
+        raise AssertionError("gateway source-inventory leak escaped")
+
+    try:
+        diagnostic.validate_cross_agent_entry(agents, claude.replace("@AGENTS.md", ""))
+    except AssertionError:
+        checks += 1
+    else:
+        raise AssertionError("Claude shared-instruction import deletion escaped")
 
     mutated = copy.deepcopy(packets)
     mutated["summary"]["proof_authority"] = "unverified"
