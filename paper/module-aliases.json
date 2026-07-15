@@ -3,7 +3,7 @@
   "artifact_role": "paper_sigil_to_lean_module_navigation_crosswalk",
   "authority_posture": "generated_navigation_projection_not_proof_authority",
   "heuristic": "Each CamelCase component contributes at most its first three characters.",
-  "alias_count": 103,
+  "alias_count": 104,
   "aliases": [
     {
       "sigil": "ActForResPro",
@@ -464,6 +464,11 @@
       "sigil": "SufCylPro",
       "module": "SuffixCylinderPromotion.lean",
       "path": "Erdos249257/SuffixCylinderPromotion.lean"
+    },
+    {
+      "sigil": "SufCylSta",
+      "module": "SuffixCylinderStage51.lean",
+      "path": "Erdos249257/SuffixCylinderStage51.lean"
     },
     {
       "sigil": "SufCylThr",

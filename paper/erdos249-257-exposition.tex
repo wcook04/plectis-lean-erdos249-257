@@ -972,6 +972,10 @@ If the resulting macro-step swallows the next strip, its coefficient-pulse
 bound forces the preceding gap into the exact quarter-band lower bound;
 this is a quantified residual branch, not an impossibility claim,
 \lrefx{SuffixCylinderProfiledSwallow.lean}{254}{nextBound_le_four_gapWidth_add_two_of_macro_swallow}.
+An explicit full-cylinder run reaches row $51$ with endpoint $51{,}327{,}745$,
+which exceeds the certified feedback head threshold and promotes the next
+cutoff,
+\lrefx{SuffixCylinderStage51.lean}{536}{fullCylinderStage51_feedback_headThreshold_margin}.
 This is a conditional local feedback classification, not a cofinal supply
 theorem: the required crossing coefficient profile is still an input.
 
