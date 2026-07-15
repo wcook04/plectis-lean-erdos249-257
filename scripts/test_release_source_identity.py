@@ -53,10 +53,24 @@ def main() -> int:
             new_lines = check_release.module_lines(cache, "Erdos249257/PostRef.lean", new_ref)
             assert new_lines is not None
             assert check_release.name_at_line(new_lines, "postRefOnly", 1)
+            matches_old, old_detail = check_release.formal_source_matches_current_lean_tree(old_ref)
+            assert not matches_old
+            assert "differ from formal-source checkpoint" in old_detail
+            matches_new, new_detail = check_release.formal_source_matches_current_lean_tree(new_ref)
+            assert matches_new
+            assert new_detail == ""
+            (root / "Erdos249257" / "Untracked.lean").write_text(
+                "theorem untracked : True := True.intro\n", encoding="utf-8"
+            )
+            matches_with_untracked, untracked_detail = (
+                check_release.formal_source_matches_current_lean_tree(new_ref)
+            )
+            assert not matches_with_untracked
+            assert "Untracked.lean" in untracked_detail
         finally:
             check_release.ROOT = original_root
 
-    print("test_release_source_identity: historical ref cannot read later worktree module")
+    print("test_release_source_identity: pinned source cannot masquerade as a later Lean tree")
     return 0
 
 

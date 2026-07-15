@@ -100,6 +100,45 @@ def module_lines(
     return cache[key]
 
 
+def formal_source_matches_current_lean_tree(formal_ref: str) -> tuple[bool, str]:
+    """Whether the current public proof sources are exactly ``formal_ref``.
+
+    The source checkpoint owns the declarations named by the claim registry.
+    Checking a declaration only with ``git show <formal_ref>:...`` is necessary,
+    but it is not sufficient when a later Lean edit is present in the worktree:
+    that would verify an older source while presenting the current tree.  The
+    public root and library directory are the supported proof surface; papers,
+    generated navigation, and release metadata may legitimately advance after
+    that checkpoint.
+    """
+    proof_paths = ("Erdos249257.lean", "Erdos249257")
+    comparison = subprocess.run(
+        ["git", "diff", "--quiet", formal_ref, "--", *proof_paths],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    if comparison.returncode not in (0, 1):
+        return False, comparison.stderr.strip() or "could not compare formal source to worktree"
+    untracked = subprocess.run(
+        ["git", "ls-files", "--others", "--exclude-standard", "--", *proof_paths],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    if untracked.returncode != 0:
+        return False, untracked.stderr.strip() or "could not inspect untracked Lean sources"
+    extras = [line for line in untracked.stdout.splitlines() if line.endswith(".lean")]
+    if comparison.returncode == 0 and not extras:
+        return True, ""
+    detail = "current public Lean sources differ from formal-source checkpoint"
+    if extras:
+        detail += "; untracked Lean source(s): " + ", ".join(extras)
+    return False, detail
+
+
 def name_at_line(lines: list[str], name: str, line: int) -> bool:
     lo = max(0, line - 1 - LINE_WINDOW)
     hi = min(len(lines), line - 1 + LINE_WINDOW + 1)
@@ -326,6 +365,9 @@ def main() -> int:
     check(subprocess.run(["git", "rev-parse", "--verify", f"{formal_ref}^{{commit}}"], cwd=ROOT,
                          capture_output=True, text=True, check=False).returncode == 0,
           f"release.formal_source.ref {formal_ref!r} does not resolve to a local commit")
+    formal_tree_matches, formal_tree_detail = formal_source_matches_current_lean_tree(formal_ref)
+    check(formal_tree_matches,
+          formal_tree_detail or "current public Lean sources differ from formal-source checkpoint")
     for index, (paper_path, paper_text) in enumerate(paper_sources):
         m = re.search(r"\\newcommand\{\\commit\}\{([^}]+)\}", paper_text)
         expected_pin = formal_ref if index == 0 else tag

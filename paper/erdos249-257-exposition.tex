@@ -976,6 +976,11 @@ An explicit full-cylinder run reaches row $51$ with endpoint $51{,}327{,}745$,
 which exceeds the certified feedback head threshold and promotes the next
 cutoff,
 \lrefx{SuffixCylinderStage51.lean}{536}{fullCylinderStage51_feedback_headThreshold_margin}.
+Any cofinal family of full suffix-cylinder stages would yield the terminal-only
+cofinal producer consumed by the final support construction,
+\lrefx{SuffixCylinderTerminalOnlyBridge.lean}{125}{cofinalTerminalOnlyStrip_of_cofinalCylinderStages}.
+This is explicitly conditional: the public development does not establish
+such a cofinal family.
 This is a conditional local feedback classification, not a cofinal supply
 theorem: the required crossing coefficient profile is still an input.
 

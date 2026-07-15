@@ -5715,6 +5715,16 @@
           ]
         },
         {
+          "id": "Erdos249257.SuffixCylinderTerminalOnlyBridge",
+          "path": "Erdos249257/SuffixCylinderTerminalOnlyBridge.lean",
+          "role": "Lean proof module",
+          "imports": [
+            "Erdos249257.SuffixCylinderStage51",
+            "Erdos249257.SuffixCylinderGlobalProducer",
+            "Erdos249257.TerminalOnlyCofinal"
+          ]
+        },
+        {
           "id": "Erdos249257.SuffixCylinderThreshold",
           "path": "Erdos249257/SuffixCylinderThreshold.lean",
           "role": "Lean proof module",
@@ -6283,7 +6293,7 @@
     "lean_toolchain": "leanprover/lean4:v4.29.1",
     "repository": "https://github.com/wcook04/plectis-lean-erdos249-257",
     "formal_source": {
-      "ref": "b685a0f",
+      "ref": "0650cdf50e5dccaedc6475ced755969b72afdca3",
       "ref_kind": "commit",
       "publication_state": "committed_checkpoint_pending_remote_publication",
       "relationship_to_last_tag": "post_tag_checkpoint"
@@ -6307,7 +6317,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 1811
+        "line": 1816
       }
     },
     {
@@ -6318,7 +6328,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 1820
+        "line": 1825
       }
     },
     {
@@ -6329,7 +6339,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 1827
+        "line": 1832
       }
     }
   ],
@@ -7299,6 +7309,11 @@
           "name": "fullCylinderStage51_feedback_headThreshold_margin",
           "module": "Erdos249257/SuffixCylinderStage51.lean",
           "line": 536
+        },
+        {
+          "name": "cofinalTerminalOnlyStrip_of_cofinalCylinderStages",
+          "module": "Erdos249257/SuffixCylinderTerminalOnlyBridge.lean",
+          "line": 125
         }
       ]
     },
