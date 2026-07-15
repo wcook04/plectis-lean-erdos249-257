@@ -5185,6 +5185,16 @@
           ]
         },
         {
+          "id": "Erdos249257.HalfCylinderLastProducerContradiction",
+          "path": "Erdos249257/HalfCylinderLastProducerContradiction.lean",
+          "role": "Lean proof module",
+          "imports": [
+            "Erdos249257.HalfCylinderLargestSkipInduction",
+            "Erdos249257.HalfCylinderProducerLowerBound",
+            "Erdos249257.HalfCylinderFinalMiddleCellEscape"
+          ]
+        },
+        {
           "id": "Erdos249257.HalfCylinderProducerCarrySocket",
           "path": "Erdos249257/HalfCylinderProducerCarrySocket.lean",
           "role": "Producer-carry and future-tail comparison socket",
@@ -6147,7 +6157,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 1723
+        "line": 1732
       }
     },
     {
@@ -6158,7 +6168,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 1732
+        "line": 1741
       }
     },
     {
@@ -6169,7 +6179,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 1739
+        "line": 1748
       }
     }
   ],
@@ -6709,6 +6719,29 @@
           "name": "finalMiddleCell_neg_three_not_last",
           "module": "Erdos249257/HalfCylinderFinalMiddleCellEscape.lean",
           "line": 587
+        }
+      ]
+    },
+    {
+      "id": "last_producer_tail_escape_reduction",
+      "label": "Last-producer tail-escape reduction",
+      "status": "conditional reduction",
+      "statement": "If every genuine middle producer other than the locally discharged -3 cell has producer carry larger than its complete future divisor-incidence tail, then an eventual right seam is impossible and 1/2 belongs to the Mersenne achievement set. A stated square-root producer lower bound is a sufficient stronger socket. Neither socket is proved here.",
+      "remaining_open_proposition_ids": [
+        "remaining_open.universal_257_all_infinite_supports"
+      ],
+      "paper_label": "res:fatalright",
+      "readme_headline": false,
+      "declarations": [
+        {
+          "name": "half_mem_mersenneAchievementSet_of_middleProducerTailEscapeExceptNegThree",
+          "module": "Erdos249257/HalfCylinderLastProducerContradiction.lean",
+          "line": 387
+        },
+        {
+          "name": "half_mem_mersenneAchievementSet_of_middleProducerSqrtEscape",
+          "module": "Erdos249257/HalfCylinderLastProducerContradiction.lean",
+          "line": 409
         }
       ]
     },

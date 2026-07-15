@@ -751,6 +751,15 @@ impossible by the analytic nonnegativity identity,
 It removes that one conditional terminal configuration; it does not decide
 the right-tail branch or the remaining two middle cells.
 
+The remaining global reduction is now precise.  If every genuine middle
+producer other than that discharged cell has producer carry larger than its
+complete future divisor-incidence tail, then an eventual right seam is
+impossible and $1/2$ belongs to the Mersenne achievement set:
+\lrefx{HalfCylinderLastProducerContradiction.lean}{387}{half_mem_mersenneAchievementSet_of_middleProducerTailEscapeExceptNegThree}.
+The stronger square-root lower-bound socket is also sufficient,
+\lrefx{HalfCylinderLastProducerContradiction.lean}{409}{half_mem_mersenneAchievementSet_of_middleProducerSqrtEscape}.
+Neither socket is supplied here.
+
 \subsection{Positive half-membership classification}\label{res:halfmembership}
 
 The complementary branch has an equally exact seam formulation.  Membership
