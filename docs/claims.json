@@ -4901,6 +4901,15 @@
           ]
         },
         {
+          "id": "Erdos249257.HalfCarryCofinalWindowOrSeamConsumer",
+          "path": "Erdos249257/HalfCarryCofinalWindowOrSeamConsumer.lean",
+          "role": "Mixed cofinal half-carry fan-in",
+          "imports": [
+            "Erdos249257.HalfCarrySelectedWindow",
+            "Erdos249257.HalfCarryProtectedSeamConsumer"
+          ]
+        },
+        {
           "id": "Erdos249257.HalfCarryProtectedSeamConsumer",
           "path": "Erdos249257/HalfCarryProtectedSeamConsumer.lean",
           "role": "Localized protected one-hole seam consumer",
@@ -5335,6 +5344,11 @@
           "to": "half_carry_reachability_compactness"
         },
         {
+          "from": "mixed_cofinal_half_carry_fan_in",
+          "relation": "builds_on",
+          "to": "localized_protected_seam_compactness"
+        },
+        {
           "from": "denominator_exclusion",
           "relation": "advances_open_target",
           "to": "erdos_249",
@@ -5608,7 +5622,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 1268
+        "line": 1279
       }
     },
     {
@@ -5619,7 +5633,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 1277
+        "line": 1288
       }
     },
     {
@@ -5630,7 +5644,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 1284
+        "line": 1295
       }
     }
   ],
@@ -5964,6 +5978,34 @@
           "name": "exists_infinite_support_half_of_cofinalProtectedEvenSeamRealization",
           "module": "Erdos249257/HalfCarryProtectedSeamConsumer.lean",
           "line": 53
+        }
+      ]
+    },
+    {
+      "id": "mixed_cofinal_half_carry_fan_in",
+      "label": "Mixed cofinal half-carry fan-in",
+      "status": "conditional reduction",
+      "statement": "At every requested scale, either a selected protected half-carry window or a localized realized one-hole seam supplies an admissible finite word. If this mixed producer is cofinal, then compactness yields an infinite support A with erdosSupportSeries 2 A = 1/2. The mixed producer is not proved.",
+      "remaining_open_proposition_ids": [
+        "remaining_open.universal_257_all_infinite_supports"
+      ],
+      "paper_label": "res:cofinalwindowseam",
+      "readme_headline": false,
+      "declarations": [
+        {
+          "name": "HalfCarryCofinalSelectedWindowOrProtectedSeam",
+          "module": "Erdos249257/HalfCarryCofinalWindowOrSeamConsumer.lean",
+          "line": 25
+        },
+        {
+          "name": "cofinalAdmissibility_of_cofinalSelectedWindowOrProtectedSeam",
+          "module": "Erdos249257/HalfCarryCofinalWindowOrSeamConsumer.lean",
+          "line": 32
+        },
+        {
+          "name": "exists_infinite_support_half_of_cofinalSelectedWindowOrProtectedSeam",
+          "module": "Erdos249257/HalfCarryCofinalWindowOrSeamConsumer.lean",
+          "line": 58
         }
       ]
     },

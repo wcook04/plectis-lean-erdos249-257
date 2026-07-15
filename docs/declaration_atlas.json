@@ -4,21 +4,21 @@
   "projection_not_authority": true,
   "proof_authority": "Lean source checked by the pinned Lean kernel",
   "argument_authority": "docs/claims.json::machine_readable_paper.argument_graph",
-  "source_fingerprint": "sha256:12eff513d370a804c755f0d68569d2e87723cfa44c838b2e2f209523af9f613a",
+  "source_fingerprint": "sha256:78716afe3db50fd788bcee72ca7ddc45508873ef449674cf11f1e600cd243d77",
   "summary": {
-    "module_count": 565,
-    "declaration_count": 7103,
-    "theorem_like_count": 6393,
+    "module_count": 566,
+    "declaration_count": 7106,
+    "theorem_like_count": 6395,
     "generated_certificate_declaration_count": 1681,
-    "principal_claim_link_count": 127,
+    "principal_claim_link_count": 130,
     "kind_counts": {
       "abbrev": 5,
-      "def": 685,
+      "def": 686,
       "inductive": 3,
       "instance": 3,
       "lemma": 354,
       "structure": 14,
-      "theorem": 6039
+      "theorem": 6041
     }
   },
   "modules": [
@@ -93,7 +93,8 @@
         "Erdos249257.HalfCarryCeilParentContraction",
         "Erdos249257.HalfCarrySelectedWindow",
         "Erdos249257.HalfCarryRewindPhase",
-        "Erdos249257.HalfCarryProtectedSeamConsumer"
+        "Erdos249257.HalfCarryProtectedSeamConsumer",
+        "Erdos249257.HalfCarryCofinalWindowOrSeamConsumer"
       ],
       "declaration_count": 0,
       "kind_counts": {}
@@ -6378,6 +6379,19 @@
       "kind_counts": {
         "def": 6,
         "theorem": 11
+      }
+    },
+    {
+      "id": "Erdos249257.HalfCarryCofinalWindowOrSeamConsumer",
+      "path": "Erdos249257/HalfCarryCofinalWindowOrSeamConsumer.lean",
+      "imports": [
+        "Erdos249257.HalfCarrySelectedWindow",
+        "Erdos249257.HalfCarryProtectedSeamConsumer"
+      ],
+      "declaration_count": 3,
+      "kind_counts": {
+        "def": 1,
+        "theorem": 2
       }
     },
     {
@@ -67604,6 +67618,45 @@
         "fixed_coefficient_rewind_contraction"
       ],
       "docstring": "Correct fixed-tail contraction dichotomy. Width alone proves exactly a singleton-or-seam-pair result, never an unconditional singleton."
+    },
+    {
+      "id": "Erdos249257/HalfCarryCofinalWindowOrSeamConsumer.lean:25:HalfCarryCofinalSelectedWindowOrProtectedSeam",
+      "name": "HalfCarryCofinalSelectedWindowOrProtectedSeam",
+      "kind": "def",
+      "module": "Erdos249257/HalfCarryCofinalWindowOrSeamConsumer.lean",
+      "line": 25,
+      "signature": "def HalfCarryCofinalSelectedWindowOrProtectedSeam : Prop",
+      "generated_certificate": false,
+      "claim_ids": [
+        "mixed_cofinal_half_carry_fan_in"
+      ],
+      "docstring": "Cofinal mixed producer: a full selected window or a localized realized seam may witness each requested scale."
+    },
+    {
+      "id": "Erdos249257/HalfCarryCofinalWindowOrSeamConsumer.lean:32:cofinalAdmissibility_of_cofinalSelectedWindowOrProtectedSeam",
+      "name": "cofinalAdmissibility_of_cofinalSelectedWindowOrProtectedSeam",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarryCofinalWindowOrSeamConsumer.lean",
+      "line": 32,
+      "signature": "theorem cofinalAdmissibility_of_cofinalSelectedWindowOrProtectedSeam (hsupply : HalfCarryCofinalSelectedWindowOrProtectedSeam) : HalfCarryCofinalAdmissibility",
+      "generated_certificate": false,
+      "claim_ids": [
+        "mixed_cofinal_half_carry_fan_in"
+      ],
+      "docstring": "Every mixed cofinal receipt contains the one admissible word required by the landed inverse-system compactness theorem."
+    },
+    {
+      "id": "Erdos249257/HalfCarryCofinalWindowOrSeamConsumer.lean:58:exists_infinite_support_half_of_cofinalSelectedWindowOrProtectedSeam",
+      "name": "exists_infinite_support_half_of_cofinalSelectedWindowOrProtectedSeam",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarryCofinalWindowOrSeamConsumer.lean",
+      "line": 58,
+      "signature": "theorem exists_infinite_support_half_of_cofinalSelectedWindowOrProtectedSeam (hsupply : HalfCarryCofinalSelectedWindowOrProtectedSeam) : ∃ A : Set ℕ, A.Infinite ∧ erdosSupportSeries 2 A = (1 : ℝ) / 2",
+      "generated_certificate": false,
+      "claim_ids": [
+        "mixed_cofinal_half_carry_fan_in"
+      ],
+      "docstring": "The mixed cofinal producer is already sufficient for an infinite support whose Mersenne achievement sum is exactly `1 / 2`."
     },
     {
       "id": "Erdos249257/HalfCarryProtectedSeamConsumer.lean:18:ProtectedEvenSeamRealizedAt",

@@ -632,6 +632,17 @@ and hence an infinite support with sum $1/2$,
 \lrefx{HalfCarryProtectedSeamConsumer.lean}{53}{exists_infinite_support_half_of_cofinalProtectedEvenSeamRealization}.
 The cofinal realization supply is not proved.
 
+\subsection{Mixed cofinal half-carry fan-in}\label{res:cofinalwindowseam}
+
+At each requested scale, the public mixed producer permits either a selected
+protected window or a localized realized seam.  Each branch supplies the one
+admissible word needed for compactness, so this cofinal disjunction implies
+an infinite support with sum $1/2$:
+\lref{HalfCarryCofinalWindowOrSeamConsumer.lean}{32}{cofinalAdmissibility_of_cofinalSelectedWindowOrProtectedSeam}
+and
+\lrefx{HalfCarryCofinalWindowOrSeamConsumer.lean}{58}{exists_infinite_support_half_of_cofinalSelectedWindowOrProtectedSeam}.
+The mixed cofinal producer remains an unproved hypothesis.
+
 \subsection{What stays open}
 
 The universal Erd\H{o}s \#257 statement, irrationality of $\sum_{n\in A}1/(2^n-1)$

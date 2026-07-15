@@ -67,3 +67,4 @@ import Erdos249257.HalfCarryCeilParentContraction
 import Erdos249257.HalfCarrySelectedWindow
 import Erdos249257.HalfCarryRewindPhase
 import Erdos249257.HalfCarryProtectedSeamConsumer
+import Erdos249257.HalfCarryCofinalWindowOrSeamConsumer
