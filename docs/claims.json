@@ -885,6 +885,15 @@
           ]
         },
         {
+          "id": "Erdos249257.DiagonalPincerCertificatesT61",
+          "path": "Erdos249257/DiagonalPincerCertificatesT61.lean",
+          "role": "Finite diagonal-pincer certificate extension",
+          "imports": [
+            "Erdos249257.DiagonalPincerCertificatesT59",
+            "Erdos249257.DiagonalPincerPrimeCertificates.ClosureT64"
+          ]
+        },
+        {
           "id": "Erdos249257.DiagonalPincerDecomposition",
           "path": "Erdos249257/DiagonalPincerDecomposition.lean",
           "role": "Exact diagonal-pincer target decomposition",
@@ -7228,8 +7237,8 @@
       "id": "certified_kill_instances",
       "label": "Initial certified-kill segment and generated certificates",
       "status": "verified finite instance",
-      "statement": "Kernel-checked certified kills for small periods and at 26 explicit lcm-diagonal scales through t = 59, plus finite certificate shards, each discharged by decide.",
-      "bounded_domain": "The explicitly listed small periods; the lcm-diagonal scales t in {1,2,3,4,5,7,8,9,11,13,16,17,19,23,25,27,29,31,32,37,41,43,47,49,53,59}; and the parameters encoded by the finite certificate shards.",
+      "statement": "Kernel-checked certified kills for small periods and at 27 explicit lcm-diagonal scales through t = 61, plus finite certificate shards, each discharged by decide.",
+      "bounded_domain": "The explicitly listed small periods; the lcm-diagonal scales t in {1,2,3,4,5,7,8,9,11,13,16,17,19,23,25,27,29,31,32,37,41,43,47,49,53,59,61}; and the parameters encoded by the finite certificate shards.",
       "remaining_open_proposition_ids": [
         "remaining_open.unbounded_certificate_supply"
       ],
@@ -7257,9 +7266,9 @@
           "line": 246
         },
         {
-          "name": "certifiedKill_diagonal_all_imported_through_t59",
-          "module": "Erdos249257/DiagonalPincerCertificatesT59.lean",
-          "line": 1869
+          "name": "certifiedKill_diagonal_all_imported_through_t61",
+          "module": "Erdos249257/DiagonalPincerCertificatesT61.lean",
+          "line": 1974
         }
       ]
     },
