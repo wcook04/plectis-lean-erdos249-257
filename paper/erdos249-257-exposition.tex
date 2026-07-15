@@ -22,7 +22,7 @@
 % the repository verifies that it matches docs/claims.json and that every
 % \lref/\lrefx/\lloc target resolves to the named declaration at that line.
 % ---------------------------------------------------------------------------
-\newcommand{\commit}{7183dc80f6ab18b528fa45071126413724acca38}
+\newcommand{\commit}{245663a59acaf69abd5eba69b885bbdc70dab122}
 \newcommand{\repobase}{https://github.com/wcook04/plectis-lean-erdos249-257/blob/\commit}
 \newcommand{\sourceurl}{https://github.com/wcook04/plectis-lean-erdos249-257/tree/\commit}
 \newcommand{\rootbase}{https://github.com/wcook04/plectis-lean-erdos249-257/blob/main}
@@ -789,6 +789,20 @@ at the next two rows:
 \lref{HalfCylinderSeamProducerAlignment.lean}{24}{producerCarry_insert_eq_four_mul_shiftedHole_sub_pulse}.
 This is an exact coordinate change between the seam and producer pictures; it
 does not supply a sign or size estimate for that carry.
+
+\subsection{A computed selected-window base}\label{res:selectedwindowbase}
+
+The selected half-carry interface has a checked depth-$18$ base: twelve
+Boolean words cover every terminal carry in the strip $[1,12]$, with all
+intermediate carries in the corresponding half strip.  The reflected table is
+formalised at
+\lref{HalfCarrySelectedWindowBase.lean}{77}{depth18TableCheck_eq_true};
+the resulting selected window is defined at
+\lrefx{HalfCarrySelectedWindowBase.lean}{127}{depth18SelectedHalfWindow}.
+All twelve words share the same restriction at depth $13$, giving the first
+next-row divisor-agreement certificate,
+\lrefx{HalfCarrySelectedWindowBase.lean}{170}{depth18SelectedHalfWindow_nextRowDivisorAgreement}.
+This finite base does not provide selected windows at unbounded depths.
 
 \subsection{What stays open}
 

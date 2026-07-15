@@ -88,3 +88,4 @@ import Erdos249257.HalfCylinderProducerCarrySocket
 import Erdos249257.HalfCylinderQuarterBandEndpoints
 import Erdos249257.HalfCylinderResetDeficitEscape
 import Erdos249257.HalfCylinderSeamProducerAlignment
+import Erdos249257.HalfCarrySelectedWindowBase

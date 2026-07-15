@@ -4954,6 +4954,14 @@
           ]
         },
         {
+          "id": "Erdos249257.HalfCarrySelectedWindowBase",
+          "path": "Erdos249257/HalfCarrySelectedWindowBase.lean",
+          "role": "Computed depth-18 selected half-carry window base",
+          "imports": [
+            "Erdos249257.HalfCarrySelectedWindow"
+          ]
+        },
+        {
           "id": "Erdos249257.HalfCutLocator",
           "path": "Erdos249257/HalfCutLocator.lean",
           "role": "Fatal-gap locator for the half target",
@@ -5574,6 +5582,11 @@
           "to": "producer_carry_future_tail_socket"
         },
         {
+          "from": "selected_window_depth18_base",
+          "relation": "builds_on",
+          "to": "selected_half_carry_window_compactness"
+        },
+        {
           "from": "denominator_exclusion",
           "relation": "advances_open_target",
           "to": "erdos_249",
@@ -5823,7 +5836,7 @@
     "lean_toolchain": "leanprover/lean4:v4.29.1",
     "repository": "https://github.com/wcook04/plectis-lean-erdos249-257",
     "formal_source": {
-      "ref": "7183dc80f6ab18b528fa45071126413724acca38",
+      "ref": "245663a59acaf69abd5eba69b885bbdc70dab122",
       "ref_kind": "commit",
       "publication_state": "committed_checkpoint_pending_remote_publication",
       "relationship_to_last_tag": "post_tag_checkpoint"
@@ -5847,7 +5860,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 1426
+        "line": 1440
       }
     },
     {
@@ -5858,7 +5871,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 1435
+        "line": 1449
       }
     },
     {
@@ -5869,7 +5882,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 1442
+        "line": 1456
       }
     }
   ],
@@ -6534,6 +6547,35 @@
           "name": "producerCarry_insert_eq_four_mul_shiftedHole_sub_pulse",
           "module": "Erdos249257/HalfCylinderSeamProducerAlignment.lean",
           "line": 24
+        }
+      ]
+    },
+    {
+      "id": "selected_window_depth18_base",
+      "label": "Computed depth-18 selected half-carry window base",
+      "status": "verified finite instance",
+      "bounded_domain": "The 12 terminal carries in the half strip at depth 18, together with their common depth-13 restriction and the next-row divisor-agreement certificate.",
+      "statement": "A kernel-reflected Boolean table supplies a selected half-carry window at depth 18 for every terminal carry in the half strip [1,12]. The representatives share a common depth-13 restriction, yielding the first next-row divisor-agreement certificate. This is a finite base and does not construct selected windows at unbounded depths.",
+      "remaining_open_proposition_ids": [
+        "remaining_open.universal_257_all_infinite_supports"
+      ],
+      "paper_label": "res:selectedwindowbase",
+      "readme_headline": false,
+      "declarations": [
+        {
+          "name": "depth18TableCheck_eq_true",
+          "module": "Erdos249257/HalfCarrySelectedWindowBase.lean",
+          "line": 77
+        },
+        {
+          "name": "depth18SelectedHalfWindow",
+          "module": "Erdos249257/HalfCarrySelectedWindowBase.lean",
+          "line": 127
+        },
+        {
+          "name": "depth18SelectedHalfWindow_nextRowDivisorAgreement",
+          "module": "Erdos249257/HalfCarrySelectedWindowBase.lean",
+          "line": 170
         }
       ]
     },

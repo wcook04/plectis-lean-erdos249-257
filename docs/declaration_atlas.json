@@ -4,21 +4,21 @@
   "projection_not_authority": true,
   "proof_authority": "Lean source checked by the pinned Lean kernel",
   "argument_authority": "docs/claims.json::machine_readable_paper.argument_graph",
-  "source_fingerprint": "sha256:2b9f81a454326353153b1945f0db65aac9dc4aea88bc345af1a3afb44c887ff6",
+  "source_fingerprint": "sha256:7ec8227fffa825bd2211a62591bfa46b934e5a88e1b1bb854c17f43778e236f9",
   "summary": {
-    "module_count": 586,
-    "declaration_count": 7564,
-    "theorem_like_count": 6763,
+    "module_count": 587,
+    "declaration_count": 7581,
+    "theorem_like_count": 6773,
     "generated_certificate_declaration_count": 1681,
-    "principal_claim_link_count": 160,
+    "principal_claim_link_count": 163,
     "kind_counts": {
       "abbrev": 6,
-      "def": 770,
+      "def": 777,
       "inductive": 3,
       "instance": 5,
       "lemma": 354,
       "structure": 17,
-      "theorem": 6409
+      "theorem": 6419
     }
   },
   "modules": [
@@ -114,7 +114,8 @@
         "Erdos249257.HalfCylinderProducerCarrySocket",
         "Erdos249257.HalfCylinderQuarterBandEndpoints",
         "Erdos249257.HalfCylinderResetDeficitEscape",
-        "Erdos249257.HalfCylinderSeamProducerAlignment"
+        "Erdos249257.HalfCylinderSeamProducerAlignment",
+        "Erdos249257.HalfCarrySelectedWindowBase"
       ],
       "declaration_count": 0,
       "kind_counts": {}
@@ -6478,6 +6479,18 @@
         "def": 15,
         "structure": 2,
         "theorem": 28
+      }
+    },
+    {
+      "id": "Erdos249257.HalfCarrySelectedWindowBase",
+      "path": "Erdos249257/HalfCarrySelectedWindowBase.lean",
+      "imports": [
+        "Erdos249257.HalfCarrySelectedWindow"
+      ],
+      "declaration_count": 17,
+      "kind_counts": {
+        "def": 7,
+        "theorem": 10
       }
     },
     {
@@ -69769,6 +69782,195 @@
       "generated_certificate": false,
       "claim_ids": [],
       "docstring": "A base selected window plus a forward selected-window induction closes the exact infinite half-sum endpoint directly."
+    },
+    {
+      "id": "Erdos249257/HalfCarrySelectedWindowBase.lean:16:wordCoeff",
+      "name": "wordCoeff",
+      "kind": "def",
+      "module": "Erdos249257/HalfCarrySelectedWindowBase.lean",
+      "line": 16,
+      "signature": "def wordCoeff {N : ℕ} (a : HalfWord N) (n : ℕ) : ℕ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Computable divisor coefficient of one finite Boolean word."
+    },
+    {
+      "id": "Erdos249257/HalfCarrySelectedWindowBase.lean:22:wordCoeff_eq_supportCoeff_wordSupport",
+      "name": "wordCoeff_eq_supportCoeff_wordSupport",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarrySelectedWindowBase.lean",
+      "line": 22,
+      "signature": "theorem wordCoeff_eq_supportCoeff_wordSupport {N : ℕ} (a : HalfWord N) (n : ℕ) : wordCoeff a n = supportCoeff (wordSupport a) n",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The computable finite-word coefficient is the existing support coefficient of `wordSupport a`."
+    },
+    {
+      "id": "Erdos249257/HalfCarrySelectedWindowBase.lean:41:wordCarry",
+      "name": "wordCarry",
+      "kind": "def",
+      "module": "Erdos249257/HalfCarrySelectedWindowBase.lean",
+      "line": 41,
+      "signature": "def wordCarry {N : ℕ} (a : HalfWord N) : ℕ → ℤ | 0 => 1 | m + 1 => 2 * wordCarry a m - (wordCoeff a (m + 2) : ℤ) /-- The executable word carry agrees with the existing `Set`-based carry. -/ theorem wordCarry_eq_integerHalfCarry {N : ℕ} (a : HalfWord N) (m : ℕ) : wordCarry a m = integerHalfCarry (wordSupport a) m",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Executable integer half carry driven by `wordCoeff`."
+    },
+    {
+      "id": "Erdos249257/HalfCarrySelectedWindowBase.lean:46:wordCarry_eq_integerHalfCarry",
+      "name": "wordCarry_eq_integerHalfCarry",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarrySelectedWindowBase.lean",
+      "line": 46,
+      "signature": "theorem wordCarry_eq_integerHalfCarry {N : ℕ} (a : HalfWord N) (m : ℕ) : wordCarry a m = integerHalfCarry (wordSupport a) m",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The executable word carry agrees with the existing `Set`-based carry."
+    },
+    {
+      "id": "Erdos249257/HalfCarrySelectedWindowBase.lean:58:depth18Word",
+      "name": "depth18Word",
+      "kind": "def",
+      "module": "Erdos249257/HalfCarrySelectedWindowBase.lean",
+      "line": 58,
+      "signature": "def depth18Word (k : ℕ) : HalfWord 18",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The depth-18 cylinder word for terminal carry `k`. Exponents `2,3,6,7` form the common prefix; exponents `14,...,18` are the five-bit big-endian encoding of `17-k`."
+    },
+    {
+      "id": "Erdos249257/HalfCarrySelectedWindowBase.lean:65:depth18EntryCheck",
+      "name": "depth18EntryCheck",
+      "kind": "def",
+      "module": "Erdos249257/HalfCarrySelectedWindowBase.lean",
+      "line": 65,
+      "signature": "def depth18EntryCheck (k : ℕ) : Bool",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Fully computable strip and terminal check for one depth-18 word."
+    },
+    {
+      "id": "Erdos249257/HalfCarrySelectedWindowBase.lean:73:depth18TableCheck",
+      "name": "depth18TableCheck",
+      "kind": "def",
+      "module": "Erdos249257/HalfCarrySelectedWindowBase.lean",
+      "line": 73,
+      "signature": "def depth18TableCheck : Bool",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "One Boolean table covers all twelve carries in the depth-18 strip."
+    },
+    {
+      "id": "Erdos249257/HalfCarrySelectedWindowBase.lean:77:depth18TableCheck_eq_true",
+      "name": "depth18TableCheck_eq_true",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarrySelectedWindowBase.lean",
+      "line": 77,
+      "signature": "theorem depth18TableCheck_eq_true : depth18TableCheck = true",
+      "generated_certificate": false,
+      "claim_ids": [
+        "selected_window_depth18_base"
+      ],
+      "docstring": "Kernel-reflected evaluation of the complete depth-18 table."
+    },
+    {
+      "id": "Erdos249257/HalfCarrySelectedWindowBase.lean:80:depth18EntryCheck_eq_true",
+      "name": "depth18EntryCheck_eq_true",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarrySelectedWindowBase.lean",
+      "line": 80,
+      "signature": "theorem depth18EntryCheck_eq_true {k : ℕ} (hk : 1 ≤ k) (hk12 : k ≤ 12) : depth18EntryCheck k = true",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCarrySelectedWindowBase.lean:91:depth18Word_carry_bounds",
+      "name": "depth18Word_carry_bounds",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarrySelectedWindowBase.lean",
+      "line": 91,
+      "signature": "theorem depth18Word_carry_bounds {k n : ℕ} (hk : 1 ≤ k) (hk12 : k ≤ 12) (hn : 1 ≤ n) (hn18 : n ≤ 18) : (1 : ℤ) ≤ wordCarry (depth18Word k) (n - 1) ∧ wordCarry (depth18Word k) (n - 1) ≤ halfStripBound n",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCarrySelectedWindowBase.lean:113:depth18Word_terminal",
+      "name": "depth18Word_terminal",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarrySelectedWindowBase.lean",
+      "line": 113,
+      "signature": "theorem depth18Word_terminal {k : ℕ} (hk : 1 ≤ k) (hk12 : k ≤ 12) : wordCarry (depth18Word k) 17 = (k : ℤ)",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCarrySelectedWindowBase.lean:119:halfStripBound_eighteen",
+      "name": "halfStripBound_eighteen",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarrySelectedWindowBase.lean",
+      "line": 119,
+      "signature": "theorem halfStripBound_eighteen : halfStripBound 18 = 12",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCarrySelectedWindowBase.lean:127:depth18SelectedHalfWindow",
+      "name": "depth18SelectedHalfWindow",
+      "kind": "def",
+      "module": "Erdos249257/HalfCarrySelectedWindowBase.lean",
+      "line": 127,
+      "signature": "noncomputable def depth18SelectedHalfWindow : SelectedHalfWindow 18 (halfStripBound 18)",
+      "generated_certificate": false,
+      "claim_ids": [
+        "selected_window_depth18_base"
+      ],
+      "docstring": "The exact depth-18 selected full strip used as the global induction base."
+    },
+    {
+      "id": "Erdos249257/HalfCarrySelectedWindowBase.lean:145:depth18PrefixWord",
+      "name": "depth18PrefixWord",
+      "kind": "def",
+      "module": "Erdos249257/HalfCarrySelectedWindowBase.lean",
+      "line": 145,
+      "signature": "def depth18PrefixWord : HalfWord 13",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The literal common prefix shared by all twelve depth-18 words."
+    },
+    {
+      "id": "Erdos249257/HalfCarrySelectedWindowBase.lean:150:restrictWord_depth18Word_thirteen",
+      "name": "restrictWord_depth18Word_thirteen",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarrySelectedWindowBase.lean",
+      "line": 150,
+      "signature": "theorem restrictWord_depth18Word_thirteen (k : ℕ) : restrictWord (by omega : 13 ≤ 18) (depth18Word k) = depth18PrefixWord",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Every certified depth-18 representative restricts to the same word at depth 13; the five terminal encoding bits have all been removed."
+    },
+    {
+      "id": "Erdos249257/HalfCarrySelectedWindowBase.lean:159:depth18SelectedHalfWindow_commonRestrictionAt_thirteen",
+      "name": "depth18SelectedHalfWindow_commonRestrictionAt_thirteen",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarrySelectedWindowBase.lean",
+      "line": 159,
+      "signature": "theorem depth18SelectedHalfWindow_commonRestrictionAt_thirteen : depth18SelectedHalfWindow.CommonRestrictionAt (by omega : 13 ≤ 18)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The finite base already carries the common-history invariant needed for the first divisor-agreement step."
+    },
+    {
+      "id": "Erdos249257/HalfCarrySelectedWindowBase.lean:170:depth18SelectedHalfWindow_nextRowDivisorAgreement",
+      "name": "depth18SelectedHalfWindow_nextRowDivisorAgreement",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarrySelectedWindowBase.lean",
+      "line": 170,
+      "signature": "theorem depth18SelectedHalfWindow_nextRowDivisorAgreement : depth18SelectedHalfWindow.NextRowDivisorAgreement",
+      "generated_certificate": false,
+      "claim_ids": [
+        "selected_window_depth18_base"
+      ],
+      "docstring": "Concrete initial coherent-history certificate: the depth-18 selected window agrees on every divisor inspected by row 19."
     },
     {
       "id": "Erdos249257/HalfCutLocator.lean:55:mersenneCorrectionTail_lt_doubleDepth",
