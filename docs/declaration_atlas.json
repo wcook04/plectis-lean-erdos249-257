@@ -4,21 +4,21 @@
   "projection_not_authority": true,
   "proof_authority": "Lean source checked by the pinned Lean kernel",
   "argument_authority": "docs/claims.json::machine_readable_paper.argument_graph",
-  "source_fingerprint": "sha256:471be44e182ba4c62d4654156e9f911f1f9637a9ff4a67ec9334bdfb8ac0ffb2",
+  "source_fingerprint": "sha256:ccfac75100342633baeb7100a62c224de11bd30eb6e297c8ea1fa72e5d5ee115",
   "summary": {
-    "module_count": 554,
-    "declaration_count": 6743,
-    "theorem_like_count": 6122,
+    "module_count": 555,
+    "declaration_count": 6817,
+    "theorem_like_count": 6178,
     "generated_certificate_declaration_count": 1681,
-    "principal_claim_link_count": 94,
+    "principal_claim_link_count": 97,
     "kind_counts": {
       "abbrev": 4,
-      "def": 601,
+      "def": 619,
       "inductive": 3,
       "instance": 3,
-      "lemma": 350,
+      "lemma": 354,
       "structure": 10,
-      "theorem": 5772
+      "theorem": 5824
     }
   },
   "modules": [
@@ -82,7 +82,8 @@
         "Erdos249257.MersenneTailAtoms",
         "Erdos249257.MobiusSignSupportNoGo",
         "Erdos249257.TotientCarryKernelRigidity",
-        "Erdos249257.PivotAntiReconstruction"
+        "Erdos249257.PivotAntiReconstruction",
+        "Erdos249257.LcmFactorIdealPulseObstruction"
       ],
       "declaration_count": 0,
       "kind_counts": {}
@@ -6419,6 +6420,21 @@
         "def": 1,
         "lemma": 2,
         "theorem": 12
+      }
+    },
+    {
+      "id": "Erdos249257.LcmFactorIdealPulseObstruction",
+      "path": "Erdos249257/LcmFactorIdealPulseObstruction.lean",
+      "imports": [
+        "Erdos249257.GenericTailOrbitRigidity",
+        "Erdos249257.LcmDiagonalReduction",
+        "Erdos249257.MersenneLambertLadder"
+      ],
+      "declaration_count": 74,
+      "kind_counts": {
+        "def": 18,
+        "lemma": 4,
+        "theorem": 52
       }
     },
     {
@@ -68231,6 +68247,819 @@
       "generated_certificate": false,
       "claim_ids": [],
       "docstring": "No lcm-diagonal tail difference is an integer at the first six scales: `D_{H_t}(H_t) ∉ ℤ` for `1 ≤ t ≤ 6`."
+    },
+    {
+      "id": "Erdos249257/LcmFactorIdealPulseObstruction.lean:41:sparsePulseState",
+      "name": "sparsePulseState",
+      "kind": "def",
+      "module": "Erdos249257/LcmFactorIdealPulseObstruction.lean",
+      "line": 41,
+      "signature": "def sparsePulseState (A : ℤ) (S : Finset ℕ) (k : ℕ) : ℤ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A state which is `-A` on a finite anchor set and zero elsewhere."
+    },
+    {
+      "id": "Erdos249257/LcmFactorIdealPulseObstruction.lean:45:sparsePulseLetter",
+      "name": "sparsePulseLetter",
+      "kind": "def",
+      "module": "Erdos249257/LcmFactorIdealPulseObstruction.lean",
+      "line": 45,
+      "signature": "def sparsePulseLetter (A : ℤ) (S : Finset ℕ) (i : ℕ) : ℤ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The zero-based forcing letter determined by `c_{i+1} = 2c_i - a_i`."
+    },
+    {
+      "id": "Erdos249257/LcmFactorIdealPulseObstruction.lean:49:sparsePulseInput",
+      "name": "sparsePulseInput",
+      "kind": "def",
+      "module": "Erdos249257/LcmFactorIdealPulseObstruction.lean",
+      "line": 49,
+      "signature": "def sparsePulseInput (A : ℤ) (S : Finset ℕ) : ℕ → ℤ | 0 => 0 | i + 1 => sparsePulseLetter A S i /-- Sparse pulses satisfy the forced affine recurrence",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The one-based input convention used by `affineBinaryOrbit`."
+    },
+    {
+      "id": "Erdos249257/LcmFactorIdealPulseObstruction.lean:54:sparsePulse_recurrence",
+      "name": "sparsePulse_recurrence",
+      "kind": "theorem",
+      "module": "Erdos249257/LcmFactorIdealPulseObstruction.lean",
+      "line": 54,
+      "signature": "theorem sparsePulse_recurrence (A : ℤ) (S : Finset ℕ) (i : ℕ) : sparsePulseState A S (i + 1) = 2 * sparsePulseState A S i - sparsePulseLetter A S i",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Sparse pulses satisfy the forced affine recurrence by construction."
+    },
+    {
+      "id": "Erdos249257/LcmFactorIdealPulseObstruction.lean:62:affineBinaryOrbit_sparsePulseInput",
+      "name": "affineBinaryOrbit_sparsePulseInput",
+      "kind": "theorem",
+      "module": "Erdos249257/LcmFactorIdealPulseObstruction.lean",
+      "line": 62,
+      "signature": "theorem affineBinaryOrbit_sparsePulseInput (A : ℤ) (S : Finset ℕ) : ∀ k : ℕ, affineBinaryOrbit (sparsePulseInput A S) (sparsePulseState A S 0) k = sparsePulseState A S k",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The synthetic state is exactly an instance of the existing generic `affineBinaryOrbit`; this module does not introduce a second orbit theory."
+    },
+    {
+      "id": "Erdos249257/LcmFactorIdealPulseObstruction.lean:74:sparsePulse_dvd_letter",
+      "name": "sparsePulse_dvd_letter",
+      "kind": "theorem",
+      "module": "Erdos249257/LcmFactorIdealPulseObstruction.lean",
+      "line": 74,
+      "signature": "theorem sparsePulse_dvd_letter (A : ℤ) (S : Finset ℕ) (i : ℕ) : A ∣ sparsePulseLetter A S i",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Every sparse-pulse letter lies in the principal ideal generated by `A`."
+    },
+    {
+      "id": "Erdos249257/LcmFactorIdealPulseObstruction.lean:80:abs_sparsePulseState_le",
+      "name": "abs_sparsePulseState_le",
+      "kind": "theorem",
+      "module": "Erdos249257/LcmFactorIdealPulseObstruction.lean",
+      "line": 80,
+      "signature": "theorem abs_sparsePulseState_le (A : ℤ) (S : Finset ℕ) (k : ℕ) : |sparsePulseState A S k| ≤ |A|",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The state has magnitude at most the pulse amplitude."
+    },
+    {
+      "id": "Erdos249257/LcmFactorIdealPulseObstruction.lean:85:abs_sparsePulseLetter_le",
+      "name": "abs_sparsePulseLetter_le",
+      "kind": "theorem",
+      "module": "Erdos249257/LcmFactorIdealPulseObstruction.lean",
+      "line": 85,
+      "signature": "theorem abs_sparsePulseLetter_le (A : ℤ) (S : Finset ℕ) (i : ℕ) : |sparsePulseLetter A S i| ≤ 2 * |A|",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The forcing letter has magnitude at most twice the pulse amplitude."
+    },
+    {
+      "id": "Erdos249257/LcmFactorIdealPulseObstruction.lean:104:dyadicCoboundary",
+      "name": "dyadicCoboundary",
+      "kind": "def",
+      "module": "Erdos249257/LcmFactorIdealPulseObstruction.lean",
+      "line": 104,
+      "signature": "def dyadicCoboundary (c : ℕ → ℤ) (n : ℕ) : ℤ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The zero-based dyadic coboundary `(2 - E)c`."
+    },
+    {
+      "id": "Erdos249257/LcmFactorIdealPulseObstruction.lean:109:dyadicClearedPrefix",
+      "name": "dyadicClearedPrefix",
+      "kind": "def",
+      "module": "Erdos249257/LcmFactorIdealPulseObstruction.lean",
+      "line": 109,
+      "signature": "def dyadicClearedPrefix (a : ℕ → ℤ) (n : ℕ) : ℕ → ℤ | 0 => 0 | L + 1 => 2 * dyadicClearedPrefix a n L + a (n + L) /-- A dyadic coboundary has exact prefix/terminal-state cancellation at every start and every finite horizon. -/ theorem dyadicClearedPrefix_dyadicCoboundary (c : ℕ → ℤ) (n L : ℕ) : dyadicClearedPrefix (dyadicCoboundary c) n L = (2 : ℤ) ^ L * c n - c (n + L)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The depth-`L` cleared binary prefix, accumulated from left to right. Equivalently this is `∑ j < L, a (n+j) * 2^(L-1-j)`."
+    },
+    {
+      "id": "Erdos249257/LcmFactorIdealPulseObstruction.lean:115:dyadicClearedPrefix_dyadicCoboundary",
+      "name": "dyadicClearedPrefix_dyadicCoboundary",
+      "kind": "theorem",
+      "module": "Erdos249257/LcmFactorIdealPulseObstruction.lean",
+      "line": 115,
+      "signature": "theorem dyadicClearedPrefix_dyadicCoboundary (c : ℕ → ℤ) (n L : ℕ) : dyadicClearedPrefix (dyadicCoboundary c) n L = (2 : ℤ) ^ L * c n - c (n + L)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A dyadic coboundary has exact prefix/terminal-state cancellation at every start and every finite horizon."
+    },
+    {
+      "id": "Erdos249257/LcmFactorIdealPulseObstruction.lean:127:forwardDifference",
+      "name": "forwardDifference",
+      "kind": "def",
+      "module": "Erdos249257/LcmFactorIdealPulseObstruction.lean",
+      "line": 127,
+      "signature": "def forwardDifference (h : ℕ) (f : ℕ → ℤ) (n : ℕ) : ℤ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Additive forward difference with step `h`."
+    },
+    {
+      "id": "Erdos249257/LcmFactorIdealPulseObstruction.lean:132:iteratedForwardDifference",
+      "name": "iteratedForwardDifference",
+      "kind": "def",
+      "module": "Erdos249257/LcmFactorIdealPulseObstruction.lean",
+      "line": 132,
+      "signature": "def iteratedForwardDifference : List ℕ → (ℕ → ℤ) → (ℕ → ℤ) | [], f => f | h :: hs, f => forwardDifference h (iteratedForwardDifference hs f) /-- Additive forward differences commute. -/ theorem forwardDifference_comm (h k : ℕ) (f : ℕ → ℤ) : forwardDifference h (forwardDifference k f) = forwardDifference k (forwardDifference h f)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "An arbitrary finite-rank additive cube, represented as a list of shift steps. Repeated steps and noncommensurate steps are both allowed."
+    },
+    {
+      "id": "Erdos249257/LcmFactorIdealPulseObstruction.lean:137:forwardDifference_comm",
+      "name": "forwardDifference_comm",
+      "kind": "theorem",
+      "module": "Erdos249257/LcmFactorIdealPulseObstruction.lean",
+      "line": 137,
+      "signature": "theorem forwardDifference_comm (h k : ℕ) (f : ℕ → ℤ) : forwardDifference h (forwardDifference k f) = forwardDifference k (forwardDifference h f)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Additive forward differences commute."
+    },
+    {
+      "id": "Erdos249257/LcmFactorIdealPulseObstruction.lean:147:forwardDifference_iteratedForwardDifference",
+      "name": "forwardDifference_iteratedForwardDifference",
+      "kind": "theorem",
+      "module": "Erdos249257/LcmFactorIdealPulseObstruction.lean",
+      "line": 147,
+      "signature": "theorem forwardDifference_iteratedForwardDifference (h : ℕ) (shifts : List ℕ) (f : ℕ → ℤ) : forwardDifference h (iteratedForwardDifference shifts f) = iteratedForwardDifference shifts (forwardDifference h f)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "One forward difference commutes with an arbitrary finite list of the others."
+    },
+    {
+      "id": "Erdos249257/LcmFactorIdealPulseObstruction.lean:158:iteratedForwardDifference_append",
+      "name": "iteratedForwardDifference_append",
+      "kind": "theorem",
+      "module": "Erdos249257/LcmFactorIdealPulseObstruction.lean",
+      "line": 158,
+      "signature": "theorem iteratedForwardDifference_append (left right : List ℕ) (f : ℕ → ℤ) : iteratedForwardDifference (left ++ right) f = iteratedForwardDifference left (iteratedForwardDifference right f)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Splitting a shift list splits the corresponding operator composition."
+    },
+    {
+      "id": "Erdos249257/LcmFactorIdealPulseObstruction.lean:169:iteratedForwardDifference_zero",
+      "name": "iteratedForwardDifference_zero",
+      "kind": "theorem",
+      "module": "Erdos249257/LcmFactorIdealPulseObstruction.lean",
+      "line": 169,
+      "signature": "theorem iteratedForwardDifference_zero (shifts : List ℕ) : iteratedForwardDifference shifts (fun _ => 0) = fun _ => 0",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Every finite shift list preserves the zero sequence."
+    },
+    {
+      "id": "Erdos249257/LcmFactorIdealPulseObstruction.lean:179:forwardDifference_dyadicCoboundary",
+      "name": "forwardDifference_dyadicCoboundary",
+      "kind": "theorem",
+      "module": "Erdos249257/LcmFactorIdealPulseObstruction.lean",
+      "line": 179,
+      "signature": "theorem forwardDifference_dyadicCoboundary (h : ℕ) (c : ℕ → ℤ) : forwardDifference h (dyadicCoboundary c) = dyadicCoboundary (forwardDifference h c)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "One shift difference commutes with the dyadic coboundary."
+    },
+    {
+      "id": "Erdos249257/LcmFactorIdealPulseObstruction.lean:188:iteratedForwardDifference_dyadicCoboundary",
+      "name": "iteratedForwardDifference_dyadicCoboundary",
+      "kind": "theorem",
+      "module": "Erdos249257/LcmFactorIdealPulseObstruction.lean",
+      "line": 188,
+      "signature": "theorem iteratedForwardDifference_dyadicCoboundary (shifts : List ℕ) (c : ℕ → ℤ) : iteratedForwardDifference shifts (dyadicCoboundary c) = dyadicCoboundary (iteratedForwardDifference shifts c)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Every finite-rank additive cube preserves the coboundary class."
+    },
+    {
+      "id": "Erdos249257/LcmFactorIdealPulseObstruction.lean:201:iteratedForwardDifference_dyadicClearedPrefix",
+      "name": "iteratedForwardDifference_dyadicClearedPrefix",
+      "kind": "theorem",
+      "module": "Erdos249257/LcmFactorIdealPulseObstruction.lean",
+      "line": 201,
+      "signature": "theorem iteratedForwardDifference_dyadicClearedPrefix (shifts : List ℕ) (c : ℕ → ℤ) (n L : ℕ) : dyadicClearedPrefix (iteratedForwardDifference shifts (dyadicCoboundary c)) n L = (2 : ℤ) ^ L * iteratedForwardDifference shifts c n - iteratedForwardDifference shifts c (n + L)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Exact all-rank, all-horizon cancellation. The cleared residue of any finite additive cube is precisely the negative terminal transformed state modulo `2^L`."
+    },
+    {
+      "id": "Erdos249257/LcmFactorIdealPulseObstruction.lean:211:dvd_iteratedForwardDifference",
+      "name": "dvd_iteratedForwardDifference",
+      "kind": "theorem",
+      "module": "Erdos249257/LcmFactorIdealPulseObstruction.lean",
+      "line": 211,
+      "signature": "theorem dvd_iteratedForwardDifference (d : ℤ) (f : ℕ → ℤ) (hdiv : ∀ n, d ∣ f n) (shifts : List ℕ) (n : ℕ) : d ∣ iteratedForwardDifference shifts f n",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Principal ideals are preserved by arbitrary finite additive rank."
+    },
+    {
+      "id": "Erdos249257/LcmFactorIdealPulseObstruction.lean:221:abs_iteratedForwardDifference_le",
+      "name": "abs_iteratedForwardDifference_le",
+      "kind": "theorem",
+      "module": "Erdos249257/LcmFactorIdealPulseObstruction.lean",
+      "line": 221,
+      "signature": "theorem abs_iteratedForwardDifference_le (f : ℕ → ℤ) (B : ℤ) (hB : ∀ n, |f n| ≤ B) (shifts : List ℕ) (n : ℕ) : |iteratedForwardDifference shifts f n| ≤ (2 : ℤ) ^ shifts.length * B",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A uniform bound grows by at most `2^rank` under a finite additive cube."
+    },
+    {
+      "id": "Erdos249257/LcmFactorIdealPulseObstruction.lean:245:shiftLinearCombination",
+      "name": "shiftLinearCombination",
+      "kind": "def",
+      "module": "Erdos249257/LcmFactorIdealPulseObstruction.lean",
+      "line": 245,
+      "signature": "def shiftLinearCombination : List (ℕ × ℤ) → (ℕ → ℤ) → (ℕ → ℤ) | [], _ => fun _ => 0 | (h, q) :: terms, f => fun n => q * f (n + h) + shiftLinearCombination terms f n /-- The `ℓ1` weight of a finite shift polynomial. -/ def shiftLinearWeight : List (ℕ × ℤ) → ℤ | [] => 0 | (_, q) :: terms => |q| + shiftLinearWeight terms /-- The dyadic coboundary commutes with every finite integer shift polynomial, not only products of forward differences. -/ theorem shiftLinearCombination_dyadicCoboundary (terms : List (ℕ × ℤ)) (c : ℕ → ℤ) :",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Evaluation of a finite integer shift polynomial on a sequence. A term `(h, q)` contributes `q * f(n+h)`."
+    },
+    {
+      "id": "Erdos249257/LcmFactorIdealPulseObstruction.lean:251:shiftLinearWeight",
+      "name": "shiftLinearWeight",
+      "kind": "def",
+      "module": "Erdos249257/LcmFactorIdealPulseObstruction.lean",
+      "line": 251,
+      "signature": "def shiftLinearWeight : List (ℕ × ℤ) → ℤ | [] => 0 | (_, q) :: terms => |q| + shiftLinearWeight terms /-- The dyadic coboundary commutes with every finite integer shift polynomial, not only products of forward differences. -/ theorem shiftLinearCombination_dyadicCoboundary (terms : List (ℕ × ℤ)) (c : ℕ → ℤ) : shiftLinearCombination terms (dyadicCoboundary c) = dyadicCoboundary (shiftLinearCombination terms c)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The `ℓ1` weight of a finite shift polynomial."
+    },
+    {
+      "id": "Erdos249257/LcmFactorIdealPulseObstruction.lean:257:shiftLinearCombination_dyadicCoboundary",
+      "name": "shiftLinearCombination_dyadicCoboundary",
+      "kind": "theorem",
+      "module": "Erdos249257/LcmFactorIdealPulseObstruction.lean",
+      "line": 257,
+      "signature": "theorem shiftLinearCombination_dyadicCoboundary (terms : List (ℕ × ℤ)) (c : ℕ → ℤ) : shiftLinearCombination terms (dyadicCoboundary c) = dyadicCoboundary (shiftLinearCombination terms c)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The dyadic coboundary commutes with every finite integer shift polynomial, not only products of forward differences."
+    },
+    {
+      "id": "Erdos249257/LcmFactorIdealPulseObstruction.lean:276:shiftLinearCombination_dyadicClearedPrefix",
+      "name": "shiftLinearCombination_dyadicClearedPrefix",
+      "kind": "theorem",
+      "module": "Erdos249257/LcmFactorIdealPulseObstruction.lean",
+      "line": 276,
+      "signature": "theorem shiftLinearCombination_dyadicClearedPrefix (terms : List (ℕ × ℤ)) (c : ℕ → ℤ) (n L : ℕ) : dyadicClearedPrefix (shiftLinearCombination terms (dyadicCoboundary c)) n L = (2 : ℤ) ^ L * shiftLinearCombination terms c n - shiftLinearCombination terms c (n + L)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Exact prefix/terminal cancellation for an arbitrary finite shift polynomial."
+    },
+    {
+      "id": "Erdos249257/LcmFactorIdealPulseObstruction.lean:287:dvd_shiftLinearCombination",
+      "name": "dvd_shiftLinearCombination",
+      "kind": "theorem",
+      "module": "Erdos249257/LcmFactorIdealPulseObstruction.lean",
+      "line": 287,
+      "signature": "theorem dvd_shiftLinearCombination (d : ℤ) (f : ℕ → ℤ) (hdiv : ∀ n, d ∣ f n) (terms : List (ℕ × ℤ)) (n : ℕ) : d ∣ shiftLinearCombination terms f n",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Principal ideals are preserved by arbitrary finite integer shift polynomials."
+    },
+    {
+      "id": "Erdos249257/LcmFactorIdealPulseObstruction.lean:299:abs_shiftLinearCombination_le",
+      "name": "abs_shiftLinearCombination_le",
+      "kind": "theorem",
+      "module": "Erdos249257/LcmFactorIdealPulseObstruction.lean",
+      "line": 299,
+      "signature": "theorem abs_shiftLinearCombination_le (f : ℕ → ℤ) (B : ℤ) (hB : ∀ n, |f n| ≤ B) (terms : List (ℕ × ℤ)) (n : ℕ) : |shiftLinearCombination terms f n| ≤ shiftLinearWeight terms * B",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A finite shift polynomial enlarges a uniform bound by at most the `ℓ1`-weight of its coefficients."
+    },
+    {
+      "id": "Erdos249257/LcmFactorIdealPulseObstruction.lean:321:mobiusTotientChannel",
+      "name": "mobiusTotientChannel",
+      "kind": "def",
+      "module": "Erdos249257/LcmFactorIdealPulseObstruction.lean",
+      "line": 321,
+      "signature": "def mobiusTotientChannel (d n : ℕ) : ℤ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The `d`-th Möbius channel in `φ(n) = ∑_{d∣n} μ(d) (n/d)`, totalized by zero off the divisor progression."
+    },
+    {
+      "id": "Erdos249257/LcmFactorIdealPulseObstruction.lean:328:totient_eq_sum_mobiusTotientChannel",
+      "name": "totient_eq_sum_mobiusTotientChannel",
+      "kind": "theorem",
+      "module": "Erdos249257/LcmFactorIdealPulseObstruction.lean",
+      "line": 328,
+      "signature": "theorem totient_eq_sum_mobiusTotientChannel (n : ℕ) (hn : 0 < n) : (Nat.totient n : ℤ) = ∑ d ∈ n.divisors, mobiusTotientChannel d n",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The channel definition reconstructs the actual totient on its finite divisor support."
+    },
+    {
+      "id": "Erdos249257/LcmFactorIdealPulseObstruction.lean:338:forwardDifference_mobiusTotientChannel_of_dvd",
+      "name": "forwardDifference_mobiusTotientChannel_of_dvd",
+      "kind": "theorem",
+      "module": "Erdos249257/LcmFactorIdealPulseObstruction.lean",
+      "line": 338,
+      "signature": "theorem forwardDifference_mobiusTotientChannel_of_dvd {d h : ℕ} (hd : 0 < d) (hdh : d ∣ h) : forwardDifference h (mobiusTotientChannel d) = fun n => if d ∣ n then ArithmeticFunction.moebius d * ((h / d : ℕ) : ℤ) else 0",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Along a `d`-divisible shift, the affine Möbius channel becomes a constant multiple of the divisor indicator."
+    },
+    {
+      "id": "Erdos249257/LcmFactorIdealPulseObstruction.lean:365:rankTwo_mobiusTotientChannel_eq_zero_of_dvd",
+      "name": "rankTwo_mobiusTotientChannel_eq_zero_of_dvd",
+      "kind": "theorem",
+      "module": "Erdos249257/LcmFactorIdealPulseObstruction.lean",
+      "line": 365,
+      "signature": "theorem rankTwo_mobiusTotientChannel_eq_zero_of_dvd {d h k : ℕ} (hd : 0 < d) (hdh : d ∣ h) (hdk : d ∣ k) : forwardDifference k (forwardDifference h (mobiusTotientChannel d)) = fun _ => 0",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "**Exact old-channel cancellation.** A Möbius divisor channel vanishes after two shift differences whose axes are both divisible by `d`. Thus only channels not covered by such a divisible pair can contribute to the rank-cube sum; no converse nonvanishing claim is made."
+    },
+    {
+      "id": "Erdos249257/LcmFactorIdealPulseObstruction.lean:385:iteratedForwardDifference_mobiusTotientChannel_eq_zero_of_two_dvd",
+      "name": "iteratedForwardDifference_mobiusTotientChannel_eq_zero_of_two_dvd",
+      "kind": "theorem",
+      "module": "Erdos249257/LcmFactorIdealPulseObstruction.lean",
+      "line": 385,
+      "signature": "theorem iteratedForwardDifference_mobiusTotientChannel_eq_zero_of_two_dvd (before between after : List ℕ) {d h k : ℕ} (hd : 0 < d) (hdh : d ∣ h) (hdk : d ∣ k) : iteratedForwardDifference (before ++ (h :: between ++ (k :: after))) (mobiusTotientChannel d) = fun _ => 0",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "**All-rank old-channel cancellation.** Arbitrary shifts may occur before, between, and after two axes divisible by `d`; the whole finite-rank Möbius channel still vanishes. The displayed list split is an exact witness that the two divisible axes occur in the shift cube."
+    },
+    {
+      "id": "Erdos249257/LcmFactorIdealPulseObstruction.lean:427:lcmAnchorStates",
+      "name": "lcmAnchorStates",
+      "kind": "def",
+      "module": "Erdos249257/LcmFactorIdealPulseObstruction.lean",
+      "line": 427,
+      "signature": "def lcmAnchorStates (t : ℕ) : Finset ℕ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "State anchors corresponding to the exact whole-ray letters at `q * periodLcm t`, for `2 ≤ q < t`."
+    },
+    {
+      "id": "Erdos249257/LcmFactorIdealPulseObstruction.lean:431:lcmAnchorPulseState",
+      "name": "lcmAnchorPulseState",
+      "kind": "def",
+      "module": "Erdos249257/LcmFactorIdealPulseObstruction.lean",
+      "line": 431,
+      "signature": "def lcmAnchorPulseState (t k : ℕ) : ℤ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The LCM pulse state with amplitude `φ(periodLcm t)`."
+    },
+    {
+      "id": "Erdos249257/LcmFactorIdealPulseObstruction.lean:435:lcmAnchorPulseLetter",
+      "name": "lcmAnchorPulseLetter",
+      "kind": "def",
+      "module": "Erdos249257/LcmFactorIdealPulseObstruction.lean",
+      "line": 435,
+      "signature": "def lcmAnchorPulseLetter (t i : ℕ) : ℤ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The LCM pulse forcing word."
+    },
+    {
+      "id": "Erdos249257/LcmFactorIdealPulseObstruction.lean:439:lcmAnchorPulseLetter_eq_dyadicCoboundary",
+      "name": "lcmAnchorPulseLetter_eq_dyadicCoboundary",
+      "kind": "theorem",
+      "module": "Erdos249257/LcmFactorIdealPulseObstruction.lean",
+      "line": 439,
+      "signature": "theorem lcmAnchorPulseLetter_eq_dyadicCoboundary (t : ℕ) : lcmAnchorPulseLetter t = dyadicCoboundary (lcmAnchorPulseState t)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The pulse letter is literally the dyadic coboundary of the pulse state."
+    },
+    {
+      "id": "Erdos249257/LcmFactorIdealPulseObstruction.lean:445:lcmAnchorFiniteRankState",
+      "name": "lcmAnchorFiniteRankState",
+      "kind": "def",
+      "module": "Erdos249257/LcmFactorIdealPulseObstruction.lean",
+      "line": 445,
+      "signature": "def lcmAnchorFiniteRankState (t : ℕ) (shifts : List ℕ) : ℕ → ℤ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The transformed state attached to an arbitrary finite shift cube."
+    },
+    {
+      "id": "Erdos249257/LcmFactorIdealPulseObstruction.lean:449:lcmAnchorFiniteRankLetter",
+      "name": "lcmAnchorFiniteRankLetter",
+      "kind": "def",
+      "module": "Erdos249257/LcmFactorIdealPulseObstruction.lean",
+      "line": 449,
+      "signature": "def lcmAnchorFiniteRankLetter (t : ℕ) (shifts : List ℕ) : ℕ → ℤ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The transformed pulse letters attached to the same finite shift cube."
+    },
+    {
+      "id": "Erdos249257/LcmFactorIdealPulseObstruction.lean:453:lcmAnchorFiniteRankLetter_eq_dyadicCoboundary",
+      "name": "lcmAnchorFiniteRankLetter_eq_dyadicCoboundary",
+      "kind": "theorem",
+      "module": "Erdos249257/LcmFactorIdealPulseObstruction.lean",
+      "line": 453,
+      "signature": "theorem lcmAnchorFiniteRankLetter_eq_dyadicCoboundary (t : ℕ) (shifts : List ℕ) : lcmAnchorFiniteRankLetter t shifts = dyadicCoboundary (lcmAnchorFiniteRankState t shifts)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Every finite-rank transformed pulse remains an exact dyadic coboundary."
+    },
+    {
+      "id": "Erdos249257/LcmFactorIdealPulseObstruction.lean:463:lcmAnchorFiniteRank_clearedPrefix",
+      "name": "lcmAnchorFiniteRank_clearedPrefix",
+      "kind": "theorem",
+      "module": "Erdos249257/LcmFactorIdealPulseObstruction.lean",
+      "line": 463,
+      "signature": "theorem lcmAnchorFiniteRank_clearedPrefix (t : ℕ) (shifts : List ℕ) (n L : ℕ) : dyadicClearedPrefix (lcmAnchorFiniteRankLetter t shifts) n L = (2 : ℤ) ^ L * lcmAnchorFiniteRankState t shifts n - lcmAnchorFiniteRankState t shifts (n + L)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Exact all-horizon terminal-state compensation for every finite-rank LCM shift cube (indeed, for arbitrary additive shifts)."
+    },
+    {
+      "id": "Erdos249257/LcmFactorIdealPulseObstruction.lean:472:lcmAnchorShiftPolynomialState",
+      "name": "lcmAnchorShiftPolynomialState",
+      "kind": "def",
+      "module": "Erdos249257/LcmFactorIdealPulseObstruction.lean",
+      "line": 472,
+      "signature": "def lcmAnchorShiftPolynomialState (t : ℕ) (terms : List (ℕ × ℤ)) : ℕ → ℤ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Pulse state transformed by an arbitrary finite integer shift polynomial."
+    },
+    {
+      "id": "Erdos249257/LcmFactorIdealPulseObstruction.lean:477:lcmAnchorShiftPolynomialLetter",
+      "name": "lcmAnchorShiftPolynomialLetter",
+      "kind": "def",
+      "module": "Erdos249257/LcmFactorIdealPulseObstruction.lean",
+      "line": 477,
+      "signature": "def lcmAnchorShiftPolynomialLetter (t : ℕ) (terms : List (ℕ × ℤ)) : ℕ → ℤ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Pulse letters transformed by the same shift polynomial."
+    },
+    {
+      "id": "Erdos249257/LcmFactorIdealPulseObstruction.lean:483:lcmAnchorShiftPolynomialLetter_eq_dyadicCoboundary",
+      "name": "lcmAnchorShiftPolynomialLetter_eq_dyadicCoboundary",
+      "kind": "theorem",
+      "module": "Erdos249257/LcmFactorIdealPulseObstruction.lean",
+      "line": 483,
+      "signature": "theorem lcmAnchorShiftPolynomialLetter_eq_dyadicCoboundary (t : ℕ) (terms : List (ℕ × ℤ)) : lcmAnchorShiftPolynomialLetter t terms = dyadicCoboundary (lcmAnchorShiftPolynomialState t terms)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Every finite integer shift polynomial preserves the exact coboundary relation."
+    },
+    {
+      "id": "Erdos249257/LcmFactorIdealPulseObstruction.lean:493:lcmAnchorShiftPolynomial_clearedPrefix",
+      "name": "lcmAnchorShiftPolynomial_clearedPrefix",
+      "kind": "theorem",
+      "module": "Erdos249257/LcmFactorIdealPulseObstruction.lean",
+      "line": 493,
+      "signature": "theorem lcmAnchorShiftPolynomial_clearedPrefix (t : ℕ) (terms : List (ℕ × ℤ)) (n L : ℕ) : dyadicClearedPrefix (lcmAnchorShiftPolynomialLetter t terms) n L = (2 : ℤ) ^ L * lcmAnchorShiftPolynomialState t terms n - lcmAnchorShiftPolynomialState t terms (n + L)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Exact all-horizon terminal-state compensation for every finite shift polynomial, including every commensurate finite-rank LCM cube normal form."
+    },
+    {
+      "id": "Erdos249257/LcmFactorIdealPulseObstruction.lean:501:two_le_periodLcm",
+      "name": "two_le_periodLcm",
+      "kind": "lemma",
+      "module": "Erdos249257/LcmFactorIdealPulseObstruction.lean",
+      "line": 501,
+      "signature": "lemma two_le_periodLcm {t : ℕ} (ht : 3 ≤ t) : 2 ≤ periodLcm t",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/LcmFactorIdealPulseObstruction.lean:505:lcmAnchorStates_mem",
+      "name": "lcmAnchorStates_mem",
+      "kind": "lemma",
+      "module": "Erdos249257/LcmFactorIdealPulseObstruction.lean",
+      "line": 505,
+      "signature": "lemma lcmAnchorStates_mem {t q : ℕ} (hq2 : 2 ≤ q) (hqt : q < t) : (q - 1) * periodLcm t ∈ lcmAnchorStates t",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/LcmFactorIdealPulseObstruction.lean:511:lcmAnchorStates_pairwise_gap",
+      "name": "lcmAnchorStates_pairwise_gap",
+      "kind": "theorem",
+      "module": "Erdos249257/LcmFactorIdealPulseObstruction.lean",
+      "line": 511,
+      "signature": "theorem lcmAnchorStates_pairwise_gap {t x y : ℕ} (ht : 3 ≤ t) (hx : x ∈ lcmAnchorStates t) (hy : y ∈ lcmAnchorStates t) (hxy : x ≠ y) : x + 2 ≤ y ∨ y + 2 ≤ x",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Distinct LCM state anchors are separated by at least two positions."
+    },
+    {
+      "id": "Erdos249257/LcmFactorIdealPulseObstruction.lean:544:lcmAnchorStates_succ_not_mem",
+      "name": "lcmAnchorStates_succ_not_mem",
+      "kind": "lemma",
+      "module": "Erdos249257/LcmFactorIdealPulseObstruction.lean",
+      "line": 544,
+      "signature": "lemma lcmAnchorStates_succ_not_mem {t x : ℕ} (ht : 3 ≤ t) (hx : x ∈ lcmAnchorStates t) : x + 1 ∉ lcmAnchorStates t",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/LcmFactorIdealPulseObstruction.lean:550:lcmAnchorStates_pred_not_mem",
+      "name": "lcmAnchorStates_pred_not_mem",
+      "kind": "lemma",
+      "module": "Erdos249257/LcmFactorIdealPulseObstruction.lean",
+      "line": 550,
+      "signature": "lemma lcmAnchorStates_pred_not_mem {t x : ℕ} (ht : 3 ≤ t) (hx : x ∈ lcmAnchorStates t) (hxpos : 0 < x) : x - 1 ∉ lcmAnchorStates t",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/LcmFactorIdealPulseObstruction.lean:559:lcmAnchorPulseLetter_eq",
+      "name": "lcmAnchorPulseLetter_eq",
+      "kind": "theorem",
+      "module": "Erdos249257/LcmFactorIdealPulseObstruction.lean",
+      "line": 559,
+      "signature": "theorem lcmAnchorPulseLetter_eq (t i : ℕ) (ht : 3 ≤ t) : lcmAnchorPulseLetter t i = if i + 1 ∈ lcmAnchorStates t then (Nat.totient (periodLcm t) : ℤ) else if i ∈ lcmAnchorStates t then -2 * (Nat.totient (periodLcm t) : ℤ) else 0",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Explicit support formula: an anchor-entry letter is `A`, an anchor-exit letter is `-2A`, and every other letter is zero."
+    },
+    {
+      "id": "Erdos249257/LcmFactorIdealPulseObstruction.lean:575:lcmAnchorPulse_letter_at_anchor",
+      "name": "lcmAnchorPulse_letter_at_anchor",
+      "kind": "theorem",
+      "module": "Erdos249257/LcmFactorIdealPulseObstruction.lean",
+      "line": 575,
+      "signature": "theorem lcmAnchorPulse_letter_at_anchor {t q : ℕ} (ht : 3 ≤ t) (hq2 : 2 ≤ q) (hqt : q < t) : lcmAnchorPulseLetter t ((q - 1) * periodLcm t - 1) = (Nat.totient (periodLcm t) : ℤ)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The pulse letter entering every prescribed state anchor is exactly `φ(H)`."
+    },
+    {
+      "id": "Erdos249257/LcmFactorIdealPulseObstruction.lean:591:lcmAnchorPulse_letter_after_anchor",
+      "name": "lcmAnchorPulse_letter_after_anchor",
+      "kind": "theorem",
+      "module": "Erdos249257/LcmFactorIdealPulseObstruction.lean",
+      "line": 591,
+      "signature": "theorem lcmAnchorPulse_letter_after_anchor {t q : ℕ} (ht : 3 ≤ t) (hq2 : 2 ≤ q) (hqt : q < t) : lcmAnchorPulseLetter t ((q - 1) * periodLcm t) = -2 * (Nat.totient (periodLcm t) : ℤ)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The compensation letter immediately after every anchor is `-2φ(H)`."
+    },
+    {
+      "id": "Erdos249257/LcmFactorIdealPulseObstruction.lean:605:totient_mul_eq_left_mul_totient_of_dvd",
+      "name": "totient_mul_eq_left_mul_totient_of_dvd",
+      "kind": "theorem",
+      "module": "Erdos249257/LcmFactorIdealPulseObstruction.lean",
+      "line": 605,
+      "signature": "theorem totient_mul_eq_left_mul_totient_of_dvd {q H : ℕ} (hqH : q ∣ H) : Nat.totient (q * H) = q * Nat.totient H",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "If `q ∣ H`, multiplying `H` by `q` adds only already-present prime factors, so the totient scales by exactly `q`."
+    },
+    {
+      "id": "Erdos249257/LcmFactorIdealPulseObstruction.lean:635:deltaTotient_periodLcm_anchor",
+      "name": "deltaTotient_periodLcm_anchor",
+      "kind": "theorem",
+      "module": "Erdos249257/LcmFactorIdealPulseObstruction.lean",
+      "line": 635,
+      "signature": "theorem deltaTotient_periodLcm_anchor {t q : ℕ} (hq2 : 2 ≤ q) (hqt : q < t) : deltaTotient (periodLcm t) (q * periodLcm t) = (Nat.totient (periodLcm t) : ℤ)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Every prescribed whole-ray forcing letter is an exact arithmetic anchor."
+    },
+    {
+      "id": "Erdos249257/LcmFactorIdealPulseObstruction.lean:652:lcmAnchorPulse_letter_eq_deltaTotient",
+      "name": "lcmAnchorPulse_letter_eq_deltaTotient",
+      "kind": "theorem",
+      "module": "Erdos249257/LcmFactorIdealPulseObstruction.lean",
+      "line": 652,
+      "signature": "theorem lcmAnchorPulse_letter_eq_deltaTotient {t q : ℕ} (ht : 3 ≤ t) (hq2 : 2 ≤ q) (hqt : q < t) : lcmAnchorPulseLetter t ((q - 1) * periodLcm t - 1) = deltaTotient (periodLcm t) (q * periodLcm t)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The synthetic word agrees exactly with every sparse whole-ray anchor."
+    },
+    {
+      "id": "Erdos249257/LcmFactorIdealPulseObstruction.lean:661:lcmAnchorPulse_recurrence",
+      "name": "lcmAnchorPulse_recurrence",
+      "kind": "theorem",
+      "module": "Erdos249257/LcmFactorIdealPulseObstruction.lean",
+      "line": 661,
+      "signature": "theorem lcmAnchorPulse_recurrence (t i : ℕ) : lcmAnchorPulseState t (i + 1) = 2 * lcmAnchorPulseState t i - lcmAnchorPulseLetter t i",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The synthetic word agrees exactly with every sparse whole-ray anchor. -/ theorem lcmAnchorPulse_letter_eq_deltaTotient {t q : ℕ} (ht : 3 ≤ t) (hq2 : 2 ≤ q) (hqt : q < t) : lcmAnchorPulseLetter t ((q - 1) * periodLcm t - 1) = deltaTotient (periodLcm t) (q * periodLcm t) := by rw [lcmAnchorPulse_letter_at_anchor ht hq2 hqt, deltaTotient_periodLcm_anchor hq2 hqt] /-! ## Bounds, factor ideals, and the formal no-go"
+    },
+    {
+      "id": "Erdos249257/LcmFactorIdealPulseObstruction.lean:666:lcmAnchorPulse_dvd_totient_periodLcm",
+      "name": "lcmAnchorPulse_dvd_totient_periodLcm",
+      "kind": "theorem",
+      "module": "Erdos249257/LcmFactorIdealPulseObstruction.lean",
+      "line": 666,
+      "signature": "theorem lcmAnchorPulse_dvd_totient_periodLcm (t i : ℕ) : (Nat.totient (periodLcm t) : ℤ) ∣ lcmAnchorPulseLetter t i",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/LcmFactorIdealPulseObstruction.lean:672:lcmAnchorPulse_dvd_totient_of_dvd",
+      "name": "lcmAnchorPulse_dvd_totient_of_dvd",
+      "kind": "theorem",
+      "module": "Erdos249257/LcmFactorIdealPulseObstruction.lean",
+      "line": 672,
+      "signature": "theorem lcmAnchorPulse_dvd_totient_of_dvd {t j : ℕ} (hj : j ∣ periodLcm t) (i : ℕ) : (Nat.totient j : ℤ) ∣ lcmAnchorPulseLetter t i",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Every lower factor ideal coming from a divisor `j ∣ H` is absorbed by the pulse word."
+    },
+    {
+      "id": "Erdos249257/LcmFactorIdealPulseObstruction.lean:684:lcmAnchorFiniteRank_dvd_totient_periodLcm",
+      "name": "lcmAnchorFiniteRank_dvd_totient_periodLcm",
+      "kind": "theorem",
+      "module": "Erdos249257/LcmFactorIdealPulseObstruction.lean",
+      "line": 684,
+      "signature": "theorem lcmAnchorFiniteRank_dvd_totient_periodLcm (t : ℕ) (shifts : List ℕ) (i : ℕ) : (Nat.totient (periodLcm t) : ℤ) ∣ lcmAnchorFiniteRankLetter t shifts i",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Finite shift rank preserves divisibility by the scale totient."
+    },
+    {
+      "id": "Erdos249257/LcmFactorIdealPulseObstruction.lean:693:lcmAnchorFiniteRank_dvd_totient_of_dvd",
+      "name": "lcmAnchorFiniteRank_dvd_totient_of_dvd",
+      "kind": "theorem",
+      "module": "Erdos249257/LcmFactorIdealPulseObstruction.lean",
+      "line": 693,
+      "signature": "theorem lcmAnchorFiniteRank_dvd_totient_of_dvd {t j : ℕ} (hj : j ∣ periodLcm t) (shifts : List ℕ) (i : ℕ) : (Nat.totient j : ℤ) ∣ lcmAnchorFiniteRankLetter t shifts i",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Every lower factor ideal remains absorbed after arbitrary finite shift rank."
+    },
+    {
+      "id": "Erdos249257/LcmFactorIdealPulseObstruction.lean:703:lcmAnchorFiniteRank_state_bound",
+      "name": "lcmAnchorFiniteRank_state_bound",
+      "kind": "theorem",
+      "module": "Erdos249257/LcmFactorIdealPulseObstruction.lean",
+      "line": 703,
+      "signature": "theorem lcmAnchorFiniteRank_state_bound (t : ℕ) (shifts : List ℕ) (i : ℕ) : |lcmAnchorFiniteRankState t shifts i| ≤ (2 : ℤ) ^ shifts.length * |(Nat.totient (periodLcm t) : ℤ)|",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Generic rank bound for the transformed pulse state. Sharper commensurate bounds are evaluator-level refinements; this symbolic bound is uniform over arbitrary shifts."
+    },
+    {
+      "id": "Erdos249257/LcmFactorIdealPulseObstruction.lean:711:lcmAnchorFiniteRank_letter_bound",
+      "name": "lcmAnchorFiniteRank_letter_bound",
+      "kind": "theorem",
+      "module": "Erdos249257/LcmFactorIdealPulseObstruction.lean",
+      "line": 711,
+      "signature": "theorem lcmAnchorFiniteRank_letter_bound (t : ℕ) (shifts : List ℕ) (i : ℕ) : |lcmAnchorFiniteRankLetter t shifts i| ≤ (2 : ℤ) ^ shifts.length * (2 * |(Nat.totient (periodLcm t) : ℤ)|)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Generic rank bound for the transformed pulse letters."
+    },
+    {
+      "id": "Erdos249257/LcmFactorIdealPulseObstruction.lean:720:lcmAnchorShiftPolynomial_dvd_totient_periodLcm",
+      "name": "lcmAnchorShiftPolynomial_dvd_totient_periodLcm",
+      "kind": "theorem",
+      "module": "Erdos249257/LcmFactorIdealPulseObstruction.lean",
+      "line": 720,
+      "signature": "theorem lcmAnchorShiftPolynomial_dvd_totient_periodLcm (t : ℕ) (terms : List (ℕ × ℤ)) (i : ℕ) : (Nat.totient (periodLcm t) : ℤ) ∣ lcmAnchorShiftPolynomialLetter t terms i",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Finite shift polynomials preserve divisibility by the scale totient."
+    },
+    {
+      "id": "Erdos249257/LcmFactorIdealPulseObstruction.lean:730:lcmAnchorShiftPolynomial_dvd_totient_of_dvd",
+      "name": "lcmAnchorShiftPolynomial_dvd_totient_of_dvd",
+      "kind": "theorem",
+      "module": "Erdos249257/LcmFactorIdealPulseObstruction.lean",
+      "line": 730,
+      "signature": "theorem lcmAnchorShiftPolynomial_dvd_totient_of_dvd {t j : ℕ} (hj : j ∣ periodLcm t) (terms : List (ℕ × ℤ)) (i : ℕ) : (Nat.totient j : ℤ) ∣ lcmAnchorShiftPolynomialLetter t terms i",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Every lower factor ideal remains absorbed under a finite shift polynomial."
+    },
+    {
+      "id": "Erdos249257/LcmFactorIdealPulseObstruction.lean:738:lcmAnchorShiftPolynomial_state_bound",
+      "name": "lcmAnchorShiftPolynomial_state_bound",
+      "kind": "theorem",
+      "module": "Erdos249257/LcmFactorIdealPulseObstruction.lean",
+      "line": 738,
+      "signature": "theorem lcmAnchorShiftPolynomial_state_bound (t : ℕ) (terms : List (ℕ × ℤ)) (i : ℕ) : |lcmAnchorShiftPolynomialState t terms i| ≤ shiftLinearWeight terms * |(Nat.totient (periodLcm t) : ℤ)|",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Uniform state bound for a transformed shift polynomial."
+    },
+    {
+      "id": "Erdos249257/LcmFactorIdealPulseObstruction.lean:747:lcmAnchorShiftPolynomial_letter_bound",
+      "name": "lcmAnchorShiftPolynomial_letter_bound",
+      "kind": "theorem",
+      "module": "Erdos249257/LcmFactorIdealPulseObstruction.lean",
+      "line": 747,
+      "signature": "theorem lcmAnchorShiftPolynomial_letter_bound (t : ℕ) (terms : List (ℕ × ℤ)) (i : ℕ) : |lcmAnchorShiftPolynomialLetter t terms i| ≤ shiftLinearWeight terms * (2 * |(Nat.totient (periodLcm t) : ℤ)|)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Uniform letter bound for a transformed shift polynomial."
+    },
+    {
+      "id": "Erdos249257/LcmFactorIdealPulseObstruction.lean:756:lcmAnchorPulse_letter_bound",
+      "name": "lcmAnchorPulse_letter_bound",
+      "kind": "theorem",
+      "module": "Erdos249257/LcmFactorIdealPulseObstruction.lean",
+      "line": 756,
+      "signature": "theorem lcmAnchorPulse_letter_bound (t i : ℕ) : |lcmAnchorPulseLetter t i| ≤ (2 * periodLcm t + i + 1 : ℕ)",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/LcmFactorIdealPulseObstruction.lean:771:lcmAnchorPulse_strict_survivor",
+      "name": "lcmAnchorPulse_strict_survivor",
+      "kind": "theorem",
+      "module": "Erdos249257/LcmFactorIdealPulseObstruction.lean",
+      "line": 771,
+      "signature": "theorem lcmAnchorPulse_strict_survivor (t i : ℕ) : |lcmAnchorPulseState t i| < (2 * periodLcm t + i + 2 : ℕ)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The synthetic state remains strictly inside every diagonal carry strip."
+    },
+    {
+      "id": "Erdos249257/LcmFactorIdealPulseObstruction.lean:798:lcm_factorIdeal_finiteRank_shiftAlgebra_not_sufficient",
+      "name": "lcm_factorIdeal_finiteRank_shiftAlgebra_not_sufficient",
+      "kind": "theorem",
+      "module": "Erdos249257/LcmFactorIdealPulseObstruction.lean",
+      "line": 798,
+      "signature": "theorem lcm_factorIdeal_finiteRank_shiftAlgebra_not_sufficient (t : ℕ) (ht : 3 ≤ t) : ∃ c a : ℕ → ℤ, (∃ k, c k ≠ 0) ∧ (∀ i, a i = dyadicCoboundary c i) ∧ ∀ terms : List (ℕ × ℤ), ∃ d b : ℕ → ℤ, (∀ i, d i = shiftLinearCombination terms c i) ∧ (∀ i, b i = shiftLinearCombination terms a i) ∧ (∀ i, b i = dyadicCoboundary d i) ∧ (∀ n L, dyadicClearedPrefix b n L = (2 : ℤ) ^ L * d n - d (n + L)) ∧ (∀ i, (Nat.totient (periodLcm t) : ℤ) ∣ b i) ∧ (∀ j, j ∣ periodLcm t → ∀ i, (Nat.totient j : ℤ) ∣ b i) ∧",
+      "generated_certificate": false,
+      "claim_ids": [
+        "lcm_factor_ideal_anchor_pulse_no_go"
+      ],
+      "docstring": "**All-rank shift-algebra no-go.** For every `t ≥ 3`, one nonzero synthetic pulse simultaneously compensates every finite integer shift polynomial. Each transformed word remains a dyadic coboundary, every cleared prefix is cancelled exactly by its terminal transformed state, every lower factor ideal is inherited, and uniform coefficient-weight bounds remain available. The shifts need not be commensurate. Hence the theorem covers every finite family of rank-two/rank-three LCM cubes, arbitrary finite rank, and each entry of a matrix built from finitely many such linear observations. It makes no claim about nonlinear combinations such as determinants, and it does not assert that the base or transformed letters are actual totient differences."
+    },
+    {
+      "id": "Erdos249257/LcmFactorIdealPulseObstruction.lean:848:LcmFactorIdealAnchorAdmissible",
+      "name": "LcmFactorIdealAnchorAdmissible",
+      "kind": "def",
+      "module": "Erdos249257/LcmFactorIdealPulseObstruction.lean",
+      "line": 848,
+      "signature": "def LcmFactorIdealAnchorAdmissible (t : ℕ) (c a : ℕ → ℤ) : Prop",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The exact hypothesis class defeated by the sparse pulse."
+    },
+    {
+      "id": "Erdos249257/LcmFactorIdealPulseObstruction.lean:866:lcm_factorIdeal_sparseAnchor_not_sufficient",
+      "name": "lcm_factorIdeal_sparseAnchor_not_sufficient",
+      "kind": "theorem",
+      "module": "Erdos249257/LcmFactorIdealPulseObstruction.lean",
+      "line": 866,
+      "signature": "theorem lcm_factorIdeal_sparseAnchor_not_sufficient (t : ℕ) (ht : 3 ≤ t) : ∃ c a : ℕ → ℤ, LcmFactorIdealAnchorAdmissible t c a ∧ (∃ k, c k ≠ 0) ∧ ∀ K i, i ≤ K → |c i| < (2 * periodLcm t + i + 2 : ℕ)",
+      "generated_certificate": false,
+      "claim_ids": [
+        "lcm_factor_ideal_anchor_pulse_no_go"
+      ],
+      "docstring": "**LCM factor-ideal sparse-anchor no-go.** For every `t ≥ 3` there is a nonzero synthetic carry orbit satisfying the exact affine recurrence, all homogeneous lower factor ideals, the natural letter and strip bounds, and every prescribed whole-ray anchor. It survives every finite horizon. This does not assert arithmetic realisability of the compensation letters; it proves that the named factor-only hypotheses are not sufficient."
+    },
+    {
+      "id": "Erdos249257/LcmFactorIdealPulseObstruction.lean:895:lcmAnchorPulse_t3_letters",
+      "name": "lcmAnchorPulse_t3_letters",
+      "kind": "theorem",
+      "module": "Erdos249257/LcmFactorIdealPulseObstruction.lean",
+      "line": 895,
+      "signature": "theorem lcmAnchorPulse_t3_letters : lcmAnchorPulseLetter 3 5 = 2 ∧ lcmAnchorPulseLetter 3 6 = -4",
+      "generated_certificate": false,
+      "claim_ids": [
+        "lcm_factor_ideal_anchor_pulse_no_go"
+      ],
+      "docstring": "**LCM factor-ideal sparse-anchor no-go.** For every `t ≥ 3` there is a nonzero synthetic carry orbit satisfying the exact affine recurrence, all homogeneous lower factor ideals, the natural letter and strip bounds, and every prescribed whole-ray anchor. It survives every finite horizon. This does not assert arithmetic realisability of the compensation letters; it proves that the named factor-only hypotheses are not sufficient. -/ theorem lcm_factorIdeal_sparseAnchor_not_sufficient (t : ℕ) (ht : 3 ≤ t) : ∃ c a : ℕ → ℤ, LcmFactorIdealAnchorAdmissible t c a ∧ (∃ k, c k ≠ 0) ∧ ∀ K i, i ≤ K → |c i| < (2 * periodLcm t + i + 2 : ℕ) := by refine ⟨lcmAnchorPulseState t, lcmAnchorPulseLetter t, ?_, ?_, ?_⟩ · exact ⟨lcmAnchorPulse_recurrence t, lcmAnchorPulse_dvd_totient_periodLcm t, fun j hj i => lcmAnchorPulse_dvd_totient_of_dvd hj i, lcmAnchorPulse_letter_bound t, lcmAnchorPulse_strict_survivor t, fun q hq2 hqt => lcmAnchorPulse_letter_eq_deltaTotient ht hq2 hqt⟩ · let x := periodLcm t have hx"
+    },
+    {
+      "id": "Erdos249257/LcmFactorIdealPulseObstruction.lean:902:lcmAnchorPulse_t3_strict_survivor",
+      "name": "lcmAnchorPulse_t3_strict_survivor",
+      "kind": "theorem",
+      "module": "Erdos249257/LcmFactorIdealPulseObstruction.lean",
+      "line": 902,
+      "signature": "theorem lcmAnchorPulse_t3_strict_survivor (i : ℕ) : |lcmAnchorPulseState 3 i| < (12 + i + 2 : ℕ)",
+      "generated_certificate": false,
+      "claim_ids": []
     },
     {
       "id": "Erdos249257/MersenneLambertLadder.lean:61:summable_lambert_pair",

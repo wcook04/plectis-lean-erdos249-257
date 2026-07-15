@@ -24,25 +24,25 @@
       "authority_role": "proof_bearing_committed_source_anchor"
     },
     "navigation_snapshot": {
-      "commit": "513b195f6db65780b1f47324ef88ff9e340ef4f3",
+      "commit": "45333a3b77ba0c9257e877a57af6e48918aae341",
       "authority_role": "machine_readable_navigation_anchor",
       "publication_state": "main_history_snapshot",
       "published_ref": "main",
-      "repository_resolution": "https://github.com/wcook04/plectis-lean-erdos249-257/tree/513b195f6db65780b1f47324ef88ff9e340ef4f3"
+      "repository_resolution": "https://github.com/wcook04/plectis-lean-erdos249-257/tree/45333a3b77ba0c9257e877a57af6e48918aae341"
     },
     "content": {
       "machine_readable_paper": {
         "path": "docs/claims.json::machine_readable_paper",
-        "content_digest": "sha256:bc1a46262b61a4dc04eb92aa2051084e321e0ef1d56d781b39693448db5587e4"
+        "content_digest": "sha256:094f1d5580c727ee8f40a9faf0514460449dd9f58e74c0c0943d34312dd8753b"
       },
       "claims_document": {
         "path": "docs/claims.json",
-        "content_digest": "sha256:42054b744fe62f393dd768175164a2c3c754bc3eebf0812c40cd8b718e8ec4d0"
+        "content_digest": "sha256:7295af45c41a4e08caca77e52bc32787d3f1dcaf1022b5f57f8d87cd5d894416"
       },
       "declaration_atlas": {
         "path": "docs/declaration_atlas.json",
-        "content_digest": "sha256:72b538df00723018f4f396de30c95d81b8d04b279e1c21ebe8510c4b9b03bb89",
-        "source_input_fingerprint": "sha256:471be44e182ba4c62d4654156e9f911f1f9637a9ff4a67ec9334bdfb8ac0ffb2"
+        "content_digest": "sha256:2ede8eef4c5d7733c6bc54185fe3110a19bae33b0ef73e230701633bf06ca360",
+        "source_input_fingerprint": "sha256:ccfac75100342633baeb7100a62c224de11bd30eb6e297c8ea1fa72e5d5ee115"
       },
       "methodology_contract": {
         "path": "docs/methodology.json",
@@ -50,7 +50,7 @@
       },
       "bounded_orientation": {
         "path": "docs/orientation.json",
-        "content_digest": "sha256:2d8e3eeb8633615a2fb483f339ec857388848ba556eec5d2ecebac9b88978f70"
+        "content_digest": "sha256:fe088eadf328bfc917ae93da3ed1727f7451343e978ccc6e8464d01897903cef"
       },
       "human_exposition": {
         "source_path": "paper/erdos249-257-exposition.tex",
@@ -62,7 +62,7 @@
       },
       "technical_companion": {
         "source_path": "paper/erdos249-transport-curvature.tex",
-        "source_content_digest": "sha256:80ad8814568cdbc496754d1f7a625aae4514bc0134942d6393c00384017bd01f",
+        "source_content_digest": "sha256:96088801b86d8e1f2440c6f910e6b2ec81ab4cecb5235ab19aaa3f535f814b9e",
         "rendered_path": "erdos249-transport-curvature.pdf",
         "rendered_content_digest": "sha256:aa52f6d9e085289858c8130a8bd04ffdd73313046d0b33d0c4fc68dfcd966e3e",
         "artifact_role": "authored_transport_and_curvature_companion",
@@ -70,7 +70,7 @@
       },
       "paper_source_sigils": {
         "path": "paper/module-aliases.json",
-        "content_digest": "sha256:24dbd1ccab8fbbdacb77d173e330a49bf53facbfb281310253ee1e41e18613af",
+        "content_digest": "sha256:d06105f0cc5f3fedd9f471a52eeaa4ef7b3ae1825aed87aa73cc4a9031981fbc",
         "schema": "erdos249257-paper-module-aliases/1",
         "artifact_role": "paper_sigil_to_lean_module_navigation_crosswalk",
         "authority_posture": "generated_navigation_projection_not_proof_authority"
@@ -132,19 +132,19 @@
     }
   },
   "summary": {
-    "module_count": 554,
-    "declaration_count": 6743,
-    "theorem_like_count": 6122,
+    "module_count": 555,
+    "declaration_count": 6817,
+    "theorem_like_count": 6178,
     "generated_certificate_declaration_count": 1681,
-    "principal_claim_link_count": 94,
+    "principal_claim_link_count": 97,
     "kind_counts": {
       "abbrev": 4,
-      "def": 601,
+      "def": 619,
       "inductive": 3,
       "instance": 3,
-      "lemma": 350,
+      "lemma": 354,
       "structure": 10,
-      "theorem": 5772
+      "theorem": 5824
     }
   },
   "compact_graph": {
@@ -440,7 +440,7 @@
     ],
     "module_topology": {
       "root": "Erdos249257.lean",
-      "node_count": 553,
+      "node_count": 554,
       "root_imports": [
         "Erdos249257.CertificateKernel",
         "Erdos249257.GeneratedCertificates",
@@ -498,7 +498,8 @@
         "Erdos249257.MersenneTailAtoms",
         "Erdos249257.MobiusSignSupportNoGo",
         "Erdos249257.TotientCarryKernelRigidity",
-        "Erdos249257.PivotAntiReconstruction"
+        "Erdos249257.PivotAntiReconstruction",
+        "Erdos249257.LcmFactorIdealPulseObstruction"
       ],
       "full_graph": "docs/claims.json::machine_readable_paper.module_graph"
     },
@@ -749,6 +750,11 @@
         },
         {
           "from": "fixed_precision_transport_no_go",
+          "relation": "builds_on",
+          "to": "transport_curvature_reductions"
+        },
+        {
+          "from": "lcm_factor_ideal_anchor_pulse_no_go",
           "relation": "builds_on",
           "to": "transport_curvature_reductions"
         },
@@ -1111,7 +1117,7 @@
   "expansion": {
     "machine_readable_paper": {
       "path": "docs/claims.json::machine_readable_paper",
-      "expected_content_digest": "sha256:bc1a46262b61a4dc04eb92aa2051084e321e0ef1d56d781b39693448db5587e4",
+      "expected_content_digest": "sha256:094f1d5580c727ee8f40a9faf0514460449dd9f58e74c0c0943d34312dd8753b",
       "contains": [
         "all_claims",
         "authored_argument_graph",
@@ -1121,8 +1127,8 @@
     },
     "exhaustive_declaration_atlas": {
       "path": "docs/declaration_atlas.json",
-      "expected_content_digest": "sha256:72b538df00723018f4f396de30c95d81b8d04b279e1c21ebe8510c4b9b03bb89",
-      "expected_source_input_fingerprint": "sha256:471be44e182ba4c62d4654156e9f911f1f9637a9ff4a67ec9334bdfb8ac0ffb2",
+      "expected_content_digest": "sha256:2ede8eef4c5d7733c6bc54185fe3110a19bae33b0ef73e230701633bf06ca360",
+      "expected_source_input_fingerprint": "sha256:ccfac75100342633baeb7100a62c224de11bd30eb6e297c8ea1fa72e5d5ee115",
       "availability": "optional_attached_corpus",
       "check": "python3 scripts/build_declaration_atlas.py --check"
     },
@@ -1141,14 +1147,14 @@
     },
     "technical_companion": {
       "source_path": "paper/erdos249-transport-curvature.tex",
-      "expected_source_content_digest": "sha256:80ad8814568cdbc496754d1f7a625aae4514bc0134942d6393c00384017bd01f",
+      "expected_source_content_digest": "sha256:96088801b86d8e1f2440c6f910e6b2ec81ab4cecb5235ab19aaa3f535f814b9e",
       "rendered_path": "erdos249-transport-curvature.pdf",
       "expected_rendered_content_digest": "sha256:aa52f6d9e085289858c8130a8bd04ffdd73313046d0b33d0c4fc68dfcd966e3e",
       "authority_posture": "authored_editorial_surface_not_Lean_proof_authority"
     },
     "paper_source_sigils": {
       "path": "paper/module-aliases.json",
-      "expected_content_digest": "sha256:24dbd1ccab8fbbdacb77d173e330a49bf53facbfb281310253ee1e41e18613af",
+      "expected_content_digest": "sha256:d06105f0cc5f3fedd9f471a52eeaa4ef7b3ae1825aed87aa73cc4a9031981fbc",
       "schema": "erdos249257-paper-module-aliases/1",
       "check": "python3 scripts/build_paper_module_aliases.py --check"
     }

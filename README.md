@@ -27,11 +27,11 @@ there rather than implied by the release tag.
 
 | Checked surface | Scale |
 |---|---:|
-| Lean modules | 554 |
-| Lean declarations | 6,743 |
-| Theorem-like declarations | 6,122 |
+| Lean modules | 555 |
+| Lean declarations | 6,817 |
+| Theorem-like declarations | 6,178 |
 | Generated certificate declarations | 1,681 |
-| Principal claim-to-Lean links | 94 |
+| Principal claim-to-Lean links | 97 |
 | Exact remaining open propositions | 3 |
 
 These are generated navigation counts, not a claim that every declaration is a
@@ -132,6 +132,11 @@ time; its explanation is not proof authority.
   release: a scalar channel transfers that factor into its coefficient rather
   than discarding it. It neither supplies certificates nor proves irrationality
   of the totient constant.
+- **An LCM factor-ideal no-go.** A synthetic affine carry can satisfy the
+  homogeneous LCM factor ideal, the stated whole-ray anchors, and every finite
+  integer shift-polynomial test while remaining a strict survivor. This rules
+  out that finite factor/anchor algebra by itself; it does not model actual
+  totient differences or rule out arguments using fresh divisor channels.
 
 The generated [orientation](docs/ORIENTATION.md) gives the exact meaning of
 every status label. Status records what is formalised, proved, reduced, or
