@@ -4,21 +4,21 @@
   "projection_not_authority": true,
   "proof_authority": "Lean source checked by the pinned Lean kernel",
   "argument_authority": "docs/claims.json::machine_readable_paper.argument_graph",
-  "source_fingerprint": "sha256:78716afe3db50fd788bcee72ca7ddc45508873ef449674cf11f1e600cd243d77",
+  "source_fingerprint": "sha256:4a8899724ee344eb007b6267934ffd07b38643cadc1c1926b6cae0e25c95a5e3",
   "summary": {
-    "module_count": 566,
-    "declaration_count": 7106,
-    "theorem_like_count": 6395,
+    "module_count": 567,
+    "declaration_count": 7198,
+    "theorem_like_count": 6454,
     "generated_certificate_declaration_count": 1681,
-    "principal_claim_link_count": 130,
+    "principal_claim_link_count": 133,
     "kind_counts": {
       "abbrev": 5,
-      "def": 686,
+      "def": 717,
       "inductive": 3,
       "instance": 3,
       "lemma": 354,
-      "structure": 14,
-      "theorem": 6041
+      "structure": 16,
+      "theorem": 6100
     }
   },
   "modules": [
@@ -94,7 +94,8 @@
         "Erdos249257.HalfCarrySelectedWindow",
         "Erdos249257.HalfCarryRewindPhase",
         "Erdos249257.HalfCarryProtectedSeamConsumer",
-        "Erdos249257.HalfCarryCofinalWindowOrSeamConsumer"
+        "Erdos249257.HalfCarryCofinalWindowOrSeamConsumer",
+        "Erdos249257.HalfCylinderIntegerGreedy"
       ],
       "declaration_count": 0,
       "kind_counts": {}
@@ -6458,6 +6459,19 @@
       "kind_counts": {
         "def": 7,
         "theorem": 52
+      }
+    },
+    {
+      "id": "Erdos249257.HalfCylinderIntegerGreedy",
+      "path": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "imports": [
+        "Erdos249257.HalfCarryReachability"
+      ],
+      "declaration_count": 92,
+      "kind_counts": {
+        "def": 31,
+        "structure": 2,
+        "theorem": 59
       }
     },
     {
@@ -69841,6 +69855,974 @@
         "half_cylinder_finite_shadow"
       ],
       "docstring": "The governed first-passage producer closes exact half-membership."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:25:truncatedMersenneWeight",
+      "name": "truncatedMersenneWeight",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 25,
+      "signature": "def truncatedMersenneWeight (s d : ℕ) : ℕ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The exact integer weight contributed at seam rank `s` by selecting a proper divisor rank `d < s`."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:29:truncatedMersenneWeight_eq_geometricCore",
+      "name": "truncatedMersenneWeight_eq_geometricCore",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 29,
+      "signature": "theorem truncatedMersenneWeight_eq_geometricCore {s d : ℕ} (hd : 2 ≤ d) : truncatedMersenneWeight s d = 2 ^ ((2 * s) % d) * ∑ i ∈ Finset.range ((2 * s) / d), (2 ^ d) ^ i",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Quotient form, with the Euclidean remainder made explicit."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:89:truncatedMersenneWeight_eq_descendingMultiples",
+      "name": "truncatedMersenneWeight_eq_descendingMultiples",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 89,
+      "signature": "theorem truncatedMersenneWeight_eq_descendingMultiples {s d : ℕ} (hd : 2 ≤ d) : truncatedMersenneWeight s d = ∑ i ∈ Finset.range ((2 * s) / d), 2 ^ (2 * s - d * (i + 1))",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Descending-multiple form used by the carry-incidence swap."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:121:descendingMultiples_eq_divisorIndicatorSum",
+      "name": "descendingMultiples_eq_divisorIndicatorSum",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 121,
+      "signature": "theorem descendingMultiples_eq_divisorIndicatorSum {s d : ℕ} (hd : 2 ≤ d) : (∑ i ∈ Finset.range ((2 * s) / d), 2 ^ (2 * s - d * (i + 1))) = ∑ j ∈ Finset.range (2 * s - 1), if d ∈ (j + 2).divisors then 2 ^ (2 * s - 2 - j) else 0",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Reindex descending multiples as precisely the rows divisible by `d`."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:197:truncatedMersenneWeight_eq_divisorIndicatorSum",
+      "name": "truncatedMersenneWeight_eq_divisorIndicatorSum",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 197,
+      "signature": "theorem truncatedMersenneWeight_eq_divisorIndicatorSum {s d : ℕ} (hd : 2 ≤ d) : truncatedMersenneWeight s d = ∑ j ∈ Finset.range (2 * s - 1), if d ∈ (j + 2).divisors then 2 ^ (2 * s - 2 - j) else 0",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:207:seamSubsetTarget",
+      "name": "seamSubsetTarget",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 207,
+      "signature": "def seamSubsetTarget (s : ℕ) : ℕ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The binary-boundary target before any selected divisor weights are removed."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:211:seamWeightsFrom",
+      "name": "seamWeightsFrom",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 211,
+      "signature": "def seamWeightsFrom (s : ℕ) : ℕ → List ℕ | d => if h : d < s then truncatedMersenneWeight s d :: seamWeightsFrom s (d + 1) else [] termination_by d => s - d decreasing_by omega /-- The actual proper-divisor weight word, indexed",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The weights with indices `d,d+1,…,s-1`, in descending size order."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:221:seamWeights",
+      "name": "seamWeights",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 221,
+      "signature": "def seamWeights (s : ℕ) : List ℕ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The actual proper-divisor weight word, indexed by `2,…,s-1`."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:224:seamWeightsFrom_eq_nil",
+      "name": "seamWeightsFrom_eq_nil",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 224,
+      "signature": "theorem seamWeightsFrom_eq_nil {s d : ℕ} (h : s ≤ d) : seamWeightsFrom s d = []",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:229:seamWeightsFrom_eq_cons",
+      "name": "seamWeightsFrom_eq_cons",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 229,
+      "signature": "theorem seamWeightsFrom_eq_cons {s d : ℕ} (h : d < s) : seamWeightsFrom s d = truncatedMersenneWeight s d :: seamWeightsFrom s (d + 1)",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:237:truncatedMersenneWeight_cast_le_scaled",
+      "name": "truncatedMersenneWeight_cast_le_scaled",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 237,
+      "signature": "theorem truncatedMersenneWeight_cast_le_scaled {s d : ℕ} (hd : 1 ≤ d) : ((truncatedMersenneWeight s d : ℕ) : ℝ) ≤ (4 : ℝ) ^ s * mersenneWeight d",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The actual proper-divisor weight word, indexed by `2,…,s-1`. -/ def seamWeights (s : ℕ) : List ℕ := seamWeightsFrom s 2 theorem seamWeightsFrom_eq_nil {s d : ℕ} (h : s ≤ d) : seamWeightsFrom s d = [] := by rw [seamWeightsFrom] simp [Nat.not_lt.mpr h] theorem seamWeightsFrom_eq_cons {s d : ℕ} (h : d < s) : seamWeightsFrom s d = truncatedMersenneWeight s d :: seamWeightsFrom s (d + 1) := by rw [seamWeightsFrom] simp [h] /-! ## Floor enclosures and the concrete dominance gap"
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:266:scaled_lt_truncatedMersenneWeight_cast_add_one",
+      "name": "scaled_lt_truncatedMersenneWeight_cast_add_one",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 266,
+      "signature": "theorem scaled_lt_truncatedMersenneWeight_cast_add_one {s d : ℕ} (hd : 1 ≤ d) : (4 : ℝ) ^ s * mersenneWeight d < (((truncatedMersenneWeight s d + 1 : ℕ) : ℕ) : ℝ)",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:296:four_pow_mul_half_pow_pred",
+      "name": "four_pow_mul_half_pow_pred",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 296,
+      "signature": "theorem four_pow_mul_half_pow_pred {s : ℕ} (hs : 1 ≤ s) : (4 : ℝ) ^ s * ((1 : ℝ) / 2) ^ (s - 1) = (2 : ℝ) ^ (s + 1)",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:319:seamWeightsFrom_cast_sum_add_tail_le",
+      "name": "seamWeightsFrom_cast_sum_add_tail_le",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 319,
+      "signature": "theorem seamWeightsFrom_cast_sum_add_tail_le (s d : ℕ) (hd : 1 ≤ d) (hds : d ≤ s) : (((seamWeightsFrom s d).sum : ℕ) : ℝ) + (4 : ℝ) ^ s * mersenneTail (s - 1) ≤ (4 : ℝ) ^ s * mersenneTail (d - 1)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The recursively listed floor weights are bounded by the matching scaled finite Mersenne tail. The infinite tail at `s-1` is retained explicitly; this is what later supplies the quantitative `2^(s+1)` gap."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:362:truncatedMersenneWeight_dominanceGap",
+      "name": "truncatedMersenneWeight_dominanceGap",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 362,
+      "signature": "theorem truncatedMersenneWeight_dominanceGap {s d : ℕ} (hs : 2 ≤ s) (hd : 1 ≤ d) (hds : d < s) : 2 ^ (s + 1) + (seamWeightsFrom s (d + 1)).sum ≤ truncatedMersenneWeight s d",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Quantitative strict superincreasingness of the actual truncated weights. The entire later integer tail plus `2^(s+1)` still fits under the current weight."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:402:GapDominates",
+      "name": "GapDominates",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 402,
+      "signature": "def GapDominates (gap : ℕ) : List ℕ → Prop | [] => True | w :: ws => gap + ws.sum ≤ w ∧ GapDominates gap ws theorem seamWeightsFrom_gapDominates {s d : ℕ} (hs : 2 ≤ s) (hd : 1 ≤ d) : GapDominates (2 ^ (s + 1)) (seamWeightsFrom s d)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Every head exceeds the sum of its complete tail by at least `gap`."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:406:seamWeightsFrom_gapDominates",
+      "name": "seamWeightsFrom_gapDominates",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 406,
+      "signature": "theorem seamWeightsFrom_gapDominates {s d : ℕ} (hs : 2 ≤ s) (hd : 1 ≤ d) : GapDominates (2 ^ (s + 1)) (seamWeightsFrom s d)",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:420:seamWeights_gapDominates",
+      "name": "seamWeights_gapDominates",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 420,
+      "signature": "theorem seamWeights_gapDominates {s : ℕ} (hs : 2 ≤ s) : GapDominates (2 ^ (s + 1)) (seamWeights s)",
+      "generated_certificate": false,
+      "claim_ids": [
+        "integer_greedy_first_wrap_reduction"
+      ]
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:426:weightedBoolSum",
+      "name": "weightedBoolSum",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 426,
+      "signature": "def weightedBoolSum : List ℕ → List Bool → ℕ | w :: ws, true :: bs => w + weightedBoolSum ws bs | _ :: ws, false :: bs => weightedBoolSum ws bs | _, _ => 0 theorem weightedBoolSum_le_sum (weights : List ℕ) (bits : List Bool) : weightedBoolSum weights bits ≤ weights.sum",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Weighted sum of a Boolean word. The equal-length hypotheses below make the two fallback equations irrelevant."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:431:weightedBoolSum_le_sum",
+      "name": "weightedBoolSum_le_sum",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 431,
+      "signature": "theorem weightedBoolSum_le_sum (weights : List ℕ) (bits : List Bool) : weightedBoolSum weights bits ≤ weights.sum",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:447:weightedBoolSum_separated",
+      "name": "weightedBoolSum_separated",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 447,
+      "signature": "theorem weightedBoolSum_separated {gap : ℕ} {weights : List ℕ} (hgap : 0 < gap) (hdom : GapDominates gap weights) {a b : List Bool} (ha : a.length = weights.length) (hb : b.length = weights.length) (hne : a ≠ b) : weightedBoolSum weights a + gap ≤ weightedBoolSum weights b ∨ weightedBoolSum weights b + gap ≤ weightedBoolSum weights a",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Distinct Boolean subset sums of a gap-dominating word differ by at least the gap."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:500:integerGreedyBits",
+      "name": "integerGreedyBits",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 500,
+      "signature": "def integerGreedyBits : List ℕ → ℕ → List Bool | [], _ => [] | w :: ws, C => if w ≤ C then true :: integerGreedyBits ws (C - w) else false :: integerGreedyBits ws C def integerGreedyRemainder (weights : List ℕ) (C : ℕ) : ℕ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Descending greedy subset for an integer capacity."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:508:integerGreedyRemainder",
+      "name": "integerGreedyRemainder",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 508,
+      "signature": "def integerGreedyRemainder (weights : List ℕ) (C : ℕ) : ℕ",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:511:integerGreedyBits_length",
+      "name": "integerGreedyBits_length",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 511,
+      "signature": "theorem integerGreedyBits_length (weights : List ℕ) (C : ℕ) : (integerGreedyBits weights C).length = weights.length",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:519:integerGreedyBits_admissible",
+      "name": "integerGreedyBits_admissible",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 519,
+      "signature": "theorem integerGreedyBits_admissible (weights : List ℕ) (C : ℕ) : weightedBoolSum weights (integerGreedyBits weights C) ≤ C",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:534:integerGreedyBits_maximal",
+      "name": "integerGreedyBits_maximal",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 534,
+      "signature": "theorem integerGreedyBits_maximal {gap : ℕ} (hgap : 0 < gap) {weights : List ℕ} (hdom : GapDominates gap weights) {C : ℕ} {bits : List Bool} (hlen : bits.length = weights.length) (hadm : weightedBoolSum weights bits ≤ C) : weightedBoolSum weights bits ≤ weightedBoolSum weights (integerGreedyBits weights C)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "For a strictly gap-dominating word, descending greedy is the maximal subset sum not exceeding `C`."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:578:exists_smallPositiveDefect_iff_integerGreedyRemainder",
+      "name": "exists_smallPositiveDefect_iff_integerGreedyRemainder",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 578,
+      "signature": "theorem exists_smallPositiveDefect_iff_integerGreedyRemainder {gap B C : ℕ} (hgap : 0 < gap) (hB : B < gap) {weights : List ℕ} (hdom : GapDominates gap weights) : (∃ bits : List Bool, bits.length = weights.length ∧ weightedBoolSum weights bits < C ∧ C - weightedBoolSum weights bits ≤ B) ↔ 1 ≤ integerGreedyRemainder weights C ∧ integerGreedyRemainder weights C ≤ B",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Exact abstract reduction. If the subset sums are separated by a gap strictly larger than the target window, then a positive defect in that window exists iff the descending greedy remainder is itself positive and in the window."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:625:seamIntegerGreedyRemainder",
+      "name": "seamIntegerGreedyRemainder",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 625,
+      "signature": "def seamIntegerGreedyRemainder (s : ℕ) : ℕ",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:628:two_mul_add_four_lt_two_pow_succ",
+      "name": "two_mul_add_four_lt_two_pow_succ",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 628,
+      "signature": "theorem two_mul_add_four_lt_two_pow_succ {s : ℕ} (hs : 3 ≤ s) : 2 * s + 4 < 2 ^ (s + 1)",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:639:halfStripBound_lt_truncatedWeightGap",
+      "name": "halfStripBound_lt_truncatedWeightGap",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 639,
+      "signature": "theorem halfStripBound_lt_truncatedWeightGap {s : ℕ} (hs : 3 ≤ s) : halfStripBound (2 * s) < 2 ^ (s + 1)",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:654:seam_smallPositiveDefect_iff_integerGreedyRemainder",
+      "name": "seam_smallPositiveDefect_iff_integerGreedyRemainder",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 654,
+      "signature": "theorem seam_smallPositiveDefect_iff_integerGreedyRemainder {s : ℕ} (hs : 3 ≤ s) : (∃ bits : List Bool, bits.length = (seamWeights s).length ∧ weightedBoolSum (seamWeights s) bits < seamSubsetTarget s ∧ seamSubsetTarget s - weightedBoolSum (seamWeights s) bits ≤ halfStripBound (2 * s)) ↔ 1 ≤ seamIntegerGreedyRemainder s ∧ seamIntegerGreedyRemainder s ≤ halfStripBound (2 * s)",
+      "generated_certificate": false,
+      "claim_ids": [
+        "integer_greedy_first_wrap_reduction"
+      ],
+      "docstring": "Universal first-wrap reduction for every `s ≥ 3`: arbitrary Boolean divisor incidence has a seam defect in the carry strip exactly when the one descending integer-greedy residual does."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:672:integerHalfCarry_eq_pow_sub_sum",
+      "name": "integerHalfCarry_eq_pow_sub_sum",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 672,
+      "signature": "theorem integerHalfCarry_eq_pow_sub_sum (A : Set ℕ) (N : ℕ) : integerHalfCarry A N = (2 : ℤ) ^ N - ∑ j ∈ Finset.range N, (2 : ℤ) ^ (N - 1 - j) * (supportCoeff A (j + 2) : ℤ)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Closed form of the affine half-carry."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:699:stemBitsFrom",
+      "name": "stemBitsFrom",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 699,
+      "signature": "def stemBitsFrom (s : ℕ) (P : Finset ℕ) : ℕ → List Bool | d => if h : d < s then decide (d ∈ P) :: stemBitsFrom s P (d + 1) else [] termination_by d => s - d decreasing_by omega def stemBits (s : ℕ) (P : Finset ℕ) : List Bool",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Boolean incidence word aligned with `seamWeightsFrom`."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:708:stemBits",
+      "name": "stemBits",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 708,
+      "signature": "def stemBits (s : ℕ) (P : Finset ℕ) : List Bool",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:711:stemBitsFrom_eq_nil",
+      "name": "stemBitsFrom_eq_nil",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 711,
+      "signature": "theorem stemBitsFrom_eq_nil {s d : ℕ} {P : Finset ℕ} (h : s ≤ d) : stemBitsFrom s P d = []",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:716:stemBitsFrom_eq_cons",
+      "name": "stemBitsFrom_eq_cons",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 716,
+      "signature": "theorem stemBitsFrom_eq_cons {s d : ℕ} {P : Finset ℕ} (h : d < s) : stemBitsFrom s P d = decide (d ∈ P) :: stemBitsFrom s P (d + 1)",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:721:stemBitsFrom_length_eq_seamWeightsFrom_length",
+      "name": "stemBitsFrom_length_eq_seamWeightsFrom_length",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 721,
+      "signature": "theorem stemBitsFrom_length_eq_seamWeightsFrom_length (s d : ℕ) (P : Finset ℕ) : (stemBitsFrom s P d).length = (seamWeightsFrom s d).length",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:734:stemBits_length_eq_seamWeights_length",
+      "name": "stemBits_length_eq_seamWeights_length",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 734,
+      "signature": "theorem stemBits_length_eq_seamWeights_length (s : ℕ) (P : Finset ℕ) : (stemBits s P).length = (seamWeights s).length",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:739:stemTruncatedSumFrom",
+      "name": "stemTruncatedSumFrom",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 739,
+      "signature": "def stemTruncatedSumFrom (s : ℕ) (P : Finset ℕ) : ℕ → ℕ | d => if h : d < s then (if d ∈ P then truncatedMersenneWeight s d else 0) + stemTruncatedSumFrom s P (d + 1) else 0 termination_by d => s - d decreasing_by omega def stemTruncatedSum (s : ℕ) (P : Finset ℕ) : ℕ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Recursive form of the selected truncated-weight sum."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:749:stemTruncatedSum",
+      "name": "stemTruncatedSum",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 749,
+      "signature": "def stemTruncatedSum (s : ℕ) (P : Finset ℕ) : ℕ",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:752:stemTruncatedSumFrom_eq_Ico",
+      "name": "stemTruncatedSumFrom_eq_Ico",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 752,
+      "signature": "theorem stemTruncatedSumFrom_eq_Ico (s d : ℕ) (P : Finset ℕ) : stemTruncatedSumFrom s P d = ∑ e ∈ Finset.Ico d s, if e ∈ P then truncatedMersenneWeight s e else 0",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:769:stemTruncatedSum_eq_sum_support",
+      "name": "stemTruncatedSum_eq_sum_support",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 769,
+      "signature": "theorem stemTruncatedSum_eq_sum_support {s : ℕ} {P : Finset ℕ} (hbelow : ∀ d ∈ P, 2 ≤ d ∧ d < s) : stemTruncatedSum s P = ∑ d ∈ P, truncatedMersenneWeight s d",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:786:weightedBoolSum_stemBitsFrom",
+      "name": "weightedBoolSum_stemBitsFrom",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 786,
+      "signature": "theorem weightedBoolSum_stemBitsFrom (s d : ℕ) (P : Finset ℕ) : weightedBoolSum (seamWeightsFrom s d) (stemBitsFrom s P d) = stemTruncatedSumFrom s P d",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:806:weightedBoolSum_stemBits",
+      "name": "weightedBoolSum_stemBits",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 806,
+      "signature": "theorem weightedBoolSum_stemBits (s : ℕ) (P : Finset ℕ) : weightedBoolSum (seamWeights s) (stemBits s P) = stemTruncatedSum s P",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:815:StemIncidenceSwap",
+      "name": "StemIncidenceSwap",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 815,
+      "signature": "def StemIncidenceSwap (s : ℕ) (P : Finset ℕ) : Prop",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The finite divisor/multiple reindexing needed to connect the affine carry expansion to the truncated-weight word. Keeping it as a named socket makes the remaining semantic dependency exact: it contains neither the inserted seam rank nor the terminal row twice."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:821:supportCoeff_finset_eq_indicatorSum",
+      "name": "supportCoeff_finset_eq_indicatorSum",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 821,
+      "signature": "theorem supportCoeff_finset_eq_indicatorSum (P : Finset ℕ) (n : ℕ) : supportCoeff (↑P : Set ℕ) n = ∑ d ∈ P, if d ∈ n.divisors then 1 else 0",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:832:supportIncidenceTotal_eq_sum_weights",
+      "name": "supportIncidenceTotal_eq_sum_weights",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 832,
+      "signature": "theorem supportIncidenceTotal_eq_sum_weights {s : ℕ} {P : Finset ℕ} (hbelow : ∀ d ∈ P, 2 ≤ d ∧ d < s) : (∑ j ∈ Finset.range (2 * s - 1), 2 ^ (2 * s - 2 - j) * supportCoeff (↑P : Set ℕ) (j + 2)) = ∑ d ∈ P, truncatedMersenneWeight s d",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:863:stemIncidenceSwap",
+      "name": "stemIncidenceSwap",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 863,
+      "signature": "theorem stemIncidenceSwap {s : ℕ} {P : Finset ℕ} (hbelow : ∀ d ∈ P, 2 ≤ d ∧ d < s) : StemIncidenceSwap s P",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The finite divisor/multiple swap is unconditional for a Boolean stem supported on the proper ranks `2,…,s-1`."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:882:supportCoeff_insert_eq_add_indicator",
+      "name": "supportCoeff_insert_eq_add_indicator",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 882,
+      "signature": "theorem supportCoeff_insert_eq_add_indicator (A : Set ℕ) {d n : ℕ} (hdA : d ∉ A) : supportCoeff (insert d A) n = supportCoeff A n + if d ∈ n.divisors then 1 else 0",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Inserting an absent support rank changes a Boolean divisor coefficient by exactly the indicator that the inserted rank divides the row."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:913:actualSeamHole_eq_target_sub_stemTruncatedSum",
+      "name": "actualSeamHole_eq_target_sub_stemTruncatedSum",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 913,
+      "signature": "theorem actualSeamHole_eq_target_sub_stemTruncatedSum (s : ℕ) (P : Finset ℕ) (hs : 2 ≤ s) (hsP : s ∉ P) (hbelow : ∀ d ∈ P, 2 ≤ d ∧ d < s) (hswap : StemIncidenceSwap s P) : 2 * integerHalfCarry (insert s (↑P : Set ℕ)) (2 * s - 2) - (supportCoeff (↑P : Set ℕ) (2 * s) : ℤ) = (seamSubsetTarget s : ℤ) - (stemTruncatedSum s P : ℤ)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Once the finite incidence swap is supplied, the actual first-wrap seam hole is exactly the abstract subset-sum defect classified above."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:1079:actualSeamHole_eq_target_sub_stemTruncatedSum_unconditional",
+      "name": "actualSeamHole_eq_target_sub_stemTruncatedSum_unconditional",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 1079,
+      "signature": "theorem actualSeamHole_eq_target_sub_stemTruncatedSum_unconditional (s : ℕ) (P : Finset ℕ) (hs : 2 ≤ s) (hsP : s ∉ P) (hbelow : ∀ d ∈ P, 2 ≤ d ∧ d < s) : 2 * integerHalfCarry (insert s (↑P : Set ℕ)) (2 * s - 2) - (supportCoeff (↑P : Set ℕ) (2 * s) : ℤ) = (seamSubsetTarget s : ℤ) - (stemTruncatedSum s P : ℤ)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Fully discharged semantic socket: every Boolean proper-rank stem has its actual first-wrap seam hole equal to the abstract integer subset-sum defect."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:1091:rowPulse",
+      "name": "rowPulse",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 1091,
+      "signature": "def rowPulse (s d : ℕ) : ℕ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The exact quotient digit created when the row is multiplied by four."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:1096:truncatedMersenneWeight_succ",
+      "name": "truncatedMersenneWeight_succ",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 1096,
+      "signature": "theorem truncatedMersenneWeight_succ {s d : ℕ} (hs : 2 ≤ s) (hd : 2 ≤ d) : truncatedMersenneWeight (s + 1) d = 4 * truncatedMersenneWeight s d + rowPulse s d",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Exact row recurrence for every old truncated Mersenne weight."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:1138:seamSubsetTarget_succ",
+      "name": "seamSubsetTarget_succ",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 1138,
+      "signature": "theorem seamSubsetTarget_succ {s : ℕ} (hs : 2 ≤ s) : seamSubsetTarget (s + 1) = 4 * seamSubsetTarget s + 2 ^ (s + 1)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The seam target itself has an exact affine row recurrence."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:1154:truncatedMersenneWeight_newRank",
+      "name": "truncatedMersenneWeight_newRank",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 1154,
+      "signature": "theorem truncatedMersenneWeight_newRank {s : ℕ} (hs : 3 ≤ s) : truncatedMersenneWeight (s + 1) s = 2 ^ (s + 2) + 4",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The new terminal weight has a closed form once `s ≥ 3`."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:1170:extendWord",
+      "name": "extendWord",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 1170,
+      "signature": "def extendWord (s : ℕ) (beta : Bool) (b : ℕ → Bool) : ℕ → Bool",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A Boolean word with its new rank overwritten by `beta`."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:1174:wordWeightSum",
+      "name": "wordWeightSum",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 1174,
+      "signature": "def wordWeightSum (s : ℕ) (b : ℕ → Bool) : ℕ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The selected weight sum of a Boolean word on ranks `2,...,s-1`."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:1179:wordPulse",
+      "name": "wordPulse",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 1179,
+      "signature": "def wordPulse (s : ℕ) (b : ℕ → Bool) : ℕ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The accumulated quotient-digit pulse of a Boolean word."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:1184:wordDefect",
+      "name": "wordDefect",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 1184,
+      "signature": "def wordDefect (s : ℕ) (b : ℕ → Bool) : ℤ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Signed subset-sum defect of an arbitrary Boolean row word."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:1187:wordWeightSum_succ",
+      "name": "wordWeightSum_succ",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 1187,
+      "signature": "theorem wordWeightSum_succ {s : ℕ} (hs : 3 ≤ s) (b : ℕ → Bool) (beta : Bool) : wordWeightSum (s + 1) (extendWord s beta b) = 4 * wordWeightSum s b + wordPulse s b + if beta then 2 ^ (s + 2) + 4 else 0",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:1225:wordDefect_succ",
+      "name": "wordDefect_succ",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 1225,
+      "signature": "theorem wordDefect_succ {s : ℕ} (hs : 3 ≤ s) (b : ℕ → Bool) (beta : Bool) : wordDefect (s + 1) (extendWord s beta b) = 4 * wordDefect s b + 2 ^ (s + 1) - wordPulse s b - (if beta then 2 ^ (s + 2) + 4 else 0)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Carry-safe affine extension formula for every Boolean word."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:1237:rowPulse_le_two",
+      "name": "rowPulse_le_two",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 1237,
+      "signature": "theorem rowPulse_le_two (s d : ℕ) (hd : 2 ≤ d) : rowPulse s d ≤ 2",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Carry-safe affine extension formula for every Boolean word. -/ theorem wordDefect_succ {s : ℕ} (hs : 3 ≤ s) (b : ℕ → Bool) (beta : Bool) : wordDefect (s + 1) (extendWord s beta b) = 4 * wordDefect s b + 2 ^ (s + 1) - wordPulse s b - (if beta then 2 ^ (s + 2) + 4 else 0) := by unfold wordDefect rw [wordWeightSum_succ hs b beta, seamSubsetTarget_succ (by omega)] push_cast ring /-! ## Carry-safe one-successor and quarter-band reduction"
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:1252:wordPulse_le",
+      "name": "wordPulse_le",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 1252,
+      "signature": "theorem wordPulse_le (s : ℕ) (b : ℕ → Bool) : wordPulse s b ≤ 2 * (s - 2)",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:1269:oldRank_order_preserved",
+      "name": "oldRank_order_preserved",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 1269,
+      "signature": "theorem oldRank_order_preserved {s : ℕ} (hs : 3 ≤ s) {b c : ℕ → Bool} (hsep : wordWeightSum s b + 2 ^ (s + 1) ≤ wordWeightSum s c) : wordWeightSum (s + 1) (extendWord s false b) < wordWeightSum (s + 1) (extendWord s false c)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Old-word order survives the row perturbation whenever the landed superincreasing gap separates the two old sums."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:1286:PerturbedFamily",
+      "name": "PerturbedFamily",
+      "kind": "structure",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 1286,
+      "signature": "structure PerturbedFamily (α : Type*)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Old-word order survives the row perturbation whenever the landed superincreasing gap separates the two old sums. -/ theorem oldRank_order_preserved {s : ℕ} (hs : 3 ≤ s) {b c : ℕ → Bool} (hsep : wordWeightSum s b + 2 ^ (s + 1) ≤ wordWeightSum s c) : wordWeightSum (s + 1) (extendWord s false b) < wordWeightSum (s + 1) (extendWord s false c) := by rw [wordWeightSum_succ hs b false, wordWeightSum_succ hs c false] simp only [Bool.false_eq_true, ↓reduceIte, Nat.add_zero] have hb := wordPulse_le s b have hc : 0 ≤ wordPulse s c := Nat.zero_le _ have hsmall : 2 * (s - 2) < 4 * 2 ^ (s + 1) := by have hlin : 2 * s + 4 < 2 ^ (s + 1) := two_mul_add_four_lt_two_pow_succ hs omega omega /-! ### Abstract adjacent-cut packet"
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:1302:newSum",
+      "name": "newSum",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 1302,
+      "signature": "def newSum (x : α) : ℕ",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:1304:newSum_strictMono",
+      "name": "newSum_strictMono",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 1304,
+      "signature": "theorem newSum_strictMono {x y : α} (hxy : F.oldSum x < F.oldSum y) : F.newSum x < F.newSum y",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:1313:newSum_mono",
+      "name": "newSum_mono",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 1313,
+      "signature": "theorem newSum_mono {x y : α} (hxy : F.oldSum x ≤ F.oldSum y) : F.newSum x ≤ F.newSum y",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:1320:AdjacentCut",
+      "name": "AdjacentCut",
+      "kind": "structure",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 1320,
+      "signature": "structure AdjacentCut (C : ℕ)",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:1332:remainder",
+      "name": "remainder",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 1332,
+      "signature": "def remainder : ℕ",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:1334:overshoot",
+      "name": "overshoot",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 1334,
+      "signature": "def overshoot : ℕ",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:1336:belowPulse",
+      "name": "belowPulse",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 1336,
+      "signature": "def belowPulse : ℕ",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:1338:abovePulse",
+      "name": "abovePulse",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 1338,
+      "signature": "def abovePulse : ℕ",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:1340:newCapacity",
+      "name": "newCapacity",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 1340,
+      "signature": "def newCapacity (_K : F.AdjacentCut C) : ℕ",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:1342:successorCarries",
+      "name": "successorCarries",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 1342,
+      "signature": "def successorCarries : Prop",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:1345:prefixChoice",
+      "name": "prefixChoice",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 1345,
+      "signature": "def prefixChoice [Decidable K.successorCarries] : α",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:1348:old_below_add_remainder",
+      "name": "old_below_add_remainder",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 1348,
+      "signature": "theorem old_below_add_remainder : F.oldSum K.below + K.remainder = C",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:1354:capacity_add_overshoot",
+      "name": "capacity_add_overshoot",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 1354,
+      "signature": "theorem capacity_add_overshoot : C + K.overshoot = F.oldSum K.above",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:1360:below_newSum_le_capacity",
+      "name": "below_newSum_le_capacity",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 1360,
+      "signature": "theorem below_newSum_le_capacity (hcap : F.pulseCap < F.gap) : F.newSum K.below ≤ K.newCapacity",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:1368:above_newSum_le_capacity_iff",
+      "name": "above_newSum_le_capacity_iff",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 1368,
+      "signature": "theorem above_newSum_le_capacity_iff : F.newSum K.above ≤ K.newCapacity ↔ K.successorCarries",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:1374:above_residual_eq",
+      "name": "above_residual_eq",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 1374,
+      "signature": "theorem above_residual_eq : K.newCapacity - F.newSum K.above = F.gap - (4 * K.overshoot + K.abovePulse)",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:1381:below_residual_eq",
+      "name": "below_residual_eq",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 1381,
+      "signature": "theorem below_residual_eq : K.newCapacity - F.newSum K.below = 4 * K.remainder + F.gap - K.belowPulse",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:1390:prefixChoice_maximal",
+      "name": "prefixChoice_maximal",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 1390,
+      "signature": "theorem prefixChoice_maximal (hcap : F.pulseCap < F.gap) [Decidable K.successorCarries] {x : α} (hx : F.newSum x ≤ K.newCapacity) : F.newSum x ≤ F.newSum K.prefixChoice",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The updated old-rank prefix is the old greedy word or its immediate successor. No later word can remain admissible."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:1432:terminalWeight",
+      "name": "terminalWeight",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 1432,
+      "signature": "def terminalWeight (_K : F.AdjacentCut C) : ℕ",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:1434:prefixRemainder",
+      "name": "prefixRemainder",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 1434,
+      "signature": "def prefixRemainder [Decidable K.successorCarries] : ℕ",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:1440:nextRemainder",
+      "name": "nextRemainder",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 1440,
+      "signature": "def nextRemainder [Decidable K.successorCarries] : ℕ",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:1446:prefixRemainder_eq_capacity_sub_choice",
+      "name": "prefixRemainder_eq_capacity_sub_choice",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 1446,
+      "signature": "theorem prefixRemainder_eq_capacity_sub_choice [Decidable K.successorCarries] : K.prefixRemainder = K.newCapacity - F.newSum K.prefixChoice",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:1455:carry_prefix_lt_terminal",
+      "name": "carry_prefix_lt_terminal",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 1455,
+      "signature": "theorem carry_prefix_lt_terminal [Decidable K.successorCarries] (hcarry : K.successorCarries) : K.prefixRemainder < K.terminalWeight",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:1463:nextRemainder_trichotomy",
+      "name": "nextRemainder_trichotomy",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 1463,
+      "signature": "theorem nextRemainder_trichotomy [Decidable K.successorCarries] : K.nextRemainder = if K.successorCarries then F.gap - (4 * K.overshoot + K.abovePulse) else if 4 * K.remainder + F.gap - K.belowPulse < K.terminalWeight then 4 * K.remainder + F.gap - K.belowPulse else 4 * K.remainder - F.gap - K.belowPulse - 4",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Exact carry-safe three-branch recurrence."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:1496:QuarterBandEscapeAt",
+      "name": "QuarterBandEscapeAt",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 1496,
+      "signature": "def QuarterBandEscapeAt (B : ℕ) : Prop",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Exact carry-safe three-branch recurrence. -/ theorem nextRemainder_trichotomy [Decidable K.successorCarries] : K.nextRemainder = if K.successorCarries then F.gap - (4 * K.overshoot + K.abovePulse) else if 4 * K.remainder + F.gap - K.belowPulse < K.terminalWeight then 4 * K.remainder + F.gap - K.belowPulse else 4 * K.remainder - F.gap - K.belowPulse - 4 := by by_cases hcarry : K.successorCarries · have hlt := K.carry_prefix_lt_terminal hcarry have hlt' : F.gap - (4 * K.overshoot + K.abovePulse) < K.terminalWeight := by simpa [prefixRemainder, hcarry] using hlt have hnle : ¬ K.terminalWeight ≤ F.gap - (4 * K.overshoot + K.abovePulse) := Nat.not_le_of_lt hlt' simp [nextRemainder, prefixRemainder, hcarry, hnle] · by_cases hterminal : 4 * K.remainder + F.gap - K.belowPulse < K.terminalWeight · have hnle : ¬ K.terminalWeight ≤ 4 * K.remainder + F.gap - K.belowPulse := Nat.not_le_of_lt hterminal simp [nextRemainder, prefixRemainder, hcarry, hterminal, hnle] · have hle : K.terminalWeight ≤ 4 *"
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:1505:bound_lt_nextRemainder_of_quarterBandEscape",
+      "name": "bound_lt_nextRemainder_of_quarterBandEscape",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 1505,
+      "signature": "theorem bound_lt_nextRemainder_of_quarterBandEscape [Decidable K.successorCarries] {B : ℕ} (hcap : F.pulseCap < F.gap) (hmiddle : B < F.gap - F.pulseCap) (hquarter : K.QuarterBandEscapeAt B) : B < K.nextRemainder",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Once the two pulse-correlated quarter bands are excluded, every branch of the exact recurrence lies above the target strip."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderIntegerGreedy.lean:1528:quarterBandEscape_iff_bound_lt_nextRemainder",
+      "name": "quarterBandEscape_iff_bound_lt_nextRemainder",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+      "line": 1528,
+      "signature": "theorem quarterBandEscape_iff_bound_lt_nextRemainder [Decidable K.successorCarries] {B : ℕ} (hcap : F.pulseCap < F.gap) (hmiddle : B < F.gap - F.pulseCap) : K.QuarterBandEscapeAt B ↔ B < K.nextRemainder",
+      "generated_certificate": false,
+      "claim_ids": [
+        "integer_greedy_first_wrap_reduction"
+      ],
+      "docstring": "Under the already-landed middle-branch separation, the two quarter-band clauses are not merely sufficient: they are exactly the assertion that the updated residual escapes the target strip."
     },
     {
       "id": "Erdos249257/HalfTrappingReturnCarry.lean:42:relationInvariantLinearChannels_det_eq_zero",

@@ -4954,6 +4954,14 @@
           ]
         },
         {
+          "id": "Erdos249257.HalfCylinderIntegerGreedy",
+          "path": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+          "role": "Integer-greedy first-wrap seam reduction",
+          "imports": [
+            "Erdos249257.HalfCarryReachability"
+          ]
+        },
+        {
           "id": "Erdos249257.HalfTrappingReturnCarry",
           "path": "Erdos249257/HalfTrappingReturnCarry.lean",
           "role": "Half-trapping reverse-carry interface",
@@ -5349,6 +5357,11 @@
           "to": "localized_protected_seam_compactness"
         },
         {
+          "from": "integer_greedy_first_wrap_reduction",
+          "relation": "builds_on",
+          "to": "half_cylinder_finite_shadow"
+        },
+        {
           "from": "denominator_exclusion",
           "relation": "advances_open_target",
           "to": "erdos_249",
@@ -5622,7 +5635,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 1279
+        "line": 1289
       }
     },
     {
@@ -5633,7 +5646,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 1288
+        "line": 1298
       }
     },
     {
@@ -5644,7 +5657,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 1295
+        "line": 1305
       }
     }
   ],
@@ -6006,6 +6019,34 @@
           "name": "exists_infinite_support_half_of_cofinalSelectedWindowOrProtectedSeam",
           "module": "Erdos249257/HalfCarryCofinalWindowOrSeamConsumer.lean",
           "line": 58
+        }
+      ]
+    },
+    {
+      "id": "integer_greedy_first_wrap_reduction",
+      "label": "Integer-greedy first-wrap reduction",
+      "status": "conditional reduction",
+      "statement": "At a first half-cylinder wrap, the truncated Mersenne weights are gap-dominating, and a small positive seam subset-sum defect exists exactly when the descending integer-greedy remainder is small and positive. The remaining unbounded lower bound for that deterministic remainder sequence is not proved.",
+      "remaining_open_proposition_ids": [
+        "remaining_open.universal_257_all_infinite_supports"
+      ],
+      "paper_label": "res:integergreedy",
+      "readme_headline": false,
+      "declarations": [
+        {
+          "name": "seamWeights_gapDominates",
+          "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+          "line": 420
+        },
+        {
+          "name": "seam_smallPositiveDefect_iff_integerGreedyRemainder",
+          "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+          "line": 654
+        },
+        {
+          "name": "quarterBandEscape_iff_bound_lt_nextRemainder",
+          "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
+          "line": 1528
         }
       ]
     },

@@ -41,6 +41,7 @@ NEW_ROLES = {
     "Erdos249257.HalfCarryRewindPhase": "Realized fixed-coefficient rewind phase",
     "Erdos249257.HalfCarryProtectedSeamConsumer": "Localized protected one-hole seam consumer",
     "Erdos249257.HalfCarryCofinalWindowOrSeamConsumer": "Mixed cofinal half-carry fan-in",
+    "Erdos249257.HalfCylinderIntegerGreedy": "Integer-greedy first-wrap seam reduction",
     "Erdos249257.HalfCylinderFiniteShadow": "Finite shadows of the half cylinder",
     "Erdos249257.HalfTrappingReturnCarry": "Half-trapping reverse-carry interface",
     "Erdos249257.LambertDiagonalEnclosure": "Lambert diagonal enclosure reduction",

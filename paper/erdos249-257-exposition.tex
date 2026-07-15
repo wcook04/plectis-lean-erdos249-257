@@ -643,6 +643,16 @@ and
 \lrefx{HalfCarryCofinalWindowOrSeamConsumer.lean}{58}{exists_infinite_support_half_of_cofinalSelectedWindowOrProtectedSeam}.
 The mixed cofinal producer remains an unproved hypothesis.
 
+\subsection{Integer-greedy first-wrap reduction}\label{res:integergreedy}
+
+The first-wrap seam has exact truncated Mersenne weights with a quantitative
+gap-dominance property.  For these weights, a small positive subset-sum defect
+exists exactly when the descending integer-greedy remainder is small and
+positive; this is formalised by
+\lref{HalfCylinderIntegerGreedy.lean}{654}{seam_smallPositiveDefect_iff_integerGreedyRemainder}.
+The remaining arithmetic input is an unbounded lower bound for that
+deterministic remainder sequence.  No such lower bound is proved here.
+
 \subsection{What stays open}
 
 The universal Erd\H{o}s \#257 statement, irrationality of $\sum_{n\in A}1/(2^n-1)$
