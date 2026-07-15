@@ -11,9 +11,9 @@
   },
   "identity": {
     "formal_source": {
-      "ref": "5eb4bb8",
+      "ref": "c8ff1ad",
       "ref_kind": "commit",
-      "resolved_commit": "5eb4bb804b0315d0b08118dcda6e652f15691eed",
+      "resolved_commit": "c8ff1ad9ed86798673ba5e928c0827ce1a1ae459",
       "publication_state": "committed_checkpoint_pending_remote_publication",
       "relationship_to_last_tag": "post_tag_checkpoint",
       "last_release": {
@@ -37,7 +37,7 @@
       },
       "claims_document": {
         "path": "docs/claims.json",
-        "content_digest": "sha256:d8c10e359bb7e531172c045ee4b87ff710e4935dca7b34322c8db20f0a7b4d1e"
+        "content_digest": "sha256:955eac56b8951beea92c51ad8e2dfdff19d5ac532ab0e45a69e6ef1dd7677f8f"
       },
       "declaration_atlas": {
         "path": "docs/declaration_atlas.json",
@@ -50,11 +50,11 @@
       },
       "bounded_orientation": {
         "path": "docs/orientation.json",
-        "content_digest": "sha256:585cdc0eb3f3fc0a96ec0969b2c95d4fa1c3803a1afc06cb8777a776a7a9f010"
+        "content_digest": "sha256:b2a38f5849f31cb940988141746f5854b119f045e90d6bc940c47d99c872384b"
       },
       "human_exposition": {
         "source_path": "paper/erdos249-257-exposition.tex",
-        "source_content_digest": "sha256:e1209729d556643716a75f2c6e99492252e360461de1857eb6adb185b6dede63",
+        "source_content_digest": "sha256:be5449bd389bef5d3e6d2613f3f2139482356c1a2b06d96acfa75420755867fe",
         "rendered_path": "erdos249-257-exposition.pdf",
         "rendered_content_digest": "sha256:b8ec00c65eeeeaf9400544630c3ed1fa3f04080b714330fc98918f40c1c02891",
         "artifact_role": "authored_mathematician_facing_exposition",
@@ -1387,7 +1387,7 @@
     },
     "human_exposition": {
       "source_path": "paper/erdos249-257-exposition.tex",
-      "expected_source_content_digest": "sha256:e1209729d556643716a75f2c6e99492252e360461de1857eb6adb185b6dede63",
+      "expected_source_content_digest": "sha256:be5449bd389bef5d3e6d2613f3f2139482356c1a2b06d96acfa75420755867fe",
       "rendered_path": "erdos249-257-exposition.pdf",
       "expected_rendered_content_digest": "sha256:b8ec00c65eeeeaf9400544630c3ed1fa3f04080b714330fc98918f40c1c02891",
       "authority_posture": "authored_editorial_surface_not_Lean_proof_authority"
