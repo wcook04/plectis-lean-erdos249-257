@@ -3,7 +3,7 @@
   "artifact_role": "paper_sigil_to_lean_module_navigation_crosswalk",
   "authority_posture": "generated_navigation_projection_not_proof_authority",
   "heuristic": "Each CamelCase component contributes at most its first three characters.",
-  "alias_count": 74,
+  "alias_count": 75,
   "aliases": [
     {
       "sigil": "ActForResPro",
@@ -349,6 +349,11 @@
       "sigil": "TerOnlCof",
       "module": "TerminalOnlyCofinal.lean",
       "path": "Erdos249257/TerminalOnlyCofinal.lean"
+    },
+    {
+      "sigil": "TerOnlScaVan",
+      "module": "TerminalOnlyScaledVanishing.lean",
+      "path": "Erdos249257/TerminalOnlyScaledVanishing.lean"
     },
     {
       "sigil": "ThrTraBou",

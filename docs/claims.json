@@ -5463,6 +5463,14 @@
           ]
         },
         {
+          "id": "Erdos249257.TerminalOnlyScaledVanishing",
+          "path": "Erdos249257/TerminalOnlyScaledVanishing.lean",
+          "role": "Lean proof module",
+          "imports": [
+            "Erdos249257.TerminalOnlyCofinal"
+          ]
+        },
+        {
           "id": "Erdos249257.ThreeTransportBoundary",
           "path": "Erdos249257/ThreeTransportBoundary.lean",
           "role": "Lean proof module",
@@ -5566,6 +5574,11 @@
           "from": "terminal_only_cofinal_closure",
           "relation": "builds_on",
           "to": "half_carry_reachability_compactness"
+        },
+        {
+          "from": "terminal_scaled_vanishing_closure",
+          "relation": "builds_on",
+          "to": "terminal_only_cofinal_closure"
         },
         {
           "from": "half_cylinder_finite_shadow",
@@ -5981,7 +5994,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 1599
+        "line": 1621
       }
     },
     {
@@ -5992,7 +6005,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 1608
+        "line": 1630
       }
     },
     {
@@ -6003,7 +6016,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 1615
+        "line": 1637
       }
     }
   ],
@@ -6253,6 +6266,34 @@
           "name": "exists_infinite_support_half_of_cofinalTerminalOnlyStrip",
           "module": "Erdos249257/TerminalOnlyCofinal.lean",
           "line": 192
+        }
+      ]
+    },
+    {
+      "id": "terminal_scaled_vanishing_closure",
+      "label": "Scaled terminal-vanishing closure",
+      "status": "conditional reduction",
+      "statement": "A normalized sequence of finite terminal words whose depths tend to infinity and whose terminal carries divided by the corresponding powers of 2 tend to zero has support-series values converging to 1/2. Closedness of the Mersenne achievement set then gives membership of 1/2 and an infinite support with that value. The prior cofinal square-root-strip condition maps into this weaker socket, but no scaled-vanishing sequence is constructed.",
+      "remaining_open_proposition_ids": [
+        "remaining_open.universal_257_all_infinite_supports"
+      ],
+      "paper_label": "res:terminalscaledvanishing",
+      "readme_headline": false,
+      "declarations": [
+        {
+          "name": "dist_half_erdosSupportSeries_wordSupport_le_carry_add_tail",
+          "module": "Erdos249257/TerminalOnlyScaledVanishing.lean",
+          "line": 24
+        },
+        {
+          "name": "half_mem_mersenneAchievementSet_of_terminalScaledVanishing",
+          "module": "Erdos249257/TerminalOnlyScaledVanishing.lean",
+          "line": 165
+        },
+        {
+          "name": "exists_infinite_support_half_of_terminalScaledVanishing",
+          "module": "Erdos249257/TerminalOnlyScaledVanishing.lean",
+          "line": 221
         }
       ]
     },

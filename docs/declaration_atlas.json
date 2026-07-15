@@ -4,21 +4,21 @@
   "projection_not_authority": true,
   "proof_authority": "Lean source checked by the pinned Lean kernel",
   "argument_authority": "docs/claims.json::machine_readable_paper.argument_graph",
-  "source_fingerprint": "sha256:7104350978eaac92ea6240e2533e8088415ea2380d879b0f02478c30ae0cd5ff",
+  "source_fingerprint": "sha256:2f32e42caedb8470626f46ea1e07b6cd06400b4fd4ea332e5a6369436a09d8e2",
   "summary": {
-    "module_count": 595,
-    "declaration_count": 7667,
-    "theorem_like_count": 6833,
+    "module_count": 596,
+    "declaration_count": 7674,
+    "theorem_like_count": 6839,
     "generated_certificate_declaration_count": 1681,
-    "principal_claim_link_count": 187,
+    "principal_claim_link_count": 190,
     "kind_counts": {
       "abbrev": 6,
       "def": 802,
       "inductive": 3,
       "instance": 5,
       "lemma": 354,
-      "structure": 18,
-      "theorem": 6479
+      "structure": 19,
+      "theorem": 6485
     }
   },
   "modules": [
@@ -124,7 +124,8 @@
         "Erdos249257.CofinalStripReturn",
         "Erdos249257.TerminalOnlyCofinal",
         "Erdos249257.FreshPrimeDeficitDecomposition",
-        "Erdos249257.PowerTwoBitLift"
+        "Erdos249257.PowerTwoBitLift",
+        "Erdos249257.TerminalOnlyScaledVanishing"
       ],
       "declaration_count": 0,
       "kind_counts": {}
@@ -7252,6 +7253,18 @@
       "kind_counts": {
         "def": 2,
         "theorem": 5
+      }
+    },
+    {
+      "id": "Erdos249257.TerminalOnlyScaledVanishing",
+      "path": "Erdos249257/TerminalOnlyScaledVanishing.lean",
+      "imports": [
+        "Erdos249257.TerminalOnlyCofinal"
+      ],
+      "declaration_count": 7,
+      "kind_counts": {
+        "structure": 1,
+        "theorem": 6
       }
     },
     {
@@ -85721,6 +85734,89 @@
         "terminal_only_cofinal_closure"
       ],
       "docstring": "The terminal-only cofinal producer yields an infinite normalized support summing exactly to `1/2`. Infinitude follows from the existing odd- denominator obstruction for finite Boolean supports."
+    },
+    {
+      "id": "Erdos249257/TerminalOnlyScaledVanishing.lean:24:dist_half_erdosSupportSeries_wordSupport_le_carry_add_tail",
+      "name": "dist_half_erdosSupportSeries_wordSupport_le_carry_add_tail",
+      "kind": "theorem",
+      "module": "Erdos249257/TerminalOnlyScaledVanishing.lean",
+      "line": 24,
+      "signature": "theorem dist_half_erdosSupportSeries_wordSupport_le_carry_add_tail {M : ℕ} (hM : 1 ≤ M) {a : HalfWord M} (hone : ∀ h : 1 < M + 1, a ⟨1, h⟩ = false) : dist (erdosSupportSeries 2 (wordSupport a)) (1 / 2 : ℝ) ≤ (|(integerHalfCarry (wordSupport a) (M - 1) : ℝ)| + (2 * Real.sqrt (M : ℝ) + 4)) / (2 : ℝ) ^ M",
+      "generated_certificate": false,
+      "claim_ids": [
+        "terminal_scaled_vanishing_closure"
+      ],
+      "docstring": "A terminal word is close to `1/2` by the sum of two normalized errors: its absolute terminal carry and the universal support-coefficient tail."
+    },
+    {
+      "id": "Erdos249257/TerminalOnlyScaledVanishing.lean:63:tendsto_two_sqrt_add_four_div_pow_zero",
+      "name": "tendsto_two_sqrt_add_four_div_pow_zero",
+      "kind": "theorem",
+      "module": "Erdos249257/TerminalOnlyScaledVanishing.lean",
+      "line": 63,
+      "signature": "theorem tendsto_two_sqrt_add_four_div_pow_zero : Tendsto (fun M : ℕ ↦ (2 * Real.sqrt (M : ℝ) + 4) / (2 : ℝ) ^ M) atTop (nhds 0)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The universal coefficient-tail envelope is negligible on the binary scale."
+    },
+    {
+      "id": "Erdos249257/TerminalOnlyScaledVanishing.lean:99:tendsto_halfStripBound_div_pow_zero",
+      "name": "tendsto_halfStripBound_div_pow_zero",
+      "kind": "theorem",
+      "module": "Erdos249257/TerminalOnlyScaledVanishing.lean",
+      "line": 99,
+      "signature": "theorem tendsto_halfStripBound_div_pow_zero : Tendsto (fun M : ℕ ↦ (halfStripBound M : ℝ) / (2 : ℝ) ^ M) atTop (nhds 0)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The concrete square-root strip is itself negligible on the binary scale."
+    },
+    {
+      "id": "Erdos249257/TerminalOnlyScaledVanishing.lean:117:HalfTerminalOnlyScaledVanishingSequence",
+      "name": "HalfTerminalOnlyScaledVanishingSequence",
+      "kind": "structure",
+      "module": "Erdos249257/TerminalOnlyScaledVanishing.lean",
+      "line": 117,
+      "signature": "structure HalfTerminalOnlyScaledVanishingSequence",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The weakest sequential terminal-only producer used here. Depths tend to infinity, normalization makes every finite value an achievement-set member, and only the *scaled terminal carry* is required to vanish."
+    },
+    {
+      "id": "Erdos249257/TerminalOnlyScaledVanishing.lean:165:half_mem_mersenneAchievementSet_of_terminalScaledVanishing",
+      "name": "half_mem_mersenneAchievementSet_of_terminalScaledVanishing",
+      "kind": "theorem",
+      "module": "Erdos249257/TerminalOnlyScaledVanishing.lean",
+      "line": 165,
+      "signature": "theorem half_mem_mersenneAchievementSet_of_terminalScaledVanishing (S : HalfTerminalOnlyScaledVanishingSequence) : (1 / 2 : ℝ) ∈ mersenneAchievementSet",
+      "generated_certificate": false,
+      "claim_ids": [
+        "terminal_scaled_vanishing_closure"
+      ],
+      "docstring": "**Scaled-terminal consumer.** Vanishing of the normalized terminal carry already puts `1/2` in the Mersenne achievement set."
+    },
+    {
+      "id": "Erdos249257/TerminalOnlyScaledVanishing.lean:221:exists_infinite_support_half_of_terminalScaledVanishing",
+      "name": "exists_infinite_support_half_of_terminalScaledVanishing",
+      "kind": "theorem",
+      "module": "Erdos249257/TerminalOnlyScaledVanishing.lean",
+      "line": 221,
+      "signature": "theorem exists_infinite_support_half_of_terminalScaledVanishing (S : HalfTerminalOnlyScaledVanishingSequence) : ∃ A : Set ℕ, A.Infinite ∧ erdosSupportSeries 2 A = (1 : ℝ) / 2",
+      "generated_certificate": false,
+      "claim_ids": [
+        "terminal_scaled_vanishing_closure"
+      ],
+      "docstring": "The scaled-terminal producer yields an infinite support summing exactly to `1/2`."
+    },
+    {
+      "id": "Erdos249257/TerminalOnlyScaledVanishing.lean:236:half_mem_mersenneAchievementSet_of_cofinalTerminalOnlyStrip_via_scaled",
+      "name": "half_mem_mersenneAchievementSet_of_cofinalTerminalOnlyStrip_via_scaled",
+      "kind": "theorem",
+      "module": "Erdos249257/TerminalOnlyScaledVanishing.lean",
+      "line": 236,
+      "signature": "theorem half_mem_mersenneAchievementSet_of_cofinalTerminalOnlyStrip_via_scaled (hcofinal : HalfCarryCofinalTerminalOnlyStrip) : (1 / 2 : ℝ) ∈ mersenneAchievementSet",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Compatibility theorem: the old square-root-strip hypothesis is a special case of the new scaled-terminal consumer."
     },
     {
       "id": "Erdos249257/ThreeTransportBoundary.lean:24:threeTransportTail",
