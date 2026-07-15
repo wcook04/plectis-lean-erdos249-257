@@ -1323,6 +1323,25 @@ and
 This is a finite arithmetic interface.  It does not supply the required
 cofactors at unbounded scales and gives no irrationality conclusion.
 
+\paragraph{Parity is not a margin certificate.}  The preceding lift does not
+settle the reduced signed-margin socket.  For every positive even modulus and
+every radius in the stated nontrivial range, each parity class contains both a
+socket hit and a socket miss.  The same statement applies to a positive
+power-of-two modulus.  Thus even a fifth-bit computation, by itself, cannot
+decide the required margin condition.
+
+\begin{proposition}[parity obstruction for the reduced margin socket]
+\label{res:paritysocket}
+Under the explicit radius inequalities, parity does not decide membership in
+the reduced margin socket, including at a positive power-of-two modulus.
+\end{proposition}
+\noindent Formalised:
+\lref{Totient827ParitySocketCeiling.lean}{73}{reducedMarginSocket_not_decided_by_parity}
+and
+\lref{Totient827ParitySocketCeiling.lean}{110}{powerTwo_reducedMarginSocket_not_decided_by_parity}.
+The module contains no $t=827$ numeral and proves no signed-margin
+certificate; it excludes parity as a sufficient standalone criterion.
+
 \paragraph{A closed prime-adjunction route.} One tempting way to seek an
 unbounded obstruction is to compare the full target at $H$, $pH$, $qH$, and
 $pqH$.  The formal development rules out this route in its unprojected form.

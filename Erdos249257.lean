@@ -99,3 +99,4 @@ import Erdos249257.TerminalOnlyCofinal
 import Erdos249257.FreshPrimeDeficitDecomposition
 import Erdos249257.PowerTwoBitLift
 import Erdos249257.TerminalOnlyScaledVanishing
+import Erdos249257.Totient827ParitySocketCeiling

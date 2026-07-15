@@ -4,21 +4,21 @@
   "projection_not_authority": true,
   "proof_authority": "Lean source checked by the pinned Lean kernel",
   "argument_authority": "docs/claims.json::machine_readable_paper.argument_graph",
-  "source_fingerprint": "sha256:2f32e42caedb8470626f46ea1e07b6cd06400b4fd4ea332e5a6369436a09d8e2",
+  "source_fingerprint": "sha256:86276f82ac9c5c04e55cb545d4c84b64d86a839e79a659092072d3b7c524394c",
   "summary": {
-    "module_count": 596,
-    "declaration_count": 7674,
-    "theorem_like_count": 6839,
+    "module_count": 597,
+    "declaration_count": 7679,
+    "theorem_like_count": 6843,
     "generated_certificate_declaration_count": 1681,
-    "principal_claim_link_count": 190,
+    "principal_claim_link_count": 192,
     "kind_counts": {
       "abbrev": 6,
-      "def": 802,
+      "def": 803,
       "inductive": 3,
       "instance": 5,
       "lemma": 354,
       "structure": 19,
-      "theorem": 6485
+      "theorem": 6489
     }
   },
   "modules": [
@@ -125,7 +125,8 @@
         "Erdos249257.TerminalOnlyCofinal",
         "Erdos249257.FreshPrimeDeficitDecomposition",
         "Erdos249257.PowerTwoBitLift",
-        "Erdos249257.TerminalOnlyScaledVanishing"
+        "Erdos249257.TerminalOnlyScaledVanishing",
+        "Erdos249257.Totient827ParitySocketCeiling"
       ],
       "declaration_count": 0,
       "kind_counts": {}
@@ -7278,6 +7279,18 @@
       "kind_counts": {
         "def": 7,
         "theorem": 10
+      }
+    },
+    {
+      "id": "Erdos249257.Totient827ParitySocketCeiling",
+      "path": "Erdos249257/Totient827ParitySocketCeiling.lean",
+      "imports": [
+        "Erdos249257.PowerTwoBitLift"
+      ],
+      "declaration_count": 5,
+      "kind_counts": {
+        "def": 1,
+        "theorem": 4
       }
     },
     {
@@ -86008,6 +86021,65 @@
         "transport_certificate_instances"
       ],
       "docstring": "Kernel-checked finite lattice separation at `t = 6`, `H = 60`."
+    },
+    {
+      "id": "Erdos249257/Totient827ParitySocketCeiling.lean:22:ReducedMarginSocket",
+      "name": "ReducedMarginSocket",
+      "kind": "def",
+      "module": "Erdos249257/Totient827ParitySocketCeiling.lean",
+      "line": 22,
+      "signature": "def ReducedMarginSocket (m A y : ℤ) : Prop",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The reduced signed-margin socket: `y` lies within strict radius `A / 16` of some multiple of `m`, with the inequality kept integral."
+    },
+    {
+      "id": "Erdos249257/Totient827ParitySocketCeiling.lean:27:not_reducedMarginSocket_midpoint",
+      "name": "not_reducedMarginSocket_midpoint",
+      "kind": "theorem",
+      "module": "Erdos249257/Totient827ParitySocketCeiling.lean",
+      "line": 27,
+      "signature": "theorem not_reducedMarginSocket_midpoint {r A : ℤ} (hr : 0 < r) (hA : A < 16 * r) : ¬ ReducedMarginSocket (2 * r) A r",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A midpoint of a positive even lattice is outside every socket whose integral radius is strictly smaller than the midpoint distance."
+    },
+    {
+      "id": "Erdos249257/Totient827ParitySocketCeiling.lean:48:not_reducedMarginSocket_midpoint_add_one",
+      "name": "not_reducedMarginSocket_midpoint_add_one",
+      "kind": "theorem",
+      "module": "Erdos249257/Totient827ParitySocketCeiling.lean",
+      "line": 48,
+      "signature": "theorem not_reducedMarginSocket_midpoint_add_one {r A : ℤ} (hr : 1 ≤ r) (hA : A < 16 * r - 16) : ¬ ReducedMarginSocket (2 * r) A (r + 1)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The successor of a midpoint is also outside when the radius is strictly smaller than its distance `r - 1` from the next lattice point."
+    },
+    {
+      "id": "Erdos249257/Totient827ParitySocketCeiling.lean:73:reducedMarginSocket_not_decided_by_parity",
+      "name": "reducedMarginSocket_not_decided_by_parity",
+      "kind": "theorem",
+      "module": "Erdos249257/Totient827ParitySocketCeiling.lean",
+      "line": 73,
+      "signature": "theorem reducedMarginSocket_not_decided_by_parity {m A : ℤ} (hmEven : Even m) (hmPos : 0 < m) (h16A : 16 < A) (hA : A < 8 * m - 16) : (∃ yHit yMiss : ℤ, Even yHit ∧ Even yMiss ∧ ReducedMarginSocket m A yHit ∧ ¬ ReducedMarginSocket m A yMiss) ∧ (∃ yHit yMiss : ℤ, Odd yHit ∧ Odd yMiss ∧ ReducedMarginSocket m A yHit ∧ ¬ ReducedMarginSocket m A yMiss)",
+      "generated_certificate": false,
+      "claim_ids": [
+        "parity_socket_obstruction"
+      ],
+      "docstring": "Knowing only the parity of a reduced quotient cannot decide its margin socket. In each parity class there is both a socket hit and a socket miss. The hits are `0` and `1`. Writing the even modulus as `2*r`, the misses are the adjacent central residues `r` and `r+1`; their parities are opposite, so they cover the two classes in one order or the other."
+    },
+    {
+      "id": "Erdos249257/Totient827ParitySocketCeiling.lean:110:powerTwo_reducedMarginSocket_not_decided_by_parity",
+      "name": "powerTwo_reducedMarginSocket_not_decided_by_parity",
+      "kind": "theorem",
+      "module": "Erdos249257/Totient827ParitySocketCeiling.lean",
+      "line": 110,
+      "signature": "theorem powerTwo_reducedMarginSocket_not_decided_by_parity {k : ℕ} {A : ℤ} (hk : 0 < k) (h16A : 16 < A) (hA : A < 8 * (2 : ℤ) ^ k - 16) : (∃ yHit yMiss : ℤ, Even yHit ∧ Even yMiss ∧ ReducedMarginSocket ((2 : ℤ) ^ k) A yHit ∧ ¬ ReducedMarginSocket ((2 : ℤ) ^ k) A yMiss) ∧ (∃ yHit yMiss : ℤ, Odd yHit ∧ Odd yMiss ∧ ReducedMarginSocket ((2 : ℤ) ^ k) A yHit ∧ ¬ ReducedMarginSocket ((2 : ℤ) ^ k) A yMiss)",
+      "generated_certificate": false,
+      "claim_ids": [
+        "parity_socket_obstruction"
+      ],
+      "docstring": "Power-of-two specialization. This is the form directly applicable to the reduced modulus `2^1198` at the canonical `t = 827` row once its margin constant is exported by the arithmetic certificate module."
     },
     {
       "id": "Erdos249257/TotientCarryKernelRigidity.lean:24:carryDerivative",

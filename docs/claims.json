@@ -5480,6 +5480,14 @@
           ]
         },
         {
+          "id": "Erdos249257.Totient827ParitySocketCeiling",
+          "path": "Erdos249257/Totient827ParitySocketCeiling.lean",
+          "role": "Lean proof module",
+          "imports": [
+            "Erdos249257.PowerTwoBitLift"
+          ]
+        },
+        {
           "id": "Erdos249257.TotientCarryKernelRigidity",
           "path": "Erdos249257/TotientCarryKernelRigidity.lean",
           "role": "Lean proof module",
@@ -5761,6 +5769,11 @@
           "to": "diagonal_fresh_loss_reduction"
         },
         {
+          "from": "parity_socket_obstruction",
+          "relation": "builds_on",
+          "to": "power_two_bit_lift"
+        },
+        {
           "from": "canonical_jump_slack_reduction",
           "relation": "builds_on",
           "to": "diagonal_fresh_loss_reduction"
@@ -5994,7 +6007,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 1621
+        "line": 1640
       }
     },
     {
@@ -6005,7 +6018,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 1630
+        "line": 1649
       }
     },
     {
@@ -6016,7 +6029,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 1637
+        "line": 1656
       }
     }
   ],
@@ -7246,6 +7259,29 @@
           "name": "not_modEq_thirtyTwo_iff_offset_sixteen",
           "module": "Erdos249257/PowerTwoBitLift.lean",
           "line": 129
+        }
+      ]
+    },
+    {
+      "id": "parity_socket_obstruction",
+      "label": "Parity obstruction for the reduced margin socket",
+      "status": "proved here",
+      "statement": "For every positive even modulus and every radius in the stated nontrivial range, each parity class contains both a reduced-margin-socket hit and a miss. The same holds for a positive power-of-two modulus. Thus quotient parity alone cannot decide the reduced signed-margin socket. No t = 827 numeral or signed-margin certificate is asserted.",
+      "remaining_open_proposition_ids": [
+        "remaining_open.unbounded_certificate_supply"
+      ],
+      "paper_label": "res:paritysocket",
+      "readme_headline": false,
+      "declarations": [
+        {
+          "name": "reducedMarginSocket_not_decided_by_parity",
+          "module": "Erdos249257/Totient827ParitySocketCeiling.lean",
+          "line": 73
+        },
+        {
+          "name": "powerTwo_reducedMarginSocket_not_decided_by_parity",
+          "module": "Erdos249257/Totient827ParitySocketCeiling.lean",
+          "line": 110
         }
       ]
     },
