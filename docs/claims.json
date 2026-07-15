@@ -4911,6 +4911,15 @@
           ]
         },
         {
+          "id": "Erdos249257.HalfCarrySelectedWindow",
+          "path": "Erdos249257/HalfCarrySelectedWindow.lean",
+          "role": "Selected protected half-carry windows",
+          "imports": [
+            "Erdos249257.HalfCylinderFiniteShadow",
+            "Erdos249257.HalfCarryCeilParentContraction"
+          ]
+        },
+        {
           "id": "Erdos249257.HalfCylinderFiniteShadow",
           "path": "Erdos249257/HalfCylinderFiniteShadow.lean",
           "role": "Finite shadows of the half cylinder",
@@ -5295,6 +5304,11 @@
           "to": "half_cylinder_finite_shadow"
         },
         {
+          "from": "selected_half_carry_window_compactness",
+          "relation": "builds_on",
+          "to": "fixed_coefficient_rewind_contraction"
+        },
+        {
           "from": "denominator_exclusion",
           "relation": "advances_open_target",
           "to": "erdos_249",
@@ -5568,7 +5582,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 1231
+        "line": 1245
       }
     },
     {
@@ -5579,7 +5593,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 1240
+        "line": 1254
       }
     },
     {
@@ -5590,7 +5604,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 1247
+        "line": 1261
       }
     }
   ],
@@ -5840,6 +5854,34 @@
           "name": "rewind_singleton_or_isSeamPair",
           "module": "Erdos249257/HalfCarryCeilParentContraction.lean",
           "line": 180
+        }
+      ]
+    },
+    {
+      "id": "selected_half_carry_window_compactness",
+      "label": "Selected half-carry windows",
+      "status": "conditional reduction",
+      "statement": "If selected protected half-carry windows exist at every sufficiently large level, then their carry-one representatives yield cofinal admissibility and an infinite support with erdosSupportSeries 2 A = 1/2. The unresolved object-level input is a coherent history at each step: a common next-row divisor cylinder or the canonical adjacent seam. The module does not supply that input.",
+      "remaining_open_proposition_ids": [
+        "remaining_open.universal_257_all_infinite_supports"
+      ],
+      "paper_label": "res:selectedhalfwindow",
+      "readme_headline": false,
+      "declarations": [
+        {
+          "name": "SelectedHalfWindow.HistoryAlternative",
+          "module": "Erdos249257/HalfCarrySelectedWindow.lean",
+          "line": 236
+        },
+        {
+          "name": "cofinalAdmissibility_of_selectedHalfWindows",
+          "module": "Erdos249257/HalfCarrySelectedWindow.lean",
+          "line": 831
+        },
+        {
+          "name": "exists_infinite_support_half_of_selectedHalfWindows",
+          "module": "Erdos249257/HalfCarrySelectedWindow.lean",
+          "line": 864
         }
       ]
     },

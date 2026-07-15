@@ -595,6 +595,20 @@ Thus width alone does not justify a singleton conclusion.  This is a finite
 rewind lemma, and supplies neither a seam exclusion nor an Erd\H{o}s~\#257
 conclusion.
 
+\subsection{Selected half-carry windows}\label{res:selectedhalfwindow}
+
+The selected-window interface keeps an explicit admissible word for each
+terminal carry in a finite protected interval.  A supply of such windows at
+all sufficiently large levels gives cofinal admissibility and hence an
+infinite support with sum $1/2$:
+\lref{HalfCarrySelectedWindow.lean}{831}{cofinalAdmissibility_of_selectedHalfWindows}
+and
+\lrefx{HalfCarrySelectedWindow.lean}{864}{exists_infinite_support_half_of_selectedHalfWindows}.
+The unresolved input is the coherent history at each step: either a common
+next-row divisor cylinder, or the canonical adjacent seam.  The module makes
+this input explicit; it does not construct the window supply and does not
+prove Erd\H{o}s~\#257.
+
 \subsection{What stays open}
 
 The universal Erd\H{o}s \#257 statement, irrationality of $\sum_{n\in A}1/(2^n-1)$

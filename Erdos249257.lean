@@ -64,3 +64,4 @@ import Erdos249257.HalfTrappingReturnCarry
 import Erdos249257.HalfCarryReachability
 import Erdos249257.HalfCylinderFiniteShadow
 import Erdos249257.HalfCarryCeilParentContraction
+import Erdos249257.HalfCarrySelectedWindow

@@ -37,6 +37,7 @@ NEW_ROLES = {
     "Erdos249257.FullTargetPrimeAdjunctionNoGo": "Prime-adjunction obstruction for the full target",
     "Erdos249257.HalfCarryReachability": "Half-carry reachability and compactness",
     "Erdos249257.HalfCarryCeilParentContraction": "Fixed-coefficient rewind contraction",
+    "Erdos249257.HalfCarrySelectedWindow": "Selected protected half-carry windows",
     "Erdos249257.HalfCylinderFiniteShadow": "Finite shadows of the half cylinder",
     "Erdos249257.HalfTrappingReturnCarry": "Half-trapping reverse-carry interface",
     "Erdos249257.LambertDiagonalEnclosure": "Lambert diagonal enclosure reduction",

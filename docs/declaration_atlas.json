@@ -4,21 +4,21 @@
   "projection_not_authority": true,
   "proof_authority": "Lean source checked by the pinned Lean kernel",
   "argument_authority": "docs/claims.json::machine_readable_paper.argument_graph",
-  "source_fingerprint": "sha256:4f773e360a02caf8608bdcc1bef29ad39ac823c8034c0433f673ddeb3325c8b3",
+  "source_fingerprint": "sha256:660be6d33f7f635255ed0aef9184076b7a1f44966a640e4c7add00d697e788ec",
   "summary": {
-    "module_count": 562,
-    "declaration_count": 7036,
-    "theorem_like_count": 6349,
+    "module_count": 563,
+    "declaration_count": 7081,
+    "theorem_like_count": 6377,
     "generated_certificate_declaration_count": 1681,
-    "principal_claim_link_count": 118,
+    "principal_claim_link_count": 121,
     "kind_counts": {
       "abbrev": 5,
-      "def": 664,
+      "def": 679,
       "inductive": 3,
       "instance": 3,
       "lemma": 354,
-      "structure": 12,
-      "theorem": 5995
+      "structure": 14,
+      "theorem": 6023
     }
   },
   "modules": [
@@ -90,7 +90,8 @@
         "Erdos249257.HalfTrappingReturnCarry",
         "Erdos249257.HalfCarryReachability",
         "Erdos249257.HalfCylinderFiniteShadow",
-        "Erdos249257.HalfCarryCeilParentContraction"
+        "Erdos249257.HalfCarryCeilParentContraction",
+        "Erdos249257.HalfCarrySelectedWindow"
       ],
       "declaration_count": 0,
       "kind_counts": {}
@@ -6390,6 +6391,20 @@
         "abbrev": 1,
         "def": 17,
         "theorem": 53
+      }
+    },
+    {
+      "id": "Erdos249257.HalfCarrySelectedWindow",
+      "path": "Erdos249257/HalfCarrySelectedWindow.lean",
+      "imports": [
+        "Erdos249257.HalfCylinderFiniteShadow",
+        "Erdos249257.HalfCarryCeilParentContraction"
+      ],
+      "declaration_count": 45,
+      "kind_counts": {
+        "def": 15,
+        "structure": 2,
+        "theorem": 28
       }
     },
     {
@@ -68343,6 +68358,505 @@
       "generated_certificate": false,
       "claim_ids": [],
       "docstring": "Solver-facing fan-in for the seam route. A canonical coordinate and scalar escape settle every even level from `20` onward; an independent odd level producer and one admissible depth-`20` base then feed the existing inverse-system consumer."
+    },
+    {
+      "id": "Erdos249257/HalfCarrySelectedWindow.lean:19:ProtectedChild",
+      "name": "ProtectedChild",
+      "kind": "def",
+      "module": "Erdos249257/HalfCarrySelectedWindow.lean",
+      "line": 19,
+      "signature": "def ProtectedChild (p : ℕ → ℤ) (k q : ℕ) : Prop",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A row forcing term and the two Boolean children of parent carry `k`."
+    },
+    {
+      "id": "Erdos249257/HalfCarrySelectedWindow.lean:27:protectedChild_cover_Icc_of_constant",
+      "name": "protectedChild_cover_Icc_of_constant",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarrySelectedWindow.lean",
+      "line": 27,
+      "signature": "theorem protectedChild_cover_Icc_of_constant (p : ℕ → ℤ) {R S C : ℕ} (hp_const : ∀ k : ℕ, 1 ≤ k → k ≤ R → p k = C) (hbuffer : S + C ≤ 2 * R) : ∀ q : ℕ, 1 ≤ q → q ≤ S → ∃ k : ℕ, 1 ≤ k ∧ k ≤ R ∧ ProtectedChild p k q",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Scalar protected-window coverage for the stronger invariant seen in the exact replay: every selected parent has one common proper-divisor coefficient `C`. The children of consecutive parents are the adjacent pairs `{2k-C-1, 2k-C}`, so `S+C ≤ 2R` tiles the whole positive target window."
+    },
+    {
+      "id": "Erdos249257/HalfCarrySelectedWindow.lean:65:extendHalfWord",
+      "name": "extendHalfWord",
+      "kind": "def",
+      "module": "Erdos249257/HalfCarrySelectedWindow.lean",
+      "line": 65,
+      "signature": "def extendHalfWord {N : ℕ} (a : HalfWord N) (β : Bool) : HalfWord (N + 1)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Append one Boolean bit to a finite half word."
+    },
+    {
+      "id": "Erdos249257/HalfCarrySelectedWindow.lean:68:extendHalfWord_castSucc",
+      "name": "extendHalfWord_castSucc",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarrySelectedWindow.lean",
+      "line": 68,
+      "signature": "@[simp] theorem extendHalfWord_castSucc {N : ℕ} (a : HalfWord N) (β : Bool) (i : Fin (N + 1)) : extendHalfWord a β i.castSucc = a i",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCarrySelectedWindow.lean:73:extendHalfWord_last",
+      "name": "extendHalfWord_last",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarrySelectedWindow.lean",
+      "line": 73,
+      "signature": "@[simp] theorem extendHalfWord_last {N : ℕ} (a : HalfWord N) (β : Bool) : extendHalfWord a β (Fin.last (N + 1)) = β",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCarrySelectedWindow.lean:80:mem_wordSupport_extendHalfWord_iff",
+      "name": "mem_wordSupport_extendHalfWord_iff",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarrySelectedWindow.lean",
+      "line": 80,
+      "signature": "theorem mem_wordSupport_extendHalfWord_iff {N n : ℕ} (a : HalfWord N) (β : Bool) : n ∈ wordSupport (extendHalfWord a β) ↔ n ∈ wordSupport a ∨ (n = N + 1 ∧ β = true)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Membership in the support of an extended word is old membership or the new terminal bit."
+    },
+    {
+      "id": "Erdos249257/HalfCarrySelectedWindow.lean:118:wordSupport_extendHalfWord",
+      "name": "wordSupport_extendHalfWord",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarrySelectedWindow.lean",
+      "line": 118,
+      "signature": "theorem wordSupport_extendHalfWord {N : ℕ} (a : HalfWord N) (β : Bool) : wordSupport (extendHalfWord a β) = if β then insert (N + 1) (wordSupport a) else wordSupport a",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Set-level support normal form for a one-bit extension."
+    },
+    {
+      "id": "Erdos249257/HalfCarrySelectedWindow.lean:127:restrictWord_extendHalfWord",
+      "name": "restrictWord_extendHalfWord",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarrySelectedWindow.lean",
+      "line": 127,
+      "signature": "theorem restrictWord_extendHalfWord {N : ℕ} (a : HalfWord N) (β : Bool) : restrictWord (Nat.le_succ N) (extendHalfWord a β) = a",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Restricting an extension recovers its parent word."
+    },
+    {
+      "id": "Erdos249257/HalfCarrySelectedWindow.lean:137:HalfStripAdmissible.extend",
+      "name": "HalfStripAdmissible.extend",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarrySelectedWindow.lean",
+      "line": 137,
+      "signature": "theorem HalfStripAdmissible.extend {N : ℕ} (hN : 1 ≤ N) {a : HalfWord N} (ha : HalfStripAdmissible N a) (β : Bool) (hterminal : (1 : ℤ) ≤ integerHalfCarry (wordSupport (extendHalfWord a β)) N ∧ integerHalfCarry (wordSupport (extendHalfWord a β)) N ≤ halfStripBound (N + 1)) : HalfStripAdmissible (N + 1) (extendHalfWord a β)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "If the new terminal carry lies in the next strip, extending an admissible word preserves all earlier strip inequalities and establishes the new one."
+    },
+    {
+      "id": "Erdos249257/HalfCarrySelectedWindow.lean:172:SelectedHalfWindow",
+      "name": "SelectedHalfWindow",
+      "kind": "structure",
+      "module": "Erdos249257/HalfCarrySelectedWindow.lean",
+      "line": 172,
+      "signature": "structure SelectedHalfWindow (N R : ℕ)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A selected family contains one explicit admissible representative for every carry in the protected initial window. No global uniqueness claim is built into this interface."
+    },
+    {
+      "id": "Erdos249257/HalfCarrySelectedWindow.lean:181:selectedRowCoeff",
+      "name": "selectedRowCoeff",
+      "kind": "def",
+      "module": "Erdos249257/HalfCarrySelectedWindow.lean",
+      "line": 181,
+      "signature": "noncomputable def selectedRowCoeff {N R : ℕ} (W : SelectedHalfWindow N R) (k : ℕ) : ℤ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The actual next-row proper-divisor coefficient of the selected representative. Values outside the protected window are set to zero only so the scalar lemma can consume a total function."
+    },
+    {
+      "id": "Erdos249257/HalfCarrySelectedWindow.lean:193:SelectedHalfWindow.NextRowDivisorAgreement",
+      "name": "SelectedHalfWindow.NextRowDivisorAgreement",
+      "kind": "def",
+      "module": "Erdos249257/HalfCarrySelectedWindow.lean",
+      "line": 193,
+      "signature": "def SelectedHalfWindow.NextRowDivisorAgreement {N R : ℕ} (W : SelectedHalfWindow N R) : Prop",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The chosen terminal representatives agree on every divisor inspected by the next proper coefficient. This is the exact cylinder-prefix consequence needed by the common-coefficient one-step atom; it avoids claiming that the whole words are equal."
+    },
+    {
+      "id": "Erdos249257/HalfCarrySelectedWindow.lean:202:supportCoeff_eq_of_divisorAgreement",
+      "name": "supportCoeff_eq_of_divisorAgreement",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarrySelectedWindow.lean",
+      "line": 202,
+      "signature": "theorem supportCoeff_eq_of_divisorAgreement (A B : Set ℕ) (n : ℕ) (hagree : ∀ d : ℕ, d ∈ n.divisors → (d ∈ A ↔ d ∈ B)) : supportCoeff A n = supportCoeff B n",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Divisor-membership agreement is precisely enough to identify two support coefficients."
+    },
+    {
+      "id": "Erdos249257/HalfCarrySelectedWindow.lean:219:SelectedHalfWindow.selectedRowCoeff_eq",
+      "name": "SelectedHalfWindow.selectedRowCoeff_eq",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarrySelectedWindow.lean",
+      "line": 219,
+      "signature": "theorem SelectedHalfWindow.selectedRowCoeff_eq {N R : ℕ} (W : SelectedHalfWindow N R) (hagree : W.NextRowDivisorAgreement) {k ℓ : ℕ} (hk : 1 ≤ k) (hkR : k ≤ R) (hℓ : 1 ≤ ℓ) (hℓR : ℓ ≤ R) : selectedRowCoeff W k = selectedRowCoeff W ℓ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A coherent next-row divisor cylinder makes `selectedRowCoeff` genuinely constant on the protected window."
+    },
+    {
+      "id": "Erdos249257/HalfCarrySelectedWindow.lean:236:SelectedHalfWindow.HistoryAlternative",
+      "name": "SelectedHalfWindow.HistoryAlternative",
+      "kind": "def",
+      "module": "Erdos249257/HalfCarrySelectedWindow.lean",
+      "line": 236,
+      "signature": "def SelectedHalfWindow.HistoryAlternative {N R : ℕ} (W : SelectedHalfWindow N R) : Prop",
+      "generated_certificate": false,
+      "claim_ids": [
+        "selected_half_carry_window_compactness"
+      ],
+      "docstring": "Exact unresolved global history alternative. Repeated common inverse maps contract a carry interval to either one ancestor or two adjacent ancestors. The singleton case must establish `NextRowDivisorAgreement`; the adjacent-pair case must identify the actual transition with the already landed canonical one-hole seam. No false phase-free singleton claim is encoded here."
+    },
+    {
+      "id": "Erdos249257/HalfCarrySelectedWindow.lean:245:SelectedHalfWindow.stepOpaque",
+      "name": "SelectedHalfWindow.stepOpaque",
+      "kind": "def",
+      "module": "Erdos249257/HalfCarrySelectedWindow.lean",
+      "line": 245,
+      "signature": "noncomputable def SelectedHalfWindow.stepOpaque {N R S C : ℕ} (hN : 1 ≤ N) (W : SelectedHalfWindow N R) (_hR : 1 ≤ R) (_hS : 1 ≤ S) (hSstrip : S ≤ halfStripBound (N + 1)) (hp_common : ∀ k : ℕ, 1 ≤ k → k ≤ R → selectedRowCoeff W k = C) (hbuffer : S + C ≤ 2 * R) : SelectedHalfWindow (N + 1) S",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Legacy existence-by-choice implementation of the object-level one-step protected-window theorem. The public `step` below uses the canonical fixed-coefficient parent and exposes exact restriction provenance."
+    },
+    {
+      "id": "Erdos249257/HalfCarrySelectedWindow.lean:364:explicitParent_pos",
+      "name": "explicitParent_pos",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarrySelectedWindow.lean",
+      "line": 364,
+      "signature": "theorem explicitParent_pos {q C : ℕ} (hq : 1 ≤ q) : 1 ≤ parent C q",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Every positive target has a positive canonical fixed-coefficient parent."
+    },
+    {
+      "id": "Erdos249257/HalfCarrySelectedWindow.lean:371:explicitParent_le",
+      "name": "explicitParent_le",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarrySelectedWindow.lean",
+      "line": 371,
+      "signature": "theorem explicitParent_le {q R S C : ℕ} (hqS : q ≤ S) (hbuffer : S + C ≤ 2 * R) : parent C q ≤ R",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The protected-window buffer inequality puts the canonical parent in the preceding protected window."
+    },
+    {
+      "id": "Erdos249257/HalfCarrySelectedWindow.lean:378:explicitParentBitZ",
+      "name": "explicitParentBitZ",
+      "kind": "def",
+      "module": "Erdos249257/HalfCarrySelectedWindow.lean",
+      "line": 378,
+      "signature": "def explicitParentBitZ (C q : ℕ) : ℤ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Exact parity bit associated to the canonical parent."
+    },
+    {
+      "id": "Erdos249257/HalfCarrySelectedWindow.lean:382:explicitParentBitZ_zero_or_one",
+      "name": "explicitParentBitZ_zero_or_one",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarrySelectedWindow.lean",
+      "line": 382,
+      "signature": "theorem explicitParentBitZ_zero_or_one (C q : ℕ) : explicitParentBitZ C q = 0 ∨ explicitParentBitZ C q = 1",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The canonical parent leaves exactly one Boolean remainder bit."
+    },
+    {
+      "id": "Erdos249257/HalfCarrySelectedWindow.lean:398:explicitParent_recurrence",
+      "name": "explicitParent_recurrence",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarrySelectedWindow.lean",
+      "line": 398,
+      "signature": "theorem explicitParent_recurrence (C q : ℕ) : (q : ℤ) = 2 * (parent C q : ℤ) - C - explicitParentBitZ C q",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The canonical parent and parity bit solve the scalar child recurrence."
+    },
+    {
+      "id": "Erdos249257/HalfCarrySelectedWindow.lean:406:SelectedHalfWindow.FixedCoeffSuccessor",
+      "name": "SelectedHalfWindow.FixedCoeffSuccessor",
+      "kind": "structure",
+      "module": "Erdos249257/HalfCarrySelectedWindow.lean",
+      "line": 406,
+      "signature": "structure SelectedHalfWindow.FixedCoeffSuccessor {N R S C : ℕ} (W : SelectedHalfWindow N R) (hbuffer : S + C ≤ 2 * R)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A selected window together with exact one-row provenance. Keeping the restriction equation in the constructor makes later rewind composition independent of the implementation details of the data-producing proof."
+    },
+    {
+      "id": "Erdos249257/HalfCarrySelectedWindow.lean:417:SelectedHalfWindow.stepExplicitWithHistory",
+      "name": "SelectedHalfWindow.stepExplicitWithHistory",
+      "kind": "def",
+      "module": "Erdos249257/HalfCarrySelectedWindow.lean",
+      "line": 417,
+      "signature": "noncomputable def SelectedHalfWindow.stepExplicitWithHistory {N R S C : ℕ} (hN : 1 ≤ N) (W : SelectedHalfWindow N R) (hSstrip : S ≤ halfStripBound (N + 1)) (hp_common : ∀ k : ℕ, 1 ≤ k → k ≤ R → selectedRowCoeff W k = C) (hbuffer : S + C ≤ 2 * R) : W.FixedCoeffSuccessor hbuffer",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Explicit-parent selected-window step with its restriction provenance in the same bundle."
+    },
+    {
+      "id": "Erdos249257/HalfCarrySelectedWindow.lean:517:SelectedHalfWindow.stepExplicit",
+      "name": "SelectedHalfWindow.stepExplicit",
+      "kind": "def",
+      "module": "Erdos249257/HalfCarrySelectedWindow.lean",
+      "line": 517,
+      "signature": "noncomputable def SelectedHalfWindow.stepExplicit {N R S C : ℕ} (hN : 1 ≤ N) (W : SelectedHalfWindow N R) (hSstrip : S ≤ halfStripBound (N + 1)) (hp_common : ∀ k : ℕ, 1 ≤ k → k ≤ R → selectedRowCoeff W k = C) (hbuffer : S + C ≤ 2 * R) : SelectedHalfWindow (N + 1) S",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Data-only projection of the explicit-parent successor."
+    },
+    {
+      "id": "Erdos249257/HalfCarrySelectedWindow.lean:527:SelectedHalfWindow.restrictWord_stepExplicit",
+      "name": "SelectedHalfWindow.restrictWord_stepExplicit",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarrySelectedWindow.lean",
+      "line": 527,
+      "signature": "theorem SelectedHalfWindow.restrictWord_stepExplicit {N R S C : ℕ} (hN : 1 ≤ N) (W : SelectedHalfWindow N R) (hSstrip : S ≤ halfStripBound (N + 1)) (hp_common : ∀ k : ℕ, 1 ≤ k → k ≤ R → selectedRowCoeff W k = C) (hbuffer : S + C ≤ 2 * R) (q : ℕ) (hq : 1 ≤ q) (hqS : q ≤ S) : restrictWord (Nat.le_succ N) ((W.stepExplicit hN hSstrip hp_common hbuffer).word q hq hqS) = W.word (parent C q) (explicitParent_pos hq) (explicitParent_le hqS hbuffer)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "One-step restriction provenance for the public explicit constructor."
+    },
+    {
+      "id": "Erdos249257/HalfCarrySelectedWindow.lean:542:SelectedHalfWindow.CommonRestrictionAt",
+      "name": "SelectedHalfWindow.CommonRestrictionAt",
+      "kind": "def",
+      "module": "Erdos249257/HalfCarrySelectedWindow.lean",
+      "line": 542,
+      "signature": "def SelectedHalfWindow.CommonRestrictionAt {M N R : ℕ} (W : SelectedHalfWindow N R) (hMN : M ≤ N) : Prop",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "All selected representatives have the same prefix at cutoff `M`."
+    },
+    {
+      "id": "Erdos249257/HalfCarrySelectedWindow.lean:551:SelectedHalfWindow.nextRowDivisorAgreement_of_commonRestriction",
+      "name": "SelectedHalfWindow.nextRowDivisorAgreement_of_commonRestriction",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarrySelectedWindow.lean",
+      "line": 551,
+      "signature": "theorem SelectedHalfWindow.nextRowDivisorAgreement_of_commonRestriction {M N R : ℕ} (W : SelectedHalfWindow N R) (hMN : M ≤ N) (hhalf : (N + 1) / 2 ≤ M) (hcommon : W.CommonRestrictionAt hMN) : W.NextRowDivisorAgreement",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A common restriction beyond the half-depth cutoff forces the exact next-row divisor-membership agreement required by `selectedRowCoeff_eq`. Every proper divisor of `N + 1` is at most `(N + 1) / 2`; the remaining divisor `N + 1` is absent from every depth-`N` word."
+    },
+    {
+      "id": "Erdos249257/HalfCarrySelectedWindow.lean:607:SelectedHalfWindow.HasRewindRestrictionAt",
+      "name": "SelectedHalfWindow.HasRewindRestrictionAt",
+      "kind": "def",
+      "module": "Erdos249257/HalfCarrySelectedWindow.lean",
+      "line": 607,
+      "signature": "def SelectedHalfWindow.HasRewindRestrictionAt {M N R₀ R : ℕ} (W : SelectedHalfWindow N R) (W₀ : SelectedHalfWindow M R₀) (hMN : M ≤ N) (cs : List ℕ) : Prop",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Composed one-step provenance, stated without exposing dependent bound proofs. Every selected word restricts to the base representative indexed by its exact closed-form rewind ancestor."
+    },
+    {
+      "id": "Erdos249257/HalfCarrySelectedWindow.lean:617:SelectedHalfWindow.word_eq_of_index_eq",
+      "name": "SelectedHalfWindow.word_eq_of_index_eq",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarrySelectedWindow.lean",
+      "line": 617,
+      "signature": "theorem SelectedHalfWindow.word_eq_of_index_eq {N R k ell : ℕ} (W : SelectedHalfWindow N R) (h : k = ell) (hk : 1 ≤ k) (hkR : k ≤ R) (hell : 1 ≤ ell) (hellR : ell ≤ R) : W.word k hk hkR = W.word ell hell hellR",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Dependent proof arguments to `word` are irrelevant once the carry index is identified."
+    },
+    {
+      "id": "Erdos249257/HalfCarrySelectedWindow.lean:625:SelectedHalfWindow.hasRewindRestrictionAt_nil",
+      "name": "SelectedHalfWindow.hasRewindRestrictionAt_nil",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarrySelectedWindow.lean",
+      "line": 625,
+      "signature": "theorem SelectedHalfWindow.hasRewindRestrictionAt_nil {N R : ℕ} (W : SelectedHalfWindow N R) : W.HasRewindRestrictionAt W (le_refl N) []",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Reflexive rewind provenance at an empty coefficient history."
+    },
+    {
+      "id": "Erdos249257/HalfCarrySelectedWindow.lean:636:SelectedHalfWindow.FixedCoeffSuccessor.hasRewindRestrictionAt_cons",
+      "name": "SelectedHalfWindow.FixedCoeffSuccessor.hasRewindRestrictionAt_cons",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarrySelectedWindow.lean",
+      "line": 636,
+      "signature": "theorem SelectedHalfWindow.FixedCoeffSuccessor.hasRewindRestrictionAt_cons {M N R₀ R S C : ℕ} (W₀ : SelectedHalfWindow M R₀) (W : SelectedHalfWindow N R) (hMN : M ≤ N) (cs : List ℕ) (hbuffer : S + C ≤ 2 * R) (next : W.FixedCoeffSuccessor hbuffer) (hprov : W.HasRewindRestrictionAt W₀ hMN cs) : next.window.HasRewindRestrictionAt W₀ (hMN.trans (Nat.le_succ N)) (C :: cs)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "One history-bearing explicit successor conses its coefficient onto exact rewind provenance."
+    },
+    {
+      "id": "Erdos249257/HalfCarrySelectedWindow.lean:670:SelectedHalfWindow.hasRewindRestrictionAt_stepExplicit",
+      "name": "SelectedHalfWindow.hasRewindRestrictionAt_stepExplicit",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarrySelectedWindow.lean",
+      "line": 670,
+      "signature": "theorem SelectedHalfWindow.hasRewindRestrictionAt_stepExplicit {M N R₀ R S C : ℕ} (W₀ : SelectedHalfWindow M R₀) (W : SelectedHalfWindow N R) (hMN : M ≤ N) (cs : List ℕ) (hN : 1 ≤ N) (hSstrip : S ≤ halfStripBound (N + 1)) (hp_common : ∀ k : ℕ, 1 ≤ k → k ≤ R → selectedRowCoeff W k = C) (hbuffer : S + C ≤ 2 * R) (hprov : W.HasRewindRestrictionAt W₀ hMN cs) : (W.stepExplicit hN hSstrip hp_common hbuffer).HasRewindRestrictionAt W₀ (hMN.trans (Nat.le_succ N)) (C :: cs)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The public explicit-parent step preserves rewind provenance with the new coefficient at the head of the history list."
+    },
+    {
+      "id": "Erdos249257/HalfCarrySelectedWindow.lean:687:SelectedHalfWindow.commonRestrictionAt_of_rewind_singleton",
+      "name": "SelectedHalfWindow.commonRestrictionAt_of_rewind_singleton",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarrySelectedWindow.lean",
+      "line": 687,
+      "signature": "theorem SelectedHalfWindow.commonRestrictionAt_of_rewind_singleton {M N R₀ R : ℕ} (W : SelectedHalfWindow N R) (W₀ : SelectedHalfWindow M R₀) (hMN : M ≤ N) (cs : List ℕ) (hR : 1 ≤ R) (hprov : W.HasRewindRestrictionAt W₀ hMN cs) (hsingle : ∀ k : ℕ, 1 ≤ k → k ≤ R → rewind cs k = rewind cs 1) : W.CommonRestrictionAt hMN",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "If the rewind map is constant on the protected interval, composed provenance supplies one literal common prefix."
+    },
+    {
+      "id": "Erdos249257/HalfCarrySelectedWindow.lean:706:SelectedHalfWindow.nextRowDivisorAgreement_of_rewind_singleton",
+      "name": "SelectedHalfWindow.nextRowDivisorAgreement_of_rewind_singleton",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarrySelectedWindow.lean",
+      "line": 706,
+      "signature": "theorem SelectedHalfWindow.nextRowDivisorAgreement_of_rewind_singleton {M N R₀ R : ℕ} (W : SelectedHalfWindow N R) (W₀ : SelectedHalfWindow M R₀) (hMN : M ≤ N) (cs : List ℕ) (hhalf : (N + 1) / 2 ≤ M) (hR : 1 ≤ R) (hprov : W.HasRewindRestrictionAt W₀ hMN cs) (hsingle : ∀ k : ℕ, 1 ≤ k → k ≤ R → rewind cs k = rewind cs 1) : W.NextRowDivisorAgreement",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Complete singleton fan-in: exact rewind provenance and the arithmetic singleton branch imply common next-row proper-divisor coefficients through the existing live interface."
+    },
+    {
+      "id": "Erdos249257/HalfCarrySelectedWindow.lean:719:SelectedHalfWindow.nextRowDivisorAgreement_of_rewind_phaseFit",
+      "name": "SelectedHalfWindow.nextRowDivisorAgreement_of_rewind_phaseFit",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarrySelectedWindow.lean",
+      "line": 719,
+      "signature": "theorem SelectedHalfWindow.nextRowDivisorAgreement_of_rewind_phaseFit {M N R₀ R : ℕ} (W : SelectedHalfWindow N R) (W₀ : SelectedHalfWindow M R₀) (hMN : M ≤ N) (cs : List ℕ) (hhalf : (N + 1) / 2 ≤ M) (hR : 1 ≤ R) (hwidth : R ≤ denom cs) (hprov : W.HasRewindRestrictionAt W₀ hMN cs) (hphase : phase cs + (R - 1) < denom cs) : W.NextRowDivisorAgreement",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Exact phase-fit fan-in from a composed history to the live common coefficient interface."
+    },
+    {
+      "id": "Erdos249257/HalfCarrySelectedWindow.lean:732:SelectedHalfWindow.ScalarHistoryAlternative",
+      "name": "SelectedHalfWindow.ScalarHistoryAlternative",
+      "kind": "def",
+      "module": "Erdos249257/HalfCarrySelectedWindow.lean",
+      "line": 732,
+      "signature": "def SelectedHalfWindow.ScalarHistoryAlternative {N R : ℕ} (W : SelectedHalfWindow N R) (cs : List ℕ) : Prop",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The exact arithmetic history alternative before semantic seam identification."
+    },
+    {
+      "id": "Erdos249257/HalfCarrySelectedWindow.lean:739:SelectedHalfWindow.scalarHistoryAlternative_of_rewindHistory",
+      "name": "SelectedHalfWindow.scalarHistoryAlternative_of_rewindHistory",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarrySelectedWindow.lean",
+      "line": 739,
+      "signature": "theorem SelectedHalfWindow.scalarHistoryAlternative_of_rewindHistory {M N R₀ R : ℕ} (W : SelectedHalfWindow N R) (W₀ : SelectedHalfWindow M R₀) (hMN : M ≤ N) (cs : List ℕ) (hhalf : (N + 1) / 2 ≤ M) (hR : 1 ≤ R) (hwidth : R ≤ denom cs) (hprov : W.HasRewindRestrictionAt W₀ hMN cs) : W.ScalarHistoryAlternative cs",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A sufficiently long exact rewind either lands in the live common-coefficient interface or leaves precisely two adjacent scalar ancestors."
+    },
+    {
+      "id": "Erdos249257/HalfCarrySelectedWindow.lean:755:SelectedHalfWindow.historyAlternative_of_rewindHistory",
+      "name": "SelectedHalfWindow.historyAlternative_of_rewindHistory",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarrySelectedWindow.lean",
+      "line": 755,
+      "signature": "theorem SelectedHalfWindow.historyAlternative_of_rewindHistory {M N R₀ R : ℕ} (W : SelectedHalfWindow N R) (W₀ : SelectedHalfWindow M R₀) (hMN : M ≤ N) (cs : List ℕ) (hhalf : (N + 1) / 2 ≤ M) (hR : 1 ≤ R) (hwidth : R ≤ denom cs) (hprov : W.HasRewindRestrictionAt W₀ hMN cs) (hseamBridge : IsSeamPair cs R → ∃ d : ℕ, ∃ δ c : ℤ, N + 1 = 2 * d ∧ IsCanonicalEvenSeam d δ c) : W.HistoryAlternative",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Once the adjacent scalar ancestors are identified with the actual canonical one-hole seam at row `N + 1`, the existing object-level history alternative follows with no further arithmetic work."
+    },
+    {
+      "id": "Erdos249257/HalfCarrySelectedWindow.lean:772:SelectedHalfWindow.step",
+      "name": "SelectedHalfWindow.step",
+      "kind": "def",
+      "module": "Erdos249257/HalfCarrySelectedWindow.lean",
+      "line": 772,
+      "signature": "noncomputable def SelectedHalfWindow.step {N R S C : ℕ} (hN : 1 ≤ N) (W : SelectedHalfWindow N R) (_hR : 1 ≤ R) (_hS : 1 ≤ S) (hSstrip : S ≤ halfStripBound (N + 1)) (hp_common : ∀ k : ℕ, 1 ≤ k → k ≤ R → selectedRowCoeff W k = C) (hbuffer : S + C ≤ 2 * R) : SelectedHalfWindow (N + 1) S",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Public object-level one-step theorem. Unlike `stepOpaque`, this route uses the canonical parent and therefore has the provenance theorem above."
+    },
+    {
+      "id": "Erdos249257/HalfCarrySelectedWindow.lean:786:SelectedHalfWindow.stepOfAgreement",
+      "name": "SelectedHalfWindow.stepOfAgreement",
+      "kind": "def",
+      "module": "Erdos249257/HalfCarrySelectedWindow.lean",
+      "line": 786,
+      "signature": "noncomputable def SelectedHalfWindow.stepOfAgreement {N : ℕ} (hN : 1 ≤ N) (W : SelectedHalfWindow N (halfStripBound N)) (hagree : W.NextRowDivisorAgreement) : SelectedHalfWindow (N + 1) (halfStripBound (N + 1))",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A coherent next-row divisor cylinder advances the entire square-root strip. The carry-`1` representative supplies the common coefficient; the sharp divisor envelope and strip-headroom theorem discharge the scalar buffer required by `SelectedHalfWindow.step`."
+    },
+    {
+      "id": "Erdos249257/HalfCarrySelectedWindow.lean:816:selectedHalfWindowIterate",
+      "name": "selectedHalfWindowIterate",
+      "kind": "def",
+      "module": "Erdos249257/HalfCarrySelectedWindow.lean",
+      "line": 816,
+      "signature": "noncomputable def selectedHalfWindowIterate (N₀ : ℕ) (R : ℕ → ℕ) (hbase : SelectedHalfWindow N₀ (R N₀)) (hstep : ∀ N : ℕ, N₀ ≤ N → SelectedHalfWindow N (R N) → SelectedHalfWindow (N + 1) (R (N + 1))) : (d : ℕ) → SelectedHalfWindow (N₀ + d) (R (N₀ + d)) | 0 =>",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Iterate a data-producing selected-window step by an explicit number of rows. Using a data definition here (rather than Prop induction) preserves the actual chosen words needed by the next coefficient row."
+    },
+    {
+      "id": "Erdos249257/HalfCarrySelectedWindow.lean:831:cofinalAdmissibility_of_selectedHalfWindows",
+      "name": "cofinalAdmissibility_of_selectedHalfWindows",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarrySelectedWindow.lean",
+      "line": 831,
+      "signature": "theorem cofinalAdmissibility_of_selectedHalfWindows (N₀ : ℕ) (R : ℕ → ℕ) (hR : ∀ N : ℕ, N₀ ≤ N → 1 ≤ R N) (hwindow : ∀ N : ℕ, N₀ ≤ N → SelectedHalfWindow N (R N)) : HalfCarryCofinalAdmissibility",
+      "generated_certificate": false,
+      "claim_ids": [
+        "selected_half_carry_window_compactness"
+      ],
+      "docstring": "Protected selected windows at all sufficiently large levels imply the landed minimal producer interface. Only one representative (carry `1`) is needed at each chosen level."
+    },
+    {
+      "id": "Erdos249257/HalfCarrySelectedWindow.lean:847:cofinalAdmissibility_of_selectedHalfWindow_induction",
+      "name": "cofinalAdmissibility_of_selectedHalfWindow_induction",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarrySelectedWindow.lean",
+      "line": 847,
+      "signature": "theorem cofinalAdmissibility_of_selectedHalfWindow_induction (N₀ : ℕ) (R : ℕ → ℕ) (hR : ∀ N : ℕ, N₀ ≤ N → 1 ≤ R N) (hbase : SelectedHalfWindow N₀ (R N₀)) (hstep : ∀ N : ℕ, N₀ ≤ N → SelectedHalfWindow N (R N) → SelectedHalfWindow (N + 1) (R (N + 1))) : HalfCarryCofinalAdmissibility",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Packaged forward-induction route to the exact half-sum theorem's minimal cofinal producer."
+    },
+    {
+      "id": "Erdos249257/HalfCarrySelectedWindow.lean:864:exists_infinite_support_half_of_selectedHalfWindows",
+      "name": "exists_infinite_support_half_of_selectedHalfWindows",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarrySelectedWindow.lean",
+      "line": 864,
+      "signature": "theorem exists_infinite_support_half_of_selectedHalfWindows (N₀ : ℕ) (R : ℕ → ℕ) (hR : ∀ N : ℕ, N₀ ≤ N → 1 ≤ R N) (hwindow : ∀ N : ℕ, N₀ ≤ N → SelectedHalfWindow N (R N)) : ∃ A : Set ℕ, A.Infinite ∧ erdosSupportSeries 2 A = (1 : ℝ) / 2",
+      "generated_certificate": false,
+      "claim_ids": [
+        "selected_half_carry_window_compactness"
+      ],
+      "docstring": "A supply of selected protected windows already yields an infinite support whose Mersenne achievement sum is exactly `1/2`."
+    },
+    {
+      "id": "Erdos249257/HalfCarrySelectedWindow.lean:875:exists_infinite_support_half_of_selectedHalfWindow_induction",
+      "name": "exists_infinite_support_half_of_selectedHalfWindow_induction",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarrySelectedWindow.lean",
+      "line": 875,
+      "signature": "theorem exists_infinite_support_half_of_selectedHalfWindow_induction (N₀ : ℕ) (R : ℕ → ℕ) (hR : ∀ N : ℕ, N₀ ≤ N → 1 ≤ R N) (hbase : SelectedHalfWindow N₀ (R N₀)) (hstep : ∀ N : ℕ, N₀ ≤ N → SelectedHalfWindow N (R N) → SelectedHalfWindow (N + 1) (R (N + 1))) : ∃ A : Set ℕ, A.Infinite ∧ erdosSupportSeries 2 A = (1 : ℝ) / 2",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A base selected window plus a forward selected-window induction closes the exact infinite half-sum endpoint directly."
     },
     {
       "id": "Erdos249257/HalfCylinderFiniteShadow.lean:26:wordSupport_subset_Iic",
