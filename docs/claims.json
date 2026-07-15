@@ -4945,6 +4945,14 @@
           ]
         },
         {
+          "id": "Erdos249257.HalfCutLocator",
+          "path": "Erdos249257/HalfCutLocator.lean",
+          "role": "Fatal-gap locator for the half target",
+          "imports": [
+            "Erdos249257.GreedyAchievementSet"
+          ]
+        },
+        {
           "id": "Erdos249257.HalfCylinderConcreteSeamAdapter",
           "path": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean",
           "role": "Concrete finite seam adapter",

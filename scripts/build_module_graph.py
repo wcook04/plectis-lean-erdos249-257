@@ -38,6 +38,7 @@ NEW_ROLES = {
     "Erdos249257.HalfCarryReachability": "Half-carry reachability and compactness",
     "Erdos249257.HalfCarryCeilParentContraction": "Fixed-coefficient rewind contraction",
     "Erdos249257.HalfCarrySelectedWindow": "Selected protected half-carry windows",
+    "Erdos249257.HalfCutLocator": "Fatal-gap locator for the half target",
     "Erdos249257.HalfCarryRewindPhase": "Realized fixed-coefficient rewind phase",
     "Erdos249257.HalfCarryProtectedSeamConsumer": "Localized protected one-hole seam consumer",
     "Erdos249257.HalfCarryCofinalWindowOrSeamConsumer": "Mixed cofinal half-carry fan-in",

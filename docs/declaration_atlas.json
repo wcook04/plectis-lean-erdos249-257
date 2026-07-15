@@ -4,21 +4,21 @@
   "projection_not_authority": true,
   "proof_authority": "Lean source checked by the pinned Lean kernel",
   "argument_authority": "docs/claims.json::machine_readable_paper.argument_graph",
-  "source_fingerprint": "sha256:2085bab60e2c66831129c16d9e6f7f56d786deb5a6473f8ecd509e6eca05c442",
+  "source_fingerprint": "sha256:988cd1b9dcd79d907c87a5dd6ed0bdb36e674174cc9ea3df8e2fe2d2a0dc67b9",
   "summary": {
-    "module_count": 568,
-    "declaration_count": 7244,
-    "theorem_like_count": 6486,
+    "module_count": 569,
+    "declaration_count": 7274,
+    "theorem_like_count": 6514,
     "generated_certificate_declaration_count": 1681,
     "principal_claim_link_count": 135,
     "kind_counts": {
       "abbrev": 6,
-      "def": 729,
+      "def": 730,
       "inductive": 3,
       "instance": 4,
       "lemma": 354,
-      "structure": 16,
-      "theorem": 6132
+      "structure": 17,
+      "theorem": 6160
     }
   },
   "modules": [
@@ -96,7 +96,8 @@
         "Erdos249257.HalfCarryProtectedSeamConsumer",
         "Erdos249257.HalfCarryCofinalWindowOrSeamConsumer",
         "Erdos249257.HalfCylinderIntegerGreedy",
-        "Erdos249257.HalfCylinderConcreteSeamAdapter"
+        "Erdos249257.HalfCylinderConcreteSeamAdapter",
+        "Erdos249257.HalfCutLocator"
       ],
       "declaration_count": 0,
       "kind_counts": {}
@@ -6446,6 +6447,19 @@
       "kind_counts": {
         "def": 15,
         "structure": 2,
+        "theorem": 28
+      }
+    },
+    {
+      "id": "Erdos249257.HalfCutLocator",
+      "path": "Erdos249257/HalfCutLocator.lean",
+      "imports": [
+        "Erdos249257.GreedyAchievementSet"
+      ],
+      "declaration_count": 30,
+      "kind_counts": {
+        "def": 1,
+        "structure": 1,
         "theorem": 28
       }
     },
@@ -69216,6 +69230,336 @@
       "generated_certificate": false,
       "claim_ids": [],
       "docstring": "A base selected window plus a forward selected-window induction closes the exact infinite half-sum endpoint directly."
+    },
+    {
+      "id": "Erdos249257/HalfCutLocator.lean:55:mersenneCorrectionTail_lt_doubleDepth",
+      "name": "mersenneCorrectionTail_lt_doubleDepth",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCutLocator.lean",
+      "line": 55,
+      "signature": "theorem mersenneCorrectionTail_lt_doubleDepth {m : ℕ} (hm : 0 < m) : mersenneCorrectionTail m < ((1 : ℝ) / 2) ^ (2 * m + 1)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "**Packet §3 upper constant.** The unresolved correction after `m` is strictly below one half of the binary cell `4^{-m}`: the sharp uniform window depth is `2m+1`."
+    },
+    {
+      "id": "Erdos249257/HalfCutLocator.lean:80:doubleDepth_succ_lt_mersenneCorrectionTail",
+      "name": "doubleDepth_succ_lt_mersenneCorrectionTail",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCutLocator.lean",
+      "line": 80,
+      "signature": "theorem doubleDepth_succ_lt_mersenneCorrectionTail (m : ℕ) : ((1 : ℝ) / 2) ^ (2 * m + 2) < mersenneCorrectionTail m",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "**Packet §3 lower constant.** The correction tail strictly exceeds the quarter cell, so no uniform tail-width argument can promise depth `2m+2`."
+    },
+    {
+      "id": "Erdos249257/HalfCutLocator.lean:95:mersenneGap_eq_weightCorrection_sub_correctionTail",
+      "name": "mersenneGap_eq_weightCorrection_sub_correctionTail",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCutLocator.lean",
+      "line": 95,
+      "signature": "theorem mersenneGap_eq_weightCorrection_sub_correctionTail (n : ℕ) : mersenneGap n = (mersenneWeight n - ((1 : ℝ) / 2) ^ n) - mersenneCorrectionTail n",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "**Packet §2 jump identity.** The Mersenne gap is exactly the one-weight correction minus the correction tail: `g_m = c_m - η_m`."
+    },
+    {
+      "id": "Erdos249257/HalfCutLocator.lean:104:correctionWindow_dyadic_crossing_unique",
+      "name": "correctionWindow_dyadic_crossing_unique",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCutLocator.lean",
+      "line": 104,
+      "signature": "theorem correctionWindow_dyadic_crossing_unique {m : ℕ} (hm : 0 < m) {x : ℝ} {k₁ k₂ : ℤ} (h₁L : x < (k₁ : ℝ) / 2 ^ (2 * m + 1)) (h₁R : (k₁ : ℝ) / 2 ^ (2 * m + 1) < x + mersenneCorrectionTail m) (h₂L : x < (k₂ : ℝ) / 2 ^ (2 * m + 1)) (h₂R : (k₂ : ℝ) / 2 ^ (2 * m + 1) < x + mersenneCorrectionTail m) : k₁ = k₂",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "**Packet §5 boundary uniqueness.** A correction window of width `η_m` meets at most one dyadic boundary of depth `2m+1`: the two candidate numerators coincide. This is the quadratic cut-localisation step."
+    },
+    {
+      "id": "Erdos249257/HalfCutLocator.lean:136:positiveMersenneSupportValue_coe_finset",
+      "name": "positiveMersenneSupportValue_coe_finset",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCutLocator.lean",
+      "line": 136,
+      "signature": "theorem positiveMersenneSupportValue_coe_finset (F : Finset ℕ) : positiveMersenneSupportValue (↑F : Set ℕ) = ∑ n ∈ F, mersenneWeight n",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The value coded by a finite positive support is its literal finite Mersenne sum."
+    },
+    {
+      "id": "Erdos249257/HalfCutLocator.lean:144:positiveMersenneSupportValue_insert",
+      "name": "positiveMersenneSupportValue_insert",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCutLocator.lean",
+      "line": 144,
+      "signature": "theorem positiveMersenneSupportValue_insert {F : Finset ℕ} {a : ℕ} (ha : a ∉ F) : positiveMersenneSupportValue (↑(insert a F) : Set ℕ) = mersenneWeight a + positiveMersenneSupportValue (↑F : Set ℕ)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Selecting one new exponent adds exactly its weight."
+    },
+    {
+      "id": "Erdos249257/HalfCutLocator.lean:158:IsStraddlePrefix",
+      "name": "IsStraddlePrefix",
+      "kind": "structure",
+      "module": "Erdos249257/HalfCutLocator.lean",
+      "line": 158,
+      "signature": "structure IsStraddlePrefix (t : ℝ) (u : Finset ℕ) (d : ℕ) : Prop",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "**Packet §4.** A finite support word certified to straddle the target at depth `d`: the coded value is at most `t` and the value plus the complete unresolved tail mass still reaches `t`. This is deliberately *weaker* than the `HalfPrefixForcingChain.interval_trapped` containment condition: overlap of the correction image with the cylinder, not containment inside it."
+    },
+    {
+      "id": "Erdos249257/HalfCutLocator.lean:165:IsStraddlePrefix.zero_notMem",
+      "name": "IsStraddlePrefix.zero_notMem",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCutLocator.lean",
+      "line": 165,
+      "signature": "theorem IsStraddlePrefix.zero_notMem {t : ℝ} {u : Finset ℕ} {d : ℕ} (hu : IsStraddlePrefix t u d) : 0 ∉ u",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Zero is never an exponent of a straddle word."
+    },
+    {
+      "id": "Erdos249257/HalfCutLocator.lean:173:mem_mersenneAchievementSet_of_straddle_all_depths",
+      "name": "mem_mersenneAchievementSet_of_straddle_all_depths",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCutLocator.lean",
+      "line": 173,
+      "signature": "theorem mem_mersenneAchievementSet_of_straddle_all_depths {t : ℝ} (h : ∀ d : ℕ, ∃ u : Finset ℕ, IsStraddlePrefix t u d) : t ∈ mersenneAchievementSet",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "**Closed-set straddle criterion.** If some finite word straddles the target at every depth, the target is achieved. Compactness of the achievement set replaces the packet's nested-cylinder limit: the straddle words need not be nested, consistent, or produced by any common process."
+    },
+    {
+      "id": "Erdos249257/HalfCutLocator.lean:205:isStraddlePrefix_step_trichotomy",
+      "name": "isStraddlePrefix_step_trichotomy",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCutLocator.lean",
+      "line": 205,
+      "signature": "theorem isStraddlePrefix_step_trichotomy {t : ℝ} {u : Finset ℕ} {d : ℕ} (hu : IsStraddlePrefix t u d) : IsStraddlePrefix t u (d + 1) ∨ IsStraddlePrefix t (insert (d + 1) u) (d + 1) ∨ (positiveMersenneSupportValue (↑u : Set ℕ) + mersenneTail (d + 1) < t ∧ t < positiveMersenneSupportValue (↑u : Set ℕ) + mersenneWeight (d + 1))",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "**Packet (23), rank-granular form.** From a straddle at depth `d`, one exact comparison of the residual against `(τ_{d+1}, w_{d+1})` yields: the word still straddles after skipping `d+1`, the extended word straddles after selecting `d+1`, or the target sits in the fatal Mersenne gap."
+    },
+    {
+      "id": "Erdos249257/HalfCutLocator.lean:243:positiveMersenneSupportValue_coe_finset_ne_half",
+      "name": "positiveMersenneSupportValue_coe_finset_ne_half",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCutLocator.lean",
+      "line": 243,
+      "signature": "theorem positiveMersenneSupportValue_coe_finset_ne_half {u : Finset ℕ} (h0 : 0 ∉ u) : positiveMersenneSupportValue (↑u : Set ℕ) ≠ (1 / 2 : ℝ)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "**Greedy endpoint kill.** No finite positive support word has value exactly `1/2`: the audited reduced denominator of the finite Erdős sum is odd."
+    },
+    {
+      "id": "Erdos249257/HalfCutLocator.lean:263:half_ne_coe_finset_add_mersenneTail",
+      "name": "half_ne_coe_finset_add_mersenneTail",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCutLocator.lean",
+      "line": 263,
+      "signature": "theorem half_ne_coe_finset_add_mersenneTail (u : Finset ℕ) (d : ℕ) : positiveMersenneSupportValue (↑u : Set ℕ) + mersenneTail d ≠ (1 / 2 : ℝ)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "**Lazy endpoint kill.** No finite positive support word plus a complete depth-`d` tail equals `1/2`: otherwise the Erdős–Borwein constant would be rational."
+    },
+    {
+      "id": "Erdos249257/HalfCutLocator.lean:287:IsStraddlePrefix.half_strict",
+      "name": "IsStraddlePrefix.half_strict",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCutLocator.lean",
+      "line": 287,
+      "signature": "theorem IsStraddlePrefix.half_strict {u : Finset ℕ} {d : ℕ} (hu : IsStraddlePrefix (1 / 2 : ℝ) u d) : positiveMersenneSupportValue (↑u : Set ℕ) < 1 / 2 ∧ (1 / 2 : ℝ) < positiveMersenneSupportValue (↑u : Set ℕ) + mersenneTail d",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "**Packet §7.** For the half target every straddle is strictly interior: both dyadic-expansion endpoint cases of the crossed-boundary classification are impossible."
+    },
+    {
+      "id": "Erdos249257/HalfCutLocator.lean:301:IsStraddlePrefix.half_step_forced",
+      "name": "IsStraddlePrefix.half_step_forced",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCutLocator.lean",
+      "line": 301,
+      "signature": "theorem IsStraddlePrefix.half_step_forced {u : Finset ℕ} {d : ℕ} (hu : IsStraddlePrefix (1 / 2 : ℝ) u d) : (IsStraddlePrefix (1 / 2 : ℝ) u (d + 1) ∧ ¬ IsStraddlePrefix (1 / 2 : ℝ) (insert (d + 1) u) (d + 1)) ∨ (IsStraddlePrefix (1 / 2 : ℝ) (insert (d + 1) u) (d + 1) ∧ ¬ IsStraddlePrefix (1 / 2 : ℝ) u (d + 1)) ∨ (positiveMersenneSupportValue (↑u : Set ℕ) + mersenneTail (d + 1) < 1 / 2 ∧ (1 / 2 : ℝ) < positiveMersenneSupportValue (↑u : Set ℕ) + mersenneWeight (d + 1))",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "**Packet (25).** The half-specialized macrostep is deterministic: from a straddle at depth `d`, exactly one of skip-refinement, take-refinement, or a fatal gap occurs, and the two refinement branches exclude each other."
+    },
+    {
+      "id": "Erdos249257/HalfCutLocator.lean:334:IsStraddlePrefix.erase_top",
+      "name": "IsStraddlePrefix.erase_top",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCutLocator.lean",
+      "line": 334,
+      "signature": "theorem IsStraddlePrefix.erase_top {t : ℝ} {u : Finset ℕ} {d : ℕ} (hu : IsStraddlePrefix t u (d + 1)) : IsStraddlePrefix t (u.erase (d + 1)) d",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Removing the top bit from a depth-`d+1` straddling word recovers a depth-`d` straddling word. This is the backwards edge needed to compare the cut-locator tree with the canonical greedy recursion."
+    },
+    {
+      "id": "Erdos249257/HalfCutLocator.lean:380:positiveMersenneSupportValue_ne_of_rank_gap",
+      "name": "positiveMersenneSupportValue_ne_of_rank_gap",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCutLocator.lean",
+      "line": 380,
+      "signature": "theorem positiveMersenneSupportValue_ne_of_rank_gap {t : ℝ} {A : Set ℕ} {d : ℕ} (hlo : mersenneSupportPrefix A d + mersenneTail (d + 1) < t) (hhi : t < mersenneSupportPrefix A d + mersenneWeight (d + 1)) : positiveMersenneSupportValue A ≠ t",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "**Packet (24), general form.** If the target sits strictly inside the rank-`(d+1)` Mersenne gap over the prefix mass of `A` through `d`, then the support `A` does not achieve the target — whichever way it continues."
+    },
+    {
+      "id": "Erdos249257/HalfCutLocator.lean:401:mersenneSupportPrefix_eq_coe_finset",
+      "name": "mersenneSupportPrefix_eq_coe_finset",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCutLocator.lean",
+      "line": 401,
+      "signature": "theorem mersenneSupportPrefix_eq_coe_finset {A : Set ℕ} {u : Finset ℕ} {d : ℕ} (hu : ∀ n ∈ u, 0 < n ∧ n ≤ d) (hagree : ∀ n : ℕ, 0 < n → n ≤ d → (n ∈ A ↔ n ∈ u)) : mersenneSupportPrefix A d = positiveMersenneSupportValue (↑u : Set ℕ)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Prefix agreement transports a finite word's value onto the support prefix mass."
+    },
+    {
+      "id": "Erdos249257/HalfCutLocator.lean:442:IsStraddlePrefix.half_agrees_greedy",
+      "name": "IsStraddlePrefix.half_agrees_greedy",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCutLocator.lean",
+      "line": 442,
+      "signature": "theorem IsStraddlePrefix.half_agrees_greedy {u : Finset ℕ} {d : ℕ} (hu : IsStraddlePrefix (1 / 2 : ℝ) u d) : ∀ n : ℕ, 0 < n → n ≤ d → (n ∈ u ↔ n ∈ greedyMersenneSupport (1 / 2 : ℝ))",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Every half-straddling word is the actual greedy word through the same depth. Strict superincreasingness enters only in the skipped top-bit case; the selected case follows from the prefix being below the target."
+    },
+    {
+      "id": "Erdos249257/HalfCutLocator.lean:513:half_ne_of_prefix_gap",
+      "name": "half_ne_of_prefix_gap",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCutLocator.lean",
+      "line": 513,
+      "signature": "theorem half_ne_of_prefix_gap {u : Finset ℕ} {d : ℕ} (hu : ∀ n ∈ u, 0 < n ∧ n ≤ d) (hlo : positiveMersenneSupportValue (↑u : Set ℕ) + mersenneTail (d + 1) < 1 / 2) (hhi : (1 / 2 : ℝ) < positiveMersenneSupportValue (↑u : Set ℕ) + mersenneWeight (d + 1)) {A : Set ℕ} (hagree : ∀ n : ℕ, 0 < n → n ≤ d → (n ∈ A ↔ n ∈ u)) : positiveMersenneSupportValue A ≠ (1 / 2 : ℝ)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "**Packet (24), word form.** A fatal gap certified over a finite word excludes the half target for every support agreeing with that word below the gap rank."
+    },
+    {
+      "id": "Erdos249257/HalfCutLocator.lean:526:ExistsFatalHalfGap",
+      "name": "ExistsFatalHalfGap",
+      "kind": "def",
+      "module": "Erdos249257/HalfCutLocator.lean",
+      "line": 526,
+      "signature": "def ExistsFatalHalfGap : Prop",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A finite half-gap witness in the cut-locator coordinates."
+    },
+    {
+      "id": "Erdos249257/HalfCutLocator.lean:538:half_not_mem_mersenneAchievementSet_of_exists_fatal_gap",
+      "name": "half_not_mem_mersenneAchievementSet_of_exists_fatal_gap",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCutLocator.lean",
+      "line": 538,
+      "signature": "theorem half_not_mem_mersenneAchievementSet_of_exists_fatal_gap (hgap : ExistsFatalHalfGap) : (1 / 2 : ℝ) ∉ mersenneAchievementSet",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A fatal half-gap witness is global, not merely branch-local. Its two strict inequalities already make its finite word a depth-`d` straddle; the canonicality theorem therefore identifies that word with the actual greedy prefix, after which the word-level exclusion applies to every hypothetical half representation."
+    },
+    {
+      "id": "Erdos249257/HalfCutLocator.lean:561:initial_half_straddle_zero",
+      "name": "initial_half_straddle_zero",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCutLocator.lean",
+      "line": 561,
+      "signature": "theorem initial_half_straddle_zero : IsStraddlePrefix (1 / 2 : ℝ) ∅ 0",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The empty word straddles the half target at depth zero."
+    },
+    {
+      "id": "Erdos249257/HalfCutLocator.lean:576:initial_half_straddle",
+      "name": "initial_half_straddle",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCutLocator.lean",
+      "line": 576,
+      "signature": "theorem initial_half_straddle : IsStraddlePrefix (1 / 2 : ℝ) ∅ 1",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "**Packet §8/§9 base case.** The empty word still straddles at depth one: the depth-one tail exceeds `19/35 > 1/2`."
+    },
+    {
+      "id": "Erdos249257/HalfCutLocator.lean:600:half_mem_mersenneAchievementSet_of_no_fatal_gap",
+      "name": "half_mem_mersenneAchievementSet_of_no_fatal_gap",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCutLocator.lean",
+      "line": 600,
+      "signature": "theorem half_mem_mersenneAchievementSet_of_no_fatal_gap (hnogap : ∀ (u : Finset ℕ) (d : ℕ), (∀ n ∈ u, 0 < n ∧ n ≤ d) → ¬ (positiveMersenneSupportValue (↑u : Set ℕ) + mersenneTail (d + 1) < 1 / 2 ∧ (1 / 2 : ℝ) < positiveMersenneSupportValue (↑u : Set ℕ) + mersenneWeight (d + 1))) : (1 / 2 : ℝ) ∈ mersenneAchievementSet",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "**No fatal gap forces membership.** If no finite word ever certifies a fatal Mersenne gap, the rank-step trichotomy produces straddle words at every depth and the closed-set criterion achieves `1/2`."
+    },
+    {
+      "id": "Erdos249257/HalfCutLocator.lean:623:half_mem_mersenneAchievementSet_or_exists_fatal_gap",
+      "name": "half_mem_mersenneAchievementSet_or_exists_fatal_gap",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCutLocator.lean",
+      "line": 623,
+      "signature": "theorem half_mem_mersenneAchievementSet_or_exists_fatal_gap : (1 / 2 : ℝ) ∈ mersenneAchievementSet ∨ ∃ (u : Finset ℕ) (d : ℕ), (∀ n ∈ u, 0 < n ∧ n ≤ d) ∧ positiveMersenneSupportValue (↑u : Set ℕ) + mersenneTail (d + 1) < 1 / 2 ∧ (1 / 2 : ℝ) < positiveMersenneSupportValue (↑u : Set ℕ) + mersenneWeight (d + 1)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "**Packet (29): the complete mechanism dichotomy.** Either some finite word certifies a fatal Mersenne gap — a finite, exact, checkable nonmembership certificate against all its extensions — or `1/2` is achieved. Deciding that the fatal branch never fires is exactly the open half case of Erdős #257; no branch decision is claimed here."
+    },
+    {
+      "id": "Erdos249257/HalfCutLocator.lean:643:existsFatalHalfGap_iff_half_not_mem_mersenneAchievementSet",
+      "name": "existsFatalHalfGap_iff_half_not_mem_mersenneAchievementSet",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCutLocator.lean",
+      "line": 643,
+      "signature": "theorem existsFatalHalfGap_iff_half_not_mem_mersenneAchievementSet : ExistsFatalHalfGap ↔ (1 / 2 : ℝ) ∉ mersenneAchievementSet",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The cut-locator fatal branch is exactly the complement of half membership. The reverse direction uses the landed global dichotomy; the forward direction is the new canonical-prefix exclusion above."
+    },
+    {
+      "id": "Erdos249257/HalfCutLocator.lean:654:half_mem_mersenneAchievementSet_iff_no_existsFatalHalfGap",
+      "name": "half_mem_mersenneAchievementSet_iff_no_existsFatalHalfGap",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCutLocator.lean",
+      "line": 654,
+      "signature": "theorem half_mem_mersenneAchievementSet_iff_no_existsFatalHalfGap : (1 / 2 : ℝ) ∈ mersenneAchievementSet ↔ ¬ ExistsFatalHalfGap",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Positive form of the complete cut-locator classification."
+    },
+    {
+      "id": "Erdos249257/HalfCutLocator.lean:664:half_sub_four_term_prefix_eq",
+      "name": "half_sub_four_term_prefix_eq",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCutLocator.lean",
+      "line": 664,
+      "signature": "theorem half_sub_four_term_prefix_eq : (1 / 2 : ℚ) - finiteErdosSum ({2, 3, 6, 7} : Finset ℕ) 2 = 1 / 16002",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "**Packet §9 first crossed boundary.** Selecting `{2,3,6,7}` from the half target leaves the exact rational residual `1/16002`: the `m = 3` boundary at `51/128` resolves to a right refinement."
+    },
+    {
+      "id": "Erdos249257/HalfCutLocator.lean:670:mersenneCorrectionTail_one_le",
+      "name": "mersenneCorrectionTail_one_le",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCutLocator.lean",
+      "line": 670,
+      "signature": "theorem mersenneCorrectionTail_one_le : mersenneCorrectionTail 1 ≤ 5 / 42",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "**Packet §9 first window.** The depth-one correction tail is at most `5/42`."
+    },
+    {
+      "id": "Erdos249257/HalfCutLocator.lean:679:three_eighths_lt_half_sub_mersenneCorrectionTail_one",
+      "name": "three_eighths_lt_half_sub_mersenneCorrectionTail_one",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCutLocator.lean",
+      "line": 679,
+      "signature": "theorem three_eighths_lt_half_sub_mersenneCorrectionTail_one : (3 / 8 : ℝ) < 1 / 2 - mersenneCorrectionTail 1",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "**Packet §9 boundary-free first macrostep.** The depth-one correction window sits strictly above `3/8`, so the first refinement crosses no dyadic boundary."
     },
     {
       "id": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean:18:SeamRowWord",
