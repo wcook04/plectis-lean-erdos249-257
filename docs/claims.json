@@ -386,6 +386,15 @@
           ]
         },
         {
+          "id": "Erdos249257.DiagonalPincerCertificateT64Endpoint",
+          "path": "Erdos249257/DiagonalPincerCertificateT64Endpoint.lean",
+          "role": "Lean proof module",
+          "imports": [
+            "Erdos249257.DiagonalPincerCertificates",
+            "Erdos249257.DiagonalPincerPrimeCertificates.ClosureT64"
+          ]
+        },
+        {
           "id": "Erdos249257.DiagonalPincerCertificates",
           "path": "Erdos249257/DiagonalPincerCertificates.lean",
           "role": "Finite diagonal-pincer certificate base",
@@ -6094,7 +6103,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 1686
+        "line": 1692
       }
     },
     {
@@ -6105,7 +6114,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 1695
+        "line": 1701
       }
     },
     {
@@ -6116,7 +6125,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 1702
+        "line": 1708
       }
     }
   ],
@@ -7331,6 +7340,22 @@
           "name": "prime_lucas_2364533768205644535022723273",
           "module": "Erdos249257/DiagonalPincerPrimeCertificates/ClosureT64.lean",
           "line": 40737
+        }
+      ]
+    },
+    {
+      "id": "diagonal_pincer_t64_endpoint_certificate",
+      "label": "T64 diagonal-pincer endpoint certificate",
+      "status": "verified finite instance",
+      "bounded_domain": "The single lcm-diagonal endpoint t = 64.",
+      "statement": "Lean checks the diagonal-pincer certified kill at t = 64 using the committed T64 Lucas-primality closure. This is one finite certificate and does not assert an unbounded certificate supply or irrationality.",
+      "paper_label": "res:t64endpoint",
+      "readme_headline": false,
+      "declarations": [
+        {
+          "name": "certifiedKill_diagonal_t64",
+          "module": "Erdos249257/DiagonalPincerCertificateT64Endpoint.lean",
+          "line": 1928
         }
       ]
     },

@@ -3,7 +3,7 @@
   "artifact_role": "paper_sigil_to_lean_module_navigation_crosswalk",
   "authority_posture": "generated_navigation_projection_not_proof_authority",
   "heuristic": "Each CamelCase component contributes at most its first three characters.",
-  "alias_count": 80,
+  "alias_count": 81,
   "aliases": [
     {
       "sigil": "ActForResPro",
@@ -64,6 +64,11 @@
       "sigil": "DiaFreLosBri",
       "module": "DiagonalFreshLossBridge.lean",
       "path": "Erdos249257/DiagonalFreshLossBridge.lean"
+    },
+    {
+      "sigil": "DiaPinCerT64End",
+      "module": "DiagonalPincerCertificateT64Endpoint.lean",
+      "path": "Erdos249257/DiagonalPincerCertificateT64Endpoint.lean"
     },
     {
       "sigil": "DiaPinCerT61",
