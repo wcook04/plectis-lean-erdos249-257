@@ -130,3 +130,4 @@ import Erdos249257.SuffixCylinderFirstFeedback
 import Erdos249257.SuffixCylinderProfiledGap
 import Erdos249257.SuffixCylinderProfiledPromotion
 import Erdos249257.SuffixCylinderProfiledAdjacency
+import Erdos249257.SuffixCylinderProfiledPromotionAdjacency

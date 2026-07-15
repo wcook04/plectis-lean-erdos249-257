@@ -962,6 +962,8 @@ the corresponding head weight,
 The two retained prefixes remain adjacent, so their next-row coefficients
 differ by at most one in the directed form needed for the profiled update,
 \lrefx{SuffixCylinderProfiledAdjacency.lean}{232}{ProfiledGapStage.lowerNextCoeff_le_upperNextCoeff_add_one}.
+The same adjacency invariant survives the false/true cutoff promotion,
+\lrefx{SuffixCylinderProfiledPromotionAdjacency.lean}{65}{ProfiledGapStage.promoteCutoff_hasAdjacentPrefixes}.
 This is a conditional local feedback classification, not a cofinal supply
 theorem: the required crossing coefficient profile is still an input.
 
