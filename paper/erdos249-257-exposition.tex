@@ -549,6 +549,21 @@ The module does not produce reverse-carry presentations or an earlier
 overlapping return; it supplies only the algebraic core of that conditional
 route.
 
+\subsection{Half-carry reachability}\label{res:halfcarryreachability}
+
+There is also a finite-prefix route for the target $1/2$.  At an unresolved
+even seam, the scalar transition reaches every integer terminal carry except
+the single value $2\delta-c$; this is the exact equivalence
+\lref{HalfCarryReachability.lean}{235}{evenSeamReachable_iff}.  A canonical
+description of such a seam at every sufficiently large even depth is an
+unproved hypothesis.  Under that hypothesis, the finite admissible words are
+cofinal, by
+\lrefx{HalfCarryReachability.lean}{999}{cofinalAdmissibility_of_canonicalEvenSeamSupply},
+and compactness then produces an infinite support with sum exactly $1/2$:
+\lrefx{HalfCarryReachability.lean}{1027}{exists_infinite_support_half_of_canonicalEvenSeamSupply}.
+Thus the formal result is a conditional reduction.  It does not establish the
+canonical seam supply and does not prove Erd\H{o}s~\#257.
+
 \subsection{What stays open}
 
 The universal Erd\H{o}s \#257 statement, irrationality of $\sum_{n\in A}1/(2^n-1)$

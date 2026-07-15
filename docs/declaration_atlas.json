@@ -4,21 +4,21 @@
   "projection_not_authority": true,
   "proof_authority": "Lean source checked by the pinned Lean kernel",
   "argument_authority": "docs/claims.json::machine_readable_paper.argument_graph",
-  "source_fingerprint": "sha256:c850e60909e82ad60b1e24fc75e427b4bf27c7377e33084a9536cefefad6e4f3",
+  "source_fingerprint": "sha256:c32fbafbcf6125a781038b000969ad343a99740afad6e5ecab47c3d5ea389f7c",
   "summary": {
-    "module_count": 559,
-    "declaration_count": 6889,
-    "theorem_like_count": 6233,
+    "module_count": 560,
+    "declaration_count": 6960,
+    "theorem_like_count": 6286,
     "generated_certificate_declaration_count": 1681,
-    "principal_claim_link_count": 109,
+    "principal_claim_link_count": 112,
     "kind_counts": {
-      "abbrev": 4,
-      "def": 634,
+      "abbrev": 5,
+      "def": 651,
       "inductive": 3,
       "instance": 3,
       "lemma": 354,
       "structure": 12,
-      "theorem": 5879
+      "theorem": 5932
     }
   },
   "modules": [
@@ -87,7 +87,8 @@
         "Erdos249257.SupportSunflowerDichotomy",
         "Erdos249257.CompositeDilationDefect",
         "Erdos249257.MaximalOmegaLayer",
-        "Erdos249257.HalfTrappingReturnCarry"
+        "Erdos249257.HalfTrappingReturnCarry",
+        "Erdos249257.HalfCarryReachability"
       ],
       "declaration_count": 0,
       "kind_counts": {}
@@ -6360,6 +6361,21 @@
         "instance": 1,
         "structure": 1,
         "theorem": 190
+      }
+    },
+    {
+      "id": "Erdos249257.HalfCarryReachability",
+      "path": "Erdos249257/HalfCarryReachability.lean",
+      "imports": [
+        "Erdos249257.BooleanMobiusCarry",
+        "Erdos249257.DyadicPrefixCompression",
+        "Erdos249257.MersenneLambertLadder"
+      ],
+      "declaration_count": 71,
+      "kind_counts": {
+        "abbrev": 1,
+        "def": 17,
+        "theorem": 53
       }
     },
     {
@@ -67328,6 +67344,786 @@
       "generated_certificate": false,
       "claim_ids": [],
       "docstring": "The exact growth criterion once a crossed boundary has forcing depth `2*N-v-1`: strict extension beyond `N` is equivalent to excluding `v ≥ N-1`."
+    },
+    {
+      "id": "Erdos249257/HalfCarryReachability.lean:32:halfStripBound",
+      "name": "halfStripBound",
+      "kind": "def",
+      "module": "Erdos249257/HalfCarryReachability.lean",
+      "line": 32,
+      "signature": "def halfStripBound (n : ℕ) : ℕ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The discrete square-root strip used by the half-carry search."
+    },
+    {
+      "id": "Erdos249257/HalfCarryReachability.lean:36:integerHalfCarry",
+      "name": "integerHalfCarry",
+      "kind": "def",
+      "module": "Erdos249257/HalfCarryReachability.lean",
+      "line": 36,
+      "signature": "noncomputable def integerHalfCarry (A : Set ℕ) : ℕ → ℤ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The integer carry whose state at time `N` is the packet's `K_{N+1}`."
+    },
+    {
+      "id": "Erdos249257/HalfCarryReachability.lean:39:integerHalfCarry_zero",
+      "name": "integerHalfCarry_zero",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarryReachability.lean",
+      "line": 39,
+      "signature": "@[simp] theorem integerHalfCarry_zero (A : Set ℕ) : integerHalfCarry A 0 = 1",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCarryReachability.lean:42:integerHalfCarry_succ",
+      "name": "integerHalfCarry_succ",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarryReachability.lean",
+      "line": 42,
+      "signature": "@[simp] theorem integerHalfCarry_succ (A : Set ℕ) (N : ℕ) : integerHalfCarry A (N + 1) = 2 * integerHalfCarry A N - (supportCoeff A (N + 2) : ℤ)",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCarryReachability.lean:49:integerHalfCarry_inter_Iic_eq_of_succ_le",
+      "name": "integerHalfCarry_inter_Iic_eq_of_succ_le",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarryReachability.lean",
+      "line": 49,
+      "signature": "theorem integerHalfCarry_inter_Iic_eq_of_succ_le (A : Set ℕ) (M : ℕ) : ∀ N : ℕ, N + 1 ≤ M → integerHalfCarry (A ∩ Set.Iic M) N = integerHalfCarry A N",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Restricting a support above `M` does not change its integer half carry through level `M`."
+    },
+    {
+      "id": "Erdos249257/HalfCarryReachability.lean:63:integerHalfCarry_insert_future_eq",
+      "name": "integerHalfCarry_insert_future_eq",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarryReachability.lean",
+      "line": 63,
+      "signature": "theorem integerHalfCarry_insert_future_eq (A : Set ℕ) {m n : ℕ} (hmn : m + 2 ≤ n) : integerHalfCarry (insert n A) m = integerHalfCarry A m",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Inserting a support bit at row `n` does not change any carry whose next coefficient row is still strictly before `n`. This is the exact bridge used to regard the two choices of the row-`n` bit as children of one parent."
+    },
+    {
+      "id": "Erdos249257/HalfCarryReachability.lean:85:sqrt_le_pred_sqrt_add_one",
+      "name": "sqrt_le_pred_sqrt_add_one",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarryReachability.lean",
+      "line": 85,
+      "signature": "theorem sqrt_le_pred_sqrt_add_one {n : ℕ} (hn : 1 ≤ n) : Nat.sqrt n ≤ Nat.sqrt (n - 1) + 1",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The elementary square-root change across one row."
+    },
+    {
+      "id": "Erdos249257/HalfCarryReachability.lean:92:halfStripBound_add_coeff_le_two_mul_pred",
+      "name": "halfStripBound_add_coeff_le_two_mul_pred",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarryReachability.lean",
+      "line": 92,
+      "signature": "theorem halfStripBound_add_coeff_le_two_mul_pred {n c : ℕ} (hn : 2 ≤ n) (hc : c ≤ 2 * Nat.sqrt n) : halfStripBound n + c ≤ 2 * halfStripBound (n - 1)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The sharp divisor envelope leaves enough room for the inverse parent at the preceding row."
+    },
+    {
+      "id": "Erdos249257/HalfCarryReachability.lean:103:HalfWord",
+      "name": "HalfWord",
+      "kind": "abbrev",
+      "module": "Erdos249257/HalfCarryReachability.lean",
+      "line": 103,
+      "signature": "abbrev HalfWord (N : ℕ)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A Boolean support word through exponent `N`. Index zero is retained so restriction is literal; admissibility forces exponents zero and one off."
+    },
+    {
+      "id": "Erdos249257/HalfCarryReachability.lean:106:restrictWord",
+      "name": "restrictWord",
+      "kind": "def",
+      "module": "Erdos249257/HalfCarryReachability.lean",
+      "line": 106,
+      "signature": "def restrictWord {M N : ℕ} (hMN : M ≤ N) (a : HalfWord N) : HalfWord M",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Restrict a word at level `N` to an earlier level `M`."
+    },
+    {
+      "id": "Erdos249257/HalfCarryReachability.lean:109:restrictWord_refl",
+      "name": "restrictWord_refl",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarryReachability.lean",
+      "line": 109,
+      "signature": "@[simp] theorem restrictWord_refl {N : ℕ} (a : HalfWord N) : restrictWord (le_refl N) a = a",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCarryReachability.lean:114:restrictWord_trans",
+      "name": "restrictWord_trans",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarryReachability.lean",
+      "line": 114,
+      "signature": "theorem restrictWord_trans {L M N : ℕ} (hLM : L ≤ M) (hMN : M ≤ N) (a : HalfWord N) : restrictWord hLM (restrictWord hMN a) = restrictWord (hLM.trans hMN) a",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCarryReachability.lean:121:wordSupport",
+      "name": "wordSupport",
+      "kind": "def",
+      "module": "Erdos249257/HalfCarryReachability.lean",
+      "line": 121,
+      "signature": "def wordSupport {N : ℕ} (a : HalfWord N) : Set ℕ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The set represented by a finite Boolean word."
+    },
+    {
+      "id": "Erdos249257/HalfCarryReachability.lean:124:wordSupport_restrictWord",
+      "name": "wordSupport_restrictWord",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarryReachability.lean",
+      "line": 124,
+      "signature": "theorem wordSupport_restrictWord {M N : ℕ} (hMN : M ≤ N) (a : HalfWord N) : wordSupport (restrictWord hMN a) = wordSupport a ∩ Set.Iic M",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCarryReachability.lean:138:HalfStripAdmissible",
+      "name": "HalfStripAdmissible",
+      "kind": "def",
+      "module": "Erdos249257/HalfCarryReachability.lean",
+      "line": 138,
+      "signature": "def HalfStripAdmissible (N : ℕ) (a : HalfWord N) : Prop",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "All-prefix strip admissibility for one finite Boolean word."
+    },
+    {
+      "id": "Erdos249257/HalfCarryReachability.lean:147:HalfStripAdmissible.restrict",
+      "name": "HalfStripAdmissible.restrict",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarryReachability.lean",
+      "line": 147,
+      "signature": "theorem HalfStripAdmissible.restrict {M N : ℕ} (hMN : M ≤ N) {a : HalfWord N} (ha : HalfStripAdmissible N a) : HalfStripAdmissible M (restrictWord hMN a)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Admissibility is stable under restriction, the key functorial fact needed by the inverse-system compactness argument."
+    },
+    {
+      "id": "Erdos249257/HalfCarryReachability.lean:162:HalfTerminalReachable",
+      "name": "HalfTerminalReachable",
+      "kind": "def",
+      "module": "Erdos249257/HalfCarryReachability.lean",
+      "line": 162,
+      "signature": "def HalfTerminalReachable (N k : ℕ) : Prop",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A terminal carry is reachable when some admissible Boolean word has that carry."
+    },
+    {
+      "id": "Erdos249257/HalfCarryReachability.lean:167:HalfCarryFullStripReachabilityAt",
+      "name": "HalfCarryFullStripReachabilityAt",
+      "kind": "def",
+      "module": "Erdos249257/HalfCarryReachability.lean",
+      "line": 167,
+      "signature": "def HalfCarryFullStripReachabilityAt (N : ℕ) : Prop",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Full terminal-strip reachability at level `N`."
+    },
+    {
+      "id": "Erdos249257/HalfCarryReachability.lean:174:FixedCoeffChild",
+      "name": "FixedCoeffChild",
+      "kind": "def",
+      "module": "Erdos249257/HalfCarryReachability.lean",
+      "line": 174,
+      "signature": "def FixedCoeffChild (c h k : ℤ) : Prop",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The two children of a parent carry under a fixed proper-divisor coefficient."
+    },
+    {
+      "id": "Erdos249257/HalfCarryReachability.lean:179:fixedCoeffChild_existsUnique",
+      "name": "fixedCoeffChild_existsUnique",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarryReachability.lean",
+      "line": 179,
+      "signature": "theorem fixedCoeffChild_existsUnique (c k : ℤ) : ∃! h : ℤ, FixedCoeffChild c h k",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Every integer has a unique fixed-coefficient parent and Boolean child bit. This is the parity inverse behind interval tiling."
+    },
+    {
+      "id": "Erdos249257/HalfCarryReachability.lean:209:fixedCoeffChild_existsUnique_parent_in_pred_strip",
+      "name": "fixedCoeffChild_existsUnique_parent_in_pred_strip",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarryReachability.lean",
+      "line": 209,
+      "signature": "theorem fixedCoeffChild_existsUnique_parent_in_pred_strip {n c k : ℕ} (hn : 2 ≤ n) (hk : 1 ≤ k) (hkB : k ≤ halfStripBound n) (hc : c ≤ 2 * Nat.sqrt n) : ∃! h : ℤ, (1 : ℤ) ≤ h ∧ h ≤ halfStripBound (n - 1) ∧ FixedCoeffChild c h k",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The parity inverse for a target inside the new strip has its unique parent inside the preceding strip. This is the proof-bearing fixed-coefficient tiling step, with the square-root headroom discharged explicitly."
+    },
+    {
+      "id": "Erdos249257/HalfCarryReachability.lean:229:EvenSeamReachable",
+      "name": "EvenSeamReachable",
+      "kind": "def",
+      "module": "Erdos249257/HalfCarryReachability.lean",
+      "line": 229,
+      "signature": "def EvenSeamReachable (δ c k : ℤ) : Prop",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Child geometry when the half-divisor bit changes at parent `δ`: parents at or below `δ` have coefficient `c+1`; parents above it have coefficient `c`."
+    },
+    {
+      "id": "Erdos249257/HalfCarryReachability.lean:235:evenSeamReachable_iff",
+      "name": "evenSeamReachable_iff",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarryReachability.lean",
+      "line": 235,
+      "signature": "theorem evenSeamReachable_iff (δ c k : ℤ) : EvenSeamReachable δ c k ↔ k ≠ 2 * δ - c",
+      "generated_certificate": false,
+      "claim_ids": [
+        "half_carry_reachability_compactness"
+      ],
+      "docstring": "**Exact one-hole theorem.** The unresolved half-divisor transition reaches every integer except `2δ-c`; there are no other holes."
+    },
+    {
+      "id": "Erdos249257/HalfCarryReachability.lean:257:EvenSeamNumeratorReachable",
+      "name": "EvenSeamNumeratorReachable",
+      "kind": "def",
+      "module": "Erdos249257/HalfCarryReachability.lean",
+      "line": 257,
+      "signature": "def EvenSeamNumeratorReachable (δ c T k q : ℤ) : Prop",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Endpoint-bearing version of `EvenSeamReachable`. If a parent with numerator `T-h` receives child bit `b`, its child numerator is `2*(T-h)+b`. The two sides of the seam use fixed coefficients `c+1` and `c`, respectively."
+    },
+    {
+      "id": "Erdos249257/HalfCarryReachability.lean:268:evenSeamNumeratorReachable_iff_twoSheets",
+      "name": "evenSeamNumeratorReachable_iff_twoSheets",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarryReachability.lean",
+      "line": 268,
+      "signature": "theorem evenSeamNumeratorReachable_iff_twoSheets (δ c T k q : ℤ) : EvenSeamNumeratorReachable δ c T k q ↔ (k < 2 * δ - c ∧ q = (2 * T - c - 1) - k) ∨ (2 * δ - c < k ∧ q = (2 * T - c) - k)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "**Exact two-sheet normal form.** Away from the missing carry `2*δ-c`, the seam has one affine numerator sheet on each side. Below the hole its endpoint is `2*T-c-1`; above the hole its endpoint is `2*T-c`."
+    },
+    {
+      "id": "Erdos249257/HalfCarryReachability.lean:306:evenSeam_recylindrifies_of_hole_below_strip",
+      "name": "evenSeam_recylindrifies_of_hole_below_strip",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarryReachability.lean",
+      "line": 306,
+      "signature": "theorem evenSeam_recylindrifies_of_hole_below_strip {δ c T : ℤ} {k : ℕ} (hk : 1 ≤ k) (hhole : 2 * δ - c < 1) : EvenSeamNumeratorReachable δ c T k ((2 * T - c) - k)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "If the seam hole lies below the target strip, every target numerator is on the upper sheet, so the strip is a single cylinder with endpoint `2*T-c`."
+    },
+    {
+      "id": "Erdos249257/HalfCarryReachability.lean:316:evenSeam_recylindrifies_of_hole_above_strip",
+      "name": "evenSeam_recylindrifies_of_hole_above_strip",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarryReachability.lean",
+      "line": 316,
+      "signature": "theorem evenSeam_recylindrifies_of_hole_above_strip {δ c T : ℤ} {B k : ℕ} (hkB : k ≤ B) (hhole : (B : ℤ) < 2 * δ - c) : EvenSeamNumeratorReachable δ c T k ((2 * T - c - 1) - k)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "If the seam hole lies above the target strip, every target numerator is on the lower sheet, so the strip is a single cylinder with endpoint `2*T-c-1`."
+    },
+    {
+      "id": "Erdos249257/HalfCarryReachability.lean:326:depth14_evenSeam_three_not_reachable",
+      "name": "depth14_evenSeam_three_not_reachable",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarryReachability.lean",
+      "line": 326,
+      "signature": "theorem depth14_evenSeam_three_not_reachable : ¬ EvenSeamReachable 2 1 3",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Negative regression fixture: the depth-14 scalar data `δ=2`, `c=1` misses terminal carry `3` exactly."
+    },
+    {
+      "id": "Erdos249257/HalfCarryReachability.lean:332:evenSeamReachable_in_strip_iff",
+      "name": "evenSeamReachable_in_strip_iff",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarryReachability.lean",
+      "line": 332,
+      "signature": "theorem evenSeamReachable_in_strip_iff (B : ℕ) (δ c : ℤ) {k : ℕ} (hk : 1 ≤ k) (hkB : k ≤ B) : EvenSeamReachable δ c k ↔ k ∈ Finset.Icc 1 B ∧ (k : ℤ) ≠ 2 * δ - c",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Strip-restricted form of the exact one-hole theorem."
+    },
+    {
+      "id": "Erdos249257/HalfCarryReachability.lean:341:IsCanonicalEvenSeam",
+      "name": "IsCanonicalEvenSeam",
+      "kind": "def",
+      "module": "Erdos249257/HalfCarryReachability.lean",
+      "line": 341,
+      "signature": "def IsCanonicalEvenSeam (d : ℕ) (δ c : ℤ) : Prop",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The coordinate bridge asserting that one actual even transition is exactly the scalar seam model. The cylinder induction is expected to produce this interface whenever exponent `d` is unresolved at depth `2d-1`."
+    },
+    {
+      "id": "Erdos249257/HalfCarryReachability.lean:347:HalfCarryEvenSeamEscape",
+      "name": "HalfCarryEvenSeamEscape",
+      "kind": "def",
+      "module": "Erdos249257/HalfCarryReachability.lean",
+      "line": 347,
+      "signature": "def HalfCarryEvenSeamEscape : Prop",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The open arithmetic obligation: every post-base canonical half-divisor seam must miss the target strip."
+    },
+    {
+      "id": "Erdos249257/HalfCarryReachability.lean:356:HalfCarryCanonicalEvenSeamSupply",
+      "name": "HalfCarryCanonicalEvenSeamSupply",
+      "kind": "def",
+      "module": "Erdos249257/HalfCarryReachability.lean",
+      "line": 356,
+      "signature": "def HalfCarryCanonicalEvenSeamSupply : Prop",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Producer interface asserting that every post-base even depth admits the canonical one-seam coordinate. This is deliberately separate from seam escape: a solver may construct the coordinate and prove its scalar escape by different arguments."
+    },
+    {
+      "id": "Erdos249257/HalfCarryReachability.lean:361:fullStripAt_even_of_canonicalSeam_escape",
+      "name": "fullStripAt_even_of_canonicalSeam_escape",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarryReachability.lean",
+      "line": 361,
+      "signature": "theorem fullStripAt_even_of_canonicalSeam_escape {d : ℕ} {δ c : ℤ} (hcanonical : IsCanonicalEvenSeam d δ c) (hescape : 2 * δ - c < 1 ∨ (halfStripBound (2 * d) : ℤ) < 2 * δ - c) : HalfCarryFullStripReachabilityAt (2 * d)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Once a canonical seam is outside the strip, the exact one-hole theorem immediately restores full terminal reachability at that even level."
+    },
+    {
+      "id": "Erdos249257/HalfCarryReachability.lean:376:fullStripAt_even_of_evenSeamSupply_escape",
+      "name": "fullStripAt_even_of_evenSeamSupply_escape",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarryReachability.lean",
+      "line": 376,
+      "signature": "theorem fullStripAt_even_of_evenSeamSupply_escape (hcanonical : HalfCarryCanonicalEvenSeamSupply) (hescape : HalfCarryEvenSeamEscape) {d : ℕ} (hd : 10 ≤ d) : HalfCarryFullStripReachabilityAt (2 * d)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The two independent even-level producers compose to full terminal-strip reachability at every post-base even depth."
+    },
+    {
+      "id": "Erdos249257/HalfCarryReachability.lean:389:exists_bool_sequence_of_prefix_closed_finite_words",
+      "name": "exists_bool_sequence_of_prefix_closed_finite_words",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarryReachability.lean",
+      "line": 389,
+      "signature": "theorem exists_bool_sequence_of_prefix_closed_finite_words (Good : ∀ N : ℕ, HalfWord N → Prop) (hrestrict : ∀ {M N : ℕ} (hMN : M ≤ N) {a : HalfWord N}, Good N a → Good M (restrictWord hMN a)) (hnonempty : ∀ N : ℕ, ∃ a : HalfWord N, Good N a) : ∃ a : ℕ → Bool, ∀ N : ℕ, Good N (fun i ↦ a i)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A coherent sequence of nonempty finite Boolean-prefix families has an infinite Boolean diagonal whose every finite prefix belongs to the family."
+    },
+    {
+      "id": "Erdos249257/HalfCarryReachability.lean:429:exists_infinite_halfStripBranch",
+      "name": "exists_infinite_halfStripBranch",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarryReachability.lean",
+      "line": 429,
+      "signature": "theorem exists_infinite_halfStripBranch (hfinite : ∀ N : ℕ, ∃ a : HalfWord N, HalfStripAdmissible N a) : ∃ a : ℕ → Bool, ∀ N : ℕ, HalfStripAdmissible N (fun i ↦ a i)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Nonempty admissible words at every height yield one infinite Boolean word whose every finite prefix is strip-admissible."
+    },
+    {
+      "id": "Erdos249257/HalfCarryReachability.lean:440:exists_infinite_halfStripBranch_of_fullStrip",
+      "name": "exists_infinite_halfStripBranch_of_fullStrip",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarryReachability.lean",
+      "line": 440,
+      "signature": "theorem exists_infinite_halfStripBranch_of_fullStrip (hfull : ∀ N : ℕ, 1 ≤ N → HalfCarryFullStripReachabilityAt N) : ∃ a : ℕ → Bool, ∀ N : ℕ, HalfStripAdmissible N (fun i ↦ a i)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Full terminal-strip reachability at every positive height supplies the nonempty levels required by compactness."
+    },
+    {
+      "id": "Erdos249257/HalfCarryReachability.lean:461:exists_infinite_halfStripBranch_of_eventualFullStrip",
+      "name": "exists_infinite_halfStripBranch_of_eventualFullStrip",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarryReachability.lean",
+      "line": 461,
+      "signature": "theorem exists_infinite_halfStripBranch_of_eventualFullStrip (N₀ : ℕ) (hbase : ∃ a : HalfWord N₀, HalfStripAdmissible N₀ a) (hfull : ∀ N : ℕ, N₀ ≤ N → HalfCarryFullStripReachabilityAt N) : ∃ a : ℕ → Bool, ∀ N : ℕ, HalfStripAdmissible N (fun i ↦ a i)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "One admissible base level together with full terminal strips from that level onward supplies the nonempty finite levels required by compactness. Earlier levels are obtained by restricting the base word."
+    },
+    {
+      "id": "Erdos249257/HalfCarryReachability.lean:479:boolSupport",
+      "name": "boolSupport",
+      "kind": "def",
+      "module": "Erdos249257/HalfCarryReachability.lean",
+      "line": 479,
+      "signature": "def boolSupport (a : ℕ → Bool) : Set ℕ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The support selected by an infinite Boolean word."
+    },
+    {
+      "id": "Erdos249257/HalfCarryReachability.lean:484:wordSupport_sequence_eq_inter_Iic",
+      "name": "wordSupport_sequence_eq_inter_Iic",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarryReachability.lean",
+      "line": 484,
+      "signature": "theorem wordSupport_sequence_eq_inter_Iic (a : ℕ → Bool) (N : ℕ) : wordSupport (fun i : Fin (N + 1) ↦ a i) = boolSupport a ∩ Set.Iic N",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A finite word cut from an infinite Boolean word represents exactly the intersection of its support with the corresponding initial interval."
+    },
+    {
+      "id": "Erdos249257/HalfCarryReachability.lean:496:halfStripBranch_integerHalfCarry_bounds",
+      "name": "halfStripBranch_integerHalfCarry_bounds",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarryReachability.lean",
+      "line": 496,
+      "signature": "theorem halfStripBranch_integerHalfCarry_bounds (a : ℕ → Bool) (hbranch : ∀ N : ℕ, HalfStripAdmissible N (fun i ↦ a i)) (n : ℕ) (hn : 1 ≤ n) : (1 : ℤ) ≤ integerHalfCarry (boolSupport a) (n - 1) ∧ integerHalfCarry (boolSupport a) (n - 1) ≤ halfStripBound n",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Every coherent finite-prefix strip bound transfers to the global support carry at the same level."
+    },
+    {
+      "id": "Erdos249257/HalfCarryReachability.lean:509:one_not_mem_boolSupport_of_halfStripBranch",
+      "name": "one_not_mem_boolSupport_of_halfStripBranch",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarryReachability.lean",
+      "line": 509,
+      "signature": "theorem one_not_mem_boolSupport_of_halfStripBranch (a : ℕ → Bool) (hbranch : ∀ N : ℕ, HalfStripAdmissible N (fun i ↦ a i)) : 1 ∉ boolSupport a",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The exponent-one guard carried by every admissible branch."
+    },
+    {
+      "id": "Erdos249257/HalfCarryReachability.lean:519:zero_not_mem_boolSupport_of_halfStripBranch",
+      "name": "zero_not_mem_boolSupport_of_halfStripBranch",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarryReachability.lean",
+      "line": 519,
+      "signature": "theorem zero_not_mem_boolSupport_of_halfStripBranch (a : ℕ → Bool) (hbranch : ∀ N : ℕ, HalfStripAdmissible N (fun i ↦ a i)) : 0 ∉ boolSupport a",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The index-zero guard carried by every admissible branch."
+    },
+    {
+      "id": "Erdos249257/HalfCarryReachability.lean:531:support_half_of_infinite_halfStripBranch",
+      "name": "support_half_of_infinite_halfStripBranch",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarryReachability.lean",
+      "line": 531,
+      "signature": "theorem support_half_of_infinite_halfStripBranch (a : ℕ → Bool) (hbranch : ∀ N : ℕ, HalfStripAdmissible N (fun i ↦ a i)) : erdosSupportSeries 2 (boolSupport a) = (1 : ℝ) / 2",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A coherent positive square-root-strip branch has exact support-series value `1/2`. This is the compactness consumer: it reuses the existing denominator-two carry factorisation and temperedness theorem."
+    },
+    {
+      "id": "Erdos249257/HalfCarryReachability.lean:589:finite_boolSupport_ne_half",
+      "name": "finite_boolSupport_ne_half",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarryReachability.lean",
+      "line": 589,
+      "signature": "theorem finite_boolSupport_ne_half (A : Set ℕ) (hfinite : A.Finite) (hzero : 0 ∉ A) : erdosSupportSeries 2 A ≠ (1 : ℝ) / 2",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A finite positive-index support cannot have support-series value `1/2`, because its audited reduced denominator is odd."
+    },
+    {
+      "id": "Erdos249257/HalfCarryReachability.lean:629:signedMobiusBaseline",
+      "name": "signedMobiusBaseline",
+      "kind": "def",
+      "module": "Erdos249257/HalfCarryReachability.lean",
+      "line": 629,
+      "signature": "noncomputable def signedMobiusBaseline (n : ℕ) : ℤ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The signed Möbius baseline behind the exact representation of `1/2`. The exceptional value at one removes the terminating binary digit."
+    },
+    {
+      "id": "Erdos249257/HalfCarryReachability.lean:634:sum_divisors_signedMobiusBaseline",
+      "name": "sum_divisors_signedMobiusBaseline",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarryReachability.lean",
+      "line": 634,
+      "signature": "theorem sum_divisors_signedMobiusBaseline (n : ℕ) (hn : 0 < n) : (∑ d ∈ n.divisors, signedMobiusBaseline d) = if n = 1 then 0 else 1",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The signed baseline has the target binary coefficient word: zero in row one and one in every positive row after it."
+    },
+    {
+      "id": "Erdos249257/HalfCarryReachability.lean:661:mobiusCenteredHalfCarry",
+      "name": "mobiusCenteredHalfCarry",
+      "kind": "def",
+      "module": "Erdos249257/HalfCarryReachability.lean",
+      "line": 661,
+      "signature": "noncomputable def mobiusCenteredHalfCarry (A : Set ℕ) (N : ℕ) : ℤ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The canonical integer half carry measured relative to the signed Möbius solution. Index `N` corresponds to the packet's state `e_{N+1}`."
+    },
+    {
+      "id": "Erdos249257/HalfCarryReachability.lean:664:mobiusCenteredHalfCarry_zero",
+      "name": "mobiusCenteredHalfCarry_zero",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarryReachability.lean",
+      "line": 664,
+      "signature": "@[simp] theorem mobiusCenteredHalfCarry_zero (A : Set ℕ) : mobiusCenteredHalfCarry A 0 = 0",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCarryReachability.lean:670:mobiusCenteredHalfCarry_succ",
+      "name": "mobiusCenteredHalfCarry_succ",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarryReachability.lean",
+      "line": 670,
+      "signature": "theorem mobiusCenteredHalfCarry_succ (A : Set ℕ) (N : ℕ) : mobiusCenteredHalfCarry A (N + 1) = 2 * mobiusCenteredHalfCarry A N + 1 - (supportCoeff A (N + 2) : ℤ)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Exact centred recurrence. Its forcing term is the Boolean divisor coefficient minus the signed baseline coefficient one."
+    },
+    {
+      "id": "Erdos249257/HalfCarryReachability.lean:680:mobiusCenteredHalfCarry_coboundary",
+      "name": "mobiusCenteredHalfCarry_coboundary",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarryReachability.lean",
+      "line": 680,
+      "signature": "theorem mobiusCenteredHalfCarry_coboundary (A : Set ℕ) (N : ℕ) : (supportCoeff A (N + 2) : ℤ) - 1 = 2 * mobiusCenteredHalfCarry A N - mobiusCenteredHalfCarry A (N + 1)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Coboundary normal form for Booleanisation relative to the signed Möbius baseline."
+    },
+    {
+      "id": "Erdos249257/HalfCarryReachability.lean:689:boolean_sub_signedMobiusBaseline_eq_centeredCoboundary",
+      "name": "boolean_sub_signedMobiusBaseline_eq_centeredCoboundary",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarryReachability.lean",
+      "line": 689,
+      "signature": "theorem boolean_sub_signedMobiusBaseline_eq_centeredCoboundary (A : Set ℕ) (N : ℕ) : (supportCoeff A (N + 2) : ℤ) - (∑ d ∈ (N + 2).divisors, signedMobiusBaseline d) = 2 * mobiusCenteredHalfCarry A N - mobiusCenteredHalfCarry A (N + 1)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The same coboundary with the signed divisor baseline left visible. This is the literal `D = 2e - e⁺` intake equation from the returned packet."
+    },
+    {
+      "id": "Erdos249257/HalfCarryReachability.lean:702:support_half_of_mobiusCenteredHalfCarry_tempered",
+      "name": "support_half_of_mobiusCenteredHalfCarry_tempered",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarryReachability.lean",
+      "line": 702,
+      "signature": "theorem support_half_of_mobiusCenteredHalfCarry_tempered (A : Set ℕ) (hone : 1 ∉ A) (htempered : Tendsto (fun N : ℕ ↦ (mobiusCenteredHalfCarry A N : ℝ) / (2 : ℝ) ^ N) atTop (nhds 0)) : erdosSupportSeries 2 A = (1 : ℝ) / 2",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Any subexponential Möbius-centred carry already closes exact half-membership through the existing canonical denominator-two orbit."
+    },
+    {
+      "id": "Erdos249257/HalfCarryReachability.lean:749:infinite_support_half_of_mobiusCenteredHalfCarry_tempered",
+      "name": "infinite_support_half_of_mobiusCenteredHalfCarry_tempered",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarryReachability.lean",
+      "line": 749,
+      "signature": "theorem infinite_support_half_of_mobiusCenteredHalfCarry_tempered (A : Set ℕ) (hzero : 0 ∉ A) (hone : 1 ∉ A) (htempered : Tendsto (fun N : ℕ ↦ (mobiusCenteredHalfCarry A N : ℝ) / (2 : ℝ) ^ N) atTop (nhds 0)) : A.Infinite ∧ erdosSupportSeries 2 A = (1 : ℝ) / 2",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The exact endpoint wanted by the construction lane: a normalized support with tempered centred carry is automatically infinite and sums to `1/2`."
+    },
+    {
+      "id": "Erdos249257/HalfCarryReachability.lean:766:greedy_half_infinite_of_mobiusCenteredHalfCarry_tempered",
+      "name": "greedy_half_infinite_of_mobiusCenteredHalfCarry_tempered",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarryReachability.lean",
+      "line": 766,
+      "signature": "theorem greedy_half_infinite_of_mobiusCenteredHalfCarry_tempered (htempered : Tendsto (fun N : ℕ ↦ (mobiusCenteredHalfCarry (greedyMersenneSupport (1 / 2 : ℝ)) N : ℝ) / (2 : ℝ) ^ N) atTop (nhds 0)) : (greedyMersenneSupport (1 / 2 : ℝ)).Infinite ∧ erdosSupportSeries 2 (greedyMersenneSupport (1 / 2 : ℝ)) = (1 : ℝ) / 2",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Greedy-specialized endpoint. A continuation now needs to prove only the displayed subexponential centred-carry limit for the canonical greedy support; zero/one normalization, exact half-membership, and infinitude are discharged here."
+    },
+    {
+      "id": "Erdos249257/HalfCarryReachability.lean:787:directly",
+      "name": "directly",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarryReachability.lean",
+      "line": 787,
+      "signature": "theorem directly at the exact support-series consumer. -/ theorem infinite_support_half_of_mobiusCenteredHalfCarry_sqrtBound (A : Set ℕ) (hzero : 0 ∉ A) (hone : 1 ∉ A) (hnonneg : ∀ N : ℕ, 0 ≤ mobiusCenteredHalfCarry A N) (hbound : ∀ N : ℕ, (mobiusCenteredHalfCarry A N : ℝ) ≤ 2 * Real.sqrt (N : ℝ) + 4) : A.Infinite ∧ erdosSupportSeries 2 A = (1 : ℝ) / 2",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCarryReachability.lean:788:infinite_support_half_of_mobiusCenteredHalfCarry_sqrtBound",
+      "name": "infinite_support_half_of_mobiusCenteredHalfCarry_sqrtBound",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarryReachability.lean",
+      "line": 788,
+      "signature": "theorem infinite_support_half_of_mobiusCenteredHalfCarry_sqrtBound (A : Set ℕ) (hzero : 0 ∉ A) (hone : 1 ∉ A) (hnonneg : ∀ N : ℕ, 0 ≤ mobiusCenteredHalfCarry A N) (hbound : ∀ N : ℕ, (mobiusCenteredHalfCarry A N : ℝ) ≤ 2 * Real.sqrt (N : ℝ) + 4) : A.Infinite ∧ erdosSupportSeries 2 A = (1 : ℝ) / 2",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Pointwise square-root control is a concrete sufficient producer for the Möbius-centred endpoint. This exposes the existing generic carry-growth theorem directly at the exact support-series consumer."
+    },
+    {
+      "id": "Erdos249257/HalfCarryReachability.lean:805:greedy_half_infinite_of_mobiusCenteredHalfCarry_sqrtBound",
+      "name": "greedy_half_infinite_of_mobiusCenteredHalfCarry_sqrtBound",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarryReachability.lean",
+      "line": 805,
+      "signature": "theorem greedy_half_infinite_of_mobiusCenteredHalfCarry_sqrtBound (hnonneg : ∀ N : ℕ, 0 ≤ mobiusCenteredHalfCarry (greedyMersenneSupport (1 / 2 : ℝ)) N) (hbound : ∀ N : ℕ, (mobiusCenteredHalfCarry (greedyMersenneSupport (1 / 2 : ℝ)) N : ℝ) ≤ 2 * Real.sqrt (N : ℝ) + 4) : (greedyMersenneSupport (1 / 2 : ℝ)).Infinite ∧ erdosSupportSeries 2 (greedyMersenneSupport (1 / 2 : ℝ)) = (1 : ℝ) / 2",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Greedy-facing square-root endpoint. The open construction problem is now expressible as the two pointwise carry inequalities witnessed by all current finite runs, rather than as an abstract filter limit."
+    },
+    {
+      "id": "Erdos249257/HalfCarryReachability.lean:842:integerHalfCarry_eq_scaled_residual_add_tail",
+      "name": "integerHalfCarry_eq_scaled_residual_add_tail",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarryReachability.lean",
+      "line": 842,
+      "signature": "theorem integerHalfCarry_eq_scaled_residual_add_tail (A : Set ℕ) (hone : 1 ∉ A) (N : ℕ) : (integerHalfCarry A N : ℝ) = (2 : ℝ) ^ (N + 1) * ((1 : ℝ) / 2 - erdosSupportSeries 2 A) + binaryCoeffTail (supportCoeff A) (N + 1)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Exact bridge: the integer half carry equals the scaled half-residual plus the analytic support-coefficient tail."
+    },
+    {
+      "id": "Erdos249257/HalfCarryReachability.lean:859:erdosSupportSeries_greedyMersenneSupport_le",
+      "name": "erdosSupportSeries_greedyMersenneSupport_le",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarryReachability.lean",
+      "line": 859,
+      "signature": "theorem erdosSupportSeries_greedyMersenneSupport_le {x : ℝ} (hx : 0 ≤ x) : erdosSupportSeries 2 (greedyMersenneSupport x) ≤ x",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Greedy prefix sums never overshoot, so the greedy support value is at most its target."
+    },
+    {
+      "id": "Erdos249257/HalfCarryReachability.lean:876:two_mem_greedyMersenneSupport_half",
+      "name": "two_mem_greedyMersenneSupport_half",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarryReachability.lean",
+      "line": 876,
+      "signature": "theorem two_mem_greedyMersenneSupport_half : 2 ∈ greedyMersenneSupport (1 / 2 : ℝ)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The greedy half orbit takes exponent two immediately."
+    },
+    {
+      "id": "Erdos249257/HalfCarryReachability.lean:890:greedy_mobiusCenteredHalfCarry_nonneg",
+      "name": "greedy_mobiusCenteredHalfCarry_nonneg",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarryReachability.lean",
+      "line": 890,
+      "signature": "theorem greedy_mobiusCenteredHalfCarry_nonneg (N : ℕ) : 0 ≤ mobiusCenteredHalfCarry (greedyMersenneSupport (1 / 2 : ℝ)) N",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "**Unconditional nonnegativity of the greedy centred carry.** The first pointwise producer obligation for exact greedy half-membership holds with no hypotheses: greedy prefix sums cannot overshoot `1/2`, the pending future-multiple tail of the taken exponents is strictly positive, and the carry is an integer, so it is at least one."
+    },
+    {
+      "id": "Erdos249257/HalfCarryReachability.lean:924:greedy_half_infinite_of_mobiusCenteredHalfCarry_upperBound",
+      "name": "greedy_half_infinite_of_mobiusCenteredHalfCarry_upperBound",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarryReachability.lean",
+      "line": 924,
+      "signature": "theorem greedy_half_infinite_of_mobiusCenteredHalfCarry_upperBound (hbound : ∀ N : ℕ, (mobiusCenteredHalfCarry (greedyMersenneSupport (1 / 2 : ℝ)) N : ℝ) ≤ 2 * Real.sqrt (N : ℝ) + 4) : (greedyMersenneSupport (1 / 2 : ℝ)).Infinite ∧ erdosSupportSeries 2 (greedyMersenneSupport (1 / 2 : ℝ)) = (1 : ℝ) / 2",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "**Producer reduction.** With nonnegativity discharged unconditionally, the sole remaining producer obligation for exact greedy half-membership is the pointwise square-root upper bound on the centred carry."
+    },
+    {
+      "id": "Erdos249257/HalfCarryReachability.lean:936:boolSupport_infinite_of_halfStripBranch",
+      "name": "boolSupport_infinite_of_halfStripBranch",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarryReachability.lean",
+      "line": 936,
+      "signature": "theorem boolSupport_infinite_of_halfStripBranch (a : ℕ → Bool) (hbranch : ∀ N : ℕ, HalfStripAdmissible N (fun i ↦ a i)) : (boolSupport a).Infinite",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The support of a coherent half-strip branch is necessarily infinite."
+    },
+    {
+      "id": "Erdos249257/HalfCarryReachability.lean:950:exists_infinite_support_half_of_fullStrip",
+      "name": "exists_infinite_support_half_of_fullStrip",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarryReachability.lean",
+      "line": 950,
+      "signature": "theorem exists_infinite_support_half_of_fullStrip (hfull : ∀ N : ℕ, 1 ≤ N → HalfCarryFullStripReachabilityAt N) : ∃ A : Set ℕ, A.Infinite ∧ erdosSupportSeries 2 A = (1 : ℝ) / 2",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "**Conditional decision theorem.** Full finite reachability at every positive level yields an infinite support with exact value `1/2`. Thus the remaining mathematical work is entirely on the finite reachability side, whose only scalar defect in the canonical cylinder coordinate is the even seam isolated above."
+    },
+    {
+      "id": "Erdos249257/HalfCarryReachability.lean:963:exists_infinite_support_half_of_eventualFullStrip",
+      "name": "exists_infinite_support_half_of_eventualFullStrip",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarryReachability.lean",
+      "line": 963,
+      "signature": "theorem exists_infinite_support_half_of_eventualFullStrip (N₀ : ℕ) (hbase : ∃ a : HalfWord N₀, HalfStripAdmissible N₀ a) (hfull : ∀ N : ℕ, N₀ ≤ N → HalfCarryFullStripReachabilityAt N) : ∃ A : Set ℕ, A.Infinite ∧ erdosSupportSeries 2 A = (1 : ℝ) / 2",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "**Eventual full-strip consumer.** It is enough to have one admissible base level and full terminal-strip reachability from that level onward. In particular, finite holes below the base level do not obstruct the inverse- system construction."
+    },
+    {
+      "id": "Erdos249257/HalfCarryReachability.lean:978:HalfCarryCofinalAdmissibility",
+      "name": "HalfCarryCofinalAdmissibility",
+      "kind": "def",
+      "module": "Erdos249257/HalfCarryReachability.lean",
+      "line": 978,
+      "signature": "def HalfCarryCofinalAdmissibility : Prop",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Minimal compactness-facing producer: admissible finite words exist at cofinally many levels. Restriction then supplies a nonempty admissible family at every earlier level."
+    },
+    {
+      "id": "Erdos249257/HalfCarryReachability.lean:984:exists_infinite_support_half_of_cofinalAdmissibility",
+      "name": "exists_infinite_support_half_of_cofinalAdmissibility",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarryReachability.lean",
+      "line": 984,
+      "signature": "theorem exists_infinite_support_half_of_cofinalAdmissibility (hcofinal : HalfCarryCofinalAdmissibility) : ∃ A : Set ℕ, A.Infinite ∧ erdosSupportSeries 2 A = (1 : ℝ) / 2",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Cofinal finite admissibility is already enough for König compactness and an infinite support summing exactly to `1/2`."
+    },
+    {
+      "id": "Erdos249257/HalfCarryReachability.lean:999:cofinalAdmissibility_of_canonicalEvenSeamSupply",
+      "name": "cofinalAdmissibility_of_canonicalEvenSeamSupply",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarryReachability.lean",
+      "line": 999,
+      "signature": "theorem cofinalAdmissibility_of_canonicalEvenSeamSupply (hcanonical : HalfCarryCanonicalEvenSeamSupply) : HalfCarryCofinalAdmissibility",
+      "generated_certificate": false,
+      "claim_ids": [
+        "half_carry_reachability_compactness"
+      ],
+      "docstring": "An exact one-hole even seam always leaves at least one of carries `1` and `2`, so canonical seam supply gives admissible words at cofinally many levels."
+    },
+    {
+      "id": "Erdos249257/HalfCarryReachability.lean:1027:exists_infinite_support_half_of_canonicalEvenSeamSupply",
+      "name": "exists_infinite_support_half_of_canonicalEvenSeamSupply",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarryReachability.lean",
+      "line": 1027,
+      "signature": "theorem exists_infinite_support_half_of_canonicalEvenSeamSupply (hcanonical : HalfCarryCanonicalEvenSeamSupply) : ∃ A : Set ℕ, A.Infinite ∧ erdosSupportSeries 2 A = (1 : ℝ) / 2",
+      "generated_certificate": false,
+      "claim_ids": [
+        "half_carry_reachability_compactness"
+      ],
+      "docstring": "**One-hole seam consumer.** Canonical even-seam supply alone gives cofinally many nonempty admissible levels. The cofinal compactness consumer then produces an infinite support. Neither seam escape nor a separate odd-level full-strip theorem is needed for this existence conclusion."
+    },
+    {
+      "id": "Erdos249257/HalfCarryReachability.lean:1038:exists_infinite_support_half_of_evenSeamSupply_escape",
+      "name": "exists_infinite_support_half_of_evenSeamSupply_escape",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarryReachability.lean",
+      "line": 1038,
+      "signature": "theorem exists_infinite_support_half_of_evenSeamSupply_escape (hcanonical : HalfCarryCanonicalEvenSeamSupply) (hescape : HalfCarryEvenSeamEscape) (hodd : ∀ d : ℕ, 10 ≤ d → HalfCarryFullStripReachabilityAt (2 * d + 1)) (hbase : ∃ a : HalfWord 20, HalfStripAdmissible 20 a) : ∃ A : Set ℕ, A.Infinite ∧ erdosSupportSeries 2 A = (1 : ℝ) / 2",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Solver-facing fan-in for the seam route. A canonical coordinate and scalar escape settle every even level from `20` onward; an independent odd level producer and one admissible depth-`20` base then feed the existing inverse-system consumer."
     },
     {
       "id": "Erdos249257/HalfTrappingReturnCarry.lean:42:relationInvariantLinearChannels_det_eq_zero",

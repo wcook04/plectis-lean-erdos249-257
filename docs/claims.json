@@ -4893,6 +4893,16 @@
           ]
         },
         {
+          "id": "Erdos249257.HalfCarryReachability",
+          "path": "Erdos249257/HalfCarryReachability.lean",
+          "role": "Half-carry reachability and compactness",
+          "imports": [
+            "Erdos249257.BooleanMobiusCarry",
+            "Erdos249257.DyadicPrefixCompression",
+            "Erdos249257.MersenneLambertLadder"
+          ]
+        },
+        {
           "id": "Erdos249257.HalfTrappingReturnCarry",
           "path": "Erdos249257/HalfTrappingReturnCarry.lean",
           "role": "Half-trapping reverse-carry interface",
@@ -5253,6 +5263,11 @@
           "to": "half_second_channel_reduction"
         },
         {
+          "from": "half_carry_reachability_compactness",
+          "relation": "builds_on",
+          "to": "half_second_channel_reduction"
+        },
+        {
           "from": "denominator_exclusion",
           "relation": "advances_open_target",
           "to": "erdos_249",
@@ -5526,7 +5541,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 1185
+        "line": 1200
       }
     },
     {
@@ -5537,7 +5552,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 1194
+        "line": 1209
       }
     },
     {
@@ -5548,7 +5563,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 1201
+        "line": 1216
       }
     }
   ],
@@ -5714,6 +5729,34 @@
           "name": "overlappingReverseCarryWords_twoPow_le_realBound",
           "module": "Erdos249257/HalfTrappingReturnCarry.lean",
           "line": 191
+        }
+      ]
+    },
+    {
+      "id": "half_carry_reachability_compactness",
+      "label": "Half-carry reachability and compactness",
+      "status": "conditional reduction",
+      "statement": "At an unresolved even seam, the scalar transition reaches exactly every integer terminal carry other than the one value 2*δ-c. If canonical seam coordinates are supplied at every sufficiently large even depth, then admissible finite half-carry words occur cofinally; compactness yields an infinite support A with erdosSupportSeries 2 A = 1/2. The canonical seam-supply hypothesis is not proved.",
+      "remaining_open_proposition_ids": [
+        "remaining_open.universal_257_all_infinite_supports"
+      ],
+      "paper_label": "res:halfcarryreachability",
+      "readme_headline": false,
+      "declarations": [
+        {
+          "name": "evenSeamReachable_iff",
+          "module": "Erdos249257/HalfCarryReachability.lean",
+          "line": 235
+        },
+        {
+          "name": "cofinalAdmissibility_of_canonicalEvenSeamSupply",
+          "module": "Erdos249257/HalfCarryReachability.lean",
+          "line": 999
+        },
+        {
+          "name": "exists_infinite_support_half_of_canonicalEvenSeamSupply",
+          "module": "Erdos249257/HalfCarryReachability.lean",
+          "line": 1027
         }
       ]
     },
