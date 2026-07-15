@@ -73,3 +73,4 @@ import Erdos249257.HalfCylinderConcreteSeamAdapter
 import Erdos249257.HalfCutLocator
 import Erdos249257.CampbellShiftSynchronization
 import Erdos249257.HalfCylinderFullShellSeamBridge
+import Erdos249257.HalfCylinderSkippedEndpointClassifier

@@ -4996,6 +4996,14 @@
           ]
         },
         {
+          "id": "Erdos249257.HalfCylinderSkippedEndpointClassifier",
+          "path": "Erdos249257/HalfCylinderSkippedEndpointClassifier.lean",
+          "role": "Skipped-endpoint classifier for the half seam",
+          "imports": [
+            "Erdos249257.HalfCylinderFullShellSeamBridge"
+          ]
+        },
+        {
           "id": "Erdos249257.HalfTrappingReturnCarry",
           "path": "Erdos249257/HalfTrappingReturnCarry.lean",
           "role": "Half-trapping reverse-carry interface",

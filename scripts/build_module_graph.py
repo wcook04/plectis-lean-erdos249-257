@@ -47,6 +47,7 @@ NEW_ROLES = {
     "Erdos249257.HalfCylinderConcreteSeamAdapter": "Concrete finite seam adapter",
     "Erdos249257.HalfCylinderFiniteShadow": "Finite shadows of the half cylinder",
     "Erdos249257.HalfCylinderFullShellSeamBridge": "Full-shell seam bridge for the half target",
+    "Erdos249257.HalfCylinderSkippedEndpointClassifier": "Skipped-endpoint classifier for the half seam",
     "Erdos249257.HalfTrappingReturnCarry": "Half-trapping reverse-carry interface",
     "Erdos249257.LambertDiagonalEnclosure": "Lambert diagonal enclosure reduction",
     "Erdos249257.LcmFactorIdealPulseObstruction": "LCM factor-ideal anchor-pulse obstruction",

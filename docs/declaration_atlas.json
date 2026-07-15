@@ -4,21 +4,21 @@
   "projection_not_authority": true,
   "proof_authority": "Lean source checked by the pinned Lean kernel",
   "argument_authority": "docs/claims.json::machine_readable_paper.argument_graph",
-  "source_fingerprint": "sha256:26f6ed9f830a456db05378b5887eef742b1122b17a68eeb6b2dd23907d8519e1",
+  "source_fingerprint": "sha256:648248c233714348853a25a86ba2838db076a8f4fdea0e62efb7cc9c5e640df9",
   "summary": {
-    "module_count": 571,
-    "declaration_count": 7330,
-    "theorem_like_count": 6563,
+    "module_count": 572,
+    "declaration_count": 7349,
+    "theorem_like_count": 6581,
     "generated_certificate_declaration_count": 1681,
     "principal_claim_link_count": 135,
     "kind_counts": {
       "abbrev": 6,
-      "def": 737,
+      "def": 738,
       "inductive": 3,
       "instance": 4,
       "lemma": 354,
       "structure": 17,
-      "theorem": 6209
+      "theorem": 6227
     }
   },
   "modules": [
@@ -99,7 +99,8 @@
         "Erdos249257.HalfCylinderConcreteSeamAdapter",
         "Erdos249257.HalfCutLocator",
         "Erdos249257.CampbellShiftSynchronization",
-        "Erdos249257.HalfCylinderFullShellSeamBridge"
+        "Erdos249257.HalfCylinderFullShellSeamBridge",
+        "Erdos249257.HalfCylinderSkippedEndpointClassifier"
       ],
       "declaration_count": 0,
       "kind_counts": {}
@@ -6529,6 +6530,18 @@
         "def": 31,
         "structure": 2,
         "theorem": 59
+      }
+    },
+    {
+      "id": "Erdos249257.HalfCylinderSkippedEndpointClassifier",
+      "path": "Erdos249257/HalfCylinderSkippedEndpointClassifier.lean",
+      "imports": [
+        "Erdos249257.HalfCylinderFullShellSeamBridge"
+      ],
+      "declaration_count": 19,
+      "kind_counts": {
+        "def": 1,
+        "theorem": 18
       }
     },
     {
@@ -72289,6 +72302,204 @@
         "integer_greedy_first_wrap_reduction"
       ],
       "docstring": "Under the already-landed middle-branch separation, the two quarter-band clauses are not merely sufficient: they are exactly the assertion that the updated residual escapes the target strip."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderSkippedEndpointClassifier.lean:21:stemBitsFrom_eq_ofFn",
+      "name": "stemBitsFrom_eq_ofFn",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderSkippedEndpointClassifier.lean",
+      "line": 21,
+      "signature": "theorem stemBitsFrom_eq_ofFn {s d : ℕ} (P : Finset ℕ) (hds : d ≤ s) : stemBitsFrom s P d = List.ofFn (fun i : Fin (s - d) => decide (d + i ∈ P))",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderSkippedEndpointClassifier.lean:41:stemBits_eq_ofFn",
+      "name": "stemBits_eq_ofFn",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderSkippedEndpointClassifier.lean",
+      "line": 41,
+      "signature": "theorem stemBits_eq_ofFn {s : ℕ} (P : Finset ℕ) (hs : 2 ≤ s) : stemBits s P = List.ofFn (fun i : Fin (s - 2) => decide ((i : ℕ) + 2 ∈ P))",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderSkippedEndpointClassifier.lean:49:halfActualSeamWord",
+      "name": "halfActualSeamWord",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderSkippedEndpointClassifier.lean",
+      "line": 49,
+      "signature": "def halfActualSeamWord (s : ℕ) : SeamRowWord s",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The actual Boolean row word supplied by the rational greedy prefix."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderSkippedEndpointClassifier.lean:52:halfActualSeamWord_toList",
+      "name": "halfActualSeamWord_toList",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderSkippedEndpointClassifier.lean",
+      "line": 52,
+      "signature": "@[simp] theorem halfActualSeamWord_toList (s : ℕ) (hs : 2 ≤ s) : (halfActualSeamWord s).toList = stemBits s (halfGreedyPrefixSupport (s - 1))",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderSkippedEndpointClassifier.lean:59:mem_halfGreedyPrefixSupport_succ_iff_of_lt",
+      "name": "mem_halfGreedyPrefixSupport_succ_iff_of_lt",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderSkippedEndpointClassifier.lean",
+      "line": 59,
+      "signature": "theorem mem_halfGreedyPrefixSupport_succ_iff_of_lt {s d : ℕ} (hd : 0 < d) (hds : d < s) : d ∈ halfGreedyPrefixSupport s ↔ d ∈ halfGreedyPrefixSupport (s - 1)",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderSkippedEndpointClassifier.lean:66:self_mem_halfGreedyPrefixSupport_iff_take",
+      "name": "self_mem_halfGreedyPrefixSupport_iff_take",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderSkippedEndpointClassifier.lean",
+      "line": 66,
+      "signature": "theorem self_mem_halfGreedyPrefixSupport_iff_take (s : ℕ) (hs : 1 ≤ s) : s ∈ halfGreedyPrefixSupport s ↔ mersenneWeight s ≤ greedyMersenneRemainder (1 / 2 : ℝ) (s - 1)",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderSkippedEndpointClassifier.lean:79:halfActualSeamWord_succ",
+      "name": "halfActualSeamWord_succ",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderSkippedEndpointClassifier.lean",
+      "line": 79,
+      "signature": "theorem halfActualSeamWord_succ (s : ℕ) (hs : 3 ≤ s) : halfActualSeamWord (s + 1) = (halfActualSeamWord s).extend (decide (mersenneWeight s ≤ greedyMersenneRemainder (1 / 2 : ℝ) (s - 1)))",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The actual word evolves by appending precisely the real greedy decision at the terminal coordinate."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderSkippedEndpointClassifier.lean:102:seamPerturbedFamily_oldSum_halfActualSeamWord",
+      "name": "seamPerturbedFamily_oldSum_halfActualSeamWord",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderSkippedEndpointClassifier.lean",
+      "line": 102,
+      "signature": "theorem seamPerturbedFamily_oldSum_halfActualSeamWord (s : ℕ) (hs : 3 ≤ s) : (seamPerturbedFamily s hs).oldSum (halfActualSeamWord s) = stemTruncatedSum s (halfGreedyPrefixSupport (s - 1))",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The actual word evolves by appending precisely the real greedy decision at the terminal coordinate. -/ theorem halfActualSeamWord_succ (s : ℕ) (hs : 3 ≤ s) : halfActualSeamWord (s + 1) = (halfActualSeamWord s).extend (decide (mersenneWeight s ≤ greedyMersenneRemainder (1 / 2 : ℝ) (s - 1))) := by funext i by_cases hi : (i : ℕ) < s - 2 · have hdpos : 0 < (i : ℕ) + 2 := by omega have hdlt : (i : ℕ) + 2 < s := by omega have hmem := mem_halfGreedyPrefixSupport_succ_iff_of_lt hdpos hdlt simp only [halfActualSeamWord, SeamRowWord.extend, dif_pos hi] rw [show s + 1 - 1 = s by omega] exact Bool.decide_congr hmem · have hilast : (i : ℕ) = s - 2 := by omega have hself := self_mem_halfGreedyPrefixSupport_iff_take s (by omega) have hindex : (i : ℕ) + 2 = s := by omega simp only [halfActualSeamWord, SeamRowWord.extend, dif_neg hi] rw [hindex, show s + 1 - 1 = s by omega] exact Bool.decide_congr hself /-! ## Full-shell margin in actual-word coordinates"
+    },
+    {
+      "id": "Erdos249257/HalfCylinderSkippedEndpointClassifier.lean:110:greedyHalfFrozenMargin_fullShell_eq_actualOldSum_sub_target",
+      "name": "greedyHalfFrozenMargin_fullShell_eq_actualOldSum_sub_target",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderSkippedEndpointClassifier.lean",
+      "line": 110,
+      "signature": "theorem greedyHalfFrozenMargin_fullShell_eq_actualOldSum_sub_target (s : ℕ) (hs : 3 ≤ s) : greedyHalfFrozenMargin (s - 1) s = ((seamPerturbedFamily s hs).oldSum (halfActualSeamWord s) : ℤ) - (seamSubsetTarget s : ℤ)",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderSkippedEndpointClassifier.lean:120:greedyHalfFrozenMargin_fullShell_lt_gap",
+      "name": "greedyHalfFrozenMargin_fullShell_lt_gap",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderSkippedEndpointClassifier.lean",
+      "line": 120,
+      "signature": "theorem greedyHalfFrozenMargin_fullShell_lt_gap (s : ℕ) (hs : 1 ≤ s) : greedyHalfFrozenMargin (s - 1) s < ((2 ^ (s + 1) : ℕ) : ℤ)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The full-shell margin is always below one adjacent-word separation gap."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderSkippedEndpointClassifier.lean:150:halfActualSeamWord_eq_greedy_of_margin_eq_zero",
+      "name": "halfActualSeamWord_eq_greedy_of_margin_eq_zero",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderSkippedEndpointClassifier.lean",
+      "line": 150,
+      "signature": "theorem halfActualSeamWord_eq_greedy_of_margin_eq_zero (s : ℕ) (hs : 5 ≤ s) (hzero : greedyHalfFrozenMargin (s - 1) s = 0) : halfActualSeamWord s = seamGreedyWord s ∧ seamIntegerGreedyRemainder s = 0",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The full-shell margin is always below one adjacent-word separation gap. -/ theorem greedyHalfFrozenMargin_fullShell_lt_gap (s : ℕ) (hs : 1 ≤ s) : greedyHalfFrozenMargin (s - 1) s < ((2 ^ (s + 1) : ℕ) : ℤ) := by let r : ℝ := greedyMersenneRemainder (1 / 2 : ℝ) (s - 1) let T : ℝ := binaryCoeffTail (supportCoeff (↑(halfGreedyPrefixSupport (s - 1)) : Set ℕ)) (2 * s) have hid := greedyHalfFrozenMargin_fullShell_cast_eq_slack_sub_tail (s - 1) have hid' : (greedyHalfFrozenMargin (s - 1) s : ℝ) = (2 : ℝ) ^ s * (1 - (2 : ℝ) ^ s * r) - T := by simpa [r, T, Nat.sub_add_cancel hs, two_mul] using hid have hr : 0 ≤ r := by exact greedyMersenneRemainder_nonneg (by norm_num) (s - 1) have hT : 0 ≤ T := binaryCoeffTail_nonneg _ _ have hle : (greedyHalfFrozenMargin (s - 1) s : ℝ) ≤ (2 : ℝ) ^ s := by rw [hid'] have hsquareRem : 0 ≤ ((2 : ℝ) ^ s) ^ 2 * r := mul_nonneg (sq_nonneg _) hr nlinarith have hlt : (2 : ℝ) ^ s < (2 : ℝ) ^ (s + 1) := by rw [pow_succ] nlinarith [show 0 < (2 : ℝ) ^ s by positivity] hav"
+    },
+    {
+      "id": "Erdos249257/HalfCylinderSkippedEndpointClassifier.lean:184:halfActualSeamWord_eq_above_of_margin_pos",
+      "name": "halfActualSeamWord_eq_above_of_margin_pos",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderSkippedEndpointClassifier.lean",
+      "line": 184,
+      "signature": "theorem halfActualSeamWord_eq_above_of_margin_pos (s : ℕ) (hs : 5 ≤ s) (hpos : 0 < greedyHalfFrozenMargin (s - 1) s) : halfActualSeamWord s = seamAboveWord s hs ∧ greedyHalfFrozenMargin (s - 1) s = ((seamAdjacentCut s hs).overshoot : ℤ)",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderSkippedEndpointClassifier.lean:246:halfGreedy_skipped_endpoint_trichotomy",
+      "name": "halfGreedy_skipped_endpoint_trichotomy",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderSkippedEndpointClassifier.lean",
+      "line": 246,
+      "signature": "theorem halfGreedy_skipped_endpoint_trichotomy (s : ℕ) (hs : 5 ≤ s) (hskip : ¬ mersenneWeight s ≤ greedyMersenneRemainder (1 / 2 : ℝ) (s - 1)) : (greedyHalfFrozenMargin (s - 1) s < 0 ∧ halfActualSeamWord s = seamGreedyWord s ∧ 1 ≤ seamIntegerGreedyRemainder s ∧ greedyHalfFrozenMargin (s - 1) s = -(seamIntegerGreedyRemainder s : ℤ)) ∨ (greedyHalfFrozenMargin (s - 1) s = 0 ∧ halfActualSeamWord s = seamGreedyWord s ∧ seamIntegerGreedyRemainder s = 0) ∨ (0 < greedyHalfFrozenMargin (s - 1) s ∧ halfActualSeamWord s = seamAboveWord s hs ∧",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A skipped endpoint has exactly three signed cells. The zero seam hit is an allowed cell; only the negative-below cell remains to be excluded."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderSkippedEndpointClassifier.lean:289:seamGreedyWord_succ_eq_upperBranch",
+      "name": "seamGreedyWord_succ_eq_upperBranch",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderSkippedEndpointClassifier.lean",
+      "line": 289,
+      "signature": "theorem seamGreedyWord_succ_eq_upperBranch (s : ℕ) (hs : 5 ≤ s) (hcarry : (seamAdjacentCut s hs).successorCarries) : seamGreedyWord (s + 1) = (seamAdjacentCut s hs).above.extend false",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderSkippedEndpointClassifier.lean:306:seamGreedyWord_succ_eq_middleBranch",
+      "name": "seamGreedyWord_succ_eq_middleBranch",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderSkippedEndpointClassifier.lean",
+      "line": 306,
+      "signature": "theorem seamGreedyWord_succ_eq_middleBranch (s : ℕ) (hs : 5 ≤ s) (hcarry : ¬ (seamAdjacentCut s hs).successorCarries) (hmiddle : 4 * (seamAdjacentCut s hs).remainder + (seamPerturbedFamily s (by omega)).gap - (seamAdjacentCut s hs).belowPulse < (seamAdjacentCut s hs).terminalWeight) : seamGreedyWord (s + 1) = (seamAdjacentCut s hs).below.extend false",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderSkippedEndpointClassifier.lean:338:seamGreedyWord_succ_eq_rightBranch",
+      "name": "seamGreedyWord_succ_eq_rightBranch",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderSkippedEndpointClassifier.lean",
+      "line": 338,
+      "signature": "theorem seamGreedyWord_succ_eq_rightBranch (s : ℕ) (hs : 5 ≤ s) (hcarry : ¬ (seamAdjacentCut s hs).successorCarries) (hright : (seamAdjacentCut s hs).terminalWeight ≤ 4 * (seamAdjacentCut s hs).remainder + (seamPerturbedFamily s (by omega)).gap - (seamAdjacentCut s hs).belowPulse) : seamGreedyWord (s + 1) = (seamAdjacentCut s hs).below.extend true",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderSkippedEndpointClassifier.lean:368:alignedSkip_next_alignment_iff_middle",
+      "name": "alignedSkip_next_alignment_iff_middle",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderSkippedEndpointClassifier.lean",
+      "line": 368,
+      "signature": "theorem alignedSkip_next_alignment_iff_middle (s : ℕ) (hs : 5 ≤ s) (hskip : ¬ mersenneWeight s ≤ greedyMersenneRemainder (1 / 2 : ℝ) (s - 1)) (halign : halfActualSeamWord s = seamGreedyWord s) : halfActualSeamWord (s + 1) = seamGreedyWord (s + 1) ↔ ¬ (seamAdjacentCut s hs).successorCarries ∧ 4 * (seamAdjacentCut s hs).remainder + (seamPerturbedFamily s (by omega)).gap - (seamAdjacentCut s hs).belowPulse < (seamAdjacentCut s hs).terminalWeight",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "An aligned skip remains aligned at the next row exactly in the middle seam branch."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderSkippedEndpointClassifier.lean:422:alignedSkip_nextMargin_eq_neg_middleQuantity",
+      "name": "alignedSkip_nextMargin_eq_neg_middleQuantity",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderSkippedEndpointClassifier.lean",
+      "line": 422,
+      "signature": "theorem alignedSkip_nextMargin_eq_neg_middleQuantity (s : ℕ) (hs : 5 ≤ s) (hskip : ¬ mersenneWeight s ≤ greedyMersenneRemainder (1 / 2 : ℝ) (s - 1)) (halign : halfActualSeamWord s = seamGreedyWord s) : greedyHalfFrozenMargin s (s + 1) = -((4 * (seamAdjacentCut s hs).remainder + (seamPerturbedFamily s (by omega)).gap - (seamAdjacentCut s hs).belowPulse : ℕ) : ℤ)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The next signed full-shell margin of any aligned skip is the negative middle-branch quantity, independently of which seam branch the greedy word chooses."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderSkippedEndpointClassifier.lean:472:alignedSkip_nextMargin_neg",
+      "name": "alignedSkip_nextMargin_neg",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderSkippedEndpointClassifier.lean",
+      "line": 472,
+      "signature": "theorem alignedSkip_nextMargin_neg (s : ℕ) (hs : 5 ≤ s) (hskip : ¬ mersenneWeight s ≤ greedyMersenneRemainder (1 / 2 : ℝ) (s - 1)) (halign : halfActualSeamWord s = seamGreedyWord s) : greedyHalfFrozenMargin s (s + 1) < 0",
+      "generated_certificate": false,
+      "claim_ids": []
     },
     {
       "id": "Erdos249257/HalfTrappingReturnCarry.lean:42:relationInvariantLinearChannels_det_eq_zero",
