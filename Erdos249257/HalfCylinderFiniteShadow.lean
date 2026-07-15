@@ -1,5 +1,6 @@
 import Erdos249257.HalfCarryReachability
 import Erdos249257.PrimitiveSupportBridge
+import Erdos249257.DyadicPrefixCompression
 
 /-!
 # Finite shadows of the half-carry strip

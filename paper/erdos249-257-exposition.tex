@@ -636,15 +636,15 @@ conditional reduction, not an unconditional membership theorem.
 For an admissible finite word, the residual from $1/2$ is given exactly by its
 terminal half carry minus the future coefficient tail, scaled by a power of
 two; see
-\lref{HalfCylinderFiniteShadow.lean}{54}{halfStripAdmissible_residual_eq}.
+\lref{HalfCylinderFiniteShadow.lean}{55}{halfStripAdmissible_residual_eq}.
 At a first seam, avoiding the integer strip is equivalent to full scalar
 reachability of that strip:
-\lrefx{HalfCylinderFiniteShadow.lean}{806}{evenSeam_fullIntegerStrip_iff_escape}.
+\lrefx{HalfCylinderFiniteShadow.lean}{807}{evenSeam_fullIntegerStrip_iff_escape}.
 The rank-three greedy fixture is raw dyadically safe while its seam has an
 in-strip hole, so raw safety alone does not imply this escape.  Finally, an
 explicit frozen-margin producer implies $1/2$ belongs to the Mersenne
 achievement set, by
-\lrefx{HalfCylinderFiniteShadow.lean}{1238}{half_mem_mersenneAchievementSet_of_governedFrozenMarginProducer}.
+\lrefx{HalfCylinderFiniteShadow.lean}{1239}{half_mem_mersenneAchievementSet_of_governedFrozenMarginProducer}.
 That producer is an unproved hypothesis; this is a conditional reduction, not
 a proof of Erd\H{o}s~\#257.
 
@@ -913,6 +913,28 @@ The same holds for any explicitly identified adjacent boundary pair,
 \lrefx{HalfDivisorUnitDrop.lean}{35}{supportCoeff_boundaryPair_unitDrop_at_double}.
 This is the local coefficient input for the rewind-seam profile, not a global
 construction of such boundary pairs.
+
+\subsection{Concrete producer-carry coordinates}\label{res:producercarrycoordinates}
+
+For every adjacent cut at rank $s\ge5$, Lean identifies the producer carry of
+the terminal-augmented below support with the concrete middle coordinate:
+\[
+  4\,\mathrm{remainder}-\mathrm{belowPulse}-4,
+\]
+and identifies the terminal-augmented above support with the negative upper
+coordinate
+\[
+  -\bigl(4\,\mathrm{overshoot}+\mathrm{abovePulse}+4\bigr).
+\]
+The generic row-word identity is
+\lref{HalfCylinderProducerLowerBound.lean}{105}{producerCarry_insert_seamWordSupport_eq},
+with the below and above specializations at
+\lrefx{HalfCylinderProducerLowerBound.lean}{150}{producerCarry_insert_seamBelowSupport_eq_middleCoordinate}
+and
+\lrefx{HalfCylinderProducerLowerBound.lean}{183}{producerCarry_insert_seamAboveSupport_eq_neg_upperCoordinate}.
+These identities make the remaining quantitative task exact: they do not
+prove exponential lower bounds, sign persistence, or a universal escape
+mechanism.
 
 \subsection{What stays open}
 

@@ -4800,6 +4800,7 @@
           "role": "Dyadic prefix compression identities",
           "imports": [
             "Erdos249257.GreedyAchievementSet",
+            "Erdos249257.HalfCutLocator",
             "Erdos249257.RationalSupportCarrySkeleton"
           ]
         },
@@ -5024,7 +5025,8 @@
           "role": "Finite shadows of the half cylinder",
           "imports": [
             "Erdos249257.HalfCarryReachability",
-            "Erdos249257.PrimitiveSupportBridge"
+            "Erdos249257.PrimitiveSupportBridge",
+            "Erdos249257.DyadicPrefixCompression"
           ]
         },
         {
@@ -5091,6 +5093,15 @@
           "imports": [
             "Erdos249257.BooleanMobiusCarry",
             "Erdos249257.GreedyAchievementSet"
+          ]
+        },
+        {
+          "id": "Erdos249257.HalfCylinderProducerLowerBound",
+          "path": "Erdos249257/HalfCylinderProducerLowerBound.lean",
+          "role": "Lean proof module",
+          "imports": [
+            "Erdos249257.HalfCylinderBoundaryPulse",
+            "Erdos249257.HalfCylinderSeamProducerAlignment"
           ]
         },
         {
@@ -5699,6 +5710,11 @@
           "to": "selected_suffix_cylinder_propagation"
         },
         {
+          "from": "concrete_producer_carry_coordinates",
+          "relation": "builds_on",
+          "to": "seam_producer_carry_alignment"
+        },
+        {
           "from": "denominator_exclusion",
           "relation": "advances_open_target",
           "to": "erdos_249",
@@ -6007,7 +6023,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 1640
+        "line": 1662
       }
     },
     {
@@ -6018,7 +6034,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 1649
+        "line": 1671
       }
     },
     {
@@ -6029,7 +6045,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 1656
+        "line": 1678
       }
     }
   ],
@@ -6324,17 +6340,17 @@
         {
           "name": "halfStripAdmissible_residual_eq",
           "module": "Erdos249257/HalfCylinderFiniteShadow.lean",
-          "line": 54
+          "line": 55
         },
         {
           "name": "evenSeam_fullIntegerStrip_iff_escape",
           "module": "Erdos249257/HalfCylinderFiniteShadow.lean",
-          "line": 806
+          "line": 807
         },
         {
           "name": "half_mem_mersenneAchievementSet_of_governedFrozenMarginProducer",
           "module": "Erdos249257/HalfCylinderFiniteShadow.lean",
-          "line": 1238
+          "line": 1239
         }
       ]
     },
@@ -6901,6 +6917,31 @@
           "name": "supportCoeff_boundaryPair_unitDrop_at_double",
           "module": "Erdos249257/HalfDivisorUnitDrop.lean",
           "line": 35
+        }
+      ]
+    },
+    {
+      "id": "concrete_producer_carry_coordinates",
+      "label": "Concrete adjacent-cut producer-carry coordinates",
+      "status": "proved here",
+      "statement": "For every adjacent cut at rank s ≥ 5, the producer carry of the terminal-augmented below support is 4 times the middle remainder minus the below pulse minus 4, while that of the terminal-augmented above support is the negative of 4 times the overshoot plus the above pulse plus 4. These are exact coordinate identities; they supply neither the needed exponential lower bounds nor a universal escape argument.",
+      "paper_label": "res:producercarrycoordinates",
+      "readme_headline": false,
+      "declarations": [
+        {
+          "name": "producerCarry_insert_seamWordSupport_eq",
+          "module": "Erdos249257/HalfCylinderProducerLowerBound.lean",
+          "line": 105
+        },
+        {
+          "name": "producerCarry_insert_seamBelowSupport_eq_middleCoordinate",
+          "module": "Erdos249257/HalfCylinderProducerLowerBound.lean",
+          "line": 150
+        },
+        {
+          "name": "producerCarry_insert_seamAboveSupport_eq_neg_upperCoordinate",
+          "module": "Erdos249257/HalfCylinderProducerLowerBound.lean",
+          "line": 183
         }
       ]
     },
