@@ -5127,6 +5127,14 @@
           ]
         },
         {
+          "id": "Erdos249257.HalfDivisorUnitDrop",
+          "path": "Erdos249257/HalfDivisorUnitDrop.lean",
+          "role": "Half-divisor unit coefficient drop at the feedback row",
+          "imports": [
+            "Erdos249257.HalfCarrySelectedWindow"
+          ]
+        },
+        {
           "id": "Erdos249257.HalfTrappingReturnCarry",
           "path": "Erdos249257/HalfTrappingReturnCarry.lean",
           "role": "Half-trapping reverse-carry interface",
@@ -5901,7 +5909,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 1473
+        "line": 1483
       }
     },
     {
@@ -5912,7 +5920,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 1482
+        "line": 1492
       }
     },
     {
@@ -5923,7 +5931,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 1489
+        "line": 1499
       }
     }
   ],
@@ -6692,6 +6700,25 @@
           "name": "depth27SelectedHalfWindow_endpoint_covers_strip",
           "module": "Erdos249257/SelectedSuffixCylinderPreFeedback.lean",
           "line": 147
+        }
+      ]
+    },
+    {
+      "id": "half_divisor_unit_drop",
+      "label": "Half-divisor unit coefficient drop at the feedback row",
+      "status": "proved here",
+      "statement": "At the doubled feedback row, switching only the terminal half-divisor bit from false to true increases the support coefficient by exactly one. The same identity holds for any explicitly identified adjacent boundary pair. This does not construct such pairs globally.",
+      "readme_headline": false,
+      "declarations": [
+        {
+          "name": "supportCoeff_extend_true_eq_false_add_one_at_double",
+          "module": "Erdos249257/HalfDivisorUnitDrop.lean",
+          "line": 20
+        },
+        {
+          "name": "supportCoeff_boundaryPair_unitDrop_at_double",
+          "module": "Erdos249257/HalfDivisorUnitDrop.lean",
+          "line": 35
         }
       ]
     },

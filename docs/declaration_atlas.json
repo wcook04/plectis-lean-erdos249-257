@@ -4,13 +4,13 @@
   "projection_not_authority": true,
   "proof_authority": "Lean source checked by the pinned Lean kernel",
   "argument_authority": "docs/claims.json::machine_readable_paper.argument_graph",
-  "source_fingerprint": "sha256:8a9d793d74ef894c60ec716dcca71ca68c11a65a23eb25cba7296e51170ba4b4",
+  "source_fingerprint": "sha256:293bb414059dfa9e6eb33ace8b42d953d7a1030bff7c108794c75e0bfc8c574c",
   "summary": {
-    "module_count": 590,
-    "declaration_count": 7622,
-    "theorem_like_count": 6797,
+    "module_count": 591,
+    "declaration_count": 7624,
+    "theorem_like_count": 6799,
     "generated_certificate_declaration_count": 1681,
-    "principal_claim_link_count": 170,
+    "principal_claim_link_count": 172,
     "kind_counts": {
       "abbrev": 6,
       "def": 793,
@@ -18,7 +18,7 @@
       "instance": 5,
       "lemma": 354,
       "structure": 18,
-      "theorem": 6443
+      "theorem": 6445
     }
   },
   "modules": [
@@ -118,7 +118,8 @@
         "Erdos249257.HalfCarrySelectedWindowBase",
         "Erdos249257.RewindSeamOperationalBridge",
         "Erdos249257.SelectedSuffixCylinder",
-        "Erdos249257.SelectedSuffixCylinderPreFeedback"
+        "Erdos249257.SelectedSuffixCylinderPreFeedback",
+        "Erdos249257.HalfDivisorUnitDrop"
       ],
       "declaration_count": 0,
       "kind_counts": {}
@@ -6738,6 +6739,17 @@
       "kind_counts": {
         "def": 1,
         "theorem": 6
+      }
+    },
+    {
+      "id": "Erdos249257.HalfDivisorUnitDrop",
+      "path": "Erdos249257/HalfDivisorUnitDrop.lean",
+      "imports": [
+        "Erdos249257.HalfCarrySelectedWindow"
+      ],
+      "declaration_count": 2,
+      "kind_counts": {
+        "theorem": 2
       }
     },
     {
@@ -75269,6 +75281,32 @@
       "generated_certificate": false,
       "claim_ids": [],
       "docstring": "Cofinal unbounded skipped seam ranks therefore give an exact representation of `1/2` in the Mersenne achievement set."
+    },
+    {
+      "id": "Erdos249257/HalfDivisorUnitDrop.lean:20:supportCoeff_extend_true_eq_false_add_one_at_double",
+      "name": "supportCoeff_extend_true_eq_false_add_one_at_double",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfDivisorUnitDrop.lean",
+      "line": 20,
+      "signature": "theorem supportCoeff_extend_true_eq_false_add_one_at_double {N : ℕ} (a : HalfWord N) : supportCoeff (wordSupport (extendHalfWord a true)) (2 * (N + 1)) = supportCoeff (wordSupport (extendHalfWord a false)) (2 * (N + 1)) + 1",
+      "generated_certificate": false,
+      "claim_ids": [
+        "half_divisor_unit_drop"
+      ],
+      "docstring": "At row `2(N+1)`, changing only exponent `N+1` from false to true adds exactly the half-divisor incidence."
+    },
+    {
+      "id": "Erdos249257/HalfDivisorUnitDrop.lean:35:supportCoeff_boundaryPair_unitDrop_at_double",
+      "name": "supportCoeff_boundaryPair_unitDrop_at_double",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfDivisorUnitDrop.lean",
+      "line": 35,
+      "signature": "theorem supportCoeff_boundaryPair_unitDrop_at_double {N : ℕ} (a : HalfWord N) (left right : HalfWord (N + 1)) (hleft : left = extendHalfWord a true) (hright : right = extendHalfWord a false) : supportCoeff (wordSupport left) (2 * (N + 1)) = supportCoeff (wordSupport right) (2 * (N + 1)) + 1",
+      "generated_certificate": false,
+      "claim_ids": [
+        "half_divisor_unit_drop"
+      ],
+      "docstring": "Proof-irrelevant word equalities may be supplied by any concrete adjacent-boundary construction."
     },
     {
       "id": "Erdos249257/HalfTrappingReturnCarry.lean:42:relationInvariantLinearChannels_det_eq_zero",

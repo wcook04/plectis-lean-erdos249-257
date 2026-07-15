@@ -837,6 +837,16 @@ and
 \lrefx{SelectedSuffixCylinderPreFeedback.lean}{147}{depth27SelectedHalfWindow_endpoint_covers_strip}.
 This is a finite run, not an unbounded induction.
 
+\subsection{Half-divisor unit drop}\label{res:halfdivisordrop}
+
+At the doubled feedback row, changing only the terminal half-divisor bit from
+false to true increases the support coefficient by exactly one:
+\lref{HalfDivisorUnitDrop.lean}{20}{supportCoeff_extend_true_eq_false_add_one_at_double}.
+The same holds for any explicitly identified adjacent boundary pair,
+\lrefx{HalfDivisorUnitDrop.lean}{35}{supportCoeff_boundaryPair_unitDrop_at_double}.
+This is the local coefficient input for the rewind-seam profile, not a global
+construction of such boundary pairs.
+
 \subsection{What stays open}
 
 The universal Erd\H{o}s \#257 statement, irrationality of $\sum_{n\in A}1/(2^n-1)$
