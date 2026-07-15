@@ -4,21 +4,21 @@
   "projection_not_authority": true,
   "proof_authority": "Lean source checked by the pinned Lean kernel",
   "argument_authority": "docs/claims.json::machine_readable_paper.argument_graph",
-  "source_fingerprint": "sha256:8acb52de5956f8b38cd1ffa04046cec8bdf7f1634798b35d7a8e0cba32b408aa",
+  "source_fingerprint": "sha256:cd2eacf685da075bccb6fe180af05985f5b18aba25ee4fcdd81814e5328cd3db",
   "summary": {
-    "module_count": 582,
-    "declaration_count": 7532,
-    "theorem_like_count": 6733,
+    "module_count": 583,
+    "declaration_count": 7542,
+    "theorem_like_count": 6742,
     "generated_certificate_declaration_count": 1681,
-    "principal_claim_link_count": 151,
+    "principal_claim_link_count": 154,
     "kind_counts": {
       "abbrev": 6,
-      "def": 769,
+      "def": 770,
       "inductive": 3,
       "instance": 4,
       "lemma": 354,
       "structure": 17,
-      "theorem": 6379
+      "theorem": 6388
     }
   },
   "modules": [
@@ -110,7 +110,8 @@
         "Erdos249257.HalfCylinderLargestSkipGap",
         "Erdos249257.HalfCylinderBoundaryPulse",
         "Erdos249257.HalfCylinderLargestSkipInduction",
-        "Erdos249257.HalfCylinderFixedTailSocket"
+        "Erdos249257.HalfCylinderFixedTailSocket",
+        "Erdos249257.HalfCylinderProducerCarrySocket"
       ],
       "declaration_count": 0,
       "kind_counts": {}
@@ -6634,6 +6635,19 @@
       "kind_counts": {
         "def": 2,
         "theorem": 8
+      }
+    },
+    {
+      "id": "Erdos249257.HalfCylinderProducerCarrySocket",
+      "path": "Erdos249257/HalfCylinderProducerCarrySocket.lean",
+      "imports": [
+        "Erdos249257.BooleanMobiusCarry",
+        "Erdos249257.GreedyAchievementSet"
+      ],
+      "declaration_count": 10,
+      "kind_counts": {
+        "def": 1,
+        "theorem": 9
       }
     },
     {
@@ -74175,6 +74189,122 @@
         "largest_skip_induction_reduction"
       ],
       "docstring": "The first-crossing socket is sufficient for the desired #257 half-membership endpoint."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderProducerCarrySocket.lean:20:producerCarry",
+      "name": "producerCarry",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderProducerCarrySocket.lean",
+      "line": 20,
+      "signature": "noncomputable def producerCarry (A : Set ℕ) (d : ℕ) : ℤ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The producer-aligned affine integer carry."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderProducerCarrySocket.lean:27:producerCarry_residual_identity",
+      "name": "producerCarry_residual_identity",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderProducerCarrySocket.lean",
+      "line": 27,
+      "signature": "theorem producerCarry_residual_identity (A : Set ℕ) (d : ℕ) (hone : 1 ∉ A) (hA : A ⊆ Set.Iic d) : (1 : ℝ) / 2 - erdosSupportSeries 2 A = ((producerCarry A d : ℝ) - binaryCoeffTail (supportCoeff A) (2 * d + 2)) / (2 : ℝ) ^ (2 * d + 2)",
+      "generated_certificate": false,
+      "claim_ids": [
+        "producer_carry_future_tail_socket"
+      ],
+      "docstring": "The finite-prefix carry identity at the producer-aligned depth `2d+1`. The support hypothesis matches an adjacent-above producer prefix, whose ranks are all at most `d`."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderProducerCarrySocket.lean:48:producerCarry_gt_tail_iff_supportSeries_lt_half",
+      "name": "producerCarry_gt_tail_iff_supportSeries_lt_half",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderProducerCarrySocket.lean",
+      "line": 48,
+      "signature": "theorem producerCarry_gt_tail_iff_supportSeries_lt_half (A : Set ℕ) (d : ℕ) (hone : 1 ∉ A) (hA : A ⊆ Set.Iic d) : binaryCoeffTail (supportCoeff A) (2 * d + 2) < (producerCarry A d : ℝ) ↔ erdosSupportSeries 2 A < (1 : ℝ) / 2",
+      "generated_certificate": false,
+      "claim_ids": [
+        "producer_carry_future_tail_socket"
+      ],
+      "docstring": "Exact middle-producer safety criterion: the adjacent-above prefix is below `1/2` iff its positive integer landing carry beats the complete future divisor-incidence tail."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderProducerCarrySocket.lean:78:producerCarry_lt_tail_iff_half_lt_supportSeries",
+      "name": "producerCarry_lt_tail_iff_half_lt_supportSeries",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderProducerCarrySocket.lean",
+      "line": 78,
+      "signature": "theorem producerCarry_lt_tail_iff_half_lt_supportSeries (A : Set ℕ) (d : ℕ) (hone : 1 ∉ A) (hA : A ⊆ Set.Iic d) : (producerCarry A d : ℝ) < binaryCoeffTail (supportCoeff A) (2 * d + 2) ↔ (1 : ℝ) / 2 < erdosSupportSeries 2 A",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The complementary exact upper-producer criterion."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderProducerCarrySocket.lean:109:producerCarry_sqrt_sufficient",
+      "name": "producerCarry_sqrt_sufficient",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderProducerCarrySocket.lean",
+      "line": 109,
+      "signature": "theorem producerCarry_sqrt_sufficient (A : Set ℕ) (d : ℕ) (hone : 1 ∉ A) (hA : A ⊆ Set.Iic d) (hcarry : 2 * Real.sqrt ((2 * d + 2 : ℕ) : ℝ) + 4 < (producerCarry A d : ℝ)) : erdosSupportSeries 2 A < (1 : ℝ) / 2",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The support-coefficient strip gives a theorem-ready square-root sufficient condition for middle-producer safety."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderProducerCarrySocket.lean:124:producerCarry_linear_sufficient",
+      "name": "producerCarry_linear_sufficient",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderProducerCarrySocket.lean",
+      "line": 124,
+      "signature": "theorem producerCarry_linear_sufficient (A : Set ℕ) (d : ℕ) (hone : 1 ∉ A) (hA : A ⊆ Set.Iic d) (hd : 1 ≤ d) (hcarry : 2 * (d : ℝ) + 6 < (producerCarry A d : ℝ)) : erdosSupportSeries 2 A < (1 : ℝ) / 2",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Elementary fallback: for `d ≥ 1`, the affine bound `2d+6` dominates the square-root tail strip."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderProducerCarrySocket.lean:145:producerCarry_neg_forces_half_lt_supportSeries",
+      "name": "producerCarry_neg_forces_half_lt_supportSeries",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderProducerCarrySocket.lean",
+      "line": 145,
+      "signature": "theorem producerCarry_neg_forces_half_lt_supportSeries (A : Set ℕ) (d : ℕ) (hone : 1 ∉ A) (hA : A ⊆ Set.Iic d) (hcarry : producerCarry A d < 0) : (1 : ℝ) / 2 < erdosSupportSeries 2 A",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A negative upper-producer integer carry is automatically strictly below the nonnegative incidence tail."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderProducerCarrySocket.lean:160:mersenneGap_lt_eight_div_four_pow_succ",
+      "name": "mersenneGap_lt_eight_div_four_pow_succ",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderProducerCarrySocket.lean",
+      "line": 160,
+      "signature": "theorem mersenneGap_lt_eight_div_four_pow_succ (d : ℕ) (hd : 2 ≤ d) : mersenneGap d < (8 : ℝ) / (4 : ℝ) ^ (d + 1)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Eight units at depth `2d+1` dominate the entire rank-`d` superincreasing gap."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderProducerCarrySocket.lean:190:producerCarry_le_neg_eight_forces_gap_margin",
+      "name": "producerCarry_le_neg_eight_forces_gap_margin",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderProducerCarrySocket.lean",
+      "line": 190,
+      "signature": "theorem producerCarry_le_neg_eight_forces_gap_margin (A : Set ℕ) (d : ℕ) (hone : 1 ∉ A) (hA : A ⊆ Set.Iic d) (hd : 2 ≤ d) (hcarry : producerCarry A d ≤ -8) : (1 : ℝ) / 2 + mersenneGap d < erdosSupportSeries 2 A",
+      "generated_certificate": false,
+      "claim_ids": [
+        "producer_carry_future_tail_socket"
+      ],
+      "docstring": "An upper-producer carry of at most `-8` puts the adjacent-above prefix more than one full Mersenne gap above `1/2`."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderProducerCarrySocket.lean:234:producerCarry_le_neg_eight_forces_belowTail_gt_half",
+      "name": "producerCarry_le_neg_eight_forces_belowTail_gt_half",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderProducerCarrySocket.lean",
+      "line": 234,
+      "signature": "theorem producerCarry_le_neg_eight_forces_belowTail_gt_half (A : Set ℕ) (d : ℕ) (base : ℝ) (hone : 1 ∉ A) (hA : A ⊆ Set.Iic d) (hd : 2 ≤ d) (hcarry : producerCarry A d ≤ -8) (hdecomp : erdosSupportSeries 2 A = base + mersenneWeight d) : (1 : ℝ) / 2 < base + mersenneTail d",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "If the adjacent-above prefix is `base + w_d`, the preceding margin says that replacing `w_d` by the entire later tail still remains above `1/2`. This is the analytic forced-return statement for the upper producer."
     },
     {
       "id": "Erdos249257/HalfCylinderSeamLimit.lean:25:seamGreedyFiniteValue",

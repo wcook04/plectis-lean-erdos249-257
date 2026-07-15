@@ -22,7 +22,7 @@
 % the repository verifies that it matches docs/claims.json and that every
 % \lref/\lrefx/\lloc target resolves to the named declaration at that line.
 % ---------------------------------------------------------------------------
-\newcommand{\commit}{38f3780e7523a8e093aeb89f636063049dd2b4ef}
+\newcommand{\commit}{519f9765502de4f066a92d0fdc92dbe3ae495ff0}
 \newcommand{\repobase}{https://github.com/wcook04/plectis-lean-erdos249-257/blob/\commit}
 \newcommand{\sourceurl}{https://github.com/wcook04/plectis-lean-erdos249-257/tree/\commit}
 \newcommand{\rootbase}{https://github.com/wcook04/plectis-lean-erdos249-257/blob/main}
@@ -741,6 +741,21 @@ every actual skipped rank has remainder at most its full future tail,
 \lrefx{HalfCylinderFixedTailSocket.lean}{73}{half_mem_iff_every_actual_skip_survives}.
 This is an exact local reformulation; the tail-survival inequality is not
 proved.
+
+\subsection{Producer-carry socket}\label{res:producercarry}
+
+For a producer-aligned finite support, the residual from $1/2$ is exactly the
+integer producer carry minus the complete future divisor-incidence tail,
+scaled by $2^{-(2d+2)}$:
+\lref{HalfCylinderProducerCarrySocket.lean}{27}{producerCarry_residual_identity}.
+Thus the carry exceeds that tail exactly when the support series lies below
+$1/2$, and a negative carry places it above $1/2$;
+\lrefx{HalfCylinderProducerCarrySocket.lean}{48}{producerCarry_gt_tail_iff_supportSeries_lt_half}
+and
+\lrefx{HalfCylinderProducerCarrySocket.lean}{145}{producerCarry_neg_forces_half_lt_supportSeries}.
+An upper carry at most $-8$ even gives a full Mersenne-gap margin,
+\lrefx{HalfCylinderProducerCarrySocket.lean}{190}{producerCarry_le_neg_eight_forces_gap_margin}.
+These are local criteria, not a proof that the required carries occur.
 
 \subsection{What stays open}
 

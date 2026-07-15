@@ -5061,6 +5061,15 @@
           ]
         },
         {
+          "id": "Erdos249257.HalfCylinderProducerCarrySocket",
+          "path": "Erdos249257/HalfCylinderProducerCarrySocket.lean",
+          "role": "Producer-carry and future-tail comparison socket",
+          "imports": [
+            "Erdos249257.BooleanMobiusCarry",
+            "Erdos249257.GreedyAchievementSet"
+          ]
+        },
+        {
           "id": "Erdos249257.HalfCylinderSeamLimit",
           "path": "Erdos249257/HalfCylinderSeamLimit.lean",
           "role": "Seam-limit reduction for the half target",
@@ -5520,6 +5529,11 @@
           "to": "half_membership_seam_classification"
         },
         {
+          "from": "producer_carry_future_tail_socket",
+          "relation": "builds_on",
+          "to": "fixed_tail_survival_socket"
+        },
+        {
           "from": "denominator_exclusion",
           "relation": "advances_open_target",
           "to": "erdos_249",
@@ -5769,7 +5783,7 @@
     "lean_toolchain": "leanprover/lean4:v4.29.1",
     "repository": "https://github.com/wcook04/plectis-lean-erdos249-257",
     "formal_source": {
-      "ref": "38f3780e7523a8e093aeb89f636063049dd2b4ef",
+      "ref": "519f9765502de4f066a92d0fdc92dbe3ae495ff0",
       "ref_kind": "commit",
       "publication_state": "committed_checkpoint_pending_remote_publication",
       "relationship_to_last_tag": "post_tag_checkpoint"
@@ -5793,7 +5807,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 1378
+        "line": 1393
       }
     },
     {
@@ -5804,7 +5818,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 1387
+        "line": 1402
       }
     },
     {
@@ -5815,7 +5829,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 1394
+        "line": 1409
       }
     }
   ],
@@ -6386,6 +6400,34 @@
           "name": "half_mem_iff_every_actual_skip_survives",
           "module": "Erdos249257/HalfCylinderFixedTailSocket.lean",
           "line": 73
+        }
+      ]
+    },
+    {
+      "id": "producer_carry_future_tail_socket",
+      "label": "Producer-carry and future-tail comparison socket",
+      "status": "conditional reduction",
+      "statement": "For a producer-aligned finite support, its residual from 1/2 is exactly the integer producer carry minus the complete future divisor-incidence tail, scaled by a power of two. A negative carry places the support above 1/2, and carry at most -8 gives a Mersenne-gap margin. No occurrence theorem for these carries is proved.",
+      "remaining_open_proposition_ids": [
+        "remaining_open.universal_257_all_infinite_supports"
+      ],
+      "paper_label": "res:producercarry",
+      "readme_headline": false,
+      "declarations": [
+        {
+          "name": "producerCarry_residual_identity",
+          "module": "Erdos249257/HalfCylinderProducerCarrySocket.lean",
+          "line": 27
+        },
+        {
+          "name": "producerCarry_gt_tail_iff_supportSeries_lt_half",
+          "module": "Erdos249257/HalfCylinderProducerCarrySocket.lean",
+          "line": 48
+        },
+        {
+          "name": "producerCarry_le_neg_eight_forces_gap_margin",
+          "module": "Erdos249257/HalfCylinderProducerCarrySocket.lean",
+          "line": 190
         }
       ]
     },

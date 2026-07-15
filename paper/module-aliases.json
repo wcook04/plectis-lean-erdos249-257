@@ -3,7 +3,7 @@
   "artifact_role": "paper_sigil_to_lean_module_navigation_crosswalk",
   "authority_posture": "generated_navigation_projection_not_proof_authority",
   "heuristic": "Each CamelCase component contributes at most its first three characters.",
-  "alias_count": 60,
+  "alias_count": 61,
   "aliases": [
     {
       "sigil": "AdeHeiObs",
@@ -164,6 +164,11 @@
       "sigil": "HalCylLarSkiInd",
       "module": "HalfCylinderLargestSkipInduction.lean",
       "path": "Erdos249257/HalfCylinderLargestSkipInduction.lean"
+    },
+    {
+      "sigil": "HalCylProCarSoc",
+      "module": "HalfCylinderProducerCarrySocket.lean",
+      "path": "Erdos249257/HalfCylinderProducerCarrySocket.lean"
     },
     {
       "sigil": "HalTraRetCar",
