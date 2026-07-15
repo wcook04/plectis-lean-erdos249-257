@@ -8,41 +8,59 @@ import Mathlib.Tactic.Ring
 import Mathlib.Tactic.Positivity
 
 /-!
-# The two-thirds band for singleton skips of a greedy Mersenne expansion
+# Bands for the last skip of a greedy Mersenne expansion
 
-Write a residual as `rem = 1/R`.  A skip at rank `k` of the greedy Mersenne
-expansion is *dyadically safe* when `rem ≤ 2^{-k}`, equivalently `R ≥ 2^k`.
-Across a run of consecutive skips `R` does not move, so only the last skip
-before a take can fail to be safe, and a take immediately followed by a take
-has no skip to check.  The remaining configuration is the *singleton*: a take
-at `b`, one skip at `b+1`, then a take at `b+2`.
+Write a residual as `rem = 1/R`.  Call a skip at rank `k` of the greedy
+Mersenne expansion *dyadically safe* when `rem ≤ 2^{-k}`, equivalently
+`R ≥ 2^k`.  Across a run of consecutive skips `R` does not move, so only the
+*last* skip before the next take can fail this test, and a take immediately
+followed by a take has no skip to check.
 
-This module gives that configuration an exact normal form.  Writing
-`q = 2^b - 1`, the singleton skip is unsafe precisely when the pre-take
-reciprocal `R` lies in the open interval
+Fix a take at `b`, put `q = 2^b - 1`, and let the next take be at rank `c`, so
+the intervening skips are `b+1, …, c-1`.  The last of them is checked against
+`m = 2^{c-1}`.  The main result `postTakeUnsafeAt_iff_band` is that this last
+skip is dyadically unsafe precisely when the *pre-take* reciprocal `R` lies in
+
+  `( q(m-1)/(q+m-1) , qm/(q+m) )`,
+
+an interval of width exactly `q²/((q+m)(q+m-1))`.  Specialising to `c = b+2`
+(a run of a single skip) gives `m = 2q+2` and the *two-thirds band*
 
   `( q(2q+1)/(3q+1) , 2q(q+1)/(3q+2) )`,
 
-whose width is exactly `q²/((3q+1)(3q+2))`, hence below `1/9`, and which is
-contained in `(2q/3, 2q/3 + 2/9)`.  The obstruction is therefore confined to a
-window of bounded width pinned at two thirds of the Mersenne modulus, and an
+of width `q²/((3q+1)(3q+2)) < 1/9`, contained in `(2q/3, 2q/3 + 2/9)`; there an
 unsafe skip forces `2q < 3R < 2q + 2/3`.
 
-Two unconditional consequences follow:
+Two unconditional consequences of that specialisation:
 
 * `not_twoThirdsBand_of_int` — an integral reciprocal is never unsafe, since
   the pinning leaves no room for an integer multiple of three.
 * `seven_le_of_intBand_odd` — for a residual `rem = p/(2D)` in lowest terms
-  with `p`, `D` and `q` odd, an unsafe singleton forces `p ≥ 7`.  The argument
-  is `2`-adic: oddness makes the band defect `Δ = 6D - 2pq` divisible by four,
-  and that congruence alone removes the classes `p ∈ {1, 3, 5}`.
+  with `p`, `D` and `q` odd, an unsafe single-skip run forces `p ≥ 7`.  The
+  argument is `2`-adic: oddness makes the band defect `Δ = 6D - 2pq` divisible
+  by four, and that congruence alone removes the classes `p ∈ {1, 3, 5}`.
 
-Both are statements about a single take-skip-take step in isolation.  This
-module does not assert that the greedy expansion of any particular target
-avoids the band, and it does not prove the half-membership statement of
-Erdős #257; the reachability of band states by an actual greedy orbit is not
-addressed here.  The `p ≥ 7` bound is sharp for the arithmetic hypotheses
-stated: odd triples realising `p = 7` inside the band exist.
+## Scope
+
+Everything here is about one take-skip-take step in isolation.  Three
+limitations are worth stating explicitly.
+
+* Runs are not all singletons.  The greedy expansion of `1/2` skips ranks
+  `4, 5` and then `8, …, 13`, so `c = b+2` is one case among many; the general
+  `m` statement above covers the others, but the `p ≥ 7` bound is proved only
+  for the single-skip specialisation.
+* Dyadic safety is *sufficient but not necessary* for the greedy expansion to
+  continue.  What the expansion actually needs at rank `k` is
+  `rem ≤ ∑_{j > k} 1/(2^j - 1)`, and that tail exceeds `2^{-k}`.  The dyadic
+  test is therefore the stronger demand, and a dyadically unsafe skip need not
+  obstruct anything.
+* Reachability is untouched.  Nothing here asserts that the expansion of a
+  particular target avoids a band, and nothing here proves the half-membership
+  statement of Erdős #257.  The parity hypotheses do not by themselves rescue a
+  state: `(p, D, b) = (17, 41, 3)` has `p` and `D` odd and coprime, and its
+  post-take residual `37/574` is both dyadically unsafe and short of the true
+  Mersenne tail at rank `4`.  The `p ≥ 7` bound is sharp for the hypotheses
+  stated: odd triples realising `p = 7` inside the band exist.
 -/
 
 namespace Erdos249257
@@ -54,8 +72,47 @@ namespace HalfGreedyTwoThirdsBand
 where `q = 2^b - 1`: from `rem' = 1/R - 1/q` one gets `R' = Rq/(q - R)`. -/
 noncomputable def postTakeReciprocal (R q : ℚ) : ℚ := R * q / (q - R)
 
-/-- The singleton skip at `b+1` is unsafe exactly when the post-take reciprocal
-lands strictly inside `(2^{b+1} - 1, 2^{b+1}) = (2q+1, 2q+2)`. -/
+/-- The last skip of the run is unsafe exactly when the post-take reciprocal
+lands strictly inside `(m - 1, m)`, where `m = 2^{c-1}` and `c` is the next
+take. -/
+def PostTakeUnsafeAt (R q m : ℚ) : Prop :=
+  m - 1 < postTakeReciprocal R q ∧ postTakeReciprocal R q < m
+
+/-- The band for a general last-skip threshold `m`. -/
+def Band (R q m : ℚ) : Prop :=
+  q * (m - 1) / (q + m - 1) < R ∧ R < q * m / (q + m)
+
+/-- **Band localisation, general form.**  Under a take at `b` (`0 < R < q`) and a
+last-skip threshold `m ≥ 1`, the last skip is dyadically unsafe if and only if
+the pre-take reciprocal lies in the band. -/
+theorem postTakeUnsafeAt_iff_band {R q m : ℚ} (hR : 0 < R) (hRq : R < q)
+    (hm : 1 ≤ m) :
+    PostTakeUnsafeAt R q m ↔ Band R q m := by
+  have hq : 0 < q := lt_trans hR hRq
+  have hqR : 0 < q - R := by linarith
+  have h1 : (0 : ℚ) < q + m - 1 := by linarith
+  have h2 : (0 : ℚ) < q + m := by linarith
+  unfold PostTakeUnsafeAt Band postTakeReciprocal
+  rw [lt_div_iff₀ hqR, div_lt_iff₀ hqR, div_lt_iff₀ h1, lt_div_iff₀ h2]
+  constructor
+  · rintro ⟨ha, hb⟩
+    exact ⟨by nlinarith, by nlinarith⟩
+  · rintro ⟨ha, hb⟩
+    exact ⟨by nlinarith, by nlinarith⟩
+
+/-- **The general band has width exactly `q²/((q+m)(q+m-1))`.** -/
+theorem band_width_general {q m : ℚ} (hq : 0 < q) (hm : 1 ≤ m) :
+    q * m / (q + m) - q * (m - 1) / (q + m - 1) =
+      q ^ 2 / ((q + m) * (q + m - 1)) := by
+  have h1 : (q + m) ≠ 0 := by positivity
+  have h2 : (q + m - 1) ≠ 0 := by
+    have : (0 : ℚ) < q + m - 1 := by linarith
+    linarith
+  field_simp
+  ring
+
+/-- The single-skip run (`c = b+2`, i.e. `m = 2q+2`) is unsafe exactly when the
+post-take reciprocal lands inside `(2q+1, 2q+2)`. -/
 def SingletonUnsafe (R q : ℚ) : Prop :=
   2 * q + 1 < postTakeReciprocal R q ∧ postTakeReciprocal R q < 2 * q + 2
 
@@ -63,8 +120,10 @@ def SingletonUnsafe (R q : ℚ) : Prop :=
 def TwoThirdsBand (R q : ℚ) : Prop :=
   q * (2 * q + 1) / (3 * q + 1) < R ∧ R < 2 * q * (q + 1) / (3 * q + 2)
 
-/-- **Band localisation.**  Under a take at `b` (`0 < R < q`), the singleton skip
-is unsafe if and only if the pre-take reciprocal lies in the two-thirds band. -/
+/-- **Band localisation, single-skip run.**  Under a take at `b` (`0 < R < q`),
+the single intervening skip is unsafe if and only if the pre-take reciprocal
+lies in the two-thirds band.  This is `postTakeUnsafeAt_iff_band` at
+`m = 2q + 2`. -/
 theorem singletonUnsafe_iff_twoThirdsBand {R q : ℚ} (hR : 0 < R) (hRq : R < q) :
     SingletonUnsafe R q ↔ TwoThirdsBand R q := by
   have hq : 0 < q := lt_trans hR hRq
@@ -199,6 +258,8 @@ Every theorem above is kernel-reduced: no `native_decide`, hence no
 `Lean.trustCompiler`, and no `sorryAx`.  The expected profile is the standard
 `[propext, Classical.choice, Quot.sound]`. -/
 
+#print axioms postTakeUnsafeAt_iff_band
+#print axioms band_width_general
 #print axioms singletonUnsafe_iff_twoThirdsBand
 #print axioms band_width
 #print axioms band_width_lt_ninth
