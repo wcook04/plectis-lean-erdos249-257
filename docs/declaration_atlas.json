@@ -4,21 +4,21 @@
   "projection_not_authority": true,
   "proof_authority": "Lean source checked by the pinned Lean kernel",
   "argument_authority": "docs/claims.json::machine_readable_paper.argument_graph",
-  "source_fingerprint": "sha256:c32fbafbcf6125a781038b000969ad343a99740afad6e5ecab47c3d5ea389f7c",
+  "source_fingerprint": "sha256:498f35f51e40ccf018221b0037ff8f9c5c8b104091493d1dee9e38aa28218e8d",
   "summary": {
-    "module_count": 560,
-    "declaration_count": 6960,
-    "theorem_like_count": 6286,
+    "module_count": 561,
+    "declaration_count": 7019,
+    "theorem_like_count": 6338,
     "generated_certificate_declaration_count": 1681,
-    "principal_claim_link_count": 112,
+    "principal_claim_link_count": 115,
     "kind_counts": {
       "abbrev": 5,
-      "def": 651,
+      "def": 658,
       "inductive": 3,
       "instance": 3,
       "lemma": 354,
       "structure": 12,
-      "theorem": 5932
+      "theorem": 5984
     }
   },
   "modules": [
@@ -88,7 +88,8 @@
         "Erdos249257.CompositeDilationDefect",
         "Erdos249257.MaximalOmegaLayer",
         "Erdos249257.HalfTrappingReturnCarry",
-        "Erdos249257.HalfCarryReachability"
+        "Erdos249257.HalfCarryReachability",
+        "Erdos249257.HalfCylinderFiniteShadow"
       ],
       "declaration_count": 0,
       "kind_counts": {}
@@ -6376,6 +6377,19 @@
         "abbrev": 1,
         "def": 17,
         "theorem": 53
+      }
+    },
+    {
+      "id": "Erdos249257.HalfCylinderFiniteShadow",
+      "path": "Erdos249257/HalfCylinderFiniteShadow.lean",
+      "imports": [
+        "Erdos249257.HalfCarryReachability",
+        "Erdos249257.PrimitiveSupportBridge"
+      ],
+      "declaration_count": 59,
+      "kind_counts": {
+        "def": 7,
+        "theorem": 52
       }
     },
     {
@@ -68124,6 +68138,660 @@
       "generated_certificate": false,
       "claim_ids": [],
       "docstring": "Solver-facing fan-in for the seam route. A canonical coordinate and scalar escape settle every even level from `20` onward; an independent odd level producer and one admissible depth-`20` base then feed the existing inverse-system consumer."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFiniteShadow.lean:26:wordSupport_subset_Iic",
+      "name": "wordSupport_subset_Iic",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFiniteShadow.lean",
+      "line": 26,
+      "signature": "theorem wordSupport_subset_Iic {N : ℕ} (a : HalfWord N) : wordSupport a ⊆ Set.Iic N",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A finite word has no support beyond its declared depth."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFiniteShadow.lean:33:wordSupport_inter_Iic",
+      "name": "wordSupport_inter_Iic",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFiniteShadow.lean",
+      "line": 33,
+      "signature": "@[simp] theorem wordSupport_inter_Iic {N : ℕ} (a : HalfWord N) : wordSupport a ∩ Set.Iic N = wordSupport a",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Intersecting the support of a depth-`N` word with `Iic N` changes nothing."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFiniteShadow.lean:39:one_not_mem_wordSupport_of_admissible",
+      "name": "one_not_mem_wordSupport_of_admissible",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFiniteShadow.lean",
+      "line": 39,
+      "signature": "theorem one_not_mem_wordSupport_of_admissible {N : ℕ} (a : HalfWord N) (ha : HalfStripAdmissible N a) : 1 ∉ wordSupport a",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Admissibility at a positive depth excludes exponent one from the word support."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFiniteShadow.lean:54:halfStripAdmissible_residual_eq",
+      "name": "halfStripAdmissible_residual_eq",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFiniteShadow.lean",
+      "line": 54,
+      "signature": "theorem halfStripAdmissible_residual_eq {N : ℕ} (hN : 1 ≤ N) (a : HalfWord N) (ha : HalfStripAdmissible N a) : (1 : ℝ) / 2 - erdosSupportSeries 2 (wordSupport a) = ((integerHalfCarry (wordSupport a) (N - 1) : ℤ) - binaryCoeffTail (supportCoeff (wordSupport a)) N) / (2 : ℝ) ^ N",
+      "generated_certificate": false,
+      "claim_ids": [
+        "half_cylinder_finite_shadow"
+      ],
+      "docstring": "**Exact finite-shadow identity.** For an admissible word at positive depth `N`, the discrepancy of its finite Mersenne support sum from `1/2` is the terminal integer half carry minus the future-multiple coefficient tail, scaled by `2^N`."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFiniteShadow.lean:71:finiteCoeffWindow",
+      "name": "finiteCoeffWindow",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderFiniteShadow.lean",
+      "line": 71,
+      "signature": "noncomputable def finiteCoeffWindow (A : Set ℕ) (n J : ℕ) : ℝ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The first `J` coefficient rows strictly inside the complete analytic tail after row `n`."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFiniteShadow.lean:79:one_sub_pow_mul_halfResidual_eq_tail_sub_centered",
+      "name": "one_sub_pow_mul_halfResidual_eq_tail_sub_centered",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFiniteShadow.lean",
+      "line": 79,
+      "signature": "theorem one_sub_pow_mul_halfResidual_eq_tail_sub_centered (A : Set ℕ) (hone : 1 ∉ A) (n : ℕ) (hn : 1 ≤ n) : 1 - (2 : ℝ) ^ n * ((1 : ℝ) / 2 - erdosSupportSeries 2 A) = binaryCoeffTail (supportCoeff A) n - (mobiusCenteredHalfCarry A (n - 1) : ℝ)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Exact carry-coordinate form of normalized raw half slack. The index `n-1` is essential: its coefficient horizon ends at row `n`, while the analytic tail begins at row `n+1`."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFiniteShadow.lean:96:finiteCoeffWindow_le_binaryCoeffTail",
+      "name": "finiteCoeffWindow_le_binaryCoeffTail",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFiniteShadow.lean",
+      "line": 96,
+      "signature": "theorem finiteCoeffWindow_le_binaryCoeffTail (A : Set ℕ) (n J : ℕ) : finiteCoeffWindow A n J ≤ binaryCoeffTail (supportCoeff A) n",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Every finite coefficient window is termwise below the complete analytic tail. This strict truncation is what makes the next theorem a sufficient producer rather than an equivalent restatement of raw safety."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFiniteShadow.lean:110:scaledHalfResidual_le_one_of_finiteCoeffWindow",
+      "name": "scaledHalfResidual_le_one_of_finiteCoeffWindow",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFiniteShadow.lean",
+      "line": 110,
+      "signature": "theorem scaledHalfResidual_le_one_of_finiteCoeffWindow (A : Set ℕ) (hone : 1 ∉ A) (n J : ℕ) (hn : 1 ≤ n) (hwindow : (mobiusCenteredHalfCarry A (n - 1) : ℝ) ≤ finiteCoeffWindow A n J) : (2 : ℝ) ^ n * ((1 : ℝ) / 2 - erdosSupportSeries 2 A) ≤ 1",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A finite future-divisor incidence inequality forces the normalized residual below one. The remaining unbounded problem is precisely to produce `hwindow` on every actual greedy prefix."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFiniteShadow.lean:127:rawHalfSlack_nonneg_of_finiteCoeffWindow",
+      "name": "rawHalfSlack_nonneg_of_finiteCoeffWindow",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFiniteShadow.lean",
+      "line": 127,
+      "signature": "theorem rawHalfSlack_nonneg_of_finiteCoeffWindow (A : Set ℕ) (hone : 1 ∉ A) (n J : ℕ) (hn : 1 ≤ n) (hwindow : (mobiusCenteredHalfCarry A (n - 1) : ℝ) ≤ finiteCoeffWindow A n J) : 0 ≤ 1 - (2 : ℝ) ^ n * ((1 : ℝ) / 2 - erdosSupportSeries 2 A)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The same finite-incidence implication in explicitly nonnegative-slack form."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFiniteShadow.lean:142:finiteCoeffWindowNumerator",
+      "name": "finiteCoeffWindowNumerator",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderFiniteShadow.lean",
+      "line": 142,
+      "signature": "noncomputable def finiteCoeffWindowNumerator (A : Set ℕ) (n : ℕ) : ℕ → ℕ | 0 => 0 | J + 1 => 2 * finiteCoeffWindowNumerator A n J + supportCoeff A (n + J + 1) /-- Binary capacity carried",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Integer numerator of the frozen coefficient window. The recurrence uses the binary weights `2^(J-i)` without division."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFiniteShadow.lean:151:futureSkipCapacity",
+      "name": "futureSkipCapacity",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderFiniteShadow.lean",
+      "line": 151,
+      "signature": "noncomputable def futureSkipCapacity (A : Set ℕ) (n : ℕ) : ℕ → ℕ | 0 => 0 | J + 1 => 2 * futureSkipCapacity A n J + (by classical exact if n + J + 1 ∈ A then 0 else 1) /-- The recursive numerator is exactly `2^J` times the existing real-valued finite coefficient window. -/ theorem finiteCoeffWindow_eq_numerator_div_pow (A : Set ℕ) (n J : ℕ) : finiteCoeffWindow A n J =",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Binary capacity carried by skipped support bits in the next `J` rows. The earliest skip receives the largest binary weight."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFiniteShadow.lean:162:finiteCoeffWindow_eq_numerator_div_pow",
+      "name": "finiteCoeffWindow_eq_numerator_div_pow",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFiniteShadow.lean",
+      "line": 162,
+      "signature": "theorem finiteCoeffWindow_eq_numerator_div_pow (A : Set ℕ) (n J : ℕ) : finiteCoeffWindow A n J = (finiteCoeffWindowNumerator A n J : ℝ) / (2 : ℝ) ^ J",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The recursive numerator is exactly `2^J` times the existing real-valued finite coefficient window."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFiniteShadow.lean:185:binaryCoeffTail_eq_finiteCoeffWindow_add_shiftedTail",
+      "name": "binaryCoeffTail_eq_finiteCoeffWindow_add_shiftedTail",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFiniteShadow.lean",
+      "line": 185,
+      "signature": "theorem binaryCoeffTail_eq_finiteCoeffWindow_add_shiftedTail (A : Set ℕ) (n J : ℕ) : binaryCoeffTail (supportCoeff A) n = finiteCoeffWindow A n J + binaryCoeffTail (supportCoeff A) (n + J) / (2 : ℝ) ^ J",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Exact decomposition of the complete coefficient tail into its first `J` rows and the shifted complete tail that remains."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFiniteShadow.lean:210:futureSkipCapacity_factorization",
+      "name": "futureSkipCapacity_factorization",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFiniteShadow.lean",
+      "line": 210,
+      "signature": "theorem futureSkipCapacity_factorization (A : Set ℕ) (n J : ℕ) (hn : 1 ≤ n) (hJ : J ≤ n) : (finiteCoeffWindowNumerator (primitivePrefix A n) n J : ℤ) - (2 : ℤ) ^ J * mobiusCenteredHalfCarry A (n - 1) = (futureSkipCapacity A n J : ℤ) - mobiusCenteredHalfCarry A (n - 1 + J)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "**Exact future-skip factorization.** Freeze the support at depth `n` and inspect any window `J <= n`. The weighted frozen incidence surplus is exactly the binary capacity of actual future skips minus the actual centered carry at the end of the window."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFiniteShadow.lean:255:finiteCoeffWindowNumerator_covers_iff_terminal_le_skipCapacity",
+      "name": "finiteCoeffWindowNumerator_covers_iff_terminal_le_skipCapacity",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFiniteShadow.lean",
+      "line": 255,
+      "signature": "theorem finiteCoeffWindowNumerator_covers_iff_terminal_le_skipCapacity (A : Set ℕ) (n J : ℕ) (hn : 1 ≤ n) (hJ : J ≤ n) : (2 : ℤ) ^ J * mobiusCenteredHalfCarry A (n - 1) ≤ (finiteCoeffWindowNumerator (primitivePrefix A n) n J : ℤ) ↔ mobiusCenteredHalfCarry A (n - 1 + J) ≤ (futureSkipCapacity A n J : ℤ)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Integer form of the exact producer: the frozen coefficient numerator covers the initial centered carry iff the future skip word covers the actual terminal centered carry."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFiniteShadow.lean:281:finiteCoeffWindow_covers_iff_terminal_le_skipCapacity",
+      "name": "finiteCoeffWindow_covers_iff_terminal_le_skipCapacity",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFiniteShadow.lean",
+      "line": 281,
+      "signature": "theorem finiteCoeffWindow_covers_iff_terminal_le_skipCapacity (A : Set ℕ) (n J : ℕ) (hn : 1 ≤ n) (hJ : J ≤ n) : (mobiusCenteredHalfCarry A (n - 1) : ℝ) ≤ finiteCoeffWindow (primitivePrefix A n) n J ↔ mobiusCenteredHalfCarry A (n - 1 + J) ≤ (futureSkipCapacity A n J : ℤ)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Real-valued form consumed by `scaledHalfResidual_le_one_of_finiteCoeffWindow`. The finite-incidence hypothesis is not merely sufficient on the first shell: it is exactly terminal-carry coverage by the actual future skip word."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFiniteShadow.lean:314:ReducedTailGapCoordinates",
+      "name": "ReducedTailGapCoordinates",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderFiniteShadow.lean",
+      "line": 314,
+      "signature": "def ReducedTailGapCoordinates (P : Set ℕ) (n : ℕ) (E : ℤ) (D : ℕ) : Prop",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A support prefix has reduced tail-gap coordinates `(E,D)` at row `n` when its centered carry minus its complete coefficient tail is exactly `E/D`."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFiniteShadow.lean:322:halfGreedyPrefix_reducedTailGapCoordinates",
+      "name": "halfGreedyPrefix_reducedTailGapCoordinates",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFiniteShadow.lean",
+      "line": 322,
+      "signature": "theorem halfGreedyPrefix_reducedTailGapCoordinates (k : ℕ) : ReducedTailGapCoordinates (↑(halfGreedyPrefixSupport k) : Set ℕ) (k + 1) (halfGreedyNextDyadicExcessNumerator k) (halfGreedyPrefixDenominator k)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The landed half-greedy excess and denominator are literally reduced tail-gap coordinates for the finite greedy prefix."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFiniteShadow.lean:343:futureSkipCapacityMargin_eq_reducedTailTax",
+      "name": "futureSkipCapacityMargin_eq_reducedTailTax",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFiniteShadow.lean",
+      "line": 343,
+      "signature": "theorem futureSkipCapacityMargin_eq_reducedTailTax (A P : Set ℕ) (n J : ℕ) (E : ℤ) (D : ℕ) (hn : 1 ≤ n) (hJ : J ≤ n) (hprefix : primitivePrefix A n = P) (hred : ReducedTailGapCoordinates P n E D) : (futureSkipCapacity A n J : ℝ) - (mobiusCenteredHalfCarry A (n - 1 + J) : ℝ) = -(2 : ℝ) ^ J * ((E : ℝ) / (D : ℝ)) - binaryCoeffTail (supportCoeff P) (n + J)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "**Reduced-state skip-capacity identity.** If the prefix of an actual support `A` through `n` has reduced coordinates `(E,D)`, then the future-skip margin is the negative reduced excess, amplified by `2^J`, minus the exact coefficient tail omitted beyond the finite window. This is the proof socket `S_J - e_J = -2^J E/D - R_(n,J)`."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFiniteShadow.lean:398:futureSkipCoverage_iff_reducedTailTax",
+      "name": "futureSkipCoverage_iff_reducedTailTax",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFiniteShadow.lean",
+      "line": 398,
+      "signature": "theorem futureSkipCoverage_iff_reducedTailTax (A P : Set ℕ) (n J : ℕ) (E : ℤ) (D : ℕ) (hn : 1 ≤ n) (hJ : J ≤ n) (hprefix : primitivePrefix A n = P) (hred : ReducedTailGapCoordinates P n E D) : mobiusCenteredHalfCarry A (n - 1 + J) ≤ (futureSkipCapacity A n J : ℤ) ↔ binaryCoeffTail (supportCoeff P) (n + J) ≤ -(2 : ℝ) ^ J * ((E : ℝ) / (D : ℝ))",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Coverage by the future skip word is exactly the reduced tail-tax inequality."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFiniteShadow.lean:425:futureSkipCoverage_succ",
+      "name": "futureSkipCoverage_succ",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFiniteShadow.lean",
+      "line": 425,
+      "signature": "theorem futureSkipCoverage_succ (A : Set ℕ) (n t : ℕ) (hn : 1 ≤ n) (ht : t + 1 ≤ n) (hcover : mobiusCenteredHalfCarry A (n - 1 + t) ≤ (futureSkipCapacity A n t : ℤ)) : mobiusCenteredHalfCarry A (n - 1 + (t + 1)) ≤ (futureSkipCapacity A n (t + 1) : ℤ)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "One-step permanence: once future skip capacity covers the actual centered carry, the next first-shell row remains covered."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFiniteShadow.lean:450:futureSkipCoverage_persistent",
+      "name": "futureSkipCoverage_persistent",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFiniteShadow.lean",
+      "line": 450,
+      "signature": "theorem futureSkipCoverage_persistent (A : Set ℕ) (n t u : ℕ) (hn : 1 ≤ n) (htu : t + u ≤ n) (hcover : mobiusCenteredHalfCarry A (n - 1 + t) ≤ (futureSkipCapacity A n t : ℤ)) : mobiusCenteredHalfCarry A (n - 1 + (t + u)) ≤ (futureSkipCapacity A n (t + u) : ℤ)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "**First-shell persistence.** Coverage at any intermediate time remains true at every later time that stays inside the first dyadic shell."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFiniteShadow.lean:466:futureSkipWeight_le_capacity_of_not_mem",
+      "name": "futureSkipWeight_le_capacity_of_not_mem",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFiniteShadow.lean",
+      "line": 466,
+      "signature": "theorem futureSkipWeight_le_capacity_of_not_mem (A : Set ℕ) (n J i : ℕ) (hi : i < J) (hskip : n + i + 1 ∉ A) : 2 ^ (J - (i + 1)) ≤ futureSkipCapacity A n J",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Every omitted row contributes its own binary weight to the total skip capacity. In particular, the earliest skip is the strongest single-row certificate."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFiniteShadow.lean:491:finiteCoeffWindow_covers_of_one_future_skip",
+      "name": "finiteCoeffWindow_covers_of_one_future_skip",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFiniteShadow.lean",
+      "line": 491,
+      "signature": "theorem finiteCoeffWindow_covers_of_one_future_skip (A : Set ℕ) (n J i : ℕ) (hn : 1 ≤ n) (hJ : J ≤ n) (hi : i < J) (hskip : n + i + 1 ∉ A) (hterminal : mobiusCenteredHalfCarry A (n - 1 + J) ≤ (2 ^ (J - (i + 1)) : ℕ)) : (mobiusCenteredHalfCarry A (n - 1) : ℝ) ≤ finiteCoeffWindow (primitivePrefix A n) n J",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "One sufficiently early actual skip is therefore enough to establish the finite incidence producer. The governed receipt tests precisely this stronger one-skip condition with `i` chosen as the first future skip."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFiniteShadow.lean:509:scaledPrefixHalfResidual_le_one_of_terminal_le_skipCapacity",
+      "name": "scaledPrefixHalfResidual_le_one_of_terminal_le_skipCapacity",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFiniteShadow.lean",
+      "line": 509,
+      "signature": "theorem scaledPrefixHalfResidual_le_one_of_terminal_le_skipCapacity (A : Set ℕ) (hone : 1 ∉ A) (n J : ℕ) (hn : 1 ≤ n) (hJ : J ≤ n) (hterminal : mobiusCenteredHalfCarry A (n - 1 + J) ≤ (futureSkipCapacity A n J : ℤ)) : (2 : ℝ) ^ n * ((1 : ℝ) / 2 - erdosSupportSeries 2 (primitivePrefix A n)) ≤ 1",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The exact skip-capacity condition feeds the already-landed residual consumer for the frozen prefix."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFiniteShadow.lean:531:halfStripAdmissible_abs_residual_le",
+      "name": "halfStripAdmissible_abs_residual_le",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFiniteShadow.lean",
+      "line": 531,
+      "signature": "theorem halfStripAdmissible_abs_residual_le {N : ℕ} (hN : 1 ≤ N) (a : HalfWord N) (ha : HalfStripAdmissible N a) : |(1 : ℝ) / 2 - erdosSupportSeries 2 (wordSupport a)| ≤ (4 * Real.sqrt (N : ℝ) + 8) / (2 : ℝ) ^ N",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "**Finite-shadow upper bound.** An admissible finite word is within `(4√N+8)/2^N` of `1/2`. This is an unconditional finite theorem; it does not assert that such words exist at every depth."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFiniteShadow.lean:587:preFeedbackGaugeSymmetry",
+      "name": "preFeedbackGaugeSymmetry",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFiniteShadow.lean",
+      "line": 587,
+      "signature": "theorem preFeedbackGaugeSymmetry (left right : Set ℕ) (s n : ℕ) (hs : 2 ≤ s) (hsn : s ≤ n) (hbase : integerHalfCarry right (s - 2) = integerHalfCarry left (s - 2)) (hseam : supportCoeff right s + 1 = supportCoeff left s) (htail : ∀ m : ℕ, s < m → m ≤ n → supportCoeff right m = supportCoeff left m + 1) : integerHalfCarry right (n - 1) = integerHalfCarry left (n - 1) + 1",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "**Pre-feedback gauge symmetry.** Suppose two support-coefficient words agree up to the carry immediately before row `s`, the left word has one additional coefficient at row `s`, and the right word has one additional coefficient at every later row through `n`. Their integer half carries then differ by exactly one at every row from `s` through `n`. This isolates the named pre-feedback no-go: the recurrence and Boolean-sized coefficient difference pattern are jointly consistent on the whole window, so a contradiction must use information not represented by those local equations."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFiniteShadow.lean:624:supportCoeff_insert_divisor",
+      "name": "supportCoeff_insert_divisor",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFiniteShadow.lean",
+      "line": 624,
+      "signature": "theorem supportCoeff_insert_divisor (A : Set ℕ) {d n : ℕ} (hd : d ∈ n.divisors) (hdA : d ∉ A) : supportCoeff (insert d A) n = supportCoeff A n + 1",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Inserting one previously absent divisor adds exactly one to the Boolean divisor coefficient at that row."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFiniteShadow.lean:642:supportCoeff_insert_self",
+      "name": "supportCoeff_insert_self",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFiniteShadow.lean",
+      "line": 642,
+      "signature": "theorem supportCoeff_insert_self (A : Set ℕ) {n : ℕ} (hn : 0 < n) (hnA : n ∉ A) : supportCoeff (insert n A) n = supportCoeff A n + 1",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Adding the current row itself to a support increases its divisor-count coefficient by exactly one."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFiniteShadow.lean:656:firstFeedbackChildCarries",
+      "name": "firstFeedbackChildCarries",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFiniteShadow.lean",
+      "line": 656,
+      "signature": "theorem firstFeedbackChildCarries (left right : Set ℕ) (s c : ℕ) (δ : ℤ) (hs : 1 ≤ s) (hleftParent : integerHalfCarry left (2 * s - 2) = δ) (hrightParent : integerHalfCarry right (2 * s - 2) = δ + 1) (hleftCoeff : supportCoeff left (2 * s) = c + 1) (hrightCoeff : supportCoeff right (2 * s) = c) (hleftFresh : 2 * s ∉ left) (hrightFresh : 2 * s ∉ right) : integerHalfCarry left (2 * s - 1) = 2 * δ - c - 1 ∧ integerHalfCarry (insert (2 * s) left) (2 * s - 1) = 2 * δ - c - 2 ∧ integerHalfCarry right (2 * s - 1) = 2 * δ - c + 2 ∧ integerHalfCarry (insert (2 * s) right) (2 * s - 1) = 2 * δ - c + 1",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "**Exact row-`2s` feedback theorem.** Assume the two boundary parents have carries `δ` and `δ+1`, while their first feedback coefficients are `c+1` and `c`. The zero/one children then have carries `H-1,H-2,H+2,H+1`, respectively, where `H=2δ-c`. The hypotheses isolate the set-level divisor-realisation question from the now-closed feedback algebra."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFiniteShadow.lean:700:firstFeedbackChildCarries_of_preFeedbackGauge",
+      "name": "firstFeedbackChildCarries_of_preFeedbackGauge",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFiniteShadow.lean",
+      "line": 700,
+      "signature": "theorem firstFeedbackChildCarries_of_preFeedbackGauge (left right : Set ℕ) (s c : ℕ) (δ : ℤ) (hs : 2 ≤ s) (hbase : integerHalfCarry right (s - 2) = integerHalfCarry left (s - 2)) (hseam : supportCoeff right s + 1 = supportCoeff left s) (htail : ∀ m : ℕ, s < m → m ≤ 2 * s - 1 → supportCoeff right m = supportCoeff left m + 1) (hdelta : integerHalfCarry left (2 * s - 2) = δ) (hleftCoeff : supportCoeff left (2 * s) = c + 1) (hrightCoeff : supportCoeff right (2 * s) = c) (hleftFresh : 2 * s ∉ left) (hrightFresh : 2 * s ∉ right) : integerHalfCarry left (2 * s - 1) = 2 * δ - c - 1 ∧ integerHalfCarry (insert (2 * s) left) (2 * s - 1) = 2 * δ - c - 2 ∧",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The complete pre-feedback-to-first-feedback composition. The gauge hypotheses determine the right parent carry from the left one; only the row-`2s` coefficient reversal and the absence of an already-selected current bit remain as explicit Boolean-divisor inputs."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFiniteShadow.lean:728:FixedCoeffNumeratorReachable",
+      "name": "FixedCoeffNumeratorReachable",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderFiniteShadow.lean",
+      "line": 728,
+      "signature": "def FixedCoeffNumeratorReachable (c T k q : ℤ) : Prop",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Endpoint-bearing fixed-coefficient transition."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFiniteShadow.lean:735:fixedCoeffCylinder_endpoint",
+      "name": "fixedCoeffCylinder_endpoint",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFiniteShadow.lean",
+      "line": 735,
+      "signature": "theorem fixedCoeffCylinder_endpoint {T h c k q b : ℤ} (hk : k = 2 * h - c - b) (hq : q = 2 * (T - h) + b) : q = (2 * T - c) - k",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Under one common proper-divisor coefficient, the child numerator and carry add to the common endpoint `2T-c`."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFiniteShadow.lean:744:fixedCoeffNumeratorReachable_iff_endpoint",
+      "name": "fixedCoeffNumeratorReachable_iff_endpoint",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFiniteShadow.lean",
+      "line": 744,
+      "signature": "theorem fixedCoeffNumeratorReachable_iff_endpoint (c T k q : ℤ) : FixedCoeffNumeratorReachable c T k q ↔ q = (2 * T - c) - k",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Complete scalar recurrence: every fixed-coefficient target has exactly the affine numerator with next endpoint `2T-c`."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFiniteShadow.lean:758:firstWrap_rawEndpoint_decomposition",
+      "name": "firstWrap_rawEndpoint_decomposition",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFiniteShadow.lean",
+      "line": 758,
+      "signature": "theorem firstWrap_rawEndpoint_decomposition {P Q T δ c : ℤ} (hT : T = P * (2 * Q) + Q + δ) : 2 * T - c = (2 * P + 1) * (2 * Q) + (2 * δ - c)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "At a first half-divisor wrap, write the old endpoint as a fixed prefix, the half-bit boundary, and boundary carry `δ`. The next raw endpoint is the extended prefix boundary plus the seam hole `2δ-c`."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFiniteShadow.lean:768:actualFirstWrap_hole_eq_leftZeroCarry_add_one",
+      "name": "actualFirstWrap_hole_eq_leftZeroCarry_add_one",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFiniteShadow.lean",
+      "line": 768,
+      "signature": "theorem actualFirstWrap_hole_eq_leftZeroCarry_add_one (P : Set ℕ) {s : ℕ} (hs : 1 ≤ s) (hsP : s ∉ P) (δ : ℤ) (hδ : integerHalfCarry (insert s P) (2 * s - 2) = δ) : 2 * δ - (supportCoeff P (2 * s) : ℤ) = integerHalfCarry (insert s P) (2 * s - 1) + 1",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "For an actual Boolean stem `P`, the scalar `c` is literally its divisor coefficient at row `2s`, and the seam hole is one more than the row-`2s` carry of the left boundary word `P ∪ {s}` with the new row left off."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFiniteShadow.lean:785:hole_in_strip_iff_shiftedCarry_in_strip",
+      "name": "hole_in_strip_iff_shiftedCarry_in_strip",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFiniteShadow.lean",
+      "line": 785,
+      "signature": "theorem hole_in_strip_iff_shiftedCarry_in_strip {B H K : ℤ} (hHK : H = K + 1) : (1 ≤ H ∧ H ≤ B) ↔ (0 ≤ K ∧ K < B)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Consequently an in-strip seam hole is exactly a left zero-child carry in the shifted strip `[0,B-1]`."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFiniteShadow.lean:792:hole_avoids_integerStrip_iff",
+      "name": "hole_avoids_integerStrip_iff",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFiniteShadow.lean",
+      "line": 792,
+      "signature": "theorem hole_avoids_integerStrip_iff {B H : ℤ} : (∀ k : ℤ, 1 ≤ k → k ≤ B → k ≠ H) ↔ H < 1 ∨ B < H",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "An integer hole misses an integer strip exactly when it is below the strip or above it."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFiniteShadow.lean:806:evenSeam_fullIntegerStrip_iff_escape",
+      "name": "evenSeam_fullIntegerStrip_iff_escape",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFiniteShadow.lean",
+      "line": 806,
+      "signature": "theorem evenSeam_fullIntegerStrip_iff_escape {B δ c : ℤ} : (∀ k : ℤ, 1 ≤ k → k ≤ B → EvenSeamReachable δ c k) ↔ 2 * δ - c < 1 ∨ B < 2 * δ - c",
+      "generated_certificate": false,
+      "claim_ids": [
+        "half_cylinder_finite_shadow"
+      ],
+      "docstring": "The landed one-hole theorem makes seam escape exactly equivalent to full scalar reachability of the integer strip."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFiniteShadow.lean:819:greedyHalf_rankThree_prefix_fixture",
+      "name": "greedyHalf_rankThree_prefix_fixture",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFiniteShadow.lean",
+      "line": 819,
+      "signature": "theorem greedyHalf_rankThree_prefix_fixture : greedyMersennePrefixRat (1 / 2 : ℚ) 3 = ({2, 3} : Finset ℕ) ∧ (1 / 2 : ℚ) - finiteErdosSum ({2, 3} : Finset ℕ) 2 = 1 / 42",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The exact first greedy post-take state is the `{2,3}` fragment with residual `1/42`."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFiniteShadow.lean:830:rankThree_rawSafe_but_seamNotEscaped",
+      "name": "rankThree_rawSafe_but_seamNotEscaped",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFiniteShadow.lean",
+      "line": 830,
+      "signature": "theorem rankThree_rawSafe_but_seamNotEscaped : BlockDyadicSafeAt 1 21 5 ∧ halfStripBound 6 = 8 ∧ ¬ ((2 : ℤ) * 2 - 1 < 1 ∨ (8 : ℤ) < (2 : ℤ) * 2 - 1) ∧ ¬ EvenSeamReachable 2 1 3",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Exact non-equivalence witness. The greedy state after taking rank `3` is dyadically safe at the last predecessor before rank `6`, but its scalar half-cylinder seam has the in-strip hole `H=3`."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFiniteShadow.lean:879:primitivePrefix_greedyMersenneSupport_eq_prefixRat",
+      "name": "primitivePrefix_greedyMersenneSupport_eq_prefixRat",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFiniteShadow.lean",
+      "line": 879,
+      "signature": "theorem primitivePrefix_greedyMersenneSupport_eq_prefixRat (x : ℚ) (n : ℕ) : primitivePrefix (greedyMersenneSupport (x : ℝ)) n = (↑(greedyMersennePrefixRat x n) : Set ℕ)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The exact-rational finite greedy prefix is the cutoff of the real greedy support. This bridge is independent of any skip assumption."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFiniteShadow.lean:912:primitivePrefix_greedyMersenneSupport_succ_eq_of_skip",
+      "name": "primitivePrefix_greedyMersenneSupport_succ_eq_of_skip",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFiniteShadow.lean",
+      "line": 912,
+      "signature": "theorem primitivePrefix_greedyMersenneSupport_succ_eq_of_skip (x : ℝ) (k : ℕ) (hskip : ¬ mersenneWeight (k + 1) ≤ greedyMersenneRemainder x k) : primitivePrefix (greedyMersenneSupport x) (k + 1) = primitivePrefix (greedyMersenneSupport x) k",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "If the next real greedy decision skips rank `k + 1`, extending the cutoff from `k` to `k + 1` does not change the primitive prefix."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFiniteShadow.lean:932:primitivePrefix_greedyHalf_eq_halfGreedyPrefixSupport_of_skip",
+      "name": "primitivePrefix_greedyHalf_eq_halfGreedyPrefixSupport_of_skip",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFiniteShadow.lean",
+      "line": 932,
+      "signature": "theorem primitivePrefix_greedyHalf_eq_halfGreedyPrefixSupport_of_skip (k : ℕ) (hskip : ¬ mersenneWeight (k + 1) ≤ greedyMersenneRemainder (1 / 2 : ℝ) k) : primitivePrefix (greedyMersenneSupport (1 / 2 : ℝ)) (k + 1) = (↑(halfGreedyPrefixSupport k) : Set ℕ)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "At an actual skipped half-greedy rank, the full real support through `k + 1` is exactly the landed finite rational support through `k`."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFiniteShadow.lean:945:greedyHalf_futureSkipCapacityMargin_eq_reducedTailTax",
+      "name": "greedyHalf_futureSkipCapacityMargin_eq_reducedTailTax",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFiniteShadow.lean",
+      "line": 945,
+      "signature": "theorem greedyHalf_futureSkipCapacityMargin_eq_reducedTailTax (k J : ℕ) (hskip : ¬ mersenneWeight (k + 1) ≤ greedyMersenneRemainder (1 / 2 : ℝ) k) (hJ : J ≤ k + 1) : (futureSkipCapacity (greedyMersenneSupport (1 / 2 : ℝ)) (k + 1) J : ℝ) - (mobiusCenteredHalfCarry (greedyMersenneSupport (1 / 2 : ℝ)) (k + J) : ℝ) = -(2 : ℝ) ^ J * ((halfGreedyNextDyadicExcessNumerator k : ℝ) / (halfGreedyPrefixDenominator k : ℝ)) - binaryCoeffTail (supportCoeff (↑(halfGreedyPrefixSupport k) : Set ℕ))",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The generic reduced skip-capacity margin, instantiated at an actual skipped half-greedy rank."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFiniteShadow.lean:973:greedyHalf_futureSkipCoverage_iff_reducedTailTax",
+      "name": "greedyHalf_futureSkipCoverage_iff_reducedTailTax",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFiniteShadow.lean",
+      "line": 973,
+      "signature": "theorem greedyHalf_futureSkipCoverage_iff_reducedTailTax (k J : ℕ) (hskip : ¬ mersenneWeight (k + 1) ≤ greedyMersenneRemainder (1 / 2 : ℝ) k) (hJ : J ≤ k + 1) : mobiusCenteredHalfCarry (greedyMersenneSupport (1 / 2 : ℝ)) (k + J) ≤ (futureSkipCapacity (greedyMersenneSupport (1 / 2 : ℝ)) (k + 1) J : ℤ) ↔ binaryCoeffTail (supportCoeff (↑(halfGreedyPrefixSupport k) : Set ℕ)) (k + 1 + J) ≤ -(2 : ℝ) ^ J * ((halfGreedyNextDyadicExcessNumerator k : ℝ) /",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Actual future-skip coverage is exactly the specialized reduced tail-tax inequality at every governed horizon `J ≤ k + 1`."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFiniteShadow.lean:1003:greedyHalfFrozenMargin",
+      "name": "greedyHalfFrozenMargin",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderFiniteShadow.lean",
+      "line": 1003,
+      "signature": "noncomputable def greedyHalfFrozenMargin (k J : ℕ) : ℤ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Signed frozen-prefix margin. Its nonnegativity says that the first `J` future divisor-incidence rows cover the centered carry at depth `k`."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFiniteShadow.lean:1010:greedyHalfFrozenMargin_zero",
+      "name": "greedyHalfFrozenMargin_zero",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFiniteShadow.lean",
+      "line": 1010,
+      "signature": "@[simp] theorem greedyHalfFrozenMargin_zero (k : ℕ) : greedyHalfFrozenMargin k 0 = -mobiusCenteredHalfCarry (↑(halfGreedyPrefixSupport k) : Set ℕ) k",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFiniteShadow.lean:1018:greedyHalfFrozenMargin_succ",
+      "name": "greedyHalfFrozenMargin_succ",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFiniteShadow.lean",
+      "line": 1018,
+      "signature": "theorem greedyHalfFrozenMargin_succ (k J : ℕ) : greedyHalfFrozenMargin k (J + 1) = 2 * greedyHalfFrozenMargin k J + (supportCoeff (↑(halfGreedyPrefixSupport k) : Set ℕ) (k + J + 2) : ℤ)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Exact integer recurrence. The forcing term is a divisor count in the frozen finite prefix, with no real tail or future greedy decision."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFiniteShadow.lean:1029:greedyHalfFrozenMargin_cast_eq_pow_mul_window_sub_carry",
+      "name": "greedyHalfFrozenMargin_cast_eq_pow_mul_window_sub_carry",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFiniteShadow.lean",
+      "line": 1029,
+      "signature": "theorem greedyHalfFrozenMargin_cast_eq_pow_mul_window_sub_carry (k J : ℕ) : (greedyHalfFrozenMargin k J : ℝ) = (2 : ℝ) ^ J * (finiteCoeffWindow (↑(halfGreedyPrefixSupport k) : Set ℕ) (k + 1) J - (mobiusCenteredHalfCarry (↑(halfGreedyPrefixSupport k) : Set ℕ) k : ℝ))",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Normalized margin is exactly the finite coefficient window minus the initial centered carry."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFiniteShadow.lean:1054:greedyHalfFrozenMargin_nonneg_iff_window_covers",
+      "name": "greedyHalfFrozenMargin_nonneg_iff_window_covers",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFiniteShadow.lean",
+      "line": 1054,
+      "signature": "theorem greedyHalfFrozenMargin_nonneg_iff_window_covers (k J : ℕ) : 0 ≤ greedyHalfFrozenMargin k J ↔ (mobiusCenteredHalfCarry (↑(halfGreedyPrefixSupport k) : Set ℕ) k : ℝ) ≤ finiteCoeffWindow (↑(halfGreedyPrefixSupport k) : Set ℕ) (k + 1) J",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The signed recurrence crosses zero exactly when the finite frozen window covers the initial centered carry."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFiniteShadow.lean:1076:greedyHalfFrozenMargin_nonneg_succ",
+      "name": "greedyHalfFrozenMargin_nonneg_succ",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFiniteShadow.lean",
+      "line": 1076,
+      "signature": "theorem greedyHalfFrozenMargin_nonneg_succ (k J : ℕ) (h : 0 ≤ greedyHalfFrozenMargin k J) : 0 ≤ greedyHalfFrozenMargin k (J + 1)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Once the signed recurrence crosses zero, every later recurrence state stays nonnegative."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFiniteShadow.lean:1084:greedyHalfFrozenMargin_eq_actual_skip_margin",
+      "name": "greedyHalfFrozenMargin_eq_actual_skip_margin",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFiniteShadow.lean",
+      "line": 1084,
+      "signature": "theorem greedyHalfFrozenMargin_eq_actual_skip_margin (k J : ℕ) (hskip : ¬ mersenneWeight (k + 1) ≤ greedyMersenneRemainder (1 / 2 : ℝ) k) (hJ : J ≤ k + 1) : greedyHalfFrozenMargin k J = (futureSkipCapacity (greedyMersenneSupport (1 / 2 : ℝ)) (k + 1) J : ℤ) - mobiusCenteredHalfCarry (greedyMersenneSupport (1 / 2 : ℝ)) (k + J)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "On an actual skipped rank and inside the first shell, the frozen margin is literally actual future-skip capacity minus the actual terminal carry."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFiniteShadow.lean:1113:greedyHalfFrozenMargin_nonneg_iff_reducedTailTax",
+      "name": "greedyHalfFrozenMargin_nonneg_iff_reducedTailTax",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFiniteShadow.lean",
+      "line": 1113,
+      "signature": "theorem greedyHalfFrozenMargin_nonneg_iff_reducedTailTax (k J : ℕ) (hskip : ¬ mersenneWeight (k + 1) ≤ greedyMersenneRemainder (1 / 2 : ℝ) k) (hJ : J ≤ k + 1) : 0 ≤ greedyHalfFrozenMargin k J ↔ binaryCoeffTail (supportCoeff (↑(halfGreedyPrefixSupport k) : Set ℕ)) (k + 1 + J) ≤ -(2 : ℝ) ^ J * ((halfGreedyNextDyadicExcessNumerator k : ℝ) / (halfGreedyPrefixDenominator k : ℝ))",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The landed reduced tail-tax inequality is exactly nonnegativity of the finite integer recurrence."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFiniteShadow.lean:1131:tendsto_finiteCoeffWindow_atTop",
+      "name": "tendsto_finiteCoeffWindow_atTop",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFiniteShadow.lean",
+      "line": 1131,
+      "signature": "theorem tendsto_finiteCoeffWindow_atTop (P : Set ℕ) (n : ℕ) : Tendsto (fun J : ℕ ↦ finiteCoeffWindow P n J) atTop (nhds (binaryCoeffTail (supportCoeff P) n))",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Finite coefficient windows converge to the complete normalized coefficient tail."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFiniteShadow.lean:1162:exists_greedyHalfFrozenMargin_nonneg_of_excess_neg",
+      "name": "exists_greedyHalfFrozenMargin_nonneg_of_excess_neg",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFiniteShadow.lean",
+      "line": 1162,
+      "signature": "theorem exists_greedyHalfFrozenMargin_nonneg_of_excess_neg (k : ℕ) (hE : halfGreedyNextDyadicExcessNumerator k < 0) : ∃ J : ℕ, 0 ≤ greedyHalfFrozenMargin k J",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Negative dyadic excess forces an eventual zero crossing of the frozen integer recurrence. This horizon is not yet bounded by the first shell."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFiniteShadow.lean:1193:exists_greedyHalfFrozenMargin_nonneg_iff_excess_neg",
+      "name": "exists_greedyHalfFrozenMargin_nonneg_iff_excess_neg",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFiniteShadow.lean",
+      "line": 1193,
+      "signature": "theorem exists_greedyHalfFrozenMargin_nonneg_iff_excess_neg (k : ℕ) (hk : 0 < k) : (∃ J : ℕ, 0 ≤ greedyHalfFrozenMargin k J) ↔ halfGreedyNextDyadicExcessNumerator k < 0",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "At positive depth, eventual first passage is equivalent to strict dyadic safety. Oddness excludes the zero-excess boundary."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFiniteShadow.lean:1231:HalfGreedyGovernedFrozenMarginProducer",
+      "name": "HalfGreedyGovernedFrozenMarginProducer",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderFiniteShadow.lean",
+      "line": 1231,
+      "signature": "def HalfGreedyGovernedFrozenMarginProducer : Prop",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Exact remaining governed producer after all reductions: the first nonnegative state of the frozen recurrence must occur by `k + 1`."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFiniteShadow.lean:1238:half_mem_mersenneAchievementSet_of_governedFrozenMarginProducer",
+      "name": "half_mem_mersenneAchievementSet_of_governedFrozenMarginProducer",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFiniteShadow.lean",
+      "line": 1238,
+      "signature": "theorem half_mem_mersenneAchievementSet_of_governedFrozenMarginProducer (hproducer : HalfGreedyGovernedFrozenMarginProducer) : (1 / 2 : ℝ) ∈ mersenneAchievementSet",
+      "generated_certificate": false,
+      "claim_ids": [
+        "half_cylinder_finite_shadow"
+      ],
+      "docstring": "The governed first-passage producer closes exact half-membership."
     },
     {
       "id": "Erdos249257/HalfTrappingReturnCarry.lean:42:relationInvariantLinearChannels_det_eq_zero",

@@ -4903,6 +4903,15 @@
           ]
         },
         {
+          "id": "Erdos249257.HalfCylinderFiniteShadow",
+          "path": "Erdos249257/HalfCylinderFiniteShadow.lean",
+          "role": "Finite shadows of the half cylinder",
+          "imports": [
+            "Erdos249257.HalfCarryReachability",
+            "Erdos249257.PrimitiveSupportBridge"
+          ]
+        },
+        {
           "id": "Erdos249257.HalfTrappingReturnCarry",
           "path": "Erdos249257/HalfTrappingReturnCarry.lean",
           "role": "Half-trapping reverse-carry interface",
@@ -5268,6 +5277,11 @@
           "to": "half_second_channel_reduction"
         },
         {
+          "from": "half_cylinder_finite_shadow",
+          "relation": "builds_on",
+          "to": "half_carry_reachability_compactness"
+        },
+        {
           "from": "denominator_exclusion",
           "relation": "advances_open_target",
           "to": "erdos_249",
@@ -5541,7 +5555,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 1200
+        "line": 1217
       }
     },
     {
@@ -5552,7 +5566,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 1209
+        "line": 1226
       }
     },
     {
@@ -5563,7 +5577,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 1216
+        "line": 1233
       }
     }
   ],
@@ -5757,6 +5771,34 @@
           "name": "exists_infinite_support_half_of_canonicalEvenSeamSupply",
           "module": "Erdos249257/HalfCarryReachability.lean",
           "line": 1027
+        }
+      ]
+    },
+    {
+      "id": "half_cylinder_finite_shadow",
+      "label": "Finite shadows of the half cylinder",
+      "status": "conditional reduction",
+      "statement": "For admissible finite half-carry words, the residual from 1/2 is exactly the terminal carry minus the future coefficient tail, scaled by a power of two. At a seam, avoiding the integer strip is equivalent to full scalar strip reachability; the rank-three greedy fixture is raw dyadically safe but has an in-strip seam hole. If the governed frozen-margin producer holds, then 1/2 belongs to the Mersenne achievement set. That producer is not proved.",
+      "remaining_open_proposition_ids": [
+        "remaining_open.universal_257_all_infinite_supports"
+      ],
+      "paper_label": "res:halfcylindershadow",
+      "readme_headline": false,
+      "declarations": [
+        {
+          "name": "halfStripAdmissible_residual_eq",
+          "module": "Erdos249257/HalfCylinderFiniteShadow.lean",
+          "line": 54
+        },
+        {
+          "name": "evenSeam_fullIntegerStrip_iff_escape",
+          "module": "Erdos249257/HalfCylinderFiniteShadow.lean",
+          "line": 806
+        },
+        {
+          "name": "half_mem_mersenneAchievementSet_of_governedFrozenMarginProducer",
+          "module": "Erdos249257/HalfCylinderFiniteShadow.lean",
+          "line": 1238
         }
       ]
     },

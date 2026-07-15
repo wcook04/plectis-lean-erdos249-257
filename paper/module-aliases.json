@@ -3,7 +3,7 @@
   "artifact_role": "paper_sigil_to_lean_module_navigation_crosswalk",
   "authority_posture": "generated_navigation_projection_not_proof_authority",
   "heuristic": "Each CamelCase component contributes at most its first three characters.",
-  "alias_count": 46,
+  "alias_count": 47,
   "aliases": [
     {
       "sigil": "AdeHeiObs",
@@ -94,6 +94,11 @@
       "sigil": "HalCarRea",
       "module": "HalfCarryReachability.lean",
       "path": "Erdos249257/HalfCarryReachability.lean"
+    },
+    {
+      "sigil": "HalCylFinSha",
+      "module": "HalfCylinderFiniteShadow.lean",
+      "path": "Erdos249257/HalfCylinderFiniteShadow.lean"
     },
     {
       "sigil": "HalTraRetCar",

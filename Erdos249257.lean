@@ -62,3 +62,4 @@ import Erdos249257.CompositeDilationDefect
 import Erdos249257.MaximalOmegaLayer
 import Erdos249257.HalfTrappingReturnCarry
 import Erdos249257.HalfCarryReachability
+import Erdos249257.HalfCylinderFiniteShadow
