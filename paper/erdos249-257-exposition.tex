@@ -932,7 +932,18 @@ bit has an exact exhaustive outcome: the cylinder promotes by one bit, or the
 two base ancestors form the literal half-divisor boundary pair and hence
 produce a protected seam,
 \lrefx{SuffixCylinderPromotion.lean}{322}{promotedSuffixCylinder_or_protectedEvenSeamRealizedAt}.
-This is a one-step structural dichotomy, not a cofinal supply theorem.
+At an exact half-divisor row, the crossing-cylinder profile gives the more
+concrete advance-or-seam alternative,
+\lrefx{SuffixCylinderGlobalProducer.lean}{174}{CylinderStage.feedbackStep_or_protectedSeam}.
+The below-strip and above-strip hole cases have explicit finite word and
+suffix-cylinder sheet witnesses,
+\lrefx{SuffixCylinderBelow.lean}{117}{SelectedHalfWindow.word_stepTailExplicit}
+and
+\lrefx{SuffixCylinderTwoSheet.lean}{26}{hasSuffixCylinderAt_take}; combining
+them leaves only a realized seam whose exact hole is inside the next strip,
+\lrefx{SuffixCylinderFeedbackFanIn.lean}{62}{CylinderStage.feedbackAdvance_or_protectedSeam_inStrip}.
+This is a conditional local feedback classification, not a cofinal supply
+theorem: the required crossing coefficient profile is still an input.
 
 \subsection{Pre-feedback selected-cylinder run}\label{res:prefeedback}
 

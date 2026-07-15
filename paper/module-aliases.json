@@ -3,7 +3,7 @@
   "artifact_role": "paper_sigil_to_lean_module_navigation_crosswalk",
   "authority_posture": "generated_navigation_projection_not_proof_authority",
   "heuristic": "Each CamelCase component contributes at most its first three characters.",
-  "alias_count": 90,
+  "alias_count": 94,
   "aliases": [
     {
       "sigil": "ActForResPro",
@@ -401,6 +401,21 @@
       "path": "Erdos249257/SublogDivisorCoverage.lean"
     },
     {
+      "sigil": "SufCylBel",
+      "module": "SuffixCylinderBelow.lean",
+      "path": "Erdos249257/SuffixCylinderBelow.lean"
+    },
+    {
+      "sigil": "SufCylFeeFanIn",
+      "module": "SuffixCylinderFeedbackFanIn.lean",
+      "path": "Erdos249257/SuffixCylinderFeedbackFanIn.lean"
+    },
+    {
+      "sigil": "SufCylGloPro",
+      "module": "SuffixCylinderGlobalProducer.lean",
+      "path": "Erdos249257/SuffixCylinderGlobalProducer.lean"
+    },
+    {
       "sigil": "SufCylPro",
       "module": "SuffixCylinderPromotion.lean",
       "path": "Erdos249257/SuffixCylinderPromotion.lean"
@@ -409,6 +424,11 @@
       "sigil": "SufCylThr",
       "module": "SuffixCylinderThreshold.lean",
       "path": "Erdos249257/SuffixCylinderThreshold.lean"
+    },
+    {
+      "sigil": "SufCylTwoShe",
+      "module": "SuffixCylinderTwoSheet.lean",
+      "path": "Erdos249257/SuffixCylinderTwoSheet.lean"
     },
     {
       "sigil": "SupSunDic",
