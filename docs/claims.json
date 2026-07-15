@@ -5599,6 +5599,15 @@
           ]
         },
         {
+          "id": "Erdos249257.SuffixCylinderPromotion",
+          "path": "Erdos249257/SuffixCylinderPromotion.lean",
+          "role": "Lean proof module",
+          "imports": [
+            "Erdos249257.SelectedSuffixCylinder",
+            "Erdos249257.RewindHalfDivisorAdapter"
+          ]
+        },
+        {
           "id": "Erdos249257.SupportDilationDifferences",
           "path": "Erdos249257/SupportDilationDifferences.lean",
           "role": "Finite support-dilation difference identities",
@@ -6174,7 +6183,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 1751
+        "line": 1756
       }
     },
     {
@@ -6185,7 +6194,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 1760
+        "line": 1765
       }
     },
     {
@@ -6196,7 +6205,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 1767
+        "line": 1772
       }
     }
   ],
@@ -7080,7 +7089,7 @@
       "id": "selected_suffix_cylinder_propagation",
       "label": "Terminally indexed selected suffix-cylinder propagation",
       "status": "conditional reduction",
-      "statement": "The depth-18 selected window has a common terminally indexed suffix cylinder after its depth-13 prefix. Under the canonical selected-window successor, the endpoint updates by E' = 2E-C and continues to cover the new carry interval. The coefficient profile needed for repeated successors is not supplied.",
+      "statement": "The depth-18 selected window has a common terminally indexed suffix cylinder after its depth-13 prefix. Under the canonical selected-window successor, the endpoint updates by E' = 2E-C and continues to cover the new carry interval. For a rewind seam, the next prefix bit either promotes the cylinder or yields the literal half-divisor boundary pair and a protected seam. The coefficient profile needed for repeated successors is not supplied.",
       "remaining_open_proposition_ids": [
         "remaining_open.universal_257_all_infinite_supports"
       ],
@@ -7096,6 +7105,11 @@
           "name": "SelectedHalfWindow.hasSuffixCylinderAt_stepExplicit",
           "module": "Erdos249257/SelectedSuffixCylinder.lean",
           "line": 136
+        },
+        {
+          "name": "promotedSuffixCylinder_or_protectedEvenSeamRealizedAt",
+          "module": "Erdos249257/SuffixCylinderPromotion.lean",
+          "line": 322
         }
       ]
     },

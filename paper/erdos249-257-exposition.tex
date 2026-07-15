@@ -927,7 +927,12 @@ Under the canonical selected-window successor, the endpoint evolves exactly by
 $E' = 2E-C$ and still covers the new carry interval,
 \lrefx{SelectedSuffixCylinder.lean}{136}{SelectedHalfWindow.hasSuffixCylinderAt_stepExplicit}.
 This preserves a finite cylinder invariant; it does not produce the required
-coefficient profile at every later step.
+coefficient profile at every later step.  For a rewind seam, the next prefix
+bit has an exact exhaustive outcome: the cylinder promotes by one bit, or the
+two base ancestors form the literal half-divisor boundary pair and hence
+produce a protected seam,
+\lrefx{SuffixCylinderPromotion.lean}{322}{promotedSuffixCylinder_or_protectedEvenSeamRealizedAt}.
+This is a one-step structural dichotomy, not a cofinal supply theorem.
 
 \subsection{Pre-feedback selected-cylinder run}\label{res:prefeedback}
 
