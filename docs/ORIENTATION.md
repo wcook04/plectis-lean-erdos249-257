@@ -15,9 +15,9 @@ Lean kernel remains proof authority.
 
 | Surface | Count |
 |---|---:|
-| Lean modules | 603 |
-| Lean declarations | 9,987 |
-| Theorem-like declarations | 9,064 |
+| Lean modules | 604 |
+| Lean declarations | 10,329 |
+| Theorem-like declarations | 9,404 |
 | Generated certificate declarations | 2,923 |
 | Principal claim links | 200 |
 
