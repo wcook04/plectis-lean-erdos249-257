@@ -5616,6 +5616,14 @@
           ]
         },
         {
+          "id": "Erdos249257.SuffixCylinderFiniteGap",
+          "path": "Erdos249257/SuffixCylinderFiniteGap.lean",
+          "role": "Lean proof module",
+          "imports": [
+            "Erdos249257.SuffixCylinderInStrip"
+          ]
+        },
+        {
           "id": "Erdos249257.SuffixCylinderGlobalProducer",
           "path": "Erdos249257/SuffixCylinderGlobalProducer.lean",
           "role": "Lean proof module",
@@ -6233,7 +6241,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 1778
+        "line": 1782
       }
     },
     {
@@ -6244,7 +6252,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 1787
+        "line": 1791
       }
     },
     {
@@ -6255,7 +6263,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 1794
+        "line": 1798
       }
     }
   ],
@@ -7139,7 +7147,7 @@
       "id": "selected_suffix_cylinder_propagation",
       "label": "Terminally indexed selected suffix-cylinder propagation",
       "status": "conditional reduction",
-      "statement": "The depth-18 selected window has a common terminally indexed suffix cylinder after its depth-13 prefix. Under the canonical selected-window successor, the endpoint updates by E' = 2E-C and continues to cover the new carry interval. For a rewind seam, the next prefix bit either promotes the cylinder or yields the literal half-divisor boundary pair and a protected seam. At an exact half-divisor row, a specified crossing profile either advances through a low or high sheet, or yields a realized protected seam whose exact hole lies inside the next strip. The strengthened in-strip form retains both endpoints, complementary literal prefixes, all non-hole admissible words, and the canonical parent-failure coordinate. The coefficient profile needed for repeated successors is not supplied.",
+      "statement": "The depth-18 selected window has a common terminally indexed suffix cylinder after its depth-13 prefix. Under the canonical selected-window successor, the endpoint updates by E' = 2E-C and continues to cover the new carry interval. For a rewind seam, the next prefix bit either promotes the cylinder or yields the literal half-divisor boundary pair and a protected seam. At an exact half-divisor row, a specified crossing profile either advances through a low or high sheet, or yields a realized protected seam whose exact hole lies inside the next strip. The strengthened in-strip form retains both endpoints, complementary literal prefixes, all non-hole admissible words, and the canonical parent-failure coordinate; it embeds as a singleton finite gap, and a finite gap advances when common next-coefficient, child-gap, and buffer hypotheses are supplied. The coefficient profile needed for repeated successors is not supplied.",
       "remaining_open_proposition_ids": [
         "remaining_open.universal_257_all_infinite_supports"
       ],
@@ -7185,6 +7193,11 @@
           "name": "CylinderStage.feedbackAdvance_or_inStripTwoSheet",
           "module": "Erdos249257/SuffixCylinderInStrip.lean",
           "line": 665
+        },
+        {
+          "name": "InStripGapStage.advanceOfCommonNextCoeff",
+          "module": "Erdos249257/SuffixCylinderFiniteGap.lean",
+          "line": 256
         }
       ]
     },

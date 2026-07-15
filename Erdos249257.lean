@@ -125,3 +125,4 @@ import Erdos249257.SuffixCylinderBelow
 import Erdos249257.SuffixCylinderTwoSheet
 import Erdos249257.SuffixCylinderFeedbackFanIn
 import Erdos249257.SuffixCylinderInStrip
+import Erdos249257.SuffixCylinderFiniteGap
