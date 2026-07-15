@@ -4893,6 +4893,15 @@
           ]
         },
         {
+          "id": "Erdos249257.HalfTrappingReturnCarry",
+          "path": "Erdos249257/HalfTrappingReturnCarry.lean",
+          "role": "Half-trapping reverse-carry interface",
+          "imports": [
+            "Erdos249257.AdelicHeightObstruction",
+            "Erdos249257.BooleanMobiusCarry"
+          ]
+        },
+        {
           "id": "Erdos249257.IncidenceQuotientHermitePade",
           "path": "Erdos249257/IncidenceQuotientHermitePade.lean",
           "role": "Lean proof module",
@@ -5239,6 +5248,11 @@
           "to": "composite_dilation_defect_identity"
         },
         {
+          "from": "half_trapping_return_carry_interface",
+          "relation": "builds_on",
+          "to": "half_second_channel_reduction"
+        },
+        {
           "from": "denominator_exclusion",
           "relation": "advances_open_target",
           "to": "erdos_249",
@@ -5512,7 +5526,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 1170
+        "line": 1185
       }
     },
     {
@@ -5523,7 +5537,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 1179
+        "line": 1194
       }
     },
     {
@@ -5534,7 +5548,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 1186
+        "line": 1201
       }
     }
   ],
@@ -5672,6 +5686,34 @@
           "name": "mixedPrimePowerLayerTwo_twelve_fixture",
           "module": "Erdos249257/MaximalOmegaLayer.lean",
           "line": 65
+        }
+      ]
+    },
+    {
+      "id": "half_trapping_return_carry_interface",
+      "label": "Half-trapping reverse-carry interface",
+      "status": "conditional reduction",
+      "statement": "Scalar-relation-invariant rational-linear channels have no nontrivial square determinant at any rank. Separately, a common coefficient word with a 1/0 seam and a common following overlap forces the terminal reverse-carry difference to be a power of two times an odd integer; a common nonnegative real carry bound yields the corresponding dyadic spacing inequality. The module neither supplies reverse-carry presentations nor a predecessor overlap, so it is not a greedy separation or irrationality theorem.",
+      "remaining_open_proposition_ids": [
+        "remaining_open.universal_257_all_infinite_supports"
+      ],
+      "paper_label": "res:halftrapping",
+      "readme_headline": false,
+      "declarations": [
+        {
+          "name": "relationInvariantLinearChannels_det_eq_zero",
+          "module": "Erdos249257/HalfTrappingReturnCarry.lean",
+          "line": 42
+        },
+        {
+          "name": "overlappingReverseCarryWords_carryDifference_eq_twoPow_mul_odd",
+          "module": "Erdos249257/HalfTrappingReturnCarry.lean",
+          "line": 124
+        },
+        {
+          "name": "overlappingReverseCarryWords_twoPow_le_realBound",
+          "module": "Erdos249257/HalfTrappingReturnCarry.lean",
+          "line": 191
         }
       ]
     },

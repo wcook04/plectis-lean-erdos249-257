@@ -534,6 +534,21 @@ one at residual argument $1$:
 These are finite coefficient identities.  They do not provide a decimation
 transport, a bounded-$\Omega$ conclusion, or an irrationality theorem.
 
+\subsection{Half-trapping return carries}\label{res:halftrapping}
+
+If rational-linear channels vanish on every relation killed by one scalar
+evaluation, their evaluation matrix has rank at most one; every nontrivial
+square minor therefore vanishes.  The all-rank determinant statement is
+\lref{HalfTrappingReturnCarry.lean}{42}{relationInvariantLinearChannels_det_eq_zero}.
+For two reverse carries with a common coefficient word, a $1/0$ seam, and a
+common following overlap, the terminal difference is a power of two times an
+odd integer.  A shared nonnegative Archimedean bound then gives the matching
+dyadic spacing inequality, formalised at
+\lrefx{HalfTrappingReturnCarry.lean}{191}{overlappingReverseCarryWords_twoPow_le_realBound}.
+The module does not produce reverse-carry presentations or an earlier
+overlapping return; it supplies only the algebraic core of that conditional
+route.
+
 \subsection{What stays open}
 
 The universal Erd\H{o}s \#257 statement, irrationality of $\sum_{n\in A}1/(2^n-1)$

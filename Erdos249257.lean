@@ -60,3 +60,4 @@ import Erdos249257.LcmFactorIdealPulseObstruction
 import Erdos249257.SupportSunflowerDichotomy
 import Erdos249257.CompositeDilationDefect
 import Erdos249257.MaximalOmegaLayer
+import Erdos249257.HalfTrappingReturnCarry

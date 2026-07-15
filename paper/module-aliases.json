@@ -3,7 +3,7 @@
   "artifact_role": "paper_sigil_to_lean_module_navigation_crosswalk",
   "authority_posture": "generated_navigation_projection_not_proof_authority",
   "heuristic": "Each CamelCase component contributes at most its first three characters.",
-  "alias_count": 44,
+  "alias_count": 45,
   "aliases": [
     {
       "sigil": "AdeHeiObs",
@@ -89,6 +89,11 @@
       "sigil": "GreAchSet",
       "module": "GreedyAchievementSet.lean",
       "path": "Erdos249257/GreedyAchievementSet.lean"
+    },
+    {
+      "sigil": "HalTraRetCar",
+      "module": "HalfTrappingReturnCarry.lean",
+      "path": "Erdos249257/HalfTrappingReturnCarry.lean"
     },
     {
       "sigil": "JoiExpTra",

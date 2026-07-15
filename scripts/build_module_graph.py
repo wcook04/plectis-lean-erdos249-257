@@ -35,6 +35,7 @@ NEW_ROLES = {
     "Erdos249257.DiagonalPincerDecomposition": "Exact diagonal-pincer target decomposition",
     "Erdos249257.DyadicPrefixCompression": "Dyadic prefix compression identities",
     "Erdos249257.FullTargetPrimeAdjunctionNoGo": "Prime-adjunction obstruction for the full target",
+    "Erdos249257.HalfTrappingReturnCarry": "Half-trapping reverse-carry interface",
     "Erdos249257.LambertDiagonalEnclosure": "Lambert diagonal enclosure reduction",
     "Erdos249257.LcmFactorIdealPulseObstruction": "LCM factor-ideal anchor-pulse obstruction",
     "Erdos249257.MersenneShadowCyclotomicNoncollapse": "Cyclotomic noncollapse in the Mersenne shadow",
