@@ -4,21 +4,21 @@
   "projection_not_authority": true,
   "proof_authority": "Lean source checked by the pinned Lean kernel",
   "argument_authority": "docs/claims.json::machine_readable_paper.argument_graph",
-  "source_fingerprint": "sha256:eb0fed8526836af8eccd8da3eb0c96ffcf3966b074e45347c92a1a8626c24484",
+  "source_fingerprint": "sha256:bb8e4fd1ff73334a94256651bc17fe460cdf92ddb2ff79ba66387c5e7ebd3fae",
   "summary": {
-    "module_count": 592,
-    "declaration_count": 7630,
-    "theorem_like_count": 6804,
+    "module_count": 593,
+    "declaration_count": 7637,
+    "theorem_like_count": 6809,
     "generated_certificate_declaration_count": 1681,
-    "principal_claim_link_count": 178,
+    "principal_claim_link_count": 181,
     "kind_counts": {
       "abbrev": 6,
-      "def": 794,
+      "def": 796,
       "inductive": 3,
       "instance": 5,
       "lemma": 354,
       "structure": 18,
-      "theorem": 6450
+      "theorem": 6455
     }
   },
   "modules": [
@@ -121,7 +121,8 @@
         "Erdos249257.SelectedSuffixCylinderPreFeedback",
         "Erdos249257.HalfDivisorUnitDrop",
         "Erdos249257.ActualForeignResidueProjection",
-        "Erdos249257.CofinalStripReturn"
+        "Erdos249257.CofinalStripReturn",
+        "Erdos249257.TerminalOnlyCofinal"
       ],
       "declaration_count": 0,
       "kind_counts": {}
@@ -7214,6 +7215,18 @@
         "def": 11,
         "structure": 1,
         "theorem": 36
+      }
+    },
+    {
+      "id": "Erdos249257.TerminalOnlyCofinal",
+      "path": "Erdos249257/TerminalOnlyCofinal.lean",
+      "imports": [
+        "Erdos249257.HalfCarryReachability"
+      ],
+      "declaration_count": 7,
+      "kind_counts": {
+        "def": 2,
+        "theorem": 5
       }
     },
     {
@@ -85258,6 +85271,89 @@
       "generated_certificate": false,
       "claim_ids": [],
       "docstring": "Moving-prime-power regression: the exact third `2`-adic layer of the singleton support `{8}` contributes one new divisor at residual argument `1`."
+    },
+    {
+      "id": "Erdos249257/TerminalOnlyCofinal.lean:24:HalfTerminalOnlyStripWitness",
+      "name": "HalfTerminalOnlyStripWitness",
+      "kind": "def",
+      "module": "Erdos249257/TerminalOnlyCofinal.lean",
+      "line": 24,
+      "signature": "def HalfTerminalOnlyStripWitness (M : ℕ) : Prop",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A normalized finite word whose *terminal* integer half-carry is in the discrete square-root strip. There is deliberately no all-prefix admissibility hypothesis here."
+    },
+    {
+      "id": "Erdos249257/TerminalOnlyCofinal.lean:34:HalfCarryCofinalTerminalOnlyStrip",
+      "name": "HalfCarryCofinalTerminalOnlyStrip",
+      "kind": "def",
+      "module": "Erdos249257/TerminalOnlyCofinal.lean",
+      "line": 34,
+      "signature": "def HalfCarryCofinalTerminalOnlyStrip : Prop",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Terminal-only square-root-strip witnesses exist at cofinally many depths. The `max N 1` guard makes the terminal index `M - 1` line up with the scaled-residual identity at exponent `M`."
+    },
+    {
+      "id": "Erdos249257/TerminalOnlyCofinal.lean:39:zero_not_mem_wordSupport_of_terminalOnlyWitness",
+      "name": "zero_not_mem_wordSupport_of_terminalOnlyWitness",
+      "kind": "theorem",
+      "module": "Erdos249257/TerminalOnlyCofinal.lean",
+      "line": 39,
+      "signature": "theorem zero_not_mem_wordSupport_of_terminalOnlyWitness {M : ℕ} {a : HalfWord M} (hzero : a ⟨0, Nat.zero_lt_succ M⟩ = false) : 0 ∉ wordSupport a",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The zero bit of a normalized terminal-only witness is absent from its finite support."
+    },
+    {
+      "id": "Erdos249257/TerminalOnlyCofinal.lean:52:one_not_mem_wordSupport_of_terminalOnlyWitness",
+      "name": "one_not_mem_wordSupport_of_terminalOnlyWitness",
+      "kind": "theorem",
+      "module": "Erdos249257/TerminalOnlyCofinal.lean",
+      "line": 52,
+      "signature": "theorem one_not_mem_wordSupport_of_terminalOnlyWitness {M : ℕ} {a : HalfWord M} (hone : ∀ h : 1 < M + 1, a ⟨1, h⟩ = false) : 1 ∉ wordSupport a",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The exponent-one bit of a normalized terminal-only witness is absent from its finite support."
+    },
+    {
+      "id": "Erdos249257/TerminalOnlyCofinal.lean:68:dist_half_erdosSupportSeries_wordSupport_le_of_terminalOnlyWitness",
+      "name": "dist_half_erdosSupportSeries_wordSupport_le_of_terminalOnlyWitness",
+      "kind": "theorem",
+      "module": "Erdos249257/TerminalOnlyCofinal.lean",
+      "line": 68,
+      "signature": "theorem dist_half_erdosSupportSeries_wordSupport_le_of_terminalOnlyWitness {M : ℕ} (hM : 1 ≤ M) {a : HalfWord M} (hone : ∀ h : 1 < M + 1, a ⟨1, h⟩ = false) (hcarry : |(integerHalfCarry (wordSupport a) (M - 1) : ℝ)| ≤ (halfStripBound M : ℝ)) : dist (erdosSupportSeries 2 (wordSupport a)) (1 / 2 : ℝ) ≤ (4 * (M : ℝ) + 12) / (2 : ℝ) ^ M",
+      "generated_certificate": false,
+      "claim_ids": [
+        "terminal_only_cofinal_closure"
+      ],
+      "docstring": "Pointwise approximation estimate. A terminal-only strip witness at positive depth gives a finite support value within `(4*M + 12) / 2^M` of `1/2`. The constant combines the discrete terminal strip with the existing analytic support-coefficient-tail bound."
+    },
+    {
+      "id": "Erdos249257/TerminalOnlyCofinal.lean:134:half_mem_mersenneAchievementSet_of_cofinalTerminalOnlyStrip",
+      "name": "half_mem_mersenneAchievementSet_of_cofinalTerminalOnlyStrip",
+      "kind": "theorem",
+      "module": "Erdos249257/TerminalOnlyCofinal.lean",
+      "line": 134,
+      "signature": "theorem half_mem_mersenneAchievementSet_of_cofinalTerminalOnlyStrip (hcofinal : HalfCarryCofinalTerminalOnlyStrip) : (1 / 2 : ℝ) ∈ mersenneAchievementSet",
+      "generated_certificate": false,
+      "claim_ids": [
+        "terminal_only_cofinal_closure"
+      ],
+      "docstring": "**Terminal-only cofinal consumer.** Cofinal square-root-strip terminal witnesses force `1/2` into the Mersenne achievement set. Unlike `exists_infinite_support_half_of_cofinalAdmissibility`, this theorem assumes neither coherent witnesses nor strip control at any earlier row."
+    },
+    {
+      "id": "Erdos249257/TerminalOnlyCofinal.lean:192:exists_infinite_support_half_of_cofinalTerminalOnlyStrip",
+      "name": "exists_infinite_support_half_of_cofinalTerminalOnlyStrip",
+      "kind": "theorem",
+      "module": "Erdos249257/TerminalOnlyCofinal.lean",
+      "line": 192,
+      "signature": "theorem exists_infinite_support_half_of_cofinalTerminalOnlyStrip (hcofinal : HalfCarryCofinalTerminalOnlyStrip) : ∃ A : Set ℕ, A.Infinite ∧ erdosSupportSeries 2 A = (1 : ℝ) / 2",
+      "generated_certificate": false,
+      "claim_ids": [
+        "terminal_only_cofinal_closure"
+      ],
+      "docstring": "The terminal-only cofinal producer yields an infinite normalized support summing exactly to `1/2`. Infinitude follows from the existing odd- denominator obstruction for finite Boolean supports."
     },
     {
       "id": "Erdos249257/ThreeTransportBoundary.lean:24:threeTransportTail",

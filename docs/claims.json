@@ -5439,6 +5439,14 @@
           ]
         },
         {
+          "id": "Erdos249257.TerminalOnlyCofinal",
+          "path": "Erdos249257/TerminalOnlyCofinal.lean",
+          "role": "Lean proof module",
+          "imports": [
+            "Erdos249257.HalfCarryReachability"
+          ]
+        },
+        {
           "id": "Erdos249257.ThreeTransportBoundary",
           "path": "Erdos249257/ThreeTransportBoundary.lean",
           "role": "Lean proof module",
@@ -5535,6 +5543,11 @@
         },
         {
           "from": "cofinal_strip_return_closure",
+          "relation": "builds_on",
+          "to": "half_carry_reachability_compactness"
+        },
+        {
+          "from": "terminal_only_cofinal_closure",
           "relation": "builds_on",
           "to": "half_carry_reachability_compactness"
         },
@@ -5942,7 +5955,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 1532
+        "line": 1557
       }
     },
     {
@@ -5953,7 +5966,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 1541
+        "line": 1566
       }
     },
     {
@@ -5964,7 +5977,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 1548
+        "line": 1573
       }
     }
   ],
@@ -6186,6 +6199,34 @@
           "name": "half_mem_mersenneAchievementSet_of_cofinalStripReturn",
           "module": "Erdos249257/CofinalStripReturn.lean",
           "line": 157
+        }
+      ]
+    },
+    {
+      "id": "terminal_only_cofinal_closure",
+      "label": "Terminal-only cofinal square-root-strip closure",
+      "status": "conditional reduction",
+      "statement": "A normalized finite word with terminal half carry in the square-root strip has support-series value within (4M+12)/2^M of 1/2. Thus cofinally many such terminal-only witnesses, with neither coherent histories nor earlier-row bounds, force 1/2 into the Mersenne achievement set and yield an infinite support with support-series value 1/2. The cofinal terminal-witness supply is not proved.",
+      "remaining_open_proposition_ids": [
+        "remaining_open.universal_257_all_infinite_supports"
+      ],
+      "paper_label": "res:terminalonlycofinal",
+      "readme_headline": false,
+      "declarations": [
+        {
+          "name": "dist_half_erdosSupportSeries_wordSupport_le_of_terminalOnlyWitness",
+          "module": "Erdos249257/TerminalOnlyCofinal.lean",
+          "line": 68
+        },
+        {
+          "name": "half_mem_mersenneAchievementSet_of_cofinalTerminalOnlyStrip",
+          "module": "Erdos249257/TerminalOnlyCofinal.lean",
+          "line": 134
+        },
+        {
+          "name": "exists_infinite_support_half_of_cofinalTerminalOnlyStrip",
+          "module": "Erdos249257/TerminalOnlyCofinal.lean",
+          "line": 192
         }
       ]
     },

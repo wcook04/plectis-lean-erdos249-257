@@ -584,6 +584,31 @@ The cofinal return condition itself is not established.  This is a weaker
 producer socket than a uniform strip bound, not an unconditional membership
 theorem.
 
+\paragraph{Terminal-only cofinal approximation.}  Coherence can be removed
+entirely from a further version of this reduction.  At depth $M$, take only a
+normalised finite word whose terminal half carry lies in the square-root
+strip.  Its finite support then has support-series value within
+\[
+ \frac{4M+12}{2^M}
+\]
+of $1/2$.  If such terminal witnesses occur cofinally, these finite values
+converge to $1/2$; closedness of the Mersenne achievement set supplies the
+limit.  No control of the earlier rows, and no compatibility between the
+witnesses, is used.
+
+\begin{proposition}[terminal-only cofinal closure]\label{res:terminalonlycofinal}
+Cofinal normalised terminal witnesses in the square-root strip imply that
+$1/2$ belongs to the Mersenne achievement set, and hence that an infinite
+support has support-series value $1/2$.
+\end{proposition}
+\noindent Formalised:
+\lref{TerminalOnlyCofinal.lean}{68}{dist_half_erdosSupportSeries_wordSupport_le_of_terminalOnlyWitness},
+\lref{TerminalOnlyCofinal.lean}{134}{half_mem_mersenneAchievementSet_of_cofinalTerminalOnlyStrip},
+and
+\lref{TerminalOnlyCofinal.lean}{192}{exists_infinite_support_half_of_cofinalTerminalOnlyStrip}.
+The cofinal terminal-witness supply is not proved.  In particular, the
+proposition does not establish membership of $1/2$ unconditionally.
+
 \subsection{Finite shadows of the half cylinder}\label{res:halfcylindershadow}
 
 For an admissible finite word, the residual from $1/2$ is given exactly by its
