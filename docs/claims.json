@@ -5275,6 +5275,14 @@
           ]
         },
         {
+          "id": "Erdos249257.PowerTwoBitLift",
+          "path": "Erdos249257/PowerTwoBitLift.lean",
+          "role": "Lean proof module",
+          "imports": [
+            "Erdos249257.DiagonalFreshLossBridge"
+          ]
+        },
+        {
           "id": "Erdos249257.PrimeJumpMigration",
           "path": "Erdos249257/PrimeJumpMigration.lean",
           "role": "Lean proof module",
@@ -5735,6 +5743,11 @@
           "to": "diagonal_fresh_loss_reduction"
         },
         {
+          "from": "power_two_bit_lift",
+          "relation": "builds_on",
+          "to": "diagonal_fresh_loss_reduction"
+        },
+        {
           "from": "canonical_jump_slack_reduction",
           "relation": "builds_on",
           "to": "diagonal_fresh_loss_reduction"
@@ -5968,7 +5981,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 1579
+        "line": 1599
       }
     },
     {
@@ -5979,7 +5992,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 1588
+        "line": 1608
       }
     },
     {
@@ -5990,7 +6003,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 1595
+        "line": 1615
       }
     }
   ],
@@ -7164,6 +7177,34 @@
           "name": "oldFivePoint_sub_secondBranchAdverseDeficit_le_actual",
           "module": "Erdos249257/FreshPrimeDeficitDecomposition.lean",
           "line": 269
+        }
+      ]
+    },
+    {
+      "id": "power_two_bit_lift",
+      "label": "Exact power-of-two one-bit lift",
+      "status": "proved here",
+      "statement": "Given agreement modulo 2^k, agreement modulo 2^(k+1) is exactly evenness of the signed quotient after division by 2^k; failure gives the unique offset class. In particular, a signed difference 16*c agrees modulo 32 exactly when c is even. This provides a finite fifth-bit interface and does not supply cofactor parity at unbounded scales.",
+      "remaining_open_proposition_ids": [
+        "remaining_open.unbounded_certificate_supply"
+      ],
+      "paper_label": "res:powertwobitlift",
+      "readme_headline": false,
+      "declarations": [
+        {
+          "name": "two_pow_succ_dvd_iff_quotient_even",
+          "module": "Erdos249257/PowerTwoBitLift.lean",
+          "line": 34
+        },
+        {
+          "name": "modEq_thirtyTwo_iff_even_difference_cofactor",
+          "module": "Erdos249257/PowerTwoBitLift.lean",
+          "line": 111
+        },
+        {
+          "name": "not_modEq_thirtyTwo_iff_offset_sixteen",
+          "module": "Erdos249257/PowerTwoBitLift.lean",
+          "line": 129
         }
       ]
     },

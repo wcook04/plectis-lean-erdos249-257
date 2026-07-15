@@ -4,13 +4,13 @@
   "projection_not_authority": true,
   "proof_authority": "Lean source checked by the pinned Lean kernel",
   "argument_authority": "docs/claims.json::machine_readable_paper.argument_graph",
-  "source_fingerprint": "sha256:3992a2cdcdddaa0425f7d3cbad4794c54d099baee66725d7daf2c28090818536",
+  "source_fingerprint": "sha256:7104350978eaac92ea6240e2533e8088415ea2380d879b0f02478c30ae0cd5ff",
   "summary": {
-    "module_count": 594,
-    "declaration_count": 7656,
-    "theorem_like_count": 6822,
+    "module_count": 595,
+    "declaration_count": 7667,
+    "theorem_like_count": 6833,
     "generated_certificate_declaration_count": 1681,
-    "principal_claim_link_count": 184,
+    "principal_claim_link_count": 187,
     "kind_counts": {
       "abbrev": 6,
       "def": 802,
@@ -18,7 +18,7 @@
       "instance": 5,
       "lemma": 354,
       "structure": 18,
-      "theorem": 6468
+      "theorem": 6479
     }
   },
   "modules": [
@@ -123,7 +123,8 @@
         "Erdos249257.ActualForeignResidueProjection",
         "Erdos249257.CofinalStripReturn",
         "Erdos249257.TerminalOnlyCofinal",
-        "Erdos249257.FreshPrimeDeficitDecomposition"
+        "Erdos249257.FreshPrimeDeficitDecomposition",
+        "Erdos249257.PowerTwoBitLift"
       ],
       "declaration_count": 0,
       "kind_counts": {}
@@ -6968,6 +6969,17 @@
       "kind_counts": {
         "def": 23,
         "theorem": 71
+      }
+    },
+    {
+      "id": "Erdos249257.PowerTwoBitLift",
+      "path": "Erdos249257/PowerTwoBitLift.lean",
+      "imports": [
+        "Erdos249257.DiagonalFreshLossBridge"
+      ],
+      "declaration_count": 11,
+      "kind_counts": {
+        "theorem": 11
       }
     },
     {
@@ -80141,6 +80153,133 @@
       "generated_certificate": false,
       "claim_ids": [],
       "docstring": "Compatibility endpoint for the stronger two-mode socket. Its proof now flows through the weaker window-gap route, making explicit that the `W₁` and `C₁` conjuncts are not on the certificate consumer's critical path."
+    },
+    {
+      "id": "Erdos249257/PowerTwoBitLift.lean:27:mul_two_dvd_mul_iff_even",
+      "name": "mul_two_dvd_mul_iff_even",
+      "kind": "theorem",
+      "module": "Erdos249257/PowerTwoBitLift.lean",
+      "line": 27,
+      "signature": "theorem mul_two_dvd_mul_iff_even {M q : ℤ} (hM : M ≠ 0) : M * 2 ∣ M * q ↔ Even q",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Cancelling a nonzero common factor turns one extra factor of two into parity of the remaining cofactor."
+    },
+    {
+      "id": "Erdos249257/PowerTwoBitLift.lean:34:two_pow_succ_dvd_iff_quotient_even",
+      "name": "two_pow_succ_dvd_iff_quotient_even",
+      "kind": "theorem",
+      "module": "Erdos249257/PowerTwoBitLift.lean",
+      "line": 34,
+      "signature": "theorem two_pow_succ_dvd_iff_quotient_even {z : ℤ} {k : ℕ} (hk : (2 : ℤ) ^ k ∣ z) : (2 : ℤ) ^ (k + 1) ∣ z ↔ Even (z / (2 : ℤ) ^ k)",
+      "generated_certificate": false,
+      "claim_ids": [
+        "power_two_bit_lift"
+      ],
+      "docstring": "Exact divisibility lift from `2^k` to `2^(k+1)`: after the known power of two is divided out, only the parity of the integral quotient remains."
+    },
+    {
+      "id": "Erdos249257/PowerTwoBitLift.lean:47:two_pow_succ_modEq_iff_quotient_even",
+      "name": "two_pow_succ_modEq_iff_quotient_even",
+      "kind": "theorem",
+      "module": "Erdos249257/PowerTwoBitLift.lean",
+      "line": 47,
+      "signature": "theorem two_pow_succ_modEq_iff_quotient_even {x y : ℤ} {k : ℕ} (hk : Int.ModEq ((2 : ℤ) ^ k) x y) : Int.ModEq ((2 : ℤ) ^ (k + 1)) x y ↔ Even ((y - x) / (2 : ℤ) ^ k)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Congruence version of the exact one-bit lift."
+    },
+    {
+      "id": "Erdos249257/PowerTwoBitLift.lean:56:two_pow_succ_modEq_or_offset",
+      "name": "two_pow_succ_modEq_or_offset",
+      "kind": "theorem",
+      "module": "Erdos249257/PowerTwoBitLift.lean",
+      "line": 56,
+      "signature": "theorem two_pow_succ_modEq_or_offset {x y : ℤ} {k : ℕ} (hk : Int.ModEq ((2 : ℤ) ^ k) x y) : Int.ModEq ((2 : ℤ) ^ (k + 1)) x y ∨ Int.ModEq ((2 : ℤ) ^ (k + 1)) x (y + (2 : ℤ) ^ k)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A residue agreeing modulo `2^k` has exactly two possible classes modulo `2^(k+1)`: the original class or its translate by `2^k`."
+    },
+    {
+      "id": "Erdos249257/PowerTwoBitLift.lean:82:thirtyTwo_dvd_iff_even_sixteen_cofactor",
+      "name": "thirtyTwo_dvd_iff_even_sixteen_cofactor",
+      "kind": "theorem",
+      "module": "Erdos249257/PowerTwoBitLift.lean",
+      "line": 82,
+      "signature": "theorem thirtyTwo_dvd_iff_even_sixteen_cofactor {z c : ℤ} (hz : z = 16 * c) : (32 : ℤ) ∣ z ↔ Even c",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "If a signed difference is displayed as `16*c`, its fifth bit vanishes exactly when the displayed cofactor is even."
+    },
+    {
+      "id": "Erdos249257/PowerTwoBitLift.lean:90:thirtyTwo_dvd_iff_sixteen_quotient_even",
+      "name": "thirtyTwo_dvd_iff_sixteen_quotient_even",
+      "kind": "theorem",
+      "module": "Erdos249257/PowerTwoBitLift.lean",
+      "line": 90,
+      "signature": "theorem thirtyTwo_dvd_iff_sixteen_quotient_even {z : ℤ} (hz : (16 : ℤ) ∣ z) : (32 : ℤ) ∣ z ↔ Even (z / 16)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Quotient form of the `16`-to-`32` lift."
+    },
+    {
+      "id": "Erdos249257/PowerTwoBitLift.lean:97:modEq_thirtyTwo_iff_sixteen_quotient_even",
+      "name": "modEq_thirtyTwo_iff_sixteen_quotient_even",
+      "kind": "theorem",
+      "module": "Erdos249257/PowerTwoBitLift.lean",
+      "line": 97,
+      "signature": "theorem modEq_thirtyTwo_iff_sixteen_quotient_even {x y : ℤ} (hxy : Int.ModEq 16 x y) : Int.ModEq 32 x y ↔ Even ((y - x) / 16)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Fifth-bit agreement of two integers is exactly parity of their signed fourth-bit quotient."
+    },
+    {
+      "id": "Erdos249257/PowerTwoBitLift.lean:103:not_modEq_thirtyTwo_iff_sixteen_quotient_odd",
+      "name": "not_modEq_thirtyTwo_iff_sixteen_quotient_odd",
+      "kind": "theorem",
+      "module": "Erdos249257/PowerTwoBitLift.lean",
+      "line": 103,
+      "signature": "theorem not_modEq_thirtyTwo_iff_sixteen_quotient_odd {x y : ℤ} (hxy : Int.ModEq 16 x y) : ¬ Int.ModEq 32 x y ↔ Odd ((y - x) / 16)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Failure of the fifth-bit lift is exactly oddness of the same quotient."
+    },
+    {
+      "id": "Erdos249257/PowerTwoBitLift.lean:111:modEq_thirtyTwo_iff_even_difference_cofactor",
+      "name": "modEq_thirtyTwo_iff_even_difference_cofactor",
+      "kind": "theorem",
+      "module": "Erdos249257/PowerTwoBitLift.lean",
+      "line": 111,
+      "signature": "theorem modEq_thirtyTwo_iff_even_difference_cofactor {P N c : ℤ} (hfactor : P - N = 16 * c) : Int.ModEq 32 P N ↔ Even c",
+      "generated_certificate": false,
+      "claim_ids": [
+        "power_two_bit_lift"
+      ],
+      "docstring": "Factor-certificate form adapted to a signed difference `P-N`; changing the orientation of the difference does not change the parity test."
+    },
+    {
+      "id": "Erdos249257/PowerTwoBitLift.lean:122:modEq_thirtyTwo_or_offset_sixteen",
+      "name": "modEq_thirtyTwo_or_offset_sixteen",
+      "kind": "theorem",
+      "module": "Erdos249257/PowerTwoBitLift.lean",
+      "line": 122,
+      "signature": "theorem modEq_thirtyTwo_or_offset_sixteen {x y : ℤ} (hxy : Int.ModEq 16 x y) : Int.ModEq 32 x y ∨ Int.ModEq 32 x (y + 16)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Exhaustive concrete fifth-bit alternatives after fourth-bit agreement."
+    },
+    {
+      "id": "Erdos249257/PowerTwoBitLift.lean:129:not_modEq_thirtyTwo_iff_offset_sixteen",
+      "name": "not_modEq_thirtyTwo_iff_offset_sixteen",
+      "kind": "theorem",
+      "module": "Erdos249257/PowerTwoBitLift.lean",
+      "line": 129,
+      "signature": "theorem not_modEq_thirtyTwo_iff_offset_sixteen {x y : ℤ} (hxy : Int.ModEq 16 x y) : ¬ Int.ModEq 32 x y ↔ Int.ModEq 32 x (y + 16)",
+      "generated_certificate": false,
+      "claim_ids": [
+        "power_two_bit_lift"
+      ],
+      "docstring": "The offset class is not merely a possible failure class: under fourth-bit agreement it is equivalent to failure of fifth-bit agreement."
     },
     {
       "id": "Erdos249257/PrimeJumpMigration.lean:23:residueHeckeDefect",

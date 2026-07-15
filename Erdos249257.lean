@@ -97,3 +97,4 @@ import Erdos249257.ActualForeignResidueProjection
 import Erdos249257.CofinalStripReturn
 import Erdos249257.TerminalOnlyCofinal
 import Erdos249257.FreshPrimeDeficitDecomposition
+import Erdos249257.PowerTwoBitLift

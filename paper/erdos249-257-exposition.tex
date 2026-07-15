@@ -1281,6 +1281,26 @@ and
 This supplies the exact correction term for the finite probes.  It supplies
 neither a cofinal deficit bound nor an irrationality criterion.
 
+\paragraph{One-bit lifting.}  The power-of-two signed-margin socket admits a
+separate exact arithmetic reduction.  If a signed difference is already
+divisible by $2^k$, lifting its congruence to $2^{k+1}$ is equivalent to
+evenness of the quotient after division by $2^k$.  Failure of the lift gives
+the unique translated residue class.  In particular, a displayed difference
+$P-N=16c$ agrees modulo $32$ exactly when $c$ is even; otherwise the residue
+is the offset class by $16$.
+
+\begin{proposition}[one-bit signed-margin lift]\label{res:powertwobitlift}
+The fifth-bit question after fourth-bit agreement is exactly one cofactor
+parity test, with the complementary offset class characterising failure.
+\end{proposition}
+\noindent Formalised:
+\lref{PowerTwoBitLift.lean}{34}{two_pow_succ_dvd_iff_quotient_even},
+\lref{PowerTwoBitLift.lean}{111}{modEq_thirtyTwo_iff_even_difference_cofactor},
+and
+\lref{PowerTwoBitLift.lean}{129}{not_modEq_thirtyTwo_iff_offset_sixteen}.
+This is a finite arithmetic interface.  It does not supply the required
+cofactors at unbounded scales and gives no irrationality conclusion.
+
 \paragraph{A closed prime-adjunction route.} One tempting way to seek an
 unbounded obstruction is to compare the full target at $H$, $pH$, $qH$, and
 $pqH$.  The formal development rules out this route in its unprojected form.
