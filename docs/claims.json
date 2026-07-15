@@ -5004,6 +5004,14 @@
           ]
         },
         {
+          "id": "Erdos249257.HalfCylinderSeamLimit",
+          "path": "Erdos249257/HalfCylinderSeamLimit.lean",
+          "role": "Seam-limit reduction for the half target",
+          "imports": [
+            "Erdos249257.HalfCylinderFloorErrorReset"
+          ]
+        },
+        {
           "id": "Erdos249257.HalfCylinderSkippedEndpointClassifier",
           "path": "Erdos249257/HalfCylinderSkippedEndpointClassifier.lean",
           "role": "Skipped-endpoint classifier for the half seam",

@@ -4,21 +4,21 @@
   "projection_not_authority": true,
   "proof_authority": "Lean source checked by the pinned Lean kernel",
   "argument_authority": "docs/claims.json::machine_readable_paper.argument_graph",
-  "source_fingerprint": "sha256:ab50d555200e239e7ed00d756eacec2378477a0229dbc334251746b3aa7d15c4",
+  "source_fingerprint": "sha256:3e5239389542747ef39f083c2ae26a3eabafb77f21be99ea851704553eb55797",
   "summary": {
-    "module_count": 573,
-    "declaration_count": 7420,
-    "theorem_like_count": 6637,
+    "module_count": 574,
+    "declaration_count": 7435,
+    "theorem_like_count": 6648,
     "generated_certificate_declaration_count": 1681,
     "principal_claim_link_count": 135,
     "kind_counts": {
       "abbrev": 6,
-      "def": 753,
+      "def": 757,
       "inductive": 3,
       "instance": 4,
       "lemma": 354,
       "structure": 17,
-      "theorem": 6283
+      "theorem": 6294
     }
   },
   "modules": [
@@ -101,7 +101,8 @@
         "Erdos249257.CampbellShiftSynchronization",
         "Erdos249257.HalfCylinderFullShellSeamBridge",
         "Erdos249257.HalfCylinderSkippedEndpointClassifier",
-        "Erdos249257.HalfCylinderFloorErrorReset"
+        "Erdos249257.HalfCylinderFloorErrorReset",
+        "Erdos249257.HalfCylinderSeamLimit"
       ],
       "declaration_count": 0,
       "kind_counts": {}
@@ -6543,6 +6544,18 @@
         "def": 31,
         "structure": 2,
         "theorem": 59
+      }
+    },
+    {
+      "id": "Erdos249257.HalfCylinderSeamLimit",
+      "path": "Erdos249257/HalfCylinderSeamLimit.lean",
+      "imports": [
+        "Erdos249257.HalfCylinderFloorErrorReset"
+      ],
+      "declaration_count": 15,
+      "kind_counts": {
+        "def": 4,
+        "theorem": 11
       }
     },
     {
@@ -73045,6 +73058,165 @@
         "integer_greedy_first_wrap_reduction"
       ],
       "docstring": "Under the already-landed middle-branch separation, the two quarter-band clauses are not merely sufficient: they are exactly the assertion that the updated residual escapes the target strip."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderSeamLimit.lean:25:seamGreedyFiniteValue",
+      "name": "seamGreedyFiniteValue",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderSeamLimit.lean",
+      "line": 25,
+      "signature": "noncomputable def seamGreedyFiniteValue (s : ℕ) : ℝ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The real achievement-set point coded by the integer-greedy seam word."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderSeamLimit.lean:29:zero_not_mem_seamWordSupport",
+      "name": "zero_not_mem_seamWordSupport",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderSeamLimit.lean",
+      "line": 29,
+      "signature": "theorem zero_not_mem_seamWordSupport {s : ℕ} (b : SeamRowWord s) : 0 ∉ seamWordSupport b",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderSeamLimit.lean:36:seamGreedyFiniteValue_mem_achievementSet",
+      "name": "seamGreedyFiniteValue_mem_achievementSet",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderSeamLimit.lean",
+      "line": 36,
+      "signature": "theorem seamGreedyFiniteValue_mem_achievementSet (s : ℕ) : seamGreedyFiniteValue s ∈ mersenneAchievementSet",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderSeamLimit.lean:41:seamGreedyFiniteValue_eq_cast_rationalSum",
+      "name": "seamGreedyFiniteValue_eq_cast_rationalSum",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderSeamLimit.lean",
+      "line": 41,
+      "signature": "theorem seamGreedyFiniteValue_eq_cast_rationalSum (s : ℕ) : seamGreedyFiniteValue s = ((seamWordRationalSum (seamGreedyWord s) : ℚ) : ℝ)",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderSeamLimit.lean:50:seamGreedyNormalizedRemainder",
+      "name": "seamGreedyNormalizedRemainder",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderSeamLimit.lean",
+      "line": 50,
+      "signature": "noncomputable def seamGreedyNormalizedRemainder (s : ℕ) : ℝ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Integer seam remainder normalized by the row-square scale."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderSeamLimit.lean:55:SeamGreedyRemainderSubquadraticAlong",
+      "name": "SeamGreedyRemainderSubquadraticAlong",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderSeamLimit.lean",
+      "line": 55,
+      "signature": "def SeamGreedyRemainderSubquadraticAlong (rows : ℕ → ℕ) : Prop",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A cofinal row sequence along which the normalized seam remainder vanishes. This is strictly weaker than a uniform exponential bound."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderSeamLimit.lean:62:seamGreedyRationalRemainder_general_bounds",
+      "name": "seamGreedyRationalRemainder_general_bounds",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderSeamLimit.lean",
+      "line": 62,
+      "signature": "theorem seamGreedyRationalRemainder_general_bounds (s : ℕ) (hs : 5 ≤ s) : 0 ≤ seamWordRationalRemainder (seamGreedyWord s) ∧ seamWordRationalRemainder (seamGreedyWord s) ≤ (1 / 2 : ℚ) ^ s + (seamIntegerGreedyRemainder s : ℚ) / (4 : ℚ) ^ s",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The finite seam error is bounded by its dyadic target correction plus the normalized integer remainder."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderSeamLimit.lean:116:seamGreedyFiniteValue_general_error_bounds",
+      "name": "seamGreedyFiniteValue_general_error_bounds",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderSeamLimit.lean",
+      "line": 116,
+      "signature": "theorem seamGreedyFiniteValue_general_error_bounds (s : ℕ) (hs : 5 ≤ s) : 0 ≤ (1 / 2 : ℝ) - seamGreedyFiniteValue s ∧ (1 / 2 : ℝ) - seamGreedyFiniteValue s ≤ (1 / 2 : ℝ) ^ s + seamGreedyNormalizedRemainder s",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderSeamLimit.lean:142:tendsto_seamGreedyFiniteValue_half_of_subquadraticAlong",
+      "name": "tendsto_seamGreedyFiniteValue_half_of_subquadraticAlong",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderSeamLimit.lean",
+      "line": 142,
+      "signature": "theorem tendsto_seamGreedyFiniteValue_half_of_subquadraticAlong (rows : ℕ → ℕ) (hrows : SeamGreedyRemainderSubquadraticAlong rows) : Tendsto (fun j => seamGreedyFiniteValue (rows j)) atTop (nhds (1 / 2 : ℝ))",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Any cofinal subquadratic seam-remainder subsequence makes the finite seam supports converge to the half target."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderSeamLimit.lean:179:half_mem_mersenneAchievementSet_of_subquadraticAlong",
+      "name": "half_mem_mersenneAchievementSet_of_subquadraticAlong",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderSeamLimit.lean",
+      "line": 179,
+      "signature": "theorem half_mem_mersenneAchievementSet_of_subquadraticAlong (rows : ℕ → ℕ) (hrows : SeamGreedyRemainderSubquadraticAlong rows) : (1 / 2 : ℝ) ∈ mersenneAchievementSet",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Closedness converts any cofinal subquadratic seam subsequence into an exact representation of `1/2`."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderSeamLimit.lean:192:SeamGreedyRemainderGapBound",
+      "name": "SeamGreedyRemainderGapBound",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderSeamLimit.lean",
+      "line": 192,
+      "signature": "def SeamGreedyRemainderGapBound : Prop",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Exponential upper bound observed by exact replay from row six onward. Its universal proof is the remaining arithmetic producer on this route."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderSeamLimit.lean:198:seamGreedyRationalRemainder_bounds",
+      "name": "seamGreedyRationalRemainder_bounds",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderSeamLimit.lean",
+      "line": 198,
+      "signature": "theorem seamGreedyRationalRemainder_bounds (s : ℕ) (hs : 5 ≤ s) (hR : seamIntegerGreedyRemainder s < 2 ^ (s + 1)) : 0 ≤ seamWordRationalRemainder (seamGreedyWord s) ∧ seamWordRationalRemainder (seamGreedyWord s) ≤ 3 * (1 / 2 : ℚ) ^ s",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Under the gap bound, the exact rational residual is positive and at most `3 * 2^(-s)`. This uses only `Phi < s-2` and the exact floor-`Z` identity."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderSeamLimit.lean:252:seamGreedyFiniteValue_error_bounds",
+      "name": "seamGreedyFiniteValue_error_bounds",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderSeamLimit.lean",
+      "line": 252,
+      "signature": "theorem seamGreedyFiniteValue_error_bounds (s : ℕ) (hs : 5 ≤ s) (hR : seamIntegerGreedyRemainder s < 2 ^ (s + 1)) : 0 ≤ (1 / 2 : ℝ) - seamGreedyFiniteValue s ∧ (1 / 2 : ℝ) - seamGreedyFiniteValue s ≤ 3 * (1 / 2 : ℝ) ^ s",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderSeamLimit.lean:278:tendsto_seamGreedyFiniteValue_half",
+      "name": "tendsto_seamGreedyFiniteValue_half",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderSeamLimit.lean",
+      "line": 278,
+      "signature": "theorem tendsto_seamGreedyFiniteValue_half (hgap : SeamGreedyRemainderGapBound) : Tendsto seamGreedyFiniteValue atTop (nhds (1 / 2 : ℝ))",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderSeamLimit.lean:303:half_mem_mersenneAchievementSet_of_seamRemainderGapBound",
+      "name": "half_mem_mersenneAchievementSet_of_seamRemainderGapBound",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderSeamLimit.lean",
+      "line": 303,
+      "signature": "theorem half_mem_mersenneAchievementSet_of_seamRemainderGapBound (hgap : SeamGreedyRemainderGapBound) : (1 / 2 : ℝ) ∈ mersenneAchievementSet",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Closedness converts the convergent sequence of finite seam supports into an exact representation of `1/2`."
     },
     {
       "id": "Erdos249257/HalfCylinderSkippedEndpointClassifier.lean:21:stemBitsFrom_eq_ofFn",
