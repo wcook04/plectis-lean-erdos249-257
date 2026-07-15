@@ -15,11 +15,11 @@ Lean kernel remains proof authority.
 
 | Surface | Count |
 |---|---:|
-| Lean modules | 621 |
-| Lean declarations | 12,275 |
-| Theorem-like declarations | 11,306 |
+| Lean modules | 622 |
+| Lean declarations | 12,292 |
+| Theorem-like declarations | 11,317 |
 | Generated certificate declarations | 2,923 |
-| Principal claim links | 219 |
+| Principal claim links | 220 |
 
 The exhaustive declaration and import index is
 [`docs/declaration_atlas.json`](declaration_atlas.json). Generated certificate
