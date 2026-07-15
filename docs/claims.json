@@ -4970,6 +4970,14 @@
           ]
         },
         {
+          "id": "Erdos249257.HalfCylinderFalseBitSupply",
+          "path": "Erdos249257/HalfCylinderFalseBitSupply.lean",
+          "role": "False-bit supply for the half seam",
+          "imports": [
+            "Erdos249257.HalfCylinderSkippedRankLimit"
+          ]
+        },
+        {
           "id": "Erdos249257.HalfCylinderFiniteShadow",
           "path": "Erdos249257/HalfCylinderFiniteShadow.lean",
           "role": "Finite shadows of the half cylinder",
