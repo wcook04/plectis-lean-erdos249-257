@@ -4945,6 +4945,14 @@
           ]
         },
         {
+          "id": "Erdos249257.HalfCylinderConcreteSeamAdapter",
+          "path": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean",
+          "role": "Concrete finite seam adapter",
+          "imports": [
+            "Erdos249257.HalfCylinderIntegerGreedy"
+          ]
+        },
+        {
           "id": "Erdos249257.HalfCylinderFiniteShadow",
           "path": "Erdos249257/HalfCylinderFiniteShadow.lean",
           "role": "Finite shadows of the half cylinder",
@@ -5362,6 +5370,11 @@
           "to": "half_cylinder_finite_shadow"
         },
         {
+          "from": "concrete_seam_adapter",
+          "relation": "builds_on",
+          "to": "integer_greedy_first_wrap_reduction"
+        },
+        {
           "from": "denominator_exclusion",
           "relation": "advances_open_target",
           "to": "erdos_249",
@@ -5635,7 +5648,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 1289
+        "line": 1296
       }
     },
     {
@@ -5646,7 +5659,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 1298
+        "line": 1305
       }
     },
     {
@@ -5657,7 +5670,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 1305
+        "line": 1312
       }
     }
   ],
@@ -6047,6 +6060,29 @@
           "name": "quarterBandEscape_iff_bound_lt_nextRemainder",
           "module": "Erdos249257/HalfCylinderIntegerGreedy.lean",
           "line": 1528
+        }
+      ]
+    },
+    {
+      "id": "concrete_seam_adapter",
+      "label": "Concrete finite seam adapter",
+      "status": "conditional reduction",
+      "statement": "Concrete finite seam words realize the abstract adjacent-cut recurrence, and the next seam word agrees with the integer-greedy choice. This implements the finite recurrence but does not establish the unbounded remainder estimate.",
+      "remaining_open_proposition_ids": [
+        "remaining_open.universal_257_all_infinite_supports"
+      ],
+      "paper_label": "res:concreteseam",
+      "readme_headline": false,
+      "declarations": [
+        {
+          "name": "seamAdjacentCut_newCapacity",
+          "module": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean",
+          "line": 451
+        },
+        {
+          "name": "seamCutNextWord_eq_greedyWord_succ",
+          "module": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean",
+          "line": 667
         }
       ]
     },

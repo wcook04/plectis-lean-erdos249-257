@@ -653,6 +653,13 @@ positive; this is formalised by
 The remaining arithmetic input is an unbounded lower bound for that
 deterministic remainder sequence.  No such lower bound is proved here.
 
+\subsection{Concrete seam adapter}\label{res:concreteseam}
+
+The finite seam-word adapter realizes the abstract adjacent cut by concrete
+Boolean words and identifies its next word with the integer-greedy choice:
+\lref{HalfCylinderConcreteSeamAdapter.lean}{667}{seamCutNextWord_eq_greedyWord_succ}.
+It implements a finite recurrence, not the unbounded remainder estimate.
+
 \subsection{What stays open}
 
 The universal Erd\H{o}s \#257 statement, irrationality of $\sum_{n\in A}1/(2^n-1)$

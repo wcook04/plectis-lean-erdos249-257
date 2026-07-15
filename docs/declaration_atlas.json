@@ -4,21 +4,21 @@
   "projection_not_authority": true,
   "proof_authority": "Lean source checked by the pinned Lean kernel",
   "argument_authority": "docs/claims.json::machine_readable_paper.argument_graph",
-  "source_fingerprint": "sha256:4a8899724ee344eb007b6267934ffd07b38643cadc1c1926b6cae0e25c95a5e3",
+  "source_fingerprint": "sha256:2085bab60e2c66831129c16d9e6f7f56d786deb5a6473f8ecd509e6eca05c442",
   "summary": {
-    "module_count": 567,
-    "declaration_count": 7198,
-    "theorem_like_count": 6454,
+    "module_count": 568,
+    "declaration_count": 7244,
+    "theorem_like_count": 6486,
     "generated_certificate_declaration_count": 1681,
-    "principal_claim_link_count": 133,
+    "principal_claim_link_count": 135,
     "kind_counts": {
-      "abbrev": 5,
-      "def": 717,
+      "abbrev": 6,
+      "def": 729,
       "inductive": 3,
-      "instance": 3,
+      "instance": 4,
       "lemma": 354,
       "structure": 16,
-      "theorem": 6100
+      "theorem": 6132
     }
   },
   "modules": [
@@ -95,7 +95,8 @@
         "Erdos249257.HalfCarryRewindPhase",
         "Erdos249257.HalfCarryProtectedSeamConsumer",
         "Erdos249257.HalfCarryCofinalWindowOrSeamConsumer",
-        "Erdos249257.HalfCylinderIntegerGreedy"
+        "Erdos249257.HalfCylinderIntegerGreedy",
+        "Erdos249257.HalfCylinderConcreteSeamAdapter"
       ],
       "declaration_count": 0,
       "kind_counts": {}
@@ -6446,6 +6447,20 @@
         "def": 15,
         "structure": 2,
         "theorem": 28
+      }
+    },
+    {
+      "id": "Erdos249257.HalfCylinderConcreteSeamAdapter",
+      "path": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean",
+      "imports": [
+        "Erdos249257.HalfCylinderIntegerGreedy"
+      ],
+      "declaration_count": 46,
+      "kind_counts": {
+        "abbrev": 1,
+        "def": 12,
+        "instance": 1,
+        "theorem": 32
       }
     },
     {
@@ -69201,6 +69216,470 @@
       "generated_certificate": false,
       "claim_ids": [],
       "docstring": "A base selected window plus a forward selected-window induction closes the exact infinite half-sum endpoint directly."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean:18:SeamRowWord",
+      "name": "SeamRowWord",
+      "kind": "abbrev",
+      "module": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean",
+      "line": 18,
+      "signature": "abbrev SeamRowWord (s : ℕ)",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean:22:toNatWord",
+      "name": "toNatWord",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean",
+      "line": 22,
+      "signature": "def toNatWord {s : ℕ} (b : SeamRowWord s) : ℕ → Bool",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean:25:toList",
+      "name": "toList",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean",
+      "line": 25,
+      "signature": "def toList {s : ℕ} (b : SeamRowWord s) : List Bool",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean:28:ofList",
+      "name": "ofList",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean",
+      "line": 28,
+      "signature": "def ofList {s : ℕ} (bits : List Bool) (hlen : bits.length = s - 2) : SeamRowWord s",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean:32:toList_ofList",
+      "name": "toList_ofList",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean",
+      "line": 32,
+      "signature": "@[simp] theorem toList_ofList {s : ℕ} (bits : List Bool) (hlen : bits.length = s - 2) : toList (ofList bits hlen) = bits",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean:38:toList_injective",
+      "name": "toList_injective",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean",
+      "line": 38,
+      "signature": "theorem toList_injective {s : ℕ} : Function.Injective (toList : SeamRowWord s → List Bool)",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean:45:seamWeightsFrom_length_eq",
+      "name": "seamWeightsFrom_length_eq",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean",
+      "line": 45,
+      "signature": "theorem seamWeightsFrom_length_eq (s d : ℕ) : (seamWeightsFrom s d).length = s - d",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean:57:seamWeights_length_eq",
+      "name": "seamWeights_length_eq",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean",
+      "line": 57,
+      "signature": "@[simp] theorem seamWeights_length_eq (s : ℕ) : (seamWeights s).length = s - 2",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean:62:seamWeightsFrom_eq_ofFn",
+      "name": "seamWeightsFrom_eq_ofFn",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean",
+      "line": 62,
+      "signature": "theorem seamWeightsFrom_eq_ofFn {s d : ℕ} (hds : d ≤ s) : seamWeightsFrom s d = List.ofFn (fun i : Fin (s - d) => truncatedMersenneWeight s (d + i))",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean:84:seamWeights_eq_ofFn",
+      "name": "seamWeights_eq_ofFn",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean",
+      "line": 84,
+      "signature": "theorem seamWeights_eq_ofFn {s : ℕ} (hs : 2 ≤ s) : seamWeights s = List.ofFn (fun i : Fin (s - 2) => truncatedMersenneWeight s (i + 2))",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean:92:weightedBoolSum_ofFn",
+      "name": "weightedBoolSum_ofFn",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean",
+      "line": 92,
+      "signature": "theorem weightedBoolSum_ofFn {n : ℕ} (w : Fin n → ℕ) (b : Fin n → Bool) : weightedBoolSum (List.ofFn w) (List.ofFn b) = ∑ i : Fin n, if b i then w i else 0",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean:104:weightedBoolSum_toList_eq_wordWeightSum",
+      "name": "weightedBoolSum_toList_eq_wordWeightSum",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean",
+      "line": 104,
+      "signature": "theorem weightedBoolSum_toList_eq_wordWeightSum {s : ℕ} (hs : 2 ≤ s) (b : SeamRowWord s) : weightedBoolSum (seamWeights s) b.toList = wordWeightSum s b.toNatWord",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean:120:seamPerturbedFamily",
+      "name": "seamPerturbedFamily",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean",
+      "line": 120,
+      "signature": "def seamPerturbedFamily (s : ℕ) (hs : 3 ≤ s) : PerturbedFamily (SeamRowWord s)",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean:168:seamPerturbedFamily_newSum_eq",
+      "name": "seamPerturbedFamily_newSum_eq",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean",
+      "line": 168,
+      "signature": "theorem seamPerturbedFamily_newSum_eq {s : ℕ} (hs : 3 ≤ s) (b : SeamRowWord s) : (seamPerturbedFamily s hs).newSum b = wordWeightSum (s + 1) (extendWord s false b.toNatWord)",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean:176:seamPulseCap_lt_gap",
+      "name": "seamPulseCap_lt_gap",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean",
+      "line": 176,
+      "signature": "theorem seamPulseCap_lt_gap {s : ℕ} (hs : 3 ≤ s) : (seamPerturbedFamily s hs).pulseCap < (seamPerturbedFamily s hs).gap",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean:185:seamGreedyWord",
+      "name": "seamGreedyWord",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean",
+      "line": 185,
+      "signature": "def seamGreedyWord (s : ℕ) : SeamRowWord s",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean:190:seamGreedyWord_toList",
+      "name": "seamGreedyWord_toList",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean",
+      "line": 190,
+      "signature": "@[simp] theorem seamGreedyWord_toList (s : ℕ) : (seamGreedyWord s).toList = integerGreedyBits (seamWeights s) (seamSubsetTarget s)",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean:195:seamHeadThreeWord",
+      "name": "seamHeadThreeWord",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean",
+      "line": 195,
+      "signature": "def seamHeadThreeWord (s : ℕ) : SeamRowWord s",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean:198:wordWeightSum_seamHeadThreeWord",
+      "name": "wordWeightSum_seamHeadThreeWord",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean",
+      "line": 198,
+      "signature": "theorem wordWeightSum_seamHeadThreeWord {s : ℕ} (hs : 5 ≤ s) : wordWeightSum s (seamHeadThreeWord s).toNatWord = truncatedMersenneWeight s 2 + truncatedMersenneWeight s 3 + truncatedMersenneWeight s 4",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean:235:seamHeadThreeWord_above_target",
+      "name": "seamHeadThreeWord_above_target",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean",
+      "line": 235,
+      "signature": "theorem seamHeadThreeWord_above_target {s : ℕ} (hs : 5 ≤ s) : seamSubsetTarget s < wordWeightSum s (seamHeadThreeWord s).toNatWord",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean:304:exists_seamWord_minimal_above",
+      "name": "exists_seamWord_minimal_above",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean",
+      "line": 304,
+      "signature": "theorem exists_seamWord_minimal_above {s : ℕ} (hs : 5 ≤ s) : ∃ a : SeamRowWord s, seamSubsetTarget s < (seamPerturbedFamily s (by omega)).oldSum a ∧ ∀ x : SeamRowWord s, seamSubsetTarget s < (seamPerturbedFamily s (by omega)).oldSum x → (seamPerturbedFamily s (by omega)).oldSum a ≤ (seamPerturbedFamily s (by omega)).oldSum x",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean:328:seamAboveWord",
+      "name": "seamAboveWord",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean",
+      "line": 328,
+      "signature": "noncomputable def seamAboveWord (s : ℕ) (hs : 5 ≤ s) : SeamRowWord s",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean:332:seamAboveWord_strict",
+      "name": "seamAboveWord_strict",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean",
+      "line": 332,
+      "signature": "theorem seamAboveWord_strict {s : ℕ} (hs : 5 ≤ s) : seamSubsetTarget s < (seamPerturbedFamily s (by omega)).oldSum (seamAboveWord s hs)",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean:338:seamAboveWord_minimal",
+      "name": "seamAboveWord_minimal",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean",
+      "line": 338,
+      "signature": "theorem seamAboveWord_minimal {s : ℕ} (hs : 5 ≤ s) (x : SeamRowWord s) (hx : seamSubsetTarget s < (seamPerturbedFamily s (by omega)).oldSum x) : (seamPerturbedFamily s (by omega)).oldSum (seamAboveWord s hs) ≤ (seamPerturbedFamily s (by omega)).oldSum x",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean:346:seamAdjacentCut",
+      "name": "seamAdjacentCut",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean",
+      "line": 346,
+      "signature": "noncomputable def seamAdjacentCut (s : ℕ) (hs : 5 ≤ s) : (seamPerturbedFamily s (by omega)).AdjacentCut (seamSubsetTarget s)",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean:375:seamAdjacentCut_remainder",
+      "name": "seamAdjacentCut_remainder",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean",
+      "line": 375,
+      "signature": "@[simp] theorem seamAdjacentCut_remainder {s : ℕ} (hs : 5 ≤ s) : (seamAdjacentCut s hs).remainder = seamIntegerGreedyRemainder s",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean:386:adjacentCutSuccessorCarriesDecidable",
+      "name": "adjacentCutSuccessorCarriesDecidable",
+      "kind": "instance",
+      "module": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean",
+      "line": 386,
+      "signature": "noncomputable local instance adjacentCutSuccessorCarriesDecidable {α : Type*} {F : PerturbedFamily α} {C : ℕ} (K : F.AdjacentCut C) : Decidable K.successorCarries",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean:395:extend",
+      "name": "extend",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean",
+      "line": 395,
+      "signature": "def extend {s : ℕ} (b : SeamRowWord s) (beta : Bool) : SeamRowWord (s + 1)",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean:399:dropTerminal",
+      "name": "dropTerminal",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean",
+      "line": 399,
+      "signature": "def dropTerminal {s : ℕ} (hs : 3 ≤ s) (b : SeamRowWord (s + 1)) : SeamRowWord s",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean:403:terminal",
+      "name": "terminal",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean",
+      "line": 403,
+      "signature": "def terminal {s : ℕ} (hs : 3 ≤ s) (b : SeamRowWord (s + 1)) : Bool",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean:406:dropTerminal_extend",
+      "name": "dropTerminal_extend",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean",
+      "line": 406,
+      "signature": "@[simp] theorem dropTerminal_extend {s : ℕ} (hs : 3 ≤ s) (b : SeamRowWord s) (beta : Bool) : dropTerminal hs (extend b beta) = b",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean:412:terminal_extend",
+      "name": "terminal_extend",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean",
+      "line": 412,
+      "signature": "@[simp] theorem terminal_extend {s : ℕ} (hs : 3 ≤ s) (b : SeamRowWord s) (beta : Bool) : terminal hs (extend b beta) = beta",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean:417:extend_dropTerminal_terminal",
+      "name": "extend_dropTerminal_terminal",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean",
+      "line": 417,
+      "signature": "theorem extend_dropTerminal_terminal {s : ℕ} (hs : 3 ≤ s) (b : SeamRowWord (s + 1)) : extend (dropTerminal hs b) (terminal hs b) = b",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean:428:toNatWord_extend",
+      "name": "toNatWord_extend",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean",
+      "line": 428,
+      "signature": "theorem toNatWord_extend {s : ℕ} (hs : 3 ≤ s) (b : SeamRowWord s) (beta : Bool) : (extend b beta).toNatWord = extendWord s beta b.toNatWord",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean:451:seamAdjacentCut_newCapacity",
+      "name": "seamAdjacentCut_newCapacity",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean",
+      "line": 451,
+      "signature": "theorem seamAdjacentCut_newCapacity {s : ℕ} (hs : 5 ≤ s) : (seamAdjacentCut s hs).newCapacity = seamSubsetTarget (s + 1)",
+      "generated_certificate": false,
+      "claim_ids": [
+        "concrete_seam_adapter"
+      ]
+    },
+    {
+      "id": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean:458:seamAdjacentCut_terminalWeight",
+      "name": "seamAdjacentCut_terminalWeight",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean",
+      "line": 458,
+      "signature": "@[simp] theorem seamAdjacentCut_terminalWeight {s : ℕ} (hs : 5 ≤ s) : (seamAdjacentCut s hs).terminalWeight = 2 ^ (s + 2) + 4",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean:467:wordWeightSum_rowWord_extend",
+      "name": "wordWeightSum_rowWord_extend",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean",
+      "line": 467,
+      "signature": "theorem wordWeightSum_rowWord_extend {s : ℕ} (hs : 3 ≤ s) (b : SeamRowWord s) (beta : Bool) : wordWeightSum (s + 1) (b.extend beta).toNatWord = (seamPerturbedFamily s hs).newSum b + if beta then 2 ^ (s + 2) + 4 else 0",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean:476:seamPrefixChoice_admissible",
+      "name": "seamPrefixChoice_admissible",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean",
+      "line": 476,
+      "signature": "theorem seamPrefixChoice_admissible {s : ℕ} (hs : 5 ≤ s) : let K",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean:490:seamCutNextWord",
+      "name": "seamCutNextWord",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean",
+      "line": 490,
+      "signature": "noncomputable def seamCutNextWord (s : ℕ) (hs : 5 ≤ s) : SeamRowWord (s + 1)",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean:497:seamCutNextWord_sum",
+      "name": "seamCutNextWord_sum",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean",
+      "line": 497,
+      "signature": "theorem seamCutNextWord_sum {s : ℕ} (hs : 5 ≤ s) : wordWeightSum (s + 1) (seamCutNextWord s hs).toNatWord = (seamPerturbedFamily s (by omega)).newSum (seamAdjacentCut s hs).prefixChoice + if (seamAdjacentCut s hs).terminalWeight ≤ (seamAdjacentCut s hs).prefixRemainder then (seamAdjacentCut s hs).terminalWeight else 0",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean:519:seamCutNextWord_admissible",
+      "name": "seamCutNextWord_admissible",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean",
+      "line": 519,
+      "signature": "theorem seamCutNextWord_admissible {s : ℕ} (hs : 5 ≤ s) : wordWeightSum (s + 1) (seamCutNextWord s hs).toNatWord ≤ seamSubsetTarget (s + 1)",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean:549:seamCut_nextRemainder_eq_target_sub_sum",
+      "name": "seamCut_nextRemainder_eq_target_sub_sum",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean",
+      "line": 549,
+      "signature": "theorem seamCut_nextRemainder_eq_target_sub_sum {s : ℕ} (hs : 5 ≤ s) : (seamAdjacentCut s hs).nextRemainder = seamSubsetTarget (s + 1) - wordWeightSum (s + 1) (seamCutNextWord s hs).toNatWord",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean:577:terminalWeight_le_newSum_gap",
+      "name": "terminalWeight_le_newSum_gap",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean",
+      "line": 577,
+      "signature": "theorem terminalWeight_le_newSum_gap {s : ℕ} (hs : 5 ≤ s) {x y : SeamRowWord s} (hxy : (seamPerturbedFamily s (by omega)).oldSum x < (seamPerturbedFamily s (by omega)).oldSum y) : (seamPerturbedFamily s (by omega)).newSum x + (seamAdjacentCut s hs).terminalWeight ≤ (seamPerturbedFamily s (by omega)).newSum y",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean:596:seamCutNextWord_maximal",
+      "name": "seamCutNextWord_maximal",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean",
+      "line": 596,
+      "signature": "theorem seamCutNextWord_maximal {s : ℕ} (hs : 5 ≤ s) {x : SeamRowWord (s + 1)} (hx : wordWeightSum (s + 1) x.toNatWord ≤ seamSubsetTarget (s + 1)) : wordWeightSum (s + 1) x.toNatWord ≤ wordWeightSum (s + 1) (seamCutNextWord s hs).toNatWord",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean:667:seamCutNextWord_eq_greedyWord_succ",
+      "name": "seamCutNextWord_eq_greedyWord_succ",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean",
+      "line": 667,
+      "signature": "theorem seamCutNextWord_eq_greedyWord_succ {s : ℕ} (hs : 5 ≤ s) : seamCutNextWord s hs = seamGreedyWord (s + 1)",
+      "generated_certificate": false,
+      "claim_ids": [
+        "concrete_seam_adapter"
+      ]
+    },
+    {
+      "id": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean:699:seamAdjacentCut_nextRemainder",
+      "name": "seamAdjacentCut_nextRemainder",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean",
+      "line": 699,
+      "signature": "@[simp] theorem seamAdjacentCut_nextRemainder {s : ℕ} (hs : 5 ≤ s) : (seamAdjacentCut s hs).nextRemainder = seamIntegerGreedyRemainder (s + 1)",
+      "generated_certificate": false,
+      "claim_ids": []
     },
     {
       "id": "Erdos249257/HalfCylinderFiniteShadow.lean:26:wordSupport_subset_Iic",

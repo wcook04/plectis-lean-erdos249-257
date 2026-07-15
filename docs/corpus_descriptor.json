@@ -24,25 +24,25 @@
       "authority_role": "proof_bearing_committed_source_anchor"
     },
     "navigation_snapshot": {
-      "commit": "0d234006efd124ad2f599624f38751b9b02616ef",
+      "commit": "cdc931b69e57d597cabe1a270ca38f02632a4212",
       "authority_role": "machine_readable_navigation_anchor",
       "publication_state": "main_history_snapshot",
       "published_ref": "main",
-      "repository_resolution": "https://github.com/wcook04/plectis-lean-erdos249-257/tree/0d234006efd124ad2f599624f38751b9b02616ef"
+      "repository_resolution": "https://github.com/wcook04/plectis-lean-erdos249-257/tree/cdc931b69e57d597cabe1a270ca38f02632a4212"
     },
     "content": {
       "machine_readable_paper": {
         "path": "docs/claims.json::machine_readable_paper",
-        "content_digest": "sha256:2a695a120e0deb99676649758270a3cccf5e48157d66d1af850ef76eaef565f7"
+        "content_digest": "sha256:9b4d52a10141d8bf9eac5e3f13d45efde0b9508e091f9ad94f75e86c23e6f6e3"
       },
       "claims_document": {
         "path": "docs/claims.json",
-        "content_digest": "sha256:6c1e550a384f6f2d50aa823eb0548208bf6706ab3770dc1185ee1a997d5bd25c"
+        "content_digest": "sha256:c8404bb68156fedb1d9d48592bcbda6e2cbc7b25ad1b10d4c2e5f68b4fa3253d"
       },
       "declaration_atlas": {
         "path": "docs/declaration_atlas.json",
-        "content_digest": "sha256:fc45056e7b51617aacb4062c4d994ed91693e32d4c9310e07a1cd9909408516d",
-        "source_input_fingerprint": "sha256:4a8899724ee344eb007b6267934ffd07b38643cadc1c1926b6cae0e25c95a5e3"
+        "content_digest": "sha256:f92f872985e87ac6ff2daf98bca942bdcc746792c1597bf9bde181741c667f3a",
+        "source_input_fingerprint": "sha256:2085bab60e2c66831129c16d9e6f7f56d786deb5a6473f8ecd509e6eca05c442"
       },
       "methodology_contract": {
         "path": "docs/methodology.json",
@@ -50,11 +50,11 @@
       },
       "bounded_orientation": {
         "path": "docs/orientation.json",
-        "content_digest": "sha256:27c817db6e051448a859b72a80c352811ae7db8e83179217eb1b5aee3ad1607e"
+        "content_digest": "sha256:1c121ac8e73a547c99cfb11f537c616457149fca680f99c23ec3e992fb70961c"
       },
       "human_exposition": {
         "source_path": "paper/erdos249-257-exposition.tex",
-        "source_content_digest": "sha256:f29c40ee12f74ed70bdc70881ba2c5a69f5115180f156475dbaa082939cb31d2",
+        "source_content_digest": "sha256:0b5f54251e902ecf9e39949f302d5b0b35eb0ad62bf529bf5800611c3b03d720",
         "rendered_path": "erdos249-257-exposition.pdf",
         "rendered_content_digest": "sha256:b8ec00c65eeeeaf9400544630c3ed1fa3f04080b714330fc98918f40c1c02891",
         "artifact_role": "authored_mathematician_facing_exposition",
@@ -70,7 +70,7 @@
       },
       "paper_source_sigils": {
         "path": "paper/module-aliases.json",
-        "content_digest": "sha256:d6d7de25061d214aeb7b408f8133398d6b20f1e8d2b3df41608ca5e7e5055b80",
+        "content_digest": "sha256:9906d13b61c7f58e6a31c6ce0da18a50ce4dcf82fa7dd11198db11fafec12cde",
         "schema": "erdos249257-paper-module-aliases/1",
         "artifact_role": "paper_sigil_to_lean_module_navigation_crosswalk",
         "authority_posture": "generated_navigation_projection_not_proof_authority"
@@ -132,19 +132,19 @@
     }
   },
   "summary": {
-    "module_count": 567,
-    "declaration_count": 7198,
-    "theorem_like_count": 6454,
+    "module_count": 568,
+    "declaration_count": 7244,
+    "theorem_like_count": 6486,
     "generated_certificate_declaration_count": 1681,
-    "principal_claim_link_count": 133,
+    "principal_claim_link_count": 135,
     "kind_counts": {
-      "abbrev": 5,
-      "def": 717,
+      "abbrev": 6,
+      "def": 729,
       "inductive": 3,
-      "instance": 3,
+      "instance": 4,
       "lemma": 354,
       "structure": 16,
-      "theorem": 6100
+      "theorem": 6132
     }
   },
   "compact_graph": {
@@ -412,7 +412,7 @@
           "source": "paper/erdos249-257-exposition.tex",
           "environment": "problem",
           "title": "Erd\\H{o}s \\#249",
-          "line": 1289
+          "line": 1296
         }
       },
       {
@@ -423,7 +423,7 @@
           "source": "paper/erdos249-257-exposition.tex",
           "environment": "problem",
           "title": "unbounded certificate supply",
-          "line": 1298
+          "line": 1305
         }
       },
       {
@@ -434,13 +434,13 @@
           "source": "paper/erdos249-257-exposition.tex",
           "environment": "problem",
           "title": "universal Erd\\H{o}s \\#257",
-          "line": 1305
+          "line": 1312
         }
       }
     ],
     "module_topology": {
       "root": "Erdos249257.lean",
-      "node_count": 566,
+      "node_count": 567,
       "root_imports": [
         "Erdos249257.CertificateKernel",
         "Erdos249257.GeneratedCertificates",
@@ -511,7 +511,8 @@
         "Erdos249257.HalfCarryRewindPhase",
         "Erdos249257.HalfCarryProtectedSeamConsumer",
         "Erdos249257.HalfCarryCofinalWindowOrSeamConsumer",
-        "Erdos249257.HalfCylinderIntegerGreedy"
+        "Erdos249257.HalfCylinderIntegerGreedy",
+        "Erdos249257.HalfCylinderConcreteSeamAdapter"
       ],
       "full_graph": "docs/claims.json::machine_readable_paper.module_graph"
     },
@@ -604,6 +605,11 @@
           "from": "integer_greedy_first_wrap_reduction",
           "relation": "builds_on",
           "to": "half_cylinder_finite_shadow"
+        },
+        {
+          "from": "concrete_seam_adapter",
+          "relation": "builds_on",
+          "to": "integer_greedy_first_wrap_reduction"
         },
         {
           "from": "denominator_exclusion",
@@ -1194,7 +1200,7 @@
   "expansion": {
     "machine_readable_paper": {
       "path": "docs/claims.json::machine_readable_paper",
-      "expected_content_digest": "sha256:2a695a120e0deb99676649758270a3cccf5e48157d66d1af850ef76eaef565f7",
+      "expected_content_digest": "sha256:9b4d52a10141d8bf9eac5e3f13d45efde0b9508e091f9ad94f75e86c23e6f6e3",
       "contains": [
         "all_claims",
         "authored_argument_graph",
@@ -1204,8 +1210,8 @@
     },
     "exhaustive_declaration_atlas": {
       "path": "docs/declaration_atlas.json",
-      "expected_content_digest": "sha256:fc45056e7b51617aacb4062c4d994ed91693e32d4c9310e07a1cd9909408516d",
-      "expected_source_input_fingerprint": "sha256:4a8899724ee344eb007b6267934ffd07b38643cadc1c1926b6cae0e25c95a5e3",
+      "expected_content_digest": "sha256:f92f872985e87ac6ff2daf98bca942bdcc746792c1597bf9bde181741c667f3a",
+      "expected_source_input_fingerprint": "sha256:2085bab60e2c66831129c16d9e6f7f56d786deb5a6473f8ecd509e6eca05c442",
       "availability": "optional_attached_corpus",
       "check": "python3 scripts/build_declaration_atlas.py --check"
     },
@@ -1217,7 +1223,7 @@
     },
     "human_exposition": {
       "source_path": "paper/erdos249-257-exposition.tex",
-      "expected_source_content_digest": "sha256:f29c40ee12f74ed70bdc70881ba2c5a69f5115180f156475dbaa082939cb31d2",
+      "expected_source_content_digest": "sha256:0b5f54251e902ecf9e39949f302d5b0b35eb0ad62bf529bf5800611c3b03d720",
       "rendered_path": "erdos249-257-exposition.pdf",
       "expected_rendered_content_digest": "sha256:b8ec00c65eeeeaf9400544630c3ed1fa3f04080b714330fc98918f40c1c02891",
       "authority_posture": "authored_editorial_surface_not_Lean_proof_authority"
@@ -1231,7 +1237,7 @@
     },
     "paper_source_sigils": {
       "path": "paper/module-aliases.json",
-      "expected_content_digest": "sha256:d6d7de25061d214aeb7b408f8133398d6b20f1e8d2b3df41608ca5e7e5055b80",
+      "expected_content_digest": "sha256:9906d13b61c7f58e6a31c6ce0da18a50ce4dcf82fa7dd11198db11fafec12cde",
       "schema": "erdos249257-paper-module-aliases/1",
       "check": "python3 scripts/build_paper_module_aliases.py --check"
     }
