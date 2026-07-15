@@ -10,6 +10,7 @@ not acquire proof authority. Run from any directory; output is JSON by default.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import re
 import sys
@@ -22,6 +23,7 @@ DEFAULT_LIMIT = 20
 MAX_LIMIT = 100
 OUTPUT_BUDGET_BYTES = 64_000
 SOURCE_LINE_WINDOW = 3
+CONNECTION_CARD_SCHEMA = "lean-connection-card/2"
 
 
 @lru_cache(maxsize=None)
@@ -700,6 +702,217 @@ def compact_module(row: dict[str, Any], roles: dict[str, str]) -> dict[str, Any]
     }
 
 
+def file_digest(path: Path) -> str:
+    return "sha256:" + hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def identifier_counts(text: str) -> dict[str, int]:
+    counts: dict[str, int] = {}
+    for name in re.findall(r"[A-Za-z_][A-Za-z0-9_']*", text):
+        counts[name] = counts.get(name, 0) + 1
+    return counts
+
+
+def connection_card(handle: str, limit: int, query: str = "") -> dict[str, Any]:
+    """Project one source-current public module relationship card.
+
+    This is the public-corpus projection of the same disclosure-aware card
+    contract used by private claim-local mathematical working memory.  The
+    shared shape makes prerequisite and consumer directions portable without
+    pretending that a public navigation projection has private claim authority.
+    """
+    atlas = load("docs/declaration_atlas.json")
+    claims = load("docs/claims.json")
+    aliases = load("paper/module-aliases.json")["aliases"]
+    alias = next((row for row in aliases if row["sigil"].casefold() == handle.casefold()), None)
+    resolved_handle = alias["path"] if alias is not None else handle
+    normalized = (
+        resolved_handle.replace(".", "/") + ".lean"
+        if "/" not in resolved_handle and not resolved_handle.endswith(".lean")
+        else resolved_handle
+    ).removeprefix("./")
+    declaration_matches = [
+        row for row in atlas["declarations"] if row["name"] == resolved_handle
+    ]
+    module = next(
+        (
+            row
+            for row in atlas["modules"]
+            if resolved_handle in (row["id"], row["path"])
+            or normalized == row["path"]
+        ),
+        None,
+    )
+    if module is None and declaration_matches:
+        module = next(
+            row for row in atlas["modules"] if row["path"] == declaration_matches[0]["module"]
+        )
+    if module is None:
+        raise KeyError(f"unknown connection handle: {handle}")
+
+    roles = module_roles(claims)
+    by_module = {row["id"]: row for row in atlas["modules"]}
+    declarations_by_path: dict[str, list[dict[str, Any]]] = {}
+    for row in atlas["declarations"]:
+        declarations_by_path.setdefault(row["module"], []).append(row)
+    for rows in declarations_by_path.values():
+        rows.sort(key=lambda row: (row["line"], row["name"]))
+
+    source_path = ROOT / module["path"]
+    source_text = source_path.read_text(encoding="utf-8")
+    source_counts = identifier_counts(source_text)
+    anchor_names = {row["name"] for row in declaration_matches}
+    module_declarations = declarations_by_path.get(module["path"], [])
+    ranked_declarations = sorted(
+        module_declarations,
+        key=lambda row: (
+            0 if row["name"] in anchor_names else 1,
+            search_rank(query, row["name"], str(row.get("signature") or ""))
+            if query and search_rank(query, row["name"], str(row.get("signature") or "")) is not None
+            else 9,
+            row["line"],
+        ),
+    )
+
+    dependency_capsules = []
+    for imported_id in module.get("imports", [])[: min(6, limit)]:
+        imported = by_module.get(imported_id)
+        if imported is None:
+            continue
+        rows = declarations_by_path.get(imported["path"], [])
+        enriched = [
+            {
+                **compact_declaration(row),
+                "statement_head": row.get("signature"),
+                "usage_count_in_anchor_source": source_counts.get(row["name"], 0),
+            }
+            for row in rows
+        ]
+        used = [row for row in enriched if row["usage_count_in_anchor_source"] > 0]
+        pool = used or enriched
+        propositions = [row for row in pool if row["declaration_kind"] in {"theorem", "lemma"}]
+        data = [row for row in pool if row["declaration_kind"] not in {"theorem", "lemma"}]
+        retained = propositions[:8] + data[:4]
+        dependency_capsules.append(
+            {
+                "module_id": imported_id,
+                "file": imported["path"],
+                "source_digest": file_digest(ROOT / imported["path"]),
+                "relationship_to_anchor_module": "prerequisite_import",
+                "selection_basis": (
+                    "referenced_declarations_in_anchor_source"
+                    if used
+                    else "bounded_public_interface"
+                ),
+                "facts": retained,
+                "fact_count": len(rows),
+                "omitted_fact_count": max(0, len(rows) - len(retained)),
+            }
+        )
+
+    producer_names = {row["name"] for row in module_declarations}
+    importer_rows = [row for row in atlas["modules"] if module["id"] in row.get("imports", [])]
+    consumer_capsules = []
+    for importer in importer_rows[: min(6, limit)]:
+        importer_path = ROOT / importer["path"]
+        importer_lines = importer_path.read_text(encoding="utf-8").splitlines()
+        importer_declarations = declarations_by_path.get(importer["path"], [])
+        consumers = []
+        for index, row in enumerate(importer_declarations):
+            end = (
+                importer_declarations[index + 1]["line"] - 1
+                if index + 1 < len(importer_declarations)
+                else len(importer_lines)
+            )
+            span = "\n".join(importer_lines[row["line"] - 1 : end])
+            uses = sorted(name for name in producer_names if re.search(rf"\b{re.escape(name)}\b", span))
+            if uses:
+                consumers.append(
+                    {
+                        **compact_declaration(row),
+                        "statement_head": row.get("signature"),
+                        "uses_anchor_declarations": uses,
+                    }
+                )
+        consumer_capsules.append(
+            {
+                "module_id": importer["id"],
+                "file": importer["path"],
+                "source_digest": file_digest(importer_path),
+                "producer_source_digest": file_digest(source_path),
+                "relationship_to_anchor_module": "consumer_importer",
+                "selection_basis": (
+                    "consumer_declarations_referencing_anchor_declarations"
+                    if consumers
+                    else "exact_import_without_named_declaration_reference"
+                ),
+                "consumers": consumers[:8],
+                "consumer_count": len(consumers),
+                "omitted_consumer_count": max(0, len(consumers) - 8),
+            }
+        )
+
+    return {
+        "kind": "connection_card",
+        "schema_version": CONNECTION_CARD_SCHEMA,
+        "status": "source_current",
+        "surface_contract": {
+            "contract_id": "lean_connection_card",
+            "projection_scope": "public_corpus",
+            "disclosure_posture": "public_only",
+            "equivalent_private_projection": "private_claim_local",
+            "equivalence_boundary": (
+                "same directional navigation grammar; independent source, claim, and proof authority"
+            ),
+        },
+        "anchor": {
+            "handle": handle,
+            "handle_kind": "declaration" if declaration_matches else "module",
+            "module_id": module["id"],
+            "file": module["path"],
+            "source_digest": file_digest(source_path),
+            "lean_source_identity": formal_source_identity(claims),
+        },
+        "module_id": module["id"],
+        "relationship_direction": {
+            "prerequisite_imports": list(module.get("imports", []))[:16],
+            "consumer_importers": [
+                {"module_id": row["id"], "file": row["path"], "relation": "consumer_importer"}
+                for row in importer_rows[:limit]
+            ],
+        },
+        "declarations": [
+            {**compact_declaration(row), "statement_head": row.get("signature")}
+            for row in ranked_declarations[: min(limit, 12)]
+        ],
+        "declaration_count": len(module_declarations),
+        "dependency_capsules": dependency_capsules,
+        "consumer_capsules": consumer_capsules,
+        "required_consumption": {
+            "trigger": "after_public_module_selection_before_proof_or_claim_reasoning",
+            "action": (
+                "Check prerequisite interfaces, named downstream consumers, attached claim status, "
+                "and exact Lean source before introducing a parallel result or public claim."
+            ),
+        },
+        "refresh_contract": {
+            "triggers": [
+                "after_context_compaction",
+                "after_target_declaration_or_strategy_changes",
+                "after_import_or_source_changes",
+                "when_any_source_digest_changes",
+            ],
+            "action": f"python3 scripts/query_corpus.py --connections {handle}",
+        },
+        "exact_drilldown": f"python3 scripts/query_corpus.py --connections {handle}",
+        "authority_boundary": (
+            "This source-current public relationship card is generated navigation. The pinned Lean "
+            "source is proof authority and docs/claims.json owns public claim status."
+        ),
+        "validation": "python3 scripts/build_declaration_atlas.py --check",
+    }
+
+
 def module_packet(handle: str, limit: int) -> dict[str, Any]:
     atlas = load("docs/declaration_atlas.json")
     claims = load("docs/claims.json")
@@ -943,7 +1156,7 @@ def search_packet(query: str, limit: int) -> dict[str, Any]:
         "results": results[:limit],
         "omitted_match_count": max(0, len(results) - limit),
         "limit": limit,
-        "next": "Use the typed handle with --claim, --paper-anchor, --open, --declaration, --source, --module, --artifact, or --route.",
+        "next": "Use the typed handle with --claim, --paper-anchor, --open, --declaration, --source, --module, --connections, --artifact, or --route.",
     }
 
 
@@ -1025,6 +1238,14 @@ def render_card(packet: dict[str, Any]) -> str:
             f"| claims={len(packet['attached_claims'])} | paper_sigil={packet.get('paper_sigil') or 'none'} "
             f"| role={module['role']}"
         )
+    if kind == "connection_card":
+        anchor = packet["anchor"]
+        return (
+            f"connections {anchor['module_id']} | declarations={packet['declaration_count']} "
+            f"| imports={len(packet['relationship_direction']['prerequisite_imports'])} "
+            f"| importers={len(packet['relationship_direction']['consumer_importers'])} "
+            f"| disclosure={packet['surface_contract']['disclosure_posture']}"
+        )
     if kind == "search":
         rows = [
             f"search {packet['query']!r} | matches={packet['match_count']} | emitted={len(packet['results'])}"
@@ -1058,9 +1279,11 @@ def main() -> int:
     group.add_argument("--source", metavar="MODULE_DOT_LEAN:LINE")
     group.add_argument("--artifact", metavar="PATH_OR_SHA256")
     group.add_argument("--module", metavar="PATH_OR_ID")
+    group.add_argument("--connections", metavar="MODULE_OR_DECLARATION")
     group.add_argument("--route", metavar="ID")
     group.add_argument("--search", metavar="TEXT")
     parser.add_argument("--limit", type=int, default=DEFAULT_LIMIT)
+    parser.add_argument("--query", default="", help="rank a connection card toward one task")
     parser.add_argument("--format", choices=("json", "card"), default="json")
     args = parser.parse_args()
     if not 1 <= args.limit <= MAX_LIMIT:
@@ -1082,6 +1305,8 @@ def main() -> int:
             packet = artifact_packet(args.artifact)
         elif args.module:
             packet = module_packet(args.module, args.limit)
+        elif args.connections:
+            packet = connection_card(args.connections, args.limit, args.query)
         elif args.route:
             packet = route_packet(args.route)
         elif args.search:

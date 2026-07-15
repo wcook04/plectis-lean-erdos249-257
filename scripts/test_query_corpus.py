@@ -407,6 +407,47 @@ def main() -> int:
         "abbrev", "class", "def", "example", "instance", "lemma", "structure", "theorem"
     }
 
+    connections = query(
+        "--connections",
+        "Erdos249257.GreedyAchievementSet",
+        "--query",
+        "reuse the greedy achievement interface downstream",
+        "--limit",
+        "6",
+    )
+    assert connections["kind"] == "connection_card"
+    assert connections["schema_version"] == "lean-connection-card/2"
+    assert connections["status"] == "source_current"
+    assert connections["surface_contract"] == {
+        "contract_id": "lean_connection_card",
+        "projection_scope": "public_corpus",
+        "disclosure_posture": "public_only",
+        "equivalent_private_projection": "private_claim_local",
+        "equivalence_boundary": (
+            "same directional navigation grammar; independent source, claim, and proof authority"
+        ),
+    }
+    assert connections["anchor"]["source_digest"].startswith("sha256:")
+    assert "Erdos249257.CertificateKernel" in connections["relationship_direction"][
+        "prerequisite_imports"
+    ]
+    assert any(
+        row["module_id"] == "Erdos249257.DyadicPrefixCompression"
+        for row in connections["relationship_direction"]["consumer_importers"]
+    )
+    assert connections["dependency_capsules"][0]["source_digest"].startswith("sha256:")
+    assert all(
+        row["source_digest"].startswith("sha256:")
+        for row in connections["consumer_capsules"]
+    )
+    declaration_connections = query(
+        "--connections", "mersenneWeightRat", "--limit", "4"
+    )
+    assert declaration_connections["anchor"]["handle_kind"] == "declaration"
+    assert declaration_connections["declarations"][0]["name"] == (
+        "mersenneWeightRat"
+    )
+
     route = query("--route", "instant_orientation")
     assert route["route"]["read"][0] == "docs/orientation.json"
     assert "docs/claims.json" not in route["route"]["read"]

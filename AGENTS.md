@@ -47,6 +47,15 @@ For a bounded lookup, use `python3 scripts/query_corpus.py --claim <id>`,
 `--source <module.lean:line>`, `--module <path_or_id>`, or `--route <id>`. Use
 `--artifact <registered_path_or_sha256>` for a descriptor-registered artefact
 or content identity. Use
+`--connections <module_or_declaration> --query "<task>"` after selecting a
+Lean module or declaration. It returns the source-current public projection of
+the shared Lean connection-card contract: directional imports, named consumer
+declarations, bounded prerequisite interfaces, source digests, and the exact
+refresh route. This is equivalent in navigation grammar to private claim-local
+cards, but it is public-only and carries no private claim, unpublished-source,
+or proof authority. Consume it before introducing a parallel public result or
+changing claim prose.
+Use
 `--search <text> --limit <1..100>` when the typed handle is not yet known.
 JSON responses are capped at 64 KB; exhaustive data remains in the routed owner.
 Visible paper sigils resolve directly (`--module CerKer`); their generated
