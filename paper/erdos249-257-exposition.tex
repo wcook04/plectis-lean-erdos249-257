@@ -707,6 +707,18 @@ and
 The first-crossing branch producer required to use this identity globally is
 not proved.
 
+\subsection{Boundary-pulse normalization}\label{res:boundarypulse}
+
+Above a late largest skipped rank, every filled suffix rank has zero row
+pulse, so the word pulse is carried entirely by the lower prefix:
+\lref{HalfCylinderBoundaryPulse.lean}{85}{exists_lowerPrefix_wordPulse_eq_of_largestFalse_late}.
+At the first crossing of the two-thirds boundary there are exactly two cases,
+$3d=2s+1$ and $3d=2s+2$, and the skipped rank has pulse respectively two or
+one:
+\lrefx{HalfCylinderBoundaryPulse.lean}{150}{rowPulse_boundary_of_late_firstCrossing}.
+This supplies the incidence normalization for a producer estimate; it does
+not establish that estimate.
+
 \subsection{What stays open}
 
 The universal Erd\H{o}s \#257 statement, irrationality of $\sum_{n\in A}1/(2^n-1)$

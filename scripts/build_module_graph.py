@@ -55,6 +55,7 @@ NEW_ROLES = {
     "Erdos249257.HalfCylinderFatalGapRightTail": "Fatal-gap and eventual-right seam classification for the half target",
     "Erdos249257.HalfCylinderHalfMembershipClassification": "Positive half-membership classification in seam coordinates",
     "Erdos249257.HalfCylinderLargestSkipGap": "Largest skipped-rank gap and successor propagation for the half seam",
+    "Erdos249257.HalfCylinderBoundaryPulse": "Boundary-pulse normalization at the largest-skip crossing",
     "Erdos249257.HalfTrappingReturnCarry": "Half-trapping reverse-carry interface",
     "Erdos249257.LambertDiagonalEnclosure": "Lambert diagonal enclosure reduction",
     "Erdos249257.LcmFactorIdealPulseObstruction": "LCM factor-ideal anchor-pulse obstruction",

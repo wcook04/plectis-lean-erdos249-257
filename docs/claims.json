@@ -4962,6 +4962,14 @@
           ]
         },
         {
+          "id": "Erdos249257.HalfCylinderBoundaryPulse",
+          "path": "Erdos249257/HalfCylinderBoundaryPulse.lean",
+          "role": "Boundary-pulse normalization at the largest-skip crossing",
+          "imports": [
+            "Erdos249257.HalfCylinderLargestSkipGap"
+          ]
+        },
+        {
           "id": "Erdos249257.HalfCylinderConcreteSeamAdapter",
           "path": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean",
           "role": "Concrete finite seam adapter",
@@ -5481,6 +5489,11 @@
           "to": "half_membership_seam_classification"
         },
         {
+          "from": "boundary_pulse_normalization",
+          "relation": "builds_on",
+          "to": "largest_skip_gap_propagation"
+        },
+        {
           "from": "denominator_exclusion",
           "relation": "advances_open_target",
           "to": "erdos_249",
@@ -5754,7 +5767,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 1343
+        "line": 1355
       }
     },
     {
@@ -5765,7 +5778,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 1352
+        "line": 1364
       }
     },
     {
@@ -5776,7 +5789,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 1359
+        "line": 1371
       }
     }
   ],
@@ -6273,6 +6286,29 @@
           "name": "IsLargestFalseRank.seamGreedyWord_succ_of_rightBranch",
           "module": "Erdos249257/HalfCylinderLargestSkipGap.lean",
           "line": 339
+        }
+      ]
+    },
+    {
+      "id": "boundary_pulse_normalization",
+      "label": "Boundary-pulse normalization at the largest-skip crossing",
+      "status": "conditional reduction",
+      "statement": "For a late largest skipped rank, the filled strict suffix has zero row pulse. At the first two-thirds crossing, the boundary rank is one of two exact incidence cases and has row pulse two or one. The producer estimate that would exploit this normalization is not proved.",
+      "remaining_open_proposition_ids": [
+        "remaining_open.universal_257_all_infinite_supports"
+      ],
+      "paper_label": "res:boundarypulse",
+      "readme_headline": false,
+      "declarations": [
+        {
+          "name": "exists_lowerPrefix_wordPulse_eq_of_largestFalse_late",
+          "module": "Erdos249257/HalfCylinderBoundaryPulse.lean",
+          "line": 85
+        },
+        {
+          "name": "rowPulse_boundary_of_late_firstCrossing",
+          "module": "Erdos249257/HalfCylinderBoundaryPulse.lean",
+          "line": 150
         }
       ]
     },

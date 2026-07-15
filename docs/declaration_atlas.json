@@ -4,13 +4,13 @@
   "projection_not_authority": true,
   "proof_authority": "Lean source checked by the pinned Lean kernel",
   "argument_authority": "docs/claims.json::machine_readable_paper.argument_graph",
-  "source_fingerprint": "sha256:467d9efcb069df598bfe24a707a44f43c55ca94b0899193b4734613768124768",
+  "source_fingerprint": "sha256:86939e0ef1abcdfafc7f59a5b28a3ac4f1a713c8638e9bea70db4d815399ab52",
   "summary": {
-    "module_count": 579,
-    "declaration_count": 7510,
-    "theorem_like_count": 6713,
+    "module_count": 580,
+    "declaration_count": 7519,
+    "theorem_like_count": 6722,
     "generated_certificate_declaration_count": 1681,
-    "principal_claim_link_count": 144,
+    "principal_claim_link_count": 146,
     "kind_counts": {
       "abbrev": 6,
       "def": 767,
@@ -18,7 +18,7 @@
       "instance": 4,
       "lemma": 354,
       "structure": 17,
-      "theorem": 6359
+      "theorem": 6368
     }
   },
   "modules": [
@@ -107,7 +107,8 @@
         "Erdos249257.HalfCylinderFalseBitSupply",
         "Erdos249257.HalfCylinderFatalGapRightTail",
         "Erdos249257.HalfCylinderHalfMembershipClassification",
-        "Erdos249257.HalfCylinderLargestSkipGap"
+        "Erdos249257.HalfCylinderLargestSkipGap",
+        "Erdos249257.HalfCylinderBoundaryPulse"
       ],
       "declaration_count": 0,
       "kind_counts": {}
@@ -6484,6 +6485,17 @@
         "def": 1,
         "structure": 1,
         "theorem": 28
+      }
+    },
+    {
+      "id": "Erdos249257.HalfCylinderBoundaryPulse",
+      "path": "Erdos249257/HalfCylinderBoundaryPulse.lean",
+      "imports": [
+        "Erdos249257.HalfCylinderLargestSkipGap"
+      ],
+      "declaration_count": 9,
+      "kind_counts": {
+        "theorem": 9
       }
     },
     {
@@ -70010,6 +70022,109 @@
       "generated_certificate": false,
       "claim_ids": [],
       "docstring": "**Packet §9 boundary-free first macrostep.** The depth-one correction window sits strictly above `3/8`, so the first refinement crosses no dyadic boundary."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderBoundaryPulse.lean:24:wordPulse_eq_sum_seamWordSupport",
+      "name": "wordPulse_eq_sum_seamWordSupport",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderBoundaryPulse.lean",
+      "line": 24,
+      "signature": "theorem wordPulse_eq_sum_seamWordSupport {s : ℕ} (b : SeamRowWord s) : wordPulse s b.toNatWord = ∑ d ∈ seamWordSupport b, rowPulse s d",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The Boolean-word pulse is exactly the row-pulse sum over its finite support."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderBoundaryPulse.lean:49:not_dvd_two_mul_add_one_of_late_strictSuffix",
+      "name": "not_dvd_two_mul_add_one_of_late_strictSuffix",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderBoundaryPulse.lean",
+      "line": 49,
+      "signature": "theorem not_dvd_two_mul_add_one_of_late_strictSuffix {s d e : ℕ} (hd2 : 2 ≤ d) (hde : d < e) (hes : e < s) (hlate : 2 * s < 3 * d) : ¬ e ∣ 2 * s + 1",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A strict suffix rank above a late largest skip cannot divide the first new incidence index."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderBoundaryPulse.lean:62:not_dvd_two_mul_add_two_of_late_strictSuffix",
+      "name": "not_dvd_two_mul_add_two_of_late_strictSuffix",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderBoundaryPulse.lean",
+      "line": 62,
+      "signature": "theorem not_dvd_two_mul_add_two_of_late_strictSuffix {s d e : ℕ} (hd2 : 2 ≤ d) (hde : d < e) (hes : e < s) (hlate : 2 * s < 3 * d) : ¬ e ∣ 2 * s + 2",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A strict suffix rank above a late largest skip cannot divide the second new incidence index."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderBoundaryPulse.lean:75:rowPulse_eq_zero_of_late_strictSuffix",
+      "name": "rowPulse_eq_zero_of_late_strictSuffix",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderBoundaryPulse.lean",
+      "line": 75,
+      "signature": "theorem rowPulse_eq_zero_of_late_strictSuffix {s d e : ℕ} (hd2 : 2 ≤ d) (hde : d < e) (hes : e < s) (hlate : 2 * s < 3 * d) : rowPulse s e = 0",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Every filled strict-suffix rank above a late largest skip has zero row pulse."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderBoundaryPulse.lean:85:exists_lowerPrefix_wordPulse_eq_of_largestFalse_late",
+      "name": "exists_lowerPrefix_wordPulse_eq_of_largestFalse_late",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderBoundaryPulse.lean",
+      "line": 85,
+      "signature": "theorem exists_lowerPrefix_wordPulse_eq_of_largestFalse_late {s d : ℕ} {b : SeamRowWord s} (hmax : IsLargestFalseRank b d) (hlate : 2 * s < 3 * d) : ∃ u : Finset ℕ, (∀ e ∈ u, 2 ≤ e ∧ e < d) ∧ seamWordSupport b = u ∪ Finset.Ico (d + 1) s ∧ wordPulse s b.toNatWord = ∑ e ∈ u, rowPulse s e",
+      "generated_certificate": false,
+      "claim_ids": [
+        "boundary_pulse_normalization"
+      ],
+      "docstring": "For a late largest skipped rank, the filled suffix is pulse-invisible: the whole word pulse is carried by the lower prefix below `d`."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderBoundaryPulse.lean:115:late_firstCrossing_boundary",
+      "name": "late_firstCrossing_boundary",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderBoundaryPulse.lean",
+      "line": 115,
+      "signature": "theorem late_firstCrossing_boundary {s d : ℕ} (hlate : 2 * s < 3 * d) (hcross : ¬ 2 * (s + 1) < 3 * d) : 3 * d = 2 * s + 1 ∨ 3 * d = 2 * s + 2",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "At the first crossing of the two-thirds boundary, the boundary incidence is one of the two consecutive new indices."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderBoundaryPulse.lean:123:rowPulse_eq_two_of_boundary_one",
+      "name": "rowPulse_eq_two_of_boundary_one",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderBoundaryPulse.lean",
+      "line": 123,
+      "signature": "theorem rowPulse_eq_two_of_boundary_one {s d : ℕ} (hd2 : 2 ≤ d) (hboundary : 3 * d = 2 * s + 1) : rowPulse s d = 2",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "In the odd boundary case, only `2*s+1` is divisible by `d`, so the boundary rank contributes pulse two."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderBoundaryPulse.lean:137:rowPulse_eq_one_of_boundary_two",
+      "name": "rowPulse_eq_one_of_boundary_two",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderBoundaryPulse.lean",
+      "line": 137,
+      "signature": "theorem rowPulse_eq_one_of_boundary_two {s d : ℕ} (hd2 : 2 ≤ d) (hboundary : 3 * d = 2 * s + 2) : rowPulse s d = 1",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "In the even boundary case, only `2*s+2` is divisible by `d`, so the boundary rank contributes pulse one."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderBoundaryPulse.lean:150:rowPulse_boundary_of_late_firstCrossing",
+      "name": "rowPulse_boundary_of_late_firstCrossing",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderBoundaryPulse.lean",
+      "line": 150,
+      "signature": "theorem rowPulse_boundary_of_late_firstCrossing {s d : ℕ} (hd2 : 2 ≤ d) (hlate : 2 * s < 3 * d) (hcross : ¬ 2 * (s + 1) < 3 * d) : (3 * d = 2 * s + 1 ∧ rowPulse s d = 2) ∨ (3 * d = 2 * s + 2 ∧ rowPulse s d = 1)",
+      "generated_certificate": false,
+      "claim_ids": [
+        "boundary_pulse_normalization"
+      ],
+      "docstring": "Combined first-crossing pulse dichotomy at the largest skipped rank."
     },
     {
       "id": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean:18:SeamRowWord",
