@@ -770,6 +770,15 @@ it is enough in turn that every late middle remainder is at least its row,
 \lrefx{HalfCylinderMiddleCarryLowerBound.lean}{1510}{half_mem_mersenneAchievementSet_of_middleProducerRowEscape}.
 These are exact conditional reductions, not proofs of the row bound.
 
+\paragraph{Finite upper-reset band certificates.}  The companion upper
+branch has a kernel-checked finite certificate: for every upper transition
+from rows $13$ through $30$, every subsequent dyadic danger band is avoided.
+The certificate shares each exact successor remainder across all its band
+indices,
+\lrefx{HalfCylinderUpperResetBandCertificates.lean}{78}{seamUpperResetDyadicBandEscape_through_thirty}.
+It is a bounded producer check and does not supply the cofinal band-escape
+hypothesis.
+
 \subsection{Positive half-membership classification}\label{res:halfmembership}
 
 The complementary branch has an equally exact seam formulation.  Membership

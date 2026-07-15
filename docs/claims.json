@@ -5271,6 +5271,14 @@
           ]
         },
         {
+          "id": "Erdos249257.HalfCylinderUpperResetBandCertificates",
+          "path": "Erdos249257/HalfCylinderUpperResetBandCertificates.lean",
+          "role": "Lean proof module",
+          "imports": [
+            "Erdos249257.HalfCylinderMiddleCarryLowerBound"
+          ]
+        },
+        {
           "id": "Erdos249257.HalfDivisorUnitDrop",
           "path": "Erdos249257/HalfDivisorUnitDrop.lean",
           "role": "Half-divisor unit coefficient drop at the feedback row",
@@ -6166,7 +6174,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 1742
+        "line": 1751
       }
     },
     {
@@ -6177,7 +6185,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 1751
+        "line": 1760
       }
     },
     {
@@ -6188,7 +6196,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 1758
+        "line": 1767
       }
     }
   ],
@@ -6774,6 +6782,21 @@
           "name": "half_mem_mersenneAchievementSet_of_middleProducerRowEscape",
           "module": "Erdos249257/HalfCylinderMiddleCarryLowerBound.lean",
           "line": 1510
+        }
+      ]
+    },
+    {
+      "id": "upper_reset_band_certificates_through_thirty",
+      "label": "Upper-reset dyadic-band certificates through row 30",
+      "status": "verified finite instance",
+      "statement": "For every upper transition from rows 13 through 30, every relevant subsequent dyadic danger band is avoided. The check shares one exact successor remainder across all band indices for each row. It is bounded evidence and does not prove the cofinal upper-reset band-escape hypothesis.",
+      "paper_label": "res:fatalright",
+      "readme_headline": false,
+      "declarations": [
+        {
+          "name": "seamUpperResetDyadicBandEscape_through_thirty",
+          "module": "Erdos249257/HalfCylinderUpperResetBandCertificates.lean",
+          "line": 78
         }
       ]
     },
