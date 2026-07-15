@@ -689,6 +689,24 @@ tending to infinity,
 These equivalences isolate the positive arithmetic producer; they do not
 establish that the producer exists.
 
+\subsection{Largest skipped ranks}\label{res:largestskip}
+
+At a named largest skipped rank $d$, the lower seam word and its adjacent
+upper competitor have an exact late-range gap.  In division-free form, the
+identity is
+\[
+  3L+\bigl(3\cdot2^{s+1}+2\cdot4^{s-d}+4\bigr)=3U
+\]
+whenever $2s<3d$; this is formalised at
+\lref{HalfCylinderLargestSkipGap.lean}{259}{three_mul_largestSkipLowerWeight_add_exactLateGap_eq_upperWeight}.
+The upper and middle successor branches create a terminal largest skipped
+rank, while the right branch preserves an existing one:
+\lrefx{HalfCylinderLargestSkipGap.lean}{328}{seamGreedyWord_succ_isLargestFalseRank_terminal_of_upperOrMiddle}
+and
+\lrefx{HalfCylinderLargestSkipGap.lean}{339}{IsLargestFalseRank.seamGreedyWord_succ_of_rightBranch}.
+The first-crossing branch producer required to use this identity globally is
+not proved.
+
 \subsection{What stays open}
 
 The universal Erd\H{o}s \#257 statement, irrationality of $\sum_{n\in A}1/(2^n-1)$

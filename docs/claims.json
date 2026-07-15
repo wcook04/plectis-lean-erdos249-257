@@ -5029,6 +5029,14 @@
           ]
         },
         {
+          "id": "Erdos249257.HalfCylinderLargestSkipGap",
+          "path": "Erdos249257/HalfCylinderLargestSkipGap.lean",
+          "role": "Largest skipped-rank gap and successor propagation for the half seam",
+          "imports": [
+            "Erdos249257.HalfCylinderHalfMembershipClassification"
+          ]
+        },
+        {
           "id": "Erdos249257.HalfCylinderSeamLimit",
           "path": "Erdos249257/HalfCylinderSeamLimit.lean",
           "role": "Seam-limit reduction for the half target",
@@ -5468,6 +5476,11 @@
           "to": "fatal_gap_right_tail_classification"
         },
         {
+          "from": "largest_skip_gap_propagation",
+          "relation": "builds_on",
+          "to": "half_membership_seam_classification"
+        },
+        {
           "from": "denominator_exclusion",
           "relation": "advances_open_target",
           "to": "erdos_249",
@@ -5741,7 +5754,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 1325
+        "line": 1343
       }
     },
     {
@@ -5752,7 +5765,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 1334
+        "line": 1352
       }
     },
     {
@@ -5763,7 +5776,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 1341
+        "line": 1359
       }
     }
   ],
@@ -6232,6 +6245,34 @@
           "name": "half_mem_mersenneAchievementSet_iff_exists_unboundedSkippedRanksAlong",
           "module": "Erdos249257/HalfCylinderHalfMembershipClassification.lean",
           "line": 213
+        }
+      ]
+    },
+    {
+      "id": "largest_skip_gap_propagation",
+      "label": "Largest skipped-rank gap and successor propagation",
+      "status": "conditional reduction",
+      "statement": "At a named largest skipped rank in the late range, the adjacent seam words satisfy an exact division-free weight-gap identity. Upper or middle successors create a terminal largest skipped rank, while right successors preserve one. The global first-crossing branch producer is not proved.",
+      "remaining_open_proposition_ids": [
+        "remaining_open.universal_257_all_infinite_supports"
+      ],
+      "paper_label": "res:largestskip",
+      "readme_headline": false,
+      "declarations": [
+        {
+          "name": "three_mul_largestSkipLowerWeight_add_exactLateGap_eq_upperWeight",
+          "module": "Erdos249257/HalfCylinderLargestSkipGap.lean",
+          "line": 259
+        },
+        {
+          "name": "seamGreedyWord_succ_isLargestFalseRank_terminal_of_upperOrMiddle",
+          "module": "Erdos249257/HalfCylinderLargestSkipGap.lean",
+          "line": 328
+        },
+        {
+          "name": "IsLargestFalseRank.seamGreedyWord_succ_of_rightBranch",
+          "module": "Erdos249257/HalfCylinderLargestSkipGap.lean",
+          "line": 339
         }
       ]
     },

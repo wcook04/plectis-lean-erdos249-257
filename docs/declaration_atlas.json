@@ -4,21 +4,21 @@
   "projection_not_authority": true,
   "proof_authority": "Lean source checked by the pinned Lean kernel",
   "argument_authority": "docs/claims.json::machine_readable_paper.argument_graph",
-  "source_fingerprint": "sha256:a528a04d7961c8aff99e425bfca630329d6dcef7d199a75fdccfe4ac68ddd988",
+  "source_fingerprint": "sha256:467d9efcb069df598bfe24a707a44f43c55ca94b0899193b4734613768124768",
   "summary": {
-    "module_count": 578,
-    "declaration_count": 7494,
-    "theorem_like_count": 6700,
+    "module_count": 579,
+    "declaration_count": 7510,
+    "theorem_like_count": 6713,
     "generated_certificate_declaration_count": 1681,
-    "principal_claim_link_count": 141,
+    "principal_claim_link_count": 144,
     "kind_counts": {
       "abbrev": 6,
-      "def": 764,
+      "def": 767,
       "inductive": 3,
       "instance": 4,
       "lemma": 354,
       "structure": 17,
-      "theorem": 6346
+      "theorem": 6359
     }
   },
   "modules": [
@@ -106,7 +106,8 @@
         "Erdos249257.HalfCylinderSkippedRankLimit",
         "Erdos249257.HalfCylinderFalseBitSupply",
         "Erdos249257.HalfCylinderFatalGapRightTail",
-        "Erdos249257.HalfCylinderHalfMembershipClassification"
+        "Erdos249257.HalfCylinderHalfMembershipClassification",
+        "Erdos249257.HalfCylinderLargestSkipGap"
       ],
       "declaration_count": 0,
       "kind_counts": {}
@@ -6584,6 +6585,18 @@
         "def": 31,
         "structure": 2,
         "theorem": 59
+      }
+    },
+    {
+      "id": "Erdos249257.HalfCylinderLargestSkipGap",
+      "path": "Erdos249257/HalfCylinderLargestSkipGap.lean",
+      "imports": [
+        "Erdos249257.HalfCylinderHalfMembershipClassification"
+      ],
+      "declaration_count": 16,
+      "kind_counts": {
+        "def": 3,
+        "theorem": 13
       }
     },
     {
@@ -73691,6 +73704,188 @@
         "integer_greedy_first_wrap_reduction"
       ],
       "docstring": "Under the already-landed middle-branch separation, the two quarter-band clauses are not merely sufficient: they are exactly the assertion that the updated residual escapes the target strip."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderLargestSkipGap.lean:34:IsLargestFalseRank",
+      "name": "IsLargestFalseRank",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderLargestSkipGap.lean",
+      "line": 34,
+      "signature": "def IsLargestFalseRank {s : ℕ} (b : SeamRowWord s) (d : ℕ) : Prop",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "`d` is the largest false rank of a seam word: it is absent, and every strictly larger rank still inside the row is present."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderLargestSkipGap.lean:42:isLargestFalseRank_iff_exists_lowerPrefix_fullSuffix",
+      "name": "isLargestFalseRank_iff_exists_lowerPrefix_fullSuffix",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderLargestSkipGap.lean",
+      "line": 42,
+      "signature": "theorem isLargestFalseRank_iff_exists_lowerPrefix_fullSuffix {s d : ℕ} (b : SeamRowWord s) (hd2 : 2 ≤ d) (hds : d < s) : IsLargestFalseRank b d ↔ ∃ u : Finset ℕ, (∀ e ∈ u, 2 ≤ e ∧ e < d) ∧ seamWordSupport b = u ∪ Finset.Ico (d + 1) s",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A named largest false rank is exactly a fixed lower prefix followed by the completely filled suffix `d+1,...,s-1`. This is the parameterized form of `exists_maximal_missing_rank_support_decomposition`."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderLargestSkipGap.lean:88:isLargestFalseRank_extend_false",
+      "name": "isLargestFalseRank_extend_false",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderLargestSkipGap.lean",
+      "line": 88,
+      "signature": "theorem isLargestFalseRank_extend_false {s : ℕ} (hs : 3 ≤ s) (b : SeamRowWord s) : IsLargestFalseRank (b.extend false) s",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Appending `false` makes the new terminal rank the largest false rank."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderLargestSkipGap.lean:99:IsLargestFalseRank.extend_true",
+      "name": "IsLargestFalseRank.extend_true",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderLargestSkipGap.lean",
+      "line": 99,
+      "signature": "theorem IsLargestFalseRank.extend_true {s d : ℕ} {b : SeamRowWord s} (hs : 3 ≤ s) (hmax : IsLargestFalseRank b d) : IsLargestFalseRank (b.extend true) d",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Appending `true` preserves every existing largest false rank."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderLargestSkipGap.lean:118:truncatedMersenneWeight_eq_twoPower_add_fourPower_of_lateRank",
+      "name": "truncatedMersenneWeight_eq_twoPower_add_fourPower_of_lateRank",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderLargestSkipGap.lean",
+      "line": 118,
+      "signature": "theorem truncatedMersenneWeight_eq_twoPower_add_fourPower_of_lateRank {s d : ℕ} (hd2 : 2 ≤ d) (hds : d < s) (hlate : 2 * s < 3 * d) : truncatedMersenneWeight s d = 2 ^ (2 * s - d) + 4 ^ (s - d)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "In the late range `2*s < 3*d`, Euclidean division has quotient two, so the truncated Mersenne weight has exactly two power terms."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderLargestSkipGap.lean:149:twoPowerSuffixSum_add_boundary",
+      "name": "twoPowerSuffixSum_add_boundary",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderLargestSkipGap.lean",
+      "line": 149,
+      "signature": "theorem twoPowerSuffixSum_add_boundary (s d : ℕ) (hds : d < s) : (∑ e ∈ Finset.Ico (d + 1) s, 2 ^ (2 * s - e)) + 2 ^ (s + 1) = 2 ^ (2 * s - d)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The descending binary powers in the strict suffix telescope exactly."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderLargestSkipGap.lean:184:three_mul_fourPowerSuffixSum_add_four",
+      "name": "three_mul_fourPowerSuffixSum_add_four",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderLargestSkipGap.lean",
+      "line": 184,
+      "signature": "theorem three_mul_fourPowerSuffixSum_add_four (s d : ℕ) (hds : d < s) : 3 * (∑ e ∈ Finset.Ico (d + 1) s, 4 ^ (s - e)) + 4 = 4 ^ (s - d)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The descending base-four correction powers telescope in a division-free form."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderLargestSkipGap.lean:212:seamWeightsFrom_sum_eq_twoPowerSuffix_add_fourPowerSuffix_of_lateRank",
+      "name": "seamWeightsFrom_sum_eq_twoPowerSuffix_add_fourPowerSuffix_of_lateRank",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderLargestSkipGap.lean",
+      "line": 212,
+      "signature": "theorem seamWeightsFrom_sum_eq_twoPowerSuffix_add_fourPowerSuffix_of_lateRank {s d : ℕ} (hd2 : 2 ≤ d) (hds : d < s) (hlate : 2 * s < 3 * d) : (seamWeightsFrom s (d + 1)).sum = (∑ e ∈ Finset.Ico (d + 1) s, 2 ^ (2 * s - e)) + ∑ e ∈ Finset.Ico (d + 1) s, 4 ^ (s - e)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Every strict-suffix weight is in the same two-term quotient-two range."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderLargestSkipGap.lean:230:three_mul_tailWeight_add_exactLateGap_eq_three_mul_headWeight",
+      "name": "three_mul_tailWeight_add_exactLateGap_eq_three_mul_headWeight",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderLargestSkipGap.lean",
+      "line": 230,
+      "signature": "theorem three_mul_tailWeight_add_exactLateGap_eq_three_mul_headWeight {s d : ℕ} (hd2 : 2 ≤ d) (hds : d < s) (hlate : 2 * s < 3 * d) : 3 * (seamWeightsFrom s (d + 1)).sum + (3 * 2 ^ (s + 1) + 2 * 4 ^ (s - d) + 4) = 3 * truncatedMersenneWeight s d",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Sharp division-free adjacent-gap identity. Dividing by three gives `2^(s+1) + (2*4^(s-d)+4)/3`."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderLargestSkipGap.lean:250:largestSkipLowerWord",
+      "name": "largestSkipLowerWord",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderLargestSkipGap.lean",
+      "line": 250,
+      "signature": "def largestSkipLowerWord (s d : ℕ) (u : Finset ℕ) : SeamRowWord s",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The lower adjacent word at largest skipped rank `d`."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderLargestSkipGap.lean:254:largestSkipUpperWord",
+      "name": "largestSkipUpperWord",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderLargestSkipGap.lean",
+      "line": 254,
+      "signature": "def largestSkipUpperWord (s d : ℕ) (u : Finset ℕ) : SeamRowWord s",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The upper adjacent word replaces the filled suffix by the skipped rank."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderLargestSkipGap.lean:259:three_mul_largestSkipLowerWeight_add_exactLateGap_eq_upperWeight",
+      "name": "three_mul_largestSkipLowerWeight_add_exactLateGap_eq_upperWeight",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderLargestSkipGap.lean",
+      "line": 259,
+      "signature": "theorem three_mul_largestSkipLowerWeight_add_exactLateGap_eq_upperWeight {s d : ℕ} {u : Finset ℕ} (hd2 : 2 ≤ d) (hds : d < s) (hu : ∀ e ∈ u, 2 ≤ e ∧ e < d) (hlate : 2 * s < 3 * d) : 3 * wordWeightSum s (largestSkipLowerWord s d u).toNatWord + (3 * 2 ^ (s + 1) + 2 * 4 ^ (s - d) + 4) = 3 * wordWeightSum s (largestSkipUpperWord s d u).toNatWord",
+      "generated_certificate": false,
+      "claim_ids": [
+        "largest_skip_gap_propagation"
+      ],
+      "docstring": "Exact late-rank adjacent word gap, including an arbitrary common lower prefix."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderLargestSkipGap.lean:304:seamGreedyWord_succ_isLargestFalseRank_terminal_of_upperBranch",
+      "name": "seamGreedyWord_succ_isLargestFalseRank_terminal_of_upperBranch",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderLargestSkipGap.lean",
+      "line": 304,
+      "signature": "theorem seamGreedyWord_succ_isLargestFalseRank_terminal_of_upperBranch (s : ℕ) (hs : 5 ≤ s) (hcarry : (seamAdjacentCut s hs).successorCarries) : IsLargestFalseRank (seamGreedyWord (s + 1)) s",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "On the `U` branch, the new terminal rank is the largest false rank."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderLargestSkipGap.lean:313:seamGreedyWord_succ_isLargestFalseRank_terminal_of_middleBranch",
+      "name": "seamGreedyWord_succ_isLargestFalseRank_terminal_of_middleBranch",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderLargestSkipGap.lean",
+      "line": 313,
+      "signature": "theorem seamGreedyWord_succ_isLargestFalseRank_terminal_of_middleBranch (s : ℕ) (hs : 5 ≤ s) (hcarry : ¬ (seamAdjacentCut s hs).successorCarries) (hmiddle : 4 * (seamAdjacentCut s hs).remainder + (seamPerturbedFamily s (by omega)).gap - (seamAdjacentCut s hs).belowPulse < (seamAdjacentCut s hs).terminalWeight) : IsLargestFalseRank (seamGreedyWord (s + 1)) s",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "On the `M` branch, the new terminal rank is the largest false rank."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderLargestSkipGap.lean:328:seamGreedyWord_succ_isLargestFalseRank_terminal_of_upperOrMiddle",
+      "name": "seamGreedyWord_succ_isLargestFalseRank_terminal_of_upperOrMiddle",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderLargestSkipGap.lean",
+      "line": 328,
+      "signature": "theorem seamGreedyWord_succ_isLargestFalseRank_terminal_of_upperOrMiddle (s : ℕ) (hs : 5 ≤ s) (hUM : SeamGreedyUpperOrMiddleAt s hs) : IsLargestFalseRank (seamGreedyWord (s + 1)) s",
+      "generated_certificate": false,
+      "claim_ids": [
+        "largest_skip_gap_propagation"
+      ],
+      "docstring": "The combined arithmetic `U/M` predicate makes the successor terminal rank the largest false rank."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderLargestSkipGap.lean:339:IsLargestFalseRank.seamGreedyWord_succ_of_rightBranch",
+      "name": "IsLargestFalseRank.seamGreedyWord_succ_of_rightBranch",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderLargestSkipGap.lean",
+      "line": 339,
+      "signature": "theorem IsLargestFalseRank.seamGreedyWord_succ_of_rightBranch {s d : ℕ} (hs : 5 ≤ s) (hmax : IsLargestFalseRank (seamGreedyWord s) d) (hcarry : ¬ (seamAdjacentCut s hs).successorCarries) (hright : (seamAdjacentCut s hs).terminalWeight ≤ 4 * (seamAdjacentCut s hs).remainder + (seamPerturbedFamily s (by omega)).gap - (seamAdjacentCut s hs).belowPulse) : IsLargestFalseRank (seamGreedyWord (s + 1)) d",
+      "generated_certificate": false,
+      "claim_ids": [
+        "largest_skip_gap_propagation"
+      ],
+      "docstring": "On the `R` branch, the old largest false rank is preserved."
     },
     {
       "id": "Erdos249257/HalfCylinderSeamLimit.lean:25:seamGreedyFiniteValue",
