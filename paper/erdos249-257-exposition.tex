@@ -1134,6 +1134,35 @@ more than the proved tail bound forces target avoidance.
 and
 \lref{SquaredMersenneDiagonalEnclosure.lean}{237}{scaleFullTarget_miss_of_lambert_projected_separation}.
 
+\paragraph{Finite foreign-residue projection.}  There is a second finite
+presentation of the same obstruction.  For a cutoff $D$, split the finite
+M\"obius residue diagonal into the channels $d\leq D$ which divide $H$ and
+the remaining channels.  The divisor part is exactly the truncated M\"obius
+shadow, while every retained nondivisor channel is explicit.  Above the
+stable cutoff $2H$, a finite window of omitted channels is bounded by
+\[
+ c_H\left(\frac{2}{2^D}+\frac{4}{3\,4^D}\right),
+\]
+where $c_H$ is the diagonal coefficient.  Thus, if the actual foreign defect
+agrees with this projection within the displayed bound, and the projected
+quantity is farther than that bound from every integer, then the full target
+is missed.
+
+\begin{proposition}[finite foreign-residue projection]\label{res:foreignresidue}
+The finite residue diagonal splits exactly into projected foreign and divisor
+channels.  A controlled projected foreign defect with the stated integer
+separation cannot meet the full target.
+\end{proposition}
+\noindent Formalised:
+\lref{ActualForeignResidueProjection.lean}{307}{finiteResidueDiagonal_eq_projectedForeign_add_divisor},
+\lref{ActualForeignResidueProjection.lean}{275}{abs_foreignTailWindow_le_foreignComplementBound},
+and
+\lref{ActualForeignResidueProjection.lean}{348}{scaleFullTarget_miss_of_projected_separation}.
+The passage from finite windows to the analytic foreign complement, including
+the corresponding kernel identity, is not supplied here.  Nor is an
+unbounded family of separated projections; these are parts of the open
+certificate-supply problem.
+
 Second, the rational M\"obius shadow has an exact reduced denominator.  If
 $r_t$ is the square-free kernel of $H_t$, $s_t=H_t/r_t$, and $J(r_t)$ is the
 odd Jordan scalar defined in the algebraic shadow chain, then

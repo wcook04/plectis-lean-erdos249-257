@@ -4,13 +4,13 @@
   "projection_not_authority": true,
   "proof_authority": "Lean source checked by the pinned Lean kernel",
   "argument_authority": "docs/claims.json::machine_readable_paper.argument_graph",
-  "source_fingerprint": "sha256:293bb414059dfa9e6eb33ace8b42d953d7a1030bff7c108794c75e0bfc8c574c",
+  "source_fingerprint": "sha256:6bebbd3ed4c6b499d29b8b9c4bce180dcdcefbd29ba8fb16be18330c0d8c205b",
   "summary": {
     "module_count": 591,
     "declaration_count": 7624,
     "theorem_like_count": 6799,
     "generated_certificate_declaration_count": 1681,
-    "principal_claim_link_count": 172,
+    "principal_claim_link_count": 175,
     "kind_counts": {
       "abbrev": 6,
       "def": 793,
@@ -119,7 +119,8 @@
         "Erdos249257.RewindSeamOperationalBridge",
         "Erdos249257.SelectedSuffixCylinder",
         "Erdos249257.SelectedSuffixCylinderPreFeedback",
-        "Erdos249257.HalfDivisorUnitDrop"
+        "Erdos249257.HalfDivisorUnitDrop",
+        "Erdos249257.ActualForeignResidueProjection"
       ],
       "declaration_count": 0,
       "kind_counts": {}
@@ -7475,7 +7476,9 @@
       "line": 275,
       "signature": "theorem abs_foreignTailWindow_le_foreignComplementBound {H D L : ℕ} (hcutoff : 2 * H ≤ D) : |foreignTailWindow H D L| ≤ foreignComplementBound H D",
       "generated_certificate": false,
-      "claim_ids": [],
+      "claim_ids": [
+        "actual_foreign_residue_projection"
+      ],
       "docstring": "The finite foreign tail is bounded by the closed complement budget. The only remaining analytic obligation is to identify the actual complement with the limit of these windows."
     },
     {
@@ -7519,7 +7522,9 @@
       "line": 307,
       "signature": "theorem finiteResidueDiagonal_eq_projectedForeign_add_divisor (H D : ℕ) : finiteResidueDiagonal H D = projectedForeignDefect H D + projectedDivisorChannels H D",
       "generated_certificate": false,
-      "claim_ids": [],
+      "claim_ids": [
+        "actual_foreign_residue_projection"
+      ],
       "docstring": "The finite residue state splits exactly into the retained foreign projection and the complementary divisor state."
     },
     {
@@ -7563,7 +7568,9 @@
       "line": 348,
       "signature": "theorem scaleFullTarget_miss_of_projected_separation {H D : ℕ} (hcontrol : ControlledForeignProjection H D) (hseparation : ProjectedFullTargetSeparation H D) : ¬ScaleFullTargetHit H",
       "generated_certificate": false,
-      "claim_ids": [],
+      "claim_ids": [
+        "actual_foreign_residue_projection"
+      ],
       "docstring": "**Complement noncancellation consumer.** A controlled projection whose finite rational state is farther from every integer than the whole omitted complement can move it forces a genuine full-target miss."
     },
     {

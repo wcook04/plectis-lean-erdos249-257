@@ -5716,6 +5716,26 @@
           "to": "squared_mersenne_enclosure"
         },
         {
+          "from": "actual_foreign_residue_projection",
+          "relation": "builds_on",
+          "to": "diagonal_pincer_reduction"
+        },
+        {
+          "from": "actual_foreign_residue_projection",
+          "relation": "builds_on",
+          "to": "squared_mersenne_enclosure"
+        },
+        {
+          "from": "actual_foreign_residue_projection",
+          "relation": "advances_open_target",
+          "to": "erdos_249",
+          "remaining_open_effect": {
+            "remaining_open_proposition_id": "remaining_open.unbounded_certificate_supply",
+            "operation": "re_expresses",
+            "statement": "Places the finite foreign-residue projection behind an explicit analytic-complement bridge and an unbounded separated-projection supply; neither is asserted."
+          }
+        },
+        {
           "from": "diagonal_pincer_reduction",
           "relation": "builds_on",
           "to": "mersenne_shadow_denominator"
@@ -5909,7 +5929,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 1483
+        "line": 1512
       }
     },
     {
@@ -5920,7 +5940,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 1492
+        "line": 1521
       }
     },
     {
@@ -5931,7 +5951,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 1499
+        "line": 1528
       }
     }
   ],
@@ -7069,6 +7089,34 @@
           "name": "scaleFullTarget_miss_of_lambert_projected_separation",
           "module": "Erdos249257/SquaredMersenneDiagonalEnclosure.lean",
           "line": 237
+        }
+      ]
+    },
+    {
+      "id": "actual_foreign_residue_projection",
+      "label": "Finite foreign-residue projection reduction",
+      "status": "conditional reduction",
+      "statement": "The finite Möbius residue diagonal splits exactly into projected foreign and divisor channels, and every finite stable tail window has a closed geometric bound. If an analytic kernel/complement bridge controls the actual foreign defect by that bound and the projection is separated from every integer, then the full target is missed. The analytic bridge and any unbounded separated-projection supply are not proved.",
+      "remaining_open_proposition_ids": [
+        "remaining_open.unbounded_certificate_supply"
+      ],
+      "paper_label": "res:foreignresidue",
+      "readme_headline": false,
+      "declarations": [
+        {
+          "name": "finiteResidueDiagonal_eq_projectedForeign_add_divisor",
+          "module": "Erdos249257/ActualForeignResidueProjection.lean",
+          "line": 307
+        },
+        {
+          "name": "abs_foreignTailWindow_le_foreignComplementBound",
+          "module": "Erdos249257/ActualForeignResidueProjection.lean",
+          "line": 275
+        },
+        {
+          "name": "scaleFullTarget_miss_of_projected_separation",
+          "module": "Erdos249257/ActualForeignResidueProjection.lean",
+          "line": 348
         }
       ]
     },
