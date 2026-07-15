@@ -6293,7 +6293,7 @@
     "lean_toolchain": "leanprover/lean4:v4.29.1",
     "repository": "https://github.com/wcook04/plectis-lean-erdos249-257",
     "formal_source": {
-      "ref": "0650cdf50e5dccaedc6475ced755969b72afdca3",
+      "ref": "189a213",
       "ref_kind": "commit",
       "publication_state": "committed_checkpoint_pending_remote_publication",
       "relationship_to_last_tag": "post_tag_checkpoint"
@@ -6932,6 +6932,7 @@
       "id": "upper_reset_band_certificates_through_thirty",
       "label": "Upper-reset dyadic-band certificates through row 30",
       "status": "verified finite instance",
+      "bounded_domain": "Upper transitions from rows 13 through 30, with every relevant subsequent dyadic danger band checked for each row.",
       "statement": "For every upper transition from rows 13 through 30, every relevant subsequent dyadic danger band is avoided. The check shares one exact successor remainder across all band indices for each row. It is bounded evidence and does not prove the cofinal upper-reset band-escape hypothesis.",
       "paper_label": "res:fatalright",
       "readme_headline": false,
@@ -7819,6 +7820,9 @@
       "id": "flexible_odd_window_affine_frontier",
       "label": "Affine three-scale frontier for the flexible odd window",
       "status": "conditional reduction",
+      "remaining_open_proposition_ids": [
+        "remaining_open.unbounded_certificate_supply"
+      ],
       "statement": "Under the stated short-correction bounds, the three half-word central-band predicates are exactly a three-scale affine escape disjunction. A uniform correction envelope alone cannot force that escape, as a zero-start affine orbit remains inside every scaled edge tube. Thus arithmetic state-correction correlation remains required.",
       "paper_label": "res:flexibleoddaffine",
       "readme_headline": false,
