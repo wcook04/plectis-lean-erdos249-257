@@ -609,6 +609,18 @@ next-row divisor cylinder, or the canonical adjacent seam.  The module makes
 this input explicit; it does not construct the window supply and does not
 prove Erd\H{o}s~\#257.
 
+\subsection{Realized rewind phase}\label{res:rewindphase}
+
+For a realized fixed-coefficient history, the dyadic rewind phase is the
+complementary binary suffix numeral:
+\lref{HalfCarryRewindPhase.lean}{39}{phase_eq_denom_sub_one_sub_suffixNumeral}.
+Consequently the singleton criterion is exactly the inequality that this
+suffix numeral covers the rest of the terminal interval,
+formalised by
+\lrefx{HalfCarryRewindPhase.lean}{65}{rewind_interval_singleton_iff_suffixNumeral_covers}.
+This converts the phase condition into support-history coordinates, but does
+not prove the required coverage inequality globally.
+
 \subsection{What stays open}
 
 The universal Erd\H{o}s \#257 statement, irrationality of $\sum_{n\in A}1/(2^n-1)$

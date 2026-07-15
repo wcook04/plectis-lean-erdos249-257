@@ -4,21 +4,21 @@
   "projection_not_authority": true,
   "proof_authority": "Lean source checked by the pinned Lean kernel",
   "argument_authority": "docs/claims.json::machine_readable_paper.argument_graph",
-  "source_fingerprint": "sha256:660be6d33f7f635255ed0aef9184076b7a1f44966a640e4c7add00d697e788ec",
+  "source_fingerprint": "sha256:d6808a45e2c3edcdce91d57002a4e691e93affe3f53382b487428a484125e4eb",
   "summary": {
-    "module_count": 563,
-    "declaration_count": 7081,
-    "theorem_like_count": 6377,
+    "module_count": 564,
+    "declaration_count": 7099,
+    "theorem_like_count": 6391,
     "generated_certificate_declaration_count": 1681,
-    "principal_claim_link_count": 121,
+    "principal_claim_link_count": 124,
     "kind_counts": {
       "abbrev": 5,
-      "def": 679,
+      "def": 683,
       "inductive": 3,
       "instance": 3,
       "lemma": 354,
       "structure": 14,
-      "theorem": 6023
+      "theorem": 6037
     }
   },
   "modules": [
@@ -91,7 +91,8 @@
         "Erdos249257.HalfCarryReachability",
         "Erdos249257.HalfCylinderFiniteShadow",
         "Erdos249257.HalfCarryCeilParentContraction",
-        "Erdos249257.HalfCarrySelectedWindow"
+        "Erdos249257.HalfCarrySelectedWindow",
+        "Erdos249257.HalfCarryRewindPhase"
       ],
       "declaration_count": 0,
       "kind_counts": {}
@@ -6391,6 +6392,18 @@
         "abbrev": 1,
         "def": 17,
         "theorem": 53
+      }
+    },
+    {
+      "id": "Erdos249257.HalfCarryRewindPhase",
+      "path": "Erdos249257/HalfCarryRewindPhase.lean",
+      "imports": [
+        "Erdos249257.HalfCarrySelectedWindow"
+      ],
+      "declaration_count": 18,
+      "kind_counts": {
+        "def": 4,
+        "theorem": 14
       }
     },
     {
@@ -68358,6 +68371,207 @@
       "generated_certificate": false,
       "claim_ids": [],
       "docstring": "Solver-facing fan-in for the seam route. A canonical coordinate and scalar escape settle every even level from `20` onward; an independent odd level producer and one admissible depth-`20` base then feed the existing inverse-system consumer."
+    },
+    {
+      "id": "Erdos249257/HalfCarryRewindPhase.lean:19:suffixNumeral",
+      "name": "suffixNumeral",
+      "kind": "def",
+      "module": "Erdos249257/HalfCarryRewindPhase.lean",
+      "line": 19,
+      "signature": "def suffixNumeral : List Bool → ℕ | [] => 0 | b :: bs => (if b then 1 else 0) + 2 * suffixNumeral bs /-- A Boolean suffix numeral fits in exactly the dyadic denominator determined",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Binary numeral in the same reverse-chronological order as `rewind`: the newest row is the low bit and every older row is one place higher."
+    },
+    {
+      "id": "Erdos249257/HalfCarryRewindPhase.lean:25:suffixNumeral_lt_two_pow_length",
+      "name": "suffixNumeral_lt_two_pow_length",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarryRewindPhase.lean",
+      "line": 25,
+      "signature": "theorem suffixNumeral_lt_two_pow_length (bits : List Bool) : suffixNumeral bits < 2 ^ bits.length",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A Boolean suffix numeral fits in exactly the dyadic denominator determined by its length."
+    },
+    {
+      "id": "Erdos249257/HalfCarryRewindPhase.lean:39:phase_eq_denom_sub_one_sub_suffixNumeral",
+      "name": "phase_eq_denom_sub_one_sub_suffixNumeral",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarryRewindPhase.lean",
+      "line": 39,
+      "signature": "theorem phase_eq_denom_sub_one_sub_suffixNumeral (cs : List ℕ) (bits : List Bool) (ancestor : ℕ) (hlen : bits.length = cs.length) (hrealized : offset cs + suffixNumeral bits + 2 = denom cs * (ancestor + 1)) : phase cs = denom cs - 1 - suffixNumeral bits",
+      "generated_certificate": false,
+      "claim_ids": [
+        "realized_rewind_phase_identity"
+      ],
+      "docstring": "Exact phase identity for a realized carry-one history. The equation `offset + suffix + 2 = denom * (ancestor + 1)` is the natural-number form obtained by unrolling `1 = denom * ancestor - coefficientNumeral - suffixNumeral` and using `offset = coefficientNumeral + denom - 1`."
+    },
+    {
+      "id": "Erdos249257/HalfCarryRewindPhase.lean:65:rewind_interval_singleton_iff_suffixNumeral_covers",
+      "name": "rewind_interval_singleton_iff_suffixNumeral_covers",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarryRewindPhase.lean",
+      "line": 65,
+      "signature": "theorem rewind_interval_singleton_iff_suffixNumeral_covers (cs : List ℕ) (bits : List Bool) (ancestor B : ℕ) (hlen : bits.length = cs.length) (hrealized : offset cs + suffixNumeral bits + 2 = denom cs * (ancestor + 1)) (hB : 1 ≤ B) (hwidth : B ≤ denom cs) : (∀ k : ℕ, 1 ≤ k → k ≤ B → rewind cs k = rewind cs 1) ↔ B - 1 ≤ suffixNumeral bits",
+      "generated_certificate": false,
+      "claim_ids": [
+        "realized_rewind_phase_identity"
+      ],
+      "docstring": "The exact fixed-coefficient singleton criterion in support-history coordinates: the terminal interval `[1,B]` rewinds to one ancestor exactly when the carry-one suffix numeral covers the other `B-1` targets."
+    },
+    {
+      "id": "Erdos249257/HalfCarryRewindPhase.lean:84:supportSuffixBits",
+      "name": "supportSuffixBits",
+      "kind": "def",
+      "module": "Erdos249257/HalfCarryRewindPhase.lean",
+      "line": 84,
+      "signature": "def supportSuffixBits (A : Set ℕ) [DecidablePred (· ∈ A)] (M : ℕ) : ℕ → List Bool | 0 => [] | L + 1 => decide (M + L + 1 ∈ A) :: supportSuffixBits A M L @[simp] theorem supportSuffixBits_length (A : Set ℕ) [DecidablePred (· ∈ A)] (M L : ℕ) : (supportSuffixBits A M L).length = L",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The actual suffix bits in reverse chronological order."
+    },
+    {
+      "id": "Erdos249257/HalfCarryRewindPhase.lean:89:supportSuffixBits_length",
+      "name": "supportSuffixBits_length",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarryRewindPhase.lean",
+      "line": 89,
+      "signature": "@[simp] theorem supportSuffixBits_length (A : Set ℕ) [DecidablePred (· ∈ A)] (M L : ℕ) : (supportSuffixBits A M L).length = L",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCarryRewindPhase.lean:97:supportSuffixNumeral",
+      "name": "supportSuffixNumeral",
+      "kind": "def",
+      "module": "Erdos249257/HalfCarryRewindPhase.lean",
+      "line": 97,
+      "signature": "def supportSuffixNumeral (A : Set ℕ) [DecidablePred (· ∈ A)] (M : ℕ) : ℕ → ℕ | 0 => 0 | L + 1 => 2 * supportSuffixNumeral A M L + if M + L + 1 ∈ A then 1 else 0 theorem suffixNumeral_supportSuffixBits (A : Set ℕ) [DecidablePred (· ∈ A)] (M L : ℕ) : suffixNumeral (supportSuffixBits A M L) = supportSuffixNumeral A M L",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Recursive binary value of the support suffix."
+    },
+    {
+      "id": "Erdos249257/HalfCarryRewindPhase.lean:104:suffixNumeral_supportSuffixBits",
+      "name": "suffixNumeral_supportSuffixBits",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarryRewindPhase.lean",
+      "line": 104,
+      "signature": "theorem suffixNumeral_supportSuffixBits (A : Set ℕ) [DecidablePred (· ∈ A)] (M L : ℕ) : suffixNumeral (supportSuffixBits A M L) = supportSuffixNumeral A M L",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCarryRewindPhase.lean:116:supportCoeff_eq_prefix_add_currentBit",
+      "name": "supportCoeff_eq_prefix_add_currentBit",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarryRewindPhase.lean",
+      "line": 116,
+      "signature": "theorem supportCoeff_eq_prefix_add_currentBit (A : Set ℕ) [DecidablePred (· ∈ A)] {M n : ℕ} (hMn : M < n) (hnfeedback : n ≤ 2 * M + 1) : supportCoeff A n = supportCoeff (A ∩ Set.Iic M) n + if n ∈ A then 1 else 0",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Before the first possible feedback row, truncating at `M` removes from row `n` only the current bit `n` itself."
+    },
+    {
+      "id": "Erdos249257/HalfCarryRewindPhase.lean:183:integerHalfCarry_prefix_eq_add_supportSuffixNumeral",
+      "name": "integerHalfCarry_prefix_eq_add_supportSuffixNumeral",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarryRewindPhase.lean",
+      "line": 183,
+      "signature": "theorem integerHalfCarry_prefix_eq_add_supportSuffixNumeral (A : Set ℕ) [DecidablePred (· ∈ A)] (M L : ℕ) (hM : 1 ≤ M) (hhorizon : M + L ≤ 2 * M + 1) : integerHalfCarry (A ∩ Set.Iic M) (M + L - 1) = integerHalfCarry A (M + L - 1) + (supportSuffixNumeral A M L : ℤ)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "On a horizon `M+L ≤ 2M+1`, the prefix-zero-extension carry exceeds the actual carry by exactly the binary numeral of the removed suffix."
+    },
+    {
+      "id": "Erdos249257/HalfCarryRewindPhase.lean:209:integerHalfCarry_prefix_eq_one_add_supportSuffixNumeral",
+      "name": "integerHalfCarry_prefix_eq_one_add_supportSuffixNumeral",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarryRewindPhase.lean",
+      "line": 209,
+      "signature": "theorem integerHalfCarry_prefix_eq_one_add_supportSuffixNumeral (A : Set ℕ) [DecidablePred (· ∈ A)] (M L : ℕ) (hM : 1 ≤ M) (hhorizon : M + L ≤ 2 * M + 1) (hterminal : integerHalfCarry A (M + L - 1) = 1) : integerHalfCarry (A ∩ Set.Iic M) (M + L - 1) = 1 + (supportSuffixNumeral A M L : ℤ)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Terminal carry one turns the support bridge into the exact frozen-prefix endpoint `Z = 1 + X` used by the phase criterion."
+    },
+    {
+      "id": "Erdos249257/HalfCarryRewindPhase.lean:223:supportCoeffRewindHistory",
+      "name": "supportCoeffRewindHistory",
+      "kind": "def",
+      "module": "Erdos249257/HalfCarryRewindPhase.lean",
+      "line": 223,
+      "signature": "noncomputable def supportCoeffRewindHistory (P : Set ℕ) (M : ℕ) : ℕ → List ℕ | 0 => [] | L + 1 => supportCoeff P (M + L + 1) :: supportCoeffRewindHistory P M L @[simp] theorem supportCoeffRewindHistory_length (P : Set ℕ) (M L : ℕ) : (supportCoeffRewindHistory P M L).length = L",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Proper-coefficient history for rewinding from row `M+L` to row `M`, newest coefficient first, exactly as `FixedCoeffRewind.rewind` consumes it."
+    },
+    {
+      "id": "Erdos249257/HalfCarryRewindPhase.lean:229:supportCoeffRewindHistory_length",
+      "name": "supportCoeffRewindHistory_length",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarryRewindPhase.lean",
+      "line": 229,
+      "signature": "@[simp] theorem supportCoeffRewindHistory_length (P : Set ℕ) (M L : ℕ) : (supportCoeffRewindHistory P M L).length = L",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCarryRewindPhase.lean:239:integerHalfCarry_add_offset_eq_denom_mul_initial",
+      "name": "integerHalfCarry_add_offset_eq_denom_mul_initial",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarryRewindPhase.lean",
+      "line": 239,
+      "signature": "theorem integerHalfCarry_add_offset_eq_denom_mul_initial (P : Set ℕ) (M L : ℕ) (hM : 1 ≤ M) : integerHalfCarry P (M + L - 1) + (offset (supportCoeffRewindHistory P M L) : ℤ) + 1 = (denom (supportCoeffRewindHistory P M L) : ℤ) * (integerHalfCarry P (M - 1) + 1)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Exact affine realization of an actual coefficient history. This is the integer identity behind the natural-number phase equation; it uses the live `integerHalfCarry` recurrence rather than an independently described orbit."
+    },
+    {
+      "id": "Erdos249257/HalfCarryRewindPhase.lean:272:supportHistory_realization",
+      "name": "supportHistory_realization",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarryRewindPhase.lean",
+      "line": 272,
+      "signature": "theorem supportHistory_realization (A : Set ℕ) [DecidablePred (· ∈ A)] (M L ancestor : ℕ) (hM : 1 ≤ M) (hhorizon : M + L ≤ 2 * M + 1) (hterminal : integerHalfCarry A (M + L - 1) = 1) (hancestor : integerHalfCarry A (M - 1) = (ancestor : ℤ)) : offset (supportCoeffRewindHistory (A ∩ Set.Iic M) M L) + supportSuffixNumeral A M L + 2 = denom (supportCoeffRewindHistory (A ∩ Set.Iic M) M L) * (ancestor + 1)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The terminal-carry-one support history satisfies the exact realization equation required by `phase_eq_denom_sub_one_sub_suffixNumeral`."
+    },
+    {
+      "id": "Erdos249257/HalfCarryRewindPhase.lean:307:phase_supportCoeffRewindHistory_eq",
+      "name": "phase_supportCoeffRewindHistory_eq",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarryRewindPhase.lean",
+      "line": 307,
+      "signature": "theorem phase_supportCoeffRewindHistory_eq (A : Set ℕ) [DecidablePred (· ∈ A)] (M L ancestor : ℕ) (hM : 1 ≤ M) (hhorizon : M + L ≤ 2 * M + 1) (hterminal : integerHalfCarry A (M + L - 1) = 1) (hancestor : integerHalfCarry A (M - 1) = (ancestor : ℤ)) : phase (supportCoeffRewindHistory (A ∩ Set.Iic M) M L) = denom (supportCoeffRewindHistory (A ∩ Set.Iic M) M L) - 1 - supportSuffixNumeral A M L",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Exact live-support phase identity before feedback can return from the removed suffix."
+    },
+    {
+      "id": "Erdos249257/HalfCarryRewindPhase.lean:327:rewind_supportCoeffHistory_singleton_iff",
+      "name": "rewind_supportCoeffHistory_singleton_iff",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarryRewindPhase.lean",
+      "line": 327,
+      "signature": "theorem rewind_supportCoeffHistory_singleton_iff (A : Set ℕ) [DecidablePred (· ∈ A)] (M L ancestor B : ℕ) (hM : 1 ≤ M) (hhorizon : M + L ≤ 2 * M + 1) (hterminal : integerHalfCarry A (M + L - 1) = 1) (hancestor : integerHalfCarry A (M - 1) = (ancestor : ℤ)) (hB : 1 ≤ B) (hwidth : B ≤ denom (supportCoeffRewindHistory (A ∩ Set.Iic M) M L)) : (∀ k : ℕ, 1 ≤ k → k ≤ B → rewind (supportCoeffRewindHistory (A ∩ Set.Iic M) M L) k = rewind (supportCoeffRewindHistory (A ∩ Set.Iic M) M L) 1) ↔ B - 1 ≤ supportSuffixNumeral A M L",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Exact support-history singleton criterion. It reduces the whole rewind interval question to the single frozen-prefix inequality `B - 1 ≤ X`."
+    },
+    {
+      "id": "Erdos249257/HalfCarryRewindPhase.lean:352:rewind_supportCoeffHistory_singleton_iff_prefixCarry_covers",
+      "name": "rewind_supportCoeffHistory_singleton_iff_prefixCarry_covers",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarryRewindPhase.lean",
+      "line": 352,
+      "signature": "theorem rewind_supportCoeffHistory_singleton_iff_prefixCarry_covers (A : Set ℕ) [DecidablePred (· ∈ A)] (M L ancestor B : ℕ) (hM : 1 ≤ M) (hhorizon : M + L ≤ 2 * M + 1) (hterminal : integerHalfCarry A (M + L - 1) = 1) (hancestor : integerHalfCarry A (M - 1) = (ancestor : ℤ)) (hB : 1 ≤ B) (hwidth : B ≤ denom (supportCoeffRewindHistory (A ∩ Set.Iic M) M L)) : (∀ k : ℕ, 1 ≤ k → k ≤ B → rewind (supportCoeffRewindHistory (A ∩ Set.Iic M) M L) k = rewind (supportCoeffRewindHistory (A ∩ Set.Iic M) M L) 1) ↔ (B : ℤ) ≤ integerHalfCarry (A ∩ Set.Iic M) (M + L - 1)",
+      "generated_certificate": false,
+      "claim_ids": [
+        "realized_rewind_phase_identity"
+      ],
+      "docstring": "Equivalent frozen-prefix form of the exact criterion. Under terminal carry one the prefix-zero-extension endpoint is `Z = 1 + X`, so singleton rewind is exactly `B ≤ Z`; no phase or suffix encoding remains downstream."
     },
     {
       "id": "Erdos249257/HalfCarrySelectedWindow.lean:19:ProtectedChild",

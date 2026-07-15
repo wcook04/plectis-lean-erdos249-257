@@ -4911,6 +4911,14 @@
           ]
         },
         {
+          "id": "Erdos249257.HalfCarryRewindPhase",
+          "path": "Erdos249257/HalfCarryRewindPhase.lean",
+          "role": "Realized fixed-coefficient rewind phase",
+          "imports": [
+            "Erdos249257.HalfCarrySelectedWindow"
+          ]
+        },
+        {
           "id": "Erdos249257.HalfCarrySelectedWindow",
           "path": "Erdos249257/HalfCarrySelectedWindow.lean",
           "role": "Selected protected half-carry windows",
@@ -5309,6 +5317,11 @@
           "to": "fixed_coefficient_rewind_contraction"
         },
         {
+          "from": "realized_rewind_phase_identity",
+          "relation": "builds_on",
+          "to": "selected_half_carry_window_compactness"
+        },
+        {
           "from": "denominator_exclusion",
           "relation": "advances_open_target",
           "to": "erdos_249",
@@ -5582,7 +5595,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 1245
+        "line": 1257
       }
     },
     {
@@ -5593,7 +5606,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 1254
+        "line": 1266
       }
     },
     {
@@ -5604,7 +5617,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 1261
+        "line": 1273
       }
     }
   ],
@@ -5882,6 +5895,34 @@
           "name": "exists_infinite_support_half_of_selectedHalfWindows",
           "module": "Erdos249257/HalfCarrySelectedWindow.lean",
           "line": 864
+        }
+      ]
+    },
+    {
+      "id": "realized_rewind_phase_identity",
+      "label": "Realized rewind phase identity",
+      "status": "conditional reduction",
+      "statement": "For a realized fixed-coefficient rewind history, the phase is exactly the denominator minus one minus the binary suffix numeral. Thus the singleton rewind criterion is equivalent to the suffix numeral covering the other terminal carries. The global coverage inequality is not proved.",
+      "remaining_open_proposition_ids": [
+        "remaining_open.universal_257_all_infinite_supports"
+      ],
+      "paper_label": "res:rewindphase",
+      "readme_headline": false,
+      "declarations": [
+        {
+          "name": "phase_eq_denom_sub_one_sub_suffixNumeral",
+          "module": "Erdos249257/HalfCarryRewindPhase.lean",
+          "line": 39
+        },
+        {
+          "name": "rewind_interval_singleton_iff_suffixNumeral_covers",
+          "module": "Erdos249257/HalfCarryRewindPhase.lean",
+          "line": 65
+        },
+        {
+          "name": "rewind_supportCoeffHistory_singleton_iff_prefixCarry_covers",
+          "module": "Erdos249257/HalfCarryRewindPhase.lean",
+          "line": 352
         }
       ]
     },
