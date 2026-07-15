@@ -4901,6 +4901,14 @@
           ]
         },
         {
+          "id": "Erdos249257.HalfCarryProtectedSeamConsumer",
+          "path": "Erdos249257/HalfCarryProtectedSeamConsumer.lean",
+          "role": "Localized protected one-hole seam consumer",
+          "imports": [
+            "Erdos249257.HalfCarryReachability"
+          ]
+        },
+        {
           "id": "Erdos249257.HalfCarryReachability",
           "path": "Erdos249257/HalfCarryReachability.lean",
           "role": "Half-carry reachability and compactness",
@@ -5322,6 +5330,11 @@
           "to": "selected_half_carry_window_compactness"
         },
         {
+          "from": "localized_protected_seam_compactness",
+          "relation": "builds_on",
+          "to": "half_carry_reachability_compactness"
+        },
+        {
           "from": "denominator_exclusion",
           "relation": "advances_open_target",
           "to": "erdos_249",
@@ -5595,7 +5608,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 1257
+        "line": 1268
       }
     },
     {
@@ -5606,7 +5619,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 1266
+        "line": 1277
       }
     },
     {
@@ -5617,7 +5630,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 1273
+        "line": 1284
       }
     }
   ],
@@ -5923,6 +5936,34 @@
           "name": "rewind_supportCoeffHistory_singleton_iff_prefixCarry_covers",
           "module": "Erdos249257/HalfCarryRewindPhase.lean",
           "line": 352
+        }
+      ]
+    },
+    {
+      "id": "localized_protected_seam_compactness",
+      "label": "Localized protected seam compactness",
+      "status": "conditional reduction",
+      "statement": "At each realized localized one-hole seam, at least one of protected carries 3 and 4 gives an admissible finite word. If such seam realizations occur cofinally, then cofinal admissibility and an infinite support A with erdosSupportSeries 2 A = 1/2 follow. The cofinal realization supply is not proved.",
+      "remaining_open_proposition_ids": [
+        "remaining_open.universal_257_all_infinite_supports"
+      ],
+      "paper_label": "res:protectedseam",
+      "readme_headline": false,
+      "declarations": [
+        {
+          "name": "ProtectedEvenSeamRealizedAt",
+          "module": "Erdos249257/HalfCarryProtectedSeamConsumer.lean",
+          "line": 18
+        },
+        {
+          "name": "cofinalAdmissibility_of_cofinalProtectedEvenSeamRealization",
+          "module": "Erdos249257/HalfCarryProtectedSeamConsumer.lean",
+          "line": 31
+        },
+        {
+          "name": "exists_infinite_support_half_of_cofinalProtectedEvenSeamRealization",
+          "module": "Erdos249257/HalfCarryProtectedSeamConsumer.lean",
+          "line": 53
         }
       ]
     },

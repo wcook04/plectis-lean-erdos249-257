@@ -4,21 +4,21 @@
   "projection_not_authority": true,
   "proof_authority": "Lean source checked by the pinned Lean kernel",
   "argument_authority": "docs/claims.json::machine_readable_paper.argument_graph",
-  "source_fingerprint": "sha256:d6808a45e2c3edcdce91d57002a4e691e93affe3f53382b487428a484125e4eb",
+  "source_fingerprint": "sha256:12eff513d370a804c755f0d68569d2e87723cfa44c838b2e2f209523af9f613a",
   "summary": {
-    "module_count": 564,
-    "declaration_count": 7099,
-    "theorem_like_count": 6391,
+    "module_count": 565,
+    "declaration_count": 7103,
+    "theorem_like_count": 6393,
     "generated_certificate_declaration_count": 1681,
-    "principal_claim_link_count": 124,
+    "principal_claim_link_count": 127,
     "kind_counts": {
       "abbrev": 5,
-      "def": 683,
+      "def": 685,
       "inductive": 3,
       "instance": 3,
       "lemma": 354,
       "structure": 14,
-      "theorem": 6037
+      "theorem": 6039
     }
   },
   "modules": [
@@ -92,7 +92,8 @@
         "Erdos249257.HalfCylinderFiniteShadow",
         "Erdos249257.HalfCarryCeilParentContraction",
         "Erdos249257.HalfCarrySelectedWindow",
-        "Erdos249257.HalfCarryRewindPhase"
+        "Erdos249257.HalfCarryRewindPhase",
+        "Erdos249257.HalfCarryProtectedSeamConsumer"
       ],
       "declaration_count": 0,
       "kind_counts": {}
@@ -6377,6 +6378,18 @@
       "kind_counts": {
         "def": 6,
         "theorem": 11
+      }
+    },
+    {
+      "id": "Erdos249257.HalfCarryProtectedSeamConsumer",
+      "path": "Erdos249257/HalfCarryProtectedSeamConsumer.lean",
+      "imports": [
+        "Erdos249257.HalfCarryReachability"
+      ],
+      "declaration_count": 4,
+      "kind_counts": {
+        "def": 2,
+        "theorem": 2
       }
     },
     {
@@ -67591,6 +67604,56 @@
         "fixed_coefficient_rewind_contraction"
       ],
       "docstring": "Correct fixed-tail contraction dichotomy. Width alone proves exactly a singleton-or-seam-pair result, never an unconditional singleton."
+    },
+    {
+      "id": "Erdos249257/HalfCarryProtectedSeamConsumer.lean:18:ProtectedEvenSeamRealizedAt",
+      "name": "ProtectedEvenSeamRealizedAt",
+      "kind": "def",
+      "module": "Erdos249257/HalfCarryProtectedSeamConsumer.lean",
+      "line": 18,
+      "signature": "def ProtectedEvenSeamRealizedAt (N : ℕ) (δ c : ℤ) : Prop",
+      "generated_certificate": false,
+      "claim_ids": [
+        "localized_protected_seam_compactness"
+      ],
+      "docstring": "At one depth, every scalar carry in the protected window that survives the exact seam is realized by an admissible finite word. Only the forward realization direction is needed; neither full-strip equivalence nor seam escape is assumed."
+    },
+    {
+      "id": "Erdos249257/HalfCarryProtectedSeamConsumer.lean:24:HalfCarryCofinalProtectedEvenSeamRealization",
+      "name": "HalfCarryCofinalProtectedEvenSeamRealization",
+      "kind": "def",
+      "module": "Erdos249257/HalfCarryProtectedSeamConsumer.lean",
+      "line": 24,
+      "signature": "def HalfCarryCofinalProtectedEvenSeamRealization : Prop",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Cofinal supply of localized, realized one-hole seams."
+    },
+    {
+      "id": "Erdos249257/HalfCarryProtectedSeamConsumer.lean:31:cofinalAdmissibility_of_cofinalProtectedEvenSeamRealization",
+      "name": "cofinalAdmissibility_of_cofinalProtectedEvenSeamRealization",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarryProtectedSeamConsumer.lean",
+      "line": 31,
+      "signature": "theorem cofinalAdmissibility_of_cofinalProtectedEvenSeamRealization (hsupply : HalfCarryCofinalProtectedEvenSeamRealization) : HalfCarryCofinalAdmissibility",
+      "generated_certificate": false,
+      "claim_ids": [
+        "localized_protected_seam_compactness"
+      ],
+      "docstring": "A one-hole seam cannot delete both protected carries `3` and `4`. Choosing the other one yields the sole finite word required by cofinal admissibility."
+    },
+    {
+      "id": "Erdos249257/HalfCarryProtectedSeamConsumer.lean:53:exists_infinite_support_half_of_cofinalProtectedEvenSeamRealization",
+      "name": "exists_infinite_support_half_of_cofinalProtectedEvenSeamRealization",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarryProtectedSeamConsumer.lean",
+      "line": 53,
+      "signature": "theorem exists_infinite_support_half_of_cofinalProtectedEvenSeamRealization (hsupply : HalfCarryCofinalProtectedEvenSeamRealization) : ∃ A : Set ℕ, A.Infinite ∧ erdosSupportSeries 2 A = (1 : ℝ) / 2",
+      "generated_certificate": false,
+      "claim_ids": [
+        "localized_protected_seam_compactness"
+      ],
+      "docstring": "Localized seam realization is already a complete arithmetic producer for an infinite Mersenne support summing to `1/2`."
     },
     {
       "id": "Erdos249257/HalfCarryReachability.lean:32:halfStripBound",

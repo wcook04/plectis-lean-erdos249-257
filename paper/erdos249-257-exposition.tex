@@ -621,6 +621,17 @@ formalised by
 This converts the phase condition into support-history coordinates, but does
 not prove the required coverage inequality globally.
 
+\subsection{Localized protected seams}\label{res:protectedseam}
+
+The compactness endpoint needs only one admissible word at cofinally many
+depths.  At a localized one-hole seam, one of the two protected carries $3$
+and $4$ survives; therefore a cofinal supply of realized protected seams
+implies cofinal admissibility,
+\lref{HalfCarryProtectedSeamConsumer.lean}{31}{cofinalAdmissibility_of_cofinalProtectedEvenSeamRealization},
+and hence an infinite support with sum $1/2$,
+\lrefx{HalfCarryProtectedSeamConsumer.lean}{53}{exists_infinite_support_half_of_cofinalProtectedEvenSeamRealization}.
+The cofinal realization supply is not proved.
+
 \subsection{What stays open}
 
 The universal Erd\H{o}s \#257 statement, irrationality of $\sum_{n\in A}1/(2^n-1)$
