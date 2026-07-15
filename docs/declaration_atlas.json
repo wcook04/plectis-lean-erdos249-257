@@ -4,13 +4,13 @@
   "projection_not_authority": true,
   "proof_authority": "Lean source checked by the pinned Lean kernel",
   "argument_authority": "docs/claims.json::machine_readable_paper.argument_graph",
-  "source_fingerprint": "sha256:88936366c8db24e8d394f3163fb1fe07eab377bc3c29f9d3681afd70b3ffd82c",
+  "source_fingerprint": "sha256:8acb52de5956f8b38cd1ffa04046cec8bdf7f1634798b35d7a8e0cba32b408aa",
   "summary": {
-    "module_count": 581,
-    "declaration_count": 7529,
-    "theorem_like_count": 6730,
+    "module_count": 582,
+    "declaration_count": 7532,
+    "theorem_like_count": 6733,
     "generated_certificate_declaration_count": 1681,
-    "principal_claim_link_count": 149,
+    "principal_claim_link_count": 151,
     "kind_counts": {
       "abbrev": 6,
       "def": 769,
@@ -18,7 +18,7 @@
       "instance": 4,
       "lemma": 354,
       "structure": 17,
-      "theorem": 6376
+      "theorem": 6379
     }
   },
   "modules": [
@@ -109,7 +109,8 @@
         "Erdos249257.HalfCylinderHalfMembershipClassification",
         "Erdos249257.HalfCylinderLargestSkipGap",
         "Erdos249257.HalfCylinderBoundaryPulse",
-        "Erdos249257.HalfCylinderLargestSkipInduction"
+        "Erdos249257.HalfCylinderLargestSkipInduction",
+        "Erdos249257.HalfCylinderFixedTailSocket"
       ],
       "declaration_count": 0,
       "kind_counts": {}
@@ -6548,6 +6549,17 @@
       "kind_counts": {
         "def": 7,
         "theorem": 52
+      }
+    },
+    {
+      "id": "Erdos249257.HalfCylinderFixedTailSocket",
+      "path": "Erdos249257/HalfCylinderFixedTailSocket.lean",
+      "imports": [
+        "Erdos249257.HalfCylinderHalfMembershipClassification"
+      ],
+      "declaration_count": 3,
+      "kind_counts": {
+        "theorem": 3
       }
     },
     {
@@ -71644,6 +71656,43 @@
         "half_cylinder_finite_shadow"
       ],
       "docstring": "The governed first-passage producer closes exact half-membership."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFixedTailSocket.lean:22:isLastHalfGreedySkip_iff_skip_and_fatal",
+      "name": "isLastHalfGreedySkip_iff_skip_and_fatal",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFixedTailSocket.lean",
+      "line": 22,
+      "signature": "theorem isLastHalfGreedySkip_iff_skip_and_fatal {M : ℕ} : IsLastHalfGreedySkip M ↔ M ∈ greedyMersenneSkippedSupport (1 / 2 : ℝ) ∧ GreedyMersenneFatalAt (1 / 2 : ℝ) M",
+      "generated_certificate": false,
+      "claim_ids": [
+        "fixed_tail_survival_socket"
+      ],
+      "docstring": "A skipped rank is the last skipped rank exactly when its post-decision residual is already fatal (strictly larger than the complete remaining tail). This is the local one-rank form of the eventual-right obstruction."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFixedTailSocket.lean:57:no_lastHalfGreedySkip_iff_every_skip_survives",
+      "name": "no_lastHalfGreedySkip_iff_every_skip_survives",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFixedTailSocket.lean",
+      "line": 57,
+      "signature": "theorem no_lastHalfGreedySkip_iff_every_skip_survives : (¬ ∃ M : ℕ, IsLastHalfGreedySkip M) ↔ ∀ M : ℕ, M ∈ greedyMersenneSkippedSupport (1 / 2 : ℝ) → greedyMersenneRemainder (1 / 2 : ℝ) M ≤ mersenneTail M",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Exact remaining arithmetic target: no final skipped rank iff every actual skip remains on the nonfatal side of the full Mersenne tail."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFixedTailSocket.lean:73:half_mem_iff_every_actual_skip_survives",
+      "name": "half_mem_iff_every_actual_skip_survives",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFixedTailSocket.lean",
+      "line": 73,
+      "signature": "theorem half_mem_iff_every_actual_skip_survives : (1 / 2 : ℝ) ∈ mersenneAchievementSet ↔ ∀ M : ℕ, M ∈ greedyMersenneSkippedSupport (1 / 2 : ℝ) → greedyMersenneRemainder (1 / 2 : ℝ) M ≤ mersenneTail M",
+      "generated_certificate": false,
+      "claim_ids": [
+        "fixed_tail_survival_socket"
+      ],
+      "docstring": "Half membership is equivalently the rank-local statement that every actual skipped decision leaves a residual on the surviving side of the full remaining tail."
     },
     {
       "id": "Erdos249257/HalfCylinderFloorErrorReset.lean:27:seamWordSupport",

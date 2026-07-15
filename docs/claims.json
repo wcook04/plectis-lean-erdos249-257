@@ -5004,6 +5004,14 @@
           ]
         },
         {
+          "id": "Erdos249257.HalfCylinderFixedTailSocket",
+          "path": "Erdos249257/HalfCylinderFixedTailSocket.lean",
+          "role": "Fixed-tail survival classification for half-cylinder skips",
+          "imports": [
+            "Erdos249257.HalfCylinderHalfMembershipClassification"
+          ]
+        },
+        {
           "id": "Erdos249257.HalfCylinderFloorErrorReset",
           "path": "Erdos249257/HalfCylinderFloorErrorReset.lean",
           "role": "Floor-error reset for the half seam",
@@ -5507,6 +5515,11 @@
           "to": "largest_skip_gap_propagation"
         },
         {
+          "from": "fixed_tail_survival_socket",
+          "relation": "builds_on",
+          "to": "half_membership_seam_classification"
+        },
+        {
           "from": "denominator_exclusion",
           "relation": "advances_open_target",
           "to": "erdos_249",
@@ -5756,7 +5769,7 @@
     "lean_toolchain": "leanprover/lean4:v4.29.1",
     "repository": "https://github.com/wcook04/plectis-lean-erdos249-257",
     "formal_source": {
-      "ref": "32a145144c4763c5532b268ade7077d69d7edec8",
+      "ref": "38f3780e7523a8e093aeb89f636063049dd2b4ef",
       "ref_kind": "commit",
       "publication_state": "committed_checkpoint_pending_remote_publication",
       "relationship_to_last_tag": "post_tag_checkpoint"
@@ -5780,7 +5793,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 1367
+        "line": 1378
       }
     },
     {
@@ -5791,7 +5804,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 1376
+        "line": 1387
       }
     },
     {
@@ -5802,7 +5815,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 1383
+        "line": 1394
       }
     }
   ],
@@ -6350,6 +6363,29 @@
           "name": "half_mem_mersenneAchievementSet_of_largestSkipLateStepSocket",
           "module": "Erdos249257/HalfCylinderLargestSkipInduction.lean",
           "line": 167
+        }
+      ]
+    },
+    {
+      "id": "fixed_tail_survival_socket",
+      "label": "Fixed-tail survival classification for half-cylinder skips",
+      "status": "conditional reduction",
+      "statement": "A skipped rank is final exactly when its post-decision remainder lies strictly above the complete remaining Mersenne tail. Hence membership of 1/2 is equivalent to the pointwise survival inequality at every actual skipped rank. That inequality is not proved.",
+      "remaining_open_proposition_ids": [
+        "remaining_open.universal_257_all_infinite_supports"
+      ],
+      "paper_label": "res:fixedtailsocket",
+      "readme_headline": false,
+      "declarations": [
+        {
+          "name": "isLastHalfGreedySkip_iff_skip_and_fatal",
+          "module": "Erdos249257/HalfCylinderFixedTailSocket.lean",
+          "line": 22
+        },
+        {
+          "name": "half_mem_iff_every_actual_skip_survives",
+          "module": "Erdos249257/HalfCylinderFixedTailSocket.lean",
+          "line": 73
         }
       ]
     },
