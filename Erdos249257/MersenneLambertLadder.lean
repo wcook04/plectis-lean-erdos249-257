@@ -33,6 +33,11 @@ the positive lift `L(A) = S`, and the signed Möbius-square lens
 
   `S = 1/2 + ∑_{d≥1} μ(d)/(2^d-1)²`.
 
+It also checks the prime-wise integrality obstruction for the normalized
+primitive coordinate: at every odd prime `p`, `p ∤ A(p)`, equivalently
+`A(p) / p` is not an integer.  This is an obstruction to an ordinary integral
+Euler/Witt realization, not an irrationality theorem for `S`.
+
 The engine is a *signed, linear-growth* weighted Lambert rearrangement
 (`tsum_lambert_pair_regroup`): the kernel's landed
 `weighted_lambert_series_identity` requires `0 ≤ w ≤ 1`, which admits neither
@@ -298,6 +303,61 @@ theorem primWeight_apply_prime {p : ℕ} (hp : p.Prime) :
   have h2 : 2 ≤ p := hp.two_le
   push_cast [Nat.cast_sub (by omega : 1 ≤ p)]
   ring
+
+/-- The primitive-conductor weight is unbounded already on prime inputs.
+This is the exact obstruction to feeding `primWeight` into the kernel's
+bounded eventually-periodic weighted Erdős-series theorem: its periodic
+support does not make its multiplicities periodic. -/
+theorem primWeight_unbounded_on_primes (B : ℕ) :
+    ∃ p : ℕ, p.Prime ∧ (B : ℤ) < primWeight p := by
+  obtain ⟨p, hpLower, hp⟩ := Nat.exists_infinite_primes (B + 3)
+  refine ⟨p, hp, ?_⟩
+  rw [primWeight_apply_prime hp]
+  have hpLowerZ : ((B + 3 : ℕ) : ℤ) ≤ (p : ℤ) := by
+    exact_mod_cast hpLower
+  omega
+
+/-- No uniform natural bound exists for `primWeight`. -/
+theorem primWeight_not_bounded :
+    ¬ ∃ B : ℕ, ∀ n : ℕ, primWeight n ≤ (B : ℤ) := by
+  rintro ⟨B, hB⟩
+  obtain ⟨p, _hp, hpB⟩ := primWeight_unbounded_on_primes B
+  exact (not_lt_of_ge (hB p)) hpB
+
+/-- **Prime-wise Dold defect of the primitive-conductor weight.**  At every
+odd prime `p`, the primitive-coordinate numerator `A(p) = p - 2` is not
+divisible by `p`.  Equivalently, the normalized Euler/Witt coordinate
+`A(p) / p` is not integral.  This is the local arithmetic obstruction behind
+the global determinant contour for Erdős #249; it does not imply the
+irrationality of the #249 value. -/
+theorem primWeight_prime_dold_defect {p : ℕ} (hp : p.Prime) (hpodd : p ≠ 2) :
+    ¬ (p : ℤ) ∣ primWeight p := by
+  rw [primWeight_apply_prime hp]
+  have hpgt : 2 < p := lt_of_le_of_ne hp.two_le (Ne.symm hpodd)
+  have hp3 : 3 ≤ p := hpgt
+  have hcast : (p : ℤ) - 2 = ((p - 2 : ℕ) : ℤ) := by
+    rw [Int.ofNat_sub (by omega : 2 ≤ p)]
+    norm_num
+  rw [hcast, Int.natCast_dvd_natCast]
+  exact Nat.not_dvd_of_pos_of_lt (by omega) (by omega)
+
+/-- Rational-coordinate form of `primWeight_prime_dold_defect`: the normalized
+primitive coordinate `A(p) / p` cannot be the image of an integer at an odd
+prime. -/
+theorem primWeight_div_prime_not_integer {p : ℕ} (hp : p.Prime) (hpodd : p ≠ 2) :
+    ¬ ∃ z : ℤ, ((primWeight p : ℤ) : ℚ) / (p : ℚ) = (z : ℚ) := by
+  intro h
+  rcases h with ⟨z, hz⟩
+  apply primWeight_prime_dold_defect hp hpodd
+  refine ⟨z, ?_⟩
+  have hp0 : (p : ℚ) ≠ 0 := by exact_mod_cast hp.ne_zero
+  have hrat : ((primWeight p : ℤ) : ℚ) = (p : ℚ) * (z : ℚ) := by
+    calc
+      ((primWeight p : ℤ) : ℚ) = (((primWeight p : ℤ) : ℚ) / (p : ℚ)) * (p : ℚ) := by
+        field_simp
+      _ = (z : ℚ) * (p : ℚ) := by rw [hz]
+      _ = (p : ℚ) * (z : ℚ) := mul_comm _ _
+  exact_mod_cast hrat
 
 /-- The weight vanishes at `2` — primitive characters mod 2 do not exist.
 This is the single local zero: `A(n) = 0` iff `n ≡ 2 (mod 4)`. -/
@@ -620,6 +680,10 @@ theorem tsum_totient_half_pow_eq_half_add_moebius_sq :
 -- Axiom audit: every result must rest only on the foundational axioms
 -- (`propext`, `Classical.choice`, `Quot.sound`) — no `sorryAx`, no `Lean.ofReduceBool`.
 #print axioms tsum_lambert_pair_regroup
+#print axioms primWeight_prime_dold_defect
+#print axioms primWeight_div_prime_not_integer
+#print axioms primWeight_unbounded_on_primes
+#print axioms primWeight_not_bounded
 #print axioms primWeight_nonneg
 #print axioms tsum_totient_div_two_pow_sub_one_eq_two
 #print axioms tsum_moebius_div_two_pow_sub_one_eq_half
