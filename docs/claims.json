@@ -4979,6 +4979,14 @@
           ]
         },
         {
+          "id": "Erdos249257.HalfCylinderFloorErrorReset",
+          "path": "Erdos249257/HalfCylinderFloorErrorReset.lean",
+          "role": "Floor-error reset for the half seam",
+          "imports": [
+            "Erdos249257.HalfCylinderSkippedEndpointClassifier"
+          ]
+        },
+        {
           "id": "Erdos249257.HalfCylinderFullShellSeamBridge",
           "path": "Erdos249257/HalfCylinderFullShellSeamBridge.lean",
           "role": "Full-shell seam bridge for the half target",

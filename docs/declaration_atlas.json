@@ -4,21 +4,21 @@
   "projection_not_authority": true,
   "proof_authority": "Lean source checked by the pinned Lean kernel",
   "argument_authority": "docs/claims.json::machine_readable_paper.argument_graph",
-  "source_fingerprint": "sha256:648248c233714348853a25a86ba2838db076a8f4fdea0e62efb7cc9c5e640df9",
+  "source_fingerprint": "sha256:ab50d555200e239e7ed00d756eacec2378477a0229dbc334251746b3aa7d15c4",
   "summary": {
-    "module_count": 572,
-    "declaration_count": 7349,
-    "theorem_like_count": 6581,
+    "module_count": 573,
+    "declaration_count": 7420,
+    "theorem_like_count": 6637,
     "generated_certificate_declaration_count": 1681,
     "principal_claim_link_count": 135,
     "kind_counts": {
       "abbrev": 6,
-      "def": 738,
+      "def": 753,
       "inductive": 3,
       "instance": 4,
       "lemma": 354,
       "structure": 17,
-      "theorem": 6227
+      "theorem": 6283
     }
   },
   "modules": [
@@ -100,7 +100,8 @@
         "Erdos249257.HalfCutLocator",
         "Erdos249257.CampbellShiftSynchronization",
         "Erdos249257.HalfCylinderFullShellSeamBridge",
-        "Erdos249257.HalfCylinderSkippedEndpointClassifier"
+        "Erdos249257.HalfCylinderSkippedEndpointClassifier",
+        "Erdos249257.HalfCylinderFloorErrorReset"
       ],
       "declaration_count": 0,
       "kind_counts": {}
@@ -6504,6 +6505,18 @@
       "kind_counts": {
         "def": 7,
         "theorem": 52
+      }
+    },
+    {
+      "id": "Erdos249257.HalfCylinderFloorErrorReset",
+      "path": "Erdos249257/HalfCylinderFloorErrorReset.lean",
+      "imports": [
+        "Erdos249257.HalfCylinderSkippedEndpointClassifier"
+      ],
+      "declaration_count": 71,
+      "kind_counts": {
+        "def": 15,
+        "theorem": 56
       }
     },
     {
@@ -71037,6 +71050,736 @@
         "half_cylinder_finite_shadow"
       ],
       "docstring": "The governed first-passage producer closes exact half-membership."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFloorErrorReset.lean:27:seamWordSupport",
+      "name": "seamWordSupport",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderFloorErrorReset.lean",
+      "line": 27,
+      "signature": "def seamWordSupport {s : ℕ} (b : SeamRowWord s) : Finset ℕ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The natural exponent support encoded by a finite seam word."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFloorErrorReset.lean:31:mem_seamWordSupport_iff",
+      "name": "mem_seamWordSupport_iff",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFloorErrorReset.lean",
+      "line": 31,
+      "signature": "theorem mem_seamWordSupport_iff {s d : ℕ} {b : SeamRowWord s} : d ∈ seamWordSupport b ↔ ∃ i : Fin (s - 2), b i = true ∧ d = (i : ℕ) + 2",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFloorErrorReset.lean:44:seamWordSupport_below",
+      "name": "seamWordSupport_below",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFloorErrorReset.lean",
+      "line": 44,
+      "signature": "theorem seamWordSupport_below {s d : ℕ} {b : SeamRowWord s} (hd : d ∈ seamWordSupport b) : 2 ≤ d ∧ d < s",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFloorErrorReset.lean:50:seamWordSupport_card_le_width",
+      "name": "seamWordSupport_card_le_width",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFloorErrorReset.lean",
+      "line": 50,
+      "signature": "theorem seamWordSupport_card_le_width {s : ℕ} (b : SeamRowWord s) : (seamWordSupport b).card ≤ s - 2",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFloorErrorReset.lean:65:seamWordSupport_extend_false",
+      "name": "seamWordSupport_extend_false",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFloorErrorReset.lean",
+      "line": 65,
+      "signature": "theorem seamWordSupport_extend_false {s : ℕ} (hs : 3 ≤ s) (b : SeamRowWord s) : seamWordSupport (b.extend false) = seamWordSupport b",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFloorErrorReset.lean:85:seamWordSupport_extend_true",
+      "name": "seamWordSupport_extend_true",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFloorErrorReset.lean",
+      "line": 85,
+      "signature": "theorem seamWordSupport_extend_true {s : ℕ} (hs : 3 ≤ s) (b : SeamRowWord s) : seamWordSupport (b.extend true) = insert s (seamWordSupport b)",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFloorErrorReset.lean:115:seamWordSupport_halfActualSeamWord",
+      "name": "seamWordSupport_halfActualSeamWord",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFloorErrorReset.lean",
+      "line": 115,
+      "signature": "theorem seamWordSupport_halfActualSeamWord (s : ℕ) (hs : 2 ≤ s) : seamWordSupport (halfActualSeamWord s) = halfGreedyPrefixSupport (s - 1)",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFloorErrorReset.lean:134:seamWordRationalSum",
+      "name": "seamWordRationalSum",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderFloorErrorReset.lean",
+      "line": 134,
+      "signature": "def seamWordRationalSum {s : ℕ} (b : SeamRowWord s) : ℚ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The exact rational sum selected by a seam word."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFloorErrorReset.lean:138:seamWordRationalRemainder",
+      "name": "seamWordRationalRemainder",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderFloorErrorReset.lean",
+      "line": 138,
+      "signature": "def seamWordRationalRemainder {s : ℕ} (b : SeamRowWord s) : ℚ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The rational residual left by a seam word."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFloorErrorReset.lean:141:seamWordRationalRemainder_halfActualSeamWord",
+      "name": "seamWordRationalRemainder_halfActualSeamWord",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFloorErrorReset.lean",
+      "line": 141,
+      "signature": "theorem seamWordRationalRemainder_halfActualSeamWord (s : ℕ) (hs : 2 ≤ s) : seamWordRationalRemainder (halfActualSeamWord s) = greedyMersenneRemainderRat (1 / 2 : ℚ) (s - 1)",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFloorErrorReset.lean:152:seamRankFloorError",
+      "name": "seamRankFloorError",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderFloorErrorReset.lean",
+      "line": 152,
+      "signature": "def seamRankFloorError (s d : ℕ) : ℚ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Fractional error of one truncated Mersenne weight."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFloorErrorReset.lean:157:seamWordFloorError",
+      "name": "seamWordFloorError",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderFloorErrorReset.lean",
+      "line": 157,
+      "signature": "def seamWordFloorError {s : ℕ} (b : SeamRowWord s) : ℚ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Total rational floor error of a finite seam word."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFloorErrorReset.lean:160:seamRankFloorError_nonneg",
+      "name": "seamRankFloorError_nonneg",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFloorErrorReset.lean",
+      "line": 160,
+      "signature": "theorem seamRankFloorError_nonneg {s d : ℕ} (hd : 1 ≤ d) : 0 ≤ seamRankFloorError s d",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFloorErrorReset.lean:179:seamRankFloorError_lt_one",
+      "name": "seamRankFloorError_lt_one",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFloorErrorReset.lean",
+      "line": 179,
+      "signature": "theorem seamRankFloorError_lt_one {s d : ℕ} (hd : 1 ≤ d) : seamRankFloorError s d < 1",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFloorErrorReset.lean:201:seamRankFloorError_eq_mod_div",
+      "name": "seamRankFloorError_eq_mod_div",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFloorErrorReset.lean",
+      "line": 201,
+      "signature": "theorem seamRankFloorError_eq_mod_div {s d : ℕ} (hd : 1 ≤ d) : seamRankFloorError s d = (((4 ^ s) % (2 ^ d - 1) : ℕ) : ℚ) / ((2 ^ d - 1 : ℕ) : ℚ)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Euclidean division makes the floor error literally the remainder divided by the Mersenne denominator."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFloorErrorReset.lean:227:four_pow_mod_mersenne",
+      "name": "four_pow_mod_mersenne",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFloorErrorReset.lean",
+      "line": 227,
+      "signature": "theorem four_pow_mod_mersenne {s d : ℕ} (hd : 2 ≤ d) : 4 ^ s % (2 ^ d - 1) = 2 ^ ((2 * s) % d)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The remainder of `4^s` modulo the Mersenne denominator is the power of two selected by the exponent remainder."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFloorErrorReset.lean:276:seamRankFloorError_eq_modPow",
+      "name": "seamRankFloorError_eq_modPow",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFloorErrorReset.lean",
+      "line": 276,
+      "signature": "theorem seamRankFloorError_eq_modPow {s d : ℕ} (hd : 2 ≤ d) : seamRankFloorError s d = (2 ^ ((2 * s) % d) : ℚ) / ((2 ^ d - 1 : ℕ) : ℚ)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Closed form used by the quotient-cell decomposition."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFloorErrorReset.lean:285:seamRankFloorError_le_four_sevenths",
+      "name": "seamRankFloorError_le_four_sevenths",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFloorErrorReset.lean",
+      "line": 285,
+      "signature": "theorem seamRankFloorError_le_four_sevenths {s d : ℕ} (hd : 2 ≤ d) : seamRankFloorError s d ≤ 4 / 7",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Uniform low-rank estimate. Rank two is sharper because `2s` is even; from rank three onward the worst possible exponent remainder is `d - 1`."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFloorErrorReset.lean:322:evenTruncationFloorErrorEnvelope",
+      "name": "evenTruncationFloorErrorEnvelope",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderFloorErrorReset.lean",
+      "line": 322,
+      "signature": "def evenTruncationFloorErrorEnvelope (h : ℕ) : ℚ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The unweighted floor-error envelope at the even truncation `2h`."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFloorErrorReset.lean:325:evenTruncationFloorErrorEnvelope_eq_modPowSum",
+      "name": "evenTruncationFloorErrorEnvelope_eq_modPowSum",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFloorErrorReset.lean",
+      "line": 325,
+      "signature": "theorem evenTruncationFloorErrorEnvelope_eq_modPowSum (h : ℕ) : evenTruncationFloorErrorEnvelope h = ∑ d ∈ Finset.Icc 2 h, (2 ^ ((2 * h) % d) : ℚ) / ((2 ^ d - 1 : ℕ) : ℚ)",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFloorErrorReset.lean:336:seamRankFloorError_le_quotientGeometric",
+      "name": "seamRankFloorError_le_quotientGeometric",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFloorErrorReset.lean",
+      "line": 336,
+      "signature": "theorem seamRankFloorError_le_quotientGeometric {h d q : ℕ} (hd : 3 ≤ d) (hq : (2 * h) / d = q) : seamRankFloorError h d ≤ 8 / 7 * (1 / 2 : ℚ) ^ ((q + 1) * d - 2 * h)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Pointwise geometric majorant inside a fixed Euclidean-quotient cell."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFloorErrorReset.lean:390:evenTruncationFloorErrorQuotientCell",
+      "name": "evenTruncationFloorErrorQuotientCell",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderFloorErrorReset.lean",
+      "line": 390,
+      "signature": "def evenTruncationFloorErrorQuotientCell (h q : ℕ) : ℚ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The quotient cell is parameterized from its first possible denominator, so the summation index itself records the geometric decay."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFloorErrorReset.lean:395:evenTruncationFloorErrorQuotientCell_eq_filterSum",
+      "name": "evenTruncationFloorErrorQuotientCell_eq_filterSum",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFloorErrorReset.lean",
+      "line": 395,
+      "signature": "theorem evenTruncationFloorErrorQuotientCell_eq_filterSum (h q : ℕ) : evenTruncationFloorErrorQuotientCell h q = ∑ d ∈ (Finset.Icc ((2 * h) / (q + 1) + 1) h).filter (fun d => (2 * h) / d = q), seamRankFloorError h d",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFloorErrorReset.lean:439:evenTruncationFloorErrorQuotientCell_le",
+      "name": "evenTruncationFloorErrorQuotientCell_le",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFloorErrorReset.lean",
+      "line": 439,
+      "signature": "theorem evenTruncationFloorErrorQuotientCell_le {h q : ℕ} (hq : 2 ≤ q) (ha : 3 ≤ (2 * h) / (q + 1) + 1) : evenTruncationFloorErrorQuotientCell h q ≤ 32 / 49",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFloorErrorReset.lean:489:evenTruncationHighQuotientCell",
+      "name": "evenTruncationHighQuotientCell",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderFloorErrorReset.lean",
+      "line": 489,
+      "signature": "def evenTruncationHighQuotientCell (h D q : ℕ) : ℚ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The part of one quotient cell lying above an arbitrary cutoff."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFloorErrorReset.lean:493:evenTruncationHighQuotientCell_le",
+      "name": "evenTruncationHighQuotientCell_le",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFloorErrorReset.lean",
+      "line": 493,
+      "signature": "theorem evenTruncationHighQuotientCell_le {h D q : ℕ} (hq : 2 ≤ q) (ha : 3 ≤ (2 * h) / (q + 1) + 1) : evenTruncationHighQuotientCell h D q ≤ 32 / 49",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFloorErrorReset.lean:531:evenTruncationHighFloorError_eq_sum_cells",
+      "name": "evenTruncationHighFloorError_eq_sum_cells",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFloorErrorReset.lean",
+      "line": 531,
+      "signature": "theorem evenTruncationHighFloorError_eq_sum_cells (h D : ℕ) (hquot : ∀ d ∈ Finset.Ioc D h, 2 ≤ (2 * h) / d ∧ (2 * h) / d ≤ D) : (∑ d ∈ Finset.Ioc D h, seamRankFloorError h d) = ∑ q ∈ Finset.Icc 2 D, evenTruncationHighQuotientCell h D q",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFloorErrorReset.lean:553:evenTruncation_highQuotient_range",
+      "name": "evenTruncation_highQuotient_range",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFloorErrorReset.lean",
+      "line": 553,
+      "signature": "theorem evenTruncation_highQuotient_range {h d : ℕ} (hd : d ∈ Finset.Ioc (Nat.sqrt (2 * h)) h) : 2 ≤ (2 * h) / d ∧ (2 * h) / d ≤ Nat.sqrt (2 * h)",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFloorErrorReset.lean:571:evenTruncation_lowFloorError_le",
+      "name": "evenTruncation_lowFloorError_le",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFloorErrorReset.lean",
+      "line": 571,
+      "signature": "theorem evenTruncation_lowFloorError_le {h D : ℕ} (hD : 2 ≤ D) : (∑ d ∈ Finset.Icc 2 D, seamRankFloorError h d) ≤ 4 / 7 * (D - 1 : ℕ)",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFloorErrorReset.lean:585:evenTruncation_highFloorError_le",
+      "name": "evenTruncation_highFloorError_le",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFloorErrorReset.lean",
+      "line": 585,
+      "signature": "theorem evenTruncation_highFloorError_le {h : ℕ} (hh : 5 ≤ h) : (∑ d ∈ Finset.Ioc (Nat.sqrt (2 * h)) h, seamRankFloorError h d) ≤ 32 / 49 * (Nat.sqrt (2 * h) - 1 : ℕ)",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFloorErrorReset.lean:632:evenTruncationFloorErrorEnvelope_le_sqrtCellBound",
+      "name": "evenTruncationFloorErrorEnvelope_le_sqrtCellBound",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFloorErrorReset.lean",
+      "line": 632,
+      "signature": "theorem evenTruncationFloorErrorEnvelope_le_sqrtCellBound {h : ℕ} (hh : 5 ≤ h) : evenTruncationFloorErrorEnvelope h ≤ 60 / 49 * (Nat.sqrt (2 * h) - 1 : ℕ)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The complete quotient-cell estimate from the continuation packet."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFloorErrorReset.lean:662:evenTruncationFloorErrorEnvelope_lt_two_sqrt_add_four",
+      "name": "evenTruncationFloorErrorEnvelope_lt_two_sqrt_add_four",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFloorErrorReset.lean",
+      "line": 662,
+      "signature": "theorem evenTruncationFloorErrorEnvelope_lt_two_sqrt_add_four {h : ℕ} (hh : 5 ≤ h) : evenTruncationFloorErrorEnvelope h < 2 * (Nat.sqrt (2 * h) : ℚ) + 4",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFloorErrorReset.lean:678:seamWordFloorError_le_evenTruncationEnvelope",
+      "name": "seamWordFloorError_le_evenTruncationEnvelope",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFloorErrorReset.lean",
+      "line": 678,
+      "signature": "theorem seamWordFloorError_le_evenTruncationEnvelope {s : ℕ} (b : SeamRowWord s) : seamWordFloorError b ≤ evenTruncationFloorErrorEnvelope s",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFloorErrorReset.lean:692:wordWeightSum_eq_sum_seamWordSupport",
+      "name": "wordWeightSum_eq_sum_seamWordSupport",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFloorErrorReset.lean",
+      "line": 692,
+      "signature": "theorem wordWeightSum_eq_sum_seamWordSupport {s : ℕ} (b : SeamRowWord s) : wordWeightSum s b.toNatWord = ∑ d ∈ seamWordSupport b, truncatedMersenneWeight s d",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFloorErrorReset.lean:715:seamWordFloorError_eq_scaledSum_sub_weightSum",
+      "name": "seamWordFloorError_eq_scaledSum_sub_weightSum",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFloorErrorReset.lean",
+      "line": 715,
+      "signature": "theorem seamWordFloorError_eq_scaledSum_sub_weightSum {s : ℕ} (b : SeamRowWord s) : seamWordFloorError b = (4 : ℚ) ^ s * seamWordRationalSum b - (wordWeightSum s b.toNatWord : ℚ)",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFloorErrorReset.lean:736:seamWordFloorError_nonneg",
+      "name": "seamWordFloorError_nonneg",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFloorErrorReset.lean",
+      "line": 736,
+      "signature": "theorem seamWordFloorError_nonneg {s : ℕ} (b : SeamRowWord s) : 0 ≤ seamWordFloorError b",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFloorErrorReset.lean:746:seamWordFloorError_lt_card",
+      "name": "seamWordFloorError_lt_card",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFloorErrorReset.lean",
+      "line": 746,
+      "signature": "theorem seamWordFloorError_lt_card {s : ℕ} {b : SeamRowWord s} (hne : (seamWordSupport b).Nonempty) : seamWordFloorError b < ((seamWordSupport b).card : ℚ)",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFloorErrorReset.lean:760:seamWordFloorError_lt_width",
+      "name": "seamWordFloorError_lt_width",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFloorErrorReset.lean",
+      "line": 760,
+      "signature": "theorem seamWordFloorError_lt_width {s : ℕ} (hs : 3 ≤ s) (b : SeamRowWord s) : seamWordFloorError b < (s - 2 : ℕ)",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFloorErrorReset.lean:774:seamWordFloorZ",
+      "name": "seamWordFloorZ",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderFloorErrorReset.lean",
+      "line": 774,
+      "signature": "def seamWordFloorZ {s : ℕ} (b : SeamRowWord s) : ℚ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Signed defect corrected by the rational floor error."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFloorErrorReset.lean:777:seamTakeThreshold",
+      "name": "seamTakeThreshold",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderFloorErrorReset.lean",
+      "line": 777,
+      "signature": "def seamTakeThreshold (s : ℕ) : ℚ",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFloorErrorReset.lean:780:four_pow_eq_two_pow_sq",
+      "name": "four_pow_eq_two_pow_sq",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFloorErrorReset.lean",
+      "line": 780,
+      "signature": "theorem four_pow_eq_two_pow_sq (s : ℕ) : (4 : ℚ) ^ s = ((2 : ℚ) ^ s) ^ 2",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFloorErrorReset.lean:785:seamSubsetTarget_cast_rat",
+      "name": "seamSubsetTarget_cast_rat",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFloorErrorReset.lean",
+      "line": 785,
+      "signature": "theorem seamSubsetTarget_cast_rat (s : ℕ) (hs : 1 ≤ s) : (seamSubsetTarget s : ℚ) = (4 : ℚ) ^ s / 2 - (2 : ℚ) ^ s",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFloorErrorReset.lean:811:seamWordFloorZ_eq_target_sub_scaledSum",
+      "name": "seamWordFloorZ_eq_target_sub_scaledSum",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFloorErrorReset.lean",
+      "line": 811,
+      "signature": "theorem seamWordFloorZ_eq_target_sub_scaledSum {s : ℕ} (b : SeamRowWord s) : seamWordFloorZ b = (seamSubsetTarget s : ℚ) - (4 : ℚ) ^ s * seamWordRationalSum b",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFloorErrorReset.lean:822:seamWordRationalRemainder_eq_pow_add_floorZ_div",
+      "name": "seamWordRationalRemainder_eq_pow_add_floorZ_div",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFloorErrorReset.lean",
+      "line": 822,
+      "signature": "theorem seamWordRationalRemainder_eq_pow_add_floorZ_div {s : ℕ} (hs : 1 ≤ s) (b : SeamRowWord s) : seamWordRationalRemainder b = ((2 : ℚ) ^ s + seamWordFloorZ b) / (4 : ℚ) ^ s",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFloorErrorReset.lean:836:wordDefect_eq_scaledRemainder_sub_pow_add_floorError",
+      "name": "wordDefect_eq_scaledRemainder_sub_pow_add_floorError",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFloorErrorReset.lean",
+      "line": 836,
+      "signature": "theorem wordDefect_eq_scaledRemainder_sub_pow_add_floorError {s : ℕ} (hs : 1 ≤ s) (b : SeamRowWord s) : ((wordDefect s b.toNatWord : ℤ) : ℚ) = (4 : ℚ) ^ s * seamWordRationalRemainder b - (2 : ℚ) ^ s + seamWordFloorError b",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Exact residual decomposition behind any terminal-only completion. The floor-error term is additive, but it does not replace the scaled rational remainder."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFloorErrorReset.lean:847:halfActualWordDefect_eq_scaledGreedyRemainder_sub_pow_add_floorError",
+      "name": "halfActualWordDefect_eq_scaledGreedyRemainder_sub_pow_add_floorError",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFloorErrorReset.lean",
+      "line": 847,
+      "signature": "theorem halfActualWordDefect_eq_scaledGreedyRemainder_sub_pow_add_floorError (s : ℕ) (hs : 2 ≤ s) : ((wordDefect s (halfActualSeamWord s).toNatWord : ℤ) : ℚ) = (4 : ℚ) ^ s * greedyMersenneRemainderRat (1 / 2 : ℚ) (s - 1) - (2 : ℚ) ^ s + seamWordFloorError (halfActualSeamWord s)",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFloorErrorReset.lean:855:seamWord_take_iff_floorZ",
+      "name": "seamWord_take_iff_floorZ",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFloorErrorReset.lean",
+      "line": 855,
+      "signature": "theorem seamWord_take_iff_floorZ {s : ℕ} (hs : 1 ≤ s) (b : SeamRowWord s) : mersenneWeightRat s ≤ seamWordRationalRemainder b ↔ seamTakeThreshold s ≤ seamWordFloorZ b",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFloorErrorReset.lean:885:seamTakeThreshold_lt_two",
+      "name": "seamTakeThreshold_lt_two",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFloorErrorReset.lean",
+      "line": 885,
+      "signature": "theorem seamTakeThreshold_lt_two (s : ℕ) (hs : 2 ≤ s) : seamTakeThreshold s < 2",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFloorErrorReset.lean:903:seamWordRationalSum_extend_false",
+      "name": "seamWordRationalSum_extend_false",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFloorErrorReset.lean",
+      "line": 903,
+      "signature": "theorem seamWordRationalSum_extend_false {s : ℕ} (hs : 3 ≤ s) (b : SeamRowWord s) : seamWordRationalSum (b.extend false) = seamWordRationalSum b",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFloorErrorReset.lean:908:seamWordRationalSum_extend_true",
+      "name": "seamWordRationalSum_extend_true",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFloorErrorReset.lean",
+      "line": 908,
+      "signature": "theorem seamWordRationalSum_extend_true {s : ℕ} (hs : 3 ≤ s) (b : SeamRowWord s) : seamWordRationalSum (b.extend true) = seamWordRationalSum b + mersenneWeightRat s",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFloorErrorReset.lean:920:seamWordFloorError_extend_false",
+      "name": "seamWordFloorError_extend_false",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFloorErrorReset.lean",
+      "line": 920,
+      "signature": "theorem seamWordFloorError_extend_false {s : ℕ} (hs : 3 ≤ s) (b : SeamRowWord s) : seamWordFloorError (b.extend false) = 4 * seamWordFloorError b - (wordPulse s b.toNatWord : ℚ)",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFloorErrorReset.lean:935:seamRankFloorError_newRank",
+      "name": "seamRankFloorError_newRank",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFloorErrorReset.lean",
+      "line": 935,
+      "signature": "theorem seamRankFloorError_newRank {s : ℕ} (hs : 3 ≤ s) : seamRankFloorError (s + 1) s = 4 / ((2 : ℚ) ^ s - 1)",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFloorErrorReset.lean:950:seamWordFloorError_extend_true",
+      "name": "seamWordFloorError_extend_true",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFloorErrorReset.lean",
+      "line": 950,
+      "signature": "theorem seamWordFloorError_extend_true {s : ℕ} (hs : 3 ≤ s) (b : SeamRowWord s) : seamWordFloorError (b.extend true) = 4 * seamWordFloorError b - (wordPulse s b.toNatWord : ℚ) + 4 / ((2 : ℚ) ^ s - 1)",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFloorErrorReset.lean:972:seamWordFloorZ_extend_false",
+      "name": "seamWordFloorZ_extend_false",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFloorErrorReset.lean",
+      "line": 972,
+      "signature": "theorem seamWordFloorZ_extend_false {s : ℕ} (hs : 3 ≤ s) (b : SeamRowWord s) : seamWordFloorZ (b.extend false) = 4 * seamWordFloorZ b + (2 : ℚ) ^ (s + 1)",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFloorErrorReset.lean:983:seamWordFloorZ_extend_true",
+      "name": "seamWordFloorZ_extend_true",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFloorErrorReset.lean",
+      "line": 983,
+      "signature": "theorem seamWordFloorZ_extend_true {s : ℕ} (hs : 3 ≤ s) (b : SeamRowWord s) : seamWordFloorZ (b.extend true) = 4 * seamWordFloorZ b - (2 : ℚ) ^ (s + 1) - 4 - 4 / ((2 : ℚ) ^ s - 1)",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFloorErrorReset.lean:997:seamGreedyFloorError",
+      "name": "seamGreedyFloorError",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderFloorErrorReset.lean",
+      "line": 997,
+      "signature": "def seamGreedyFloorError (s : ℕ) : ℚ",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFloorErrorReset.lean:1000:seamAboveFloorError",
+      "name": "seamAboveFloorError",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderFloorErrorReset.lean",
+      "line": 1000,
+      "signature": "def seamAboveFloorError (s : ℕ) (hs : 5 ≤ s) : ℚ",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFloorErrorReset.lean:1003:seamGreedyFloorZ",
+      "name": "seamGreedyFloorZ",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderFloorErrorReset.lean",
+      "line": 1003,
+      "signature": "def seamGreedyFloorZ (s : ℕ) : ℚ",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFloorErrorReset.lean:1006:seamGreedyFloorZ_eq_remainder_sub_error",
+      "name": "seamGreedyFloorZ_eq_remainder_sub_error",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFloorErrorReset.lean",
+      "line": 1006,
+      "signature": "theorem seamGreedyFloorZ_eq_remainder_sub_error (s : ℕ) (hs : 5 ≤ s) : seamGreedyFloorZ s = (seamIntegerGreedyRemainder s : ℚ) - seamGreedyFloorError s",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFloorErrorReset.lean:1033:seamTakeThreshold_le_greedyFloorZ_of_card_add_two_le",
+      "name": "seamTakeThreshold_le_greedyFloorZ_of_card_add_two_le",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFloorErrorReset.lean",
+      "line": 1033,
+      "signature": "theorem seamTakeThreshold_le_greedyFloorZ_of_card_add_two_le (s : ℕ) (hs : 5 ≤ s) (hlarge : (seamWordSupport (seamGreedyWord s)).card + 2 ≤ seamIntegerGreedyRemainder s) : seamTakeThreshold s ≤ seamGreedyFloorZ s",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The elementary finite-probe lower bound: a seam remainder at least two larger than the selected support cardinality already clears the exact rational take threshold."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFloorErrorReset.lean:1062:mersenneWeightRat_le_seamGreedyRemainder_of_card_add_two_le",
+      "name": "mersenneWeightRat_le_seamGreedyRemainder_of_card_add_two_le",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFloorErrorReset.lean",
+      "line": 1062,
+      "signature": "theorem mersenneWeightRat_le_seamGreedyRemainder_of_card_add_two_le (s : ℕ) (hs : 5 ≤ s) (hlarge : (seamWordSupport (seamGreedyWord s)).card + 2 ≤ seamIntegerGreedyRemainder s) : mersenneWeightRat s ≤ seamWordRationalRemainder (seamGreedyWord s)",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFloorErrorReset.lean:1072:seamAboveFloorZ_eq_neg_overshoot_sub_error",
+      "name": "seamAboveFloorZ_eq_neg_overshoot_sub_error",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFloorErrorReset.lean",
+      "line": 1072,
+      "signature": "theorem seamAboveFloorZ_eq_neg_overshoot_sub_error (s : ℕ) (hs : 5 ≤ s) : seamWordFloorZ (seamAboveWord s hs) = -((seamAdjacentCut s hs).overshoot : ℚ) - seamAboveFloorError s hs",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFloorErrorReset.lean:1095:seamGreedyFloorZ_succ_upper",
+      "name": "seamGreedyFloorZ_succ_upper",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFloorErrorReset.lean",
+      "line": 1095,
+      "signature": "theorem seamGreedyFloorZ_succ_upper (s : ℕ) (hs : 5 ≤ s) (hcarry : (seamAdjacentCut s hs).successorCarries) : seamGreedyFloorZ (s + 1) = (2 : ℚ) ^ (s + 1) - 4 * ((seamAdjacentCut s hs).overshoot + seamAboveFloorError s hs)",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFloorErrorReset.lean:1116:seamGreedyFloorZ_succ_middle",
+      "name": "seamGreedyFloorZ_succ_middle",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFloorErrorReset.lean",
+      "line": 1116,
+      "signature": "theorem seamGreedyFloorZ_succ_middle (s : ℕ) (hs : 5 ≤ s) (hcarry : ¬ (seamAdjacentCut s hs).successorCarries) (hmiddle : 4 * (seamAdjacentCut s hs).remainder + (seamPerturbedFamily s (by omega)).gap - (seamAdjacentCut s hs).belowPulse < (seamAdjacentCut s hs).terminalWeight) : seamGreedyFloorZ (s + 1) = 4 * seamGreedyFloorZ s + (2 : ℚ) ^ (s + 1)",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFloorErrorReset.lean:1131:seamGreedyFloorZ_succ_right",
+      "name": "seamGreedyFloorZ_succ_right",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFloorErrorReset.lean",
+      "line": 1131,
+      "signature": "theorem seamGreedyFloorZ_succ_right (s : ℕ) (hs : 5 ≤ s) (hcarry : ¬ (seamAdjacentCut s hs).successorCarries) (hright : (seamAdjacentCut s hs).terminalWeight ≤ 4 * (seamAdjacentCut s hs).remainder + (seamPerturbedFamily s (by omega)).gap - (seamAdjacentCut s hs).belowPulse) : seamGreedyFloorZ (s + 1) = 4 * seamGreedyFloorZ s - (2 : ℚ) ^ (s + 1) - 4 - 4 / ((2 : ℚ) ^ s - 1)",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFloorErrorReset.lean:1150:SeamResetUAt",
+      "name": "SeamResetUAt",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderFloorErrorReset.lean",
+      "line": 1150,
+      "signature": "def SeamResetUAt (s : ℕ) (hs : 5 ≤ s) : Prop",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The unresolved upper-reset inequality, stated in the exact output coordinate supplied by `seamGreedyFloorZ_succ_upper`."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFloorErrorReset.lean:1160:SeamResetRAt",
+      "name": "SeamResetRAt",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderFloorErrorReset.lean",
+      "line": 1160,
+      "signature": "def SeamResetRAt (s : ℕ) (hs : 5 ≤ s) : Prop",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The unresolved terminal/right-reset inequality, again stated in the exact output coordinate."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFloorErrorReset.lean:1171:seamResetUAt_iff_output_floorZ",
+      "name": "seamResetUAt_iff_output_floorZ",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFloorErrorReset.lean",
+      "line": 1171,
+      "signature": "theorem seamResetUAt_iff_output_floorZ (s : ℕ) (hs : 5 ≤ s) : SeamResetUAt s hs ↔ (seamAdjacentCut s hs).successorCarries → 0 < seamIntegerGreedyRemainder (s + 1) → seamTakeThreshold (s + 1) ≤ seamGreedyFloorZ (s + 1)",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFloorErrorReset.lean:1185:seamResetRAt_iff_output_floorZ",
+      "name": "seamResetRAt_iff_output_floorZ",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFloorErrorReset.lean",
+      "line": 1185,
+      "signature": "theorem seamResetRAt_iff_output_floorZ (s : ℕ) (hs : 5 ≤ s) : SeamResetRAt s hs ↔ ¬ (seamAdjacentCut s hs).successorCarries → (seamAdjacentCut s hs).terminalWeight ≤ 4 * (seamAdjacentCut s hs).remainder + (seamPerturbedFamily s (by omega)).gap - (seamAdjacentCut s hs).belowPulse → 0 < seamIntegerGreedyRemainder (s + 1) → seamTakeThreshold (s + 1) ≤ seamGreedyFloorZ (s + 1)",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFloorErrorReset.lean:1205:four_mul_sub_three_add_two_lt_two_pow_succ",
+      "name": "four_mul_sub_three_add_two_lt_two_pow_succ",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFloorErrorReset.lean",
+      "line": 1205,
+      "signature": "theorem four_mul_sub_three_add_two_lt_two_pow_succ (s : ℕ) (hs : 5 ≤ s) : 4 * (s - 3) + 2 < 2 ^ (s + 1)",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFloorErrorReset.lean:1220:alignedPositiveSkip_forces_next_take",
+      "name": "alignedPositiveSkip_forces_next_take",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFloorErrorReset.lean",
+      "line": 1220,
+      "signature": "theorem alignedPositiveSkip_forces_next_take (s : ℕ) (hs : 5 ≤ s) (hskip : ¬ mersenneWeight s ≤ greedyMersenneRemainder (1 / 2 : ℝ) (s - 1)) (halign : halfActualSeamWord s = seamGreedyWord s) (hpos : 1 ≤ seamIntegerGreedyRemainder s) : mersenneWeight (s + 1) ≤ greedyMersenneRemainder (1 / 2 : ℝ) s",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A hypothetical skipped, aligned, positive-remainder cell forces the next actual rational/real greedy decision to be a take. This uses only the exact `Z` comparison and the proved `Phi < width` floor-error bound."
     },
     {
       "id": "Erdos249257/HalfCylinderFullShellSeamBridge.lean:22:sqrt_shift_le_sqrt_add_one_add_div",
