@@ -105,3 +105,4 @@ import Erdos249257.DiagonalFlexibleOddWindowAffine
 import Erdos249257.DiagonalFlexibleOddWindowSupply
 import Erdos249257.DiagonalPincerPrimeCertificates.ClosureT64
 import Erdos249257.DiagonalPincerCertificatesT47
+import Erdos249257.DiagonalPincerCertificatesT49
