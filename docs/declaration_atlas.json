@@ -4,21 +4,21 @@
   "projection_not_authority": true,
   "proof_authority": "Lean source checked by the pinned Lean kernel",
   "argument_authority": "docs/claims.json::machine_readable_paper.argument_graph",
-  "source_fingerprint": "sha256:498f35f51e40ccf018221b0037ff8f9c5c8b104091493d1dee9e38aa28218e8d",
+  "source_fingerprint": "sha256:4f773e360a02caf8608bdcc1bef29ad39ac823c8034c0433f673ddeb3325c8b3",
   "summary": {
-    "module_count": 561,
-    "declaration_count": 7019,
-    "theorem_like_count": 6338,
+    "module_count": 562,
+    "declaration_count": 7036,
+    "theorem_like_count": 6349,
     "generated_certificate_declaration_count": 1681,
-    "principal_claim_link_count": 115,
+    "principal_claim_link_count": 118,
     "kind_counts": {
       "abbrev": 5,
-      "def": 658,
+      "def": 664,
       "inductive": 3,
       "instance": 3,
       "lemma": 354,
       "structure": 12,
-      "theorem": 5984
+      "theorem": 5995
     }
   },
   "modules": [
@@ -89,7 +89,8 @@
         "Erdos249257.MaximalOmegaLayer",
         "Erdos249257.HalfTrappingReturnCarry",
         "Erdos249257.HalfCarryReachability",
-        "Erdos249257.HalfCylinderFiniteShadow"
+        "Erdos249257.HalfCylinderFiniteShadow",
+        "Erdos249257.HalfCarryCeilParentContraction"
       ],
       "declaration_count": 0,
       "kind_counts": {}
@@ -6362,6 +6363,18 @@
         "instance": 1,
         "structure": 1,
         "theorem": 190
+      }
+    },
+    {
+      "id": "Erdos249257.HalfCarryCeilParentContraction",
+      "path": "Erdos249257/HalfCarryCeilParentContraction.lean",
+      "imports": [
+        "Erdos249257.HalfCylinderFiniteShadow"
+      ],
+      "declaration_count": 17,
+      "kind_counts": {
+        "def": 6,
+        "theorem": 11
       }
     },
     {
@@ -67358,6 +67371,198 @@
       "generated_certificate": false,
       "claim_ids": [],
       "docstring": "The exact growth criterion once a crossed boundary has forcing depth `2*N-v-1`: strict extension beyond `N` is equivalent to excluding `v ≥ N-1`."
+    },
+    {
+      "id": "Erdos249257/HalfCarryCeilParentContraction.lean:24:parent",
+      "name": "parent",
+      "kind": "def",
+      "module": "Erdos249257/HalfCarryCeilParentContraction.lean",
+      "line": 24,
+      "signature": "def parent (c k : ℕ) : ℕ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Canonical inverse parent for a target carry under common coefficient `c`. The extra `1` is the usual natural-number expression for the ceiling of `(k + c) / 2`."
+    },
+    {
+      "id": "Erdos249257/HalfCarryCeilParentContraction.lean:27:rewind",
+      "name": "rewind",
+      "kind": "def",
+      "module": "Erdos249257/HalfCarryCeilParentContraction.lean",
+      "line": 27,
+      "signature": "def rewind : List ℕ → ℕ → ℕ | [], k => k | c :: cs, k => rewind cs (parent c k) /-- Numerator offset accumulated",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Apply the coefficient rows in list order, earliest row first."
+    },
+    {
+      "id": "Erdos249257/HalfCarryCeilParentContraction.lean:33:offset",
+      "name": "offset",
+      "kind": "def",
+      "module": "Erdos249257/HalfCarryCeilParentContraction.lean",
+      "line": 33,
+      "signature": "def offset : List ℕ → ℕ | [] => 0 | c :: cs => c + 1 + 2 * offset cs /-- Common denominator in the closed form. -/ def denom (cs : List ℕ) : ℕ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Numerator offset accumulated by a rewind. A later parent map is one binary place more significant than every earlier map."
+    },
+    {
+      "id": "Erdos249257/HalfCarryCeilParentContraction.lean:38:denom",
+      "name": "denom",
+      "kind": "def",
+      "module": "Erdos249257/HalfCarryCeilParentContraction.lean",
+      "line": 38,
+      "signature": "def denom (cs : List ℕ) : ℕ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Common denominator in the closed form."
+    },
+    {
+      "id": "Erdos249257/HalfCarryCeilParentContraction.lean:41:phase",
+      "name": "phase",
+      "kind": "def",
+      "module": "Erdos249257/HalfCarryCeilParentContraction.lean",
+      "line": 41,
+      "signature": "def phase (cs : List ℕ) : ℕ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The dyadic phase of the left endpoint `1`."
+    },
+    {
+      "id": "Erdos249257/HalfCarryCeilParentContraction.lean:43:denom_pos",
+      "name": "denom_pos",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarryCeilParentContraction.lean",
+      "line": 43,
+      "signature": "@[simp] theorem denom_pos (cs : List ℕ) : 0 < denom cs",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCarryCeilParentContraction.lean:49:rewind_eq_closedForm",
+      "name": "rewind_eq_closedForm",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarryCeilParentContraction.lean",
+      "line": 49,
+      "signature": "theorem rewind_eq_closedForm (cs : List ℕ) (k : ℕ) : rewind cs k = (k + offset cs) / denom cs",
+      "generated_certificate": false,
+      "claim_ids": [
+        "fixed_coefficient_rewind_contraction"
+      ],
+      "docstring": "Exact iterate formula. Floor-of-floor composition is absorbed into a single division because every later translation is scaled by the appropriate power of two in `offset`."
+    },
+    {
+      "id": "Erdos249257/HalfCarryCeilParentContraction.lean:69:rewind_mono",
+      "name": "rewind_mono",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarryCeilParentContraction.lean",
+      "line": 69,
+      "signature": "theorem rewind_mono (cs : List ℕ) : Monotone (rewind cs)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Rewind is monotone in the terminal carry."
+    },
+    {
+      "id": "Erdos249257/HalfCarryCeilParentContraction.lean:76:add_div_eq_left_div_iff_phase_fit",
+      "name": "add_div_eq_left_div_iff_phase_fit",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarryCeilParentContraction.lean",
+      "line": 76,
+      "signature": "theorem add_div_eq_left_div_iff_phase_fit {x y D : ℕ} (hD : 0 < D) (hy : y < D) : (x + y) / D = x / D ↔ x % D + y < D",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Adding a numerator shorter than the denominator preserves the current quotient exactly iff it does not overflow the current residue."
+    },
+    {
+      "id": "Erdos249257/HalfCarryCeilParentContraction.lean:86:rewind_endpoint_le_succ",
+      "name": "rewind_endpoint_le_succ",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarryCeilParentContraction.lean",
+      "line": 86,
+      "signature": "theorem rewind_endpoint_le_succ (cs : List ℕ) {B : ℕ} (hB : 1 ≤ B) (hwidth : B ≤ denom cs) : rewind cs B ≤ rewind cs 1 + 1",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "If the input interval `[1,B]` has width at most the rewind denominator, its two endpoint ancestors differ by at most one. This is the corrected contraction statement: a singleton conclusion requires phase information."
+    },
+    {
+      "id": "Erdos249257/HalfCarryCeilParentContraction.lean:99:rewind_endpoint_eq_iff_phase_fit",
+      "name": "rewind_endpoint_eq_iff_phase_fit",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarryCeilParentContraction.lean",
+      "line": 99,
+      "signature": "theorem rewind_endpoint_eq_iff_phase_fit (cs : List ℕ) {B : ℕ} (hB : 1 ≤ B) (hwidth : B ≤ denom cs) : rewind cs B = rewind cs 1 ↔ phase cs + (B - 1) < denom cs",
+      "generated_certificate": false,
+      "claim_ids": [
+        "fixed_coefficient_rewind_contraction"
+      ],
+      "docstring": "Exact singleton criterion for the endpoints."
+    },
+    {
+      "id": "Erdos249257/HalfCarryCeilParentContraction.lean:119:IsSeamPair",
+      "name": "IsSeamPair",
+      "kind": "def",
+      "module": "Erdos249257/HalfCarryCeilParentContraction.lean",
+      "line": 119,
+      "signature": "def IsSeamPair (cs : List ℕ) (B : ℕ) : Prop",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The residual alternative after maximal fixed-coefficient contraction: the right endpoint has landed at the successor of the left endpoint. Every interior target then lands on one of these same two ancestors (proved below), so this is the exact scalar socket for a canonical one-hole seam argument."
+    },
+    {
+      "id": "Erdos249257/HalfCarryCeilParentContraction.lean:123:isSeamPair_iff_phase_overflow",
+      "name": "isSeamPair_iff_phase_overflow",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarryCeilParentContraction.lean",
+      "line": 123,
+      "signature": "theorem isSeamPair_iff_phase_overflow (cs : List ℕ) {B : ℕ} (hB : 1 ≤ B) (hwidth : B ≤ denom cs) : IsSeamPair cs B ↔ denom cs ≤ phase cs + (B - 1)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The seam-pair alternative is exactly dyadic phase overflow."
+    },
+    {
+      "id": "Erdos249257/HalfCarryCeilParentContraction.lean:147:rewind_eq_left_or_right_of_isSeamPair",
+      "name": "rewind_eq_left_or_right_of_isSeamPair",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarryCeilParentContraction.lean",
+      "line": 147,
+      "signature": "theorem rewind_eq_left_or_right_of_isSeamPair (cs : List ℕ) {B k : ℕ} (hk : 1 ≤ k) (hkB : k ≤ B) (hseam : IsSeamPair cs B) : rewind cs k = rewind cs 1 ∨ rewind cs k = rewind cs 1 + 1",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Under the seam-pair alternative, every rewound target lies on one of the two adjacent ancestors."
+    },
+    {
+      "id": "Erdos249257/HalfCarryCeilParentContraction.lean:158:rewind_interval_singleton_iff_endpoint_eq",
+      "name": "rewind_interval_singleton_iff_endpoint_eq",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarryCeilParentContraction.lean",
+      "line": 158,
+      "signature": "theorem rewind_interval_singleton_iff_endpoint_eq (cs : List ℕ) {B : ℕ} (hB : 1 ≤ B) : (∀ k : ℕ, 1 ≤ k → k ≤ B → rewind cs k = rewind cs 1) ↔ rewind cs B = rewind cs 1",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The entire interval is a singleton exactly when its endpoints agree."
+    },
+    {
+      "id": "Erdos249257/HalfCarryCeilParentContraction.lean:171:rewind_interval_singleton_iff_phase_fit",
+      "name": "rewind_interval_singleton_iff_phase_fit",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarryCeilParentContraction.lean",
+      "line": 171,
+      "signature": "theorem rewind_interval_singleton_iff_phase_fit (cs : List ℕ) {B : ℕ} (hB : 1 ≤ B) (hwidth : B ≤ denom cs) : (∀ k : ℕ, 1 ≤ k → k ≤ B → rewind cs k = rewind cs 1) ↔ phase cs + (B - 1) < denom cs",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Full interval phase criterion."
+    },
+    {
+      "id": "Erdos249257/HalfCarryCeilParentContraction.lean:180:rewind_singleton_or_isSeamPair",
+      "name": "rewind_singleton_or_isSeamPair",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCarryCeilParentContraction.lean",
+      "line": 180,
+      "signature": "theorem rewind_singleton_or_isSeamPair (cs : List ℕ) {B : ℕ} (hB : 1 ≤ B) (hwidth : B ≤ denom cs) : (∀ k : ℕ, 1 ≤ k → k ≤ B → rewind cs k = rewind cs 1) ∨ IsSeamPair cs B",
+      "generated_certificate": false,
+      "claim_ids": [
+        "fixed_coefficient_rewind_contraction"
+      ],
+      "docstring": "Correct fixed-tail contraction dichotomy. Width alone proves exactly a singleton-or-seam-pair result, never an unconditional singleton."
     },
     {
       "id": "Erdos249257/HalfCarryReachability.lean:32:halfStripBound",

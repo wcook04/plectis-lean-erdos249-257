@@ -4893,6 +4893,14 @@
           ]
         },
         {
+          "id": "Erdos249257.HalfCarryCeilParentContraction",
+          "path": "Erdos249257/HalfCarryCeilParentContraction.lean",
+          "role": "Fixed-coefficient rewind contraction",
+          "imports": [
+            "Erdos249257.HalfCylinderFiniteShadow"
+          ]
+        },
+        {
           "id": "Erdos249257.HalfCarryReachability",
           "path": "Erdos249257/HalfCarryReachability.lean",
           "role": "Half-carry reachability and compactness",
@@ -5282,6 +5290,11 @@
           "to": "half_carry_reachability_compactness"
         },
         {
+          "from": "fixed_coefficient_rewind_contraction",
+          "relation": "builds_on",
+          "to": "half_cylinder_finite_shadow"
+        },
+        {
           "from": "denominator_exclusion",
           "relation": "advances_open_target",
           "to": "erdos_249",
@@ -5555,7 +5568,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 1217
+        "line": 1231
       }
     },
     {
@@ -5566,7 +5579,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 1226
+        "line": 1240
       }
     },
     {
@@ -5577,7 +5590,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 1233
+        "line": 1247
       }
     }
   ],
@@ -5799,6 +5812,34 @@
           "name": "half_mem_mersenneAchievementSet_of_governedFrozenMarginProducer",
           "module": "Erdos249257/HalfCylinderFiniteShadow.lean",
           "line": 1238
+        }
+      ]
+    },
+    {
+      "id": "fixed_coefficient_rewind_contraction",
+      "label": "Fixed-coefficient rewind contraction",
+      "status": "conditional reduction",
+      "statement": "A finite sequence of canonical fixed-coefficient inverse-parent maps has an exact dyadic closed form. An interval no wider than its denominator contracts either to one ancestor or to an adjacent seam pair; the singleton alternative is exactly the stated phase-fit inequality. This does not exclude the seam-pair alternative or prove half-membership.",
+      "remaining_open_proposition_ids": [
+        "remaining_open.universal_257_all_infinite_supports"
+      ],
+      "paper_label": "res:fixedcoeffrewind",
+      "readme_headline": false,
+      "declarations": [
+        {
+          "name": "rewind_eq_closedForm",
+          "module": "Erdos249257/HalfCarryCeilParentContraction.lean",
+          "line": 49
+        },
+        {
+          "name": "rewind_endpoint_eq_iff_phase_fit",
+          "module": "Erdos249257/HalfCarryCeilParentContraction.lean",
+          "line": 99
+        },
+        {
+          "name": "rewind_singleton_or_isSeamPair",
+          "module": "Erdos249257/HalfCarryCeilParentContraction.lean",
+          "line": 180
         }
       ]
     },
