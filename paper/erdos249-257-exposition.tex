@@ -742,6 +742,15 @@ Thus this module gives an exact classification of the nonmembership branch.
 It neither decides whether $1/2$ belongs to the achievement set nor proves
 the universal Erd\H{o}s~\#257 statement.
 
+\paragraph{First final-middle cell.}  The first exceptional middle cell has a
+separate obstruction: if the orbit extends right after the last false rank,
+then the cell with producer carry $-3$ makes the lazy cofinite tail strictly
+smaller than $1/2$ while its centred carry becomes negative.  This is
+impossible by the analytic nonnegativity identity,
+\lrefx{HalfCylinderFinalMiddleCellEscape.lean}{587}{finalMiddleCell_neg_three_not_last}.
+It removes that one conditional terminal configuration; it does not decide
+the right-tail branch or the remaining two middle cells.
+
 \subsection{Positive half-membership classification}\label{res:halfmembership}
 
 The complementary branch has an equally exact seam formulation.  Membership

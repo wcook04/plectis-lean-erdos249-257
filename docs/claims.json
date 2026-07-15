@@ -5109,6 +5109,15 @@
           ]
         },
         {
+          "id": "Erdos249257.HalfCylinderFinalMiddleCellEscape",
+          "path": "Erdos249257/HalfCylinderFinalMiddleCellEscape.lean",
+          "role": "Lean proof module",
+          "imports": [
+            "Erdos249257.HalfCylinderFatalGapRightTail",
+            "Erdos249257.HalfCylinderProducerLowerBound"
+          ]
+        },
+        {
           "id": "Erdos249257.HalfCylinderFiniteShadow",
           "path": "Erdos249257/HalfCylinderFiniteShadow.lean",
           "role": "Finite shadows of the half cylinder",
@@ -6138,7 +6147,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 1714
+        "line": 1723
       }
     },
     {
@@ -6149,7 +6158,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 1723
+        "line": 1732
       }
     },
     {
@@ -6160,7 +6169,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 1730
+        "line": 1739
       }
     }
   ],
@@ -6685,6 +6694,21 @@
           "name": "seamGreedyEventuallyRight_iff_exists_isLastHalfGreedySkip",
           "module": "Erdos249257/HalfCylinderFatalGapRightTail.lean",
           "line": 802
+        }
+      ]
+    },
+    {
+      "id": "final_middle_cell_escape",
+      "label": "First final-middle cell cannot feed an all-right tail",
+      "status": "proved here",
+      "statement": "If the concrete seam orbit extends right after its last false rank, then the producer-carry cell -3 is impossible: the lazy cofinite tail is below 1/2 while the corresponding Mobius-centred carry is negative, contradicting analytic nonnegativity. This removes one conditional terminal configuration, not the right-tail branch or the remaining middle cells.",
+      "paper_label": "res:fatalright",
+      "readme_headline": false,
+      "declarations": [
+        {
+          "name": "finalMiddleCell_neg_three_not_last",
+          "module": "Erdos249257/HalfCylinderFinalMiddleCellEscape.lean",
+          "line": 587
         }
       ]
     },
