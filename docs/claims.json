@@ -5648,6 +5648,15 @@
           ]
         },
         {
+          "id": "Erdos249257.SuffixCylinderProfiledAdjacency",
+          "path": "Erdos249257/SuffixCylinderProfiledAdjacency.lean",
+          "role": "Lean proof module",
+          "imports": [
+            "Erdos249257.SuffixCylinderProfiledGap",
+            "Erdos249257.HalfCylinderIntegerGreedy"
+          ]
+        },
+        {
           "id": "Erdos249257.SuffixCylinderProfiledGap",
           "path": "Erdos249257/SuffixCylinderProfiledGap.lean",
           "role": "Lean proof module",
@@ -6265,7 +6274,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 1794
+        "line": 1797
       }
     },
     {
@@ -6276,7 +6285,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 1803
+        "line": 1806
       }
     },
     {
@@ -6287,7 +6296,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 1810
+        "line": 1813
       }
     }
   ],
@@ -7232,6 +7241,11 @@
           "name": "selectedHalfIntervalPromoteHigh",
           "module": "Erdos249257/SuffixCylinderProfiledPromotion.lean",
           "line": 107
+        },
+        {
+          "name": "ProfiledGapStage.lowerNextCoeff_le_upperNextCoeff_add_one",
+          "module": "Erdos249257/SuffixCylinderProfiledAdjacency.lean",
+          "line": 232
         }
       ]
     },

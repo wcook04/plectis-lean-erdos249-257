@@ -959,6 +959,9 @@ At the next cutoff boundary, the lower and upper sheets respectively gain
 their forced false and true prefix bits; the upper endpoint is adjusted by
 the corresponding head weight,
 \lrefx{SuffixCylinderProfiledPromotion.lean}{107}{selectedHalfIntervalPromoteHigh}.
+The two retained prefixes remain adjacent, so their next-row coefficients
+differ by at most one in the directed form needed for the profiled update,
+\lrefx{SuffixCylinderProfiledAdjacency.lean}{232}{ProfiledGapStage.lowerNextCoeff_le_upperNextCoeff_add_one}.
 This is a conditional local feedback classification, not a cofinal supply
 theorem: the required crossing coefficient profile is still an input.
 
