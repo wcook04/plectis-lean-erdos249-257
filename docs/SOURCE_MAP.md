@@ -54,7 +54,7 @@ open obligation; it does not prove the required unbounded supply.
   stronger adjacent-suffix supply interfaces.
 - `Erdos249257.DiagonalPincerCertificates` and
   `Erdos249257.DiagonalPincerCertificatesT*` — the finite diagonal segment,
-  currently assembled at 22 explicit scales through `t = 43`.
+  currently assembled at 28 explicit scales through `t = 64`.
 - `Erdos249257.DiagonalPincerPrimeCertificates.*` — finite prime certificate
   shards used by that assembled segment; read the aggregators first.
 

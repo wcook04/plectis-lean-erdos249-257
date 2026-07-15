@@ -22,7 +22,7 @@
 % the repository verifies that it matches docs/claims.json and that every
 % \lref/\lrefx/\lloc target resolves to the named declaration at that line.
 % ---------------------------------------------------------------------------
-\newcommand{\commit}{189a213}
+\newcommand{\commit}{189a2130ddb4583a9f76582abb713a67f7c0147c}
 \newcommand{\repobase}{https://github.com/wcook04/plectis-lean-erdos249-257/blob/\commit}
 \newcommand{\sourceurl}{https://github.com/wcook04/plectis-lean-erdos249-257/tree/\commit}
 \newcommand{\rootbase}{https://github.com/wcook04/plectis-lean-erdos249-257/blob/main}
@@ -79,7 +79,7 @@ rational representation has denominator greater than
 $\Qzero\approx7.96\times10^{34}$, and formalise an exact reduction of
 irrationality to an unbounded family of finite decidable certificates. We also
 refine that reduction through an exact full-target interval, a
-squared-Mersenne enclosure, and a fresh-loss projection, and verify 22 explicit
+squared-Mersenne enclosure, and a fresh-loss projection, and verify 28 explicit
 lcm-diagonal scales through $t=64$.  On the \#257 side we formalise the
 measure-one, nowhere-dense Mersenne achievement set and auxiliary rationality
 criteria based on binary carry systems. This work solves neither
@@ -122,7 +122,7 @@ a witness at fixed parameters is equivalent to the corresponding tail
 difference being non-integral.
 The same reduction is then decomposed into an exact target-interval test, a
 Lambert-centred squared-Mersenne enclosure, and finite fresh-loss projection
-conditions; the checked finite segment reaches 22 explicit scales through
+conditions; the checked finite segment reaches 28 explicit scales through
 $t=64$.  Fifth, it gives an executable greedy model of the Mersenne achievement
 set, including its compact, perfect, totally disconnected, nowhere-dense, and
 measure-one geometry, while leaving the rational-member question open.
@@ -136,6 +136,13 @@ neither is presented as a solution. The support theorems establish named
 families toward \#257, not the universal quantifier.
 \end{minipage}}
 \end{center}
+
+The checked library contains many identities, equivalences, rigidity
+statements, case eliminations, finite certificates, and scoped no-go theorems.
+The available development did not exhaustively test every cross-composition of
+these results.  Accordingly, the claim graph and source map expose proved
+dependencies for reuse and challenge; neither the size of the corpus nor an
+unexplored composition is evidence that a solution is latent in it.
 
 The formalisation-specific contribution is a common architecture in which an
 infinite irrationality question is converted into finite arithmetic checked by
@@ -228,8 +235,8 @@ weight $A$.
 \begin{proposition}[the rational rungs]
 $\sum_{d\ge1}\mu(d)/(2^d-1)=1/2$ and $\sum_{d\ge1}\ph(d)/(2^d-1)=2$, exactly.
 \end{proposition}
-\noindent Formalised: \lref{MersenneLambertLadder.lean}{527}{tsum_moebius_div_two_pow_sub_one_eq_half}
-and \lref{MersenneLambertLadder.lean}{515}{tsum_totient_div_two_pow_sub_one_eq_two}; restated on the
+\noindent Formalised: \lref{MersenneLambertLadder.lean}{587}{tsum_moebius_div_two_pow_sub_one_eq_half}
+and \lref{MersenneLambertLadder.lean}{575}{tsum_totient_div_two_pow_sub_one_eq_two}; restated on the
 \#249 series shape at \lrefx{CertificateKernel.lean}{18106}{tsum_moebius_div_two_pow_sub_one_eq_half}
 and \lrefx{CertificateKernel.lean}{18101}{tsum_totient_div_two_pow_sub_one_eq_two}.
 
@@ -240,7 +247,7 @@ With the primitive-conductor weight $A=\ph*\mu$,
 \]
 \end{proposition}
 \noindent Formalised: \lref{CertificateKernel.lean}{18117}{tsum_primWeight_div_two_pow_sub_one_eq_totient_series},
-with the weight $A$ defined at \lrefx{MersenneLambertLadder.lean}{247}{primWeight}. This
+with the weight $A$ defined at \lrefx{MersenneLambertLadder.lean}{252}{primWeight}. This
 places $S$ in the same $\sum(\cdot)/(2^d-1)$ family as $E$, with a nonnegative weight.
 
 \subsection{Finite primitive-coordinate obstruction}\label{sec:primitiveindex}
@@ -741,6 +748,19 @@ by
 Thus this module gives an exact classification of the nonmembership branch.
 It neither decides whether $1/2$ belongs to the achievement set nor proves
 the universal Erd\H{o}s~\#257 statement.
+
+The canonical half-value spine can now be stated without development
+chronology.  Strict superincreasingness gives unique normalized support coding
+(\lrefx{GreedyAchievementSet.lean}{1527}{positiveMersenneSupportValue_injective_normalized}),
+and $1/2$ belongs to the achievement set exactly when its greedy orbit skips
+infinitely many ranks
+(\lrefx{GreedyAchievementSet.lean}{2514}{half_mem_mersenneAchievementSet_iff_greedySkippedSupport_infinite}).
+If instead there is a last skip, the last-producer argument partitions its
+successor into upper and middle cases.  The upper case is impossible, while
+the next paragraph eliminates the middle cell $-3$.  What remains in the
+checked source is the stated middle-producer tail-escape socket.  The source
+does not yet identify that residual with dyadically unsafe skips, nor does it
+eliminate the two other exceptional middle coordinates $-2$ and $-1$.
 
 \paragraph{First final-middle cell.}  The first exceptional middle cell has a
 separate obstruction: if the orbit extends right after the last false rank,
@@ -1256,8 +1276,9 @@ The following are checked by the Lean kernel:
 \begin{itemize}[leftmargin=1.4em]
 \item $\textsf{certifiedKill}(h,12,16)$ for every period $h\in[1,8]$;
 \item certified kills for every period $h\in[1,16]$ at a fixed window;
-\item diagonal certificates $\textsf{certifiedKill}(M_t,M_t,L)$ at the 22 scales
-  $t\in\{1,2,3,4,5,7,8,9,11,13,16,17,19,23,25,27,29,31,32,37,41,43\}$;
+\item diagonal certificates $\textsf{certifiedKill}(M_t,M_t,L)$ at the 28 scales
+  $t\in\{1,2,3,4,5,7,8,9,11,13,16,17,19,23,25,27,29,31,32,37,41,43,
+  47,49,53,59,61,64\}$;
 \item a tabulated joint cone-vertex certificate.
 \end{itemize}
 \end{example}
@@ -1850,6 +1871,10 @@ proof obligations. The Lambert, M\"obius, probabilistic, periodic-tail, and
 carry descriptions are not competing stories: each makes a different
 rationality obstruction explicit. A future advance must exploit one of those
 obstructions uniformly, not merely extend the finite range already checked.
+The public package therefore records exact interfaces and their consumers,
+including negative and finite results, without treating corpus volume as
+mathematical evidence or claiming that an unchecked composition closes either
+open problem.
 
 \subsection*{Statements and declarations}
 
@@ -2312,8 +2337,8 @@ Erd\H{o}s--Borwein $E$ irrational & \lrefx{CertificateKernel.lean}{8007}{irratio
 factorial support & \lrefx{CertificateKernel.lean}{5707}{irrational_erdosSum_factorial_support}\ (\texttt{CertificateKernel})\\
 power-of-two support & \lrefx{CertificateKernel.lean}{5731}{irrational_erdosSum_two_pow_support}\ (\texttt{CertificateKernel})\\
 pairwise-coprime supports & \lrefx{CertificateKernel.lean}{10448}{irrational_erdosSupportSeries_pairwise_coprime}\ (\texttt{CertificateKernel})\\
-$L(\mu)=1/2$ & \lrefx{MersenneLambertLadder.lean}{527}{tsum_moebius_div_two_pow_sub_one_eq_half}\ (\texttt{MersenneLambertLadder})\\
-$L(\ph)=2$ & \lrefx{MersenneLambertLadder.lean}{515}{tsum_totient_div_two_pow_sub_one_eq_two}\ (\texttt{MersenneLambertLadder})\\
+$L(\mu)=1/2$ & \lrefx{MersenneLambertLadder.lean}{587}{tsum_moebius_div_two_pow_sub_one_eq_half}\ (\texttt{MersenneLambertLadder})\\
+$L(\ph)=2$ & \lrefx{MersenneLambertLadder.lean}{575}{tsum_totient_div_two_pow_sub_one_eq_two}\ (\texttt{MersenneLambertLadder})\\
 positive lift $L(A)=S$ & \lrefx{CertificateKernel.lean}{18117}{tsum_primWeight_div_two_pow_sub_one_eq_totient_series}\ (\texttt{CertificateKernel})\\
 M\"obius-square lens & \lrefx{CertificateKernel.lean}{18126}{totient_series_eq_half_add_moebius_mersenne_square}\ (\texttt{CertificateKernel})\\
 $L_2(\mathbf1)$ and $L_2(\ph)$ gcd moments & \lrefx{GcdMomentCalculus.lean}{216}{tsum_one_div_mersenne_sq_eq_sigma_sub_tau_series}, \lrefx{GcdMomentCalculus.lean}{235}{tsum_totient_div_mersenne_sq_eq_gcd_moment_series}\ (\texttt{GcdMomentCalculus})\\

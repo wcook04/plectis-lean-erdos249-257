@@ -368,12 +368,12 @@ def main() -> int:
     formal_tree_matches, formal_tree_detail = formal_source_matches_current_lean_tree(formal_ref)
     check(formal_tree_matches,
           formal_tree_detail or "current public Lean sources differ from formal-source checkpoint")
-    for index, (paper_path, paper_text) in enumerate(paper_sources):
+    for paper_path, paper_text in paper_sources:
         m = re.search(r"\\newcommand\{\\commit\}\{([^}]+)\}", paper_text)
-        expected_pin = formal_ref if index == 0 else tag
+        expected_pin = formal_ref
         check(m is not None and m.group(1) == expected_pin,
               f"{paper_path} \\commit pin {m.group(1) if m else '<missing>'} != expected {expected_pin}")
-        if index == 0:
+        if paper_path == main_paper_row["source"]:
             check(paper_text.count("blob/main") == 1 and "\\newcommand{\\rootbase}" in paper_text,
                   f"{paper_path} may use blob/main only for the explicit \\rref root-navigation base")
         else:
@@ -448,8 +448,8 @@ def main() -> int:
                   f"{decl['module']}:{decl['line']} (±{LINE_WINDOW})")
 
     # --- 4. paper source links ----------------------------------------------
-    for index, (paper_path, paper_text) in enumerate(paper_sources):
-        source_ref = formal_ref if index == 0 else tag
+    for paper_path, paper_text in paper_sources:
+        source_ref = formal_ref
         for macro, fname, line_s, name in re.findall(
                 r"\\(lref|lrefx|lloc)\{([^}]+)\}\{(\d+)\}(?:\{([^}]*)\})?", paper_text):
             rel = f"Erdos249257/{fname}"

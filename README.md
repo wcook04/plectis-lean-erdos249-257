@@ -25,7 +25,7 @@ Erdős #257.**
 | Library | Current size |
 |---|---:|
 | Lean modules | 632 |
-| Formal results and supporting lemmas | 11,453 |
+| Formal results and supporting lemmas | 11,457 |
 
 These figures describe the library, not the number of separate mathematical
 claims. For a guided reading order, see
@@ -57,8 +57,8 @@ the Lean source checked by the pinned Lean kernel is proof authority.
   is irrational.
 - **An exact finite-certificate reduction for #249.** Irrationality follows from
   certified non-integrality witnesses at unbounded parameters. The existence of
-  that unbounded certificate supply remains open. The release verifies 22
-  explicit lcm-diagonal scales through `t = 43`; a verified finite instance does
+  that unbounded certificate supply remains open. The release verifies 28
+  explicit lcm-diagonal scales through `t = 64`; a verified finite instance does
   not change the unbounded quantifier.
 - **Necessary conditions for rational support values.** The formal development
   records carry-orbit, reciprocal-mass, unbounded-state, achievement-set, and

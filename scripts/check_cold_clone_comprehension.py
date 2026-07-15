@@ -30,6 +30,17 @@ HUMAN_FIRST_CONTACT_BUDGET_BYTES = 32_000
 SUMMARY_PACKET_BUDGET_BYTES = 32_000
 PACKET_BUDGET_BYTES = 16_384
 PROOF_AUTHORITY = "Lean source checked by the pinned Lean kernel"
+STORY_ROUTES = ("erdos257_half_story", "erdos249_certificate_story")
+STORY_CLAIMS = (
+    "greedy_achievement_geometry",
+    "half_membership_seam_classification",
+    "fatal_gap_right_tail_classification",
+    "final_middle_cell_escape",
+    "last_producer_tail_escape_reduction",
+    "certificate_reduction",
+    "certificate_completeness",
+    "first_harmonic_certificate_interface",
+)
 
 
 def read(rel: str) -> str:
@@ -108,6 +119,12 @@ def collect_agent_packets() -> dict[str, Any]:
         "modules": {},
         "sigil_modules": {},
         "route": query_packet("--route", "instant_orientation"),
+        "story_routes": {
+            route_id: query_packet("--route", route_id) for route_id in STORY_ROUTES
+        },
+        "story_claims": {
+            claim_id: query_packet("--claim", claim_id) for claim_id in STORY_CLAIMS
+        },
     }
     for row in summary["remaining_open_propositions"]:
         packets["opens"][row["id"]] = query_packet("--open", row["id"])
@@ -198,6 +215,41 @@ def validate_agent_packets(packets: dict[str, Any]) -> None:
     assert route["authority_owners"]
     assert route["adjacent_handle_classes"]
 
+    story_routes = packets["story_routes"]
+    assert tuple(story_routes) == STORY_ROUTES
+    assert [
+        step.rsplit(" ", 1)[-1]
+        for step in story_routes["erdos257_half_story"]["route"]["query_steps"]
+    ] == list(STORY_CLAIMS[:5])
+    assert story_routes["erdos249_certificate_story"]["route"]["query_steps"][-1].endswith(
+        "remaining_open.unbounded_certificate_supply"
+    )
+
+    story_claims = packets["story_claims"]
+    half_membership = story_claims["half_membership_seam_classification"]
+    assert {
+        (row["relation"], row["neighbour"]["id"])
+        for row in half_membership["argument_neighbourhood"]["outgoing"]
+    } >= {
+        ("builds_on", "greedy_achievement_geometry"),
+        ("builds_on", "fatal_gap_right_tail_classification"),
+    }
+    last_producer = story_claims["last_producer_tail_escape_reduction"]
+    assert ("eliminates_case", "final_middle_cell_escape") in {
+        (row["relation"], row["neighbour"]["id"])
+        for row in last_producer["argument_neighbourhood"]["incoming"]
+    }
+    assert ("builds_on", "fatal_gap_right_tail_classification") in {
+        (row["relation"], row["neighbour"]["id"])
+        for row in last_producer["argument_neighbourhood"]["outgoing"]
+    }
+    first_harmonic = story_claims["first_harmonic_certificate_interface"]
+    assert {
+        row["neighbour"]["id"]
+        for row in first_harmonic["argument_neighbourhood"]["outgoing"]
+        if row["relation"] == "builds_on"
+    } >= {"certificate_reduction", "certificate_completeness"}
+
 
 def main() -> int:
     packets = collect_agent_packets()
@@ -214,6 +266,8 @@ def main() -> int:
         + len(packets["sources"])
         + len(packets["modules"])
         + len(packets["sigil_modules"])
+        + len(packets["story_routes"])
+        + len(packets["story_claims"])
         + 3
     )
     print(

@@ -47,6 +47,31 @@ def main() -> int:
     assert_rejected(mutated, "open boundary")
     checks += 1
 
+    mutated = copy.deepcopy(packets)
+    mutated["story_routes"]["erdos257_half_story"]["route"]["query_steps"].pop()
+    assert_rejected(mutated, "#257 story route")
+    checks += 1
+
+    mutated = copy.deepcopy(packets)
+    last_producer = mutated["story_claims"]["last_producer_tail_escape_reduction"]
+    last_producer["argument_neighbourhood"]["incoming"] = [
+        row
+        for row in last_producer["argument_neighbourhood"]["incoming"]
+        if row["relation"] != "eliminates_case"
+    ]
+    assert_rejected(mutated, "#257 eliminated-case edge")
+    checks += 1
+
+    mutated = copy.deepcopy(packets)
+    first_harmonic = mutated["story_claims"]["first_harmonic_certificate_interface"]
+    first_harmonic["argument_neighbourhood"]["outgoing"] = [
+        row
+        for row in first_harmonic["argument_neighbourhood"]["outgoing"]
+        if row["neighbour"]["id"] != "certificate_completeness"
+    ]
+    assert_rejected(mutated, "#249 completeness-consumer edge")
+    checks += 1
+
     conditional = next(
         claim_id for claim_id, packet in packets["claims"].items()
         if packet["claim"]["status"] == "conditional reduction"

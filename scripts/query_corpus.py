@@ -45,22 +45,11 @@ def lean_source_identity_for_paper(
 ) -> dict[str, Any]:
     """Return the immutable Lean identity used by one authored paper.
 
-    The principal exposition is pinned to the current committed formal-source
-    checkpoint. Technical companions retain their tagged-release source pin.
-    Both are immutable, but callers must not silently substitute one for the
-    other.
+    Every authored paper is pinned to the current committed formal-source
+    checkpoint.  A companion that cites post-tag modules cannot truthfully
+    retain the older release tag as its source identity.
     """
-    release = claims["release"]
-    principal_source = claims["machine_readable_paper"]["paper"]["source"]
-    if paper_source in (None, principal_source):
-        return formal_source_identity(claims)
-    return {
-        "ref": release["tag"],
-        "ref_kind": "tag",
-        "publication_state": "published_last_tag",
-        "relationship_to_last_tag": "at_last_tag",
-        "repository": release["repository"],
-    }
+    return formal_source_identity(claims)
 
 
 @lru_cache(maxsize=1)

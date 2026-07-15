@@ -16,8 +16,8 @@ Lean kernel remains proof authority.
 | Surface | Count |
 |---|---:|
 | Lean modules | 632 |
-| Lean declarations | 12,472 |
-| Theorem-like declarations | 11,453 |
+| Lean declarations | 12,476 |
+| Theorem-like declarations | 11,457 |
 | Generated certificate declarations | 2,923 |
 | Principal claim links | 230 |
 
@@ -77,6 +77,12 @@ settle the open proposition attached to it.
 - **See how the #249 reduction, #257 families, carry trunk, and open targets relate.** (`understand_argument_topology`): `docs/orientation.json` → `docs/SOURCE_MAP.md` → `docs/WAVE_INDEX.md`
   - Bounded queries: `python3 scripts/query_corpus.py --claim <claim_id>`; `python3 scripts/query_corpus.py --open <remaining_open_proposition_id>`; `python3 scripts/query_corpus.py --search <term> --limit <1..100>`
   - Authority owners: `docs/claims.json::machine_readable_paper.argument_graph`, `docs/SOURCE_MAP.md`, `docs/WAVE_INDEX.md`
+- **Recover the proved #257 half-value spine from unique greedy coding through the last-producer partition to the exact tail-escape residual, without identifying the remaining middle cells with dyadic unsafety beyond the checked theorems.** (`erdos257_half_story`): `docs/orientation.json`
+  - Bounded queries: `python3 scripts/query_corpus.py --claim greedy_achievement_geometry`; `python3 scripts/query_corpus.py --claim half_membership_seam_classification`; `python3 scripts/query_corpus.py --claim fatal_gap_right_tail_classification`; `python3 scripts/query_corpus.py --claim final_middle_cell_escape`; `python3 scripts/query_corpus.py --claim last_producer_tail_escape_reduction`
+  - Authority owners: `Erdos249257/GreedyAchievementSet.lean`, `Erdos249257/HalfCylinderFatalGapRightTail.lean`, `Erdos249257/HalfCylinderFinalMiddleCellEscape.lean`, `Erdos249257/HalfCylinderLastProducerContradiction.lean`, `docs/claims.json::machine_readable_paper.argument_graph`
+- **Recover the exact #249 endpoint, certificate completeness, first-harmonic finite consumer, and the still-open cofinal harmonic estimate.** (`erdos249_certificate_story`): `docs/orientation.json`
+  - Bounded queries: `python3 scripts/query_corpus.py --claim certificate_reduction`; `python3 scripts/query_corpus.py --claim certificate_completeness`; `python3 scripts/query_corpus.py --claim first_harmonic_certificate_interface`; `python3 scripts/query_corpus.py --open remaining_open.unbounded_certificate_supply`
+  - Authority owners: `Erdos249257/TotientTailPeriodKiller.lean`, `Erdos249257/LcmConeFlatness.lean`, `Erdos249257/FirstHarmonicGap.lean`, `docs/claims.json::machine_readable_paper.argument_graph`
 - **Understand the cited mathematical sources, their precise relationship to the release, and the priority boundary.** (`trace_prior_art`): `docs/PRIOR_ART.md` → `CITATION.cff` → `docs/orientation.json`
   - Bounded queries: `python3 scripts/query_corpus.py --artifact docs/PRIOR_ART.md`; `python3 scripts/query_corpus.py --paper-label <TeX_label>`; `python3 scripts/query_corpus.py --artifact <content_digest>`
   - Authority owners: `docs/PRIOR_ART.md`, `CITATION.cff`, `paper/erdos249-257-exposition.tex`, `paper/erdos249-transport-curvature.tex`

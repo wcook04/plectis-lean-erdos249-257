@@ -95,6 +95,60 @@
         ]
       },
       {
+        "id": "erdos257_half_story",
+        "intent": "Recover the proved #257 half-value spine from unique greedy coding through the last-producer partition to the exact tail-escape residual, without identifying the remaining middle cells with dyadic unsafety beyond the checked theorems.",
+        "read": [
+          "docs/orientation.json"
+        ],
+        "query_steps": [
+          "python3 scripts/query_corpus.py --claim greedy_achievement_geometry",
+          "python3 scripts/query_corpus.py --claim half_membership_seam_classification",
+          "python3 scripts/query_corpus.py --claim fatal_gap_right_tail_classification",
+          "python3 scripts/query_corpus.py --claim final_middle_cell_escape",
+          "python3 scripts/query_corpus.py --claim last_producer_tail_escape_reduction"
+        ],
+        "authority_owners": [
+          "Erdos249257/GreedyAchievementSet.lean",
+          "Erdos249257/HalfCylinderFatalGapRightTail.lean",
+          "Erdos249257/HalfCylinderFinalMiddleCellEscape.lean",
+          "Erdos249257/HalfCylinderLastProducerContradiction.lean",
+          "docs/claims.json::machine_readable_paper.argument_graph"
+        ],
+        "adjacent_handle_classes": [
+          "claim_id",
+          "paper_label",
+          "declaration",
+          "module",
+          "source_coordinate"
+        ]
+      },
+      {
+        "id": "erdos249_certificate_story",
+        "intent": "Recover the exact #249 endpoint, certificate completeness, first-harmonic finite consumer, and the still-open cofinal harmonic estimate.",
+        "read": [
+          "docs/orientation.json"
+        ],
+        "query_steps": [
+          "python3 scripts/query_corpus.py --claim certificate_reduction",
+          "python3 scripts/query_corpus.py --claim certificate_completeness",
+          "python3 scripts/query_corpus.py --claim first_harmonic_certificate_interface",
+          "python3 scripts/query_corpus.py --open remaining_open.unbounded_certificate_supply"
+        ],
+        "authority_owners": [
+          "Erdos249257/TotientTailPeriodKiller.lean",
+          "Erdos249257/LcmConeFlatness.lean",
+          "Erdos249257/FirstHarmonicGap.lean",
+          "docs/claims.json::machine_readable_paper.argument_graph"
+        ],
+        "adjacent_handle_classes": [
+          "claim_id",
+          "open_proposition_id",
+          "paper_label",
+          "declaration",
+          "module"
+        ]
+      },
+      {
         "id": "trace_prior_art",
         "intent": "Understand the cited mathematical sources, their precise relationship to the release, and the priority boundary.",
         "read": [
@@ -5827,6 +5881,7 @@
       "edge_semantics": {
         "corollary_of": "The source claim is presented as a corollary or specialization of the target claim.",
         "builds_on": "The source claim's argument layer builds on the target claim or criterion.",
+        "eliminates_case": "The source claim eliminates a named branch or cell in the target reduction without discharging its remaining residual.",
         "makes_exact": "The source claim records why a reduction or certificate formulation loses no information.",
         "instantiates": "The source claim supplies checked finite instances of the target reduction.",
         "advances_open_target": "The source claim is honest partial progress toward the open target and does not settle it.",
@@ -5939,9 +5994,29 @@
           "to": "concrete_seam_adapter"
         },
         {
+          "from": "fatal_gap_right_tail_classification",
+          "relation": "builds_on",
+          "to": "greedy_achievement_geometry"
+        },
+        {
           "from": "half_membership_seam_classification",
           "relation": "builds_on",
           "to": "fatal_gap_right_tail_classification"
+        },
+        {
+          "from": "half_membership_seam_classification",
+          "relation": "builds_on",
+          "to": "greedy_achievement_geometry"
+        },
+        {
+          "from": "last_producer_tail_escape_reduction",
+          "relation": "builds_on",
+          "to": "fatal_gap_right_tail_classification"
+        },
+        {
+          "from": "final_middle_cell_escape",
+          "relation": "eliminates_case",
+          "to": "last_producer_tail_escape_reduction"
         },
         {
           "from": "largest_skip_gap_propagation",
@@ -6225,6 +6300,11 @@
         },
         {
           "from": "first_harmonic_certificate_interface",
+          "relation": "builds_on",
+          "to": "certificate_completeness"
+        },
+        {
+          "from": "first_harmonic_certificate_interface",
           "relation": "advances_open_target",
           "to": "erdos_249",
           "remaining_open_effect": {
@@ -6293,7 +6373,7 @@
     "lean_toolchain": "leanprover/lean4:v4.29.1",
     "repository": "https://github.com/wcook04/plectis-lean-erdos249-257",
     "formal_source": {
-      "ref": "189a213",
+      "ref": "189a2130ddb4583a9f76582abb713a67f7c0147c",
       "ref_kind": "commit",
       "publication_state": "committed_checkpoint_pending_remote_publication",
       "relationship_to_last_tag": "post_tag_checkpoint"
@@ -6317,7 +6397,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 1816
+        "line": 1837
       }
     },
     {
@@ -6328,7 +6408,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 1825
+        "line": 1846
       }
     },
     {
@@ -6339,7 +6419,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 1832
+        "line": 1853
       }
     }
   ],

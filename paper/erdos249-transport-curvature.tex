@@ -7,7 +7,7 @@
 \usepackage{amsmath,amssymb,amsthm,booktabs,seqsplit}
 \usepackage[dvipsnames]{xcolor}
 \usepackage[colorlinks=true,linkcolor=black,urlcolor=RoyalBlue,citecolor=black]{hyperref}
-\newcommand{\commit}{v0.6.0}
+\newcommand{\commit}{189a2130ddb4583a9f76582abb713a67f7c0147c}
 \newcommand{\repobase}{https://github.com/wcook04/plectis-lean-erdos249-257/blob/\commit}
 \newcommand{\PK}{Erdos249257}
 \input{module-aliases.tex}
@@ -215,7 +215,12 @@ More generally, if $T$ is any nonempty finite set of indices below $2X$ and
 then a certificate occurs at some $N\in T$.  This subset form is
 \idn{exists_certifiedKill_of_first_harmonic_gap_subset}
 \lref{FirstHarmonicGap.lean}{104}{exists_certifiedKill_of_first_harmonic_gap_subset}.
-No cofinal exponential-sum estimate establishing either hypothesis is proved.
+By certificate completeness, the witness produced here is an exact
+non-integral tail difference, not a heuristic phase test.  Thus the story
+spine is: exact tail-difference endpoint, complete finite-certificate
+interface, first-harmonic finite consumer.  The remaining edge is a cofinal
+first-harmonic estimate producing such witnesses at unbounded parameters; no
+estimate establishing that edge is proved.
 
 \section{Adjacent-pair phase separation}\label{sec:adjacentphase}
 At a scale satisfying the same room inequality, with $N+1<2X$, suppose that

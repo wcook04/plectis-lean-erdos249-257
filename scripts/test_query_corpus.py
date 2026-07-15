@@ -61,7 +61,16 @@ def main() -> int:
     descriptor = json.loads((ROOT / "docs" / "corpus_descriptor.json").read_text(encoding="utf-8"))
     formal_source = claims_document["release"]["formal_source"]
     assert descriptor["identity"]["formal_source"]["ref"] == formal_source["ref"]
-    assert descriptor["identity"]["formal_source"]["resolved_commit"] == formal_source["ref"]
+    resolved_formal_source = subprocess.run(
+        ["git", "rev-parse", formal_source["ref"]],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        check=True,
+    ).stdout.strip()
+    assert descriptor["identity"]["formal_source"]["resolved_commit"] == (
+        resolved_formal_source
+    )
     assert descriptor["identity"]["formal_source"]["publication_state"] == (
         "committed_checkpoint_pending_remote_publication"
     )
@@ -84,17 +93,60 @@ def main() -> int:
     )
     assert reduction["paper"]["label"] == reduction_claim["paper_label"]
 
+    half_route = query("--route", "erdos257_half_story")["route"]
+    assert half_route["query_steps"] == [
+        "python3 scripts/query_corpus.py --claim greedy_achievement_geometry",
+        "python3 scripts/query_corpus.py --claim half_membership_seam_classification",
+        "python3 scripts/query_corpus.py --claim fatal_gap_right_tail_classification",
+        "python3 scripts/query_corpus.py --claim final_middle_cell_escape",
+        "python3 scripts/query_corpus.py --claim last_producer_tail_escape_reduction",
+    ]
+    half_membership = query("--claim", "half_membership_seam_classification")
+    assert {
+        (row["relation"], row["neighbour"]["id"])
+        for row in half_membership["argument_neighbourhood"]["outgoing"]
+    } >= {
+        ("builds_on", "greedy_achievement_geometry"),
+        ("builds_on", "fatal_gap_right_tail_classification"),
+    }
+    last_producer = query("--claim", "last_producer_tail_escape_reduction")
+    assert ("builds_on", "fatal_gap_right_tail_classification") in {
+        (row["relation"], row["neighbour"]["id"])
+        for row in last_producer["argument_neighbourhood"]["outgoing"]
+    }
+    assert ("eliminates_case", "final_middle_cell_escape") in {
+        (row["relation"], row["neighbour"]["id"])
+        for row in last_producer["argument_neighbourhood"]["incoming"]
+    }
+
+    certificate_route = query("--route", "erdos249_certificate_story")["route"]
+    assert certificate_route["query_steps"] == [
+        "python3 scripts/query_corpus.py --claim certificate_reduction",
+        "python3 scripts/query_corpus.py --claim certificate_completeness",
+        "python3 scripts/query_corpus.py --claim first_harmonic_certificate_interface",
+        "python3 scripts/query_corpus.py --open remaining_open.unbounded_certificate_supply",
+    ]
+    first_harmonic = query("--claim", "first_harmonic_certificate_interface")
+    assert {
+        row["neighbour"]["id"]
+        for row in first_harmonic["argument_neighbourhood"]["outgoing"]
+        if row["relation"] == "builds_on"
+    } >= {"certificate_reduction", "certificate_completeness"}
+
     labelled_claims = [row for row in claims_document["claims"] if row.get("paper_label")]
     for row in labelled_claims:
         packet = query("--claim", row["id"])
         paper = packet["paper"]
-        source_line = (ROOT / paper["source"]).read_text(encoding="utf-8").splitlines()[paper["line"] - 1]
-        assert re.search(rf"\\label\{{{re.escape(row['paper_label'])}\}}", source_line)
+        source_lines = (ROOT / paper["source"]).read_text(encoding="utf-8").splitlines()
+        anchor_window = "\n".join(source_lines[paper["line"] - 1 : paper["line"] + 1])
+        assert re.search(rf"\\label\{{{re.escape(row['paper_label'])}\}}", anchor_window)
     companion = query("--claim", "transport_curvature_reductions")
     assert companion["paper"]["source"] == "paper/erdos249-transport-curvature.tex"
     assert companion["paper"]["rendered"] == "erdos249-transport-curvature.pdf"
-    assert companion["lean_source_identity"]["ref"] == claims_document["release"]["tag"]
-    assert companion["lean_source_identity"]["ref_kind"] == "tag"
+    assert companion["lean_source_identity"] == {
+        **formal_source,
+        "repository": claims_document["release"]["repository"],
+    }
     assert query("--claim", "erdos_249")["paper"] is None
 
     adelic = query("--claim", "adelic_height_obstruction")
@@ -244,7 +296,7 @@ def main() -> int:
 
     open_expectations = {
         "remaining_open.erdos_249_irrationality": ("erdos_249", 1),
-        "remaining_open.unbounded_certificate_supply": ("erdos_249", 8),
+        "remaining_open.unbounded_certificate_supply": ("erdos_249", 9),
         "remaining_open.universal_257_all_infinite_supports": ("universal_257", 6),
     }
     for open_id, (target, advancing_count) in open_expectations.items():
@@ -339,9 +391,9 @@ def main() -> int:
 
     certificate_hub = query("--module", "Erdos249257.DiagonalPincerCertificates")
     hub_neighbourhood = certificate_hub["dependency_neighbourhood"]
-    assert hub_neighbourhood["receipt"]["importers_total"] == 481
+    assert hub_neighbourhood["receipt"]["importers_total"] == 483
     assert len(hub_neighbourhood["importers"]) == 20
-    assert hub_neighbourhood["receipt"]["importers_omitted"] == 461
+    assert hub_neighbourhood["receipt"]["importers_omitted"] == 463
 
     root = query("--module", "Erdos249257.lean", "--limit", "3")
     assert root["module"]["role"] == "Supported package root import"

@@ -7,13 +7,13 @@
     "version": "0.6.0",
     "tag": "v0.6.0",
     "lean_toolchain": "leanprover/lean4:v4.29.1",
-    "formal_source_ref": "189a213",
+    "formal_source_ref": "189a2130ddb4583a9f76582abb713a67f7c0147c",
     "formal_source_publication_state": "committed_checkpoint_pending_remote_publication"
   },
   "scale": {
     "module_count": 632,
-    "declaration_count": 12472,
-    "theorem_like_count": 11453,
+    "declaration_count": 12476,
+    "theorem_like_count": 11457,
     "generated_certificate_declaration_count": 2923,
     "principal_claim_link_count": 230,
     "kind_counts": {
@@ -23,7 +23,7 @@
       "instance": 5,
       "lemma": 354,
       "structure": 27,
-      "theorem": 11099
+      "theorem": 11103
     }
   },
   "status_taxonomy": {
@@ -44,7 +44,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 1816
+        "line": 1837
       }
     },
     {
@@ -55,7 +55,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 1825
+        "line": 1846
       }
     },
     {
@@ -66,7 +66,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 1832
+        "line": 1853
       }
     }
   ],
@@ -389,6 +389,60 @@
         "docs/claims.json::machine_readable_paper.argument_graph",
         "docs/SOURCE_MAP.md",
         "docs/WAVE_INDEX.md"
+      ],
+      "adjacent_handle_classes": [
+        "claim_id",
+        "open_proposition_id",
+        "paper_label",
+        "declaration",
+        "module"
+      ]
+    },
+    {
+      "id": "erdos257_half_story",
+      "intent": "Recover the proved #257 half-value spine from unique greedy coding through the last-producer partition to the exact tail-escape residual, without identifying the remaining middle cells with dyadic unsafety beyond the checked theorems.",
+      "read": [
+        "docs/orientation.json"
+      ],
+      "query_steps": [
+        "python3 scripts/query_corpus.py --claim greedy_achievement_geometry",
+        "python3 scripts/query_corpus.py --claim half_membership_seam_classification",
+        "python3 scripts/query_corpus.py --claim fatal_gap_right_tail_classification",
+        "python3 scripts/query_corpus.py --claim final_middle_cell_escape",
+        "python3 scripts/query_corpus.py --claim last_producer_tail_escape_reduction"
+      ],
+      "authority_owners": [
+        "Erdos249257/GreedyAchievementSet.lean",
+        "Erdos249257/HalfCylinderFatalGapRightTail.lean",
+        "Erdos249257/HalfCylinderFinalMiddleCellEscape.lean",
+        "Erdos249257/HalfCylinderLastProducerContradiction.lean",
+        "docs/claims.json::machine_readable_paper.argument_graph"
+      ],
+      "adjacent_handle_classes": [
+        "claim_id",
+        "paper_label",
+        "declaration",
+        "module",
+        "source_coordinate"
+      ]
+    },
+    {
+      "id": "erdos249_certificate_story",
+      "intent": "Recover the exact #249 endpoint, certificate completeness, first-harmonic finite consumer, and the still-open cofinal harmonic estimate.",
+      "read": [
+        "docs/orientation.json"
+      ],
+      "query_steps": [
+        "python3 scripts/query_corpus.py --claim certificate_reduction",
+        "python3 scripts/query_corpus.py --claim certificate_completeness",
+        "python3 scripts/query_corpus.py --claim first_harmonic_certificate_interface",
+        "python3 scripts/query_corpus.py --open remaining_open.unbounded_certificate_supply"
+      ],
+      "authority_owners": [
+        "Erdos249257/TotientTailPeriodKiller.lean",
+        "Erdos249257/LcmConeFlatness.lean",
+        "Erdos249257/FirstHarmonicGap.lean",
+        "docs/claims.json::machine_readable_paper.argument_graph"
       ],
       "adjacent_handle_classes": [
         "claim_id",
