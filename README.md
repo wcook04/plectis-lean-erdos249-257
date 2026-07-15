@@ -24,8 +24,8 @@ Erdős #257.**
 
 | Library | Current size |
 |---|---:|
-| Lean modules | 632 |
-| Formal results and supporting lemmas | 11,457 |
+| Lean modules | 633 |
+| Formal results and supporting lemmas | 11,467 |
 
 These figures describe the library, not the number of separate mathematical
 claims. For a guided reading order, see

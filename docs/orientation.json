@@ -7,23 +7,23 @@
     "version": "0.6.0",
     "tag": "v0.6.0",
     "lean_toolchain": "leanprover/lean4:v4.29.1",
-    "formal_source_ref": "189a2130ddb4583a9f76582abb713a67f7c0147c",
+    "formal_source_ref": "0e85f7ebadb0f81a26791bc167ce224bd2534f36",
     "formal_source_publication_state": "committed_checkpoint_pending_remote_publication"
   },
   "scale": {
-    "module_count": 632,
-    "declaration_count": 12476,
-    "theorem_like_count": 11457,
+    "module_count": 633,
+    "declaration_count": 12490,
+    "theorem_like_count": 11467,
     "generated_certificate_declaration_count": 2923,
     "principal_claim_link_count": 230,
     "kind_counts": {
       "abbrev": 7,
-      "def": 976,
+      "def": 980,
       "inductive": 4,
       "instance": 5,
       "lemma": 354,
       "structure": 27,
-      "theorem": 11103
+      "theorem": 11113
     }
   },
   "status_taxonomy": {
@@ -44,7 +44,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 1837
+        "line": 1897
       }
     },
     {
@@ -55,7 +55,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 1846
+        "line": 1906
       }
     },
     {
@@ -66,7 +66,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 1853
+        "line": 1913
       }
     }
   ],

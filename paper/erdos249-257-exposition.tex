@@ -22,7 +22,7 @@
 % the repository verifies that it matches docs/claims.json and that every
 % \lref/\lrefx/\lloc target resolves to the named declaration at that line.
 % ---------------------------------------------------------------------------
-\newcommand{\commit}{189a2130ddb4583a9f76582abb713a67f7c0147c}
+\newcommand{\commit}{0e85f7ebadb0f81a26791bc167ce224bd2534f36}
 \newcommand{\repobase}{https://github.com/wcook04/plectis-lean-erdos249-257/blob/\commit}
 \newcommand{\sourceurl}{https://github.com/wcook04/plectis-lean-erdos249-257/tree/\commit}
 \newcommand{\rootbase}{https://github.com/wcook04/plectis-lean-erdos249-257/blob/main}
@@ -77,12 +77,16 @@ structured infinite-support variants. For the totient constant
 $S=\sum_{n\ge1}\ph(n)/2^n$, whose irrationality remains open, we prove that any
 rational representation has denominator greater than
 $\Qzero\approx7.96\times10^{34}$, and formalise an exact reduction of
-irrationality to an unbounded family of finite decidable certificates. We also
+irrationality to pointwise non-integrality of binary tail differences, each
+equivalent to a finite decidable certificate. We also
 refine that reduction through an exact full-target interval, a
 squared-Mersenne enclosure, and a fresh-loss projection, and verify 28 explicit
 lcm-diagonal scales through $t=64$.  On the \#257 side we formalise the
 measure-one, nowhere-dense Mersenne achievement set and auxiliary rationality
-criteria based on binary carry systems. This work solves neither
+criteria based on binary carry systems.  For the test value $1/2$, membership
+is equivalent to infinitely many greedy skips; the upper last-producer branch
+and the first exceptional middle coordinate are impossible, leaving an exact
+tail estimate for the two remaining middle coordinates.  This work solves neither
 Erd\H{o}s~\#249 nor the universal form of Erd\H{o}s~\#257.
 \end{abstract}
 
@@ -140,24 +144,23 @@ families toward \#257, not the universal quantifier.
 The checked library contains many identities, equivalences, rigidity
 statements, case eliminations, finite certificates, and scoped no-go theorems.
 The available development did not exhaustively test every cross-composition of
-these results.  Accordingly, the claim graph and source map expose proved
-dependencies for reuse and challenge; neither the size of the corpus nor an
-unexplored composition is evidence that a solution is latent in it.
+these results.  We therefore state their hypotheses and logical dependencies
+explicitly, so that they can be reused, challenged, or strengthened.  Neither
+the size of the library nor an unexplored composition is evidence that a
+solution is latent in it.
 
 The formalisation-specific contribution is a common architecture in which an
 infinite irrationality question is converted into finite arithmetic checked by
 the Lean kernel, while the remaining analytic uniformity statement is exposed
-rather than hidden inside computation. Exact links from the informal statements
-to the pinned source are kept as quiet blue sigils. Each CamelCase component of
-a module contributes at most its first three letters: for example,
-\texttt{CertificateKernel} becomes \texttt{CerKer}. The complete declaration
-map pairs every sigil with its full module name in Appendix~\ref{app:index}.
+rather than hidden inside computation.  Small blue source marks connect the
+statements to the formal proof and may be ignored on a first reading; the full
+cross-reference is confined to Appendix~\ref{app:index}.
 
 The transport and curvature frontier has its own technical companion in this
 release.  It develops affine residue-state cancellation, sharp four-vertex
-consumers, a first-harmonic interface, and a fixed-precision strategy boundary.
-Those results retain explicit unbounded-supply hypotheses and do not alter the
-open status of \#249.
+non-integrality criteria, a first-harmonic criterion, and a fixed-precision
+obstruction.  Those results retain explicit unbounded-supply hypotheses and do
+not alter the open status of \#249.
 
 The prior-art boundary is theorem-specific. Chowla had conjectured the broader
 rational-argument irrationality question for
@@ -492,7 +495,39 @@ prime-valuation-deficit witness forces the multiplicative order of the base modu
 the relevant modulus not to collapse, which rules out the long repeated digit
 blocks a rational value would require.
 
-\subsection{A conditional orthogonal-petal route}\label{res:sunflower}
+\subsection{The half-value problem in one page}\label{res:halfstory}
+
+The most concrete unresolved test value is $1/2$.  The Mersenne weights are
+strictly superincreasing, so a normalized support representing a given value is
+unique.  The greedy algorithm therefore does more than search for a support: it
+recovers the only possible one.  For $1/2$, membership in the achievement set
+is equivalent to the greedy orbit skipping infinitely many exponents.
+
+Suppose instead that the orbit has a last skip.  At the following dyadic seam,
+the last contribution must come from either an upper cell or a middle cell.
+The upper alternative is impossible.  Among the three exceptional middle
+coordinates $-3,-2,-1$, the coordinate $-3$ is also impossible: it would make
+the remaining cofinite tail smaller than $1/2$ while forcing a negative
+centred carry, contradicting a nonnegativity identity.
+
+This leaves a precise open edge.  It is enough to show that every remaining
+middle contribution is larger in magnitude than all of its future
+divisor-incidence contributions combined.  That tail estimate is not proved
+for the actual greedy orbit.  In particular, the formal source does not yet
+identify the two remaining coordinates $-2,-1$ with the failure of a dyadic
+safety condition.  Thus the argument eliminates two branches and isolates the
+last one; it does not prove that $1/2$ belongs to the achievement set.
+
+The exact statements are
+\lrefx{GreedyAchievementSet.lean}{1527}{positiveMersenneSupportValue_injective_normalized},
+\lrefx{GreedyAchievementSet.lean}{2514}{half_mem_mersenneAchievementSet_iff_greedySkippedSupport_infinite},
+\lrefx{HalfCylinderFinalMiddleCellEscape.lean}{587}{finalMiddleCell_neg_three_not_last},
+and
+\lrefx{HalfCylinderLastProducerContradiction.lean}{387}{half_mem_mersenneAchievementSet_of_middleProducerTailEscapeExceptNegThree}.
+The rest of this section develops sufficient criteria and finite case analyses
+around this remaining estimate; it may be skipped on a first reading.
+
+\subsection{A conditional orthogonal-petal criterion}\label{res:sunflower}
 
 Let $A$ be a finite-core orthogonal-petal bouquet: outside a finite frame, its
 elements have the form $c_i p_i$, where the cores $c_i$ divide one fixed
@@ -506,7 +541,7 @@ For such a bouquet, the remaining input is an exact tail-selection predicate:
 at every positive binary scale it chooses a carry slot with a normalized tail
 at most $16$.  Lean proves that this predicate supplies the needed forced-carry
 certificates and hence irrationality of the base-$2$ support series.  The
-endpoint is
+result is
 \lref{SupportSunflowerDichotomy.lean}{540}{irrational_erdosSupportSeries_of_orthogonalPetalBouquet},
 with the carry bridge at
 \lrefx{SupportSunflowerDichotomy.lean}{531}{sunflowerForcedCarrySupply_of_orthogonalPetalBouquet}.
@@ -535,7 +570,7 @@ $q$-adic layer operators commute, and, for distinct primes with the residual
 argument coprime to $pq$, their composite extracts the iterated exact-valuation
 pullback of the support coefficient.  This is formalised by
 \lref{MaximalOmegaLayer.lean}{39}{mixedPrimePowerLayerTwo_supportCoeffInt}.
-The singleton support $\{12\}$ gives a checked $(2^2,3)$ fixture with value
+The singleton support $\{12\}$ gives a checked $(2^2,3)$ example with value
 one at residual argument $1$:
 \lrefx{MaximalOmegaLayer.lean}{65}{mixedPrimePowerLayerTwo_twelve_fixture}.
 These are finite coefficient identities.  They do not provide a decimation
@@ -552,13 +587,13 @@ common following overlap, the terminal difference is a power of two times an
 odd integer.  A shared nonnegative Archimedean bound then gives the matching
 dyadic spacing inequality, formalised at
 \lrefx{HalfTrappingReturnCarry.lean}{191}{overlappingReverseCarryWords_twoPow_le_realBound}.
-The module does not produce reverse-carry presentations or an earlier
+The argument does not produce reverse-carry presentations or an earlier
 overlapping return; it supplies only the algebraic core of that conditional
-route.
+criterion.
 
 \subsection{Half-carry reachability}\label{res:halfcarryreachability}
 
-There is also a finite-prefix route for the target $1/2$.  At an unresolved
+There is also a finite-prefix criterion for the target $1/2$.  At an unresolved
 even seam, the scalar transition reaches every integer terminal carry except
 the single value $2\delta-c$; this is the exact equivalence
 \lref{HalfCarryReachability.lean}{235}{evenSeamReachable_iff}.  A canonical
@@ -587,8 +622,8 @@ square-root strip, then $1/2$ belongs to the Mersenne achievement set.
 \lref{CofinalStripReturn.lean}{84}{greedy_integerHalfCarry_scaled_tendsto_zero_of_cofinalStripReturn}
 and
 \lref{CofinalStripReturn.lean}{157}{half_mem_mersenneAchievementSet_of_cofinalStripReturn}.
-The cofinal return condition itself is not established.  This is a weaker
-producer socket than a uniform strip bound, not an unconditional membership
+The cofinal return condition itself is not established.  It is weaker than a
+uniform strip bound and still does not give an unconditional membership
 theorem.
 
 \paragraph{Terminal-only cofinal approximation.}  Coherence can be removed
@@ -622,8 +657,8 @@ depths of normalised finite words tend to infinity.  If their terminal carries,
 after division by the corresponding power of $2$, tend to zero, then the
 universal coefficient-tail error also tends to zero.  The finite support
 values therefore converge to $1/2$, and closedness of the achievement set
-again supplies the limit.  The earlier terminal-only strip condition maps
-into this weaker sequential socket.
+again supplies the limit.  The earlier terminal-only strip condition implies
+this weaker sequential hypothesis.
 
 \begin{proposition}[scaled terminal-vanishing closure]\label{res:terminalscaledvanishing}
 A normalised terminal-word sequence with depths tending to infinity and
@@ -647,11 +682,11 @@ two; see
 At a first seam, avoiding the integer strip is equivalent to full scalar
 reachability of that strip:
 \lrefx{HalfCylinderFiniteShadow.lean}{807}{evenSeam_fullIntegerStrip_iff_escape}.
-The rank-three greedy fixture is raw dyadically safe while its seam has an
+The rank-three greedy example is raw dyadically safe while its seam has an
 in-strip hole, so raw safety alone does not imply this escape.  Finally, an
 explicit frozen-margin producer implies $1/2$ belongs to the Mersenne
 achievement set, by
-\lrefx{HalfCylinderFiniteShadow.lean}{1239}{half_mem_mersenneAchievementSet_of_governedFrozenMarginProducer}.
+\lrefx{HalfCylinderFiniteShadow.lean}{1256}{half_mem_mersenneAchievementSet_of_governedFrozenMarginProducer}.
 That producer is an unproved hypothesis; this is a conditional reduction, not
 a proof of Erd\H{o}s~\#257.
 
@@ -671,7 +706,7 @@ conclusion.
 
 \subsection{Selected half-carry windows}\label{res:selectedhalfwindow}
 
-The selected-window interface keeps an explicit admissible word for each
+The selected-window construction keeps an explicit admissible word for each
 terminal carry in a finite protected interval.  A supply of such windows at
 all sufficiently large levels gives cofinal admissibility and hence an
 infinite support with sum $1/2$:
@@ -697,7 +732,7 @@ not prove the required coverage inequality globally.
 
 \subsection{Localized protected seams}\label{res:protectedseam}
 
-The compactness endpoint needs only one admissible word at cofinally many
+The compactness argument needs only one admissible word at cofinally many
 depths.  At a localized one-hole seam, one of the two protected carries $3$
 and $4$ survives; therefore a cofinal supply of realized protected seams
 implies cofinal admissibility,
@@ -706,7 +741,7 @@ and hence an infinite support with sum $1/2$,
 \lrefx{HalfCarryProtectedSeamConsumer.lean}{53}{exists_infinite_support_half_of_cofinalProtectedEvenSeamRealization}.
 The cofinal realization supply is not proved.
 
-\subsection{Mixed cofinal half-carry fan-in}\label{res:cofinalwindowseam}
+\subsection{Combining the two cofinal half-carry criteria}\label{res:cofinalwindowseam}
 
 At each requested scale, the public mixed producer permits either a selected
 protected window or a localized realized seam.  Each branch supplies the one
@@ -745,22 +780,13 @@ by
 and also to a final skipped exponent in the real greedy orbit,
 by
 \lrefx{HalfCylinderFatalGapRightTail.lean}{802}{seamGreedyEventuallyRight_iff_exists_isLastHalfGreedySkip}.
-Thus this module gives an exact classification of the nonmembership branch.
+Thus this equivalence gives an exact classification of the nonmembership branch.
 It neither decides whether $1/2$ belongs to the achievement set nor proves
 the universal Erd\H{o}s~\#257 statement.
 
-The canonical half-value spine can now be stated without development
-chronology.  Strict superincreasingness gives unique normalized support coding
-(\lrefx{GreedyAchievementSet.lean}{1527}{positiveMersenneSupportValue_injective_normalized}),
-and $1/2$ belongs to the achievement set exactly when its greedy orbit skips
-infinitely many ranks
-(\lrefx{GreedyAchievementSet.lean}{2514}{half_mem_mersenneAchievementSet_iff_greedySkippedSupport_infinite}).
-If instead there is a last skip, the last-producer argument partitions its
-successor into upper and middle cases.  The upper case is impossible, while
-the next paragraph eliminates the middle cell $-3$.  What remains in the
-checked source is the stated middle-producer tail-escape socket.  The source
-does not yet identify that residual with dyadically unsafe skips, nor does it
-eliminate the two other exceptional middle coordinates $-2$ and $-1$.
+This is the nonmembership half of the argument summarized earlier: a last
+greedy skip is equivalent to eventual right extension.  The following
+paragraph records the first exceptional middle case that can be ruled out.
 
 \paragraph{First final-middle cell.}  The first exceptional middle cell has a
 separate obstruction: if the orbit extends right after the last false rank,
@@ -776,9 +802,9 @@ producer other than that discharged cell has producer carry larger than its
 complete future divisor-incidence tail, then an eventual right seam is
 impossible and $1/2$ belongs to the Mersenne achievement set:
 \lrefx{HalfCylinderLastProducerContradiction.lean}{387}{half_mem_mersenneAchievementSet_of_middleProducerTailEscapeExceptNegThree}.
-The stronger square-root lower-bound socket is also sufficient,
+The stronger square-root lower-bound hypothesis is also sufficient,
 \lrefx{HalfCylinderLastProducerContradiction.lean}{409}{half_mem_mersenneAchievementSet_of_middleProducerSqrtEscape}.
-Neither socket is supplied here.
+Neither hypothesis is supplied here.
 
 For finite seam prefixes the remaining tail bound sharpens further: the
 future divisor-incidence tail is bounded by the cardinality of the prefix.
@@ -845,17 +871,17 @@ not establish that estimate.
 
 \subsection{Largest-skip induction}\label{res:largestskipinduction}
 
-Let the first-crossing socket assert that a late largest skipped rank either
+Assume that at the first crossing a late largest skipped rank either
 remains late at the next row or forces an upper-or-middle successor branch.
-Lean proves that this socket propagates a late largest skipped rank from row
+This hypothesis propagates a late largest skipped rank from row
 $14$ onward,
 \lref{HalfCylinderLargestSkipInduction.lean}{90}{LargestSkipLateStepSocket.largestSkipLateAt_succ},
 and hence yields cofinal skipped ranks and membership of $1/2$ in the Mersenne
 achievement set,
 \lrefx{HalfCylinderLargestSkipInduction.lean}{167}{half_mem_mersenneAchievementSet_of_largestSkipLateStepSocket}.
-The first-crossing socket itself remains unproved.
+The first-crossing hypothesis itself remains unproved.
 
-\subsection{Fixed-tail survival socket}\label{res:fixedtailsocket}
+\subsection{The fixed-tail survival criterion}\label{res:fixedtailsocket}
 
 A skipped rank is final exactly when its post-decision remainder lies strictly
 above the complete remaining Mersenne tail:
@@ -866,7 +892,7 @@ every actual skipped rank has remainder at most its full future tail,
 This is an exact local reformulation; the tail-survival inequality is not
 proved.
 
-\subsection{Producer-carry socket}\label{res:producercarry}
+\subsection{The producer-carry identity}\label{res:producercarry}
 
 For a producer-aligned finite support, the residual from $1/2$ is exactly the
 integer producer carry minus the complete future divisor-incidence tail,
@@ -916,7 +942,7 @@ does not supply a sign or size estimate for that carry.
 
 \subsection{A computed selected-window base}\label{res:selectedwindowbase}
 
-The selected half-carry interface has a checked depth-$18$ base: twelve
+The selected half-carry construction has a checked depth-$18$ base: twelve
 Boolean words cover every terminal carry in the strip $[1,12]$, with all
 intermediate carries in the corresponding half strip.  The reflected table is
 formalised at
@@ -1085,6 +1111,40 @@ the quantified theorem.
 Whether $S=\sum_{n\ge1}\ph(n)/2^n$ is irrational is open. The development gives two
 things and claims neither as a solution: an unconditional exclusion of
 small-denominator rationals, and a conditional reduction to finite certificates.
+
+\subsection{The certificate argument in one page}\label{res:249story}
+
+Write
+\[
+ R_N=\sum_{m\geq1}\frac{\ph(N+m)}{2^m}.
+\]
+For every positive shift $h$, integrality of even one difference
+$R_{N+h}-R_N$ forces $S$ to be rational.  Consequently $S$ is irrational if
+and only if all these differences are non-integral.  This is an exact
+equivalence, not merely a one-way reduction.
+
+Non-integrality at fixed $h$ and $N$ has a complete finite test.  Truncate the
+binary expansion at depth $L$, compute the resulting integer discrepancy, and
+check that its residue modulo $2^L$ lies farther from both endpoints than the
+rigorously bounded omitted tail.  Such a certificate exists for some $L$ if
+and only if $R_{N+h}-R_N$ is non-integral.  Thus the infinite statement has an
+exact finite witness at each fixed pair of parameters.
+
+There is also a direct analytic way to force one of these witnesses.  On a
+finite dyadic block, attach to each discrepancy residue its first cosine
+harmonic.  Under the explicit room inequality, any fixed saving below the
+near-integer value forces at least one residue into the central certified
+region.  What remains is to prove such a harmonic saving at cofinally many
+parameters.  The formal development proves the finite implication, but no
+cofinal estimate and hence no irrationality theorem for $S$.
+
+The exact equivalences and finite implication are
+\lrefx{LcmConeFlatness.lean}{386}{irrational_totient_series_iff_all_tail_diffs_nonintegral},
+\lrefx{LcmConeFlatness.lean}{316}{exists_certifiedKill_iff_tail_diff_notMem_int},
+and
+\lrefx{FirstHarmonicGap.lean}{128}{exists_certifiedKill_of_first_harmonic_gap}.
+The remainder of this section gives the denominator theorem, the geometry of
+$S$, and the finite arithmetic behind this summary.
 
 \subsection{Unconditional: no small denominator}\label{sec:uncond}
 
@@ -1261,8 +1321,8 @@ corresponding ordinary empty-gap inequality fails.
 \noindent Formalised:
 \lref{PrimitiveWeightCertificate.lean}{54}{reducedDenominatorUnitGapCert_prime_pow_iff},
 \lrefx{PrimitiveWeightCertificate.lean}{111}{reducedDenominatorCandidateCount_prime_pow_le_one},
-\lrefx{PrimitiveWeightCertificate.lean}{141}{reducedDenominatorUnitGapCert_three_window_3_5}, and
-\lrefx{PrimitiveWeightCertificate.lean}{147}{not_ordinary_gap_certificate_three_window_3_5}.
+\lrefx{PrimitiveWeightCertificate.lean}{151}{reducedDenominatorUnitGapCert_three_window_3_5}, and
+\lrefx{PrimitiveWeightCertificate.lean}{157}{not_ordinary_gap_certificate_three_window_3_5}.
 This is a finite certificate-level strengthening.  We do not establish that
 rationality of $S$ supplies these predicates at unbounded parameters.
 
@@ -1871,10 +1931,9 @@ proof obligations. The Lambert, M\"obius, probabilistic, periodic-tail, and
 carry descriptions are not competing stories: each makes a different
 rationality obstruction explicit. A future advance must exploit one of those
 obstructions uniformly, not merely extend the finite range already checked.
-The public package therefore records exact interfaces and their consumers,
-including negative and finite results, without treating corpus volume as
-mathematical evidence or claiming that an unchecked composition closes either
-open problem.
+The public package therefore records exact implications, finite results, and
+negative results without treating corpus volume as mathematical evidence or
+claiming that an unchecked composition closes either open problem.
 
 \subsection*{Statements and declarations}
 

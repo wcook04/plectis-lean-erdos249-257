@@ -5341,6 +5341,12 @@
           ]
         },
         {
+          "id": "Erdos249257.HalfGreedyTwoThirdsBand",
+          "path": "Erdos249257/HalfGreedyTwoThirdsBand.lean",
+          "role": "Lean proof module",
+          "imports": []
+        },
+        {
           "id": "Erdos249257.HalfTrappingReturnCarry",
           "path": "Erdos249257/HalfTrappingReturnCarry.lean",
           "role": "Half-trapping reverse-carry interface",
@@ -6373,7 +6379,7 @@
     "lean_toolchain": "leanprover/lean4:v4.29.1",
     "repository": "https://github.com/wcook04/plectis-lean-erdos249-257",
     "formal_source": {
-      "ref": "189a2130ddb4583a9f76582abb713a67f7c0147c",
+      "ref": "0e85f7ebadb0f81a26791bc167ce224bd2534f36",
       "ref_kind": "commit",
       "publication_state": "committed_checkpoint_pending_remote_publication",
       "relationship_to_last_tag": "post_tag_checkpoint"
@@ -6397,7 +6403,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 1837
+        "line": 1897
       }
     },
     {
@@ -6408,7 +6414,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 1846
+        "line": 1906
       }
     },
     {
@@ -6419,7 +6425,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 1853
+        "line": 1913
       }
     }
   ],
@@ -6724,7 +6730,7 @@
         {
           "name": "half_mem_mersenneAchievementSet_of_governedFrozenMarginProducer",
           "module": "Erdos249257/HalfCylinderFiniteShadow.lean",
-          "line": 1239
+          "line": 1256
         }
       ]
     },
@@ -7572,12 +7578,12 @@
         {
           "name": "reducedDenominatorUnitGapCert_three_window_3_5",
           "module": "Erdos249257/PrimitiveWeightCertificate.lean",
-          "line": 141
+          "line": 151
         },
         {
           "name": "not_ordinary_gap_certificate_three_window_3_5",
           "module": "Erdos249257/PrimitiveWeightCertificate.lean",
-          "line": 147
+          "line": 157
         }
       ]
     },
