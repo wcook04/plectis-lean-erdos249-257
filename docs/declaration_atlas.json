@@ -4,21 +4,21 @@
   "projection_not_authority": true,
   "proof_authority": "Lean source checked by the pinned Lean kernel",
   "argument_authority": "docs/claims.json::machine_readable_paper.argument_graph",
-  "source_fingerprint": "sha256:5dcbf3a941ab27a604acedf68f6d1b5209861af7f2a7d3515434ed8104d98037",
+  "source_fingerprint": "sha256:a71f95a963cf3f850bb6f68ad018428e668124fe530a88d13d147bbaa198bb45",
   "summary": {
-    "module_count": 576,
-    "declaration_count": 7445,
-    "theorem_like_count": 6657,
+    "module_count": 577,
+    "declaration_count": 7477,
+    "theorem_like_count": 6687,
     "generated_certificate_declaration_count": 1681,
-    "principal_claim_link_count": 135,
+    "principal_claim_link_count": 138,
     "kind_counts": {
       "abbrev": 6,
-      "def": 758,
+      "def": 760,
       "inductive": 3,
       "instance": 4,
       "lemma": 354,
       "structure": 17,
-      "theorem": 6303
+      "theorem": 6333
     }
   },
   "modules": [
@@ -104,7 +104,8 @@
         "Erdos249257.HalfCylinderFloorErrorReset",
         "Erdos249257.HalfCylinderSeamLimit",
         "Erdos249257.HalfCylinderSkippedRankLimit",
-        "Erdos249257.HalfCylinderFalseBitSupply"
+        "Erdos249257.HalfCylinderFalseBitSupply",
+        "Erdos249257.HalfCylinderFatalGapRightTail"
       ],
       "declaration_count": 0,
       "kind_counts": {}
@@ -6506,6 +6507,19 @@
       "declaration_count": 3,
       "kind_counts": {
         "theorem": 3
+      }
+    },
+    {
+      "id": "Erdos249257.HalfCylinderFatalGapRightTail",
+      "path": "Erdos249257/HalfCylinderFatalGapRightTail.lean",
+      "imports": [
+        "Erdos249257.HalfCylinderFalseBitSupply",
+        "Erdos249257.CampbellShiftSynchronization"
+      ],
+      "declaration_count": 32,
+      "kind_counts": {
+        "def": 2,
+        "theorem": 30
       }
     },
     {
@@ -70467,6 +70481,361 @@
       "generated_certificate": false,
       "claim_ids": [],
       "docstring": "The quantifier form most convenient for an arithmetic producer: a false terminal bit occurs beyond every requested row. Choice extracts a cofinal sequence, after which the preceding consumer applies."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFatalGapRightTail.lean:25:weightedBoolSum_replicate_true",
+      "name": "weightedBoolSum_replicate_true",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFatalGapRightTail.lean",
+      "line": 25,
+      "signature": "@[simp] theorem weightedBoolSum_replicate_true (weights : List ℕ) : weightedBoolSum weights (List.replicate weights.length true) = weights.sum",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFatalGapRightTail.lean:34:weightedBoolSum_replicate_false",
+      "name": "weightedBoolSum_replicate_false",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFatalGapRightTail.lean",
+      "line": 34,
+      "signature": "@[simp] theorem weightedBoolSum_replicate_false (weights : List ℕ) : weightedBoolSum weights (List.replicate weights.length false) = 0",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFatalGapRightTail.lean:52:weightedBoolSum_adjacent_cut",
+      "name": "weightedBoolSum_adjacent_cut",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFatalGapRightTail.lean",
+      "line": 52,
+      "signature": "theorem weightedBoolSum_adjacent_cut {gap cutWeight : ℕ} {prefixWeights suffixWeights : List ℕ} (hdom : GapDominates gap (prefixWeights ++ cutWeight :: suffixWeights)) {prefixBits candidate : List Bool} (hprefix : prefixBits.length = prefixWeights.length) (hcandidate : candidate.length = (prefixWeights ++ cutWeight :: suffixWeights).length) : weightedBoolSum (prefixWeights ++ cutWeight :: suffixWeights) candidate ≤ weightedBoolSum (prefixWeights ++ cutWeight :: suffixWeights) (prefixBits ++ false :: List.replicate suffixWeights.length true) ∨",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "In a gap-dominating word, the two Boolean words `prefix ++ false ++ allTrueSuffix` and `prefix ++ true ++ allFalseSuffix` are adjacent in weighted-sum order: every equal-length Boolean word lies on one of the two closed sides. This is the oriented strengthening of `weightedBoolSum_separated` needed by cylinder-gap arguments."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFatalGapRightTail.lean:138:seamGreedyWord_exists_false",
+      "name": "seamGreedyWord_exists_false",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFatalGapRightTail.lean",
+      "line": 138,
+      "signature": "theorem seamGreedyWord_exists_false (s : ℕ) (hs : 5 ≤ s) : ∃ i : Fin (s - 2), seamGreedyWord s i = false",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Every seam-greedy word from row five onward omits some rank. Otherwise it would contain the first three ranks, whose exact truncated sum is already strictly above the seam target."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFatalGapRightTail.lean:169:not_mem_seamWordSupport_iff_false",
+      "name": "not_mem_seamWordSupport_iff_false",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFatalGapRightTail.lean",
+      "line": 169,
+      "signature": "theorem not_mem_seamWordSupport_iff_false {s d : ℕ} (b : SeamRowWord s) (hd2 : 2 ≤ d) (hds : d < s) : d ∉ seamWordSupport b ↔ b ⟨d - 2, by omega⟩ = false",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Inside the natural rank window of a seam word, absence from its support is exactly a false Boolean coordinate."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFatalGapRightTail.lean:194:exists_maximal_missing_rank_support_decomposition",
+      "name": "exists_maximal_missing_rank_support_decomposition",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFatalGapRightTail.lean",
+      "line": 194,
+      "signature": "theorem exists_maximal_missing_rank_support_decomposition (S : ℕ) (hS5 : 5 ≤ S) : ∃ (D : ℕ) (u : Finset ℕ), 2 ≤ D ∧ D < S ∧ D ∉ seamWordSupport (seamGreedyWord S) ∧ (∀ e ∈ u, 2 ≤ e ∧ e < D) ∧ seamWordSupport (seamGreedyWord S) = u ∪ Finset.Ico (D + 1) S",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A row-five-or-later greedy support has a largest missing rank. Splitting just below it leaves a finite prefix and a completely filled upper interval. This is the finite support normal form used by the reverse fatal-gap route."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFatalGapRightTail.lean:257:SeamGreedyEventuallyRight",
+      "name": "SeamGreedyEventuallyRight",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderFatalGapRightTail.lean",
+      "line": 257,
+      "signature": "def SeamGreedyEventuallyRight : Prop",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The concrete right-tail predicate, expressed without duplicating the three scalar branch inequalities."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFatalGapRightTail.lean:264:seamWordSupport_add_eq_of_eventually_right",
+      "name": "seamWordSupport_add_eq_of_eventually_right",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFatalGapRightTail.lean",
+      "line": 264,
+      "signature": "theorem seamWordSupport_add_eq_of_eventually_right (S : ℕ) (hS5 : 5 ≤ S) (hright : ∀ s : ℕ, S ≤ s → seamGreedyWord (s + 1) = (seamGreedyWord s).extend true) : ∀ j : ℕ, seamWordSupport (seamGreedyWord (S + j)) = seamWordSupport (seamGreedyWord S) ∪ Finset.Ico S (S + j)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Repeated right extension preserves the base support and fills precisely the consecutive ranks added after the base row."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFatalGapRightTail.lean:287:seamWordSupport_add_eq_prefix_union_Ico",
+      "name": "seamWordSupport_add_eq_prefix_union_Ico",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFatalGapRightTail.lean",
+      "line": 287,
+      "signature": "theorem seamWordSupport_add_eq_prefix_union_Ico {S D : ℕ} {u : Finset ℕ} (hS5 : 5 ≤ S) (hDS : D < S) (hright : ∀ s : ℕ, S ≤ s → seamGreedyWord (s + 1) = (seamGreedyWord s).extend true) (hbase : seamWordSupport (seamGreedyWord S) = u ∪ Finset.Ico (D + 1) S) (j : ℕ) : seamWordSupport (seamGreedyWord (S + j)) = u ∪ Finset.Ico (D + 1) (S + j)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Once the largest missing rank `D` is fixed, every later support is the same finite prefix `u` followed by the full interval strictly above `D`."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFatalGapRightTail.lean:306:seamRowWordOfFinset",
+      "name": "seamRowWordOfFinset",
+      "kind": "def",
+      "module": "Erdos249257/HalfCylinderFatalGapRightTail.lean",
+      "line": 306,
+      "signature": "def seamRowWordOfFinset (s : ℕ) (F : Finset ℕ) : SeamRowWord s",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The seam word that selects exactly the ranks of `F` lying in its row window. A separate bounds hypothesis below turns this into an exact support constructor."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFatalGapRightTail.lean:309:seamWordSupport_seamRowWordOfFinset",
+      "name": "seamWordSupport_seamRowWordOfFinset",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFatalGapRightTail.lean",
+      "line": 309,
+      "signature": "theorem seamWordSupport_seamRowWordOfFinset {s : ℕ} {F : Finset ℕ} (hF : ∀ d ∈ F, 2 ≤ d ∧ d < s) : seamWordSupport (seamRowWordOfFinset s F) = F",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFatalGapRightTail.lean:328:seamGreedyFiniteValue_add_eq_prefix_add_partialTail",
+      "name": "seamGreedyFiniteValue_add_eq_prefix_add_partialTail",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFatalGapRightTail.lean",
+      "line": 328,
+      "signature": "theorem seamGreedyFiniteValue_add_eq_prefix_add_partialTail {S D : ℕ} {u : Finset ℕ} (hS5 : 5 ≤ S) (hDS : D < S) (hu : ∀ e ∈ u, 2 ≤ e ∧ e < D) (hright : ∀ s : ℕ, S ≤ s → seamGreedyWord (s + 1) = (seamGreedyWord s).extend true) (hbase : seamWordSupport (seamGreedyWord S) = u ∪ Finset.Ico (D + 1) S) (j : ℕ) : seamGreedyFiniteValue (S + j) = positiveMersenneSupportValue (↑u : Set ℕ) + ∑ k ∈ Finset.range (S + j - (D + 1)), mersenneWeight (D + 1 + k)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The real finite value of a propagated right-tail support is its fixed prefix value plus the corresponding initial segment of the Mersenne tail."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFatalGapRightTail.lean:357:prefix_add_mersenneTail_le_half_of_eventually_right",
+      "name": "prefix_add_mersenneTail_le_half_of_eventually_right",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFatalGapRightTail.lean",
+      "line": 357,
+      "signature": "theorem prefix_add_mersenneTail_le_half_of_eventually_right {S D : ℕ} {u : Finset ℕ} (hS5 : 5 ≤ S) (hDS : D < S) (hu : ∀ e ∈ u, 2 ≤ e ∧ e < D) (hright : ∀ s : ℕ, S ≤ s → seamGreedyWord (s + 1) = (seamGreedyWord s).extend true) (hbase : seamWordSupport (seamGreedyWord S) = u ∪ Finset.Ico (D + 1) S) : positiveMersenneSupportValue (↑u : Set ℕ) + mersenneTail D ≤ (1 / 2 : ℝ)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The filled finite suffixes stay below the half target at every row, so their limit—the complete Mersenne tail above `D`—does too."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFatalGapRightTail.lean:402:prefix_add_mersenneTail_lt_half_of_eventually_right",
+      "name": "prefix_add_mersenneTail_lt_half_of_eventually_right",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFatalGapRightTail.lean",
+      "line": 402,
+      "signature": "theorem prefix_add_mersenneTail_lt_half_of_eventually_right {S D : ℕ} {u : Finset ℕ} (hS5 : 5 ≤ S) (hDS : D < S) (hu : ∀ e ∈ u, 2 ≤ e ∧ e < D) (hright : ∀ s : ℕ, S ≤ s → seamGreedyWord (s + 1) = (seamGreedyWord s).extend true) (hbase : seamWordSupport (seamGreedyWord S) = u ∪ Finset.Ico (D + 1) S) : positiveMersenneSupportValue (↑u : Set ℕ) + mersenneTail D < (1 / 2 : ℝ)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The lazy endpoint is not rational; hence the preceding weak inequality is strict at the half target."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFatalGapRightTail.lean:419:sum_truncatedMersenneWeight_Ico_eq_seamWeightsFrom_sum",
+      "name": "sum_truncatedMersenneWeight_Ico_eq_seamWeightsFrom_sum",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFatalGapRightTail.lean",
+      "line": 419,
+      "signature": "theorem sum_truncatedMersenneWeight_Ico_eq_seamWeightsFrom_sum (s d : ℕ) (hds : d ≤ s) : ∑ e ∈ Finset.Ico d s, truncatedMersenneWeight s e = (seamWeightsFrom s d).sum",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The recursively generated truncated tail is exactly the sum over its natural rank interval."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFatalGapRightTail.lean:430:wordWeightSum_cast_le_scaled_supportValue",
+      "name": "wordWeightSum_cast_le_scaled_supportValue",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFatalGapRightTail.lean",
+      "line": 430,
+      "signature": "theorem wordWeightSum_cast_le_scaled_supportValue {s : ℕ} (b : SeamRowWord s) : ((wordWeightSum s b.toNatWord : ℕ) : ℝ) ≤ (4 : ℝ) ^ s * positiveMersenneSupportValue (↑(seamWordSupport b) : Set ℕ)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The integer weight of any seam word is bounded by its real Mersenne support value after multiplication by the row scale."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFatalGapRightTail.lean:453:upper_competitor_exceeds_target_of_eventually_right",
+      "name": "upper_competitor_exceeds_target_of_eventually_right",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFatalGapRightTail.lean",
+      "line": 453,
+      "signature": "theorem upper_competitor_exceeds_target_of_eventually_right {S D : ℕ} {u : Finset ℕ} (hS5 : 5 ≤ S) (hD2 : 2 ≤ D) (hDS : D < S) (hu : ∀ e ∈ u, 2 ≤ e ∧ e < D) (hright : ∀ s : ℕ, S ≤ s → seamGreedyWord (s + 1) = (seamGreedyWord s).extend true) (hbase : seamWordSupport (seamGreedyWord S) = u ∪ Finset.Ico (D + 1) S) (j : ℕ) : seamSubsetTarget (S + j) < wordWeightSum (S + j) (seamRowWordOfFinset (S + j) (insert D u)).toNatWord",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Replacing the last missing rank `D` by true and clearing all later ranks produces a fixed-support word strictly above every later seam target."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFatalGapRightTail.lean:544:seamSubsetTarget_div_four_pow_eq",
+      "name": "seamSubsetTarget_div_four_pow_eq",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFatalGapRightTail.lean",
+      "line": 544,
+      "signature": "theorem seamSubsetTarget_div_four_pow_eq (s : ℕ) (hs : 1 ≤ s) : ((seamSubsetTarget s : ℕ) : ℝ) / (4 : ℝ) ^ s = (1 / 2 : ℝ) - (1 / 2 : ℝ) ^ s",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Exact real normalization of the finite seam target."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFatalGapRightTail.lean:562:tendsto_seamSubsetTarget_div_four_pow_add",
+      "name": "tendsto_seamSubsetTarget_div_four_pow_add",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFatalGapRightTail.lean",
+      "line": 562,
+      "signature": "theorem tendsto_seamSubsetTarget_div_four_pow_add (S : ℕ) (hS1 : 1 ≤ S) : Tendsto (fun j : ℕ => ((seamSubsetTarget (S + j) : ℕ) : ℝ) / (4 : ℝ) ^ (S + j)) atTop (nhds (1 / 2 : ℝ))",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Along every translated row sequence, the normalized finite seam target converges to `1/2`."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFatalGapRightTail.lean:589:normalized_target_lt_upper_competitor_of_eventually_right",
+      "name": "normalized_target_lt_upper_competitor_of_eventually_right",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFatalGapRightTail.lean",
+      "line": 589,
+      "signature": "theorem normalized_target_lt_upper_competitor_of_eventually_right {S D : ℕ} {u : Finset ℕ} (hS5 : 5 ≤ S) (hD2 : 2 ≤ D) (hDS : D < S) (hu : ∀ e ∈ u, 2 ≤ e ∧ e < D) (hright : ∀ s : ℕ, S ≤ s → seamGreedyWord (s + 1) = (seamGreedyWord s).extend true) (hbase : seamWordSupport (seamGreedyWord S) = u ∪ Finset.Ico (D + 1) S) (j : ℕ) : ((seamSubsetTarget (S + j) : ℕ) : ℝ) / (4 : ℝ) ^ (S + j) < positiveMersenneSupportValue (↑(insert D u) : Set ℕ)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Each normalized target lies below the real value of the fixed upper competitor."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFatalGapRightTail.lean:627:half_lt_upper_competitor_of_eventually_right",
+      "name": "half_lt_upper_competitor_of_eventually_right",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFatalGapRightTail.lean",
+      "line": 627,
+      "signature": "theorem half_lt_upper_competitor_of_eventually_right {S D : ℕ} {u : Finset ℕ} (hS5 : 5 ≤ S) (hD2 : 2 ≤ D) (hDS : D < S) (hu : ∀ e ∈ u, 2 ≤ e ∧ e < D) (hright : ∀ s : ℕ, S ≤ s → seamGreedyWord (s + 1) = (seamGreedyWord s).extend true) (hbase : seamWordSupport (seamGreedyWord S) = u ∪ Finset.Ico (D + 1) S) : (1 / 2 : ℝ) < positiveMersenneSupportValue (↑(insert D u) : Set ℕ)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Passing the normalized targets to their limit puts `1/2` below the fixed competitor; odd-denominator finiteness excludes equality."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFatalGapRightTail.lean:653:seamGreedyWord_succ_eq_extend_true_of_terminal_true",
+      "name": "seamGreedyWord_succ_eq_extend_true_of_terminal_true",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFatalGapRightTail.lean",
+      "line": 653,
+      "signature": "theorem seamGreedyWord_succ_eq_extend_true_of_terminal_true (s : ℕ) (hs : 5 ≤ s) (hterminal : SeamRowWord.terminal (by omega) (seamGreedyWord (s + 1)) = true) : seamGreedyWord (s + 1) = (seamGreedyWord s).extend true",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A true successor terminal bit can only come from the non-carry right branch, so its prefix is definitionally the old greedy word."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFatalGapRightTail.lean:682:seamGreedyWord_succ_eq_extend_true_iff_terminal_true",
+      "name": "seamGreedyWord_succ_eq_extend_true_iff_terminal_true",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFatalGapRightTail.lean",
+      "line": 682,
+      "signature": "theorem seamGreedyWord_succ_eq_extend_true_iff_terminal_true (s : ℕ) (hs : 5 ≤ s) : seamGreedyWord (s + 1) = (seamGreedyWord s).extend true ↔ SeamRowWord.terminal (by omega) (seamGreedyWord (s + 1)) = true",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "At every concrete row, extending on the right is exactly the same as seeing a true terminal bit in the next greedy word."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFatalGapRightTail.lean:695:seamGreedyEventuallyRight_iff_eventually_terminal_true",
+      "name": "seamGreedyEventuallyRight_iff_eventually_terminal_true",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFatalGapRightTail.lean",
+      "line": 695,
+      "signature": "theorem seamGreedyEventuallyRight_iff_eventually_terminal_true : SeamGreedyEventuallyRight ↔ ∃ S : ℕ, ∃ hS5 : 5 ≤ S, ∀ (s : ℕ) (hs : S ≤ s), SeamRowWord.terminal (by omega) (seamGreedyWord (s + 1)) = true",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The word-level right-tail predicate is exactly eventual truth of the successor terminal coordinate."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFatalGapRightTail.lean:715:eventually_terminal_true_of_half_not_mem",
+      "name": "eventually_terminal_true_of_half_not_mem",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFatalGapRightTail.lean",
+      "line": 715,
+      "signature": "theorem eventually_terminal_true_of_half_not_mem (hnotmem : (1 / 2 : ℝ) ∉ mersenneAchievementSet) : ∃ S : ℕ, ∃ hS5 : 5 ≤ S, ∀ (s : ℕ) (hs : S ≤ s), SeamRowWord.terminal (by omega) (seamGreedyWord (s + 1)) = true",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Half nonmembership rules out false terminal bits beyond every bound by contraposition of the cofinal-false compactness consumer. Since the terminal coordinate is Boolean, all sufficiently late terminals are true."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFatalGapRightTail.lean:740:seamGreedyEventuallyRight_of_half_not_mem",
+      "name": "seamGreedyEventuallyRight_of_half_not_mem",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFatalGapRightTail.lean",
+      "line": 740,
+      "signature": "theorem seamGreedyEventuallyRight_of_half_not_mem (hnotmem : (1 / 2 : ℝ) ∉ mersenneAchievementSet) : SeamGreedyEventuallyRight",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The already-formalized compactness route proves one exact direction of the eventual-right classification."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFatalGapRightTail.lean:748:seamGreedyEventuallyRight_of_existsFatalHalfGap",
+      "name": "seamGreedyEventuallyRight_of_existsFatalHalfGap",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFatalGapRightTail.lean",
+      "line": 748,
+      "signature": "theorem seamGreedyEventuallyRight_of_existsFatalHalfGap (hgap : ExistsFatalHalfGap) : SeamGreedyEventuallyRight",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Every cut-locator fatal half gap forces the concrete integer seam to stabilize on its right extension."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFatalGapRightTail.lean:757:existsFatalHalfGap_of_seamGreedyEventuallyRight",
+      "name": "existsFatalHalfGap_of_seamGreedyEventuallyRight",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFatalGapRightTail.lean",
+      "line": 757,
+      "signature": "theorem existsFatalHalfGap_of_seamGreedyEventuallyRight (heventual : SeamGreedyEventuallyRight) : ExistsFatalHalfGap",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "An eventual concrete right seam tail produces a finite fatal gap. Choose the largest missing rank `D` in the base row, retain the selected prefix below `D`, and use the two limit endpoints proved above at depth `D - 1`."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFatalGapRightTail.lean:781:seamGreedyEventuallyRight_iff_existsFatalHalfGap",
+      "name": "seamGreedyEventuallyRight_iff_existsFatalHalfGap",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFatalGapRightTail.lean",
+      "line": 781,
+      "signature": "theorem seamGreedyEventuallyRight_iff_existsFatalHalfGap : SeamGreedyEventuallyRight ↔ ExistsFatalHalfGap",
+      "generated_certificate": false,
+      "claim_ids": [
+        "fatal_gap_right_tail_classification"
+      ],
+      "docstring": "Fatal half gaps and eventual right seam tails are the same concrete phenomenon."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFatalGapRightTail.lean:787:seamGreedyEventuallyRight_iff_half_not_mem",
+      "name": "seamGreedyEventuallyRight_iff_half_not_mem",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFatalGapRightTail.lean",
+      "line": 787,
+      "signature": "theorem seamGreedyEventuallyRight_iff_half_not_mem : SeamGreedyEventuallyRight ↔ (1 / 2 : ℝ) ∉ mersenneAchievementSet",
+      "generated_certificate": false,
+      "claim_ids": [
+        "fatal_gap_right_tail_classification"
+      ],
+      "docstring": "Equivalent membership-complement form of the classification."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFatalGapRightTail.lean:795:seamGreedyEventuallyRight_of_exists_isLastHalfGreedySkip",
+      "name": "seamGreedyEventuallyRight_of_exists_isLastHalfGreedySkip",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFatalGapRightTail.lean",
+      "line": 795,
+      "signature": "theorem seamGreedyEventuallyRight_of_exists_isLastHalfGreedySkip (hlast : ∃ M : ℕ, IsLastHalfGreedySkip M) : SeamGreedyEventuallyRight",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Equivalently, a final skipped exponent of the actual real greedy orbit forces an eventual concrete right seam tail."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderFatalGapRightTail.lean:802:seamGreedyEventuallyRight_iff_exists_isLastHalfGreedySkip",
+      "name": "seamGreedyEventuallyRight_iff_exists_isLastHalfGreedySkip",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderFatalGapRightTail.lean",
+      "line": 802,
+      "signature": "theorem seamGreedyEventuallyRight_iff_exists_isLastHalfGreedySkip : SeamGreedyEventuallyRight ↔ ∃ M : ℕ, IsLastHalfGreedySkip M",
+      "generated_certificate": false,
+      "claim_ids": [
+        "fatal_gap_right_tail_classification"
+      ],
+      "docstring": "Equivalent last-real-skip form of the classification."
     },
     {
       "id": "Erdos249257/HalfCylinderFiniteShadow.lean:26:wordSupport_subset_Iic",

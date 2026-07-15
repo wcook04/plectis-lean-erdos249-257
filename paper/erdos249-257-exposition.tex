@@ -660,6 +660,21 @@ Boolean words and identifies its next word with the integer-greedy choice:
 \lref{HalfCylinderConcreteSeamAdapter.lean}{667}{seamCutNextWord_eq_greedyWord_succ}.
 It implements a finite recurrence, not the unbounded remainder estimate.
 
+\subsection{Fatal gaps and eventual right tails}\label{res:fatalright}
+
+For the concrete integer seam words, eventual right extension is equivalent
+to nonmembership of $1/2$ in the Mersenne achievement set:
+\lref{HalfCylinderFatalGapRightTail.lean}{787}{seamGreedyEventuallyRight_iff_half_not_mem}.
+The same condition is equivalent to the existence of a finite fatal half gap,
+by
+\lrefx{HalfCylinderFatalGapRightTail.lean}{781}{seamGreedyEventuallyRight_iff_existsFatalHalfGap},
+and also to a final skipped exponent in the real greedy orbit,
+by
+\lrefx{HalfCylinderFatalGapRightTail.lean}{802}{seamGreedyEventuallyRight_iff_exists_isLastHalfGreedySkip}.
+Thus this module gives an exact classification of the nonmembership branch.
+It neither decides whether $1/2$ belongs to the achievement set nor proves
+the universal Erd\H{o}s~\#257 statement.
+
 \subsection{What stays open}
 
 The universal Erd\H{o}s \#257 statement, irrationality of $\sum_{n\in A}1/(2^n-1)$

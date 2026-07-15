@@ -52,6 +52,7 @@ NEW_ROLES = {
     "Erdos249257.HalfCylinderSeamLimit": "Seam-limit reduction for the half target",
     "Erdos249257.HalfCylinderSkippedRankLimit": "Skipped-rank limit for the half seam",
     "Erdos249257.HalfCylinderFalseBitSupply": "False-bit supply for the half seam",
+    "Erdos249257.HalfCylinderFatalGapRightTail": "Fatal-gap and eventual-right seam classification for the half target",
     "Erdos249257.HalfTrappingReturnCarry": "Half-trapping reverse-carry interface",
     "Erdos249257.LambertDiagonalEnclosure": "Lambert diagonal enclosure reduction",
     "Erdos249257.LcmFactorIdealPulseObstruction": "LCM factor-ideal anchor-pulse obstruction",

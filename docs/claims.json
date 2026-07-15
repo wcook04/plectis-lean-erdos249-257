@@ -4978,6 +4978,15 @@
           ]
         },
         {
+          "id": "Erdos249257.HalfCylinderFatalGapRightTail",
+          "path": "Erdos249257/HalfCylinderFatalGapRightTail.lean",
+          "role": "Fatal-gap and eventual-right seam classification for the half target",
+          "imports": [
+            "Erdos249257.HalfCylinderFalseBitSupply",
+            "Erdos249257.CampbellShiftSynchronization"
+          ]
+        },
+        {
           "id": "Erdos249257.HalfCylinderFiniteShadow",
           "path": "Erdos249257/HalfCylinderFiniteShadow.lean",
           "role": "Finite shadows of the half cylinder",
@@ -5441,6 +5450,11 @@
           "to": "integer_greedy_first_wrap_reduction"
         },
         {
+          "from": "fatal_gap_right_tail_classification",
+          "relation": "builds_on",
+          "to": "concrete_seam_adapter"
+        },
+        {
           "from": "denominator_exclusion",
           "relation": "advances_open_target",
           "to": "erdos_249",
@@ -5714,7 +5728,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 1296
+        "line": 1311
       }
     },
     {
@@ -5725,7 +5739,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 1305
+        "line": 1320
       }
     },
     {
@@ -5736,7 +5750,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 1312
+        "line": 1327
       }
     }
   ],
@@ -6149,6 +6163,34 @@
           "name": "seamCutNextWord_eq_greedyWord_succ",
           "module": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean",
           "line": 667
+        }
+      ]
+    },
+    {
+      "id": "fatal_gap_right_tail_classification",
+      "label": "Fatal-gap and eventual-right seam classification",
+      "status": "proved here",
+      "statement": "For the concrete integer seam words, eventual right extension is equivalent to nonmembership of 1/2 in the Mersenne achievement set. It is also equivalent to the existence of a finite fatal half gap and to the existence of a final skipped exponent in the real greedy orbit. This exact classification does not decide either membership branch.",
+      "remaining_open_proposition_ids": [
+        "remaining_open.universal_257_all_infinite_supports"
+      ],
+      "paper_label": "res:fatalright",
+      "readme_headline": false,
+      "declarations": [
+        {
+          "name": "seamGreedyEventuallyRight_iff_existsFatalHalfGap",
+          "module": "Erdos249257/HalfCylinderFatalGapRightTail.lean",
+          "line": 781
+        },
+        {
+          "name": "seamGreedyEventuallyRight_iff_half_not_mem",
+          "module": "Erdos249257/HalfCylinderFatalGapRightTail.lean",
+          "line": 787
+        },
+        {
+          "name": "seamGreedyEventuallyRight_iff_exists_isLastHalfGreedySkip",
+          "module": "Erdos249257/HalfCylinderFatalGapRightTail.lean",
+          "line": 802
         }
       ]
     },
