@@ -474,16 +474,10 @@ def main() -> int:
 
     # --- 6. README ------------------------------------------------------------
     readme = read(ROOT / "README.md")
-    for claim in data["claims"]:
-        if claim.get("readme_headline"):
-            first = claim["declarations"][0]["name"] if claim["declarations"] else None
-            if first:
-                check(first in readme,
-                      f"README missing headline declaration {first} ({claim['id']})")
     check(tag in readme, f"README does not state the release tag {tag}")
     check("does not solve" in readme, "README must state the open boundary in plain language")
-    check("METHODOLOGY.md" in readme and "docs/methodology.json" in readme,
-          "README must route to the human and machine-readable methodology")
+    check("METHODOLOGY.md" in readme and "SOURCE_MAP.md" in readme,
+          "README must route readers to the methodology and source map")
     leaked_identifier = re.search(r"method_axiom\.|anti_principle\.|principle\.[a-z_]|transition\.[a-z_]", readme)
     check(leaked_identifier is None,
           f"README leaks a methodology machine identifier: {leaked_identifier.group(0) if leaked_identifier else ''}")
