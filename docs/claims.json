@@ -5624,6 +5624,14 @@
           ]
         },
         {
+          "id": "Erdos249257.SuffixCylinderFirstFeedback",
+          "path": "Erdos249257/SuffixCylinderFirstFeedback.lean",
+          "role": "Lean proof module",
+          "imports": [
+            "Erdos249257.SuffixCylinderThreshold"
+          ]
+        },
+        {
           "id": "Erdos249257.SuffixCylinderGlobalProducer",
           "path": "Erdos249257/SuffixCylinderGlobalProducer.lean",
           "role": "Lean proof module",
@@ -6241,7 +6249,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 1782
+        "line": 1785
       }
     },
     {
@@ -6252,7 +6260,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 1791
+        "line": 1794
       }
     },
     {
@@ -6263,7 +6271,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 1798
+        "line": 1801
       }
     }
   ],
@@ -7206,7 +7214,7 @@
       "label": "Selected suffix-cylinder run through the first feedback row",
       "status": "verified finite instance",
       "bounded_domain": "Each depth N from 18 through 29, including the full protected carry strip at depths 27 and 29; at depth 29, common suffix cylinders are certified at cutoffs 14 through 25 and refuted at cutoff 26.",
-      "statement": "Before the first half-divisor feedback row, a common depth-13 prefix supports a full selected window at every depth 18 through 27 while preserving the suffix-cylinder invariant. The threshold-stage continuation extends the explicit window through depth 29, with the endpoint covering the full protected strip and common suffix cylinders at cutoffs 14 through 25 but not 26. This is a finite run, not an unbounded induction.",
+      "statement": "Before the first half-divisor feedback row, a common depth-13 prefix supports a full selected window at every depth 18 through 27 while preserving the suffix-cylinder invariant. Its explicitly checked shared-prefix coefficient sequence determines the endpoint values through depth 27. The threshold-stage continuation extends the explicit window through depth 29, with the endpoint covering the full protected strip and common suffix cylinders at cutoffs 14 through 25 but not 26. This is a finite run, not an unbounded induction.",
       "remaining_open_proposition_ids": [
         "remaining_open.universal_257_all_infinite_supports"
       ],
@@ -7227,6 +7235,11 @@
           "name": "depth27SelectedHalfWindow_endpoint_covers_strip",
           "module": "Erdos249257/SelectedSuffixCylinderPreFeedback.lean",
           "line": 147
+        },
+        {
+          "name": "stage27_endpoint_eq",
+          "module": "Erdos249257/SuffixCylinderFirstFeedback.lean",
+          "line": 144
         },
         {
           "name": "depth29SelectedHalfWindow_endpoint_covers_strip",
