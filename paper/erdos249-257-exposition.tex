@@ -945,6 +945,13 @@ whole protected strip,
 and
 \lrefx{SelectedSuffixCylinderPreFeedback.lean}{147}{depth27SelectedHalfWindow_endpoint_covers_strip}.
 This is a finite run, not an unbounded induction.
+The threshold-stage continuation extends this explicit window through depth
+$29$: its endpoint still covers the strip and its common suffix cylinder is
+certified at every cutoff from $14$ through $25$, while cutoff $26$ is
+explicitly not common,
+\lrefx{SuffixCylinderThreshold.lean}{700}{depth29SelectedHalfWindow_endpoint_covers_strip}
+and
+\lrefx{SuffixCylinderThreshold.lean}{806}{depth29SelectedHalfWindow_not_commonRestrictionAt_twentySix}.
 
 \subsection{Half-divisor unit drop}\label{res:halfdivisordrop}
 
