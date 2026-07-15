@@ -4,21 +4,21 @@
   "projection_not_authority": true,
   "proof_authority": "Lean source checked by the pinned Lean kernel",
   "argument_authority": "docs/claims.json::machine_readable_paper.argument_graph",
-  "source_fingerprint": "sha256:58e0ed9bf094a6e9b4b3c703ba175048a601d3d5546453bc1053564e7ec33e15",
+  "source_fingerprint": "sha256:2bbb346c9890114303da1a59852d479e3b5b52cf970c844ba0e568d30b4a7b8e",
   "summary": {
-    "module_count": 588,
-    "declaration_count": 7595,
-    "theorem_like_count": 6785,
+    "module_count": 589,
+    "declaration_count": 7605,
+    "theorem_like_count": 6793,
     "generated_certificate_declaration_count": 1681,
-    "principal_claim_link_count": 165,
+    "principal_claim_link_count": 167,
     "kind_counts": {
       "abbrev": 6,
-      "def": 779,
+      "def": 781,
       "inductive": 3,
       "instance": 5,
       "lemma": 354,
       "structure": 17,
-      "theorem": 6431
+      "theorem": 6439
     }
   },
   "modules": [
@@ -116,7 +116,8 @@
         "Erdos249257.HalfCylinderResetDeficitEscape",
         "Erdos249257.HalfCylinderSeamProducerAlignment",
         "Erdos249257.HalfCarrySelectedWindowBase",
-        "Erdos249257.RewindSeamOperationalBridge"
+        "Erdos249257.RewindSeamOperationalBridge",
+        "Erdos249257.SelectedSuffixCylinder"
       ],
       "declaration_count": 0,
       "kind_counts": {}
@@ -7074,6 +7075,19 @@
       "kind_counts": {
         "def": 2,
         "theorem": 12
+      }
+    },
+    {
+      "id": "Erdos249257.SelectedSuffixCylinder",
+      "path": "Erdos249257/SelectedSuffixCylinder.lean",
+      "imports": [
+        "Erdos249257.HalfCarryRewindPhase",
+        "Erdos249257.HalfCarrySelectedWindowBase"
+      ],
+      "declaration_count": 10,
+      "kind_counts": {
+        "def": 2,
+        "theorem": 8
       }
     },
     {
@@ -82891,6 +82905,120 @@
       "generated_certificate": false,
       "claim_ids": [],
       "docstring": "Full-strip specialization: the standard divisor envelope discharges the buffer automatically. Thus the only semantic input not already present in `HasRewindRestrictionAt + IsSeamPair` is the unit coefficient drop between the two adjacent base ancestors."
+    },
+    {
+      "id": "Erdos249257/SelectedSuffixCylinder.lean:23:wordSuffixNumeral",
+      "name": "wordSuffixNumeral",
+      "kind": "def",
+      "module": "Erdos249257/SelectedSuffixCylinder.lean",
+      "line": 23,
+      "signature": "noncomputable def wordSuffixNumeral {N : ℕ} (a : HalfWord N) (M L : ℕ) : ℕ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Binary value of the indicated terminal word suffix."
+    },
+    {
+      "id": "Erdos249257/SelectedSuffixCylinder.lean:29:HasSuffixCylinderAt",
+      "name": "HasSuffixCylinderAt",
+      "kind": "def",
+      "module": "Erdos249257/SelectedSuffixCylinder.lean",
+      "line": 29,
+      "signature": "noncomputable def HasSuffixCylinderAt {M N R : ℕ} (W : SelectedHalfWindow N R) (hMN : M ≤ N) (endpoint : ℕ) : Prop",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A selected window shares one prefix, while its suffix numerals are the consecutive values `endpoint - k` indexed by terminal carry `k`."
+    },
+    {
+      "id": "Erdos249257/SelectedSuffixCylinder.lean:40:supportSuffixNumeral_congr_on",
+      "name": "supportSuffixNumeral_congr_on",
+      "kind": "theorem",
+      "module": "Erdos249257/SelectedSuffixCylinder.lean",
+      "line": 40,
+      "signature": "theorem supportSuffixNumeral_congr_on (A B : Set ℕ) [DecidablePred (· ∈ A)] [DecidablePred (· ∈ B)] (M L : ℕ) (hbits : ∀ j : ℕ, j < L → (M + j + 1 ∈ A ↔ M + j + 1 ∈ B)) : supportSuffixNumeral A M L = supportSuffixNumeral B M L",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A support suffix numeral depends only on membership in the suffix interval that it reads."
+    },
+    {
+      "id": "Erdos249257/SelectedSuffixCylinder.lean:55:supportSuffixNumeral_extendHalfWord",
+      "name": "supportSuffixNumeral_extendHalfWord",
+      "kind": "theorem",
+      "module": "Erdos249257/SelectedSuffixCylinder.lean",
+      "line": 55,
+      "signature": "theorem supportSuffixNumeral_extendHalfWord {M N : ℕ} (hMN : M ≤ N) (a : HalfWord N) (β : Bool) : wordSuffixNumeral (extendHalfWord a β) M (N + 1 - M) = 2 * wordSuffixNumeral a M (N - M) + if β then 1 else 0",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Appending one bit doubles the old suffix numeral and adds that bit."
+    },
+    {
+      "id": "Erdos249257/SelectedSuffixCylinder.lean:80:depth18Word_suffix_thirteen",
+      "name": "depth18Word_suffix_thirteen",
+      "kind": "theorem",
+      "module": "Erdos249257/SelectedSuffixCylinder.lean",
+      "line": 80,
+      "signature": "theorem depth18Word_suffix_thirteen {k : ℕ} (hk : 1 ≤ k) (hk12 : k ≤ 12) : wordSuffixNumeral (depth18Word k) 13 5 + k = 17",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The finite depth-18 cylinder has common endpoint 17 after its common depth-13 prefix is removed."
+    },
+    {
+      "id": "Erdos249257/SelectedSuffixCylinder.lean:88:depth18SelectedHalfWindow_hasSuffixCylinderAt_thirteen",
+      "name": "depth18SelectedHalfWindow_hasSuffixCylinderAt_thirteen",
+      "kind": "theorem",
+      "module": "Erdos249257/SelectedSuffixCylinder.lean",
+      "line": 88,
+      "signature": "theorem depth18SelectedHalfWindow_hasSuffixCylinderAt_thirteen : HasSuffixCylinderAt depth18SelectedHalfWindow (by omega : 13 ≤ 18) 17",
+      "generated_certificate": false,
+      "claim_ids": [
+        "selected_suffix_cylinder_propagation"
+      ],
+      "docstring": "Exact cylinder certificate for the existing certified induction base."
+    },
+    {
+      "id": "Erdos249257/SelectedSuffixCylinder.lean:101:depth18SelectedHalfWindow_endpoint_covers_strip",
+      "name": "depth18SelectedHalfWindow_endpoint_covers_strip",
+      "kind": "theorem",
+      "module": "Erdos249257/SelectedSuffixCylinder.lean",
+      "line": 101,
+      "signature": "theorem depth18SelectedHalfWindow_endpoint_covers_strip : halfStripBound 18 ≤ 17",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The depth-18 endpoint covers its complete certified strip."
+    },
+    {
+      "id": "Erdos249257/SelectedSuffixCylinder.lean:107:SelectedHalfWindow.word_stepExplicit",
+      "name": "SelectedHalfWindow.word_stepExplicit",
+      "kind": "theorem",
+      "module": "Erdos249257/SelectedSuffixCylinder.lean",
+      "line": 107,
+      "signature": "theorem SelectedHalfWindow.word_stepExplicit {N R S C : ℕ} (hN : 1 ≤ N) (W : SelectedHalfWindow N R) (hSstrip : S ≤ halfStripBound (N + 1)) (hp_common : ∀ k : ℕ, 1 ≤ k → k ≤ R → selectedRowCoeff W k = C) (hbuffer : S + C ≤ 2 * R) (q : ℕ) (hq : 1 ≤ q) (hqS : q ≤ S) : (W.stepExplicit hN hSstrip hp_common hbuffer).word q hq hqS = extendHalfWord (W.word (parent C q) (explicitParent_pos hq) (explicitParent_le hqS hbuffer)) (decide (explicitParentBitZ C q = 1))",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The public selected successor really is the canonical parent word with the explicit parity bit appended."
+    },
+    {
+      "id": "Erdos249257/SelectedSuffixCylinder.lean:121:explicitParent_bitNat_recurrence",
+      "name": "explicitParent_bitNat_recurrence",
+      "kind": "theorem",
+      "module": "Erdos249257/SelectedSuffixCylinder.lean",
+      "line": 121,
+      "signature": "theorem explicitParent_bitNat_recurrence (C q : ℕ) : q + C + (if decide (explicitParentBitZ C q = 1) then 1 else 0) = 2 * parent C q",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Natural-number form of the canonical parent/bit recurrence."
+    },
+    {
+      "id": "Erdos249257/SelectedSuffixCylinder.lean:136:SelectedHalfWindow.hasSuffixCylinderAt_stepExplicit",
+      "name": "SelectedHalfWindow.hasSuffixCylinderAt_stepExplicit",
+      "kind": "theorem",
+      "module": "Erdos249257/SelectedSuffixCylinder.lean",
+      "line": 136,
+      "signature": "theorem SelectedHalfWindow.hasSuffixCylinderAt_stepExplicit {M N R S C E : ℕ} (hN : 1 ≤ N) (W : SelectedHalfWindow N R) (hMN : M ≤ N) (hSstrip : S ≤ halfStripBound (N + 1)) (hp_common : ∀ k : ℕ, 1 ≤ k → k ≤ R → selectedRowCoeff W k = C) (hbuffer : S + C ≤ 2 * R) (hcyl : HasSuffixCylinderAt W hMN E) (hRE : R ≤ E) : HasSuffixCylinderAt (W.stepExplicit hN hSstrip hp_common hbuffer) (hMN.trans (Nat.le_succ N)) (2 * E - C) ∧ S ≤ 2 * E - C",
+      "generated_certificate": false,
+      "claim_ids": [
+        "selected_suffix_cylinder_propagation"
+      ],
+      "docstring": "Exact cylinder propagation. The endpoint update is `E' = 2E-C`; the ordinary selected-window buffer also proves that the new endpoint still covers the entire new carry interval."
     },
     {
       "id": "Erdos249257/SignedQMomentObstruction.lean:28:det_mul_rectangular",

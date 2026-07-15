@@ -5350,6 +5350,15 @@
           ]
         },
         {
+          "id": "Erdos249257.SelectedSuffixCylinder",
+          "path": "Erdos249257/SelectedSuffixCylinder.lean",
+          "role": "Terminally indexed selected suffix-cylinder propagation",
+          "imports": [
+            "Erdos249257.HalfCarryRewindPhase",
+            "Erdos249257.HalfCarrySelectedWindowBase"
+          ]
+        },
+        {
           "id": "Erdos249257.SignedQMomentObstruction",
           "path": "Erdos249257/SignedQMomentObstruction.lean",
           "role": "Finite signed-moment determinant and dyadic-parity substrate",
@@ -5599,6 +5608,11 @@
           "from": "rewind_seam_operational_bridge",
           "relation": "builds_on",
           "to": "localized_protected_seam_compactness"
+        },
+        {
+          "from": "selected_suffix_cylinder_propagation",
+          "relation": "builds_on",
+          "to": "selected_window_depth18_base"
         },
         {
           "from": "denominator_exclusion",
@@ -5874,7 +5888,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 1450
+        "line": 1461
       }
     },
     {
@@ -5885,7 +5899,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 1459
+        "line": 1470
       }
     },
     {
@@ -5896,7 +5910,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 1466
+        "line": 1477
       }
     }
   ],
@@ -6613,6 +6627,29 @@
           "name": "protectedEvenSeamRealizedAt_succ_of_profile",
           "module": "Erdos249257/RewindSeamOperationalBridge.lean",
           "line": 217
+        }
+      ]
+    },
+    {
+      "id": "selected_suffix_cylinder_propagation",
+      "label": "Terminally indexed selected suffix-cylinder propagation",
+      "status": "conditional reduction",
+      "statement": "The depth-18 selected window has a common terminally indexed suffix cylinder after its depth-13 prefix. Under the canonical selected-window successor, the endpoint updates by E' = 2E-C and continues to cover the new carry interval. The coefficient profile needed for repeated successors is not supplied.",
+      "remaining_open_proposition_ids": [
+        "remaining_open.universal_257_all_infinite_supports"
+      ],
+      "paper_label": "res:selectsuffix",
+      "readme_headline": false,
+      "declarations": [
+        {
+          "name": "depth18SelectedHalfWindow_hasSuffixCylinderAt_thirteen",
+          "module": "Erdos249257/SelectedSuffixCylinder.lean",
+          "line": 88
+        },
+        {
+          "name": "SelectedHalfWindow.hasSuffixCylinderAt_stepExplicit",
+          "module": "Erdos249257/SelectedSuffixCylinder.lean",
+          "line": 136
         }
       ]
     },

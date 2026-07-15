@@ -814,6 +814,17 @@ protected one-hole seam at the next row,
 \lrefx{RewindSeamOperationalBridge.lean}{217}{protectedEvenSeamRealizedAt_succ_of_profile}.
 The base-ancestor coefficient drop is an explicit input, not a theorem here.
 
+\subsection{Selected suffix cylinders}\label{res:selectsuffix}
+
+The depth-$18$ selected window has one common terminally indexed suffix
+cylinder after its depth-$13$ prefix is removed,
+\lref{SelectedSuffixCylinder.lean}{88}{depth18SelectedHalfWindow_hasSuffixCylinderAt_thirteen}.
+Under the canonical selected-window successor, the endpoint evolves exactly by
+$E' = 2E-C$ and still covers the new carry interval,
+\lrefx{SelectedSuffixCylinder.lean}{136}{SelectedHalfWindow.hasSuffixCylinderAt_stepExplicit}.
+This preserves a finite cylinder invariant; it does not produce the required
+coefficient profile at every later step.
+
 \subsection{What stays open}
 
 The universal Erd\H{o}s \#257 statement, irrationality of $\sum_{n\in A}1/(2^n-1)$
