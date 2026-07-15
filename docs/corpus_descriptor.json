@@ -24,25 +24,25 @@
       "authority_role": "proof_bearing_committed_source_anchor"
     },
     "navigation_snapshot": {
-      "commit": "2535426bd4d86bb817d4ff9a129f57d8e8c349e3",
+      "commit": "ce9382d1685f1ea66485e18b463b897d451d5993",
       "authority_role": "machine_readable_navigation_anchor",
       "publication_state": "main_history_snapshot",
       "published_ref": "main",
-      "repository_resolution": "https://github.com/wcook04/plectis-lean-erdos249-257/tree/2535426bd4d86bb817d4ff9a129f57d8e8c349e3"
+      "repository_resolution": "https://github.com/wcook04/plectis-lean-erdos249-257/tree/ce9382d1685f1ea66485e18b463b897d451d5993"
     },
     "content": {
       "machine_readable_paper": {
         "path": "docs/claims.json::machine_readable_paper",
-        "content_digest": "sha256:9a5ca2422446807b7a2e6ad84fd48d24ea092f780d7e87187952a8001099db28"
+        "content_digest": "sha256:92f1aadd2137f4bd710947c20a285ee0cb0314585fccdf9da01d3951c6037ce5"
       },
       "claims_document": {
         "path": "docs/claims.json",
-        "content_digest": "sha256:96770acd08c38dc4cea9502e238619263d6dab766fc94d2b5e9170a67f2e4053"
+        "content_digest": "sha256:ce8ae68d4e3e15002b165c9196c68f034560b90754193e74032b78ced6be3d07"
       },
       "declaration_atlas": {
         "path": "docs/declaration_atlas.json",
-        "content_digest": "sha256:e5b446d412385e2c261fbc326e4925473750062d67528bfea8f11cc7610934db",
-        "source_input_fingerprint": "sha256:646ff6a193d9ec0ff9732e908d073e4a2239ddc5a73404110ce42bcc655cd1db"
+        "content_digest": "sha256:a6a723135443101a4b46c17372c62b56acf570de8a42f01ff6febbda16dfb6e0",
+        "source_input_fingerprint": "sha256:b63b802f19c1aab336bcfb67d281f66d2b7cd092a5dda1a073a31671f122082b"
       },
       "methodology_contract": {
         "path": "docs/methodology.json",
@@ -50,11 +50,11 @@
       },
       "bounded_orientation": {
         "path": "docs/orientation.json",
-        "content_digest": "sha256:692392c8ab4049e66ff88143be27246746a417d85af78812e349db2f87743b7d"
+        "content_digest": "sha256:2075174e986e81b5232e5d49b6d1cbf0fdcd0348a5761109f2bca88ba586c90e"
       },
       "human_exposition": {
         "source_path": "paper/erdos249-257-exposition.tex",
-        "source_content_digest": "sha256:a74fd132c6869017979c781fd202712548595b19bc8696c14101e9d448c54677",
+        "source_content_digest": "sha256:15009e26176801b4f168cbbc883a0204ce015bd5a9d9c73ca42909cd0d5f1595",
         "rendered_path": "erdos249-257-exposition.pdf",
         "rendered_content_digest": "sha256:b8ec00c65eeeeaf9400544630c3ed1fa3f04080b714330fc98918f40c1c02891",
         "artifact_role": "authored_mathematician_facing_exposition",
@@ -70,7 +70,7 @@
       },
       "paper_source_sigils": {
         "path": "paper/module-aliases.json",
-        "content_digest": "sha256:891fc7710c46382f4a44c8f7739c43a3c92b49ecc378ccdfeb258b2dbb00b008",
+        "content_digest": "sha256:c3ee81e6f576199263d0fc5cbf46b45948cca87f5ca1837a4aba49f64816b6ae",
         "schema": "erdos249257-paper-module-aliases/1",
         "artifact_role": "paper_sigil_to_lean_module_navigation_crosswalk",
         "authority_posture": "generated_navigation_projection_not_proof_authority"
@@ -132,19 +132,19 @@
     }
   },
   "summary": {
-    "module_count": 604,
-    "declaration_count": 10329,
-    "theorem_like_count": 9404,
+    "module_count": 605,
+    "declaration_count": 10729,
+    "theorem_like_count": 9802,
     "generated_certificate_declaration_count": 2923,
     "principal_claim_link_count": 200,
     "kind_counts": {
       "abbrev": 6,
-      "def": 889,
+      "def": 891,
       "inductive": 4,
       "instance": 5,
       "lemma": 354,
       "structure": 21,
-      "theorem": 9050
+      "theorem": 9448
     }
   },
   "compact_graph": {
@@ -288,7 +288,7 @@
       {
         "id": "certified_kill_instances",
         "status": "verified finite instance",
-        "statement": "Kernel-checked certified kills for small periods and at 25 explicit lcm-diagonal scales through t = 53, plus finite certificate shards, each discharged by decide.",
+        "statement": "Kernel-checked certified kills for small periods and at 26 explicit lcm-diagonal scales through t = 59, plus finite certificate shards, each discharged by decide.",
         "paper_label": "res:deposits",
         "declarations": [
           {
@@ -312,9 +312,9 @@
             "line": 246
           },
           {
-            "name": "certifiedKill_diagonal_all_imported_through_t53",
-            "module": "Erdos249257/DiagonalPincerCertificatesT53.lean",
-            "line": 1698
+            "name": "certifiedKill_diagonal_all_imported_through_t59",
+            "module": "Erdos249257/DiagonalPincerCertificatesT59.lean",
+            "line": 1869
           }
         ],
         "remaining_open_proposition_ids": [
@@ -440,7 +440,7 @@
     ],
     "module_topology": {
       "root": "Erdos249257.lean",
-      "node_count": 603,
+      "node_count": 604,
       "root_imports": [
         "Erdos249257.CertificateKernel",
         "Erdos249257.GeneratedCertificates",
@@ -549,7 +549,8 @@
         "Erdos249257.DiagonalPincerPrimeCertificates.ClosureT64",
         "Erdos249257.DiagonalPincerCertificatesT47",
         "Erdos249257.DiagonalPincerCertificatesT49",
-        "Erdos249257.DiagonalPincerCertificatesT53"
+        "Erdos249257.DiagonalPincerCertificatesT53",
+        "Erdos249257.DiagonalPincerCertificatesT59"
       ],
       "full_graph": "docs/claims.json::machine_readable_paper.module_graph"
     },
@@ -1323,9 +1324,9 @@
       },
       {
         "claim_id": "certified_kill_instances",
-        "name": "certifiedKill_diagonal_all_imported_through_t53",
-        "module": "Erdos249257/DiagonalPincerCertificatesT53.lean",
-        "line": 1698
+        "name": "certifiedKill_diagonal_all_imported_through_t59",
+        "module": "Erdos249257/DiagonalPincerCertificatesT59.lean",
+        "line": 1869
       },
       {
         "claim_id": "diagonal_pincer_reduction",
@@ -1362,7 +1363,7 @@
   "expansion": {
     "machine_readable_paper": {
       "path": "docs/claims.json::machine_readable_paper",
-      "expected_content_digest": "sha256:9a5ca2422446807b7a2e6ad84fd48d24ea092f780d7e87187952a8001099db28",
+      "expected_content_digest": "sha256:92f1aadd2137f4bd710947c20a285ee0cb0314585fccdf9da01d3951c6037ce5",
       "contains": [
         "all_claims",
         "authored_argument_graph",
@@ -1372,8 +1373,8 @@
     },
     "exhaustive_declaration_atlas": {
       "path": "docs/declaration_atlas.json",
-      "expected_content_digest": "sha256:e5b446d412385e2c261fbc326e4925473750062d67528bfea8f11cc7610934db",
-      "expected_source_input_fingerprint": "sha256:646ff6a193d9ec0ff9732e908d073e4a2239ddc5a73404110ce42bcc655cd1db",
+      "expected_content_digest": "sha256:a6a723135443101a4b46c17372c62b56acf570de8a42f01ff6febbda16dfb6e0",
+      "expected_source_input_fingerprint": "sha256:b63b802f19c1aab336bcfb67d281f66d2b7cd092a5dda1a073a31671f122082b",
       "availability": "optional_attached_corpus",
       "check": "python3 scripts/build_declaration_atlas.py --check"
     },
@@ -1385,7 +1386,7 @@
     },
     "human_exposition": {
       "source_path": "paper/erdos249-257-exposition.tex",
-      "expected_source_content_digest": "sha256:a74fd132c6869017979c781fd202712548595b19bc8696c14101e9d448c54677",
+      "expected_source_content_digest": "sha256:15009e26176801b4f168cbbc883a0204ce015bd5a9d9c73ca42909cd0d5f1595",
       "rendered_path": "erdos249-257-exposition.pdf",
       "expected_rendered_content_digest": "sha256:b8ec00c65eeeeaf9400544630c3ed1fa3f04080b714330fc98918f40c1c02891",
       "authority_posture": "authored_editorial_surface_not_Lean_proof_authority"
@@ -1399,7 +1400,7 @@
     },
     "paper_source_sigils": {
       "path": "paper/module-aliases.json",
-      "expected_content_digest": "sha256:891fc7710c46382f4a44c8f7739c43a3c92b49ecc378ccdfeb258b2dbb00b008",
+      "expected_content_digest": "sha256:c3ee81e6f576199263d0fc5cbf46b45948cca87f5ca1837a4aba49f64816b6ae",
       "schema": "erdos249257-paper-module-aliases/1",
       "check": "python3 scripts/build_paper_module_aliases.py --check"
     }

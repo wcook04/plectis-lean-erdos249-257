@@ -107,3 +107,4 @@ import Erdos249257.DiagonalPincerPrimeCertificates.ClosureT64
 import Erdos249257.DiagonalPincerCertificatesT47
 import Erdos249257.DiagonalPincerCertificatesT49
 import Erdos249257.DiagonalPincerCertificatesT53
+import Erdos249257.DiagonalPincerCertificatesT59
