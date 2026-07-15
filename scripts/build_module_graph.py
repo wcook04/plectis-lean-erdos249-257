@@ -37,6 +37,7 @@ NEW_ROLES = {
     "Erdos249257.FullTargetPrimeAdjunctionNoGo": "Prime-adjunction obstruction for the full target",
     "Erdos249257.HalfCarryReachability": "Half-carry reachability and compactness",
     "Erdos249257.HalfCarryCeilParentContraction": "Fixed-coefficient rewind contraction",
+    "Erdos249257.CampbellShiftSynchronization": "Campbell shift synchronization for the half target",
     "Erdos249257.HalfCarrySelectedWindow": "Selected protected half-carry windows",
     "Erdos249257.HalfCutLocator": "Fatal-gap locator for the half target",
     "Erdos249257.HalfCarryRewindPhase": "Realized fixed-coefficient rewind phase",

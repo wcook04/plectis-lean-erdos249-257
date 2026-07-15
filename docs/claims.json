@@ -283,6 +283,15 @@
           ]
         },
         {
+          "id": "Erdos249257.CampbellShiftSynchronization",
+          "path": "Erdos249257/CampbellShiftSynchronization.lean",
+          "role": "Campbell shift synchronization for the half target",
+          "imports": [
+            "Erdos249257.HalfCarryReachability",
+            "Erdos249257.HalfCutLocator"
+          ]
+        },
+        {
           "id": "Erdos249257.CarrySurvivorExtinction",
           "path": "Erdos249257/CarrySurvivorExtinction.lean",
           "role": "Multiple-period collapse",

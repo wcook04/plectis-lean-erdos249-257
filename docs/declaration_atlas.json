@@ -4,21 +4,21 @@
   "projection_not_authority": true,
   "proof_authority": "Lean source checked by the pinned Lean kernel",
   "argument_authority": "docs/claims.json::machine_readable_paper.argument_graph",
-  "source_fingerprint": "sha256:988cd1b9dcd79d907c87a5dd6ed0bdb36e674174cc9ea3df8e2fe2d2a0dc67b9",
+  "source_fingerprint": "sha256:261c1f32b27cb0d0d101d5d838ae80a1e61df47d7d45524b6373f3574b609064",
   "summary": {
-    "module_count": 569,
-    "declaration_count": 7274,
-    "theorem_like_count": 6514,
+    "module_count": 570,
+    "declaration_count": 7303,
+    "theorem_like_count": 6539,
     "generated_certificate_declaration_count": 1681,
     "principal_claim_link_count": 135,
     "kind_counts": {
       "abbrev": 6,
-      "def": 730,
+      "def": 734,
       "inductive": 3,
       "instance": 4,
       "lemma": 354,
       "structure": 17,
-      "theorem": 6160
+      "theorem": 6185
     }
   },
   "modules": [
@@ -97,7 +97,8 @@
         "Erdos249257.HalfCarryCofinalWindowOrSeamConsumer",
         "Erdos249257.HalfCylinderIntegerGreedy",
         "Erdos249257.HalfCylinderConcreteSeamAdapter",
-        "Erdos249257.HalfCutLocator"
+        "Erdos249257.HalfCutLocator",
+        "Erdos249257.CampbellShiftSynchronization"
       ],
       "declaration_count": 0,
       "kind_counts": {}
@@ -175,6 +176,19 @@
         "def": 9,
         "structure": 1,
         "theorem": 61
+      }
+    },
+    {
+      "id": "Erdos249257.CampbellShiftSynchronization",
+      "path": "Erdos249257/CampbellShiftSynchronization.lean",
+      "imports": [
+        "Erdos249257.HalfCarryReachability",
+        "Erdos249257.HalfCutLocator"
+      ],
+      "declaration_count": 29,
+      "kind_counts": {
+        "def": 4,
+        "theorem": 25
       }
     },
     {
@@ -8849,6 +8863,324 @@
       "generated_certificate": false,
       "claim_ids": [],
       "docstring": "The explicit orbit satisfies the sharp positive square-root strip."
+    },
+    {
+      "id": "Erdos249257/CampbellShiftSynchronization.lean:33:halfSkippedPrefix",
+      "name": "halfSkippedPrefix",
+      "kind": "def",
+      "module": "Erdos249257/CampbellShiftSynchronization.lean",
+      "line": 33,
+      "signature": "noncomputable def halfSkippedPrefix (M : ℕ) : Finset ℕ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The skipped exponents visible through level `M`."
+    },
+    {
+      "id": "Erdos249257/CampbellShiftSynchronization.lean:38:finiteMersenneShift",
+      "name": "finiteMersenneShift",
+      "kind": "def",
+      "module": "Erdos249257/CampbellShiftSynchronization.lean",
+      "line": 38,
+      "signature": "noncomputable def finiteMersenneShift (F : Finset ℕ) : ℝ",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The Mersenne-rational shift carried by a finite set of exponents."
+    },
+    {
+      "id": "Erdos249257/CampbellShiftSynchronization.lean:42:IsLastHalfGreedySkip",
+      "name": "IsLastHalfGreedySkip",
+      "kind": "def",
+      "module": "Erdos249257/CampbellShiftSynchronization.lean",
+      "line": 42,
+      "signature": "def IsLastHalfGreedySkip (M : ℕ) : Prop",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "`M` is the final exponent skipped by the actual greedy half orbit."
+    },
+    {
+      "id": "Erdos249257/CampbellShiftSynchronization.lean:46:isLastHalfGreedySkip_pos",
+      "name": "isLastHalfGreedySkip_pos",
+      "kind": "theorem",
+      "module": "Erdos249257/CampbellShiftSynchronization.lean",
+      "line": 46,
+      "signature": "theorem isLastHalfGreedySkip_pos {M : ℕ} (hlast : IsLastHalfGreedySkip M) : 0 < M",
+      "generated_certificate": false,
+      "claim_ids": []
+    },
+    {
+      "id": "Erdos249257/CampbellShiftSynchronization.lean:55:coe_halfSkippedPrefix_eq_skippedSupport",
+      "name": "coe_halfSkippedPrefix_eq_skippedSupport",
+      "kind": "theorem",
+      "module": "Erdos249257/CampbellShiftSynchronization.lean",
+      "line": 55,
+      "signature": "theorem coe_halfSkippedPrefix_eq_skippedSupport {M : ℕ} (hlast : IsLastHalfGreedySkip M) : (↑(halfSkippedPrefix M) : Set ℕ) = greedyMersenneSkippedSupport (1 / 2 : ℝ)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Under a last-skip hypothesis, the finite prefix is the complete skipped support."
+    },
+    {
+      "id": "Erdos249257/CampbellShiftSynchronization.lean:72:finiteMersenneShift_eq_cast_finiteErdosSum",
+      "name": "finiteMersenneShift_eq_cast_finiteErdosSum",
+      "kind": "theorem",
+      "module": "Erdos249257/CampbellShiftSynchronization.lean",
+      "line": 72,
+      "signature": "theorem finiteMersenneShift_eq_cast_finiteErdosSum (F : Finset ℕ) : finiteMersenneShift F = ((finiteErdosSum F 2 : ℚ) : ℝ)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A finite Mersenne shift is visibly rational."
+    },
+    {
+      "id": "Erdos249257/CampbellShiftSynchronization.lean:77:halfGreedySupportSuffix_eq_tail_of_lastSkip",
+      "name": "halfGreedySupportSuffix_eq_tail_of_lastSkip",
+      "kind": "theorem",
+      "module": "Erdos249257/CampbellShiftSynchronization.lean",
+      "line": 77,
+      "signature": "theorem halfGreedySupportSuffix_eq_tail_of_lastSkip {M : ℕ} (hlast : IsLastHalfGreedySkip M) : positiveMersenneSupportSuffix (greedyMersenneSupport (1 / 2 : ℝ)) M = mersenneTail M",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "After a last skip, every term in the remaining suffix is selected."
+    },
+    {
+      "id": "Erdos249257/CampbellShiftSynchronization.lean:96:halfGreedySupportValue_eq_prefix_add_tail_of_lastSkip",
+      "name": "halfGreedySupportValue_eq_prefix_add_tail_of_lastSkip",
+      "kind": "theorem",
+      "module": "Erdos249257/CampbellShiftSynchronization.lean",
+      "line": 96,
+      "signature": "theorem halfGreedySupportValue_eq_prefix_add_tail_of_lastSkip {M : ℕ} (hlast : IsLastHalfGreedySkip M) : positiveMersenneSupportValue (greedyMersenneSupport (1 / 2 : ℝ)) = halfGreedyMersennePrefix M + mersenneTail M",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The full selected value is the finite selected prefix plus the complete tail after a last skip."
+    },
+    {
+      "id": "Erdos249257/CampbellShiftSynchronization.lean:107:lastHalfSkip_shiftDelta_eq_remainder_sub_tail",
+      "name": "lastHalfSkip_shiftDelta_eq_remainder_sub_tail",
+      "kind": "theorem",
+      "module": "Erdos249257/CampbellShiftSynchronization.lean",
+      "line": 107,
+      "signature": "theorem lastHalfSkip_shiftDelta_eq_remainder_sub_tail {M : ℕ} (hlast : IsLastHalfGreedySkip M) : (1 / 2 : ℝ) + finiteMersenneShift (halfSkippedPrefix M) - erdosBorweinMersenneConstant = greedyMersenneRemainder (1 / 2 : ℝ) M - mersenneTail M",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Exact fatal coordinate: the finite-shift displacement is the residual excess above the remaining tail."
+    },
+    {
+      "id": "Erdos249257/CampbellShiftSynchronization.lean:130:lastHalfSkip_remainder_lt_weight",
+      "name": "lastHalfSkip_remainder_lt_weight",
+      "kind": "theorem",
+      "module": "Erdos249257/CampbellShiftSynchronization.lean",
+      "line": 130,
+      "signature": "theorem lastHalfSkip_remainder_lt_weight {M : ℕ} (hlast : IsLastHalfGreedySkip M) : greedyMersenneRemainder (1 / 2 : ℝ) M < mersenneWeight M",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The last skipped branch leaves the level-`M` residual below `w_M`."
+    },
+    {
+      "id": "Erdos249257/CampbellShiftSynchronization.lean:146:lastHalfSkip_tail_le_remainder",
+      "name": "lastHalfSkip_tail_le_remainder",
+      "kind": "theorem",
+      "module": "Erdos249257/CampbellShiftSynchronization.lean",
+      "line": 146,
+      "signature": "theorem lastHalfSkip_tail_le_remainder {M : ℕ} (hlast : IsLastHalfGreedySkip M) : mersenneTail M ≤ greedyMersenneRemainder (1 / 2 : ℝ) M",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "After a last skip the greedy orbit selects every later exponent, so the partial tail sums telescope inside the level-`M` residual: the complete tail is at most the residual."
+    },
+    {
+      "id": "Erdos249257/CampbellShiftSynchronization.lean:181:lastHalfSkip_shiftDelta_nonneg",
+      "name": "lastHalfSkip_shiftDelta_nonneg",
+      "kind": "theorem",
+      "module": "Erdos249257/CampbellShiftSynchronization.lean",
+      "line": 181,
+      "signature": "theorem lastHalfSkip_shiftDelta_nonneg {M : ℕ} (hlast : IsLastHalfGreedySkip M) : 0 ≤ (1 / 2 : ℝ) + finiteMersenneShift (halfSkippedPrefix M) - erdosBorweinMersenneConstant",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The finite-shift displacement is nonnegative for a last skip."
+    },
+    {
+      "id": "Erdos249257/CampbellShiftSynchronization.lean:191:lastHalfSkip_shiftDelta_ne_zero",
+      "name": "lastHalfSkip_shiftDelta_ne_zero",
+      "kind": "theorem",
+      "module": "Erdos249257/CampbellShiftSynchronization.lean",
+      "line": 191,
+      "signature": "theorem lastHalfSkip_shiftDelta_ne_zero {M : ℕ} (_hlast : IsLastHalfGreedySkip M) : (1 / 2 : ℝ) + finiteMersenneShift (halfSkippedPrefix M) - erdosBorweinMersenneConstant ≠ 0",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Irrationality excludes equality at the rational centre of the shifted fatal interval."
+    },
+    {
+      "id": "Erdos249257/CampbellShiftSynchronization.lean:211:lastHalfSkip_shift_fatalInterval",
+      "name": "lastHalfSkip_shift_fatalInterval",
+      "kind": "theorem",
+      "module": "Erdos249257/CampbellShiftSynchronization.lean",
+      "line": 211,
+      "signature": "theorem lastHalfSkip_shift_fatalInterval {M : ℕ} (hlast : IsLastHalfGreedySkip M) : 0 < (1 / 2 : ℝ) + finiteMersenneShift (halfSkippedPrefix M) - erdosBorweinMersenneConstant ∧ (1 / 2 : ℝ) + finiteMersenneShift (halfSkippedPrefix M) - erdosBorweinMersenneConstant < mersenneGap M",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Exact one-sided fatal interval around the rational shift determined by a putative last skip."
+    },
+    {
+      "id": "Erdos249257/CampbellShiftSynchronization.lean:231:lastHalfSkip_shadow_mem_gap",
+      "name": "lastHalfSkip_shadow_mem_gap",
+      "kind": "theorem",
+      "module": "Erdos249257/CampbellShiftSynchronization.lean",
+      "line": 231,
+      "signature": "theorem lastHalfSkip_shadow_mem_gap {M : ℕ} (hlast : IsLastHalfGreedySkip M) : |halfGreedyMersenneShadow (M - 1) - erdosBorweinMersenneConstant| < mersenneGap M",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The `M-1` shadow uses the same gap as the last skipped exponent `M`. This theorem is the exact index reconciliation for the death-hole picture."
+    },
+    {
+      "id": "Erdos249257/CampbellShiftSynchronization.lean:261:mersenneGap_lt_quarterPow",
+      "name": "mersenneGap_lt_quarterPow",
+      "kind": "theorem",
+      "module": "Erdos249257/CampbellShiftSynchronization.lean",
+      "line": 261,
+      "signature": "theorem mersenneGap_lt_quarterPow {M : ℕ} (hM : 3 ≤ M) : mersenneGap M < ((1 : ℝ) / 4) ^ M",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The Mersenne gap is already smaller than the depth-`2M` dyadic scale for `M ≥ 3`."
+    },
+    {
+      "id": "Erdos249257/CampbellShiftSynchronization.lean:283:lastHalfSkip_shifted_mem_dyadicCylinder",
+      "name": "lastHalfSkip_shifted_mem_dyadicCylinder",
+      "kind": "theorem",
+      "module": "Erdos249257/CampbellShiftSynchronization.lean",
+      "line": 283,
+      "signature": "theorem lastHalfSkip_shifted_mem_dyadicCylinder {M : ℕ} (hM : 3 ≤ M) (hlast : IsLastHalfGreedySkip M) : (1 / 2 : ℝ) - ((1 : ℝ) / 4) ^ M < erdosBorweinMersenneConstant - finiteMersenneShift (halfSkippedPrefix M) ∧ erdosBorweinMersenneConstant - finiteMersenneShift (halfSkippedPrefix M) < (1 / 2 : ℝ)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A last skip puts the shifted constant inside the depth-`2M` cylinder immediately below `1 / 2`."
+    },
+    {
+      "id": "Erdos249257/CampbellShiftSynchronization.lean:299:campbellQuarterExponent_periodFreeze_noSync",
+      "name": "campbellQuarterExponent_periodFreeze_noSync",
+      "kind": "theorem",
+      "module": "Erdos249257/CampbellShiftSynchronization.lean",
+      "line": 299,
+      "signature": "theorem campbellQuarterExponent_periodFreeze_noSync {d t P : ℕ} (hd : 2 ≤ d) (htd : t ≤ d) (hP : P ≤ 4 * t) (hAGP : d ^ 4 ≤ P) : False",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "If `d` is the combined prime-progression modulus, `t` is the unavoidable phase factor, and `P` is the prime cap forced by the fatal window, Campbell's quarter-exponent applicability condition is impossible."
+    },
+    {
+      "id": "Erdos249257/CampbellShiftSynchronization.lean:320:campbellPhaseFreeze_parameters_impossible",
+      "name": "campbellPhaseFreeze_parameters_impossible",
+      "kind": "theorem",
+      "module": "Erdos249257/CampbellShiftSynchronization.lean",
+      "line": 320,
+      "signature": "theorem campbellPhaseFreeze_parameters_impossible {M q0sq t d P : ℕ} (hq : 0 < q0sq) (htpos : 0 < t) (hd : 2 ≤ d) (ht : M ≤ t * q0sq) (htd : t ≤ d) (hwindow : P * q0sq ≤ 2 * M + 2) (hAGP : d ^ 4 ≤ P) : False",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Substrate-native parameter map. The hypotheses expose exactly where a future analytic construction must improve: the phase-period factor `t`, the fatal-window cap `P`, or the sublinear modulus exponent."
+    },
+    {
+      "id": "Erdos249257/CampbellShiftSynchronization.lean:351:four_mem_greedyMersenneSkippedSupport_half",
+      "name": "four_mem_greedyMersenneSkippedSupport_half",
+      "kind": "theorem",
+      "module": "Erdos249257/CampbellShiftSynchronization.lean",
+      "line": 351,
+      "signature": "theorem four_mem_greedyMersenneSkippedSupport_half : 4 ∈ greedyMersenneSkippedSupport (1 / 2 : ℝ)",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Exponent four is already skipped by the exact greedy recursion. This small evaluator fixes the positive-index convention used by the last-skip endpoint below."
+    },
+    {
+      "id": "Erdos249257/CampbellShiftSynchronization.lean:359:exists_isLastHalfGreedySkip_iff_skippedSupport_finite",
+      "name": "exists_isLastHalfGreedySkip_iff_skippedSupport_finite",
+      "kind": "theorem",
+      "module": "Erdos249257/CampbellShiftSynchronization.lean",
+      "line": 359,
+      "signature": "theorem exists_isLastHalfGreedySkip_iff_skippedSupport_finite : (∃ M : ℕ, IsLastHalfGreedySkip M) ↔ (greedyMersenneSkippedSupport (1 / 2 : ℝ)).Finite",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "A final skipped exponent exists exactly when the actual skipped support is finite. Nonemptiness is unconditional because exponent four is skipped."
+    },
+    {
+      "id": "Erdos249257/CampbellShiftSynchronization.lean:384:existsFatalHalfGap_iff_exists_isLastHalfGreedySkip",
+      "name": "existsFatalHalfGap_iff_exists_isLastHalfGreedySkip",
+      "kind": "theorem",
+      "module": "Erdos249257/CampbellShiftSynchronization.lean",
+      "line": 384,
+      "signature": "theorem existsFatalHalfGap_iff_exists_isLastHalfGreedySkip : ExistsFatalHalfGap ↔ ∃ M : ℕ, IsLastHalfGreedySkip M",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The cut-locator's arbitrary-word fatal branch is now identified with the canonical dynamical endpoint: it occurs exactly when the actual greedy orbit has a final skipped exponent."
+    },
+    {
+      "id": "Erdos249257/CampbellShiftSynchronization.lean:412:GreedyShiftWindowZero",
+      "name": "GreedyShiftWindowZero",
+      "kind": "def",
+      "module": "Erdos249257/CampbellShiftSynchronization.lean",
+      "line": 412,
+      "signature": "def GreedyShiftWindowZero : Prop",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The last-skip-guarded shifted-window interface. Under a putative last skip `M ≥ 3`, the complete finite shift is required to lie outside the all-one depth-`2M` cylinder. The equivalence theorem below shows that this guarded formulation is an endpoint restatement, not an independent arithmetic producer."
+    },
+    {
+      "id": "Erdos249257/CampbellShiftSynchronization.lean:419:not_isLastHalfGreedySkip_of_shiftWindowZero",
+      "name": "not_isLastHalfGreedySkip_of_shiftWindowZero",
+      "kind": "theorem",
+      "module": "Erdos249257/CampbellShiftSynchronization.lean",
+      "line": 419,
+      "signature": "theorem not_isLastHalfGreedySkip_of_shiftWindowZero (hzero : GreedyShiftWindowZero) {M : ℕ} (hM : 3 ≤ M) : ¬ IsLastHalfGreedySkip M",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The shifted-zero producer rules out a final skipped exponent."
+    },
+    {
+      "id": "Erdos249257/CampbellShiftSynchronization.lean:428:greedyMersenneSkippedSupport_infinite_of_shiftWindowZero",
+      "name": "greedyMersenneSkippedSupport_infinite_of_shiftWindowZero",
+      "kind": "theorem",
+      "module": "Erdos249257/CampbellShiftSynchronization.lean",
+      "line": 428,
+      "signature": "theorem greedyMersenneSkippedSupport_infinite_of_shiftWindowZero (hzero : GreedyShiftWindowZero) : (greedyMersenneSkippedSupport (1 / 2 : ℝ)).Infinite",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The shifted-zero producer forces infinitely many actual skips."
+    },
+    {
+      "id": "Erdos249257/CampbellShiftSynchronization.lean:457:shiftWindowZero_of_greedyMersenneSkippedSupport_infinite",
+      "name": "shiftWindowZero_of_greedyMersenneSkippedSupport_infinite",
+      "kind": "theorem",
+      "module": "Erdos249257/CampbellShiftSynchronization.lean",
+      "line": 457,
+      "signature": "theorem shiftWindowZero_of_greedyMersenneSkippedSupport_infinite (hinfinite : (greedyMersenneSkippedSupport (1 / 2 : ℝ)).Infinite) : GreedyShiftWindowZero",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Infinitely many skipped exponents make the last-skip hypothesis in the shifted-window producer impossible. This closes the converse logical direction without adding any analytic input: the genuine arithmetic content of `GreedyShiftWindowZero` is exactly the exclusion of a final skip."
+    },
+    {
+      "id": "Erdos249257/CampbellShiftSynchronization.lean:471:shiftWindowZero_iff_greedyMersenneSkippedSupport_infinite",
+      "name": "shiftWindowZero_iff_greedyMersenneSkippedSupport_infinite",
+      "kind": "theorem",
+      "module": "Erdos249257/CampbellShiftSynchronization.lean",
+      "line": 471,
+      "signature": "theorem shiftWindowZero_iff_greedyMersenneSkippedSupport_infinite : GreedyShiftWindowZero ↔ (greedyMersenneSkippedSupport (1 / 2 : ℝ)).Infinite",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Exact endpoint classification of the Campbell-shift interface. It is equivalent to infinitude of the actual greedy skipped support, rather than a strictly weaker producer waiting for a separate composition theorem."
+    },
+    {
+      "id": "Erdos249257/CampbellShiftSynchronization.lean:480:half_mem_mersenneAchievementSet_of_shiftWindowZero",
+      "name": "half_mem_mersenneAchievementSet_of_shiftWindowZero",
+      "kind": "theorem",
+      "module": "Erdos249257/CampbellShiftSynchronization.lean",
+      "line": 480,
+      "signature": "theorem half_mem_mersenneAchievementSet_of_shiftWindowZero (hzero : GreedyShiftWindowZero) : (1 / 2 : ℝ) ∈ mersenneAchievementSet",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "Composition with the checked greedy endpoint yields exact half membership once the shifted-zero producer is supplied."
+    },
+    {
+      "id": "Erdos249257/CampbellShiftSynchronization.lean:488:shiftWindowZero_iff_half_mem_mersenneAchievementSet",
+      "name": "shiftWindowZero_iff_half_mem_mersenneAchievementSet",
+      "kind": "theorem",
+      "module": "Erdos249257/CampbellShiftSynchronization.lean",
+      "line": 488,
+      "signature": "theorem shiftWindowZero_iff_half_mem_mersenneAchievementSet : GreedyShiftWindowZero ↔ (1 / 2 : ℝ) ∈ mersenneAchievementSet",
+      "generated_certificate": false,
+      "claim_ids": [],
+      "docstring": "The shifted-window formulation is exactly equivalent to the concrete half-achievement endpoint."
     },
     {
       "id": "Erdos249257/CarrySurvivorExtinction.lean:63:totientTail_pos",

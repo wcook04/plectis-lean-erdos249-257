@@ -71,3 +71,4 @@ import Erdos249257.HalfCarryCofinalWindowOrSeamConsumer
 import Erdos249257.HalfCylinderIntegerGreedy
 import Erdos249257.HalfCylinderConcreteSeamAdapter
 import Erdos249257.HalfCutLocator
+import Erdos249257.CampbellShiftSynchronization
