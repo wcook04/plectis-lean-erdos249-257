@@ -1259,6 +1259,28 @@ and
 The development proves finite fixtures for this bridge but does not assert an
 unbounded projection or suffix supply.
 
+\paragraph{Fresh-prime deficit decomposition.}  The literal foreign channel
+also has an endpoint form suited to curvature tests.  Retain only the prime
+support already present at $H$ in the two endpoints $H+s$ and $2H+s$, and
+write the resulting discrepancy from the actual totient as an endpoint
+deficit.  Each such deficit is nonnegative.  The actual diagonal increment
+then equals the old-prime increment plus the lower deficit minus the upper
+deficit.  The second and five-point curvature operators preserve this exact
+split; the latter has coefficient row $[-8,4,2,1,1]$.  Consequently, the old
+curvature margin loses at most the stated adverse weighted deficit.
+
+\begin{proposition}[fresh-prime deficit decomposition]\label{res:freshprimedeficit}
+The endpoint fresh deficits are nonnegative, give an exact decomposition of
+the foreign channel, and bound the loss from the old-prime curvature margins.
+\end{proposition}
+\noindent Formalised:
+\lref{FreshPrimeDeficitDecomposition.lean}{91}{endpointFreshDeficit_nonneg},
+\lref{FreshPrimeDeficitDecomposition.lean}{184}{finiteForeignChannelIncrement_eq_endpointFreshDeficit_sub},
+and
+\lref{FreshPrimeDeficitDecomposition.lean}{269}{oldFivePoint_sub_secondBranchAdverseDeficit_le_actual}.
+This supplies the exact correction term for the finite probes.  It supplies
+neither a cofinal deficit bound nor an irrationality criterion.
+
 \paragraph{A closed prime-adjunction route.} One tempting way to seek an
 unbounded obstruction is to compare the full target at $H$, $pH$, $qH$, and
 $pqH$.  The formal development rules out this route in its unprojected form.

@@ -4828,6 +4828,14 @@
           ]
         },
         {
+          "id": "Erdos249257.FreshPrimeDeficitDecomposition",
+          "path": "Erdos249257/FreshPrimeDeficitDecomposition.lean",
+          "role": "Lean proof module",
+          "imports": [
+            "Erdos249257.DiagonalFreshLossBridge"
+          ]
+        },
+        {
           "id": "Erdos249257.FullTargetPrimeAdjunctionNoGo",
           "path": "Erdos249257/FullTargetPrimeAdjunctionNoGo.lean",
           "role": "Prime-adjunction obstruction for the full target",
@@ -5722,6 +5730,11 @@
           "to": "diagonal_pincer_reduction"
         },
         {
+          "from": "fresh_prime_deficit_decomposition",
+          "relation": "builds_on",
+          "to": "diagonal_fresh_loss_reduction"
+        },
+        {
           "from": "canonical_jump_slack_reduction",
           "relation": "builds_on",
           "to": "diagonal_fresh_loss_reduction"
@@ -5955,7 +5968,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 1557
+        "line": 1579
       }
     },
     {
@@ -5966,7 +5979,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 1566
+        "line": 1588
       }
     },
     {
@@ -5977,7 +5990,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 1573
+        "line": 1595
       }
     }
   ],
@@ -7123,6 +7136,34 @@
           "name": "irrational_totientSeries_of_diagonalFreshLossProjectionSupply",
           "module": "Erdos249257/DiagonalFreshLossBridge.lean",
           "line": 187
+        }
+      ]
+    },
+    {
+      "id": "fresh_prime_deficit_decomposition",
+      "label": "Fresh-prime endpoint-deficit decomposition",
+      "status": "proved here",
+      "statement": "At each positive height, every old-prime endpoint mass dominates the actual totient. The diagonal increment and literal foreign channel split exactly into the old Möbius increment and lower-minus-upper endpoint fresh deficits. The second and five-point curvature operators retain this split, and the nonnegative deficits bound the exact adverse weighted loss from the old-prime curvature margins. No cofinal deficit bound or irrationality conclusion is proved.",
+      "remaining_open_proposition_ids": [
+        "remaining_open.unbounded_certificate_supply"
+      ],
+      "paper_label": "res:freshprimedeficit",
+      "readme_headline": false,
+      "declarations": [
+        {
+          "name": "endpointFreshDeficit_nonneg",
+          "module": "Erdos249257/FreshPrimeDeficitDecomposition.lean",
+          "line": 91
+        },
+        {
+          "name": "finiteForeignChannelIncrement_eq_endpointFreshDeficit_sub",
+          "module": "Erdos249257/FreshPrimeDeficitDecomposition.lean",
+          "line": 184
+        },
+        {
+          "name": "oldFivePoint_sub_secondBranchAdverseDeficit_le_actual",
+          "module": "Erdos249257/FreshPrimeDeficitDecomposition.lean",
+          "line": 269
         }
       ]
     },
