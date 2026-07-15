@@ -4,13 +4,13 @@
   "projection_not_authority": true,
   "proof_authority": "Lean source checked by the pinned Lean kernel",
   "argument_authority": "docs/claims.json::machine_readable_paper.argument_graph",
-  "source_fingerprint": "sha256:ed5affcf6ee517fc31729c63fd33adcd9edca1be2338dce72f81af81668a7014",
+  "source_fingerprint": "sha256:2b9f81a454326353153b1945f0db65aac9dc4aea88bc345af1a3afb44c887ff6",
   "summary": {
-    "module_count": 585,
-    "declaration_count": 7563,
-    "theorem_like_count": 6762,
+    "module_count": 586,
+    "declaration_count": 7564,
+    "theorem_like_count": 6763,
     "generated_certificate_declaration_count": 1681,
-    "principal_claim_link_count": 159,
+    "principal_claim_link_count": 160,
     "kind_counts": {
       "abbrev": 6,
       "def": 770,
@@ -18,7 +18,7 @@
       "instance": 5,
       "lemma": 354,
       "structure": 17,
-      "theorem": 6408
+      "theorem": 6409
     }
   },
   "modules": [
@@ -113,7 +113,8 @@
         "Erdos249257.HalfCylinderFixedTailSocket",
         "Erdos249257.HalfCylinderProducerCarrySocket",
         "Erdos249257.HalfCylinderQuarterBandEndpoints",
-        "Erdos249257.HalfCylinderResetDeficitEscape"
+        "Erdos249257.HalfCylinderResetDeficitEscape",
+        "Erdos249257.HalfCylinderSeamProducerAlignment"
       ],
       "declaration_count": 0,
       "kind_counts": {}
@@ -6685,6 +6686,18 @@
       "kind_counts": {
         "def": 4,
         "theorem": 11
+      }
+    },
+    {
+      "id": "Erdos249257.HalfCylinderSeamProducerAlignment",
+      "path": "Erdos249257/HalfCylinderSeamProducerAlignment.lean",
+      "imports": [
+        "Erdos249257.HalfCylinderProducerCarrySocket",
+        "Erdos249257.HalfCylinderFiniteShadow"
+      ],
+      "declaration_count": 1,
+      "kind_counts": {
+        "theorem": 1
       }
     },
     {
@@ -74724,6 +74737,19 @@
       "generated_certificate": false,
       "claim_ids": [],
       "docstring": "Closedness converts the convergent sequence of finite seam supports into an exact representation of `1/2`."
+    },
+    {
+      "id": "Erdos249257/HalfCylinderSeamProducerAlignment.lean:24:producerCarry_insert_eq_four_mul_shiftedHole_sub_pulse",
+      "name": "producerCarry_insert_eq_four_mul_shiftedHole_sub_pulse",
+      "kind": "theorem",
+      "module": "Erdos249257/HalfCylinderSeamProducerAlignment.lean",
+      "line": 24,
+      "signature": "theorem producerCarry_insert_eq_four_mul_shiftedHole_sub_pulse (P : Set ℕ) (s : ℕ) (hs : 1 ≤ s) (hsP : s ∉ P) (δ : ℤ) (hδ : integerHalfCarry (insert s P) (2 * s - 2) = δ) : producerCarry (insert s P) s = 4 * (2 * δ - (supportCoeff P (2 * s) : ℤ) - 1) - (2 * (supportCoeff (insert s P) (2 * s + 1) : ℤ) + (supportCoeff (insert s P) (2 * s + 2) : ℤ))",
+      "generated_certificate": false,
+      "claim_ids": [
+        "seam_producer_carry_alignment"
+      ],
+      "docstring": "If `insert s P` is the left boundary support at the first feedback row, its producer-aligned carry is four times the shifted seam hole, minus the explicit odd/even paired incidence pulse at rows `2s+1` and `2s+2`. The seam hole is `2δ - supportCoeff P (2s)`, as in `actualFirstWrap_hole_eq_leftZeroCarry_add_one`."
     },
     {
       "id": "Erdos249257/HalfCylinderSkippedEndpointClassifier.lean:21:stemBitsFrom_eq_ofFn",

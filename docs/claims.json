@@ -5094,6 +5094,15 @@
           ]
         },
         {
+          "id": "Erdos249257.HalfCylinderSeamProducerAlignment",
+          "path": "Erdos249257/HalfCylinderSeamProducerAlignment.lean",
+          "role": "Seam-to-producer carry alignment identity",
+          "imports": [
+            "Erdos249257.HalfCylinderProducerCarrySocket",
+            "Erdos249257.HalfCylinderFiniteShadow"
+          ]
+        },
+        {
           "id": "Erdos249257.HalfCylinderSkippedEndpointClassifier",
           "path": "Erdos249257/HalfCylinderSkippedEndpointClassifier.lean",
           "role": "Skipped-endpoint classifier for the half seam",
@@ -5560,6 +5569,11 @@
           "to": "largest_skip_gap_propagation"
         },
         {
+          "from": "seam_producer_carry_alignment",
+          "relation": "builds_on",
+          "to": "producer_carry_future_tail_socket"
+        },
+        {
           "from": "denominator_exclusion",
           "relation": "advances_open_target",
           "to": "erdos_249",
@@ -5809,7 +5823,7 @@
     "lean_toolchain": "leanprover/lean4:v4.29.1",
     "repository": "https://github.com/wcook04/plectis-lean-erdos249-257",
     "formal_source": {
-      "ref": "c0b65494d2ef1ea071cc2d3549d079b3b5705a8d",
+      "ref": "7183dc80f6ab18b528fa45071126413724acca38",
       "ref_kind": "commit",
       "publication_state": "committed_checkpoint_pending_remote_publication",
       "relationship_to_last_tag": "post_tag_checkpoint"
@@ -5833,7 +5847,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 1417
+        "line": 1426
       }
     },
     {
@@ -5844,7 +5858,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 1426
+        "line": 1435
       }
     },
     {
@@ -5855,7 +5869,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 1433
+        "line": 1442
       }
     }
   ],
@@ -6505,6 +6519,21 @@
           "name": "upperOrMiddle_within_of_two_pow_deficit",
           "module": "Erdos249257/HalfCylinderResetDeficitEscape.lean",
           "line": 261
+        }
+      ]
+    },
+    {
+      "id": "seam_producer_carry_alignment",
+      "label": "Seam-to-producer carry alignment identity",
+      "status": "proved here",
+      "statement": "For the left boundary support at a first-wrap seam, the producer-aligned carry is exactly four times the shifted seam hole minus the paired incidence pulse at the next two rows. This is a coordinate identity and gives no sign or occurrence estimate.",
+      "paper_label": "res:seamproducer",
+      "readme_headline": false,
+      "declarations": [
+        {
+          "name": "producerCarry_insert_eq_four_mul_shiftedHole_sub_pulse",
+          "module": "Erdos249257/HalfCylinderSeamProducerAlignment.lean",
+          "line": 24
         }
       ]
     },
