@@ -103,3 +103,4 @@ import Erdos249257.Totient827ParitySocketCeiling
 import Erdos249257.HalfCylinderProducerLowerBound
 import Erdos249257.DiagonalFlexibleOddWindowAffine
 import Erdos249257.DiagonalFlexibleOddWindowSupply
+import Erdos249257.DiagonalPincerPrimeCertificates.ClosureT64

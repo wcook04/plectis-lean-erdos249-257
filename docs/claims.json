@@ -858,6 +858,14 @@
           ]
         },
         {
+          "id": "Erdos249257.DiagonalPincerPrimeCertificates.ClosureT64",
+          "path": "Erdos249257/DiagonalPincerPrimeCertificates/ClosureT64.lean",
+          "role": "Finite diagonal prime-certificate shard",
+          "imports": [
+            "Erdos249257.DiagonalPincerCertificates"
+          ]
+        },
+        {
           "id": "Erdos249257.DiagonalPincerPrimeCertificates.Prime1007065607398559",
           "path": "Erdos249257/DiagonalPincerPrimeCertificates/Prime1007065607398559.lean",
           "role": "Finite diagonal prime-certificate shard",
@@ -6041,7 +6049,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 1679
+        "line": 1686
       }
     },
     {
@@ -6052,7 +6060,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 1688
+        "line": 1695
       }
     },
     {
@@ -6063,7 +6071,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 1695
+        "line": 1702
       }
     }
   ],
@@ -7262,6 +7270,22 @@
           "name": "irrational_totientSeries_of_diagonalFreshLossProjectionSupply",
           "module": "Erdos249257/DiagonalFreshLossBridge.lean",
           "line": 191
+        }
+      ]
+    },
+    {
+      "id": "diagonal_pincer_t64_primality_closure",
+      "label": "T64 diagonal-pincer primality closure",
+      "status": "verified finite instance",
+      "bounded_domain": "The generated Lucas primality dependencies required by the diagonal-pincer certificate family through t = 64.",
+      "statement": "A generated proof-producing Lucas-certificate module supplies the primality dependencies for the t=47,49,53,59,61,64 diagonal-pincer certificates. This is finite certificate infrastructure; it neither supplies an unbounded certificate family nor proves irrationality.",
+      "paper_label": "res:t64closure",
+      "readme_headline": false,
+      "declarations": [
+        {
+          "name": "prime_lucas_2364533768205644535022723273",
+          "module": "Erdos249257/DiagonalPincerPrimeCertificates/ClosureT64.lean",
+          "line": 40737
         }
       ]
     },
