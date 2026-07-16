@@ -98,6 +98,25 @@ def prior_art_errors(prior_art: str) -> list[str]:
     ]
 
 
+def related_problem_errors(related: str) -> list[str]:
+    """Reject collapse between catalogue status and local mathematical effect."""
+    required = (
+        "external catalogue status and the local release status are separate facts",
+        "--open remaining_open.erdos_249_irrationality",
+        "--open remaining_open.universal_257_all_infinite_supports",
+        "--claim prime_support_irrationality",
+        "--claim sigma_transcendence",
+        "The first two packets are `open`; the latter two are `cited only`",
+        "records an `advances_open_target` edge",
+        "untouched analogy",
+    )
+    return [
+        f"related-problem map lost typed relation boundary: {phrase}"
+        for phrase in required
+        if phrase not in related
+    ]
+
+
 def main() -> int:
     """Assert that every first-contact surface preserves the public membrane."""
     agents = read("AGENTS.md")
@@ -106,9 +125,11 @@ def main() -> int:
     claims = json.loads(read("docs/claims.json"))
     methodology = json.loads(read("docs/methodology.json"))
     prior_art = read("docs/PRIOR_ART.md")
+    related = read("docs/RELATED_PROBLEMS.md")
     summary = summary_packet()
     assert not boundary_errors(agents, scope, readme, claims, methodology, summary)
     assert not prior_art_errors(prior_art)
+    assert not related_problem_errors(related)
 
     missing_agent_rule = agents.replace(
         "never infer unpublished results or private machinery", "", 1
@@ -145,11 +166,27 @@ def main() -> int:
         "prior-art map lost claim-faithful comparison boundary" in error
         for error in prior_art_errors(missing_claim_route)
     )
+    collapsed_relation = related.replace(
+        "The first two packets are `open`; the latter two are `cited only`.",
+        "Every related solved problem is progress on the open targets.",
+        1,
+    )
+    assert any(
+        "related-problem map lost typed relation boundary" in error
+        for error in related_problem_errors(collapsed_relation)
+    )
+    missing_open_handle = related.replace(
+        "--open remaining_open.universal_257_all_infinite_supports", "", 1
+    )
+    assert any(
+        "related-problem map lost typed relation boundary" in error
+        for error in related_problem_errors(missing_open_handle)
+    )
 
     print(
         "test_public_artifact_boundary: first-contact surfaces reject "
         "private or unpublished proof authority and novelty inference; "
-        "4 negative fixtures rejected"
+        "6 negative fixtures rejected"
     )
     return 0
 
