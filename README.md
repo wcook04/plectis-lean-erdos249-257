@@ -40,13 +40,13 @@ release. Lean source checked by the pinned Lean kernel is proof authority.
 | **formalised here** | The base-2 Mersenne achievement set is compact, perfect, totally disconnected, nowhere dense, and has Lebesgue measure one. Membership is equivalent to greedy survival at every level. |
 | **unconditional progress** | If `S` is rational, its denominator is greater than `79 639 646 646 701 375 323 355 774 875 831 053` (about `7.96 × 10³⁴`). |
 | **conditional reduction** | `S` is irrational exactly when certified non-integrality witnesses occur at unbounded parameters. At fixed parameters, existence of a finite certificate is equivalent to non-integrality of the corresponding tail difference. The unbounded supply remains open. |
+| **verified finite instance** | The kernel checks 28 explicit lcm-diagonal scales through `t = 64`. This bounded range does not supply the unbounded quantifier required above. |
 | **proved here** | For the #257 test value `1/2`, achievement-set membership is equivalent to infinitely many greedy skips. Under the alternative hypothesis that there is a last skip, the upper branch and the middle coordinate `-3` are impossible. |
 | **conditional reduction** | The two remaining middle coordinates `-2` and `-1` would also be eliminated if the producer carry dominated its complete future divisor-incidence tail. That inequality is not proved. |
 
-Further bounded and local checks include 28 explicit lcm-diagonal scales
-through `t = 64` and an exact band formula for the final skip between two
-takes. These validate finite mechanisms; they do not provide the unbounded
-#249 supply or show that the actual #257 orbit avoids an unsafe band.
+A further local check gives an exact band formula for the final skip between
+two takes. It validates a finite mechanism; it does not show that the actual
+orbit avoids an unsafe band.
 
 The generated [orientation](docs/ORIENTATION.md) expands these status labels and
 routes every principal claim. The [exposition](erdos249-257-exposition.pdf)
@@ -73,7 +73,7 @@ mathematical boundary.
 | Library | Current size |
 |---|---:|
 | Lean modules | 633 |
-| Formal results and supporting lemmas | 11,467 |
+| Formal results and supporting lemmas | 11,471 |
 
 These figures describe the library, not the number of separate mathematical
 claims. For a guided reading order, see

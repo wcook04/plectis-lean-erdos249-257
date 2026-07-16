@@ -174,7 +174,7 @@ def paper_anchor_inventory() -> list[dict[str, Any]]:
 
         section_pattern = re.compile(
             r"\\(?P<kind>section|subsection|subsubsection|paragraph)\{(?P<title>[^\n}]*)\}"
-            r"[^\n]*?\\label\{(?P<label>[^}]+)\}"
+            r"[^\n]*(?:\n[ \t]*)?\\label\{(?P<label>[^}]+)\}"
         )
         for match in section_pattern.finditer(text):
             starts.append(

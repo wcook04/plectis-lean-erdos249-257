@@ -11,9 +11,9 @@
   },
   "identity": {
     "formal_source": {
-      "ref": "0e85f7ebadb0f81a26791bc167ce224bd2534f36",
+      "ref": "81150c1c6fdd4cd51e76d3aa0de344341e0e9e7c",
       "ref_kind": "commit",
-      "resolved_commit": "0e85f7ebadb0f81a26791bc167ce224bd2534f36",
+      "resolved_commit": "81150c1c6fdd4cd51e76d3aa0de344341e0e9e7c",
       "publication_state": "committed_checkpoint_pending_remote_publication",
       "relationship_to_last_tag": "post_tag_checkpoint",
       "last_release": {
@@ -24,11 +24,11 @@
       "authority_role": "proof_bearing_committed_source_anchor"
     },
     "navigation_snapshot": {
-      "commit": "2f085f09b795ecaca2c21e0ef9b4af0be8fe7c82",
+      "commit": "77e5610d7d6e46842d783736434d091ca29fbf99",
       "authority_role": "machine_readable_navigation_anchor",
       "publication_state": "main_history_snapshot",
       "published_ref": "main",
-      "repository_resolution": "https://github.com/wcook04/plectis-lean-erdos249-257/tree/2f085f09b795ecaca2c21e0ef9b4af0be8fe7c82"
+      "repository_resolution": "https://github.com/wcook04/plectis-lean-erdos249-257/tree/77e5610d7d6e46842d783736434d091ca29fbf99"
     },
     "content": {
       "machine_readable_paper": {
@@ -37,12 +37,12 @@
       },
       "claims_document": {
         "path": "docs/claims.json",
-        "content_digest": "sha256:371673361da1717565842b2da10a56243f781e8fc41cb5f53d9852fb9f018de1"
+        "content_digest": "sha256:3df888e549c7c39b2529b2ea404377217102deb502471e34bac1bfcb9d4e49ab"
       },
       "declaration_atlas": {
         "path": "docs/declaration_atlas.json",
-        "content_digest": "sha256:86198faac88c0bd2072ebced43ea3ccbfc1cfed0f48c41d0ed86e734f592ed45",
-        "source_input_fingerprint": "sha256:a37267622c98fa2c66dad4cc5c28583d9c0b8e31547860a7b242706fc5bb7ecd"
+        "content_digest": "sha256:77f8f35723a50c991ea73cef35ab1c4927e4b7280176bc90c396b251f696522b",
+        "source_input_fingerprint": "sha256:267947a5b0d7963566214632dea23d31fe83dadadeae6cd8122b1a7fa63f2e5f"
       },
       "methodology_contract": {
         "path": "docs/methodology.json",
@@ -50,27 +50,27 @@
       },
       "bounded_orientation": {
         "path": "docs/orientation.json",
-        "content_digest": "sha256:ddb1388b10a95ea61ae2bafafa1102d4f4491ee7d16ee5a95c517c2bb1f422a7"
+        "content_digest": "sha256:9fed920fd0bc89c079f02da2c5cf7511b35b24d670c43b592d6a2ff9f49a8e3f"
       },
       "human_exposition": {
         "source_path": "paper/erdos249-257-exposition.tex",
-        "source_content_digest": "sha256:7ae1af4f4622ba76e15a989d4f01abf72fbec5140a4f091b953d6e404bac0041",
+        "source_content_digest": "sha256:a13f2a0b4a82ea58c6accdfdd59f4c4f2cc85bad312241719a02f35124060d24",
         "rendered_path": "erdos249-257-exposition.pdf",
-        "rendered_content_digest": "sha256:36f4e682f09a6f761ef3742aa20d71ab861e99f6c1b1880200006323992d12ed",
+        "rendered_content_digest": "sha256:a17b9e15d1bd8b529d65953ada0546124796639eba9815d4eb932c5d199f1d01",
         "artifact_role": "authored_mathematician_facing_exposition",
         "authority_posture": "authored_editorial_surface_not_Lean_proof_authority"
       },
       "technical_companion": {
         "source_path": "paper/erdos249-transport-curvature.tex",
-        "source_content_digest": "sha256:19e11eba297e26ef7dd376187f16c8a457e8a6f01f6ebe3ce345d6aec170120e",
+        "source_content_digest": "sha256:e7d4c88388cbafb87f054f7aff5d535b7e20c47f94f61aff7dac7a1d3b225099",
         "rendered_path": "erdos249-transport-curvature.pdf",
-        "rendered_content_digest": "sha256:f6ce2e2461c98870ca3ecc769741bae2d6c1cd94540fcbc92d5db04c3fd47951",
+        "rendered_content_digest": "sha256:931dcad0394ca9ab73bff794da0807f46f76bab1eecf7632f97cdffca1620e15",
         "artifact_role": "authored_transport_and_curvature_companion",
         "authority_posture": "authored_editorial_surface_not_Lean_proof_authority"
       },
       "paper_source_sigils": {
         "path": "paper/module-aliases.json",
-        "content_digest": "sha256:5ee01acfe2ff8714155f4e57de59891e675e66a24d48a5a254a2199d94752ba1",
+        "content_digest": "sha256:e5a44f0ea58fd580ee4d4191cd28a65e17433ff3369ed071b547a75c9d1af539",
         "schema": "erdos249257-paper-module-aliases/1",
         "artifact_role": "paper_sigil_to_lean_module_navigation_crosswalk",
         "authority_posture": "generated_navigation_projection_not_proof_authority"
@@ -133,18 +133,18 @@
   },
   "summary": {
     "module_count": 633,
-    "declaration_count": 12490,
-    "theorem_like_count": 11467,
-    "generated_certificate_declaration_count": 2923,
-    "principal_claim_link_count": 235,
+    "declaration_count": 12496,
+    "theorem_like_count": 11471,
+    "generated_certificate_declaration_count": 2925,
+    "principal_claim_link_count": 247,
     "kind_counts": {
       "abbrev": 7,
-      "def": 980,
+      "def": 982,
       "inductive": 4,
       "instance": 5,
       "lemma": 354,
       "structure": 27,
-      "theorem": 11113
+      "theorem": 11117
     }
   },
   "compact_graph": {
@@ -375,6 +375,52 @@
         "remaining_open_proposition_ids": [
           "remaining_open.universal_257_all_infinite_supports"
         ]
+      },
+      {
+        "id": "greedy_achievement_geometry",
+        "status": "formalised here",
+        "statement": "The Mersenne achievement set is compact, perfect, totally disconnected, nowhere dense, and has Lebesgue measure one. Membership is equivalent to greedy survival at every level; for the target 1/2 it is exactly equivalent to the canonical greedy orbit omitting infinitely many exponents. Finite exact-rational death certificates soundly prove non-membership (3/4 is excluded at level one). The strict-tail Cantor geometry is recorded by Kovač–Tao; no novelty claim is made for the formalised refinements.",
+        "paper_label": "res:greedy",
+        "declarations": [
+          {
+            "name": "volume_mersenneAchievementSet",
+            "module": "Erdos249257/GreedyAchievementSet.lean",
+            "line": 996
+          },
+          {
+            "name": "perfect_mersenneAchievementSet",
+            "module": "Erdos249257/GreedyAchievementSet.lean",
+            "line": 1620
+          },
+          {
+            "name": "isTotallyDisconnected_mersenneAchievementSet",
+            "module": "Erdos249257/GreedyAchievementSet.lean",
+            "line": 1636
+          },
+          {
+            "name": "isNowhereDense_mersenneAchievementSet",
+            "module": "Erdos249257/GreedyAchievementSet.lean",
+            "line": 1645
+          },
+          {
+            "name": "mem_mersenneAchievementSet_iff_greedy_survival",
+            "module": "Erdos249257/GreedyAchievementSet.lean",
+            "line": 1445
+          },
+          {
+            "name": "three_fourths_not_mem_mersenneAchievementSet",
+            "module": "Erdos249257/GreedyAchievementSet.lean",
+            "line": 1748
+          },
+          {
+            "name": "half_mem_mersenneAchievementSet_iff_greedySkippedSupport_infinite",
+            "module": "Erdos249257/GreedyAchievementSet.lean",
+            "line": 2514
+          }
+        ],
+        "remaining_open_proposition_ids": [
+          "remaining_open.universal_257_all_infinite_supports"
+        ]
       }
     ],
     "non_claims": [
@@ -412,18 +458,18 @@
           "source": "paper/erdos249-257-exposition.tex",
           "environment": "problem",
           "title": "Erd\\H{o}s \\#249",
-          "line": 1926
+          "line": 2027
         }
       },
       {
         "id": "remaining_open.unbounded_certificate_supply",
         "open_target_claim": "erdos_249",
-        "statement": "Produce certified non-integrality witnesses at unbounded parameters, equivalently along the lcm diagonal.",
+        "statement": "Produce certified non-integrality witnesses at unbounded parameters. A sufficient one-parameter form is to produce them along the lcm diagonal.",
         "paper_anchor": {
           "source": "paper/erdos249-257-exposition.tex",
           "environment": "problem",
           "title": "unbounded certificate supply",
-          "line": 1935
+          "line": 2036
         }
       },
       {
@@ -434,7 +480,7 @@
           "source": "paper/erdos249-257-exposition.tex",
           "environment": "problem",
           "title": "universal Erd\\H{o}s \\#257",
-          "line": 1942
+          "line": 2044
         }
       }
     ],
@@ -1427,6 +1473,48 @@
         "name": "supportCoeffZeroWindow_length_le_eps_logb_add",
         "module": "Erdos249257/SublogDivisorCoverage.lean",
         "line": 392
+      },
+      {
+        "claim_id": "greedy_achievement_geometry",
+        "name": "volume_mersenneAchievementSet",
+        "module": "Erdos249257/GreedyAchievementSet.lean",
+        "line": 996
+      },
+      {
+        "claim_id": "greedy_achievement_geometry",
+        "name": "perfect_mersenneAchievementSet",
+        "module": "Erdos249257/GreedyAchievementSet.lean",
+        "line": 1620
+      },
+      {
+        "claim_id": "greedy_achievement_geometry",
+        "name": "isTotallyDisconnected_mersenneAchievementSet",
+        "module": "Erdos249257/GreedyAchievementSet.lean",
+        "line": 1636
+      },
+      {
+        "claim_id": "greedy_achievement_geometry",
+        "name": "isNowhereDense_mersenneAchievementSet",
+        "module": "Erdos249257/GreedyAchievementSet.lean",
+        "line": 1645
+      },
+      {
+        "claim_id": "greedy_achievement_geometry",
+        "name": "mem_mersenneAchievementSet_iff_greedy_survival",
+        "module": "Erdos249257/GreedyAchievementSet.lean",
+        "line": 1445
+      },
+      {
+        "claim_id": "greedy_achievement_geometry",
+        "name": "three_fourths_not_mem_mersenneAchievementSet",
+        "module": "Erdos249257/GreedyAchievementSet.lean",
+        "line": 1748
+      },
+      {
+        "claim_id": "greedy_achievement_geometry",
+        "name": "half_mem_mersenneAchievementSet_iff_greedySkippedSupport_infinite",
+        "module": "Erdos249257/GreedyAchievementSet.lean",
+        "line": 2514
       }
     ]
   },
@@ -1443,8 +1531,8 @@
     },
     "exhaustive_declaration_atlas": {
       "path": "docs/declaration_atlas.json",
-      "expected_content_digest": "sha256:86198faac88c0bd2072ebced43ea3ccbfc1cfed0f48c41d0ed86e734f592ed45",
-      "expected_source_input_fingerprint": "sha256:a37267622c98fa2c66dad4cc5c28583d9c0b8e31547860a7b242706fc5bb7ecd",
+      "expected_content_digest": "sha256:77f8f35723a50c991ea73cef35ab1c4927e4b7280176bc90c396b251f696522b",
+      "expected_source_input_fingerprint": "sha256:267947a5b0d7963566214632dea23d31fe83dadadeae6cd8122b1a7fa63f2e5f",
       "availability": "optional_attached_corpus",
       "check": "python3 scripts/build_declaration_atlas.py --check"
     },
@@ -1456,21 +1544,21 @@
     },
     "human_exposition": {
       "source_path": "paper/erdos249-257-exposition.tex",
-      "expected_source_content_digest": "sha256:7ae1af4f4622ba76e15a989d4f01abf72fbec5140a4f091b953d6e404bac0041",
+      "expected_source_content_digest": "sha256:a13f2a0b4a82ea58c6accdfdd59f4c4f2cc85bad312241719a02f35124060d24",
       "rendered_path": "erdos249-257-exposition.pdf",
-      "expected_rendered_content_digest": "sha256:36f4e682f09a6f761ef3742aa20d71ab861e99f6c1b1880200006323992d12ed",
+      "expected_rendered_content_digest": "sha256:a17b9e15d1bd8b529d65953ada0546124796639eba9815d4eb932c5d199f1d01",
       "authority_posture": "authored_editorial_surface_not_Lean_proof_authority"
     },
     "technical_companion": {
       "source_path": "paper/erdos249-transport-curvature.tex",
-      "expected_source_content_digest": "sha256:19e11eba297e26ef7dd376187f16c8a457e8a6f01f6ebe3ce345d6aec170120e",
+      "expected_source_content_digest": "sha256:e7d4c88388cbafb87f054f7aff5d535b7e20c47f94f61aff7dac7a1d3b225099",
       "rendered_path": "erdos249-transport-curvature.pdf",
-      "expected_rendered_content_digest": "sha256:f6ce2e2461c98870ca3ecc769741bae2d6c1cd94540fcbc92d5db04c3fd47951",
+      "expected_rendered_content_digest": "sha256:931dcad0394ca9ab73bff794da0807f46f76bab1eecf7632f97cdffca1620e15",
       "authority_posture": "authored_editorial_surface_not_Lean_proof_authority"
     },
     "paper_source_sigils": {
       "path": "paper/module-aliases.json",
-      "expected_content_digest": "sha256:5ee01acfe2ff8714155f4e57de59891e675e66a24d48a5a254a2199d94752ba1",
+      "expected_content_digest": "sha256:e5a44f0ea58fd580ee4d4191cd28a65e17433ff3369ed071b547a75c9d1af539",
       "schema": "erdos249257-paper-module-aliases/1",
       "check": "python3 scripts/build_paper_module_aliases.py --check"
     }

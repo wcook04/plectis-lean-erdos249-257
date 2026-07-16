@@ -105,7 +105,7 @@ def main() -> int:
     mutated["story_claims"]["half_greedy_two_thirds_band"]["claim"]["statement"] = (
         "The actual greedy orbit for 1/2 avoids the band."
     )
-    assert_rejected(mutated, "#257 singleton-band orbit boundary")
+    assert_rejected(mutated, "#257 band orbit boundary")
     checks += 1
 
     mutated = copy.deepcopy(packets)

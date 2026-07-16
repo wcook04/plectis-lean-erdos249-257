@@ -7,23 +7,23 @@
     "version": "0.6.0",
     "tag": "v0.6.0",
     "lean_toolchain": "leanprover/lean4:v4.29.1",
-    "formal_source_ref": "0e85f7ebadb0f81a26791bc167ce224bd2534f36",
+    "formal_source_ref": "81150c1c6fdd4cd51e76d3aa0de344341e0e9e7c",
     "formal_source_publication_state": "committed_checkpoint_pending_remote_publication"
   },
   "scale": {
     "module_count": 633,
-    "declaration_count": 12490,
-    "theorem_like_count": 11467,
-    "generated_certificate_declaration_count": 2923,
-    "principal_claim_link_count": 235,
+    "declaration_count": 12496,
+    "theorem_like_count": 11471,
+    "generated_certificate_declaration_count": 2925,
+    "principal_claim_link_count": 247,
     "kind_counts": {
       "abbrev": 7,
-      "def": 980,
+      "def": 982,
       "inductive": 4,
       "instance": 5,
       "lemma": 354,
       "structure": 27,
-      "theorem": 11113
+      "theorem": 11117
     }
   },
   "status_taxonomy": {
@@ -44,18 +44,18 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 1926
+        "line": 2027
       }
     },
     {
       "id": "remaining_open.unbounded_certificate_supply",
       "open_target_claim": "erdos_249",
-      "statement": "Produce certified non-integrality witnesses at unbounded parameters, equivalently along the lcm diagonal.",
+      "statement": "Produce certified non-integrality witnesses at unbounded parameters. A sufficient one-parameter form is to produce them along the lcm diagonal.",
       "paper_anchor": {
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 1935
+        "line": 2036
       }
     },
     {
@@ -66,7 +66,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 1942
+        "line": 2044
       }
     }
   ],
@@ -309,6 +309,52 @@
           "name": "supportCoeffZeroWindow_length_le_eps_logb_add",
           "module": "Erdos249257/SublogDivisorCoverage.lean",
           "line": 392
+        }
+      ],
+      "remaining_open_proposition_ids": [
+        "remaining_open.universal_257_all_infinite_supports"
+      ]
+    },
+    {
+      "id": "greedy_achievement_geometry",
+      "status": "formalised here",
+      "statement": "The Mersenne achievement set is compact, perfect, totally disconnected, nowhere dense, and has Lebesgue measure one. Membership is equivalent to greedy survival at every level; for the target 1/2 it is exactly equivalent to the canonical greedy orbit omitting infinitely many exponents. Finite exact-rational death certificates soundly prove non-membership (3/4 is excluded at level one). The strict-tail Cantor geometry is recorded by Kovač–Tao; no novelty claim is made for the formalised refinements.",
+      "paper_label": "res:greedy",
+      "declarations": [
+        {
+          "name": "volume_mersenneAchievementSet",
+          "module": "Erdos249257/GreedyAchievementSet.lean",
+          "line": 996
+        },
+        {
+          "name": "perfect_mersenneAchievementSet",
+          "module": "Erdos249257/GreedyAchievementSet.lean",
+          "line": 1620
+        },
+        {
+          "name": "isTotallyDisconnected_mersenneAchievementSet",
+          "module": "Erdos249257/GreedyAchievementSet.lean",
+          "line": 1636
+        },
+        {
+          "name": "isNowhereDense_mersenneAchievementSet",
+          "module": "Erdos249257/GreedyAchievementSet.lean",
+          "line": 1645
+        },
+        {
+          "name": "mem_mersenneAchievementSet_iff_greedy_survival",
+          "module": "Erdos249257/GreedyAchievementSet.lean",
+          "line": 1445
+        },
+        {
+          "name": "three_fourths_not_mem_mersenneAchievementSet",
+          "module": "Erdos249257/GreedyAchievementSet.lean",
+          "line": 1748
+        },
+        {
+          "name": "half_mem_mersenneAchievementSet_iff_greedySkippedSupport_infinite",
+          "module": "Erdos249257/GreedyAchievementSet.lean",
+          "line": 2514
         }
       ],
       "remaining_open_proposition_ids": [

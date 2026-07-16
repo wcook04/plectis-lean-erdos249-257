@@ -16,10 +16,10 @@ Lean kernel remains proof authority.
 | Surface | Count |
 |---|---:|
 | Lean modules | 633 |
-| Lean declarations | 12,490 |
-| Theorem-like declarations | 11,467 |
-| Generated certificate declarations | 2,923 |
-| Principal claim links | 235 |
+| Lean declarations | 12,496 |
+| Theorem-like declarations | 11,471 |
+| Generated certificate declarations | 2,925 |
+| Principal claim links | 247 |
 
 The exhaustive declaration and import index is
 [`docs/declaration_atlas.json`](declaration_atlas.json). Generated certificate
@@ -43,7 +43,7 @@ The authored prior-art record, not this table, is the source for antecedents.
 ## Exact open boundary
 
 - `remaining_open.erdos_249_irrationality` — Prove that S = ∑ φ(n)/2ⁿ is irrational, with no bound on a possible rational denominator.
-- `remaining_open.unbounded_certificate_supply` — Produce certified non-integrality witnesses at unbounded parameters, equivalently along the lcm diagonal.
+- `remaining_open.unbounded_certificate_supply` — Produce certified non-integrality witnesses at unbounded parameters. A sufficient one-parameter form is to produce them along the lcm diagonal.
 - `remaining_open.universal_257_all_infinite_supports` — Prove irrationality for every infinite support A, not only the named support families formalised here.
 
 ## Principal claim routes
@@ -60,6 +60,7 @@ The authored prior-art record, not this table, is the source for antecedents.
 | `diagonal_pincer_reduction` | conditional reduction | `res:pincer` | `diagonal_int_iff_foreignDiagonalDefect_hits_fullTarget` in `Erdos249257/DiagonalPincerDecomposition.lean:215` |
 | `adelic_height_obstruction` | proved here | `res:adelic` | `scalarLocalization_complement_dvd` in `Erdos249257/AdelicHeightObstruction.lean:23` |
 | `sublog_zero_windows` | proved here | `res:sublog` | `supportCoeffZeroWindow_length_le_eps_logb_add` in `Erdos249257/SublogDivisorCoverage.lean:392` |
+| `greedy_achievement_geometry` | formalised here | `res:greedy` | `volume_mersenneAchievementSet` in `Erdos249257/GreedyAchievementSet.lean:996` |
 
 Each row is only an entry handle. Read the claim statement and every attached
 declaration in [`docs/claims.json`](claims.json), then follow the paper label into

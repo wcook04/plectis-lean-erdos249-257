@@ -102,14 +102,14 @@ def main() -> int:
         "python3 scripts/query_corpus.py --claim final_middle_cell_escape",
         "python3 scripts/query_corpus.py --claim last_producer_tail_escape_reduction",
     ]
-    singleton_band = query("--claim", "half_greedy_two_thirds_band")
+    band_claim = query("--claim", "half_greedy_two_thirds_band")
     assert ("builds_on", "greedy_achievement_geometry") in {
         (row["relation"], row["neighbour"]["id"])
-        for row in singleton_band["argument_neighbourhood"]["outgoing"]
+        for row in band_claim["argument_neighbourhood"]["outgoing"]
     }
     assert (
-        "no theorem here says that the actual greedy orbit for 1/2 avoids the band"
-        in singleton_band["claim"]["statement"]
+        "no theorem here says that the actual greedy orbit for 1/2 avoids a band"
+        in band_claim["claim"]["statement"]
     )
     half_membership = query("--claim", "half_membership_seam_classification")
     assert {
