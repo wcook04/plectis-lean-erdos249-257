@@ -18,6 +18,7 @@ from __future__ import annotations
 
 import copy
 import json
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -76,12 +77,17 @@ DISCOVERY_ROUTE_QUERIES = {
     "how close is problem 249": "erdos249_certificate_story",
     "what remains open for 257": "erdos257_half_story",
     "achievement set topology": "erdos257_half_story",
+    "periodic weighted Lambert series": "structured_support_families",
+    "diagonal pincer and fresh loss": "erdos249_diagonal_arithmetic",
+    "binary carry rigidity": "boolean_mobius_constraints",
     "why local induction fails": "half_carry_compactness_programme",
     "strategy countermodels": "transport_curvature_programme",
+    "Mersenne Lambert identities": "lambert_obstruction_interfaces",
     "formal proof trust": "change_or_verify_release",
     "denominator obstruction": "arithmetic_obstruction_interfaces",
     "how big is the corpus": "instant_orientation",
     "what is formally checked": "instant_orientation",
+    "what other exact mathematics is there": "instant_orientation",
     "where are the Lean proofs": "follow_one_claim",
     "what is new mathematics": "trace_prior_art",
     "how do I verify this": "change_or_verify_release",
@@ -149,6 +155,22 @@ def human_tasks(summary: dict[str, Any]) -> dict[str, list[list[str]]]:
             ["conditional reduction"],
             ["verified finite instance"],
             ["does not show that the actual orbit avoids", "does not show the actual orbit avoids"],
+        ],
+        "recover_breadth_beyond_headlines": [
+            ["eventually-periodic nonnegative weighted irrationality"],
+            ["signed irrational-or-base-terminating dichotomy"],
+            [
+                "five binary-carry criteria/consequences",
+                "five binary-carry criteria or consequences",
+            ],
+            ["two scoped #249 no-go countermodels"],
+        ],
+        "recover_scale_and_assembly": [
+            ["Lean modules"],
+            ["Formal results and supporting lemmas"],
+            ["Curated claim records"],
+            ["Contribution families"],
+            ["navigation counts, not novelty claims"],
         ],
         "name_exact_open_frontier": [
             [open_rows["remaining_open.erdos_249_irrationality"]["statement"],
@@ -238,9 +260,25 @@ def validate_gateway_opening(paper: str) -> None:
     start = paper.index(r"\section{Introduction}")
     end = paper.index(r"\section{The Mersenne--Lambert ladder}")
     opening = paper[start:end]
-    size = len(opening.encode("utf-8"))
+    visible_opening = re.sub(
+        r"\\lword\{[^{}]*\}\{[^{}]*\}\{[^{}]*\}\{([^{}]*)\}",
+        r"\1",
+        opening,
+    )
+    visible_opening = re.sub(
+        r"\\(?:lref|lrefx)\{[^{}]*\}\{[^{}]*\}\{[^{}]*\}",
+        "Lean proof",
+        visible_opening,
+    )
+    visible_opening = re.sub(
+        r"\\lloc\{[^{}]*\}\{[^{}]*\}",
+        "Lean source",
+        visible_opening,
+    )
+    size = len(visible_opening.encode("utf-8"))
     assert size <= GATEWAY_OPENING_BUDGET_BYTES, (
-        f"gateway introduction is {size} bytes (budget {GATEWAY_OPENING_BUDGET_BYTES})"
+        f"visible gateway introduction is {size} bytes "
+        f"(budget {GATEWAY_OPENING_BUDGET_BYTES})"
     )
     requirements = {
         "both_problem_statements": [
@@ -248,7 +286,8 @@ def validate_gateway_opening(paper: str) -> None:
             [r"for every infinite $A\subseteq\N$ (\#257)"],
         ],
         "status_table": [
-            [r"\textbf{Classical formalisation}"],
+            [r"\textbf{\mbox{Classical}}"],
+            [r"\textbf{\mbox{Unconditional/exact}}"],
             [r"q>\Qzero"],
             ["28 diagonal certificates"],
         ],
@@ -454,6 +493,9 @@ def validate_agent_packets(packets: dict[str, Any]) -> None:
     route = packets["route"]["route"]
     assert "docs/claims.json" not in route["read"]
     assert route["query_steps"]
+    assert "python3 scripts/query_corpus.py --publication-architecture" in (
+        route["query_steps"]
+    )
     assert route["authority_owners"]
     assert route["adjacent_handle_classes"]
 
@@ -507,11 +549,14 @@ def validate_agent_packets(packets: dict[str, Any]) -> None:
         search_packet = packets["discovery_searches"][search_text]
         assert search_packet["kind"] == "search"
         assert search_packet["query"] == search_text
-        assert expected_route_id in {
-            row.get("id")
-            for row in search_packet["results"]
-            if row["kind"] == "reading_route"
-        }
+        assert search_packet["results"]
+        assert search_packet["results"][0]["kind"] == "reading_route"
+        assert search_packet["results"][0]["id"] == expected_route_id
+    portfolio_results = packets["discovery_searches"][
+        "what other exact mathematics is there"
+    ]["results"]
+    assert portfolio_results[0]["kind"] == "reading_route"
+    assert portfolio_results[0]["id"] == "instant_orientation"
     assert [
         step.rsplit(" ", 1)[-1]
         for step in story_routes["erdos257_half_story"]["route"]["query_steps"]

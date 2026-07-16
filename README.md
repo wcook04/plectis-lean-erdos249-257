@@ -24,8 +24,8 @@ Both remain open. This project formalises results around both questions; **it
 does not solve Erdős #249 or the universal form of Erdős #257.** Every row
 below is stated at the scope the Lean source actually supports.
 
-This is a self-contained public project. It is not an entrypoint into any
-private development system, and no claim depends on unreleased work.
+This self-contained public project is not an entrypoint into any private
+development system; no claim depends on unreleased work.
 
 `v0.6.0` is the latest tagged release and citation anchor.
 [`docs/claims.json`](docs/claims.json) pins the post-tag formal-source checkpoint;
@@ -44,9 +44,13 @@ authority.
 | **proved here** | For the #257 test value `1/2`, achievement-set membership is equivalent to infinitely many greedy skips and would produce an infinite support of rational sum, refuting universal #257. Under a last-skip hypothesis, the upper branch and the middle coordinate `-3` are impossible. |
 | **conditional reduction** | The two remaining middle coordinates `-2` and `-1` would also be eliminated if the producer carry dominated its complete future divisor-incidence tail. That inequality is not proved. |
 
-A further local check gives an exact band formula for the final skip between
-two takes. It validates a finite mechanism; it does not show that the actual
-orbit avoids an unsafe band.
+Other exact packages cover eventually-periodic nonnegative weighted irrationality, a
+signed irrational-or-base-terminating dichotomy, five binary-carry
+criteria/consequences forced by rational support values, and two scoped #249
+no-go countermodels.
+
+An exact final-skip band formula checks a finite mechanism; it does not show
+that the actual orbit avoids an unsafe band.
 
 The generated [orientation](docs/ORIENTATION.md) routes every principal claim.
 The [gateway paper](erdos249-257-exposition.pdf) states both canonical spines;
@@ -73,10 +77,11 @@ mathematical boundary.
 |---|---:|
 | Lean modules | 633 |
 | Formal results and supporting lemmas | 11,471 |
+| Curated claim records | 92 |
+| Contribution families | 19 |
 
-These figures describe the library, not the number of separate mathematical
-claims. For a guided reading order, see
-[`docs/ORIENTATION.md`](docs/ORIENTATION.md).
+Claim records span every status, including cited and open, and are partitioned
+exactly once. These are navigation counts, not novelty claims.
 <!-- END generated_corpus_at_a_glance -->
 
 ## Read or run it
@@ -98,9 +103,8 @@ claims. For a guided reading order, see
 
 ## How the repository fits together
 
-The published package has one supported root import,
-[`Erdos249257.lean`](Erdos249257.lean). Beneath it, the source is organised into
-four reader-facing layers:
+The supported root import is [`Erdos249257.lean`](Erdos249257.lean). The source
+has four reader-facing layers:
 
 - **Assembled kernel.** [`CertificateKernel.lean`](Erdos249257/CertificateKernel.lean)
   contains the common series machinery, the full-support Erdős-Borwein theorem,
@@ -115,9 +119,9 @@ four reader-facing layers:
   carry, reciprocal-mass, and divisor-coverage modules describe what a rational
   support value would force. They give exact criteria and necessary conditions,
   not the universal #257 theorem.
-- **The reading layer.** The exposition gives the mathematical account, and the
-  [source map](docs/SOURCE_MAP.md) gives a sensible route into the code. The
-  detailed declaration index is there when a precise Lean name is needed.
+- **The reading layer.** The exposition gives the mathematical account; the
+  [source map](docs/SOURCE_MAP.md) gives code routes, and the declaration index
+  supplies exact Lean names.
 
 [`docs/SOURCE_MAP.md`](docs/SOURCE_MAP.md) gives the exact module order within
 each band. [`docs/WAVE_INDEX.md`](docs/WAVE_INDEX.md) gives the development
@@ -134,15 +138,15 @@ order without asking you to decode Lean declaration names first.
 
 ## Build and verify
 
-The project uses `leanprover/lean4:v4.29.1` with Mathlib pinned by
-[`lake-manifest.json`](lake-manifest.json).
+[`lake-manifest.json`](lake-manifest.json) pins Mathlib for
+`leanprover/lean4:v4.29.1`.
 
 ```sh
 lake exe cache get
 lake build
 ```
 
-On a memory-constrained machine:
+For memory-constrained builds:
 
 ```sh
 python3 scripts/lean_fast_build.py --jobs 2
@@ -173,8 +177,8 @@ full-support theorem.
 
 ## Citation and licence
 
-Cite release `v0.6.0` using [`CITATION.cff`](CITATION.cff). For the mathematics,
-cite the exposition included in the release.
+Use [`CITATION.cff`](CITATION.cff) for release `v0.6.0`; cite the included
+exposition for the mathematics.
 
 Code, scripts, and documentation are Apache-2.0. The manuscript layer, including
 the paper source and rendered PDFs, is CC-BY-4.0. The complete licence map is in

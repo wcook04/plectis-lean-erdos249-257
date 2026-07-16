@@ -15,11 +15,14 @@
     "entrypoints": [
       {
         "id": "instant_orientation",
-        "intent": "Understand what this repository proves, reduces, cites, and leaves open.",
+        "intent": "Understand what this repository proves, reduces, cites, leaves open, and how its claims divide into contribution families.",
         "discovery_terms": [
           "how big is the corpus",
           "what is formally checked",
-          "what are the main results"
+          "what are the main results",
+          "what other exact mathematics is there",
+          "what else is proved",
+          "survey the theorem families"
         ],
         "read": [
           "docs/orientation.json",
@@ -28,15 +31,18 @@
         ],
         "query_steps": [
           "python3 scripts/query_corpus.py --format card",
+          "python3 scripts/query_corpus.py --publication-architecture",
           "python3 scripts/query_corpus.py --open <remaining_open_proposition_id>",
           "python3 scripts/query_corpus.py --claim <claim_id>"
         ],
         "authority_owners": [
           "docs/claims.json::claims",
           "docs/claims.json::remaining_open_propositions",
+          "docs/claims.json::machine_readable_paper.publication_assembly",
           "docs/methodology.json"
         ],
         "adjacent_handle_classes": [
+          "publication_family_id",
           "claim_id",
           "open_proposition_id",
           "paper_label",
@@ -222,6 +228,11 @@
         "route_kind": "mathematical_programme",
         "title": "Classical and structured support irrationality",
         "intent": "Follow the full-support theorem, named infinite-support families, periodic coefficient extensions, the mixed-sign dichotomy, and a conditional orthogonal-petal route.",
+        "discovery_terms": [
+          "periodic weighted Lambert series",
+          "structured support irrationality",
+          "orthogonal petal supports"
+        ],
         "mathematical_focus": "Classical full support, structured infinite supports, periodic nonnegative weights, signed periodic obstructions, and orthogonal-petal support combinatorics.",
         "claim_ceiling": "These are structured families, coefficient classes, and a conditional bouquet reduction; arbitrary infinite supports in universal Erdős #257 remain open.",
         "problem_target_claim_ids": [
@@ -274,6 +285,11 @@
         "route_kind": "mathematical_programme",
         "title": "#249 diagonal arithmetic and fresh-loss interfaces",
         "intent": "Follow the exact lcm-diagonal pincer, fresh-loss projection, prime-deficit decomposition, odd-window, bit-lift, slack, and foreign-residue interfaces.",
+        "discovery_terms": [
+          "diagonal pincer and fresh loss",
+          "lcm diagonal arithmetic",
+          "fresh prime deficit"
+        ],
         "mathematical_focus": "Exact interval avoidance on the lcm diagonal, fresh-prime endpoint defects, binary suffix arithmetic, affine escape sockets, and finite residue projections.",
         "claim_ceiling": "Each interface sharpens or re-expresses the same supply problem; no unbounded avoidance, slack, or separated-projection supply is proved.",
         "problem_target_claim_ids": [
@@ -328,6 +344,11 @@
         "route_kind": "mathematical_programme",
         "title": "Boolean Möbius carry and global rationality constraints",
         "intent": "Follow the exact carry-orbit characterisations of rational support-series values and the reciprocal-mass, unbounded-state, and zero-window consequences they force.",
+        "discovery_terms": [
+          "binary carry rigidity",
+          "rational support constraints",
+          "Boolean Mobius carry"
+        ],
         "mathematical_focus": "Tempered binary carry orbits, Boolean Möbius reconstruction, reciprocal mass, unbounded carry states, and sublogarithmic divisor-coverage windows.",
         "claim_ceiling": "These are exact characterisations and necessary consequences of rationality; they do not contradict every hypothetical rational value or settle universal Erdős #257.",
         "problem_target_claim_ids": [
@@ -380,7 +401,8 @@
         "discovery_terms": [
           "strategy countermodels",
           "why local signatures fail",
-          "phase separation"
+          "phase separation",
+          "transport curvature"
         ],
         "mathematical_focus": "Finite differences of totient tails, exponent transport, affine moment annihilation, harmonic phases, reconstruction defects, and countermodels to bounded local signatures.",
         "claim_ceiling": "The consumers and countermodels are exact, but no cofinal curvature, transport, phase-separation, or anti-reconstruction producer is proved.",
@@ -436,6 +458,11 @@
         "route_kind": "mathematical_programme",
         "title": "Mersenne–Lambert identities and obstruction interfaces",
         "intent": "Follow the exact Lambert identities around the totient constant and the coordinate, tail-atom, sign-support, and carry-rank obstructions that rule out naive compression strategies.",
+        "discovery_terms": [
+          "Mersenne Lambert identities",
+          "finite algebraic obstructions",
+          "primitive coordinate obstruction"
+        ],
         "mathematical_focus": "Dirichlet convolution identities, the Möbius-square lens, primitive-coordinate finite jets, exact tail atoms, sign-support no-go results, and conditional carry-rank growth.",
         "claim_ceiling": "These are exact identities, obstruction theorems, and one conditional rank consequence; they do not form an irrationality criterion for S.",
         "problem_target_claim_ids": [
@@ -553,6 +580,11 @@
         "route_kind": "mathematical_programme",
         "title": "Denominator, CRT, moment, and gauge obstructions",
         "intent": "Follow exact arithmetic enclosures and denominator lower bounds, finite square-CRT suppression, dyadic moment and certificate interfaces, and gauge countermodels that delimit several plausible #249 routes.",
+        "discovery_terms": [
+          "denominator obstruction",
+          "CRT and gauge obstruction",
+          "quantitative denominator bound"
+        ],
         "mathematical_focus": "Squared-Mersenne tail enclosures, exact reduced denominators, adelic divisibility, square-CRT correction removal, dyadic determinant substrate, certificate dimensions, and residual-gauge no-go results.",
         "claim_ceiling": "These are exact arithmetic interfaces, finite mechanisms, and obstruction theorems; they do not supply an unbounded certificate family or an irrationality criterion for the totient constant.",
         "problem_target_claim_ids": [

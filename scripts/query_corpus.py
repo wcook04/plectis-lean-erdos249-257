@@ -236,8 +236,10 @@ def paper_anchor_inventory() -> list[dict[str, Any]]:
 
             source_links = []
             for link in re.finditer(
-                r"\\(?P<macro>lref|lrefx|lloc)\{(?P<file>[^}]+)\}\{(?P<line>\d+)\}"
-                r"(?:\{(?P<name>[^}]*)\})?",
+                r"\\(?P<macro>lref|lrefx|lword|lloc)"
+                r"\{(?P<file>[^}]+)\}\{(?P<line>\d+)\}"
+                r"(?:\{(?P<name>[^}]*)\})?"
+                r"(?:\{(?P<label>[^}]*)\})?",
                 region,
             ):
                 module = f"Erdos249257/{link.group('file')}"
@@ -250,6 +252,7 @@ def paper_anchor_inventory() -> list[dict[str, Any]]:
                         "source_ref": f"{module}:{link.group('line')}",
                         "source_identity": dict(lean_source_identity),
                         "declaration": link.group("name") or None,
+                        "display_label": link.group("label") or None,
                     }
                 )
 
@@ -1040,6 +1043,26 @@ def search_rank(query: str, primary: str, haystack: str) -> int | None:
     return None
 
 
+def search_result_sort_key(
+    item: tuple[int, str, dict[str, Any]]
+) -> tuple[int, int, str]:
+    """Keep typed-handle lookup exact while preferring routes for semantic ties."""
+    rank, stable_key, result = item
+    if rank <= 2:
+        return (rank, 0, stable_key)
+    semantic_kind_priority = {
+        "reading_route": 0,
+        "publication_family": 1,
+        "open_proposition": 2,
+        "claim": 3,
+        "paper_anchor": 4,
+        "declaration": 5,
+        "module": 6,
+        "artifact": 7,
+    }
+    return (rank, semantic_kind_priority.get(result["kind"], 99), stable_key)
+
+
 def search_packet(query: str, limit: int) -> dict[str, Any]:
     query = query.strip()
     if not query:
@@ -1244,7 +1267,7 @@ def search_packet(query: str, limit: int) -> dict[str, Any]:
                 )
             )
 
-    ranked.sort(key=lambda item: (item[0], item[1]))
+    ranked.sort(key=search_result_sort_key)
     results = [item[2] for item in ranked]
     return {
         "kind": "search",

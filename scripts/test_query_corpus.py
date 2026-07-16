@@ -164,12 +164,17 @@ def validate_natural_language_search() -> None:
         "how close is problem 249": "erdos249_certificate_story",
         "what remains open for 257": "erdos257_half_story",
         "achievement set topology": "erdos257_half_story",
+        "periodic weighted Lambert series": "structured_support_families",
+        "diagonal pincer and fresh loss": "erdos249_diagonal_arithmetic",
+        "binary carry rigidity": "boolean_mobius_constraints",
         "why local induction fails": "half_carry_compactness_programme",
         "strategy countermodels": "transport_curvature_programme",
+        "Mersenne Lambert identities": "lambert_obstruction_interfaces",
         "formal proof trust": "change_or_verify_release",
         "denominator obstruction": "arithmetic_obstruction_interfaces",
         "how big is the corpus": "instant_orientation",
         "what is formally checked": "instant_orientation",
+        "what other exact mathematics is there": "instant_orientation",
         "where are the Lean proofs": "follow_one_claim",
         "what is new mathematics": "trace_prior_art",
         "how do I verify this": "change_or_verify_release",
@@ -177,11 +182,13 @@ def validate_natural_language_search() -> None:
     }
     for search_text, route_id in natural_language_routes.items():
         natural_search = query("--search", search_text, "--limit", "10")
-        assert route_id in {
-            row.get("id")
-            for row in natural_search["results"]
-            if row["kind"] == "reading_route"
-        }
+        assert natural_search["results"][0]["kind"] == "reading_route"
+        assert natural_search["results"][0]["id"] == route_id
+    portfolio_search = query(
+        "--search", "what other exact mathematics is there", "--limit", "10"
+    )
+    assert portfolio_search["results"][0]["kind"] == "reading_route"
+    assert portfolio_search["results"][0]["id"] == "instant_orientation"
 
 
 def main() -> int:
@@ -488,9 +495,11 @@ def main() -> int:
     local_result = query("--paper-anchor", "res:lift")
     assert local_result["anchor_class"] == "authored_formal_anchor_without_registered_claim"
     assert local_result["attachment_receipt"]["claim_count"] == 0
+    assert local_result["source_links"][0]["macro"] == "lword"
     assert local_result["source_links"][0]["declaration"] == (
         "tsum_primWeight_div_two_pow_sub_one_eq_totient_series"
     )
+    assert local_result["source_links"][0]["display_label"] == "positive-lift identity"
     unlabelled_declaration = query(
         "--declaration", "tsum_moebius_div_two_pow_sub_one_eq_half"
     )["matches"]
@@ -900,7 +909,7 @@ if __name__ == "__main__":
         print(
             "test_query_corpus: "
             f"{len(PROGRAMME_EXPECTATIONS)} mathematical programme routes and "
-            "13 natural-language discovery queries passed"
+            "18 natural-language discovery queries passed"
         )
         raise SystemExit(0)
     if sys.argv[1:]:

@@ -111,6 +111,20 @@ def main() -> int:
     checks += 1
 
     mutated = copy.deepcopy(packets)
+    mutated["route"]["route"]["query_steps"].remove(
+        "python3 scripts/query_corpus.py --publication-architecture"
+    )
+    assert_rejected(mutated, "contribution-family first-read route")
+    checks += 1
+
+    mutated = copy.deepcopy(packets)
+    mutated["discovery_searches"]["what other exact mathematics is there"][
+        "results"
+    ].insert(0, {"kind": "declaration", "name": "shadow_result"})
+    assert_rejected(mutated, "contribution-family search priority")
+    checks += 1
+
+    mutated = copy.deepcopy(packets)
     removed_family = next(iter(mutated["publication_families"]))
     mutated["publication_families"].pop(removed_family)
     assert_rejected(mutated, "contribution-family coverage")

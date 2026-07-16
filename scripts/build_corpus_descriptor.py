@@ -376,8 +376,13 @@ def render_orientation_markdown(orientation: dict[str, Any]) -> str:
     return "\n".join(lines)
 
 
-def render_readme_scale_strip(orientation: dict[str, Any]) -> str:
+def render_readme_scale_strip(
+    orientation: dict[str, Any], claims: dict[str, Any]
+) -> str:
     scale = orientation["scale"]
+    contribution_families = claims["machine_readable_paper"][
+        "publication_assembly"
+    ]["contribution_families"]
     return "\n".join(
         [
             README_SCALE_BEGIN,
@@ -388,10 +393,11 @@ def render_readme_scale_strip(orientation: dict[str, Any]) -> str:
             "|---|---:|",
             f"| Lean modules | {scale['module_count']:,} |",
             f"| Formal results and supporting lemmas | {scale['theorem_like_count']:,} |",
+            f"| Curated claim records | {len(claims['claims']):,} |",
+            f"| Contribution families | {len(contribution_families):,} |",
             "",
-            "These figures describe the library, not the number of separate mathematical",
-            "claims. For a guided reading order, see",
-            "[`docs/ORIENTATION.md`](docs/ORIENTATION.md).",
+            "Claim records span every status, including cited and open, and are partitioned",
+            "exactly once. These are navigation counts, not novelty claims.",
             README_SCALE_END,
         ]
     )
@@ -782,7 +788,7 @@ def main() -> int:
     expected_orientation_markdown = render_orientation_markdown(orientation)
     actual_readme = README_PATH.read_text(encoding="utf-8")
     expected_readme = replace_readme_scale_strip(
-        actual_readme, render_readme_scale_strip(orientation)
+        actual_readme, render_readme_scale_strip(orientation, claims)
     )
     expected_readme = replace_readme_principal_declaration_anchors(
         expected_readme, render_readme_principal_declaration_anchors(orientation)
