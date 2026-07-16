@@ -138,6 +138,13 @@ def main() -> int:
     checks += 1
 
     mutated = copy.deepcopy(packets)
+    mutated["discovery_searches"][
+        "what else is formally checked besides Erdos 249 and 257"
+    ]["results"] = []
+    assert_rejected(mutated, "ordinary corpus-breadth route discovery")
+    checks += 1
+
+    mutated = copy.deepcopy(packets)
     removed_family = next(iter(mutated["publication_families"]))
     mutated["publication_families"].pop(removed_family)
     assert_rejected(mutated, "contribution-family coverage")

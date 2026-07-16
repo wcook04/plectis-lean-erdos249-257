@@ -97,6 +97,7 @@ DISCOVERY_ROUTE_QUERIES = {
     "how big is the corpus": "instant_orientation",
     "what is formally checked": "instant_orientation",
     "what other exact mathematics is there": "instant_orientation",
+    "what else is formally checked besides Erdos 249 and 257": "instant_orientation",
     "where are the Lean proofs": "follow_one_claim",
     "what is new mathematics": "trace_prior_art",
     "how do I verify this": "change_or_verify_release",
