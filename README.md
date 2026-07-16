@@ -195,7 +195,9 @@ import Erdos249257
 
 [`examples/Examples.lean`](examples/Examples.lean) is the minimal downstream
 consumer. It imports the package root and derives the base-3 instance of the
-full-support theorem.
+full-support theorem. It also exercises a conditional rational shell-pressure
+interface while leaving its analytic hypothesis explicit; that example does
+not prove the still-open universal Erdős #257 statement.
 
 ## Citation and licence
 

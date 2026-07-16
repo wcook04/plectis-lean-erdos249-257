@@ -30,3 +30,17 @@ theorem downstream_base_three_irrational :
 import: the Erdős–Borwein constant is irrational. -/
 example : Irrational (∑' k : ℕ, (1 : ℝ) / ((2 : ℝ) ^ (k + 1) - 1)) :=
   irrational_erdosBorwein_series
+
+/-- Downstream use of a conditional interface. The rational-gap lower bound
+is supplied by the library, while the analytic shell estimate remains an
+explicit hypothesis. In particular, this does not prove the universal
+Erdős #257 statement for arbitrary infinite supports. -/
+theorem downstream_conditional_rational_shell_bound
+    (whole pfx : ℚ) (K X : ℕ)
+    (hpositive : pfx < whole) (hX : 1 ≤ X)
+    (hupper : (whole : ℝ) - (pfx : ℝ) ≤
+      (K : ℝ) / (2 : ℝ) ^ X + 2 / (2 : ℝ) ^ (2 * X)) :
+    (2 : ℝ) ^ X ≤
+      ((whole.den * pfx.den : ℕ) : ℝ) * (K + 1) :=
+  prefixDenominator_shell_power_bound_of_rational_difference
+    whole pfx K X hpositive hX hupper
