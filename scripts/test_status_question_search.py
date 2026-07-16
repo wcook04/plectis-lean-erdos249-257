@@ -21,6 +21,12 @@ CASES = (
     ),
 )
 
+GENERIC_CASES = (
+    "which results are unconditional progress",
+    "which claims are cited only",
+    "list open claims",
+)
+
 
 def main() -> int:
     failures: list[str] = []
@@ -38,14 +44,22 @@ def main() -> int:
                 f"{query!r}: exact open proposition is absent from top three: "
                 f"{handles[:3]}"
             )
+    for query in GENERIC_CASES:
+        results = search_packet(query, 3)["results"]
+        handles = [(row["kind"], row.get("id")) for row in results]
+        expected_route = ("reading_route", "browse_claim_status")
+        if not handles or handles[0] != expected_route:
+            failures.append(
+                f"{query!r}: first result {handles[:1]} is not {expected_route}"
+            )
     if failures:
         print(f"test_status_question_search: {len(failures)} failure(s)")
         for failure in failures:
             print(f"  FAIL {failure}")
         return 1
     print(
-        "test_status_question_search: ordinary #249/#257 solved questions "
-        "route to the exact programme and open proposition"
+        "test_status_question_search: problem-specific and corpus-wide status "
+        "questions route to exact status surfaces"
     )
     return 0
 

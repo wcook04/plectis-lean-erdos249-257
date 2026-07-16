@@ -1230,6 +1230,25 @@ def status_question_target(query: str) -> tuple[str, str] | None:
     return None
 
 
+def is_generic_claim_status_query(
+    query: str, status_taxonomy: dict[str, str]
+) -> bool:
+    """Recognise corpus-wide status questions independently of route copy."""
+    terms = search_terms(query)
+    if "resolution_status" in terms and terms & {
+        "claim",
+        "list",
+        "result",
+        "status",
+    }:
+        return True
+    return any(
+        status_terms - {"resolution_status"} and status_terms <= terms
+        for status in status_taxonomy
+        if (status_terms := search_terms(status))
+    )
+
+
 def search_rank(query: str, primary: str, haystack: str) -> int | None:
     needle = query.casefold()
     key = primary.casefold()
@@ -1289,6 +1308,10 @@ def search_packet(query: str, limit: int) -> dict[str, Any]:
     sigil_by_path = {row["path"]: row["sigil"] for row in aliases}
     roles = module_roles(claims)
     status_target = status_question_target(query)
+    generic_claim_status_query = (
+        status_target is None
+        and is_generic_claim_status_query(query, claims["status_taxonomy"])
+    )
     ranked: list[tuple[int, str, dict[str, Any]]] = []
 
     for artifact in artifact_inventory():
@@ -1558,6 +1581,8 @@ def search_packet(query: str, limit: int) -> dict[str, Any]:
             }
             <= search_terms(" ".join(row.get("discovery_terms", [])))
         ):
+            rank = -2
+        elif generic_claim_status_query and row["id"] == "browse_claim_status":
             rank = -2
         if rank is not None:
             ranked.append(
