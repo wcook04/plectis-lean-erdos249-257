@@ -357,6 +357,81 @@ def validate_mutation_evidence_receipt(
     if baseline.get("negative_fixture_count") != 69:
         errors.append("publication evidence negative-fixture count drifted")
 
+    corpus_snapshot = evaluation.get("corpus_snapshot", {})
+    try:
+        checkpoint_reader = RepositoryReader(
+            reader.root,
+            evaluation.get("checkpoint"),
+        )
+        checkpoint_claims = load_json(checkpoint_reader, CLAIMS_PATH)
+        checkpoint_atlas = load_json(
+            checkpoint_reader,
+            "docs/declaration_atlas.json",
+        )
+    except (FileNotFoundError, json.JSONDecodeError, UnicodeError) as error:
+        errors.append(f"publication evidence checkpoint census is unreadable: {error}")
+    else:
+        atlas_summary = checkpoint_atlas["summary"]
+        assembly = checkpoint_claims["machine_readable_paper"][
+            "publication_assembly"
+        ]
+        derived_snapshot = {
+            "snapshot_kind": "evaluation_checkpoint_not_current_tree",
+            "claims_source": CLAIMS_PATH,
+            "declaration_atlas_source": "docs/declaration_atlas.json",
+            "module_count": atlas_summary["module_count"],
+            "declaration_count": atlas_summary["declaration_count"],
+            "theorem_like_count": atlas_summary["theorem_like_count"],
+            "generated_certificate_declaration_count": atlas_summary[
+                "generated_certificate_declaration_count"
+            ],
+            "curated_claim_count": len(checkpoint_claims["claims"]),
+            "contribution_family_count": len(assembly["contribution_families"]),
+            "status_count": len(checkpoint_claims["status_taxonomy"]),
+            "remaining_open_proposition_count": len(
+                checkpoint_claims["remaining_open_propositions"]
+            ),
+        }
+        if corpus_snapshot != derived_snapshot:
+            errors.append(
+                "publication evidence corpus snapshot drifted from the "
+                "evaluation-checkpoint claims and declaration atlas"
+            )
+        try:
+            normalized_source = normalize_latex_evidence(
+                reader.read_text(artifact["source_path"])
+            )
+        except (FileNotFoundError, UnicodeError):
+            normalized_source = ""
+        snapshot_patterns = {
+            "module/declaration census": (
+                rf"{derived_snapshot['module_count']} lean modules and "
+                rf"{derived_snapshot['declaration_count']:,} declarations"
+            ),
+            "theorem-like/certificate census": (
+                rf"{derived_snapshot['theorem_like_count']:,} of the declarations "
+                rf"are theorem-like, and "
+                rf"{derived_snapshot['generated_certificate_declaration_count']:,} "
+                r"of those are generated"
+            ),
+            "claim/family census": (
+                rf"{derived_snapshot['curated_claim_count']} public claims in "
+                rf"{derived_snapshot['contribution_family_count']} contribution families"
+            ),
+            "remaining-open census": (
+                r"(?:3|three) typed remaining-open propositions"
+            ),
+            "status-taxonomy census": (
+                r"(?:7|seven) (?:logical )?statuses"
+            ),
+        }
+        for label, pattern in snapshot_patterns.items():
+            if not re.search(pattern, normalized_source):
+                errors.append(
+                    f"systems artifact {artifact['id']!r} source lost its "
+                    f"{label} checkpoint anchor"
+                )
+
     protocol = evaluation.get("protocol", {})
     expected_protocol = {
         "worktree_posture": "isolated_worktree_pinned_at_evaluation_checkpoint",
@@ -862,5 +937,16 @@ def mutation_fixture_failures(reader: RepositoryReader) -> list[str]:
         evidence_override=provenance_inflation,
     ):
         failures.append("unbacked_raw_run_log_claim")
+
+    snapshot_inflation = copy.deepcopy(evidence)
+    snapshot_inflation["evaluation"]["corpus_snapshot"]["curated_claim_count"] = 98
+    snapshot_inflation["evaluation"]["corpus_snapshot"][
+        "contribution_family_count"
+    ] = 21
+    if not validate_publication_contract(
+        reader,
+        evidence_override=snapshot_inflation,
+    ):
+        failures.append("evaluation_snapshot_current_tree_conflation")
 
     return failures

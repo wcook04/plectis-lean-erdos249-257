@@ -30,6 +30,19 @@
       "result": "all_checks_passed",
       "negative_fixture_count": 69
     },
+    "corpus_snapshot": {
+      "snapshot_kind": "evaluation_checkpoint_not_current_tree",
+      "claims_source": "docs/claims.json",
+      "declaration_atlas_source": "docs/declaration_atlas.json",
+      "module_count": 633,
+      "declaration_count": 12496,
+      "theorem_like_count": 11471,
+      "generated_certificate_declaration_count": 2925,
+      "curated_claim_count": 96,
+      "contribution_family_count": 20,
+      "status_count": 7,
+      "remaining_open_proposition_count": 3
+    },
     "protocol": {
       "worktree_posture": "isolated_worktree_pinned_at_evaluation_checkpoint",
       "application_mode": "one_mutation_at_a_time",

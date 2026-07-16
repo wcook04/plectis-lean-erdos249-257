@@ -55,7 +55,7 @@
       "architecture_ref": "docs/claims.json::machine_readable_paper.publication_assembly.publication_architecture.systems_case_studies",
       "entry_route_id": "understand_publication_system",
       "evidence_receipt_path": "docs/publication_evidence.json",
-      "evidence_receipt_digest": "sha256:d3ed910e5a7e4041bba2c427e4ed7d11aef0d8bcb1d7f82f6c3e49864185709d",
+      "evidence_receipt_digest": "sha256:0cf00b9f63c84eeec83bef149a53a00926e4effe64d4df3f13f7e9561548b1f7",
       "validation": [
         "python3 scripts/check_publication_contract.py",
         "python3 scripts/run_publication_mutations.py --verify-operators",

@@ -207,6 +207,7 @@ def publication_evidence_packet(mutation_id: str) -> dict[str, Any]:
         "publication_artifact_id": receipt["publication_artifact_id"],
         "checkpoint": receipt["evaluation"]["checkpoint"],
         "baseline": receipt["evaluation"]["baseline"],
+        "corpus_snapshot": receipt["evaluation"]["corpus_snapshot"],
         "summary": receipt["evaluation"]["summary"],
         "mutation": mutation,
         "post_repair": receipt["post_repair"],
@@ -1674,6 +1675,8 @@ def render_card(packet: dict[str, Any]) -> str:
             return (
                 f"publication evidence {packet['record_id']} "
                 f"| checkpoint={packet['checkpoint'][:7]} "
+                f"| snapshot_claims={packet['corpus_snapshot']['curated_claim_count']} "
+                f"| snapshot_families={packet['corpus_snapshot']['contribution_family_count']} "
                 f"| mutations={summary['authored_mutation_count']} "
                 f"| rejected={summary['rejected_mutation_count']} "
                 f"| escaped={','.join(summary['escaped_mutation_ids'])}"
