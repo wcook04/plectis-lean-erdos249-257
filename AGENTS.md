@@ -135,6 +135,17 @@ python3 scripts/test_query_corpus.py --programme-routes-only
 python3 scripts/test_query_corpus.py
 ```
 
+When the shared worktree contains unrelated in-progress edits, validate the
+committed snapshot without cleaning or stashing anyone's files:
+
+```sh
+python3 scripts/check_release_ref.py --ref HEAD --receipt /tmp/release-head.json
+```
+
+The wrapper uses a disposable local clone and excludes all caller worktree
+changes. `--probe-only` verifies ref resolution and clone preparation without
+running the expensive release gate.
+
 Run the full proof authority check after Lean changes:
 
 ```sh

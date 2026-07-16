@@ -118,6 +118,7 @@
     "mutation_evidence_query": "python3 scripts/query_corpus.py --publication-evidence M8",
     "mutation_operator_verification": "python3 scripts/run_publication_mutations.py --verify-operators",
     "mutation_reconstruction_run": "python3 scripts/run_publication_mutations.py --all --receipt <output.json>",
+    "clean_snapshot_release_gate": "python3 scripts/check_release_ref.py --ref HEAD --receipt <output.json>",
     "staged_snapshot_check": "python3 scripts/check_publication_contract.py --git-ref :",
     "release_gate": "python3 scripts/check_release.py",
     "paper_build": "make -C paper"
