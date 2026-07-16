@@ -1,0 +1,149 @@
+{
+  "schema": "erdos249257-publication-mutation-operators/1",
+  "suite_id": "claim_faithful_publication_mutation_reconstruction_v1",
+  "experiment_kind": "deterministic_reconstruction_not_exact_historical_replay",
+  "checkpoint": "0e5aaf9b2f81912d477fa43b8a3bfa993155a68c",
+  "historical_evidence": "docs/publication_evidence.json",
+  "authority_posture": "executable_reconstruction_of_reported_mutation_classes_not_original_run_log_authority",
+  "reconstruction_boundary": "The public record does not identify every original claim, source coordinate, paper link, family pair, Lean file, or open-proposition anchor. These operators instantiate the same ten reported mutation classes with explicit deterministic targets at the evaluation checkpoint. Results from this suite are a new experiment and must not overwrite the historical timing matrix.",
+  "default_gate_command": [
+    "python3",
+    "scripts/check_release.py"
+  ],
+  "operators": [
+    {
+      "id": "M1",
+      "reported_class": "status upgrade",
+      "exact_original_target_registered": false,
+      "expected_historical_outcome": "rejected",
+      "operation": {
+        "kind": "set_claim_status",
+        "path": "docs/claims.json",
+        "claim_id": "certificate_reduction",
+        "from": "conditional reduction",
+        "to": "proved here"
+      }
+    },
+    {
+      "id": "M2",
+      "reported_class": "README open boundary deleted",
+      "exact_original_target_registered": false,
+      "expected_historical_outcome": "rejected",
+      "operation": {
+        "kind": "replace_text",
+        "path": "README.md",
+        "old": "does not solve Erdős #249 or the universal form of Erdős #257",
+        "new": "solves Erdős #249 and the universal form of Erdős #257",
+        "expected_occurrences": 1
+      }
+    },
+    {
+      "id": "M3",
+      "reported_class": "declaration coordinate drifted by 40 lines",
+      "exact_original_target_registered": false,
+      "expected_historical_outcome": "rejected",
+      "operation": {
+        "kind": "increment_claim_declaration_line",
+        "path": "docs/claims.json",
+        "claim_id": "certificate_reduction",
+        "declaration_name": "irrational_totient_series_of_certificate_supply",
+        "delta": 40
+      }
+    },
+    {
+      "id": "M4",
+      "reported_class": "paper source link retargeted by 50 lines",
+      "exact_original_target_registered": false,
+      "expected_historical_outcome": "rejected",
+      "operation": {
+        "kind": "increment_tex_anchor_line",
+        "path": "paper/erdos249-257-main-paper.tex",
+        "macro": "lrefx",
+        "source": "GreedyAchievementSet.lean",
+        "line": 996,
+        "declaration": "volume_mersenneAchievementSet",
+        "delta": 50,
+        "expected_occurrences": 2,
+        "occurrence_index": 0
+      }
+    },
+    {
+      "id": "M5",
+      "reported_class": "one claim placed in two contribution families",
+      "exact_original_target_registered": false,
+      "expected_historical_outcome": "rejected",
+      "operation": {
+        "kind": "duplicate_claim_across_families",
+        "path": "docs/claims.json",
+        "claim_id": "eb_full_support",
+        "source_family_id": "classical_full_support_and_named_257_families",
+        "target_family_id": "periodic_weighted_lambert_theorems"
+      }
+    },
+    {
+      "id": "M6",
+      "reported_class": "descriptor module count hand-edited by one",
+      "exact_original_target_registered": true,
+      "expected_historical_outcome": "rejected",
+      "operation": {
+        "kind": "increment_json_integer",
+        "path": "docs/corpus_descriptor.json",
+        "field_path": [
+          "summary",
+          "module_count"
+        ],
+        "delta": 1
+      }
+    },
+    {
+      "id": "M7",
+      "reported_class": "native_decide introduced into proof source",
+      "exact_original_target_registered": false,
+      "expected_historical_outcome": "rejected",
+      "operation": {
+        "kind": "append_text",
+        "path": "Erdos249257.lean",
+        "text": "\nexample : True := by native_decide\n",
+        "must_be_absent": "native_decide"
+      }
+    },
+    {
+      "id": "M8",
+      "reported_class": "finite-evidence boundary strengthened to an unbounded claim",
+      "exact_original_target_registered": true,
+      "expected_historical_outcome": "escaped",
+      "operation": {
+        "kind": "replace_text",
+        "path": "README.md",
+        "old": "This bounded range does not supply the unbounded quantifier required above.",
+        "new": "This bounded range completes the unbounded quantifier required above.",
+        "expected_occurrences": 1
+      }
+    },
+    {
+      "id": "M9",
+      "reported_class": "open-problem anchor title mangled",
+      "exact_original_target_registered": false,
+      "expected_historical_outcome": "rejected",
+      "operation": {
+        "kind": "set_open_anchor_title",
+        "path": "docs/claims.json",
+        "open_proposition_id": "remaining_open.erdos_249_irrationality",
+        "from": "Erd\\H{o}s \\#249",
+        "to": "MANGLED OPEN PROBLEM TITLE"
+      }
+    },
+    {
+      "id": "M10",
+      "reported_class": "orientation surface padded past its byte budget",
+      "exact_original_target_registered": true,
+      "expected_historical_outcome": "rejected",
+      "operation": {
+        "kind": "pad_file_to_bytes",
+        "path": "docs/orientation.json",
+        "target_size_bytes": 32001,
+        "pad_byte": " "
+      }
+    }
+  ]
+}

@@ -43,7 +43,10 @@ evidence of that workflow. They do not create hidden proof authority.
    Read `docs/publication_evidence.json` for the typed historical mutation
    matrix, protocol, timings, M8 escape, post-repair rerun boundary, and
    explicit absence of registered raw run logs or executable mutation
-   operators.
+   operators. `experiments/publication_mutations.json` and
+   `scripts/run_publication_mutations.py` provide a separately versioned,
+   deterministic reconstruction of the ten mutation classes; they are not the
+   missing original run logs or exact targets.
 6. Read `SCOPE.md` before describing what the project proves. Erdős #249 and
    the universal form of #257 remain open.
 7. For one claim, follow its `paper_label` into
@@ -127,6 +130,7 @@ python3 scripts/refresh_source_coordinates.py --check
 python3 scripts/build_corpus_descriptor.py --check
 python3 scripts/check_publication_contract.py
 python3 scripts/test_publication_artifact_contract.py
+python3 scripts/run_publication_mutations.py --verify-operators
 python3 scripts/test_query_corpus.py --programme-routes-only
 python3 scripts/test_query_corpus.py
 ```

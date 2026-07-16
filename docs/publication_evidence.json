@@ -13,8 +13,14 @@
   "provenance": {
     "raw_run_logs_registered": false,
     "executable_mutation_operators_registered": false,
-    "reproduction_bundle_status": "protocol_and_results_registered_but_raw_logs_and_executable_mutation_operators_are_not_registered",
-    "claim_ceiling": "This receipt makes the reported protocol, matrix, and limitations machine-readable. It is not a fresh rerun and does not reconstruct missing raw run logs."
+    "reconstructed_executable_mutation_operators_registered": true,
+    "reconstruction_manifest": "experiments/publication_mutations.json",
+    "reconstruction_manifest_digest": "sha256:9243e270257869e7a191c7598e917457cab61194299d1651e21bbc45a2d4c1e3",
+    "reconstruction_harness": "scripts/run_publication_mutations.py",
+    "reconstruction_harness_digest": "sha256:f95ad49665cc4747349b8f4fe7ad0c3e205ffd4412a64f55140ccc08cbc51a3f",
+    "operator_verification": "python3 scripts/run_publication_mutations.py --verify-operators",
+    "reproduction_bundle_status": "historical_protocol_and_results_registered_with_a_separate_deterministic_operator_reconstruction_but_without_original_raw_logs",
+    "claim_ceiling": "This receipt makes the reported protocol, matrix, and limitations machine-readable. It is not a fresh rerun, does not reconstruct missing raw run logs, and does not treat deterministic replacement targets as the exact original edits."
   },
   "evaluation": {
     "checkpoint": "0e5aaf9b2f81912d477fa43b8a3bfa993155a68c",

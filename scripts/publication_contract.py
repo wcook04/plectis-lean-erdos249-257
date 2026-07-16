@@ -17,11 +17,14 @@ from typing import Any
 
 CONTRACT_PATH = "docs/publication_contract.json"
 EVIDENCE_PATH = "docs/publication_evidence.json"
+MUTATION_MANIFEST_PATH = "experiments/publication_mutations.json"
+MUTATION_HARNESS_PATH = "scripts/run_publication_mutations.py"
 CLAIMS_PATH = "docs/claims.json"
 MAKEFILE_PATH = "paper/Makefile"
 REUSE_PATH = "REUSE.toml"
 SCHEMA = "erdos249257-publication-contract/1"
 EVIDENCE_SCHEMA = "erdos249257-publication-evidence/1"
+MUTATION_MANIFEST_SCHEMA = "erdos249257-publication-mutation-operators/1"
 EXPECTED_INVARIANT_FAMILIES = (
     "proof_trust",
     "registry_structure",
@@ -268,8 +271,71 @@ def validate_mutation_evidence_receipt(
                 "publication evidence may claim executable mutation operators "
                 "only with an existing mutation_operator_manifest"
             )
+    if provenance.get("reconstructed_executable_mutation_operators_registered") is not True:
+        errors.append(
+            "publication evidence must register the deterministic mutation reconstruction"
+        )
+    reconstruction_manifest = provenance.get("reconstruction_manifest")
+    reconstruction_harness = provenance.get("reconstruction_harness")
+    if reconstruction_manifest != MUTATION_MANIFEST_PATH:
+        errors.append("publication evidence reconstruction manifest path drifted")
+    if reconstruction_harness != MUTATION_HARNESS_PATH:
+        errors.append("publication evidence reconstruction harness path drifted")
+    for relative, digest_field in (
+        (MUTATION_MANIFEST_PATH, "reconstruction_manifest_digest"),
+        (MUTATION_HARNESS_PATH, "reconstruction_harness_digest"),
+    ):
+        if not reader.exists(relative):
+            errors.append(f"publication evidence reconstruction path is missing: {relative}")
+            continue
+        actual = sha256(reader.read_bytes(relative))
+        if provenance.get(digest_field) != actual:
+            errors.append(
+                f"publication evidence {digest_field} drifted: "
+                f"expected {provenance.get(digest_field)}, actual {actual}"
+            )
+    try:
+        reconstruction = load_json(reader, MUTATION_MANIFEST_PATH)
+    except (FileNotFoundError, json.JSONDecodeError, UnicodeError) as error:
+        errors.append(f"{MUTATION_MANIFEST_PATH}: {error}")
+        reconstruction = {}
+    if reconstruction.get("schema") != MUTATION_MANIFEST_SCHEMA:
+        errors.append(
+            f"{MUTATION_MANIFEST_PATH} must use schema {MUTATION_MANIFEST_SCHEMA}"
+        )
+    if reconstruction.get("experiment_kind") != (
+        "deterministic_reconstruction_not_exact_historical_replay"
+    ):
+        errors.append("publication mutation manifest lost its reconstruction boundary")
+    if reconstruction.get("checkpoint") != artifact["evidence_boundary"][
+        "evaluation_checkpoint"
+    ]:
+        errors.append("publication mutation manifest checkpoint drifted")
+    if reconstruction.get("historical_evidence") != EVIDENCE_PATH:
+        errors.append("publication mutation manifest lost its historical evidence owner")
+    reconstructed_rows = reconstruction.get("operators", [])
+    reconstructed_ids = [
+        row.get("id") for row in reconstructed_rows if isinstance(row, dict)
+    ]
+    if reconstructed_ids != list(EXPECTED_MUTATION_MATRIX):
+        errors.append("publication mutation manifest must register M1 through M10")
+    exact_target_ids = {
+        row.get("id")
+        for row in reconstructed_rows
+        if isinstance(row, dict) and row.get("exact_original_target_registered") is True
+    }
+    if exact_target_ids != {"M6", "M8", "M10"}:
+        errors.append("publication mutation exact-target provenance drifted")
+    if provenance.get("operator_verification") != (
+        "python3 scripts/run_publication_mutations.py --verify-operators"
+    ):
+        errors.append("publication evidence operator-verification route drifted")
     claim_ceiling = str(provenance.get("claim_ceiling", "")).lower()
-    for phrase in ("not a fresh rerun", "does not reconstruct missing raw run logs"):
+    for phrase in (
+        "not a fresh rerun",
+        "does not reconstruct missing raw run logs",
+        "does not treat deterministic replacement targets as the exact original edits",
+    ):
         if phrase not in claim_ceiling:
             errors.append(
                 f"publication evidence provenance lost claim ceiling phrase: {phrase}"
