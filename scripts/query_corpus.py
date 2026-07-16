@@ -35,6 +35,10 @@ def publication_contract() -> dict[str, Any]:
     return load("docs/publication_contract.json")
 
 
+def publication_evidence() -> dict[str, Any]:
+    return load("docs/publication_evidence.json")
+
+
 def all_entrypoints(claims: dict[str, Any]) -> list[dict[str, Any]]:
     return [
         *claims["machine_readable_paper"]["entrypoints"],
@@ -177,6 +181,38 @@ def publication_artifact_packet(artifact_id: str) -> dict[str, Any]:
         ),
         "coverage_contract": contract["coverage_contract"],
         "reproducibility": contract["reproducibility"],
+        "validation": "python3 scripts/check_publication_contract.py",
+    }
+
+
+def publication_evidence_packet(mutation_id: str) -> dict[str, Any]:
+    receipt = publication_evidence()
+    mutation = None
+    if mutation_id != "summary":
+        mutation = next(
+            (
+                row
+                for row in receipt["evaluation"]["mutations"]
+                if row["id"].casefold() == mutation_id.casefold()
+            ),
+            None,
+        )
+        if mutation is None:
+            raise KeyError(f"unknown publication mutation id: {mutation_id}")
+    return {
+        "kind": "publication_evidence",
+        "authority_posture": receipt["authority_posture"],
+        "record_id": receipt["record_id"],
+        "record_kind": receipt["record_kind"],
+        "publication_artifact_id": receipt["publication_artifact_id"],
+        "checkpoint": receipt["evaluation"]["checkpoint"],
+        "baseline": receipt["evaluation"]["baseline"],
+        "summary": receipt["evaluation"]["summary"],
+        "mutation": mutation,
+        "post_repair": receipt["post_repair"],
+        "provenance": receipt["provenance"],
+        "threats_to_validity": receipt["threats_to_validity"],
+        "expansion": "docs/publication_evidence.json",
         "validation": "python3 scripts/check_publication_contract.py",
     }
 
@@ -1328,6 +1364,36 @@ def search_packet(query: str, limit: int) -> dict[str, Any]:
                 )
             )
 
+    for mutation in publication_evidence()["evaluation"]["mutations"]:
+        rank = search_rank(
+            query,
+            f"mutation {mutation['id']}",
+            " ".join(
+                str(value)
+                for value in (
+                    mutation["description"],
+                    mutation["outcome"],
+                    mutation.get("first_detector"),
+                    *mutation.get("additional_detectors", []),
+                )
+                if value
+            ),
+        )
+        if rank is not None:
+            ranked.append(
+                (
+                    rank,
+                    f"publication_evidence:{mutation['id']}",
+                    {
+                        "kind": "publication_evidence",
+                        "id": mutation["id"],
+                        "outcome": mutation["outcome"],
+                        "first_detector": mutation.get("first_detector"),
+                        "description": mutation["description"],
+                    },
+                )
+            )
+
     for row in all_entrypoints(claims):
         route_haystack = " ".join(
             str(value)
@@ -1380,7 +1446,7 @@ def search_packet(query: str, limit: int) -> dict[str, Any]:
         "results": results[:limit],
         "omitted_match_count": max(0, len(results) - limit),
         "limit": limit,
-        "next": "Use the typed handle with --claim, --status, --paper-anchor, --open, --declaration, --source, --module, --connections, --artifact, --publication-artifact, --route, or --publication-family.",
+        "next": "Use the typed handle with --claim, --status, --paper-anchor, --open, --declaration, --source, --module, --connections, --artifact, --publication-artifact, --publication-evidence, --route, or --publication-family.",
     }
 
 
@@ -1601,6 +1667,23 @@ def render_card(packet: dict[str, Any]) -> str:
             f"| identity={packet['content_identity_status']} "
             f"| source={artifact['source_path']} | rendered={artifact['rendered_path']}"
         )
+    if kind == "publication_evidence":
+        mutation = packet["mutation"]
+        if mutation is None:
+            summary = packet["summary"]
+            return (
+                f"publication evidence {packet['record_id']} "
+                f"| checkpoint={packet['checkpoint'][:7]} "
+                f"| mutations={summary['authored_mutation_count']} "
+                f"| rejected={summary['rejected_mutation_count']} "
+                f"| escaped={','.join(summary['escaped_mutation_ids'])}"
+            )
+        return (
+            f"publication mutation {mutation['id']} | {mutation['outcome']} "
+            f"| first_detector={mutation.get('first_detector') or 'none'} "
+            f"| time={mutation['wall_time_seconds']}s "
+            f"| checkpoint={packet['checkpoint'][:7]}"
+        )
     if kind == "open_proposition":
         proposition = packet["open_proposition"]
         return (
@@ -1697,6 +1780,12 @@ def main() -> int:
     group.add_argument("--source", metavar="MODULE_DOT_LEAN:LINE")
     group.add_argument("--artifact", metavar="PATH_OR_SHA256")
     group.add_argument("--publication-artifact", metavar="ID")
+    group.add_argument(
+        "--publication-evidence",
+        nargs="?",
+        const="summary",
+        metavar="MUTATION_ID",
+    )
     group.add_argument("--module", metavar="PATH_OR_ID")
     group.add_argument("--connections", metavar="MODULE_OR_DECLARATION")
     group.add_argument("--route", metavar="ID")
@@ -1727,6 +1816,8 @@ def main() -> int:
             packet = artifact_packet(args.artifact)
         elif args.publication_artifact:
             packet = publication_artifact_packet(args.publication_artifact)
+        elif args.publication_evidence:
+            packet = publication_evidence_packet(args.publication_evidence)
         elif args.module:
             packet = module_packet(args.module, args.limit)
         elif args.connections:

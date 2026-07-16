@@ -40,6 +40,10 @@ evidence of that workflow. They do not create hidden proof authority.
    and their entry routes. It owns publication-artifact coverage, not
    mathematical claim status. In particular, the systems case study is
    evidence about release controls and does not acquire Lean proof authority.
+   Read `docs/publication_evidence.json` for the typed historical mutation
+   matrix, protocol, timings, M8 escape, post-repair rerun boundary, and
+   explicit absence of registered raw run logs or executable mutation
+   operators.
 6. Read `SCOPE.md` before describing what the project proves. Erdős #249 and
    the universal form of #257 remain open.
 7. For one claim, follow its `paper_label` into
@@ -74,6 +78,8 @@ handle:
   content identity;
 - `--publication-artifact <id>` for a shipped manuscript's typed role,
   expected digests, current drift status, evidence boundary, and validation;
+- `--publication-evidence [MUTATION_ID]` for the historical experiment summary
+  or one exact mutation row, including its detector and evidence ceiling;
 - `--connections <module_or_declaration> --query "<task>"` after choosing a
   source handle; and
 - `--search "what remains open for 257" --limit 10` (or another short natural

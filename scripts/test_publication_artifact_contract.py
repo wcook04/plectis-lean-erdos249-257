@@ -40,7 +40,7 @@ def main() -> int:
             print(f"  FAIL fixture did not reject: {fixture}")
         return 1
     print(
-        "test_publication_artifact_contract: baseline and 7 known-bad "
+        "test_publication_artifact_contract: baseline and 10 known-bad "
         "publication mutations verified"
     )
     return 0

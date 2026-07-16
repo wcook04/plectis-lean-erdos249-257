@@ -1,0 +1,187 @@
+{
+  "schema": "erdos249257-publication-evidence/1",
+  "record_id": "claim_faithful_publication_mutation_study_v1",
+  "record_kind": "structured_transcription_of_reported_historical_runs",
+  "authority_posture": "historical_systems_evidence_not_Lean_proof_authority_and_not_a_fresh_rerun",
+  "publication_artifact_id": "systems_case_study",
+  "source": {
+    "manuscript": "paper/claim-faithful-publication-systems-paper.tex",
+    "table_label": "tab:matrix",
+    "evaluation_section_label": "sec:eval",
+    "contract": "docs/publication_contract.json"
+  },
+  "provenance": {
+    "raw_run_logs_registered": false,
+    "executable_mutation_operators_registered": false,
+    "reproduction_bundle_status": "protocol_and_results_registered_but_raw_logs_and_executable_mutation_operators_are_not_registered",
+    "claim_ceiling": "This receipt makes the reported protocol, matrix, and limitations machine-readable. It is not a fresh rerun and does not reconstruct missing raw run logs."
+  },
+  "evaluation": {
+    "checkpoint": "0e5aaf9b2f81912d477fa43b8a3bfa993155a68c",
+    "baseline": {
+      "release_check_count": 5207,
+      "wall_time_seconds": 144.5,
+      "result": "all_checks_passed",
+      "negative_fixture_count": 69
+    },
+    "protocol": {
+      "worktree_posture": "isolated_worktree_pinned_at_evaluation_checkpoint",
+      "application_mode": "one_mutation_at_a_time",
+      "tree_restored_between_runs": true,
+      "full_release_gate_run_after_each_mutation": true,
+      "mutation_author_relationship": "mutations_authored_by_checker_author"
+    },
+    "invariant_families": [
+      {
+        "id": "proof_trust",
+        "label": "proof trust"
+      },
+      {
+        "id": "registry_structure",
+        "label": "registry"
+      },
+      {
+        "id": "source_coordinates",
+        "label": "coordinates"
+      },
+      {
+        "id": "paper_anchoring",
+        "label": "anchoring"
+      },
+      {
+        "id": "boundary_language",
+        "label": "boundary"
+      },
+      {
+        "id": "projection_freshness",
+        "label": "freshness"
+      },
+      {
+        "id": "byte_budgets",
+        "label": "budgets"
+      }
+    ],
+    "mutations": [
+      {
+        "id": "M1",
+        "description": "Status upgraded from conditional reduction to proved here.",
+        "outcome": "rejected",
+        "first_detector": "projection_freshness",
+        "additional_detectors": [],
+        "wall_time_seconds": 139.4
+      },
+      {
+        "id": "M2",
+        "description": "README open-boundary clause does not solve was deleted.",
+        "outcome": "rejected",
+        "first_detector": "boundary_language",
+        "additional_detectors": [],
+        "wall_time_seconds": 171.5
+      },
+      {
+        "id": "M3",
+        "description": "A declaration coordinate was drifted by 40 lines.",
+        "outcome": "rejected",
+        "first_detector": "source_coordinates",
+        "additional_detectors": [
+          "projection_freshness"
+        ],
+        "wall_time_seconds": 239.1
+      },
+      {
+        "id": "M4",
+        "description": "A paper source link was retargeted by 50 lines.",
+        "outcome": "rejected",
+        "first_detector": "source_coordinates",
+        "additional_detectors": [
+          "projection_freshness"
+        ],
+        "wall_time_seconds": 192.2
+      },
+      {
+        "id": "M5",
+        "description": "One claim was placed in two contribution families.",
+        "outcome": "rejected",
+        "first_detector": "registry_structure",
+        "additional_detectors": [
+          "source_coordinates",
+          "projection_freshness"
+        ],
+        "wall_time_seconds": 121.4
+      },
+      {
+        "id": "M6",
+        "description": "The corpus descriptor module count was hand-edited by one.",
+        "outcome": "rejected",
+        "first_detector": "projection_freshness",
+        "additional_detectors": [],
+        "wall_time_seconds": 184.8
+      },
+      {
+        "id": "M7",
+        "description": "native_decide was introduced into a proof.",
+        "outcome": "rejected",
+        "first_detector": "proof_trust",
+        "additional_detectors": [],
+        "wall_time_seconds": 4.7,
+        "checks_before_rejection": 639
+      },
+      {
+        "id": "M8",
+        "description": "A finite-evidence boundary clause was strengthened from does not supply to completes.",
+        "outcome": "escaped",
+        "first_detector": null,
+        "additional_detectors": [],
+        "wall_time_seconds": 176.0,
+        "gate_result": "all_checks_passed"
+      },
+      {
+        "id": "M9",
+        "description": "An authored open-problem anchor title was mangled.",
+        "outcome": "rejected",
+        "first_detector": "paper_anchoring",
+        "additional_detectors": [
+          "source_coordinates",
+          "projection_freshness"
+        ],
+        "wall_time_seconds": 122.8
+      },
+      {
+        "id": "M10",
+        "description": "The orientation surface was padded past its byte budget.",
+        "outcome": "rejected",
+        "first_detector": "byte_budgets",
+        "additional_detectors": [
+          "projection_freshness"
+        ],
+        "wall_time_seconds": 210.5
+      }
+    ],
+    "summary": {
+      "authored_mutation_count": 10,
+      "rejected_mutation_count": 9,
+      "escaped_mutation_ids": [
+        "M8"
+      ],
+      "observed_detection_ratio": "9/10",
+      "coverage_depth_posture": "one_deep_coverage_not_family_depth"
+    }
+  },
+  "post_repair": {
+    "repair": "The M8 boundary clause became a declared anchor group with a derived rejection fixture.",
+    "intact_baseline_rechecked": true,
+    "rerun_mutation_ids": [
+      "M8"
+    ],
+    "other_original_mutations_rerun": false,
+    "post_repair_detection_ratio": null,
+    "claim_ceiling": "The repaired checker rejects M8. No post-repair ten-of-ten result is reported."
+  },
+  "threats_to_validity": [
+    "The mutation author and checker author were the same person.",
+    "Five of seven invariant families were exercised by exactly one mutation.",
+    "The study covers one corpus, one maintainer, and one working style.",
+    "There was no controlled comparison with ordinary continuous integration or disciplined manual review.",
+    "Reader error and transfer to other corpora were not measured."
+  ]
+}

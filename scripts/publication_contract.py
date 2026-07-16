@@ -16,10 +16,53 @@ from typing import Any
 
 
 CONTRACT_PATH = "docs/publication_contract.json"
+EVIDENCE_PATH = "docs/publication_evidence.json"
 CLAIMS_PATH = "docs/claims.json"
 MAKEFILE_PATH = "paper/Makefile"
 REUSE_PATH = "REUSE.toml"
 SCHEMA = "erdos249257-publication-contract/1"
+EVIDENCE_SCHEMA = "erdos249257-publication-evidence/1"
+EXPECTED_INVARIANT_FAMILIES = (
+    "proof_trust",
+    "registry_structure",
+    "source_coordinates",
+    "paper_anchoring",
+    "boundary_language",
+    "projection_freshness",
+    "byte_budgets",
+)
+EXPECTED_MUTATION_MATRIX = {
+    "M1": ("rejected", "projection_freshness", (), 139.4),
+    "M2": ("rejected", "boundary_language", (), 171.5),
+    "M3": (
+        "rejected",
+        "source_coordinates",
+        ("projection_freshness",),
+        239.1,
+    ),
+    "M4": (
+        "rejected",
+        "source_coordinates",
+        ("projection_freshness",),
+        192.2,
+    ),
+    "M5": (
+        "rejected",
+        "registry_structure",
+        ("source_coordinates", "projection_freshness"),
+        121.4,
+    ),
+    "M6": ("rejected", "projection_freshness", (), 184.8),
+    "M7": ("rejected", "proof_trust", (), 4.7),
+    "M8": ("escaped", None, (), 176.0),
+    "M9": (
+        "rejected",
+        "paper_anchoring",
+        ("source_coordinates", "projection_freshness"),
+        122.8,
+    ),
+    "M10": ("rejected", "byte_budgets", ("projection_freshness",), 210.5),
+}
 REQUIRED_ARTIFACT_FIELDS = {
     "id",
     "title",
@@ -182,6 +225,177 @@ def validate_systems_evidence_source(
     return errors
 
 
+def validate_mutation_evidence_receipt(
+    receipt: dict[str, Any],
+    artifact: dict[str, Any],
+    reader: RepositoryReader,
+) -> list[str]:
+    """Validate the immutable reported mutation matrix and its claim ceiling."""
+    errors: list[str] = []
+    if receipt.get("schema") != EVIDENCE_SCHEMA:
+        errors.append(f"{EVIDENCE_PATH} must use schema {EVIDENCE_SCHEMA}")
+    if receipt.get("record_kind") != (
+        "structured_transcription_of_reported_historical_runs"
+    ):
+        errors.append("publication evidence record kind drifted")
+    if receipt.get("authority_posture") != (
+        "historical_systems_evidence_not_Lean_proof_authority_and_not_a_fresh_rerun"
+    ):
+        errors.append("publication evidence authority posture drifted")
+    if receipt.get("publication_artifact_id") != artifact["id"]:
+        errors.append("publication evidence points at the wrong artifact")
+
+    source = receipt.get("source", {})
+    if source.get("manuscript") != artifact["source_path"]:
+        errors.append("publication evidence manuscript path drifted")
+    if source.get("contract") != CONTRACT_PATH:
+        errors.append("publication evidence lost its contract owner")
+
+    provenance = receipt.get("provenance", {})
+    raw_logs = provenance.get("raw_run_logs_registered")
+    operators = provenance.get("executable_mutation_operators_registered")
+    if raw_logs is not False:
+        paths = provenance.get("raw_run_log_paths", [])
+        if not paths or any(not reader.exists(path) for path in paths):
+            errors.append(
+                "publication evidence may claim registered raw logs only when "
+                "all raw_run_log_paths exist"
+            )
+    if operators is not False:
+        manifest = provenance.get("mutation_operator_manifest")
+        if not isinstance(manifest, str) or not reader.exists(manifest):
+            errors.append(
+                "publication evidence may claim executable mutation operators "
+                "only with an existing mutation_operator_manifest"
+            )
+    claim_ceiling = str(provenance.get("claim_ceiling", "")).lower()
+    for phrase in ("not a fresh rerun", "does not reconstruct missing raw run logs"):
+        if phrase not in claim_ceiling:
+            errors.append(
+                f"publication evidence provenance lost claim ceiling phrase: {phrase}"
+            )
+
+    evaluation = receipt.get("evaluation", {})
+    contract_evidence = artifact["evidence_boundary"]
+    if evaluation.get("checkpoint") != contract_evidence["evaluation_checkpoint"]:
+        errors.append("publication evidence checkpoint drifted from the contract")
+    baseline = evaluation.get("baseline", {})
+    if baseline.get("release_check_count") != contract_evidence[
+        "release_check_count_at_evaluation"
+    ]:
+        errors.append("publication evidence release-check baseline drifted")
+    if baseline.get("wall_time_seconds") != 144.5:
+        errors.append("publication evidence baseline timing drifted")
+    if baseline.get("result") != "all_checks_passed":
+        errors.append("publication evidence baseline result drifted")
+    if baseline.get("negative_fixture_count") != 69:
+        errors.append("publication evidence negative-fixture count drifted")
+
+    protocol = evaluation.get("protocol", {})
+    expected_protocol = {
+        "worktree_posture": "isolated_worktree_pinned_at_evaluation_checkpoint",
+        "application_mode": "one_mutation_at_a_time",
+        "tree_restored_between_runs": True,
+        "full_release_gate_run_after_each_mutation": True,
+        "mutation_author_relationship": "mutations_authored_by_checker_author",
+    }
+    for field, expected in expected_protocol.items():
+        if protocol.get(field) != expected:
+            errors.append(f"publication evidence protocol field drifted: {field}")
+
+    families = evaluation.get("invariant_families", [])
+    family_ids = [row.get("id") for row in families if isinstance(row, dict)]
+    if tuple(family_ids) != EXPECTED_INVARIANT_FAMILIES:
+        errors.append("publication evidence invariant-family order or coverage drifted")
+
+    mutations = evaluation.get("mutations", [])
+    mutation_ids = [
+        row.get("id") for row in mutations if isinstance(row, dict)
+    ]
+    if mutation_ids != list(EXPECTED_MUTATION_MATRIX):
+        errors.append("publication evidence mutation ids or order drifted")
+    mutations_by_id = {
+        row.get("id"): row for row in mutations if isinstance(row, dict)
+    }
+    for mutation_id, expected in EXPECTED_MUTATION_MATRIX.items():
+        row = mutations_by_id.get(mutation_id)
+        if row is None:
+            continue
+        actual = (
+            row.get("outcome"),
+            row.get("first_detector"),
+            tuple(row.get("additional_detectors", [])),
+            row.get("wall_time_seconds"),
+        )
+        if actual != expected:
+            errors.append(
+                f"publication evidence matrix row drifted: {mutation_id}; "
+                f"expected={expected}, actual={actual}"
+            )
+        detectors = [
+            row.get("first_detector"),
+            *row.get("additional_detectors", []),
+        ]
+        if any(
+            detector is not None and detector not in EXPECTED_INVARIANT_FAMILIES
+            for detector in detectors
+        ):
+            errors.append(
+                f"publication evidence matrix row names an unknown detector: "
+                f"{mutation_id}"
+            )
+        if not isinstance(row.get("description"), str) or not row["description"]:
+            errors.append(
+                f"publication evidence matrix row lacks a description: {mutation_id}"
+            )
+
+    m7 = mutations_by_id.get("M7", {})
+    if m7.get("checks_before_rejection") != 639:
+        errors.append("publication evidence M7 early-rejection count drifted")
+    m8 = mutations_by_id.get("M8", {})
+    if m8.get("gate_result") != "all_checks_passed":
+        errors.append("publication evidence must preserve the M8 green-gate escape")
+
+    rejected_ids = [
+        row.get("id") for row in mutations if row.get("outcome") == "rejected"
+    ]
+    escaped_ids = [
+        row.get("id") for row in mutations if row.get("outcome") == "escaped"
+    ]
+    summary = evaluation.get("summary", {})
+    if summary.get("authored_mutation_count") != len(mutations):
+        errors.append("publication evidence authored-mutation summary is not derived")
+    if summary.get("rejected_mutation_count") != len(rejected_ids):
+        errors.append("publication evidence rejected-mutation summary is not derived")
+    if summary.get("escaped_mutation_ids") != escaped_ids:
+        errors.append("publication evidence escaped-mutation summary is not derived")
+    if summary.get("observed_detection_ratio") != "9/10":
+        errors.append("publication evidence observed detection ratio drifted")
+    if summary.get("coverage_depth_posture") != (
+        "one_deep_coverage_not_family_depth"
+    ):
+        errors.append("publication evidence lost its one-deep coverage ceiling")
+
+    post_repair = receipt.get("post_repair", {})
+    if post_repair.get("intact_baseline_rechecked") is not True:
+        errors.append("publication evidence lost the post-repair baseline recheck")
+    if post_repair.get("rerun_mutation_ids") != ["M8"]:
+        errors.append("publication evidence must preserve M8 as the only rerun mutation")
+    if post_repair.get("other_original_mutations_rerun") is not False:
+        errors.append("publication evidence must not claim the other mutations were rerun")
+    if post_repair.get("post_repair_detection_ratio") is not None:
+        errors.append("publication evidence must not report a post-repair ratio")
+    if "no post-repair ten-of-ten" not in str(
+        post_repair.get("claim_ceiling", "")
+    ).lower():
+        errors.append("publication evidence lost the post-repair ten-of-ten ceiling")
+
+    threats = receipt.get("threats_to_validity", [])
+    if not isinstance(threats, list) or len(threats) < 5:
+        errors.append("publication evidence threats-to-validity record is incomplete")
+    return errors
+
+
 def all_entrypoints(
     claims: dict[str, Any], contract: dict[str, Any]
 ) -> list[dict[str, Any]]:
@@ -196,6 +410,7 @@ def validate_publication_contract(
     *,
     contract_override: dict[str, Any] | None = None,
     claims_override: dict[str, Any] | None = None,
+    evidence_override: dict[str, Any] | None = None,
 ) -> list[str]:
     errors: list[str] = []
 
@@ -428,6 +643,31 @@ def validate_publication_contract(
             )
         else:
             errors.extend(validate_systems_evidence_source(artifact, source_text))
+        evidence_path = artifact.get("evidence_receipt_path")
+        evidence_digest = artifact.get("evidence_receipt_digest")
+        if evidence_path != EVIDENCE_PATH:
+            errors.append(
+                f"systems artifact {artifact['id']!r} must register {EVIDENCE_PATH}"
+            )
+            continue
+        if not isinstance(evidence_digest, str):
+            errors.append(
+                f"systems artifact {artifact['id']!r} lacks an evidence receipt digest"
+            )
+            continue
+        try:
+            receipt_bytes = reader.read_bytes(evidence_path)
+            receipt = evidence_override or json.loads(receipt_bytes)
+        except (FileNotFoundError, json.JSONDecodeError, UnicodeError) as error:
+            errors.append(f"{EVIDENCE_PATH}: {error}")
+            continue
+        actual_digest = sha256(receipt_bytes)
+        if evidence_digest != actual_digest:
+            errors.append(
+                f"systems artifact {artifact['id']!r} evidence receipt digest drifted: "
+                f"expected {evidence_digest}, actual {actual_digest}"
+            )
+        errors.extend(validate_mutation_evidence_receipt(receipt, artifact, reader))
 
     return errors
 
@@ -516,5 +756,45 @@ def mutation_fixture_failures(reader: RepositoryReader) -> list[str]:
             contract_override=source_inflation,
         ):
             failures.append("source_and_digest_ten_of_ten_inflation")
+
+    evidence = load_json(reader, EVIDENCE_PATH)
+
+    matrix_inflation = copy.deepcopy(evidence)
+    m8 = next(
+        row
+        for row in matrix_inflation["evaluation"]["mutations"]
+        if row["id"] == "M8"
+    )
+    m8["outcome"] = "rejected"
+    m8["first_detector"] = "boundary_language"
+    matrix_inflation["evaluation"]["summary"]["rejected_mutation_count"] = 10
+    matrix_inflation["evaluation"]["summary"]["escaped_mutation_ids"] = []
+    matrix_inflation["evaluation"]["summary"]["observed_detection_ratio"] = "10/10"
+    if not validate_publication_contract(
+        reader,
+        evidence_override=matrix_inflation,
+    ):
+        failures.append("historical_matrix_ten_of_ten_inflation")
+
+    detector_drift = copy.deepcopy(evidence)
+    m3 = next(
+        row
+        for row in detector_drift["evaluation"]["mutations"]
+        if row["id"] == "M3"
+    )
+    m3["first_detector"] = "byte_budgets"
+    if not validate_publication_contract(
+        reader,
+        evidence_override=detector_drift,
+    ):
+        failures.append("historical_matrix_detector_drift")
+
+    provenance_inflation = copy.deepcopy(evidence)
+    provenance_inflation["provenance"]["raw_run_logs_registered"] = True
+    if not validate_publication_contract(
+        reader,
+        evidence_override=provenance_inflation,
+    ):
+        failures.append("unbacked_raw_run_log_claim")
 
     return failures
