@@ -6396,7 +6396,7 @@
     "lean_toolchain": "leanprover/lean4:v4.29.1",
     "repository": "https://github.com/wcook04/plectis-lean-erdos249-257",
     "formal_source": {
-      "ref": "0e85f7ebadb0f81a26791bc167ce224bd2534f36",
+      "ref": "81150c1c6fdd4cd51e76d3aa0de344341e0e9e7c",
       "ref_kind": "commit",
       "publication_state": "committed_checkpoint_pending_remote_publication",
       "relationship_to_last_tag": "post_tag_checkpoint"
@@ -6420,18 +6420,18 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 1926
+        "line": 2027
       }
     },
     {
       "id": "remaining_open.unbounded_certificate_supply",
       "open_target_claim": "erdos_249",
-      "statement": "Produce certified non-integrality witnesses at unbounded parameters, equivalently along the lcm diagonal.",
+      "statement": "Produce certified non-integrality witnesses at unbounded parameters. A sufficient one-parameter form is to produce them along the lcm diagonal.",
       "paper_anchor": {
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 1935
+        "line": 2036
       }
     },
     {
@@ -6442,7 +6442,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 1942
+        "line": 2044
       }
     }
   ],
@@ -6502,6 +6502,66 @@
           "name": "irrational_erdosSupportSeries_pairwise_coprime",
           "module": "Erdos249257/CertificateKernel.lean",
           "line": 10448
+        }
+      ]
+    },
+    {
+      "id": "periodic_nonnegative_weight_irrationality",
+      "label": "Eventually-periodic nonnegative weighted Lambert irrationality",
+      "status": "formalised here",
+      "statement": "For every integer base b ≥ 2, an eventually-periodic nonnegative rational coefficient sequence with a positive value at a positive index in its periodic region has irrational series ∑ γ(a)/(b^a − 1). This includes eventually-periodic natural-number weights and indicator supports. Luca–Tachiya prove a broader periodic rational-coefficient theorem by different methods; no priority claim is made here.",
+      "paper_label": "res:periodicnonnegative",
+      "readme_headline": false,
+      "declarations": [
+        {
+          "name": "irrational_weightedErdosSeries_periodic",
+          "module": "Erdos249257/CertificateKernel.lean",
+          "line": 12370
+        },
+        {
+          "name": "irrational_weightedErdosSeries_eventuallyPeriodic",
+          "module": "Erdos249257/CertificateKernel.lean",
+          "line": 12397
+        },
+        {
+          "name": "irrational_ratWeightSeries_eventuallyPeriodic",
+          "module": "Erdos249257/CertificateKernel.lean",
+          "line": 12483
+        }
+      ]
+    },
+    {
+      "id": "periodic_signed_weight_dichotomy",
+      "label": "Periodic signed-weight irrational-or-terminating dichotomy",
+      "status": "proved here",
+      "statement": "For every integer base b ≥ 2 and every periodic integer weight w, the signed series ∑ w(a)/(b^a − 1) is irrational or some power of b times its value is an integer. Excluding that terminating alternative implies irrationality. The terminating alternative is not excluded in general, so the full mixed-sign periodic-coefficient theorem is not claimed.",
+      "paper_label": "res:periodicsigned",
+      "readme_headline": false,
+      "declarations": [
+        {
+          "name": "irrational_or_bpow_mul_eq_intCast_intWeightedErdosSeries_periodic",
+          "module": "Erdos249257/CertificateKernel.lean",
+          "line": 13847
+        },
+        {
+          "name": "irrational_intWeightedErdosSeries_periodic_of_bpow_mul_ne_intCast",
+          "module": "Erdos249257/CertificateKernel.lean",
+          "line": 13872
+        }
+      ]
+    },
+    {
+      "id": "period_four_signed_residue_obstruction",
+      "label": "Period-four signed residue-selection obstruction",
+      "status": "proved here",
+      "statement": "For the period-four signed weight 1,0,−1,0, the associated signed divisor coefficient vanishes for every n congruent to 3 modulo 4. A whole arithmetic progression can therefore carry zero coefficient, so residue-blind selection cannot force a protected nonzero residue for every periodic signed weight.",
+      "paper_label": "res:periodfourobstruction",
+      "readme_headline": false,
+      "declarations": [
+        {
+          "name": "intWeightedCoeff_periodFourSignWeight_eq_zero_of_mod_four_eq_three",
+          "module": "Erdos249257/CertificateKernel.lean",
+          "line": 13898
         }
       ]
     },
@@ -7286,17 +7346,17 @@
         {
           "name": "depth18TableCheck_eq_true",
           "module": "Erdos249257/HalfCarrySelectedWindowBase.lean",
-          "line": 77
+          "line": 79
         },
         {
           "name": "depth18SelectedHalfWindow",
           "module": "Erdos249257/HalfCarrySelectedWindowBase.lean",
-          "line": 127
+          "line": 129
         },
         {
           "name": "depth18SelectedHalfWindow_nextRowDivisorAgreement",
           "module": "Erdos249257/HalfCarrySelectedWindowBase.lean",
-          "line": 170
+          "line": 172
         }
       ]
     },
@@ -7848,7 +7908,7 @@
         {
           "name": "prime_lucas_2364533768205644535022723273",
           "module": "Erdos249257/DiagonalPincerPrimeCertificates/ClosureT64.lean",
-          "line": 40737
+          "line": 51759
         }
       ]
     },
@@ -8314,7 +8374,7 @@
         "remaining_open.universal_257_all_infinite_supports"
       ],
       "paper_label": "res:greedy",
-      "readme_headline": false,
+      "readme_headline": true,
       "declarations": [
         {
           "name": "volume_mersenneAchievementSet",
@@ -8355,9 +8415,9 @@
     },
     {
       "id": "half_greedy_two_thirds_band",
-      "label": "Two-thirds localization of an unsafe isolated greedy skip",
+      "label": "Exact band localization of the final skip between two takes",
       "status": "proved here",
-      "statement": "For a take-skip-take singleton with pre-take reciprocal R and q = 2^b - 1, assuming 0 < R < q, the skipped term is dyadically unsafe exactly when R lies in the open interval (q(2q+1)/(3q+1), 2q(q+1)/(3q+2)). The interval has exact width q^2/((3q+1)(3q+2)) < 1/9 and lies immediately above 2q/3. Integral reciprocals never lie in it; in the corresponding positive odd integer band, the numerator is at least 7. These are local constraints: no theorem here says that the actual greedy orbit for 1/2 avoids the band or identifies the surviving last-producer cells with unsafe skips.",
+      "statement": "Suppose a take at rank b is followed by the next take at c > b+1, put q = 2^b − 1 and m = 2^(c−1), and write the pre-take residual as 1/R with 0 < R < q. The final intervening skip is dyadically unsafe exactly when q(m−1)/(q+m−1) < R < qm/(q+m), an interval of exact width q^2/((q+m)(q+m−1)). For one intervening skip this specializes to the two-thirds band (q(2q+1)/(3q+1), 2q(q+1)/(3q+2)), whose width is below 1/9; integral reciprocals never lie there, and the corresponding positive odd numerator is at least 7. These are local constraints: no theorem here says that the actual greedy orbit for 1/2 avoids a band or identifies the surviving last-producer cells with unsafe skips.",
       "remaining_open_proposition_ids": [
         "remaining_open.universal_257_all_infinite_supports"
       ],
@@ -8365,29 +8425,39 @@
       "readme_headline": false,
       "declarations": [
         {
-          "name": "singletonUnsafe_iff_twoThirdsBand",
+          "name": "postTakeUnsafeAt_iff_band",
           "module": "Erdos249257/HalfGreedyTwoThirdsBand.lean",
-          "line": 68
+          "line": 88
         },
         {
-          "name": "band_width",
-          "module": "Erdos249257/HalfGreedyTwoThirdsBand.lean",
-          "line": 95
-        },
-        {
-          "name": "band_width_lt_ninth",
+          "name": "band_width_general",
           "module": "Erdos249257/HalfGreedyTwoThirdsBand.lean",
           "line": 104
         },
         {
+          "name": "singletonUnsafe_iff_twoThirdsBand",
+          "module": "Erdos249257/HalfGreedyTwoThirdsBand.lean",
+          "line": 127
+        },
+        {
+          "name": "band_width",
+          "module": "Erdos249257/HalfGreedyTwoThirdsBand.lean",
+          "line": 154
+        },
+        {
+          "name": "band_width_lt_ninth",
+          "module": "Erdos249257/HalfGreedyTwoThirdsBand.lean",
+          "line": 163
+        },
+        {
           "name": "not_twoThirdsBand_of_int",
           "module": "Erdos249257/HalfGreedyTwoThirdsBand.lean",
-          "line": 126
+          "line": 185
         },
         {
           "name": "seven_le_of_intBand_odd",
           "module": "Erdos249257/HalfGreedyTwoThirdsBand.lean",
-          "line": 172
+          "line": 231
         }
       ]
     },
@@ -8426,6 +8496,36 @@
           "name": "half_mem_mersenneAchievementSet_iff_greedySkippedSupport_infinite",
           "module": "Erdos249257/GreedyAchievementSet.lean",
           "line": 2514
+        }
+      ]
+    },
+    {
+      "id": "campbell_shift_synchronization_boundary",
+      "label": "Campbell shift-synchronization strategy boundary",
+      "status": "unconditional progress",
+      "statement": "The quarter-exponent prime-progression parameters cannot be synchronized with the last-skip fatal window under the stated period-freezing bounds. Moreover, the proposed shifted-zero interface is exactly equivalent to infinitely many actual greedy skips and to membership of 1/2 in the Mersenne achievement set. This closes a synchronization strategy and an exact re-expression; it does not provide an independent producer or prove half-membership.",
+      "paper_label": "res:campbellboundary",
+      "readme_headline": false,
+      "declarations": [
+        {
+          "name": "campbellQuarterExponent_periodFreeze_noSync",
+          "module": "Erdos249257/CampbellShiftSynchronization.lean",
+          "line": 299
+        },
+        {
+          "name": "campbellPhaseFreeze_parameters_impossible",
+          "module": "Erdos249257/CampbellShiftSynchronization.lean",
+          "line": 320
+        },
+        {
+          "name": "shiftWindowZero_iff_greedyMersenneSkippedSupport_infinite",
+          "module": "Erdos249257/CampbellShiftSynchronization.lean",
+          "line": 471
+        },
+        {
+          "name": "shiftWindowZero_iff_half_mem_mersenneAchievementSet",
+          "module": "Erdos249257/CampbellShiftSynchronization.lean",
+          "line": 488
         }
       ]
     },

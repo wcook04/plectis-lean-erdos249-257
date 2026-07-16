@@ -44,7 +44,7 @@ Every conditional theorem, criterion, or reduction names the exact hypothesis or
 
 Seen in: Exact reduction of #249 to finite decidable certificates (`certificate_reduction`).
 
-Recorded boundary: Produce certified non-integrality witnesses at unbounded parameters, equivalently along the lcm diagonal (`remaining_open.unbounded_certificate_supply`).
+Recorded boundary: Produce certified non-integrality witnesses at unbounded parameters. A sufficient one-parameter form is to produce them along the lcm diagonal (`remaining_open.unbounded_certificate_supply`).
 
 Limit: An exact reduction can expose an open proposition without proving it.
 
@@ -54,7 +54,7 @@ Finite certificates, bounded searches, and verified initial segments remain fini
 
 Seen in: Initial certified-kill segment and generated certificates (`certified_kill_instances`).
 
-Recorded boundary: Produce certified non-integrality witnesses at unbounded parameters, equivalently along the lcm diagonal (`remaining_open.unbounded_certificate_supply`).
+Recorded boundary: Produce certified non-integrality witnesses at unbounded parameters. A sufficient one-parameter form is to produce them along the lcm diagonal (`remaining_open.unbounded_certificate_supply`).
 
 Limit: Increasing a checked bound does not change the quantifier of the public claim.
 

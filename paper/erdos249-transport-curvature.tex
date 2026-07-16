@@ -7,7 +7,7 @@
 \usepackage{amsmath,amssymb,amsthm,booktabs,seqsplit}
 \usepackage[dvipsnames]{xcolor}
 \usepackage[colorlinks=true,linkcolor=black,urlcolor=RoyalBlue,citecolor=black]{hyperref}
-\newcommand{\commit}{0e85f7ebadb0f81a26791bc167ce224bd2534f36}
+\newcommand{\commit}{81150c1c6fdd4cd51e76d3aa0de344341e0e9e7c}
 \newcommand{\repobase}{https://github.com/wcook04/plectis-lean-erdos249-257/blob/\commit}
 \newcommand{\PK}{Erdos249257}
 \input{module-aliases.tex}
@@ -304,17 +304,17 @@ using the missing fresh divisor channels.
 \begin{tabular}{@{}p{0.24\textwidth}p{0.46\textwidth}p{0.2\textwidth}@{}}
 \toprule Layer & Checked statement & Status \\
 \midrule
-Curvature & exact split, radius, recurrence, criterion & unconditional \\
-Exponent transport & stable support, affine state, cancellation & unconditional \\
-Joint $(3,5)$ transport & moment annihilation and criterion & unconditional \\
-Prime jump & migration, sharp window, $(12,5,15)$ & finite \\
-Three transport & sharp window and $(60,12)$ & finite \\
-First harmonic & cosine gap forces a certificate & conditional input \\
-Adjacent phases & squared chord separation forces a certificate & conditional input \\
-Pivot anti-reconstruction & pairwise phase energy and exact window-pair equivalence & conditional / equivalence \\
-Tropical signature & fixed precision has a completion & no-go \\
-LCM factor ideals & factor/anchor and finite shift algebra have a synthetic survivor & no-go \\
-Irrationality of $S$ & follows from a named unbounded supply & supply open \\
+Curvature & exact split, radius, recurrence, criterion & conditional reduction \\
+Exponent transport & stable support, affine state, cancellation & proved here \\
+Joint $(3,5)$ transport & moment annihilation and criterion & conditional reduction \\
+Prime jump & migration, sharp window, $(12,5,15)$ & verified finite instance \\
+Three transport & sharp window and $(60,12)$ & verified finite instance \\
+First harmonic & cosine gap forces a certificate & conditional reduction \\
+Adjacent phases & squared chord separation forces a certificate & conditional reduction \\
+Pivot anti-reconstruction & pairwise phase energy and exact window-pair equivalence & conditional reduction \\
+Tropical signature & fixed precision has a completion & unconditional progress \\
+LCM factor ideals & factor/anchor and finite shift algebra have a synthetic survivor & unconditional progress \\
+Irrationality of $S$ & follows from a named unbounded supply & open \\
 \bottomrule
 \end{tabular}
 \end{center}

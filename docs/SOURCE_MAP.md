@@ -20,7 +20,26 @@ User-facing route:
 ## #257 / Erdős–Borwein families
 
 - `Erdos249257.CertificateKernel`
-- Relevant declarations include: `irrational_erdosSum_full_support`, `irrational_erdosBorwein_series`, `irrational_erdosSum_factorial_support`, `irrational_erdosSum_two_pow_support`
+- Relevant declarations include: `irrational_erdosSum_full_support`,
+  `irrational_erdosBorwein_series`, `irrational_erdosSum_factorial_support`,
+  `irrational_erdosSum_two_pow_support`, and
+  `irrational_erdosSupportSeries_eventuallyPeriodic`.
+
+## Periodic weighted Lambert series
+
+- `Erdos249257.CertificateKernel`
+- Nonnegative weights:
+  `irrational_weightedErdosSeries_periodic`,
+  `irrational_weightedErdosSeries_eventuallyPeriodic`, and
+  `irrational_ratWeightSeries_eventuallyPeriodic`.
+- Signed weights:
+  `irrational_or_bpow_mul_eq_intCast_intWeightedErdosSeries_periodic` gives
+  the irrational-or-base-terminating dichotomy, while
+  `irrational_intWeightedErdosSeries_periodic_of_bpow_mul_ne_intCast`
+  consumes an explicit nontermination hypothesis.
+- `intWeightedCoeff_periodFourSignWeight_eq_zero_of_mod_four_eq_three` is the
+  residue-selection obstruction explaining why the signed endpoint is not
+  unconditional irrationality.
 
 ## #249 / totient denominator exclusions
 
@@ -117,13 +136,24 @@ contribution; the cylinder law actually used in the exposition is owned by
 
 ## Binary-carry trunk (post-wave carry layer)
 
-Builds on `Erdos249257.CertificateKernel`; not part of the wave chronology. Reading order: `GenericTailOrbitRigidity → GreedyAchievementSet → BooleanMobiusCarry → RationalSupportCarrySkeleton → SublogDivisorCoverage`.
+Builds on `Erdos249257.CertificateKernel`; not part of the wave chronology.
+Reading order:
+`GenericTailOrbitRigidity → GreedyAchievementSet → CampbellShiftSynchronization → BooleanMobiusCarry → RationalSupportCarrySkeleton → SublogDivisorCoverage`.
 
 - `Erdos249257.GenericTailOrbitRigidity`
 - Relevant declarations include: `temperedBinaryOrbit_eq_scaledTail`, `binaryCoeffSeries_rational_iff_exists_temperedBinaryOrbit`, `balancedPulse_fanout_unbounded`, `balancedPulse_no_autonomous_decoder`
 
 - `Erdos249257.GreedyAchievementSet`
 - Relevant declarations include: `volume_mersenneAchievementSet`, `perfect_mersenneAchievementSet`, `isNowhereDense_mersenneAchievementSet`, `mem_mersenneAchievementSet_iff_greedy_survival`, `certifiedGreedyMersenneDeath_not_mem`, `three_fourths_not_mem_mersenneAchievementSet`, `rational_member_support_bit_iff`, `half_mem_mersenneAchievementSet_of_prefixForcingChain` (conditional interface only)
+
+- `Erdos249257.CampbellShiftSynchronization`
+- Relevant declarations include:
+  `campbellQuarterExponent_periodFreeze_noSync`,
+  `campbellPhaseFreeze_parameters_impossible`,
+  `shiftWindowZero_iff_greedyMersenneSkippedSupport_infinite`, and
+  `shiftWindowZero_iff_half_mem_mersenneAchievementSet`. These are a
+  synchronization no-go and an exact endpoint re-expression, not an
+  independent half-membership producer.
 
 - `Erdos249257.BooleanMobiusCarry`
 - Relevant declarations include: `erdosSupportSeries_rational_iff_exists_temperedCarry`, `support_fraction_iff_exists_temperedCarry`, `exists_normalized_support_fraction_iff_exists_booleanMobiusCarry`, `mobius_carryQuotient_recovers_support`, `support_half_iff_affineBinaryOrbit_tempered`

@@ -22,7 +22,7 @@
 % the repository verifies that it matches docs/claims.json and that every
 % \lref/\lrefx/\lloc target resolves to the named declaration at that line.
 % ---------------------------------------------------------------------------
-\newcommand{\commit}{0e85f7ebadb0f81a26791bc167ce224bd2534f36}
+\newcommand{\commit}{81150c1c6fdd4cd51e76d3aa0de344341e0e9e7c}
 \newcommand{\repobase}{https://github.com/wcook04/plectis-lean-erdos249-257/blob/\commit}
 \newcommand{\sourceurl}{https://github.com/wcook04/plectis-lean-erdos249-257/tree/\commit}
 \newcommand{\rootbase}{https://github.com/wcook04/plectis-lean-erdos249-257/blob/main}
@@ -251,6 +251,55 @@ With the primitive-conductor weight $A=\ph*\mu$,
 with the weight $A$ defined at \lrefx{MersenneLambertLadder.lean}{252}{primWeight}. This
 places $S$ in the same $\sum(\cdot)/(2^d-1)$ family as $E$, with a nonnegative weight.
 
+\subsection{Periodic coefficient theorems}\label{sec:periodicweights}
+
+The same certificate machinery applies beyond indicator functions.  For a
+coefficient sequence $\gamma$ and integer base $b\ge2$, write
+\[
+  L_b(\gamma)=\sum_{a\ge1}\frac{\gamma(a)}{b^a-1}.
+\]
+
+\begin{theorem}[nonnegative eventually-periodic weights]
+\label{res:periodicnonnegative}
+If $\gamma\colon\N\to\Q_{\ge0}$ is eventually periodic and has a positive
+value at a positive index in its periodic region, then $L_b(\gamma)$ is
+irrational.  The same statement holds in particular for eventually-periodic
+natural-number weights.
+\end{theorem}
+\noindent Formalised:
+\lrefx{CertificateKernel.lean}{12370}{irrational_weightedErdosSeries_periodic},
+\lrefx{CertificateKernel.lean}{12397}{irrational_weightedErdosSeries_eventuallyPeriodic},
+and
+\lref{CertificateKernel.lean}{12483}{irrational_ratWeightSeries_eventuallyPeriodic}.
+This contains the eventually-periodic support case when $\gamma$ is an
+indicator.  Luca--Tachiya prove a broader periodic rational-coefficient
+theorem by different methods~\cite{lucatachiya}; no priority claim is made
+here.
+
+\begin{theorem}[periodic signed-weight dichotomy]
+\label{res:periodicsigned}
+If $w\colon\N\to\Z$ is periodic, then $L_b(w)$ is irrational or it terminates
+in base $b$: for some $k\ge0$, the number $b^kL_b(w)$ is an integer.
+Consequently, excluding termination is sufficient for irrationality.
+\end{theorem}
+\noindent Formalised:
+\lrefx{CertificateKernel.lean}{13847}{irrational_or_bpow_mul_eq_intCast_intWeightedErdosSeries_periodic}
+and
+\lref{CertificateKernel.lean}{13872}{irrational_intWeightedErdosSeries_periodic_of_bpow_mul_ne_intCast}.
+The terminating alternative is not excluded in general, so this is not a
+formalisation of the full mixed-sign periodic-coefficient theorem.
+
+\begin{proposition}[a residue-blind obstruction]\label{res:periodfourobstruction}
+For the period-four signed weight $1,0,-1,0$, the associated divisor
+coefficient vanishes identically on $n\equiv3\pmod4$.
+\end{proposition}
+\noindent Formalised:
+\lref{CertificateKernel.lean}{13898}{intWeightedCoeff_periodFourSignWeight_eq_zero_of_mod_four_eq_three}.
+Thus a whole arithmetic progression can carry zero signed coefficient.  A
+residue-blind selection argument cannot force a protected nonzero residue for
+every periodic signed weight; this explains why the checked endpoint is a
+dichotomy rather than unconditional irrationality.
+
 \subsection{Finite primitive-coordinate obstruction}\label{sec:primitiveindex}
 
 The weight $A$ also has finite rational coordinates independent of the
@@ -318,7 +367,7 @@ arithmetic function $f$, put
 If $X$ and $Y$ are the independent waiting times used in
 Section~\ref{sec:geom}, then
 \[
- \Pr(d\mid\gcd(X,Y))=Pr(d\mid X)\Pr(d\mid Y)
+ \Pr(d\mid\gcd(X,Y))=\Pr(d\mid X)\Pr(d\mid Y)
      =\frac{1}{(2^d-1)^2}.
 \]
 Consequently $L_2(f)$ is the divisor calculus of the random gcd, just as
@@ -493,6 +542,29 @@ prime-valuation-deficit witness forces the multiplicative order of the base modu
 the relevant modulus not to collapse, which rules out the long repeated digit
 blocks a rational value would require.
 
+\subsection{The base-$2$ achievement set}
+
+Let
+\[
+  \mathcal A=\left\{\sum_{n\in A}\frac1{2^n-1}:A\subseteq\N,\ 0\notin A\right\}.
+\]
+The formal development verifies that $\mathcal A$ is compact, perfect,
+totally disconnected, nowhere dense, and has Lebesgue measure one.  Its
+strictly superincreasing weights make normalized support coding injective,
+and membership is equivalent to exact greedy survival at every level.
+Formalised:
+\lrefx{GreedyAchievementSet.lean}{996}{volume_mersenneAchievementSet},
+\lrefx{GreedyAchievementSet.lean}{1445}{mem_mersenneAchievementSet_iff_greedy_survival},
+\lrefx{GreedyAchievementSet.lean}{1527}{positiveMersenneSupportValue_injective_normalized},
+\lrefx{GreedyAchievementSet.lean}{1620}{perfect_mersenneAchievementSet},
+\lrefx{GreedyAchievementSet.lean}{1636}{isTotallyDisconnected_mersenneAchievementSet},
+and
+\lref{GreedyAchievementSet.lean}{1645}{isNowhereDense_mersenneAchievementSet}.
+Kova\v{c}--Tao supply the strict-tail Cantor-set context~\cite{kovactao}; no
+novelty claim is made for that geometry.  The exact rational execution and
+finite non-membership certificates used for computation are described in
+Appendix~\ref{sec:carry}.
+
 \subsection{The half-value problem in one page}\label{res:halfstory}
 
 The most concrete unresolved test value is $1/2$.  The Mersenne weights are
@@ -525,38 +597,48 @@ and
 The rest of this section develops sufficient criteria and finite case analyses
 around this remaining estimate; it may be skipped on a first reading.
 
-\subsection{A narrow obstruction for an isolated skip}\label{res:twothirdsband}
+\subsection{A band formula for the final skip between two takes}
+\label{res:twothirdsband}
 
-One local configuration admits a particularly simple exact description.
-Suppose the greedy process takes the term at rank $b$, skips the next term,
-and then takes the term after that.  Put $q=2^b-1$, and write the residual
-immediately before the first take as $1/R$.  When $0<R<q$, the intervening
-skip is dyadically unsafe if and only if
+One local configuration admits a simple exact description in full generality.
+Suppose a take at rank $b$ is followed by the next take at $c>b+1$.  Put
+$q=2^b-1$, $m=2^{c-1}$, and write the residual immediately before the first
+take as $1/R$.  When $0<R<q$, the final intervening skip is dyadically unsafe
+if and only if
 \[
-  \frac{q(2q+1)}{3q+1}<R<\frac{2q(q+1)}{3q+2}.
+  \frac{q(m-1)}{q+m-1}<R<\frac{qm}{q+m}.
 \]
-The width of this interval is exactly
+The interval has exact width
 \[
-  \frac{q^2}{(3q+1)(3q+2)}<\frac19,
+  \frac{q^2}{(q+m)(q+m-1)}.
 \]
-and the whole interval lies between $2q/3$ and $2q/3+2/9$.  Thus an unsafe
-isolated skip is confined to a uniformly narrow window pinned just above two
-thirds of the Mersenne modulus.  No integral reciprocal lies in this window.
-In the corresponding positive odd integer formulation, with residual
-$p/(2D)$, membership in the cleared band forces $p\ge7$.
-
-This is a localizer, not an orbit-level elimination.  It does not show that
-the greedy orbit of $1/2$ avoids the interval, and it does not identify the
-two surviving last-producer coordinates $-2,-1$ with unsafe isolated skips.
-The exact equivalence, width calculation, and arithmetic consequences are
-\lrefx{HalfGreedyTwoThirdsBand.lean}{68}{singletonUnsafe_iff_twoThirdsBand},
-\lrefx{HalfGreedyTwoThirdsBand.lean}{95}{band_width},
-\lrefx{HalfGreedyTwoThirdsBand.lean}{104}{band_width_lt_ninth},
-\lrefx{HalfGreedyTwoThirdsBand.lean}{126}{not_twoThirdsBand_of_int},
+Formalised:
+\lrefx{HalfGreedyTwoThirdsBand.lean}{88}{postTakeUnsafeAt_iff_band}
 and
-\lref{HalfGreedyTwoThirdsBand.lean}{172}{seven_le_of_intBand_odd}.
+\lref{HalfGreedyTwoThirdsBand.lean}{104}{band_width_general}.
 
-\subsection{A conditional orthogonal-petal criterion}\label{res:sunflower}
+For a single intervening skip, $c=b+2$ and $m=2q+2$.  The band becomes
+\[
+  \frac{q(2q+1)}{3q+1}<R<\frac{2q(q+1)}{3q+2},
+\]
+with width $q^2/((3q+1)(3q+2))<1/9$, entirely between $2q/3$ and
+$2q/3+2/9$.  No integral reciprocal lies in this window.  In the
+corresponding positive odd integer formulation, with residual $p/(2D)$,
+membership in the cleared band forces $p\ge7$.  Formalised:
+\lrefx{HalfGreedyTwoThirdsBand.lean}{127}{singletonUnsafe_iff_twoThirdsBand},
+\lrefx{HalfGreedyTwoThirdsBand.lean}{154}{band_width},
+\lrefx{HalfGreedyTwoThirdsBand.lean}{163}{band_width_lt_ninth},
+\lrefx{HalfGreedyTwoThirdsBand.lean}{185}{not_twoThirdsBand_of_int},
+and
+\lref{HalfGreedyTwoThirdsBand.lean}{231}{seven_le_of_intBand_odd}.
+
+These are localizers, not orbit-level eliminations.  They do not show that
+the greedy orbit of $1/2$ avoids any such band, and they do not identify the
+two surviving last-producer coordinates $-2,-1$ with dyadically unsafe skips.
+
+\subsection{Conditional support and reachability producers}
+
+\subsubsection{A conditional orthogonal-petal criterion}\label{res:sunflower}
 
 Let $A$ be a finite-core orthogonal-petal bouquet: outside a finite frame, its
 elements have the form $c_i p_i$, where the cores $c_i$ divide one fixed
@@ -578,7 +660,7 @@ The tail-selection predicate itself is not proved here.  Thus this is a
 conditional reduction for one structured support family, not a further
 unconditional case of Erd\H{o}s~\#257.
 
-\subsection{Composite dilation defects}\label{res:compositedefect}
+\subsubsection{Composite dilation defects}\label{res:compositedefect}
 
 For a support divisor count $f_A(x)=\#\{d\in A:d\mid x\}$, multiplication by
 a composite support element $a$ has an exact correction term.  Besides the
@@ -592,7 +674,7 @@ This records the local correction needed when dilation is not prime.  It does
 not prove a correlation estimate, the sunflower tail selector, or an
 irrationality statement.
 
-\subsection{Mixed prime-power layers}\label{res:mixedlayer}
+\subsubsection{Mixed prime-power layers}\label{res:mixedlayer}
 
 The one-prime-power layer has a two-signature extension.  Exact $p$-adic and
 $q$-adic layer operators commute, and, for distinct primes with the residual
@@ -605,7 +687,7 @@ one at residual argument $1$:
 These are finite coefficient identities.  They do not provide a decimation
 transport, a bounded-$\Omega$ conclusion, or an irrationality theorem.
 
-\subsection{Half-trapping return carries}\label{res:halftrapping}
+\subsubsection{Half-trapping return carries}\label{res:halftrapping}
 
 If rational-linear channels vanish on every relation killed by one scalar
 evaluation, their evaluation matrix has rank at most one; every nontrivial
@@ -620,7 +702,7 @@ The argument does not produce reverse-carry presentations or an earlier
 overlapping return; it supplies only the algebraic core of that conditional
 criterion.
 
-\subsection{Half-carry reachability}\label{res:halfcarryreachability}
+\subsubsection{Half-carry reachability}\label{res:halfcarryreachability}
 
 There is also a finite-prefix criterion for the target $1/2$.  At an unresolved
 even seam, the scalar transition reaches every integer terminal carry except
@@ -702,7 +784,9 @@ and
 No such scaled-vanishing sequence is constructed here; the result is a
 conditional reduction, not an unconditional membership theorem.
 
-\subsection{Finite shadows of the half cylinder}\label{res:halfcylindershadow}
+\subsection{Window, seam, rewind, and compactness sockets}
+
+\subsubsection{Finite shadows of the half cylinder}\label{res:halfcylindershadow}
 
 For an admissible finite word, the residual from $1/2$ is given exactly by its
 terminal half carry minus the future coefficient tail, scaled by a power of
@@ -719,7 +803,7 @@ achievement set, by
 That producer is an unproved hypothesis; this is a conditional reduction, not
 a proof of Erd\H{o}s~\#257.
 
-\subsection{Fixed-coefficient rewind}\label{res:fixedcoeffrewind}
+\subsubsection{Fixed-coefficient rewind}\label{res:fixedcoeffrewind}
 
 For a finite list of common coefficients, the canonical inverse-parent map has
 an exact closed form with a power-of-two denominator:
@@ -733,7 +817,7 @@ Thus width alone does not justify a singleton conclusion.  This is a finite
 rewind lemma, and supplies neither a seam exclusion nor an Erd\H{o}s~\#257
 conclusion.
 
-\subsection{Selected half-carry windows}\label{res:selectedhalfwindow}
+\subsubsection{Selected half-carry windows}\label{res:selectedhalfwindow}
 
 The selected-window construction keeps an explicit admissible word for each
 terminal carry in a finite protected interval.  A supply of such windows at
@@ -747,7 +831,7 @@ next-row divisor cylinder, or the canonical adjacent seam.  The module makes
 this input explicit; it does not construct the window supply and does not
 prove Erd\H{o}s~\#257.
 
-\subsection{Realized rewind phase}\label{res:rewindphase}
+\subsubsection{Realized rewind phase}\label{res:rewindphase}
 
 For a realized fixed-coefficient history, the dyadic rewind phase is the
 complementary binary suffix numeral:
@@ -759,7 +843,7 @@ formalised by
 This converts the phase condition into support-history coordinates, but does
 not prove the required coverage inequality globally.
 
-\subsection{Localized protected seams}\label{res:protectedseam}
+\subsubsection{Localized protected seams}\label{res:protectedseam}
 
 The compactness argument needs only one admissible word at cofinally many
 depths.  At a localized one-hole seam, one of the two protected carries $3$
@@ -770,7 +854,7 @@ and hence an infinite support with sum $1/2$,
 \lrefx{HalfCarryProtectedSeamConsumer.lean}{53}{exists_infinite_support_half_of_cofinalProtectedEvenSeamRealization}.
 The cofinal realization supply is not proved.
 
-\subsection{Combining the two cofinal half-carry criteria}\label{res:cofinalwindowseam}
+\subsubsection{Combining the two cofinal half-carry criteria}\label{res:cofinalwindowseam}
 
 At each requested scale, the public mixed producer permits either a selected
 protected window or a localized realized seam.  Each branch supplies the one
@@ -781,7 +865,7 @@ and
 \lrefx{HalfCarryCofinalWindowOrSeamConsumer.lean}{58}{exists_infinite_support_half_of_cofinalSelectedWindowOrProtectedSeam}.
 The mixed cofinal producer remains an unproved hypothesis.
 
-\subsection{Integer-greedy first-wrap reduction}\label{res:integergreedy}
+\subsubsection{Integer-greedy first-wrap reduction}\label{res:integergreedy}
 
 The first-wrap seam has exact truncated Mersenne weights with a quantitative
 gap-dominance property.  For these weights, a small positive subset-sum defect
@@ -791,14 +875,16 @@ positive; this is formalised by
 The remaining arithmetic input is an unbounded lower bound for that
 deterministic remainder sequence.  No such lower bound is proved here.
 
-\subsection{Concrete seam adapter}\label{res:concreteseam}
+\subsubsection{Concrete seam adapter}\label{res:concreteseam}
 
 The finite seam-word adapter realizes the abstract adjacent cut by concrete
 Boolean words and identifies its next word with the integer-greedy choice:
 \lref{HalfCylinderConcreteSeamAdapter.lean}{667}{seamCutNextWord_eq_greedyWord_succ}.
 It implements a finite recurrence, not the unbounded remainder estimate.
 
-\subsection{Fatal gaps and eventual right tails}\label{res:fatalright}
+\subsection{Fatal-gap and last-producer spine}
+
+\subsubsection{Fatal gaps and eventual right tails}\label{res:fatalright}
 
 For the concrete integer seam words, eventual right extension is equivalent
 to nonmembership of $1/2$ in the Mersenne achievement set:
@@ -854,7 +940,7 @@ indices,
 It is a bounded producer check and does not supply the cofinal band-escape
 hypothesis.
 
-\subsection{Positive half-membership classification}\label{res:halfmembership}
+\subsubsection{Positive half-membership classification}\label{res:halfmembership}
 
 The complementary branch has an equally exact seam formulation.  Membership
 of $1/2$ in the Mersenne achievement set is equivalent to false successor
@@ -868,7 +954,7 @@ tending to infinity,
 These equivalences isolate the positive arithmetic producer; they do not
 establish that the producer exists.
 
-\subsection{Largest skipped ranks}\label{res:largestskip}
+\subsubsection{Largest skipped ranks}\label{res:largestskip}
 
 At a named largest skipped rank $d$, the lower seam word and its adjacent
 upper competitor have an exact late-range gap.  In division-free form, the
@@ -886,7 +972,7 @@ and
 The first-crossing branch producer required to use this identity globally is
 not proved.
 
-\subsection{Boundary-pulse normalization}\label{res:boundarypulse}
+\subsubsection{Boundary-pulse normalization}\label{res:boundarypulse}
 
 Above a late largest skipped rank, every filled suffix rank has zero row
 pulse, so the word pulse is carried entirely by the lower prefix:
@@ -898,7 +984,7 @@ one:
 This supplies the incidence normalization for a producer estimate; it does
 not establish that estimate.
 
-\subsection{Largest-skip induction}\label{res:largestskipinduction}
+\subsubsection{Largest-skip induction}\label{res:largestskipinduction}
 
 Assume that at the first crossing a late largest skipped rank either
 remains late at the next row or forces an upper-or-middle successor branch.
@@ -910,7 +996,7 @@ achievement set,
 \lrefx{HalfCylinderLargestSkipInduction.lean}{167}{half_mem_mersenneAchievementSet_of_largestSkipLateStepSocket}.
 The first-crossing hypothesis itself remains unproved.
 
-\subsection{The fixed-tail survival criterion}\label{res:fixedtailsocket}
+\subsubsection{The fixed-tail survival criterion}\label{res:fixedtailsocket}
 
 A skipped rank is final exactly when its post-decision remainder lies strictly
 above the complete remaining Mersenne tail:
@@ -921,7 +1007,7 @@ every actual skipped rank has remainder at most its full future tail,
 This is an exact local reformulation; the tail-survival inequality is not
 proved.
 
-\subsection{The producer-carry identity}\label{res:producercarry}
+\subsubsection{The producer-carry identity}\label{res:producercarry}
 
 For a producer-aligned finite support, the residual from $1/2$ is exactly the
 integer producer carry minus the complete future divisor-incidence tail,
@@ -936,7 +1022,7 @@ An upper carry at most $-8$ even gives a full Mersenne-gap margin,
 \lrefx{HalfCylinderProducerCarrySocket.lean}{190}{producerCarry_le_neg_eight_forces_gap_margin}.
 These are local criteria, not a proof that the required carries occur.
 
-\subsection{Quarter-band endpoint cells}\label{res:quarterband}
+\subsubsection{Quarter-band endpoint cells}\label{res:quarterband}
 
 For the adjacent seam recurrence, failure of the desired next-row upper bound
 on the middle branch is exactly one multiple-of-four pulse cell,
@@ -947,7 +1033,7 @@ $3\cdot2^{s-1}+k$ pulse cell,
 These are arithmetic normal forms for the exceptional cells; no avoidance
 statement for the concrete seam orbit is proved.
 
-\subsection{Reset-deficit escape}\label{res:resetdeficit}
+\subsubsection{Reset-deficit escape}\label{res:resetdeficit}
 
 At a late largest skipped rank, a right successor branch pins the integer
 greedy remainder between an explicit quarter threshold and carry threshold:
@@ -960,7 +1046,7 @@ corresponding number of rows,
 The remaining input is the deterministic anti-concentration needed to exclude
 the pinned right-branch window globally.
 
-\subsection{Seam-to-producer carry alignment}\label{res:seamproducer}
+\subsubsection{Seam-to-producer carry alignment}\label{res:seamproducer}
 
 At a first-wrap seam, the producer-aligned carry of the left boundary support
 is four times the shifted seam hole, less the explicit paired incidence pulse
@@ -969,21 +1055,23 @@ at the next two rows:
 This is an exact coordinate change between the seam and producer pictures; it
 does not supply a sign or size estimate for that carry.
 
-\subsection{A computed selected-window base}\label{res:selectedwindowbase}
+\subsection{Finite deposits, identities, and counterexamples}
+
+\subsubsection{A computed selected-window base}\label{res:selectedwindowbase}
 
 The selected half-carry construction has a checked depth-$18$ base: twelve
 Boolean words cover every terminal carry in the strip $[1,12]$, with all
 intermediate carries in the corresponding half strip.  The reflected table is
 formalised at
-\lref{HalfCarrySelectedWindowBase.lean}{77}{depth18TableCheck_eq_true};
+\lref{HalfCarrySelectedWindowBase.lean}{79}{depth18TableCheck_eq_true};
 the resulting selected window is defined at
-\lrefx{HalfCarrySelectedWindowBase.lean}{127}{depth18SelectedHalfWindow}.
+\lrefx{HalfCarrySelectedWindowBase.lean}{129}{depth18SelectedHalfWindow}.
 All twelve words share the same restriction at depth $13$, giving the first
 next-row divisor-agreement certificate,
-\lrefx{HalfCarrySelectedWindowBase.lean}{170}{depth18SelectedHalfWindow_nextRowDivisorAgreement}.
+\lrefx{HalfCarrySelectedWindowBase.lean}{172}{depth18SelectedHalfWindow_nextRowDivisorAgreement}.
 This finite base does not provide selected windows at unbounded depths.
 
-\subsection{Operational rewind-seam bridge}\label{res:rewindseambridge}
+\subsubsection{Operational rewind-seam bridge}\label{res:rewindseambridge}
 
 For a selected window with a rewind seam, a two-value coefficient profile on
 the adjacent base ancestors induces the live next-row profile,
@@ -993,7 +1081,7 @@ protected one-hole seam at the next row,
 \lrefx{RewindSeamOperationalBridge.lean}{217}{protectedEvenSeamRealizedAt_succ_of_profile}.
 The base-ancestor coefficient drop is an explicit input, not a theorem here.
 
-\subsection{Selected suffix cylinders}\label{res:selectsuffix}
+\subsubsection{Selected suffix cylinders}\label{res:selectsuffix}
 
 The depth-$18$ selected window has one common terminally indexed suffix
 cylinder after its depth-$13$ prefix is removed,
@@ -1059,7 +1147,7 @@ such a cofinal family.
 This is a conditional local feedback classification, not a cofinal supply
 theorem: the required crossing coefficient profile is still an input.
 
-\subsection{Pre-feedback selected-cylinder run}\label{res:prefeedback}
+\subsubsection{Pre-feedback selected-cylinder run}\label{res:prefeedback}
 
 Before the first half-divisor feedback row, Lean constructs a full selected
 window at every depth from $18$ through $27$,
@@ -1081,7 +1169,7 @@ explicitly not common,
 and
 \lrefx{SuffixCylinderThreshold.lean}{806}{depth29SelectedHalfWindow_not_commonRestrictionAt_twentySix}.
 
-\subsection{Half-divisor unit drop}\label{res:halfdivisordrop}
+\subsubsection{Half-divisor unit drop}\label{res:halfdivisordrop}
 
 At the doubled feedback row, changing only the terminal half-divisor bit from
 false to true increases the support coefficient by exactly one:
@@ -1096,7 +1184,7 @@ and
 This is the local coefficient input for the rewind-seam profile, not a global
 construction of such boundary pairs.
 
-\subsection{A finite rewind-boundary obstruction}\label{res:rewindboundarycounterexample}
+\subsubsection{A finite rewind-boundary obstruction}\label{res:rewindboundarycounterexample}
 
 The scalar one-row rewind data alone still does not supply that missing
 boundary predicate.  Lean gives a concrete depth-$26$ selected two-word
@@ -1107,7 +1195,7 @@ half-divisor boundary-pair witness:
 Thus the protected-window buffer in the cofinal consumer is a genuine
 hypothesis, not a consequence of the scalar seam facts alone.
 
-\subsection{Concrete producer-carry coordinates}\label{res:producercarrycoordinates}
+\subsubsection{Concrete producer-carry coordinates}\label{res:producercarrycoordinates}
 
 For every adjacent cut at rank $s\ge5$, Lean identifies the producer carry of
 the terminal-augmented below support with the concrete middle coordinate:
@@ -1128,6 +1216,28 @@ and
 These identities make the remaining quantitative task exact: they do not
 prove exponential lower bounds, sign persistence, or a universal escape
 mechanism.
+
+\subsubsection{Strategy boundary: Campbell shift synchronization}
+\label{res:campbellboundary}
+
+A proposed route combines a finite Mersenne shift from a putative last greedy
+skip with Campbell's quarter-exponent prime progression.  The exact parameter
+requirements cannot be synchronized: if the combined progression modulus is
+$d\ge2$, the phase factor is at most $d$, the fatal-window prime cap is at
+most four times that phase, and Campbell's applicability requires
+$d^4$ below the cap, then the inequalities are inconsistent.  Formalised:
+\lrefx{CampbellShiftSynchronization.lean}{299}{campbellQuarterExponent_periodFreeze_noSync}
+and
+\lref{CampbellShiftSynchronization.lean}{320}{campbellPhaseFreeze_parameters_impossible}.
+
+The associated shifted-zero interface is not an independent producer.  It is
+exactly equivalent both to infinitely many actual greedy skips and to
+$1/2\in\mathcal A$:
+\lrefx{CampbellShiftSynchronization.lean}{471}{shiftWindowZero_iff_greedyMersenneSkippedSupport_infinite}
+and
+\lref{CampbellShiftSynchronization.lean}{488}{shiftWindowZero_iff_half_mem_mersenneAchievementSet}.
+This closes one synchronization strategy and one reformulation; it does not
+advance either endpoint beyond the already stated half-achievement problem.
 
 \subsection{What stays open}
 
@@ -1534,7 +1644,7 @@ unbounded projection or suffix supply.
 \paragraph{T64 certificate closure.}\label{res:t64closure}
 The generated Lucas-certificate closure supplies the primality dependencies for
 the finite diagonal-pincer certificate family through $t=64$; for example,
-\lref{DiagonalPincerPrimeCertificates/ClosureT64.lean}{40737}{prime_lucas_2364533768205644535022723273}.
+\lref{DiagonalPincerPrimeCertificates/ClosureT64.lean}{51759}{prime_lucas_2364533768205644535022723273}.
 It is finite certificate infrastructure, not an unbounded certificate supply
 or an irrationality proof.
 
@@ -1854,10 +1964,10 @@ verified artefact.
 The remaining questions can be stated without reference to the size of the
 formal development.
 
-\subsection{Exact-arithmetic frontier as of 13 July 2026}
+\subsection{Two exact-arithmetic reductions}
 
-Two further reductions put the current proof obligations into scalar exact
-arithmetic.  They do not change the status of either problem.
+Two registered reductions put parts of the remaining obligations into scalar
+exact arithmetic.  They do not change the status of either problem.
 
 For \#249, let $m_t$ be the canonical adjacent-suffix depth and let $d_t$ be
 the corresponding residue in $[0,2^{m_t})$.  Define
@@ -1914,15 +2024,6 @@ criterion.  Thus the second-channel hypothesis is one sufficient route to the
 infinite-skip condition.  It does not prove that condition, and membership alone
 is not the universal \#257 theorem.
 
-Exact-arithmetic probes used during proof search found no violation of the
-second-channel inequality through $n=4000$, and found nonnegative canonical
-slack at every tested index through $t=52$, including all $22$ strict lcm
-jumps in that range.  These are finite computations outside the Lean proof
-authority.  In particular, they do not supply either universal quantifier.
-Their value is diagnostic: the \#257 computation points to an invariant of
-the rational orbit $u_n$, while the \#249 computation points to a sign or
-recurrence argument for $\sigma_t$ across fresh prime-power lcm jumps.
-
 \begin{problem}[Erd\H{o}s \#249]
 Prove that
 \[
@@ -1933,10 +2034,11 @@ rational representation.
 \end{problem}
 
 \begin{problem}[unbounded certificate supply]
-Produce certified non-integrality witnesses at unbounded parameters,
-equivalently along the lcm diagonal. This is the open hypothesis in
-Corollary~\ref{res:diag}; the verified scales in Example~\ref{res:deposits}
-form a finite initial set and do not establish it.
+Produce certified non-integrality witnesses at unbounded parameters.  A
+sufficient one-parameter form is to produce them along the lcm diagonal, as
+in Corollary~\ref{res:diag}; the verified scales in
+Example~\ref{res:deposits} form a finite initial set and do not establish the
+unbounded supply.
 \end{problem}
 
 \begin{problem}[universal Erd\H{o}s \#257]
@@ -1950,7 +2052,8 @@ support families in Theorem~\ref{res:support}.
 
 On the \#257 side, rationality would impose two complementary forms of
 rigidity: divisor-coverage zero windows have length $o(\log N)$, whereas an
-infinite support forces the associated positive carry states to be unbounded.
+infinite support with rational series value forces the associated positive
+carry states to be unbounded.
 These statements constrain different objects and do not yet exclude a rational
 infinite-support value, but together they narrow the structure that any such
 value would have to exhibit.
@@ -1974,10 +2077,10 @@ than proof authority; Section~\ref{sec:verify} gives the verification route.
 
 \paragraph{Use of AI assistance.} Large-language-model assistants were used
 during development for proof drafting, refactoring, and prose editing. Every
-mathematical claim rests on the
-published Lean source, in which each proof term is checked by the Lean~4
-kernel against the pinned Mathlib, with no \texttt{sorry}, \texttt{admit},
-additional axioms, or \texttt{native\_decide}.
+registered Lean-backed claim is linked to a declaration in the pinned
+formal-source checkpoint. Lean checks each proof term against the pinned
+Mathlib; the project contains no \texttt{sorry}, \texttt{admit},
+project-defined \texttt{axiom} declaration, or \texttt{native\_decide}.
 
 \paragraph{Funding and competing interests.} This work received no external
 funding. The author declares no competing interests.
@@ -2425,6 +2528,9 @@ Erd\H{o}s--Borwein $E$ irrational & \lrefx{CertificateKernel.lean}{8007}{irratio
 factorial support & \lrefx{CertificateKernel.lean}{5707}{irrational_erdosSum_factorial_support}\ (\texttt{CertificateKernel})\\
 power-of-two support & \lrefx{CertificateKernel.lean}{5731}{irrational_erdosSum_two_pow_support}\ (\texttt{CertificateKernel})\\
 pairwise-coprime supports & \lrefx{CertificateKernel.lean}{10448}{irrational_erdosSupportSeries_pairwise_coprime}\ (\texttt{CertificateKernel})\\
+eventually-periodic nonnegative rational weights & \lrefx{CertificateKernel.lean}{12483}{irrational_ratWeightSeries_eventuallyPeriodic}\ (\texttt{CertificateKernel})\\
+periodic signed-weight irrational-or-terminating dichotomy & \lrefx{CertificateKernel.lean}{13847}{irrational_or_bpow_mul_eq_intCast_intWeightedErdosSeries_periodic}\ (\texttt{CertificateKernel})\\
+period-four residue obstruction & \lrefx{CertificateKernel.lean}{13898}{intWeightedCoeff_periodFourSignWeight_eq_zero_of_mod_four_eq_three}\ (\texttt{CertificateKernel})\\
 $L(\mu)=1/2$ & \lrefx{MersenneLambertLadder.lean}{587}{tsum_moebius_div_two_pow_sub_one_eq_half}\ (\texttt{MersenneLambertLadder})\\
 $L(\ph)=2$ & \lrefx{MersenneLambertLadder.lean}{575}{tsum_totient_div_two_pow_sub_one_eq_two}\ (\texttt{MersenneLambertLadder})\\
 positive lift $L(A)=S$ & \lrefx{CertificateKernel.lean}{18117}{tsum_primWeight_div_two_pow_sub_one_eq_totient_series}\ (\texttt{CertificateKernel})\\
@@ -2457,6 +2563,7 @@ unbounded carry states & \lrefx{RationalSupportCarrySkeleton.lean}{2377}{exists_
 sublogarithmic zero windows & \lrefx{SublogDivisorCoverage.lean}{392}{supportCoeffZeroWindow_length_le_eps_logb_add}\ (\texttt{SublogDivisorCoverage})\\
 greedy membership criterion & \lrefx{GreedyAchievementSet.lean}{1445}{mem_mersenneAchievementSet_iff_greedy_survival}\ (\texttt{GreedyAchievementSet})\\
 Mersenne achievement set: measure one and nowhere dense & \lrefx{GreedyAchievementSet.lean}{996}{volume_mersenneAchievementSet}, \lrefx{GreedyAchievementSet.lean}{1645}{isNowhereDense_mersenneAchievementSet}\ (\texttt{GreedyAchievementSet})\\
+Campbell shift-synchronization boundary & \lrefx{CampbellShiftSynchronization.lean}{299}{campbellQuarterExponent_periodFreeze_noSync}, \lrefx{CampbellShiftSynchronization.lean}{488}{shiftWindowZero_iff_half_mem_mersenneAchievementSet}\ (\texttt{CampbellShiftSynchronization})\\
 \bottomrule
 \end{tabular}
 \end{center}
