@@ -2286,9 +2286,39 @@ through \(N\), the exact obstruction is:
 \(D\) clears every \(a_n\).
 \end{proposition}
 \lref{PrimitiveDeterminantLift.lean}{148}{twoTierPrimorial_dvd_of_integral_jet}
-Finite Mersenne-atom determinants likewise recover only their explicit
-denominator product, with no additional height surplus.
-\lrefx{MersenneTailAtoms.lean}{181}{one_le_abs_weightedMersenneAtom_cleared_det}
+
+For \(d\ge1\), define the pointed periodic atom
+\[
+ \omega_d(N)=\frac{2^{\,N\bmod d}}{2^d-1}.
+\]
+It satisfies the exact carry law
+\[
+ 2\omega_d(N)-\omega_d(N+1)=\mathbf1_{d\mid N+1}.
+\]
+
+\begin{proposition}[finite Mersenne-atom determinant boundary]
+\label{res:mersennetailatoms}
+Fix \(m\ge1\), conductors \(d_j\ge1\), indices \(n_{ij}\ge0\), and integer
+column weights \(w_j\), and set
+\[
+ W_{ij}=w_j\omega_{d_j}(n_{ij}),
+ \qquad U_{ij}=2^{\,n_{ij}\bmod d_j}.
+\]
+Then
+\[
+ \left(\prod_{j=1}^m(2^{d_j}-1)\right)\det W
+ =\left(\prod_{j=1}^m w_j\right)\det U\in\Z.
+\]
+If the integer on the right is nonzero, then the absolute value of the
+cleared determinant on the left is at least \(1\).
+\end{proposition}
+\noindent Formalised:
+\lrefx{MersenneTailAtoms.lean}{28}{mersenneTailAtom_step},
+\lrefx{MersenneTailAtoms.lean}{158}{weightedMersenneAtom_denominatorProduct_mul_det},
+and
+\lrefx{MersenneTailAtoms.lean}{181}{one_le_abs_weightedMersenneAtom_cleared_det}.
+Thus finite Mersenne-atom determinants recover exactly their explicit column
+denominators; the clearing creates no additional height surplus.
 These are scoped finite-denominator obstructions, not irrationality criteria
 for \(S\).
 
