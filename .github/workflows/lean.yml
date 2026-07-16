@@ -69,6 +69,21 @@ jobs:
       - name: Test downstream example claim boundary
         if: ${{ !cancelled() }}
         run: python3 scripts/test_downstream_example_contract.py
+      - name: Test adversarial methodology transitions
+        if: ${{ !cancelled() }}
+        run: python3 scripts/test_methodology_contract.py
+      - name: Test publication artifact mutations
+        if: ${{ !cancelled() }}
+        run: python3 scripts/test_publication_artifact_contract.py
+      - name: Test exact claim packet boundaries
+        if: ${{ !cancelled() }}
+        run: python3 scripts/test_claim_packet_boundaries.py
+      - name: Test publication evidence time axis
+        if: ${{ !cancelled() }}
+        run: python3 scripts/test_publication_evidence_time_axis.py
+      - name: Test ordinary-language status questions
+        if: ${{ !cancelled() }}
+        run: python3 scripts/test_status_question_search.py
       - name: Validate CITATION.cff
         if: ${{ !cancelled() }}
         run: python3 scripts/check_metadata.py
