@@ -247,7 +247,7 @@ private theorem right_extensions_after_last_false
 
 /-! ## The upper last producer is impossible unconditionally -/
 
-private theorem upperProducer_not_last
+theorem upperProducer_not_last
     (D : ℕ) (hD13 : 13 ≤ D)
     (hcarry : (seamAdjacentCut D (by omega)).successorCarries)
     (htrue : ∀ (s : ℕ) (hDs : D < s),
@@ -416,6 +416,7 @@ theorem half_mem_mersenneAchievementSet_of_middleProducerSqrtEscape
 #print axioms one_not_mem_insert_seamWordSupport
 #print axioms insert_seamWordSupport_subset_Iic
 #print axioms exists_last_false_terminal_of_eventuallyRight
+#print axioms upperProducer_not_last
 #print axioms middleProducer_neg_three_not_last
 #print axioms half_mem_mersenneAchievementSet_of_middleProducerTailEscapeExceptNegThree
 #print axioms half_mem_mersenneAchievementSet_of_middleProducerTailEscape
