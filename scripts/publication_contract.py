@@ -17,13 +17,19 @@ from typing import Any
 
 CONTRACT_PATH = "docs/publication_contract.json"
 EVIDENCE_PATH = "docs/publication_evidence.json"
+ENTRY_SOURCE_PATH = "docs/publication_entry_source.json"
+ENTRY_PACKET_PATH = "docs/publication_entry_packet.json"
 MUTATION_MANIFEST_PATH = "experiments/publication_mutations.json"
 MUTATION_HARNESS_PATH = "scripts/run_publication_mutations.py"
 CLAIMS_PATH = "docs/claims.json"
+METHODOLOGY_PATH = "docs/methodology.json"
+AGENT_ENTRY_PATH = "AGENTS.md"
 MAKEFILE_PATH = "paper/Makefile"
 REUSE_PATH = "REUSE.toml"
 SCHEMA = "erdos249257-publication-contract/1"
 EVIDENCE_SCHEMA = "erdos249257-publication-evidence/1"
+ENTRY_SOURCE_SCHEMA = "erdos249257-publication-entry-source/1"
+ENTRY_PACKET_SCHEMA = "erdos249257-publication-entry-packet/1"
 MUTATION_MANIFEST_SCHEMA = "erdos249257-publication-mutation-operators/1"
 EXPECTED_INVARIANT_FAMILIES = (
     "proof_trust",
@@ -138,6 +144,12 @@ class RepositoryReader:
 
 def sha256(data: bytes) -> str:
     return "sha256:" + hashlib.sha256(data).hexdigest()
+
+
+def canonical_json_bytes(data: dict[str, Any]) -> bytes:
+    return (
+        json.dumps(data, indent=2, ensure_ascii=False, sort_keys=True) + "\n"
+    ).encode("utf-8")
 
 
 def load_json(reader: RepositoryReader, relative: str) -> dict[str, Any]:
@@ -546,6 +558,272 @@ def all_entrypoints(
     ]
 
 
+def build_publication_entry_packet(reader: RepositoryReader) -> dict[str, Any]:
+    """Build the bounded agent packet from canonical publication owners."""
+    source = load_json(reader, ENTRY_SOURCE_PATH)
+    contract = load_json(reader, CONTRACT_PATH)
+    evidence = load_json(reader, EVIDENCE_PATH)
+    claims = load_json(reader, CLAIMS_PATH)
+    mutation_manifest = load_json(reader, MUTATION_MANIFEST_PATH)
+
+    systems_artifact = next(
+        row
+        for row in contract["artifacts"]
+        if row["id"] == "systems_case_study"
+    )
+    release = claims["release"]
+    evaluation = evidence["evaluation"]
+    current_assembly = claims["machine_readable_paper"]["publication_assembly"]
+    current_snapshot = {
+        "snapshot_kind": "current_canonical_owners",
+        "curated_claim_count": len(claims["claims"]),
+        "contribution_family_count": len(
+            current_assembly["contribution_families"]
+        ),
+        "status_count": len(claims["status_taxonomy"]),
+        "remaining_open_proposition_count": len(
+            claims["remaining_open_propositions"]
+        ),
+    }
+
+    owner_paths = [
+        ENTRY_SOURCE_PATH,
+        CONTRACT_PATH,
+        EVIDENCE_PATH,
+        CLAIMS_PATH,
+        METHODOLOGY_PATH,
+        MUTATION_MANIFEST_PATH,
+        MUTATION_HARNESS_PATH,
+        systems_artifact["source_path"],
+        systems_artifact["rendered_path"],
+    ]
+    content_hashes = {
+        path: sha256(reader.read_bytes(path))
+        for path in sorted(set(owner_paths))
+    }
+
+    provenance = evidence["provenance"]
+    exact_target_ids = [
+        row["id"]
+        for row in mutation_manifest["operators"]
+        if row.get("exact_original_target_registered") is True
+    ]
+    active_residuals: list[dict[str, Any]] = []
+    if provenance.get("raw_run_logs_registered") is not True:
+        active_residuals.append(
+            {
+                "id": "original_raw_mutation_logs_absent",
+                "kind": "evidence_boundary",
+                "status": "known_absence",
+                "statement": (
+                    "The original mutation run logs are not registered; "
+                    "historical timings remain a structured transcription."
+                ),
+                "reentry_condition": (
+                    "Register authenticated original logs and bind their "
+                    "content identities before changing this boundary."
+                ),
+            }
+        )
+    if len(exact_target_ids) != len(mutation_manifest["operators"]):
+        active_residuals.append(
+            {
+                "id": "exact_original_mutation_targets_partial",
+                "kind": "evidence_boundary",
+                "status": "known_absence",
+                "statement": (
+                    "Only the explicitly named mutation operators preserve "
+                    "exact original targets; the remaining targets are "
+                    "deterministic reconstructions."
+                ),
+                "exact_original_target_ids": exact_target_ids,
+                "reentry_condition": (
+                    "Recover and authenticate an original target before "
+                    "marking another operator exact."
+                ),
+            }
+        )
+    if evidence["post_repair"].get("other_original_mutations_rerun") is not True:
+        active_residuals.append(
+            {
+                "id": "historical_post_repair_full_rerun_absent",
+                "kind": "evaluation_boundary",
+                "status": "not_run",
+                "statement": (
+                    "The historical study did not rerun the other nine "
+                    "mutations after the M8 repair."
+                ),
+                "reentry_condition": (
+                    "Keep later deterministic reconstructions separate from "
+                    "the historical result unless the original experiment is "
+                    "rerun with equivalent targets and archived logs."
+                ),
+            }
+        )
+    active_residuals.extend(copy.deepcopy(source.get("manual_residuals", [])))
+
+    commands = list(source["validation_commands"])
+    for command in contract.get("reproducibility", {}).values():
+        if command not in commands:
+            commands.append(command)
+
+    return {
+        "schema": ENTRY_PACKET_SCHEMA,
+        "artifact_role": "generated_bounded_agent_entry_projection",
+        "authority_posture": (
+            "navigation_projection_not_Lean_proof_authority_and_not_"
+            "historical_evidence_authority"
+        ),
+        "thesis": source["thesis"],
+        "five_sentence_summary": source["five_sentence_summary"],
+        "revision_and_identity": {
+            "release_version": release["version"],
+            "release_tag": release["tag"],
+            "release_date": release["date"],
+            "lean_toolchain": release["lean_toolchain"],
+            "repository": release["repository"],
+            "formal_source": release["formal_source"],
+            "evaluation_checkpoint": evaluation["checkpoint"],
+            "current_checkout_revision_command": "git rev-parse HEAD",
+            "revision_embedding_boundary": (
+                "A tracked file cannot contain its own Git commit id without "
+                "self-reference. Content freshness is enforced by the owner "
+                "hashes below; agents query the checkout revision at runtime."
+            ),
+        },
+        "public_claims": source["publication_claims"],
+        "publication_non_claims": source["publication_non_claims"],
+        "registered_mathematical_non_claims": claims["non_claims"],
+        "remaining_open_propositions": claims["remaining_open_propositions"],
+        "authority_map": {
+            "nodes": source["authority_nodes"],
+            "edges": source["authority_edges"],
+        },
+        "evaluation": {
+            "historical_checkpoint_snapshot": evaluation["corpus_snapshot"],
+            "current_owner_snapshot": current_snapshot,
+            "same_snapshot": (
+                evaluation["corpus_snapshot"]["curated_claim_count"]
+                == current_snapshot["curated_claim_count"]
+                and evaluation["corpus_snapshot"]["contribution_family_count"]
+                == current_snapshot["contribution_family_count"]
+                and evaluation["corpus_snapshot"]["status_count"]
+                == current_snapshot["status_count"]
+                and evaluation["corpus_snapshot"][
+                    "remaining_open_proposition_count"
+                ]
+                == current_snapshot["remaining_open_proposition_count"]
+            ),
+            "baseline": evaluation["baseline"],
+            "protocol": evaluation["protocol"],
+            "invariant_families": evaluation["invariant_families"],
+            "mutations": evaluation["mutations"],
+            "summary": evaluation["summary"],
+            "post_repair": evidence["post_repair"],
+        },
+        "known_limitations": evidence["threats_to_validity"],
+        "active_evidence_residuals": active_residuals,
+        "artifact_owners": {
+            "publication_artifact_id": systems_artifact["id"],
+            "source_path": systems_artifact["source_path"],
+            "rendered_path": systems_artifact["rendered_path"],
+            "publication_contract": CONTRACT_PATH,
+            "publication_evidence": EVIDENCE_PATH,
+            "mutation_manifest": MUTATION_MANIFEST_PATH,
+            "mutation_harness": MUTATION_HARNESS_PATH,
+            "entry_source": ENTRY_SOURCE_PATH,
+            "entry_packet": ENTRY_PACKET_PATH,
+        },
+        "content_hashes": content_hashes,
+        "validation_commands": commands,
+        "packet_contract": {
+            "max_bytes": source["packet_max_bytes"],
+            "freshness_check": (
+                "python3 scripts/build_publication_entry_packet.py --check"
+            ),
+            "agent_entry_owner": AGENT_ENTRY_PATH,
+        },
+    }
+
+
+def validate_publication_entry_packet(
+    reader: RepositoryReader,
+    *,
+    source_override: dict[str, Any] | None = None,
+    packet_override: dict[str, Any] | None = None,
+) -> list[str]:
+    """Validate generation, boundedness, and actual agent-entry wiring."""
+    errors: list[str] = []
+    try:
+        source = source_override or load_json(reader, ENTRY_SOURCE_PATH)
+    except (FileNotFoundError, json.JSONDecodeError, UnicodeError) as error:
+        return [f"{ENTRY_SOURCE_PATH}: {error}"]
+    try:
+        packet_bytes = (
+            canonical_json_bytes(packet_override)
+            if packet_override is not None
+            else reader.read_bytes(ENTRY_PACKET_PATH)
+        )
+        packet = packet_override or json.loads(packet_bytes)
+    except (FileNotFoundError, json.JSONDecodeError, UnicodeError) as error:
+        return [f"{ENTRY_PACKET_PATH}: {error}"]
+
+    if source.get("schema") != ENTRY_SOURCE_SCHEMA:
+        errors.append(f"{ENTRY_SOURCE_PATH} must use schema {ENTRY_SOURCE_SCHEMA}")
+    if source.get("packet_path") != ENTRY_PACKET_PATH:
+        errors.append("publication entry source points at the wrong packet path")
+    if packet.get("schema") != ENTRY_PACKET_SCHEMA:
+        errors.append(f"{ENTRY_PACKET_PATH} must use schema {ENTRY_PACKET_SCHEMA}")
+    if len(source.get("five_sentence_summary", [])) != 5:
+        errors.append("publication entry source must contain exactly five summary sentences")
+    if len(source.get("publication_claims", [])) < 4:
+        errors.append("publication entry source must retain the four evidence claims")
+    if not source.get("publication_non_claims"):
+        errors.append("publication entry source must retain explicit non-claims")
+    max_bytes = source.get("packet_max_bytes")
+    if not isinstance(max_bytes, int) or max_bytes <= 0:
+        errors.append("publication entry packet byte budget is invalid")
+    elif len(packet_bytes) > max_bytes:
+        errors.append(
+            f"publication entry packet exceeds its {max_bytes}-byte budget: "
+            f"{len(packet_bytes)}"
+        )
+
+    if not errors:
+        expected = build_publication_entry_packet(
+            RepositoryReader(
+                reader.root,
+                reader.git_ref,
+                {
+                    ENTRY_SOURCE_PATH: canonical_json_bytes(source),
+                }
+                if source_override is not None
+                else None,
+            )
+        )
+        if packet != expected:
+            errors.append(
+                "publication entry packet is stale; run "
+                "python3 scripts/build_publication_entry_packet.py"
+            )
+
+    try:
+        agent_entry = reader.read_text(AGENT_ENTRY_PATH)
+    except (FileNotFoundError, UnicodeError) as error:
+        errors.append(f"{AGENT_ENTRY_PATH}: {error}")
+    else:
+        for required in (
+            ENTRY_PACKET_PATH,
+            "python3 scripts/build_publication_entry_packet.py --check",
+        ):
+            if required not in agent_entry:
+                errors.append(
+                    f"{AGENT_ENTRY_PATH} does not load or validate the "
+                    f"publication entry packet: missing {required}"
+                )
+    return errors
+
+
 def validate_publication_contract(
     reader: RepositoryReader,
     *,
@@ -810,6 +1088,7 @@ def validate_publication_contract(
             )
         errors.extend(validate_mutation_evidence_receipt(receipt, artifact, reader))
 
+    errors.extend(validate_publication_entry_packet(reader))
     return errors
 
 
@@ -948,5 +1227,35 @@ def mutation_fixture_failures(reader: RepositoryReader) -> list[str]:
         evidence_override=snapshot_inflation,
     ):
         failures.append("evaluation_snapshot_current_tree_conflation")
+
+    packet = load_json(reader, ENTRY_PACKET_PATH)
+
+    thesis_loss = copy.deepcopy(packet)
+    thesis_loss["thesis"] = "The checks passed."
+    if not validate_publication_entry_packet(reader, packet_override=thesis_loss):
+        failures.append("publication_entry_thesis_loss")
+
+    checkpoint_conflation = copy.deepcopy(packet)
+    checkpoint_conflation["revision_and_identity"]["evaluation_checkpoint"] = (
+        checkpoint_conflation["revision_and_identity"]["formal_source"]["ref"]
+    )
+    if not validate_publication_entry_packet(
+        reader,
+        packet_override=checkpoint_conflation,
+    ):
+        failures.append("publication_entry_checkpoint_conflation")
+
+    owner_hash_drift = copy.deepcopy(packet)
+    owner_hash_drift["content_hashes"][EVIDENCE_PATH] = "sha256:" + "0" * 64
+    if not validate_publication_entry_packet(
+        reader,
+        packet_override=owner_hash_drift,
+    ):
+        failures.append("publication_entry_owner_hash_drift")
+
+    residual_loss = copy.deepcopy(packet)
+    residual_loss["active_evidence_residuals"] = []
+    if not validate_publication_entry_packet(reader, packet_override=residual_loss):
+        failures.append("publication_entry_residual_loss")
 
     return failures

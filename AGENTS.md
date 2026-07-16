@@ -35,7 +35,15 @@ evidence of that workflow. They do not create hidden proof authority.
    authored papers and the paper-to-Lean source-sigil crosswalk. These authored
    surfaces remain distinct from Lean proof authority. The release gate keeps
    this registration envelope below 64 KB.
-5. Read `docs/publication_contract.json` for the exact inventory of shipped
+5. Read `docs/publication_entry_packet.json` when the task concerns the
+   systems paper, publication controls, mutation evidence, or their current
+   limits. It is a generated, bounded agent packet containing the thesis,
+   checked claims and non-claims, historical and current evidence snapshots,
+   authority owners, content hashes, validation commands, and active evidence
+   residuals. It is navigation, not Lean proof authority or historical
+   evidence authority. Its authored source is
+   `docs/publication_entry_source.json`.
+6. Read `docs/publication_contract.json` for the exact inventory of shipped
    manuscripts and PDFs, their content identities, their evidence boundaries,
    and their entry routes. It owns publication-artifact coverage, not
    mathematical claim status. In particular, the systems case study is
@@ -47,16 +55,16 @@ evidence of that workflow. They do not create hidden proof authority.
    `scripts/run_publication_mutations.py` provide a separately versioned,
    deterministic reconstruction of the ten mutation classes; they are not the
    missing original run logs or exact targets.
-6. Read `SCOPE.md` before describing what the project proves. Erdős #249 and
+7. Read `SCOPE.md` before describing what the project proves. Erdős #249 and
    the universal form of #257 remain open.
-7. For one claim, follow its `paper_label` into
+8. For one claim, follow its `paper_label` into
    `paper/erdos249-257-main-paper.tex`, then follow its `declarations` to the
    named Lean source coordinates.
-8. Use `docs/declaration_atlas.json` when you need the exhaustive mathematical
+9. Use `docs/declaration_atlas.json` when you need the exhaustive mathematical
    scale: every declaration, signature excerpt, module, import edge, generated
    certificate marker, and principal-claim link. It is a generated navigation
    projection; drill back to Lean before trusting a statement.
-9. Use `Erdos249257.lean` for the supported root import and exact package
+10. Use `Erdos249257.lean` for the supported root import and exact package
    topology. Use `docs/SOURCE_MAP.md` for intention-based routes and
    `docs/WAVE_INDEX.md` for mathematical chronology.
 
@@ -128,6 +136,7 @@ python3 scripts/test_methodology_contract.py
 python3 scripts/build_module_graph.py --check
 python3 scripts/refresh_source_coordinates.py --check
 python3 scripts/build_corpus_descriptor.py --check
+python3 scripts/build_publication_entry_packet.py --check
 python3 scripts/check_publication_contract.py
 python3 scripts/test_publication_artifact_contract.py
 python3 scripts/run_publication_mutations.py --verify-operators

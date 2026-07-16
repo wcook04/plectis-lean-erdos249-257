@@ -1,0 +1,158 @@
+{
+  "schema": "erdos249257-publication-entry-source/1",
+  "packet_path": "docs/publication_entry_packet.json",
+  "packet_max_bytes": 32768,
+  "thesis": "A proof assistant checks the formal theorem, but people and AI agents read papers and summaries; this project records the strength of each public claim and checks declared properties of published retellings against that record before release.",
+  "five_sentence_summary": [
+    "Lean checks formal declarations and proofs, not every natural-language sentence that later describes them.",
+    "This repository records mathematical claim status, source coordinates, publication artifacts, and declared release invariants in machine-readable owners.",
+    "At evaluation checkpoint 0e5aaf9, the release gate rejected nine of ten authored corruptions and allowed M8, which strengthened a finite-evidence boundary into a false unbounded claim.",
+    "After that sentence became a declared boundary with a negative fixture, the same M8 corruption was rejected.",
+    "A green release gate means the declared checks passed; it does not mean the system understood arbitrary prose or proved that its invariant family is complete."
+  ],
+  "publication_claims": [
+    {
+      "id": "declared_invariants_executable_at_corpus_scale",
+      "statement": "The declared publication invariants were executable on this corpus at the recorded evaluation checkpoint.",
+      "evidence_refs": [
+        "docs/publication_evidence.json::evaluation.baseline",
+        "docs/publication_evidence.json::evaluation.protocol"
+      ],
+      "explicitly_not_claimed": [
+        "The invariant family is complete.",
+        "The release gate understands arbitrary prose."
+      ]
+    },
+    {
+      "id": "nine_of_ten_authored_mutations_rejected",
+      "statement": "The release gate rejected nine of ten authored corruptions at the evaluation checkpoint.",
+      "evidence_refs": [
+        "docs/publication_evidence.json::evaluation.mutations",
+        "docs/publication_evidence.json::evaluation.summary"
+      ],
+      "explicitly_not_claimed": [
+        "This is a controlled comparison with ordinary continuous integration.",
+        "The mutation author was independent of the checker author."
+      ]
+    },
+    {
+      "id": "m8_exposed_enumeration_boundary",
+      "statement": "M8 passed because the strengthened sentence was outside the declared boundary set.",
+      "evidence_refs": [
+        "docs/publication_evidence.json::evaluation.mutations.M8",
+        "docs/publication_evidence.json::post_repair"
+      ],
+      "explicitly_not_claimed": [
+        "The system can infer every semantically important sentence automatically."
+      ]
+    },
+    {
+      "id": "same_m8_corruption_now_rejected",
+      "statement": "After the boundary was declared, the intact baseline passed and the same M8 corruption was rejected.",
+      "evidence_refs": [
+        "docs/publication_evidence.json::post_repair"
+      ],
+      "explicitly_not_claimed": [
+        "The original ten-mutation study was rerun in full after the repair.",
+        "A post-repair ten-of-ten historical result exists."
+      ]
+    }
+  ],
+  "publication_non_claims": [
+    "The release gate does not semantically understand arbitrary prose.",
+    "The invariant family and status taxonomy are not proved complete.",
+    "There is no controlled comparison with ordinary continuous integration or disciplined manual review.",
+    "Reader-comprehension improvement was not measured.",
+    "Byte budgets are not claimed to cause comprehension.",
+    "Transfer beyond this corpus has not been demonstrated.",
+    "Porting and maintenance cost beyond recorded implementation size and runtime has not been measured.",
+    "Lean acceptance alone does not prove that a formal statement matches the intended informal mathematics."
+  ],
+  "authority_nodes": [
+    {
+      "id": "formal_source",
+      "owner": "Erdos249257.lean and imported Lean modules",
+      "role": "kernel-checked proof authority"
+    },
+    {
+      "id": "claim_registry",
+      "owner": "docs/claims.json",
+      "role": "claim status, release identity, open propositions, and source coordinates"
+    },
+    {
+      "id": "methodology_contract",
+      "owner": "docs/methodology.json",
+      "role": "claim-transition and review requirements"
+    },
+    {
+      "id": "publication_contract",
+      "owner": "docs/publication_contract.json",
+      "role": "shipped artifact inventory, content identity, entry routes, and evidence boundary"
+    },
+    {
+      "id": "publication_evidence",
+      "owner": "docs/publication_evidence.json",
+      "role": "historical mutation protocol, matrix, limitations, and post-repair scope"
+    },
+    {
+      "id": "mutation_reconstruction",
+      "owner": "experiments/publication_mutations.json and scripts/run_publication_mutations.py",
+      "role": "separately versioned deterministic reconstruction, not original raw logs"
+    },
+    {
+      "id": "entry_packet",
+      "owner": "docs/publication_entry_packet.json",
+      "role": "generated bounded agent-entry projection, not proof or evidence authority"
+    }
+  ],
+  "authority_edges": [
+    {
+      "from": "formal_source",
+      "to": "claim_registry",
+      "relation": "supports registered mathematical claims"
+    },
+    {
+      "from": "claim_registry",
+      "to": "publication_contract",
+      "relation": "bounds public artifact claim scope"
+    },
+    {
+      "from": "methodology_contract",
+      "to": "publication_contract",
+      "relation": "constrains public claim transitions"
+    },
+    {
+      "from": "publication_evidence",
+      "to": "publication_contract",
+      "relation": "supplies digest-bound systems evidence"
+    },
+    {
+      "from": "mutation_reconstruction",
+      "to": "publication_evidence",
+      "relation": "reconstructs mutation classes under an explicit provenance ceiling"
+    },
+    {
+      "from": "claim_registry",
+      "to": "entry_packet",
+      "relation": "projects release identity, open propositions, and mathematical non-claims"
+    },
+    {
+      "from": "publication_contract",
+      "to": "entry_packet",
+      "relation": "projects owners, routes, and validation commands"
+    },
+    {
+      "from": "publication_evidence",
+      "to": "entry_packet",
+      "relation": "projects evaluation results and evidence residuals"
+    }
+  ],
+  "validation_commands": [
+    "python3 scripts/build_publication_entry_packet.py --check",
+    "python3 scripts/check_publication_contract.py",
+    "python3 scripts/test_publication_artifact_contract.py",
+    "python3 scripts/run_publication_mutations.py --verify-operators",
+    "python3 scripts/check_release.py"
+  ],
+  "manual_residuals": []
+}
