@@ -4,9 +4,10 @@
 """Run the release gate against a clean committed Git snapshot.
 
 This wrapper is for shared or intentionally dirty worktrees.  It resolves one
-commit, creates a disposable local clone, and runs the release gate plus the
-public Lean disk/root-closure census there.  Uncommitted files in the caller's
-checkout are never copied into the validation snapshot.
+commit, creates a disposable local clone, and runs every independent release
+gate there.  A failing gate does not suppress later diagnostics; the first
+nonzero exit code remains the process result.  Uncommitted files in the
+caller's checkout are never copied into the validation snapshot.
 """
 
 from __future__ import annotations
@@ -213,12 +214,15 @@ def validate_ref(
                         "stderr_tail": bounded_tail(completed.stderr),
                     }
                 )
-                if completed.returncode != 0:
-                    break
             elapsed = round(time.monotonic() - started, 3)
             stdout = "\n".join(stdout_parts)
             stderr = "\n".join(stderr_parts)
-            exit_code = gate_results[-1]["exit_code"]
+            failed_results = [
+                result for result in gate_results if result["exit_code"] != 0
+            ]
+            exit_code = (
+                failed_results[0]["exit_code"] if failed_results else 0
+            )
             summary = parse_release_summary(stdout)
             return (
                 {
@@ -232,6 +236,7 @@ def validate_ref(
                     "wall_time_seconds": elapsed,
                     "gate_exit_code": exit_code,
                     "gate_results": gate_results,
+                    "failed_gate_count": len(failed_results),
                     **summary,
                     "stdout_tail": bounded_tail(stdout),
                     "stderr_tail": bounded_tail(stderr),

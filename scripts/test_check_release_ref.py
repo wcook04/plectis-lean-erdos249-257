@@ -137,6 +137,7 @@ def main() -> int:
                 ["python3", "scripts/test_release_source_identity.py"],
             ]
             assert [row["exit_code"] for row in passed["gate_results"]] == [0, 0, 0]
+            assert passed["failed_gate_count"] == 0
 
             (root / "scripts" / "test_root_import_closure.py").write_text(
                 auxiliary_gate_source(
@@ -157,8 +158,14 @@ def main() -> int:
             )
             assert root_failed_exit == 9
             assert root_failed["status"] == "failed"
-            assert [row["exit_code"] for row in root_failed["gate_results"]] == [0, 9]
+            assert [row["exit_code"] for row in root_failed["gate_results"]] == [
+                0,
+                9,
+                0,
+            ]
+            assert root_failed["failed_gate_count"] == 1
             assert "synthetic root census" in root_failed["stdout_tail"]
+            assert "synthetic source adversary" in root_failed["stdout_tail"]
 
             (root / "scripts" / "test_root_import_closure.py").write_text(
                 auxiliary_gate_source(
@@ -197,6 +204,7 @@ def main() -> int:
                 0,
                 11,
             ]
+            assert source_failed["failed_gate_count"] == 1
             assert "synthetic source adversary" in source_failed["stdout_tail"]
 
             (root / "scripts" / "test_release_source_identity.py").write_text(
@@ -244,6 +252,14 @@ def main() -> int:
             assert failed["resolved_commit"] == failing_commit
             assert failed["reported_check_count"] == 17
             assert failed["reported_release"] is None
+            assert [row["exit_code"] for row in failed["gate_results"]] == [
+                7,
+                0,
+                0,
+            ]
+            assert failed["failed_gate_count"] == 1
+            assert "synthetic root census" in failed["stdout_tail"]
+            assert "synthetic source adversary" in failed["stdout_tail"]
 
             (root / "scripts" / "check_release.py").write_text(
                 "import time\n"
@@ -283,7 +299,8 @@ def main() -> int:
     print(
         "test_check_release_ref: caller dirt excluded, exact commits selected, "
         "dirty paths bounded, root disk census and immutable source adversary "
-        "enforced, failing gate exit preserved, and timeout receipt serialized"
+        "always reported, first failing gate exit preserved, and timeout receipt "
+        "serialized"
     )
     return 0
 
