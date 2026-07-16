@@ -39,14 +39,22 @@ REQUIRED_ARTIFACT_FIELDS = {
 class RepositoryReader:
     """Read either the worktree or one committed/staged Git snapshot."""
 
-    def __init__(self, root: Path, git_ref: str | None = None) -> None:
+    def __init__(
+        self,
+        root: Path,
+        git_ref: str | None = None,
+        byte_overrides: dict[str, bytes] | None = None,
+    ) -> None:
         self.root = root
         self.git_ref = git_ref
+        self.byte_overrides = byte_overrides or {}
 
     def _git_spec(self, relative: str) -> str:
         return f":{relative}" if self.git_ref == ":" else f"{self.git_ref}:{relative}"
 
     def read_bytes(self, relative: str) -> bytes:
+        if relative in self.byte_overrides:
+            return self.byte_overrides[relative]
         if self.git_ref is None:
             return (self.root / relative).read_bytes()
         completed = subprocess.run(
@@ -115,6 +123,63 @@ def reuse_manuscript_pdfs(data: dict[str, Any]) -> set[str]:
             ):
                 paths.add(path)
     return paths
+
+
+def normalize_latex_evidence(text: str) -> str:
+    """Flatten stable prose anchors without pretending to parse all of TeX."""
+    normalized = text.replace("{,}", ",").replace("~", " ").replace("$", "")
+    for _ in range(3):
+        normalized = re.sub(
+            r"\\(?:emph|texttt)\{([^{}]*)\}",
+            r"\1",
+            normalized,
+        )
+    normalized = normalized.replace("{", "").replace("}", "")
+    return re.sub(r"\s+", " ", normalized).strip().lower()
+
+
+def validate_systems_evidence_source(
+    artifact: dict[str, Any],
+    source_text: str,
+) -> list[str]:
+    """Bind structured experiment metadata to load-bearing manuscript prose."""
+    errors: list[str] = []
+    evidence = artifact["evidence_boundary"]
+    normalized = normalize_latex_evidence(source_text)
+    checkpoint_prefix = evidence["evaluation_checkpoint"][:7]
+    release_check_count = evidence["release_check_count_at_evaluation"]
+    escaped_mutation = evidence["escaped_mutation_id"].lower()
+
+    required_patterns = {
+        "evaluation checkpoint": (
+            rf"evaluation checkpoint .{{0,80}}{re.escape(checkpoint_prefix)}"
+        ),
+        "release-check baseline": (
+            rf"{release_check_count:,} release checks pass"
+        ),
+        "observed mutation ratio": (
+            r"reports .{0,20}9/10 for the ten authored mutations"
+        ),
+        "escaped mutation identity": (
+            rf"mutation {re.escape(escaped_mutation)} survived"
+        ),
+        "post-repair baseline scope": (
+            r"repaired checker passes the intact baseline and rejects the same corruption"
+        ),
+        "post-repair rerun limitation": (
+            r"we did not rerun the other nine mutations against the extended invariant family"
+        ),
+        "post-repair ratio limitation": (
+            r"no post-repair detection ratio is reported"
+        ),
+    }
+    for label, pattern in required_patterns.items():
+        if not re.search(pattern, normalized):
+            errors.append(
+                f"systems artifact {artifact['id']!r} source lost its "
+                f"{label} evidence anchor"
+            )
+    return errors
 
 
 def all_entrypoints(
@@ -336,6 +401,10 @@ def validate_publication_contract(
                 f"systems artifact {artifact['id']!r} evaluation checkpoint is absent: "
                 f"{checkpoint}"
             )
+        if evidence.get("release_check_count_at_evaluation") != 5207:
+            errors.append(
+                "systems evidence must preserve the 5,207-check evaluation baseline"
+            )
         if evidence.get("authored_mutation_count") != 10:
             errors.append("systems evidence must preserve the ten-mutation study size")
         if evidence.get("rejected_mutation_count") != 9:
@@ -350,6 +419,15 @@ def validate_publication_contract(
             errors.append(
                 "systems evidence must explicitly forbid a post-repair ten-of-ten claim"
             )
+        try:
+            source_text = reader.read_text(artifact["source_path"])
+        except (FileNotFoundError, UnicodeError) as error:
+            errors.append(
+                f"systems artifact {artifact['id']!r} evidence source is unreadable: "
+                f"{error}"
+            )
+        else:
+            errors.extend(validate_systems_evidence_source(artifact, source_text))
 
     return errors
 
@@ -389,5 +467,54 @@ def mutation_fixture_failures(reader: RepositoryReader) -> list[str]:
     systems["evidence_boundary"]["post_repair_full_mutation_rerun"] = True
     if not validate_publication_contract(reader, contract_override=inflated):
         failures.append("post_repair_ten_of_ten_inflation")
+
+    checkpoint_drift = copy.deepcopy(contract)
+    systems = next(
+        row
+        for row in checkpoint_drift["artifacts"]
+        if row["id"] == "systems_case_study"
+    )
+    systems["evidence_boundary"]["evaluation_checkpoint"] = (
+        "a16aa24af5236b6508a34b8a4c4b41fdcf620a98"
+    )
+    if not validate_publication_contract(reader, contract_override=checkpoint_drift):
+        failures.append("evaluation_checkpoint_source_drift")
+
+    source_inflation = copy.deepcopy(contract)
+    systems = next(
+        row
+        for row in source_inflation["artifacts"]
+        if row["id"] == "systems_case_study"
+    )
+    source_path = systems["source_path"]
+    original_source = reader.read_text(source_path)
+    limited_sentence = (
+        "We did\nnot rerun the other nine mutations against the extended invariant family, "
+        "so\nno post-repair detection ratio is reported; the claim is only that this\n"
+        "corruption is now caught."
+    )
+    inflated_sentence = (
+        "We reran all ten mutations against the extended invariant family, so a\n"
+        "post-repair ten-of-ten detection ratio is reported."
+    )
+    if limited_sentence not in original_source:
+        failures.append("post_repair_source_fixture_anchor_missing")
+    else:
+        mutated_source = original_source.replace(
+            limited_sentence,
+            inflated_sentence,
+            1,
+        )
+        systems["source_content_digest"] = sha256(mutated_source.encode("utf-8"))
+        overlay_reader = RepositoryReader(
+            reader.root,
+            reader.git_ref,
+            {source_path: mutated_source.encode("utf-8")},
+        )
+        if not validate_publication_contract(
+            overlay_reader,
+            contract_override=source_inflation,
+        ):
+            failures.append("source_and_digest_ten_of_ten_inflation")
 
     return failures
