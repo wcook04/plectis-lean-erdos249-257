@@ -315,6 +315,17 @@ def clone_at_checkpoint(checkpoint: str, parent: Path) -> Path:
     return clone
 
 
+def resolve_commit(ref: str) -> str:
+    completed = run_checked(
+        ["git", "rev-parse", "--verify", f"{ref}^{{commit}}"],
+        ROOT,
+    )
+    commit = completed.stdout.strip()
+    if re.fullmatch(r"[0-9a-f]{40}", commit) is None:
+        raise MutationError(f"base ref did not resolve to a full commit id: {ref}")
+    return commit
+
+
 def reset_clone(clone: Path, checkpoint: str) -> None:
     run_checked(["git", "reset", "--hard", "--quiet", checkpoint], clone)
     run_checked(["git", "clean", "-fdq"], clone)
@@ -339,12 +350,16 @@ def load_manifest(path: Path) -> dict[str, Any]:
     return manifest
 
 
-def verify_operators(manifest: dict[str, Any]) -> dict[str, Any]:
+def verify_operators(
+    manifest: dict[str, Any],
+    base_ref: str,
+    base_commit: str,
+) -> dict[str, Any]:
     with tempfile.TemporaryDirectory(prefix="publication-mutation-verify-") as temp:
-        clone = clone_at_checkpoint(manifest["checkpoint"], Path(temp))
+        clone = clone_at_checkpoint(base_commit, Path(temp))
         rows = []
         for operator in manifest["operators"]:
-            reset_clone(clone, manifest["checkpoint"])
+            reset_clone(clone, base_commit)
             applied = apply_operator(clone, operator)
             changed = changed_paths(clone)
             expected_paths = [operator["operation"]["path"]]
@@ -368,7 +383,14 @@ def verify_operators(manifest: dict[str, Any]) -> dict[str, Any]:
         "schema": VERIFY_SCHEMA,
         "suite_id": manifest["suite_id"],
         "experiment_kind": manifest["experiment_kind"],
-        "checkpoint": manifest["checkpoint"],
+        "manifest_checkpoint": manifest["checkpoint"],
+        "base_ref": base_ref,
+        "base_commit": base_commit,
+        "base_role": (
+            "historical_evaluation_checkpoint"
+            if base_commit == manifest["checkpoint"]
+            else "selected_later_commit"
+        ),
         "verified_operator_count": len(rows),
         "operators": rows,
         "status": "all_operators_apply_uniquely",
@@ -395,17 +417,20 @@ def run_mutations(
     manifest: dict[str, Any],
     selected_ids: list[str],
     timeout_seconds: int,
+    base_ref: str,
+    base_commit: str,
 ) -> dict[str, Any]:
     by_id = {row["id"]: row for row in manifest["operators"]}
     unknown = [mutation_id for mutation_id in selected_ids if mutation_id not in by_id]
     if unknown:
         raise MutationError(f"unknown mutation ids: {', '.join(unknown)}")
     started_at = datetime.now(timezone.utc).isoformat()
+    historical_comparison_applicable = base_commit == manifest["checkpoint"]
     results = []
     with tempfile.TemporaryDirectory(prefix="publication-mutation-run-") as temp:
-        clone = clone_at_checkpoint(manifest["checkpoint"], Path(temp))
+        clone = clone_at_checkpoint(base_commit, Path(temp))
         for mutation_id in selected_ids:
-            reset_clone(clone, manifest["checkpoint"])
+            reset_clone(clone, base_commit)
             operator = by_id[mutation_id]
             applied = apply_operator(clone, operator)
             changed = changed_paths(clone)
@@ -451,6 +476,8 @@ def run_mutations(
                     ],
                     "matches_historical_outcome_class": (
                         result["outcome"] == operator["expected_historical_outcome"]
+                        if historical_comparison_applicable
+                        else None
                     ),
                     "exact_original_target_registered": operator[
                         "exact_original_target_registered"
@@ -464,7 +491,14 @@ def run_mutations(
         "schema": RUN_SCHEMA,
         "suite_id": manifest["suite_id"],
         "experiment_kind": manifest["experiment_kind"],
-        "checkpoint": manifest["checkpoint"],
+        "manifest_checkpoint": manifest["checkpoint"],
+        "base_ref": base_ref,
+        "base_commit": base_commit,
+        "base_role": (
+            "historical_evaluation_checkpoint"
+            if historical_comparison_applicable
+            else "selected_later_commit"
+        ),
         "historical_evidence": manifest["historical_evidence"],
         "started_at": started_at,
         "completed_at": datetime.now(timezone.utc).isoformat(),
@@ -475,13 +509,17 @@ def run_mutations(
             "rejected_count": sum(row["outcome"] == "rejected" for row in results),
             "escaped_count": sum(row["outcome"] == "escaped" for row in results),
             "timeout_count": sum(row["outcome"] == "timeout" for row in results),
-            "historical_outcome_class_match_count": sum(
-                row["matches_historical_outcome_class"] for row in results
+            "historical_comparison_applicable": historical_comparison_applicable,
+            "historical_outcome_class_match_count": (
+                sum(row["matches_historical_outcome_class"] for row in results)
+                if historical_comparison_applicable
+                else None
             ),
         },
         "claim_ceiling": (
-            "These are deterministic reconstruction results, not the original "
-            "historical run logs or timings."
+            "These are deterministic reconstruction results on the selected "
+            "base commit, not the original historical run logs or timings. "
+            "A later-commit result applies only to that exact base commit."
         ),
     }
 
@@ -497,6 +535,13 @@ def emit(data: dict[str, Any], receipt: Path | None) -> None:
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--manifest", type=Path, default=DEFAULT_MANIFEST)
+    parser.add_argument(
+        "--base-ref",
+        help=(
+            "commit to mutate; defaults to the manifest evaluation checkpoint. "
+            "Use HEAD only for an explicitly versioned later-commit rerun"
+        ),
+    )
     action = parser.add_mutually_exclusive_group(required=True)
     action.add_argument("--list", action="store_true")
     action.add_argument("--verify-operators", action="store_true")
@@ -507,6 +552,8 @@ def main() -> int:
     args = parser.parse_args()
     try:
         manifest = load_manifest(args.manifest.resolve())
+        base_ref = args.base_ref or manifest["checkpoint"]
+        base_commit = resolve_commit(base_ref)
         if args.list:
             emit(
                 {
@@ -530,7 +577,10 @@ def main() -> int:
                 args.receipt,
             )
         elif args.verify_operators:
-            emit(verify_operators(manifest), args.receipt)
+            emit(
+                verify_operators(manifest, base_ref, base_commit),
+                args.receipt,
+            )
         else:
             selected = (
                 [row["id"] for row in manifest["operators"]]
@@ -538,7 +588,13 @@ def main() -> int:
                 else args.mutation
             )
             emit(
-                run_mutations(manifest, selected, args.timeout_seconds),
+                run_mutations(
+                    manifest,
+                    selected,
+                    args.timeout_seconds,
+                    base_ref,
+                    base_commit,
+                ),
                 args.receipt,
             )
     except (MutationError, OSError, json.JSONDecodeError) as error:
