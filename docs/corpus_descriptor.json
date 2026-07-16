@@ -36,20 +36,20 @@
 "authority_role": "proof_bearing_committed_source_anchor"
 },
 "navigation_snapshot": {
-"commit": "81cc3c2a514157aaf45677c4b90d2c86f3957668",
+"commit": "90ec289ef45f8504ccada9897dddba6ad1919a25",
 "authority_role": "machine_readable_navigation_anchor",
 "publication_state": "main_history_snapshot",
 "published_ref": "main",
-"repository_resolution": "https://github.com/wcook04/plectis-lean-erdos249-257/tree/81cc3c2a514157aaf45677c4b90d2c86f3957668"
+"repository_resolution": "https://github.com/wcook04/plectis-lean-erdos249-257/tree/90ec289ef45f8504ccada9897dddba6ad1919a25"
 },
 "content": {
 "machine_readable_paper": {
 "path": "docs/claims.json::machine_readable_paper",
-"content_digest": "sha256:1349a0e84749f8d46c372bec4a81c22b235abb1a67116c3318f966e35f4b8a51"
+"content_digest": "sha256:40a2bf9520ed03ada204461490545792a3259d6012c8d8090adcd03dcc3b4609"
 },
 "claims_document": {
 "path": "docs/claims.json",
-"content_digest": "sha256:0feafaafee3645604e770703c728b11dc788bf1b6f723e8a886646b63a4624ad"
+"content_digest": "sha256:e17844c6c7f52d07f1e0c921aa49d8136b7a5fb8602de6210b30725af45ace8f"
 },
 "declaration_atlas": {
 "path": "docs/declaration_atlas.json",
@@ -62,7 +62,7 @@
 },
 "bounded_orientation": {
 "path": "docs/orientation.json",
-"content_digest": "sha256:fd1fbd65038dd70236b9b579a0915e324257599553b540067175b2231f95dad1"
+"content_digest": "sha256:51013c9a45aecf31e2905e65132ce95148d34dd0022ec050a02c12e088751009"
 },
 "human_exposition": {
 "source_path": "paper/erdos249-257-main-paper.tex",
@@ -115,6 +115,7 @@
 "direct_Lean_source_coordinate_resolution": true,
 "registered_artifact_and_digest_resolution": true,
 "typed_mathematical_programme_routes": true,
+"typed_claim_status_lookup": true,
 "declaration_level_proof_dependencies": false,
 "typed_remaining_open_propositions": true,
 "claim_transition_requirements": true,
@@ -1716,12 +1717,13 @@
 "line": 589
 }
 ],
-"mathematical_programme_query": "python3 scripts/query_corpus.py --route <programme_route_id>"
+"mathematical_programme_query": "python3 scripts/query_corpus.py --route <programme_route_id>",
+"claim_status_query": "python3 scripts/query_corpus.py --status <claim_status>"
 },
 "expansion": {
 "machine_readable_paper": {
 "path": "docs/claims.json::machine_readable_paper",
-"expected_content_digest": "sha256:1349a0e84749f8d46c372bec4a81c22b235abb1a67116c3318f966e35f4b8a51",
+"expected_content_digest": "sha256:40a2bf9520ed03ada204461490545792a3259d6012c8d8090adcd03dcc3b4609",
 "contains": [
 "all_claims",
 "authored_argument_graph",

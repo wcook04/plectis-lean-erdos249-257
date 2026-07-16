@@ -32,6 +32,7 @@
         ],
         "query_steps": [
           "python3 scripts/query_corpus.py --format card",
+          "python3 scripts/query_corpus.py --status <claim_status>",
           "python3 scripts/query_corpus.py --publication-architecture",
           "python3 scripts/query_corpus.py --open <remaining_open_proposition_id>",
           "python3 scripts/query_corpus.py --claim <claim_id>"
@@ -49,6 +50,42 @@
           "paper_label",
           "declaration",
           "module"
+        ]
+      },
+      {
+        "id": "browse_claim_status",
+        "intent": "Browse bounded claim handles by exact registry status.",
+        "discovery_terms": [
+          "what is proved",
+          "what is formalised",
+          "what is formalized",
+          "what is reduced",
+          "what is computed",
+          "show verified finite computations",
+          "show conditional reductions",
+          "browse claims by status"
+        ],
+        "read": [
+          "docs/orientation.json",
+          "SCOPE.md"
+        ],
+        "query_steps": [
+          "python3 scripts/query_corpus.py --status <claim_status>",
+          "python3 scripts/query_corpus.py --claim <claim_id>",
+          "python3 scripts/query_corpus.py --open <remaining_open_proposition_id>"
+        ],
+        "authority_owners": [
+          "docs/claims.json::status_taxonomy",
+          "docs/claims.json::claims",
+          "docs/claims.json::remaining_open_propositions",
+          "docs/methodology.json"
+        ],
+        "adjacent_handle_classes": [
+          "claim_status",
+          "claim_id",
+          "open_proposition_id",
+          "paper_label",
+          "declaration"
         ]
       },
       {
@@ -408,7 +445,8 @@
           "why local signatures fail",
           "phase separation",
           "transport curvature",
-          "first harmonic pivot decomposition"
+          "first harmonic pivot decomposition",
+          "what is ruled out"
         ],
         "mathematical_focus": "Finite differences of totient tails, exponent transport, affine moment annihilation, the exact first-harmonic pivot budget, harmonic phases, reconstruction defects, and countermodels to bounded local signatures.",
         "claim_ceiling": "The consumers and countermodels are exact, but no cofinal curvature, transport, phase-separation, or anti-reconstruction producer is proved.",
@@ -470,7 +508,8 @@
         "discovery_terms": [
           "Mersenne Lambert identities",
           "finite algebraic obstructions",
-          "primitive coordinate obstruction"
+          "primitive coordinate obstruction",
+          "what is ruled out"
         ],
         "mathematical_focus": "Dirichlet convolution identities, the Möbius-square lens, primitive-coordinate finite jets, exact tail atoms, sign-support no-go results, and conditional carry-rank growth.",
         "claim_ceiling": "These are exact identities, obstruction theorems, and one conditional rank consequence; they do not form an irrationality criterion for S.",
@@ -657,7 +696,8 @@
         "discovery_terms": [
           "denominator obstruction",
           "CRT and gauge obstruction",
-          "quantitative denominator bound"
+          "quantitative denominator bound",
+          "what is ruled out"
         ],
         "mathematical_focus": "Squared-Mersenne tail enclosures, exact reduced denominators, adelic divisibility, square-CRT correction removal, dyadic determinant substrate, certificate dimensions, and residual-gauge no-go results.",
         "claim_ceiling": "These are exact arithmetic interfaces, finite mechanisms, and obstruction theorems; they do not supply an unbounded certificate family or an irrationality criterion for the totient constant.",
@@ -744,7 +784,8 @@
         "discovery_terms": [
           "what is still missing",
           "what remains unproved",
-          "what are the open obligations"
+          "what are the open obligations",
+          "what remains open"
         ],
         "read": [
           "METHODOLOGY.md",

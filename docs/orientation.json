@@ -526,7 +526,6 @@
  "reading_routes": [
   {
    "id": "instant_orientation",
-   "route_kind": "reading_route",
    "intent": "Understand what this repository proves, reduces, cites, leaves open, and how its claims are partitioned.",
    "read": [
     "docs/orientation.json",
@@ -535,8 +534,15 @@
    ]
   },
   {
+   "id": "browse_claim_status",
+   "intent": "Browse bounded claim handles by exact registry status.",
+   "read": [
+    "docs/orientation.json",
+    "SCOPE.md"
+   ]
+  },
+  {
    "id": "follow_one_claim",
-   "route_kind": "reading_route",
    "intent": "Trace one mathematical claim from exposition to checked source.",
    "read": [
     "docs/orientation.json",
@@ -545,7 +551,6 @@
   },
   {
    "id": "understand_argument_topology",
-   "route_kind": "reading_route",
    "intent": "See how the #249 reduction, #257 families, carry trunk, and open targets relate.",
    "read": [
     "docs/orientation.json",
@@ -554,7 +559,6 @@
   },
   {
    "id": "erdos257_half_story",
-   "route_kind": "mathematical_programme",
    "intent": "Recover the proved #257 half-value spine from unique greedy coding through the last-producer partition to the exact tail-escape residual, without identifying the remaining middle cells with dyadic unsafety beyond the checked theorems.",
    "read": [
     "docs/orientation.json"
@@ -563,7 +567,6 @@
   },
   {
    "id": "erdos249_certificate_story",
-   "route_kind": "mathematical_programme",
    "intent": "Recover the denominator exclusion, exact certificate endpoint, certificate completeness, finite checked instances, first-harmonic consumer, and the still-open unbounded supply.",
    "read": [
     "docs/orientation.json"
@@ -572,7 +575,6 @@
   },
   {
    "id": "structured_support_families",
-   "route_kind": "mathematical_programme",
    "intent": "Follow the full-support theorem, named infinite-support families, periodic coefficient extensions, the mixed-sign dichotomy, and a conditional orthogonal-petal route.",
    "read": [
     "docs/orientation.json"
@@ -581,7 +583,6 @@
   },
   {
    "id": "erdos249_diagonal_arithmetic",
-   "route_kind": "mathematical_programme",
    "intent": "Follow the exact lcm-diagonal pincer, fresh-loss projection, prime-deficit decomposition, odd-window, bit-lift, slack, and foreign-residue interfaces.",
    "read": [
     "docs/orientation.json"
@@ -590,7 +591,6 @@
   },
   {
    "id": "boolean_mobius_constraints",
-   "route_kind": "mathematical_programme",
    "intent": "Follow the exact carry-orbit characterisations of rational support-series values and the reciprocal-mass, unbounded-state, and zero-window consequences they force.",
    "read": [
     "docs/orientation.json"
@@ -599,7 +599,6 @@
   },
   {
    "id": "transport_curvature_programme",
-   "route_kind": "mathematical_programme",
    "intent": "Follow exact transport and curvature consumers, affine channel annihilation, checked finite instances, phase-separation producers, and fixed-precision countermodels.",
    "read": [
     "docs/orientation.json"
@@ -608,7 +607,6 @@
   },
   {
    "id": "lambert_obstruction_interfaces",
-   "route_kind": "mathematical_programme",
    "intent": "Follow the exact Lambert identities around the totient constant and the coordinate, tail-atom, sign-support, and carry-rank obstructions that rule out naive compression strategies.",
    "read": [
     "docs/orientation.json"
@@ -617,7 +615,6 @@
   },
   {
    "id": "probabilistic_gcd_geometry",
-   "route_kind": "mathematical_programme",
    "intent": "Follow the fair-coin coprimality form of S and its denominator exclusion, squared-Lambert gcd moments, exact Stern–Brocot cylinder convergence, and Fibonacci/continuant stability of induced runs.",
    "read": [
     "docs/orientation.json"
@@ -626,7 +623,6 @@
   },
   {
    "id": "half_carry_compactness_programme",
-   "route_kind": "mathematical_programme",
    "intent": "Follow the compactness sockets that would turn cofinal finite half-carry witnesses into half-membership, together with the exact rewind, protected-window, seam, suffix-cylinder, and finite-base theorems that isolate the missing producer.",
    "read": [
     "docs/orientation.json"
@@ -635,7 +631,6 @@
   },
   {
    "id": "arithmetic_obstruction_interfaces",
-   "route_kind": "mathematical_programme",
    "intent": "Follow exact arithmetic enclosures and denominator lower bounds, finite square-CRT suppression, dyadic moment and certificate interfaces, and gauge countermodels that delimit several plausible #249 routes.",
    "read": [
     "docs/orientation.json"
@@ -644,7 +639,6 @@
   },
   {
    "id": "trace_prior_art",
-   "route_kind": "reading_route",
    "intent": "Understand the cited mathematical sources, their precise relationship to the release, and the priority boundary.",
    "read": [
     "docs/PRIOR_ART.md",
@@ -653,7 +647,6 @@
   },
   {
    "id": "understand_methodology_and_open_boundary",
-   "route_kind": "reading_route",
    "intent": "Understand the mathematical method, the evidence required for claim transitions, and the exact remaining open propositions.",
    "read": [
     "METHODOLOGY.md",
@@ -662,7 +655,6 @@
   },
   {
    "id": "change_or_verify_release",
-   "route_kind": "reading_route",
    "intent": "Modify a formal or editorial surface without allowing status or source coordinates to drift.",
    "read": [
     "AGENTS.md",
@@ -691,6 +683,7 @@
  "queries": {
   "summary": "python3 scripts/query_corpus.py --format card",
   "claim": "python3 scripts/query_corpus.py --claim <claim_id>",
+  "claim_status": "python3 scripts/query_corpus.py --status <claim_status> [--limit 1..100]",
   "paper_label": "python3 scripts/query_corpus.py --paper-label <TeX_label>",
   "paper_anchor": "python3 scripts/query_corpus.py --paper-anchor <TeX_label_or_source_ref>",
   "open_proposition": "python3 scripts/query_corpus.py --open <remaining_open.id>",

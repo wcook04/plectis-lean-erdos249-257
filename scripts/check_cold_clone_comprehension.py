@@ -98,10 +98,25 @@ DISCOVERY_ROUTE_QUERIES = {
     "what is formally checked": "instant_orientation",
     "what other exact mathematics is there": "instant_orientation",
     "what else is formally checked besides Erdos 249 and 257": "instant_orientation",
+    "what is proved": "browse_claim_status",
+    "what is formalised": "browse_claim_status",
+    "what is formalized": "browse_claim_status",
+    "what is reduced": "browse_claim_status",
+    "what is computed": "browse_claim_status",
+    "show verified finite computations": "browse_claim_status",
+    "show conditional reductions": "browse_claim_status",
     "where are the Lean proofs": "follow_one_claim",
     "what is new mathematics": "trace_prior_art",
     "how do I verify this": "change_or_verify_release",
     "what is still missing": "understand_methodology_and_open_boundary",
+    "what remains open": "understand_methodology_and_open_boundary",
+}
+DISCOVERY_MULTI_ROUTE_QUERIES = {
+    "what is ruled out": {
+        "transport_curvature_programme",
+        "lambert_obstruction_interfaces",
+        "arithmetic_obstruction_interfaces",
+    }
 }
 
 
@@ -298,8 +313,12 @@ def validate_gateway_opening(paper: str) -> None:
         opening,
     )
     visible_opening = re.sub(
-        r"\\(?:lref|lrefx)\{[^{}]*\}\{[^{}]*\}\{[^{}]*\}",
-        "Lean proof",
+        r"\\(?:lref|lrefx)\{[^{}]*\}\{[^{}]*\}\{([^{}]*)\}",
+        lambda match: re.sub(
+            r"(?<=[a-z0-9])(?=[A-Z])",
+            " ",
+            match.group(1).replace("_", " "),
+        ).lower(),
         visible_opening,
     )
     visible_opening = re.sub(
@@ -397,12 +416,20 @@ def collect_agent_packets() -> dict[str, Any]:
             row["id"]: query_packet("--publication-family", row["id"])
             for row in publication_architecture["family_index"]
         },
+        "claim_statuses": {
+            status: query_packet("--status", status, "--limit", "12")
+            for status in summary["status_taxonomy"]
+        },
         "story_routes": {
             route_id: query_packet("--route", route_id) for route_id in STORY_ROUTES
         },
         "discovery_searches": {
             search_text: query_packet("--search", search_text, "--limit", "10")
             for search_text in DISCOVERY_ROUTE_QUERIES
+        },
+        "discovery_multi_searches": {
+            search_text: query_packet("--search", search_text, "--limit", "10")
+            for search_text in DISCOVERY_MULTI_ROUTE_QUERIES
         },
         "story_claims": {
             claim_id: query_packet("--claim", claim_id) for claim_id in STORY_CLAIMS
@@ -472,6 +499,41 @@ def validate_agent_packets(packets: dict[str, Any]) -> None:
         assert packet["family"]["primary_narrative_owner"]
         assert packet["family"]["consumer_or_open_obligation"]
         assert packet["family"]["view_decision"]
+        assert encoded_bytes(packet) <= PACKET_BUDGET_BYTES
+
+    assert set(packets["claim_statuses"]) == set(summary["status_taxonomy"])
+    for status, packet in packets["claim_statuses"].items():
+        assert packet["kind"] == "claim_status"
+        assert packet["authority_posture"] == (
+            "claim_registry_status_navigation_not_proof_authority"
+        )
+        assert packet["status"] == status
+        assert packet["meaning"] == summary["status_taxonomy"][status]
+        assert packet["claim_count"] >= len(packet["claims"]) > 0
+        assert packet["omitted_claim_count"] == (
+            packet["claim_count"] - len(packet["claims"])
+        )
+        assert all(row["status"] == status for row in packet["claims"])
+        assert all(row["statement_excerpt"] for row in packet["claims"])
+        if status == "conditional reduction":
+            assert all(
+                row.get("remaining_open_proposition_ids")
+                for row in packet["claims"]
+            )
+        if status == "verified finite instance":
+            assert all(row.get("bounded_domain") for row in packet["claims"])
+        if status == "open":
+            assert {row["id"] for row in packet["claims"]} == {
+                "erdos_249",
+                "universal_257",
+            }
+            assert {
+                row["id"] for row in packet["remaining_open_propositions"]
+            } == {
+                row["id"] for row in summary["remaining_open_propositions"]
+            }
+        else:
+            assert packet["remaining_open_propositions"] == []
         assert encoded_bytes(packet) <= PACKET_BUDGET_BYTES
 
     principal = {row["id"]: row for row in summary["principal_claims"]}
@@ -584,6 +646,15 @@ def validate_agent_packets(packets: dict[str, Any]) -> None:
         assert search_packet["results"]
         assert search_packet["results"][0]["kind"] == "reading_route"
         assert search_packet["results"][0]["id"] == expected_route_id
+    for search_text, expected_route_ids in DISCOVERY_MULTI_ROUTE_QUERIES.items():
+        search_packet = packets["discovery_multi_searches"][search_text]
+        assert search_packet["kind"] == "search"
+        assert search_packet["query"] == search_text
+        assert {
+            row["id"]
+            for row in search_packet["results"]
+            if row["kind"] == "reading_route"
+        } >= expected_route_ids
     portfolio_results = packets["discovery_searches"][
         "what other exact mathematics is there"
     ]["results"]
@@ -703,8 +774,10 @@ def main(argv: list[str] | None = None) -> int:
         + len(packets["sigil_modules"])
         + 1
         + len(packets["publication_families"])
+        + len(packets["claim_statuses"])
         + len(packets["story_routes"])
         + len(packets["discovery_searches"])
+        + len(packets["discovery_multi_searches"])
         + len(packets["story_claims"])
         + 3
     )

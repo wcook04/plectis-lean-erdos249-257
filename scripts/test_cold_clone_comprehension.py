@@ -182,6 +182,37 @@ def main() -> int:
     checks += 1
 
     mutated = copy.deepcopy(packets)
+    mutated["discovery_searches"]["what is reduced"]["results"].insert(
+        0, {"kind": "declaration", "name": "shadow_reduction"}
+    )
+    assert_rejected(mutated, "claim-status route priority")
+    checks += 1
+
+    mutated = copy.deepcopy(packets)
+    mutated["discovery_multi_searches"]["what is ruled out"]["results"] = []
+    assert_rejected(mutated, "no-go programme route coverage")
+    checks += 1
+
+    mutated = copy.deepcopy(packets)
+    mutated["claim_statuses"]["conditional reduction"]["claims"][0][
+        "remaining_open_proposition_ids"
+    ] = []
+    assert_rejected(mutated, "conditional status packet open boundary")
+    checks += 1
+
+    mutated = copy.deepcopy(packets)
+    mutated["claim_statuses"]["verified finite instance"]["claims"][0].pop(
+        "bounded_domain", None
+    )
+    assert_rejected(mutated, "finite status packet bounded domain")
+    checks += 1
+
+    mutated = copy.deepcopy(packets)
+    mutated["claim_statuses"]["open"]["remaining_open_propositions"] = []
+    assert_rejected(mutated, "open status packet proposition distinction")
+    checks += 1
+
+    mutated = copy.deepcopy(packets)
     mutated["story_claims"]["half_greedy_two_thirds_band"]["claim"]["statement"] = (
         "The actual greedy orbit for 1/2 avoids the band."
     )

@@ -15,6 +15,7 @@ import query_corpus
 from query_corpus import (
     artifact_inventory,
     artifact_packet,
+    claim_status_packet,
     claim_packet,
     declaration_packet,
     lean_source_identity_for_paper,
@@ -185,10 +186,18 @@ def validate_natural_language_search() -> None:
         "what is formally checked": "instant_orientation",
         "what other exact mathematics is there": "instant_orientation",
         "what else is formally checked besides Erdos 249 and 257": "instant_orientation",
+        "what is proved": "browse_claim_status",
+        "what is formalised": "browse_claim_status",
+        "what is formalized": "browse_claim_status",
+        "what is reduced": "browse_claim_status",
+        "what is computed": "browse_claim_status",
+        "show verified finite computations": "browse_claim_status",
+        "show conditional reductions": "browse_claim_status",
         "where are the Lean proofs": "follow_one_claim",
         "what is new mathematics": "trace_prior_art",
         "how do I verify this": "change_or_verify_release",
         "what is still missing": "understand_methodology_and_open_boundary",
+        "what remains open": "understand_methodology_and_open_boundary",
     }
     for search_text, route_id in natural_language_routes.items():
         natural_search = query("--search", search_text, "--limit", "10")
@@ -199,11 +208,71 @@ def validate_natural_language_search() -> None:
     )
     assert portfolio_search["results"][0]["kind"] == "reading_route"
     assert portfolio_search["results"][0]["id"] == "instant_orientation"
+    ruled_out = query("--search", "what is ruled out", "--limit", "10")
+    assert {
+        row["id"]
+        for row in ruled_out["results"]
+        if row["kind"] == "reading_route"
+    } >= {
+        "transport_curvature_programme",
+        "lambert_obstruction_interfaces",
+        "arithmetic_obstruction_interfaces",
+    }
+
+
+def validate_claim_status_packets() -> None:
+    claims_document = load("docs/claims.json")
+    taxonomy = claims_document["status_taxonomy"]
+    all_claims = claims_document["claims"]
+    for status, meaning in taxonomy.items():
+        packet = query("--status", status, "--limit", "100")
+        expected = [claim for claim in all_claims if claim["status"] == status]
+        assert packet["kind"] == "claim_status"
+        assert packet["authority_posture"] == (
+            "claim_registry_status_navigation_not_proof_authority"
+        )
+        assert packet["status"] == status
+        assert packet["meaning"] == meaning
+        assert packet["claim_count"] == len(expected)
+        assert packet["omitted_claim_count"] == 0
+        assert len(packet["claims"]) == len(expected)
+        assert all(row["status"] == status for row in packet["claims"])
+        assert all(row["statement_excerpt"] for row in packet["claims"])
+        if status == "conditional reduction":
+            assert all(
+                row["remaining_open_proposition_ids"] for row in packet["claims"]
+            )
+        if status == "verified finite instance":
+            assert all(row["bounded_domain"] for row in packet["claims"])
+        if status == "open":
+            assert {row["id"] for row in packet["claims"]} == {
+                "erdos_249",
+                "universal_257",
+            }
+            assert {
+                row["id"] for row in packet["remaining_open_propositions"]
+            } == {
+                row["id"]
+                for row in claims_document["remaining_open_propositions"]
+            }
+        else:
+            assert packet["remaining_open_propositions"] == []
+        direct = claim_status_packet(status.upper(), 1)
+        assert direct["status"] == status
+        assert len(direct["claims"]) == min(1, len(expected))
+        card = run("--status", status, "--format", "card")
+        assert card.returncode == 0
+        assert card.stdout.startswith(f"status {status} | claims={len(expected)}")
+
+    unknown_status = run("--status", "not a registry status")
+    assert unknown_status.returncode == 2
+    assert "unknown claim status" in unknown_status.stderr
 
 
 def main() -> int:
     validate_programme_routes()
     validate_natural_language_search()
+    validate_claim_status_packets()
     summary = query()
     assert summary["kind"] == "corpus_summary"
     claims_document = json.loads((ROOT / "docs" / "claims.json").read_text(encoding="utf-8"))
@@ -932,7 +1001,7 @@ if __name__ == "__main__":
         print(
             "test_query_corpus: "
             f"{len(PROGRAMME_EXPECTATIONS)} mathematical programme routes and "
-            "23 natural-language discovery queries passed"
+            "32 natural-language discovery queries passed"
         )
         raise SystemExit(0)
     if sys.argv[1:]:

@@ -119,7 +119,6 @@ def build_orientation(claims: dict[str, Any], atlas: dict[str, Any]) -> dict[str
     for route in machine_paper["entrypoints"]:
         row: dict[str, Any] = {
             "id": route["id"],
-            "route_kind": route.get("route_kind", "reading_route"),
             "intent": route["intent"],
             "read": route["read"],
         }
@@ -182,6 +181,7 @@ def build_orientation(claims: dict[str, Any], atlas: dict[str, Any]) -> dict[str
         "queries": {
             "summary": "python3 scripts/query_corpus.py --format card",
             "claim": "python3 scripts/query_corpus.py --claim <claim_id>",
+            "claim_status": "python3 scripts/query_corpus.py --status <claim_status> [--limit 1..100]",
             "paper_label": "python3 scripts/query_corpus.py --paper-label <TeX_label>",
             "paper_anchor": "python3 scripts/query_corpus.py --paper-anchor <TeX_label_or_source_ref>",
             "open_proposition": "python3 scripts/query_corpus.py --open <remaining_open.id>",
@@ -327,7 +327,7 @@ def render_orientation_markdown(orientation: dict[str, Any]) -> str:
         if title != route["intent"]:
             lines.append(f"  - Intent: {route['intent']}")
         lines.append(
-            "  - Bounded route: "
+            "  - Route: "
             f"`python3 scripts/query_corpus.py --route {route['id']}`"
         )
     lines.extend(
@@ -649,6 +649,7 @@ def build() -> dict[str, Any]:
             "direct_Lean_source_coordinate_resolution": True,
             "registered_artifact_and_digest_resolution": True,
             "typed_mathematical_programme_routes": True,
+            "typed_claim_status_lookup": True,
             "declaration_level_proof_dependencies": False,
             "typed_remaining_open_propositions": True,
             "claim_transition_requirements": True,
@@ -713,6 +714,9 @@ def build() -> dict[str, Any]:
             "principal_declaration_handles": principal_declaration_handles,
             "mathematical_programme_query": (
                 "python3 scripts/query_corpus.py --route <programme_route_id>"
+            ),
+            "claim_status_query": (
+                "python3 scripts/query_corpus.py --status <claim_status>"
             ),
         },
         "expansion": {

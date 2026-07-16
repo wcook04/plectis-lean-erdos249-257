@@ -101,47 +101,49 @@ settle the open proposition attached to it.
 ## Read by intent
 
 - **Understand what this repository proves, reduces, cites, leaves open, and how its claims are partitioned.** (`instant_orientation`): `docs/orientation.json` → `SCOPE.md` → `README.md`
-  - Bounded route: `python3 scripts/query_corpus.py --route instant_orientation`
+  - Route: `python3 scripts/query_corpus.py --route instant_orientation`
+- **Browse bounded claim handles by exact registry status.** (`browse_claim_status`): `docs/orientation.json` → `SCOPE.md`
+  - Route: `python3 scripts/query_corpus.py --route browse_claim_status`
 - **Trace one mathematical claim from exposition to checked source.** (`follow_one_claim`): `docs/orientation.json` → `docs/ORIENTATION.md`
-  - Bounded route: `python3 scripts/query_corpus.py --route follow_one_claim`
+  - Route: `python3 scripts/query_corpus.py --route follow_one_claim`
 - **See how the #249 reduction, #257 families, carry trunk, and open targets relate.** (`understand_argument_topology`): `docs/orientation.json` → `docs/SOURCE_MAP.md`
-  - Bounded route: `python3 scripts/query_corpus.py --route understand_argument_topology`
+  - Route: `python3 scripts/query_corpus.py --route understand_argument_topology`
 - **Achievement-set geometry and the half-value seam** (`erdos257_half_story`): `docs/orientation.json`
   - Intent: Recover the proved #257 half-value spine from unique greedy coding through the last-producer partition to the exact tail-escape residual, without identifying the remaining middle cells with dyadic unsafety beyond the checked theorems.
-  - Bounded route: `python3 scripts/query_corpus.py --route erdos257_half_story`
+  - Route: `python3 scripts/query_corpus.py --route erdos257_half_story`
 - **#249 certificate and harmonic interface** (`erdos249_certificate_story`): `docs/orientation.json`
   - Intent: Recover the denominator exclusion, exact certificate endpoint, certificate completeness, finite checked instances, first-harmonic consumer, and the still-open unbounded supply.
-  - Bounded route: `python3 scripts/query_corpus.py --route erdos249_certificate_story`
+  - Route: `python3 scripts/query_corpus.py --route erdos249_certificate_story`
 - **Classical and structured support irrationality** (`structured_support_families`): `docs/orientation.json`
   - Intent: Follow the full-support theorem, named infinite-support families, periodic coefficient extensions, the mixed-sign dichotomy, and a conditional orthogonal-petal route.
-  - Bounded route: `python3 scripts/query_corpus.py --route structured_support_families`
+  - Route: `python3 scripts/query_corpus.py --route structured_support_families`
 - **#249 diagonal arithmetic and fresh-loss interfaces** (`erdos249_diagonal_arithmetic`): `docs/orientation.json`
   - Intent: Follow the exact lcm-diagonal pincer, fresh-loss projection, prime-deficit decomposition, odd-window, bit-lift, slack, and foreign-residue interfaces.
-  - Bounded route: `python3 scripts/query_corpus.py --route erdos249_diagonal_arithmetic`
+  - Route: `python3 scripts/query_corpus.py --route erdos249_diagonal_arithmetic`
 - **Boolean Möbius carry and global rationality constraints** (`boolean_mobius_constraints`): `docs/orientation.json`
   - Intent: Follow the exact carry-orbit characterisations of rational support-series values and the reciprocal-mass, unbounded-state, and zero-window consequences they force.
-  - Bounded route: `python3 scripts/query_corpus.py --route boolean_mobius_constraints`
+  - Route: `python3 scripts/query_corpus.py --route boolean_mobius_constraints`
 - **Transport, curvature, phase separation, and no-go results** (`transport_curvature_programme`): `docs/orientation.json`
   - Intent: Follow exact transport and curvature consumers, affine channel annihilation, checked finite instances, phase-separation producers, and fixed-precision countermodels.
-  - Bounded route: `python3 scripts/query_corpus.py --route transport_curvature_programme`
+  - Route: `python3 scripts/query_corpus.py --route transport_curvature_programme`
 - **Mersenne–Lambert identities and obstruction interfaces** (`lambert_obstruction_interfaces`): `docs/orientation.json`
   - Intent: Follow the exact Lambert identities around the totient constant and the coordinate, tail-atom, sign-support, and carry-rank obstructions that rule out naive compression strategies.
-  - Bounded route: `python3 scripts/query_corpus.py --route lambert_obstruction_interfaces`
+  - Route: `python3 scripts/query_corpus.py --route lambert_obstruction_interfaces`
 - **Coprimality probability, gcd moments, and Stern–Brocot geometry** (`probabilistic_gcd_geometry`): `docs/orientation.json`
   - Intent: Follow the fair-coin coprimality form of S and its denominator exclusion, squared-Lambert gcd moments, exact Stern–Brocot cylinder convergence, and Fibonacci/continuant stability of induced runs.
-  - Bounded route: `python3 scripts/query_corpus.py --route probabilistic_gcd_geometry`
+  - Route: `python3 scripts/query_corpus.py --route probabilistic_gcd_geometry`
 - **Half-carry compactness, windows, seams, and finite propagation** (`half_carry_compactness_programme`): `docs/orientation.json`
   - Intent: Follow the compactness sockets that would turn cofinal finite half-carry witnesses into half-membership, together with the exact rewind, protected-window, seam, suffix-cylinder, and finite-base theorems that isolate the missing producer.
-  - Bounded route: `python3 scripts/query_corpus.py --route half_carry_compactness_programme`
+  - Route: `python3 scripts/query_corpus.py --route half_carry_compactness_programme`
 - **Denominator, CRT, moment, and gauge obstructions** (`arithmetic_obstruction_interfaces`): `docs/orientation.json`
   - Intent: Follow exact arithmetic enclosures and denominator lower bounds, finite square-CRT suppression, dyadic moment and certificate interfaces, and gauge countermodels that delimit several plausible #249 routes.
-  - Bounded route: `python3 scripts/query_corpus.py --route arithmetic_obstruction_interfaces`
+  - Route: `python3 scripts/query_corpus.py --route arithmetic_obstruction_interfaces`
 - **Understand the cited mathematical sources, their precise relationship to the release, and the priority boundary.** (`trace_prior_art`): `docs/PRIOR_ART.md` → `docs/orientation.json`
-  - Bounded route: `python3 scripts/query_corpus.py --route trace_prior_art`
+  - Route: `python3 scripts/query_corpus.py --route trace_prior_art`
 - **Understand the mathematical method, the evidence required for claim transitions, and the exact remaining open propositions.** (`understand_methodology_and_open_boundary`): `METHODOLOGY.md` → `SCOPE.md`
-  - Bounded route: `python3 scripts/query_corpus.py --route understand_methodology_and_open_boundary`
+  - Route: `python3 scripts/query_corpus.py --route understand_methodology_and_open_boundary`
 - **Modify a formal or editorial surface without allowing status or source coordinates to drift.** (`change_or_verify_release`): `AGENTS.md` → `CONTRIBUTING.md`
-  - Bounded route: `python3 scripts/query_corpus.py --route change_or_verify_release`
+  - Route: `python3 scripts/query_corpus.py --route change_or_verify_release`
 
 ## Drill down
 

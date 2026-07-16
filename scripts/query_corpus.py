@@ -141,6 +141,22 @@ def compact_claim(claim: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def compact_status_claim(claim: dict[str, Any]) -> dict[str, Any]:
+    """Keep a status browse packet bounded while preserving its exact ceilings."""
+    row = {
+        **compact_claim(claim),
+        "statement_excerpt": claim["statement"][:280],
+        "declaration_count": len(claim["declarations"]),
+    }
+    if claim.get("remaining_open_proposition_ids"):
+        row["remaining_open_proposition_ids"] = claim[
+            "remaining_open_proposition_ids"
+        ]
+    if claim.get("bounded_domain"):
+        row["bounded_domain"] = claim["bounded_domain"]
+    return row
+
+
 @lru_cache(maxsize=1)
 def paper_anchor_inventory() -> list[dict[str, Any]]:
     """Derive typed human-paper anchors without promoting them to claim authority."""
@@ -1248,7 +1264,12 @@ def search_packet(query: str, limit: int) -> dict[str, Any]:
             )
             if value
         )
-        rank = search_rank(query, row["id"], route_haystack)
+        ranks = [search_rank(query, row["id"], route_haystack)]
+        ranks.extend(
+            search_rank(query, discovery_term, route_haystack)
+            for discovery_term in row.get("discovery_terms", [])
+        )
+        rank = min((value for value in ranks if value is not None), default=None)
         if rank is not None:
             ranked.append(
                 (
@@ -1277,7 +1298,44 @@ def search_packet(query: str, limit: int) -> dict[str, Any]:
         "results": results[:limit],
         "omitted_match_count": max(0, len(results) - limit),
         "limit": limit,
-        "next": "Use the typed handle with --claim, --paper-anchor, --open, --declaration, --source, --module, --connections, --artifact, --route, or --publication-family.",
+        "next": "Use the typed handle with --claim, --status, --paper-anchor, --open, --declaration, --source, --module, --connections, --artifact, --route, or --publication-family.",
+    }
+
+
+def claim_status_packet(status: str, limit: int) -> dict[str, Any]:
+    claims = load("docs/claims.json")
+    taxonomy = claims["status_taxonomy"]
+    status_by_folded = {key.casefold(): key for key in taxonomy}
+    canonical_status = status_by_folded.get(status.strip().casefold())
+    if canonical_status is None:
+        expected = ", ".join(taxonomy)
+        raise KeyError(f"unknown claim status: {status}; expected one of: {expected}")
+    matching_claims = [
+        claim for claim in claims["claims"] if claim["status"] == canonical_status
+    ]
+    remaining_open = (
+        claims["remaining_open_propositions"] if canonical_status == "open" else []
+    )
+    return {
+        "kind": "claim_status",
+        "authority_posture": "claim_registry_status_navigation_not_proof_authority",
+        "status": canonical_status,
+        "meaning": taxonomy[canonical_status],
+        "claim_count": len(matching_claims),
+        "claims": [
+            compact_status_claim(claim) for claim in matching_claims[:limit]
+        ],
+        "omitted_claim_count": max(0, len(matching_claims) - limit),
+        "limit": limit,
+        "remaining_open_propositions": remaining_open,
+        "proof_authority": "Lean source checked by the pinned Lean kernel",
+        "expansion": {
+            "claim": "python3 scripts/query_corpus.py --claim <claim_id>",
+            "open_proposition": (
+                "python3 scripts/query_corpus.py --open <remaining_open.id>"
+            ),
+        },
+        "validation": "python3 scripts/check_release.py",
     }
 
 
@@ -1486,6 +1544,12 @@ def render_card(packet: dict[str, Any]) -> str:
             handle = result.get("id") or result.get("name")
             rows.append(f"{result['kind']} | {handle}")
         return "\n".join(rows)
+    if kind == "claim_status":
+        return (
+            f"status {packet['status']} | claims={packet['claim_count']} "
+            f"| emitted={len(packet['claims'])} "
+            f"| remaining_open_propositions={len(packet['remaining_open_propositions'])}"
+        )
     if kind == "reading_route":
         route = packet["route"]
         if route.get("route_kind") == "mathematical_programme":
@@ -1546,6 +1610,7 @@ def main() -> int:
     group.add_argument("--module", metavar="PATH_OR_ID")
     group.add_argument("--connections", metavar="MODULE_OR_DECLARATION")
     group.add_argument("--route", metavar="ID")
+    group.add_argument("--status", metavar="CLAIM_STATUS")
     group.add_argument("--publication-family", metavar="ID")
     group.add_argument("--publication-architecture", action="store_true")
     group.add_argument("--search", metavar="TEXT")
@@ -1576,6 +1641,8 @@ def main() -> int:
             packet = connection_card(args.connections, args.limit, args.query)
         elif args.route:
             packet = route_packet(args.route)
+        elif args.status:
+            packet = claim_status_packet(args.status, args.limit)
         elif args.publication_family:
             packet = publication_family_packet(args.publication_family)
         elif args.publication_architecture:
