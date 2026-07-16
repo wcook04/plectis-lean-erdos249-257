@@ -66,6 +66,9 @@ jobs:
       - name: Test supported root-import closure
         if: ${{ !cancelled() }}
         run: python3 scripts/test_root_import_closure.py
+      - name: Test downstream example claim boundary
+        if: ${{ !cancelled() }}
+        run: python3 scripts/test_downstream_example_contract.py
       - name: Validate CITATION.cff
         if: ${{ !cancelled() }}
         run: python3 scripts/check_metadata.py
