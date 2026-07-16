@@ -21,17 +21,16 @@ irrationality problems.
   infinite `A ⊆ ℕ`.
 
 Both remain open. This project formalises results around both questions; **it
-does not solve Erdős #249 or the universal form of Erdős #257.** Every row
-below is stated at the scope the Lean source actually supports.
+does not solve Erdős #249 or the universal form of Erdős #257.** Each row
+stays within the Lean source.
 
-This self-contained public project is an output of a larger
-formal-mathematics workflow, not an entrypoint into any private development
-system. No claim depends on unreleased work; do not infer results from private or unreleased work.
+This self-contained public checkout is not an entrypoint into any private
+development system; do not infer results from private or unreleased work.
 
 `v0.6.0` is the latest tagged release and citation anchor.
-[`docs/claims.json`](docs/claims.json) pins the post-tag formal-source checkpoint;
-it is not a new tagged release. Lean source checked by the pinned Lean kernel is proof
-authority.
+[`docs/claims.json`](docs/claims.json) pins the post-tag formal-source
+checkpoint, not a new tagged release. Lean source checked by the pinned Lean
+kernel is proof authority.
 
 ## What the formal source establishes
 
@@ -69,10 +68,10 @@ scoped #249 no-go countermodels.
 An exact final-skip band formula does not show that the actual orbit avoids
 an unsafe band.
 
-The [orientation](docs/ORIENTATION.md) routes claims.
-The [gateway paper](erdos249-257-main-paper.pdf) states both spines; the
+[Orientation](docs/ORIENTATION.md) routes claims. The
+[gateway paper](erdos249-257-main-paper.pdf) states both spines; the
 [#249 companion](erdos249-transport-curvature-companion-note.pdf) covers
-transport, phase separation, and scoped countermodels.
+transport and curvature.
 
 ## What remains open
 
