@@ -153,10 +153,11 @@ recursion explain the representation containing the #249 Möbius-square atom.
 `FullTargetPrimeAdjunctionNoGo` is included as a proved negative result because
 it closes a recurring prime-adjunction strategy without changing the open
 claim. `SternBrocotRunGeometry` is registered as a source-level supporting
-claim: its continuant/Fibonacci stability theorems are exact, but no endpoint
-argument currently consumes them. It therefore remains outside the paper's
-principal result spine; the cylinder law used in the exposition is owned by
-`GcdMomentCalculus`.
+claim: its continuant/Fibonacci stability theorems are stated in the Lambert
+complements, but no endpoint argument currently consumes them. It therefore
+remains outside the paper's principal result spine; the cylinder law is owned
+by `GcdMomentCalculus`, while `SternBrocotRunGeometry` owns the induced-run
+stability package.
 
 ## Binary-carry trunk (post-wave carry layer)
 

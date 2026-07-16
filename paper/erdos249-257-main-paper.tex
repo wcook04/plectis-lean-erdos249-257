@@ -1556,6 +1556,12 @@ Base $2$ is the one point where $\Pr(X=a)\Pr(Y=b)=2^{-(a+b)}$ needs no normalisi
 constant, so the totient sum and the coprimality probability line up with no
 boundary correction. In this reading, Erd\H{o}s \#249 asks whether two independent
 fair-coin waiting times are coprime with irrational probability.
+After reducing $(X,Y)$ by their gcd, the same distribution has an exact
+Stern--Brocot cylinder decomposition.  Appendix~\ref{app:lambert-complements}
+states the resulting probability law and the sharp Fibonacci stability of its
+alternating runs.  These are unconditional structural theorems about the
+representation of $S$; they do not supply the denominator survival needed for
+irrationality.
 
 \subsection{Exact certificate characterisation}\label{sec:reduction}
 
@@ -2245,7 +2251,7 @@ distinguished target analysed in Section~\ref{sec:eb}.
 
 \long\def\FurtherLambertAppendix{%
 
-\subsection{Additional Lambert and finite-algebraic boundaries}
+\subsection{Additional Lambert, probability, and finite-algebraic structure}
 \label{sec:additional-lambert}
 
 \paragraph{Periodic weights.}\label{sec:periodicweights}
@@ -2313,9 +2319,97 @@ where \(P\) is Pillai's gcd-sum function.
 \lrefx{GcdMomentCalculus.lean}{235}{tsum_totient_div_mersenne_sq_eq_gcd_moment_series}
 Postelmans--Van Assche imply irrationality of the middle row
 ~\cite{postelmansvanassche}; this does not transfer to the M\"obius row, which
-is exactly the open constant \(S-\tfrac12\).  The further coprime-pair and
-Stern--Brocot identities are retained in the living reference rather than
-given equal narrative weight here.
+is exactly the open constant \(S-\tfrac12\).
+
+\paragraph{Reduced slopes and Stern--Brocot cylinders.}
+The fair-coin pair has a particularly rigid distribution after division by
+its gcd.  For positive coprime \(a,b\), put
+\[
+  \nu(a,b)=\frac1{2^{a+b}-1},
+  \qquad
+  M(a,b)=\frac1{(2^a-1)(2^b-1)}.
+\]
+The first quantity is the probability that the reduced direction is
+\((a,b)\); the second is the mass of the Stern--Brocot cylinder rooted at
+\((a,b)\).  Let \(M_d(a,b)\) be the total stop mass in the first \(d\)
+generations below that root, where a node \((u,v)\) has stop mass
+\((2^{u+v}-1)^{-1}\) and children \((u+v,v)\), \((u,u+v)\).
+
+\begin{theorem}[reduced-direction and cylinder law]
+\label{res:sternbrocotcylinders}
+The reduced directions form a probability distribution,
+\[
+  \sum_{\substack{a,b\ge1\\(a,b)=1}}\nu(a,b)=1.
+\]
+At every positive node,
+\[
+  M(a,b)=\frac1{2^{a+b}-1}+M(a+b,b)+M(a,a+b),
+\]
+and, uniformly in \(a,b\) and \(d\),
+\[
+  0\le M(a,b)-M_d(a,b)
+  \le \left(\frac23\right)^d M(a,b).
+\]
+Consequently \(M_d(a,b)\to M(a,b)\); at the root \(M(1,1)=1\).
+\end{theorem}
+\noindent Formalised:
+\lrefx{GcdMomentCalculus.lean}{349}{tsum_pos_coprime_inv_mersenne_eq_one},
+\lrefx{GcdMomentCalculus.lean}{474}{cylinderMass_split},
+\lrefx{GcdMomentCalculus.lean}{525}{sternBrocotDepthMass_error}, and
+\lrefx{GcdMomentCalculus.lean}{560}{tendsto_sternBrocotDepthMass}.
+The recursion is the elementary rational identity obtained after setting
+\(A=2^a\), \(B=2^b\); the quantitative point is that the two children retain
+at most two thirds of their parent's mass.
+
+\paragraph{Alternating-run stability.}
+Write an alternating Stern--Brocot word as \(r\) nonempty runs of lengths
+\(n_i=1+e_i\), with \(e_i\ge0\).  Starting with \(P_\varnothing=(1,1)\), define
+\[
+  P_{(n_1,\ldots,n_r)}=(n_1A+B,A)
+  \quad\text{when}\quad P_{(n_2,\ldots,n_r)}=(A,B),
+  \qquad H(n_1,\ldots,n_r)=P_1+P_2.
+\]
+Thus \(H\) is the arithmetic height of the primitive pair reached by the
+word.  Let \(F_0=0,F_1=1\).
+
+\begin{theorem}[Fibonacci--continuant stability]
+\label{res:sternbrocotruns}
+Every \(r\)-run word satisfies
+\[
+ H(1+e_1,\ldots,1+e_r)
+ \ge F_{r+3}+F_{r+1}\sum_{i=1}^r e_i,
+\]
+and \(H(1,\ldots,1)=F_{r+3}\).  A defect confined to position
+\(i\in\{0,\ldots,r-1\}\) has the exact size
+\[
+ H(\underbrace{1,\ldots,1}_{i},1+e,
+   \underbrace{1,\ldots,1}_{r-i-1})
+ =F_{r+3}+F_{i+2}F_{r-i+1}e.
+\]
+More generally, the checked recurrence gives the full positive multiaffine
+continuant defect.  The two orientations with one nonempty run have total
+mass \(1/2\), while the natural denominator exponent on the all-unit spine is
+\[
+  \sum_{j=0}^{r-1}F_{j+2}=F_{r+3}-2.
+\]
+\end{theorem}
+\noindent Formalised:
+\lrefx{SternBrocotRunGeometry.lean}{185}{runHeight_fib_lower},
+\lrefx{SternBrocotRunGeometry.lean}{263}{runHeight_defectRunLengths},
+\lrefx{SternBrocotRunGeometry.lean}{343}{runHeight_defect_fib_sum_lower},
+\lrefx{SternBrocotRunGeometry.lean}{413}{runHeight_oneSiteDefect},
+\lrefx{SternBrocotRunGeometry.lean}{467}{oneRunMass_eq_half}, and
+\lrefx{SternBrocotRunGeometry.lean}{491}{naturalRunDenominatorExponent_add_two}.
+
+The Lambert and M\"obius identities used above are classical
+~\cite{apostol,merca2017,mercaschmidt}, and the mediant language goes back to
+Farey~\cite{farey1816}.  Postelmans--Van Assche supply the cited irrationality
+of the constant-weight squared-Lambert row, not these cylinder or run
+statements.  We claim the displayed Lean-checked identities and estimates,
+not priority for their assembled package.  In particular, the exact equality
+of the Fibonacci height and denominator scales is a boundary, not an
+irrationality argument: no theorem here proves that a run tail survives
+denominator clearing.
 }
 
 \subsection{Two concrete scalar criteria}
@@ -2914,14 +3008,15 @@ None proves the unbounded certificate supply
 
 \TotientTechnicalAppendix
 
-\section{Lambert and finite-algebraic complements}
+\section{Lambert, probability, and finite-algebraic complements}
 \label{app:lambert-complements}
 
 This appendix records results that enlarge the surrounding Lambert-series
 picture without advancing either unbounded frontier in
 Section~\ref{sec:further}.  They include periodic-weight theorems, finite
-denominator obstructions, the M\"obius-square identity, and a squared Lambert
-calculus for gcd moments.
+denominator obstructions, the M\"obius-square identity, a squared Lambert
+calculus for gcd moments, an exact Stern--Brocot cylinder law, and sharp
+Fibonacci--continuant stability for alternating runs.
 
 \FurtherLambertAppendix
 

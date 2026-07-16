@@ -1124,7 +1124,7 @@
           "primary_narrative_owner": "paper/erdos249-257-main-paper.tex",
           "source_route": "python3 scripts/query_corpus.py --route probabilistic_gcd_geometry",
           "consumer_or_open_obligation": "Recasts #249 and exposes independent gcd-distribution and continued-fraction structure; the run package has no endpoint consumer, and irrationality remains open.",
-          "view_decision": "gateway_supporting_identity_living_reference_detail"
+          "view_decision": "gateway_supporting_theorems_and_living_reference_detail"
         },
         {
           "id": "erdos249_quantitative_headline",
@@ -7512,7 +7512,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 2384
+        "line": 2478
       }
     },
     {
@@ -7523,7 +7523,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 2395
+        "line": 2489
       }
     },
     {
@@ -7534,7 +7534,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "the half-value counterexample route",
-        "line": 2410
+        "line": 2504
       }
     },
     {
@@ -7545,7 +7545,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 2401
+        "line": 2495
       }
     }
   ],
@@ -8846,6 +8846,7 @@
       "label": "Reduced-direction normalization and Stern–Brocot cylinder law",
       "status": "proved here",
       "statement": "The Mersenne weights of positive reduced slopes sum exactly to one. At every positive Stern–Brocot node (a,b), the cylinder mass 1/((2^a-1)(2^b-1)) splits into its stop mass and two child cylinders; the depth-d unfolding has error between zero and (2/3)^d times the cylinder mass and converges to the closed form.",
+      "paper_label": "res:sternbrocotcylinders",
       "readme_headline": false,
       "declarations": [
         {
@@ -8875,6 +8876,7 @@
       "label": "Fibonacci and continuant stability of Stern–Brocot runs",
       "status": "formalised here",
       "statement": "A Stern–Brocot word with r nonempty alternating runs has height at least F_(r+3), with equality on the all-unit run spine. Writing each run length as 1+e_i gives an exact multiaffine continuant-defect expansion, the sharp global gain F_(r+1) sum e_i, and exact one-site coefficient F_(i+2)F_(r-i+1). The first induced run layer has mass 1/2, while the natural denominator exponent is exactly F_(r+3)-2. These are source-level combinatorial and arithmetic facts; no analytic denominator survival or irrationality conclusion is claimed.",
+      "paper_label": "res:sternbrocotruns",
       "readme_headline": false,
       "declarations": [
         {
