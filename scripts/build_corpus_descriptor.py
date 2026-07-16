@@ -673,7 +673,7 @@ def build() -> dict[str, Any]:
 
 
 def render() -> str:
-    return json.dumps(build(), ensure_ascii=False, indent=2) + "\n"
+    return json.dumps(build(), ensure_ascii=False, indent=1) + "\n"
 
 
 def main() -> int:
