@@ -189,10 +189,13 @@ def validate_natural_language_search() -> None:
         "what is proved": "browse_claim_status",
         "what is formalised": "browse_claim_status",
         "what is formalized": "browse_claim_status",
+        "which results are unconditional progress": "browse_claim_status",
         "what is reduced": "browse_claim_status",
         "what is computed": "browse_claim_status",
         "show verified finite computations": "browse_claim_status",
         "show conditional reductions": "browse_claim_status",
+        "which claims are cited only": "browse_claim_status",
+        "list open claims": "browse_claim_status",
         "where are the Lean proofs": "follow_one_claim",
         "what is new mathematics": "trace_prior_art",
         "how do I verify this": "change_or_verify_release",
@@ -1001,7 +1004,7 @@ if __name__ == "__main__":
         print(
             "test_query_corpus: "
             f"{len(PROGRAMME_EXPECTATIONS)} mathematical programme routes and "
-            "32 natural-language discovery queries passed"
+            "natural-language discovery queries passed"
         )
         raise SystemExit(0)
     if sys.argv[1:]:

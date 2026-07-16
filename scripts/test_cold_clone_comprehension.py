@@ -189,6 +189,18 @@ def main() -> int:
     checks += 1
 
     mutated = copy.deepcopy(packets)
+    mutated["discovery_searches"]["which claims are cited only"]["results"] = []
+    assert_rejected(mutated, "cited-only status route")
+    checks += 1
+
+    mutated = copy.deepcopy(packets)
+    mutated["discovery_searches"]["list open claims"]["results"].insert(
+        0, {"kind": "reading_route", "id": "shadow_open_route"}
+    )
+    assert_rejected(mutated, "open-claim status route priority")
+    checks += 1
+
+    mutated = copy.deepcopy(packets)
     mutated["discovery_multi_searches"]["what is ruled out"]["results"] = []
     assert_rejected(mutated, "no-go programme route coverage")
     checks += 1
