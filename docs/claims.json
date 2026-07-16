@@ -991,7 +991,7 @@
             "campbell_shift_synchronization_boundary"
           ],
           "status_summary": "Classical geometry formalised, exact local bands, a conditional second channel, and scoped no-go boundaries.",
-          "prior_art_posture": "Kovač–Tao supply the strict-tail subsum geometry; Crandall and Campbell concern adjacent binary-digit questions and are not proof inputs.",
+          "prior_art_posture": "Kovač–Tao supply the strict-tail subsum geometry; the classical Lambert–Möbius identity is the baseline for the scoped sign-support no-go; Crandall and Campbell concern adjacent binary-digit questions and are not proof inputs. No priority claim is made for the sign separation.",
           "primary_narrative_owner": "paper/erdos249-257-main-paper.tex",
           "source_route": "python3 scripts/query_corpus.py --claim greedy_achievement_geometry",
           "consumer_or_open_obligation": "Decide whether 1/2 belongs to the achievement set; positive membership refutes universal #257.",
@@ -7512,7 +7512,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 2478
+        "line": 2481
       }
     },
     {
@@ -7523,7 +7523,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 2489
+        "line": 2492
       }
     },
     {
@@ -7534,7 +7534,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "the half-value counterexample route",
-        "line": 2504
+        "line": 2507
       }
     },
     {
@@ -7545,7 +7545,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 2495
+        "line": 2498
       }
     }
   ],
@@ -8995,6 +8995,7 @@
       "label": "Möbius-sign support one-half no-go",
       "status": "proved here",
       "statement": "The Boolean support selected by the negative Möbius values has sum 1/2 plus the positive Möbius tail and is therefore at least 1/2 + 1/63. This closes the sign-truncation route to the target value 1/2; it does not exclude another infinite Boolean support with that value.",
+      "paper_label": "res:mobiussignnogo",
       "readme_headline": false,
       "declarations": [
         {

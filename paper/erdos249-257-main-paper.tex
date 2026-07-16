@@ -658,6 +658,9 @@ and
 \lword{HalfCylinderHalfMembershipClassification.lean}{235}{half_mem_mersenneAchievementSet_iff_no_lastHalfGreedySkip}{no-final-skip theorem}.
 Finite supports are excluded by the
 \lword{HalfCarryReachability.lean}{589}{finite_boolSupport_ne_half}{finite-support theorem}.
+A tempting signed-to-Boolean shortcut also fails: selecting precisely the
+negative M\"obius indices overshoots \(1/2\) by at least \(1/63\).
+Proposition~\ref{res:mobiussignnogo} gives the exact sign-separation identity.
 
 \subsection{The final-skip reduction}
 
@@ -2665,16 +2668,29 @@ classical Lambert-series tools~\cite{apostol,merca2017,mercaschmidt}; the
 contribution here is their Lean-checked composition with the tempered-orbit
 criterion.
 
-The signed identity $L(\mu)=1/2$ does not by itself provide a Boolean support
-for the target value.  If the negative M\"obius indices are selected and the
-positive indices (apart from $1$) are discarded, the selected support sum is
-exactly $1/2$ plus the positive M\"obius tail, hence exceeds $1/2$ by at least
-$1/63$ from the index $6$.  This closes one sign-truncation route only; it does
-not exclude another infinite Boolean support with value $1/2$.
+\begin{proposition}[M\"obius-sign support no-go]\label{res:mobiussignnogo}
+Let
+\[
+ A_-=\{d\ge2:\mu(d)=-1\},
+ \qquad A_+=\{d\ge2:\mu(d)=1\}.
+\]
+Then
+\[
+ \sum_{d\in A_-}\frac1{2^d-1}
+ =\frac12+\sum_{d\in A_+}\frac1{2^d-1}
+ \ge\frac12+\frac1{63}>\frac12.
+\]
+In particular, the signed identity \(L(\mu)=1/2\) cannot be converted into a
+Boolean support of value \(1/2\) merely by selecting the negative M\"obius
+indices.
+\end{proposition}
 \noindent Formalised:
 \lref{MobiusSignSupportNoGo.lean}{111}{tsum_negativeMobius_eq_half_add_positiveMobiusTail}
 and
 \lref{MobiusSignSupportNoGo.lean}{150}{half_add_one_div_sixty_three_le_tsum_negativeMobius}.
+The term \(d=6\) supplies the displayed \(1/63\).  This closes one
+sign-truncation route only; it does not exclude another infinite Boolean
+support with value \(1/2\).
 
 \begin{proposition}[Boolean M\"obius inversion, both directions]\label{res:boolmob}
 On positive integers, $f_A=\mathbf 1_A*\zeta$ and $\mu*f_A=\mathbf 1_A$, where
