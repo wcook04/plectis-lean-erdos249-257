@@ -25,6 +25,7 @@ from typing import Any
 ROOT = Path(__file__).resolve().parent.parent
 SCHEMA = "erdos249257-clean-ref-release-receipt/1"
 TAIL_BYTES = 16_000
+DIRTY_PATH_LIMIT = 120
 
 
 class SnapshotError(RuntimeError):
@@ -128,14 +129,17 @@ def prepare_clone(commit: str, parent: Path) -> Path:
 
 
 def receipt_base(ref: str, commit: str, caller_dirty_paths: list[str]) -> dict[str, Any]:
+    dirty_path_count = len(caller_dirty_paths)
     return {
         "schema": SCHEMA,
         "requested_ref": ref,
         "resolved_commit": commit,
         "snapshot_posture": "clean_committed_clone_excludes_caller_worktree_changes",
         "source_repository": str(ROOT),
-        "caller_worktree_dirty_path_count": len(caller_dirty_paths),
-        "caller_worktree_dirty_paths": caller_dirty_paths,
+        "caller_worktree_dirty_path_count": dirty_path_count,
+        "caller_worktree_dirty_paths": caller_dirty_paths[:DIRTY_PATH_LIMIT],
+        "caller_worktree_dirty_path_limit": DIRTY_PATH_LIMIT,
+        "caller_worktree_dirty_paths_truncated": dirty_path_count > DIRTY_PATH_LIMIT,
         "release_command": ["python3", "scripts/check_release.py"],
     }
 

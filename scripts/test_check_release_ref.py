@@ -80,6 +80,24 @@ def main() -> int:
                 "caller.txt",
                 "untracked.txt",
             }
+            assert not probe["caller_worktree_dirty_paths_truncated"]
+
+            many_dirty_paths = [
+                f"untracked-{index:03d}.txt"
+                for index in range(check_release_ref.DIRTY_PATH_LIMIT + 5)
+            ]
+            bounded_receipt = check_release_ref.receipt_base(
+                "HEAD",
+                passing_commit,
+                many_dirty_paths,
+            )
+            assert bounded_receipt["caller_worktree_dirty_path_count"] == len(
+                many_dirty_paths
+            )
+            assert len(bounded_receipt["caller_worktree_dirty_paths"]) == (
+                check_release_ref.DIRTY_PATH_LIMIT
+            )
+            assert bounded_receipt["caller_worktree_dirty_paths_truncated"]
 
             passed, passed_exit = check_release_ref.validate_ref(
                 passing_commit,
@@ -158,7 +176,8 @@ def main() -> int:
 
     print(
         "test_check_release_ref: caller dirt excluded, exact commits selected, "
-        "failing gate exit preserved, and timeout receipt serialized"
+        "dirty paths bounded, failing gate exit preserved, and timeout "
+        "receipt serialized"
     )
     return 0
 
