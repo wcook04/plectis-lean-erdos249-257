@@ -434,6 +434,9 @@ def paper_coordinate(label: str | None, index: dict[str, dict[str, Any]]) -> dic
 def claim_packet(claim_id: str) -> dict[str, Any]:
     claims = load("docs/claims.json")
     claim_index = {row["id"]: row for row in claims["claims"]}
+    open_index = {
+        row["id"]: row for row in claims["remaining_open_propositions"]
+    }
     claim = claim_index.get(claim_id)
     if claim is None:
         raise KeyError(f"unknown claim id: {claim_id}")
@@ -454,6 +457,17 @@ def claim_packet(claim_id: str) -> dict[str, Any]:
         return row
 
     open_ids = set(claim.get("remaining_open_proposition_ids", []))
+    programme_routes = [
+        row
+        for row in all_entrypoints(claims)
+        if row.get("route_kind") == "mathematical_programme"
+        and claim_id in row.get("core_claim_ids", [])
+    ]
+    programme_open_ids = {
+        open_id
+        for route in programme_routes
+        for open_id in route.get("remaining_open_proposition_ids", [])
+    }
     return {
         "kind": "claim",
         "authority_posture": "navigation_projection_not_proof_authority",
@@ -470,7 +484,27 @@ def claim_packet(claim_id: str) -> dict[str, Any]:
             "follow": "python3 scripts/query_corpus.py --claim <neighbour_id>",
         },
         "remaining_open_propositions": [
-            row for row in claims["remaining_open_propositions"] if row["id"] in open_ids
+            open_index[open_id] for open_id in sorted(open_ids)
+        ],
+        "programme_contexts": [
+            {
+                "id": route["id"],
+                "title": route["title"],
+                "claim_ceiling": route["claim_ceiling"],
+                "problem_targets": [
+                    compact_claim(claim_index[target_id])
+                    for target_id in route.get("problem_target_claim_ids", [])
+                ],
+                "remaining_open_proposition_ids": route.get(
+                    "remaining_open_proposition_ids", []
+                ),
+                "follow": f"python3 scripts/query_corpus.py --route {route['id']}",
+            }
+            for route in programme_routes
+        ],
+        "wider_programme_open_propositions": [
+            open_index[open_id]
+            for open_id in sorted(programme_open_ids - open_ids)
         ],
         "paper": paper_coordinate(claim.get("paper_label"), label_index),
         "validation": "python3 scripts/check_release.py",
