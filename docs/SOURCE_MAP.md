@@ -5,11 +5,28 @@ SPDX-License-Identifier: Apache-2.0
 
 # Source map
 
-User-facing route:
+## Bounded reader route
 
-- read `Erdos249257.lean` for the import graph
-- read `docs/WAVE_INDEX.md` for chronology
-- read the paper for mathematical exposition
+Start from one mathematical question rather than decoding the complete import
+graph:
+
+1. Read `docs/orientation.json`, or its human projection
+   `docs/ORIENTATION.md`, and select one programme, claim, or exact remaining
+   open proposition.
+2. Run one bounded lookup:
+   `python3 scripts/query_corpus.py --route <programme_id>`,
+   `python3 scripts/query_corpus.py --claim <claim_id>`, or
+   `python3 scripts/query_corpus.py --open <remaining_open.id>`.
+3. Follow the returned paper label into the authored exposition and its
+   declaration or source handles into the modules grouped below.
+4. Read `Erdos249257.lean` only when the package topology itself is the
+   question. Read `docs/WAVE_INDEX.md` for chronology, not as the recommended
+   mathematical reading order.
+
+Lean source checked by the pinned Lean kernel is proof authority. This map is
+authored navigation: it does not strengthen a claim, replace
+`docs/claims.json`, or close an exact remaining-open proposition. Erdős #249
+and the universal form of #257 remain open.
 
 ## Build entrypoint
 

@@ -113,6 +113,30 @@ def contributor_gate_posture_errors(contributing: str) -> list[str]:
     return errors
 
 
+def source_map_entry_errors(source_map: str) -> list[str]:
+    """Keep source navigation bounded and subordinate to mathematical owners."""
+    required = (
+        "docs/orientation.json",
+        "python3 scripts/query_corpus.py --route <programme_id>",
+        "python3 scripts/query_corpus.py --claim <claim_id>",
+        "python3 scripts/query_corpus.py --open <remaining_open.id>",
+        "Lean source checked by the pinned Lean kernel is proof authority",
+        "Erdős #249",
+        "universal form of #257 remain open",
+    )
+    errors = [
+        f"docs/SOURCE_MAP.md lost bounded first-contact route: {phrase}"
+        for phrase in required
+        if phrase not in source_map
+    ]
+    if "Read `Erdos249257.lean` only when the package topology itself is the" not in source_map:
+        errors.append(
+            "docs/SOURCE_MAP.md must not send first-contact readers directly "
+            "into the full import graph"
+        )
+    return errors
+
+
 def module_lines(
     cache: dict[tuple[str, str | None], list[str] | None],
     rel: str,
@@ -834,6 +858,10 @@ def main() -> int:
     contributing = read(ROOT / "CONTRIBUTING.md")
     contributing_errors = contributor_gate_posture_errors(contributing)
     check(not contributing_errors, "; ".join(contributing_errors))
+
+    source_map = read(ROOT / "docs" / "SOURCE_MAP.md")
+    source_map_errors = source_map_entry_errors(source_map)
+    check(not source_map_errors, "; ".join(source_map_errors))
 
     methodology_check = subprocess.run(
         [sys.executable, str(ROOT / "scripts" / "build_methodology.py"), "--check"],
