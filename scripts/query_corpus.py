@@ -40,6 +40,29 @@ def publication_evidence() -> dict[str, Any]:
     return load("docs/publication_evidence.json")
 
 
+def current_corpus_census() -> dict[str, Any]:
+    claims = load("docs/claims.json")
+    atlas_summary = load("docs/declaration_atlas.json")["summary"]
+    assembly = claims["machine_readable_paper"]["publication_assembly"]
+    return {
+        "snapshot_kind": "current_worktree_navigation_state",
+        "claims_source": "docs/claims.json",
+        "declaration_atlas_source": "docs/declaration_atlas.json",
+        "module_count": atlas_summary["module_count"],
+        "declaration_count": atlas_summary["declaration_count"],
+        "theorem_like_count": atlas_summary["theorem_like_count"],
+        "generated_certificate_declaration_count": atlas_summary[
+            "generated_certificate_declaration_count"
+        ],
+        "curated_claim_count": len(claims["claims"]),
+        "contribution_family_count": len(assembly["contribution_families"]),
+        "status_count": len(claims["status_taxonomy"]),
+        "remaining_open_proposition_count": len(
+            claims["remaining_open_propositions"]
+        ),
+    }
+
+
 def all_entrypoints(claims: dict[str, Any]) -> list[dict[str, Any]]:
     return [
         *claims["machine_readable_paper"]["entrypoints"],
@@ -188,6 +211,17 @@ def publication_artifact_packet(artifact_id: str) -> dict[str, Any]:
 
 def publication_evidence_packet(mutation_id: str) -> dict[str, Any]:
     receipt = publication_evidence()
+    evaluation_snapshot = receipt["evaluation"]["corpus_snapshot"]
+    current_snapshot = current_corpus_census()
+    numeric_fields = [
+        key
+        for key, value in evaluation_snapshot.items()
+        if isinstance(value, int) and not isinstance(value, bool)
+    ]
+    snapshot_delta = {
+        key: current_snapshot[key] - evaluation_snapshot[key]
+        for key in numeric_fields
+    }
     mutation = None
     if mutation_id != "summary":
         mutation = next(
@@ -208,7 +242,18 @@ def publication_evidence_packet(mutation_id: str) -> dict[str, Any]:
         "publication_artifact_id": receipt["publication_artifact_id"],
         "checkpoint": receipt["evaluation"]["checkpoint"],
         "baseline": receipt["evaluation"]["baseline"],
-        "corpus_snapshot": receipt["evaluation"]["corpus_snapshot"],
+        "corpus_snapshot": evaluation_snapshot,
+        "current_corpus_census": current_snapshot,
+        "time_axis": {
+            "same_as_evaluation_snapshot": all(
+                delta == 0 for delta in snapshot_delta.values()
+            ),
+            "current_minus_evaluation": snapshot_delta,
+            "rule": (
+                "Use corpus_snapshot for evaluation-time claims and "
+                "current_corpus_census for present-tense repository claims."
+            ),
+        },
         "summary": receipt["evaluation"]["summary"],
         "mutation": mutation,
         "post_repair": receipt["post_repair"],
@@ -1772,6 +1817,9 @@ def render_card(packet: dict[str, Any]) -> str:
                 f"| checkpoint={packet['checkpoint'][:7]} "
                 f"| snapshot_claims={packet['corpus_snapshot']['curated_claim_count']} "
                 f"| snapshot_families={packet['corpus_snapshot']['contribution_family_count']} "
+                f"| current_claims={packet['current_corpus_census']['curated_claim_count']} "
+                f"| current_families={packet['current_corpus_census']['contribution_family_count']} "
+                f"| same_snapshot={packet['time_axis']['same_as_evaluation_snapshot']} "
                 f"| mutations={summary['authored_mutation_count']} "
                 f"| rejected={summary['rejected_mutation_count']} "
                 f"| escaped={','.join(summary['escaped_mutation_ids'])}"
