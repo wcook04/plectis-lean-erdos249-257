@@ -88,6 +88,22 @@ Records a reviewed judgement about: Whether a formal proposition matches the int
 
 Does not decide: Whether the Lean kernel accepts the proof term.
 
+## Research and publication paths
+
+The machine source records two bounded paths. They are navigation and review order, not additional mathematical implications.
+
+### Mathematical research path
+
+`open_target` → `representation` → `necessary_consequence` → `proved_reduction` → `finite_certificate` → `lean_declaration` → `remaining_open_proposition`
+
+A route may stop at any intermediate object. In particular, a necessary consequence, reduction, finite certificate, or Lean declaration does not remove the final remaining-open proposition unless a checked theorem actually does so.
+
+### Public claim path
+
+`lean_declaration` → `checked_assumptions` → `reviewed_intended_meaning` → `public_claim` → `authored_exposition` → `generated_projection` → `public_checkout`
+
+This is the authority order for publication. Kernel acceptance precedes assumption review; intended meaning is reviewed before a public claim; authored exposition precedes generated projections; and the public checkout is the final reader-facing surface.
+
 ## Working principles
 
 ### Proving

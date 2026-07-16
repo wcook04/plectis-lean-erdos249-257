@@ -19,6 +19,33 @@ IMPLEMENTED_GUARDS = {
     "release.proof_trust",
 }
 
+REQUIRED_IMPORT_CONTRACTS = [
+    "docs/claims.json::machine_readable_paper.authority_order",
+    "docs/claims.json::status_taxonomy",
+    "docs/claims.json::remaining_open_propositions",
+    "docs/claims.json::non_claims",
+]
+
+MATHEMATICAL_RESEARCH_CYCLE = [
+    "open_target",
+    "representation",
+    "necessary_consequence",
+    "proved_reduction",
+    "finite_certificate",
+    "lean_declaration",
+    "remaining_open_proposition",
+]
+
+PUBLIC_CLAIM_CYCLE = [
+    "lean_declaration",
+    "checked_assumptions",
+    "reviewed_intended_meaning",
+    "public_claim",
+    "authored_exposition",
+    "generated_projection",
+    "public_checkout",
+]
+
 REMAINING_OPEN_EFFECTS = {
     "proves",
     "narrows",
@@ -69,6 +96,9 @@ MUTATION_FIXTURE_IDS = {
     "linkage_correction_forbidden_effects_removed",
     "change_class_without_minimum_evidence",
     "semantic_change_review_downgraded",
+    "authority_import_contract_removed",
+    "mathematical_research_cycle_reordered",
+    "public_claim_cycle_skips_review",
 }
 
 
@@ -92,6 +122,18 @@ def validate_contract(claims: dict[str, Any], methodology: dict[str, Any]) -> li
 
     if not methodology.get("human_preamble"):
         errors.append("methodology needs a human_preamble")
+    if not methodology.get("scope"):
+        errors.append("methodology needs a scope boundary")
+    if not methodology.get("artifact_role"):
+        errors.append("methodology needs an artifact_role")
+    if not methodology.get("human_capsule"):
+        errors.append("methodology needs a human_capsule")
+    if methodology.get("imports_contracts") != REQUIRED_IMPORT_CONTRACTS:
+        errors.append("methodology imports_contracts must name the exact claims authority surfaces")
+    if methodology.get("mathematical_research_cycle") != MATHEMATICAL_RESEARCH_CYCLE:
+        errors.append("methodology mathematical_research_cycle must preserve the declared path")
+    if methodology.get("public_claim_cycle") != PUBLIC_CLAIM_CYCLE:
+        errors.append("methodology public_claim_cycle must preserve review and projection order")
 
     evidence_classes = set(methodology.get("evidence_classes", {}))
     for evidence_id, evidence in methodology.get("evidence_classes", {}).items():
@@ -411,6 +453,27 @@ def render_markdown(methodology: dict[str, Any], claims: dict[str, Any]) -> str:
             ]
         )
 
+    lines.extend(
+        [
+            "## Research and publication paths",
+            "",
+            "The machine source records two bounded paths. They are navigation and review order, not additional mathematical implications.",
+            "",
+            "### Mathematical research path",
+            "",
+            " → ".join(f"`{step}`" for step in methodology["mathematical_research_cycle"]),
+            "",
+            "A route may stop at any intermediate object. In particular, a necessary consequence, reduction, finite certificate, or Lean declaration does not remove the final remaining-open proposition unless a checked theorem actually does so.",
+            "",
+            "### Public claim path",
+            "",
+            " → ".join(f"`{step}`" for step in methodology["public_claim_cycle"]),
+            "",
+            "This is the authority order for publication. Kernel acceptance precedes assumption review; intended meaning is reviewed before a public claim; authored exposition precedes generated projections; and the public checkout is the final reader-facing surface.",
+            "",
+        ]
+    )
+
     lines.extend(["## Working principles", ""])
     for group, heading in (("proving", "Proving"), ("publishing", "Publishing"), ("maintaining", "Maintaining")):
         lines.extend([f"### {heading}", ""])
@@ -551,6 +614,20 @@ def mutation_fixture_errors(claims: dict[str, Any], methodology: dict[str, Any])
     proposition_class["human_review"] = "on_trigger"
     proposition_class["review_triggers"] = ["claim_text_changed"]
     fixtures["semantic_change_review_downgraded"] = (claims, review_downgraded)
+
+    missing_import = deepcopy(methodology)
+    missing_import["imports_contracts"] = missing_import["imports_contracts"][:-1]
+    fixtures["authority_import_contract_removed"] = (claims, missing_import)
+
+    reordered_research = deepcopy(methodology)
+    reordered_research["mathematical_research_cycle"][1:3] = reversed(
+        reordered_research["mathematical_research_cycle"][1:3]
+    )
+    fixtures["mathematical_research_cycle_reordered"] = (claims, reordered_research)
+
+    skipped_review = deepcopy(methodology)
+    skipped_review["public_claim_cycle"].remove("reviewed_intended_meaning")
+    fixtures["public_claim_cycle_skips_review"] = (claims, skipped_review)
 
     if set(fixtures) != MUTATION_FIXTURE_IDS:
         raise AssertionError("mutation fixtures drifted from MUTATION_FIXTURE_IDS")
