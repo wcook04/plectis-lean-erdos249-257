@@ -26,6 +26,7 @@ METHODOLOGY_PATH = "docs/methodology.json"
 AGENT_ENTRY_PATH = "AGENTS.md"
 MAKEFILE_PATH = "paper/Makefile"
 REUSE_PATH = "REUSE.toml"
+MANUSCRIPT_LICENSE = "CC-BY-4.0"
 SCHEMA = "erdos249257-publication-contract/1"
 EVIDENCE_SCHEMA = "erdos249257-publication-evidence/1"
 ENTRY_SOURCE_SCHEMA = "erdos249257-publication-entry-source/1"
@@ -181,6 +182,23 @@ def reuse_manuscript_pdfs(data: dict[str, Any]) -> set[str]:
             ):
                 paths.add(path)
     return paths
+
+
+def manuscript_source_license_errors(path: str, text: str) -> list[str]:
+    """Require a registered manuscript source to declare the manuscript licence."""
+    header = "\n".join(text.splitlines()[:12])
+    expected = f"SPDX-License-Identifier: {MANUSCRIPT_LICENSE}"
+    if expected not in header:
+        return [
+            f"publication manuscript source {path!r} must declare "
+            f"{MANUSCRIPT_LICENSE} in its SPDX header"
+        ]
+    if "SPDX-License-Identifier: Apache-2.0" in header:
+        return [
+            f"publication manuscript source {path!r} must not use the "
+            "Apache-2.0 software licence"
+        ]
+    return []
 
 
 def normalize_latex_evidence(text: str) -> str:
@@ -899,6 +917,12 @@ def validate_publication_contract(
                     f"publication artifact {artifact_id!r} {digest_field} drifted: "
                     f"expected {artifact[digest_field]}, actual {actual}"
                 )
+        try:
+            source_text = reader.read_text(source)
+        except (FileNotFoundError, UnicodeError):
+            pass
+        else:
+            errors.extend(manuscript_source_license_errors(source, source_text))
         if "not_Lean_proof_authority" not in artifact["authority_posture"]:
             errors.append(
                 f"publication artifact {artifact_id!r} lost its Lean proof-authority boundary"
@@ -1114,6 +1138,34 @@ def mutation_fixture_failures(reader: RepositoryReader) -> list[str]:
     drift["artifacts"][0]["source_content_digest"] = "sha256:" + "0" * 64
     if not validate_publication_contract(reader, contract_override=drift):
         failures.append("publication_digest_drift")
+
+    source_license_drift = copy.deepcopy(contract)
+    gateway = next(
+        row
+        for row in source_license_drift["artifacts"]
+        if row["artifact_class"] == "mathematical_gateway"
+    )
+    source_path = gateway["source_path"]
+    original_source = reader.read_text(source_path)
+    mutated_source = original_source.replace(
+        f"SPDX-License-Identifier: {MANUSCRIPT_LICENSE}",
+        "SPDX-License-Identifier: Apache-2.0",
+        1,
+    )
+    if mutated_source == original_source:
+        failures.append("manuscript_source_license_fixture_anchor_missing")
+    else:
+        gateway["source_content_digest"] = sha256(mutated_source.encode("utf-8"))
+        overlay_reader = RepositoryReader(
+            reader.root,
+            reader.git_ref,
+            {source_path: mutated_source.encode("utf-8")},
+        )
+        if not validate_publication_contract(
+            overlay_reader,
+            contract_override=source_license_drift,
+        ):
+            failures.append("manuscript_source_relicensed_as_software")
 
     rejected = copy.deepcopy(contract)
     rejected["rejected_artifact_ids"].append("systems_case_study")
