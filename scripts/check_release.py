@@ -23,7 +23,9 @@ This script verifies that every other public surface agrees with it:
   7. Licensing: every licence named in REUSE.toml or an SPDX header has its
      text under LICENSES/.
   8. AGENTS.md routes agent harnesses through the public machine-readable paper
-     without weakening the proof or open-problem boundary.
+     without weakening the proof or open-problem boundary, and CONTRIBUTING.md
+     describes the cold-clone baseline-plus-adversarial program as a release
+     gate rather than an advisory diagnostic.
   9. Proof-trust guard: no sorry/admit/axiom or native evaluator in the
      Lean sources.
  10. The methodology source, generated root projection, claim-transition
@@ -41,6 +43,11 @@ import sys
 from pathlib import Path
 
 from methodology_contract import mutation_fixture_errors, render_markdown, validate_contract
+from publication_contract import (
+    RepositoryReader,
+    mutation_fixture_failures as publication_mutation_fixture_failures,
+    validate_publication_contract,
+)
 from query_corpus import paper_anchor_inventory
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -83,6 +90,27 @@ def file_digest(path: Path) -> str:
 
 def read(path: Path) -> str:
     return path.read_text(encoding="utf-8")
+
+
+def contributor_gate_posture_errors(contributing: str) -> list[str]:
+    """Reject contributor guidance that understates cold-reader validation."""
+    flat = " ".join(contributing.split())
+    errors: list[str] = []
+    if "combined baseline-plus-adversarial release-gate check" not in flat:
+        errors.append(
+            "CONTRIBUTING.md must identify the cold-clone adversarial program "
+            "as a release-gate check"
+        )
+    if "A failure therefore blocks the release gate" not in flat:
+        errors.append(
+            "CONTRIBUTING.md must state that cold-clone comprehension failures "
+            "block the release gate"
+        )
+    if "diagnostic (not a gate)" in flat or "does not block a release" in flat:
+        errors.append(
+            "CONTRIBUTING.md still describes cold-clone comprehension as advisory"
+        )
+    return errors
 
 
 def module_lines(
@@ -284,6 +312,28 @@ def main() -> int:
     data = json.loads(read(claims_path))
     check(data.get("schema") == "erdos249257-claims/3",
           "docs/claims.json must use schema erdos249257-claims/3")
+    publication_reader = RepositoryReader(ROOT)
+    publication_errors = validate_publication_contract(publication_reader)
+    check(
+        not publication_errors,
+        "publication artifact contract failed: " + "; ".join(publication_errors),
+    )
+    publication_fixture_failures = publication_mutation_fixture_failures(
+        publication_reader
+    )
+    check(
+        not publication_fixture_failures,
+        "publication artifact mutation fixtures stopped rejecting: "
+        + ", ".join(publication_fixture_failures),
+    )
+    if ERRORS:
+        print(
+            "check_release: "
+            f"{len(ERRORS)} publication-contract failure(s) across {CHECKS} checks"
+        )
+        for err in ERRORS:
+            print(f"  FAIL {err}")
+        return 1
     taxonomy = set(data["status_taxonomy"])
     release = data["release"]
     version, tag = release["version"], release["tag"]
@@ -780,6 +830,10 @@ def main() -> int:
           "AGENTS.md must preserve the public-projection provenance boundary")
     check("mathematical programme" in agents,
           "AGENTS.md must expose mathematical programme routes")
+
+    contributing = read(ROOT / "CONTRIBUTING.md")
+    contributing_errors = contributor_gate_posture_errors(contributing)
+    check(not contributing_errors, "; ".join(contributing_errors))
 
     methodology_check = subprocess.run(
         [sys.executable, str(ROOT / "scripts" / "build_methodology.py"), "--check"],

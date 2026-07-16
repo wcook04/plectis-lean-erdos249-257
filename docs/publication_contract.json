@@ -1,0 +1,115 @@
+{
+  "schema": "erdos249257-publication-contract/1",
+  "artifact_role": "canonical_publication_artifact_and_evidence_contract",
+  "authority_posture": "publication_metadata_and_evidence_boundary_not_Lean_proof_authority",
+  "coverage_contract": {
+    "build_manifest": "paper/Makefile::PAPERS",
+    "licence_manifest": "REUSE.toml::CC-BY-4.0",
+    "rule": "Every manuscript built by paper/Makefile and every root manuscript PDF licensed by REUSE.toml must appear exactly once in artifacts. A rejected artifact must not be built, licensed, or present as a shipped manuscript."
+  },
+  "artifacts": [
+    {
+      "id": "human_exposition",
+      "title": "Tail Certificates and Achievement-Set Geometry for Erdős Problems 249 and 257",
+      "artifact_class": "mathematical_gateway",
+      "source_path": "paper/erdos249-257-main-paper.tex",
+      "source_content_digest": "sha256:f7e3d442d2b9c4f91f885d421cf44a3827fac2d34e12c5a13ef49bb18bbe1013",
+      "rendered_path": "erdos249-257-main-paper.pdf",
+      "rendered_content_digest": "sha256:26d0262a3e026917cfc5757db4725f4b6e311d157bfd19c49cfa9c0ae333592e",
+      "authority_posture": "authored_mathematical_exposition_not_Lean_proof_authority",
+      "claim_scope": "Mathematical exposition of claims and open boundaries owned by docs/claims.json and checked against the pinned Lean source.",
+      "architecture_ref": "docs/claims.json::machine_readable_paper.publication_assembly.publication_architecture.canonical_gateway",
+      "entry_route_id": "follow_one_claim",
+      "validation": [
+        "python3 scripts/check_rendered_paper_boundary.py",
+        "python3 scripts/check_release.py"
+      ]
+    },
+    {
+      "id": "technical_companion",
+      "title": "Finite-Difference Certificates and a Phase-Separation Characterisation for Erdős Problem 249",
+      "artifact_class": "mathematical_companion",
+      "source_path": "paper/erdos249-transport-curvature-companion-note.tex",
+      "source_content_digest": "sha256:3d783ea71b84196bc7bb4d55c21ddae6afb41f97a3c7a691948591d44787c14b",
+      "rendered_path": "erdos249-transport-curvature-companion-note.pdf",
+      "rendered_content_digest": "sha256:4105b929fa04a2b8bc08228b064408268be0508dc707a0a490366bfd56d3cb65",
+      "authority_posture": "authored_mathematical_exposition_not_Lean_proof_authority",
+      "claim_scope": "Specialist mathematical exposition of registered transport, curvature, phase-separation, and scoped no-go claims.",
+      "architecture_ref": "docs/claims.json::machine_readable_paper.publication_assembly.publication_architecture.retained_companions",
+      "entry_route_id": "transport_curvature_programme",
+      "validation": [
+        "python3 scripts/check_rendered_paper_boundary.py",
+        "python3 scripts/check_release.py"
+      ]
+    },
+    {
+      "id": "systems_case_study",
+      "title": "Claim-Faithful Publication of a Formalised Mathematics Corpus",
+      "artifact_class": "systems_case_study",
+      "source_path": "paper/claim-faithful-publication-systems-paper.tex",
+      "source_content_digest": "sha256:f7ba2d8e600c8a00305c945530fbbb646a618b8ac27cb998bf23367d00900156",
+      "rendered_path": "claim-faithful-publication-systems-paper.pdf",
+      "rendered_content_digest": "sha256:cd03b30978fa5d5533cdcc92429159d08bd6f530e9998fdefc6462ab962654c6",
+      "authority_posture": "authored_systems_evidence_not_Lean_proof_authority",
+      "claim_scope": "A systems case study about publication controls, declared invariants, mutation evidence, and their limits. It makes no mathematical claim beyond the registered corpus boundaries.",
+      "architecture_ref": "docs/claims.json::machine_readable_paper.publication_assembly.publication_architecture.systems_case_studies",
+      "entry_route_id": "understand_publication_system",
+      "validation": [
+        "python3 scripts/check_publication_contract.py",
+        "python3 scripts/check_release.py"
+      ],
+      "evidence_boundary": {
+        "evaluation_checkpoint": "0e5aaf9b2f81912d477fa43b8a3bfa993155a68c",
+        "authored_mutation_count": 10,
+        "rejected_mutation_count": 9,
+        "escaped_mutation_id": "M8",
+        "post_repair_validation": "The intact baseline and the M8 corruption were rechecked after the missing boundary was declared.",
+        "post_repair_full_mutation_rerun": false,
+        "forbidden_inference": "Do not report a post-repair ten-of-ten result unless all ten mutations are rerun against the extended invariant set."
+      }
+    }
+  ],
+  "entrypoints": [
+    {
+      "id": "understand_publication_system",
+      "title": "Publication contract, release gate, and mutation evidence",
+      "intent": "Inspect how shipped papers, public claim strength, release checks, negative fixtures, and the M8 limitation are represented and validated without treating systems prose as mathematical proof authority.",
+      "discovery_terms": [
+        "claim faithful publication",
+        "publication contract case study",
+        "M8 mutation",
+        "reproduce the publication mutation study",
+        "how are shipped papers registered"
+      ],
+      "read": [
+        "docs/publication_contract.json",
+        "docs/orientation.json"
+      ],
+      "query_steps": [
+        "python3 scripts/query_corpus.py --publication-artifact systems_case_study",
+        "python3 scripts/query_corpus.py --artifact claim-faithful-publication-systems-paper.pdf"
+      ],
+      "authority_owners": [
+        "docs/publication_contract.json",
+        "docs/claims.json::machine_readable_paper.publication_assembly",
+        "scripts/check_release.py"
+      ],
+      "adjacent_handle_classes": [
+        "publication_artifact_id",
+        "artifact",
+        "digest",
+        "reading_route"
+      ]
+    }
+  ],
+  "rejected_artifact_ids": [
+    "additional_erdos249_companion"
+  ],
+  "reproducibility": {
+    "publication_contract_check": "python3 scripts/check_publication_contract.py",
+    "publication_contract_fixture_test": "python3 scripts/test_publication_artifact_contract.py",
+    "staged_snapshot_check": "python3 scripts/check_publication_contract.py --git-ref :",
+    "release_gate": "python3 scripts/check_release.py",
+    "paper_build": "make -C paper"
+  }
+}

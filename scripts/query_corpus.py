@@ -31,6 +31,17 @@ def load(rel: str) -> dict[str, Any]:
     return json.loads((ROOT / rel).read_text(encoding="utf-8"))
 
 
+def publication_contract() -> dict[str, Any]:
+    return load("docs/publication_contract.json")
+
+
+def all_entrypoints(claims: dict[str, Any]) -> list[dict[str, Any]]:
+    return [
+        *claims["machine_readable_paper"]["entrypoints"],
+        *publication_contract().get("entrypoints", []),
+    ]
+
+
 def formal_source_identity(claims: dict[str, Any]) -> dict[str, Any]:
     """Return the immutable Lean checkpoint that owns the claim registry."""
     release = claims["release"]
@@ -129,6 +140,44 @@ def artifact_packet(handle: str) -> dict[str, Any]:
         },
         "expansion": "docs/corpus_descriptor.json",
         "validation": "python3 scripts/build_corpus_descriptor.py --check",
+    }
+
+
+def publication_artifact_packet(artifact_id: str) -> dict[str, Any]:
+    contract = publication_contract()
+    artifact = next(
+        (row for row in contract["artifacts"] if row["id"] == artifact_id),
+        None,
+    )
+    if artifact is None:
+        raise KeyError(f"unknown publication artifact id: {artifact_id}")
+    identities = []
+    for variant in ("source", "rendered"):
+        path = artifact[f"{variant}_path"]
+        expected = artifact[f"{variant}_content_digest"]
+        actual = "sha256:" + hashlib.sha256((ROOT / path).read_bytes()).hexdigest()
+        identities.append(
+            {
+                "variant": variant,
+                "path": path,
+                "expected_content_digest": expected,
+                "current_content_digest": actual,
+                "status": "current" if actual == expected else "drifted",
+            }
+        )
+    return {
+        "kind": "publication_artifact",
+        "authority_posture": contract["authority_posture"],
+        "artifact": artifact,
+        "content_identities": identities,
+        "content_identity_status": (
+            "current"
+            if all(row["status"] == "current" for row in identities)
+            else "drifted"
+        ),
+        "coverage_contract": contract["coverage_contract"],
+        "reproducibility": contract["reproducibility"],
+        "validation": "python3 scripts/check_publication_contract.py",
     }
 
 
@@ -1246,7 +1295,40 @@ def search_packet(query: str, limit: int) -> dict[str, Any]:
                 )
             )
 
-    for row in claims["machine_readable_paper"]["entrypoints"]:
+    for artifact in publication_contract()["artifacts"]:
+        rank = search_rank(
+            query,
+            artifact["id"],
+            " ".join(
+                str(value)
+                for value in (
+                    artifact["title"],
+                    artifact["artifact_class"],
+                    artifact["claim_scope"],
+                    artifact["source_path"],
+                    artifact["rendered_path"],
+                    artifact.get("evidence_boundary"),
+                )
+                if value
+            ),
+        )
+        if rank is not None:
+            ranked.append(
+                (
+                    rank,
+                    f"publication_artifact:{artifact['id']}",
+                    {
+                        "kind": "publication_artifact",
+                        "id": artifact["id"],
+                        "title": artifact["title"],
+                        "artifact_class": artifact["artifact_class"],
+                        "source_path": artifact["source_path"],
+                        "rendered_path": artifact["rendered_path"],
+                    },
+                )
+            )
+
+    for row in all_entrypoints(claims):
         route_haystack = " ".join(
             str(value)
             for value in (
@@ -1298,7 +1380,7 @@ def search_packet(query: str, limit: int) -> dict[str, Any]:
         "results": results[:limit],
         "omitted_match_count": max(0, len(results) - limit),
         "limit": limit,
-        "next": "Use the typed handle with --claim, --status, --paper-anchor, --open, --declaration, --source, --module, --connections, --artifact, --route, or --publication-family.",
+        "next": "Use the typed handle with --claim, --status, --paper-anchor, --open, --declaration, --source, --module, --connections, --artifact, --publication-artifact, --route, or --publication-family.",
     }
 
 
@@ -1344,7 +1426,7 @@ def route_packet(route_id: str) -> dict[str, Any]:
     route = next(
         (
             row
-            for row in claims["machine_readable_paper"]["entrypoints"]
+            for row in all_entrypoints(claims)
             if row["id"] == route_id
         ),
         None,
@@ -1356,7 +1438,7 @@ def route_packet(route_id: str) -> dict[str, Any]:
         row["id"]: row for row in claims["remaining_open_propositions"]
     }
     route_index = {
-        row["id"]: row for row in claims["machine_readable_paper"]["entrypoints"]
+        row["id"]: row for row in all_entrypoints(claims)
     }
     packet = {
         "kind": "reading_route",
@@ -1512,6 +1594,13 @@ def render_card(packet: dict[str, Any]) -> str:
             f"artifact {match['artifact_handle']} | {match['artifact_kind']} "
             f"| digest={match['content_digest']} | matches={len(packet['matches'])}"
         )
+    if kind == "publication_artifact":
+        artifact = packet["artifact"]
+        return (
+            f"publication artifact {artifact['id']} | {artifact['artifact_class']} "
+            f"| identity={packet['content_identity_status']} "
+            f"| source={artifact['source_path']} | rendered={artifact['rendered_path']}"
+        )
     if kind == "open_proposition":
         proposition = packet["open_proposition"]
         return (
@@ -1607,6 +1696,7 @@ def main() -> int:
     group.add_argument("--declaration", metavar="NAME")
     group.add_argument("--source", metavar="MODULE_DOT_LEAN:LINE")
     group.add_argument("--artifact", metavar="PATH_OR_SHA256")
+    group.add_argument("--publication-artifact", metavar="ID")
     group.add_argument("--module", metavar="PATH_OR_ID")
     group.add_argument("--connections", metavar="MODULE_OR_DECLARATION")
     group.add_argument("--route", metavar="ID")
@@ -1635,6 +1725,8 @@ def main() -> int:
             packet = source_coordinate_packet(args.source, args.limit)
         elif args.artifact:
             packet = artifact_packet(args.artifact)
+        elif args.publication_artifact:
+            packet = publication_artifact_packet(args.publication_artifact)
         elif args.module:
             packet = module_packet(args.module, args.limit)
         elif args.connections:

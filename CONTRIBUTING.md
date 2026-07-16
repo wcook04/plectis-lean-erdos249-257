@@ -51,12 +51,15 @@ python3 scripts/test_methodology_contract.py  # adversarial claim-transition fix
 python3 -m pip install cffconvert reuse  # once, for metadata and licence checks
 python3 scripts/check_metadata.py  # CITATION.cff schema validation (same command as CI)
 reuse lint                         # licence validation
-python3 scripts/check_cold_clone_comprehension.py  # diagnostic (not a gate): cold-clone readability
-python3 scripts/test_cold_clone_comprehension.py  # adversarial self-test for the diagnostic
+python3 scripts/check_cold_clone_comprehension.py --quick  # fast committed-surface readability check
+python3 scripts/check_cold_clone_comprehension.py  # standalone bounded cold-reader baseline
+python3 scripts/test_cold_clone_comprehension.py  # combined baseline-plus-adversarial release-gate check
 python3 scripts/test_query_corpus.py  # bounded claim/declaration/module/route queries
 ```
 
-CI runs the build and release-surface checks on every push. The cold-clone
-comprehension diagnostic is advisory: it flags when a prose or machine surface
-has dropped one of the proved/open distinctions, but it does not block a
-release.
+CI runs the build and release-surface checks on every push.
+`scripts/check_release.py` executes the bounded query suite and the combined
+cold-clone baseline-plus-adversarial program. A failure therefore blocks the
+release gate. The standalone quick and full comprehension commands remain
+useful while editing because they produce narrower readability receipts
+without running the entire release check.

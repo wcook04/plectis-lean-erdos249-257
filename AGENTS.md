@@ -35,16 +35,21 @@ evidence of that workflow. They do not create hidden proof authority.
    authored papers and the paper-to-Lean source-sigil crosswalk. These authored
    surfaces remain distinct from Lean proof authority. The release gate keeps
    this registration envelope below 64 KB.
-5. Read `SCOPE.md` before describing what the project proves. Erdős #249 and
+5. Read `docs/publication_contract.json` for the exact inventory of shipped
+   manuscripts and PDFs, their content identities, their evidence boundaries,
+   and their entry routes. It owns publication-artifact coverage, not
+   mathematical claim status. In particular, the systems case study is
+   evidence about release controls and does not acquire Lean proof authority.
+6. Read `SCOPE.md` before describing what the project proves. Erdős #249 and
    the universal form of #257 remain open.
-6. For one claim, follow its `paper_label` into
+7. For one claim, follow its `paper_label` into
    `paper/erdos249-257-main-paper.tex`, then follow its `declarations` to the
    named Lean source coordinates.
-7. Use `docs/declaration_atlas.json` when you need the exhaustive mathematical
+8. Use `docs/declaration_atlas.json` when you need the exhaustive mathematical
    scale: every declaration, signature excerpt, module, import edge, generated
    certificate marker, and principal-claim link. It is a generated navigation
    projection; drill back to Lean before trusting a statement.
-8. Use `Erdos249257.lean` for the supported root import and exact package
+9. Use `Erdos249257.lean` for the supported root import and exact package
    topology. Use `docs/SOURCE_MAP.md` for intention-based routes and
    `docs/WAVE_INDEX.md` for mathematical chronology.
 
@@ -67,6 +72,8 @@ handle:
   for checked source;
 - `--artifact <path_or_sha256>` for a registered paper, PDF, JSON owner, or
   content identity;
+- `--publication-artifact <id>` for a shipped manuscript's typed role,
+  expected digests, current drift status, evidence boundary, and validation;
 - `--connections <module_or_declaration> --query "<task>"` after choosing a
   source handle; and
 - `--search "what remains open for 257" --limit 10` (or another short natural
@@ -112,6 +119,8 @@ python3 scripts/test_methodology_contract.py
 python3 scripts/build_module_graph.py --check
 python3 scripts/refresh_source_coordinates.py --check
 python3 scripts/build_corpus_descriptor.py --check
+python3 scripts/check_publication_contract.py
+python3 scripts/test_publication_artifact_contract.py
 python3 scripts/test_query_corpus.py --programme-routes-only
 python3 scripts/test_query_corpus.py
 ```
