@@ -899,6 +899,23 @@
           }
         ]
       },
+      "editorial_state": {
+        "schema": "erdos249257-editorial-state/1",
+        "scope": "continuous_whole_main_paper_exposition",
+        "current_priority": {
+          "id": "whole_paper_final_validation_and_release_sync",
+          "surface": "paper/erdos249-257-main-paper.tex",
+          "defect_class": "the editorial reconstruction is complete and must now be validated as one synchronized source, PDF, claim-coordinate, orientation, and publication-contract wave",
+          "statement": "Run the full paper and corpus validation stack, confirm incoming references for Appendices A–E, isolate unrelated concurrent drift, and bind the verified wave in a scoped commit."
+        },
+        "last_verified_wave": {
+          "id": "whole_paper_hierarchy_and_vocabulary_reconstruction",
+          "surface": "paper/erdos249-257-main-paper.tex",
+          "result": "Sections 4, 5, and 8 are theorem-led; supporting inventories live in referenced Appendices A, C, and D; Appendices A–C use mathematical rather than development-role vocabulary; the abstract, introduction, exact-spines overview, method section, verification statement, and conclusion now agree on the exact proved, finite, conditional, and open statuses."
+        },
+        "active_inconsistencies": [],
+        "blocked_decisions": []
+      },
       "contribution_families": [
         {
           "id": "classical_full_support_and_named_257_families",
@@ -7470,7 +7487,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 1962
+        "line": 2285
       }
     },
     {
@@ -7481,7 +7498,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 1971
+        "line": 2296
       }
     },
     {
@@ -7492,7 +7509,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 1979
+        "line": 2302
       }
     }
   ],

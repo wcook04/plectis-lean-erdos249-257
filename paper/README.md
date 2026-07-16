@@ -9,11 +9,12 @@ A guide to this repository for mathematicians who do not read Lean.
 proves, cites, and leaves open. Every formal statement links to the exact source
 line on GitHub, pinned to the formal-source checkpoint named in
 `docs/claims.json`, so a reader can go from a sentence of prose to the checked
-proof in one click. The visible link text is
-intentionally quiet; the file, line, and declaration remain in each link target
-and are verified against the released source by `scripts/check_release.py`. The
-document adds no mathematics beyond what the Lean sources contain; the proofs
-are the sources it links to.
+proof in one click. The visible link text is theorem-specific: important
+anchors use short authored mathematical labels, while the default links turn
+the exact declaration name into a spaced, lower-case phrase. The file, line,
+and declaration remain in each link target and are verified against the
+released source by `scripts/check_release.py`. The document adds no mathematics
+beyond what the Lean sources contain; the proofs are the sources it links to.
 
 The manuscript layer (this `.tex` and the rendered PDF) is licensed CC-BY-4.0;
 see `REUSE.toml` at the repository root.

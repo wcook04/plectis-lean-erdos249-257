@@ -500,6 +500,54 @@ def main() -> int:
                 for row in machine_paper["paper"].get("companion_sources", [])
             ), f"retained publication companion is not registered: "
                f"{companion.get('source')}")
+        editorial_state = publication_assembly.get("editorial_state")
+        check(isinstance(editorial_state, dict),
+              "publication_assembly must own an editorial_state")
+        if isinstance(editorial_state, dict):
+            required_editorial_fields = {
+                "schema",
+                "scope",
+                "current_priority",
+                "last_verified_wave",
+                "active_inconsistencies",
+                "blocked_decisions",
+            }
+            check(not (required_editorial_fields - set(editorial_state)),
+                  "publication editorial_state lacks fields: "
+                  f"{sorted(required_editorial_fields - set(editorial_state))}")
+            check(editorial_state.get("schema") == "erdos249257-editorial-state/1",
+                  "publication editorial_state has an unsupported schema")
+            for field in ("current_priority", "last_verified_wave"):
+                row = editorial_state.get(field, {})
+                check(isinstance(row, dict) and bool(row.get("id"))
+                      and bool(row.get("surface")),
+                      f"publication editorial_state {field} lacks an id or surface")
+                owner_path = str(row.get("surface", "")).split("::", 1)[0]
+                check((ROOT / owner_path).is_file(),
+                      f"publication editorial_state {field} owner does not exist: "
+                      f"{owner_path}")
+            inconsistencies = editorial_state.get("active_inconsistencies", [])
+            check(isinstance(inconsistencies, list),
+                  "publication active_inconsistencies must be a list")
+            inconsistency_ids = [
+                row.get("id") for row in inconsistencies if isinstance(row, dict)
+            ]
+            check(len(inconsistency_ids) == len(set(inconsistency_ids)),
+                  "publication active_inconsistencies contain duplicate ids")
+            for row in inconsistencies:
+                check(isinstance(row, dict)
+                      and bool(row.get("id"))
+                      and row.get("severity") in {"high", "medium", "low"}
+                      and bool(row.get("surface"))
+                      and bool(row.get("statement"))
+                      and bool(row.get("next_action")),
+                      "publication active inconsistency lacks a typed complete record")
+                owner_path = str(row.get("surface", "")).split("::", 1)[0]
+                check((ROOT / owner_path).is_file(),
+                      f"publication active inconsistency owner does not exist: "
+                      f"{owner_path}")
+            check(isinstance(editorial_state.get("blocked_decisions"), list),
+                  "publication blocked_decisions must be a list")
     route_ids = [route.get("id") for route in machine_paper["entrypoints"]]
     check(len(route_ids) == len(set(route_ids)),
           "machine-readable-paper entrypoints contain duplicate route ids")
@@ -1075,6 +1123,44 @@ def main() -> int:
     ]
     check(orientation.get("mathematical_programmes") == expected_programmes,
           "orientation mathematical programmes drifted from machine-readable-paper entrypoints")
+    publication_assembly = machine_paper["publication_assembly"]
+    architecture = publication_assembly["publication_architecture"]
+    expected_editorial_architecture = {
+        "canonical_gateway": {
+            key: architecture["canonical_gateway"][key]
+            for key in ("source", "decision")
+        },
+        "retained_companions": [
+            {key: companion[key] for key in ("source", "decision")}
+            for companion in architecture.get("retained_companions", [])
+        ],
+        "qualified_future_companion": {
+            key: architecture["qualified_future_companion"][key]
+            for key in ("id", "decision")
+        },
+    }
+    check(orientation.get("editorial_architecture")
+          == expected_editorial_architecture,
+          "orientation editorial architecture drifted from publication_assembly")
+    editorial_state = publication_assembly["editorial_state"]
+    expected_editorial_state = {
+        "current_priority": editorial_state["current_priority"],
+        "active_inconsistencies": editorial_state["active_inconsistencies"],
+        "blocked_decisions": editorial_state["blocked_decisions"],
+    }
+    check(orientation.get("editorial_state") == expected_editorial_state,
+          "orientation editorial state drifted from publication_assembly")
+    expected_source_revision = {
+        "formal_source_ref": data["release"]["formal_source"]["ref"],
+        "committed_navigation_snapshot": descriptor["identity"][
+            "navigation_snapshot"
+        ]["commit"],
+        "main_paper_source_digest": file_digest(
+            ROOT / "paper" / "erdos249-257-main-paper.tex"
+        ),
+    }
+    check(orientation.get("source_revision") == expected_source_revision,
+          "orientation source revision is older than its canonical claims or paper")
     check(len(orientation_path.read_bytes()) <= 32_000,
           "orientation JSON exceeds the 32 KB bounded first-read budget")
     for target in orientation.get("drilldowns", {}).values():

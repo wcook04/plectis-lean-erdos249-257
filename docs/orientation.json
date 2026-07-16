@@ -56,7 +56,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "Erd\\H{o}s \\#249",
-    "line": 1962
+    "line": 2285
    }
   },
   {
@@ -67,7 +67,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "unbounded certificate supply",
-    "line": 1971
+    "line": 2296
    }
   },
   {
@@ -78,7 +78,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "universal Erd\\H{o}s \\#257",
-    "line": 1979
+    "line": 2302
    }
   }
  ],
@@ -523,6 +523,37 @@
    ]
   }
  ],
+ "editorial_architecture": {
+  "canonical_gateway": {
+   "source": "paper/erdos249-257-main-paper.tex",
+   "decision": "retain_and_reconstruct"
+  },
+  "retained_companions": [
+   {
+    "source": "paper/erdos249-transport-curvature-companion-note.tex",
+    "decision": "retain_and_rebuild"
+   }
+  ],
+  "qualified_future_companion": {
+   "id": "erdos257_half_value_carry_companion",
+   "decision": "qualified_but_not_created_in_this_wave"
+  }
+ },
+ "editorial_state": {
+  "current_priority": {
+   "id": "whole_paper_final_validation_and_release_sync",
+   "surface": "paper/erdos249-257-main-paper.tex",
+   "defect_class": "the editorial reconstruction is complete and must now be validated as one synchronized source, PDF, claim-coordinate, orientation, and publication-contract wave",
+   "statement": "Run the full paper and corpus validation stack, confirm incoming references for Appendices A–E, isolate unrelated concurrent drift, and bind the verified wave in a scoped commit."
+  },
+  "active_inconsistencies": [],
+  "blocked_decisions": []
+ },
+ "source_revision": {
+  "formal_source_ref": "a16aa24af5236b6508a34b8a4c4b41fdcf620a98",
+  "committed_navigation_snapshot": "0dc6d69b0fd9de2f9710e4c57385aad617948c1b",
+  "main_paper_source_digest": "sha256:96193e323e9a7c616ef564715434434ef08ab9eabccbc0dd94323e9cefc596ea"
+ },
  "reading_routes": [
   {
    "id": "instant_orientation",

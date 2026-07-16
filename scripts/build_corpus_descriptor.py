@@ -112,6 +112,16 @@ def build_orientation(claims: dict[str, Any], atlas: dict[str, Any]) -> dict[str
         principal_claims.append(row)
 
     machine_paper = claims["machine_readable_paper"]
+    publication_assembly = machine_paper["publication_assembly"]
+    navigation_commit = git(
+        "log",
+        "-1",
+        "--format=%H",
+        "--",
+        "docs/claims.json",
+        "docs/declaration_atlas.json",
+        "docs/methodology.json",
+    )
     # The runnable per-route command is derivable from the id (see the
     # ``queries`` section); storing it per row would spend first-contact
     # budget on repetition.
@@ -140,6 +150,27 @@ def build_orientation(claims: dict[str, Any], atlas: dict[str, Any]) -> dict[str
         for route in machine_paper["entrypoints"]
         if route.get("route_kind") == "mathematical_programme"
     ]
+    architecture = publication_assembly["publication_architecture"]
+    editorial_architecture = {
+        "canonical_gateway": {
+            key: architecture["canonical_gateway"][key]
+            for key in ("source", "decision")
+        },
+        "retained_companions": [
+            {key: companion[key] for key in ("source", "decision")}
+            for companion in architecture.get("retained_companions", [])
+        ],
+        "qualified_future_companion": {
+            key: architecture["qualified_future_companion"][key]
+            for key in ("id", "decision")
+        },
+    }
+    state = publication_assembly["editorial_state"]
+    editorial_state = {
+        "current_priority": state["current_priority"],
+        "active_inconsistencies": state["active_inconsistencies"],
+        "blocked_decisions": state["blocked_decisions"],
+    }
     return {
         "schema": "erdos249257-orientation/1",
         "artifact_role": "bounded_first_read_navigation_projection",
@@ -159,6 +190,13 @@ def build_orientation(claims: dict[str, Any], atlas: dict[str, Any]) -> dict[str
         "non_claims": claims["non_claims"],
         "principal_claims": principal_claims,
         "mathematical_programmes": mathematical_programmes,
+        "editorial_architecture": editorial_architecture,
+        "editorial_state": editorial_state,
+        "source_revision": {
+            "formal_source_ref": claims["release"]["formal_source"]["ref"],
+            "committed_navigation_snapshot": navigation_commit,
+            "main_paper_source_digest": file_digest(MAIN_PAPER_TEX),
+        },
         "reading_routes": reading_routes,
         "drilldowns": {
             "exact_claims_and_argument_graph": "docs/claims.json",

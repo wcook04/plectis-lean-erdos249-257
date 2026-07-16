@@ -44,7 +44,7 @@ FIRST_MINUTE_CONTRACT = {
     "erdos249-257-main-paper.pdf": {
         (1, 1): (
             "q > q0",
-            "classical full-support theorem",
+            "full support in every base",
             "would refute the universal statement",
             "neither problem is settled",
             "an unbounded certificate supply",
@@ -54,7 +54,7 @@ FIRST_MINUTE_CONTRACT = {
             "an exact certificate normal form",
             "the exact half-value counterexample spine",
             "a finite normalized support cannot have value 1/2",
-            "no cofinal harmonic saving is proved",
+            "no unbounded supply is proved",
         ),
     },
     "erdos249-transport-curvature-companion-note.pdf": {
@@ -99,12 +99,20 @@ def source_errors(path: Path) -> list[str]:
 
     if r"\newcommand{\sourceglyph}" in text:
         errors.append("obsolete source-glyph definition is still present")
+    gateway = path.name == "erdos249-257-main-paper.tex"
     for macro in ("lref", "lrefx"):
         definitions = re.findall(
             rf"\\newcommand\{{\\{macro}\}}.*$", text, flags=re.M
         )
-        if definitions and any("{Lean proof}" not in row for row in definitions):
+        if gateway:
+            if definitions and any(r"\leanlabel{#3}" not in row for row in definitions):
+                errors.append(
+                    f"\\{macro} does not print its theorem-specific declaration label"
+                )
+        elif definitions and any("{Lean proof}" not in row for row in definitions):
             errors.append(f"\\{macro} does not print the textual fallback 'Lean proof'")
+    if gateway and r"\newcommand{\leanlabel}" not in text:
+        errors.append(r"\leanlabel is missing from the gateway paper")
     lword_definitions = re.findall(r"\\newcommand\{\\lword\}.*$", text, flags=re.M)
     if lword_definitions and any("{#4}" not in row for row in lword_definitions):
         errors.append(r"\lword does not print its semantic label")

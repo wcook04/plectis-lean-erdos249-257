@@ -348,7 +348,7 @@ def validate_gateway_opening(paper: str) -> None:
         "exact_residuals": [
             ["An unbounded certificate supply"],
             ["cofinal false terminals"],
-            ["the unresolved middle-tail estimate"],
+            ["two final-skip obligations"],
         ],
         "common_architecture": [
             ["tail and carry identities separate exact finite arithmetic"],
