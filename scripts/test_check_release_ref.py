@@ -39,10 +39,10 @@ def gate_source(*, exit_code: int, summary: str) -> str:
     )
 
 
-def root_closure_source(*, exit_code: int) -> str:
+def auxiliary_gate_source(*, label: str, exit_code: int) -> str:
     return (
         "#!/usr/bin/env python3\n"
-        "print('test_root_import_closure: synthetic root census')\n"
+        f"print({label!r})\n"
         f"raise SystemExit({exit_code})\n"
     )
 
@@ -65,7 +65,17 @@ def main() -> int:
                 encoding="utf-8",
             )
             (root / "scripts" / "test_root_import_closure.py").write_text(
-                root_closure_source(exit_code=0),
+                auxiliary_gate_source(
+                    label="test_root_import_closure: synthetic root census",
+                    exit_code=0,
+                ),
+                encoding="utf-8",
+            )
+            (root / "scripts" / "test_release_source_identity.py").write_text(
+                auxiliary_gate_source(
+                    label="test_release_source_identity: synthetic source adversary",
+                    exit_code=0,
+                ),
                 encoding="utf-8",
             )
             git(root, "add", ".")
@@ -124,11 +134,15 @@ def main() -> int:
             assert passed["release_commands"] == [
                 ["python3", "scripts/check_release.py"],
                 ["python3", "scripts/test_root_import_closure.py"],
+                ["python3", "scripts/test_release_source_identity.py"],
             ]
-            assert [row["exit_code"] for row in passed["gate_results"]] == [0, 0]
+            assert [row["exit_code"] for row in passed["gate_results"]] == [0, 0, 0]
 
             (root / "scripts" / "test_root_import_closure.py").write_text(
-                root_closure_source(exit_code=9),
+                auxiliary_gate_source(
+                    label="test_root_import_closure: synthetic root census",
+                    exit_code=9,
+                ),
                 encoding="utf-8",
             )
             root_failure_commit = commit_path(
@@ -147,13 +161,55 @@ def main() -> int:
             assert "synthetic root census" in root_failed["stdout_tail"]
 
             (root / "scripts" / "test_root_import_closure.py").write_text(
-                root_closure_source(exit_code=0),
+                auxiliary_gate_source(
+                    label="test_root_import_closure: synthetic root census",
+                    exit_code=0,
+                ),
                 encoding="utf-8",
             )
             commit_path(
                 root,
                 "scripts/test_root_import_closure.py",
                 "restore passing root closure",
+            )
+
+            (root / "scripts" / "test_release_source_identity.py").write_text(
+                auxiliary_gate_source(
+                    label="test_release_source_identity: synthetic source adversary",
+                    exit_code=11,
+                ),
+                encoding="utf-8",
+            )
+            source_failure_commit = commit_path(
+                root,
+                "scripts/test_release_source_identity.py",
+                "failing source identity snapshot",
+            )
+            source_failed, source_failed_exit = check_release_ref.validate_ref(
+                source_failure_commit,
+                timeout_seconds=30,
+                probe_only=False,
+            )
+            assert source_failed_exit == 11
+            assert source_failed["status"] == "failed"
+            assert [row["exit_code"] for row in source_failed["gate_results"]] == [
+                0,
+                0,
+                11,
+            ]
+            assert "synthetic source adversary" in source_failed["stdout_tail"]
+
+            (root / "scripts" / "test_release_source_identity.py").write_text(
+                auxiliary_gate_source(
+                    label="test_release_source_identity: synthetic source adversary",
+                    exit_code=0,
+                ),
+                encoding="utf-8",
+            )
+            commit_path(
+                root,
+                "scripts/test_release_source_identity.py",
+                "restore passing source identity",
             )
 
             (root / "scripts" / "check_release.py").write_text(
@@ -226,8 +282,8 @@ def main() -> int:
 
     print(
         "test_check_release_ref: caller dirt excluded, exact commits selected, "
-        "dirty paths bounded, root disk census enforced, failing gate exit "
-        "preserved, and timeout receipt serialized"
+        "dirty paths bounded, root disk census and immutable source adversary "
+        "enforced, failing gate exit preserved, and timeout receipt serialized"
     )
     return 0
 
