@@ -877,6 +877,14 @@
             "thesis": "Affine Möbius-channel annihilation, finite-difference certificates, an exact phase-separation characterisation, and scoped local countermodels for Erdős Problem 249."
           }
         ],
+        "systems_case_studies": [
+          {
+            "id": "claim_faithful_publication_systems_paper",
+            "source": "paper/claim-faithful-publication-systems-paper.tex",
+            "decision": "retain_as_separate_systems_case_study",
+            "thesis": "A release-time publication contract, its mutation-tested detectors, the M8 enumeration failure, and the exact boundary between declared checks and unreviewed meaning."
+          }
+        ],
         "qualified_future_companion": {
           "id": "erdos257_half_value_carry_companion",
           "decision": "qualified_but_not_created_in_this_wave",
@@ -888,11 +896,6 @@
             "id": "additional_erdos249_companion",
             "decision": "do_not_create",
             "reason": "The certificate and diagonal-pincer material is the mathematical centre of the gateway; the retained transport paper already owns the distinct specialist #249 thesis."
-          },
-          {
-            "id": "system_or_methodology_paper",
-            "decision": "do_not_create",
-            "reason": "Provenance, release authority, and workflow belong in methodology and reference surfaces unless a separate reproducible-research theorem and external comparison are established."
           }
         ]
       },
