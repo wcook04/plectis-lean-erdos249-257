@@ -15,9 +15,16 @@ IMPORT_RE = re.compile(r"^import (Erdos249257(?:\.[A-Za-z0-9_]+)+)\s*$", re.M)
 
 
 def closure_errors(nodes: list[dict[str, object]], root_imports: list[str]) -> list[str]:
-    """Return missing-edge and orphan errors for a public import graph."""
+    """Return identity, missing-edge, and orphan errors for a public import graph."""
+    module_ids = [str(node["id"]) for node in nodes]
+    duplicate_ids = sorted(
+        module_id for module_id in set(module_ids) if module_ids.count(module_id) > 1
+    )
+    errors = [
+        f"machine-readable module graph contains duplicate id: {module_id}"
+        for module_id in duplicate_ids
+    ]
     imports_by_id = {str(node["id"]): list(node["imports"]) for node in nodes}
-    errors: list[str] = []
     for importer, imports in [("Erdos249257", root_imports), *imports_by_id.items()]:
         for imported in imports:
             if imported not in imports_by_id:
@@ -51,6 +58,14 @@ def check_fixtures() -> None:
     missing = [{"id": "Erdos249257.A", "imports": ["Erdos249257.Missing"]}]
     assert closure_errors(missing, ["Erdos249257.A"]) == [
         "Erdos249257.A imports unknown public module Erdos249257.Missing"
+    ]
+
+    duplicate = [
+        {"id": "Erdos249257.A", "imports": []},
+        {"id": "Erdos249257.A", "imports": []},
+    ]
+    assert closure_errors(duplicate, ["Erdos249257.A"]) == [
+        "machine-readable module graph contains duplicate id: Erdos249257.A"
     ]
 
 
