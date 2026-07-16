@@ -103,6 +103,15 @@ def main() -> int:
                 "untracked.txt",
             }
             assert not probe["caller_worktree_dirty_paths_truncated"]
+            assert probe["gate_coverage"] == {
+                "configured_gate_count": 3,
+                "started_gate_count": 0,
+                "completed_gate_count": 0,
+                "failed_gate_count": 0,
+                "timed_out_gate_count": 0,
+                "all_configured_gates_completed": False,
+                "not_run_commands": probe["release_commands"],
+            }
 
             many_dirty_paths = [
                 f"untracked-{index:03d}.txt"
@@ -138,6 +147,15 @@ def main() -> int:
             ]
             assert [row["exit_code"] for row in passed["gate_results"]] == [0, 0, 0]
             assert passed["failed_gate_count"] == 0
+            assert passed["gate_coverage"] == {
+                "configured_gate_count": 3,
+                "started_gate_count": 3,
+                "completed_gate_count": 3,
+                "failed_gate_count": 0,
+                "timed_out_gate_count": 0,
+                "all_configured_gates_completed": True,
+                "not_run_commands": [],
+            }
 
             (root / "scripts" / "test_root_import_closure.py").write_text(
                 auxiliary_gate_source(
@@ -164,6 +182,9 @@ def main() -> int:
                 0,
             ]
             assert root_failed["failed_gate_count"] == 1
+            assert root_failed["gate_coverage"]["completed_gate_count"] == 3
+            assert root_failed["gate_coverage"]["failed_gate_count"] == 1
+            assert root_failed["gate_coverage"]["all_configured_gates_completed"]
             assert "synthetic root census" in root_failed["stdout_tail"]
             assert "synthetic source adversary" in root_failed["stdout_tail"]
 
@@ -285,6 +306,19 @@ def main() -> int:
                 "python3",
                 "scripts/check_release.py",
             ]
+            assert timed_out["failed_gate_count"] == 0
+            assert timed_out["gate_coverage"] == {
+                "configured_gate_count": 3,
+                "started_gate_count": 1,
+                "completed_gate_count": 0,
+                "failed_gate_count": 0,
+                "timed_out_gate_count": 1,
+                "all_configured_gates_completed": False,
+                "not_run_commands": [
+                    ["python3", "scripts/test_root_import_closure.py"],
+                    ["python3", "scripts/test_release_source_identity.py"],
+                ],
+            }
             assert "release gate started" in timed_out["stdout_tail"]
 
             try:
@@ -300,7 +334,7 @@ def main() -> int:
         "test_check_release_ref: caller dirt excluded, exact commits selected, "
         "dirty paths bounded, root disk census and immutable source adversary "
         "always reported, first failing gate exit preserved, and timeout receipt "
-        "serialized"
+        "coverage serialized"
     )
     return 0
 

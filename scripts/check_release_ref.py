@@ -159,6 +159,33 @@ def receipt_base(ref: str, commit: str, caller_dirty_paths: list[str]) -> dict[s
     }
 
 
+def gate_coverage(gate_results: list[dict[str, Any]]) -> dict[str, Any]:
+    """Summarize which configured gates started, completed, or remained unrun."""
+    completed_gate_count = sum(
+        result.get("exit_code") is not None for result in gate_results
+    )
+    failed_gate_count = sum(
+        result.get("exit_code") not in (None, 0) for result in gate_results
+    )
+    timed_out_gate_count = sum(
+        result.get("status") == "timeout" for result in gate_results
+    )
+    return {
+        "configured_gate_count": len(RELEASE_COMMANDS),
+        "started_gate_count": len(gate_results),
+        "completed_gate_count": completed_gate_count,
+        "failed_gate_count": failed_gate_count,
+        "timed_out_gate_count": timed_out_gate_count,
+        "all_configured_gates_completed": (
+            completed_gate_count == len(RELEASE_COMMANDS)
+            and timed_out_gate_count == 0
+        ),
+        "not_run_commands": [
+            list(command) for command in RELEASE_COMMANDS[len(gate_results) :]
+        ],
+    }
+
+
 def validate_ref(
     ref: str,
     *,
@@ -185,6 +212,7 @@ def validate_ref(
                     "completed_at": datetime.now(timezone.utc).isoformat(),
                     "wall_time_seconds": elapsed,
                     "gate_exit_code": None,
+                    "gate_coverage": gate_coverage([]),
                 },
                 0,
             )
@@ -237,6 +265,7 @@ def validate_ref(
                     "gate_exit_code": exit_code,
                     "gate_results": gate_results,
                     "failed_gate_count": len(failed_results),
+                    "gate_coverage": gate_coverage(gate_results),
                     **summary,
                     "stdout_tail": bounded_tail(stdout),
                     "stderr_tail": bounded_tail(stderr),
@@ -271,6 +300,11 @@ def validate_ref(
                         list(active_command) if active_command is not None else None
                     ),
                     "gate_results": gate_results,
+                    "failed_gate_count": sum(
+                        result.get("exit_code") not in (None, 0)
+                        for result in gate_results
+                    ),
+                    "gate_coverage": gate_coverage(gate_results),
                     "reported_check_count": None,
                     "reported_release": None,
                     "stdout_tail": bounded_tail(
