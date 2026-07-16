@@ -132,6 +132,7 @@ python3 scripts/check_publication_contract.py
 python3 scripts/test_publication_artifact_contract.py
 python3 scripts/run_publication_mutations.py --verify-operators
 python3 scripts/test_query_corpus.py --programme-routes-only
+python3 scripts/test_status_question_search.py
 python3 scripts/test_query_corpus.py
 ```
 

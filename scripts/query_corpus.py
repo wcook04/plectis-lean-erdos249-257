@@ -14,6 +14,7 @@ import hashlib
 import json
 import re
 import sys
+import unicodedata
 from functools import lru_cache
 from pathlib import Path
 from typing import Any
@@ -1084,10 +1085,12 @@ SEARCH_STOP_WORDS = frozenset(
         "as",
         "at",
         "be",
+        "been",
         "close",
         "for",
         "from",
         "how",
+        "has",
         "in",
         "is",
         "it",
@@ -1102,19 +1105,50 @@ SEARCH_STOP_WORDS = frozenset(
     }
 )
 
+SEARCH_TERM_ALIASES = {
+    "open": "resolution_status",
+    "prove": "resolution_status",
+    "proved": "resolution_status",
+    "resolve": "resolution_status",
+    "resolved": "resolution_status",
+    "settle": "resolution_status",
+    "settled": "resolution_status",
+    "solution": "resolution_status",
+    "solve": "resolution_status",
+    "solved": "resolution_status",
+    "unresolved": "resolution_status",
+}
+
 
 def search_terms(value: str) -> set[str]:
     """Return stable lexical terms for bounded natural-language fallback."""
     terms: set[str] = set()
-    for token in re.findall(r"[a-z0-9]+", value.casefold()):
+    folded = "".join(
+        character
+        for character in unicodedata.normalize("NFKD", value.casefold())
+        if not unicodedata.combining(character)
+    )
+    for token in re.findall(r"[a-z0-9]+", folded):
         if token in SEARCH_STOP_WORDS:
             continue
         if token.endswith("ing") and len(token) > 6:
             token = token[:-3]
         elif token.endswith("s") and len(token) > 4 and not token.endswith("ss"):
             token = token[:-1]
-        terms.add(token)
+        terms.add(SEARCH_TERM_ALIASES.get(token, token))
     return terms
+
+
+def status_question_target(query: str) -> tuple[str, str] | None:
+    """Return the open-target claim and problem number for a status question."""
+    terms = search_terms(query)
+    if "resolution_status" not in terms:
+        return None
+    if "249" in terms:
+        return ("erdos_249", "249")
+    if "257" in terms:
+        return ("universal_257", "257")
+    return None
 
 
 def search_rank(query: str, primary: str, haystack: str) -> int | None:
@@ -1170,10 +1204,12 @@ def search_packet(query: str, limit: int) -> dict[str, Any]:
     if not query:
         raise ValueError("search query must not be empty")
     claims = load("docs/claims.json")
+    claims_by_id = {row["id"]: row for row in claims["claims"]}
     atlas = load("docs/declaration_atlas.json")
     aliases = load("paper/module-aliases.json")["aliases"]
     sigil_by_path = {row["path"]: row["sigil"] for row in aliases}
     roles = module_roles(claims)
+    status_target = status_question_target(query)
     ranked: list[tuple[int, str, dict[str, Any]]] = []
 
     for artifact in artifact_inventory():
@@ -1238,11 +1274,26 @@ def search_packet(query: str, limit: int) -> dict[str, Any]:
             )
 
     for proposition in claims["remaining_open_propositions"]:
+        target = claims_by_id.get(proposition["open_target_claim"], {})
         rank = search_rank(
             query,
             proposition["id"],
-            proposition["statement"] + " " + proposition["open_target_claim"],
+            " ".join(
+                str(value)
+                for value in (
+                    proposition["statement"],
+                    proposition["open_target_claim"],
+                    target.get("label"),
+                    target.get("statement"),
+                    target.get("status"),
+                    proposition.get("paper_anchor", {}).get("title"),
+                    "open unresolved not solved",
+                )
+                if value
+            ),
         )
+        if status_target and proposition["open_target_claim"] == status_target[0]:
+            rank = -1
         if rank is not None:
             ranked.append(
                 (
@@ -1419,6 +1470,16 @@ def search_packet(query: str, limit: int) -> dict[str, Any]:
             for discovery_term in row.get("discovery_terms", [])
         )
         rank = min((value for value in ranks if value is not None), default=None)
+        if (
+            status_target
+            and status_target[0] in row.get("problem_target_claim_ids", [])
+            and {
+                "resolution_status",
+                status_target[1],
+            }
+            <= search_terms(" ".join(row.get("discovery_terms", [])))
+        ):
+            rank = -2
         if rank is not None:
             ranked.append(
                 (
