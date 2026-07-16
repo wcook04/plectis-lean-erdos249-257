@@ -550,6 +550,14 @@ Kova\v{c}--Tao provide the strict-tail Cantor-set context~\cite{kovactao};
 no novelty claim is made for that geometry.  Exact rational death
 certificates are given in Appendix~\ref{sec:carry}.
 
+\paragraph{Consequence for the half-value branch.}
+Parts~\textup{(i)}, \textup{(ii)}, and~\textup{(iv)} make the greedy code a
+canonical decision procedure, while compactness in part~\textup{(iii)} allows
+cofinal finite approximations to pass to a point of \(\mathcal A\).  The
+measure-one statement is global: it does not decide whether the particular
+point \(1/2\) belongs to \(\mathcal A\).  That pointwise question is the
+separate reduction below.
+
 \subsection{Rigidity of a hypothetical rational support}
 
 For \(A\subseteq\N\setminus\{0\}\), define
@@ -664,6 +672,13 @@ Finite supports are excluded by the
 A tempting signed-to-Boolean shortcut also fails: selecting precisely the
 negative M\"obius indices overshoots \(1/2\) by at least \(1/63\).
 Proposition~\ref{res:mobiussignnogo} gives the exact sign-separation identity.
+
+\paragraph{Section consequence.}
+Theorem~\ref{res:halfmembership} replaces a search over arbitrary supports by
+one canonical quantifier question: does the greedy orbit of \(1/2\) skip
+cofinally?  It does not answer that question.  The next subsection assumes a
+possible final skip and identifies exactly what would be required to exclude
+it.
 
 \subsection{The final-skip reduction}
 
@@ -2605,6 +2620,14 @@ Section~\ref{sec:eb}.  The appendix is included so that the hypotheses in the
 main reduction can be audited without turning the main theorem section into a
 chronology of the formal development.
 
+The order is by mathematical use.  Appendix~A.1 localizes one possible unsafe
+skip; Appendix~A.2 records conditional structured-support criteria;
+Appendix~A.3 collects the finite-window and compactness consumers;
+Appendix~A.4 develops the equivalent final-skip coordinates; and
+Appendix~A.5 records finite deposits, exact adapters, counterexamples, and
+closed strategy branches.  This is a dependency map, not a second route to a
+conclusion.
+
 Throughout this appendix, a \emph{seam} is an adjacent pair of finite greedy
 words at a branch boundary, a \emph{rewind} is the corresponding inverse
 finite recurrence, and the \emph{transition carry} is the integer coordinate
@@ -2612,6 +2635,15 @@ appearing in the exact residual identity.  These terms denote mathematical
 objects, not stages of a proof search.
 
 \HalfValueTechnicalAppendix
+
+\paragraph{Appendix consequence.}
+The compactness and final-skip subsections give exact consumers: a cofinal
+window, seam, or terminal approximation would produce \(1/2\in\mathcal A\),
+whereas an eventual right tail is exactly nonmembership.  The other
+subsections localize possible inputs, verify finite deposits, and close
+stronger but invalid local inferences.  None produces the required cofinal
+input, so the residual remains precisely the two obligations in
+Theorem~\ref{res:fatalright}.
 
 \section{Auxiliary rationality criteria from binary carry systems}\label{sec:carry}
 
