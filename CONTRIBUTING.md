@@ -42,6 +42,7 @@ and citation metadata.
 
 ```sh
 lake exe cache get                 # fetch the prebuilt Mathlib cache
+python3 scripts/test_dependency_lock_contract.py  # verify the pinned Lean/Mathlib lock
 lake build                         # elaborate and kernel-check the library
 lake build Examples                # build the downstream consumer example
 python3 scripts/check_release.py   # cross-surface release checks
