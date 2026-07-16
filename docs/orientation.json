@@ -56,7 +56,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "Erd\\H{o}s \\#249",
-    "line": 2511
+    "line": 2521
    }
   },
   {
@@ -67,7 +67,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "unbounded certificate supply",
-    "line": 2522
+    "line": 2532
    }
   },
   {
@@ -78,7 +78,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "the half-value counterexample route",
-    "line": 2537
+    "line": 2547
    }
   },
   {
@@ -89,7 +89,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "universal Erd\\H{o}s \\#257",
-    "line": 2528
+    "line": 2538
    }
   }
  ],
@@ -554,18 +554,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "paper_suite_reader_hierarchy_and_conclusion_audit",
+   "id": "main_paper_section_level_status_and_transition_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "the promoted theorem hierarchy may still be under-signalled or inconsistently summarized in abstracts, introductions, reading maps, statement matrices, and conclusions",
-   "statement": "Compare the front and back matter of each mathematics paper against its now-anchored contribution families; repair only consequential omissions, duplication, or status drift."
+   "defect_class": "local theorem clusters may still obscure whether a subsection supplies an input, a finite consumer, a conditional bridge, a strategy boundary, or the surviving residual",
+   "statement": "Audit the main paper section by section, especially the #257 argument and its technical appendices, for explicit consequence-and-residual transitions; compress or relocate material only when it interrupts the mathematical spine."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "a16aa24af5236b6508a34b8a4c4b41fdcf620a98",
-  "committed_navigation_snapshot": "54d44b850d9fe27ada4939e8453884fdfcb5477f",
-  "main_paper_source_digest": "sha256:efc3f79cc8479f39dc6ebf3b1f029f5c5e2265e6b17d1172e218d18f87b514ab"
+  "committed_navigation_snapshot": "714cf71c6672558839300a8eaf306d09e78ae279",
+  "main_paper_source_digest": "sha256:a2e2c1b9091678f0d278e5ee162a853821ea297be6cc4c24dedb9d77641d5250"
  },
  "reading_routes": [
   {

@@ -907,15 +907,15 @@
         "schema": "erdos249257-editorial-state/1",
         "scope": "continuous_whole_main_paper_exposition",
         "current_priority": {
-          "id": "paper_suite_reader_hierarchy_and_conclusion_audit",
+          "id": "main_paper_section_level_status_and_transition_audit",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "defect_class": "the promoted theorem hierarchy may still be under-signalled or inconsistently summarized in abstracts, introductions, reading maps, statement matrices, and conclusions",
-          "statement": "Compare the front and back matter of each mathematics paper against its now-anchored contribution families; repair only consequential omissions, duplication, or status drift."
+          "defect_class": "local theorem clusters may still obscure whether a subsection supplies an input, a finite consumer, a conditional bridge, a strategy boundary, or the surviving residual",
+          "statement": "Audit the main paper section by section, especially the #257 argument and its technical appendices, for explicit consequence-and-residual transitions; compress or relocate material only when it interrupts the mathematical spine."
         },
         "last_verified_wave": {
-          "id": "cross_paper_claim_significance_and_prior_art_audit",
-          "surface": "docs/claims.json",
-          "result": "Promoted the exact Stern–Brocot cylinder and Fibonacci-run theorems, the four-term first-harmonic pivot budget, the Möbius-sign support no-go, and the finite Mersenne-atom determinant boundary; recorded exact prior-art and open-endpoint limits; retained the dyadic-prefix package as source-map material for the qualified future #257 companion."
+          "id": "paper_suite_reader_hierarchy_and_conclusion_reconstruction",
+          "surface": "paper/erdos249-transport-curvature-companion-note.tex",
+          "result": "Recast the transport companion as a three-stage argument from affine cancellation through harmonic and phase consumers to scoped no-go boundaries, promoted the exact pivot bridge in its opening hierarchy, normalized its status matrix, and added a real conclusion; sharpened the gateway paper's reading map, architecture, frontier synthesis, and independent-structure guide."
         },
         "active_inconsistencies": [],
         "blocked_decisions": []
@@ -7512,7 +7512,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 2511
+        "line": 2521
       }
     },
     {
@@ -7523,7 +7523,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 2522
+        "line": 2532
       }
     },
     {
@@ -7534,7 +7534,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "the half-value counterexample route",
-        "line": 2537
+        "line": 2547
       }
     },
     {
@@ -7545,7 +7545,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 2528
+        "line": 2538
       }
     }
   ],

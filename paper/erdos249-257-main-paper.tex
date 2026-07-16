@@ -163,10 +163,13 @@ Section~\ref{sec:eb}.\\
 Section~\ref{sec:spines} states the two exact proof spines and their unresolved
 hypotheses.  Section~\ref{sec:ladder} gives the common Mersenne--Lambert
 transform; Sections~\ref{sec:eb} and~\ref{sec:249} give the theorem-level
-detail.  Section~\ref{sec:further} states the remaining questions, and the
-appendices retain the supporting reductions.  Linked mathematical phrases
-open exact Lean proofs.  The companion develops the affine and
-first-harmonic \#249 theory without changing its open status.
+detail.  Section~\ref{sec:further} states the remaining questions.
+Appendices~\ref{app:half-technical} and~\ref{sec:carry} contain the local
+half-value and rational-carry machinery; the later appendices contain the
+totient-certificate reductions and the independent Lambert, probability, and
+finite-algebraic structure.  Linked mathematical phrases open exact Lean
+proofs.  The companion develops the affine and first-harmonic \#249 theory
+without changing its open status.
 
 \medskip
 \noindent\textbf{Keywords.} irrationality; Erd\H{o}s--Borwein constant;
@@ -2181,7 +2184,11 @@ and exposes the nonnegative primitive-conductor weight. The M\"obius-square
 identity turns the same number into a signed rapidly convergent series. The
 coprime-pair identity turns it into a probability. Formalising all three and
 proving that the denominator exclusion transfers between them prevents an
-informal change of representation from silently changing the claim.
+informal change of representation from silently changing the claim.  Reducing
+the random pair by its gcd then yields the exact Stern--Brocot cylinder law of
+Theorem~\ref{res:sternbrocotcylinders} and the Fibonacci--continuant estimates
+of Theorem~\ref{res:sternbrocotruns}.  These are unconditional structure inside
+the probability representation, not a substitute for the certificate supply.
 
 \paragraph{Necessary conditions on a rational support.}
 The mathematical assertions in this part of the architecture are exactly
@@ -2251,6 +2258,9 @@ Theorem~\ref{res:support} settles several structured infinite supports, but
 the universal statement remains open.  A counterexample would instead be a
 rational member of the achievement set $\mathcal A$, with $1/2$ the
 distinguished target analysed in Section~\ref{sec:eb}.
+The achievement-set topology and the Stern--Brocot cylinder law are exact
+structural results on the two sides of this frontier; neither supplies the
+missing universal or cofinal assertion.
 
 \long\def\FurtherLambertAppendix{%
 
@@ -3077,9 +3087,11 @@ For a first reading, the main landmarks are Theorem~\ref{res:full} for the
 full-support irrationality theorem, Theorem~\ref{res:farey} for the totient
 denominator exclusion, Theorem~\ref{res:red21} for the exact
 tail-certificate reduction, and Proposition~\ref{res:greedytopology} for the
-geometry of the Mersenne achievement set. The public repository contains a
-complete searchable cross-reference for readers who need declaration-level
-detail.
+geometry of the Mersenne achievement set.  For the strongest independent
+structure beyond those two proof spines, see
+Theorems~\ref{res:sternbrocotcylinders} and~\ref{res:sternbrocotruns}.
+The public repository contains a complete searchable cross-reference for
+readers who need declaration-level detail.
 
 % Retain the exhaustive source-link manifest in the authored TeX for automated
 % validation and query tooling, but keep it outside the printed paper.

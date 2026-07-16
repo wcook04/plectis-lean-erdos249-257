@@ -58,9 +58,15 @@ cofinal arithmetic or harmonic producer is proved.
 
 The gateway exposition~\cite{mainpaper} proves the denominator exclusion and
 the complete finite-certificate normal form for $S$.  This paper has a
-different thesis: finite differences annihilate the old affine channels
-exactly, phase separation gives a complete geometric normal form, and two
-countermodels delimit what fixed local transport data can prove.
+different thesis.  Its argument has three stages.  First, finite differences
+annihilate the old affine divisor channels and turn the surviving channels
+into exact dyadic-window residues.  Second, a first-harmonic gap turns residue
+dispersion into a finite certificate, while the large-prime pivot
+decomposition identifies four precise budgets that would produce that gap.
+Third, phase separation gives a complete geometric normal form and two
+countermodels delimit what fixed local transport data can prove.  Thus the
+paper isolates exact consumers and exact obstructions; it does not supply the
+cofinal arithmetic producer needed to settle the problem.
 
 \begin{theorem}[affine-channel annihilation]\label{thm:affine}
 Let \(m_i\in\mathbb N\) and \(c_i\in\mathbb R\) satisfy
@@ -73,6 +79,16 @@ where \(K_d\) is the exact M\"obius transport-residue kernel.
 \noindent Formalised as
 \lword{JointExponentTransport.lean}{36}{oldChannel_affine_moment_annihilation}{affine-channel annihilation}.
 The anchored coefficients at \(H,3H,5H,15H\) are one primitive instance.
+Sections~\ref{sec:windows}--\ref{sec:primejump} turn this cancellation into
+finite central-residue criteria.
+
+\paragraph{The harmonic bridge.}
+Theorem~\ref{thm:first-pivot} decomposes the first-harmonic block sum into
+centred, fibre-mean, bad-supplier, and non-supplier terms.  Its exact budget
+implies a finite tail-difference certificate; the corresponding cofinal
+budget would imply irrationality.  This is the analytic consumer between the
+transport identities and the phase geometry, not an additional proof of the
+missing estimates.
 
 \begin{theorem}[phase-separation characterisation]\label{thm:phase}
 The cofinal fibre-free window-pair separation predicate of
@@ -111,6 +127,14 @@ here.  The theorem-specific comparison boundary is maintained with the
 gateway paper.  Linked mathematical phrases open the pinned Lean proofs; the
 claim registry and release gate that validate these links are described in
 the suite's systems companion~\cite{syspaper}.
+
+\paragraph{Reading map.}
+Sections~\ref{sec:windows}--\ref{sec:primejump} build the exact transport and
+window algebra.  Sections~\ref{sec:harmonic}--\ref{sec:pivot} give the two
+global consumers: a sufficient harmonic-budget route and an equivalent
+phase-separation route.  Sections~\ref{sec:nogo} and~\ref{sec:factorideal}
+then show why bounded local transport data cannot by itself produce either
+cofinal hypothesis.
 
 \section{Dyadic windows}\label{sec:windows}
 For a finite integer combination $X(H)=\sum_i c_iR_{m_iH}$, truncate each
@@ -397,7 +421,24 @@ This is a synthetic countermodel: it does not assert that these forcing letters
 are actual totient differences, and it does not rule out a nonlinear argument
 using the missing fresh divisor channels.
 
-\section{Statement matrix and open boundary}\label{sec:index}
+\section{Conclusion and exact boundary}\label{sec:index}
+
+The results form one chain rather than a list of unrelated certificate
+modules.  Affine transport explains which divisor channels a finite
+difference removes; a dyadic window converts the remaining tail observable
+into an exact central-residue test; and harmonic or pairwise phase dispersion
+turns that test into a certificate.  The four-term pivot theorem makes the
+first of these global consumers arithmetically explicit, while the
+window-pair theorem shows that the second is logically complete.
+
+What remains missing is not another finite identity.  One must produce the
+required dispersion cofinally, either through estimates meeting the four
+pivot budgets or through an equivalent window-pair separation mechanism.
+The two countermodels explain why fixed local precision, factor ideals,
+whole-ray anchors, and finite shift algebra do not force such dispersion.
+They delimit the current methods without asserting a global impossibility.
+
+For reference, the exact status of each layer is:
 \begin{center}\small
 \begin{tabular}{@{}
 >{\raggedright\arraybackslash}p{0.21\textwidth}
@@ -405,24 +446,24 @@ using the missing fresh divisor channels.
 >{\raggedright\arraybackslash}p{0.29\textwidth}@{}}
 \toprule Layer & Checked statement & Status \\
 \midrule
-Curvature & exact split, radius, recurrence, criterion & \mbox{conditional reduction} \\
-Exponent transport & stable support, affine state, cancellation & \mbox{proved here} \\
-Joint $(3,5)$ transport & moment annihilation and criterion & \mbox{conditional reduction} \\
-Prime jump & migration, sharp window, $(12,5,15)$ & \mbox{verified finite instance} \\
-Three transport & sharp window and $(60,12)$ & \mbox{verified finite instance} \\
-First harmonic & cosine gap forces a certificate & \mbox{conditional reduction} \\
-Large-prime pivot & exact four-term split and one-sided budget & \mbox{conditional reduction} \\
-Adjacent phases & squared chord separation forces a certificate & \mbox{conditional reduction} \\
-Pivot anti-reconstruction & pairwise phase energy and exact window-pair equivalence & \mbox{conditional reduction} \\
-Tropical signature & fixed precision has a completion & \mbox{unconditional progress} \\
-LCM factor ideals & factor/anchor and finite shift algebra have a synthetic survivor & \mbox{unconditional progress} \\
-Irrationality of $S$ & follows from a named unbounded supply & \mbox{open} \\
+Curvature & exact split, radius, recurrence, criterion & finite certificate criterion \\
+Exponent transport & stable support, affine state, cancellation & exact identity \\
+Joint $(3,5)$ transport & moment annihilation and criterion & identity and finite criterion \\
+Prime jump & migration, sharp window, $(12,5,15)$ & identity and finite instance \\
+Three transport & sharp window and $(60,12)$ & criterion and finite instance \\
+First harmonic & cosine gap forces a certificate & finite certificate criterion \\
+Large-prime pivot & exact four-term split and one-sided budget & identity and conditional endpoint \\
+Adjacent phases & squared chord separation forces a certificate & finite certificate criterion \\
+Pivot anti-reconstruction & pairwise phase energy and exact window-pair equivalence & exact equivalence \\
+Tropical signature & fixed precision has a completion & scoped countermodel \\
+LCM factor ideals & factor/anchor and finite shift algebra have a synthetic survivor & scoped synthetic countermodel \\
+Irrationality of $S$ & follows from a named unbounded supply & open \\
 \bottomrule
 \end{tabular}
 \end{center}
-The development proves no cofinal supply of curvature, prime-jump, joint, or
-three-transport certificates, and no cofinal first-harmonic gap.  It therefore
-does not prove Erd\H{o}s~\#249.
+No cofinal arithmetic or harmonic producer is proved.  Therefore the chain
+stops at exact finite consumers and equivalent reformulations, and
+Erd\H{o}s~\#249 remains open.
 
 \begin{thebibliography}{9}
 \bibitem{erdos1948} P.~Erd\H{o}s,
