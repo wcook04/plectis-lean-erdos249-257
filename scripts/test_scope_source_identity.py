@@ -11,17 +11,31 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parent.parent
+OPEN_ID_RE = re.compile(r"`(remaining_open\.[A-Za-z0-9_]+)`")
+NON_CLAIM_ID_RE = re.compile(r"`(not_[A-Za-z0-9_]+)`")
 
 
-def scope_open_route_errors(scope: str, open_ids: set[str]) -> list[str]:
-    """Require every registered open proposition to remain directly queryable."""
+def scope_machine_handle_errors(
+    scope: str, open_ids: set[str], non_claim_ids: set[str]
+) -> list[str]:
+    """Require exact registered handles and bounded open queries in SCOPE.md."""
     errors: list[str] = []
+    observed_open_ids = set(OPEN_ID_RE.findall(scope))
+    for open_id in sorted(open_ids - observed_open_ids):
+        errors.append(f"SCOPE.md lost exact open identifier {open_id}")
+    for open_id in sorted(observed_open_ids - open_ids):
+        errors.append(f"SCOPE.md carries unknown open identifier {open_id}")
     for open_id in sorted(open_ids):
-        if f"`{open_id}`" not in scope:
-            errors.append(f"SCOPE.md lost exact open identifier {open_id}")
         command = f"python3 scripts/query_corpus.py --open {open_id}"
         if command not in scope:
             errors.append(f"SCOPE.md lost bounded open query {command}")
+
+    observed_non_claim_ids = set(NON_CLAIM_ID_RE.findall(scope))
+    for non_claim_id in sorted(non_claim_ids - observed_non_claim_ids):
+        errors.append(f"SCOPE.md lost exact non-claim identifier {non_claim_id}")
+    for non_claim_id in sorted(observed_non_claim_ids - non_claim_ids):
+        errors.append(f"SCOPE.md carries unknown non-claim identifier {non_claim_id}")
+
     for phrase in (
         "Finite instances, conditional reductions, cited neighbours, and named",
         "do not discharge these propositions",
@@ -36,6 +50,7 @@ def main() -> int:
     claims = json.loads((ROOT / "docs" / "claims.json").read_text(encoding="utf-8"))
     formal_source = claims["release"]["formal_source"]
     open_ids = {row["id"] for row in claims["remaining_open_propositions"]}
+    non_claim_ids = {row["id"] for row in claims["non_claims"]}
     scope = (ROOT / "SCOPE.md").read_text(encoding="utf-8")
 
     assert re.fullmatch(r"[0-9a-f]{40}", formal_source["ref"])
@@ -45,7 +60,7 @@ def main() -> int:
     assert "citation and release identity" in scope
     assert "not a substitute for an exact proof-source identity" in scope
     assert "until it is included in a new tagged\nrelease" not in scope
-    assert not scope_open_route_errors(scope, open_ids)
+    assert not scope_machine_handle_errors(scope, open_ids, non_claim_ids)
 
     missing_open = scope.replace(
         "python3 scripts/query_corpus.py --open "
@@ -55,7 +70,9 @@ def main() -> int:
     )
     assert any(
         "lost bounded open query" in error
-        for error in scope_open_route_errors(missing_open, open_ids)
+        for error in scope_machine_handle_errors(
+            missing_open, open_ids, non_claim_ids
+        )
     )
     weakened_transition = scope.replace(
         "do not discharge these propositions",
@@ -64,12 +81,35 @@ def main() -> int:
     )
     assert any(
         "lost open-transition boundary" in error
-        for error in scope_open_route_errors(weakened_transition, open_ids)
+        for error in scope_machine_handle_errors(
+            weakened_transition, open_ids, non_claim_ids
+        )
+    )
+    stale_open = scope.replace(
+        "The prose boundary above is backed by machine-resolvable open propositions:",
+        "The prose boundary above is backed by machine-resolvable open propositions:\n\n"
+        "- `remaining_open.retired_placeholder`:\n"
+        "  `python3 scripts/query_corpus.py --open remaining_open.retired_placeholder`",
+        1,
+    )
+    assert any(
+        "unknown open identifier" in error
+        for error in scope_machine_handle_errors(stale_open, open_ids, non_claim_ids)
+    )
+    stale_non_claim = scope + (
+        "\n| `not_retired_placeholder` | A stale scope claim that is no longer registered |\n"
+    )
+    assert any(
+        "unknown non-claim identifier" in error
+        for error in scope_machine_handle_errors(
+            stale_non_claim, open_ids, non_claim_ids
+        )
     )
 
     print(
         "test_scope_source_identity: scope separates release identity, proof "
-        "checkpoint, and 3 exact open propositions; 2 negative fixtures rejected"
+        "checkpoint, 3 exact open propositions, and 6 exact non-claims; "
+        "4 negative fixtures rejected"
     )
     return 0
 
