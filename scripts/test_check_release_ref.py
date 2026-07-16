@@ -39,6 +39,14 @@ def gate_source(*, exit_code: int, summary: str) -> str:
     )
 
 
+def root_closure_source(*, exit_code: int) -> str:
+    return (
+        "#!/usr/bin/env python3\n"
+        "print('test_root_import_closure: synthetic root census')\n"
+        f"raise SystemExit({exit_code})\n"
+    )
+
+
 def main() -> int:
     original_root = check_release_ref.ROOT
     try:
@@ -54,6 +62,10 @@ def main() -> int:
                     exit_code=0,
                     summary="check_release: all 17 checks passed for release v-test",
                 ),
+                encoding="utf-8",
+            )
+            (root / "scripts" / "test_root_import_closure.py").write_text(
+                root_closure_source(exit_code=0),
                 encoding="utf-8",
             )
             git(root, "add", ".")
@@ -109,6 +121,40 @@ def main() -> int:
             assert passed["reported_check_count"] == 17
             assert passed["reported_release"] == "v-test"
             assert "uncommitted caller edit" not in passed["stdout_tail"]
+            assert passed["release_commands"] == [
+                ["python3", "scripts/check_release.py"],
+                ["python3", "scripts/test_root_import_closure.py"],
+            ]
+            assert [row["exit_code"] for row in passed["gate_results"]] == [0, 0]
+
+            (root / "scripts" / "test_root_import_closure.py").write_text(
+                root_closure_source(exit_code=9),
+                encoding="utf-8",
+            )
+            root_failure_commit = commit_path(
+                root,
+                "scripts/test_root_import_closure.py",
+                "failing root closure snapshot",
+            )
+            root_failed, root_failed_exit = check_release_ref.validate_ref(
+                root_failure_commit,
+                timeout_seconds=30,
+                probe_only=False,
+            )
+            assert root_failed_exit == 9
+            assert root_failed["status"] == "failed"
+            assert [row["exit_code"] for row in root_failed["gate_results"]] == [0, 9]
+            assert "synthetic root census" in root_failed["stdout_tail"]
+
+            (root / "scripts" / "test_root_import_closure.py").write_text(
+                root_closure_source(exit_code=0),
+                encoding="utf-8",
+            )
+            commit_path(
+                root,
+                "scripts/test_root_import_closure.py",
+                "restore passing root closure",
+            )
 
             (root / "scripts" / "check_release.py").write_text(
                 gate_source(
@@ -163,6 +209,10 @@ def main() -> int:
             assert timed_out["status"] == "timeout"
             assert timed_out["resolved_commit"] == timeout_commit
             assert timed_out["timeout_seconds"] == TIMEOUT_SECONDS
+            assert timed_out["timed_out_command"] == [
+                "python3",
+                "scripts/check_release.py",
+            ]
             assert "release gate started" in timed_out["stdout_tail"]
 
             try:
@@ -176,8 +226,8 @@ def main() -> int:
 
     print(
         "test_check_release_ref: caller dirt excluded, exact commits selected, "
-        "dirty paths bounded, failing gate exit preserved, and timeout "
-        "receipt serialized"
+        "dirty paths bounded, root disk census enforced, failing gate exit "
+        "preserved, and timeout receipt serialized"
     )
     return 0
 

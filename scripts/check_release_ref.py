@@ -4,9 +4,9 @@
 """Run the release gate against a clean committed Git snapshot.
 
 This wrapper is for shared or intentionally dirty worktrees.  It resolves one
-commit, creates a disposable local clone, and runs scripts/check_release.py
-there.  Uncommitted files in the caller's checkout are never copied into the
-validation snapshot.
+commit, creates a disposable local clone, and runs the release gate plus the
+public Lean disk/root-closure census there.  Uncommitted files in the caller's
+checkout are never copied into the validation snapshot.
 """
 
 from __future__ import annotations
@@ -26,6 +26,10 @@ ROOT = Path(__file__).resolve().parent.parent
 SCHEMA = "erdos249257-clean-ref-release-receipt/1"
 TAIL_BYTES = 16_000
 DIRTY_PATH_LIMIT = 120
+RELEASE_COMMANDS = (
+    ("python3", "scripts/check_release.py"),
+    ("python3", "scripts/test_root_import_closure.py"),
+)
 
 
 class SnapshotError(RuntimeError):
@@ -123,8 +127,16 @@ def prepare_clone(commit: str, parent: Path) -> Path:
         raise SnapshotError(
             checked_out.stderr.strip() or f"could not check out {commit}"
         )
-    if not (clone / "scripts" / "check_release.py").is_file():
-        raise SnapshotError("snapshot does not contain scripts/check_release.py")
+    missing = [
+        command[1]
+        for command in RELEASE_COMMANDS
+        if not (clone / command[1]).is_file()
+    ]
+    if missing:
+        raise SnapshotError(
+            "snapshot does not contain required release command(s): "
+            + ", ".join(missing)
+        )
     return clone
 
 
@@ -140,7 +152,8 @@ def receipt_base(ref: str, commit: str, caller_dirty_paths: list[str]) -> dict[s
         "caller_worktree_dirty_paths": caller_dirty_paths[:DIRTY_PATH_LIMIT],
         "caller_worktree_dirty_path_limit": DIRTY_PATH_LIMIT,
         "caller_worktree_dirty_paths_truncated": dirty_path_count > DIRTY_PATH_LIMIT,
-        "release_command": ["python3", "scripts/check_release.py"],
+        "release_command": list(RELEASE_COMMANDS[0]),
+        "release_commands": [list(command) for command in RELEASE_COMMANDS],
     }
 
 
@@ -173,33 +186,71 @@ def validate_ref(
                 },
                 0,
             )
+        gate_results: list[dict[str, Any]] = []
+        stdout_parts: list[str] = []
+        stderr_parts: list[str] = []
+        active_command: tuple[str, ...] | None = None
+        deadline = time.monotonic() + timeout_seconds
         try:
-            completed = run(
-                ["python3", "scripts/check_release.py"],
-                cwd=clone,
-                timeout=timeout_seconds,
-            )
+            for command in RELEASE_COMMANDS:
+                active_command = command
+                remaining = deadline - time.monotonic()
+                if remaining <= 0:
+                    raise subprocess.TimeoutExpired(command, timeout_seconds)
+                completed = run(
+                    list(command),
+                    cwd=clone,
+                    timeout=remaining,
+                )
+                stdout_parts.append(completed.stdout)
+                stderr_parts.append(completed.stderr)
+                gate_results.append(
+                    {
+                        "command": list(command),
+                        "exit_code": completed.returncode,
+                        "stdout_tail": bounded_tail(completed.stdout),
+                        "stderr_tail": bounded_tail(completed.stderr),
+                    }
+                )
+                if completed.returncode != 0:
+                    break
             elapsed = round(time.monotonic() - started, 3)
-            summary = parse_release_summary(completed.stdout)
+            stdout = "\n".join(stdout_parts)
+            stderr = "\n".join(stderr_parts)
+            exit_code = gate_results[-1]["exit_code"]
+            summary = parse_release_summary(stdout)
             return (
                 {
                     **receipt_base(ref, commit, caller_dirty_paths),
                     "mode": "release_gate",
                     "status": (
-                        "passed" if completed.returncode == 0 else "failed"
+                        "passed" if exit_code == 0 else "failed"
                     ),
                     "started_at": started_at,
                     "completed_at": datetime.now(timezone.utc).isoformat(),
                     "wall_time_seconds": elapsed,
-                    "gate_exit_code": completed.returncode,
+                    "gate_exit_code": exit_code,
+                    "gate_results": gate_results,
                     **summary,
-                    "stdout_tail": bounded_tail(completed.stdout),
-                    "stderr_tail": bounded_tail(completed.stderr),
+                    "stdout_tail": bounded_tail(stdout),
+                    "stderr_tail": bounded_tail(stderr),
                 },
-                completed.returncode,
+                exit_code,
             )
         except subprocess.TimeoutExpired as error:
             elapsed = round(time.monotonic() - started, 3)
+            timed_out_stdout = bounded_tail(error.stdout or "")
+            timed_out_stderr = bounded_tail(error.stderr or "")
+            if active_command is not None:
+                gate_results.append(
+                    {
+                        "command": list(active_command),
+                        "exit_code": None,
+                        "status": "timeout",
+                        "stdout_tail": timed_out_stdout,
+                        "stderr_tail": timed_out_stderr,
+                    }
+                )
             return (
                 {
                     **receipt_base(ref, commit, caller_dirty_paths),
@@ -210,10 +261,18 @@ def validate_ref(
                     "wall_time_seconds": elapsed,
                     "gate_exit_code": None,
                     "timeout_seconds": timeout_seconds,
+                    "timed_out_command": (
+                        list(active_command) if active_command is not None else None
+                    ),
+                    "gate_results": gate_results,
                     "reported_check_count": None,
                     "reported_release": None,
-                    "stdout_tail": bounded_tail(error.stdout or ""),
-                    "stderr_tail": bounded_tail(error.stderr or ""),
+                    "stdout_tail": bounded_tail(
+                        "\n".join([*stdout_parts, timed_out_stdout])
+                    ),
+                    "stderr_tail": bounded_tail(
+                        "\n".join([*stderr_parts, timed_out_stderr])
+                    ),
                 },
                 124,
             )
