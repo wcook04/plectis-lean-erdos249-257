@@ -907,15 +907,15 @@
         "schema": "erdos249257-editorial-state/1",
         "scope": "continuous_whole_main_paper_exposition",
         "current_priority": {
-          "id": "cross_paper_claim_significance_and_prior_art_audit",
-          "surface": "docs/claims.json",
-          "defect_class": "formally strong results may be underweighted, duplicated, or insufficiently distinguished from prior art across the paper suite",
-          "statement": "Compare the contribution families, checked declarations, bibliography, main paper, and companions; elevate only claim-faithful results with exact prior-art and open-status boundaries."
+          "id": "paper_suite_reader_hierarchy_and_conclusion_audit",
+          "surface": "paper/erdos249-257-main-paper.tex",
+          "defect_class": "the promoted theorem hierarchy may still be under-signalled or inconsistently summarized in abstracts, introductions, reading maps, statement matrices, and conclusions",
+          "statement": "Compare the front and back matter of each mathematics paper against its now-anchored contribution families; repair only consequential omissions, duplication, or status drift."
         },
         "last_verified_wave": {
-          "id": "appendix_a_suffix_cylinder_mathematical_reconstruction",
-          "surface": "paper/erdos249-257-main-paper.tex",
-          "result": "Appendix A now defines selected windows and suffix cylinders, states one exact conditional feedback proposition, separates finite stages through depth 52, and removes the remaining reader-facing sheet and interface vocabulary."
+          "id": "cross_paper_claim_significance_and_prior_art_audit",
+          "surface": "docs/claims.json",
+          "result": "Promoted the exact Stern–Brocot cylinder and Fibonacci-run theorems, the four-term first-harmonic pivot budget, the Möbius-sign support no-go, and the finite Mersenne-atom determinant boundary; recorded exact prior-art and open-endpoint limits; retained the dyadic-prefix package as source-map material for the qualified future #257 companion."
         },
         "active_inconsistencies": [],
         "blocked_decisions": []
@@ -1023,8 +1023,8 @@
           "prior_art_posture": "Exact rational and greedy-block formalisation; no priority claim is made for the assembled source-level package.",
           "primary_narrative_owner": "docs/SOURCE_MAP.md",
           "source_route": "python3 scripts/query_corpus.py --claim dyadic_prefix_block_safety_interfaces",
-          "consumer_or_open_obligation": "Supply actual block-safety, raw-margin, or primitive-overshoot witnesses cofinally; no such unbounded producer is proved.",
-          "view_decision": "source_map_and_living_reference_only"
+          "consumer_or_open_obligation": "Supply actual block-safety, raw-margin, or primitive-overshoot witnesses cofinally; no such unbounded producer is proved. Until the qualified #257 companion has a citable low-duplication theorem spine, this package remains source-map material rather than another gateway inventory.",
+          "view_decision": "source_map_now_qualified_future_257_companion_source_only"
         },
         {
           "id": "rewind_windows_and_protected_seams",
