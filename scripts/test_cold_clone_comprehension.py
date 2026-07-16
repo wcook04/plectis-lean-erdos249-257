@@ -111,6 +111,12 @@ def main() -> int:
     checks += 1
 
     mutated = copy.deepcopy(packets)
+    removed_family = next(iter(mutated["publication_families"]))
+    mutated["publication_families"].pop(removed_family)
+    assert_rejected(mutated, "contribution-family coverage")
+    checks += 1
+
+    mutated = copy.deepcopy(packets)
     mutated["story_routes"]["erdos257_half_story"]["route"]["query_steps"].pop()
     assert_rejected(mutated, "#257 story route")
     checks += 1

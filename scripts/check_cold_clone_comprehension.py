@@ -310,6 +310,7 @@ def validate_cross_agent_entry(agents: str, claude: str) -> None:
 def collect_agent_packets() -> dict[str, Any]:
     """Collect only bounded query replies needed to walk the public graph."""
     summary = query_packet(budget_bytes=SUMMARY_PACKET_BUDGET_BYTES)
+    publication_architecture = query_packet("--publication-architecture")
     packets: dict[str, Any] = {
         "summary": summary,
         "opens": {},
@@ -320,6 +321,11 @@ def collect_agent_packets() -> dict[str, Any]:
         "modules": {},
         "sigil_modules": {},
         "route": query_packet("--route", "instant_orientation"),
+        "publication_architecture": publication_architecture,
+        "publication_families": {
+            row["id"]: query_packet("--publication-family", row["id"])
+            for row in publication_architecture["family_index"]
+        },
         "story_routes": {
             route_id: query_packet("--route", route_id) for route_id in STORY_ROUTES
         },
@@ -377,6 +383,25 @@ def validate_agent_packets(packets: dict[str, Any]) -> None:
     assert summary["curated_claim_count"] >= len(summary["principal_claims"])
     assert summary["publication_family_count"] > 0
     assert len(summary["mathematical_programmes"]) == len(STORY_ROUTES)
+
+    architecture = packets["publication_architecture"]
+    assert architecture["kind"] == "publication_architecture"
+    assert architecture["authority_posture"] == (
+        "authored_editorial_topology_not_proof_authority"
+    )
+    assert len(architecture["family_index"]) == summary["publication_family_count"]
+    assert set(packets["publication_families"]) == {
+        row["id"] for row in architecture["family_index"]
+    }
+    for family_id, packet in packets["publication_families"].items():
+        assert packet["kind"] == "publication_family"
+        assert packet["family"]["id"] == family_id
+        assert packet["claims"]
+        assert packet["status_counts"]
+        assert packet["family"]["primary_narrative_owner"]
+        assert packet["family"]["consumer_or_open_obligation"]
+        assert packet["family"]["view_decision"]
+        assert encoded_bytes(packet) <= PACKET_BUDGET_BYTES
 
     principal = {row["id"]: row for row in summary["principal_claims"]}
     assert any(row["status"] == "conditional reduction" for row in principal.values())
@@ -559,6 +584,8 @@ def main() -> int:
         + len(packets["sources"])
         + len(packets["modules"])
         + len(packets["sigil_modules"])
+        + 1
+        + len(packets["publication_families"])
         + len(packets["story_routes"])
         + len(packets["discovery_searches"])
         + len(packets["story_claims"])
