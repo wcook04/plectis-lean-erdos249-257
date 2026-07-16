@@ -92,6 +92,9 @@ jobs:
       - name: Validate CITATION.cff
         if: ${{ !cancelled() }}
         run: python3 scripts/check_metadata.py
+      - name: Test citation release identity
+        if: ${{ !cancelled() }}
+        run: python3 scripts/test_citation_identity_contract.py
       - name: REUSE licensing lint
         if: ${{ !cancelled() }}
         run: reuse lint

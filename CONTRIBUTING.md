@@ -51,6 +51,7 @@ python3 scripts/refresh_source_coordinates.py --check  # claim/paper line pins
 python3 scripts/test_methodology_contract.py  # adversarial claim-transition fixtures
 python3 -m pip install cffconvert reuse  # once, for metadata and licence checks
 python3 scripts/check_metadata.py  # CITATION.cff schema validation (same command as CI)
+python3 scripts/test_citation_identity_contract.py  # citation/release identity and open boundary
 reuse lint                         # licence validation
 python3 scripts/check_cold_clone_comprehension.py --quick  # fast committed-surface readability check
 python3 scripts/check_cold_clone_comprehension.py  # standalone bounded cold-reader baseline
