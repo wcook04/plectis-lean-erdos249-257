@@ -73,9 +73,11 @@ def depth18EntryCheck (k : ℕ) : Bool :=
 def depth18TableCheck : Bool :=
   (List.range 12).all fun j ↦ depth18EntryCheck (j + 1)
 
-/-- Kernel-reflected evaluation of the complete depth-18 table. -/
+/-- Kernel-reflected evaluation of the complete depth-18 table.  The strip
+bound calls `Nat.sqrt`, whose well-founded recursion the elaborator will not
+unfold, so the goal is discharged by kernel reduction rather than `decide`. -/
 theorem depth18TableCheck_eq_true : depth18TableCheck = true := by
-  decide
+  decide +kernel
 
 theorem depth18EntryCheck_eq_true
     {k : ℕ} (hk : 1 ≤ k) (hk12 : k ≤ 12) :
