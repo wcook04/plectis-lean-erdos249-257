@@ -3,6 +3,18 @@
   "artifact_role": "bounded_first_read_navigation_projection",
   "authority_posture": "navigation_projection_not_proof_authority",
   "proof_authority": "Lean source checked by the pinned Lean kernel",
+  "release_provenance": {
+    "posture": "self_contained_public_projection_from_a_larger_ongoing_research_workflow",
+    "meaning": "This checkout is a deliberately curated, independently verifiable public output of a larger ongoing formal-mathematics workflow. No public claim depends on private or unreleased work.",
+    "public_evidence": [
+      "pinned formal-source identity",
+      "claim and open-proposition registry",
+      "machine-readable argument and module graphs",
+      "generated declaration atlas",
+      "bounded cold-clone and adversarial checks"
+    ],
+    "boundary": "The workflow provenance explains the release discipline; it does not imply hidden proof authority or equivalence with private work."
+  },
   "release": {
     "version": "0.6.0",
     "tag": "v0.6.0",
@@ -44,7 +56,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 2009
+        "line": 1896
       }
     },
     {
@@ -55,7 +67,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 2018
+        "line": 1905
       }
     },
     {
@@ -66,7 +78,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 2026
+        "line": 1913
       }
     }
   ],
@@ -362,222 +374,293 @@
       ]
     }
   ],
+  "mathematical_programmes": [
+    {
+      "id": "erdos257_half_story",
+      "title": "Achievement-set geometry and the half-value seam",
+      "mathematical_focus": "Greedy coding, exact achievement-set geometry, dyadic skip bands, seam classification, and the last-producer tail residual for the target 1/2.",
+      "claim_ceiling": "Exact geometry and reductions for the half-value branch; neither half-membership nor universal Erdős #257 is proved.",
+      "core_claim_count": 6,
+      "representative_claim_ids": [
+        "greedy_achievement_geometry",
+        "half_greedy_two_thirds_band"
+      ],
+      "remaining_open_proposition_ids": [
+        "remaining_open.universal_257_all_infinite_supports"
+      ]
+    },
+    {
+      "id": "erdos249_certificate_story",
+      "title": "#249 certificate and harmonic interface",
+      "mathematical_focus": "Tail-difference certificates, exact completeness at fixed parameters, bounded lcm-diagonal instances, and first-harmonic consumers.",
+      "claim_ceiling": "The certificate formulation is exact and finite instances are checked; the unbounded certificate supply and irrationality of S remain open.",
+      "core_claim_count": 5,
+      "representative_claim_ids": [
+        "denominator_exclusion",
+        "certificate_reduction"
+      ],
+      "remaining_open_proposition_ids": [
+        "remaining_open.erdos_249_irrationality",
+        "remaining_open.unbounded_certificate_supply"
+      ]
+    },
+    {
+      "id": "structured_support_families",
+      "title": "Classical and structured support irrationality",
+      "mathematical_focus": "Classical full support, structured infinite supports, periodic nonnegative weights, signed periodic obstructions, and orthogonal-petal support combinatorics.",
+      "claim_ceiling": "These are structured families, coefficient classes, and a conditional bouquet reduction; arbitrary infinite supports in universal Erdős #257 remain open.",
+      "core_claim_count": 7,
+      "representative_claim_ids": [
+        "eb_constant",
+        "eb_full_support"
+      ],
+      "remaining_open_proposition_ids": [
+        "remaining_open.universal_257_all_infinite_supports"
+      ]
+    },
+    {
+      "id": "erdos249_diagonal_arithmetic",
+      "title": "#249 diagonal arithmetic and fresh-loss interfaces",
+      "mathematical_focus": "Exact interval avoidance on the lcm diagonal, fresh-prime endpoint defects, binary suffix arithmetic, affine escape sockets, and finite residue projections.",
+      "claim_ceiling": "Each interface sharpens or re-expresses the same supply problem; no unbounded avoidance, slack, or separated-projection supply is proved.",
+      "core_claim_count": 7,
+      "representative_claim_ids": [
+        "diagonal_pincer_reduction",
+        "diagonal_fresh_loss_reduction"
+      ],
+      "remaining_open_proposition_ids": [
+        "remaining_open.unbounded_certificate_supply"
+      ]
+    },
+    {
+      "id": "boolean_mobius_constraints",
+      "title": "Boolean Möbius carry and global rationality constraints",
+      "mathematical_focus": "Tempered binary carry orbits, Boolean Möbius reconstruction, reciprocal mass, unbounded carry states, and sublogarithmic divisor-coverage windows.",
+      "claim_ceiling": "These are exact characterisations and necessary consequences of rationality; they do not contradict every hypothetical rational value or settle universal Erdős #257.",
+      "core_claim_count": 5,
+      "representative_claim_ids": [
+        "tail_orbit_rigidity",
+        "boolean_mobius_carry"
+      ],
+      "remaining_open_proposition_ids": [
+        "remaining_open.universal_257_all_infinite_supports"
+      ]
+    },
+    {
+      "id": "transport_curvature_programme",
+      "title": "Transport, curvature, phase separation, and no-go results",
+      "mathematical_focus": "Finite differences of totient tails, exponent transport, affine moment annihilation, harmonic phases, reconstruction defects, and countermodels to bounded local signatures.",
+      "claim_ceiling": "The consumers and countermodels are exact, but no cofinal curvature, transport, phase-separation, or anti-reconstruction producer is proved.",
+      "core_claim_count": 7,
+      "representative_claim_ids": [
+        "transport_curvature_reductions",
+        "affine_transport_annihilation"
+      ],
+      "remaining_open_proposition_ids": [
+        "remaining_open.unbounded_certificate_supply"
+      ]
+    },
+    {
+      "id": "lambert_obstruction_interfaces",
+      "title": "Mersenne–Lambert identities and obstruction interfaces",
+      "mathematical_focus": "Dirichlet convolution identities, the Möbius-square lens, primitive-coordinate finite jets, exact tail atoms, sign-support no-go results, and conditional carry-rank growth.",
+      "claim_ceiling": "These are exact identities, obstruction theorems, and one conditional rank consequence; they do not form an irrationality criterion for S.",
+      "core_claim_count": 6,
+      "representative_claim_ids": [
+        "mersenne_lambert_ladder",
+        "primitive_coordinate_index_obstruction"
+      ],
+      "remaining_open_proposition_ids": [
+        "remaining_open.unbounded_certificate_supply"
+      ]
+    },
+    {
+      "id": "half_carry_compactness_programme",
+      "title": "Half-carry compactness, windows, seams, and finite propagation",
+      "mathematical_focus": "Compactness from finite half-carry words, scaled terminal closure, protected windows and one-hole seams, inverse-parent contraction, suffix-cylinder propagation, and checked depth-18-to-29 bases.",
+      "claim_ceiling": "The closure implications, local propagation laws, and bounded bases are exact; a cofinal producer or coherent unbounded window family is not proved, so neither half-membership nor universal Erdős #257 follows.",
+      "core_claim_count": 12,
+      "representative_claim_ids": [
+        "half_carry_reachability_compactness",
+        "cofinal_strip_return_closure"
+      ],
+      "remaining_open_proposition_ids": [
+        "remaining_open.universal_257_all_infinite_supports"
+      ]
+    },
+    {
+      "id": "arithmetic_obstruction_interfaces",
+      "title": "Denominator, CRT, moment, and gauge obstructions",
+      "mathematical_focus": "Squared-Mersenne tail enclosures, exact reduced denominators, adelic divisibility, square-CRT correction removal, dyadic determinant substrate, certificate dimensions, and residual-gauge no-go results.",
+      "claim_ceiling": "These are exact arithmetic interfaces, finite mechanisms, and obstruction theorems; they do not supply an unbounded certificate family or an irrationality criterion for the totient constant.",
+      "core_claim_count": 7,
+      "representative_claim_ids": [
+        "squared_mersenne_enclosure",
+        "mersenne_shadow_denominator"
+      ],
+      "remaining_open_proposition_ids": [
+        "remaining_open.erdos_249_irrationality",
+        "remaining_open.unbounded_certificate_supply"
+      ]
+    }
+  ],
   "reading_routes": [
     {
       "id": "instant_orientation",
+      "route_kind": "reading_route",
+      "title": null,
       "intent": "Understand what this repository proves, reduces, cites, and leaves open.",
       "read": [
         "docs/orientation.json",
         "SCOPE.md",
         "README.md"
       ],
-      "query_steps": [
-        "python3 scripts/query_corpus.py --format card",
-        "python3 scripts/query_corpus.py --open <remaining_open_proposition_id>",
-        "python3 scripts/query_corpus.py --claim <claim_id>"
-      ],
-      "authority_owners": [
-        "docs/claims.json::claims",
-        "docs/claims.json::remaining_open_propositions",
-        "docs/methodology.json"
-      ],
-      "adjacent_handle_classes": [
-        "claim_id",
-        "open_proposition_id",
-        "paper_label",
-        "declaration",
-        "module"
-      ]
+      "query": "python3 scripts/query_corpus.py --route instant_orientation"
     },
     {
       "id": "follow_one_claim",
+      "route_kind": "reading_route",
+      "title": null,
       "intent": "Trace one mathematical claim from exposition to checked source.",
       "read": [
         "docs/orientation.json",
         "docs/ORIENTATION.md"
       ],
-      "query_steps": [
-        "python3 scripts/query_corpus.py --claim <claim_id>",
-        "python3 scripts/query_corpus.py --paper-label <TeX_label>",
-        "python3 scripts/query_corpus.py --declaration <Lean_declaration>",
-        "python3 scripts/query_corpus.py --source <module.lean:line>",
-        "python3 scripts/query_corpus.py --module <module_or_paper_sigil>"
-      ],
-      "authority_owners": [
-        "docs/claims.json::claims",
-        "paper/erdos249-257-exposition.tex",
-        "paper/erdos249-transport-curvature.tex",
-        "Erdos249257.lean"
-      ],
-      "adjacent_handle_classes": [
-        "paper_label",
-        "paper_anchor",
-        "declaration",
-        "source_coordinate",
-        "module",
-        "paper_sigil"
-      ]
+      "query": "python3 scripts/query_corpus.py --route follow_one_claim"
     },
     {
       "id": "understand_argument_topology",
+      "route_kind": "reading_route",
+      "title": null,
       "intent": "See how the #249 reduction, #257 families, carry trunk, and open targets relate.",
       "read": [
         "docs/orientation.json",
-        "docs/SOURCE_MAP.md",
-        "docs/WAVE_INDEX.md"
+        "docs/SOURCE_MAP.md"
       ],
-      "query_steps": [
-        "python3 scripts/query_corpus.py --claim <claim_id>",
-        "python3 scripts/query_corpus.py --open <remaining_open_proposition_id>",
-        "python3 scripts/query_corpus.py --search <term> --limit <1..100>"
-      ],
-      "authority_owners": [
-        "docs/claims.json::machine_readable_paper.argument_graph",
-        "docs/SOURCE_MAP.md",
-        "docs/WAVE_INDEX.md"
-      ],
-      "adjacent_handle_classes": [
-        "claim_id",
-        "open_proposition_id",
-        "paper_label",
-        "declaration",
-        "module"
-      ]
+      "query": "python3 scripts/query_corpus.py --route understand_argument_topology"
     },
     {
       "id": "erdos257_half_story",
+      "route_kind": "mathematical_programme",
+      "title": "Achievement-set geometry and the half-value seam",
       "intent": "Recover the proved #257 half-value spine from unique greedy coding through the last-producer partition to the exact tail-escape residual, without identifying the remaining middle cells with dyadic unsafety beyond the checked theorems.",
       "read": [
         "docs/orientation.json"
       ],
-      "query_steps": [
-        "python3 scripts/query_corpus.py --claim greedy_achievement_geometry",
-        "python3 scripts/query_corpus.py --claim half_greedy_two_thirds_band",
-        "python3 scripts/query_corpus.py --claim half_membership_seam_classification",
-        "python3 scripts/query_corpus.py --claim fatal_gap_right_tail_classification",
-        "python3 scripts/query_corpus.py --claim final_middle_cell_escape",
-        "python3 scripts/query_corpus.py --claim last_producer_tail_escape_reduction"
-      ],
-      "authority_owners": [
-        "Erdos249257/GreedyAchievementSet.lean",
-        "Erdos249257/HalfGreedyTwoThirdsBand.lean",
-        "Erdos249257/HalfCylinderFatalGapRightTail.lean",
-        "Erdos249257/HalfCylinderFinalMiddleCellEscape.lean",
-        "Erdos249257/HalfCylinderLastProducerContradiction.lean",
-        "docs/claims.json::machine_readable_paper.argument_graph"
-      ],
-      "adjacent_handle_classes": [
-        "claim_id",
-        "paper_label",
-        "declaration",
-        "module",
-        "source_coordinate"
-      ]
+      "query": "python3 scripts/query_corpus.py --route erdos257_half_story"
     },
     {
       "id": "erdos249_certificate_story",
-      "intent": "Recover the exact #249 endpoint, certificate completeness, first-harmonic finite consumer, and the still-open cofinal harmonic estimate.",
+      "route_kind": "mathematical_programme",
+      "title": "#249 certificate and harmonic interface",
+      "intent": "Recover the denominator exclusion, exact certificate endpoint, certificate completeness, finite checked instances, first-harmonic consumer, and the still-open unbounded supply.",
       "read": [
         "docs/orientation.json"
       ],
-      "query_steps": [
-        "python3 scripts/query_corpus.py --claim certificate_reduction",
-        "python3 scripts/query_corpus.py --claim certificate_completeness",
-        "python3 scripts/query_corpus.py --claim first_harmonic_certificate_interface",
-        "python3 scripts/query_corpus.py --open remaining_open.unbounded_certificate_supply"
+      "query": "python3 scripts/query_corpus.py --route erdos249_certificate_story"
+    },
+    {
+      "id": "structured_support_families",
+      "route_kind": "mathematical_programme",
+      "title": "Classical and structured support irrationality",
+      "intent": "Follow the full-support theorem, named infinite-support families, periodic coefficient extensions, the mixed-sign dichotomy, and a conditional orthogonal-petal route.",
+      "read": [
+        "docs/orientation.json"
       ],
-      "authority_owners": [
-        "Erdos249257/TotientTailPeriodKiller.lean",
-        "Erdos249257/LcmConeFlatness.lean",
-        "Erdos249257/FirstHarmonicGap.lean",
-        "docs/claims.json::machine_readable_paper.argument_graph"
+      "query": "python3 scripts/query_corpus.py --route structured_support_families"
+    },
+    {
+      "id": "erdos249_diagonal_arithmetic",
+      "route_kind": "mathematical_programme",
+      "title": "#249 diagonal arithmetic and fresh-loss interfaces",
+      "intent": "Follow the exact lcm-diagonal pincer, fresh-loss projection, prime-deficit decomposition, odd-window, bit-lift, slack, and foreign-residue interfaces.",
+      "read": [
+        "docs/orientation.json"
       ],
-      "adjacent_handle_classes": [
-        "claim_id",
-        "open_proposition_id",
-        "paper_label",
-        "declaration",
-        "module"
-      ]
+      "query": "python3 scripts/query_corpus.py --route erdos249_diagonal_arithmetic"
+    },
+    {
+      "id": "boolean_mobius_constraints",
+      "route_kind": "mathematical_programme",
+      "title": "Boolean Möbius carry and global rationality constraints",
+      "intent": "Follow the exact carry-orbit characterisations of rational support-series values and the reciprocal-mass, unbounded-state, and zero-window consequences they force.",
+      "read": [
+        "docs/orientation.json"
+      ],
+      "query": "python3 scripts/query_corpus.py --route boolean_mobius_constraints"
+    },
+    {
+      "id": "transport_curvature_programme",
+      "route_kind": "mathematical_programme",
+      "title": "Transport, curvature, phase separation, and no-go results",
+      "intent": "Follow exact transport and curvature consumers, affine channel annihilation, checked finite instances, phase-separation producers, and fixed-precision countermodels.",
+      "read": [
+        "docs/orientation.json"
+      ],
+      "query": "python3 scripts/query_corpus.py --route transport_curvature_programme"
+    },
+    {
+      "id": "lambert_obstruction_interfaces",
+      "route_kind": "mathematical_programme",
+      "title": "Mersenne–Lambert identities and obstruction interfaces",
+      "intent": "Follow the exact Lambert identities around the totient constant and the coordinate, tail-atom, sign-support, and carry-rank obstructions that rule out naive compression strategies.",
+      "read": [
+        "docs/orientation.json"
+      ],
+      "query": "python3 scripts/query_corpus.py --route lambert_obstruction_interfaces"
+    },
+    {
+      "id": "half_carry_compactness_programme",
+      "route_kind": "mathematical_programme",
+      "title": "Half-carry compactness, windows, seams, and finite propagation",
+      "intent": "Follow the compactness sockets that would turn cofinal finite half-carry witnesses into half-membership, together with the exact rewind, protected-window, seam, suffix-cylinder, and finite-base theorems that isolate the missing producer.",
+      "read": [
+        "docs/orientation.json"
+      ],
+      "query": "python3 scripts/query_corpus.py --route half_carry_compactness_programme"
+    },
+    {
+      "id": "arithmetic_obstruction_interfaces",
+      "route_kind": "mathematical_programme",
+      "title": "Denominator, CRT, moment, and gauge obstructions",
+      "intent": "Follow exact arithmetic enclosures and denominator lower bounds, finite square-CRT suppression, dyadic moment and certificate interfaces, and gauge countermodels that delimit several plausible #249 routes.",
+      "read": [
+        "docs/orientation.json"
+      ],
+      "query": "python3 scripts/query_corpus.py --route arithmetic_obstruction_interfaces"
     },
     {
       "id": "trace_prior_art",
+      "route_kind": "reading_route",
+      "title": null,
       "intent": "Understand the cited mathematical sources, their precise relationship to the release, and the priority boundary.",
       "read": [
         "docs/PRIOR_ART.md",
-        "CITATION.cff",
         "docs/orientation.json"
       ],
-      "query_steps": [
-        "python3 scripts/query_corpus.py --artifact docs/PRIOR_ART.md",
-        "python3 scripts/query_corpus.py --paper-label <TeX_label>",
-        "python3 scripts/query_corpus.py --artifact <content_digest>"
-      ],
-      "authority_owners": [
-        "docs/PRIOR_ART.md",
-        "CITATION.cff",
-        "paper/erdos249-257-exposition.tex",
-        "paper/erdos249-transport-curvature.tex"
-      ],
-      "adjacent_handle_classes": [
-        "artifact",
-        "digest",
-        "paper_label",
-        "paper_anchor"
-      ]
+      "query": "python3 scripts/query_corpus.py --route trace_prior_art"
     },
     {
       "id": "understand_methodology_and_open_boundary",
+      "route_kind": "reading_route",
+      "title": null,
       "intent": "Understand the mathematical method, the evidence required for claim transitions, and the exact remaining open propositions.",
       "read": [
         "METHODOLOGY.md",
-        "SCOPE.md",
-        "docs/orientation.json"
-      ],
-      "query_steps": [
-        "python3 scripts/query_corpus.py --open <remaining_open_proposition_id>",
-        "python3 scripts/query_corpus.py --claim <claim_id>",
-        "python3 scripts/query_corpus.py --route instant_orientation"
-      ],
-      "authority_owners": [
-        "docs/methodology.json",
-        "docs/claims.json::remaining_open_propositions",
         "SCOPE.md"
       ],
-      "adjacent_handle_classes": [
-        "open_proposition_id",
-        "claim_id",
-        "route_id",
-        "paper_anchor"
-      ]
+      "query": "python3 scripts/query_corpus.py --route understand_methodology_and_open_boundary"
     },
     {
       "id": "change_or_verify_release",
+      "route_kind": "reading_route",
+      "title": null,
       "intent": "Modify a formal or editorial surface without allowing status or source coordinates to drift.",
       "read": [
         "AGENTS.md",
-        "scripts/check_release.py",
         "CONTRIBUTING.md"
       ],
-      "query_steps": [
-        "python3 scripts/query_corpus.py --artifact <path_or_sha256>",
-        "python3 scripts/query_corpus.py --declaration <Lean_declaration>",
-        "python3 scripts/query_corpus.py --source <module.lean:line>"
-      ],
-      "authority_owners": [
-        "docs/claims.json",
-        "docs/methodology.json",
-        "scripts/check_release.py",
-        "Erdos249257.lean"
-      ],
-      "adjacent_handle_classes": [
-        "artifact",
-        "digest",
-        "declaration",
-        "source_coordinate",
-        "module",
-        "claim_id"
-      ]
+      "query": "python3 scripts/query_corpus.py --route change_or_verify_release"
     }
   ],
   "drilldowns": {
@@ -609,6 +692,7 @@
     "artifact_or_digest": "python3 scripts/query_corpus.py --artifact <path_or_sha256>",
     "module": "python3 scripts/query_corpus.py --module <path_or_id_or_paper_sigil>",
     "reading_route": "python3 scripts/query_corpus.py --route <route_id>",
+    "mathematical_programme": "python3 scripts/query_corpus.py --route <programme_route_id>",
     "search": "python3 scripts/query_corpus.py --search <text> [--limit 1..100]"
   },
   "external_registration": {

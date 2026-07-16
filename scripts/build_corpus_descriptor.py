@@ -112,11 +112,38 @@ def build_orientation(claims: dict[str, Any], atlas: dict[str, Any]) -> dict[str
         principal_claims.append(row)
 
     machine_paper = claims["machine_readable_paper"]
+    reading_routes = [
+        {
+            "id": route["id"],
+            "route_kind": route.get("route_kind", "reading_route"),
+            "title": route.get("title"),
+            "intent": route["intent"],
+            "read": route["read"],
+            "query": f"python3 scripts/query_corpus.py --route {route['id']}",
+        }
+        for route in machine_paper["entrypoints"]
+    ]
+    mathematical_programmes = [
+        {
+            "id": route["id"],
+            "title": route["title"],
+            "mathematical_focus": route["mathematical_focus"],
+            "claim_ceiling": route["claim_ceiling"],
+            "core_claim_count": len(route["core_claim_ids"]),
+            "representative_claim_ids": route["core_claim_ids"][:2],
+            "remaining_open_proposition_ids": route[
+                "remaining_open_proposition_ids"
+            ],
+        }
+        for route in machine_paper["entrypoints"]
+        if route.get("route_kind") == "mathematical_programme"
+    ]
     return {
         "schema": "erdos249257-orientation/1",
         "artifact_role": "bounded_first_read_navigation_projection",
         "authority_posture": "navigation_projection_not_proof_authority",
         "proof_authority": "Lean source checked by the pinned Lean kernel",
+        "release_provenance": claims["release"]["public_projection"],
         "release": {
             "version": claims["release"]["version"],
             "tag": claims["release"]["tag"],
@@ -129,7 +156,8 @@ def build_orientation(claims: dict[str, Any], atlas: dict[str, Any]) -> dict[str
         "remaining_open_propositions": claims["remaining_open_propositions"],
         "non_claims": claims["non_claims"],
         "principal_claims": principal_claims,
-        "reading_routes": machine_paper["entrypoints"],
+        "mathematical_programmes": mathematical_programmes,
+        "reading_routes": reading_routes,
         "drilldowns": {
             "exact_claims_and_argument_graph": "docs/claims.json",
             "machine_readable_paper": "docs/claims.json::machine_readable_paper",
@@ -159,6 +187,7 @@ def build_orientation(claims: dict[str, Any], atlas: dict[str, Any]) -> dict[str
             "artifact_or_digest": "python3 scripts/query_corpus.py --artifact <path_or_sha256>",
             "module": "python3 scripts/query_corpus.py --module <path_or_id_or_paper_sigil>",
             "reading_route": "python3 scripts/query_corpus.py --route <route_id>",
+            "mathematical_programme": "python3 scripts/query_corpus.py --route <programme_route_id>",
             "search": "python3 scripts/query_corpus.py --search <text> [--limit 1..100]",
         },
         "external_registration": {
@@ -195,6 +224,16 @@ def render_orientation_markdown(orientation: dict[str, Any]) -> str:
         "projection, not proof authority. The published Lean source checked by the pinned",
         "Lean kernel remains proof authority.",
         "",
+        "## Release provenance",
+        "",
+        orientation["release_provenance"]["meaning"],
+        "",
+        "Public evidence of that release workflow: "
+        + "; ".join(orientation["release_provenance"]["public_evidence"])
+        + ".",
+        "",
+        orientation["release_provenance"]["boundary"],
+        "",
         "## Scale",
         "",
         "| Surface | Count |",
@@ -227,6 +266,32 @@ def render_orientation_markdown(orientation: dict[str, Any]) -> str:
     lines.extend(["", "## Exact open boundary", ""])
     for row in orientation["remaining_open_propositions"]:
         lines.append(f"- `{row['id']}` — {row['statement']}")
+    lines.extend(
+        [
+            "",
+            "## Mathematical programmes",
+            "",
+            "These are reading routes through the checked corpus, not extra claims.",
+            "Each route states its mathematical focus and exact public claim ceiling.",
+            "",
+            "| Programme | Exact ceiling |",
+            "|---|---|",
+        ]
+    )
+    for route in orientation["mathematical_programmes"]:
+        lines.append(
+            f"| **{route['title']}** (`{route['id']}`) | "
+            f"{route['claim_ceiling']} |"
+        )
+    lines.extend(
+        [
+            "",
+            "Open one programme with",
+            "`python3 scripts/query_corpus.py --route <programme_route_id>`.",
+            "The packet returns the ordered claim handles, exact open boundary, related",
+            "programmes, and source owners without loading the exhaustive graph.",
+        ]
+    )
     lines.extend(["", "## Principal claim routes", ""])
     lines.extend(
         [
@@ -254,12 +319,10 @@ def render_orientation_markdown(orientation: dict[str, Any]) -> str:
     )
     for route in orientation["reading_routes"]:
         paths = " → ".join(f"`{path}`" for path in route["read"])
-        lines.append(f"- **{route['intent']}** (`{route['id']}`): {paths}")
-        lines.append(f"  - Bounded queries: {'; '.join(f'`{step}`' for step in route['query_steps'])}")
-        lines.append(
-            "  - Authority owners: "
-            + ", ".join(f"`{owner}`" for owner in route["authority_owners"])
-        )
+        title = route.get("title") or route["intent"]
+        lines.append(f"- **{title}** (`{route['id']}`): {paths}")
+        lines.append(f"  - Intent: {route['intent']}")
+        lines.append(f"  - Bounded route: `{route['query']}`")
     lines.extend(
         [
             "",
@@ -304,7 +367,8 @@ def render_orientation_markdown(orientation: dict[str, Any]) -> str:
             "python3 scripts/query_corpus.py --module Erdos249257/CertificateKernel.lean",
             "python3 scripts/query_corpus.py --module CerKer",
             "python3 scripts/query_corpus.py --route instant_orientation",
-            "python3 scripts/query_corpus.py --search totient --limit 10",
+            "python3 scripts/query_corpus.py --route erdos249_diagonal_arithmetic",
+            'python3 scripts/query_corpus.py --search "what remains open for 257" --limit 5',
             "```",
             "",
         ]
@@ -470,6 +534,7 @@ def build() -> dict[str, Any]:
         "schema": "erdos249257-corpus-descriptor/3",
         "artifact_role": "self_describing_external_mathematical_corpus_root",
         "corpus_id": "plectis_lean_erdos249_257_public",
+        "release_provenance": release["public_projection"],
         "authority_posture": {
             "proof": "Lean source checked by the pinned Lean kernel",
             "authored_argument": "docs/claims.json::machine_readable_paper.argument_graph",
@@ -570,6 +635,7 @@ def build() -> dict[str, Any]:
             "declaration_to_human_paper_anchor_reverse_links": True,
             "direct_Lean_source_coordinate_resolution": True,
             "registered_artifact_and_digest_resolution": True,
+            "typed_mathematical_programme_routes": True,
             "declaration_level_proof_dependencies": False,
             "typed_remaining_open_propositions": True,
             "claim_transition_requirements": True,
@@ -578,7 +644,13 @@ def build() -> dict[str, Any]:
         "retrieval_modes": {
             "global": {
                 "source": "docs/orientation.json and compact_graph",
-                "supports": ["proved_open_boundary", "principal_claim_routes", "release_scale", "root_module_topology"],
+                "supports": [
+                    "proved_open_boundary",
+                    "principal_claim_routes",
+                    "mathematical_programme_routes",
+                    "release_scale",
+                    "root_module_topology",
+                ],
             },
             "concept": {
                 "source": "scripts/query_corpus.py then attached claims or atlas",
@@ -595,6 +667,19 @@ def build() -> dict[str, Any]:
             "principal_claims": orientation["principal_claims"],
             "non_claims": claims["non_claims"],
             "remaining_open_propositions": claims["remaining_open_propositions"],
+            "mathematical_programmes": [
+                {
+                    "id": route["id"],
+                    "title": route["title"],
+                    "core_claim_count": len(route["core_claim_ids"]),
+                    "representative_claim_ids": route["core_claim_ids"][:2],
+                    "remaining_open_proposition_ids": route[
+                        "remaining_open_proposition_ids"
+                    ],
+                }
+                for route in machine_paper["entrypoints"]
+                if route.get("route_kind") == "mathematical_programme"
+            ],
             "module_topology": {
                 "root": machine_paper["module_graph"]["root"],
                 "node_count": len(machine_paper["module_graph"]["nodes"]),
@@ -613,12 +698,20 @@ def build() -> dict[str, Any]:
                 "full_contract": "docs/methodology.json",
             },
             "principal_declaration_handles": principal_declaration_handles,
+            "mathematical_programme_query": (
+                "python3 scripts/query_corpus.py --route <programme_route_id>"
+            ),
         },
         "expansion": {
             "machine_readable_paper": {
                 "path": "docs/claims.json::machine_readable_paper",
                 "expected_content_digest": canonical_digest(machine_paper),
-                "contains": ["all_claims", "authored_argument_graph", "complete_module_import_graph"],
+                "contains": [
+                    "all_claims",
+                    "authored_argument_graph",
+                    "mathematical_programme_routes",
+                    "complete_module_import_graph",
+                ],
                 "query": "python3 scripts/query_corpus.py --claim <claim_id>",
             },
             "exhaustive_declaration_atlas": {

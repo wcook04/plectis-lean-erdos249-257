@@ -35,10 +35,32 @@ README_FIRST_MINUTE_BUDGET_BYTES = 6_000
 SUMMARY_PACKET_BUDGET_BYTES = 32_000
 PACKET_BUDGET_BYTES = 16_384
 PROOF_AUTHORITY = "Lean source checked by the pinned Lean kernel"
+SELF_APPRAISAL_PHRASES = (
+    "ambitious",
+    "crazy good",
+    "exceptional",
+    "extraordinary",
+    "groundbreaking",
+    "impressive",
+    "insane",
+    "major achievement",
+    "research-grade",
+    "unprecedented",
+)
 GATEWAY_PAPER = "paper/erdos249-257-exposition.tex"
 GATEWAY_OPENING_BUDGET_BYTES = 7_500
 CLAUDE_ENTRY_BUDGET_BYTES = 1_500
-STORY_ROUTES = ("erdos257_half_story", "erdos249_certificate_story")
+STORY_ROUTES = (
+    "erdos257_half_story",
+    "erdos249_certificate_story",
+    "structured_support_families",
+    "erdos249_diagonal_arithmetic",
+    "boolean_mobius_constraints",
+    "transport_curvature_programme",
+    "lambert_obstruction_interfaces",
+    "half_carry_compactness_programme",
+    "arithmetic_obstruction_interfaces",
+)
 STORY_CLAIMS = (
     "greedy_achievement_geometry",
     "half_greedy_two_thirds_band",
@@ -50,6 +72,21 @@ STORY_CLAIMS = (
     "certificate_completeness",
     "first_harmonic_certificate_interface",
 )
+DISCOVERY_ROUTE_QUERIES = {
+    "how close is problem 249": "erdos249_certificate_story",
+    "what remains open for 257": "erdos257_half_story",
+    "achievement set topology": "erdos257_half_story",
+    "why local induction fails": "half_carry_compactness_programme",
+    "strategy countermodels": "transport_curvature_programme",
+    "formal proof trust": "change_or_verify_release",
+    "denominator obstruction": "arithmetic_obstruction_interfaces",
+    "how big is the corpus": "instant_orientation",
+    "what is formally checked": "instant_orientation",
+    "where are the Lean proofs": "follow_one_claim",
+    "what is new mathematics": "trace_prior_art",
+    "how do I verify this": "change_or_verify_release",
+    "what is still missing": "understand_methodology_and_open_boundary",
+}
 
 
 def read(rel: str) -> str:
@@ -150,6 +187,12 @@ def validate_human_first_contact(
     for path, budget in HUMAN_SURFACE_BUDGET_BYTES.items():
         size = len(surfaces[path].encode("utf-8"))
         assert size <= budget, f"{path} is {size} bytes (budget {budget})"
+        lowered = normalized(surfaces[path]).casefold()
+        for phrase in SELF_APPRAISAL_PHRASES:
+            assert phrase not in lowered, (
+                f"{path} uses self-appraisal phrase {phrase!r}; expose objective "
+                "mathematical and formal facts instead"
+            )
 
     readme_prefix = first_bytes(surfaces["README.md"], README_FIRST_MINUTE_BUDGET_BYTES)
     section_order = (
@@ -184,6 +227,10 @@ def validate_human_first_contact(
         assert contains_any(orientation, [summary["status_taxonomy"][status]])
     for row in summary["remaining_open_propositions"]:
         assert row["id"] in orientation and contains_any(orientation, [row["statement"]])
+    for programme in summary["mathematical_programmes"]:
+        assert programme["id"] in orientation
+        assert contains_any(orientation, [programme["title"]])
+        assert contains_any(orientation, [programme["claim_ceiling"]])
 
 
 def validate_gateway_opening(paper: str) -> None:
@@ -197,26 +244,27 @@ def validate_gateway_opening(paper: str) -> None:
     )
     requirements = {
         "both_problem_statements": [
-            [r"Erd\H{o}s~\#249 asks whether"],
-            [r"Erd\H{o}s~\#257 asks whether"],
+            [r"is irrational (\#249)"],
+            [r"for every infinite $A\subseteq\N$ (\#257)"],
         ],
         "status_table": [
-            ["problem & checked here & exact open edge"],
-            [r"q>\Qzero\approx7.96\times10^{34}"],
-            ["28 lcm-diagonal scales"],
+            [r"\textbf{Classical formalisation}"],
+            [r"q>\Qzero"],
+            ["28 diagonal certificates"],
         ],
         "exact_residuals": [
-            ["Produce these certificates at unbounded parameters"],
-            [r"middle coordinates $-2$ and $-1$"],
+            ["An unbounded certificate supply"],
+            ["cofinal false terminals"],
+            ["the unresolved middle-tail estimate"],
         ],
         "common_architecture": [
-            ["exact tail and carry identities separate finite arithmetic"],
-            ["not an assertion that the two open problems are equivalent"],
+            ["tail and carry identities separate exact finite arithmetic"],
+            ["one analytic or combinatorial cofinality statement"],
         ],
         "reading_map": [
             [r"\paragraph{Reading map.}"],
-            [r"Section~\ref{sec:eb}"],
-            [r"Section~\ref{sec:249}"],
+            [r"Sections~\ref{sec:eb}"],
+            [r"and~\ref{sec:249}"],
         ],
     }
     for task_id, groups in requirements.items():
@@ -224,7 +272,7 @@ def validate_gateway_opening(paper: str) -> None:
             assert contains_any(opening, alternatives), (
                 f"gateway opening task {task_id!r} lost {alternatives}"
             )
-    for source_inventory_token in (r"\lref", r"\idn", ".lean", "module inventory"):
+    for source_inventory_token in (r"\idn", "module inventory"):
         assert source_inventory_token not in opening, (
             f"gateway opening exposes source-inventory token {source_inventory_token!r}"
         )
@@ -233,6 +281,13 @@ def validate_gateway_opening(paper: str) -> None:
 def validate_cross_agent_entry(agents: str, claude: str) -> None:
     """Keep one shared semantic core with a small Claude-native adapter."""
     assert len(claude.encode("utf-8")) <= CLAUDE_ENTRY_BUDGET_BYTES
+    for path, text in (("AGENTS.md", agents), ("CLAUDE.md", claude)):
+        lowered = normalized(text).casefold()
+        for phrase in SELF_APPRAISAL_PHRASES:
+            assert phrase not in lowered, (
+                f"{path} uses self-appraisal phrase {phrase!r}; route to objective "
+                "claims, scale, and verification receipts instead"
+            )
     for token in (
         "docs/orientation.json",
         "docs/claims.json",
@@ -244,6 +299,8 @@ def validate_cross_agent_entry(agents: str, claude: str) -> None:
         "@AGENTS.md",
         "Claude-specific deltas only",
         "docs/orientation.json",
+        "mathematical programme",
+        "larger ongoing formal-mathematics workflow",
         "not an entrypoint into any private development system",
     ):
         assert contains_any(claude, [token]), f"CLAUDE.md lost native adapter token {token!r}"
@@ -265,6 +322,10 @@ def collect_agent_packets() -> dict[str, Any]:
         "route": query_packet("--route", "instant_orientation"),
         "story_routes": {
             route_id: query_packet("--route", route_id) for route_id in STORY_ROUTES
+        },
+        "discovery_searches": {
+            search_text: query_packet("--search", search_text, "--limit", "10")
+            for search_text in DISCOVERY_ROUTE_QUERIES
         },
         "story_claims": {
             claim_id: query_packet("--claim", claim_id) for claim_id in STORY_CLAIMS
@@ -302,8 +363,20 @@ def validate_agent_packets(packets: dict[str, Any]) -> None:
     assert summary["kind"] == "corpus_summary"
     assert summary["authority_posture"] == "navigation_projection_not_proof_authority"
     assert summary["proof_authority"] == PROOF_AUTHORITY
+    assert summary["release_provenance"]["posture"] == (
+        "self_contained_public_projection_from_a_larger_ongoing_research_workflow"
+    )
+    assert "does not imply hidden proof authority" in (
+        summary["release_provenance"]["boundary"]
+    )
     assert encoded_bytes(summary) <= SUMMARY_PACKET_BUDGET_BYTES
     assert summary["remaining_open_propositions"]
+    assert summary["scale"]["theorem_like_count"] > (
+        summary["scale"]["generated_certificate_declaration_count"]
+    )
+    assert summary["curated_claim_count"] >= len(summary["principal_claims"])
+    assert summary["publication_family_count"] > 0
+    assert len(summary["mathematical_programmes"]) == len(STORY_ROUTES)
 
     principal = {row["id"]: row for row in summary["principal_claims"]}
     assert any(row["status"] == "conditional reduction" for row in principal.values())
@@ -361,13 +434,78 @@ def validate_agent_packets(packets: dict[str, Any]) -> None:
 
     story_routes = packets["story_routes"]
     assert tuple(story_routes) == STORY_ROUTES
+    summary_programmes = {
+        row["id"]: row for row in summary["mathematical_programmes"]
+    }
+    assert set(summary_programmes) == set(STORY_ROUTES)
+    for route_id, packet in story_routes.items():
+        route = packet["route"]
+        programme = packet["programme"]
+        assert route["route_kind"] == "mathematical_programme"
+        assert route["id"] == route_id
+        assert programme["title"] == summary_programmes[route_id]["title"]
+        assert programme["core_claims"]
+        assert summary_programmes[route_id]["core_claim_count"] == len(
+            programme["core_claims"]
+        )
+        assert set(summary_programmes[route_id]["representative_claim_ids"]).issubset(
+            {row["id"] for row in programme["core_claims"]}
+        )
+        assert programme["problem_targets"]
+        assert all(row["status"] == "open" for row in programme["problem_targets"])
+        assert programme["remaining_open_propositions"]
+        assert any(
+            token in programme["claim_ceiling"].casefold()
+            for token in (
+                "remain open",
+                "not proved",
+                "does not",
+                "do not",
+                "neither",
+                "no ",
+            )
+        )
+        assert {
+            step.rsplit(" ", 1)[-1]
+            for step in route["query_steps"]
+            if " --claim " in step
+        } == {row["id"] for row in programme["core_claims"]}
+        assert {
+            step.rsplit(" ", 1)[-1]
+            for step in route["query_steps"]
+            if " --open " in step
+        } == {
+            row["id"] for row in programme["remaining_open_propositions"]
+        }
+        assert packet["release_provenance"] == summary["release_provenance"]
+    for search_text, expected_route_id in DISCOVERY_ROUTE_QUERIES.items():
+        search_packet = packets["discovery_searches"][search_text]
+        assert search_packet["kind"] == "search"
+        assert search_packet["query"] == search_text
+        assert expected_route_id in {
+            row.get("id")
+            for row in search_packet["results"]
+            if row["kind"] == "reading_route"
+        }
     assert [
         step.rsplit(" ", 1)[-1]
         for step in story_routes["erdos257_half_story"]["route"]["query_steps"]
-    ] == list(STORY_CLAIMS[:6])
-    assert story_routes["erdos249_certificate_story"]["route"]["query_steps"][-1].endswith(
-        "remaining_open.unbounded_certificate_supply"
-    )
+    ] == [
+        *STORY_CLAIMS[:6],
+        "remaining_open.universal_257_all_infinite_supports",
+    ]
+    assert [
+        step.rsplit(" ", 1)[-1]
+        for step in story_routes["erdos249_certificate_story"]["route"]["query_steps"]
+    ] == [
+        "denominator_exclusion",
+        "certificate_reduction",
+        "certificate_completeness",
+        "certified_kill_instances",
+        "first_harmonic_certificate_interface",
+        "remaining_open.erdos_249_irrationality",
+        "remaining_open.unbounded_certificate_supply",
+    ]
 
     story_claims = packets["story_claims"]
     band_claim = story_claims["half_greedy_two_thirds_band"]
@@ -422,6 +560,7 @@ def main() -> int:
         + len(packets["modules"])
         + len(packets["sigil_modules"])
         + len(packets["story_routes"])
+        + len(packets["discovery_searches"])
         + len(packets["story_claims"])
         + 3
     )

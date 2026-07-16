@@ -970,6 +970,48 @@ def module_packet(handle: str, limit: int) -> dict[str, Any]:
     }
 
 
+SEARCH_STOP_WORDS = frozenset(
+    {
+        "a",
+        "an",
+        "and",
+        "are",
+        "as",
+        "at",
+        "be",
+        "close",
+        "for",
+        "from",
+        "how",
+        "in",
+        "is",
+        "it",
+        "of",
+        "on",
+        "or",
+        "the",
+        "to",
+        "what",
+        "why",
+        "with",
+    }
+)
+
+
+def search_terms(value: str) -> set[str]:
+    """Return stable lexical terms for bounded natural-language fallback."""
+    terms: set[str] = set()
+    for token in re.findall(r"[a-z0-9]+", value.casefold()):
+        if token in SEARCH_STOP_WORDS:
+            continue
+        if token.endswith("ing") and len(token) > 6:
+            token = token[:-3]
+        elif token.endswith("s") and len(token) > 4 and not token.endswith("ss"):
+            token = token[:-1]
+        terms.add(token)
+    return terms
+
+
 def search_rank(query: str, primary: str, haystack: str) -> int | None:
     needle = query.casefold()
     key = primary.casefold()
@@ -982,6 +1024,19 @@ def search_rank(query: str, primary: str, haystack: str) -> int | None:
         return 2
     if needle in body:
         return 3
+    query_terms = search_terms(query)
+    if not query_terms:
+        return None
+    key_terms = search_terms(primary)
+    body_terms = search_terms(haystack)
+    if query_terms <= key_terms:
+        return 4
+    if query_terms <= body_terms:
+        return 5
+    matched = len(query_terms & (key_terms | body_terms))
+    required = max(2, (2 * len(query_terms) + 2) // 3)
+    if matched >= required:
+        return 10 + len(query_terms) - matched
     return None
 
 
@@ -991,7 +1046,6 @@ def search_packet(query: str, limit: int) -> dict[str, Any]:
         raise ValueError("search query must not be empty")
     claims = load("docs/claims.json")
     atlas = load("docs/declaration_atlas.json")
-    orientation = load("docs/orientation.json")
     aliases = load("paper/module-aliases.json")["aliases"]
     sigil_by_path = {row["path"]: row["sigil"] for row in aliases}
     roles = module_roles(claims)
@@ -1121,19 +1175,74 @@ def search_packet(query: str, limit: int) -> dict[str, Any]:
                 )
             )
 
-    for row in orientation["reading_routes"]:
+    publication_assembly = claims["machine_readable_paper"]["publication_assembly"]
+    for row in publication_assembly["contribution_families"]:
+        rank = search_rank(
+            query,
+            row["id"],
+            " ".join(
+                str(value)
+                for value in (
+                    row["status_summary"],
+                    row["prior_art_posture"],
+                    row["primary_narrative_owner"],
+                    row["consumer_or_open_obligation"],
+                    row["view_decision"],
+                    *row["claim_ids"],
+                )
+            ),
+        )
+        if rank is not None:
+            ranked.append(
+                (
+                    rank,
+                    f"publication_family:{row['id']}",
+                    {
+                        "kind": "publication_family",
+                        "id": row["id"],
+                        "status_summary": row["status_summary"],
+                        "primary_narrative_owner": row["primary_narrative_owner"],
+                        "view_decision": row["view_decision"],
+                    },
+                )
+            )
+
+    for row in claims["machine_readable_paper"]["entrypoints"]:
         route_haystack = " ".join(
-            [
+            str(value)
+            for value in (
+                row.get("title"),
                 row["intent"],
+                *row.get("discovery_terms", []),
+                row.get("mathematical_focus"),
+                row.get("claim_ceiling"),
                 *row["read"],
                 *row["query_steps"],
                 *row["authority_owners"],
                 *row["adjacent_handle_classes"],
-            ]
+                *row.get("core_claim_ids", []),
+                *row.get("remaining_open_proposition_ids", []),
+            )
+            if value
         )
         rank = search_rank(query, row["id"], route_haystack)
         if rank is not None:
-            ranked.append((rank, f"route:{row['id']}", {"kind": "reading_route", **row}))
+            ranked.append(
+                (
+                    rank,
+                    f"route:{row['id']}",
+                    {
+                        "kind": "reading_route",
+                        "id": row["id"],
+                        "route_kind": row.get("route_kind", "reading_route"),
+                        "title": row.get("title"),
+                        "intent": row["intent"],
+                        "problem_target_claim_ids": row.get(
+                            "problem_target_claim_ids", []
+                        ),
+                    },
+                )
+            )
 
     ranked.sort(key=lambda item: (item[0], item[1]))
     results = [item[2] for item in ranked]
@@ -1145,28 +1254,139 @@ def search_packet(query: str, limit: int) -> dict[str, Any]:
         "results": results[:limit],
         "omitted_match_count": max(0, len(results) - limit),
         "limit": limit,
-        "next": "Use the typed handle with --claim, --paper-anchor, --open, --declaration, --source, --module, --connections, --artifact, or --route.",
+        "next": "Use the typed handle with --claim, --paper-anchor, --open, --declaration, --source, --module, --connections, --artifact, --route, or --publication-family.",
     }
 
 
 def route_packet(route_id: str) -> dict[str, Any]:
-    orientation = load("docs/orientation.json")
-    route = next((row for row in orientation["reading_routes"] if row["id"] == route_id), None)
+    claims = load("docs/claims.json")
+    route = next(
+        (
+            row
+            for row in claims["machine_readable_paper"]["entrypoints"]
+            if row["id"] == route_id
+        ),
+        None,
+    )
     if route is None:
         raise KeyError(f"unknown route id: {route_id}")
-    return {
+    claim_index = {row["id"]: row for row in claims["claims"]}
+    open_index = {
+        row["id"]: row for row in claims["remaining_open_propositions"]
+    }
+    route_index = {
+        row["id"]: row for row in claims["machine_readable_paper"]["entrypoints"]
+    }
+    packet = {
         "kind": "reading_route",
-        "authority_posture": orientation["authority_posture"],
+        "authority_posture": "authored_navigation_route_not_proof_authority",
         "route": route,
-        "proof_authority": orientation["proof_authority"],
+        "proof_authority": "Lean source checked by the pinned Lean kernel",
+        "release_provenance": claims["release"]["public_projection"],
+        "validation": "python3 scripts/check_release.py",
+    }
+    if route.get("route_kind") == "mathematical_programme":
+        core_claims = [claim_index[claim_id] for claim_id in route["core_claim_ids"]]
+        packet["programme"] = {
+            "title": route["title"],
+            "mathematical_focus": route["mathematical_focus"],
+            "claim_ceiling": route["claim_ceiling"],
+            "problem_targets": [
+                compact_claim(claim_index[claim_id])
+                for claim_id in route["problem_target_claim_ids"]
+            ],
+            "core_claims": [compact_claim(claim) for claim in core_claims],
+            "status_counts": dict(
+                sorted(
+                    {
+                        status: sum(
+                            claim["status"] == status for claim in core_claims
+                        )
+                        for status in {claim["status"] for claim in core_claims}
+                    }.items()
+                )
+            ),
+            "remaining_open_propositions": [
+                open_index[open_id]
+                for open_id in route["remaining_open_proposition_ids"]
+            ],
+            "related_programmes": [
+                {
+                    "id": related_id,
+                    "title": route_index[related_id]["title"],
+                    "intent": route_index[related_id]["intent"],
+                }
+                for related_id in route["related_route_ids"]
+            ],
+        }
+    return packet
+
+
+def publication_family_packet(family_id: str) -> dict[str, Any]:
+    claims = load("docs/claims.json")
+    assembly = claims["machine_readable_paper"]["publication_assembly"]
+    family = next(
+        (
+            row
+            for row in assembly["contribution_families"]
+            if row["id"] == family_id
+        ),
+        None,
+    )
+    if family is None:
+        raise KeyError(f"unknown publication family id: {family_id}")
+    claim_index = {row["id"]: row for row in claims["claims"]}
+    family_claims = [claim_index[claim_id] for claim_id in family["claim_ids"]]
+    return {
+        "kind": "publication_family",
+        "authority_posture": "publication_assembly_navigation_not_proof_authority",
+        "family": family,
+        "claims": [compact_claim(claim) for claim in family_claims],
+        "status_counts": dict(
+            sorted(
+                {
+                    status: sum(claim["status"] == status for claim in family_claims)
+                    for status in {claim["status"] for claim in family_claims}
+                }.items()
+            )
+        ),
+        "publication_architecture": assembly["publication_architecture"],
+        "proof_authority": "Lean source checked by the pinned Lean kernel",
+        "validation": "python3 scripts/check_release.py",
+    }
+
+
+def publication_architecture_packet() -> dict[str, Any]:
+    claims = load("docs/claims.json")
+    assembly = claims["machine_readable_paper"]["publication_assembly"]
+    return {
+        "kind": "publication_architecture",
+        "authority_posture": "authored_editorial_topology_not_proof_authority",
+        "architecture": assembly["publication_architecture"],
+        "family_index": [
+            {
+                "id": row["id"],
+                "status_summary": row["status_summary"],
+                "primary_narrative_owner": row["primary_narrative_owner"],
+                "view_decision": row["view_decision"],
+                "claim_count": len(row["claim_ids"]),
+            }
+            for row in assembly["contribution_families"]
+        ],
+        "coverage_rule": assembly["coverage_rule"],
+        "validation": "python3 scripts/check_release.py",
     }
 
 
 def summary_packet() -> dict[str, Any]:
     orientation = load("docs/orientation.json")
+    claims = load("docs/claims.json")
+    assembly = claims["machine_readable_paper"]["publication_assembly"]
     return {
         "kind": "corpus_summary",
         **orientation,
+        "curated_claim_count": len(claims["claims"]),
+        "publication_family_count": len(assembly["contribution_families"]),
     }
 
 
@@ -1245,14 +1465,47 @@ def render_card(packet: dict[str, Any]) -> str:
         return "\n".join(rows)
     if kind == "reading_route":
         route = packet["route"]
+        if route.get("route_kind") == "mathematical_programme":
+            programme = packet["programme"]
+            claims = ",".join(
+                row["id"] for row in programme["core_claims"]
+            )
+            open_ids = ",".join(
+                row["id"]
+                for row in programme["remaining_open_propositions"]
+            )
+            return (
+                f"programme {route['id']} | {programme['title']} "
+                f"| claims={claims} | open={open_ids}"
+            )
         return (
             f"route {route['id']} | {route['intent']} | read={' -> '.join(route['read'])} "
             f"| next={route['query_steps'][0]}"
         )
+    if kind == "publication_family":
+        family = packet["family"]
+        return (
+            f"publication family {family['id']} | claims={len(packet['claims'])} "
+            f"| owner={family['primary_narrative_owner']} "
+            f"| view={family['view_decision']} "
+            f"| obligation={family['consumer_or_open_obligation']}"
+        )
+    if kind == "publication_architecture":
+        architecture = packet["architecture"]
+        return (
+            f"publication architecture | gateway="
+            f"{architecture['canonical_gateway']['source']} "
+            f"| retained_companions={len(architecture['retained_companions'])} "
+            f"| families={len(packet['family_index'])}"
+        )
     scale = packet["scale"]
     return (
         f"corpus {packet['release']['tag']} | modules={scale['module_count']} "
-        f"| declarations={scale['declaration_count']} | principal_claims={len(packet['principal_claims'])} "
+        f"| theorem_like={scale['theorem_like_count']} "
+        f"| curated_claims={packet['curated_claim_count']} "
+        f"| programmes={len(packet['mathematical_programmes'])} "
+        f"| contribution_families={packet['publication_family_count']} "
+        f"| claim_links={scale['principal_claim_link_count']} "
         f"| open={len(packet['remaining_open_propositions'])}"
     )
 
@@ -1270,6 +1523,8 @@ def main() -> int:
     group.add_argument("--module", metavar="PATH_OR_ID")
     group.add_argument("--connections", metavar="MODULE_OR_DECLARATION")
     group.add_argument("--route", metavar="ID")
+    group.add_argument("--publication-family", metavar="ID")
+    group.add_argument("--publication-architecture", action="store_true")
     group.add_argument("--search", metavar="TEXT")
     parser.add_argument("--limit", type=int, default=DEFAULT_LIMIT)
     parser.add_argument("--query", default="", help="rank a connection card toward one task")
@@ -1298,6 +1553,10 @@ def main() -> int:
             packet = connection_card(args.connections, args.limit, args.query)
         elif args.route:
             packet = route_packet(args.route)
+        elif args.publication_family:
+            packet = publication_family_packet(args.publication_family)
+        elif args.publication_architecture:
+            packet = publication_architecture_packet()
         elif args.search:
             packet = search_packet(args.search, args.limit)
         else:

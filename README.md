@@ -1,20 +1,17 @@
 <!-- SPDX-FileCopyrightText: 2026 Will Cook -->
 <!-- SPDX-License-Identifier: Apache-2.0 -->
 
-# Erdős Problems 249 and 257 in Lean 4
+# Tail certificates and achievement-set geometry for Erdős Problems 249 and 257
 
-Formalised results, exact reductions, and open questions around two unsolved
+Lean 4 formal corpus of exact reductions, explicit bounds, classical
+formalisation, finite evidence, and open producers for unsolved
 irrationality problems.
 
-[**Exposition PDF**](erdos249-257-exposition.pdf) ·
+[**Gateway paper**](erdos249-257-exposition.pdf) ·
+[**#249 companion**](erdos249-transport-curvature.pdf) ·
 [Release v0.6.0](https://github.com/wcook04/plectis-lean-erdos249-257/releases/tag/v0.6.0) ·
 [![Lean CI](https://github.com/wcook04/plectis-lean-erdos249-257/actions/workflows/lean.yml/badge.svg)](https://github.com/wcook04/plectis-lean-erdos249-257/actions/workflows/lean.yml) ·
-[Plectis website](https://wcook04.github.io/plectis/) ·
-[Plectis source](https://github.com/wcook04/plectis)
-
-This is a self-contained public Lean project. It is not an entrypoint into any
-private development system. No claim here depends on private or unreleased
-work, and no equivalence with such work is asserted. In particular, do not infer results from private or unreleased work.
+[Plectis](https://wcook04.github.io/plectis/)
 
 ## The two problems
 
@@ -27,10 +24,13 @@ Both remain open. This project formalises results around both questions; **it
 does not solve Erdős #249 or the universal form of Erdős #257.** Every row
 below is stated at the scope the Lean source actually supports.
 
-`v0.6.0` is the latest tagged release and citation anchor. The claims and paper
-are pinned separately to the exact post-tag formal-source checkpoint recorded
-in [`docs/claims.json`](docs/claims.json); that checkpoint is not a new tagged
-release. Lean source checked by the pinned Lean kernel is proof authority.
+This is a self-contained public project. It is not an entrypoint into any
+private development system, and no claim depends on unreleased work.
+
+`v0.6.0` is the latest tagged release and citation anchor.
+[`docs/claims.json`](docs/claims.json) pins the post-tag formal-source checkpoint;
+it is not a new tagged release. Lean source checked by the pinned Lean kernel is proof
+authority.
 
 ## What the formal source establishes
 
@@ -39,20 +39,19 @@ release. Lean source checked by the pinned Lean kernel is proof authority.
 | **formalised here** | For every integer `b ≥ 2`, the full-support series `∑ 1/(bⁿ - 1)` is irrational. Several named infinite-support families are also formalised; this does not cover every infinite support. |
 | **formalised here** | The base-2 Mersenne achievement set is compact, perfect, totally disconnected, nowhere dense, and has Lebesgue measure one. Membership is equivalent to greedy survival at every level. |
 | **unconditional progress** | If `S` is rational, its denominator is greater than `79 639 646 646 701 375 323 355 774 875 831 053` (about `7.96 × 10³⁴`). |
-| **conditional reduction** | `S` is irrational exactly when certified non-integrality witnesses occur at unbounded parameters. At fixed parameters, existence of a finite certificate is equivalent to non-integrality of the corresponding tail difference. The unbounded supply remains open. |
+| **exact equivalence / conditional producer** | `S` is irrational exactly when every positive binary tail difference is non-integral, equivalently when every fixed pair has a finite certificate. The unresolved producer is an unbounded or cofinal supply of these witnesses. |
 | **verified finite instance** | The kernel checks 28 explicit lcm-diagonal scales through `t = 64`. This bounded range does not supply the unbounded quantifier required above. |
-| **proved here** | For the #257 test value `1/2`, achievement-set membership is equivalent to infinitely many greedy skips. Under the alternative hypothesis that there is a last skip, the upper branch and the middle coordinate `-3` are impossible. |
+| **proved here** | For the #257 test value `1/2`, achievement-set membership is equivalent to infinitely many greedy skips and would produce an infinite support of rational sum, refuting universal #257. Under a last-skip hypothesis, the upper branch and the middle coordinate `-3` are impossible. |
 | **conditional reduction** | The two remaining middle coordinates `-2` and `-1` would also be eliminated if the producer carry dominated its complete future divisor-incidence tail. That inequality is not proved. |
 
 A further local check gives an exact band formula for the final skip between
 two takes. It validates a finite mechanism; it does not show that the actual
 orbit avoids an unsafe band.
 
-The generated [orientation](docs/ORIENTATION.md) expands these status labels and
-routes every principal claim. The [exposition](erdos249-257-exposition.pdf)
-states the hypotheses and proof status in ordinary notation. The separate
-[transport and curvature companion](erdos249-transport-curvature.pdf) treats
-the affine transport and fixed-precision boundary.
+The generated [orientation](docs/ORIENTATION.md) routes every principal claim.
+The [gateway paper](erdos249-257-exposition.pdf) states both canonical spines;
+the [#249 companion](erdos249-transport-curvature.pdf) owns transport,
+phase separation, and scoped local countermodels.
 
 ## What remains open
 
@@ -86,10 +85,13 @@ claims. For a guided reading order, see
   [Exposition PDF](erdos249-257-exposition.pdf), then use
   [`docs/SOURCE_MAP.md`](docs/SOURCE_MAP.md) to follow one result into Lean.
 - **Coding agent:** read [`AGENTS.md`](AGENTS.md), then the bounded
-  [`docs/orientation.json`](docs/orientation.json). Select one claim before
-  expanding the exhaustive registry.
+  [`docs/orientation.json`](docs/orientation.json). Select one mathematical
+  programme or claim before expanding the exhaustive registry.
 - **Exact boundary or claim status:** read [SCOPE.md](SCOPE.md), the human
   [orientation](docs/ORIENTATION.md), and [methodology](METHODOLOGY.md).
+- **Publication topology or contribution family:** run
+  `python3 scripts/query_corpus.py --publication-architecture` or
+  `python3 scripts/query_corpus.py --publication-family <id>`.
 - **Verify:** run `python3 scripts/check_release.py`; after Lean changes, run
   `lake build` (or `python3 scripts/lean_fast_build.py --jobs 2` on a
   memory-constrained machine).

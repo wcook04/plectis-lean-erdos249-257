@@ -4,23 +4,22 @@
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage[a4paper,margin=1in]{geometry}
-\usepackage{amsmath,amssymb,amsthm,booktabs}
+\usepackage{amsmath,amssymb,amsthm,booktabs,array}
 \usepackage[dvipsnames]{xcolor}
 \usepackage[colorlinks=true,linkcolor=black,urlcolor=RoyalBlue,citecolor=black]{hyperref}
 \newcommand{\commit}{81150c1c6fdd4cd51e76d3aa0de344341e0e9e7c}
 \newcommand{\repobase}{https://github.com/wcook04/plectis-lean-erdos249-257/blob/\commit}
 \newcommand{\PK}{Erdos249257}
 \input{module-aliases.tex}
-\newcommand{\sourceglyph}{\textsuperscript{\textcolor{RoyalBlue}{\ensuremath{\scriptscriptstyle\blacklozenge}}}}
-\newcommand{\lref}[3]{\href{\repobase/\PK/#1\#L#2}{\sourceglyph}}
+\newcommand{\lref}[3]{\href{\repobase/\PK/#1\#L#2}{\nolinkurl{#3}}}
 \emergencystretch=2em
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{proposition}[theorem]{Proposition}
 \theoremstyle{remark}\newtheorem*{remark}{Remark}
 \newcommand{\Z}{\mathbb Z}
 \newcommand{\ph}{\varphi}
-\title{Transport and Curvature Certificates for the Totient Constant\\
-{\large a Lean~4 companion to the Erd\H{o}s~\#249 formalisation}}
+\title{Finite-Difference Certificates and a Phase-Separation\\
+Characterisation for Erd\H{o}s Problem 249}
 \author{Will Cook}
 \date{July 2026}
 
@@ -29,46 +28,75 @@
 \maketitle
 \begin{abstract}
 Let $S=\sum_{n\geq1}\ph(n)/2^n$ and
-$R_N=\sum_{j\geq1}\ph(N+j)/2^j$.  The irrationality of $S$ is
-Erd\H{o}s Problem~249 and remains open.  We formalise exact secondary
-reductions built from finite differences of the tails $R_N$: curvature,
-exponent-transport and prime-jump commutators, and an anchored four-vertex
-operator at $H,3H,5H,15H$.  Each object splits into an integer dyadic window
-and a rigorously bounded tail, giving a decidable modular certificate for
-non-integrality.  We prove that old M\"obius divisor channels are affine and
-are annihilated by the relevant moments, isolate the new-channel migration at
-a prime jump, and show that every fixed-precision valuation--unit word admits
-a centred completion.  The finite non-integrality criteria and no-go theorem are
-unconditional; every irrationality conclusion remains conditional on an
-explicitly named unbounded supply.  No such supply, and hence no solution of
-Problem~249, is claimed.
+$R_N=\sum_{j\geq1}\ph(N+j)/2^j$.  The M\"obius residue kernel governing
+transport of the tails $R_N$ is affine in its scale coordinate, with periodic
+slope and intercept.  Consequently, every finite coefficient system satisfying
+$\sum_i c_i=\sum_i c_im_i=0$ annihilates all divisor channels already present
+at a base height.  Curvature, prime-jump, balanced $(1,2,3,6)$, and anchored
+$(1,3,5,15)$ observables admit exact dyadic-window decompositions and
+decidable central-residue conditions implying non-integrality.  A
+first-harmonic saving on a finite block forces a tail-difference certificate,
+and the fibre-free cofinal window-pair separation predicate is equivalent to
+the irrationality of $S$.  We also prove two local obstructions: every
+fixed-precision valuation--unit word has a prefix-locked centred completion,
+and a synthetic nonzero lcm carry satisfying the stated factor and anchor
+constraints survives every finite integer shift polynomial.  The finite
+criteria and obstruction theorems are unconditional.  Erd\H{o}s Problem~249
+remains open because no cofinal arithmetic or harmonic producer is proved.
 \end{abstract}
 
-\section{Scope and logical boundary}\label{sec:scope}
-The main exposition~\cite{mainpaper} develops the direct certificate reduction
-for $S$, proves an unconditional denominator exclusion, and records the open
-boundary.  This companion studies finite-difference operators on the same
-tail sequence.  They annihilate affine contributions from divisor channels
-already present at an lcm height, but the remaining new channels must still be
-shown to produce non-integral values at unboundedly many heights.  Thus every
-endpoint below has the form
+\section{Main results and logical boundary}\label{sec:scope}
+
+The gateway exposition~\cite{mainpaper} proves the denominator exclusion and
+the complete finite-certificate normal form for $S$.  This paper has a
+different thesis: finite differences annihilate the old affine channels
+exactly, phase separation gives a complete geometric normal form, and two
+countermodels delimit what fixed local transport data can prove.
+
+\begin{theorem}[affine-channel annihilation]\label{thm:affine}
+Let \(m_i\in\mathbb N\) and \(c_i\in\mathbb R\) satisfy
+\(\sum_i c_i=0\) and \(\sum_i c_im_i=0\).  If \(d\mid H\), then
 \[
- \text{unbounded supply of finite certificates}\Longrightarrow S\notin\mathbb Q,
+  \sum_i c_i K_d(m_iH)=0,
 \]
-with the antecedent open.  A certificate at one height is finite evidence,
-not evidence for the cofinal quantifier.  The fixed-precision no-go theorem is
-a boundary on one local strategy, not a global impossibility result.
+where \(K_d\) is the exact M\"obius transport-residue kernel.
+\end{theorem}
+\noindent Formalised:
+\lref{JointExponentTransport.lean}{36}{oldChannel_affine_moment_annihilation}.
+The anchored coefficients at \(H,3H,5H,15H\) are one primitive instance.
 
-The Lambert-series background is classical.  The open problem is recorded in
-the Erd\H{o}s--Graham collection and maintained catalogue
-\cite{erdosgraham1980,erdosproblems}.  We make no priority claim for finite
-differences or affine moment cancellation as general techniques.  The
-contribution here is their precise integration into checked identities,
-finite non-integrality criteria, conditional hypotheses, and an obstruction
-theorem.
+\begin{theorem}[phase-separation characterisation]\label{thm:phase}
+The cofinal fibre-free window-pair separation predicate of
+Section~\ref{sec:pivot} holds if and only if \(S\) is irrational.
+\end{theorem}
+\noindent Formalised:
+\lref{PivotAntiReconstruction.lean}{1744}{dtwWindowSeparatedPairs_iff_irrational_totient_series}.
+This is an exact equivalence, not a weaker sufficient condition.  Its
+arithmetic producer remains open.
 
-Small blue source marks link the displayed claims to their formal proofs and
-may be ignored on a first reading.
+\begin{proposition}[local no-go boundaries]\label{prop:nogo}
+At every fixed valuation--unit precision, each compatible finite word has a
+prefix-locked centred carry completion.  Separately, for every lcm height
+\(t\ge3\), a nonzero synthetic carry satisfies the stated factor ideals,
+whole-ray anchors, and every finite integer shift polynomial while remaining
+a strict survivor.
+\end{proposition}
+\noindent Formalised:
+\lref{TropicalCurvatureCarry.lean}{137}{fixedPrecisionTropicalNoGo} and
+\lref{LcmFactorIdealPulseObstruction.lean}{798}{lcm_factorIdeal_finiteRank_shiftAlgebra_not_sufficient}.
+These are scoped countermodels, not global impossibility theorems.
+
+Every positive endpoint below still has the form
+\[
+ \text{cofinal supply of finite certificates}\Longrightarrow S\notin\mathbb Q.
+\]
+The finite identities, criteria, equivalence, and countermodels are
+unconditional; no cofinal supply is proved.  The open problem is recorded in
+the original collection and maintained catalogue
+\cite{erdosgraham1980,erdosproblems}.  Finite differences and affine moment
+cancellation are classical techniques; the theorem-specific comparison
+boundary is maintained with the gateway paper.  Blue declaration names link
+to the pinned Lean proofs.
 
 \section{Dyadic windows}\label{sec:windows}
 For a finite integer combination $X(H)=\sum_i c_iR_{m_iH}$, truncate each
@@ -273,20 +301,23 @@ using the missing fresh divisor channels.
 
 \section{Statement matrix and open boundary}\label{sec:index}
 \begin{center}\small
-\begin{tabular}{@{}p{0.24\textwidth}p{0.46\textwidth}p{0.2\textwidth}@{}}
+\begin{tabular}{@{}
+>{\raggedright\arraybackslash}p{0.21\textwidth}
+>{\raggedright\arraybackslash}p{0.40\textwidth}
+>{\raggedright\arraybackslash}p{0.29\textwidth}@{}}
 \toprule Layer & Checked statement & Status \\
 \midrule
-Curvature & exact split, radius, recurrence, criterion & conditional reduction \\
-Exponent transport & stable support, affine state, cancellation & proved here \\
-Joint $(3,5)$ transport & moment annihilation and criterion & conditional reduction \\
-Prime jump & migration, sharp window, $(12,5,15)$ & verified finite instance \\
-Three transport & sharp window and $(60,12)$ & verified finite instance \\
-First harmonic & cosine gap forces a certificate & conditional reduction \\
-Adjacent phases & squared chord separation forces a certificate & conditional reduction \\
-Pivot anti-reconstruction & pairwise phase energy and exact window-pair equivalence & conditional reduction \\
-Tropical signature & fixed precision has a completion & unconditional progress \\
-LCM factor ideals & factor/anchor and finite shift algebra have a synthetic survivor & unconditional progress \\
-Irrationality of $S$ & follows from a named unbounded supply & open \\
+Curvature & exact split, radius, recurrence, criterion & \mbox{conditional reduction} \\
+Exponent transport & stable support, affine state, cancellation & \mbox{proved here} \\
+Joint $(3,5)$ transport & moment annihilation and criterion & \mbox{conditional reduction} \\
+Prime jump & migration, sharp window, $(12,5,15)$ & \mbox{verified finite instance} \\
+Three transport & sharp window and $(60,12)$ & \mbox{verified finite instance} \\
+First harmonic & cosine gap forces a certificate & \mbox{conditional reduction} \\
+Adjacent phases & squared chord separation forces a certificate & \mbox{conditional reduction} \\
+Pivot anti-reconstruction & pairwise phase energy and exact window-pair equivalence & \mbox{conditional reduction} \\
+Tropical signature & fixed precision has a completion & \mbox{unconditional progress} \\
+LCM factor ideals & factor/anchor and finite shift algebra have a synthetic survivor & \mbox{unconditional progress} \\
+Irrationality of $S$ & follows from a named unbounded supply & \mbox{open} \\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -302,8 +333,8 @@ Monographies de l'Enseignement Math\'ematique 28 (1980), 61--62,
 \bibitem{erdosproblems} T.~Bloom (ed.), \emph{Erd\H{o}s Problems}, entry 249,
 \href{https://www.erdosproblems.com/249}{\texttt{erdosproblems.com/249}},
 accessed July 2026.
-\bibitem{mainpaper} W.~Cook, \emph{Erd\H{o}s Problems 249 and 257 in Lean~4:
-formalised results, certificate reductions, and open questions}, companion
-exposition in this release.
+\bibitem{mainpaper} W.~Cook, \emph{Tail Certificates and Achievement-Set
+Geometry for Erd\H{o}s Problems 249 and 257}, gateway exposition in this
+release.
 \end{thebibliography}
 \end{document}

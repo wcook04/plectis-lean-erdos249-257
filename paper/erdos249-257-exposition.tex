@@ -28,11 +28,11 @@
 \newcommand{\PK}{Erdos249257}
 \input{module-aliases.tex}
 % Formal source coordinates remain in the hyperlink targets and verifier
-% manifest, while the printed paper exposes only a quiet source mark.
-\newcommand{\sourceglyph}{\textsuperscript{\textcolor{RoyalBlue}{\ensuremath{\scriptscriptstyle\blacklozenge}}}}
-\newcommand{\lref}[3]{\href{\repobase/\PK/#1\#L#2}{\sourceglyph}}
-\newcommand{\lrefx}[3]{\href{\repobase/\PK/#1\#L#2}{\sourceglyph}}
-\newcommand{\lloc}[2]{\href{\repobase/\PK/#1\#L#2}{\sourceglyph}}
+% manifest.  The printed link names the declaration instead of using an
+% indistinguishable source glyph.
+\newcommand{\lref}[3]{\href{\repobase/\PK/#1\#L#2}{\nolinkurl{#3}}}
+\newcommand{\lrefx}[3]{\href{\repobase/\PK/#1\#L#2}{\nolinkurl{#3}}}
+\newcommand{\lloc}[2]{\href{\repobase/\PK/#1\#L#2}{Lean source at line #2}}
 % \rref{rootfile}: link a repository-root navigation file at the public main branch.
 \newcommand{\rref}[1]{\href{\rootbase/\detokenize{#1}}{repository record}}
 \emergencystretch=2em
@@ -56,10 +56,10 @@
 \newcommand{\Irr}{\text{ irrational}}
 \newcommand{\Qzero}{Q_0}
 
-\title{\vspace{-2em}Erd\H{o}s Problems 249 and 257 in Lean~4:\\
-{\large formalised results, certificate reductions, and open questions}}
-\author{Will Cook}
-\date{July 2026}
+\title{\vspace{-4em}Tail Certificates and Achievement-Set Geometry\\
+{\large for Erd\H{o}s Problems 249 and 257}}
+\author{Will Cook \qquad July 2026}
+\date{}
 
 \begin{document}
 \sloppy
@@ -67,131 +67,179 @@
 
 \begin{abstract}
 \noindent
-We formalise in Lean~4 several results around Erd\H{o}s Problems 249 and 257.
-For every integer base $b\ge2$, the development verifies the irrationality of
-the Erd\H{o}s--Borwein series $\sum_{n\ge1}(b^n-1)^{-1}$, together with several
-structured infinite-support variants. For the totient constant
-$S=\sum_{n\ge1}\ph(n)/2^n$, whose irrationality remains open, we prove that any
-rational representation has denominator greater than
-$\Qzero\approx7.96\times10^{34}$, and formalise an exact reduction of
-irrationality to pointwise non-integrality of binary tail differences, each
-equivalent to a finite decidable certificate. We also
-refine that reduction through an exact full-target interval, a
-squared-Mersenne enclosure, and a fresh-loss projection, and verify 28 explicit
-lcm-diagonal scales through $t=64$.  On the \#257 side we formalise the
-measure-one, nowhere-dense Mersenne achievement set and auxiliary rationality
-criteria based on binary carry systems.  For the test value $1/2$, membership
-is equivalent to infinitely many greedy skips; the upper last-producer branch
-and the first exceptional middle coordinate are impossible, leaving an exact
-tail estimate for the two remaining middle coordinates.  This work solves neither
-Erd\H{o}s~\#249 nor the universal form of Erd\H{o}s~\#257.
+For the totient constant
+$S=\sum_{n\ge1}\ph(n)/2^n$, we prove that every rational representation
+$S=p/q$ has $q>\Qzero\approx7.96\times10^{34}$.  We also prove that
+irrationality of $S$ is equivalent to non-integrality of every positive binary
+tail difference, with a complete finite certificate at each fixed pair of
+parameters.  The missing input is an unbounded supply of these certificates;
+the checks through $t=64$ are finite evidence only.  For Erd\H{o}s~\#257, we
+formalise Erd\H{o}s's classical full-support theorem in every integer base and
+several structured-support cases.  At base $2$, the Mersenne achievement set is
+compact, perfect, nowhere dense, and of measure one.  Membership of $1/2$,
+which would refute the universal statement, is equivalent to infinitely many
+greedy skips.  The upper last producer and the middle coordinate $-3$ are
+impossible; the remaining sufficient condition is a future-tail inequality
+for the coordinates $-2$ and $-1$.  Both problems reduce exact finite
+arithmetic to one unproved cofinal producer.  Neither is settled.
 \end{abstract}
-
-\medskip
-\noindent\textbf{Keywords.} irrationality; Erd\H{o}s--Borwein constant;
-Euler totient; Lambert series; binary carry systems; Lean~4; Mathlib;
-formal verification.
-
-\smallskip
-\noindent\textbf{MSC 2020.} 11J72 (primary); 11A25, 68V20 (secondary).
 
 \section{Introduction}\label{sec:intro}
 
-Two open questions provide the setting; their original formulations occur in
-the Erd\H{o}s--Graham problem collection and Erd\H{o}s's later survey
-~\cite{erdosgraham1980,erdos1988}, while the numbering follows the maintained
-Erd\H{o}s Problems catalogue~\cite{erdosproblems}. Erd\H{o}s~\#249 asks whether the
-totient constant
-\[
-S=\sum_{n\ge1}\frac{\ph(n)}{2^n}
-\]
-is irrational. Erd\H{o}s~\#257 asks whether
+The two questions are whether
+$S=\sum_{n\ge1}\ph(n)/2^n$ is irrational (\#249), and whether
 $\sum_{n\in A}(2^n-1)^{-1}$ is irrational for every infinite
-$A\subseteq\N$. The second problem contains the classical full-support
-Erd\H{o}s--Borwein constant, but the passage from structured supports to an
-arbitrary infinite support remains open.
+$A\subseteq\N$ (\#257).  The formulations occur in the Erd\H{o}s--Graham
+collection and Erd\H{o}s's later survey~\cite{erdosgraham1980,erdos1988};
+the numbering follows the maintained catalogue~\cite{erdosproblems}.
 
-Across the two directions, exact tail and carry identities separate finite
-arithmetic, checked by Lean, from an analytic or combinatorial uniformity
-statement.  This is a common proof architecture, not an assertion that the two
-open problems are equivalent.  The present status is as follows.
+For \#257, proving irrationality for every infinite support is the universal
+direction; constructing an infinite support of sum $1/2$ would refute it.
+The corpus contains unconditional positive cases and an exact conditional
+counterexample route, but reaches neither endpoint.  Across both problems,
+tail and carry identities separate exact finite arithmetic from one analytic
+or combinatorial cofinality statement.  The status classes are:
 
 \begin{center}
-\small
-\begin{tabular}{@{}p{1.25cm}p{6.15cm}p{6.15cm}@{}}
+\scriptsize
+\begin{tabular}{@{}p{2.3cm}p{5.65cm}p{5.65cm}@{}}
 \toprule
-problem & checked here & exact open edge\\
+status & Erd\H{o}s \#249 & Erd\H{o}s \#257\\
 \midrule
-\#249 &
-Any rational expression $S=p/q$ has $q>\Qzero\approx7.96\times10^{34}$.
-At fixed parameters, non-integrality of the relevant tail difference is
-equivalent to a finite certificate; 28 lcm-diagonal scales are verified
-through $t=64$. &
-Produce these certificates at unbounded parameters.  No such supply theorem is
-proved, so the irrationality of $S$ remains open.\\[4pt]
-\#257 &
-The full-support series is irrational in every integer base $b\ge2$, and
-several named infinite-support families are formalised.  For the value $1/2$,
-membership is equivalent to infinitely many greedy skips; the upper
-last-producer branch and the middle coordinate $-3$ are eliminated. &
-Treat every infinite support.  For the $1/2$ test value, the remaining checked
-endpoint is a tail estimate for the middle coordinates $-2$ and $-1$.\\
+\textbf{Classical formalisation} &
+Lambert-series and convolution identities used to represent $S$. &
+Full support in every base $b\ge2$; pairwise-coprime and periodic support
+families.\\[2pt]
+\textbf{Unconditional or exact here} &
+$q>\Qzero$ for every rational $S=p/q$; irrationality is equivalent to
+non-integrality of every positive tail difference and to pointwise finite
+certificates. &
+Achievement-set geometry; exact greedy classification of $1/2$; impossibility
+of the upper last producer and of the middle coordinate $-3$.\\[2pt]
+\textbf{Conditional / finite} &
+First-harmonic and transport consumers; 28 diagonal certificates through
+$t=64$. &
+Cofinal seam or carry producers imply an infinite support of sum $1/2$;
+local bands, finite reset rows, and scoped no-go theorems.\\[2pt]
+\textbf{Open producer} &
+An unbounded certificate supply, or a cofinal estimate that supplies it. &
+Universal direction: all infinite supports.  Counterexample direction:
+cofinal false terminals; concretely, the unresolved middle-tail estimate.\\
 \bottomrule
 \end{tabular}
 \end{center}
 
-The checked library also contains identities, rigidity statements, finite
-certificates, and scoped no-go theorems.  Their hypotheses and logical
-dependencies are stated explicitly.  Neither the size of the library nor an
-unexplored composition is evidence that a solution is latent in it.
-
 \paragraph{Reading map.}
-Section~\ref{sec:ladder} gives the common Mersenne--Lambert transform.
-Section~\ref{sec:eb} treats the \#257 direction and begins its half-value
-analysis with a one-page account of the exact residual.  Section~\ref{sec:249}
-treats \#249 and likewise begins with the certificate argument in one page.
+Section~\ref{sec:spines} states the two exact proof spines and their unresolved
+producers.  Section~\ref{sec:ladder} gives the common Mersenne--Lambert
+transform.  Sections~\ref{sec:eb} and~\ref{sec:249} supply the theorem-level
+detail for \#257 and \#249.
 Sections~\ref{sec:architecture} and~\ref{sec:verify} describe the formalisation
 and its verification; the appendices contain auxiliary carry criteria and a
-formal-source guide.  Small blue source marks may be ignored on a
+formal-source guide.  Blue declaration links may be ignored on a
 first reading.  The separate transport-and-curvature companion develops the
 technical affine and first-harmonic material without changing the open status
 of \#249.
 
-The prior-art boundary is theorem-specific. Chowla had conjectured the broader
-rational-argument irrationality question for
-\(\sum_{n\ge1}x^n/(1-x^n)\); the full-support specialization is \(x=1/b\).
-Erd\H{o}s proved that integer-reciprocal case~\cite{chowla1947,erdos1948};
-Borwein later proved a broader irrationality theorem that includes the relevant
-Mersenne--Lambert specialisation~\cite{borwein1992}.
-The pairwise-coprime support condition is also classical~\cite{erdos1968}.
-Periodic-coefficient Lambert series have a separate literature~\cite{lucatachiya}.
-Kova\v{c}--Tao record the strict-tail geometry used by the achievement-set
-appendix~\cite{kovactao}, while Wang--Grau Ribas use the integral carry
-recurrence in the weighted binary setting~\cite{wanggrauribas}. For adjacent
-work on the binary expansion of the Erd\H{o}s--Borwein constant, see Crandall
-and the subsequent result of Campbell~\cite{crandall,campbell}; neither result
-is used or formalised in this development. We make no priority claim for these
-mathematical ingredients; the contribution here is their verified integration,
-the stated certificate reductions and bounds, and the formalisation lessons
-described below.
+\medskip
+\noindent\textbf{Keywords.} irrationality; Erd\H{o}s--Borwein constant;
+Euler totient; Lambert series; achievement sets; binary carry systems; Lean~4.
+\qquad
+\textbf{MSC 2020.} 11J72 (primary); 11A25, 68V20 (secondary).
 
-\begin{center}
-\fbox{\begin{minipage}{0.94\textwidth}
-\centering
-\textbf{The Mersenne--Lambert ladder.}\quad $\displaystyle L(f)=\sum_{n\ge1}\frac{f(n)}{2^n-1}$\\[6pt]
-\begin{tabular}{@{}cccc@{}}
-$L(\mu)=\tfrac12$ & $L(\ph)=2$ & $L(\mathbf 1)=E$ & $L(\ph*\mu)=S$\ (\#249)\\
-rational & rational & \textbf{irrational (proved)} & \textbf{open}\\
-\end{tabular}\\[10pt]
-\textbf{Logical status of the \#249 reduction.}\\[3pt]
-$S\in\Q\ \Longrightarrow\ \text{eventual binary periodicity}
-\ \Longrightarrow\ R_{N+h}-R_N\in\Z$ for the eventual period.\\[3pt]
-$\textsf{certifiedKill}(h,N,L)\ \Longrightarrow\ R_{N+h}-R_N\notin\Z$, and\\[-2pt]
-$\exists L\,\textsf{certifiedKill}(h,N,L)\ \Longleftrightarrow\ R_{N+h}-R_N\notin\Z$.\\[4pt]
-{\footnotesize Solid implications and the equivalence are proved; the
-unresolved step is an unbounded supply of such non-integral tail differences.}
-\end{minipage}}
-\end{center}
+\section{The two exact spines}\label{sec:spines}
+
+\subsection{Erd\H{o}s \#249: an exact certificate normal form}
+\label{res:249story}
+
+Write
+\[
+ R_N=\sum_{m\geq1}\frac{\ph(N+m)}{2^m}.
+\]
+The formal source proves the exact chain
+\[
+\begin{split}
+ S\notin\Q
+ &\quad\Longleftrightarrow\quad
+   R_{N+h}-R_N\notin\Z
+   \quad\text{for every }h>0\text{ and every }N\\
+ &\quad\Longleftrightarrow\quad
+   \text{for every }h>0,N\text{ there is an }L
+   \text{ with }\textsf{certifiedKill}(h,N,L).
+\end{split}
+\]
+Here \(\textsf{certifiedKill}(h,N,L)\) is a finite residue computation with a
+rigorous tail allowance.  The second equivalence is completeness of the
+certificate: at fixed \(h,N\), some finite depth succeeds exactly when the
+tail difference is non-integral.  Conversely, integrality of one
+positive-shift difference forces \(S\) to be rational.
+
+This normal form is accompanied by an unconditional theorem: if \(S=p/q\),
+then
+\[
+ q>\Qzero
+ =79\,639\,646\,646\,701\,375\,323\,355\,774\,875\,831\,053.
+\]
+The exact open producer is an unbounded supply of non-integral tail
+differences, equivalently of finite certificates.  The first-harmonic
+criterion gives one sufficient finite mechanism, but no cofinal harmonic
+saving is proved.  Formalised:
+\lrefx{LcmConeFlatness.lean}{386}{irrational_totient_series_iff_all_tail_diffs_nonintegral},
+\lrefx{LcmConeFlatness.lean}{316}{exists_certifiedKill_iff_tail_diff_notMem_int},
+\lrefx{LcmConeFlatness.lean}{399}{irrational_totient_series_iff_pointwise_certificates},
+\lloc{CertificateKernel.lean}{18055}, and
+\lrefx{FirstHarmonicGap.lean}{128}{exists_certifiedKill_of_first_harmonic_gap}.
+
+\subsection{Erd\H{o}s \#257: the exact half-value counterexample spine}
+\label{res:halfstory}
+
+Let
+\[
+  \mathcal A=\left\{\sum_{n\in A}\frac1{2^n-1}:A\subseteq\N,\ 0\notin A\right\}.
+\]
+The weights are strictly superincreasing, so the normalized support of a value
+is unique.  For \(1/2\), the following are equivalent:
+\[
+\begin{aligned}
+\frac12\in\mathcal A
+&\quad\Longleftrightarrow\quad
+\text{the greedy skipped support is infinite}\\
+&\quad\Longleftrightarrow\quad
+\text{false successor terminals occur beyond every bound}.
+\end{aligned}
+\]
+A finite normalized support cannot have value \(1/2\).  Thus membership would
+produce an infinite support of rational sum and refute the universal statement
+of Erd\H{o}s~\#257.  The required counterexample producer is therefore exact:
+cofinally many false terminals, equivalently no last greedy skip.
+
+The strongest current last-skip contradiction is conditional.  At the seam
+following a putative last skip, the upper producer is impossible, and among
+the middle coordinates \(-3,-2,-1\), the coordinate \(-3\) is impossible.
+For \(-2\) and \(-1\), it is sufficient that the producer carry dominate the
+complete future divisor-incidence tail.  That inequality is not proved for
+the actual greedy orbit.  Formalised:
+\lrefx{GreedyAchievementSet.lean}{2514}{half_mem_mersenneAchievementSet_iff_greedySkippedSupport_infinite},
+\lrefx{HalfCylinderHalfMembershipClassification.lean}{126}{half_mem_mersenneAchievementSet_iff_unboundedTerminalFalse},
+\lrefx{HalfCylinderHalfMembershipClassification.lean}{235}{half_mem_mersenneAchievementSet_iff_no_lastHalfGreedySkip},
+\lrefx{HalfCarryReachability.lean}{589}{finite_boolSupport_ne_half},
+\lrefx{HalfCylinderFinalMiddleCellEscape.lean}{587}{finalMiddleCell_neg_three_not_last},
+and
+\lrefx{HalfCylinderLastProducerContradiction.lean}{387}{half_mem_mersenneAchievementSet_of_middleProducerTailEscapeExceptNegThree}.
+
+\paragraph{Prior-art boundary.}
+The full-support theorem is Erd\H{o}s's, and Borwein proved a broader
+irrationality theorem containing the same Mersenne--Lambert
+specialisation~\cite{erdos1948,borwein1992}.  Pairwise-coprime supports are
+classical~\cite{erdos1968}, and Luca--Tachiya treat periodic rational
+coefficients by another method~\cite{lucatachiya}.  Kova\v{c}--Tao supply the
+strict-tail achievement-set context~\cite{kovactao}; Wang--Grau Ribas supply
+the closest recorded integral carry recurrence~\cite{wanggrauribas}.
+Crandall and Campbell concern adjacent binary-expansion questions
+~\cite{crandall,campbell}.  The explicit denominator bound, certificate
+equivalence, and last-producer package have no exact antecedent in the
+maintained comparison record; that absence is not itself a novelty claim.
+The theorem-specific comparison record is maintained with the release.
 
 \section{The Mersenne--Lambert ladder}\label{sec:ladder}
 
@@ -248,98 +296,40 @@ With the primitive-conductor weight $A=\ph*\mu$,
 with the weight $A$ defined at \lrefx{MersenneLambertLadder.lean}{252}{primWeight}. This
 places $S$ in the same $\sum(\cdot)/(2^d-1)$ family as $E$, with a nonnegative weight.
 
-\subsection{Periodic coefficient theorems}\label{sec:periodicweights}
-
-The same certificate machinery applies beyond indicator functions.  For a
-coefficient sequence $\gamma$ and integer base $b\ge2$, write
-\[
-  L_b(\gamma)=\sum_{a\ge1}\frac{\gamma(a)}{b^a-1}.
-\]
-
-\begin{theorem}[nonnegative eventually-periodic weights]
+\paragraph{Periodic weights.}\label{sec:periodicweights}
+For \(L_b(\gamma)=\sum_{a\ge1}\gamma(a)/(b^a-1)\), the checked endpoints are:
+\begin{theorem}[eventually-periodic nonnegative weights]
 \label{res:periodicnonnegative}
-If $\gamma\colon\N\to\Q_{\ge0}$ is eventually periodic and has a positive
-value at a positive index in its periodic region, then $L_b(\gamma)$ is
-irrational.  The same statement holds in particular for eventually-periodic
-natural-number weights.
+An eventually-periodic nonnegative rational weight with a positive periodic
+value gives an irrational series.
 \end{theorem}
-\noindent Formalised:
-\lrefx{CertificateKernel.lean}{12370}{irrational_weightedErdosSeries_periodic},
-\lrefx{CertificateKernel.lean}{12397}{irrational_weightedErdosSeries_eventuallyPeriodic},
-and
-\lref{CertificateKernel.lean}{12483}{irrational_ratWeightSeries_eventuallyPeriodic}.
-This contains the eventually-periodic support case when $\gamma$ is an
-indicator.  Luca--Tachiya prove a broader periodic rational-coefficient
-theorem by different methods~\cite{lucatachiya}; no priority claim is made
-here.
-
-\begin{theorem}[periodic signed-weight dichotomy]
-\label{res:periodicsigned}
-If $w\colon\N\to\Z$ is periodic, then $L_b(w)$ is irrational or it terminates
-in base $b$: for some $k\ge0$, the number $b^kL_b(w)$ is an integer.
-Consequently, excluding termination is sufficient for irrationality.
+\lrefx{CertificateKernel.lean}{12397}{irrational_weightedErdosSeries_eventuallyPeriodic}
+This is contained in a broader theorem of Luca--Tachiya~\cite{lucatachiya}.
+\begin{theorem}[periodic signed-weight dichotomy]\label{res:periodicsigned}
+For a periodic integer weight, the series is irrational or terminating in
+base \(b\).
 \end{theorem}
-\noindent Formalised:
 \lrefx{CertificateKernel.lean}{13847}{irrational_or_bpow_mul_eq_intCast_intWeightedErdosSeries_periodic}
-and
-\lref{CertificateKernel.lean}{13872}{irrational_intWeightedErdosSeries_periodic_of_bpow_mul_ne_intCast}.
-The terminating alternative is not excluded in general, so this is not a
-formalisation of the full mixed-sign periodic-coefficient theorem.
-
-\begin{proposition}[a residue-blind obstruction]\label{res:periodfourobstruction}
-For the period-four signed weight $1,0,-1,0$, the associated divisor
-coefficient vanishes identically on $n\equiv3\pmod4$.
+\begin{proposition}[residue-blind obstruction]\label{res:periodfourobstruction}
+For the period-four weight \(1,0,-1,0\), the divisor coefficient vanishes on
+\(n\equiv3\pmod4\).
 \end{proposition}
-\noindent Formalised:
-\lref{CertificateKernel.lean}{13898}{intWeightedCoeff_periodFourSignWeight_eq_zero_of_mod_four_eq_three}.
-Thus a whole arithmetic progression can carry zero signed coefficient.  A
-residue-blind selection argument cannot force a protected nonzero residue for
-every periodic signed weight; this explains why the checked endpoint is a
-dichotomy rather than unconditional irrationality.
+\lref{CertificateKernel.lean}{13898}{intWeightedCoeff_periodFourSignWeight_eq_zero_of_mod_four_eq_three}
 
-\subsection{Finite primitive-coordinate obstruction}\label{sec:primitiveindex}
-
-The weight $A$ also has finite rational coordinates independent of the
-Lambert-series identity.  Put $a_n=A(n)/n$.  For $N,D\in\N$, say that $D$
-clears the primitive Euler coordinates through $N$ when $D a_n\in\Z$ for all
-$1\leq n\leq N$.  Define
-\[
- \lambda_N(p)=
- \begin{cases}
-  4,&p=2\text{ and }4\leq N,\\
-  p^2,&p\text{ is odd prime and }p^2\leq N,\\
-  p,&p\text{ is odd prime and }p\leq N<p^2,\\
-  1,&\text{otherwise},
- \end{cases}
- \qquad
- T_N=\mathop{\mathrm{lcm}}_{p\leq N}\lambda_N(p).
-\]
-
-\begin{proposition}[primitive-coordinate finite-jet obstruction]\label{res:primitiveindex}
-If $N\geq4$ and $D$ clears the primitive Euler coordinates through $N$, then
-$T_N\mid D$.  Consequently no fixed positive integer clears all coordinates
-$a_n$.
+\paragraph{Finite algebraic boundaries.}\label{sec:primitiveindex}
+Put \(a_n=(\ph*\mu)(n)/n\).  If an integer \(D\) clears these coordinates
+through \(N\), the exact obstruction is:
+\begin{proposition}[primitive-coordinate finite-jet obstruction]
+\label{res:primitiveindex}
+\(D\) is divisible by an explicit two-tier primorial \(T_N\); hence no fixed
+\(D\) clears every \(a_n\).
 \end{proposition}
-\noindent Formalised:
 \lref{PrimitiveDeterminantLift.lean}{148}{twoTierPrimorial_dvd_of_integral_jet}
-and
-\lref{PrimitiveDeterminantLift.lean}{169}{no_fixed_integral_primitive_euler_index}.
-The proposition concerns only these normalized finite coordinates.  It makes
-no statement about arbitrary integral power-series jets, and it gives no
-irrationality criterion for $S$.
-
-\paragraph{Finite Mersenne atoms.}  For a positive conductor $d$ and tail
-index $N$, the pointed atom $2^{N\bmod d}/(2^d-1)$ obeys the exact doubling
-step with one carry at each wrap.  For any finite matrix of such atoms, clearing
-the product of the column Mersenne denominators recovers an integer determinant.
-Thus a nonzero cleared minor has absolute value at least one; integer column
-weights do not create an additional height surplus.
-\noindent Formalised:
-\lref{MersenneTailAtoms.lean}{28}{mersenneTailAtom_step},
-\lrefx{MersenneTailAtoms.lean}{122}{mersenneAtom_denominatorProduct_mul_det}, and
-\lrefx{MersenneTailAtoms.lean}{181}{one_le_abs_weightedMersenneAtom_cleared_det}.
-This is a finite-denominator boundary for an atom-minor route, not an
-irrationality criterion for $S$.
+Finite Mersenne-atom determinants likewise recover only their explicit
+denominator product, with no additional height surplus.
+\lrefx{MersenneTailAtoms.lean}{181}{one_le_abs_weightedMersenneAtom_cleared_det}
+These are scoped finite-denominator obstructions, not irrationality criteria
+for \(S\).
 
 \begin{proposition}[the M\"obius-square lens]\label{res:lens}
 \[
@@ -354,72 +344,26 @@ probability that $d$ divides two independent fair-coin waiting times
 tail differences of Section~\ref{sec:reduction} are three readings of the same
 quantity.
 
-\subsection{The squared transform and gcd moments}\label{sec:squared}
-
-The square in Proposition~\ref{res:lens} is not an isolated identity.  For an
-arithmetic function $f$, put
+\paragraph{Squared Lambert calculus.}\label{sec:squared}
+For \(L_2(f)=\sum_{d\ge1}f(d)/(2^d-1)^2\), the denominator is the probability
+that \(d\) divides two independent geometric waiting times.  The formal
+transfer theorem therefore gives a divisor calculus for their gcd.
+\lref{GcdMomentCalculus.lean}{105}{tsum_lambert_linear_weight_sq_pure}
+\begin{proposition}[squared Lambert ladder]\label{res:gcdmoment}
+At \(r=1/2\), the three rows \(f=\mu,\mathbf 1,\ph\) yield respectively
 \[
- L_2(f)=\sum_{d\geq1}\frac{f(d)}{(2^d-1)^2}.
+ L_2(\mu)=S-\tfrac12,\qquad
+ L_2(\mathbf 1)=\sum_{n\ge1}\frac{\sigma(n)-\tau(n)}{2^n},\qquad
+ L_2(\ph)=\sum_{n\ge1}\frac{P(n)-n}{2^n},
 \]
-If $X$ and $Y$ are the independent waiting times used in
-Section~\ref{sec:geom}, then
-\[
- \Pr(d\mid\gcd(X,Y))=\Pr(d\mid X)\Pr(d\mid Y)
-     =\frac{1}{(2^d-1)^2}.
-\]
-Consequently $L_2(f)$ is the divisor calculus of the random gcd, just as
-$L(f)$ is the divisor calculus of one waiting time.  More precisely, the
-formal transfer theorem gives, for $0\leq r<1$ and $|f(d)|\leq d$,
-\[
- \sum_{d\geq1}f(d)\left(\frac{r^d}{1-r^d}\right)^2
- =\sum_{n\geq1}\left(\sum_{e\mid n}f(e)\left(\frac ne-1\right)\right)r^n.
-\]
-Formalised:
-\lref{GcdMomentCalculus.lean}{105}{tsum_lambert_linear_weight_sq_pure}.
-
-\begin{proposition}[the squared Lambert ladder]\label{res:gcdmoment}
-At $r=1/2$ the following identities hold:
-\begin{align*}
- L_2(\mu)&=S-\tfrac12,\\
- L_2(\mathbf 1)&=
-   \sum_{n\geq1}\frac{\sigma(n)-\tau(n)}{2^n},\\
- L_2(\ph)&=
-   \sum_{n\geq1}\frac{P(n)-n}{2^n},
- \qquad
- P(n)=\sum_{e\mid n}\ph(e)\frac ne.
-\end{align*}
-Here $P$ is Pillai's gcd-sum function.  The three rows are respectively the
-coprime probability, the expected divisor count of $\gcd(X,Y)$, and the
-expected value of $\gcd(X,Y)$.
+where \(P\) is Pillai's gcd-sum function.
 \end{proposition}
-\noindent The first row is Proposition~\ref{res:lens}.  The second and third
-are formalised at
-\lref{GcdMomentCalculus.lean}{216}{tsum_one_div_mersenne_sq_eq_sigma_sub_tau_series}
-and
-\lref{GcdMomentCalculus.lean}{235}{tsum_totient_div_mersenne_sq_eq_gcd_moment_series}.
-In the standard notation
-$\zeta_q(s)=\sum_{n\geq1}\sigma_{s-1}(n)q^n$, the middle value is
-$\zeta_{1/2}(2)-\zeta_{1/2}(1)$.  Postelmans--Van Assche prove that
-$1,\zeta_q(1),\zeta_q(2)$ are linearly independent over $\Q$ when
-$q^{-1}\in\Z\setminus\{-1,1\}$~\cite{postelmansvanassche}; hence this middle
-value is irrational.  Their Hermite--Pad\'e argument is cited only and is not
-formalised here.  It does not transfer irrationality to the M\"obius row:
-$L_2(\mu)=S-1/2$ remains precisely the open arithmetic atom.
-
-The same pair calculus has a reduced-direction identity
-\[
- \sum_{\substack{a,b\geq1\\(a,b)=1}}\frac{1}{2^{a+b}-1}=1,
-\]
-formalised at
-\lref{GcdMomentCalculus.lean}{349}{tsum_pos_coprime_inv_mersenne_eq_one}.
-Its Stern--Brocot cylinder mass
-$C(a,b)=((2^a-1)(2^b-1))^{-1}$ satisfies an exact parent--children recursion,
-and the depth-$d$ unfolding converges to $C(a,b)$ with error at most
-$(2/3)^dC(a,b)$; see
-\lrefx{GcdMomentCalculus.lean}{474}{cylinderMass_split} and
-\lrefx{GcdMomentCalculus.lean}{525}{sternBrocotDepthMass_error}.
-These are exact representations of the same positive mass.  They do not by
-themselves supply an irrationality criterion for $S$.
+\lrefx{GcdMomentCalculus.lean}{235}{tsum_totient_div_mersenne_sq_eq_gcd_moment_series}
+Postelmans--Van Assche imply irrationality of the middle row
+~\cite{postelmansvanassche}; this does not transfer to the M\"obius row, which
+is exactly the open constant \(S-\tfrac12\).  The further coprime-pair and
+Stern--Brocot identities are retained in the living reference rather than
+given equal narrative weight here.
 
 \section{Erd\H{o}s--Borwein-type irrationality (the \#257 direction)}\label{sec:eb}
 
@@ -562,37 +506,10 @@ novelty claim is made for that geometry.  The exact rational execution and
 finite non-membership certificates used for computation are described in
 Appendix~\ref{sec:carry}.
 
-\subsection{The half-value problem in one page}\label{res:halfstory}
-
-The most concrete unresolved test value is $1/2$.  The Mersenne weights are
-strictly superincreasing, so a normalized support representing a given value is
-unique.  The greedy algorithm therefore does more than search for a support: it
-recovers the only possible one.  For $1/2$, membership in the achievement set
-is equivalent to the greedy orbit skipping infinitely many exponents.
-
-Suppose instead that the orbit has a last skip.  At the following dyadic seam,
-the last contribution must come from either an upper cell or a middle cell.
-The upper alternative is impossible.  Among the three exceptional middle
-coordinates $-3,-2,-1$, the coordinate $-3$ is also impossible: it would make
-the remaining cofinite tail smaller than $1/2$ while forcing a negative
-centred carry, contradicting a nonnegativity identity.
-
-This leaves a precise open edge.  It is enough to show that every remaining
-middle contribution is larger in magnitude than all of its future
-divisor-incidence contributions combined.  That tail estimate is not proved
-for the actual greedy orbit.  In particular, the formal source does not yet
-identify the two remaining coordinates $-2,-1$ with the failure of a dyadic
-safety condition.  Thus the argument eliminates two branches and isolates the
-last one; it does not prove that $1/2$ belongs to the achievement set.
-
-The exact statements are
-\lrefx{GreedyAchievementSet.lean}{1527}{positiveMersenneSupportValue_injective_normalized},
-\lrefx{GreedyAchievementSet.lean}{2514}{half_mem_mersenneAchievementSet_iff_greedySkippedSupport_infinite},
-\lrefx{HalfCylinderFinalMiddleCellEscape.lean}{587}{finalMiddleCell_neg_three_not_last},
-and
-\lrefx{HalfCylinderLastProducerContradiction.lean}{387}{half_mem_mersenneAchievementSet_of_middleProducerTailEscapeExceptNegThree}.
-The rest of this section develops sufficient criteria and finite case analyses
-around this remaining estimate; it may be skipped on a first reading.
+The exact half-value spine and its open producer are stated in
+Section~\ref{res:halfstory}.  The rest of this section develops sufficient
+criteria and finite case analyses around the remaining middle-tail estimate;
+it may be skipped on a first reading.
 
 \subsection{A band formula for the final skip between two takes}
 \label{res:twothirdsband}
@@ -1248,39 +1165,9 @@ Whether $S=\sum_{n\ge1}\ph(n)/2^n$ is irrational is open. The development gives 
 things and claims neither as a solution: an unconditional exclusion of
 small-denominator rationals, and a conditional reduction to finite certificates.
 
-\subsection{The certificate argument in one page}\label{res:249story}
-
-Write
-\[
- R_N=\sum_{m\geq1}\frac{\ph(N+m)}{2^m}.
-\]
-For every positive shift $h$, integrality of even one difference
-$R_{N+h}-R_N$ forces $S$ to be rational.  Consequently $S$ is irrational if
-and only if all these differences are non-integral.  This is an exact
-equivalence, not merely a one-way reduction.
-
-Non-integrality at fixed $h$ and $N$ has a complete finite test.  Truncate the
-binary expansion at depth $L$, compute the resulting integer discrepancy, and
-check that its residue modulo $2^L$ lies farther from both endpoints than the
-rigorously bounded omitted tail.  Such a certificate exists for some $L$ if
-and only if $R_{N+h}-R_N$ is non-integral.  Thus the infinite statement has an
-exact finite witness at each fixed pair of parameters.
-
-There is also a direct analytic way to force one of these witnesses.  On a
-finite dyadic block, attach to each discrepancy residue its first cosine
-harmonic.  Under the explicit room inequality, any fixed saving below the
-near-integer value forces at least one residue into the central certified
-region.  What remains is to prove such a harmonic saving at cofinally many
-parameters.  The formal development proves the finite implication, but no
-cofinal estimate and hence no irrationality theorem for $S$.
-
-The exact equivalences and finite implication are
-\lrefx{LcmConeFlatness.lean}{386}{irrational_totient_series_iff_all_tail_diffs_nonintegral},
-\lrefx{LcmConeFlatness.lean}{316}{exists_certifiedKill_iff_tail_diff_notMem_int},
-and
-\lrefx{FirstHarmonicGap.lean}{128}{exists_certifiedKill_of_first_harmonic_gap}.
-The remainder of this section gives the denominator theorem, the geometry of
-$S$, and the finite arithmetic behind this summary.
+The exact certificate spine and its open producer are stated in
+Section~\ref{res:249story}.  This section gives the denominator theorem, the
+geometry of $S$, and the finite arithmetic behind that summary.
 
 \subsection{Unconditional: no small denominator}\label{sec:uncond}
 
@@ -1918,7 +1805,7 @@ the development. The source, exact informal-to-formal links, and build
 instructions are maintained in the
 \href{https://github.com/wcook04/plectis-lean-erdos249-257}{public repository}.
 This paper is tied to an
-\href{\sourceurl}{archived formal-source revision}; every blue source mark
+\href{\sourceurl}{archived formal-source revision}; every blue declaration name
 links directly to the corresponding checked theorem there. The repository
 pins the theorem prover and library versions needed to reproduce the build.
 
@@ -2497,10 +2384,10 @@ exclude rational values for either open series.
 
 \section{Guide to the formal sources}\label{app:index}
 
-The paper is meant to be read as mathematics. The small blue marks following
-formalised statements are optional links to the exact checked theorems in the
-\href{\sourceurl}{archived source revision}. They preserve line-level
-traceability without printing theorem identifiers or source-module names.
+The paper is meant to be read as mathematics. The blue declaration names
+following formalised statements are optional links to the exact checked
+theorems in the \href{\sourceurl}{archived source revision}. They preserve
+line-level traceability while saying which declaration each link opens.
 
 For a first reading, the main landmarks are Theorem~\ref{res:full} for the
 full-support irrationality theorem, Theorem~\ref{res:farey} for the totient
@@ -2569,16 +2456,12 @@ Campbell shift-synchronization boundary & \lrefx{CampbellShiftSynchronization.le
 \fi
 
 \clearpage
-\begin{thebibliography}{11}
+\begin{thebibliography}{99}
 \small
 \setlength{\itemsep}{0pt}
 \bibitem{erdos1948} P.~Erd\H{o}s, \emph{On arithmetical properties of Lambert series},
   J. Indian Math. Soc. (N.S.) \textbf{12} (1948), 63--66,
   \href{https://users.renyi.hu/~p_erdos/1948-04.pdf}{archive scan}.
-\bibitem{chowla1947} S.~Chowla, \emph{On series of the Lambert type which assume irrational
-  values for rational values of the argument}, Proc. Natl. Inst. Sci. India
-  \textbf{13} (1947), 171--173,
-  \href{https://insa.nic.in/UI/Archivesection.aspx?JID=MA%3D%3D&JYrs=MTk0Nw%3D%3D}{publisher archive}.
 \bibitem{erdos1968} P.~Erd\H{o}s, \emph{On the irrationality of certain series},
   Math. Student \textbf{36} (1968), 222--226,
   \href{https://users.renyi.hu/~p_erdos/1969-09.pdf}{archive scan}.
@@ -2641,9 +2524,6 @@ Campbell shift-synchronization boundary & \lrefx{CampbellShiftSynchronization.le
   in \emph{CPP 2020}, ACM (2020), 367--381, doi:10.1145/3372885.3373824.
 \bibitem{erdosproblems} T.~Bloom (ed.), \emph{Erd\H{o}s Problems}, entries 249 and 257,
   \href{https://www.erdosproblems.com}{\texttt{erdosproblems.com}}, accessed July 2026.
-\bibitem{artifact} W.~Cook, \emph{Erd\H{o}s \#249/\#257 Lean formalisation},
-  public source artefact, release \texttt{v0.6.0} (2026),
-  \href{https://github.com/wcook04/plectis-lean-erdos249-257/releases/tag/v0.6.0}{GitHub repository}.
 \end{thebibliography}
 
 \end{document}

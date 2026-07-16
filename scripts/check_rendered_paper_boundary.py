@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 # SPDX-FileCopyrightText: 2026 Will Cook
 # SPDX-License-Identifier: Apache-2.0
-"""Keep implementation coordinates out of the human-facing papers.
+"""Keep implementation coordinates legible but bounded in the papers.
 
 The authored TeX deliberately retains exact Lean coordinates inside hyperlink
-arguments so release tooling can validate them.  The printed papers should
-show only a quiet source mark, never theorem identifiers, module names, source
-paths, registry paths, or commit hashes.
+arguments so release tooling can validate them.  A source link must print its
+exact declaration name, not an indistinguishable glyph.  Module names, source
+paths, registry paths, commit hashes, and unlinked Lean identifiers remain
+outside the rendered narrative.
 
 Run from the repository root:
 
@@ -39,6 +40,32 @@ PAPERS = (
     ),
 )
 ALIASES = ROOT / "paper" / "module-aliases.json"
+FIRST_MINUTE_CONTRACT = {
+    "erdos249-257-exposition.pdf": {
+        (1, 1): (
+            "q > q0",
+            "classical full-support theorem",
+            "would refute the universal statement",
+            "neither is settled",
+            "an unbounded certificate supply",
+            "cofinal false terminals",
+        ),
+        (2, 2): (
+            "an exact certificate normal form",
+            "the exact half-value counterexample spine",
+            "a finite normalized support cannot have value 1/2",
+            "no cofinal harmonic saving is proved",
+        ),
+    },
+    "erdos249-transport-curvature.pdf": {
+        (1, 2): (
+            "affine-channel annihilation",
+            "phase-separation characterisation",
+            "local no-go boundaries",
+            "remains open because no cofinal",
+        ),
+    },
+}
 
 LINK_MACRO_RE = re.compile(
     r"""\\(?:lref|lrefx)\{[^{}]*\}\{[^{}]*\}\{[^{}]*\}
@@ -48,9 +75,6 @@ LINK_MACRO_RE = re.compile(
 COMMENT_RE = re.compile(r"(?<!\\)%.*$")
 HIDDEN_RE = re.compile(r"\\iffalse.*?\\fi", re.S)
 NEWCOMMAND_RE = re.compile(r"^\s*\\newcommand.*$", re.M)
-LEAN_IDENTIFIER_RE = re.compile(
-    r"\b[A-Za-z][A-Za-z0-9]*(?:_[A-Za-z0-9]+)+\b"
-)
 VISIBLE_PATH_RE = re.compile(
     r"\b[A-Za-z0-9_./-]+\.(?:lean|json|py|md)\b",
     re.I,
@@ -71,14 +95,17 @@ def source_errors(path: Path) -> list[str]:
     visible = visible_tex(text)
     errors: list[str] = []
 
-    if r"\newcommand{\sourceglyph}" not in text:
-        errors.append("missing the quiet source-glyph definition")
-    for macro in ("lref", "lrefx", "lloc"):
+    if r"\newcommand{\sourceglyph}" in text:
+        errors.append("obsolete source-glyph definition is still present")
+    for macro in ("lref", "lrefx"):
         definitions = re.findall(
             rf"\\newcommand\{{\\{macro}\}}.*$", text, flags=re.M
         )
-        if definitions and any(r"\sourceglyph" not in row for row in definitions):
-            errors.append(f"\\{macro} renders something other than the source glyph")
+        if definitions and any(r"\nolinkurl{#3}" not in row for row in definitions):
+            errors.append(f"\\{macro} does not print the linked declaration name")
+    lloc_definitions = re.findall(r"\\newcommand\{\\lloc\}.*$", text, flags=re.M)
+    if lloc_definitions and any("Lean source at line #2" not in row for row in lloc_definitions):
+        errors.append(r"\lloc does not print a distinguishable textual source link")
     if r"\modulesigil" in "\n".join(
         re.findall(r"\\newcommand\{\\(?:lref|lrefx|lloc)\}.*$", text, flags=re.M)
     ):
@@ -112,9 +139,65 @@ def rendered_text(pdf: Path, pdftotext: str) -> str:
     return completed.stdout
 
 
-def rendered_errors(pdf: Path, text: str, aliases: dict[str, object]) -> list[str]:
+def rendered_pages(pdf: Path, pdftotext: str, first: int, last: int) -> str:
+    completed = subprocess.run(
+        [pdftotext, "-f", str(first), "-l", str(last), str(pdf), "-"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    if completed.returncode != 0:
+        detail = completed.stderr.strip() or "pdftotext failed"
+        raise RuntimeError(
+            f"{pdf.relative_to(ROOT)} pages {first}-{last}: {detail}"
+        )
+    return completed.stdout
+
+
+def semantic_text(text: str) -> str:
+    replacements = {
+        "ﬁ": "fi",
+        "ﬂ": "fl",
+        "ﬀ": "ff",
+        "ﬃ": "ffi",
+        "ﬄ": "ffl",
+        "−": "-",
+        "–": "-",
+        "—": "-",
+    }
+    for source, target in replacements.items():
+        text = text.replace(source, target)
+    return re.sub(r"\s+", " ", text).lower()
+
+
+def first_minute_errors(pdf: Path, pdftotext: str) -> list[str]:
     errors: list[str] = []
-    compact = re.sub(r"\s+", " ", text)
+    contract = FIRST_MINUTE_CONTRACT.get(pdf.name, {})
+    for (first, last), anchors in contract.items():
+        try:
+            text = semantic_text(rendered_pages(pdf, pdftotext, first, last))
+        except RuntimeError as error:
+            errors.append(str(error))
+            continue
+        for anchor in anchors:
+            if anchor not in text:
+                errors.append(
+                    f"{pdf.relative_to(ROOT)} pages {first}-{last}: "
+                    f"missing first-minute anchor {anchor!r}"
+                )
+    return errors
+
+
+def rendered_errors(
+    pdf: Path,
+    text: str,
+    aliases: dict[str, object],
+) -> list[str]:
+    errors: list[str] = []
+    compact = re.sub(r"_\s+(?=[a-z0-9])", "_", text)
+    compact = re.sub(r"(?<=[a-z0-9])\s+_", "_", compact)
+    compact = re.sub(r"\s+", " ", compact)
 
     fixed_terms = (
         "docs/claims.json",
@@ -132,9 +215,6 @@ def rendered_errors(pdf: Path, text: str, aliases: dict[str, object]) -> list[st
         errors.append(f"prints implementation path {match.group(0)!r}")
     for match in COMMIT_RE.finditer(compact):
         errors.append(f"prints full commit hash {match.group(0)!r}")
-    for match in LEAN_IDENTIFIER_RE.finditer(compact):
-        errors.append(f"prints Lean-style identifier {match.group(0)!r}")
-
     alias_rows = aliases.get("aliases", [])
     if isinstance(alias_rows, list):
         for row in alias_rows:
@@ -172,7 +252,7 @@ def main() -> int:
             errors.append("pdftotext is required for the rendered-paper check")
         else:
             aliases = json.loads(ALIASES.read_text(encoding="utf-8"))
-            for _tex, pdf in PAPERS:
+            for tex, pdf in PAPERS:
                 if not pdf.is_file():
                     errors.append(f"{pdf.relative_to(ROOT)}: rendered paper is missing")
                     continue
@@ -182,6 +262,7 @@ def main() -> int:
                     errors.append(str(error))
                     continue
                 errors.extend(rendered_errors(pdf, text, aliases))
+                errors.extend(first_minute_errors(pdf, pdftotext))
 
     if errors:
         print(f"check_rendered_paper_boundary: {len(errors)} failure(s)")

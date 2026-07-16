@@ -2,6 +2,18 @@
  "schema": "erdos249257-corpus-descriptor/3",
  "artifact_role": "self_describing_external_mathematical_corpus_root",
  "corpus_id": "plectis_lean_erdos249_257_public",
+ "release_provenance": {
+  "posture": "self_contained_public_projection_from_a_larger_ongoing_research_workflow",
+  "meaning": "This checkout is a deliberately curated, independently verifiable public output of a larger ongoing formal-mathematics workflow. No public claim depends on private or unreleased work.",
+  "public_evidence": [
+   "pinned formal-source identity",
+   "claim and open-proposition registry",
+   "machine-readable argument and module graphs",
+   "generated declaration atlas",
+   "bounded cold-clone and adversarial checks"
+  ],
+  "boundary": "The workflow provenance explains the release discipline; it does not imply hidden proof authority or equivalence with private work."
+ },
  "authority_posture": {
   "proof": "Lean source checked by the pinned Lean kernel",
   "authored_argument": "docs/claims.json::machine_readable_paper.argument_graph",
@@ -24,20 +36,20 @@
    "authority_role": "proof_bearing_committed_source_anchor"
   },
   "navigation_snapshot": {
-   "commit": "77e5610d7d6e46842d783736434d091ca29fbf99",
+   "commit": "68b7acc4379b650523cbce424dabcc62f6ae3b54",
    "authority_role": "machine_readable_navigation_anchor",
    "publication_state": "main_history_snapshot",
    "published_ref": "main",
-   "repository_resolution": "https://github.com/wcook04/plectis-lean-erdos249-257/tree/77e5610d7d6e46842d783736434d091ca29fbf99"
+   "repository_resolution": "https://github.com/wcook04/plectis-lean-erdos249-257/tree/68b7acc4379b650523cbce424dabcc62f6ae3b54"
   },
   "content": {
    "machine_readable_paper": {
     "path": "docs/claims.json::machine_readable_paper",
-    "content_digest": "sha256:efeabb41c86d24748671e0353d35f61d319861ef9c996bde5173c74e89566a4f"
+    "content_digest": "sha256:be9540cdced648359f5952a87ff57a4cea9bd0ab660dad798a65466260ba20cc"
    },
    "claims_document": {
     "path": "docs/claims.json",
-    "content_digest": "sha256:4661f6b00f82f2b9267b8aa7efcae33e35392df906dd1d639fbcb59597d83452"
+    "content_digest": "sha256:617e631304eedf26946f81c2cb9a41f430427665a7e825234f36509f3ea52d73"
    },
    "declaration_atlas": {
     "path": "docs/declaration_atlas.json",
@@ -50,21 +62,21 @@
    },
    "bounded_orientation": {
     "path": "docs/orientation.json",
-    "content_digest": "sha256:4002f22923058547031abb2d59c23548b7cf2337be4dbcaea091cf83464dfed0"
+    "content_digest": "sha256:2c4b7709beeb813857ae85fab3bb715f00f60bb4415fa60c8a45d5cbcc7c0255"
    },
    "human_exposition": {
     "source_path": "paper/erdos249-257-exposition.tex",
-    "source_content_digest": "sha256:faad850f67daa49f0aaf4010db6b86b954ce1590c8f9259a14221b1cecc6b829",
+    "source_content_digest": "sha256:9ddb6209ba445e524675910b6af5d1e66dc408bf08ee2e48efb10cca4ee6972c",
     "rendered_path": "erdos249-257-exposition.pdf",
-    "rendered_content_digest": "sha256:2c1a43ec48aa9c5181b34d78a69f00962a4b7e46a5216a6ffe9fd47959c5b0e0",
+    "rendered_content_digest": "sha256:eeaf2b4e136bb817c44daaafd8f79df24faaa3bfa1de953476694bfda0315f8c",
     "artifact_role": "authored_mathematician_facing_exposition",
     "authority_posture": "authored_editorial_surface_not_Lean_proof_authority"
    },
    "technical_companion": {
     "source_path": "paper/erdos249-transport-curvature.tex",
-    "source_content_digest": "sha256:e97ebf9d4d5c405fafe8e9f5de7bde8c6a98fc82c6600f6022a623ed51638dd2",
+    "source_content_digest": "sha256:58f52df6adee152d1cb78a71be2bd55356c80b4d0455614435311b36572220a3",
     "rendered_path": "erdos249-transport-curvature.pdf",
-    "rendered_content_digest": "sha256:797c86e5f211e17485db59b988951347767062e9cec0e2def56ad55ef33a744d",
+    "rendered_content_digest": "sha256:17eb2e7e007e49decd235afdd232e2929642220a7b2ca3e7a30eef96d92ef803",
     "artifact_role": "authored_transport_and_curvature_companion",
     "authority_posture": "authored_editorial_surface_not_Lean_proof_authority"
    },
@@ -102,6 +114,7 @@
   "declaration_to_human_paper_anchor_reverse_links": true,
   "direct_Lean_source_coordinate_resolution": true,
   "registered_artifact_and_digest_resolution": true,
+  "typed_mathematical_programme_routes": true,
   "declaration_level_proof_dependencies": false,
   "typed_remaining_open_propositions": true,
   "claim_transition_requirements": true,
@@ -113,6 +126,7 @@
    "supports": [
     "proved_open_boundary",
     "principal_claim_routes",
+    "mathematical_programme_routes",
     "release_scale",
     "root_module_topology"
    ]
@@ -458,7 +472,7 @@
      "source": "paper/erdos249-257-exposition.tex",
      "environment": "problem",
      "title": "Erd\\H{o}s \\#249",
-     "line": 2009
+     "line": 1896
     }
    },
    {
@@ -469,7 +483,7 @@
      "source": "paper/erdos249-257-exposition.tex",
      "environment": "problem",
      "title": "unbounded certificate supply",
-     "line": 2018
+     "line": 1905
     }
    },
    {
@@ -480,8 +494,120 @@
      "source": "paper/erdos249-257-exposition.tex",
      "environment": "problem",
      "title": "universal Erd\\H{o}s \\#257",
-     "line": 2026
+     "line": 1913
     }
+   }
+  ],
+  "mathematical_programmes": [
+   {
+    "id": "erdos257_half_story",
+    "title": "Achievement-set geometry and the half-value seam",
+    "core_claim_count": 6,
+    "representative_claim_ids": [
+     "greedy_achievement_geometry",
+     "half_greedy_two_thirds_band"
+    ],
+    "remaining_open_proposition_ids": [
+     "remaining_open.universal_257_all_infinite_supports"
+    ]
+   },
+   {
+    "id": "erdos249_certificate_story",
+    "title": "#249 certificate and harmonic interface",
+    "core_claim_count": 5,
+    "representative_claim_ids": [
+     "denominator_exclusion",
+     "certificate_reduction"
+    ],
+    "remaining_open_proposition_ids": [
+     "remaining_open.erdos_249_irrationality",
+     "remaining_open.unbounded_certificate_supply"
+    ]
+   },
+   {
+    "id": "structured_support_families",
+    "title": "Classical and structured support irrationality",
+    "core_claim_count": 7,
+    "representative_claim_ids": [
+     "eb_constant",
+     "eb_full_support"
+    ],
+    "remaining_open_proposition_ids": [
+     "remaining_open.universal_257_all_infinite_supports"
+    ]
+   },
+   {
+    "id": "erdos249_diagonal_arithmetic",
+    "title": "#249 diagonal arithmetic and fresh-loss interfaces",
+    "core_claim_count": 7,
+    "representative_claim_ids": [
+     "diagonal_pincer_reduction",
+     "diagonal_fresh_loss_reduction"
+    ],
+    "remaining_open_proposition_ids": [
+     "remaining_open.unbounded_certificate_supply"
+    ]
+   },
+   {
+    "id": "boolean_mobius_constraints",
+    "title": "Boolean Möbius carry and global rationality constraints",
+    "core_claim_count": 5,
+    "representative_claim_ids": [
+     "tail_orbit_rigidity",
+     "boolean_mobius_carry"
+    ],
+    "remaining_open_proposition_ids": [
+     "remaining_open.universal_257_all_infinite_supports"
+    ]
+   },
+   {
+    "id": "transport_curvature_programme",
+    "title": "Transport, curvature, phase separation, and no-go results",
+    "core_claim_count": 7,
+    "representative_claim_ids": [
+     "transport_curvature_reductions",
+     "affine_transport_annihilation"
+    ],
+    "remaining_open_proposition_ids": [
+     "remaining_open.unbounded_certificate_supply"
+    ]
+   },
+   {
+    "id": "lambert_obstruction_interfaces",
+    "title": "Mersenne–Lambert identities and obstruction interfaces",
+    "core_claim_count": 6,
+    "representative_claim_ids": [
+     "mersenne_lambert_ladder",
+     "primitive_coordinate_index_obstruction"
+    ],
+    "remaining_open_proposition_ids": [
+     "remaining_open.unbounded_certificate_supply"
+    ]
+   },
+   {
+    "id": "half_carry_compactness_programme",
+    "title": "Half-carry compactness, windows, seams, and finite propagation",
+    "core_claim_count": 12,
+    "representative_claim_ids": [
+     "half_carry_reachability_compactness",
+     "cofinal_strip_return_closure"
+    ],
+    "remaining_open_proposition_ids": [
+     "remaining_open.universal_257_all_infinite_supports"
+    ]
+   },
+   {
+    "id": "arithmetic_obstruction_interfaces",
+    "title": "Denominator, CRT, moment, and gauge obstructions",
+    "core_claim_count": 7,
+    "representative_claim_ids": [
+     "squared_mersenne_enclosure",
+     "mersenne_shadow_denominator"
+    ],
+    "remaining_open_proposition_ids": [
+     "remaining_open.erdos_249_irrationality",
+     "remaining_open.unbounded_certificate_supply"
+    ]
    }
   ],
   "module_topology": {
@@ -1516,15 +1642,17 @@
     "module": "Erdos249257/GreedyAchievementSet.lean",
     "line": 2514
    }
-  ]
+  ],
+  "mathematical_programme_query": "python3 scripts/query_corpus.py --route <programme_route_id>"
  },
  "expansion": {
   "machine_readable_paper": {
    "path": "docs/claims.json::machine_readable_paper",
-   "expected_content_digest": "sha256:efeabb41c86d24748671e0353d35f61d319861ef9c996bde5173c74e89566a4f",
+   "expected_content_digest": "sha256:be9540cdced648359f5952a87ff57a4cea9bd0ab660dad798a65466260ba20cc",
    "contains": [
     "all_claims",
     "authored_argument_graph",
+    "mathematical_programme_routes",
     "complete_module_import_graph"
    ],
    "query": "python3 scripts/query_corpus.py --claim <claim_id>"
@@ -1544,16 +1672,16 @@
   },
   "human_exposition": {
    "source_path": "paper/erdos249-257-exposition.tex",
-   "expected_source_content_digest": "sha256:faad850f67daa49f0aaf4010db6b86b954ce1590c8f9259a14221b1cecc6b829",
+   "expected_source_content_digest": "sha256:9ddb6209ba445e524675910b6af5d1e66dc408bf08ee2e48efb10cca4ee6972c",
    "rendered_path": "erdos249-257-exposition.pdf",
-   "expected_rendered_content_digest": "sha256:2c1a43ec48aa9c5181b34d78a69f00962a4b7e46a5216a6ffe9fd47959c5b0e0",
+   "expected_rendered_content_digest": "sha256:eeaf2b4e136bb817c44daaafd8f79df24faaa3bfa1de953476694bfda0315f8c",
    "authority_posture": "authored_editorial_surface_not_Lean_proof_authority"
   },
   "technical_companion": {
    "source_path": "paper/erdos249-transport-curvature.tex",
-   "expected_source_content_digest": "sha256:e97ebf9d4d5c405fafe8e9f5de7bde8c6a98fc82c6600f6022a623ed51638dd2",
+   "expected_source_content_digest": "sha256:58f52df6adee152d1cb78a71be2bd55356c80b4d0455614435311b36572220a3",
    "rendered_path": "erdos249-transport-curvature.pdf",
-   "expected_rendered_content_digest": "sha256:797c86e5f211e17485db59b988951347767062e9cec0e2def56ad55ef33a744d",
+   "expected_rendered_content_digest": "sha256:17eb2e7e007e49decd235afdd232e2929642220a7b2ca3e7a30eef96d92ef803",
    "authority_posture": "authored_editorial_surface_not_Lean_proof_authority"
   },
   "paper_source_sigils": {

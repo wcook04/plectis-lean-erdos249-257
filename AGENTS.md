@@ -6,17 +6,24 @@
 This is an ordinary public Lean project and a pinned scholarly artefact. It is
 not an entrypoint into any private development system. Work only from the files
 in this repository, and never infer unpublished results or private machinery.
+The checkout is nevertheless a deliberately curated public projection from a
+larger ongoing formal-mathematics workflow: its release discipline, claim
+registry, graph structure, generated atlas, and adversarial checks are public
+evidence of that workflow. They do not create hidden proof authority.
 
 ## First read
 
 1. Read `docs/orientation.json`. It is the bounded first-read capsule: release
-   scale, exact open propositions, principal claim routes, and typed drilldowns.
-   Its human projection is `docs/ORIENTATION.md`. Both are generated navigation,
-   not proof authority.
+   scale, exact open propositions, mathematical programme routes, principal
+   claim routes, and typed drilldowns. Its human projection is
+   `docs/ORIENTATION.md`. Both are generated navigation, not proof authority.
 2. Drill into `docs/claims.json` only for the selected claim or route. Its
    `machine_readable_paper` object owns the complete map from paper claims to
    Lean declarations, module imports, argument relationships, validation, and
-   explicit non-claims. Do not load its exhaustive module graph merely to orient.
+   explicit non-claims. Its `publication_assembly` partitions every public
+   claim exactly once into a contribution family with a narrative owner,
+   prior-art posture, consumer or open obligation, and rendered-view decision.
+   Do not load its exhaustive module graph merely to orient.
 3. Read `docs/methodology.json` before changing a public claim. It defines
    the evidence responsibilities, change classes, required reviews, and local
    claim, guard, and negative-fixture references for each rule.
@@ -46,15 +53,24 @@ handle:
 
 - `--claim <id>`, `--open <remaining_open.id>`, or `--route <id>` for the
   mathematical story and exact frontier;
+- programme routes such as `erdos249_diagonal_arithmetic`,
+  `transport_curvature_programme`, `boolean_mobius_constraints`, and
+  `erdos257_half_story` for a bounded map of one coherent mathematical
+  programme, including its exact claim ceiling and surviving open proposition;
 - `--paper-label <label>` or `--paper-anchor <label_or_source_ref>` for authored
   exposition;
+- `--publication-family <id>` for one contribution family's status,
+  prior-art posture, narrative owner, source route, consumer, and view decision;
+- `--publication-architecture` for the gateway/companion verdict and complete
+  contribution-family index;
 - `--declaration <name>`, `--source <module.lean:line>`, or `--module <path_or_id>`
   for checked source;
 - `--artifact <path_or_sha256>` for a registered paper, PDF, JSON owner, or
   content identity;
 - `--connections <module_or_declaration> --query "<task>"` after choosing a
   source handle; and
-- `--search <text> --limit <1..100>` only when no typed handle is known.
+- `--search "what remains open for 257" --limit 10` (or another short natural
+  question) only when no typed handle is known.
 
 Run `python3 scripts/query_corpus.py --help` for the full grammar. Responses are
 capped at 64 KB and route exhaustive data back to its owner. Follow adjacent
@@ -96,6 +112,7 @@ python3 scripts/test_methodology_contract.py
 python3 scripts/build_module_graph.py --check
 python3 scripts/refresh_source_coordinates.py --check
 python3 scripts/build_corpus_descriptor.py --check
+python3 scripts/test_query_corpus.py --programme-routes-only
 python3 scripts/test_query_corpus.py
 ```
 

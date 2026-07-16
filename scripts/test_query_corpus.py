@@ -28,6 +28,50 @@ from query_corpus import (
 
 ROOT = Path(__file__).resolve().parent.parent
 SCRIPT = ROOT / "scripts" / "query_corpus.py"
+PROGRAMME_EXPECTATIONS = {
+    "erdos257_half_story": {
+        "title": "Achievement-set geometry and the half-value seam",
+        "open_ids": {"remaining_open.universal_257_all_infinite_supports"},
+    },
+    "erdos249_certificate_story": {
+        "title": "#249 certificate and harmonic interface",
+        "open_ids": {
+            "remaining_open.erdos_249_irrationality",
+            "remaining_open.unbounded_certificate_supply",
+        },
+    },
+    "structured_support_families": {
+        "title": "Classical and structured support irrationality",
+        "open_ids": {"remaining_open.universal_257_all_infinite_supports"},
+    },
+    "erdos249_diagonal_arithmetic": {
+        "title": "#249 diagonal arithmetic and fresh-loss interfaces",
+        "open_ids": {"remaining_open.unbounded_certificate_supply"},
+    },
+    "boolean_mobius_constraints": {
+        "title": "Boolean Möbius carry and global rationality constraints",
+        "open_ids": {"remaining_open.universal_257_all_infinite_supports"},
+    },
+    "transport_curvature_programme": {
+        "title": "Transport, curvature, phase separation, and no-go results",
+        "open_ids": {"remaining_open.unbounded_certificate_supply"},
+    },
+    "lambert_obstruction_interfaces": {
+        "title": "Mersenne–Lambert identities and obstruction interfaces",
+        "open_ids": {"remaining_open.unbounded_certificate_supply"},
+    },
+    "half_carry_compactness_programme": {
+        "title": "Half-carry compactness, windows, seams, and finite propagation",
+        "open_ids": {"remaining_open.universal_257_all_infinite_supports"},
+    },
+    "arithmetic_obstruction_interfaces": {
+        "title": "Denominator, CRT, moment, and gauge obstructions",
+        "open_ids": {
+            "remaining_open.erdos_249_irrationality",
+            "remaining_open.unbounded_certificate_supply",
+        },
+    },
+}
 
 
 def query(*args: str) -> dict[str, object]:
@@ -51,15 +95,157 @@ def run(*args: str) -> subprocess.CompletedProcess[str]:
     )
 
 
+def validate_programme_routes() -> None:
+    for route_id, expected in PROGRAMME_EXPECTATIONS.items():
+        packet = query("--route", route_id)
+        route = packet["route"]
+        programme = packet["programme"]
+        assert route["route_kind"] == "mathematical_programme"
+        assert programme["title"] == expected["title"]
+        assert programme["core_claims"]
+        assert programme["problem_targets"]
+        assert all(row["status"] == "open" for row in programme["problem_targets"])
+        assert {
+            row["id"] for row in programme["remaining_open_propositions"]
+        } == expected["open_ids"]
+        assert {
+            step.rsplit(" ", 1)[-1]
+            for step in route["query_steps"]
+            if " --claim " in step
+        } == {row["id"] for row in programme["core_claims"]}
+        assert {
+            step.rsplit(" ", 1)[-1]
+            for step in route["query_steps"]
+            if " --open " in step
+        } == expected["open_ids"]
+        assert any(
+            token in programme["claim_ceiling"].casefold()
+            for token in (
+                "remain open",
+                "not proved",
+                "does not",
+                "do not",
+                "neither",
+                "no ",
+            )
+        )
+        encoded = json.dumps(packet, ensure_ascii=False).encode("utf-8")
+        assert len(encoded) <= 16_384
+        card = run("--route", route_id, "--format", "card")
+        assert card.returncode == 0
+        assert card.stdout.startswith(f"programme {route_id} |")
+
+
+def validate_natural_language_search() -> None:
+    assert query_corpus.search_rank("exact_id", "exact_id", "body") == 0
+    assert query_corpus.search_rank("exact", "exact_id", "body") == 1
+    assert query_corpus.search_rank("act_id", "exact_id", "body") == 2
+    assert (
+        query_corpus.search_rank(
+            "whole phrase", "id", "prefix whole phrase suffix"
+        )
+        == 3
+    )
+    assert (
+        query_corpus.search_rank(
+            "denominator obstruction",
+            "id",
+            "denominator and gauge obstruction",
+        )
+        == 5
+    )
+    assert (
+        query_corpus.search_rank(
+            "unknown mathematical phrase", "id", "unrelated body"
+        )
+        is None
+    )
+    natural_language_routes = {
+        "how close is problem 249": "erdos249_certificate_story",
+        "what remains open for 257": "erdos257_half_story",
+        "achievement set topology": "erdos257_half_story",
+        "why local induction fails": "half_carry_compactness_programme",
+        "strategy countermodels": "transport_curvature_programme",
+        "formal proof trust": "change_or_verify_release",
+        "denominator obstruction": "arithmetic_obstruction_interfaces",
+        "how big is the corpus": "instant_orientation",
+        "what is formally checked": "instant_orientation",
+        "where are the Lean proofs": "follow_one_claim",
+        "what is new mathematics": "trace_prior_art",
+        "how do I verify this": "change_or_verify_release",
+        "what is still missing": "understand_methodology_and_open_boundary",
+    }
+    for search_text, route_id in natural_language_routes.items():
+        natural_search = query("--search", search_text, "--limit", "10")
+        assert route_id in {
+            row.get("id")
+            for row in natural_search["results"]
+            if row["kind"] == "reading_route"
+        }
+
+
 def main() -> int:
+    validate_programme_routes()
+    validate_natural_language_search()
     summary = query()
     assert summary["kind"] == "corpus_summary"
     claims_document = json.loads((ROOT / "docs" / "claims.json").read_text(encoding="utf-8"))
+    assert summary["curated_claim_count"] == len(claims_document["claims"])
+    assert summary["publication_family_count"] == len(
+        claims_document["machine_readable_paper"]["publication_assembly"][
+            "contribution_families"
+        ]
+    )
     module_graph = claims_document["machine_readable_paper"]["module_graph"]
     assert module_graph["root"] == "Erdos249257.lean"
     assert summary["scale"]["module_count"] == len(module_graph["nodes"]) + 1
     descriptor = json.loads((ROOT / "docs" / "corpus_descriptor.json").read_text(encoding="utf-8"))
     formal_source = claims_document["release"]["formal_source"]
+    publication_assembly = claims_document["machine_readable_paper"]["publication_assembly"]
+    architecture = query("--publication-architecture")
+    assert architecture["kind"] == "publication_architecture"
+    assert architecture["architecture"]["canonical_gateway"]["source"] == (
+        "paper/erdos249-257-exposition.tex"
+    )
+    assert len(architecture["family_index"]) == len(
+        publication_assembly["contribution_families"]
+    )
+    assembled_claim_ids = [
+        claim_id
+        for family in publication_assembly["contribution_families"]
+        for claim_id in family["claim_ids"]
+    ]
+    assert len(assembled_claim_ids) == len(set(assembled_claim_ids))
+    assert set(assembled_claim_ids) == {
+        claim["id"] for claim in claims_document["claims"]
+    }
+    certificate_family = query(
+        "--publication-family", "exact_certificate_equivalence_and_deposits"
+    )
+    assert certificate_family["kind"] == "publication_family"
+    assert certificate_family["family"]["primary_narrative_owner"] == (
+        "paper/erdos249-257-exposition.tex"
+    )
+    assert {claim["id"] for claim in certificate_family["claims"]} == {
+        "certificate_reduction",
+        "certificate_completeness",
+        "certified_kill_instances",
+        "diagonal_pincer_t64_primality_closure",
+        "diagonal_pincer_t64_endpoint_certificate",
+    }
+    family_card = run(
+        "--publication-family",
+        "exact_certificate_equivalence_and_deposits",
+        "--format",
+        "card",
+    )
+    assert family_card.returncode == 0
+    assert family_card.stdout.startswith(
+        "publication family exact_certificate_equivalence_and_deposits |"
+    )
+    architecture_card = run("--publication-architecture", "--format", "card")
+    assert architecture_card.returncode == 0
+    assert architecture_card.stdout.startswith("publication architecture |")
     assert descriptor["identity"]["formal_source"]["ref"] == formal_source["ref"]
     resolved_formal_source = subprocess.run(
         ["git", "rev-parse", formal_source["ref"]],
@@ -101,6 +287,7 @@ def main() -> int:
         "python3 scripts/query_corpus.py --claim fatal_gap_right_tail_classification",
         "python3 scripts/query_corpus.py --claim final_middle_cell_escape",
         "python3 scripts/query_corpus.py --claim last_producer_tail_escape_reduction",
+        "python3 scripts/query_corpus.py --open remaining_open.universal_257_all_infinite_supports",
     ]
     band_claim = query("--claim", "half_greedy_two_thirds_band")
     assert ("builds_on", "greedy_achievement_geometry") in {
@@ -131,11 +318,62 @@ def main() -> int:
 
     certificate_route = query("--route", "erdos249_certificate_story")["route"]
     assert certificate_route["query_steps"] == [
+        "python3 scripts/query_corpus.py --claim denominator_exclusion",
         "python3 scripts/query_corpus.py --claim certificate_reduction",
         "python3 scripts/query_corpus.py --claim certificate_completeness",
+        "python3 scripts/query_corpus.py --claim certified_kill_instances",
         "python3 scripts/query_corpus.py --claim first_harmonic_certificate_interface",
+        "python3 scripts/query_corpus.py --open remaining_open.erdos_249_irrationality",
         "python3 scripts/query_corpus.py --open remaining_open.unbounded_certificate_supply",
     ]
+    certificate_programme = query("--route", "erdos249_certificate_story")
+    assert certificate_programme["route"]["route_kind"] == "mathematical_programme"
+    assert certificate_programme["programme"]["problem_targets"][0]["id"] == "erdos_249"
+    assert {
+        row["id"] for row in certificate_programme["programme"]["core_claims"]
+    } == {
+        "denominator_exclusion",
+        "certificate_reduction",
+        "certificate_completeness",
+        "certified_kill_instances",
+        "first_harmonic_certificate_interface",
+    }
+    assert {
+        row["id"]
+        for row in certificate_programme["programme"][
+            "remaining_open_propositions"
+        ]
+    } == {
+        "remaining_open.erdos_249_irrationality",
+        "remaining_open.unbounded_certificate_supply",
+    }
+    assert "remain open" in certificate_programme["programme"]["claim_ceiling"]
+    diagonal_programme = query("--route", "erdos249_diagonal_arithmetic")
+    assert diagonal_programme["programme"]["title"] == (
+        "#249 diagonal arithmetic and fresh-loss interfaces"
+    )
+    assert "diagonal_fresh_loss_reduction" in {
+        row["id"] for row in diagonal_programme["programme"]["core_claims"]
+    }
+    assert {
+        row["id"] for row in diagonal_programme["programme"]["related_programmes"]
+    } >= {
+        "erdos249_certificate_story",
+        "transport_curvature_programme",
+    }
+    programme_card = run(
+        "--route", "boolean_mobius_constraints", "--format", "card"
+    )
+    assert programme_card.returncode == 0
+    assert programme_card.stdout.startswith(
+        "programme boolean_mobius_constraints |"
+    )
+    programme_search = query("--search", "fresh-loss interfaces", "--limit", "10")
+    assert any(
+        row["kind"] == "reading_route"
+        and row["id"] == "erdos249_diagonal_arithmetic"
+        for row in programme_search["results"]
+    )
     first_harmonic = query("--claim", "first_harmonic_certificate_interface")
     assert {
         row["neighbour"]["id"]
@@ -343,7 +581,10 @@ def main() -> int:
     )
     assert declaration["matches"][0]["lean_source_identity"] == adelic["lean_source_identity"]
     assert declaration["matches"][0]["attached_claims"][0]["paper"]["label"] == "res:farey"
-    assert declaration["matches"][0]["paper_anchors"][0]["canonical_handle"] == "res:farey"
+    assert "res:farey" in {
+        row["canonical_handle"]
+        for row in declaration["matches"][0]["paper_anchors"]
+    }
 
     reduction_declaration = query(
         "--declaration", "irrational_totient_series_of_certificate_supply"
@@ -377,7 +618,9 @@ def main() -> int:
         "tsum_totient_div_pow_two_ne_ratCast_of_den_le_79639646646701375323355774875831053"
     )
     assert source_declaration["attached_claims"][0]["id"] == "denominator_exclusion"
-    assert source_declaration["paper_anchors"][0]["canonical_handle"] == "res:farey"
+    assert "res:farey" in {
+        row["canonical_handle"] for row in source_declaration["paper_anchors"]
+    }
     nondeclaration_source = query("--source", "Erdos249257/CertificateKernel.lean:1")
     assert nondeclaration_source["source"]["line"] == 1
     assert nondeclaration_source["coordinate_receipt"]["line_exists"] is True
@@ -651,4 +894,18 @@ def main() -> int:
 
 
 if __name__ == "__main__":
+    if sys.argv[1:] == ["--programme-routes-only"]:
+        validate_programme_routes()
+        validate_natural_language_search()
+        print(
+            "test_query_corpus: "
+            f"{len(PROGRAMME_EXPECTATIONS)} mathematical programme routes and "
+            "13 natural-language discovery queries passed"
+        )
+        raise SystemExit(0)
+    if sys.argv[1:]:
+        raise SystemExit(
+            "usage: python3 scripts/test_query_corpus.py "
+            "[--programme-routes-only]"
+        )
     raise SystemExit(main())

@@ -283,9 +283,31 @@ def main() -> int:
         check(formal_source.get("relationship_to_last_tag") in {
             "at_last_tag", "post_tag_checkpoint",
         }, "release.formal_source has an unsupported relationship_to_last_tag")
+    public_projection = release.get("public_projection")
+    check(isinstance(public_projection, dict),
+          "release must name its public_projection provenance posture")
+    if isinstance(public_projection, dict):
+        check(
+            public_projection.get("posture")
+            == "self_contained_public_projection_from_a_larger_ongoing_research_workflow",
+            "release.public_projection posture drifted",
+        )
+        check(bool(public_projection.get("meaning"))
+              and bool(public_projection.get("public_evidence"))
+              and bool(public_projection.get("boundary")),
+              "release.public_projection needs meaning, evidence, and a boundary")
+        boundary = str(public_projection.get("boundary", "")).casefold()
+        check("does not imply hidden proof authority" in boundary
+              and "private work" in boundary,
+              "release.public_projection boundary must reject hidden proof authority "
+              "and private-work equivalence")
     claim_ids = [claim["id"] for claim in data["claims"]]
     check(len(claim_ids) == len(set(claim_ids)), "docs/claims.json contains duplicate claim ids")
     claim_id_set = set(claim_ids)
+    claim_index = {claim["id"]: claim for claim in data["claims"]}
+    remaining_open_id_set = {
+        row["id"] for row in data["remaining_open_propositions"]
+    }
     for claim in data["claims"]:
         check(claim["status"] in taxonomy,
               f"claim {claim['id']}: status {claim['status']!r} not in taxonomy")
@@ -299,6 +321,78 @@ def main() -> int:
     machine_paper = data["machine_readable_paper"]
     check(machine_paper.get("schema") == "erdos249257-machine-readable-paper/1",
           "machine_readable_paper has an unsupported schema")
+    publication_assembly = machine_paper.get("publication_assembly")
+    check(isinstance(publication_assembly, dict),
+          "machine_readable_paper must own a publication_assembly")
+    if isinstance(publication_assembly, dict):
+        families = publication_assembly.get("contribution_families", [])
+        check(isinstance(families, list) and bool(families),
+              "publication_assembly must contain contribution families")
+        family_ids = [family.get("id") for family in families]
+        check(len(family_ids) == len(set(family_ids)),
+              "publication contribution families contain duplicate ids")
+        required_family_fields = {
+            "id",
+            "claim_ids",
+            "status_summary",
+            "prior_art_posture",
+            "primary_narrative_owner",
+            "source_route",
+            "consumer_or_open_obligation",
+            "view_decision",
+        }
+        assembled_claim_ids: list[str] = []
+        for family in families:
+            missing_fields = required_family_fields - set(family)
+            check(not missing_fields,
+                  f"publication family {family.get('id')!r} lacks fields: "
+                  f"{sorted(missing_fields)}")
+            family_claim_ids = family.get("claim_ids", [])
+            check(isinstance(family_claim_ids, list) and bool(family_claim_ids),
+                  f"publication family {family.get('id')!r} has no claims")
+            check(not (set(family_claim_ids) - claim_id_set),
+                  f"publication family {family.get('id')!r} has unknown claims: "
+                  f"{sorted(set(family_claim_ids) - claim_id_set)}")
+            assembled_claim_ids.extend(family_claim_ids)
+            owner_path = str(family.get("primary_narrative_owner", "")).split("::", 1)[0]
+            check((ROOT / owner_path).is_file(),
+                  f"publication family {family.get('id')!r} owner does not exist: "
+                  f"{owner_path}")
+            check(str(family.get("source_route", "")).startswith(
+                "python3 scripts/query_corpus.py --"),
+                f"publication family {family.get('id')!r} lacks a typed source route")
+            check(bool(family.get("status_summary"))
+                  and bool(family.get("prior_art_posture"))
+                  and bool(family.get("consumer_or_open_obligation"))
+                  and bool(family.get("view_decision")),
+                  f"publication family {family.get('id')!r} has an empty editorial field")
+        duplicate_assembled_claims = sorted(
+            claim_id
+            for claim_id in set(assembled_claim_ids)
+            if assembled_claim_ids.count(claim_id) > 1
+        )
+        check(not duplicate_assembled_claims,
+              "publication contribution families overlap on claims: "
+              f"{duplicate_assembled_claims}")
+        check(set(assembled_claim_ids) == claim_id_set,
+              "publication contribution census drifted: missing="
+              f"{sorted(claim_id_set - set(assembled_claim_ids))}, extra="
+              f"{sorted(set(assembled_claim_ids) - claim_id_set)}")
+        architecture = publication_assembly.get("publication_architecture", {})
+        canonical_gateway = architecture.get("canonical_gateway", {})
+        check(canonical_gateway.get("source") == machine_paper["paper"]["source"],
+              "publication architecture canonical gateway drifted from paper owner")
+        for companion in architecture.get("retained_companions", []):
+            check(any(
+                row.get("source") == companion.get("source")
+                for row in machine_paper["paper"].get("companion_sources", [])
+            ), f"retained publication companion is not registered: "
+               f"{companion.get('source')}")
+    route_ids = [route.get("id") for route in machine_paper["entrypoints"]]
+    check(len(route_ids) == len(set(route_ids)),
+          "machine-readable-paper entrypoints contain duplicate route ids")
+    route_id_set = set(route_ids)
+    route_index = {route["id"]: route for route in machine_paper["entrypoints"]}
     exhaustive_route_reads = {"docs/claims.json", "docs/declaration_atlas.json", "docs/methodology.json"}
     for route in machine_paper["entrypoints"]:
         check(bool(route.get("id")) and bool(route.get("intent")) and bool(route.get("read")),
@@ -324,6 +418,89 @@ def main() -> int:
         for step in route.get("query_steps", []):
             check(step.startswith("python3 scripts/query_corpus.py --"),
                   f"route {route.get('id')!r} query step is not a typed corpus query: {step}")
+        discovery_terms = route.get("discovery_terms", [])
+        check(
+            isinstance(discovery_terms, list)
+            and all(isinstance(term, str) and term.strip() for term in discovery_terms),
+            f"route {route.get('id')!r} has invalid discovery terms",
+        )
+        route_kind = route.get("route_kind", "reading_route")
+        check(route_kind in {"reading_route", "mathematical_programme"},
+              f"route {route.get('id')!r} has unsupported route_kind {route_kind!r}")
+        if route_kind == "mathematical_programme":
+            required_fields = (
+                "title",
+                "mathematical_focus",
+                "claim_ceiling",
+                "problem_target_claim_ids",
+                "core_claim_ids",
+                "remaining_open_proposition_ids",
+                "related_route_ids",
+            )
+            check(all(route.get(field) for field in required_fields),
+                  f"programme route {route.get('id')!r} lacks a required programme field")
+            target_ids = set(route.get("problem_target_claim_ids", []))
+            core_ids = set(route.get("core_claim_ids", []))
+            open_ids = set(route.get("remaining_open_proposition_ids", []))
+            related_ids = set(route.get("related_route_ids", []))
+            check(not (target_ids - claim_id_set),
+                  f"programme route {route.get('id')!r} has unknown problem targets: "
+                  f"{sorted(target_ids - claim_id_set)}")
+            check(
+                all(claim_index[target_id]["status"] == "open"
+                    for target_id in target_ids if target_id in claim_index),
+                f"programme route {route.get('id')!r} target claims must remain open",
+            )
+            check(not (core_ids - claim_id_set),
+                  f"programme route {route.get('id')!r} has unknown core claims: "
+                  f"{sorted(core_ids - claim_id_set)}")
+            check(not (open_ids - remaining_open_id_set),
+                  f"programme route {route.get('id')!r} has unknown open propositions: "
+                  f"{sorted(open_ids - remaining_open_id_set)}")
+            check(not (related_ids - route_id_set),
+                  f"programme route {route.get('id')!r} has unknown related routes: "
+                  f"{sorted(related_ids - route_id_set)}")
+            check(
+                all(
+                    route_index[related_id].get("route_kind")
+                    == "mathematical_programme"
+                    for related_id in related_ids
+                    if related_id in route_index
+                ),
+                f"programme route {route.get('id')!r} relates to a non-programme route",
+            )
+            check(route.get("id") not in related_ids,
+                  f"programme route {route.get('id')!r} relates to itself")
+            steps = set(route.get("query_steps", []))
+            check(
+                all(
+                    f"python3 scripts/query_corpus.py --claim {claim_id}" in steps
+                    for claim_id in core_ids
+                ),
+                f"programme route {route.get('id')!r} does not expose every core claim",
+            )
+            check(
+                all(
+                    f"python3 scripts/query_corpus.py --open {open_id}" in steps
+                    for open_id in open_ids
+                ),
+                f"programme route {route.get('id')!r} does not expose every open proposition",
+            )
+            ceiling = str(route.get("claim_ceiling", "")).casefold()
+            check(
+                any(
+                    token in ceiling
+                    for token in (
+                        "remain open",
+                        "not proved",
+                        "does not",
+                        "do not",
+                        "neither",
+                        "no ",
+                    )
+                ),
+                f"programme route {route.get('id')!r} lacks an explicit negative claim ceiling",
+            )
 
     module_nodes = machine_paper["module_graph"]["nodes"]
     module_ids = [node["id"] for node in module_nodes]
@@ -579,6 +756,10 @@ def main() -> int:
         check(required in agents, f"AGENTS.md does not route through {required}")
     check("remain open" in agents, "AGENTS.md must preserve the open-problem boundary")
     check("proof authority" in agents, "AGENTS.md must state the proof-authority boundary")
+    check("larger ongoing formal-mathematics workflow" in agents,
+          "AGENTS.md must preserve the public-projection provenance boundary")
+    check("mathematical programme" in agents,
+          "AGENTS.md must expose mathematical programme routes")
 
     methodology_check = subprocess.run(
         [sys.executable, str(ROOT / "scripts" / "build_methodology.py"), "--check"],
@@ -659,6 +840,8 @@ def main() -> int:
     descriptor = json.loads(read(ROOT / "docs" / "corpus_descriptor.json"))
     check(descriptor.get("schema") == "erdos249257-corpus-descriptor/3",
           "corpus descriptor must use schema erdos249257-corpus-descriptor/3")
+    check(descriptor.get("release_provenance") == public_projection,
+          "corpus descriptor release provenance drifted from docs/claims.json")
     descriptor_path = ROOT / "docs" / "corpus_descriptor.json"
     check(len(descriptor_path.read_bytes()) <= 64_000,
           "corpus descriptor exceeds the 64 KB registration-envelope budget")
@@ -670,6 +853,28 @@ def main() -> int:
           "corpus descriptor module count drifted from the machine-readable paper")
     check(module_topology.get("full_graph") == "docs/claims.json::machine_readable_paper.module_graph",
           "corpus descriptor does not route to the complete module graph")
+    expected_compact_programmes = [
+        {
+            "id": route["id"],
+            "title": route["title"],
+            "core_claim_count": len(route["core_claim_ids"]),
+            "representative_claim_ids": route["core_claim_ids"][:2],
+            "remaining_open_proposition_ids": route[
+                "remaining_open_proposition_ids"
+            ],
+        }
+        for route in machine_paper["entrypoints"]
+        if route.get("route_kind") == "mathematical_programme"
+    ]
+    check(compact_graph.get("mathematical_programmes") == expected_compact_programmes,
+          "corpus descriptor mathematical programme index drifted")
+    check(
+        compact_graph.get("mathematical_programme_query")
+        == "python3 scripts/query_corpus.py --route <programme_route_id>",
+        "corpus descriptor mathematical programme query route drifted",
+    )
+    check(descriptor.get("capabilities", {}).get("typed_mathematical_programme_routes") is True,
+          "corpus descriptor does not advertise typed mathematical programme routes")
     methodology_content = descriptor.get("identity", {}).get("content", {}).get("methodology_contract", {})
     check(methodology_content.get("path") == "docs/methodology.json",
           "corpus descriptor does not register docs/methodology.json")
@@ -719,6 +924,8 @@ def main() -> int:
           "orientation projection must use schema erdos249257-orientation/1")
     check(orientation.get("scale") == declaration_atlas.get("summary"),
           "orientation scale drifted from the declaration atlas")
+    check(orientation.get("release_provenance") == public_projection,
+          "orientation release provenance drifted from docs/claims.json")
     expected_principal_ids = [
         claim["id"] for claim in data["claims"] if claim.get("readme_headline")
     ]
@@ -727,6 +934,23 @@ def main() -> int:
     ]
     check(actual_principal_ids == expected_principal_ids,
           "orientation principal claims drifted from README-headline claims")
+    expected_programmes = [
+        {
+            "id": route["id"],
+            "title": route["title"],
+            "mathematical_focus": route["mathematical_focus"],
+            "claim_ceiling": route["claim_ceiling"],
+            "core_claim_count": len(route["core_claim_ids"]),
+            "representative_claim_ids": route["core_claim_ids"][:2],
+            "remaining_open_proposition_ids": route[
+                "remaining_open_proposition_ids"
+            ],
+        }
+        for route in machine_paper["entrypoints"]
+        if route.get("route_kind") == "mathematical_programme"
+    ]
+    check(orientation.get("mathematical_programmes") == expected_programmes,
+          "orientation mathematical programmes drifted from machine-readable-paper entrypoints")
     check(len(orientation_path.read_bytes()) <= 32_000,
           "orientation JSON exceeds the 32 KB bounded first-read budget")
     for target in orientation.get("drilldowns", {}).values():

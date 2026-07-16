@@ -59,8 +59,16 @@ def main() -> int:
     assert_human_rejected(summary, mutated, "first-minute section contract")
     checks += 1
 
+    mutated = copy.deepcopy(human_surfaces)
+    mutated["README.md"] = (
+        "This is an exceptional and impressive research-grade achievement.\n"
+        + mutated["README.md"]
+    )
+    assert_human_rejected(summary, mutated, "self-appraisal language")
+    checks += 1
+
     mutated_paper = gateway_paper.replace(
-        "Produce these certificates at unbounded parameters", ""
+        "An unbounded certificate supply", ""
     )
     try:
         diagnostic.validate_gateway_opening(mutated_paper)
@@ -70,7 +78,8 @@ def main() -> int:
         raise AssertionError("gateway exact-open-edge deletion escaped")
 
     mutated_paper = gateway_paper.replace(
-        r"\paragraph{Reading map.}", r"\paragraph{Reading map.}\lref{Fake.lean}{1}{fake}"
+        r"\paragraph{Reading map.}",
+        r"\paragraph{Reading map.} Fake.lean module inventory",
     )
     try:
         diagnostic.validate_gateway_opening(mutated_paper)
@@ -97,8 +106,39 @@ def main() -> int:
     checks += 1
 
     mutated = copy.deepcopy(packets)
+    mutated["summary"]["publication_family_count"] = 0
+    assert_rejected(mutated, "contribution-family scale")
+    checks += 1
+
+    mutated = copy.deepcopy(packets)
     mutated["story_routes"]["erdos257_half_story"]["route"]["query_steps"].pop()
     assert_rejected(mutated, "#257 story route")
+    checks += 1
+
+    mutated = copy.deepcopy(packets)
+    mutated["story_routes"]["erdos249_diagonal_arithmetic"]["programme"][
+        "claim_ceiling"
+    ] = "This solves Erdős #249."
+    assert_rejected(mutated, "programme claim ceiling")
+    checks += 1
+
+    mutated = copy.deepcopy(packets)
+    mutated["story_routes"]["boolean_mobius_constraints"]["programme"][
+        "core_claims"
+    ].pop()
+    assert_rejected(mutated, "programme claim-route completeness")
+    checks += 1
+
+    mutated = copy.deepcopy(packets)
+    mutated["story_routes"]["transport_curvature_programme"][
+        "release_provenance"
+    ]["boundary"] = "Private work may supply proof authority."
+    assert_rejected(mutated, "public-projection provenance boundary")
+    checks += 1
+
+    mutated = copy.deepcopy(packets)
+    mutated["discovery_searches"]["what remains open for 257"]["results"] = []
+    assert_rejected(mutated, "natural-language route discovery")
     checks += 1
 
     mutated = copy.deepcopy(packets)
