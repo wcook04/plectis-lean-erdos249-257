@@ -57,6 +57,9 @@ jobs:
       - name: Test immutable release source resolution
         if: ${{ !cancelled() }}
         run: python3 scripts/test_release_source_identity.py
+      - name: Test clean committed-snapshot release wrapper
+        if: ${{ !cancelled() }}
+        run: python3 scripts/test_check_release_ref.py
       - name: Test scope source-identity boundary
         if: ${{ !cancelled() }}
         run: python3 scripts/test_scope_source_identity.py
