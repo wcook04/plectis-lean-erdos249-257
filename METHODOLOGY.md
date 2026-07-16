@@ -100,6 +100,7 @@ Does not decide: Whether the Lean kernel accepts the proof term.
 - Every frontier-facing partial result states both its positive conclusion and the exact proposition that survives it.
 - Each representation change identifies the checked theorem that transfers the claim and states the direction and any loss.
 - A reader using only the public checkout must be able to find the main argument, proof routes, public claim statuses, and remaining open propositions.
+- Public claim review checks both ceilings and coverage: prose must not exceed the checked theorem chain, and a source-backed high-value mechanism, exact reformulation, quantitative reduction, or distinct endpoint must be mechanically discoverable when omitting it would materially understate the corpus.
 
 ### Maintaining
 

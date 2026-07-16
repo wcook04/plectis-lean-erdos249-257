@@ -26,7 +26,7 @@ below is stated at the scope the Lean source actually supports.
 
 This self-contained public project is an output of a larger
 formal-mathematics workflow, not an entrypoint into any private development
-system; no claim depends on unreleased work.
+system. No claim depends on unreleased work; do not infer results from private or unreleased work.
 
 `v0.6.0` is the latest tagged release and citation anchor.
 [`docs/claims.json`](docs/claims.json) pins the post-tag formal-source checkpoint;
@@ -45,13 +45,29 @@ authority.
 | **proved here** | For the #257 test value `1/2`, achievement-set membership is equivalent to infinitely many greedy skips and would produce an infinite support of rational sum, refuting universal #257. Under a last-skip hypothesis, the upper branch and the middle coordinate `-3` are impossible. |
 | **conditional reduction** | The two remaining middle coordinates `-2` and `-1` would also be eliminated if the producer carry dominated its complete future divisor-incidence tail. That inequality is not proved. |
 
-Other exact packages cover eventually-periodic nonnegative weighted irrationality, a
-signed irrational-or-base-terminating dichotomy, five binary-carry
-criteria/consequences forced by rational support values, and two scoped #249
-no-go countermodels.
+### Other exact mathematics in the corpus
 
-An exact final-skip band formula checks a finite mechanism; it does not show
-that the actual orbit avoids an unsafe band.
+| Package | Exact checked content | Boundary |
+|---|---|---|
+| Fair-coin coprimality | For independent waiting times with `P(X=n)=2⁻ⁿ`, `S = 1/2 + P(gcd(X,Y)=1)`. The probability has no rational representation with denominator at most `39 819 823 323 350 687 661 677 887 437 915 526`. | Irrationality of the probability, and hence of `S`, remains open. |
+| Squared-Lambert gcd moments | `∑ 1/(2ᵈ-1)² = ∑ (σ(n)-τ(n))/2ⁿ` and `∑ φ(d)/(2ᵈ-1)² = ∑ (P(n)-n)/2ⁿ`, where `P` is Pillai's gcd-sum function. | These identities do not transfer the cited irrationality of the first series to the open Möbius-weighted row. |
+| Stern–Brocot cylinder law | Positive reduced slopes have total Mersenne weight one. Each cylinder splits exactly into a stop mass and two children; the depth-`d` error is at most `(2/3)^d` times the cylinder mass and tends to zero. | This is an exact probability/continued-fraction package, not an irrationality theorem or novelty claim. |
+| Fibonacci/continuant run stability | `r` nonempty alternating runs have height at least `F_{r+3}`, with equality on the all-unit spine. Defects `eᵢ` give an exact multiaffine expansion, gain at least `F_{r+1}∑eᵢ`, and have one-site weight `F_{i+2}F_{r-i+1}`. The first induced run layer has mass `1/2`. | The natural denominator exponent is `F_{r+3}-2`; no theorem here says the analytic run tail survives denominator clearing. |
+| Tempered binary tail rigidity | For every coefficient sequence with `c(n) ≤ n`, `∑ c(n)/2ⁿ` is rational exactly when there is a tempered integer carry orbit; every such orbit is the scaled tail itself. | This is a general rationality classification. Applying it still requires problem-specific control of the resulting orbit. |
+| Exact Möbius-shadow denominator | The reduced denominator of the lcm-height scaled Möbius shadow is computed exactly; an explicit upper-half product of Mersenne factors divides it and gives a quantitative lower bound. | This is denominator survival on the diagonal reduction, not the missing unbounded avoidance supply. |
+| Scalar-localisation height obstruction | If `H ∣ x.den` and `(c·x).den ∣ H`, then `x.den/H ∣ |c|`: denominator clearing transfers the complement into the coefficient. | Local height obstruction, not an irrationality criterion. |
+
+Typed routes expose the source declarations and argument neighbours. Use
+`probabilistic_gcd_geometry` for the first four rows,
+`boolean_mobius_constraints` for tail rigidity, and
+`arithmetic_obstruction_interfaces` for the denominator and height rows.
+Separate packages establish eventually-periodic nonnegative weighted
+irrationality, a signed irrational-or-base-terminating dichotomy, five
+binary-carry criteria/consequences forced by rational support values, and two
+scoped #249 no-go countermodels.
+
+An exact final-skip band formula does not show that the actual orbit avoids
+an unsafe band.
 
 The [orientation](docs/ORIENTATION.md) routes claims.
 The [gateway paper](erdos249-257-main-paper.pdf) states both spines; the
@@ -78,8 +94,8 @@ boundary.
 |---|---:|
 | Lean modules | 633 |
 | Formal results and supporting lemmas | 11,471 |
-| Curated claim records | 96 |
-| Contribution families | 20 |
+| Curated claim records | 98 |
+| Contribution families | 21 |
 
 Claim records span every status, including cited and open, and are partitioned
 exactly once. These are navigation counts, not novelty claims.
@@ -98,9 +114,11 @@ exactly once. These are navigation counts, not novelty claims.
 - **Publication topology or contribution family:** run
   `python3 scripts/query_corpus.py --publication-architecture` or
   `python3 scripts/query_corpus.py --publication-family <id>`.
-- **Verify:** run `python3 scripts/check_release.py`; after Lean changes, run
-  `lake build` (or `python3 scripts/lean_fast_build.py --jobs 2` on a
-  memory-constrained machine).
+- **Verify:** `python3 scripts/check_cold_clone_comprehension.py --quick`
+  checks committed reading surfaces without Mathlib or a Lean build.
+  `python3 scripts/check_release.py` runs the full public-surface/query sweep.
+  After Lean changes, run `lake build` or
+  `python3 scripts/lean_fast_build.py --jobs 2`.
 
 ## How the repository fits together
 
@@ -156,9 +174,13 @@ python3 scripts/lean_fast_build.py --jobs 2
 Check the public release surfaces separately:
 
 ```sh
+python3 scripts/check_cold_clone_comprehension.py --quick
 python3 scripts/check_release.py
 python3 scripts/test_methodology_contract.py
 ```
+
+The quick check needs no Lean build. `lake exe cache get` only downloads pinned
+compiled dependencies; `lake build` is the fresh local kernel check.
 
 The pinned public Lean source contains no `sorry`, `admit`, project-defined
 `axiom`, or `native_decide`; finite computations use kernel-checked `decide`.

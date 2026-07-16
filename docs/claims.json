@@ -175,9 +175,10 @@
         "discovery_terms": [
           "how close is problem 249",
           "what remains open for 249",
-          "finite certificates"
+          "finite certificates",
+          "first harmonic certificates"
         ],
-        "mathematical_focus": "Tail-difference certificates, exact completeness at fixed parameters, bounded lcm-diagonal instances, and first-harmonic consumers.",
+        "mathematical_focus": "Tail-difference certificates, exact completeness at fixed parameters, bounded lcm-diagonal instances, first-harmonic consumers, and the exact four-term pivot budget.",
         "claim_ceiling": "The certificate formulation is exact and finite instances are checked; the unbounded certificate supply and irrationality of S remain open.",
         "problem_target_claim_ids": [
           "erdos_249"
@@ -187,7 +188,8 @@
           "certificate_reduction",
           "certificate_completeness",
           "certified_kill_instances",
-          "first_harmonic_certificate_interface"
+          "first_harmonic_certificate_interface",
+          "first_harmonic_pivot_decomposition"
         ],
         "remaining_open_proposition_ids": [
           "remaining_open.erdos_249_irrationality",
@@ -206,6 +208,7 @@
           "python3 scripts/query_corpus.py --claim certificate_completeness",
           "python3 scripts/query_corpus.py --claim certified_kill_instances",
           "python3 scripts/query_corpus.py --claim first_harmonic_certificate_interface",
+          "python3 scripts/query_corpus.py --claim first_harmonic_pivot_decomposition",
           "python3 scripts/query_corpus.py --open remaining_open.erdos_249_irrationality",
           "python3 scripts/query_corpus.py --open remaining_open.unbounded_certificate_supply"
         ],
@@ -213,6 +216,7 @@
           "Erdos249257/TotientTailPeriodKiller.lean",
           "Erdos249257/LcmConeFlatness.lean",
           "Erdos249257/FirstHarmonicGap.lean",
+          "Erdos249257/FirstHarmonicPivot.lean",
           "docs/claims.json::machine_readable_paper.argument_graph"
         ],
         "adjacent_handle_classes": [
@@ -402,9 +406,10 @@
           "strategy countermodels",
           "why local signatures fail",
           "phase separation",
-          "transport curvature"
+          "transport curvature",
+          "first harmonic pivot decomposition"
         ],
-        "mathematical_focus": "Finite differences of totient tails, exponent transport, affine moment annihilation, harmonic phases, reconstruction defects, and countermodels to bounded local signatures.",
+        "mathematical_focus": "Finite differences of totient tails, exponent transport, affine moment annihilation, the exact first-harmonic pivot budget, harmonic phases, reconstruction defects, and countermodels to bounded local signatures.",
         "claim_ceiling": "The consumers and countermodels are exact, but no cofinal curvature, transport, phase-separation, or anti-reconstruction producer is proved.",
         "problem_target_claim_ids": [
           "erdos_249"
@@ -413,6 +418,7 @@
           "transport_curvature_reductions",
           "affine_transport_annihilation",
           "transport_certificate_instances",
+          "first_harmonic_pivot_decomposition",
           "adjacent_phase_separation_reduction",
           "pivot_anti_reconstruction_reduction",
           "fixed_precision_transport_no_go",
@@ -433,6 +439,7 @@
           "python3 scripts/query_corpus.py --claim transport_curvature_reductions",
           "python3 scripts/query_corpus.py --claim affine_transport_annihilation",
           "python3 scripts/query_corpus.py --claim transport_certificate_instances",
+          "python3 scripts/query_corpus.py --claim first_harmonic_pivot_decomposition",
           "python3 scripts/query_corpus.py --claim adjacent_phase_separation_reduction",
           "python3 scripts/query_corpus.py --claim pivot_anti_reconstruction_reduction",
           "python3 scripts/query_corpus.py --claim fixed_precision_transport_no_go",
@@ -442,6 +449,7 @@
         "authority_owners": [
           "docs/claims.json::claims",
           "docs/claims.json::machine_readable_paper.argument_graph",
+          "Erdos249257/FirstHarmonicPivot.lean",
           "paper/erdos249-transport-curvature-companion-note.tex",
           "Erdos249257.lean"
         ],
@@ -576,9 +584,11 @@
         "discovery_terms": [
           "why local induction fails",
           "carry compactness",
-          "half-carry propagation"
+          "half-carry propagation",
+          "dyadic prefix compression",
+          "block safety and primitive overshoot"
         ],
-        "mathematical_focus": "Compactness from finite half-carry words, scaled terminal closure, protected windows and one-hole seams, inverse-parent contraction, suffix-cylinder propagation, and checked depth-18-to-29 bases.",
+        "mathematical_focus": "Exact dyadic prefix and block-safety coordinates, compactness from finite half-carry words, scaled terminal closure, protected seams, inverse-parent contraction, suffix-cylinder propagation, and checked depth-18-to-29 bases.",
         "claim_ceiling": "The closure implications, local propagation laws, and bounded bases are exact; a cofinal producer or coherent unbounded window family is not proved, so neither half-membership nor universal Erdős #257 follows.",
         "problem_target_claim_ids": [
           "universal_257"
@@ -593,6 +603,7 @@
           "selected_half_carry_window_compactness",
           "localized_protected_seam_compactness",
           "mixed_cofinal_half_carry_fan_in",
+          "dyadic_prefix_block_safety_interfaces",
           "selected_window_depth18_base",
           "selected_suffix_cylinder_propagation",
           "selected_suffix_pre_feedback_run"
@@ -617,6 +628,7 @@
           "python3 scripts/query_corpus.py --claim selected_half_carry_window_compactness",
           "python3 scripts/query_corpus.py --claim localized_protected_seam_compactness",
           "python3 scripts/query_corpus.py --claim mixed_cofinal_half_carry_fan_in",
+          "python3 scripts/query_corpus.py --claim dyadic_prefix_block_safety_interfaces",
           "python3 scripts/query_corpus.py --claim selected_window_depth18_base",
           "python3 scripts/query_corpus.py --claim selected_suffix_cylinder_propagation",
           "python3 scripts/query_corpus.py --claim selected_suffix_pre_feedback_run",
@@ -625,6 +637,7 @@
         "authority_owners": [
           "docs/claims.json::claims",
           "docs/claims.json::machine_readable_paper.argument_graph",
+          "Erdos249257/DyadicPrefixCompression.lean",
           "Erdos249257.lean"
         ],
         "adjacent_handle_classes": [
@@ -933,6 +946,18 @@
           "view_decision": "gateway_appendix_future_257_companion"
         },
         {
+          "id": "dyadic_prefix_block_safety_interfaces",
+          "claim_ids": [
+            "dyadic_prefix_block_safety_interfaces"
+          ],
+          "status_summary": "Exact reduced-denominator transport, block-safety and primitive-overshoot equivalences, conditional half-membership consumers, and explicit failures of naive induction.",
+          "prior_art_posture": "Exact rational and greedy-block formalisation; no priority claim is made for the assembled source-level package.",
+          "primary_narrative_owner": "docs/SOURCE_MAP.md",
+          "source_route": "python3 scripts/query_corpus.py --claim dyadic_prefix_block_safety_interfaces",
+          "consumer_or_open_obligation": "Supply actual block-safety, raw-margin, or primitive-overshoot witnesses cofinally; no such unbounded producer is proved.",
+          "view_decision": "source_map_and_living_reference_only"
+        },
+        {
           "id": "rewind_windows_and_protected_seams",
           "claim_ids": [
             "fixed_coefficient_rewind_contraction",
@@ -1132,14 +1157,15 @@
           "id": "harmonic_and_phase_reductions",
           "claim_ids": [
             "first_harmonic_certificate_interface",
+            "first_harmonic_pivot_decomposition",
             "adjacent_phase_separation_reduction",
             "pivot_anti_reconstruction_reduction"
           ],
-          "status_summary": "Conditional harmonic and phase consumers ending in an exact window-pair equivalence.",
+          "status_summary": "Conditional harmonic and phase consumers, including an exact four-term pivot decomposition and budget, ending in an exact window-pair equivalence.",
           "prior_art_posture": "No matching combined theorem is identified; all novelty language remains provisional.",
           "primary_narrative_owner": "paper/erdos249-transport-curvature-companion-note.tex",
           "source_route": "python3 scripts/query_corpus.py --claim pivot_anti_reconstruction_reduction",
-          "consumer_or_open_obligation": "Supply a cofinal harmonic, adjacent-pair, or anti-reconstruction producer.",
+          "consumer_or_open_obligation": "Supply a cofinal first-harmonic pivot budget, adjacent-pair separator, or anti-reconstruction producer.",
           "view_decision": "transport_companion_primary"
         },
         {
@@ -7191,6 +7217,21 @@
           }
         },
         {
+          "from": "dyadic_prefix_block_safety_interfaces",
+          "relation": "builds_on",
+          "to": "greedy_achievement_geometry"
+        },
+        {
+          "from": "dyadic_prefix_block_safety_interfaces",
+          "relation": "advances_open_target",
+          "to": "universal_257",
+          "remaining_open_effect": {
+            "remaining_open_proposition_id": "remaining_open.universal_257_all_infinite_supports",
+            "operation": "re_expresses",
+            "statement": "Gives exact block-safety, tail-gap, and primitive-overshoot witnesses sufficient for half-membership, but proves no cofinal supply of those witnesses and does not address arbitrary infinite supports."
+          }
+        },
+        {
           "from": "half_second_channel_reduction",
           "relation": "builds_on",
           "to": "greedy_achievement_geometry"
@@ -7248,6 +7289,21 @@
             "remaining_open_proposition_id": "remaining_open.unbounded_certificate_supply",
             "operation": "re_expresses",
             "statement": "Turns a cofinal first-harmonic estimate into the existing finite certificate supply; no such estimate is proved."
+          }
+        },
+        {
+          "from": "first_harmonic_pivot_decomposition",
+          "relation": "builds_on",
+          "to": "first_harmonic_certificate_interface"
+        },
+        {
+          "from": "first_harmonic_pivot_decomposition",
+          "relation": "advances_open_target",
+          "to": "erdos_249",
+          "remaining_open_effect": {
+            "remaining_open_proposition_id": "remaining_open.unbounded_certificate_supply",
+            "operation": "re_expresses",
+            "statement": "Gives an exact four-term first-harmonic decomposition and a sufficient 9X/10 budget; no prime-distribution or decorrelation estimate supplies those budgets cofinally."
           }
         },
         {
@@ -7366,7 +7422,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 1951
+        "line": 1962
       }
     },
     {
@@ -7377,7 +7433,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 1960
+        "line": 1971
       }
     },
     {
@@ -7388,7 +7444,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 1968
+        "line": 1979
       }
     }
   ],
@@ -7586,6 +7642,63 @@
           "name": "mixedPrimePowerLayerTwo_twelve_fixture",
           "module": "Erdos249257/MaximalOmegaLayer.lean",
           "line": 65
+        }
+      ]
+    },
+    {
+      "id": "dyadic_prefix_block_safety_interfaces",
+      "label": "Dyadic-prefix, block-safety, and primitive-overshoot interfaces",
+      "status": "proved here",
+      "statement": "Inside a hypothetical dyadic-rational support value, a reduced finite positive prefix transports exactly to a residual rational support value and wrap-ratio certificate. For the half-greedy orbit, reduced and raw margins, three-depth take-run excess, primitive-lattice cap violation, support-coefficient tail gaps, and gcd-scaled predecessor overshoot are connected by exact identities and equivalences; cofinal supplies of the named witnesses imply that 1/2 belongs to the Mersenne achievement set. Checked fixtures show that safe brackets with numerator monotonicity and a factor-11 predecessor rule are not inductive. No cofinal witness supply is proved, so neither half-membership nor universal Erdős #257 follows.",
+      "remaining_open_proposition_ids": [
+        "remaining_open.universal_257_all_infinite_supports"
+      ],
+      "readme_headline": false,
+      "declarations": [
+        {
+          "name": "finiteFragment_dyadicPrefixCompression",
+          "module": "Erdos249257/DyadicPrefixCompression.lean",
+          "line": 1481
+        },
+        {
+          "name": "halfGreedyThreeDepthTakeRunExcessBound_iff_skippedExcessBound",
+          "module": "Erdos249257/DyadicPrefixCompression.lean",
+          "line": 2021
+        },
+        {
+          "name": "greedyHalf_badSkipCapViolation_iff_primitiveLattice",
+          "module": "Erdos249257/DyadicPrefixCompression.lean",
+          "line": 2033
+        },
+        {
+          "name": "halfGreedyPrefixSupportTailGap_eq_excess_div_denominator",
+          "module": "Erdos249257/DyadicPrefixCompression.lean",
+          "line": 2126
+        },
+        {
+          "name": "greedyHalf_badSkipCapViolation_iff_supportCoeffTailGap",
+          "module": "Erdos249257/DyadicPrefixCompression.lean",
+          "line": 2164
+        },
+        {
+          "name": "rawSafe_but_not_gcdScaled_fixture",
+          "module": "Erdos249257/DyadicPrefixCompression.lean",
+          "line": 3294
+        },
+        {
+          "name": "factorEleven_predecessorOvershoot_not_inductive_fixture",
+          "module": "Erdos249257/DyadicPrefixCompression.lean",
+          "line": 3316
+        },
+        {
+          "name": "unsafeSkipGcdOvershootSupply_iff_primitive",
+          "module": "Erdos249257/DyadicPrefixCompression.lean",
+          "line": 3463
+        },
+        {
+          "name": "half_mem_mersenneAchievementSet_of_unsafeSkipPrimitiveOvershootSupply",
+          "module": "Erdos249257/DyadicPrefixCompression.lean",
+          "line": 3504
         }
       ]
     },
@@ -9725,6 +9838,43 @@
           "name": "exists_certifiedKill_of_first_harmonic_gap",
           "module": "Erdos249257/FirstHarmonicGap.lean",
           "line": 128
+        }
+      ]
+    },
+    {
+      "id": "first_harmonic_pivot_decomposition",
+      "label": "Complex first-harmonic pivot decomposition",
+      "status": "conditional reduction",
+      "statement": "Removing the pivot phase gives an exact decomposition of the block first-harmonic sum into a centred supplier-fibre correlation, a supplier-fibre mean term, a bad-supplier term, and a non-supplier term. At a positive scale satisfying the explicit dyadic-room inequality, if the real part of the centred term is at most 14X/25 and the other three norms are at most X/100, X/100, and 8X/25, then the real first-harmonic sum is at most 9X/10 and yields a finite certificate. A cofinal supply of these budgets implies irrationality of S. No prime-distribution or decorrelation estimate supplying the budgets is proved.",
+      "remaining_open_proposition_ids": [
+        "remaining_open.unbounded_certificate_supply"
+      ],
+      "readme_headline": false,
+      "declarations": [
+        {
+          "name": "windowFirstExp_sum_eq_pivot_decomposition",
+          "module": "Erdos249257/FirstHarmonicPivot.lean",
+          "line": 342
+        },
+        {
+          "name": "PivotBudgetAt",
+          "module": "Erdos249257/FirstHarmonicPivot.lean",
+          "line": 371
+        },
+        {
+          "name": "first_harmonic_gap_of_pivotBudgetAt",
+          "module": "Erdos249257/FirstHarmonicPivot.lean",
+          "line": 377
+        },
+        {
+          "name": "DTWPivotResidualDecorrelation",
+          "module": "Erdos249257/FirstHarmonicPivot.lean",
+          "line": 397
+        },
+        {
+          "name": "irrational_totient_series_of_pivotResidualDecorrelation",
+          "module": "Erdos249257/FirstHarmonicPivot.lean",
+          "line": 405
         }
       ]
     },

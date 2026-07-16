@@ -284,6 +284,16 @@
       "applies_to": ["object:projection", "change_type:projection_changed"],
       "checked_by": ["release.methodology_schema_and_references", "release.methodology_projection_matches_source", "release.methodology_routes_exist"],
       "scope_limit": "Path and projection checks establish availability, not reader comprehension."
+    },
+    {
+      "id": "principle.claim_assurance_is_two_sided",
+      "title": "Claim assurance checks underclaiming as well as overclaiming",
+      "group": "publishing",
+      "statement": "Public claim review checks both ceilings and coverage: prose must not exceed the checked theorem chain, and a source-backed high-value mechanism, exact reformulation, quantitative reduction, or distinct endpoint must be mechanically discoverable when omitting it would materially understate the corpus.",
+      "evidence_classes": ["lean_check", "repository_check", "human_mathematical_review"],
+      "applies_to": ["object:lean_declaration", "object:public_claim", "object:projection", "change_type:claim_support_linkage_changed", "change_type:authored_exposition_changed", "change_type:projection_changed"],
+      "checked_by": ["release.methodology_schema_and_references", "release.methodology_projection_matches_source", "release.methodology_routes_exist"],
+      "scope_limit": "Coverage does not turn support lemmas into separate headline claims: group plumbing under the smallest faithful contribution and require human review for significance."
     }
   ],
   "anti_principles": [
@@ -609,6 +619,7 @@
         "principle.separate_lean_human_and_agent_authority",
         "principle.update_authoritative_sources_before_projections",
         "principle.public_checkout_explains_claims_and_open_boundary",
+        "principle.claim_assurance_is_two_sided",
         "anti_principle.do_not_equate_lean_acceptance_with_intended_meaning",
         "anti_principle.do_not_report_reduction_as_solution",
         "anti_principle.do_not_generalize_finite_result_without_theorem",
@@ -654,6 +665,7 @@
       "description": "Checks that METHODOLOGY.md is the exact deterministic projection of docs/methodology.json.",
       "serves": [
         "principle.public_checkout_explains_claims_and_open_boundary",
+        "principle.claim_assurance_is_two_sided",
         "anti_principle.do_not_edit_projection_as_source",
         "transition.methodology_source_to_public_projections"
       ]
@@ -666,6 +678,7 @@
         "principle.separate_lean_human_and_agent_authority",
         "principle.update_authoritative_sources_before_projections",
         "principle.public_checkout_explains_claims_and_open_boundary",
+        "principle.claim_assurance_is_two_sided",
         "anti_principle.do_not_treat_graph_model_or_private_work_as_proof",
         "anti_principle.do_not_edit_projection_as_source",
         "transition.methodology_source_to_public_projections"

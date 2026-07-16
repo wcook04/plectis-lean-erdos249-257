@@ -6,6 +6,7 @@
 from __future__ import annotations
 
 import copy
+import re
 
 import check_cold_clone_comprehension as diagnostic
 
@@ -26,12 +27,24 @@ def assert_human_rejected(summary: dict, surfaces: dict[str, str], label: str) -
     raise AssertionError(f"human first-contact mutation escaped: {label}")
 
 
+def remove_semantic_anchor(text: str, token: str) -> str:
+    """Delete every case-insensitive occurrence seen by the production check."""
+    return re.sub(
+        re.escape(diagnostic.normalized(token)),
+        "",
+        text,
+        flags=re.IGNORECASE,
+    )
+
+
 def main() -> int:
     packets = diagnostic.collect_agent_packets()
     summary = packets["summary"]
+    quick_summary = diagnostic.quick_summary()
     human_surfaces = {
         path: diagnostic.read(path) for path in diagnostic.HUMAN_SURFACES
     }
+    diagnostic.validate_human_first_contact(quick_summary, human_surfaces)
     diagnostic.validate_human_first_contact(summary, human_surfaces)
     gateway_paper = diagnostic.read(diagnostic.GATEWAY_PAPER)
     diagnostic.validate_gateway_opening(gateway_paper)
@@ -40,14 +53,14 @@ def main() -> int:
     diagnostic.validate_cross_agent_entry(agents, claude)
     diagnostic.validate_agent_packets(packets)
 
-    checks = 2
+    checks = 3
     for task_id, requirements in diagnostic.human_tasks(summary).items():
         for alternatives in requirements:
             mutated = copy.deepcopy(human_surfaces)
             mutated["README.md"] = diagnostic.normalized(mutated["README.md"])
             for token in alternatives:
-                mutated["README.md"] = mutated["README.md"].replace(
-                    diagnostic.normalized(token), ""
+                mutated["README.md"] = remove_semantic_anchor(
+                    mutated["README.md"], token
                 )
             assert_human_rejected(summary, mutated, f"{task_id}: {alternatives}")
             checks += 1
@@ -56,7 +69,7 @@ def main() -> int:
     mutated["README.md"] = mutated["README.md"].replace(
         "## What remains open", "## Deferred questions"
     )
-    assert_human_rejected(summary, mutated, "first-minute section contract")
+    assert_human_rejected(summary, mutated, "first-contact section contract")
     checks += 1
 
     mutated = copy.deepcopy(human_surfaces)
@@ -188,6 +201,16 @@ def main() -> int:
     assert_rejected(mutated, "#249 completeness-consumer edge")
     checks += 1
 
+    mutated = copy.deepcopy(packets)
+    harmonic_pivot = mutated["story_claims"]["first_harmonic_pivot_decomposition"]
+    harmonic_pivot["argument_neighbourhood"]["outgoing"] = [
+        row
+        for row in harmonic_pivot["argument_neighbourhood"]["outgoing"]
+        if row["neighbour"]["id"] != "first_harmonic_certificate_interface"
+    ]
+    assert_rejected(mutated, "#249 harmonic-pivot consumer edge")
+    checks += 1
+
     conditional = next(
         claim_id for claim_id, packet in packets["claims"].items()
         if packet["claim"]["status"] == "conditional reduction"
@@ -214,7 +237,7 @@ def main() -> int:
 
     print(
         "test_cold_clone_comprehension: bounded baseline passed; "
-        f"{checks - 2} semantic mutations were rejected"
+        f"{checks - 3} semantic mutations were rejected"
     )
     return 0
 

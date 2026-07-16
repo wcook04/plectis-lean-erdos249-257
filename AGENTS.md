@@ -125,8 +125,8 @@ lake build
 The release checker validates claim status, declaration coordinates, paper
 anchors, the machine-readable module and argument graphs, the exhaustive
 declaration atlas, scope, metadata, licensing, and proof-trust guards. Do not
-add `sorry`, `admit`, `axiom`, or `native_decide`; finite computations use
-kernel-checked `decide`.
+add `sorry`, `admit`, `axiom`, `native_decide`, unsafe/partial declarations,
+or unbounded kernel limits; finite computations use kernel-checked `decide`.
 
 After adding, removing, or rewiring Lean modules, run
 `python3 scripts/build_module_graph.py` before the other projections.  It
@@ -139,16 +139,20 @@ never declaration names or mathematical prose.
 A separate diagnostic checks that a cold clone stays readable:
 
 ```sh
+python3 scripts/check_cold_clone_comprehension.py --quick
 python3 scripts/check_cold_clone_comprehension.py
 python3 scripts/test_cold_clone_comprehension.py
 ```
 
-It proves the first-contact boundary through a compact human bundle and the
-same bounded public query packets a cold coding agent would follow; it does
-not concatenate the claim registry, methodology, or declaration atlas as
-evidence. It checks navigation semantics and response budgets, not Lean proof
-correctness, and runs in the release gate. A failure means a projection, route,
-or typed handle dropped a distinction and should be repaired.
+The `--quick` path checks the committed compact human and agent projections
+without a Lean build or typed-query sweep, so a fresh clone gets an immediate
+readability receipt. The full diagnostic proves the first-contact boundary
+through the same bounded public query packets a cold coding agent would follow;
+it does not concatenate the claim registry, methodology, or declaration atlas
+as evidence. Both check navigation semantics and response budgets, not Lean
+proof correctness, and the full diagnostic runs in the release gate. A failure
+means a projection, route, or typed handle dropped a distinction and should be
+repaired.
 The companion adversarial test removes human semantic anchors and mutates proof
 authority, open-boundary, finite-bound, source-coordinate, and graph-link
 facts; every mutation must make the evaluator fail.

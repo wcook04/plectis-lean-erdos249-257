@@ -57,9 +57,11 @@ README_BANNED_PHRASES = [
 ]
 
 PROOF_TRUST_RE = re.compile(
-    r"^\s*(?:sorry\b|admit\b|axiom\s)"
+    r"\bsorry\b|\badmit\b|(?<![\w.])axiom\s+"
     r"|native_decide"
-    r"|\bdecide[^\n]*(?:\+native\b|native\s*:=\s*true\b)",
+    r"|\+native\b|\bnative\s*:=\s*true\b"
+    r"|^\s*(?:unsafe|partial)\s+(?:def|theorem|opaque|instance)\b"
+    r"|^\s*set_option\s+(?:maxHeartbeats|maxRecDepth)\s+0\b",
     re.M,
 )
 
@@ -223,14 +225,32 @@ def check_proof_trust() -> None:
     # Pin the lexical boundary: prose and strings are harmless, executable
     # native reduction is not.  These fixtures keep future scanner edits from
     # silently weakening or over-broadening the release contract.
+    check(proof_trust_violation("theorem bad : True := by sorry\n") == "sorry",
+          "proof-trust scanner must reject inline sorry")
+    check(proof_trust_violation("theorem bad : True := by admit\n") == "admit",
+          "proof-trust scanner must reject inline admit")
+    check(proof_trust_violation("namespace Bad\naxiom hidden : True\nend Bad\n") == "axiom",
+          "proof-trust scanner must reject project-defined axioms")
     check(proof_trust_violation("theorem bad : True := by native_decide\n") == "native_decide",
           "proof-trust scanner must reject executable native reduction")
-    check(proof_trust_violation("theorem bad : True := by decide +native\n") == "decide +native",
+    check(proof_trust_violation("theorem bad : True := by decide +native\n") == "+native",
           "proof-trust scanner must reject the native decide alias")
     check(proof_trust_violation(
         "theorem bad : True := by decide (config := { native := true })\n"
-    ) == "decide (config := { native := true",
+    ) == "native := true",
           "proof-trust scanner must reject native evaluation through configuration")
+    check(proof_trust_violation("unsafe def bad : Nat := 1\n") == "unsafe def",
+          "proof-trust scanner must reject unsafe declarations")
+    check(proof_trust_violation("partial def bad : Nat -> Nat := fun n => bad n\n") == "partial def",
+          "proof-trust scanner must reject partial declarations")
+    check(proof_trust_violation(
+        "set_option maxHeartbeats 0\nexample : True := by trivial\n"
+    ) == "set_option maxHeartbeats 0",
+          "proof-trust scanner must reject unbounded heartbeat limits")
+    check(proof_trust_violation(
+        "set_option maxRecDepth 0 in\nexample : True := by trivial\n"
+    ) == "set_option maxRecDepth 0",
+          "proof-trust scanner must reject unbounded recursion limits")
     check(proof_trust_violation("/- native_decide -/\ntheorem ok : True := by trivial\n") is None,
           "proof-trust scanner must ignore comments")
     check(proof_trust_violation('def label := "native_decide"\n') is None,

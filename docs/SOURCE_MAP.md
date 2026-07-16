@@ -83,7 +83,7 @@ Algebraic support for the same band:
 - `RadicalMobiusShadow → RepunitMobiusNumerator → CyclicTensorMobiusShadow`
 - `CyclotomicProjectionOfShadow → PrimePowerJumpDynamics`
 - `RationalDenominatorSurvival`, `LambertDiagonalEnclosure`,
-  `FullTargetPrimeAdjunctionNoGo`, and `DyadicPrefixCompression`
+  and `FullTargetPrimeAdjunctionNoGo`
 
 Exploratory exact interfaces with explicit conditional boundaries live in
 `PrimitiveRationalGapSupply`, `PrimitiveSupportBridge`,
@@ -95,8 +95,14 @@ Exploratory exact interfaces with explicit conditional boundaries live in
 Read `CurvatureCarry → ExponentOnlyTransport → JointExponentTransport` for the
 main proof spine, then `PrimeJumpMigration → PrimeJumpWindow` and
 `ThreeTransportBoundary` for the new-prime and balanced finite consumers.
-`FirstHarmonicGap` is the analytic interface: a constant-saving cosine bound
-forces a direct certificate, but no cofinal estimate is asserted.
+For the harmonic route, read
+`FirstHarmonicGap → FirstHarmonicPivot → AdjacentPhaseSeparation`.
+`FirstHarmonicGap` turns a constant-saving cosine bound into a direct
+certificate. `FirstHarmonicPivot` decomposes the complex harmonic sum exactly
+into centred supplier-fibre, fibre-mean, bad-supplier, and non-supplier terms;
+the one-sided budgets `14X/25`, `X/100`, `X/100`, and `8X/25` give the required
+`9X/10` saving. `AdjacentPhaseSeparation` gives a pairwise alternative. No
+cofinal harmonic, prime-distribution, or decorrelation estimate is proved.
 `TropicalCurvatureCarry` is a proved negative result showing that bounded
 valuation–unit precision alone cannot exclude all centred completions.
 
@@ -112,6 +118,8 @@ valuation–unit precision alone cannot exclude all centred completions.
   `(60,12)` certificate.
 - `FirstHarmonicGap` — deterministic conversion of a blockwise harmonic gap
   into a direct certificate.
+- `FirstHarmonicPivot` — exact four-term complex pivot decomposition and a
+  conditional cofinal budget-to-irrationality socket.
 - `TropicalCurvatureCarry` — fixed-precision local-signature no-go theorem.
 
 The technical exposition is `paper/erdos249-transport-curvature-companion-note.tex`.  This
@@ -137,7 +145,7 @@ principal result spine; the cylinder law used in the exposition is owned by
 
 Builds on `Erdos249257.CertificateKernel`; not part of the wave chronology.
 Reading order:
-`GenericTailOrbitRigidity → GreedyAchievementSet → CampbellShiftSynchronization → BooleanMobiusCarry → RationalSupportCarrySkeleton → SublogDivisorCoverage`.
+`GenericTailOrbitRigidity → GreedyAchievementSet → CampbellShiftSynchronization → BooleanMobiusCarry → RationalSupportCarrySkeleton → DyadicPrefixCompression → SublogDivisorCoverage`.
 
 - `Erdos249257.GenericTailOrbitRigidity`
 - Relevant declarations include: `temperedBinaryOrbit_eq_scaledTail`, `binaryCoeffSeries_rational_iff_exists_temperedBinaryOrbit`, `balancedPulse_fanout_unbounded`, `balancedPulse_no_autonomous_decoder`
@@ -160,8 +168,48 @@ Reading order:
 - `Erdos249257.RationalSupportCarrySkeleton`
 - Relevant declarations include: `sum_doublingResidue_eq_mul_wrapCount`, `one_div_oddOrder_le_reciprocalMass_of_support_fraction`, `reciprocalMass_eq_residueMean_add_excessMean`, `dyadic_support_fraction_reciprocalMass_diverges_or_gt_one`, `exists_unbounded_shifted_odd_tail_nat_state_of_support_fraction`
 
+- `Erdos249257.DyadicPrefixCompression`
+- This is #257 support, not part of the #249 diagonal band. It gives exact
+  finite-fragment dyadic compression inside a hypothetical dyadic-rational
+  support value, reduced/raw block-safety coordinates, primitive-lattice and
+  support-tail-gap equivalences, conditional half-membership consumers, and
+  checked failures of naive induction.
+  Start with `finiteFragment_dyadicPrefixCompression`,
+  `halfGreedyThreeDepthTakeRunExcessBound_iff_skippedExcessBound`,
+  `greedyHalf_badSkipCapViolation_iff_primitiveLattice`,
+  `halfGreedyPrefixSupportTailGap_eq_excess_div_denominator`, and
+  `unsafeSkipGcdOvershootSupply_iff_primitive`. No cofinal witness supply is
+  proved.
+
 - `Erdos249257.SublogDivisorCoverage`
 - Relevant declarations include: `supportCoeffZeroWindow_length_le_eps_logb_add`
+
+## Half-value finite-prefix and boundary analysis
+
+This band studies the test value `1/2` in ordinary finite-prefix language.
+A greedy prefix is the first `n` include/skip decisions. A seam is a pair of
+finite words whose values bracket `1/2`. A cylinder is the set of infinite
+extensions of one fixed prefix. A producer is an unproved hypothesis that
+supplies the required seams or return configurations arbitrarily far out.
+
+Read the band in four layers:
+
+1. `GreedyAchievementSet → HalfCutLocator` defines the achievement set, greedy
+   coding, and the finite cut around `1/2`.
+2. `HalfCarryReachability → HalfCylinderFiniteShadow` translates finite
+   prefixes into integer carry and finite-shadow coordinates.
+3. `HalfCylinderIntegerGreedy → HalfCylinderConcreteSeamAdapter →
+   HalfCylinderFullShellSeamBridge → HalfCylinderSkippedEndpointClassifier →
+   HalfCylinderFloorErrorReset → HalfCylinderSeamLimit` develops the exact
+   boundary arithmetic and limiting seam interface.
+4. `HalfCylinderFatalGapRightTail → HalfCylinderHalfMembershipClassification →
+   HalfCylinderLastProducerContradiction → HalfCylinderMiddleCarryLowerBound`
+   gives the endpoint classification, eliminates the upper and `-3` middle
+   cases, and isolates the remaining carry-tail inequality for `-2` and `-1`.
+
+The floor-error and shell modules are supporting arithmetic layers, not
+separate endpoint theorems. The last layer remains conditional: no producer
+supplying the required configurations cofinally is proved.
 
 ## Claim registry
 

@@ -16,6 +16,7 @@ authority.
 
 from __future__ import annotations
 
+import argparse
 import copy
 import json
 import re
@@ -28,11 +29,11 @@ ROOT = Path(__file__).resolve().parent.parent
 QUERY = ROOT / "scripts" / "query_corpus.py"
 HUMAN_SURFACES = ("README.md", "SCOPE.md", "docs/ORIENTATION.md")
 HUMAN_SURFACE_BUDGET_BYTES = {
-    "README.md": 9_000,
+    "README.md": 12_000,
     "SCOPE.md": 4_000,
     "docs/ORIENTATION.md": 16_000,
 }
-README_FIRST_MINUTE_BUDGET_BYTES = 6_000
+README_FIRST_CONTACT_BUDGET_BYTES = 12_000
 SUMMARY_PACKET_BUDGET_BYTES = 32_000
 PACKET_BUDGET_BYTES = 16_384
 PROOF_AUTHORITY = "Lean source checked by the pinned Lean kernel"
@@ -74,6 +75,7 @@ STORY_CLAIMS = (
     "certificate_reduction",
     "certificate_completeness",
     "first_harmonic_certificate_interface",
+    "first_harmonic_pivot_decomposition",
 )
 DISCOVERY_ROUTE_QUERIES = {
     "how close is problem 249": "erdos249_certificate_story",
@@ -83,6 +85,8 @@ DISCOVERY_ROUTE_QUERIES = {
     "diagonal pincer and fresh loss": "erdos249_diagonal_arithmetic",
     "binary carry rigidity": "boolean_mobius_constraints",
     "why local induction fails": "half_carry_compactness_programme",
+    "dyadic prefix compression": "half_carry_compactness_programme",
+    "first harmonic pivot decomposition": "transport_curvature_programme",
     "strategy countermodels": "transport_curvature_programme",
     "Mersenne Lambert identities": "lambert_obstruction_interfaces",
     "what probability and gcd identities are formalized": "probabilistic_gcd_geometry",
@@ -102,6 +106,16 @@ DISCOVERY_ROUTE_QUERIES = {
 
 def read(rel: str) -> str:
     return (ROOT / rel).read_text(encoding="utf-8")
+
+
+def quick_summary() -> dict[str, Any]:
+    """Load the committed bounded projection without spawning corpus queries."""
+    orientation = json.loads(read("docs/orientation.json"))
+    return {
+        "remaining_open_propositions": orientation["remaining_open_propositions"],
+        "status_taxonomy": orientation["status_taxonomy"],
+        "mathematical_programmes": orientation["mathematical_programmes"],
+    }
 
 
 def encoded_bytes(value: Any) -> int:
@@ -128,7 +142,7 @@ def query_packet(*args: str, budget_bytes: int = PACKET_BUDGET_BYTES) -> dict[st
 
 
 def human_tasks(summary: dict[str, Any]) -> dict[str, list[list[str]]]:
-    """Facts a reader must recover from the README's first-minute prefix.
+    """Facts a reader must recover from the bounded README first contact.
 
     Each task contains conjunctions of semantic anchor groups.  Alternatives
     within one group permit harmless wording changes; satisfying one task with
@@ -171,6 +185,17 @@ def human_tasks(summary: dict[str, Any]) -> dict[str, list[list[str]]]:
             ],
             ["two scoped #249 no-go countermodels"],
         ],
+        "recover_independent_exact_packages": [
+            ["fair-coin coprimality", "P(gcd(X,Y)=1)"],
+            ["squared-Lambert gcd moments"],
+            ["Stern–Brocot cylinder law"],
+            ["(2/3)^d"],
+            ["Fibonacci/continuant run stability"],
+            ["F_{r+3}"],
+            ["tempered binary tail rigidity"],
+            ["exact Möbius-shadow denominator"],
+            ["scalar-localisation height obstruction"],
+        ],
         "recover_scale_and_assembly": [
             ["Lean modules"],
             ["Formal results and supporting lemmas"],
@@ -204,8 +229,8 @@ def normalized(text: str) -> str:
 
 
 def contains_any(text: str, alternatives: list[str]) -> bool:
-    compact = normalized(text)
-    return any(normalized(token) in compact for token in alternatives)
+    compact = normalized(text).casefold()
+    return any(normalized(token).casefold() in compact for token in alternatives)
 
 
 def validate_human_first_contact(
@@ -222,7 +247,7 @@ def validate_human_first_contact(
                 "mathematical and formal facts instead"
             )
 
-    readme_prefix = first_bytes(surfaces["README.md"], README_FIRST_MINUTE_BUDGET_BYTES)
+    readme_prefix = first_bytes(surfaces["README.md"], README_FIRST_CONTACT_BUDGET_BYTES)
     section_order = (
         "## The two problems",
         "## What the formal source establishes",
@@ -231,14 +256,14 @@ def validate_human_first_contact(
     )
     positions = [readme_prefix.find(heading) for heading in section_order]
     assert all(position >= 0 for position in positions), (
-        f"README first-minute prefix lost section sequence {section_order}"
+        f"README first-contact surface lost section sequence {section_order}"
     )
-    assert positions == sorted(positions), "README first-minute sections are out of order"
+    assert positions == sorted(positions), "README first-contact sections are out of order"
 
     for task_id, requirements in human_tasks(summary).items():
         for alternatives in requirements:
             assert contains_any(readme_prefix, alternatives), (
-                f"README first-minute task {task_id!r} lost semantic anchor group "
+                f"README first-contact task {task_id!r} lost semantic anchor group "
                 f"{alternatives}"
             )
 
@@ -579,6 +604,7 @@ def validate_agent_packets(packets: dict[str, Any]) -> None:
         "certificate_completeness",
         "certified_kill_instances",
         "first_harmonic_certificate_interface",
+        "first_harmonic_pivot_decomposition",
         "remaining_open.erdos_249_irrationality",
         "remaining_open.unbounded_certificate_supply",
     ]
@@ -616,9 +642,48 @@ def validate_agent_packets(packets: dict[str, Any]) -> None:
         for row in first_harmonic["argument_neighbourhood"]["outgoing"]
         if row["relation"] == "builds_on"
     } >= {"certificate_reduction", "certificate_completeness"}
+    harmonic_pivot = story_claims["first_harmonic_pivot_decomposition"]
+    assert "14X/25" in harmonic_pivot["claim"]["statement"]
+    assert "9X/10" in harmonic_pivot["claim"]["statement"]
+    assert {
+        (row["relation"], row["neighbour"]["id"])
+        for row in harmonic_pivot["argument_neighbourhood"]["outgoing"]
+    } >= {
+        ("builds_on", "first_harmonic_certificate_interface"),
+        ("advances_open_target", "erdos_249"),
+    }
 
 
-def main() -> int:
+def run_quick_check() -> int:
+    """Verify the zero-build first-contact path from committed projections."""
+    summary = quick_summary()
+    human_surfaces = {path: read(path) for path in HUMAN_SURFACES}
+    validate_human_first_contact(summary, human_surfaces)
+    validate_gateway_opening(read(GATEWAY_PAPER))
+    validate_cross_agent_entry(read("AGENTS.md"), read("CLAUDE.md"))
+    print(
+        "cold-clone quick check: committed human and agent first-contact "
+        "projections verified; no Lean build or corpus-query sweep run"
+    )
+    return 0
+
+
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(
+        description="Verify bounded cold-clone comprehension."
+    )
+    parser.add_argument(
+        "--quick",
+        action="store_true",
+        help=(
+            "check committed first-contact projections only; performs no Lean "
+            "build and no exhaustive typed-query sweep"
+        ),
+    )
+    args = parser.parse_args(argv)
+    if args.quick:
+        return run_quick_check()
+
     packets = collect_agent_packets()
     summary = packets["summary"]
     human_surfaces = {path: read(path) for path in HUMAN_SURFACES}

@@ -172,6 +172,8 @@ def validate_natural_language_search() -> None:
         "diagonal pincer and fresh loss": "erdos249_diagonal_arithmetic",
         "binary carry rigidity": "boolean_mobius_constraints",
         "why local induction fails": "half_carry_compactness_programme",
+        "dyadic prefix compression": "half_carry_compactness_programme",
+        "first harmonic pivot decomposition": "transport_curvature_programme",
         "strategy countermodels": "transport_curvature_programme",
         "Mersenne Lambert identities": "lambert_obstruction_interfaces",
         "what probability and gcd identities are formalized": "probabilistic_gcd_geometry",
@@ -337,6 +339,7 @@ def main() -> int:
         "python3 scripts/query_corpus.py --claim certificate_completeness",
         "python3 scripts/query_corpus.py --claim certified_kill_instances",
         "python3 scripts/query_corpus.py --claim first_harmonic_certificate_interface",
+        "python3 scripts/query_corpus.py --claim first_harmonic_pivot_decomposition",
         "python3 scripts/query_corpus.py --open remaining_open.erdos_249_irrationality",
         "python3 scripts/query_corpus.py --open remaining_open.unbounded_certificate_supply",
     ]
@@ -351,6 +354,7 @@ def main() -> int:
         "certificate_completeness",
         "certified_kill_instances",
         "first_harmonic_certificate_interface",
+        "first_harmonic_pivot_decomposition",
     }
     assert {
         row["id"]
@@ -394,6 +398,17 @@ def main() -> int:
         for row in first_harmonic["argument_neighbourhood"]["outgoing"]
         if row["relation"] == "builds_on"
     } >= {"certificate_reduction", "certificate_completeness"}
+    harmonic_pivot = query("--claim", "first_harmonic_pivot_decomposition")
+    assert harmonic_pivot["claim"]["status"] == "conditional reduction"
+    assert "14X/25" in harmonic_pivot["claim"]["statement"]
+    assert "9X/10" in harmonic_pivot["claim"]["statement"]
+    assert {
+        (row["relation"], row["neighbour"]["id"])
+        for row in harmonic_pivot["argument_neighbourhood"]["outgoing"]
+    } >= {
+        ("builds_on", "first_harmonic_certificate_interface"),
+        ("advances_open_target", "erdos_249"),
+    }
 
     labelled_claims = [row for row in claims_document["claims"] if row.get("paper_label")]
     for row in labelled_claims:
@@ -560,8 +575,8 @@ def main() -> int:
 
     open_expectations = {
         "remaining_open.erdos_249_irrationality": ("erdos_249", 1),
-        "remaining_open.unbounded_certificate_supply": ("erdos_249", 9),
-        "remaining_open.universal_257_all_infinite_supports": ("universal_257", 7),
+        "remaining_open.unbounded_certificate_supply": ("erdos_249", 10),
+        "remaining_open.universal_257_all_infinite_supports": ("universal_257", 8),
     }
     for open_id, (target, advancing_count) in open_expectations.items():
         open_packet = query("--open", open_id)
@@ -916,7 +931,7 @@ if __name__ == "__main__":
         print(
             "test_query_corpus: "
             f"{len(PROGRAMME_EXPECTATIONS)} mathematical programme routes and "
-            "21 natural-language discovery queries passed"
+            "23 natural-language discovery queries passed"
         )
         raise SystemExit(0)
     if sys.argv[1:]:

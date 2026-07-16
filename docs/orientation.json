@@ -27,7 +27,7 @@
   "declaration_count": 12496,
   "theorem_like_count": 11471,
   "generated_certificate_declaration_count": 2925,
-  "principal_claim_link_count": 265,
+  "principal_claim_link_count": 279,
   "kind_counts": {
    "abbrev": 7,
    "def": 982,
@@ -56,7 +56,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "Erd\\H{o}s \\#249",
-    "line": 1951
+    "line": 1962
    }
   },
   {
@@ -67,7 +67,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "unbounded certificate supply",
-    "line": 1960
+    "line": 1971
    }
   },
   {
@@ -78,7 +78,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "universal Erd\\H{o}s \\#257",
-    "line": 1968
+    "line": 1979
    }
   }
  ],
@@ -397,9 +397,9 @@
   {
    "id": "erdos249_certificate_story",
    "title": "#249 certificate and harmonic interface",
-   "mathematical_focus": "Tail-difference certificates, exact completeness at fixed parameters, bounded lcm-diagonal instances, and first-harmonic consumers.",
+   "mathematical_focus": "Tail-difference certificates, exact completeness at fixed parameters, bounded lcm-diagonal instances, first-harmonic consumers, and the exact four-term pivot budget.",
    "claim_ceiling": "The certificate formulation is exact and finite instances are checked; the unbounded certificate supply and irrationality of S remain open.",
-   "core_claim_count": 5,
+   "core_claim_count": 6,
    "representative_claim_ids": [
     "denominator_exclusion",
     "certificate_reduction"
@@ -454,9 +454,9 @@
   {
    "id": "transport_curvature_programme",
    "title": "Transport, curvature, phase separation, and no-go results",
-   "mathematical_focus": "Finite differences of totient tails, exponent transport, affine moment annihilation, harmonic phases, reconstruction defects, and countermodels to bounded local signatures.",
+   "mathematical_focus": "Finite differences of totient tails, exponent transport, affine moment annihilation, the exact first-harmonic pivot budget, harmonic phases, reconstruction defects, and countermodels to bounded local signatures.",
    "claim_ceiling": "The consumers and countermodels are exact, but no cofinal curvature, transport, phase-separation, or anti-reconstruction producer is proved.",
-   "core_claim_count": 7,
+   "core_claim_count": 8,
    "representative_claim_ids": [
     "transport_curvature_reductions",
     "affine_transport_annihilation"
@@ -496,9 +496,9 @@
   {
    "id": "half_carry_compactness_programme",
    "title": "Half-carry compactness, windows, seams, and finite propagation",
-   "mathematical_focus": "Compactness from finite half-carry words, scaled terminal closure, protected windows and one-hole seams, inverse-parent contraction, suffix-cylinder propagation, and checked depth-18-to-29 bases.",
+   "mathematical_focus": "Exact dyadic prefix and block-safety coordinates, compactness from finite half-carry words, scaled terminal closure, protected seams, inverse-parent contraction, suffix-cylinder propagation, and checked depth-18-to-29 bases.",
    "claim_ceiling": "The closure implications, local propagation laws, and bounded bases are exact; a cofinal producer or coherent unbounded window family is not proved, so neither half-membership nor universal Erdős #257 follows.",
-   "core_claim_count": 12,
+   "core_claim_count": 13,
    "representative_claim_ids": [
     "half_carry_reachability_compactness",
     "cofinal_strip_return_closure"
