@@ -70,7 +70,10 @@ PROGRAMME_EXPECTATIONS = {
     },
     "half_carry_compactness_programme": {
         "title": "Half-carry compactness, windows, seams, and finite propagation",
-        "open_ids": {"remaining_open.universal_257_all_infinite_supports"},
+        "open_ids": {
+            "remaining_open.half_value_membership",
+            "remaining_open.universal_257_all_infinite_supports",
+        },
     },
     "arithmetic_obstruction_interfaces": {
         "title": "Denominator, CRT, moment, and gauge obstructions",

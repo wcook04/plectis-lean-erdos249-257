@@ -625,7 +625,7 @@
         "id": "half_carry_compactness_programme",
         "route_kind": "mathematical_programme",
         "title": "Half-carry compactness, windows, seams, and finite propagation",
-        "intent": "Follow the compactness sockets that would turn cofinal finite half-carry witnesses into half-membership, together with the exact rewind, protected-window, seam, suffix-cylinder, and finite-base theorems that isolate the missing producer.",
+        "intent": "Follow the exact compactness implications from cofinal finite half-carry witnesses to half-membership, and the rewind, seam, suffix-cylinder, and finite-stage results that isolate the missing uniform construction.",
         "discovery_terms": [
           "why local induction fails",
           "carry compactness",
@@ -633,8 +633,8 @@
           "dyadic prefix compression",
           "block safety and primitive overshoot"
         ],
-        "mathematical_focus": "Exact dyadic prefix and block-safety coordinates, compactness from finite half-carry words, scaled terminal closure, protected seams, inverse-parent contraction, suffix-cylinder propagation, and checked depth-18-to-29 bases.",
-        "claim_ceiling": "The closure implications, local propagation laws, and bounded bases are exact; a cofinal producer or coherent unbounded window family is not proved, so neither half-membership nor universal Erdős #257 follows.",
+        "mathematical_focus": "Exact dyadic prefix coordinates, compactness from finite half-carry words, protected seams, inverse-parent contraction, suffix-cylinder propagation, and checked stages through depth 52.",
+        "claim_ceiling": "The closure implications, local propagation laws, and bounded stages are exact; no cofinal or coherent unbounded window family is proved, so neither half-membership nor universal Erdős #257 follows.",
         "problem_target_claim_ids": [
           "universal_257"
         ],
@@ -654,6 +654,7 @@
           "selected_suffix_pre_feedback_run"
         ],
         "remaining_open_proposition_ids": [
+          "remaining_open.half_value_membership",
           "remaining_open.universal_257_all_infinite_supports"
         ],
         "related_route_ids": [
@@ -677,6 +678,7 @@
           "python3 scripts/query_corpus.py --claim selected_window_depth18_base",
           "python3 scripts/query_corpus.py --claim selected_suffix_cylinder_propagation",
           "python3 scripts/query_corpus.py --claim selected_suffix_pre_feedback_run",
+          "python3 scripts/query_corpus.py --open remaining_open.half_value_membership",
           "python3 scripts/query_corpus.py --open remaining_open.universal_257_all_infinite_supports"
         ],
         "authority_owners": [
@@ -905,15 +907,15 @@
         "schema": "erdos249257-editorial-state/1",
         "scope": "continuous_whole_main_paper_exposition",
         "current_priority": {
-          "id": "appendix_a_mathematical_vocabulary_and_narrative_compression",
-          "surface": "paper/erdos249-257-main-paper.tex",
-          "defect_class": "internal vocabulary and theorem-by-theorem sequencing remain in Appendix A",
-          "statement": "Translate the remaining sheet, package, and interface terms, then regroup the suffix-cylinder chain around its invariant, hypotheses, consequence, and open gap."
+          "id": "cross_paper_claim_significance_and_prior_art_audit",
+          "surface": "docs/claims.json",
+          "defect_class": "formally strong results may be underweighted, duplicated, or insufficiently distinguished from prior art across the paper suite",
+          "statement": "Compare the contribution families, checked declarations, bibliography, main paper, and companions; elevate only claim-faithful results with exact prior-art and open-status boundaries."
         },
         "last_verified_wave": {
-          "id": "whole_paper_prose_role_and_section_closure",
+          "id": "appendix_a_suffix_cylinder_mathematical_reconstruction",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "result": "Sections 3, 6, and 7 now declare their expository roles and exact residuals; Section 6 points to the self-contained rational-support theorem rather than restating it loosely."
+          "result": "Appendix A now defines selected windows and suffix cylinders, states one exact conditional feedback proposition, separates finite stages through depth 52, and removes the remaining reader-facing sheet and interface vocabulary."
         },
         "active_inconsistencies": [],
         "blocked_decisions": []
@@ -1089,11 +1091,11 @@
             "half_divisor_unit_drop",
             "rewind_boundary_pair_obstruction"
           ],
-          "status_summary": "Conditional cylinder propagation, finite pre-feedback evidence, an exact unit drop, and a concrete scalar-seam obstruction.",
-          "prior_art_posture": "No theorem-level match is recorded.",
+          "status_summary": "An exact conditional child-gap recurrence with a cofinal half-value consequence, verified finite stages through depth 52, an exact unit drop, and a concrete scalar-seam obstruction.",
+          "prior_art_posture": "Kovač–Tao supply the surrounding strict-tail achievement-set geometry. No exact antecedent for this finite carry recurrence is recorded, and no novelty claim is made.",
           "primary_narrative_owner": "paper/erdos249-257-main-paper.tex",
           "source_route": "python3 scripts/query_corpus.py --claim selected_suffix_cylinder_propagation",
-          "consumer_or_open_obligation": "Supply the repeated next-row coefficient profile or cofinal cylinder stages.",
+          "consumer_or_open_obligation": "Establish the child-gap inequalities at arbitrarily large depths, or otherwise construct cofinal full suffix-cylinder stages.",
           "view_decision": "future_257_companion_reference_stages"
         },
         {
@@ -7510,7 +7512,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 2315
+        "line": 2384
       }
     },
     {
@@ -7521,7 +7523,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 2326
+        "line": 2395
       }
     },
     {
@@ -7532,7 +7534,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "the half-value counterexample route",
-        "line": 2341
+        "line": 2410
       }
     },
     {
@@ -7543,7 +7545,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 2332
+        "line": 2401
       }
     }
   ],
@@ -8556,11 +8558,11 @@
     },
     {
       "id": "selected_suffix_cylinder_propagation",
-      "label": "Terminally indexed selected suffix-cylinder propagation",
+      "label": "Conditional suffix-cylinder feedback and child-gap recurrence",
       "status": "conditional reduction",
-      "statement": "The depth-18 selected window has a common terminally indexed suffix cylinder after its depth-13 prefix. Under the canonical selected-window successor, the endpoint updates by E' = 2E-C and continues to cover the new carry interval. For a rewind seam, the next prefix bit either promotes the cylinder or yields the literal half-divisor boundary pair and a protected seam. At an exact half-divisor row, a specified crossing profile either advances through a low or high sheet, or yields a realized protected seam whose exact hole lies inside the next strip. The strengthened in-strip form retains both endpoints, complementary literal prefixes, all non-hole admissible words, and the canonical parent-failure coordinate; it embeds as a singleton finite gap. A profiled gap retains independent sheet prefixes, derives its next-row coefficient profile while ready, and advances under the stated child-gap and buffer hypotheses. The coefficient profile needed for repeated successors is not supplied.",
+      "statement": "For the depth-18 selected window, the common depth-13 prefix and suffix numeral satisfy ν + k = 17. Under a common next coefficient C the endpoint obeys E' = 2E - C. At a feedback row the full cylinder either advances or leaves one carry gap [g_-,g_+]. If the lower and upper families have coefficients C_- and C_+ and satisfy the explicit positivity, ordering, strip, and buffer inequalities, the next gap is exactly [2g_- - C_- - 1, 2g_+ - C_+]. Cutoff promotion appends forced bits 0 and 1 and preserves consecutive prefixes. A swallowed two-row update forces the sharp quarter-band bound B <= 4(g_+ - g_- + 1) + 2. Cofinal full stages would produce an infinite support of value 1/2, but no such cofinal family or uniform coefficient inequalities are proved.",
       "remaining_open_proposition_ids": [
-        "remaining_open.universal_257_all_infinite_supports"
+        "remaining_open.half_value_membership"
       ],
       "paper_label": "res:selectsuffix",
       "readme_headline": false,
@@ -8641,25 +8643,25 @@
           "line": 254
         },
         {
-          "name": "fullCylinderStage51_feedback_headThreshold_margin",
-          "module": "Erdos249257/SuffixCylinderStage51.lean",
-          "line": 536
-        },
-        {
           "name": "cofinalTerminalOnlyStrip_of_cofinalCylinderStages",
           "module": "Erdos249257/SuffixCylinderTerminalOnlyBridge.lean",
           "line": 125
+        },
+        {
+          "name": "exists_infinite_support_half_of_cofinalCylinderStages",
+          "module": "Erdos249257/SuffixCylinderTerminalOnlyBridge.lean",
+          "line": 138
         }
       ]
     },
     {
       "id": "selected_suffix_pre_feedback_run",
-      "label": "Selected suffix-cylinder run through the first feedback row",
+      "label": "Verified finite suffix-cylinder stages through depth 52",
       "status": "verified finite instance",
-      "bounded_domain": "Each depth N from 18 through 29, including the full protected carry strip at depths 27 and 29; at depth 29, common suffix cylinders are certified at cutoffs 14 through 25 and refuted at cutoff 26.",
-      "statement": "Before the first half-divisor feedback row, a common depth-13 prefix supports a full selected window at every depth 18 through 27 while preserving the suffix-cylinder invariant. Its explicitly checked shared-prefix coefficient sequence determines the endpoint values through depth 27. The threshold-stage continuation extends the explicit window through depth 29, with the endpoint covering the full protected strip and common suffix cylinders at cutoffs 14 through 25 but not 26. This is a finite run, not an unbounded induction.",
+      "bounded_domain": "Every depth from 18 through 29, plus explicit full stages at depths 51 and 52; depth 29 has common suffix cylinders at cutoffs 14 through 25 but not 26.",
+      "statement": "A common depth-13 prefix supports full selected windows at every depth 18 through 27, and the threshold continuation reaches depth 29 while covering the protected strip. At depth 29, cutoffs 14 through 25 remain common and cutoff 26 does not. A separate exact recurrence reaches depth 51 with endpoint 51,327,745 beyond the next head threshold, and the promoted depth-52 successor supplies a terminal-strip witness. These are finite stages, not an unbounded induction.",
       "remaining_open_proposition_ids": [
-        "remaining_open.universal_257_all_infinite_supports"
+        "remaining_open.half_value_membership"
       ],
       "paper_label": "res:prefeedback",
       "readme_headline": false,
@@ -8693,6 +8695,16 @@
           "name": "depth29SelectedHalfWindow_not_commonRestrictionAt_twentySix",
           "module": "Erdos249257/SuffixCylinderThreshold.lean",
           "line": 806
+        },
+        {
+          "name": "fullCylinderStage51_feedback_headThreshold_margin",
+          "module": "Erdos249257/SuffixCylinderStage51.lean",
+          "line": 536
+        },
+        {
+          "name": "fullCylinderStage52_halfTerminalOnlyStripWitness",
+          "module": "Erdos249257/SuffixCylinderTerminalOnlyBridge.lean",
+          "line": 118
         }
       ]
     },

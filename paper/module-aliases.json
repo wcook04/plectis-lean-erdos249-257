@@ -3,7 +3,7 @@
   "artifact_role": "paper_sigil_to_lean_module_navigation_crosswalk",
   "authority_posture": "generated_navigation_projection_not_proof_authority",
   "heuristic": "Each CamelCase component contributes at most its first three characters.",
-  "alias_count": 85,
+  "alias_count": 73,
   "aliases": [
     {
       "sigil": "ActForResPro",
@@ -306,11 +306,6 @@
       "path": "Erdos249257/RewindSeamOperationalBridge.lean"
     },
     {
-      "sigil": "SelSufCyl",
-      "module": "SelectedSuffixCylinder.lean",
-      "path": "Erdos249257/SelectedSuffixCylinder.lean"
-    },
-    {
       "sigil": "SelSufCylPreFee",
       "module": "SelectedSuffixCylinderPreFeedback.lean",
       "path": "Erdos249257/SelectedSuffixCylinderPreFeedback.lean"
@@ -336,69 +331,14 @@
       "path": "Erdos249257/SublogDivisorCoverage.lean"
     },
     {
-      "sigil": "SufCylBel",
-      "module": "SuffixCylinderBelow.lean",
-      "path": "Erdos249257/SuffixCylinderBelow.lean"
-    },
-    {
-      "sigil": "SufCylFeeFanIn",
-      "module": "SuffixCylinderFeedbackFanIn.lean",
-      "path": "Erdos249257/SuffixCylinderFeedbackFanIn.lean"
-    },
-    {
-      "sigil": "SufCylFinGap",
-      "module": "SuffixCylinderFiniteGap.lean",
-      "path": "Erdos249257/SuffixCylinderFiniteGap.lean"
-    },
-    {
       "sigil": "SufCylFirFee",
       "module": "SuffixCylinderFirstFeedback.lean",
       "path": "Erdos249257/SuffixCylinderFirstFeedback.lean"
     },
     {
-      "sigil": "SufCylGloPro",
-      "module": "SuffixCylinderGlobalProducer.lean",
-      "path": "Erdos249257/SuffixCylinderGlobalProducer.lean"
-    },
-    {
-      "sigil": "SufCylInStr",
-      "module": "SuffixCylinderInStrip.lean",
-      "path": "Erdos249257/SuffixCylinderInStrip.lean"
-    },
-    {
-      "sigil": "SufCylProPro",
-      "module": "SuffixCylinderProfiledPromotion.lean",
-      "path": "Erdos249257/SuffixCylinderProfiledPromotion.lean"
-    },
-    {
-      "sigil": "SufCylProSwa",
-      "module": "SuffixCylinderProfiledSwallow.lean",
-      "path": "Erdos249257/SuffixCylinderProfiledSwallow.lean"
-    },
-    {
-      "sigil": "SufCylPro",
-      "module": "SuffixCylinderPromotion.lean",
-      "path": "Erdos249257/SuffixCylinderPromotion.lean"
-    },
-    {
-      "sigil": "SufCylSta",
-      "module": "SuffixCylinderStage51.lean",
-      "path": "Erdos249257/SuffixCylinderStage51.lean"
-    },
-    {
-      "sigil": "SufCylTerOnlBri",
-      "module": "SuffixCylinderTerminalOnlyBridge.lean",
-      "path": "Erdos249257/SuffixCylinderTerminalOnlyBridge.lean"
-    },
-    {
       "sigil": "SufCylThr",
       "module": "SuffixCylinderThreshold.lean",
       "path": "Erdos249257/SuffixCylinderThreshold.lean"
-    },
-    {
-      "sigil": "SufCylTwoShe",
-      "module": "SuffixCylinderTwoSheet.lean",
-      "path": "Erdos249257/SuffixCylinderTwoSheet.lean"
     },
     {
       "sigil": "SupSunDic",

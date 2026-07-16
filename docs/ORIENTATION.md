@@ -27,7 +27,7 @@ The workflow provenance explains the release discipline; it does not imply hidde
 | Lean declarations | 12,496 |
 | Theorem-like declarations | 11,471 |
 | Generated certificate declarations | 2,925 |
-| Principal claim links | 279 |
+| Principal claim links | 281 |
 
 The exhaustive declaration and import index is
 [`docs/declaration_atlas.json`](declaration_atlas.json). Generated certificate
@@ -70,7 +70,7 @@ Each route states its mathematical focus and exact public claim ceiling.
 | **Transport, curvature, phase separation, and no-go results** (`transport_curvature_programme`) | The consumers and countermodels are exact, but no cofinal curvature, transport, phase-separation, or anti-reconstruction producer is proved. |
 | **Mersenne–Lambert identities and obstruction interfaces** (`lambert_obstruction_interfaces`) | These are exact identities, obstruction theorems, and one conditional rank consequence; they do not form an irrationality criterion for S. |
 | **Coprimality probability, gcd moments, and Stern–Brocot geometry** (`probabilistic_gcd_geometry`) | Exact identities, denominator transfer, convergence, and combinatorial stability only; no irrationality or novelty claim. |
-| **Half-carry compactness, windows, seams, and finite propagation** (`half_carry_compactness_programme`) | The closure implications, local propagation laws, and bounded bases are exact; a cofinal producer or coherent unbounded window family is not proved, so neither half-membership nor universal Erdős #257 follows. |
+| **Half-carry compactness, windows, seams, and finite propagation** (`half_carry_compactness_programme`) | The closure implications, local propagation laws, and bounded stages are exact; no cofinal or coherent unbounded window family is proved, so neither half-membership nor universal Erdős #257 follows. |
 | **Denominator, CRT, moment, and gauge obstructions** (`arithmetic_obstruction_interfaces`) | These are exact arithmetic interfaces, finite mechanisms, and obstruction theorems; they do not supply an unbounded certificate family or an irrationality criterion for the totient constant. |
 
 Open one programme with
@@ -134,7 +134,7 @@ settle the open proposition attached to it.
   - Intent: Follow the fair-coin coprimality form of S and its denominator exclusion, squared-Lambert gcd moments, exact Stern–Brocot cylinder convergence, and Fibonacci/continuant stability of induced runs.
   - Route: `python3 scripts/query_corpus.py --route probabilistic_gcd_geometry`
 - **Half-carry compactness, windows, seams, and finite propagation** (`half_carry_compactness_programme`): `docs/orientation.json`
-  - Intent: Follow the compactness sockets that would turn cofinal finite half-carry witnesses into half-membership, together with the exact rewind, protected-window, seam, suffix-cylinder, and finite-base theorems that isolate the missing producer.
+  - Intent: Follow the exact compactness implications from cofinal finite half-carry witnesses to half-membership, and the rewind, seam, suffix-cylinder, and finite-stage results that isolate the missing uniform construction.
   - Route: `python3 scripts/query_corpus.py --route half_carry_compactness_programme`
 - **Denominator, CRT, moment, and gauge obstructions** (`arithmetic_obstruction_interfaces`): `docs/orientation.json`
   - Intent: Follow exact arithmetic enclosures and denominator lower bounds, finite square-CRT suppression, dyadic moment and certificate interfaces, and gauge countermodels that delimit several plausible #249 routes.

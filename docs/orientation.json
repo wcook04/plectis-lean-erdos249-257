@@ -27,7 +27,7 @@
   "declaration_count": 12496,
   "theorem_like_count": 11471,
   "generated_certificate_declaration_count": 2925,
-  "principal_claim_link_count": 279,
+  "principal_claim_link_count": 281,
   "kind_counts": {
    "abbrev": 7,
    "def": 982,
@@ -56,7 +56,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "Erd\\H{o}s \\#249",
-    "line": 2315
+    "line": 2384
    }
   },
   {
@@ -67,7 +67,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "unbounded certificate supply",
-    "line": 2326
+    "line": 2395
    }
   },
   {
@@ -78,7 +78,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "the half-value counterexample route",
-    "line": 2341
+    "line": 2410
    }
   },
   {
@@ -89,7 +89,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "universal Erd\\H{o}s \\#257",
-    "line": 2332
+    "line": 2401
    }
   }
  ],
@@ -508,14 +508,15 @@
   {
    "id": "half_carry_compactness_programme",
    "title": "Half-carry compactness, windows, seams, and finite propagation",
-   "mathematical_focus": "Exact dyadic prefix and block-safety coordinates, compactness from finite half-carry words, scaled terminal closure, protected seams, inverse-parent contraction, suffix-cylinder propagation, and checked depth-18-to-29 bases.",
-   "claim_ceiling": "The closure implications, local propagation laws, and bounded bases are exact; a cofinal producer or coherent unbounded window family is not proved, so neither half-membership nor universal Erdős #257 follows.",
+   "mathematical_focus": "Exact dyadic prefix coordinates, compactness from finite half-carry words, protected seams, inverse-parent contraction, suffix-cylinder propagation, and checked stages through depth 52.",
+   "claim_ceiling": "The closure implications, local propagation laws, and bounded stages are exact; no cofinal or coherent unbounded window family is proved, so neither half-membership nor universal Erdős #257 follows.",
    "core_claim_count": 13,
    "representative_claim_ids": [
     "half_carry_reachability_compactness",
     "cofinal_strip_return_closure"
    ],
    "remaining_open_proposition_ids": [
+    "remaining_open.half_value_membership",
     "remaining_open.universal_257_all_infinite_supports"
    ]
   },
@@ -553,18 +554,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "appendix_a_mathematical_vocabulary_and_narrative_compression",
-   "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "internal vocabulary and theorem-by-theorem sequencing remain in Appendix A",
-   "statement": "Translate the remaining sheet, package, and interface terms, then regroup the suffix-cylinder chain around its invariant, hypotheses, consequence, and open gap."
+   "id": "cross_paper_claim_significance_and_prior_art_audit",
+   "surface": "docs/claims.json",
+   "defect_class": "formally strong results may be underweighted, duplicated, or insufficiently distinguished from prior art across the paper suite",
+   "statement": "Compare the contribution families, checked declarations, bibliography, main paper, and companions; elevate only claim-faithful results with exact prior-art and open-status boundaries."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "a16aa24af5236b6508a34b8a4c4b41fdcf620a98",
-  "committed_navigation_snapshot": "18ff9972d0bcdb1d0eb2f32ce9c4dfb5d96cab6e",
-  "main_paper_source_digest": "sha256:563f57f9b15a0ca43a1f85f002a2b78b0396d7adbcc951d687e9897bc7751686"
+  "committed_navigation_snapshot": "3b99fbf1039f9e8a8d3fb82b1ea28341895c0e5b",
+  "main_paper_source_digest": "sha256:feb325696a270f6ba3565912b9a32d8d4868edf962c8e60e41a4b91bb6d5f462"
  },
  "reading_routes": [
   {
@@ -666,7 +667,7 @@
   },
   {
    "id": "half_carry_compactness_programme",
-   "intent": "Follow the compactness sockets that would turn cofinal finite half-carry witnesses into half-membership, together with the exact rewind, protected-window, seam, suffix-cylinder, and finite-base theorems that isolate the missing producer.",
+   "intent": "Follow the exact compactness implications from cofinal finite half-carry witnesses to half-membership, and the rewind, seam, suffix-cylinder, and finite-stage results that isolate the missing uniform construction.",
    "read": [
     "docs/orientation.json"
    ],

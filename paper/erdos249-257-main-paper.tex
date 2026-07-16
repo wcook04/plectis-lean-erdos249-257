@@ -1222,72 +1222,131 @@ protected one-hole seam at the next row,
 \lrefx{RewindSeamOperationalBridge.lean}{217}{protectedEvenSeamRealizedAt_succ_of_profile}.
 The base-ancestor coefficient drop is an explicit input, not a theorem here.
 
-\subsubsection{Selected suffix cylinders}\label{res:selectsuffix}
+\subsubsection{Selected suffix cylinders}
 
-The depth-$18$ selected window has one common terminally indexed suffix
-cylinder after its depth-$13$ prefix is removed,
-\lref{SelectedSuffixCylinder.lean}{88}{depth18SelectedHalfWindow_hasSuffixCylinderAt_thirteen}.
-Under the canonical selected-window successor, the endpoint evolves exactly by
-$E' = 2E-C$ and still covers the new carry interval,
-\lrefx{SelectedSuffixCylinder.lean}{136}{SelectedHalfWindow.hasSuffixCylinderAt_stepExplicit}.
-This preserves a finite cylinder invariant; it does not produce the required
-coefficient profile at every later step.  For a rewind seam, the next prefix
-bit has an exact exhaustive outcome: the cylinder promotes by one bit, or the
-two base ancestors form the literal half-divisor boundary pair and hence
-produce a protected seam,
-\lrefx{SuffixCylinderPromotion.lean}{322}{promotedSuffixCylinder_or_protectedEvenSeamRealizedAt}.
-At an exact half-divisor row, the crossing-cylinder profile gives the more
-concrete advance-or-seam alternative,
-\lrefx{SuffixCylinderGlobalProducer.lean}{174}{CylinderStage.feedbackStep_or_protectedSeam}.
-The below-strip and above-strip hole cases have explicit finite word and
-suffix-cylinder sheet witnesses,
-\lrefx{SuffixCylinderBelow.lean}{117}{SelectedHalfWindow.word_stepTailExplicit}
+Put
+\[
+ H_N=2\lfloor\sqrt N\rfloor+4.
+\]
+For a Boolean word \(a=(a_0,\ldots,a_N)\), let
+\[
+ f_a(n)=\#\{d\leq N:d\mid n,\ a_d=1\},\qquad
+ K_0(a)=1,\qquad K_{r+1}(a)=2K_r(a)-f_a(r+2).
+\]
+
+\begin{definition}[selected window and suffix cylinder]
+\label{def:selected-suffix-cylinder}
+A \emph{selected window} of depth \(N\) and radius \(R\) is a family
+\((a^{(k)})_{1\leq k\leq R}\) of Boolean words with
+\(a^{(k)}_0=a^{(k)}_1=0\) such that
+\[
+ 1\leq K_{n-1}(a^{(k)})\leq H_n
+ \quad(1\leq n\leq N),
+ \qquad K_{N-1}(a^{(k)})=k.
+\]
+For \(M\leq N\), define the suffix numeral
+\[
+ \nu_{M,N}(a)=\sum_{j=M+1}^{N}a_j\,2^{N-j}.
+\]
+The window has a \emph{suffix cylinder at cutoff \(M\) with endpoint \(E\)}
+if all \(a^{(k)}\) have the same prefix through \(M\) and
+\[
+ \nu_{M,N}(a^{(k)})+k=E
+ \qquad(1\leq k\leq R).
+\]
+A \emph{profiled gap stage} additionally permits one missing carry interval
+\([g_-,g_+]\subseteq[1,H_N]\): a lower suffix-cylinder family represents
+\(1,\ldots,g_--1\), an upper family represents
+\(g_++1,\ldots,H_N\), and the two families retain fixed consecutive
+prefixes through the cutoff.
+\end{definition}
+
+\begin{proposition}[conditional suffix-cylinder feedback]
+\label{res:selectsuffix}
+The following statements hold.
+\begin{enumerate}[label=\textup{(\roman*)},leftmargin=2.2em]
+\item The verified depth-\(18\) selected window has \(R=12\) and a suffix
+cylinder at cutoff \(M=13\) with endpoint \(E=17\).
+
+\item Whenever the canonical one-row successor hypotheses hold and every
+selected word has the same next coefficient \(C\), the successor remains a
+suffix cylinder and its endpoint is
+\[
+ E'=2E-C.
+\]
+At a feedback row \(N+1=2(M+1)\), either the full cylinder advances or the
+exceptional carry values form a profiled gap stage; the alternative includes
+the protected-seam case.
+
+\item Suppose a profiled gap stage has lower and upper next coefficients
+\(C_-\) and \(C_+\), respectively.  If
+\[
+\begin{gathered}
+ 1\leq 2g_- -C_- -1,\qquad C_+\leq2g_+,\\
+ 2g_- -C_- -1\leq 2g_+ -C_+\leq H_{N+1},\\
+ H_{N+1}+C_+\leq2H_N,
+\end{gathered}
+\]
+then the stage advances one row with exact child gap
+\[
+ [g'_-,g'_+]
+   =[\,2g_- -C_- -1,\;2g_+ -C_+\,].
+\]
+At a cutoff boundary \(N=2M+1\), \(M\geq4\), the lower and upper prefixes
+acquire the forced bits \(0\) and \(1\); their consecutiveness is preserved.
+Under the displayed child-gap conditions at the next row, this promoted
+stage therefore advances with coefficients determined by its retained
+prefixes.
+
+\item If a two-row update swallows a protected strip of bound \(B\), and the
+lower coefficient pulse is at most the upper pulse plus \(2\), then
+\[
+ B\leq4(g_+-g_-+1)+2. \tag{A.1}
+\]
+This is a necessary quarter-band condition, not a contradiction.
+
+\item If full suffix-cylinder stages exist at arbitrarily large depths, then
+there is an infinite set \(A\subseteq\N\) such that
+\[
+ \sum_{n\in A}\frac1{2^n-1}=\frac12.
+\]
+\end{enumerate}
+\end{proposition}
+
+\noindent Part~\textup{(i)} is the
+\lword{SelectedSuffixCylinder.lean}{88}{depth18SelectedHalfWindow_hasSuffixCylinderAt_thirteen}{depth-\(18\) cylinder}.
+The one-row law and the feedback alternatives are the
+\lword{SelectedSuffixCylinder.lean}{136}{SelectedHalfWindow.hasSuffixCylinderAt_stepExplicit}{endpoint recurrence},
+\lword{SuffixCylinderPromotion.lean}{322}{promotedSuffixCylinder_or_protectedEvenSeamRealizedAt}{promotion-or-seam alternative},
+\lword{SuffixCylinderGlobalProducer.lean}{174}{CylinderStage.feedbackStep_or_protectedSeam}{feedback dichotomy},
+\lword{SuffixCylinderBelow.lean}{117}{SelectedHalfWindow.word_stepTailExplicit}{lower-family witness},
+\lword{SuffixCylinderTwoSheet.lean}{26}{hasSuffixCylinderAt_take}{upper-family witness},
+\lword{SuffixCylinderFeedbackFanIn.lean}{62}{CylinderStage.feedbackAdvance_or_protectedSeam_inStrip}{in-strip reduction},
 and
-\lrefx{SuffixCylinderTwoSheet.lean}{26}{hasSuffixCylinderAt_take}; combining
-them leaves only a realized seam whose exact hole is inside the next strip,
-\lrefx{SuffixCylinderFeedbackFanIn.lean}{62}{CylinderStage.feedbackAdvance_or_protectedSeam_inStrip}.
-The strengthened in-strip alternative retains its two endpoint cylinders,
-complementary literal prefixes, every admissible word off the hole, and the
-canonical parent-failure coordinate required by the finite-gap construction,
-\lrefx{SuffixCylinderInStrip.lean}{665}{CylinderStage.feedbackAdvance_or_inStripTwoSheet}.
-The one-hole state embeds as a singleton finite gap; provided a common
-next-row coefficient and the stated child-gap and buffer inequalities, this
-two-sheet package advances one row while preserving its complete data,
-\lrefx{SuffixCylinderFiniteGap.lean}{256}{InStripGapStage.advanceOfCommonNextCoeff}.
-After cutoff promotion the two live sheets may have different coefficients.
-The two-profile gap formulation retains their independent literal prefixes,
-derives the next-row coefficient pair, and advances under explicit gap and
-buffer hypotheses,
-\lword{SuffixCylinderProfiledGap.lean}{124}{ProfiledGapStage.advanceOfNextCoeffProfile}{two-profile gap advance}.
-At the next cutoff boundary, the lower and upper sheets respectively gain
-their forced false and true prefix bits; the upper endpoint is adjusted by
-the corresponding head weight,
-\lrefx{SuffixCylinderProfiledPromotion.lean}{107}{selectedHalfIntervalPromoteHigh}.
-The two retained prefixes remain adjacent, so their next-row coefficients
-differ by at most one in the directed form needed for the profiled update,
-\lword{SuffixCylinderProfiledAdjacency.lean}{232}{ProfiledGapStage.lowerNextCoeff_le_upperNextCoeff_add_one}{coefficient adjacency bound}.
-The same adjacency invariant survives the false/true cutoff promotion,
-\lword{SuffixCylinderProfiledPromotionAdjacency.lean}{65}{ProfiledGapStage.promoteCutoff_hasAdjacentPrefixes}{adjacency after promotion}.
-Given its explicit next-row arithmetic cell, the promoted stage then advances
-with its coefficient profile and buffer synthesized internally, preserving
-adjacency through the whole feedback operation,
+\lword{SuffixCylinderInStrip.lean}{665}{CylinderStage.feedbackAdvance_or_inStripTwoSheet}{two-family gap alternative}.
+Part~\textup{(iii)} is the
+\lword{SuffixCylinderFiniteGap.lean}{256}{InStripGapStage.advanceOfCommonNextCoeff}{common-coefficient gap recurrence}
+and its
+\lword{SuffixCylinderProfiledGap.lean}{124}{ProfiledGapStage.advanceOfNextCoeffProfile}{two-coefficient form};
+the cutoff and adjacency statements are the
+\lword{SuffixCylinderProfiledPromotion.lean}{107}{selectedHalfIntervalPromoteHigh}{upper-family promotion},
+\lword{SuffixCylinderProfiledAdjacency.lean}{232}{ProfiledGapStage.lowerNextCoeff_le_upperNextCoeff_add_one}{coefficient adjacency bound},
+\lword{SuffixCylinderProfiledPromotionAdjacency.lean}{65}{ProfiledGapStage.promoteCutoff_hasAdjacentPrefixes}{adjacency after promotion},
+and
 \lword{SuffixCylinderProfiledAutoStep.lean}{110}{ProfiledGapStage.promoteThenAdvance_hasAdjacentPrefixes}{promote-and-advance theorem}.
-If the resulting macro-step swallows the next strip, its coefficient-pulse
-bound forces the preceding gap into the exact quarter-band lower bound;
-this is a quantified residual branch, not an impossibility claim,
-\lrefx{SuffixCylinderProfiledSwallow.lean}{254}{nextBound_le_four_gapWidth_add_two_of_macro_swallow}.
-An explicit full-cylinder run reaches row $51$ with endpoint $51{,}327{,}745$,
-which exceeds the certified feedback head threshold and promotes the next
-cutoff,
-\lrefx{SuffixCylinderStage51.lean}{536}{fullCylinderStage51_feedback_headThreshold_margin}.
-Any cofinal family of full suffix-cylinder stages would yield the terminal
-strip condition required by the compactness argument,
-\lrefx{SuffixCylinderTerminalOnlyBridge.lean}{125}{cofinalTerminalOnlyStrip_of_cofinalCylinderStages}.
-This is explicitly conditional: no such cofinal family is established.
-This is a conditional local feedback classification, not a cofinal supply
-theorem: the required crossing coefficient profile is still an input.
+The quarter-band condition is
+\lword{SuffixCylinderProfiledSwallow.lean}{254}{nextBound_le_four_gapWidth_add_two_of_macro_swallow}{swallow bound}.
+The cofinal implication is formalised directly by
+\lword{SuffixCylinderTerminalOnlyBridge.lean}{138}{exists_infinite_support_half_of_cofinalCylinderStages}{cofinal-cylinder criterion}.
 
-\subsubsection{A finite selected-cylinder computation before feedback}\label{res:prefeedback}
+\paragraph{Status and prior-art boundary.}
+The proposition is a conditional propagation theorem: it does not supply the
+coefficient inequalities or the cofinal family in part~\textup{(v)}.  The
+strict-tail achievement-set literature supplies the surrounding Cantor-set
+geometry~\cite{kovactao}, not this finite carry recurrence; the comparison
+record makes no novelty claim for the recurrence itself.
+
+\subsubsection{Verified finite suffix-cylinder stages}\label{res:prefeedback}
 
 Before the first half-divisor feedback row, Lean constructs a full selected
 window at every depth from $18$ through $27$,
@@ -1308,6 +1367,16 @@ explicitly not common,
 \lrefx{SuffixCylinderThreshold.lean}{700}{depth29SelectedHalfWindow_endpoint_covers_strip}
 and
 \lrefx{SuffixCylinderThreshold.lean}{806}{depth29SelectedHalfWindow_not_commonRestrictionAt_twentySix}.
+
+An independent exact run reaches depth \(51\) with endpoint
+\(51{,}327{,}745\), beyond the next feedback head threshold, and therefore
+promotes the cutoff.  The promoted successor at depth \(52\) is also checked:
+\lword{SuffixCylinderStage51.lean}{536}{fullCylinderStage51_feedback_headThreshold_margin}{depth-\(51\) threshold margin}
+and
+\lword{SuffixCylinderTerminalOnlyBridge.lean}{118}{fullCylinderStage52_halfTerminalOnlyStripWitness}{depth-\(52\) terminal-strip witness}.
+These computations establish finite stages only; they do not provide the
+arbitrarily large stages required by
+Proposition~\ref{res:selectsuffix}\textup{(v)}.
 
 \subsubsection{Half-divisor unit drop}\label{res:halfdivisordrop}
 
@@ -2913,7 +2982,7 @@ prime-adjunction diamond no-go & \lrefx{FullTargetPrimeAdjunctionNoGo.lean}{196}
 scalar-localisation height obstruction & \lrefx{AdelicHeightObstruction.lean}{23}{scalarLocalization_complement_dvd}\ (\texttt{AdelicHeightObstruction})\\
 square-CRT correction suppression & \lrefx{SquareCRTCube.lean}{198}{exists_squareCRT_clean_totient_family}\ (\texttt{SquareCRTCube})\\
 signed dyadic-moment algebra & \lrefx{SignedQMomentObstruction.lean}{28}{det_mul_rectangular}\ (\texttt{SignedQMomentObstruction})\\
-dyadic totient certificate interface & \lrefx{TotientMahlerDefect.lean}{98}{finrank_canonicalTotientKernel_eq_of_certificate}\ (\texttt{TotientMahlerDefect})\\
+dyadic totient certificate rank criterion & \lrefx{TotientMahlerDefect.lean}{98}{finrank_canonicalTotientKernel_eq_of_certificate}\ (\texttt{TotientMahlerDefect})\\
 residual-gauge obstruction for monomial minors & \lrefx{ResidualGaugeObstruction.lean}{55}{det_residualMonomialMatrix_ne_zero_iff}\ (\texttt{ResidualGaugeObstruction})\\
 tail-orbit rationality criterion & \lrefx{GenericTailOrbitRigidity.lean}{425}{binaryCoeffSeries_rational_iff_exists_temperedBinaryOrbit}\ (\texttt{GenericTailOrbitRigidity})\\
 Boolean carry certificate $\Leftrightarrow$ support fraction & \lrefx{BooleanMobiusCarry.lean}{948}{exists_normalized_support_fraction_iff_exists_booleanMobiusCarry}\ (\texttt{BooleanMobiusCarry})\\
