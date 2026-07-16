@@ -19,6 +19,8 @@ def contract_errors(example: str, readme: str) -> list[str]:
         "proved headline consumer": "theorem downstream_base_three_irrational",
         "conditional consumer": "theorem downstream_conditional_rational_shell_bound",
         "explicit analytic hypothesis": "(hupper : (whole : ℝ) - (pfx : ℝ) ≤",
+        "exact shell-power conclusion":
+            "(2 : ℝ) ^ X ≤\n      ((whole.den * pfx.den : ℕ) : ℝ) * (K + 1)",
         "conditional library adapter":
             "prefixDenominator_shell_power_bound_of_rational_difference",
         "universal claim ceiling":
@@ -57,6 +59,26 @@ def main() -> int:
         for error in contract_errors(implicit_hypothesis, readme)
     )
 
+    weakened_conclusion = example.replace(
+        "(2 : ℝ) ^ X ≤\n      ((whole.den * pfx.den : ℕ) : ℝ) * (K + 1)",
+        "0 ≤ ((whole.den * pfx.den : ℕ) : ℝ) * (K + 1)",
+        1,
+    )
+    assert any(
+        "exact shell-power conclusion" in error
+        for error in contract_errors(weakened_conclusion, readme)
+    )
+
+    lost_local_ceiling = example.replace(
+        "this does not prove the universal\nErdős #257 statement",
+        "this proves the universal\nErdős #257 statement",
+        1,
+    )
+    assert any(
+        "universal claim ceiling" in error
+        for error in contract_errors(lost_local_ceiling, readme)
+    )
+
     overstated_readme = readme.replace(
         "does\nnot prove the still-open universal Erdős #257 statement",
         "proves the universal Erdős #257 statement",
@@ -69,7 +91,8 @@ def main() -> int:
 
     print(
         "test_downstream_example_contract: proved and conditional consumers "
-        "retain an explicit open boundary; 2 negative fixtures rejected"
+        "retain an exact conclusion and explicit open boundary; "
+        "4 negative fixtures rejected"
     )
     return 0
 
