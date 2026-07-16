@@ -10437,7 +10437,7 @@ theorem exists_weighted_coeff_certificates_supportCoeff_pairwise_coprime
   have hexpand : q * (C + (N + L + 2)) = q * C + q * (N + L + 2) := by ring
   omega
 
-/-- **Erdős's pairwise-coprime support theorem (1948), machine-checked.**
+/-- **Erdős's pairwise-coprime support theorem (1968), machine-checked.**
 For every base `b ≥ 2` and every infinite pairwise-coprime support
 `A ⊆ ℕ` with summable reciprocals, `∑_{a ∈ A} 1/(b^a - 1)` is
 irrational.  The first non-dilation support class of Erdős #257 to

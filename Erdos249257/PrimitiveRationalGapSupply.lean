@@ -20,9 +20,8 @@ counterpart).  Disconfirmation test: `whole = prefix`, or more generally a
 nonpositive residual, must not enter this adapter; in that case the absolute
 rational gap does not provide a positive residual lower bound.
 
-This module is intentionally left unimported while the generation-1
-integration build owns the root.  Its focused validation target is
-`Erdos249257.PrimitiveRationalGapSupply`.
+The supported root `Erdos249257.lean` imports this adapter.  Its focused
+validation target is `Erdos249257.PrimitiveRationalGapSupply`.
 -/
 
 namespace Erdos249257
