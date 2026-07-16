@@ -36,8 +36,13 @@ def main() -> int:
         git(root, "config", "user.email", "release-test@example.invalid")
         git(root, "config", "user.name", "Release source identity test")
         (root / "Erdos249257").mkdir()
+        root_source = "import Erdos249257.Stable\n"
+        stable_source = "theorem stable : True := True.intro\n"
+        (root / "Erdos249257.lean").write_text(
+            root_source, encoding="utf-8"
+        )
         (root / "Erdos249257" / "Stable.lean").write_text(
-            "theorem stable : True := True.intro\n", encoding="utf-8"
+            stable_source, encoding="utf-8"
         )
         old_ref = commit(root, "old formal source")
         (root / "Erdos249257" / "PostRef.lean").write_text(
@@ -59,6 +64,29 @@ def main() -> int:
             matches_new, new_detail = check_release.formal_source_matches_current_lean_tree(new_ref)
             assert matches_new
             assert new_detail == ""
+
+            (root / "Erdos249257.lean").write_text(
+                "import Erdos249257.PostRef\n", encoding="utf-8"
+            )
+            matches_changed_root, changed_root_detail = (
+                check_release.formal_source_matches_current_lean_tree(new_ref)
+            )
+            assert not matches_changed_root
+            assert "differ from formal-source checkpoint" in changed_root_detail
+            (root / "Erdos249257.lean").write_text(
+                root_source, encoding="utf-8"
+            )
+
+            (root / "Erdos249257" / "Stable.lean").unlink()
+            matches_with_deletion, deletion_detail = (
+                check_release.formal_source_matches_current_lean_tree(new_ref)
+            )
+            assert not matches_with_deletion
+            assert "differ from formal-source checkpoint" in deletion_detail
+            (root / "Erdos249257" / "Stable.lean").write_text(
+                stable_source, encoding="utf-8"
+            )
+
             (root / "Erdos249257" / "Untracked.lean").write_text(
                 "theorem untracked : True := True.intro\n", encoding="utf-8"
             )
@@ -70,7 +98,10 @@ def main() -> int:
         finally:
             check_release.ROOT = original_root
 
-    print("test_release_source_identity: pinned source cannot masquerade as a later Lean tree")
+    print(
+        "test_release_source_identity: pinned source rejects later modules, "
+        "root edits, deletions, and untracked Lean files"
+    )
     return 0
 
 
