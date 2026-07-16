@@ -4,7 +4,8 @@
 #     https://tectonic-typesetting.github.io
 # Fallback: a standard TeX Live install (run pdflatex twice for the TOC/refs).
 
-PAPERS = erdos249-257-main-paper erdos249-transport-curvature-companion-note
+PAPERS = erdos249-257-main-paper erdos249-transport-curvature-companion-note \
+  claim-faithful-publication-systems-paper
 ALIASES = module-aliases.tex
 
 .PHONY: all check clean sync-root

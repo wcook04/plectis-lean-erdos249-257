@@ -15,6 +15,11 @@
 \usepackage{enumitem}
 \usepackage[dvipsnames]{xcolor}
 \usepackage[colorlinks=true,linkcolor=black,urlcolor=RoyalBlue,citecolor=black]{hyperref}
+\hypersetup{
+  pdftitle={Tail Certificates and Achievement-Set Geometry for Erdős Problems 249 and 257},
+  pdfauthor={Will Cook},
+  pdfsubject={Main gateway paper for the Erdős 249/257 Lean formalisation},
+}
 
 % ---------------------------------------------------------------------------
 % Drill-down machinery: each formal anchor links to the GitHub blob at the
@@ -1779,7 +1784,10 @@ step matters as much as the first three. It prevents a large verified finite
 range from being mistaken for the infinite theorem.
 
 The repository separately records claim status and editorial change rules;
-the mathematical content remains the statements and proofs above.
+the publication architecture that keeps every reader-facing surface
+consistent with the checked sources is the subject of a systems
+companion~\cite{syspaper}. The mathematical content remains the statements
+and proofs above.
 
 \section{Artefact availability and verification}\label{sec:verify}
 
@@ -1795,7 +1803,10 @@ pins the theorem prover and library versions needed to reproduce the build.
 Every declaration is elaborated and every proof term is checked by the Lean
 kernel. Finite computations use kernel-checked decision procedures rather than
 an external evaluator, and the development contains no proof placeholders or
-added axioms. Continuous integration repeats the complete project build.
+added axioms. Continuous integration repeats the complete project build, and
+a separate release gate re-validates every public surface, including this
+paper's source links, against the claim registry and the pinned sources; its
+design and evaluation are described in the systems companion~\cite{syspaper}.
 Appendix~\ref{app:index} explains how a reader can move from the mathematics
 to the exact formal sources without exposing implementation names in the
 printed paper.
@@ -2579,6 +2590,9 @@ Campbell shift-synchronization boundary & \lrefx{CampbellShiftSynchronization.le
   in \emph{CPP 2020}, ACM (2020), 367--381, doi:10.1145/3372885.3373824.
 \bibitem{erdosproblems} T.~Bloom (ed.), \emph{Erd\H{o}s Problems}, entries 249 and 257,
   \href{https://www.erdosproblems.com}{\texttt{erdosproblems.com}}, accessed July 2026.
+\bibitem{syspaper} W.~Cook, \emph{Claim-Faithful Publication of a Formalised
+Mathematics Corpus}, systems companion in this release.
+
 \end{thebibliography}
 
 \end{document}

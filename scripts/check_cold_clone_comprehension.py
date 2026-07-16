@@ -160,6 +160,7 @@ def human_tasks(summary: dict[str, Any]) -> dict[str, list[list[str]]]:
             ["conditional reduction"],
             ["verified finite instance"],
             ["does not show that the actual orbit avoids", "does not show the actual orbit avoids"],
+            ["does not supply the unbounded quantifier"],
         ],
         "recover_breadth_beyond_headlines": [
             ["eventually-periodic nonnegative weighted irrationality"],

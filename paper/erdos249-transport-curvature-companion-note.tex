@@ -7,6 +7,11 @@
 \usepackage{amsmath,amssymb,amsthm,booktabs,array}
 \usepackage[dvipsnames]{xcolor}
 \usepackage[colorlinks=true,linkcolor=black,urlcolor=RoyalBlue,citecolor=black]{hyperref}
+\hypersetup{
+  pdftitle={Finite-Difference Certificates and a Phase-Separation Characterisation for Erdős Problem 249},
+  pdfauthor={Will Cook},
+  pdfsubject={Companion note on transport, curvature, and local obstructions; specialist companion to the Erdős 249/257 gateway paper},
+}
 \newcommand{\commit}{a16aa24af5236b6508a34b8a4c4b41fdcf620a98}
 \newcommand{\repobase}{https://github.com/wcook04/plectis-lean-erdos249-257/blob/\commit}
 \newcommand{\PK}{Erdos249257}
@@ -101,7 +106,9 @@ M\"obius/divisor background is classical~\cite{erdos1948,apostol};
 Borwein's theorem gives a neighbouring general irrationality
 benchmark~\cite{borwein1992}.  None supplies the cofinal producer isolated
 here.  The theorem-specific comparison boundary is maintained with the
-gateway paper.  Linked mathematical phrases open the pinned Lean proofs.
+gateway paper.  Linked mathematical phrases open the pinned Lean proofs; the
+claim registry and release gate that validate these links are described in
+the suite's systems companion~\cite{syspaper}.
 
 \section{Dyadic windows}\label{sec:windows}
 For a finite integer combination $X(H)=\sum_i c_iR_{m_iH}$, truncate each
@@ -361,5 +368,7 @@ accessed July 2026.
 \bibitem{mainpaper} W.~Cook, \emph{Tail Certificates and Achievement-Set
 Geometry for Erd\H{o}s Problems 249 and 257}, gateway exposition in this
 release.
+\bibitem{syspaper} W.~Cook, \emph{Claim-Faithful Publication of a Formalised
+Mathematics Corpus}, systems companion in this release.
 \end{thebibliography}
 \end{document}
