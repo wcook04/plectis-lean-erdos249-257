@@ -137,6 +137,24 @@ def source_map_entry_errors(source_map: str) -> list[str]:
     return errors
 
 
+def wave_index_entry_errors(wave_index: str) -> list[str]:
+    """Keep development chronology downstream of bounded mathematical entry."""
+    required = (
+        "docs/orientation.json",
+        "docs/SOURCE_MAP.md",
+        "recover development chronology only when chronology is the",
+        "inspect the complete package topology only when import",
+        "Lean source checked by the pinned Lean kernel is proof authority",
+        "Erdős #249",
+        "universal form of #257 remain open",
+    )
+    return [
+        f"docs/WAVE_INDEX.md lost bounded chronology boundary: {phrase}"
+        for phrase in required
+        if phrase not in wave_index
+    ]
+
+
 def module_lines(
     cache: dict[tuple[str, str | None], list[str] | None],
     rel: str,
@@ -862,6 +880,10 @@ def main() -> int:
     source_map = read(ROOT / "docs" / "SOURCE_MAP.md")
     source_map_errors = source_map_entry_errors(source_map)
     check(not source_map_errors, "; ".join(source_map_errors))
+
+    wave_index = read(ROOT / "docs" / "WAVE_INDEX.md")
+    wave_index_errors = wave_index_entry_errors(wave_index)
+    check(not wave_index_errors, "; ".join(wave_index_errors))
 
     methodology_check = subprocess.run(
         [sys.executable, str(ROOT / "scripts" / "build_methodology.py"), "--check"],

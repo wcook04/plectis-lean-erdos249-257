@@ -9,10 +9,20 @@ Wave labels are **development chronology**, not Lean import order.
 
 Read order for humans:
 
-1. `Erdos249257.lean` — import graph / package map
-2. this file — chronology and module reference
-3. `docs/SOURCE_MAP.md` — intention-based module routes
-4. `paper/erdos249-257-main-paper.tex` — mathematical exposition
+1. `docs/orientation.json` or `docs/ORIENTATION.md` — select one mathematical
+   programme, claim, or exact remaining open proposition.
+2. `docs/SOURCE_MAP.md` — follow that selected intention into a bounded module
+   route.
+3. `paper/erdos249-257-main-paper.tex` — read the authored mathematical
+   exposition and its source handles.
+4. this file — recover development chronology only when chronology is the
+   question.
+5. `Erdos249257.lean` — inspect the complete package topology only when import
+   structure is the question.
+
+Lean source checked by the pinned Lean kernel is proof authority. Wave order
+does not strengthen a claim or close an exact open proposition. Erdős #249 and
+the universal form of #257 remain open.
 
 ## Chronology map
 
