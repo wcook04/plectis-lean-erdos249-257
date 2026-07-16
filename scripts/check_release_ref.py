@@ -69,8 +69,12 @@ def dirty_paths() -> list[str]:
     return [line[3:] for line in completed.stdout.splitlines() if line]
 
 
-def bounded_tail(text: str) -> str:
-    encoded = text.encode("utf-8", errors="replace")
+def bounded_tail(text: str | bytes) -> str:
+    encoded = (
+        text
+        if isinstance(text, bytes)
+        else text.encode("utf-8", errors="replace")
+    )
     return encoded[-TAIL_BYTES:].decode("utf-8", errors="replace")
 
 

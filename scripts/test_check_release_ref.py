@@ -12,6 +12,9 @@ from pathlib import Path
 import check_release_ref
 
 
+TIMEOUT_SECONDS = 1
+
+
 def git(root: Path, *args: str) -> str:
     return subprocess.run(
         ["git", *args],
@@ -122,6 +125,28 @@ def main() -> int:
             assert failed["reported_check_count"] == 17
             assert failed["reported_release"] is None
 
+            (root / "scripts" / "check_release.py").write_text(
+                "import time\n"
+                "print('release gate started', flush=True)\n"
+                f"time.sleep({TIMEOUT_SECONDS + 2})\n",
+                encoding="utf-8",
+            )
+            timeout_commit = commit_path(
+                root,
+                "scripts/check_release.py",
+                "timed-out release snapshot",
+            )
+            timed_out, timeout_exit = check_release_ref.validate_ref(
+                timeout_commit,
+                timeout_seconds=TIMEOUT_SECONDS,
+                probe_only=False,
+            )
+            assert timeout_exit == 124
+            assert timed_out["status"] == "timeout"
+            assert timed_out["resolved_commit"] == timeout_commit
+            assert timed_out["timeout_seconds"] == TIMEOUT_SECONDS
+            assert "release gate started" in timed_out["stdout_tail"]
+
             try:
                 check_release_ref.resolve_commit("missing-ref")
             except check_release_ref.SnapshotError:
@@ -133,7 +158,7 @@ def main() -> int:
 
     print(
         "test_check_release_ref: caller dirt excluded, exact commits selected, "
-        "and failing gate exit preserved"
+        "failing gate exit preserved, and timeout receipt serialized"
     )
     return 0
 
