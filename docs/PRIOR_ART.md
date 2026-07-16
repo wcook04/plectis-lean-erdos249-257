@@ -21,6 +21,23 @@ citation for this version and selected foundational or software references,
 not a duplicate bibliography. This map explains why the principal sources are
 credited.
 
+## Bounded comparison route
+
+Start with
+`python3 scripts/query_corpus.py --route trace_prior_art`, then select the
+exact local claim with `python3 scripts/query_corpus.py --claim <claim_id>`.
+Read its registry status, statement, assumptions, remaining-open links, and
+Lean declarations before interpreting any row below. A status such as
+`proved here` or `formalised here` is an evidence statement, not a novelty
+statement.
+
+For a theorem-level comparison, record the source statement, assumptions,
+conclusion, specialisation map, proof mechanism, and residual difference
+against that selected local claim. Failure to identify a matching source is
+not evidence of novelty. Lean source checked by the pinned Lean kernel remains
+proof authority; this bibliography and its search history are authored
+attribution evidence only.
+
 | Source | Relationship to this release | Boundary |
 |---|---|---|
 | P. Erdős and R. L. Graham, [*Old and New Problems and Results in Combinatorial Number Theory* (1980)](https://mathweb.ucsd.edu/~ronspubs/80_11_number_theory.pdf); P. Erdős, [*On the irrationality of certain series: problems and results* (1988)](https://doi.org/10.1017/CBO9780511897184.009) | Original published formulations for the #249 and #257 problem setting. | They formulate open problems; they are not proofs of either universal statement. |

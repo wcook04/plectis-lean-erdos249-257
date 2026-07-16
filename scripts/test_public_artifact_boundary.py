@@ -81,6 +81,23 @@ def boundary_errors(
     return errors
 
 
+def prior_art_errors(prior_art: str) -> list[str]:
+    """Keep bibliography navigation subordinate to exact claim evidence."""
+    required = (
+        "python3 scripts/query_corpus.py --route trace_prior_art",
+        "python3 scripts/query_corpus.py --claim <claim_id>",
+        "remaining-open links",
+        "is an evidence statement, not a novelty",
+        "Failure to identify a matching source is\nnot evidence of novelty",
+        "Lean source checked by the pinned Lean kernel remains\nproof authority",
+    )
+    return [
+        f"prior-art map lost claim-faithful comparison boundary: {phrase}"
+        for phrase in required
+        if phrase not in prior_art
+    ]
+
+
 def main() -> int:
     """Assert that every first-contact surface preserves the public membrane."""
     agents = read("AGENTS.md")
@@ -88,8 +105,10 @@ def main() -> int:
     readme = read("README.md")
     claims = json.loads(read("docs/claims.json"))
     methodology = json.loads(read("docs/methodology.json"))
+    prior_art = read("docs/PRIOR_ART.md")
     summary = summary_packet()
     assert not boundary_errors(agents, scope, readme, claims, methodology, summary)
+    assert not prior_art_errors(prior_art)
 
     missing_agent_rule = agents.replace(
         "never infer unpublished results or private machinery", "", 1
@@ -110,10 +129,27 @@ def main() -> int:
             agents, scope, readme, claims, methodology, missing_projection
         )
     )
+    novelty_from_absence = prior_art.replace(
+        "Failure to identify a matching source is\nnot evidence of novelty.",
+        "Failure to identify a matching source establishes novelty.",
+        1,
+    )
+    assert any(
+        "prior-art map lost claim-faithful comparison boundary" in error
+        for error in prior_art_errors(novelty_from_absence)
+    )
+    missing_claim_route = prior_art.replace(
+        "python3 scripts/query_corpus.py --claim <claim_id>", "", 1
+    )
+    assert any(
+        "prior-art map lost claim-faithful comparison boundary" in error
+        for error in prior_art_errors(missing_claim_route)
+    )
 
     print(
         "test_public_artifact_boundary: first-contact surfaces reject "
-        "private or unpublished proof authority; 2 negative fixtures rejected"
+        "private or unpublished proof authority and novelty inference; "
+        "4 negative fixtures rejected"
     )
     return 0
 
