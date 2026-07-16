@@ -32,7 +32,10 @@ SCRIPT = ROOT / "scripts" / "query_corpus.py"
 PROGRAMME_EXPECTATIONS = {
     "erdos257_half_story": {
         "title": "Achievement-set geometry and the half-value seam",
-        "open_ids": {"remaining_open.universal_257_all_infinite_supports"},
+        "open_ids": {
+            "remaining_open.half_value_membership",
+            "remaining_open.universal_257_all_infinite_supports",
+        },
     },
     "erdos249_certificate_story": {
         "title": "#249 certificate and harmonic interface",
@@ -278,6 +281,17 @@ def main() -> int:
     validate_claim_status_packets()
     summary = query()
     assert summary["kind"] == "corpus_summary"
+    omission_receipt = summary["bounded_summary_omission_receipt"]
+    assert set(omission_receipt["omitted_sections"]) == {
+        "editorial_architecture",
+        "editorial_state",
+        "external_registration",
+        "source_revision",
+    }
+    assert omission_receipt["drilldown"] == "docs/orientation.json"
+    assert all(
+        key not in summary for key in omission_receipt["omitted_sections"]
+    )
     claims_document = json.loads((ROOT / "docs" / "claims.json").read_text(encoding="utf-8"))
     assert summary["curated_claim_count"] == len(claims_document["claims"])
     assert summary["publication_family_count"] == len(
@@ -376,9 +390,13 @@ def main() -> int:
         "python3 scripts/query_corpus.py --claim fatal_gap_right_tail_classification",
         "python3 scripts/query_corpus.py --claim final_middle_cell_escape",
         "python3 scripts/query_corpus.py --claim last_producer_tail_escape_reduction",
+        "python3 scripts/query_corpus.py --open remaining_open.half_value_membership",
         "python3 scripts/query_corpus.py --open remaining_open.universal_257_all_infinite_supports",
     ]
     band_claim = query("--claim", "half_greedy_two_thirds_band")
+    assert {
+        row["id"] for row in band_claim["remaining_open_propositions"]
+    } == {"remaining_open.half_value_membership"}
     assert ("builds_on", "greedy_achievement_geometry") in {
         (row["relation"], row["neighbour"]["id"])
         for row in band_claim["argument_neighbourhood"]["outgoing"]
@@ -394,9 +412,17 @@ def main() -> int:
     } >= {
         ("builds_on", "greedy_achievement_geometry"),
         ("builds_on", "fatal_gap_right_tail_classification"),
+        ("re_expresses_open_branch", "universal_257"),
     }
+    assert {
+        row["id"] for row in half_membership["remaining_open_propositions"]
+    } == {"remaining_open.half_value_membership"}
     last_producer = query("--claim", "last_producer_tail_escape_reduction")
     assert ("builds_on", "fatal_gap_right_tail_classification") in {
+        (row["relation"], row["neighbour"]["id"])
+        for row in last_producer["argument_neighbourhood"]["outgoing"]
+    }
+    assert ("advances_open_target", "universal_257") in {
         (row["relation"], row["neighbour"]["id"])
         for row in last_producer["argument_neighbourhood"]["outgoing"]
     }
@@ -649,7 +675,8 @@ def main() -> int:
     open_expectations = {
         "remaining_open.erdos_249_irrationality": ("erdos_249", 1),
         "remaining_open.unbounded_certificate_supply": ("erdos_249", 10),
-        "remaining_open.universal_257_all_infinite_supports": ("universal_257", 8),
+        "remaining_open.half_value_membership": ("universal_257", 4),
+        "remaining_open.universal_257_all_infinite_supports": ("universal_257", 6),
     }
     for open_id, (target, advancing_count) in open_expectations.items():
         open_packet = query("--open", open_id)

@@ -36,20 +36,20 @@
 "authority_role": "proof_bearing_committed_source_anchor"
 },
 "navigation_snapshot": {
-"commit": "0dc6d69b0fd9de2f9710e4c57385aad617948c1b",
+"commit": "18ff9972d0bcdb1d0eb2f32ce9c4dfb5d96cab6e",
 "authority_role": "machine_readable_navigation_anchor",
 "publication_state": "main_history_snapshot",
 "published_ref": "main",
-"repository_resolution": "https://github.com/wcook04/plectis-lean-erdos249-257/tree/0dc6d69b0fd9de2f9710e4c57385aad617948c1b"
+"repository_resolution": "https://github.com/wcook04/plectis-lean-erdos249-257/tree/18ff9972d0bcdb1d0eb2f32ce9c4dfb5d96cab6e"
 },
 "content": {
 "machine_readable_paper": {
 "path": "docs/claims.json::machine_readable_paper",
-"content_digest": "sha256:5108cbfebca1ba8e75525e364cf224d14c237a1879423eb3e649f3cde45b36ea"
+"content_digest": "sha256:4411ab12d829732a5b9bc84b71995d9b968b952ca5ed60a87942eafa03bcfaba"
 },
 "claims_document": {
 "path": "docs/claims.json",
-"content_digest": "sha256:c37e162df08728cf843c0eb4e9b1278660b9f3cb1ff7a228ee0236be6a20eb2a"
+"content_digest": "sha256:9b0b5cad3d9b126d572e3c0f6c3e193d48c44855b5963cbf9c37963e45948e41"
 },
 "declaration_atlas": {
 "path": "docs/declaration_atlas.json",
@@ -62,13 +62,13 @@
 },
 "bounded_orientation": {
 "path": "docs/orientation.json",
-"content_digest": "sha256:58ae0f972a8269841723ba39a6ab0e26749a773337922586483903ae68b74b25"
+"content_digest": "sha256:47735f6d35a29f516d5fd5fedc742ddd1f3f39882511916cc4822d263ab2829e"
 },
 "human_exposition": {
 "source_path": "paper/erdos249-257-main-paper.tex",
-"source_content_digest": "sha256:96193e323e9a7c616ef564715434434ef08ab9eabccbc0dd94323e9cefc596ea",
+"source_content_digest": "sha256:563f57f9b15a0ca43a1f85f002a2b78b0396d7adbcc951d687e9897bc7751686",
 "rendered_path": "erdos249-257-main-paper.pdf",
-"rendered_content_digest": "sha256:b437b94c3c97d8a6e59eaa5dac53b9d6a3120170a08eeb5b0f7c8da70dfbd45a",
+"rendered_content_digest": "sha256:8dcc35763c77efc797d4230654b97187636d8544e6ee5a8fff90eb02a9c26611",
 "artifact_role": "authored_mathematician_facing_exposition",
 "authority_posture": "authored_editorial_surface_not_Lean_proof_authority"
 },
@@ -82,7 +82,7 @@
 },
 "paper_source_sigils": {
 "path": "paper/module-aliases.json",
-"content_digest": "sha256:15486559c83f6869c2a6c0f2abed6a113fa8423ecfd9d38ba1b8de4dee3947db",
+"content_digest": "sha256:0e8345b99c95fd3f77e3cc926663bd3df76c7f7da76f622f222f7b8076368029",
 "schema": "erdos249257-paper-module-aliases/1",
 "artifact_role": "paper_sigil_to_lean_module_navigation_crosswalk",
 "authority_posture": "generated_navigation_projection_not_proof_authority"
@@ -478,7 +478,7 @@
 "source": "paper/erdos249-257-main-paper.tex",
 "environment": "problem",
 "title": "Erd\\H{o}s \\#249",
-"line": 2285
+"line": 2315
 }
 },
 {
@@ -489,7 +489,18 @@
 "source": "paper/erdos249-257-main-paper.tex",
 "environment": "problem",
 "title": "unbounded certificate supply",
-"line": 2296
+"line": 2326
+}
+},
+{
+"id": "remaining_open.half_value_membership",
+"open_target_claim": "universal_257",
+"statement": "Decide whether 1/2 lies in the Mersenne achievement set. Yes refutes universal #257; no closes only this route.",
+"paper_anchor": {
+"source": "paper/erdos249-257-main-paper.tex",
+"environment": "problem",
+"title": "the half-value counterexample route",
+"line": 2341
 }
 },
 {
@@ -500,7 +511,7 @@
 "source": "paper/erdos249-257-main-paper.tex",
 "environment": "problem",
 "title": "universal Erd\\H{o}s \\#257",
-"line": 2302
+"line": 2332
 }
 }
 ],
@@ -514,6 +525,7 @@
 "half_greedy_two_thirds_band"
 ],
 "remaining_open_proposition_ids": [
+"remaining_open.half_value_membership",
 "remaining_open.universal_257_all_infinite_supports"
 ]
 },
@@ -781,6 +793,7 @@
 "makes_exact": "The source claim records why a reduction or certificate formulation loses no information.",
 "instantiates": "The source claim supplies checked finite instances of the target reduction.",
 "advances_open_target": "The source claim is honest partial progress toward the open target and does not settle it.",
+"re_expresses_open_branch": "The source claim gives an exact reformulation of a distinct open branch without deciding that branch or the surrounding open target.",
 "positions": "The source claim is cited or used to position another claim; it is not formal proof authority here."
 },
 "edges": [
@@ -905,9 +918,29 @@
 "to": "greedy_achievement_geometry"
 },
 {
+"from": "half_membership_seam_classification",
+"relation": "re_expresses_open_branch",
+"to": "universal_257",
+"remaining_open_effect": {
+"remaining_open_proposition_id": "remaining_open.half_value_membership",
+"operation": "re_expresses",
+"statement": "Identifies half-membership exactly with cofinal terminal omissions and unbounded skipped ranks, but proves neither side of that equivalence."
+}
+},
+{
 "from": "last_producer_tail_escape_reduction",
 "relation": "builds_on",
 "to": "fatal_gap_right_tail_classification"
+},
+{
+"from": "last_producer_tail_escape_reduction",
+"relation": "advances_open_target",
+"to": "universal_257",
+"remaining_open_effect": {
+"remaining_open_proposition_id": "remaining_open.half_value_membership",
+"operation": "re_expresses",
+"statement": "Reduces the positive half-membership branch to future-tail escape at the remaining middle transitions; that escape statement is not proved."
+}
 },
 {
 "from": "final_middle_cell_escape",
@@ -1159,7 +1192,7 @@
 "relation": "advances_open_target",
 "to": "universal_257",
 "remaining_open_effect": {
-"remaining_open_proposition_id": "remaining_open.universal_257_all_infinite_supports",
+"remaining_open_proposition_id": "remaining_open.half_value_membership",
 "operation": "constrains",
 "statement": "Localizes an unsafe isolated greedy skip to an exact open interval of width below 1/9; it neither proves that the actual half-greedy orbit avoids the interval nor addresses arbitrary infinite supports."
 }
@@ -1189,7 +1222,7 @@
 "relation": "advances_open_target",
 "to": "universal_257",
 "remaining_open_effect": {
-"remaining_open_proposition_id": "remaining_open.universal_257_all_infinite_supports",
+"remaining_open_proposition_id": "remaining_open.half_value_membership",
 "operation": "re_expresses",
 "statement": "Reduces membership of the target one half to an exact rational separation statement from level seven onward; it neither proves that statement nor settles arbitrary infinite supports."
 }
@@ -1723,7 +1756,7 @@
 "expansion": {
 "machine_readable_paper": {
 "path": "docs/claims.json::machine_readable_paper",
-"expected_content_digest": "sha256:5108cbfebca1ba8e75525e364cf224d14c237a1879423eb3e649f3cde45b36ea",
+"expected_content_digest": "sha256:4411ab12d829732a5b9bc84b71995d9b968b952ca5ed60a87942eafa03bcfaba",
 "contains": [
 "all_claims",
 "authored_argument_graph",
@@ -1747,9 +1780,9 @@
 },
 "human_exposition": {
 "source_path": "paper/erdos249-257-main-paper.tex",
-"expected_source_content_digest": "sha256:96193e323e9a7c616ef564715434434ef08ab9eabccbc0dd94323e9cefc596ea",
+"expected_source_content_digest": "sha256:563f57f9b15a0ca43a1f85f002a2b78b0396d7adbcc951d687e9897bc7751686",
 "rendered_path": "erdos249-257-main-paper.pdf",
-"expected_rendered_content_digest": "sha256:b437b94c3c97d8a6e59eaa5dac53b9d6a3120170a08eeb5b0f7c8da70dfbd45a",
+"expected_rendered_content_digest": "sha256:8dcc35763c77efc797d4230654b97187636d8544e6ee5a8fff90eb02a9c26611",
 "authority_posture": "authored_editorial_surface_not_Lean_proof_authority"
 },
 "technical_companion": {
@@ -1761,7 +1794,7 @@
 },
 "paper_source_sigils": {
 "path": "paper/module-aliases.json",
-"expected_content_digest": "sha256:15486559c83f6869c2a6c0f2abed6a113fa8423ecfd9d38ba1b8de4dee3947db",
+"expected_content_digest": "sha256:0e8345b99c95fd3f77e3cc926663bd3df76c7f7da76f622f222f7b8076368029",
 "schema": "erdos249257-paper-module-aliases/1",
 "check": "python3 scripts/build_paper_module_aliases.py --check"
 }

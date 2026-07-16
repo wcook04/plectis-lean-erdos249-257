@@ -668,6 +668,7 @@ def validate_agent_packets(packets: dict[str, Any]) -> None:
         for step in story_routes["erdos257_half_story"]["route"]["query_steps"]
     ] == [
         *STORY_CLAIMS[:6],
+        "remaining_open.half_value_membership",
         "remaining_open.universal_257_all_infinite_supports",
     ]
     assert [

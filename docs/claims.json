@@ -153,7 +153,7 @@
         "id": "erdos257_half_story",
         "route_kind": "mathematical_programme",
         "title": "Achievement-set geometry and the half-value seam",
-        "intent": "Recover the proved #257 half-value spine from unique greedy coding through the last-producer partition to the exact tail-escape residual, without identifying the remaining middle cells with dyadic unsafety beyond the checked theorems.",
+        "intent": "Follow the proved #257 half-value spine from unique greedy coding to the exact last-transition tail residual, without treating local dyadic-safety bounds as a solution.",
         "discovery_terms": [
           "what remains open for 257",
           "achievement set topology",
@@ -173,6 +173,7 @@
           "last_producer_tail_escape_reduction"
         ],
         "remaining_open_proposition_ids": [
+          "remaining_open.half_value_membership",
           "remaining_open.universal_257_all_infinite_supports"
         ],
         "related_route_ids": [
@@ -190,6 +191,7 @@
           "python3 scripts/query_corpus.py --claim fatal_gap_right_tail_classification",
           "python3 scripts/query_corpus.py --claim final_middle_cell_escape",
           "python3 scripts/query_corpus.py --claim last_producer_tail_escape_reduction",
+          "python3 scripts/query_corpus.py --open remaining_open.half_value_membership",
           "python3 scripts/query_corpus.py --open remaining_open.universal_257_all_infinite_supports"
         ],
         "authority_owners": [
@@ -903,15 +905,15 @@
         "schema": "erdos249257-editorial-state/1",
         "scope": "continuous_whole_main_paper_exposition",
         "current_priority": {
-          "id": "whole_paper_final_validation_and_release_sync",
+          "id": "appendix_a_mathematical_vocabulary_and_narrative_compression",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "defect_class": "the editorial reconstruction is complete and must now be validated as one synchronized source, PDF, claim-coordinate, orientation, and publication-contract wave",
-          "statement": "Run the full paper and corpus validation stack, confirm incoming references for Appendices A–E, isolate unrelated concurrent drift, and bind the verified wave in a scoped commit."
+          "defect_class": "internal vocabulary and theorem-by-theorem sequencing remain in Appendix A",
+          "statement": "Translate the remaining sheet, package, and interface terms, then regroup the suffix-cylinder chain around its invariant, hypotheses, consequence, and open gap."
         },
         "last_verified_wave": {
-          "id": "whole_paper_hierarchy_and_vocabulary_reconstruction",
+          "id": "whole_paper_prose_role_and_section_closure",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "result": "Sections 4, 5, and 8 are theorem-led; supporting inventories live in referenced Appendices A, C, and D; Appendices A–C use mathematical rather than development-role vocabulary; the abstract, introduction, exact-spines overview, method section, verification statement, and conclusion now agree on the exact proved, finite, conditional, and open statuses."
+          "result": "Sections 3, 6, and 7 now declare their expository roles and exact residuals; Section 6 points to the self-contained rational-support theorem rather than restating it loosely."
         },
         "active_inconsistencies": [],
         "blocked_decisions": []
@@ -6898,6 +6900,7 @@
         "makes_exact": "The source claim records why a reduction or certificate formulation loses no information.",
         "instantiates": "The source claim supplies checked finite instances of the target reduction.",
         "advances_open_target": "The source claim is honest partial progress toward the open target and does not settle it.",
+        "re_expresses_open_branch": "The source claim gives an exact reformulation of a distinct open branch without deciding that branch or the surrounding open target.",
         "positions": "The source claim is cited or used to position another claim; it is not formal proof authority here."
       },
       "edges": [
@@ -7022,9 +7025,29 @@
           "to": "greedy_achievement_geometry"
         },
         {
+          "from": "half_membership_seam_classification",
+          "relation": "re_expresses_open_branch",
+          "to": "universal_257",
+          "remaining_open_effect": {
+            "remaining_open_proposition_id": "remaining_open.half_value_membership",
+            "operation": "re_expresses",
+            "statement": "Identifies half-membership exactly with cofinal terminal omissions and unbounded skipped ranks, but proves neither side of that equivalence."
+          }
+        },
+        {
           "from": "last_producer_tail_escape_reduction",
           "relation": "builds_on",
           "to": "fatal_gap_right_tail_classification"
+        },
+        {
+          "from": "last_producer_tail_escape_reduction",
+          "relation": "advances_open_target",
+          "to": "universal_257",
+          "remaining_open_effect": {
+            "remaining_open_proposition_id": "remaining_open.half_value_membership",
+            "operation": "re_expresses",
+            "statement": "Reduces the positive half-membership branch to future-tail escape at the remaining middle transitions; that escape statement is not proved."
+          }
         },
         {
           "from": "final_middle_cell_escape",
@@ -7276,7 +7299,7 @@
           "relation": "advances_open_target",
           "to": "universal_257",
           "remaining_open_effect": {
-            "remaining_open_proposition_id": "remaining_open.universal_257_all_infinite_supports",
+            "remaining_open_proposition_id": "remaining_open.half_value_membership",
             "operation": "constrains",
             "statement": "Localizes an unsafe isolated greedy skip to an exact open interval of width below 1/9; it neither proves that the actual half-greedy orbit avoids the interval nor addresses arbitrary infinite supports."
           }
@@ -7306,7 +7329,7 @@
           "relation": "advances_open_target",
           "to": "universal_257",
           "remaining_open_effect": {
-            "remaining_open_proposition_id": "remaining_open.universal_257_all_infinite_supports",
+            "remaining_open_proposition_id": "remaining_open.half_value_membership",
             "operation": "re_expresses",
             "statement": "Reduces membership of the target one half to an exact rational separation statement from level seven onward; it neither proves that statement nor settles arbitrary infinite supports."
           }
@@ -7487,7 +7510,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 2285
+        "line": 2315
       }
     },
     {
@@ -7498,7 +7521,18 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 2296
+        "line": 2326
+      }
+    },
+    {
+      "id": "remaining_open.half_value_membership",
+      "open_target_claim": "universal_257",
+      "statement": "Decide whether 1/2 lies in the Mersenne achievement set. Yes refutes universal #257; no closes only this route.",
+      "paper_anchor": {
+        "source": "paper/erdos249-257-main-paper.tex",
+        "environment": "problem",
+        "title": "the half-value counterexample route",
+        "line": 2341
       }
     },
     {
@@ -7509,7 +7543,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 2302
+        "line": 2332
       }
     }
   ],
@@ -8132,7 +8166,7 @@
       "status": "proved here",
       "statement": "For the concrete integer seam words, eventual right extension is equivalent to nonmembership of 1/2 in the Mersenne achievement set. It is also equivalent to the existence of a finite fatal half gap and to the existence of a final skipped exponent in the real greedy orbit. This exact classification does not decide either membership branch.",
       "remaining_open_proposition_ids": [
-        "remaining_open.universal_257_all_infinite_supports"
+        "remaining_open.half_value_membership"
       ],
       "paper_label": "res:fatalright",
       "readme_headline": false,
@@ -8159,6 +8193,9 @@
       "label": "Upper and first middle producers cannot feed an all-right tail",
       "status": "proved here",
       "statement": "At a putative last false rank D ≥ 13, the upper producer is impossible unconditionally. On the middle branch, producer-carry cell -3 is also impossible: the lazy cofinite tail is below 1/2 while the corresponding Mobius-centred carry is negative, contradicting analytic nonnegativity. This removes the upper branch and one middle cell, not the right-tail branch or the remaining middle cells -2 and -1.",
+      "remaining_open_proposition_ids": [
+        "remaining_open.half_value_membership"
+      ],
       "paper_label": "res:fatalright",
       "readme_headline": false,
       "declarations": [
@@ -8185,7 +8222,7 @@
       "status": "conditional reduction",
       "statement": "If every genuine middle producer other than the locally discharged -3 cell has producer carry larger than its complete future divisor-incidence tail, then an eventual right seam is impossible and 1/2 belongs to the Mersenne achievement set. A stated square-root producer lower bound is a sufficient stronger socket. Neither socket is proved here.",
       "remaining_open_proposition_ids": [
-        "remaining_open.universal_257_all_infinite_supports"
+        "remaining_open.half_value_membership"
       ],
       "paper_label": "res:fatalright",
       "readme_headline": false,
@@ -8247,7 +8284,7 @@
       "status": "proved here",
       "statement": "Membership of 1/2 in the Mersenne achievement set is equivalent to false successor terminal bits beyond every bound, to a cofinal sequence of such bits, and to a cofinal integer-seam sequence whose skipped ranks tend to infinity. These equivalences do not establish that any positive producer exists.",
       "remaining_open_proposition_ids": [
-        "remaining_open.universal_257_all_infinite_supports"
+        "remaining_open.half_value_membership"
       ],
       "paper_label": "res:halfmembership",
       "readme_headline": false,
@@ -9675,7 +9712,7 @@
       "status": "proved here",
       "statement": "Suppose a take at rank b is followed by the next take at c > b+1, put q = 2^b − 1 and m = 2^(c−1), and write the pre-take residual as 1/R with 0 < R < q. The final intervening skip is dyadically unsafe exactly when q(m−1)/(q+m−1) < R < qm/(q+m), an interval of exact width q^2/((q+m)(q+m−1)). For one intervening skip this specializes to the two-thirds band (q(2q+1)/(3q+1), 2q(q+1)/(3q+2)), whose width is below 1/9; integral reciprocals never lie there, and the corresponding positive odd numerator is at least 7. These are local constraints: no theorem here says that the actual greedy orbit for 1/2 avoids a band or identifies the surviving last-producer cells with unsafe skips.",
       "remaining_open_proposition_ids": [
-        "remaining_open.universal_257_all_infinite_supports"
+        "remaining_open.half_value_membership"
       ],
       "paper_label": "res:twothirdsband",
       "readme_headline": false,
@@ -9723,7 +9760,7 @@
       "status": "conditional reduction",
       "statement": "A decidable rational separation predicate controls the greedy Mersenne orbit for the target 1/2. Lean verifies levels 1 through 6 exactly; proving the predicate for every n >= 7 would place 1/2 in the Mersenne achievement set, equivalently would force infinitely many canonical greedy skips. The universal tail statement remains open.",
       "remaining_open_proposition_ids": [
-        "remaining_open.universal_257_all_infinite_supports"
+        "remaining_open.half_value_membership"
       ],
       "paper_label": "res:secondfrontier",
       "readme_headline": false,
@@ -10051,6 +10088,7 @@
       "status": "open",
       "statement": "Irrationality of ∑_{n∈A} 1/(2ⁿ − 1) for every infinite A is not proved by this release; only named families are formalised.",
       "remaining_open_proposition_ids": [
+        "remaining_open.half_value_membership",
         "remaining_open.universal_257_all_infinite_supports"
       ],
       "declarations": []

@@ -351,6 +351,16 @@ Proposition~\ref{res:coprime}; its M\"obius-square form and the periodic and
 finite-algebraic variants of the ladder are collected in
 Section~\ref{sec:additional-lambert}.
 
+\paragraph{Section consequence and residual.}
+The exact contribution of this section is the coordinate change
+\(L(A)=S\), together with the two rational rungs above it in the same
+Lambert family.  These identities explain why the Mersenne--Lambert
+coordinates are natural for both problems, but they do not imply that \(S\)
+is irrational.  For \#249 the remaining issue is still the unbounded
+certificate supply isolated in Section~\ref{sec:249}; for \#257 the ladder
+supplies context rather than either the universal theorem or a rational
+counterexample.
+
 \section{Erd\H{o}s--Borwein-type irrationality (the \#257 direction)}\label{sec:eb}
 
 There are two logically distinct directions.  The universal direction asks
@@ -2062,6 +2072,12 @@ for $S$.
 \section{Mathematical architecture of the checked arguments}
 \label{sec:architecture}
 
+\noindent This section is interpretive: it introduces no additional
+mathematical claim.  Its purpose is to identify which parts of the checked
+arguments are finite and complete, which parts require a uniform theorem, and
+why the chosen coordinates expose that distinction.
+
+\paragraph{Finite arithmetic versus uniform supply.}
 The arguments repeatedly separate a finite arithmetic core from a statement
 that must hold uniformly.  In the full-support Erd\H{o}s--Borwein theorem, the
 finite core consists of a Bertrand--CRT choice, divisor-pair averaging, and
@@ -2072,6 +2088,7 @@ Proposition~\ref{res:complete} proves that the finite certificate loses no
 information there.  The missing ingredient is therefore not a larger finite
 verification, but a theorem producing such witnesses without bound.
 
+\paragraph{Tail coordinates and completeness.}
 The choice of tail coordinates is essential.  Rather than reason about an
 informal repeating digit string, one uses the scaled tails $R_N$ and the fact
 that rationality forces suitable period differences to be integers.
@@ -2079,6 +2096,7 @@ Certificate completeness then separates two logically distinct tasks: finite
 arithmetic decides non-integrality at a fixed pair $(h,N)$, while
 Theorem~\ref{res:red21} requires those pairs beyond every threshold.
 
+\paragraph{Equivalent representations.}
 Three further changes of coordinates serve different mathematical purposes. The
 Mersenne--Lambert transform places $S$ next to the Erd\H{o}s--Borwein constant
 and exposes the nonnegative primitive-conductor weight. The M\"obius-square
@@ -2087,33 +2105,37 @@ coprime-pair identity turns it into a probability. Formalising all three and
 proving that the denominator exclusion transfers between them prevents an
 informal change of representation from silently changing the claim.
 
-The auxiliary carry results ask what rationality would force rather than
-claiming a new irrationality theorem. They give an exact tempered-orbit
-criterion, Boolean--M\"obius coordinates for support series, constraints from
-residue wraps and reciprocal mass, and a greedy description of the value set.
-The sublogarithmic coverage theorem adds a further lesson: the elementary
-fixed-power estimate $\tau(n)^k\le(k^{2^k})^k n$ becomes useful only after it is
-transported through the binary tail and composed with the exact carry
-recurrence. Rationality then forbids long zero windows in $f_A$, uniformly in
-the support. In the reciprocal-mass argument, divergent series had to be kept
-as an explicit alternative rather than passed through a default value for a
-divergent formal sum.
-Together they rule out several tempting but false proof strategies---for
-example, rationality need not give a bounded carry alphabet---and identify the
-kind of infinite Boolean carry path that a future proof would have to exclude.
-The precise statements and source links are retained in
-Appendix~\ref{sec:carry}; their supporting role is why they are not a second
-main narrative here.
+\paragraph{Necessary conditions on a rational support.}
+The mathematical assertions in this part of the architecture are exactly
+those of Theorem~\ref{res:rigidity-main}, with their proofs and auxiliary
+coordinates in Appendix~\ref{sec:carry}.  Their role is diagnostic.  The
+zero-window bound in Theorem~\ref{res:rigidity-main}\textup{(ii)} is obtained
+by transporting the fixed-power divisor estimate
+\(\tau(n)^k\le(k^{2^k})^k n\) through the binary tail and the exact carry
+recurrence.  Part~\textup{(i)} shows that an infinite rational support cannot
+be represented by a bounded carry alphabet.  Part~\textup{(iii)} relates the
+odd denominator to reciprocal mass, retaining divergence as an explicit
+alternative.  None of these necessary conditions is a contradiction; they
+describe the infinite Boolean carry path that a future proof would have to
+exclude.
 
+\paragraph{General proof template and residual.}
 The same architecture is useful beyond the two named problems: choose a
 representation in which rationality imposes a rigid tail law, isolate a finite
 predicate that soundly refutes that law, prove the predicate complete at fixed
 parameters, and state the remaining uniformity theorem separately. The last
 step matters as much as the first three. It prevents a large verified finite
-range from being mistaken for the infinite theorem.
+range from being mistaken for the infinite theorem.  Thus the exact
+consequence of this section is organisational rather than mathematical:
+fixed-parameter completeness has been separated from the unbounded supply
+required for \#249 and from the two unresolved \#257 directions.
 
 \section{Formal verification and reproducibility}\label{sec:verify}
 
+\noindent This section records proof authority and reproducibility; it does
+not add a mathematical conclusion to either theorem spine.
+
+\paragraph{Proof authority and source identity.}
 The Lean~4 proof assistant~\cite{lean} and Mathlib library~\cite{mathlib} check
 the named results.  The source, exact informal-to-formal links, and build
 instructions are available in the
@@ -2123,12 +2145,20 @@ This paper is tied to an
 links directly to the corresponding checked theorem there. The repository
 pins the theorem prover and library versions needed to reproduce the build.
 
+\paragraph{Computational and expository boundary.}
 Every declaration is elaborated and every proof term is checked by the Lean
 kernel.  Finite computations use kernel-checked decision procedures rather
 than an external evaluator, and the source contains no proof placeholders or
 added axioms.  The manuscript is exposition rather than proof authority;
 Appendix~\ref{app:index} explains how each displayed result is connected to
 its exact formal statement.
+
+\paragraph{Section consequence.}
+The linked declarations and their checked proof terms certify the stated
+proved, conditional, finite, and equivalence results at the archived source
+revision.  That verification does not change the mathematical status of the
+unresolved statements: the open problems collected in
+Section~\ref{sec:further} remain open.
 
 \section{Exact frontiers and further questions}\label{sec:further}
 

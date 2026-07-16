@@ -3,7 +3,7 @@
   "artifact_role": "paper_sigil_to_lean_module_navigation_crosswalk",
   "authority_posture": "generated_navigation_projection_not_proof_authority",
   "heuristic": "Each CamelCase component contributes at most its first three characters.",
-  "alias_count": 96,
+  "alias_count": 85,
   "aliases": [
     {
       "sigil": "ActForResPro",
@@ -191,31 +191,6 @@
       "path": "Erdos249257/HalfCylinderLargestSkipGap.lean"
     },
     {
-      "sigil": "HalCylLarSkiInd",
-      "module": "HalfCylinderLargestSkipInduction.lean",
-      "path": "Erdos249257/HalfCylinderLargestSkipInduction.lean"
-    },
-    {
-      "sigil": "HalCylLasProCon",
-      "module": "HalfCylinderLastProducerContradiction.lean",
-      "path": "Erdos249257/HalfCylinderLastProducerContradiction.lean"
-    },
-    {
-      "sigil": "HalCylMidCarLowBou",
-      "module": "HalfCylinderMiddleCarryLowerBound.lean",
-      "path": "Erdos249257/HalfCylinderMiddleCarryLowerBound.lean"
-    },
-    {
-      "sigil": "HalCylProCarSoc",
-      "module": "HalfCylinderProducerCarrySocket.lean",
-      "path": "Erdos249257/HalfCylinderProducerCarrySocket.lean"
-    },
-    {
-      "sigil": "HalCylProLowBou",
-      "module": "HalfCylinderProducerLowerBound.lean",
-      "path": "Erdos249257/HalfCylinderProducerLowerBound.lean"
-    },
-    {
       "sigil": "HalCylQuaBanEnd",
       "module": "HalfCylinderQuarterBandEndpoints.lean",
       "path": "Erdos249257/HalfCylinderQuarterBandEndpoints.lean"
@@ -224,11 +199,6 @@
       "sigil": "HalCylResDefEsc",
       "module": "HalfCylinderResetDeficitEscape.lean",
       "path": "Erdos249257/HalfCylinderResetDeficitEscape.lean"
-    },
-    {
-      "sigil": "HalCylSeaProAli",
-      "module": "HalfCylinderSeamProducerAlignment.lean",
-      "path": "Erdos249257/HalfCylinderSeamProducerAlignment.lean"
     },
     {
       "sigil": "HalCylUppResBanCer",
@@ -396,29 +366,9 @@
       "path": "Erdos249257/SuffixCylinderInStrip.lean"
     },
     {
-      "sigil": "SufCylProAdj",
-      "module": "SuffixCylinderProfiledAdjacency.lean",
-      "path": "Erdos249257/SuffixCylinderProfiledAdjacency.lean"
-    },
-    {
-      "sigil": "SufCylProAutSte",
-      "module": "SuffixCylinderProfiledAutoStep.lean",
-      "path": "Erdos249257/SuffixCylinderProfiledAutoStep.lean"
-    },
-    {
-      "sigil": "SufCylProGap",
-      "module": "SuffixCylinderProfiledGap.lean",
-      "path": "Erdos249257/SuffixCylinderProfiledGap.lean"
-    },
-    {
       "sigil": "SufCylProPro",
       "module": "SuffixCylinderProfiledPromotion.lean",
       "path": "Erdos249257/SuffixCylinderProfiledPromotion.lean"
-    },
-    {
-      "sigil": "SufCylProProAdj",
-      "module": "SuffixCylinderProfiledPromotionAdjacency.lean",
-      "path": "Erdos249257/SuffixCylinderProfiledPromotionAdjacency.lean"
     },
     {
       "sigil": "SufCylProSwa",
@@ -464,11 +414,6 @@
       "sigil": "TerOnlScaVan",
       "module": "TerminalOnlyScaledVanishing.lean",
       "path": "Erdos249257/TerminalOnlyScaledVanishing.lean"
-    },
-    {
-      "sigil": "TotParSocCei",
-      "module": "Totient827ParitySocketCeiling.lean",
-      "path": "Erdos249257/Totient827ParitySocketCeiling.lean"
     },
     {
       "sigil": "TotCarKerRig",

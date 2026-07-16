@@ -52,6 +52,7 @@ The authored prior-art record, not this table, is the source for antecedents.
 
 - `remaining_open.erdos_249_irrationality` — Prove that S = ∑ φ(n)/2ⁿ is irrational, with no bound on a possible rational denominator.
 - `remaining_open.unbounded_certificate_supply` — Produce certified non-integrality witnesses at unbounded parameters. A sufficient one-parameter form is to produce them along the lcm diagonal.
+- `remaining_open.half_value_membership` — Decide whether 1/2 lies in the Mersenne achievement set. Yes refutes universal #257; no closes only this route.
 - `remaining_open.universal_257_all_infinite_supports` — Prove irrationality for every infinite support A, not only the named support families formalised here.
 
 ## Mathematical programmes
@@ -109,7 +110,7 @@ settle the open proposition attached to it.
 - **See how the #249 reduction, #257 families, carry trunk, and open targets relate.** (`understand_argument_topology`): `docs/orientation.json` → `docs/SOURCE_MAP.md`
   - Route: `python3 scripts/query_corpus.py --route understand_argument_topology`
 - **Achievement-set geometry and the half-value seam** (`erdos257_half_story`): `docs/orientation.json`
-  - Intent: Recover the proved #257 half-value spine from unique greedy coding through the last-producer partition to the exact tail-escape residual, without identifying the remaining middle cells with dyadic unsafety beyond the checked theorems.
+  - Intent: Follow the proved #257 half-value spine from unique greedy coding to the exact last-transition tail residual, without treating local dyadic-safety bounds as a solution.
   - Route: `python3 scripts/query_corpus.py --route erdos257_half_story`
 - **#249 certificate and harmonic interface** (`erdos249_certificate_story`): `docs/orientation.json`
   - Intent: Recover the denominator exclusion, exact certificate endpoint, certificate completeness, finite checked instances, first-harmonic consumer, and the still-open unbounded supply.

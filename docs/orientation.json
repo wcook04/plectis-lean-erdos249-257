@@ -56,7 +56,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "Erd\\H{o}s \\#249",
-    "line": 2285
+    "line": 2315
    }
   },
   {
@@ -67,7 +67,18 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "unbounded certificate supply",
-    "line": 2296
+    "line": 2326
+   }
+  },
+  {
+   "id": "remaining_open.half_value_membership",
+   "open_target_claim": "universal_257",
+   "statement": "Decide whether 1/2 lies in the Mersenne achievement set. Yes refutes universal #257; no closes only this route.",
+   "paper_anchor": {
+    "source": "paper/erdos249-257-main-paper.tex",
+    "environment": "problem",
+    "title": "the half-value counterexample route",
+    "line": 2341
    }
   },
   {
@@ -78,7 +89,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "universal Erd\\H{o}s \\#257",
-    "line": 2302
+    "line": 2332
    }
   }
  ],
@@ -391,6 +402,7 @@
     "half_greedy_two_thirds_band"
    ],
    "remaining_open_proposition_ids": [
+    "remaining_open.half_value_membership",
     "remaining_open.universal_257_all_infinite_supports"
    ]
   },
@@ -541,18 +553,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "whole_paper_final_validation_and_release_sync",
+   "id": "appendix_a_mathematical_vocabulary_and_narrative_compression",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "the editorial reconstruction is complete and must now be validated as one synchronized source, PDF, claim-coordinate, orientation, and publication-contract wave",
-   "statement": "Run the full paper and corpus validation stack, confirm incoming references for Appendices A–E, isolate unrelated concurrent drift, and bind the verified wave in a scoped commit."
+   "defect_class": "internal vocabulary and theorem-by-theorem sequencing remain in Appendix A",
+   "statement": "Translate the remaining sheet, package, and interface terms, then regroup the suffix-cylinder chain around its invariant, hypotheses, consequence, and open gap."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "a16aa24af5236b6508a34b8a4c4b41fdcf620a98",
-  "committed_navigation_snapshot": "0dc6d69b0fd9de2f9710e4c57385aad617948c1b",
-  "main_paper_source_digest": "sha256:96193e323e9a7c616ef564715434434ef08ab9eabccbc0dd94323e9cefc596ea"
+  "committed_navigation_snapshot": "18ff9972d0bcdb1d0eb2f32ce9c4dfb5d96cab6e",
+  "main_paper_source_digest": "sha256:563f57f9b15a0ca43a1f85f002a2b78b0396d7adbcc951d687e9897bc7751686"
  },
  "reading_routes": [
   {
@@ -590,7 +602,7 @@
   },
   {
    "id": "erdos257_half_story",
-   "intent": "Recover the proved #257 half-value spine from unique greedy coding through the last-producer partition to the exact tail-escape residual, without identifying the remaining middle cells with dyadic unsafety beyond the checked theorems.",
+   "intent": "Follow the proved #257 half-value spine from unique greedy coding to the exact last-transition tail residual, without treating local dyadic-safety bounds as a solution.",
    "read": [
     "docs/orientation.json"
    ],

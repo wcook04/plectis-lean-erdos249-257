@@ -123,9 +123,9 @@
   "authority_posture": "navigation_projection_not_Lean_proof_authority_and_not_historical_evidence_authority",
   "content_hashes": {
     "claim-faithful-publication-systems-paper.pdf": "sha256:cd03b30978fa5d5533cdcc92429159d08bd6f530e9998fdefc6462ab962654c6",
-    "docs/claims.json": "sha256:c37e162df08728cf843c0eb4e9b1278660b9f3cb1ff7a228ee0236be6a20eb2a",
+    "docs/claims.json": "sha256:9b0b5cad3d9b126d572e3c0f6c3e193d48c44855b5963cbf9c37963e45948e41",
     "docs/methodology.json": "sha256:d2dab3ef7bd853be6bd086ad2ff448d97996280c648878f6aa5066e1616a722e",
-    "docs/publication_contract.json": "sha256:6592095215ca527fd613622c87c6d04bbdd4736b59c38fe14675edf43b33b5a2",
+    "docs/publication_contract.json": "sha256:ba2ecf0c0a198d59b52c7b402dfdd67f0baf9ddec69e93655a41b86731dabe9a",
     "docs/publication_entry_source.json": "sha256:8e43c8b75e0d664d0731c8bd44cbd03b7dd910f812e2f34d4909b9aa0df6d699",
     "docs/publication_evidence.json": "sha256:69df3b371c23a365b2870ae905b1b3fe65fe4dcdb6c8cc31ee3d7d1f128ccc91",
     "experiments/publication_mutations.json": "sha256:9243e270257869e7a191c7598e917457cab61194299d1651e21bbc45a2d4c1e3",
@@ -142,7 +142,7 @@
     "current_owner_snapshot": {
       "contribution_family_count": 21,
       "curated_claim_count": 98,
-      "remaining_open_proposition_count": 3,
+      "remaining_open_proposition_count": 4,
       "snapshot_kind": "current_canonical_owners",
       "status_count": 7
     },
@@ -422,7 +422,7 @@
       "open_target_claim": "erdos_249",
       "paper_anchor": {
         "environment": "problem",
-        "line": 2285,
+        "line": 2315,
         "source": "paper/erdos249-257-main-paper.tex",
         "title": "Erd\\H{o}s \\#249"
       },
@@ -433,18 +433,29 @@
       "open_target_claim": "erdos_249",
       "paper_anchor": {
         "environment": "problem",
-        "line": 2296,
+        "line": 2326,
         "source": "paper/erdos249-257-main-paper.tex",
         "title": "unbounded certificate supply"
       },
       "statement": "Produce certified non-integrality witnesses at unbounded parameters. A sufficient one-parameter form is to produce them along the lcm diagonal."
     },
     {
+      "id": "remaining_open.half_value_membership",
+      "open_target_claim": "universal_257",
+      "paper_anchor": {
+        "environment": "problem",
+        "line": 2341,
+        "source": "paper/erdos249-257-main-paper.tex",
+        "title": "the half-value counterexample route"
+      },
+      "statement": "Decide whether 1/2 lies in the Mersenne achievement set. Yes refutes universal #257; no closes only this route."
+    },
+    {
       "id": "remaining_open.universal_257_all_infinite_supports",
       "open_target_claim": "universal_257",
       "paper_anchor": {
         "environment": "problem",
-        "line": 2302,
+        "line": 2332,
         "source": "paper/erdos249-257-main-paper.tex",
         "title": "universal Erd\\H{o}s \\#257"
       },
