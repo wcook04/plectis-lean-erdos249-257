@@ -184,6 +184,34 @@ def reuse_manuscript_pdfs(data: dict[str, Any]) -> set[str]:
     return paths
 
 
+def reuse_manuscript_override_errors(
+    data: dict[str, Any], registered_pdfs: set[str]
+) -> list[str]:
+    """Bind registered manuscript PDFs to one explicit REUSE override."""
+    annotations = [
+        row
+        for row in data.get("annotations", [])
+        if row.get("SPDX-License-Identifier") == MANUSCRIPT_LICENSE
+    ]
+    if len(annotations) != 1:
+        return [
+            "publication manuscript PDFs must use one CC-BY-4.0 REUSE annotation"
+        ]
+    annotation = annotations[0]
+    errors: list[str] = []
+    if annotation.get("precedence") != "override":
+        errors.append(
+            "publication manuscript CC-BY-4.0 annotation must use "
+            "precedence = override"
+        )
+    if reuse_manuscript_pdfs(data) != registered_pdfs:
+        errors.append(
+            "publication manuscript CC-BY-4.0 override must cover exactly "
+            "the registered root PDFs"
+        )
+    return errors
+
+
 def manuscript_source_license_errors(path: str, text: str) -> list[str]:
     """Require a registered manuscript source to declare the manuscript licence."""
     header = "\n".join(text.splitlines()[:12])
@@ -953,6 +981,7 @@ def validate_publication_contract(
             f"not_built={sorted(registered_bases - built)}"
         )
 
+    reuse: dict[str, Any] | None = None
     try:
         reuse = tomllib.loads(reader.read_text(REUSE_PATH))
         licensed_pdfs = reuse_manuscript_pdfs(reuse)
@@ -966,6 +995,8 @@ def validate_publication_contract(
             f"missing_from_contract={sorted(licensed_pdfs - registered_pdfs)}, "
             f"not_CC_BY_licensed={sorted(registered_pdfs - licensed_pdfs)}"
         )
+    if reuse is not None:
+        errors.extend(reuse_manuscript_override_errors(reuse, registered_pdfs))
 
     contract_routes = contract.get("entrypoints", [])
     contract_route_ids = [row.get("id") for row in contract_routes]
@@ -1138,6 +1169,20 @@ def mutation_fixture_failures(reader: RepositoryReader) -> list[str]:
     drift["artifacts"][0]["source_content_digest"] = "sha256:" + "0" * 64
     if not validate_publication_contract(reader, contract_override=drift):
         failures.append("publication_digest_drift")
+
+    reuse_text = reader.read_text(REUSE_PATH)
+    precedence_anchor = 'precedence = "override"'
+    ambiguous_reuse = reuse_text.replace(precedence_anchor, "", 1)
+    if ambiguous_reuse == reuse_text:
+        failures.append("publication_license_precedence_fixture_anchor_missing")
+    else:
+        overlay_reader = RepositoryReader(
+            reader.root,
+            reader.git_ref,
+            {REUSE_PATH: ambiguous_reuse.encode("utf-8")},
+        )
+        if not validate_publication_contract(overlay_reader):
+            failures.append("publication_license_override_precedence_removed")
 
     source_license_drift = copy.deepcopy(contract)
     gateway = next(
