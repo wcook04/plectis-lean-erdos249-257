@@ -1777,11 +1777,26 @@ def summary_packet() -> dict[str, Any]:
     orientation = load("docs/orientation.json")
     claims = load("docs/claims.json")
     assembly = claims["machine_readable_paper"]["publication_assembly"]
+    bounded_omissions = (
+        "editorial_architecture",
+        "editorial_state",
+        "external_registration",
+        "source_revision",
+    )
     return {
         "kind": "corpus_summary",
-        **orientation,
+        **{
+            key: value
+            for key, value in orientation.items()
+            if key not in bounded_omissions
+        },
         "curated_claim_count": len(claims["claims"]),
         "publication_family_count": len(assembly["contribution_families"]),
+        "bounded_summary_omission_receipt": {
+            "omitted_sections": list(bounded_omissions),
+            "drilldown": "docs/orientation.json",
+            "reason": "non_mathematical_owner_metadata_kept_out_of_bounded_agent_summary",
+        },
     }
 
 
