@@ -7,9 +7,12 @@
 PAPERS = erdos249-257-exposition erdos249-transport-curvature
 ALIASES = module-aliases.tex
 
-.PHONY: all clean
+.PHONY: all check clean
 
 all: $(PAPERS:%=%.pdf)
+
+check: all
+	python3 ../scripts/check_rendered_paper_boundary.py
 
 $(ALIASES): $(PAPERS:%=%.tex) ../scripts/build_paper_module_aliases.py
 	python3 ../scripts/build_paper_module_aliases.py

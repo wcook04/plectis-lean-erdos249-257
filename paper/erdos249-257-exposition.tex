@@ -11,7 +11,6 @@
 \usepackage[a4paper,margin=1in]{geometry}
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{booktabs}
-\usepackage{seqsplit}
 \usepackage{enumitem}
 \usepackage[dvipsnames]{xcolor}
 \usepackage[colorlinks=true,linkcolor=black,urlcolor=RoyalBlue,citecolor=black]{hyperref}
@@ -28,16 +27,14 @@
 \newcommand{\rootbase}{https://github.com/wcook04/plectis-lean-erdos249-257/blob/main}
 \newcommand{\PK}{Erdos249257}
 \input{module-aliases.tex}
-% \idn: typeset a Lean identifier (underscores literal, breakable across lines).
-\newcommand{\idn}[1]{\texttt{\expandafter\seqsplit\expandafter{\detokenize{#1}}}}
-% The source coordinates remain in every hyperlink target and in the verifier's
-% manifest. The visible sigil identifies the source module without letting long
-% declaration identifiers dominate the prose.
-\newcommand{\lref}[3]{\href{\repobase/\PK/#1\#L#2}{\texttt{\modulesigil{#1}}}}
-\newcommand{\lrefx}[3]{\href{\repobase/\PK/#1\#L#2}{\texttt{\modulesigil{#1}}}}
-\newcommand{\lloc}[2]{\href{\repobase/\PK/#1\#L#2}{\texttt{\modulesigil{#1}}}}
+% Formal source coordinates remain in the hyperlink targets and verifier
+% manifest, while the printed paper exposes only a quiet source mark.
+\newcommand{\sourceglyph}{\textsuperscript{\textcolor{RoyalBlue}{\ensuremath{\scriptscriptstyle\blacklozenge}}}}
+\newcommand{\lref}[3]{\href{\repobase/\PK/#1\#L#2}{\sourceglyph}}
+\newcommand{\lrefx}[3]{\href{\repobase/\PK/#1\#L#2}{\sourceglyph}}
+\newcommand{\lloc}[2]{\href{\repobase/\PK/#1\#L#2}{\sourceglyph}}
 % \rref{rootfile}: link a repository-root navigation file at the public main branch.
-\newcommand{\rref}[1]{\href{\rootbase/\detokenize{#1}}{\texttt{\detokenize{#1}}}}
+\newcommand{\rref}[1]{\href{\rootbase/\detokenize{#1}}{repository record}}
 \emergencystretch=2em
 
 \newtheorem{theorem}{Theorem}[section]
@@ -154,8 +151,8 @@ Section~\ref{sec:eb} treats the \#257 direction and begins its half-value
 analysis with a one-page account of the exact residual.  Section~\ref{sec:249}
 treats \#249 and likewise begins with the certificate argument in one page.
 Sections~\ref{sec:architecture} and~\ref{sec:verify} describe the formalisation
-and its verification; the appendices contain auxiliary carry criteria and the
-source cross-reference.  Small blue source marks may be ignored on a
+and its verification; the appendices contain auxiliary carry criteria and a
+formal-source guide.  Small blue source marks may be ignored on a
 first reading.  The separate transport-and-curvature companion develops the
 technical affine and first-harmonic material without changing the open status
 of \#249.
@@ -1895,8 +1892,8 @@ fixed-power estimate $\tau(n)^k\le(k^{2^k})^k n$ becomes useful only after it is
 transported through the binary tail and composed with the exact carry
 recurrence. Rationality then forbids long zero windows in $f_A$, uniformly in
 the support. In the reciprocal-mass argument, divergent series had to be kept
-as an explicit alternative rather than passed through the convention that a
-divergent \texttt{tsum} evaluates to zero.
+as an explicit alternative rather than passed through a default value for a
+divergent formal sum.
 Together they rule out several tempting but false proof strategies---for
 example, rationality need not give a bounded carry alphabet---and identify the
 kind of infinite Boolean carry path that a future proof would have to exclude.
@@ -1911,42 +1908,27 @@ parameters, and state the remaining uniformity theorem separately. The last
 step matters as much as the first three. It prevents a large verified finite
 range from being mistaken for the infinite theorem.
 
-The repository records the corresponding claim-status and change rules in
-\texttt{METHODOLOGY.md}; the mathematical content remains the statements and
-proofs above.
+The repository separately records claim status and editorial change rules;
+the mathematical content remains the statements and proofs above.
 
 \section{Artefact availability and verification}\label{sec:verify}
 
 The Lean~4 proof assistant~\cite{lean} and Mathlib library~\cite{mathlib} check
-the development. The source, exact informal-to-formal links, and build metadata are
-maintained in the repository
-\href{https://github.com/wcook04/plectis-lean-erdos249-257}{\texttt{plectis-lean-erdos249-257}}.
-This paper is pinned to the committed formal-source checkpoint
-\href{\sourceurl}{\texttt{\commit}};
-each blue source sigil targets an exact declaration at that revision (for example, the
-base-$2$ corollary in Theorem~\ref{res:full} resolves to
-\lrefx{CertificateKernel.lean}{8007}{irrational_erdosBorwein_series}). The package uses
-\texttt{leanprover/lean4:v4.29.1} and the Mathlib revision pinned by
-\href{\repobase/lake-manifest.json}{\texttt{lake-manifest.json}}.
-The exact formal-source revision cited here is \texttt{\commit}~\cite{artifact}.
+the development. The source, exact informal-to-formal links, and build
+instructions are maintained in the
+\href{https://github.com/wcook04/plectis-lean-erdos249-257}{public repository}.
+This paper is tied to an
+\href{\sourceurl}{archived formal-source revision}; every blue source mark
+links directly to the corresponding checked theorem there. The repository
+pins the theorem prover and library versions needed to reproduce the build.
 
-There is no \texttt{sorry} or \texttt{admit} in the package. Finite
-computations use \texttt{decide}, whose proof terms are checked by the Lean
-kernel; the package does not use \texttt{native\_decide}. Reproduction requires
-only the pinned toolchain and the ordinary project build:
-\begin{verbatim}
-lake exe cache get
-lake build
-\end{verbatim}
-The second command elaborates every declaration and kernel-checks every proof
-term against the pinned Mathlib dependency. Continuous integration executes
-the same build. Appendix~\ref{app:index} gives a compact map of the principal
-informal statements to declarations. The repository's claim registry
-(\rref{docs/claims.json}) records each registered claim once, and
-\rref{scripts/check_release.py} verifies that this paper's source links, the
-repository documentation, and the release metadata all agree with it,
-including that every source sigil above resolves to the named declaration at the
-stated line of the named formal-source checkpoint.
+Every declaration is elaborated and every proof term is checked by the Lean
+kernel. Finite computations use kernel-checked decision procedures rather than
+an external evaluator, and the development contains no proof placeholders or
+added axioms. Continuous integration repeats the complete project build.
+Appendix~\ref{app:index} explains how a reader can move from the mathematics
+to the exact formal sources without exposing implementation names in the
+printed paper.
 
 \section{Complements and further questions}\label{sec:further}
 
@@ -2069,18 +2051,18 @@ claiming that an unchecked composition closes either open problem.
 
 \subsection*{Statements and declarations}
 
-\paragraph{Artefact and data availability.} The pinned formal-source revision
-\href{\sourceurl}{\texttt{\commit}} contains the Lean sources, pinned toolchain,
-Mathlib manifest, and generated certificate files used by the source sigils.
-The claim registry and this manuscript are repository navigation surfaces rather
-than proof authority; Section~\ref{sec:verify} gives the verification route.
+\paragraph{Artefact and data availability.} The
+\href{\sourceurl}{archived formal-source revision} contains the Lean sources,
+pinned toolchain, library manifest, and generated certificate data used in the
+verification. Repository metadata and this manuscript provide navigation
+rather than proof authority; Section~\ref{sec:verify} gives the verification
+route.
 
 \paragraph{Use of AI assistance.} Large-language-model assistants were used
 during development for proof drafting, refactoring, and prose editing. Every
-registered Lean-backed claim is linked to a declaration in the pinned
-formal-source checkpoint. Lean checks each proof term against the pinned
-Mathlib; the project contains no \texttt{sorry}, \texttt{admit},
-project-defined \texttt{axiom} declaration, or \texttt{native\_decide}.
+registered formal claim is linked to a declaration in the archived source
+revision. Lean checks each proof term against the pinned library; the project
+contains no proof placeholders or project-defined axioms.
 
 \paragraph{Funding and competing interests.} This work received no external
 funding. The author declares no competing interests.
@@ -2348,8 +2330,8 @@ $\rho(A)$ --- the density of the multiples of $a$, summed over the support ---
 and the mean of the scaled tails has the same limit
 (\lref{RationalSupportCarrySkeleton.lean}{945}{tendsto_supportCoeff_mean_reciprocalMass},
 \lrefx{RationalSupportCarrySkeleton.lean}{1036}{tendsto_binaryCoeffTail_supportCoeff_mean_reciprocalMass}).
-The divergent case is carried as an explicit disjunction, not through the
-convention that a divergent \texttt{tsum} is zero
+The divergent case is carried as an explicit disjunction, not through a
+default value assigned to a divergent formal sum
 (\lrefx{RationalSupportCarrySkeleton.lean}{796}{ReciprocalMassDivergesOrAtLeast}).
 Each tail state splits exactly as $u(N)=v\,e_N+r_N$ with integral excess
 $e_N=\lfloor u(N)/v\rfloor\ge0$
@@ -2513,9 +2495,26 @@ nothing about membership, and no decidability of membership in $\mathcal A$ is
 asserted.  Neither the global geometry nor the finite death certificates
 exclude rational values for either open series.
 
-\section{Index of principal declarations}\label{app:index}
+\section{Guide to the formal sources}\label{app:index}
 
-Each row links to the declaration at source revision \href{\sourceurl}{\texttt{\commit}}.
+The paper is meant to be read as mathematics. The small blue marks following
+formalised statements are optional links to the exact checked theorems in the
+\href{\sourceurl}{archived source revision}. They preserve line-level
+traceability without printing theorem identifiers or source-module names.
+
+For a first reading, the main landmarks are Theorem~\ref{res:full} for the
+full-support irrationality theorem, Theorem~\ref{res:farey} for the totient
+denominator exclusion, Corollary~\ref{res:red21} for the exact
+tail-certificate reduction, and Proposition~\ref{res:greedytopology} for the
+geometry of the Mersenne achievement set. The public repository contains a
+complete searchable cross-reference for readers who need declaration-level
+detail.
+
+% Retain the exhaustive source-link manifest in the authored TeX for automated
+% validation and query tooling, but keep it outside the printed paper.
+\iffalse
+
+Each row links to the declaration at the archived source revision.
 
 \begin{center}
 \footnotesize
@@ -2567,6 +2566,7 @@ Campbell shift-synchronization boundary & \lrefx{CampbellShiftSynchronization.le
 \bottomrule
 \end{tabular}
 \end{center}
+\fi
 
 \clearpage
 \begin{thebibliography}{11}

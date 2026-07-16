@@ -44,7 +44,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 2027
+        "line": 2009
       }
     },
     {
@@ -55,7 +55,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 2036
+        "line": 2018
       }
     },
     {
@@ -66,7 +66,7 @@
         "source": "paper/erdos249-257-exposition.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 2044
+        "line": 2026
       }
     }
   ],
@@ -595,7 +595,8 @@
   "checks": {
     "release": "python3 scripts/check_release.py",
     "cold_clone_comprehension": "python3 scripts/check_cold_clone_comprehension.py",
-    "orientation_freshness": "python3 scripts/build_corpus_descriptor.py --check"
+    "orientation_freshness": "python3 scripts/build_corpus_descriptor.py --check",
+    "rendered_paper_boundary": "python3 scripts/check_rendered_paper_boundary.py"
   },
   "queries": {
     "summary": "python3 scripts/query_corpus.py --format card",

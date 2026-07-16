@@ -37,7 +37,7 @@
    },
    "claims_document": {
     "path": "docs/claims.json",
-    "content_digest": "sha256:3df888e549c7c39b2529b2ea404377217102deb502471e34bac1bfcb9d4e49ab"
+    "content_digest": "sha256:4661f6b00f82f2b9267b8aa7efcae33e35392df906dd1d639fbcb59597d83452"
    },
    "declaration_atlas": {
     "path": "docs/declaration_atlas.json",
@@ -50,21 +50,21 @@
    },
    "bounded_orientation": {
     "path": "docs/orientation.json",
-    "content_digest": "sha256:9fed920fd0bc89c079f02da2c5cf7511b35b24d670c43b592d6a2ff9f49a8e3f"
+    "content_digest": "sha256:4002f22923058547031abb2d59c23548b7cf2337be4dbcaea091cf83464dfed0"
    },
    "human_exposition": {
     "source_path": "paper/erdos249-257-exposition.tex",
-    "source_content_digest": "sha256:a13f2a0b4a82ea58c6accdfdd59f4c4f2cc85bad312241719a02f35124060d24",
+    "source_content_digest": "sha256:faad850f67daa49f0aaf4010db6b86b954ce1590c8f9259a14221b1cecc6b829",
     "rendered_path": "erdos249-257-exposition.pdf",
-    "rendered_content_digest": "sha256:a17b9e15d1bd8b529d65953ada0546124796639eba9815d4eb932c5d199f1d01",
+    "rendered_content_digest": "sha256:2c1a43ec48aa9c5181b34d78a69f00962a4b7e46a5216a6ffe9fd47959c5b0e0",
     "artifact_role": "authored_mathematician_facing_exposition",
     "authority_posture": "authored_editorial_surface_not_Lean_proof_authority"
    },
    "technical_companion": {
     "source_path": "paper/erdos249-transport-curvature.tex",
-    "source_content_digest": "sha256:e7d4c88388cbafb87f054f7aff5d535b7e20c47f94f61aff7dac7a1d3b225099",
+    "source_content_digest": "sha256:e97ebf9d4d5c405fafe8e9f5de7bde8c6a98fc82c6600f6022a623ed51638dd2",
     "rendered_path": "erdos249-transport-curvature.pdf",
-    "rendered_content_digest": "sha256:931dcad0394ca9ab73bff794da0807f46f76bab1eecf7632f97cdffca1620e15",
+    "rendered_content_digest": "sha256:797c86e5f211e17485db59b988951347767062e9cec0e2def56ad55ef33a744d",
     "artifact_role": "authored_transport_and_curvature_companion",
     "authority_posture": "authored_editorial_surface_not_Lean_proof_authority"
    },
@@ -458,7 +458,7 @@
      "source": "paper/erdos249-257-exposition.tex",
      "environment": "problem",
      "title": "Erd\\H{o}s \\#249",
-     "line": 2027
+     "line": 2009
     }
    },
    {
@@ -469,7 +469,7 @@
      "source": "paper/erdos249-257-exposition.tex",
      "environment": "problem",
      "title": "unbounded certificate supply",
-     "line": 2036
+     "line": 2018
     }
    },
    {
@@ -480,7 +480,7 @@
      "source": "paper/erdos249-257-exposition.tex",
      "environment": "problem",
      "title": "universal Erd\\H{o}s \\#257",
-     "line": 2044
+     "line": 2026
     }
    }
   ],
@@ -1544,16 +1544,16 @@
   },
   "human_exposition": {
    "source_path": "paper/erdos249-257-exposition.tex",
-   "expected_source_content_digest": "sha256:a13f2a0b4a82ea58c6accdfdd59f4c4f2cc85bad312241719a02f35124060d24",
+   "expected_source_content_digest": "sha256:faad850f67daa49f0aaf4010db6b86b954ce1590c8f9259a14221b1cecc6b829",
    "rendered_path": "erdos249-257-exposition.pdf",
-   "expected_rendered_content_digest": "sha256:a17b9e15d1bd8b529d65953ada0546124796639eba9815d4eb932c5d199f1d01",
+   "expected_rendered_content_digest": "sha256:2c1a43ec48aa9c5181b34d78a69f00962a4b7e46a5216a6ffe9fd47959c5b0e0",
    "authority_posture": "authored_editorial_surface_not_Lean_proof_authority"
   },
   "technical_companion": {
    "source_path": "paper/erdos249-transport-curvature.tex",
-   "expected_source_content_digest": "sha256:e7d4c88388cbafb87f054f7aff5d535b7e20c47f94f61aff7dac7a1d3b225099",
+   "expected_source_content_digest": "sha256:e97ebf9d4d5c405fafe8e9f5de7bde8c6a98fc82c6600f6022a623ed51638dd2",
    "rendered_path": "erdos249-transport-curvature.pdf",
-   "expected_rendered_content_digest": "sha256:931dcad0394ca9ab73bff794da0807f46f76bab1eecf7632f97cdffca1620e15",
+   "expected_rendered_content_digest": "sha256:797c86e5f211e17485db59b988951347767062e9cec0e2def56ad55ef33a744d",
    "authority_posture": "authored_editorial_surface_not_Lean_proof_authority"
   },
   "paper_source_sigils": {

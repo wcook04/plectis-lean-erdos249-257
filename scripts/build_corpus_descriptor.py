@@ -146,6 +146,7 @@ def build_orientation(claims: dict[str, Any], atlas: dict[str, Any]) -> dict[str
             "release": "python3 scripts/check_release.py",
             "cold_clone_comprehension": "python3 scripts/check_cold_clone_comprehension.py",
             "orientation_freshness": "python3 scripts/build_corpus_descriptor.py --check",
+            "rendered_paper_boundary": "python3 scripts/check_rendered_paper_boundary.py",
         },
         "queries": {
             "summary": "python3 scripts/query_corpus.py --format card",

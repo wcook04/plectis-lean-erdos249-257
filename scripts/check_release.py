@@ -28,7 +28,6 @@ This script verifies that every other public surface agrees with it:
      Lean sources.
  10. The methodology source, generated root projection, claim-transition
      requirements, descriptor capsule, and entry routes agree.
-
 Stdlib only; run from the repository root:  python3 scripts/check_release.py
 """
 
@@ -640,6 +639,22 @@ def main() -> int:
     )
     check(paper_alias_check.returncode == 0,
           f"paper module alias drift: {paper_alias_check.stdout.strip() or paper_alias_check.stderr.strip()}")
+    boundary = subprocess.run(
+        [
+            sys.executable,
+            str(ROOT / "scripts" / "check_rendered_paper_boundary.py"),
+            "--source-only",
+        ],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    check(
+        boundary.returncode == 0,
+        "human-facing paper boundary failed: "
+        f"{boundary.stdout.strip() or boundary.stderr.strip()}",
+    )
 
     descriptor = json.loads(read(ROOT / "docs" / "corpus_descriptor.json"))
     check(descriptor.get("schema") == "erdos249257-corpus-descriptor/3",
