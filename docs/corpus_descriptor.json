@@ -36,11 +36,11 @@
 "authority_role": "proof_bearing_committed_source_anchor"
 },
 "navigation_snapshot": {
-"commit": "5479543a1dd0e0df4a632febc04d476860640c80",
+"commit": "22f0bb2e390a44e71ede1b8324e2b46902a3cea8",
 "authority_role": "machine_readable_navigation_anchor",
 "publication_state": "main_history_snapshot",
 "published_ref": "main",
-"repository_resolution": "https://github.com/wcook04/plectis-lean-erdos249-257/tree/5479543a1dd0e0df4a632febc04d476860640c80"
+"repository_resolution": "https://github.com/wcook04/plectis-lean-erdos249-257/tree/22f0bb2e390a44e71ede1b8324e2b46902a3cea8"
 },
 "content": {
 "machine_readable_paper": {
@@ -49,7 +49,7 @@
 },
 "claims_document": {
 "path": "docs/claims.json",
-"content_digest": "sha256:d3ee035b1eb2b4b0183dbcb10c394dcbb3656d4a1e61ed0fabcf134a95cb816d"
+"content_digest": "sha256:5aa1499e3af05b2168e100d753e7f572ba49a59b66cc5434b8dd2481ca8729ce"
 },
 "declaration_atlas": {
 "path": "docs/declaration_atlas.json",
@@ -62,7 +62,7 @@
 },
 "bounded_orientation": {
 "path": "docs/orientation.json",
-"content_digest": "sha256:a615f43ca0642a67554a30b7fadf1b0c853192bf08b9b040de115a4e837406af"
+"content_digest": "sha256:23d4d36a9c2bcb8237b20869ca385a3cce265d048050683bfcc632f8c97cdae3"
 },
 "human_exposition": {
 "source_path": "paper/erdos249-257-main-paper.tex",
@@ -74,9 +74,9 @@
 },
 "technical_companion": {
 "source_path": "paper/erdos249-transport-curvature-companion-note.tex",
-"source_content_digest": "sha256:3d783ea71b84196bc7bb4d55c21ddae6afb41f97a3c7a691948591d44787c14b",
+"source_content_digest": "sha256:d123a21e52b63522f1396112e43f60914f600129bb5dd1e85a5d4546a5e4b3e5",
 "rendered_path": "erdos249-transport-curvature-companion-note.pdf",
-"rendered_content_digest": "sha256:4105b929fa04a2b8bc08228b064408268be0508dc707a0a490366bfd56d3cb65",
+"rendered_content_digest": "sha256:aced137193c8042b3fa6cba5226f44facdd95efc383a0e2b599ddd26592d7893",
 "artifact_role": "authored_transport_and_curvature_companion",
 "authority_posture": "authored_editorial_surface_not_Lean_proof_authority"
 },
@@ -1788,9 +1788,9 @@
 },
 "technical_companion": {
 "source_path": "paper/erdos249-transport-curvature-companion-note.tex",
-"expected_source_content_digest": "sha256:3d783ea71b84196bc7bb4d55c21ddae6afb41f97a3c7a691948591d44787c14b",
+"expected_source_content_digest": "sha256:d123a21e52b63522f1396112e43f60914f600129bb5dd1e85a5d4546a5e4b3e5",
 "rendered_path": "erdos249-transport-curvature-companion-note.pdf",
-"expected_rendered_content_digest": "sha256:4105b929fa04a2b8bc08228b064408268be0508dc707a0a490366bfd56d3cb65",
+"expected_rendered_content_digest": "sha256:aced137193c8042b3fa6cba5226f44facdd95efc383a0e2b599ddd26592d7893",
 "authority_posture": "authored_editorial_surface_not_Lean_proof_authority"
 },
 "paper_source_sigils": {

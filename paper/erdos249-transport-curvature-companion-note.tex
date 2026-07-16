@@ -43,13 +43,15 @@ at a base height.  Curvature, prime-jump, balanced $(1,2,3,6)$, and anchored
 $(1,3,5,15)$ observables admit exact dyadic-window decompositions and
 decidable central-residue conditions implying non-integrality.  A
 first-harmonic saving on a finite block forces a tail-difference certificate,
-and the fibre-free cofinal window-pair separation predicate is equivalent to
-the irrationality of $S$.  We also prove two local obstructions: every
-fixed-precision valuation--unit word has a prefix-locked centred completion,
-and a synthetic nonzero lcm carry satisfying the stated factor and anchor
-constraints survives every finite integer shift polynomial.  The finite
-criteria and obstruction theorems are unconditional.  Erd\H{o}s Problem~249
-remains open because no cofinal arithmetic or harmonic producer is proved.
+and an exact four-term large-prime pivot decomposition reduces such a saving
+to centred, fibre-mean, bad-supplier, and non-supplier budgets.  The fibre-free
+cofinal window-pair separation predicate is equivalent to the irrationality
+of $S$.  We also prove two local obstructions: every fixed-precision
+valuation--unit word has a prefix-locked centred completion, and a synthetic
+nonzero lcm carry satisfying the stated factor and anchor constraints survives
+every finite integer shift polynomial.  The finite criteria and obstruction
+theorems are unconditional.  Erd\H{o}s Problem~249 remains open because no
+cofinal arithmetic or harmonic producer is proved.
 \end{abstract}
 
 \section{Main results and logical boundary}\label{sec:scope}
@@ -246,6 +248,87 @@ required by the tail-difference criterion.  What is still missing is a
 first-harmonic estimate that supplies such blocks at unbounded parameters; no
 such estimate is proved here.
 
+\section{The exact large-prime pivot decomposition}\label{sec:first-pivot}
+The preceding criterion becomes useful only after the harmonic sum has been
+split into terms for which an arithmetic estimate is plausible.  We record
+that split explicitly.  Put
+\[
+ Z_N=\exp\!\left(
+   2\pi i\,\frac{A(h,N,L)\bmod 2^L}{2^L}\right),
+ \qquad X\le N<2X,
+\]
+so that \(\Re Z_N=W_1(h,N,L)\) and \(|Z_N|=1\).
+Fix an overlap depth \(s\), set \(q_N=N+(L-s+1)\), and write
+\(q_N=m_Np_N\), where \(p_N\) is its largest prime factor.  Call \(N\) a
+\emph{supplier} when
+\[
+ 0<m_N\le\frac{\sqrt X}{2},
+ \qquad 2\sqrt X<p_N,
+\]
+with the displayed factorisation certified; call it \(\eta\)-good when also
+\(\eta m_N\le\ph(m_N)\).  On a supplier define the pivot phase
+\[
+ P_N=\exp\!\left(
+ 2\pi i\,\frac{(2^h-1)\ph(m_N)(p_N-1)}{2^{L-s+1}}\right),
+ \qquad R_N=\frac{Z_N}{P_N}.
+\]
+The identity \(\ph(m_Np_N)=\ph(m_N)(p_N-1)\) is exact here because the size
+conditions force \(p_N\nmid m_N\).  For the supplier fibre
+\(\mathcal F_m=\{N:m_N=m\}\), let
+\[
+ \overline P_m=\frac1{|\mathcal F_m|}
+                 \sum_{N\in\mathcal F_m}P_N.
+\]
+Finally, let \(\mathcal G,\mathcal B,\mathcal U\) be respectively the good
+suppliers, bad suppliers, and non-suppliers in \([X,2X)\), and put
+\[
+\begin{aligned}
+ C&=\sum_{N\in\mathcal G}R_N(P_N-\overline P_{m_N}),&
+ M&=\sum_{N\in\mathcal G}R_N\overline P_{m_N},\\
+ B&=\sum_{N\in\mathcal B}Z_N,&
+ U&=\sum_{N\in\mathcal U}Z_N.
+\end{aligned}
+\]
+
+\begin{theorem}[four-term pivot decomposition and budget]
+\label{thm:first-pivot}
+For every choice of \(h,X,L,s,\eta\),
+\[
+  \sum_{X\le N<2X}Z_N=C+M+B+U.
+\]
+If \(X>0\), \(16(2X+h+L+2)\le2^L\), and
+\[
+ \Re C\le\frac{14}{25}X,\qquad
+ |M|\le\frac1{100}X,\qquad
+ |B|\le\frac1{100}X,\qquad
+ |U|\le\frac8{25}X,
+\]
+then
+\[
+ \sum_{X\le N<2X}W_1(h,N,L)\le\frac9{10}X,
+\]
+so the block contains a finite tail-difference certificate.  Consequently,
+if for every \(h>0\) there are fixed \(s>0\) and \(0<\eta<1\) for which these
+four budgets hold at arbitrarily large \(X\), with \(h\le L-s\), then \(S\)
+is irrational.
+\end{theorem}
+\noindent The exact split is formalised
+\lword{FirstHarmonicPivot.lean}{342}{windowFirstExp_sum_eq_pivot_decomposition}{by the four-term decomposition};
+the budget implication is
+\lword{FirstHarmonicPivot.lean}{377}{first_harmonic_gap_of_pivotBudgetAt}{the one-sided pivot budget};
+and the cofinal conditional endpoint is
+\lword{FirstHarmonicPivot.lean}{405}{irrational_totient_series_of_pivotResidualDecorrelation}{the residual-decorrelation implication}.
+
+The constants are not heuristic bookkeeping:
+\[
+ \frac{14}{25}+\frac1{100}+\frac1{100}+\frac8{25}
+ =\frac9{10}.
+\]
+Only the real part of the centred term is bounded; no unnecessary complex-norm
+estimate is assumed there.  The theorem proves the exact algebraic consumer.
+It does not prove a prime-distribution or residual-decorrelation estimate
+supplying the four inequalities at cofinal scales.
+
 \section{Adjacent-pair phase separation}\label{sec:adjacentphase}
 At a scale satisfying the same room inequality, with $N+1<2X$, suppose that
 the first harmonic phases at two adjacent indices obey
@@ -328,6 +411,7 @@ Joint $(3,5)$ transport & moment annihilation and criterion & \mbox{conditional 
 Prime jump & migration, sharp window, $(12,5,15)$ & \mbox{verified finite instance} \\
 Three transport & sharp window and $(60,12)$ & \mbox{verified finite instance} \\
 First harmonic & cosine gap forces a certificate & \mbox{conditional reduction} \\
+Large-prime pivot & exact four-term split and one-sided budget & \mbox{conditional reduction} \\
 Adjacent phases & squared chord separation forces a certificate & \mbox{conditional reduction} \\
 Pivot anti-reconstruction & pairwise phase energy and exact window-pair equivalence & \mbox{conditional reduction} \\
 Tropical signature & fixed precision has a completion & \mbox{unconditional progress} \\
