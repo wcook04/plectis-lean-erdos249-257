@@ -98,3 +98,6 @@ jobs:
       - name: REUSE licensing lint
         if: ${{ !cancelled() }}
         run: reuse lint
+      - name: Test semantic licence map
+        if: ${{ !cancelled() }}
+        run: python3 scripts/test_license_map_contract.py

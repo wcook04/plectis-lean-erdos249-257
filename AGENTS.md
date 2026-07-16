@@ -134,6 +134,7 @@ Run the focused public-surface gate after documentation or registry changes:
 python3 scripts/check_release.py
 python3 scripts/test_dependency_lock_contract.py
 python3 scripts/test_citation_identity_contract.py
+python3 scripts/test_license_map_contract.py
 python3 scripts/test_methodology_contract.py
 python3 scripts/build_module_graph.py --check
 python3 scripts/refresh_source_coordinates.py --check
