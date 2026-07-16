@@ -17,6 +17,22 @@ the public proof artefact. Work later than the declared checkpoint is out of
 scope even if it checks locally; a later tagged release is a separate citation
 and release action, not a substitute for an exact proof-source identity.
 
+## Exact open propositions
+
+The prose boundary above is backed by machine-resolvable open propositions:
+
+- `remaining_open.erdos_249_irrationality`:
+  `python3 scripts/query_corpus.py --open remaining_open.erdos_249_irrationality`
+- `remaining_open.unbounded_certificate_supply`:
+  `python3 scripts/query_corpus.py --open remaining_open.unbounded_certificate_supply`
+- `remaining_open.universal_257_all_infinite_supports`:
+  `python3 scripts/query_corpus.py --open remaining_open.universal_257_all_infinite_supports`
+
+Finite instances, conditional reductions, cited neighbours, and named
+infinite-support families do not discharge these propositions. Only a future
+claim transition recorded against the exact identifier, with the evidence
+required by `docs/methodology.json`, can change this boundary.
+
 ## Machine identifiers
 
 These identifiers are the machine-readable form of the scope statement above.
