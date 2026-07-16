@@ -19,10 +19,13 @@ ROOT = Path(__file__).resolve().parent.parent
 CLAIMS = ROOT / "docs" / "claims.json"
 ATLAS = ROOT / "docs" / "declaration_atlas.json"
 PAPERS = (
-    ROOT / "paper" / "erdos249-257-exposition.tex",
-    ROOT / "paper" / "erdos249-transport-curvature.tex",
+    ROOT / "paper" / "erdos249-257-main-paper.tex",
+    ROOT / "paper" / "erdos249-transport-curvature-companion-note.tex",
 )
-LINK_RE = re.compile(r"\\(lrefx?)\{([^}]+)\}\{\d+\}\{([^}]+)\}")
+LINK_RE = re.compile(
+    r"\\(lrefx?|lword)\{([^}]+)\}\{\d+\}\{([^}]+)\}"
+    r"(?:\{([^{}]*)\})?"
+)
 
 
 def paper_anchor_line(anchor: dict[str, object]) -> int:
@@ -66,11 +69,16 @@ def render() -> tuple[str, dict[Path, str]]:
             anchor["line"] = paper_anchor_line(anchor)
 
     def replace(match: re.Match[str]) -> str:
-        macro, filename, name = match.groups()
+        macro, filename, name, label = match.groups()
         key = (f"Erdos249257/{filename}", name)
         if key not in lines:
             raise RuntimeError(f"paper declaration absent from atlas: {key}")
-        return f"\\{macro}{{{filename}}}{{{lines[key]}}}{{{name}}}"
+        rendered = f"\\{macro}{{{filename}}}{{{lines[key]}}}{{{name}}}"
+        if macro == "lword":
+            if label is None:
+                raise RuntimeError(f"semantic paper link lacks a label: {key}")
+            rendered += f"{{{label}}}"
+        return rendered
 
     papers = {
         path: LINK_RE.sub(replace, path.read_text(encoding="utf-8"))

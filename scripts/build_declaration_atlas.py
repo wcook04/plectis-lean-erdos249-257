@@ -150,7 +150,7 @@ def build() -> dict[str, object]:
         "declarations": declarations,
         "drilldown": {
             "principal_argument_map": "docs/claims.json",
-            "human_exposition": "paper/erdos249-257-exposition.tex",
+            "human_exposition": "paper/erdos249-257-main-paper.tex",
             "root_import": "Erdos249257.lean",
             "check": "python3 scripts/build_declaration_atlas.py --check",
         },

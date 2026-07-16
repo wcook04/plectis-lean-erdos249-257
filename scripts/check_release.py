@@ -889,12 +889,12 @@ def main() -> int:
     paper_aliases = json.loads(read(ROOT / "paper" / "module-aliases.json"))
     paper_artifacts = {
         "human_exposition": (
-            "paper/erdos249-257-exposition.tex",
-            "erdos249-257-exposition.pdf",
+            "paper/erdos249-257-main-paper.tex",
+            "erdos249-257-main-paper.pdf",
         ),
         "technical_companion": (
-            "paper/erdos249-transport-curvature.tex",
-            "erdos249-transport-curvature.pdf",
+            "paper/erdos249-transport-curvature-companion-note.tex",
+            "erdos249-transport-curvature-companion-note.pdf",
         ),
     }
     for content_id, (source_path, rendered_path) in paper_artifacts.items():

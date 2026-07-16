@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 # SPDX-FileCopyrightText: 2026 Will Cook
 # SPDX-License-Identifier: Apache-2.0
-"""Keep implementation coordinates legible but bounded in the papers.
+"""Keep implementation coordinates exact but visually subordinate in the papers.
 
 The authored TeX deliberately retains exact Lean coordinates inside hyperlink
-arguments so release tooling can validate them.  A source link must print its
-exact declaration name, not an indistinguishable glyph.  Module names, source
-paths, registry paths, commit hashes, and unlinked Lean identifiers remain
-outside the rendered narrative.
+arguments so release tooling can validate them.  A source link must print
+ordinary mathematical words, not an indistinguishable glyph or a raw Lean
+identifier.  Module names, source paths, registry paths, commit hashes, and
+unlinked Lean identifiers remain outside the rendered narrative.
 
 Run from the repository root:
 
@@ -31,22 +31,22 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 PAPERS = (
     (
-        ROOT / "paper" / "erdos249-257-exposition.tex",
-        ROOT / "erdos249-257-exposition.pdf",
+        ROOT / "paper" / "erdos249-257-main-paper.tex",
+        ROOT / "erdos249-257-main-paper.pdf",
     ),
     (
-        ROOT / "paper" / "erdos249-transport-curvature.tex",
-        ROOT / "erdos249-transport-curvature.pdf",
+        ROOT / "paper" / "erdos249-transport-curvature-companion-note.tex",
+        ROOT / "erdos249-transport-curvature-companion-note.pdf",
     ),
 )
 ALIASES = ROOT / "paper" / "module-aliases.json"
 FIRST_MINUTE_CONTRACT = {
-    "erdos249-257-exposition.pdf": {
+    "erdos249-257-main-paper.pdf": {
         (1, 1): (
             "q > q0",
             "classical full-support theorem",
             "would refute the universal statement",
-            "neither is settled",
+            "neither problem is settled",
             "an unbounded certificate supply",
             "cofinal false terminals",
         ),
@@ -57,7 +57,7 @@ FIRST_MINUTE_CONTRACT = {
             "no cofinal harmonic saving is proved",
         ),
     },
-    "erdos249-transport-curvature.pdf": {
+    "erdos249-transport-curvature-companion-note.pdf": {
         (1, 2): (
             "affine-channel annihilation",
             "phase-separation characterisation",
@@ -68,7 +68,8 @@ FIRST_MINUTE_CONTRACT = {
 }
 
 LINK_MACRO_RE = re.compile(
-    r"""\\(?:lref|lrefx)\{[^{}]*\}\{[^{}]*\}\{[^{}]*\}
+    r"""\\lword\{[^{}]*\}\{[^{}]*\}\{[^{}]*\}\{[^{}]*\}
+        |\\(?:lref|lrefx)\{[^{}]*\}\{[^{}]*\}\{[^{}]*\}
         |\\lloc\{[^{}]*\}\{[^{}]*\}""",
     re.X,
 )
@@ -80,6 +81,7 @@ VISIBLE_PATH_RE = re.compile(
     re.I,
 )
 COMMIT_RE = re.compile(r"\b[0-9a-f]{40}\b", re.I)
+LEAN_IDENTIFIER_RE = re.compile(r"\b[A-Za-z][A-Za-z0-9]*_[A-Za-z0-9_]{8,}\b")
 
 
 def visible_tex(text: str) -> str:
@@ -101,13 +103,20 @@ def source_errors(path: Path) -> list[str]:
         definitions = re.findall(
             rf"\\newcommand\{{\\{macro}\}}.*$", text, flags=re.M
         )
-        if definitions and any(r"\nolinkurl{#3}" not in row for row in definitions):
-            errors.append(f"\\{macro} does not print the linked declaration name")
+        if definitions and any("{Lean proof}" not in row for row in definitions):
+            errors.append(f"\\{macro} does not print the textual fallback 'Lean proof'")
+    lword_definitions = re.findall(r"\\newcommand\{\\lword\}.*$", text, flags=re.M)
+    if lword_definitions and any("{#4}" not in row for row in lword_definitions):
+        errors.append(r"\lword does not print its semantic label")
     lloc_definitions = re.findall(r"\\newcommand\{\\lloc\}.*$", text, flags=re.M)
-    if lloc_definitions and any("Lean source at line #2" not in row for row in lloc_definitions):
+    if lloc_definitions and any("{Lean source}" not in row for row in lloc_definitions):
         errors.append(r"\lloc does not print a distinguishable textual source link")
     if r"\modulesigil" in "\n".join(
-        re.findall(r"\\newcommand\{\\(?:lref|lrefx|lloc)\}.*$", text, flags=re.M)
+        re.findall(
+            r"\\newcommand\{\\(?:lref|lrefx|lword|lloc)\}.*$",
+            text,
+            flags=re.M,
+        )
     ):
         errors.append("a paper link macro still prints a module sigil")
     if r"\idn{" in visible:
@@ -215,6 +224,8 @@ def rendered_errors(
         errors.append(f"prints implementation path {match.group(0)!r}")
     for match in COMMIT_RE.finditer(compact):
         errors.append(f"prints full commit hash {match.group(0)!r}")
+    for match in LEAN_IDENTIFIER_RE.finditer(compact):
+        errors.append(f"prints raw Lean identifier {match.group(0)!r}")
     alias_rows = aliases.get("aliases", [])
     if isinstance(alias_rows, list):
         for row in alias_rows:

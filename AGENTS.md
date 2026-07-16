@@ -38,7 +38,7 @@ evidence of that workflow. They do not create hidden proof authority.
 5. Read `SCOPE.md` before describing what the project proves. Erdős #249 and
    the universal form of #257 remain open.
 6. For one claim, follow its `paper_label` into
-   `paper/erdos249-257-exposition.tex`, then follow its `declarations` to the
+   `paper/erdos249-257-main-paper.tex`, then follow its `declarations` to the
    named Lean source coordinates.
 7. Use `docs/declaration_atlas.json` when you need the exhaustive mathematical
    scale: every declaration, signature excerpt, module, import edge, generated

@@ -34,10 +34,10 @@ WAVE_INDEX_PATH = ROOT / "docs" / "WAVE_INDEX.md"
 CLAIMS_PATH = ROOT / "docs" / "claims.json"
 ATLAS_PATH = ROOT / "docs" / "declaration_atlas.json"
 METHODOLOGY_PATH = ROOT / "docs" / "methodology.json"
-MAIN_PAPER_TEX = ROOT / "paper" / "erdos249-257-exposition.tex"
-MAIN_PAPER_PDF = ROOT / "erdos249-257-exposition.pdf"
-COMPANION_PAPER_TEX = ROOT / "paper" / "erdos249-transport-curvature.tex"
-COMPANION_PAPER_PDF = ROOT / "erdos249-transport-curvature.pdf"
+MAIN_PAPER_TEX = ROOT / "paper" / "erdos249-257-main-paper.tex"
+MAIN_PAPER_PDF = ROOT / "erdos249-257-main-paper.pdf"
+COMPANION_PAPER_TEX = ROOT / "paper" / "erdos249-transport-curvature-companion-note.tex"
+COMPANION_PAPER_PDF = ROOT / "erdos249-transport-curvature-companion-note.pdf"
 PAPER_ALIASES_PATH = ROOT / "paper" / "module-aliases.json"
 README_SCALE_BEGIN = "<!-- BEGIN generated_corpus_at_a_glance -->"
 README_SCALE_END = "<!-- END generated_corpus_at_a_glance -->"
@@ -112,17 +112,20 @@ def build_orientation(claims: dict[str, Any], atlas: dict[str, Any]) -> dict[str
         principal_claims.append(row)
 
     machine_paper = claims["machine_readable_paper"]
-    reading_routes = [
-        {
+    # The runnable per-route command is derivable from the id (see the
+    # ``queries`` section); storing it per row would spend first-contact
+    # budget on repetition.
+    reading_routes = []
+    for route in machine_paper["entrypoints"]:
+        row: dict[str, Any] = {
             "id": route["id"],
             "route_kind": route.get("route_kind", "reading_route"),
-            "title": route.get("title"),
             "intent": route["intent"],
             "read": route["read"],
-            "query": f"python3 scripts/query_corpus.py --route {route['id']}",
         }
-        for route in machine_paper["entrypoints"]
-    ]
+        if route.get("title"):
+            row["title"] = route["title"]
+        reading_routes.append(row)
     mathematical_programmes = [
         {
             "id": route["id"],
@@ -163,8 +166,8 @@ def build_orientation(claims: dict[str, Any], atlas: dict[str, Any]) -> dict[str
             "machine_readable_paper": "docs/claims.json::machine_readable_paper",
             "exhaustive_declarations": "docs/declaration_atlas.json",
             "mathematical_methodology": "docs/methodology.json",
-            "human_exposition": "erdos249-257-exposition.pdf",
-            "technical_companion": "erdos249-transport-curvature.pdf",
+            "human_exposition": "erdos249-257-main-paper.pdf",
+            "technical_companion": "erdos249-transport-curvature-companion-note.pdf",
             "paper_source_sigils": "paper/module-aliases.json",
             "source_by_question": "docs/SOURCE_MAP.md",
             "development_chronology": "docs/WAVE_INDEX.md",
@@ -199,8 +202,8 @@ def build_orientation(claims: dict[str, Any], atlas: dict[str, Any]) -> dict[str
                 "docs/claims.json",
                 "docs/declaration_atlas.json",
                 "docs/methodology.json",
-                "erdos249-257-exposition.pdf",
-                "erdos249-transport-curvature.pdf",
+                "erdos249-257-main-paper.pdf",
+                "erdos249-transport-curvature-companion-note.pdf",
                 "paper/module-aliases.json",
             ],
         },
@@ -321,8 +324,12 @@ def render_orientation_markdown(orientation: dict[str, Any]) -> str:
         paths = " → ".join(f"`{path}`" for path in route["read"])
         title = route.get("title") or route["intent"]
         lines.append(f"- **{title}** (`{route['id']}`): {paths}")
-        lines.append(f"  - Intent: {route['intent']}")
-        lines.append(f"  - Bounded route: `{route['query']}`")
+        if title != route["intent"]:
+            lines.append(f"  - Intent: {route['intent']}")
+        lines.append(
+            "  - Bounded route: "
+            f"`python3 scripts/query_corpus.py --route {route['id']}`"
+        )
     lines.extend(
         [
             "",
@@ -332,8 +339,8 @@ def render_orientation_markdown(orientation: dict[str, Any]) -> str:
             "  [`docs/claims.json`](claims.json)",
             "- Source routes by mathematical question: [`docs/SOURCE_MAP.md`](SOURCE_MAP.md)",
             "- Development chronology: [`docs/WAVE_INDEX.md`](WAVE_INDEX.md)",
-            "- Human mathematical account: [`erdos249-257-exposition.pdf`](../erdos249-257-exposition.pdf)",
-            "- Transport and curvature companion: [`erdos249-transport-curvature.pdf`](../erdos249-transport-curvature.pdf)",
+            "- Human mathematical account: [`erdos249-257-main-paper.pdf`](../erdos249-257-main-paper.pdf)",
+            "- Transport and curvature companion: [`erdos249-transport-curvature-companion-note.pdf`](../erdos249-transport-curvature-companion-note.pdf)",
             "- Machine form of this page: [`docs/orientation.json`](orientation.json)",
             "",
             "## External corpus registration",
@@ -592,17 +599,17 @@ def build() -> dict[str, Any]:
                     "content_digest": canonical_digest(orientation),
                 },
                 "human_exposition": {
-                    "source_path": "paper/erdos249-257-exposition.tex",
+                    "source_path": "paper/erdos249-257-main-paper.tex",
                     "source_content_digest": file_digest(MAIN_PAPER_TEX),
-                    "rendered_path": "erdos249-257-exposition.pdf",
+                    "rendered_path": "erdos249-257-main-paper.pdf",
                     "rendered_content_digest": file_digest(MAIN_PAPER_PDF),
                     "artifact_role": "authored_mathematician_facing_exposition",
                     "authority_posture": "authored_editorial_surface_not_Lean_proof_authority",
                 },
                 "technical_companion": {
-                    "source_path": "paper/erdos249-transport-curvature.tex",
+                    "source_path": "paper/erdos249-transport-curvature-companion-note.tex",
                     "source_content_digest": file_digest(COMPANION_PAPER_TEX),
-                    "rendered_path": "erdos249-transport-curvature.pdf",
+                    "rendered_path": "erdos249-transport-curvature-companion-note.pdf",
                     "rendered_content_digest": file_digest(COMPANION_PAPER_PDF),
                     "artifact_role": "authored_transport_and_curvature_companion",
                     "authority_posture": "authored_editorial_surface_not_Lean_proof_authority",
@@ -734,16 +741,16 @@ def build() -> dict[str, Any]:
                 "check": "python3 scripts/build_methodology.py --check",
             },
             "human_exposition": {
-                "source_path": "paper/erdos249-257-exposition.tex",
+                "source_path": "paper/erdos249-257-main-paper.tex",
                 "expected_source_content_digest": file_digest(MAIN_PAPER_TEX),
-                "rendered_path": "erdos249-257-exposition.pdf",
+                "rendered_path": "erdos249-257-main-paper.pdf",
                 "expected_rendered_content_digest": file_digest(MAIN_PAPER_PDF),
                 "authority_posture": "authored_editorial_surface_not_Lean_proof_authority",
             },
             "technical_companion": {
-                "source_path": "paper/erdos249-transport-curvature.tex",
+                "source_path": "paper/erdos249-transport-curvature-companion-note.tex",
                 "expected_source_content_digest": file_digest(COMPANION_PAPER_TEX),
-                "rendered_path": "erdos249-transport-curvature.pdf",
+                "rendered_path": "erdos249-transport-curvature-companion-note.pdf",
                 "expected_rendered_content_digest": file_digest(COMPANION_PAPER_PDF),
                 "authority_posture": "authored_editorial_surface_not_Lean_proof_authority",
             },
@@ -784,7 +791,7 @@ def main() -> int:
     atlas = json.loads(ATLAS_PATH.read_text(encoding="utf-8"))
     orientation = build_orientation(claims, atlas)
     expected = render()
-    expected_orientation_json = json.dumps(orientation, ensure_ascii=False, indent=2) + "\n"
+    expected_orientation_json = json.dumps(orientation, ensure_ascii=False, indent=1) + "\n"
     expected_orientation_markdown = render_orientation_markdown(orientation)
     actual_readme = README_PATH.read_text(encoding="utf-8")
     expected_readme = replace_readme_scale_strip(

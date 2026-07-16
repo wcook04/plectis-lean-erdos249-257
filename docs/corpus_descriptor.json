@@ -23,9 +23,9 @@
  },
  "identity": {
   "formal_source": {
-   "ref": "81150c1c6fdd4cd51e76d3aa0de344341e0e9e7c",
+   "ref": "a16aa24af5236b6508a34b8a4c4b41fdcf620a98",
    "ref_kind": "commit",
-   "resolved_commit": "81150c1c6fdd4cd51e76d3aa0de344341e0e9e7c",
+   "resolved_commit": "a16aa24af5236b6508a34b8a4c4b41fdcf620a98",
    "publication_state": "committed_checkpoint_pending_remote_publication",
    "relationship_to_last_tag": "post_tag_checkpoint",
    "last_release": {
@@ -36,25 +36,25 @@
    "authority_role": "proof_bearing_committed_source_anchor"
   },
   "navigation_snapshot": {
-   "commit": "a2aaba5b2a88a473426e3f53d1f69f23a417c0d0",
+   "commit": "b23c350c78c48f371816599d2abc9e0b461f0e67",
    "authority_role": "machine_readable_navigation_anchor",
    "publication_state": "main_history_snapshot",
    "published_ref": "main",
-   "repository_resolution": "https://github.com/wcook04/plectis-lean-erdos249-257/tree/a2aaba5b2a88a473426e3f53d1f69f23a417c0d0"
+   "repository_resolution": "https://github.com/wcook04/plectis-lean-erdos249-257/tree/b23c350c78c48f371816599d2abc9e0b461f0e67"
   },
   "content": {
    "machine_readable_paper": {
     "path": "docs/claims.json::machine_readable_paper",
-    "content_digest": "sha256:be9540cdced648359f5952a87ff57a4cea9bd0ab660dad798a65466260ba20cc"
+    "content_digest": "sha256:f99396ff78f0ad24da9fab8085739804daf1e6ab065efbec47a552b40427d9bc"
    },
    "claims_document": {
     "path": "docs/claims.json",
-    "content_digest": "sha256:617e631304eedf26946f81c2cb9a41f430427665a7e825234f36509f3ea52d73"
+    "content_digest": "sha256:27e29296e56094008a0a7d5272592590e5c82e6f251a09ccef54b12d29cb0725"
    },
    "declaration_atlas": {
     "path": "docs/declaration_atlas.json",
-    "content_digest": "sha256:77f8f35723a50c991ea73cef35ab1c4927e4b7280176bc90c396b251f696522b",
-    "source_input_fingerprint": "sha256:267947a5b0d7963566214632dea23d31fe83dadadeae6cd8122b1a7fa63f2e5f"
+    "content_digest": "sha256:e363a8703515d005bd074a471c55d5103603657565a1a2b913a92321c95e4e33",
+    "source_input_fingerprint": "sha256:212fb43a669b0ae5a1be1ff02a98ff017cf7d23b49761987a5a9dc3c113b1443"
    },
    "methodology_contract": {
     "path": "docs/methodology.json",
@@ -62,27 +62,27 @@
    },
    "bounded_orientation": {
     "path": "docs/orientation.json",
-    "content_digest": "sha256:2c4b7709beeb813857ae85fab3bb715f00f60bb4415fa60c8a45d5cbcc7c0255"
+    "content_digest": "sha256:201a2b5c94b101dd9b468b51765e7f6713c6c73ae012716fdc720c1d33fb4d2a"
    },
    "human_exposition": {
-    "source_path": "paper/erdos249-257-exposition.tex",
-    "source_content_digest": "sha256:9ddb6209ba445e524675910b6af5d1e66dc408bf08ee2e48efb10cca4ee6972c",
-    "rendered_path": "erdos249-257-exposition.pdf",
-    "rendered_content_digest": "sha256:eeaf2b4e136bb817c44daaafd8f79df24faaa3bfa1de953476694bfda0315f8c",
+    "source_path": "paper/erdos249-257-main-paper.tex",
+    "source_content_digest": "sha256:b2f4d47bb51101903bcdd188df7fc687c2fbbd448bcb99e2ec1d90361ae4ae86",
+    "rendered_path": "erdos249-257-main-paper.pdf",
+    "rendered_content_digest": "sha256:26e5eb43777e03c517c65b5832a2f091efa7b395a76bd329327dd1d47d07fa79",
     "artifact_role": "authored_mathematician_facing_exposition",
     "authority_posture": "authored_editorial_surface_not_Lean_proof_authority"
    },
    "technical_companion": {
-    "source_path": "paper/erdos249-transport-curvature.tex",
-    "source_content_digest": "sha256:58f52df6adee152d1cb78a71be2bd55356c80b4d0455614435311b36572220a3",
-    "rendered_path": "erdos249-transport-curvature.pdf",
-    "rendered_content_digest": "sha256:17eb2e7e007e49decd235afdd232e2929642220a7b2ca3e7a30eef96d92ef803",
+    "source_path": "paper/erdos249-transport-curvature-companion-note.tex",
+    "source_content_digest": "sha256:eb8316e8a93033c014d060748cfc9a26092c9e4258cbeb9a77f986b6b10dd224",
+    "rendered_path": "erdos249-transport-curvature-companion-note.pdf",
+    "rendered_content_digest": "sha256:577b062bcd65cab4f24174633b7aa4827ef9c86aed21c52c1a8fa68a3b1ebe40",
     "artifact_role": "authored_transport_and_curvature_companion",
     "authority_posture": "authored_editorial_surface_not_Lean_proof_authority"
    },
    "paper_source_sigils": {
     "path": "paper/module-aliases.json",
-    "content_digest": "sha256:e5a44f0ea58fd580ee4d4191cd28a65e17433ff3369ed071b547a75c9d1af539",
+    "content_digest": "sha256:15486559c83f6869c2a6c0f2abed6a113fa8423ecfd9d38ba1b8de4dee3947db",
     "schema": "erdos249257-paper-module-aliases/1",
     "artifact_role": "paper_sigil_to_lean_module_navigation_crosswalk",
     "authority_posture": "generated_navigation_projection_not_proof_authority"
@@ -150,7 +150,7 @@
   "declaration_count": 12496,
   "theorem_like_count": 11471,
   "generated_certificate_declaration_count": 2925,
-  "principal_claim_link_count": 247,
+  "principal_claim_link_count": 265,
   "kind_counts": {
    "abbrev": 7,
    "def": 982,
@@ -393,7 +393,7 @@
    {
     "id": "greedy_achievement_geometry",
     "status": "formalised here",
-    "statement": "The Mersenne achievement set is compact, perfect, totally disconnected, nowhere dense, and has Lebesgue measure one. Membership is equivalent to greedy survival at every level; for the target 1/2 it is exactly equivalent to the canonical greedy orbit omitting infinitely many exponents. Finite exact-rational death certificates soundly prove non-membership (3/4 is excluded at level one). The strict-tail Cantor geometry is recorded by Kovač–Tao; no novelty claim is made for the formalised refinements.",
+    "statement": "The Mersenne achievement set is compact, perfect, totally disconnected, nowhere dense, and has Lebesgue measure one. Membership is equivalent to greedy survival at every level; for the target 1/2 it is exactly equivalent to the canonical greedy orbit omitting infinitely many exponents. No finite normalized support has value 1/2, so positive membership would automatically produce an infinite rational-valued support and refute universal #257. Finite exact-rational death certificates soundly prove non-membership (3/4 is excluded at level one). The strict-tail Cantor geometry is recorded by Kovač–Tao; no novelty claim is made for the formalised refinements.",
     "paper_label": "res:greedy",
     "declarations": [
      {
@@ -430,6 +430,11 @@
       "name": "half_mem_mersenneAchievementSet_iff_greedySkippedSupport_infinite",
       "module": "Erdos249257/GreedyAchievementSet.lean",
       "line": 2514
+     },
+     {
+      "name": "finite_boolSupport_ne_half",
+      "module": "Erdos249257/HalfCarryReachability.lean",
+      "line": 589
      }
     ],
     "remaining_open_proposition_ids": [
@@ -469,10 +474,10 @@
     "open_target_claim": "erdos_249",
     "statement": "Prove that S = ∑ φ(n)/2ⁿ is irrational, with no bound on a possible rational denominator.",
     "paper_anchor": {
-     "source": "paper/erdos249-257-exposition.tex",
+     "source": "paper/erdos249-257-main-paper.tex",
      "environment": "problem",
      "title": "Erd\\H{o}s \\#249",
-     "line": 1896
+     "line": 1951
     }
    },
    {
@@ -480,10 +485,10 @@
     "open_target_claim": "erdos_249",
     "statement": "Produce certified non-integrality witnesses at unbounded parameters. A sufficient one-parameter form is to produce them along the lcm diagonal.",
     "paper_anchor": {
-     "source": "paper/erdos249-257-exposition.tex",
+     "source": "paper/erdos249-257-main-paper.tex",
      "environment": "problem",
      "title": "unbounded certificate supply",
-     "line": 1905
+     "line": 1960
     }
    },
    {
@@ -491,10 +496,10 @@
     "open_target_claim": "universal_257",
     "statement": "Prove irrationality for every infinite support A, not only the named support families formalised here.",
     "paper_anchor": {
-     "source": "paper/erdos249-257-exposition.tex",
+     "source": "paper/erdos249-257-main-paper.tex",
      "environment": "problem",
      "title": "universal Erd\\H{o}s \\#257",
-     "line": 1913
+     "line": 1968
     }
    }
   ],
@@ -582,6 +587,18 @@
     ],
     "remaining_open_proposition_ids": [
      "remaining_open.unbounded_certificate_supply"
+    ]
+   },
+   {
+    "id": "probabilistic_gcd_geometry",
+    "title": "Coprimality probability, gcd moments, and Stern–Brocot geometry",
+    "core_claim_count": 4,
+    "representative_claim_ids": [
+     "totient_coprimality_probability",
+     "squared_lambert_gcd_moments"
+    ],
+    "remaining_open_proposition_ids": [
+     "remaining_open.erdos_249_irrationality"
     ]
    },
    {
@@ -1252,6 +1269,26 @@
      "to": "mersenne_lambert_ladder"
     },
     {
+     "from": "totient_coprimality_probability",
+     "relation": "builds_on",
+     "to": "mersenne_lambert_ladder"
+    },
+    {
+     "from": "squared_lambert_gcd_moments",
+     "relation": "builds_on",
+     "to": "totient_coprimality_probability"
+    },
+    {
+     "from": "stern_brocot_cylinder_law",
+     "relation": "builds_on",
+     "to": "squared_lambert_gcd_moments"
+    },
+    {
+     "from": "stern_brocot_run_fibonacci_stability",
+     "relation": "positions",
+     "to": "stern_brocot_cylinder_law"
+    },
+    {
      "from": "prime_support_irrationality",
      "relation": "positions",
      "to": "universal_257"
@@ -1641,6 +1678,12 @@
     "name": "half_mem_mersenneAchievementSet_iff_greedySkippedSupport_infinite",
     "module": "Erdos249257/GreedyAchievementSet.lean",
     "line": 2514
+   },
+   {
+    "claim_id": "greedy_achievement_geometry",
+    "name": "finite_boolSupport_ne_half",
+    "module": "Erdos249257/HalfCarryReachability.lean",
+    "line": 589
    }
   ],
   "mathematical_programme_query": "python3 scripts/query_corpus.py --route <programme_route_id>"
@@ -1648,7 +1691,7 @@
  "expansion": {
   "machine_readable_paper": {
    "path": "docs/claims.json::machine_readable_paper",
-   "expected_content_digest": "sha256:be9540cdced648359f5952a87ff57a4cea9bd0ab660dad798a65466260ba20cc",
+   "expected_content_digest": "sha256:f99396ff78f0ad24da9fab8085739804daf1e6ab065efbec47a552b40427d9bc",
    "contains": [
     "all_claims",
     "authored_argument_graph",
@@ -1659,8 +1702,8 @@
   },
   "exhaustive_declaration_atlas": {
    "path": "docs/declaration_atlas.json",
-   "expected_content_digest": "sha256:77f8f35723a50c991ea73cef35ab1c4927e4b7280176bc90c396b251f696522b",
-   "expected_source_input_fingerprint": "sha256:267947a5b0d7963566214632dea23d31fe83dadadeae6cd8122b1a7fa63f2e5f",
+   "expected_content_digest": "sha256:e363a8703515d005bd074a471c55d5103603657565a1a2b913a92321c95e4e33",
+   "expected_source_input_fingerprint": "sha256:212fb43a669b0ae5a1be1ff02a98ff017cf7d23b49761987a5a9dc3c113b1443",
    "availability": "optional_attached_corpus",
    "check": "python3 scripts/build_declaration_atlas.py --check"
   },
@@ -1671,22 +1714,22 @@
    "check": "python3 scripts/build_methodology.py --check"
   },
   "human_exposition": {
-   "source_path": "paper/erdos249-257-exposition.tex",
-   "expected_source_content_digest": "sha256:9ddb6209ba445e524675910b6af5d1e66dc408bf08ee2e48efb10cca4ee6972c",
-   "rendered_path": "erdos249-257-exposition.pdf",
-   "expected_rendered_content_digest": "sha256:eeaf2b4e136bb817c44daaafd8f79df24faaa3bfa1de953476694bfda0315f8c",
+   "source_path": "paper/erdos249-257-main-paper.tex",
+   "expected_source_content_digest": "sha256:b2f4d47bb51101903bcdd188df7fc687c2fbbd448bcb99e2ec1d90361ae4ae86",
+   "rendered_path": "erdos249-257-main-paper.pdf",
+   "expected_rendered_content_digest": "sha256:26e5eb43777e03c517c65b5832a2f091efa7b395a76bd329327dd1d47d07fa79",
    "authority_posture": "authored_editorial_surface_not_Lean_proof_authority"
   },
   "technical_companion": {
-   "source_path": "paper/erdos249-transport-curvature.tex",
-   "expected_source_content_digest": "sha256:58f52df6adee152d1cb78a71be2bd55356c80b4d0455614435311b36572220a3",
-   "rendered_path": "erdos249-transport-curvature.pdf",
-   "expected_rendered_content_digest": "sha256:17eb2e7e007e49decd235afdd232e2929642220a7b2ca3e7a30eef96d92ef803",
+   "source_path": "paper/erdos249-transport-curvature-companion-note.tex",
+   "expected_source_content_digest": "sha256:eb8316e8a93033c014d060748cfc9a26092c9e4258cbeb9a77f986b6b10dd224",
+   "rendered_path": "erdos249-transport-curvature-companion-note.pdf",
+   "expected_rendered_content_digest": "sha256:577b062bcd65cab4f24174633b7aa4827ef9c86aed21c52c1a8fa68a3b1ebe40",
    "authority_posture": "authored_editorial_surface_not_Lean_proof_authority"
   },
   "paper_source_sigils": {
    "path": "paper/module-aliases.json",
-   "expected_content_digest": "sha256:e5a44f0ea58fd580ee4d4191cd28a65e17433ff3369ed071b547a75c9d1af539",
+   "expected_content_digest": "sha256:15486559c83f6869c2a6c0f2abed6a113fa8423ecfd9d38ba1b8de4dee3947db",
    "schema": "erdos249257-paper-module-aliases/1",
    "check": "python3 scripts/build_paper_module_aliases.py --check"
   }

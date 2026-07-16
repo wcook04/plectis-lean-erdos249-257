@@ -5,10 +5,11 @@
 
 A guide to this repository for mathematicians who do not read Lean.
 
-`erdos249-257-exposition.tex` states, in ordinary notation, what the Lean development
+`erdos249-257-main-paper.tex` states, in ordinary notation, what the Lean development
 proves, cites, and leaves open. Every formal statement links to the exact source
-line on GitHub, pinned to the release tag `v0.6.0`, so a reader can go from a
-sentence of prose to the checked proof in one click. The visible link text is
+line on GitHub, pinned to the formal-source checkpoint named in
+`docs/claims.json`, so a reader can go from a sentence of prose to the checked
+proof in one click. The visible link text is
 intentionally quiet; the file, line, and declaration remain in each link target
 and are verified against the released source by `scripts/check_release.py`. The
 document adds no mathematics beyond what the Lean sources contain; the proofs
@@ -17,7 +18,7 @@ are the sources it links to.
 The manuscript layer (this `.tex` and the rendered PDF) is licensed CC-BY-4.0;
 see `REUSE.toml` at the repository root.
 
-`erdos249-transport-curvature.tex` is the technical companion for the
+`erdos249-transport-curvature-companion-note.tex` is the technical companion for the
 transport/curvature frontier. It separates unconditional affine-channel
 cancellation, sharp finite consumers, and the fixed-precision no-go theorem
 from the explicitly open unbounded-supply and first-harmonic hypotheses.
@@ -26,17 +27,18 @@ from the explicitly open unbounded-supply and first-harmonic hypotheses.
 
 ```sh
 # with tectonic (recommended; fetches TeX packages on first run)
-tectonic erdos249-257-exposition.tex
+tectonic erdos249-257-main-paper.tex
 
 # or with a TeX Live install
-pdflatex erdos249-257-exposition.tex && pdflatex erdos249-257-exposition.tex
+pdflatex erdos249-257-main-paper.tex && pdflatex erdos249-257-main-paper.tex
 
 # or
 make
 ```
 
-The outputs are `erdos249-257-exposition.pdf` and
-`erdos249-transport-curvature.pdf`.
+The outputs are `erdos249-257-main-paper.pdf` and
+`erdos249-transport-curvature-companion-note.pdf`; `make` also synchronises
+the tracked reader-facing copies at repository root.
 
 ## Contents
 

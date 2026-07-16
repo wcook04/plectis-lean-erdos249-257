@@ -48,8 +48,9 @@ SELF_APPRAISAL_PHRASES = (
     "research-grade",
     "unprecedented",
 )
-GATEWAY_PAPER = "paper/erdos249-257-exposition.tex"
-GATEWAY_OPENING_BUDGET_BYTES = 7_500
+GATEWAY_PAPER = "paper/erdos249-257-main-paper.tex"
+# The slice includes the introduction and both exact proof spines through page 3.
+GATEWAY_OPENING_BUDGET_BYTES = 9_000
 CLAUDE_ENTRY_BUDGET_BYTES = 1_500
 STORY_ROUTES = (
     "erdos257_half_story",
@@ -59,6 +60,7 @@ STORY_ROUTES = (
     "boolean_mobius_constraints",
     "transport_curvature_programme",
     "lambert_obstruction_interfaces",
+    "probabilistic_gcd_geometry",
     "half_carry_compactness_programme",
     "arithmetic_obstruction_interfaces",
 )
@@ -83,6 +85,9 @@ DISCOVERY_ROUTE_QUERIES = {
     "why local induction fails": "half_carry_compactness_programme",
     "strategy countermodels": "transport_curvature_programme",
     "Mersenne Lambert identities": "lambert_obstruction_interfaces",
+    "what probability and gcd identities are formalized": "probabilistic_gcd_geometry",
+    "what Stern Brocot or continued fraction geometry is proved": "probabilistic_gcd_geometry",
+    "what exact run geometry is proved": "probabilistic_gcd_geometry",
     "formal proof trust": "change_or_verify_release",
     "denominator obstruction": "arithmetic_obstruction_interfaces",
     "how big is the corpus": "instant_orientation",

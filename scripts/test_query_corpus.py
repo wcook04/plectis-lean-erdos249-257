@@ -60,6 +60,10 @@ PROGRAMME_EXPECTATIONS = {
         "title": "Mersenne–Lambert identities and obstruction interfaces",
         "open_ids": {"remaining_open.unbounded_certificate_supply"},
     },
+    "probabilistic_gcd_geometry": {
+        "title": "Coprimality probability, gcd moments, and Stern–Brocot geometry",
+        "open_ids": {"remaining_open.erdos_249_irrationality"},
+    },
     "half_carry_compactness_programme": {
         "title": "Half-carry compactness, windows, seams, and finite propagation",
         "open_ids": {"remaining_open.universal_257_all_infinite_supports"},
@@ -170,6 +174,9 @@ def validate_natural_language_search() -> None:
         "why local induction fails": "half_carry_compactness_programme",
         "strategy countermodels": "transport_curvature_programme",
         "Mersenne Lambert identities": "lambert_obstruction_interfaces",
+        "what probability and gcd identities are formalized": "probabilistic_gcd_geometry",
+        "what Stern Brocot or continued fraction geometry is proved": "probabilistic_gcd_geometry",
+        "what exact run geometry is proved": "probabilistic_gcd_geometry",
         "formal proof trust": "change_or_verify_release",
         "denominator obstruction": "arithmetic_obstruction_interfaces",
         "how big is the corpus": "instant_orientation",
@@ -212,7 +219,7 @@ def main() -> int:
     architecture = query("--publication-architecture")
     assert architecture["kind"] == "publication_architecture"
     assert architecture["architecture"]["canonical_gateway"]["source"] == (
-        "paper/erdos249-257-exposition.tex"
+        "paper/erdos249-257-main-paper.tex"
     )
     assert len(architecture["family_index"]) == len(
         publication_assembly["contribution_families"]
@@ -231,7 +238,7 @@ def main() -> int:
     )
     assert certificate_family["kind"] == "publication_family"
     assert certificate_family["family"]["primary_narrative_owner"] == (
-        "paper/erdos249-257-exposition.tex"
+        "paper/erdos249-257-main-paper.tex"
     )
     assert {claim["id"] for claim in certificate_family["claims"]} == {
         "certificate_reduction",
@@ -396,8 +403,8 @@ def main() -> int:
         anchor_window = "\n".join(source_lines[paper["line"] - 1 : paper["line"] + 1])
         assert re.search(rf"\\label\{{{re.escape(row['paper_label'])}\}}", anchor_window)
     companion = query("--claim", "transport_curvature_reductions")
-    assert companion["paper"]["source"] == "paper/erdos249-transport-curvature.tex"
-    assert companion["paper"]["rendered"] == "erdos249-transport-curvature.pdf"
+    assert companion["paper"]["source"] == "paper/erdos249-transport-curvature-companion-note.tex"
+    assert companion["paper"]["rendered"] == "erdos249-transport-curvature-companion-note.pdf"
     assert companion["lean_source_identity"] == {
         **formal_source,
         "repository": claims_document["release"]["repository"],
@@ -490,7 +497,7 @@ def main() -> int:
     }
     companion_paper_label = query("--paper-label", "sec:curvature")
     assert companion_paper_label["paper"]["source"] == (
-        "paper/erdos249-transport-curvature.tex"
+        "paper/erdos249-transport-curvature-companion-note.tex"
     )
     local_result = query("--paper-anchor", "res:lift")
     assert local_result["anchor_class"] == "authored_formal_anchor_without_registered_claim"
@@ -815,7 +822,7 @@ def main() -> int:
         "--artifact", "docs/claims.json::machine_readable_paper"
     )
     assert machine_paper_artifact["matches"][0]["artifact_kind"] == "json_fragment"
-    exposition_artifact = query("--artifact", "erdos249-257-exposition.pdf")
+    exposition_artifact = query("--artifact", "erdos249-257-main-paper.pdf")
     assert exposition_artifact["matches"][0]["artifact_kind"] == (
         "authored_paper_rendered"
     )
@@ -909,7 +916,7 @@ if __name__ == "__main__":
         print(
             "test_query_corpus: "
             f"{len(PROGRAMME_EXPECTATIONS)} mathematical programme routes and "
-            "18 natural-language discovery queries passed"
+            "21 natural-language discovery queries passed"
         )
         raise SystemExit(0)
     if sys.argv[1:]:

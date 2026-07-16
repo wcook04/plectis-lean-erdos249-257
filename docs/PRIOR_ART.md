@@ -13,8 +13,8 @@ mathematical priority. Formalisation/software dependencies are recorded in
 [CITATION.cff](../CITATION.cff); the Erdős Problems catalogue supplies
 numbering and status context rather than mathematical priority.
 
-The [exposition](../paper/erdos249-257-exposition.tex) and the
-[transport/curvature companion](../paper/erdos249-transport-curvature.tex)
+The [exposition](../paper/erdos249-257-main-paper.tex) and the
+[transport/curvature companion](../paper/erdos249-transport-curvature-companion-note.tex)
 together form the mathematics bibliography. [CITATION.cff](../CITATION.cff) is intentionally
 selected release/software citation metadata: it supplies the recommended
 citation for this version and selected foundational or software references,

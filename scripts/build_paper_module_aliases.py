@@ -15,8 +15,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 PAPER_DIR = ROOT / "paper"
 PAPERS = (
-    PAPER_DIR / "erdos249-257-exposition.tex",
-    PAPER_DIR / "erdos249-transport-curvature.tex",
+    PAPER_DIR / "erdos249-257-main-paper.tex",
+    PAPER_DIR / "erdos249-transport-curvature-companion-note.tex",
 )
 OUTPUT = PAPER_DIR / "module-aliases.tex"
 JSON_OUTPUT = PAPER_DIR / "module-aliases.json"

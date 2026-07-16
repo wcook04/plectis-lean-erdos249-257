@@ -4,12 +4,17 @@
 #     https://tectonic-typesetting.github.io
 # Fallback: a standard TeX Live install (run pdflatex twice for the TOC/refs).
 
-PAPERS = erdos249-257-exposition erdos249-transport-curvature
+PAPERS = erdos249-257-main-paper erdos249-transport-curvature-companion-note
 ALIASES = module-aliases.tex
 
-.PHONY: all check clean
+.PHONY: all check clean sync-root
 
-all: $(PAPERS:%=%.pdf)
+all: $(PAPERS:%=%.pdf) sync-root
+
+sync-root: $(PAPERS:%=%.pdf)
+	@for paper in $(PAPERS); do \
+	  cp "$$paper.pdf" "../$$paper.pdf"; \
+	done
 
 check: all
 	python3 ../scripts/check_rendered_paper_boundary.py

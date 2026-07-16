@@ -3,7 +3,7 @@
   "artifact_role": "paper_sigil_to_lean_module_navigation_crosswalk",
   "authority_posture": "generated_navigation_projection_not_proof_authority",
   "heuristic": "Each CamelCase component contributes at most its first three characters.",
-  "alias_count": 107,
+  "alias_count": 96,
   "aliases": [
     {
       "sigil": "ActForResPro",
@@ -14,11 +14,6 @@
       "sigil": "AdeHeiObs",
       "module": "AdelicHeightObstruction.lean",
       "path": "Erdos249257/AdelicHeightObstruction.lean"
-    },
-    {
-      "sigil": "AdjPhaSep",
-      "module": "AdjacentPhaseSeparation.lean",
-      "path": "Erdos249257/AdjacentPhaseSeparation.lean"
     },
     {
       "sigil": "BooMobCar",
@@ -49,11 +44,6 @@
       "sigil": "ComDilDef",
       "module": "CompositeDilationDefect.lean",
       "path": "Erdos249257/CompositeDilationDefect.lean"
-    },
-    {
-      "sigil": "CurCar",
-      "module": "CurvatureCarry.lean",
-      "path": "Erdos249257/CurvatureCarry.lean"
     },
     {
       "sigil": "DiaFleOddWinAff",
@@ -89,16 +79,6 @@
       "sigil": "DiaPinPriCerT64",
       "module": "DiagonalPincerPrimeCertificates/ClosureT64.lean",
       "path": "Erdos249257/DiagonalPincerPrimeCertificates/ClosureT64.lean"
-    },
-    {
-      "sigil": "ExpOnlTra",
-      "module": "ExponentOnlyTransport.lean",
-      "path": "Erdos249257/ExponentOnlyTransport.lean"
-    },
-    {
-      "sigil": "FirHarGap",
-      "module": "FirstHarmonicGap.lean",
-      "path": "Erdos249257/FirstHarmonicGap.lean"
     },
     {
       "sigil": "FrePriDefDec",
@@ -271,11 +251,6 @@
       "path": "Erdos249257/HalfTrappingReturnCarry.lean"
     },
     {
-      "sigil": "JoiExpTra",
-      "module": "JointExponentTransport.lean",
-      "path": "Erdos249257/JointExponentTransport.lean"
-    },
-    {
       "sigil": "LcmConFla",
       "module": "LcmConeFlatness.lean",
       "path": "Erdos249257/LcmConeFlatness.lean"
@@ -289,11 +264,6 @@
       "sigil": "LcmDiaRed",
       "module": "LcmDiagonalReduction.lean",
       "path": "Erdos249257/LcmDiagonalReduction.lean"
-    },
-    {
-      "sigil": "LcmFacIdePulObs",
-      "module": "LcmFactorIdealPulseObstruction.lean",
-      "path": "Erdos249257/LcmFactorIdealPulseObstruction.lean"
     },
     {
       "sigil": "MaxOmeLay",
@@ -321,11 +291,6 @@
       "path": "Erdos249257/MobiusSignSupportNoGo.lean"
     },
     {
-      "sigil": "PivAntRec",
-      "module": "PivotAntiReconstruction.lean",
-      "path": "Erdos249257/PivotAntiReconstruction.lean"
-    },
-    {
       "sigil": "PowTwoBitLif",
       "module": "PowerTwoBitLift.lean",
       "path": "Erdos249257/PowerTwoBitLift.lean"
@@ -334,16 +299,6 @@
       "sigil": "PowTwoCenBitLif",
       "module": "PowerTwoCenteredBitLift.lean",
       "path": "Erdos249257/PowerTwoCenteredBitLift.lean"
-    },
-    {
-      "sigil": "PriJumMig",
-      "module": "PrimeJumpMigration.lean",
-      "path": "Erdos249257/PrimeJumpMigration.lean"
-    },
-    {
-      "sigil": "PriJumWin",
-      "module": "PrimeJumpWindow.lean",
-      "path": "Erdos249257/PrimeJumpWindow.lean"
     },
     {
       "sigil": "PriDetLif",
@@ -511,11 +466,6 @@
       "path": "Erdos249257/TerminalOnlyScaledVanishing.lean"
     },
     {
-      "sigil": "ThrTraBou",
-      "module": "ThreeTransportBoundary.lean",
-      "path": "Erdos249257/ThreeTransportBoundary.lean"
-    },
-    {
       "sigil": "TotParSocCei",
       "module": "Totient827ParitySocketCeiling.lean",
       "path": "Erdos249257/Totient827ParitySocketCeiling.lean"
@@ -534,11 +484,6 @@
       "sigil": "TotTaiPerKil",
       "module": "TotientTailPeriodKiller.lean",
       "path": "Erdos249257/TotientTailPeriodKiller.lean"
-    },
-    {
-      "sigil": "TroCurCar",
-      "module": "TropicalCurvatureCarry.lean",
-      "path": "Erdos249257/TropicalCurvatureCarry.lean"
     }
   ],
   "validation": "python3 scripts/build_paper_module_aliases.py --check"

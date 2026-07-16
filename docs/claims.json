@@ -15,7 +15,7 @@
     "entrypoints": [
       {
         "id": "instant_orientation",
-        "intent": "Understand what this repository proves, reduces, cites, leaves open, and how its claims divide into contribution families.",
+        "intent": "Understand what this repository proves, reduces, cites, leaves open, and how its claims are partitioned.",
         "discovery_terms": [
           "how big is the corpus",
           "what is formally checked",
@@ -70,8 +70,8 @@
         ],
         "authority_owners": [
           "docs/claims.json::claims",
-          "paper/erdos249-257-exposition.tex",
-          "paper/erdos249-transport-curvature.tex",
+          "paper/erdos249-257-main-paper.tex",
+          "paper/erdos249-transport-curvature-companion-note.tex",
           "Erdos249257.lean"
         ],
         "adjacent_handle_classes": [
@@ -442,7 +442,7 @@
         "authority_owners": [
           "docs/claims.json::claims",
           "docs/claims.json::machine_readable_paper.argument_graph",
-          "paper/erdos249-transport-curvature.tex",
+          "paper/erdos249-transport-curvature-companion-note.tex",
           "Erdos249257.lean"
         ],
         "adjacent_handle_classes": [
@@ -481,7 +481,8 @@
         ],
         "related_route_ids": [
           "erdos249_certificate_story",
-          "erdos249_diagonal_arithmetic"
+          "erdos249_diagonal_arithmetic",
+          "probabilistic_gcd_geometry"
         ],
         "read": [
           "docs/orientation.json"
@@ -506,6 +507,65 @@
           "paper_label",
           "declaration",
           "module"
+        ]
+      },
+      {
+        "id": "probabilistic_gcd_geometry",
+        "route_kind": "mathematical_programme",
+        "title": "Coprimality probability, gcd moments, and Stern–Brocot geometry",
+        "intent": "Follow the fair-coin coprimality form of S and its denominator exclusion, squared-Lambert gcd moments, exact Stern–Brocot cylinder convergence, and Fibonacci/continuant stability of induced runs.",
+        "discovery_terms": [
+          "what probability and gcd identities are formalized",
+          "fair coin coprimality probability",
+          "squared Lambert gcd moments",
+          "Stern Brocot geometry",
+          "continued fraction cylinder law",
+          "Fibonacci continuant run geometry",
+          "what exact run geometry is proved",
+          "nontrivial mathematics beyond the endpoints"
+        ],
+        "mathematical_focus": "Fair-coin gcd distributions, squared-Mersenne Lambert transforms, Pillai's gcd-sum function, Stern–Brocot cylinder measures, and Fibonacci/continuant run stability.",
+        "claim_ceiling": "Exact identities, denominator transfer, convergence, and combinatorial stability only; no irrationality or novelty claim.",
+        "problem_target_claim_ids": [
+          "erdos_249"
+        ],
+        "core_claim_ids": [
+          "totient_coprimality_probability",
+          "squared_lambert_gcd_moments",
+          "stern_brocot_cylinder_law",
+          "stern_brocot_run_fibonacci_stability"
+        ],
+        "remaining_open_proposition_ids": [
+          "remaining_open.erdos_249_irrationality"
+        ],
+        "related_route_ids": [
+          "lambert_obstruction_interfaces",
+          "erdos249_certificate_story"
+        ],
+        "read": [
+          "docs/orientation.json"
+        ],
+        "query_steps": [
+          "python3 scripts/query_corpus.py --claim totient_coprimality_probability",
+          "python3 scripts/query_corpus.py --claim squared_lambert_gcd_moments",
+          "python3 scripts/query_corpus.py --claim stern_brocot_cylinder_law",
+          "python3 scripts/query_corpus.py --claim stern_brocot_run_fibonacci_stability",
+          "python3 scripts/query_corpus.py --open remaining_open.erdos_249_irrationality"
+        ],
+        "authority_owners": [
+          "Erdos249257/CertificateKernel.lean",
+          "Erdos249257/GeometricCoprimality.lean",
+          "Erdos249257/GcdMomentCalculus.lean",
+          "Erdos249257/SternBrocotRunGeometry.lean",
+          "docs/claims.json::claims"
+        ],
+        "adjacent_handle_classes": [
+          "claim_id",
+          "open_proposition_id",
+          "paper_label",
+          "declaration",
+          "module",
+          "source_coordinate"
         ]
       },
       {
@@ -654,8 +714,8 @@
         "authority_owners": [
           "docs/PRIOR_ART.md",
           "CITATION.cff",
-          "paper/erdos249-257-exposition.tex",
-          "paper/erdos249-transport-curvature.tex"
+          "paper/erdos249-257-main-paper.tex",
+          "paper/erdos249-transport-curvature-companion-note.tex"
         ],
         "adjacent_handle_classes": [
           "artifact",
@@ -729,16 +789,16 @@
     ],
     "paper": {
       "title": "Tail Certificates and Achievement-Set Geometry for Erdős Problems 249 and 257",
-      "source": "paper/erdos249-257-exposition.tex",
-      "rendered": "erdos249-257-exposition.pdf",
+      "source": "paper/erdos249-257-main-paper.tex",
+      "rendered": "erdos249-257-main-paper.pdf",
       "role": "Canonical gateway: status-sorted exact mathematics, common architecture, and one-page spines for both open problems.",
       "principal_declaration_index_label": "app:index",
       "claim_anchor_field": "paper_label",
       "companion_sources": [
         {
           "title": "Finite-Difference Certificates and a Phase-Separation Characterisation for Erdős Problem 249",
-          "source": "paper/erdos249-transport-curvature.tex",
-          "rendered": "erdos249-transport-curvature.pdf",
+          "source": "paper/erdos249-transport-curvature-companion-note.tex",
+          "rendered": "erdos249-transport-curvature-companion-note.pdf",
           "role": "Primary specialist owner of affine-channel annihilation, transport windows, the exact phase-separation characterisation, and scoped local countermodels."
         }
       ]
@@ -748,13 +808,13 @@
       "coverage_rule": "Every docs/claims.json claim id appears in exactly one contribution family. The release checker enforces completeness and disjointness.",
       "publication_architecture": {
         "canonical_gateway": {
-          "source": "paper/erdos249-257-exposition.tex",
+          "source": "paper/erdos249-257-main-paper.tex",
           "decision": "retain_and_reconstruct",
           "thesis": "Exact certificate and achievement-set spines for Erdős Problems 249 and 257, with unconditional bounds, classical formalisation boundaries, conditional reductions, finite evidence, and unresolved producers visible before auxiliary variants."
         },
         "retained_companions": [
           {
-            "source": "paper/erdos249-transport-curvature.tex",
+            "source": "paper/erdos249-transport-curvature-companion-note.tex",
             "decision": "retain_and_rebuild",
             "thesis": "Affine Möbius-channel annihilation, finite-difference certificates, an exact phase-separation characterisation, and scoped local countermodels for Erdős Problem 249."
           }
@@ -790,7 +850,7 @@
           ],
           "status_summary": "Classical formalisation, cited special case, and the open universal target.",
           "prior_art_posture": "Erdős owns full support; Erdős owns the pairwise-coprime family; Tao–Teräväinen own the prime-support theorem. No priority claim is made for their formalisation.",
-          "primary_narrative_owner": "paper/erdos249-257-exposition.tex",
+          "primary_narrative_owner": "paper/erdos249-257-main-paper.tex",
           "source_route": "python3 scripts/query_corpus.py --claim eb_full_support",
           "consumer_or_open_obligation": "Establishes the classical benchmark and leaves remaining_open.universal_257_all_infinite_supports.",
           "view_decision": "gateway_headline"
@@ -804,7 +864,7 @@
           ],
           "status_summary": "One classical/broader antecedent, one exact signed dichotomy, and one proved residue obstruction.",
           "prior_art_posture": "Luca–Tachiya prove the broader periodic rational-coefficient theorem by another method; the signed endpoint here is only irrational-or-terminating.",
-          "primary_narrative_owner": "paper/erdos249-257-exposition.tex",
+          "primary_narrative_owner": "paper/erdos249-257-main-paper.tex",
           "source_route": "python3 scripts/query_corpus.py --claim periodic_nonnegative_weight_irrationality",
           "consumer_or_open_obligation": "Supports structured #257 families; unconditional signed irrationality would require excluding base termination.",
           "view_decision": "gateway_summary_reference_detail"
@@ -834,7 +894,7 @@
           ],
           "status_summary": "Exact rationality characterisations and proved necessary consequences.",
           "prior_art_posture": "Wang–Grau Ribas supply the closest weighted-binary carry recurrence; the abstraction, converse, and downstream constraints make no priority claim.",
-          "primary_narrative_owner": "paper/erdos249-257-exposition.tex",
+          "primary_narrative_owner": "paper/erdos249-257-main-paper.tex",
           "source_route": "python3 scripts/query_corpus.py --claim tail_orbit_rigidity",
           "consumer_or_open_obligation": "Constrains any rational #257 counterexample without settling universal irrationality.",
           "view_decision": "gateway_appendix_reference_detail"
@@ -850,7 +910,7 @@
           ],
           "status_summary": "Classical geometry formalised, exact local bands, a conditional second channel, and scoped no-go boundaries.",
           "prior_art_posture": "Kovač–Tao supply the strict-tail subsum geometry; Crandall and Campbell concern adjacent binary-digit questions and are not proof inputs.",
-          "primary_narrative_owner": "paper/erdos249-257-exposition.tex",
+          "primary_narrative_owner": "paper/erdos249-257-main-paper.tex",
           "source_route": "python3 scripts/query_corpus.py --claim greedy_achievement_geometry",
           "consumer_or_open_obligation": "Decide whether 1/2 belongs to the achievement set; positive membership refutes universal #257.",
           "view_decision": "gateway_headline"
@@ -867,7 +927,7 @@
           ],
           "status_summary": "Conditional compactness consumers from progressively weaker finite-word or carry supplies.",
           "prior_art_posture": "No executable seam/closure antecedent is recorded beyond the global achievement-set geometry.",
-          "primary_narrative_owner": "paper/erdos249-257-exposition.tex",
+          "primary_narrative_owner": "paper/erdos249-257-main-paper.tex",
           "source_route": "python3 scripts/query_corpus.py --claim half_carry_reachability_compactness",
           "consumer_or_open_obligation": "Supply canonical seams, strip returns, terminal witnesses, or scaled-vanishing words cofinally.",
           "view_decision": "gateway_appendix_future_257_companion"
@@ -885,7 +945,7 @@
           ],
           "status_summary": "Conditional rewind/window consumers plus one verified depth-18 base.",
           "prior_art_posture": "No theorem-level match is recorded; any novelty posture remains provisional.",
-          "primary_narrative_owner": "paper/erdos249-257-exposition.tex",
+          "primary_narrative_owner": "paper/erdos249-257-main-paper.tex",
           "source_route": "python3 scripts/query_corpus.py --claim selected_half_carry_window_compactness",
           "consumer_or_open_obligation": "Produce repeated object-level coefficient agreement or protected seams cofinally.",
           "view_decision": "gateway_appendix_future_257_companion"
@@ -907,7 +967,7 @@
           ],
           "status_summary": "Exact half-membership/nonmembership classifications, proved branch eliminations, and explicit conditional tail consumers.",
           "prior_art_posture": "No exact local seam or last-producer antecedent is recorded beyond strict-tail achievement-set background.",
-          "primary_narrative_owner": "paper/erdos249-257-exposition.tex",
+          "primary_narrative_owner": "paper/erdos249-257-main-paper.tex",
           "source_route": "python3 scripts/query_corpus.py --claim half_membership_seam_classification",
           "consumer_or_open_obligation": "Prove future-tail escape for the remaining middle producers.",
           "view_decision": "gateway_spine_future_257_companion_detail"
@@ -924,7 +984,7 @@
           ],
           "status_summary": "Conditional largest-skip propagation, exact pulse geometry, and finite reset-band evidence.",
           "prior_art_posture": "No close theorem-level antecedent is recorded.",
-          "primary_narrative_owner": "paper/erdos249-257-exposition.tex",
+          "primary_narrative_owner": "paper/erdos249-257-main-paper.tex",
           "source_route": "python3 scripts/query_corpus.py --claim largest_skip_gap_propagation",
           "consumer_or_open_obligation": "Supply a global first-crossing or anti-concentration theorem preventing persistent right-branch pinning.",
           "view_decision": "gateway_appendix_future_257_companion"
@@ -939,7 +999,7 @@
           ],
           "status_summary": "Conditional cylinder propagation, finite pre-feedback evidence, an exact unit drop, and a concrete scalar-seam obstruction.",
           "prior_art_posture": "No theorem-level match is recorded.",
-          "primary_narrative_owner": "paper/erdos249-257-exposition.tex",
+          "primary_narrative_owner": "paper/erdos249-257-main-paper.tex",
           "source_route": "python3 scripts/query_corpus.py --claim selected_suffix_cylinder_propagation",
           "consumer_or_open_obligation": "Supply the repeated next-row coefficient profile or cofinal cylinder stages.",
           "view_decision": "future_257_companion_reference_stages"
@@ -952,10 +1012,25 @@
           ],
           "status_summary": "Classical identities formalised and one transcendental rung cited only.",
           "prior_art_posture": "Apostol, Merca, and Merca–Schmidt own the transform background; Nesterenko owns the cited transcendence theorem.",
-          "primary_narrative_owner": "paper/erdos249-257-exposition.tex",
+          "primary_narrative_owner": "paper/erdos249-257-main-paper.tex",
           "source_route": "python3 scripts/query_corpus.py --claim mersenne_lambert_ladder",
           "consumer_or_open_obligation": "Provides the conceptual bridge between the classical #257 benchmark and the open #249 constant.",
           "view_decision": "gateway_spine"
+        },
+        {
+          "id": "probabilistic_gcd_and_stern_brocot_geometry",
+          "claim_ids": [
+            "totient_coprimality_probability",
+            "squared_lambert_gcd_moments",
+            "stern_brocot_cylinder_law",
+            "stern_brocot_run_fibonacci_stability"
+          ],
+          "status_summary": "Exact coprimality and gcd-moment identities, a Stern–Brocot cylinder law with uniform geometric convergence, and source-level Fibonacci/continuant run stability.",
+          "prior_art_posture": "Classical Lambert-series, convolution, Pillai gcd-sum, probability, and Stern–Brocot background; Postelmans–Van Assche own the cited irrationality theorem for the q-zeta middle row. No priority claim is made for this assembled formal package.",
+          "primary_narrative_owner": "paper/erdos249-257-main-paper.tex",
+          "source_route": "python3 scripts/query_corpus.py --route probabilistic_gcd_geometry",
+          "consumer_or_open_obligation": "Recasts #249 and exposes independent gcd-distribution and continued-fraction structure; the run package has no endpoint consumer, and irrationality remains open.",
+          "view_decision": "gateway_supporting_identity_living_reference_detail"
         },
         {
           "id": "erdos249_quantitative_headline",
@@ -965,7 +1040,7 @@
           ],
           "status_summary": "One unconditional quantitative theorem and the open irrationality claim.",
           "prior_art_posture": "Farey is historical language only; no exact antecedent for the explicit bound is identified, without asserting novelty.",
-          "primary_narrative_owner": "paper/erdos249-257-exposition.tex",
+          "primary_narrative_owner": "paper/erdos249-257-main-paper.tex",
           "source_route": "python3 scripts/query_corpus.py --claim denominator_exclusion",
           "consumer_or_open_obligation": "Leaves remaining_open.erdos_249_irrationality.",
           "view_decision": "gateway_headline"
@@ -981,7 +1056,7 @@
           ],
           "status_summary": "Exact equivalence and completeness with bounded verified deposits.",
           "prior_art_posture": "Classical Lambert and Möbius identities underlie the construction; no exact certificate-equivalence antecedent is recorded, without a novelty conclusion.",
-          "primary_narrative_owner": "paper/erdos249-257-exposition.tex",
+          "primary_narrative_owner": "paper/erdos249-257-main-paper.tex",
           "source_route": "python3 scripts/query_corpus.py --claim certificate_completeness",
           "consumer_or_open_obligation": "Produce certificates at unbounded parameters.",
           "view_decision": "gateway_headline_finite_matrix"
@@ -997,7 +1072,7 @@
           ],
           "status_summary": "Exact diagonal targets, sharp enclosures and denominators, and conditional avoidance projections.",
           "prior_art_posture": "Classical Möbius/Lambert algebra only; no theorem-specific antecedent is identified.",
-          "primary_narrative_owner": "paper/erdos249-257-exposition.tex",
+          "primary_narrative_owner": "paper/erdos249-257-main-paper.tex",
           "source_route": "python3 scripts/query_corpus.py --claim diagonal_pincer_reduction",
           "consumer_or_open_obligation": "Supply unbounded full-target avoidance, fresh-loss separation, or the missing analytic complement bridge.",
           "view_decision": "gateway_supporting_spine"
@@ -1014,7 +1089,7 @@
           ],
           "status_summary": "Exact local arithmetic, conditional band/slack reductions, and scoped parity ceilings.",
           "prior_art_posture": "No close statement comparison is recorded; novelty remains unasserted.",
-          "primary_narrative_owner": "paper/erdos249-257-exposition.tex",
+          "primary_narrative_owner": "paper/erdos249-257-main-paper.tex",
           "source_route": "python3 scripts/query_corpus.py --claim canonical_jump_slack_reduction",
           "consumer_or_open_obligation": "Prove cofinal nonnegative slack or a correlated multi-rank band supply.",
           "view_decision": "gateway_appendix_reference_detail"
@@ -1048,7 +1123,7 @@
           ],
           "status_summary": "Exact affine annihilation, conditional finite-difference consumers, and two verified windows.",
           "prior_art_posture": "Finite differences and affine moments are general techniques; no matching combined theorem was identified, and that absence is not a novelty claim.",
-          "primary_narrative_owner": "paper/erdos249-transport-curvature.tex",
+          "primary_narrative_owner": "paper/erdos249-transport-curvature-companion-note.tex",
           "source_route": "python3 scripts/query_corpus.py --claim affine_transport_annihilation",
           "consumer_or_open_obligation": "Produce an unbounded supply of a named transport certificate.",
           "view_decision": "transport_companion_primary"
@@ -1062,7 +1137,7 @@
           ],
           "status_summary": "Conditional harmonic and phase consumers ending in an exact window-pair equivalence.",
           "prior_art_posture": "No matching combined theorem is identified; all novelty language remains provisional.",
-          "primary_narrative_owner": "paper/erdos249-transport-curvature.tex",
+          "primary_narrative_owner": "paper/erdos249-transport-curvature-companion-note.tex",
           "source_route": "python3 scripts/query_corpus.py --claim pivot_anti_reconstruction_reduction",
           "consumer_or_open_obligation": "Supply a cofinal harmonic, adjacent-pair, or anti-reconstruction producer.",
           "view_decision": "transport_companion_primary"
@@ -1075,7 +1150,7 @@
           ],
           "status_summary": "Two unconditional scoped countermodels to fixed local precision and finite shift algebra.",
           "prior_art_posture": "No matching theorem is identified; the record explicitly refuses to infer novelty from that.",
-          "primary_narrative_owner": "paper/erdos249-transport-curvature.tex",
+          "primary_narrative_owner": "paper/erdos249-transport-curvature-companion-note.tex",
           "source_route": "python3 scripts/query_corpus.py --claim fixed_precision_transport_no_go",
           "consumer_or_open_obligation": "Future arguments must use growing precision, global correlation, nonlinear arithmetic, or actual fresh-channel structure.",
           "view_decision": "transport_companion_primary"
@@ -7221,6 +7296,26 @@
           "to": "mersenne_lambert_ladder"
         },
         {
+          "from": "totient_coprimality_probability",
+          "relation": "builds_on",
+          "to": "mersenne_lambert_ladder"
+        },
+        {
+          "from": "squared_lambert_gcd_moments",
+          "relation": "builds_on",
+          "to": "totient_coprimality_probability"
+        },
+        {
+          "from": "stern_brocot_cylinder_law",
+          "relation": "builds_on",
+          "to": "squared_lambert_gcd_moments"
+        },
+        {
+          "from": "stern_brocot_run_fibonacci_stability",
+          "relation": "positions",
+          "to": "stern_brocot_cylinder_law"
+        },
+        {
           "from": "prime_support_irrationality",
           "relation": "positions",
           "to": "universal_257"
@@ -7235,7 +7330,7 @@
     "lean_toolchain": "leanprover/lean4:v4.29.1",
     "repository": "https://github.com/wcook04/plectis-lean-erdos249-257",
     "formal_source": {
-      "ref": "81150c1c6fdd4cd51e76d3aa0de344341e0e9e7c",
+      "ref": "a16aa24af5236b6508a34b8a4c4b41fdcf620a98",
       "ref_kind": "commit",
       "publication_state": "committed_checkpoint_pending_remote_publication",
       "relationship_to_last_tag": "post_tag_checkpoint"
@@ -7268,10 +7363,10 @@
       "open_target_claim": "erdos_249",
       "statement": "Prove that S = ∑ φ(n)/2ⁿ is irrational, with no bound on a possible rational denominator.",
       "paper_anchor": {
-        "source": "paper/erdos249-257-exposition.tex",
+        "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 1896
+        "line": 1951
       }
     },
     {
@@ -7279,10 +7374,10 @@
       "open_target_claim": "erdos_249",
       "statement": "Produce certified non-integrality witnesses at unbounded parameters. A sufficient one-parameter form is to produce them along the lcm diagonal.",
       "paper_anchor": {
-        "source": "paper/erdos249-257-exposition.tex",
+        "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 1905
+        "line": 1960
       }
     },
     {
@@ -7290,10 +7385,10 @@
       "open_target_claim": "universal_257",
       "statement": "Prove irrationality for every infinite support A, not only the named support families formalised here.",
       "paper_anchor": {
-        "source": "paper/erdos249-257-exposition.tex",
+        "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 1913
+        "line": 1968
       }
     }
   ],
@@ -7883,12 +7978,22 @@
     },
     {
       "id": "final_middle_cell_escape",
-      "label": "First final-middle cell cannot feed an all-right tail",
+      "label": "Upper and first middle producers cannot feed an all-right tail",
       "status": "proved here",
-      "statement": "If the concrete seam orbit extends right after its last false rank, then the producer-carry cell -3 is impossible: the lazy cofinite tail is below 1/2 while the corresponding Mobius-centred carry is negative, contradicting analytic nonnegativity. This removes one conditional terminal configuration, not the right-tail branch or the remaining middle cells.",
+      "statement": "At a putative last false rank D ≥ 13, the upper producer is impossible unconditionally. On the middle branch, producer-carry cell -3 is also impossible: the lazy cofinite tail is below 1/2 while the corresponding Mobius-centred carry is negative, contradicting analytic nonnegativity. This removes the upper branch and one middle cell, not the right-tail branch or the remaining middle cells -2 and -1.",
       "paper_label": "res:fatalright",
       "readme_headline": false,
       "declarations": [
+        {
+          "name": "upperProducer_not_last",
+          "module": "Erdos249257/HalfCylinderLastProducerContradiction.lean",
+          "line": 250
+        },
+        {
+          "name": "middleProducer_neg_three_not_last",
+          "module": "Erdos249257/HalfCylinderLastProducerContradiction.lean",
+          "line": 315
+        },
         {
           "name": "finalMiddleCell_neg_three_not_last",
           "module": "Erdos249257/HalfCylinderFinalMiddleCellEscape.lean",
@@ -8463,6 +8568,122 @@
           "name": "totient_series_eq_half_add_moebius_mersenne_square",
           "module": "Erdos249257/CertificateKernel.lean",
           "line": 18126
+        }
+      ]
+    },
+    {
+      "id": "totient_coprimality_probability",
+      "label": "Fair-coin coprimality form of the totient constant",
+      "status": "proved here",
+      "statement": "For independent fair-coin geometric waiting times X and Y on the positive integers, S = 1/2 + P(gcd(X,Y)=1), where the probability is the visible coprime-pair series. That probability has no rational representation with denominator at most 39819823323350687661677887437915526. This is an exact reformulation and quantitative corollary; irrationality remains open.",
+      "remaining_open_proposition_ids": [
+        "remaining_open.erdos_249_irrationality"
+      ],
+      "paper_label": "res:coprime",
+      "readme_headline": false,
+      "declarations": [
+        {
+          "name": "totient_series_eq_half_add_visible_coprime_pairs",
+          "module": "Erdos249257/CertificateKernel.lean",
+          "line": 18229
+        },
+        {
+          "name": "tsum_visible_coprime_pairs_ne_int_div_of_den_le_39819823323350687661677887437915526",
+          "module": "Erdos249257/CertificateKernel.lean",
+          "line": 18244
+        }
+      ]
+    },
+    {
+      "id": "squared_lambert_gcd_moments",
+      "label": "Squared-Lambert identities for divisor count and the first gcd moment",
+      "status": "proved here",
+      "statement": "The squared-Mersenne Lambert series with weight 1 equals the base-1/2 series of sigma(n)-tau(n), and the series with weight phi equals the base-1/2 series of P(n)-n, where P is Pillai's gcd-sum function. These are the exact divisor-count and first-moment identities for the fair-coin gcd law; the separately cited irrationality of the q-zeta middle row is not claimed as formalised here.",
+      "paper_label": "res:gcdmoment",
+      "readme_headline": false,
+      "declarations": [
+        {
+          "name": "tsum_one_div_mersenne_sq_eq_sigma_sub_tau_series",
+          "module": "Erdos249257/GcdMomentCalculus.lean",
+          "line": 216
+        },
+        {
+          "name": "tsum_totient_div_mersenne_sq_eq_gcd_moment_series",
+          "module": "Erdos249257/GcdMomentCalculus.lean",
+          "line": 235
+        }
+      ]
+    },
+    {
+      "id": "stern_brocot_cylinder_law",
+      "label": "Reduced-direction normalization and Stern–Brocot cylinder law",
+      "status": "proved here",
+      "statement": "The Mersenne weights of positive reduced slopes sum exactly to one. At every positive Stern–Brocot node (a,b), the cylinder mass 1/((2^a-1)(2^b-1)) splits into its stop mass and two child cylinders; the depth-d unfolding has error between zero and (2/3)^d times the cylinder mass and converges to the closed form.",
+      "readme_headline": false,
+      "declarations": [
+        {
+          "name": "tsum_pos_coprime_inv_mersenne_eq_one",
+          "module": "Erdos249257/GcdMomentCalculus.lean",
+          "line": 349
+        },
+        {
+          "name": "cylinderMass_split",
+          "module": "Erdos249257/GcdMomentCalculus.lean",
+          "line": 474
+        },
+        {
+          "name": "sternBrocotDepthMass_error",
+          "module": "Erdos249257/GcdMomentCalculus.lean",
+          "line": 525
+        },
+        {
+          "name": "tendsto_sternBrocotDepthMass",
+          "module": "Erdos249257/GcdMomentCalculus.lean",
+          "line": 560
+        }
+      ]
+    },
+    {
+      "id": "stern_brocot_run_fibonacci_stability",
+      "label": "Fibonacci and continuant stability of Stern–Brocot runs",
+      "status": "formalised here",
+      "statement": "A Stern–Brocot word with r nonempty alternating runs has height at least F_(r+3), with equality on the all-unit run spine. Writing each run length as 1+e_i gives an exact multiaffine continuant-defect expansion, the sharp global gain F_(r+1) sum e_i, and exact one-site coefficient F_(i+2)F_(r-i+1). The first induced run layer has mass 1/2, while the natural denominator exponent is exactly F_(r+3)-2. These are source-level combinatorial and arithmetic facts; no analytic denominator survival or irrationality conclusion is claimed.",
+      "readme_headline": false,
+      "declarations": [
+        {
+          "name": "sbPair_runWord",
+          "module": "Erdos249257/SternBrocotRunGeometry.lean",
+          "line": 125
+        },
+        {
+          "name": "runHeight_fib_lower",
+          "module": "Erdos249257/SternBrocotRunGeometry.lean",
+          "line": 185
+        },
+        {
+          "name": "runHeight_defectRunLengths",
+          "module": "Erdos249257/SternBrocotRunGeometry.lean",
+          "line": 263
+        },
+        {
+          "name": "runHeight_defect_fib_sum_lower",
+          "module": "Erdos249257/SternBrocotRunGeometry.lean",
+          "line": 343
+        },
+        {
+          "name": "runHeight_oneSiteDefect",
+          "module": "Erdos249257/SternBrocotRunGeometry.lean",
+          "line": 413
+        },
+        {
+          "name": "oneRunMass_eq_half",
+          "module": "Erdos249257/SternBrocotRunGeometry.lean",
+          "line": 467
+        },
+        {
+          "name": "naturalRunDenominatorExponent_add_two",
+          "module": "Erdos249257/SternBrocotRunGeometry.lean",
+          "line": 491
         }
       ]
     },
@@ -9221,7 +9442,7 @@
       "id": "greedy_achievement_geometry",
       "label": "Greedy geometry of the Mersenne achievement set",
       "status": "formalised here",
-      "statement": "The Mersenne achievement set is compact, perfect, totally disconnected, nowhere dense, and has Lebesgue measure one. Membership is equivalent to greedy survival at every level; for the target 1/2 it is exactly equivalent to the canonical greedy orbit omitting infinitely many exponents. Finite exact-rational death certificates soundly prove non-membership (3/4 is excluded at level one). The strict-tail Cantor geometry is recorded by Kovač–Tao; no novelty claim is made for the formalised refinements.",
+      "statement": "The Mersenne achievement set is compact, perfect, totally disconnected, nowhere dense, and has Lebesgue measure one. Membership is equivalent to greedy survival at every level; for the target 1/2 it is exactly equivalent to the canonical greedy orbit omitting infinitely many exponents. No finite normalized support has value 1/2, so positive membership would automatically produce an infinite rational-valued support and refute universal #257. Finite exact-rational death certificates soundly prove non-membership (3/4 is excluded at level one). The strict-tail Cantor geometry is recorded by Kovač–Tao; no novelty claim is made for the formalised refinements.",
       "remaining_open_proposition_ids": [
         "remaining_open.universal_257_all_infinite_supports"
       ],
@@ -9262,6 +9483,11 @@
           "name": "half_mem_mersenneAchievementSet_iff_greedySkippedSupport_infinite",
           "module": "Erdos249257/GreedyAchievementSet.lean",
           "line": 2514
+        },
+        {
+          "name": "finite_boolSupport_ne_half",
+          "module": "Erdos249257/HalfCarryReachability.lean",
+          "line": 589
         }
       ]
     },

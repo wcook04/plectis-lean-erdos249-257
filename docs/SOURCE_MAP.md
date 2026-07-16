@@ -114,7 +114,7 @@ valuation–unit precision alone cannot exclude all centred completions.
   into a direct certificate.
 - `TropicalCurvatureCarry` — fixed-precision local-signature no-go theorem.
 
-The technical exposition is `paper/erdos249-transport-curvature.tex`.  This
+The technical exposition is `paper/erdos249-transport-curvature-companion-note.tex`.  This
 band is included as a separate companion because it has its own definitions
 and proof spine; folding it into the principal paper would obscure the latter's
 global result map.  Every irrationality endpoint in the band remains a
@@ -127,11 +127,10 @@ squared Lambert transform, gcd moments, reduced-direction law, and cylinder
 recursion explain the representation containing the #249 Möbius-square atom.
 `FullTargetPrimeAdjunctionNoGo` is included as a proved negative result because
 it closes a recurring prime-adjunction strategy without changing the open
-claim. `SternBrocotRunGeometry` remains source-map-only supporting
-combinatorics: its continuant/Fibonacci stability theorems are exact, but no
-principal claim or current argument edge consumes them. Promoting that module
-to a paper result would therefore confuse formal infrastructure with a new
-contribution; the cylinder law actually used in the exposition is owned by
+claim. `SternBrocotRunGeometry` is registered as a source-level supporting
+claim: its continuant/Fibonacci stability theorems are exact, but no endpoint
+argument currently consumes them. It therefore remains outside the paper's
+principal result spine; the cylinder law used in the exposition is owned by
 `GcdMomentCalculus`.
 
 ## Binary-carry trunk (post-wave carry layer)
