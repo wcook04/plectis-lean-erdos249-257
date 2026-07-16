@@ -40,19 +40,35 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Test immutable release source resolution
-        run: python3 scripts/test_release_source_identity.py
-      - name: Test scope source-identity boundary
-        run: python3 scripts/test_scope_source_identity.py
-      - name: Test public-artifact boundary
-        run: python3 scripts/test_public_artifact_boundary.py
-      - name: Test supported root-import closure
-        run: python3 scripts/test_root_import_closure.py
-      - name: Cross-surface release checks
-        run: python3 scripts/check_release.py
       - name: Install metadata validators
         run: pip install cffconvert reuse
+
+      # Every check below is blocking, and every check below reports.  The
+      # `!cancelled()` guard exists because release-surface failures are not
+      # ordered by severity: a first-contact wording check runs before the
+      # proof-trust guard, so a fail-fast job can report a missing README
+      # sentence while silently never reaching a `native_decide` violation in
+      # the checked source.  That is what happened between 2026-07-13 and
+      # 2026-07-16.  Surfacing all failures at once weakens nothing; the job
+      # still fails if any single check fails.
+      - name: Cross-surface release checks (proof trust, claims, projections)
+        if: ${{ !cancelled() }}
+        run: python3 scripts/check_release.py
+      - name: Test immutable release source resolution
+        if: ${{ !cancelled() }}
+        run: python3 scripts/test_release_source_identity.py
+      - name: Test scope source-identity boundary
+        if: ${{ !cancelled() }}
+        run: python3 scripts/test_scope_source_identity.py
+      - name: Test public-artifact boundary
+        if: ${{ !cancelled() }}
+        run: python3 scripts/test_public_artifact_boundary.py
+      - name: Test supported root-import closure
+        if: ${{ !cancelled() }}
+        run: python3 scripts/test_root_import_closure.py
       - name: Validate CITATION.cff
+        if: ${{ !cancelled() }}
         run: python3 scripts/check_metadata.py
       - name: REUSE licensing lint
+        if: ${{ !cancelled() }}
         run: reuse lint
