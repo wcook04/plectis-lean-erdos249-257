@@ -14,6 +14,38 @@ ROOT = Path(__file__).resolve().parent.parent
 IMPORT_RE = re.compile(r"^import (Erdos249257(?:\.[A-Za-z0-9_]+)+)\s*$", re.M)
 
 
+def registry_errors(
+    nodes: list[dict[str, object]], public_paths: set[str]
+) -> list[str]:
+    """Return identity and disk-coverage errors for the public module registry."""
+    module_paths = [str(node["path"]) for node in nodes]
+    duplicate_paths = sorted(
+        module_path
+        for module_path in set(module_paths)
+        if module_paths.count(module_path) > 1
+    )
+    errors = [
+        f"machine-readable module graph contains duplicate path: {module_path}"
+        for module_path in duplicate_paths
+    ]
+    for node in nodes:
+        module_id = str(node["id"])
+        module_path = str(node["path"])
+        expected_path = module_id.replace(".", "/") + ".lean"
+        if module_path != expected_path:
+            errors.append(
+                f"module id/path mismatch: {module_id} should use {expected_path}, "
+                f"not {module_path}"
+            )
+
+    registered_paths = set(module_paths)
+    for module_path in sorted(public_paths - registered_paths):
+        errors.append(f"public Lean file is missing from module graph: {module_path}")
+    for module_path in sorted(registered_paths - public_paths):
+        errors.append(f"module graph path is missing from disk: {module_path}")
+    return errors
+
+
 def closure_errors(nodes: list[dict[str, object]], root_imports: list[str]) -> list[str]:
     """Return identity, missing-edge, and orphan errors for a public import graph."""
     module_ids = [str(node["id"]) for node in nodes]
@@ -45,27 +77,77 @@ def closure_errors(nodes: list[dict[str, object]], root_imports: list[str]) -> l
 
 def check_fixtures() -> None:
     connected = [
-        {"id": "Erdos249257.A", "imports": ["Erdos249257.B"]},
-        {"id": "Erdos249257.B", "imports": []},
+        {
+            "id": "Erdos249257.A",
+            "path": "Erdos249257/A.lean",
+            "imports": ["Erdos249257.B"],
+        },
+        {
+            "id": "Erdos249257.B",
+            "path": "Erdos249257/B.lean",
+            "imports": [],
+        },
     ]
+    connected_paths = {"Erdos249257/A.lean", "Erdos249257/B.lean"}
+    assert registry_errors(connected, connected_paths) == []
     assert closure_errors(connected, ["Erdos249257.A"]) == []
 
-    orphaned = [*connected, {"id": "Erdos249257.Orphan", "imports": []}]
+    orphaned = [
+        *connected,
+        {
+            "id": "Erdos249257.Orphan",
+            "path": "Erdos249257/Orphan.lean",
+            "imports": [],
+        },
+    ]
     assert closure_errors(orphaned, ["Erdos249257.A"]) == [
         "public module is outside supported root-import closure: Erdos249257.Orphan"
     ]
 
-    missing = [{"id": "Erdos249257.A", "imports": ["Erdos249257.Missing"]}]
+    missing = [
+        {
+            "id": "Erdos249257.A",
+            "path": "Erdos249257/A.lean",
+            "imports": ["Erdos249257.Missing"],
+        }
+    ]
     assert closure_errors(missing, ["Erdos249257.A"]) == [
         "Erdos249257.A imports unknown public module Erdos249257.Missing"
     ]
 
     duplicate = [
-        {"id": "Erdos249257.A", "imports": []},
-        {"id": "Erdos249257.A", "imports": []},
+        {"id": "Erdos249257.A", "path": "Erdos249257/A.lean", "imports": []},
+        {"id": "Erdos249257.A", "path": "Erdos249257/A2.lean", "imports": []},
     ]
     assert closure_errors(duplicate, ["Erdos249257.A"]) == [
         "machine-readable module graph contains duplicate id: Erdos249257.A"
+    ]
+
+    duplicate_path = [
+        {"id": "Erdos249257.A", "path": "Erdos249257/A.lean", "imports": []},
+        {"id": "Erdos249257.B", "path": "Erdos249257/A.lean", "imports": []},
+    ]
+    duplicate_path_errors = registry_errors(
+        duplicate_path, {"Erdos249257/A.lean"}
+    )
+    assert (
+        "machine-readable module graph contains duplicate path: "
+        "Erdos249257/A.lean"
+    ) in duplicate_path_errors
+
+    mismatched_path = [
+        {"id": "Erdos249257.A", "path": "Erdos249257/B.lean", "imports": []}
+    ]
+    assert any(
+        error.startswith("module id/path mismatch:")
+        for error in registry_errors(mismatched_path, {"Erdos249257/B.lean"})
+    )
+
+    assert registry_errors(connected, connected_paths | {"Erdos249257/New.lean"}) == [
+        "public Lean file is missing from module graph: Erdos249257/New.lean"
+    ]
+    assert registry_errors(connected, {"Erdos249257/A.lean"}) == [
+        "module graph path is missing from disk: Erdos249257/B.lean"
     ]
 
 
@@ -75,11 +157,18 @@ def main() -> int:
     graph = claims["machine_readable_paper"]["module_graph"]
     assert graph["root"] == "Erdos249257.lean"
     root_imports = IMPORT_RE.findall((ROOT / graph["root"]).read_text(encoding="utf-8"))
-    errors = closure_errors(graph["nodes"], root_imports)
+    public_paths = {
+        path.relative_to(ROOT).as_posix()
+        for path in (ROOT / "Erdos249257").rglob("*.lean")
+    }
+    errors = [
+        *registry_errors(graph["nodes"], public_paths),
+        *closure_errors(graph["nodes"], root_imports),
+    ]
     assert not errors, "\n".join(errors)
     print(
-        "test_root_import_closure: supported root reaches "
-        f"all {len(graph['nodes'])} public Lean modules"
+        "test_root_import_closure: registry exactly matches disk and supported "
+        f"root reaches all {len(graph['nodes'])} public Lean modules"
     )
     return 0
 
