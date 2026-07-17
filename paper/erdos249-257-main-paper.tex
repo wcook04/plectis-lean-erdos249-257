@@ -1688,8 +1688,8 @@ at unbounded parameters.  Only the fourth layer would settle the problem.
 
 The main section states this theorem spine.
 Appendix~\ref{app:totient-normal} gives equivalent cofinal coordinates;
-Appendix~\ref{app:totient-finite} contains fixed-scale projections and
-bounded evidence; and
+Appendix~\ref{app:totient-finite} separates fixed-scale mechanisms from the
+conditional cofinal criteria that consume them; and
 Appendices~\ref{app:totient-boundaries}--\ref{app:totient-rank} record
 necessary inputs, scoped no-go results, and conditional rank routes.  Only
 the first is an exact reformulation of the open fourth layer.
@@ -1912,11 +1912,11 @@ quantifier pattern.  No theorem in the formal source proves
 for $S$ is made here.
 
 Appendix~\ref{app:totient-normal} records the exact reformulations of this
-open obligation.  Appendix~\ref{app:totient-finite} records only fixed-scale
-enclosures, projections, and certificates; Appendices~
+open obligation.  Appendix~\ref{app:totient-finite} records fixed-scale
+enclosures, projections, and certificates, then states separately the
+conditional cofinal criteria that consume them.  Appendices~
 \ref{app:totient-boundaries}--\ref{app:totient-rank} delimit candidate
-unbounded routes.  The latter three sharpen or test the target but do not
-supply its missing cofinal quantifier.
+unbounded routes.  None supplies the missing cofinal quantifier.
 
 \long\def\TotientTechnicalAppendix{%
 
@@ -1991,14 +1991,14 @@ Proposition~\ref{res:pincer} converts each one into a missed full target.
 Thus the proposition is the fixed-scale equivalence and the corollary is its
 exact global consumer.  The cofinal avoidance statement remains open.
 
-\subsection{Fixed-scale projections and bounded evidence}
+\subsection{Fixed-scale mechanisms and conditional cofinal consumers}
 \label{app:totient-finite}
 
-This subsection contains finite or one-scale statements only.  The
-reduced-denominator predicate is a stronger finite test not known to follow
-cofinally from rationality; the checked certificate families prove specific
-non-integral tail differences; and the projection criteria turn additional
-finite hypotheses into target avoidance.  None supplies the unbounded
+This subsection is organised by quantifier.  Its enclosures, predicates,
+checked certificate families, and projection equivalences are finite or
+one-scale mechanisms.  Whenever a corollary concludes irrationality, its
+additional premise is an unproved cofinal supply of the relevant finite
+mechanism.  No result here constructs such a supply or fills the missing
 quantifier in Appendix~\ref{app:totient-normal}.
 
 \paragraph{A one-way analytic enclosure.}
@@ -2227,6 +2227,18 @@ at $t=64$,
 \lword{DiagonalPincerCertificateT64Endpoint.lean}{1928}{certifiedKill_diagonal_t64}{scale-64 diagonal certificate}.
 This is one finite endpoint certificate, not an unbounded supply.
 
+\subsection{Candidate cofinal inputs and no-go boundaries}
+\label{app:totient-boundaries}
+
+The three-rank condition below is a candidate cofinal producer, while its
+affine form exposes a precise obstruction to obtaining that producer from
+uniform correction bounds alone.  The remaining results are independent
+filters, not consecutive proof steps: the fresh-prime decomposition and
+one-bit lift expose exact correction terms that an unbounded argument would
+have to control, and the parity, prime-adjunction, scalar-localisation, and
+square-CRT results close four natural shortcuts.  No no-go result consumes
+the preceding filter as a hypothesis.
+
 \paragraph{A three-rank odd window.}\label{res:flexibleoddwindow}
 At an analytically admissible odd power-of-two rank, centrality at any one of
 the canonical odd rank or its next two base-four successors yields the
@@ -2243,16 +2255,6 @@ equivalent to one three-scale affine escape condition,
 A zero-start affine orbit shows that a uniform correction envelope alone does
 not force escape at any finite number of ranks,
 \lword{DiagonalFlexibleOddWindowAffine.lean}{225}{zeroAffineOrbit_stays_in_scaled_edge}{zero-orbit obstruction}.
-
-\subsection{Necessary inputs and no-go boundaries: fresh primes and bits}
-\label{app:totient-boundaries}
-
-The results below are independent filters, not consecutive steps of a proof.
-The fresh-prime decomposition and one-bit lift expose exact correction terms
-that an unbounded argument would have to control.  The parity,
-prime-adjunction, scalar-localisation, and square-CRT results then show that
-four natural shortcuts do not provide that control.  No proposition in the
-second group consumes the preceding one as a hypothesis.
 
 \paragraph{Fresh-prime deficit decomposition.}  The literal foreign channel
 also has an endpoint form suited to curvature tests.  Retain only the prime
@@ -2492,8 +2494,11 @@ therefore the still-open quantifier in Theorem~\ref{res:red21}:
  \forall h\geq1\;\forall N_0\;\exists N\geq N_0\;\exists L\geq1,\qquad
  \textsf{certifiedKill}(h,N,L).
 \]
-The finite projections and no-go results delimit possible ways to prove this
-statement; they do not provide the required cofinal certificates.
+The one-scale mechanisms and conditional consumers in
+Appendix~\ref{app:totient-finite}, the candidate inputs and no-go boundaries
+in Appendix~\ref{app:totient-boundaries}, and the conditional rank routes in
+Appendix~\ref{app:totient-rank} delimit possible approaches to this
+statement.  None provides the required cofinal certificates.
 
 }
 
@@ -3604,12 +3609,12 @@ The exact spine is
 \end{array}
 \]
 Appendix~\ref{app:totient-normal} gives equivalent coordinates for this
-fixed-to-cofinal spine.  Appendix~\ref{app:totient-finite} contains one-scale
-enclosures, projections, and bounded certificates.
+fixed-to-cofinal spine.  Appendix~\ref{app:totient-finite} distinguishes
+one-scale mechanisms from the conditional cofinal consumers that use them.
 Appendices~\ref{app:totient-boundaries}--\ref{app:totient-rank} expose
 possible inputs to an unbounded producer and close several shortcuts.  None
-of the latter three sections performs the missing passage from fixed-scale
-evidence to the second line.
+of the latter three sections proves the missing cofinal supply in the second
+line.
 
 \TotientTechnicalAppendix
 
