@@ -2349,12 +2349,30 @@ irrationality criterion for $S$.
 
 \subsection{Finite determinant and rank routes}
 
-This route has three layers.  Two generic algebraic lemmas expand a
-rectangular determinant and prevent cancellation by a unique largest dyadic
-exponent.  The separated-minor proposition is the conditional rank consumer
-at one fixed level; the even-residue and compressed-adjoint propositions are
-independent reductions, not inputs to that consumer.  The residual-gauge
-proposition then marks the boundary of residual-blind minor constructions.
+This route has two conditional rank consumers.  The first transfers a
+hypothetical rational totient series into unbounded carry-section ranks under
+an all-level kernel-independence hypothesis.  The second turns a separated
+nonzero minor into maximal rank at one fixed level; the two generic algebraic
+lemmas below supply possible inputs to that minor route.  The even-residue and
+compressed-adjoint propositions are independent reductions, and the
+residual-gauge proposition marks the boundary of residual-blind minor
+constructions.
+
+\begin{proposition}[finite-level carry anti-compression]\label{res:carryrank}
+Suppose a tempered integral carry orbit for the totient sequence has positive
+multiplier.  If the canonical level-$e$ totient kernel family is linearly
+independent, then the span of its canonical carry sections has dimension at
+least $2^e-1$.  Consequently, an all-level independence hypothesis together
+with rationality of the totient coefficient series would force one tempered
+carry orbit with unbounded finite-level section ranks.
+\end{proposition}
+\noindent Formalised:
+\lword{TotientCarryKernelRigidity.lean}{211}{finrank_canonicalCarryKernel_ge_of_linearIndependent}{the carry-kernel rank lower bound}
+and
+\lword{TotientCarryKernelRigidity.lean}{261}{not_irrational_totientSeries_implies_unbounded_carryRank}{the unbounded-rank consequence of rationality}.
+The all-level independence hypothesis is not proved here.  Thus the
+proposition records an exact conditional anti-compression consequence, not an
+irrationality criterion for $S$.
 
 \begin{proposition}[rectangular determinant expansion]\label{res:signedmoment}
 For matrices $M:\iota\times\kappa\to R$ and
@@ -3016,6 +3034,27 @@ divisor-coverage constraints in Appendix~B.3; denominator-wrap, reciprocal
 mass, and unbounded-state constraints in Appendix~B.4; and the exact greedy
 geometry with one-sided finite death certificates in Appendix~B.5.
 
+The dependency spine is
+\[
+\begin{array}{rcl}
+ \text{a rational support value}
+ &\Longleftrightarrow& \text{a tempered integral tail orbit}
+ \quad\text{(B.1)},\\
+ \text{a specified support fraction \(p/q\)}
+ &\Longleftrightarrow& \text{a Boolean--M\"obius carry certificate}
+ \quad\text{(B.2)},\\
+ \text{an infinite rational support}
+ &\Longrightarrow& \text{sublogarithmic zero gaps}\quad\text{(B.3)},\\
+ \text{an infinite rational support}
+ &\Longrightarrow& \text{unbounded-state and mass constraints}
+ \quad\text{(B.4).}
+\end{array}
+\]
+The last two lines list independent necessary conditions, not converses and
+not contradictions.  Appendix~B.5 is orthogonal to this rationality chain:
+finite greedy death proves nonmembership in the achievement set, whereas
+survival through any finite depth proves nothing.
+
 The prior-art boundary is theorem-family-specific. The integral carry
 recurrence has a direct antecedent in Wang--Grau Ribas~\cite{wanggrauribas};
 the strict-tail geometry is recorded by Kova\v{c}--Tao~\cite{kovactao};
@@ -3024,7 +3063,12 @@ M\"obius inversion, repetend algebra, and divisor averaging are classical
 priority for the converse/rigidity, certificate-normal-form, or coupled
 reciprocal-mass/collision statements collected here.
 
-\subsection{Tail-orbit rigidity: a rationality criterion}
+\subsection{Exact normal form: tail-orbit rigidity}
+
+This subsection supplies the generic equivalence consumed in Appendix~B.2.
+It converts rationality into an integer recurrence with a boundary condition;
+it does not itself exclude such an orbit or impose the Boolean support
+constraint.
 
 For a coefficient sequence $\gamma:\N\to\N$ with $\gamma(n)\le n$, write
 \[
@@ -3070,27 +3114,12 @@ itself, and positivity is nowhere advertised as an equivalent criterion. The
 linear-growth hypothesis covers both constants introduced in
 Section~\ref{sec:intro}:
 $\ph(n)\le n$ for the \#249 coefficients, and $f_A(n)\le\tau(n)\le n$ for the
-\#257 support coefficients $f_A(n)=\#\{a\in A:a\mid n\}$. The results below
-instantiate the criterion on supports; the totient instantiation is not taken
-here.
+\#257 support coefficients $f_A(n)=\#\{a\in A:a\mid n\}$.  The results below
+instantiate the criterion on supports.  Its separate totient
+anti-compression consequence belongs to the \#249 rank route in
+Appendix~C.4.
 
-\begin{proposition}[finite-level carry anti-compression]\label{res:carryrank}
-Suppose a tempered integral carry orbit for the totient sequence has positive
-multiplier.  If the canonical level-$e$ totient kernel family is linearly
-independent, then the span of its canonical carry sections has dimension at
-least $2^e-1$.  Consequently, an all-level independence hypothesis together
-with rationality of the totient coefficient series would force one tempered
-carry orbit with unbounded finite-level section ranks.
-\end{proposition}
-\noindent Formalised:
-\lword{TotientCarryKernelRigidity.lean}{211}{finrank_canonicalCarryKernel_ge_of_linearIndependent}{the carry-kernel rank lower bound}
-and
-\lword{TotientCarryKernelRigidity.lean}{261}{not_irrational_totientSeries_implies_unbounded_carryRank}{the unbounded-rank consequence of rationality}.
-The all-level independence hypothesis is not proved here.  Thus the
-proposition records an exact conditional anti-compression consequence, not an
-irrationality criterion for $S$.
-
-\subsection{Boolean--M\"obius carry coordinates (the \#257 direction)}
+\subsection{Exact \#257 coordinates: Boolean--M\"obius carry certificates}
 
 This subsection has one preliminary boundary result and then one exact
 equivalence chain.  The boundary result rules out extracting the desired
@@ -3190,7 +3219,12 @@ These are coordinates, not by themselves a strategy: nothing here excludes
 infinite Boolean carry paths, and no finite search is promoted to a
 completeness argument.
 
-\subsection{Sublogarithmic divisor coverage}
+\subsection{Necessary condition I: sublogarithmic divisor coverage}
+
+This theorem is a one-way consequence of a rational support value and is used
+in Corollary~\ref{res:rigidity-sublog-main}.  It limits zero gaps in the
+divisor-coefficient stream; it neither reconstructs a support nor contradicts
+the existence of an infinite rational support.
 
 The coefficient $f_A(n)$ counts the elements of $A$ dividing $n$. Say that a
 zero window of length $h$ starts after $c+N$ when
@@ -3226,7 +3260,7 @@ leaves a coefficient $1/(k-1)$ in front of the binary logarithm. Choosing $k$
 after $\varepsilon$ gives the theorem. This controls gaps in divisor coverage;
 it does not assert a subpower bound for the carry state itself.
 
-\subsection{Residue wraps, reciprocal mass, and unbounded carries}
+\subsection{Necessary conditions II: wraps, mass, and unbounded states}
 
 The dependency order is
 \[
@@ -3363,7 +3397,7 @@ The repetend identities and divisor averages used here are classical. We make
 no claim of mathematical novelty for the coupled reciprocal-mass bounds,
 collision strengthening, or global unboundedness statement.
 
-\subsection{Greedy geometry of the \#257 value set}
+\subsection{Independent geometry and one-sided nonmembership certificates}
 
 Finally, consider the set of all values a base-$2$ support series can
 take. For $n\ge1$ put $w_n=1/(2^n-1)$, let $T(n)$ be the mass strictly after

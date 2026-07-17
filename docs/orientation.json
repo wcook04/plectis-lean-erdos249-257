@@ -56,7 +56,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "Erd\\H{o}s \\#249",
-    "line": 2861
+    "line": 2879
    }
   },
   {
@@ -67,7 +67,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "unbounded certificate supply",
-    "line": 2872
+    "line": 2890
    }
   },
   {
@@ -78,7 +78,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "the half-value counterexample route",
-    "line": 2893
+    "line": 2911
    }
   },
   {
@@ -89,7 +89,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "universal Erd\\H{o}s \\#257",
-    "line": 2884
+    "line": 2902
    }
   }
  ],
@@ -554,18 +554,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_appendix_b_dependency_hierarchy_audit",
+   "id": "main_paper_appendix_c_dependency_hierarchy_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "Appendix B states a five-part reading order, but its long theorem families can still blur exact equivalences, necessary conditions, and one-sided finite nonmembership tests",
-   "statement": "Audit Appendix B's opening and subsection handoffs so the rational-support dependency chain and each theorem family's main-text consumer remain visible."
+   "defect_class": "Appendix C separates four result families, but its long exact-normal-form, finite-evidence, no-go, and rank routes can still obscure which statements consume or merely delimit the open cofinal certificate supply",
+   "statement": "Audit Appendix C's dependency spine and subsection openings so fixed-scale equivalences, bounded evidence, necessary inputs, and closed strategies remain visibly distinct."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "a16aa24af5236b6508a34b8a4c4b41fdcf620a98",
-  "committed_navigation_snapshot": "f4e9fcca6cdd962e3ed42165ba912b82ca58de1a",
-  "main_paper_source_digest": "sha256:7f4737e95331e52cd5a41fddfb8a42fda4a9764c4f89aa5c72f857738d90a790"
+  "committed_navigation_snapshot": "77761791f1eb6dbcc1bdbd1e85976b1467d10da0",
+  "main_paper_source_digest": "sha256:87582b6c851aef3f7428655ccb69d33de88c534cc204452e84666e7ef5fed640"
  },
  "reading_routes": [
   {
