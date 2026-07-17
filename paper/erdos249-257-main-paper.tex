@@ -2502,16 +2502,12 @@ statement.  None provides the required cofinal certificates.
 
 }
 
-\section{Mathematical architecture of the checked arguments}
+\section{The shared finite-to-cofinal bottleneck}
 \label{sec:architecture}
 
-\noindent This section is interpretive: it introduces no additional
-mathematical claim.  Its purpose is to identify which parts of the checked
-arguments are finite and complete, which parts require a uniform theorem, and
-why the chosen coordinates expose that distinction.
-
-\paragraph{Two finite-to-cofinal passages.}
-Both open spines use finite predicates, but their conclusions point in
+\noindent This section makes one comparison between the two open spines; it
+introduces no additional mathematical claim and is not a further proof step.
+Both use complete finite predicates, but their cofinal conclusions point in
 opposite directions:
 \[
 \begin{aligned}
@@ -2523,40 +2519,16 @@ opposite directions:
  \text{\(\tau_s=0\) occurs cofinally}.
 \end{aligned}
 \]
-For the first equivalence, Proposition~\ref{res:complete} supplies fixed
-completeness, Theorem~\ref{res:pointwisecomplete} gives the pointwise global
-form, and Theorem~\ref{res:red21} gives the cofinal form displayed above.
-The missing input is a producer of finite refuters without bound.  For the
-second equivalence, Theorem~\ref{res:halfmembership} already identifies
-cofinal terminal zeros with membership; the missing input is instead a
-producer of those zeros.  The classical full-support theorem is the closed
-comparison case: its producer is the Bertrand--CRT and averaging construction
-of Section~\ref{sec:eb}.
-
-\paragraph{Parallel coordinates for \(S\).}
-The Mersenne--Lambert, M\"obius-square, and coprime-pair identities are three
-equal representations of \(S\), not successive implications.  They expose,
-respectively, the nonnegative primitive-conductor weight, a signed rapidly
-convergent series, and a probability.  Equality of the represented number is
-what transfers the denominator exclusion between them.  None supplies the
-cofinal \(\textsf{certifiedKill}\) family.
-
-\paragraph{Structure inside the probability coordinate.}
-Reducing the random pair by its gcd yields the exact Stern--Brocot cylinder
-law of Theorem~\ref{res:sternbrocotcylinders} and the
-Fibonacci--continuant estimates of Theorem~\ref{res:sternbrocotruns}.  These
-are unconditional consequences inside one coordinate, not another step
-toward the missing certificate producer.
-
-\paragraph{Parallel filters on a rational support.}
-Theorem~\ref{res:rigidity-main} is the common node: rationality forces its
-carry recurrence.  Its four corollaries are parallel filters on the same
-hypothetical support---unbounded carry states, sublogarithmic coverage gaps,
-the odd-denominator reciprocal-mass identity, and the dyadic mass endpoint.
-No filter proves another.  Their proofs and auxiliary coordinates are in
-Appendix~\ref{sec:carry}.  A proof through this route would have to show that
-every infinite rational support violates at least one filter; no such
-exclusion is proved here.
+For \(S\), Proposition~\ref{res:complete} supplies fixed completeness,
+Theorem~\ref{res:pointwisecomplete} gives the pointwise global form, and
+Theorem~\ref{res:red21} gives the displayed cofinal form.  What is missing is
+a producer of finite refuters without bound.  For \(1/2\),
+Theorem~\ref{res:halfmembership} already identifies cofinal terminal zeros
+with membership; what is missing is a producer of those zeros.  The
+classical full-support theorem is the closed comparison case because its
+Bertrand--CRT and averaging argument constructs the required witnesses
+uniformly.  The coordinate identities and rational-support filters used
+elsewhere in the paper do not alter either missing quantifier.
 
 \section{Formal verification and reproducibility}\label{sec:verify}
 
