@@ -907,15 +907,15 @@
         "schema": "erdos249257-editorial-state/1",
         "scope": "continuous_whole_main_paper_exposition",
         "current_priority": {
-          "id": "appendix_c_finite_record_provenance_density",
+          "id": "main_paper_residual_definition_provenance_density",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "defect_class": "an expanded finite-record inventory can cite overlapping scale-specific certificates alongside the aggregate theorem that already owns the same family, obscuring the four mathematical validation classes",
-          "statement": "Audit the verified finite-instance record in Appendix C and align its provenance with the four stated validation classes, retaining aggregate coverage rather than intermediate scale-by-scale plumbing."
+          "defect_class": "the paper still occasionally appends Lean definition links immediately after giving the complete mathematical definition in displayed notation, mixing provenance for objects with provenance for results",
+          "statement": "Audit residual definition-level links across the main paper, beginning with the exact tail-period predicate and the Mersenne achievement set, while preserving links that supply a theorem or a definition absent from the prose."
         },
         "last_verified_wave": {
-          "id": "main_paper_definition_provenance_compression",
+          "id": "appendix_c_finite_record_provenance_compression",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "result": "Removed six definition-level source links from Appendix B.4 after the prose had already defined residues, wrap digits, wrap counts, odd order, reciprocal mass, and tail excess; theorem-level existence, identity, positivity, limit, and classification anchors remain."
+          "result": "Aligned Appendix C's expanded finite-instance record with its four stated validation classes, replacing seven overlapping links with four aggregate anchors and letting the scale-64 theorem own all 28 displayed diagonal scales."
         },
         "active_inconsistencies": [],
         "blocked_decisions": []
@@ -7512,7 +7512,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 2548
+        "line": 2546
       }
     },
     {
@@ -7523,7 +7523,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 2559
+        "line": 2557
       }
     },
     {
@@ -7534,7 +7534,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "the half-value counterexample route",
-        "line": 2574
+        "line": 2572
       }
     },
     {
@@ -7545,7 +7545,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 2565
+        "line": 2563
       }
     }
   ],

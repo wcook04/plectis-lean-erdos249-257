@@ -56,7 +56,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "Erd\\H{o}s \\#249",
-    "line": 2548
+    "line": 2546
    }
   },
   {
@@ -67,7 +67,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "unbounded certificate supply",
-    "line": 2559
+    "line": 2557
    }
   },
   {
@@ -78,7 +78,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "the half-value counterexample route",
-    "line": 2574
+    "line": 2572
    }
   },
   {
@@ -89,7 +89,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "universal Erd\\H{o}s \\#257",
-    "line": 2565
+    "line": 2563
    }
   }
  ],
@@ -554,18 +554,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "appendix_c_finite_record_provenance_density",
+   "id": "main_paper_residual_definition_provenance_density",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "an expanded finite-record inventory can cite overlapping scale-specific certificates alongside the aggregate theorem that already owns the same family, obscuring the four mathematical validation classes",
-   "statement": "Audit the verified finite-instance record in Appendix C and align its provenance with the four stated validation classes, retaining aggregate coverage rather than intermediate scale-by-scale plumbing."
+   "defect_class": "the paper still occasionally appends Lean definition links immediately after giving the complete mathematical definition in displayed notation, mixing provenance for objects with provenance for results",
+   "statement": "Audit residual definition-level links across the main paper, beginning with the exact tail-period predicate and the Mersenne achievement set, while preserving links that supply a theorem or a definition absent from the prose."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "a16aa24af5236b6508a34b8a4c4b41fdcf620a98",
-  "committed_navigation_snapshot": "153ed343f97ecb967482125b90b8e51637d863b5",
-  "main_paper_source_digest": "sha256:ac78401535861f77db6130f4c0cc825ee5a79065c75fb696136504e15a1e1463"
+  "committed_navigation_snapshot": "7ec23447e601864923dcac053c14d76ce9bd4515",
+  "main_paper_source_digest": "sha256:9c401b5127618512a57e25724061e4b46be9588b19f4a15a3d157559ed0d296a"
  },
  "reading_routes": [
   {
