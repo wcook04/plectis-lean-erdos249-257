@@ -56,7 +56,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "Erd\\H{o}s \\#249",
-    "line": 2767
+    "line": 2779
    }
   },
   {
@@ -67,7 +67,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "unbounded certificate supply",
-    "line": 2778
+    "line": 2790
    }
   },
   {
@@ -78,7 +78,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "the half-value counterexample route",
-    "line": 2794
+    "line": 2806
    }
   },
   {
@@ -89,7 +89,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "universal Erd\\H{o}s \\#257",
-    "line": 2785
+    "line": 2797
    }
   }
  ],
@@ -554,18 +554,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_section8_scalar_direction_audit",
+   "id": "main_paper_result_status_caption_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "Section 8 juxtaposes exact scalar equivalences, sufficient cofinal consumers, and finite-prefix checks, so the displayed dependency arrows must agree with the formal quantifiers",
-   "statement": "Audit the strict-jump slack and second-channel results in Section 8, separating local equivalence, global sufficient conditions, and verified finite prefixes."
+   "defect_class": "numbered main-spine statements and their formal-link captions can still combine or blur fixed-scale equivalence, finite verification, necessary consequence, and sufficient consumer status",
+   "statement": "Audit every remaining numbered result in Sections 3--8 for a single visible logical status and a caption whose direction matches its cited declaration."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "a16aa24af5236b6508a34b8a4c4b41fdcf620a98",
-  "committed_navigation_snapshot": "b4a35e3dc6e6ac505983a9265d90960c8d2bb2c0",
-  "main_paper_source_digest": "sha256:05a043bd0cd255f119d543aa51d973c0a7ace25cfe3cb7af72298f81d8b9f488"
+  "committed_navigation_snapshot": "11fc8f92276e1fcbd818e8747b663d62d18555f5",
+  "main_paper_source_digest": "sha256:fefbeabc56f8fb9813af0e5ed0258503967735a39f5552295b03810419ee08f5"
  },
  "reading_routes": [
   {

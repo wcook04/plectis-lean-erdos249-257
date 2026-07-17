@@ -907,15 +907,15 @@
         "schema": "erdos249257-editorial-state/1",
         "scope": "continuous_whole_main_paper_exposition",
         "current_priority": {
-          "id": "main_paper_section8_scalar_direction_audit",
+          "id": "main_paper_result_status_caption_audit",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "defect_class": "Section 8 juxtaposes exact scalar equivalences, sufficient cofinal consumers, and finite-prefix checks, so the displayed dependency arrows must agree with the formal quantifiers",
-          "statement": "Audit the strict-jump slack and second-channel results in Section 8, separating local equivalence, global sufficient conditions, and verified finite prefixes."
+          "defect_class": "numbered main-spine statements and their formal-link captions can still combine or blur fixed-scale equivalence, finite verification, necessary consequence, and sufficient consumer status",
+          "statement": "Audit every remaining numbered result in Sections 3--8 for a single visible logical status and a caption whose direction matches its cited declaration."
         },
         "last_verified_wave": {
-          "id": "main_paper_appendixC_target_avoidance_direction_repair",
+          "id": "main_paper_section8_scalar_aggregate_repair",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "result": "Separated fixed-scale full-target equivalence from its exact cofinal characterisation, while explicitly retaining squared-Mersenne separation and fresh-loss projection as one-way sufficient producers."
+          "result": "Split the scalar slack bundle into a fixed-scale equivalence and one-way cofinal corollary, and split the second-channel bundle into a six-level finite proposition and an unbounded sufficient corollary."
         },
         "active_inconsistencies": [],
         "blocked_decisions": []
@@ -7512,7 +7512,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 2767
+        "line": 2779
       }
     },
     {
@@ -7523,7 +7523,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 2778
+        "line": 2790
       }
     },
     {
@@ -7534,7 +7534,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "the half-value counterexample route",
-        "line": 2794
+        "line": 2806
       }
     },
     {
@@ -7545,7 +7545,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 2785
+        "line": 2797
       }
     }
   ],
@@ -9375,7 +9375,7 @@
       "remaining_open_proposition_ids": [
         "remaining_open.unbounded_certificate_supply"
       ],
-      "paper_label": "res:slackfrontier",
+      "paper_label": "res:slackcriterion",
       "readme_headline": false,
       "declarations": [
         {
@@ -9778,7 +9778,7 @@
       "remaining_open_proposition_ids": [
         "remaining_open.half_value_membership"
       ],
-      "paper_label": "res:secondfrontier",
+      "paper_label": "res:secondcriterion",
       "readme_headline": false,
       "declarations": [
         {

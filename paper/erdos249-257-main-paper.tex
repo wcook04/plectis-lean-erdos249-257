@@ -2686,22 +2686,28 @@ where $0\le d_t<2^{m_t}$.  Define
     (2^{m_t}-2^{m_t-5})-d_t\bigr)\in\Z.
 \]
 
-\begin{proposition}[canonical strict-jump slack]\label{res:slackfrontier}
+\begin{proposition}[canonical central-band equivalence]\label{res:slackfrontier}
 For every $t\ge1$, the canonical residue lies in the central band
 $[2^{m_t-5},2^{m_t}-2^{m_t-5}]$ if and only if $\sigma_t\ge0$.
+\end{proposition}
+\noindent This fixed-scale equivalence and its cofinal strict-jump form are
+the
+\lword{DiagonalFreshLossBridge.lean}{2469}{canonicalAdjacentSuffixCentral_iff_slack_nonneg}{canonical central-band equivalence}
+and
+\lword{DiagonalFreshLossBridge.lean}{2559}{canonicalAdjacentSuffixJumpCentralSupply_iff_slackSupply}{strict-jump slack equivalence}.
+
+\begin{corollary}[cofinal strict-jump slack criterion]
+\label{res:slackcriterion}
 If, for every $t_0$, there is a $t\ge\max\{3,t_0\}$ such that
 \[
  M_t<M_{t+1}\qquad\text{and}\qquad \sigma_t\ge0,
 \]
 then $S$ is irrational.
-\end{proposition}
-\noindent Formalised:
-\lword{DiagonalFreshLossBridge.lean}{2469}{canonicalAdjacentSuffixCentral_iff_slack_nonneg}{canonical central-band equivalence},
-\lword{DiagonalFreshLossBridge.lean}{2559}{canonicalAdjacentSuffixJumpCentralSupply_iff_slackSupply}{strict-jump slack equivalence},
-and
+\end{corollary}
+\noindent This implication is the
 \lword{DiagonalFreshLossBridge.lean}{2731}{irrational_totientSeries_of_canonicalAdjacentSuffixJumpSlackSupply}{cofinal-slack irrationality criterion}.
-The proposition is an equivalence followed by a sufficient criterion.  It
-does not prove that $\sigma_t$ is nonnegative cofinally.
+The proposition identifies equivalent scalar forms; the corollary is
+one-way and does not prove that $\sigma_t$ is nonnegative cofinally.
 
 For \#257, write $r_n$ for the exact greedy residual of the target $1/2$ and
 put
@@ -2713,14 +2719,19 @@ The second-channel condition is the rational inequality
   \frac16+\frac{37}{56}2^{-n}\le \left|u_n-\frac13\right|.
 \]
 
-\begin{proposition}[rational second-channel reduction]\label{res:secondfrontier}
+\begin{proposition}[finite second-channel verification]\label{res:secondfrontier}
 The second-channel condition is decidable over $\Q$ and holds for
-$1\le n\le6$.  If it holds for every $n\ge7$, then
-$1/2$ belongs to the Mersenne achievement set $\mathcal A$.
+$1\le n\le6$.
 \end{proposition}
-\noindent The finite check and the unbounded-range implication are formalised as
-\lword{GreedyAchievementSet.lean}{2723}{halfSecondChannelSeparatedRat_of_pos_le_six}{finite second-channel verification}
-and the
+\noindent This is the
+\lword{GreedyAchievementSet.lean}{2723}{halfSecondChannelSeparatedRat_of_pos_le_six}{finite second-channel verification}.
+
+\begin{corollary}[second-channel membership criterion]
+\label{res:secondcriterion}
+If the second-channel condition holds for every \(n\ge7\), then
+\(1/2\) belongs to the Mersenne achievement set \(\mathcal A\).
+\end{corollary}
+\noindent This implication is the
 \lword{GreedyAchievementSet.lean}{2901}{half_mem_mersenneAchievementSet_of_secondChannelSeparationRat_from_seven}{from-seven membership criterion}.
 The membership conclusion is itself exact:
 \[
@@ -2735,6 +2746,7 @@ uses the absorbing fatal-state
 criterion.  Thus the second-channel hypothesis is one sufficient route to the
 infinite-skip condition.  It does not prove that condition, and membership alone
 is not the universal \#257 theorem.
+The finite proposition supplies no case of the missing range \(n\ge7\).
 
 \paragraph{Dependency direction.}
 The two criteria have the proved logical form
