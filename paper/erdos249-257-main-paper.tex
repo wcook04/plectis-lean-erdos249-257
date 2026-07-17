@@ -2878,7 +2878,7 @@ $\varepsilon,c,$ and $v$, such that every zero window after $c+N$ satisfies
 The bound is uniform in $A,p,N,$ and $h$.
 \end{theorem}
 \noindent Formalised:
-\lref{SublogDivisorCoverage.lean}{392}{supportCoeffZeroWindow_length_le_eps_logb_add}.
+\lword{SublogDivisorCoverage.lean}{392}{supportCoeffZeroWindow_length_le_eps_logb_add}{sublogarithmic zero-window bound}.
 
 The proof first establishes, for each integer $k\ge2$, the explicit divisor
 estimate
@@ -2899,7 +2899,7 @@ containing a positive element. Rationality makes the scaled tails integers:
 $u(N)=v\,T_{f_A}(c+N)$ is a positive integer, satisfies the carry recurrence
 $u(N+1)+v\,f_A(c+N+1)=2\,u(N)$, and reduces modulo $v$ to the doubling
 residues $r_N=p\,2^N\bmod v$
-(\lrefx{RationalSupportCarrySkeleton.lean}{668}{exists_shifted_odd_tail_nat_states_of_support_fraction}).
+(\lword{RationalSupportCarrySkeleton.lean}{668}{exists_shifted_odd_tail_nat_states_of_support_fraction}{shifted natural-state existence}).
 Doubling a least residue either stays under $v$ or wraps past it exactly once,
 so each step emits a wrap digit $k_N=\lfloor2r_N/v\rfloor\in\{0,1\}$, and over
 any cycle length $h$ with $2^h\equiv1\pmod v$ the repetend identity holds:
@@ -2909,12 +2909,12 @@ any cycle length $h$ with $2^h\equiv1\pmod v$ the repetend identity holds:
 w=\sum_{N<h}k_N,
 \]
 with $w\ge1$ when $p$ is coprime to $v>1$. Formalised:
-\lref{RationalSupportCarrySkeleton.lean}{171}{sum_doublingResidue_eq_mul_wrapCount}
-and \lrefx{RationalSupportCarrySkeleton.lean}{181}{doublingWrapCount_pos};
+\lword{RationalSupportCarrySkeleton.lean}{171}{sum_doublingResidue_eq_mul_wrapCount}{wrap-count identity}
+and \lword{RationalSupportCarrySkeleton.lean}{181}{doublingWrapCount_pos}{positive wrap count};
 residues, digits, and counts are
-\lrefx{RationalSupportCarrySkeleton.lean}{35}{doublingResidue},
-\lrefx{RationalSupportCarrySkeleton.lean}{39}{doublingWrapDigit},
-\lrefx{RationalSupportCarrySkeleton.lean}{43}{doublingWrapCount}.
+\lword{RationalSupportCarrySkeleton.lean}{35}{doublingResidue}{doubling residue},
+\lword{RationalSupportCarrySkeleton.lean}{39}{doublingWrapDigit}{wrap digit},
+\lword{RationalSupportCarrySkeleton.lean}{43}{doublingWrapCount}{wrap count}.
 
 \begin{proposition}[one-wrap classification]\label{res:onewrap}
 Let $v>1$ be odd, $p$ coprime to $v$, and $h\ge1$ with $2^h\equiv1\pmod v$.
@@ -2923,33 +2923,33 @@ residue is a power of two: $r_0=2^a$ for some $a<h$.
 \end{proposition}
 \noindent The one-wrap cycles are thus exactly the Mersenne repetends
 $2^a/(2^h-1)$. Formalised:
-\lref{RationalSupportCarrySkeleton.lean}{415}{one_doublingWrap_classification},
+\lword{RationalSupportCarrySkeleton.lean}{415}{one_doublingWrap_classification}{one-wrap classification},
 from the generic closed-cycle form
-\lrefx{RationalSupportCarrySkeleton.lean}{353}{one_wrap_cycle_classification},
+\lword{RationalSupportCarrySkeleton.lean}{353}{one_wrap_cycle_classification}{one-wrap cycle classification},
 and instantiated at the true order $h=\operatorname{ord}_v(2)$
-(\lrefx{RationalSupportCarrySkeleton.lean}{478}{one_oddOrder_doublingWrap_classification},
-with \lrefx{RationalSupportCarrySkeleton.lean}{436}{oddDoublingOrder}). The
+(\lword{RationalSupportCarrySkeleton.lean}{478}{one_oddOrder_doublingWrap_classification}{odd-order one-wrap classification},
+with \lword{RationalSupportCarrySkeleton.lean}{436}{oddDoublingOrder}{odd doubling order}). The
 classification is algebraic; a finite check of $446$ coprime starting residues
 across twelve modulus/order rows is retained as kernel-checked validation, not
 as the proof
-(\lrefx{RationalSupportCarrySkeleton.lean}{2450}{orderWrapValidatedStartCount_eq_446},
-\lrefx{RationalSupportCarrySkeleton.lean}{2454}{orderWrapValidation446_passes},
-\lrefx{RationalSupportCarrySkeleton.lean}{2460}{orderWrap_minima_table_passes}).
+(\lword{RationalSupportCarrySkeleton.lean}{2450}{orderWrapValidatedStartCount_eq_446}{446-start count},
+\lword{RationalSupportCarrySkeleton.lean}{2454}{orderWrapValidation446_passes}{446-start validation},
+\lword{RationalSupportCarrySkeleton.lean}{2460}{orderWrap_minima_table_passes}{minima-table validation}).
 
 The analytic bridge is Ces\`aro averaging. Write $\rho(A)=\sum_{a\in A}1/a$
 for the reciprocal mass
-(\lrefx{RationalSupportCarrySkeleton.lean}{790}{reciprocalMass}). When the
+(\lword{RationalSupportCarrySkeleton.lean}{790}{reciprocalMass}{reciprocal mass}). When the
 reciprocal family is summable, the mean of $f_A(1),\dots,f_A(N)$ converges to
 $\rho(A)$ --- the density of the multiples of $a$, summed over the support ---
 and the mean of the scaled tails has the same limit
-(\lref{RationalSupportCarrySkeleton.lean}{945}{tendsto_supportCoeff_mean_reciprocalMass},
-\lrefx{RationalSupportCarrySkeleton.lean}{1036}{tendsto_binaryCoeffTail_supportCoeff_mean_reciprocalMass}).
+(\lword{RationalSupportCarrySkeleton.lean}{945}{tendsto_supportCoeff_mean_reciprocalMass}{divisor-mean limit},
+\lword{RationalSupportCarrySkeleton.lean}{1036}{tendsto_binaryCoeffTail_supportCoeff_mean_reciprocalMass}{coefficient-tail mean limit}).
 The divergent case is carried as an explicit disjunction, not through a
 default value assigned to a divergent formal sum
-(\lrefx{RationalSupportCarrySkeleton.lean}{796}{ReciprocalMassDivergesOrAtLeast}).
+(\lword{RationalSupportCarrySkeleton.lean}{796}{ReciprocalMassDivergesOrAtLeast}{reciprocal-mass dichotomy}).
 Each tail state splits exactly as $u(N)=v\,e_N+r_N$ with integral excess
 $e_N=\lfloor u(N)/v\rfloor\ge0$
-(\lrefx{RationalSupportCarrySkeleton.lean}{501}{oddTailExcess}).
+(\lword{RationalSupportCarrySkeleton.lean}{501}{oddTailExcess}{odd-tail excess}).
 
 \begin{proposition}[order-wrap lower bound, with exact excess mean]\label{res:orderwrap}
 Let $A$ and $p/(2^c v)$ be as above with $v>1$ odd, and let $w$ be the wrap
@@ -2963,16 +2963,16 @@ the excess $e_N$ converges automatically, and
 \]
 \end{proposition}
 \noindent Formalised:
-\lref{RationalSupportCarrySkeleton.lean}{1454}{support_fraction_oddOrder_wrapRatio_le_reciprocalMass},
-\lref{RationalSupportCarrySkeleton.lean}{1478}{one_div_oddOrder_le_reciprocalMass_of_support_fraction},
+\lword{RationalSupportCarrySkeleton.lean}{1454}{support_fraction_oddOrder_wrapRatio_le_reciprocalMass}{wrap-ratio mass bound},
+\lword{RationalSupportCarrySkeleton.lean}{1478}{one_div_oddOrder_le_reciprocalMass_of_support_fraction}{odd-order mass lower bound},
 the form retaining the divergent alternative
 \lloc{RationalSupportCarrySkeleton.lean}{1582},
 and the excess mean
-\lref{RationalSupportCarrySkeleton.lean}{1334}{tendsto_oddTailExcess_mean}
+\lword{RationalSupportCarrySkeleton.lean}{1334}{tendsto_oddTailExcess_mean}{odd-tail excess mean limit}
 (fraction-facing shifted form
-\lrefx{RationalSupportCarrySkeleton.lean}{1577}{exists_shifted_oddTailExcess_mean_of_support_fraction},
+\lword{RationalSupportCarrySkeleton.lean}{1577}{exists_shifted_oddTailExcess_mean_of_support_fraction}{shifted excess-mean realisation},
 named-limit form
-\lrefx{RationalSupportCarrySkeleton.lean}{1353}{reciprocalMass_eq_wrapRatio_add_oddTailExcessMean}).
+\lword{RationalSupportCarrySkeleton.lean}{1353}{reciprocalMass_eq_wrapRatio_add_oddTailExcessMean}{exact mass decomposition}).
 A rational value thus ties the odd part of its denominator to the sparsity of
 its support: a summable support with small $\rho(A)$ can only display
 denominators whose odd part has small multiplicative order of $2$.
@@ -2992,13 +2992,13 @@ while the exact carry equation $f_A(n)+e_n=k_{n-1}+2e_{n-1}$ with
 $k_{n-1}\le1$ lets one step absorb at most one unit --- so the preceding
 excess must spike to at least $\lceil(|F|-1)/2\rceil$, and the spikes recur
 with density $1/L$. Formalised:
-\lref{RationalSupportCarrySkeleton.lean}{2037}{booleanCollision_wrap_bound_of_common_multiple}
+\lword{RationalSupportCarrySkeleton.lean}{2037}{booleanCollision_wrap_bound_of_common_multiple}{common-multiple wrap bound}
 (denominator-shifted form
 \lloc{RationalSupportCarrySkeleton.lean}{1863}),
 the carry equation
-\lrefx{RationalSupportCarrySkeleton.lean}{1651}{supportCoeff_add_oddTailExcess_succ_eq_wrap_add_two_excess},
+\lword{RationalSupportCarrySkeleton.lean}{1651}{supportCoeff_add_oddTailExcess_succ_eq_wrap_add_two_excess}{wrap--excess recurrence},
 and the dyadic corollary
-\lref{RationalSupportCarrySkeleton.lean}{2200}{dyadic_support_fraction_reciprocalMass_diverges_or_gt_one}
+\lword{RationalSupportCarrySkeleton.lean}{2200}{dyadic_support_fraction_reciprocalMass_diverges_or_gt_one}{dyadic reciprocal-mass dichotomy}
 (via \lloc{RationalSupportCarrySkeleton.lean}{2003}).
 
 \begin{theorem}[carry states are unbounded over infinite supports]\label{res:unbounded}
@@ -3009,13 +3009,13 @@ with $u(N)>B$.
 \noindent The proof picks $2B+1$ positive support elements; at a common
 multiple $L$ of all of them, the local inequality $1+v\,|F|\le2\,u(L-c-1)$
 pushes the state past $B$. Formalised:
-\lref{RationalSupportCarrySkeleton.lean}{2377}{exists_unbounded_shifted_odd_tail_nat_state_of_support_fraction},
+\lword{RationalSupportCarrySkeleton.lean}{2377}{exists_unbounded_shifted_odd_tail_nat_state_of_support_fraction}{unbounded shifted states},
 from
-\lrefx{RationalSupportCarrySkeleton.lean}{2320}{shifted_state_unbounded_of_infinite_support}
+\lword{RationalSupportCarrySkeleton.lean}{2320}{shifted_state_unbounded_of_infinite_support}{infinite-support state unboundedness}
 and the local inequality
-\lrefx{RationalSupportCarrySkeleton.lean}{2228}{one_add_mul_card_le_two_mul_shifted_state};
+\lword{RationalSupportCarrySkeleton.lean}{2228}{one_add_mul_card_le_two_mul_shifted_state}{support-cardinality state bound};
 the $\{2,3\}$ example revalidates it at sixty-six common multiples
-(\lrefx{RationalSupportCarrySkeleton.lean}{2401}{carryOrbit23_common_multiple_bound_validation66}).
+(\lword{RationalSupportCarrySkeleton.lean}{2401}{carryOrbit23_common_multiple_bound_validation66}{two-point finite validation}).
 So a rational value over an infinite support cannot run on a bounded carry
 alphabet. That closes finite-state readings of the carry system; it does not
 close the problem. Nothing in the constraints above
@@ -3035,8 +3035,8 @@ exponent $n$, and let
 the \emph{Mersenne achievement set}, the exponent $0$ being normalised away as
 analytically invisible. Coding by supports of positive exponents is literally
 the formal support series
-(\lrefx{GreedyAchievementSet.lean}{554}{positiveMersenneSupportValue_eq_erdosSupportSeries};
-the set is \lrefx{GreedyAchievementSet.lean}{571}{mersenneAchievementSet}). In
+(\lword{GreedyAchievementSet.lean}{554}{positiveMersenneSupportValue_eq_erdosSupportSeries}{support-value identity};
+the set is \lword{GreedyAchievementSet.lean}{571}{mersenneAchievementSet}{achievement-set definition}). In
 this language the base-$2$ \#257 statement reads: the rational members of
 $\mathcal A$ are exactly the finite subset sums. Nothing below decides that.
 Kova\v{c} and Tao verify, for every fixed integer $t\ge2$, that
@@ -3060,14 +3060,14 @@ $\mathcal A$ has a unique support, which the greedy recursion recovers bit by
 bit.
 \end{theorem}
 \noindent Formalised:
-\lref{GreedyAchievementSet.lean}{180}{mersenneTail_lt_weight},
-\lref{GreedyAchievementSet.lean}{473}{mersenneGap_isBigOWith} (explicit bound
-\lrefx{GreedyAchievementSet.lean}{448}{mersenneGap_asymptotic_bound}),
-\lref{GreedyAchievementSet.lean}{1445}{mem_mersenneAchievementSet_iff_greedy_survival},
+\lword{GreedyAchievementSet.lean}{180}{mersenneTail_lt_weight}{strict-tail inequality},
+\lword{GreedyAchievementSet.lean}{473}{mersenneGap_isBigOWith}{gap big-O estimate} (explicit bound
+\lword{GreedyAchievementSet.lean}{448}{mersenneGap_asymptotic_bound}{explicit gap bound}),
+\lword{GreedyAchievementSet.lean}{1445}{mem_mersenneAchievementSet_iff_greedy_survival}{greedy survival criterion},
 and
-\lref{GreedyAchievementSet.lean}{1527}{positiveMersenneSupportValue_injective_normalized},
+\lword{GreedyAchievementSet.lean}{1527}{positiveMersenneSupportValue_injective_normalized}{normalised support-value injectivity},
 transferred to the kernel series at
-\lrefx{GreedyAchievementSet.lean}{1536}{erdosSupportSeries_two_injective_normalized}.
+\lword{GreedyAchievementSet.lean}{1536}{erdosSupportSeries_two_injective_normalized}{normalised support-series injectivity}.
 The nonnegativity guard in the membership criterion is necessary: without it a
 negative target would survive every level while lying outside $\mathcal A$.
 
@@ -3078,11 +3078,11 @@ The achievement set $\mathcal A$ is compact, perfect, totally disconnected,
 and nowhere dense.  Its Lebesgue measure is exactly one.
 \end{proposition}
 \noindent Formalised:
-\lref{GreedyAchievementSet.lean}{996}{volume_mersenneAchievementSet},
-\lref{GreedyAchievementSet.lean}{1620}{perfect_mersenneAchievementSet},
-\lref{GreedyAchievementSet.lean}{1636}{isTotallyDisconnected_mersenneAchievementSet},
+\lword{GreedyAchievementSet.lean}{996}{volume_mersenneAchievementSet}{measure-one theorem},
+\lword{GreedyAchievementSet.lean}{1620}{perfect_mersenneAchievementSet}{perfectness},
+\lword{GreedyAchievementSet.lean}{1636}{isTotallyDisconnected_mersenneAchievementSet}{total disconnectedness},
 and
-\lref{GreedyAchievementSet.lean}{1645}{isNowhereDense_mersenneAchievementSet}.
+\lword{GreedyAchievementSet.lean}{1645}{isNowhereDense_mersenneAchievementSet}{nowhere density}.
 Kova\v{c}--Tao supply the strict-tail Cantor-set context cited above.  The
 formalisation records these exact properties without making a novelty or
 priority claim for them.
@@ -3097,13 +3097,13 @@ rational number already known to lie in $\mathcal A$ has computable support
 bits.
 \end{proposition}
 \noindent Formalised:
-\lref{GreedyAchievementSet.lean}{1130}{cast_greedyMersenneRemainderRat};
-\lref{GreedyAchievementSet.lean}{1726}{certifiedGreedyMersenneDeath_not_mem},
+\lword{GreedyAchievementSet.lean}{1130}{cast_greedyMersenneRemainderRat}{rational--real greedy agreement};
+\lword{GreedyAchievementSet.lean}{1726}{certifiedGreedyMersenneDeath_not_mem}{finite death certificate},
 with the certificate
-\lrefx{GreedyAchievementSet.lean}{1720}{CertifiedGreedyMersenneDeath} and the
-enclosure \lrefx{GreedyAchievementSet.lean}{1687}{mersenneTailUpperRat};
-\lref{GreedyAchievementSet.lean}{1748}{three_fourths_not_mem_mersenneAchievementSet};
-and \lref{GreedyAchievementSet.lean}{1832}{rational_member_support_bit_iff}.
+\lword{GreedyAchievementSet.lean}{1720}{CertifiedGreedyMersenneDeath}{death-certificate predicate} and the
+enclosure \lword{GreedyAchievementSet.lean}{1687}{mersenneTailUpperRat}{rational tail enclosure};
+\lword{GreedyAchievementSet.lean}{1748}{three_fourths_not_mem_mersenneAchievementSet}{three-quarters nonmembership};
+and \lword{GreedyAchievementSet.lean}{1832}{rational_member_support_bit_iff}{rational-member support-bit equivalence}.
 The certificates are one-sided: survival through any finite depth proves
 nothing about membership, and no decidability of membership in $\mathcal A$ is
 asserted.  Neither the global geometry nor the finite death certificates
