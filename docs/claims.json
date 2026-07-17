@@ -907,15 +907,15 @@
         "schema": "erdos249257-editorial-state/1",
         "scope": "continuous_whole_main_paper_exposition",
         "current_priority": {
-          "id": "main_paper_appendix_bundled_statement_audit",
+          "id": "main_paper_remaining_bundled_statement_audit",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "defect_class": "one numbered appendix proposition can bundle a finite base case, several conditional transitions, a no-go inequality, and a cofinal conclusion without exposing their dependency order",
-          "statement": "Audit multi-part appendix propositions, beginning with the suffix-cylinder feedback statement, and separate independent facts from the actual conditional chain."
+          "defect_class": "a remaining numbered statement can still bundle mathematically independent clauses whose only relationship is that they were formalised in the same module family",
+          "statement": "Audit the remaining multi-clause appendix statements and split only where the clauses have distinct hypotheses, consumers, or proof status."
         },
         "last_verified_wave": {
-          "id": "main_paper_appendix_assumption_scope_repair",
+          "id": "main_paper_appendix_bundled_statement_repair",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "result": "Made the cofinal strip, foreign-projection, shadow-denominator, residue-supply, parity-socket, and order-wrap statements locally explicit by moving their numerical bounds, quantifiers, and rationality hypotheses into the numbered results."
+          "result": "Split the former five-part suffix-cylinder inventory into a locally quantified base/update proposition, feedback dichotomy, profiled-gap transition, quarter-band obstruction, and cofinal half-membership corollary, with each formal source attached to its actual mathematical role."
         },
         "active_inconsistencies": [],
         "blocked_decisions": []
@@ -7512,7 +7512,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 2655
+        "line": 2684
       }
     },
     {
@@ -7523,7 +7523,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 2666
+        "line": 2695
       }
     },
     {
@@ -7534,7 +7534,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "the half-value counterexample route",
-        "line": 2681
+        "line": 2710
       }
     },
     {
@@ -7545,7 +7545,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 2672
+        "line": 2701
       }
     }
   ],

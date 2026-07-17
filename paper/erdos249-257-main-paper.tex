@@ -1319,24 +1319,57 @@ A \emph{profiled gap stage} additionally permits one missing carry interval
 prefixes through the cutoff.
 \end{definition}
 
-\begin{proposition}[conditional suffix-cylinder feedback]
-\label{res:selectsuffix}
-The following statements hold.
-\begin{enumerate}[label=\textup{(\roman*)},leftmargin=2.2em]
-\item The verified depth-\(18\) selected window has \(R=12\) and a suffix
-cylinder at cutoff \(M=13\) with endpoint \(E=17\).
+The results below have five different roles.  The checked base feeds the
+ordinary one-row update.  At a feedback row there is a dichotomy between a
+new full stage and a local gap.  A separate recurrence advances such a gap
+when its coefficient inequalities hold.  The quarter-band bound is only a
+necessary obstruction.  Finally, the cofinal corollary is the sole step from
+arbitrarily deep full stages to half-membership.
 
-\item Whenever the canonical one-row successor hypotheses hold and every
-selected word has the same next coefficient \(C\), the successor remains a
-suffix cylinder and its endpoint is
+\begin{proposition}[verified base and one-row cylinder update]
+\label{res:selectsuffix}
+The depth-\(18\) selected window has \(R=12\) and a suffix cylinder at cutoff
+\(M=13\) with endpoint \(E=17\).
+
+More generally, let a depth-\(N\), radius-\(R\) selected window
+\((a^{(k)})_{1\leq k\leq R}\) have a suffix cylinder at cutoff \(M\leq N\)
+with endpoint \(E\), where \(1\leq N\) and \(R\leq E\).  Let
+\(1\leq R'\leq H_{N+1}\).  If
+\[
+ f_{a^{(k)}}(N+1)=C\qquad(1\leq k\leq R)
+\]
+and
+\[
+ R'+C\leq2R,
+\]
+then the radius-\(R'\) successor remains a suffix cylinder, with endpoint
 \[
  E'=2E-C.
 \]
-At a feedback row \(N+1=2(M+1)\), either the full cylinder advances or the
-exceptional carry values form a profiled gap stage; the alternative includes
-the protected-seam case.
+\end{proposition}
+\noindent The base and endpoint update are the
+\lword{SelectedSuffixCylinder.lean}{88}{depth18SelectedHalfWindow_hasSuffixCylinderAt_thirteen}{depth-\(18\) cylinder}
+and
+\lword{SelectedSuffixCylinder.lean}{136}{SelectedHalfWindow.hasSuffixCylinderAt_stepExplicit}{endpoint recurrence}.
 
-\item Suppose a profiled gap stage has lower and upper next coefficients
+\begin{proposition}[feedback-row dichotomy]\label{res:feedbackdichotomy}
+Let a full suffix-cylinder stage have depth \(N\), cutoff \(M\), with
+\(1\leq N\), \(M+1\leq N\), and
+\[
+ N+1=2(M+1).
+\]
+At depth \(N+1\), either a full stage exists at cutoff \(M+1\), or the
+exceptional carries form a two-sheet profiled gap stage.  If
+\(27\leq H_{N+1}\), the residual alternative also realises a protected
+one-hole seam.
+\end{proposition}
+\noindent Formalised by the
+\lword{SuffixCylinderGlobalProducer.lean}{174}{CylinderStage.feedbackStep_or_protectedSeam}{feedback dichotomy}
+and
+\lword{SuffixCylinderInStrip.lean}{665}{CylinderStage.feedbackAdvance_or_inStripTwoSheet}{two-family gap alternative}.
+
+\begin{proposition}[profiled-gap transition]\label{res:profiledgap}
+Suppose a profiled gap stage has lower and upper next coefficients
 \(C_-\) and \(C_+\), respectively.  If
 \[
 \begin{gathered}
@@ -1355,41 +1388,37 @@ acquire the forced bits \(0\) and \(1\); their consecutiveness is preserved.
 Under the displayed child-gap conditions at the next row, this promoted
 stage therefore advances with coefficients determined by its retained
 prefixes.
+\end{proposition}
+\noindent Formalised by the
+\lword{SuffixCylinderProfiledGap.lean}{124}{ProfiledGapStage.advanceOfNextCoeffProfile}{two-coefficient gap recurrence}
+and
+\lword{SuffixCylinderProfiledAutoStep.lean}{110}{ProfiledGapStage.promoteThenAdvance_hasAdjacentPrefixes}{promote-and-advance theorem}.
 
-\item If a two-row update swallows a protected strip of bound \(B\), and the
+\begin{proposition}[quarter-band swallow obstruction]\label{res:cylinderswallow}
+If a two-row update swallows a protected strip of bound \(B\), and the
 lower coefficient pulse is at most the upper pulse plus \(2\), then
 \[
  B\leq4(g_+-g_-+1)+2. \tag{A.1}
 \]
 This is a necessary quarter-band condition, not a contradiction.
+\end{proposition}
+\noindent Formalised as the
+\lword{SuffixCylinderProfiledSwallow.lean}{254}{nextBound_le_four_gapWidth_add_two_of_macro_swallow}{swallow bound}.
 
-\item If full suffix-cylinder stages exist at arbitrarily large depths, then
+\begin{corollary}[cofinal suffix-cylinder criterion]\label{res:cofinalcylinder}
+If full suffix-cylinder stages exist at arbitrarily large depths, then
 there is an infinite set \(A\subseteq\N\) such that
 \[
  \sum_{n\in A}\frac1{2^n-1}=\frac12.
 \]
-\end{enumerate}
-\end{proposition}
-
-\noindent Part~\textup{(i)} is the
-\lword{SelectedSuffixCylinder.lean}{88}{depth18SelectedHalfWindow_hasSuffixCylinderAt_thirteen}{depth-\(18\) cylinder}.
-Part~\textup{(ii)} is the
-\lword{SelectedSuffixCylinder.lean}{136}{SelectedHalfWindow.hasSuffixCylinderAt_stepExplicit}{endpoint recurrence},
-\lword{SuffixCylinderGlobalProducer.lean}{174}{CylinderStage.feedbackStep_or_protectedSeam}{feedback dichotomy},
-and
-\lword{SuffixCylinderInStrip.lean}{665}{CylinderStage.feedbackAdvance_or_inStripTwoSheet}{two-family gap alternative}.
-Part~\textup{(iii)} is the
-\lword{SuffixCylinderProfiledGap.lean}{124}{ProfiledGapStage.advanceOfNextCoeffProfile}{two-coefficient gap recurrence}
-and
-\lword{SuffixCylinderProfiledAutoStep.lean}{110}{ProfiledGapStage.promoteThenAdvance_hasAdjacentPrefixes}{promote-and-advance theorem}.
-Part~\textup{(iv)} is the
-\lword{SuffixCylinderProfiledSwallow.lean}{254}{nextBound_le_four_gapWidth_add_two_of_macro_swallow}{swallow bound}.
-Part~\textup{(v)} is the
+\end{corollary}
+\noindent This is the
 \lword{SuffixCylinderTerminalOnlyBridge.lean}{138}{exists_infinite_support_half_of_cofinalCylinderStages}{cofinal-cylinder criterion}.
 
 \paragraph{Status and prior-art boundary.}
-The proposition is a conditional propagation theorem: it does not supply the
-coefficient inequalities or the cofinal family in part~\textup{(v)}.  The
+The two transition propositions do not supply their coefficient inequalities,
+and the finite base does not supply the cofinal family required by
+Corollary~\ref{res:cofinalcylinder}.  The
 strict-tail achievement-set literature supplies the surrounding Cantor-set
 geometry~\cite{kovactao}, not this finite carry recurrence; the comparison
 record makes no novelty claim for the recurrence itself.
@@ -1421,7 +1450,7 @@ and
 \end{enumerate}
 These are finite milestones, not an unbounded induction; they do not provide
 the arbitrarily large stages required by
-Proposition~\ref{res:selectsuffix}\textup{(v)}.
+Corollary~\ref{res:cofinalcylinder}.
 
 \subsubsection{Half-divisor unit drop}\label{res:halfdivisordrop}
 
