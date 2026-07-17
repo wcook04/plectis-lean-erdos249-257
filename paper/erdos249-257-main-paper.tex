@@ -2483,20 +2483,12 @@ Section~\ref{sec:further} remain open.
 
 \section{Exact frontiers and further questions}\label{sec:further}
 
-The conclusions divide into one open \#249 obligation and a two-way \#257
-frontier.  For
-Erd\H{o}s \#249, Theorem~\ref{res:farey} excludes a large finite denominator
-range and Theorem~\ref{res:red21} gives an exact certificate
-characterisation; the missing assertion is the unbounded certificate supply
-\eqref{eq:unbounded-certificate-supply}.  For Erd\H{o}s \#257,
-Theorem~\ref{res:full} settles full support and
-Theorem~\ref{res:support} settles several structured infinite supports, but
-the universal statement remains open.  A counterexample would instead be a
-rational member of the achievement set $\mathcal A$, with $1/2$ the
-distinguished target analysed in Section~\ref{sec:eb}.
-The achievement-set topology and the Stern--Brocot cylinder law are exact
-structural results on the two sides of this frontier; neither supplies the
-missing universal or cofinal assertion.
+Section~\ref{sec:spines} gives the exact reductions.  Here we record two
+concrete sufficient criteria and then state the unresolved questions.
+Erd\H{o}s \#249 has one open obligation in two equivalent forms.  Erd\H{o}s
+\#257 has a universal statement and a counterexample route pointing in
+opposite directions: half-value membership would refute the universal
+statement, while nonmembership would close only that route.
 
 \long\def\FurtherLambertAppendix{%
 
@@ -2824,6 +2816,7 @@ whereas the second would refute, not prove, the universal \#257 statement.
 
 \subsection{The unresolved statements}
 
+\paragraph{Erd\H{o}s \#249: one obligation in two equivalent forms.}
 \begin{problem}[Erd\H{o}s \#249]
 Prove that
 \[
@@ -2842,6 +2835,11 @@ Theorem~\ref{res:diag}.  The finite scales in
 Example~\ref{res:deposits} do not establish either cofinal form.
 \end{problem}
 
+These are not two independent open problems: Theorem~\ref{res:red21} and
+Theorem~\ref{res:diag} identify the second as an exact certificate form of
+the first.
+
+\paragraph{Erd\H{o}s \#257: universal statement and counterexample route.}
 \begin{problem}[universal Erd\H{o}s \#257]
 Prove that
 \[
@@ -2860,23 +2858,19 @@ statement; a negative answer would close this distinguished counterexample
 route only.
 \end{problem}
 
-The scalar criteria above isolate two concrete subproblems: cofinal
-nonnegative slack would settle \#249, while the second-channel inequality
-would settle the half-value membership question.  Neither assertion follows
-from its checked finite range.
+\paragraph{Boundary of the closing criteria.}
+Cofinal nonnegative slack would settle the exact \#249 obligation, but the
+verified finite scales do not provide it.  The second-channel inequality for
+all \(n\ge7\) would settle half-value membership, but its verified prefix
+provides no part of that universal range.  The rational-support filters in
+Section~\ref{sec:eb} constrain the universal \#257 problem without reducing
+it to one finite predicate, and the additional coordinates in
+Appendix~\ref{app:lambert-complements} close none of these frontiers.
 
-Rationality on the \#257 side would also impose two complementary forms of
-rigidity: divisor-coverage zero windows have length $o(\log N)$, whereas an
-infinite support with rational series value forces the associated positive
-carry states to be unbounded.  These constraints do not yet exclude a
-rational infinite-support value.
-
-Appendix~\ref{app:lambert-complements} collects further weighted-Lambert,
-M\"obius-square, and finite-algebraic identities.  They provide additional
-coordinates and obstructions, but no further closure of the three statements
-above.  Across both problems the missing step has the same logical form: a
-finite obstruction is exact at fixed parameters, while the theorem requires
-that obstruction uniformly or without bound.
+Thus the missing inputs are distinct: a cofinal certificate supply for
+\#249; cofinal terminal zeros, or an equivalent membership decision, for the
+half-value route; and a proof for every infinite support, or a rational
+infinite-support counterexample, for the universal \#257 statement.
 
 \subsection*{Statements and declarations}
 
