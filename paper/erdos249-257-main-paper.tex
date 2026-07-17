@@ -386,7 +386,7 @@ Thus Erd\H{o}s~\#249 also asks whether the probability that two independent
 fair-coin waiting times are coprime is irrational.  The exact identity is
 Proposition~\ref{res:coprime}; its M\"obius-square form and the periodic and
 finite-algebraic variants of the ladder are collected in
-Section~\ref{sec:additional-lambert}.
+Appendix~\ref{app:lambert-complements}.
 
 \paragraph{Section consequence and residual.}
 The exact contribution of this section is the coordinate change
@@ -2565,8 +2565,13 @@ statement, while nonmembership would close only that route.
 
 \long\def\FurtherLambertAppendix{%
 
-\subsection{Additional Lambert, probability, and finite-algebraic structure}
+\subsection{Weighted Lambert comparison families}
 \label{sec:additional-lambert}
+
+This subsection changes the coefficient input.  Its eventually-periodic
+theorems settle or classify those comparison series, while the period-four
+example blocks one residue-blind shortcut.  None has the totient weight
+defining \(S\), so no irrationality status transfers to Erd\H{o}s~\#249.
 
 \paragraph{Periodic weights.}\label{sec:periodicweights}
 For \(L_b(\gamma)=\sum_{a\ge1}\gamma(a)/(b^a-1)\), the checked endpoints are:
@@ -2590,6 +2595,14 @@ For the period-four weight \(1,0,-1,0\), the divisor coefficient vanishes on
 \end{proposition}
 \noindent Formalised:
 \lword{CertificateKernel.lean}{13898}{intWeightedCoeff_periodFourSignWeight_eq_zero_of_mod_four_eq_three}{period-four coefficient obstruction}.
+
+\subsection{Finite algebraic boundaries and squared-Lambert coordinates}
+
+This subsection keeps the relevant coordinates but separates three roles:
+finite denominator-clearing obstructions, the exact M\"obius-square identity
+for \(S\), and comparison rows in the squared-Lambert calculus.  The identity
+changes coordinates; the finite propositions delimit algebraic methods; and
+the status of one squared-Lambert row does not pass to another.
 
 \paragraph{Finite algebraic boundaries.}\label{sec:primitiveindex}
 Put \(a_n=(\ph*\mu)(n)/n\).  If an integer \(D\) clears these coordinates
@@ -2671,7 +2684,14 @@ Postelmans--Van Assche imply irrationality of the middle row
 ~\cite{postelmansvanassche}; this does not transfer to the M\"obius row, which
 is exactly the open constant \(S-\tfrac12\).
 
-\paragraph{Reduced slopes and Stern--Brocot cylinders.}
+\subsection{Probability-coordinate geometry: reduced slopes and cylinders}
+
+These results live entirely inside the coprime-pair probability coordinate.
+They normalise reduced directions and quantify Stern--Brocot cylinder and run
+geometry.  They are unconditional geometric consequences, not consumers or
+producers of the open certificate supply.
+
+\paragraph{Reduced directions and cylinder masses.}
 The fair-coin pair has a particularly rigid distribution after division by
 its gcd.  For positive coprime \(a,b\), put
 \[
@@ -3556,15 +3576,25 @@ Lambert identities, and the Stern--Brocot cylinder and continuant laws.
 These enlarge the two coordinate pictures; they are not additional steps in
 either open proof spine.
 
+The three families are parallel, not cumulative.  Appendix~D.1 proves or
+classifies weighted Lambert series with coefficient inputs different from the
+open totient input.  Appendix~D.2 gives exact identities and finite algebraic
+boundaries for the squared and M\"obius coordinates.  Appendix~D.3 develops
+unconditional geometry internal to the coprime-pair probability coordinate.
+No conclusion about a comparison input transfers irrationality to \(S\), and
+none of the three families supplies the cofinal
+\(\textsf{certifiedKill}\) producer.
+
 \FurtherLambertAppendix
 
 \paragraph{Appendix consequence.}
-The periodic-weight results extend the Mersenne--Lambert ladder in
-Section~\ref{sec:ladder}; the M\"obius-square, gcd-moment, cylinder, and
-continuant identities refine the coprime-pair representation in
-Proposition~\ref{res:coprime}.  Neither handoff implies the cofinal
-\(\textsf{certifiedKill}\) supply for \(S\) or a producer of
-\(1/2\in\mathcal A\).  Those, rather than any result internal to this
+The transfer is coordinate extension only.  Appendix~D.1 enlarges the
+Mersenne--Lambert comparison family in Section~\ref{sec:ladder};
+Appendix~D.2 supplies the M\"obius-square and gcd-moment coordinates; and
+Appendix~D.3 refines the coprime-pair representation in
+Proposition~\ref{res:coprime}.  These are three independent handoffs.  None
+implies the cofinal \(\textsf{certifiedKill}\) supply for \(S\) or a producer
+of \(1/2\in\mathcal A\).  Those, rather than any result internal to this
 appendix, remain the missing main-spine inputs.
 
 \section{Guide to the formal sources}\label{app:index}
