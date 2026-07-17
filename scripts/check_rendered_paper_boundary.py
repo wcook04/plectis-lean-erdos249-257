@@ -34,10 +34,6 @@ PAPERS = (
         ROOT / "paper" / "erdos249-257-main-paper.tex",
         ROOT / "erdos249-257-main-paper.pdf",
     ),
-    (
-        ROOT / "paper" / "erdos249-transport-curvature-companion-note.tex",
-        ROOT / "erdos249-transport-curvature-companion-note.pdf",
-    ),
 )
 ARCHITECTURE_PAPERS = (
     ROOT / "claim-faithful-publication-systems-paper.pdf",
@@ -58,16 +54,6 @@ FIRST_MINUTE_CONTRACT = {
             "the exact half-value counterexample spine",
             "a finite normalised support cannot have value 1/2",
             "no unbounded supply is proved",
-        ),
-    },
-    "erdos249-transport-curvature-companion-note.pdf": {
-        (1, 1): (
-            "scrapped",
-            "not an active mathematical paper",
-            "the only two coherent successors",
-            "matched pair of specialist notes",
-            "what was preserved",
-            "makes no mathematical status change",
         ),
     },
     "claim-faithful-publication-systems-paper.pdf": {

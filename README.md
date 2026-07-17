@@ -12,7 +12,6 @@ Lean 4 formal work on two unsolved irrationality problems.
 
 [**Gateway paper**](erdos249-257-main-paper.pdf) ·
 [**Publication systems paper**](claim-faithful-publication-systems-paper.pdf) ·
-[**Retired #249-only note**](erdos249-transport-curvature-companion-note.pdf) ·
 [Release v0.6.0](https://github.com/wcook04/plectis-lean-erdos249-257/releases/tag/v0.6.0) ·
 [![Lean CI](https://github.com/wcook04/plectis-lean-erdos249-257/actions/workflows/lean.yml/badge.svg)](https://github.com/wcook04/plectis-lean-erdos249-257/actions/workflows/lean.yml) ·
 [Plectis](https://wcook04.github.io/plectis/)
@@ -74,9 +73,7 @@ An exact final-skip band formula does not show that the actual orbit avoids
 an unsafe band.
 
 [Orientation](docs/ORIENTATION.md) routes claims; the
-[gateway paper](erdos249-257-main-paper.pdf) owns the current exposition. The
-[former #249-only note](erdos249-transport-curvature-companion-note.pdf) is a
-retirement notice; its predecessor is archived.
+[gateway paper](erdos249-257-main-paper.pdf) owns the current exposition.
 
 ## What remains open
 

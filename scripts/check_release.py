@@ -1092,10 +1092,6 @@ def main() -> int:
             "paper/erdos249-257-main-paper.tex",
             "erdos249-257-main-paper.pdf",
         ),
-        "technical_companion": (
-            "paper/erdos249-transport-curvature-companion-note.tex",
-            "erdos249-transport-curvature-companion-note.pdf",
-        ),
     }
     for content_id, (source_path, rendered_path) in paper_artifacts.items():
         content = descriptor_content.get(content_id, {})

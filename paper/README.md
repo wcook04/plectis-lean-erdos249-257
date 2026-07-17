@@ -25,12 +25,11 @@ beyond what the Lean sources contain; the proofs are the sources it links to.
 The manuscript layer (this `.tex` and the rendered PDF) is licensed CC-BY-4.0;
 see `REUSE.toml` at the repository root.
 
-`erdos249-transport-curvature-companion-note.tex` is now a retirement notice.
-The former #249-only specialist note was scrapped because a one-sided
-companion does not give readers a coherent paper set for a repository about
-both #249 and #257. Its full prior source and PDF are preserved under
-`paper/archive/`. Revive specialist notes only as a matched #249/#257 pair;
-otherwise keep one mathematical gateway paper.
+There is deliberately no specialist companion note. A former #249-only note
+was scrapped and deleted (it survives only in git history) because a
+one-sided companion does not give readers a coherent paper set for a
+repository about both #249 and #257. Add specialist notes only as a matched
+#249/#257 pair; otherwise keep one mathematical gateway paper.
 
 `claim-faithful-publication-systems-paper.tex` is the printable architecture
 and access guide. It names the real source files, reviewed records, generated
@@ -56,8 +55,7 @@ pdflatex erdos249-257-main-paper.tex && pdflatex erdos249-257-main-paper.tex
 make
 ```
 
-The outputs are `erdos249-257-main-paper.pdf`, the retirement notice
-`erdos249-transport-curvature-companion-note.pdf`, and
+The outputs are `erdos249-257-main-paper.pdf` and
 `claim-faithful-publication-systems-paper.pdf`; `make` also synchronises the
 tracked reader-facing copies at repository root.
 
