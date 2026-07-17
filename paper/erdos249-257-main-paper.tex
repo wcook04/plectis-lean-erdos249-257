@@ -2967,14 +2967,10 @@ with $u(N)>B$.
 \end{theorem}
 \noindent The proof picks $2B+1$ positive support elements; at a common
 multiple $L$ of all of them, the local inequality $1+v\,|F|\le2\,u(L-c-1)$
-pushes the state past $B$. Formalised:
-\lword{RationalSupportCarrySkeleton.lean}{2377}{exists_unbounded_shifted_odd_tail_nat_state_of_support_fraction}{unbounded shifted states},
-from
-\lword{RationalSupportCarrySkeleton.lean}{2320}{shifted_state_unbounded_of_infinite_support}{infinite-support state unboundedness}
-and the local inequality
-\lword{RationalSupportCarrySkeleton.lean}{2228}{one_add_mul_card_le_two_mul_shifted_state}{support-cardinality state bound};
-the $\{2,3\}$ example revalidates it at sixty-six common multiples
-(\lword{RationalSupportCarrySkeleton.lean}{2401}{carryOrbit23_common_multiple_bound_validation66}{two-point finite validation}).
+pushes the state past $B$. The conclusion is the
+\lword{RationalSupportCarrySkeleton.lean}{2377}{exists_unbounded_shifted_odd_tail_nat_state_of_support_fraction}{fraction-facing unbounded-state theorem};
+its local engine is the
+\lword{RationalSupportCarrySkeleton.lean}{2228}{one_add_mul_card_le_two_mul_shifted_state}{support-cardinality state bound}.
 So a rational value over an infinite support cannot run on a bounded carry
 alphabet. That closes finite-state readings of the carry system; it does not
 close the problem. Nothing in the constraints above

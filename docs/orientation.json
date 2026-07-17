@@ -554,18 +554,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "appendix_b_unbounded_carry_provenance_hierarchy",
+   "id": "main_paper_finite_record_provenance_alignment",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "the unbounded-carry theorem has one conclusion and one displayed proof mechanism but its provenance continues through an internal bridge theorem and a finite example validation, obscuring the direct theorem-to-lemma dependency",
-   "statement": "Recast the Appendix B.4 unbounded-carry provenance around the fraction-facing unboundedness theorem and the local support-cardinality inequality, demoting internal proof plumbing and nonessential example validation."
+   "defect_class": "the main Section 5 finite-instance record states four validation classes but uses five anchors because an early diagonal theorem overlaps the aggregate 28-scale theorem, unlike the now-aligned Appendix C record",
+   "statement": "Align the main Section 5 finite-instance provenance with its four stated validation classes and let the aggregate scale-64 theorem own the displayed diagonal family."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "a16aa24af5236b6508a34b8a4c4b41fdcf620a98",
-  "committed_navigation_snapshot": "117e11c80296fa62df75fda6b03257df7c50edd2",
-  "main_paper_source_digest": "sha256:90b4ec8c1e81dc57427edc0e749e78d3c42b34b8791ee7552c02127c5dfedfed"
+  "committed_navigation_snapshot": "624deb293aa12152edae0d6498b194df3b1d8357",
+  "main_paper_source_digest": "sha256:a8d986077c3aa40b5c97161ca06191353ca3f8b346cb2d3c5a2083ed2f9e26bc"
  },
  "reading_routes": [
   {

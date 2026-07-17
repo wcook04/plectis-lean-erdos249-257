@@ -907,15 +907,15 @@
         "schema": "erdos249257-editorial-state/1",
         "scope": "continuous_whole_main_paper_exposition",
         "current_priority": {
-          "id": "appendix_b_unbounded_carry_provenance_hierarchy",
+          "id": "main_paper_finite_record_provenance_alignment",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "defect_class": "the unbounded-carry theorem has one conclusion and one displayed proof mechanism but its provenance continues through an internal bridge theorem and a finite example validation, obscuring the direct theorem-to-lemma dependency",
-          "statement": "Recast the Appendix B.4 unbounded-carry provenance around the fraction-facing unboundedness theorem and the local support-cardinality inequality, demoting internal proof plumbing and nonessential example validation."
+          "defect_class": "the main Section 5 finite-instance record states four validation classes but uses five anchors because an early diagonal theorem overlaps the aggregate 28-scale theorem, unlike the now-aligned Appendix C record",
+          "statement": "Align the main Section 5 finite-instance provenance with its four stated validation classes and let the aggregate scale-64 theorem own the displayed diagonal family."
         },
         "last_verified_wave": {
-          "id": "appendix_b_collision_provenance_compression",
+          "id": "appendix_b_unbounded_carry_provenance_compression",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "result": "Reduced the collision corollary's five mixed theorem and raw-location anchors to the three direct shifted results matching its common-multiple bound, wrap-excess recurrence, and dyadic reciprocal-mass alternative."
+          "result": "Reduced the unbounded-carry theorem from four anchors to the direct fraction-facing unboundedness theorem and its displayed local support-cardinality inequality, removing an internal bridge and nonessential finite-example validation."
         },
         "active_inconsistencies": [],
         "blocked_decisions": []
