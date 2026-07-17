@@ -48,7 +48,7 @@ FIRST_MINUTE_CONTRACT = {
             "would refute the universal statement",
             "neither problem is settled",
             "an unbounded certificate supply",
-            "cofinal false terminals",
+            "cofinal terminal zeros",
         ),
         (2, 2): (
             "an exact certificate normal form",

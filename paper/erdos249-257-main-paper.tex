@@ -157,7 +157,7 @@ support of sum $1/2$.\\[2pt]
 \textbf{\mbox{Open}} &
 An unbounded certificate supply. &
 Universal direction: all infinite supports.  Counterexample direction:
-cofinal false terminals; concretely, the two final-skip obligations in
+cofinal terminal zeros; concretely, the two final-skip obligations in
 Section~\ref{sec:eb}.\\
 \bottomrule
 \end{tabular}
@@ -240,15 +240,15 @@ is unique.  For \(1/2\), the following are equivalent:
 \begin{aligned}
 \frac12\in\mathcal A
 &\quad\Longleftrightarrow\quad
-\text{the greedy skipped support is infinite}\\
+\text{the set of exponents omitted by the greedy expansion is infinite}\\
 &\quad\Longleftrightarrow\quad
-\text{false successor terminals occur beyond every bound}.
+\text{a successor terminal bit equal to zero occurs beyond every bound}.
 \end{aligned}
 \]
 A finite normalised support cannot have value \(1/2\).  Thus membership would
 produce an infinite support of rational sum and refute the universal statement
 of Erd\H{o}s~\#257.  The required counterexample condition is therefore exact:
-cofinally many false terminals, equivalently no last greedy skip.
+cofinally many terminal zeros, equivalently no last greedy skip.
 
 More generally, rationality over an infinite support forces an unbounded
 positive integer carry orbit.  Further exact consequences are
@@ -671,7 +671,7 @@ No finite normalised support has value \(1/2\).  Consequently, any one of
 \(X_A=1/2\), and therefore refutes the universal form of
 Erd\H{o}s~\#257.
 \end{theorem}
-\noindent The greedy-support equivalence is the
+\noindent The omitted-set equivalence is the
 \lword{GreedyAchievementSet.lean}{2514}{half_mem_mersenneAchievementSet_iff_greedySkippedSupport_infinite}{infinite-skip theorem};
 the terminal forms are the
 \lword{HalfCylinderHalfMembershipClassification.lean}{126}{half_mem_mersenneAchievementSet_iff_unboundedTerminalFalse}{unbounded-terminal theorem}
@@ -893,8 +893,8 @@ weakened for the canonical greedy half carry.  Its uncentred, binary-scaled
 form is antitone.  Consequently, if it returns to the square-root strip
 cofinally, then one sufficiently late return bounds every later scaled carry;
 the strip envelope divided by $2^N$ tends to zero.  The resulting tempered
-centred carry gives an infinite greedy support with support-series value
-$1/2$.
+centred carry yields a support selected by the greedy expansion whose series
+value is $1/2$; the finite-support exclusion makes that support infinite.
 
 \begin{proposition}[cofinal strip-return criterion]\label{res:cofinalstripreturn}
 If the canonical greedy half carry returns cofinally to the stated
@@ -1076,7 +1076,7 @@ greedy skip is equivalent to eventual right extension.  The following
 paragraph records the first exceptional middle case that can be ruled out.
 
 \paragraph{First final-middle cell.}  The first exceptional middle cell has a
-separate obstruction: if the orbit extends right after the last false rank,
+separate obstruction: if the orbit extends right after the last skipped rank,
 then the cell with transition carry $-3$ makes the lazy cofinite tail strictly
 smaller than $1/2$ while its centred carry becomes negative.  This is
 impossible by the analytic nonnegativity identity,
@@ -1115,11 +1115,11 @@ hypothesis.
 \subsubsection{Positive half-membership classification}\label{app:halfmembership-detail}
 
 The complementary branch has an equally exact seam formulation.  Membership
-of $1/2$ in the Mersenne achievement set is equivalent to false successor
-terminal bits beyond every bound,
-\lword{HalfCylinderHalfMembershipClassification.lean}{126}{half_mem_mersenneAchievementSet_iff_unboundedTerminalFalse}{the unbounded terminal-skip equivalence};
-equivalently, it is equivalent to a cofinal sequence of such false terminals,
-\lword{HalfCylinderHalfMembershipClassification.lean}{203}{half_mem_mersenneAchievementSet_iff_cofinalTerminalFalse}{the cofinal terminal-skip equivalence}.
+of $1/2$ in the Mersenne achievement set is equivalent to the occurrence,
+beyond every bound, of a successor terminal bit equal to zero,
+\lword{HalfCylinderHalfMembershipClassification.lean}{126}{half_mem_mersenneAchievementSet_iff_unboundedTerminalFalse}{the unbounded terminal-zero equivalence};
+equivalently, it is equivalent to a cofinal sequence of such terminal zeros,
+\lword{HalfCylinderHalfMembershipClassification.lean}{203}{half_mem_mersenneAchievementSet_iff_cofinalTerminalFalse}{the cofinal terminal-zero equivalence}.
 It is also equivalent to a cofinal integer-seam sequence with skipped ranks
 tending to infinity,
 \lword{HalfCylinderHalfMembershipClassification.lean}{213}{half_mem_mersenneAchievementSet_iff_exists_unboundedSkippedRanksAlong}{the unbounded skipped-rank equivalence}.
@@ -1399,7 +1399,7 @@ Proposition~\ref{res:selectsuffix}\textup{(v)}.
 \subsubsection{Half-divisor unit drop}\label{res:halfdivisordrop}
 
 At the doubled feedback row, changing only the terminal half-divisor bit from
-false to true increases the support coefficient by exactly one:
+\(0\) to \(1\) increases the support coefficient by exactly one:
 \lword{HalfDivisorUnitDrop.lean}{20}{supportCoeff_extend_true_eq_false_add_one_at_double}{the terminal-bit unit-drop identity}.
 The same holds for any explicitly identified adjacent boundary pair,
 \lword{HalfDivisorUnitDrop.lean}{35}{supportCoeff_boundaryPair_unitDrop_at_double}{the boundary-pair unit-drop identity}.
@@ -3011,7 +3011,7 @@ and deduce distinct Lambert subsums and a Cantor set~\cite{kovactao}. At
 $t=2$ this is the relevant Lambert-series instance of Kakeya's classical
 strict-tail criterion for subsum sets~\cite{kakeya1914}. The local
 contribution is the checked greedy criterion, quantitative enclosure, and
-finite non-membership certificates over that known geometry; it does not
+finite nonmembership certificates over that known geometry; it does not
 attribute those refinements to the cited sources or settle \#257.
 
 \begin{theorem}[superincreasing geometry and greedy membership]\label{res:greedy-details}
@@ -3051,7 +3051,7 @@ Kova\v{c}--Tao supply the strict-tail Cantor-set context cited above.  The
 formalisation records these exact properties without making a novelty or
 priority claim for them.
 
-\begin{proposition}[exact rational runs and finite non-membership certificates]\label{res:death}
+\begin{proposition}[exact rational runs and finite nonmembership certificates]\label{res:death}
 The greedy recursion executed in exact rational arithmetic agrees step by step
 with the real recursion under casting. For a rational target $x$, write
 $r_n(x)$ for its exact rational residual after level $n$ and, for a lookahead

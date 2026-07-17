@@ -554,18 +554,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_cross_section_terminology_audit",
+   "id": "main_paper_notation_coordinate_boundary_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "the same mathematical objects recur in the theorem spines, detailed sections, and appendices under nearby terms such as omitted exponents, skipped support, false terminals, seam words, and carry states",
-   "statement": "Audit recurring mathematical objects across the main paper, standardising genuine synonyms and explicitly declaring coordinate changes where distinct terms encode different levels of the argument."
+   "defect_class": "the main spines and technical appendices use several nearby tail, residual, seam, and carry coordinates whose symbol changes are mathematically legitimate only when their different domains or normalisations are explicit",
+   "statement": "Audit notation at every main-to-appendix boundary, retaining distinct symbols only for distinct mathematical objects and adding an explicit coordinate map wherever the reader would otherwise have to infer the change."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "a16aa24af5236b6508a34b8a4c4b41fdcf620a98",
-  "committed_navigation_snapshot": "ef3ed387b22a74f6cb202667a9cce20b05d84eb3",
-  "main_paper_source_digest": "sha256:9bbe3e382ca4b6a3bcbcf59b07714e7f301c9c7b488bc2624e9fae2826e70ea2"
+  "committed_navigation_snapshot": "d80f9ec11c9df8245831b5b92f2c9b02aa2fa8df",
+  "main_paper_source_digest": "sha256:a22a4630129d8e653370fd2fa837d5a4479a3ff1a97d6537837dad8a6527a59c"
  },
  "reading_routes": [
   {

@@ -347,7 +347,7 @@ def validate_gateway_opening(paper: str) -> None:
         ],
         "exact_residuals": [
             ["An unbounded certificate supply"],
-            ["cofinal false terminals"],
+            ["cofinal terminal zeros"],
             ["two final-skip obligations"],
         ],
         "common_architecture": [
