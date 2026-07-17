@@ -581,7 +581,7 @@ For \(A\subseteq\N\setminus\{0\}\), define
  T_f(N)=\sum_{j\geq1}\frac{f(N+j)}{2^j}.
 \]
 
-\begin{theorem}[rational-support rigidity]\label{res:rigidity-main}
+\begin{theorem}[rational-support carry recurrence]\label{res:rigidity-main}
 Suppose that \(A\neq\varnothing\) and
 \[
  X_A=\frac{p}{2^c v},
@@ -591,17 +591,35 @@ Then \(u_N=vT_{f_A}(c+N)\) is a positive integer for every \(N\), and
 \[
  u_{N+1}+v f_A(c+N+1)=2u_N. \tag{4.1}
 \]
-The recurrence is the common premise for the following three independent
-necessary consequences:
-\begin{enumerate}[label=\textup{(\roman*)},leftmargin=2.2em]
-\item if \(A\) is infinite, then \((u_N)\) is unbounded;
-\item for every \(\varepsilon>0\) there is
+\end{theorem}
+\noindent This is the exact carry recurrence forced by rationality; its
+tail-orbit normal form is Theorem~\ref{res:rigidity}.
+
+\begin{corollary}[unbounded-state consequence]
+\label{res:rigidity-unbounded-main}
+Under the hypotheses of Theorem~\ref{res:rigidity-main}, if \(A\) is
+infinite, then \((u_N)\) is unbounded.
+\end{corollary}
+\noindent This is Theorem~\ref{res:unbounded}; it rules out every bounded-state
+model for an infinite rational support.
+
+\begin{corollary}[sublogarithmic coverage consequence]
+\label{res:rigidity-sublog-main}
+Under the hypotheses of Theorem~\ref{res:rigidity-main}, for every
+\(\varepsilon>0\) there is
 \(B=B(\varepsilon,c,v)\) such that every interval
 \(\{c+N+1,\ldots,c+N+\ell\}\) on which \(f_A\) vanishes satisfies
 \[
  \ell\leq\varepsilon\log_2(N+1)+B;
 \]
-\item if \(\rho(A)=\sum_{a\in A}a^{-1}<\infty\), \(v>1\), and
+\end{corollary}
+\noindent This is Theorem~\ref{res:sublog}; it prevents logarithmically long
+gaps in divisor coverage.
+
+\begin{corollary}[odd-denominator reciprocal-mass consequence]
+\label{res:rigidity-mass-main}
+Under the hypotheses of Theorem~\ref{res:rigidity-main}, if
+\(\rho(A)=\sum_{a\in A}a^{-1}<\infty\), \(v>1\), and
 \(h=\operatorname{ord}_v(2)\), then
 \[
  \rho(A)=\frac{w}{h}
@@ -609,24 +627,20 @@ necessary consequences:
 \]
 where \(w\) is the number of wraps in one doubling-residue cycle and
 \(u_N=ve_N+(p2^N\bmod v)\).  If \((p,v)=1\), then \(w\geq1\).
-For \(v=1\) and \(A\) infinite, either \(\rho(A)\) diverges or
-\(\rho(A)>1\).
-\end{enumerate}
-\end{theorem}
-\noindent Equation~(4.1) is the exact carry recurrence.  Part (i) rules out
-every bounded-state model for an infinite rational support; part (ii)
-prevents logarithmically long gaps in divisor coverage; part (iii) relates
-the odd denominator to the reciprocal density of the support.  These are
-necessary consequences of rationality, not a contradiction.  The exact
-tail-orbit statement is Theorem~\ref{res:rigidity}.  Parts~\textup{(i)} and
-\textup{(ii)} are proved in Theorems~\ref{res:unbounded} and
-\ref{res:sublog}; the odd-denominator portion of part~\textup{(iii)} is
-Proposition~\ref{res:orderwrap}, and its dyadic endpoint is
-Corollary~\ref{res:collision}.  The supporting Boolean-certificate
-coordinates are developed in Appendix~\ref{sec:carry}.
-The three clauses remain together because they share the displayed rationality
-hypothesis and the same consumer---testing a hypothetical rational support;
-no clause is used to prove another.
+\end{corollary}
+\noindent This is Proposition~\ref{res:orderwrap}.
+
+\begin{corollary}[dyadic reciprocal-mass consequence]
+\label{res:rigidity-dyadic-mass-main}
+Under the hypotheses of Theorem~\ref{res:rigidity-main}, if \(v=1\) and
+\(A\) is infinite, then either \(\rho(A)\) diverges or \(\rho(A)>1\).
+\end{corollary}
+\noindent This is Corollary~\ref{res:collision}.
+
+These are four independent necessary consequences of the common rationality
+premise, not steps in a proof chain and not a contradiction.  Their supporting
+Boolean-certificate coordinates are developed in
+Appendix~\ref{sec:carry}; no corollary above is used to prove another.
 
 \subsection{The target \(1/2\)}
 
@@ -1554,8 +1568,9 @@ The two directions remain separate.
 \begin{enumerate}[label=\textup{(\alph*)},leftmargin=2.2em]
 \item The universal problem is to prove \(X_A\notin\Q\) for every infinite
 \(A\subseteq\N\setminus\{0\}\).  Theorem~\ref{res:support} proves several
-families, and Theorem~\ref{res:rigidity-main} constrains a hypothetical
-rational support, but neither result supplies the universal quantifier.
+families, while Theorem~\ref{res:rigidity-main} and its four corollaries
+constrain a hypothetical rational support.  Neither route supplies the
+universal quantifier.
 \item The counterexample problem is to prove \(1/2\in\mathcal A\).
 Theorem~\ref{res:halfmembership} identifies this with infinitely many greedy
 skips, while Theorem~\ref{res:fatalright} identifies nonmembership with a
@@ -2399,17 +2414,20 @@ the probability representation, not a substitute for the certificate supply.
 
 \paragraph{Necessary conditions on a rational support.}
 The mathematical assertions in this part of the architecture are exactly
-those of Theorem~\ref{res:rigidity-main}, with their proofs and auxiliary
-coordinates in Appendix~\ref{sec:carry}.  Their role is diagnostic.  The
-zero-window bound in Theorem~\ref{res:rigidity-main}\textup{(ii)} is obtained
+Theorem~\ref{res:rigidity-main} and
+Corollaries~\ref{res:rigidity-unbounded-main}--\ref{res:rigidity-dyadic-mass-main},
+with their proofs and auxiliary coordinates in Appendix~\ref{sec:carry}.
+Their role is diagnostic.  The zero-window bound in
+Corollary~\ref{res:rigidity-sublog-main} is obtained
 by transporting the fixed-power divisor estimate
 \(\tau(n)^k\le(k^{2^k})^k n\) through the binary tail and the exact carry
-recurrence.  Part~\textup{(i)} shows that an infinite rational support cannot
-be represented by a bounded carry alphabet.  Part~\textup{(iii)} relates the
-odd denominator to reciprocal mass, retaining divergence as an explicit
-alternative.  None of these necessary conditions is a contradiction; they
-describe the infinite Boolean carry path that a future proof would have to
-exclude.
+recurrence.  Corollary~\ref{res:rigidity-unbounded-main} excludes a bounded
+carry alphabet, while Corollary~\ref{res:rigidity-mass-main} relates the odd
+denominator to reciprocal mass and
+Corollary~\ref{res:rigidity-dyadic-mass-main} retains divergence as an
+explicit alternative at the dyadic endpoint.  None of these necessary
+conditions is a contradiction; they describe the infinite Boolean carry path
+that a future proof would have to exclude.
 
 \section{Formal verification and reproducibility}\label{sec:verify}
 
@@ -2903,14 +2921,16 @@ bounded checks and local no-go theorems provide neither route.
 \section{Auxiliary rationality criteria from binary carry systems}\label{sec:carry}
 
 This appendix supplies the general results assembled in
-Theorem~\ref{res:rigidity-main} and the detailed greedy geometry cited after
-Theorem~\ref{res:greedy}.  Its new working objects are a tempered integer
-tail orbit, its Boolean M\"obius coordinate, the wrap--excess decomposition
-modulo the odd denominator, and exact rational death certificates for the
-achievement set.  Appendices~B.1--B.4 describe necessary or equivalent forms
-of a hypothetical rational support; Appendix~B.5 describes the ambient
-achievement set and its one-sided finite nonmembership test.  None of these
-objects by itself excludes a rational value.
+Theorem~\ref{res:rigidity-main} and
+Corollaries~\ref{res:rigidity-unbounded-main}--\ref{res:rigidity-dyadic-mass-main},
+and the detailed greedy geometry cited after Theorem~\ref{res:greedy}.  Its
+new working objects are a tempered integer tail orbit, its Boolean M\"obius
+coordinate, the wrap--excess decomposition modulo the odd denominator, and
+exact rational death certificates for the achievement set.
+Appendices~B.1--B.4 describe necessary or equivalent forms of a hypothetical
+rational support; Appendix~B.5 describes the ambient achievement set and its
+one-sided finite nonmembership test.  None of these objects by itself
+excludes a rational value.
 
 The reading order is: a generic tail-orbit rationality normal form in
 Appendix~B.1; its Boolean--M\"obius specialisation in Appendix~B.2;
@@ -3354,13 +3374,17 @@ asserted.  Neither the global geometry nor the finite death certificates
 exclude rational values for either open series.
 
 \paragraph{Appendix consequence.}
-The transfer to the main text is Theorem~\ref{res:rigidity-main}: rationality
-of \(X_A\) forces an unbounded integral carry orbit, sublogarithmic
-divisor-coverage gaps, and the stated wrap--density constraint.  Appendix~B.5
-also supplies the finite death certificates used in
+The transfer to the main text is Theorem~\ref{res:rigidity-main} followed by
+the four independent
+Corollaries~\ref{res:rigidity-unbounded-main}--\ref{res:rigidity-dyadic-mass-main}.
+Rationality yields the exact carry recurrence; an infinite rational support
+must separately satisfy the unbounded-state theorem, the sublogarithmic
+divisor-coverage bound, and the applicable odd- or dyadic-denominator
+reciprocal-mass constraint.
+Appendix~B.5 also supplies the finite death certificates used in
 Theorem~\ref{res:greedy}.  What is not proved is that the support attached to
-either target violates one of these necessary conditions.  That contradiction,
-not another rational normal form, is the missing premise.
+either target violates one of these necessary conditions.  That
+contradiction, not another rational normal form, is the missing premise.
 
 \section{Technical reductions for the totient-certificate branch}
 \label{app:totient-technical}
