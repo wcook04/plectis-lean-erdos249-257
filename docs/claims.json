@@ -907,15 +907,15 @@
         "schema": "erdos249257-editorial-state/1",
         "scope": "continuous_whole_main_paper_exposition",
         "current_priority": {
-          "id": "appendix_b_order_wrap_provenance_hierarchy",
+          "id": "appendix_b_collision_provenance_hierarchy",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "defect_class": "the order-wrap proposition states three mathematical conclusions but follows them with six overlapping generic, shifted, named-limit, and divergent-form anchors, so the direct fraction-facing proof hierarchy is not visible",
-          "statement": "Recast the Appendix B.4 order-wrap provenance around the divergent wrap-ratio alternative, its coprime specialization, and the fraction-facing shifted excess-mean theorem."
+          "defect_class": "the collision corollary's three mathematical components are followed by five anchors, including two uncaptioned raw source locations for shifted variants, so direct results and implementation variants are visually conflated",
+          "statement": "Recast the Appendix B.4 collision provenance around the common-multiple bound, the exact wrap-excess recurrence, and the dyadic divergent-or-greater-than-one corollary."
         },
         "last_verified_wave": {
-          "id": "main_paper_residual_definition_provenance_compression",
+          "id": "appendix_b_order_wrap_provenance_compression",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "result": "Removed eleven redundant links to Lean definitions already given mathematically in the prose. The finite death certificate now displays its rational enclosure and certificate inequality and links to the enclosure theorem and soundness theorem; only two visible definition targets remain, both unreproduced finite-data or proof-construction objects."
+          "result": "Reduced the order-wrap proposition's six overlapping generic, divergent, shifted, and named-limit anchors to the three direct fraction-facing theorems matching its wrap-ratio alternative, coprime specialization, and exact excess-mean conclusion."
         },
         "active_inconsistencies": [],
         "blocked_decisions": []

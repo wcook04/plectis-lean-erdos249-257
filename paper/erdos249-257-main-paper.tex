@@ -2930,17 +2930,12 @@ the excess $e_N$ converges automatically, and
 \rho(A)\;=\;\frac{w}{h}\;+\;\lim_{N\to\infty}\frac1N\sum_{n<N}e_n .
 \]
 \end{proposition}
-\noindent Formalised:
-\lword{RationalSupportCarrySkeleton.lean}{1454}{support_fraction_oddOrder_wrapRatio_le_reciprocalMass}{wrap-ratio mass bound},
-\lword{RationalSupportCarrySkeleton.lean}{1478}{one_div_oddOrder_le_reciprocalMass_of_support_fraction}{odd-order mass lower bound},
-the form retaining the divergent alternative
-\lloc{RationalSupportCarrySkeleton.lean}{1582},
-and the excess mean
-\lword{RationalSupportCarrySkeleton.lean}{1334}{tendsto_oddTailExcess_mean}{odd-tail excess mean limit}
-(fraction-facing shifted form
-\lword{RationalSupportCarrySkeleton.lean}{1577}{exists_shifted_oddTailExcess_mean_of_support_fraction}{shifted excess-mean realisation},
-named-limit form
-\lword{RationalSupportCarrySkeleton.lean}{1353}{reciprocalMass_eq_wrapRatio_add_oddTailExcessMean}{exact mass decomposition}).
+\noindent The divergent-or-bounded conclusion is formalised by the
+\lword{RationalSupportCarrySkeleton.lean}{1501}{support_fraction_oddOrder_wrapRatio_reciprocalMassDivergesOrAtLeast}{wrap-ratio mass alternative},
+its coprime specialization by the
+\lword{RationalSupportCarrySkeleton.lean}{1517}{support_fraction_one_div_oddOrder_reciprocalMassDivergesOrAtLeast}{odd-order mass alternative},
+and the automatic excess limit in the fraction-facing coordinates above by the
+\lword{RationalSupportCarrySkeleton.lean}{1577}{exists_shifted_oddTailExcess_mean_of_support_fraction}{shifted excess-mean identity}.
 A rational value thus ties the odd part of its denominator to the sparsity of
 its support: a summable support with small $\rho(A)$ can only display
 denominators whose odd part has small multiplicative order of $2$.
