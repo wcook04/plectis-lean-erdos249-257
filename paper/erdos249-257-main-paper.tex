@@ -95,9 +95,10 @@ representation $S=p/q$ with
 $q\le\Qzero\approx7.96\times10^{34}$.  We also prove that irrationality of
 $S$ is equivalent to non-integrality of every positive binary tail difference,
 with a complete finite certificate at each fixed pair of parameters; one
-integral difference would instead force rationality.  The missing input is an
-unbounded supply of these certificates, and the checks through $t=64$ are
-finite evidence only.  For Erd\H{o}s~\#257, we formalise Erd\H{o}s's classical
+integral difference would instead force rationality.  Equivalently, \(S\) is
+irrational exactly when lcm-diagonal certificates occur cofinally; the checks
+through \(t=64\) are finite evidence only.  For Erd\H{o}s~\#257, we formalise
+Erd\H{o}s's classical
 full-support theorem in every integer base and several structured-support
 cases.  At base $2$, the Mersenne achievement set is compact, perfect, nowhere
 dense, and of measure one.  Any infinite rational-valued support must have
@@ -141,7 +142,8 @@ families.\\[2pt]
 \textbf{\mbox{Unconditional/exact}} &
 One window gives $q>\Qzero$ for every rational $S=p/q$; irrationality is
 equivalent to non-integrality of every positive tail difference and to
-pointwise finite certificates. &
+pointwise finite certificates, hence also to cofinal lcm-diagonal
+certificates. &
 Measure-one nowhere-dense achievement geometry; exact rational carry
 certificates; unbounded states and sublogarithmic zero gaps over infinite
 rational supports; exact classification of $1/2$.\\[2pt]
@@ -151,7 +153,7 @@ verifications. &
 Local band and window identities, bounded reset rows, and explicit finite
 counterexamples.\\[2pt]
 \textbf{\mbox{Conditional}} &
-A cofinal certificate or scalar-slack supply implies irrationality. &
+A cofinal scalar-slack supply implies irrationality. &
 Cofinal seam, window, strip, or terminal hypotheses imply an infinite
 support of sum $1/2$.\\[2pt]
 \textbf{\mbox{Open}} &
@@ -215,10 +217,10 @@ then
  =79\,639\,646\,646\,701\,375\,323\,355\,774\,875\,831\,053.
 \]
 The exact open statement is an unbounded supply of non-integral tail
-differences, equivalently of finite certificates.  Corollary~\ref{res:diag}
-gives a sufficient lcm-diagonal form, and finite diagonal instances are
-verified through \(t=64\), but no unbounded supply is proved.  The displayed
-chain is formalised by the
+differences, equivalently of finite certificates.
+Theorem~\ref{res:diag} compresses this to the equivalent one-parameter
+lcm-diagonal supply.  Finite diagonal instances are verified through \(t=64\),
+but no unbounded supply is proved.  The displayed chain is formalised by the
 \lword{LcmConeFlatness.lean}{386}{irrational_totient_series_iff_all_tail_diffs_nonintegral}{tail-difference equivalence},
 the
 \lword{LcmConeFlatness.lean}{399}{irrational_totient_series_iff_pointwise_certificates}{pointwise certificate equivalence},
@@ -1728,16 +1730,25 @@ Proposition~\ref{res:complete} supplies the fixed-parameter equivalence;
 Theorem~\ref{res:red21} adds exactly the unbounded placement quantifier.
 
 Every multiple of an eventual period is again a period.  The least common
-multiple $M_t$ therefore provides a useful one-parameter sufficient form.
+multiple $M_t$ therefore provides an exact one-parameter form.
 
-\begin{corollary}[diagonal reduction]\label{res:diag}
-Suppose that for every threshold $t_0$ there are parameters $t\ge t_0$ and
-$L$ for which $\textsf{certifiedKill}(M_t,M_t,L)$ holds. Then $S$ is
-irrational.
-\end{corollary}
-\noindent Formalised: \lword{LcmDiagonalReduction.lean}{112}{irrational_totient_series_of_lcm_diagonal_certificate_supply}{diagonal-supply criterion}.
-The corollary replaces the two free parameters \(h,N\) by the diagonal pair
-\((M_t,M_t)\); producing that cofinal one-parameter family is still open.
+\begin{theorem}[exact diagonal characterisation]\label{res:diag}
+The following are equivalent:
+\[
+\begin{aligned}
+ &S\notin\Q;\\
+ &\forall\,t_0\in\N\ \exists\,t\geq t_0\ \exists\,L\geq1,\qquad
+   \textsf{certifiedKill}(M_t,M_t,L).
+\end{aligned}
+\]
+\end{theorem}
+\noindent The reverse implication is the
+\lword{LcmDiagonalReduction.lean}{112}{irrational_totient_series_of_lcm_diagonal_certificate_supply}{diagonal-supply theorem}.
+For the forward implication, the pointwise equivalence in
+Proposition~\ref{res:complete} supplies a certificate at every diagonal pair,
+so one may take \(t=t_0\).
+The theorem replaces the two free parameters \(h,N\) by \((M_t,M_t)\);
+producing that cofinal one-parameter family is still open.
 
 \begin{example}[verified finite range]\label{res:deposits}
 Lean checks:
@@ -1781,9 +1792,9 @@ By Theorem~\ref{res:red21}, the unresolved statement is precisely
 \textsf{certifiedKill}(h,N,L).
 \tag{5.1}\label{eq:unbounded-certificate-supply}
 \]
-The diagonal hypothesis in Corollary~\ref{res:diag} is a sufficient
-one-parameter strengthening of this statement.  The verified scales in
-Example~\ref{res:deposits} form a finite set and do not establish either
+The diagonal condition in Theorem~\ref{res:diag} is an equivalent
+one-parameter form of this statement.  The verified scales in
+Example~\ref{res:deposits} form a finite set and establish neither cofinal
 quantifier pattern.  No theorem in the formal source proves
 \eqref{eq:unbounded-certificate-supply}; consequently no irrationality claim
 for $S$ is made here.
@@ -2747,8 +2758,9 @@ following exact quantifier statement.
 
 \begin{problem}[unbounded certificate supply]
 Prove~\eqref{eq:unbounded-certificate-supply}.
-The lcm-diagonal supply in Corollary~\ref{res:diag} is sufficient, but the
-finite scales in Example~\ref{res:deposits} do not establish it.
+Equivalently, prove the lcm-diagonal supply in
+Theorem~\ref{res:diag}.  The finite scales in
+Example~\ref{res:deposits} do not establish either cofinal form.
 \end{problem}
 
 \begin{problem}[universal Erd\H{o}s \#257]
@@ -3316,7 +3328,7 @@ not another rational normal form, is the missing premise.
 
 This appendix expands the supporting mathematics behind
 Theorem~\ref{res:red21}, Proposition~\ref{res:complete}, and
-Corollary~\ref{res:diag}.  It contains exact cone-flatness and target-interval
+Theorem~\ref{res:diag}.  It contains exact cone-flatness and target-interval
 reformulations, finite residue projections, denominator and bit-lifting
 formulae, bounded certificate families, and rigorous obstructions to several
 candidate strategies.  Each statement retains its own hypotheses and status.
