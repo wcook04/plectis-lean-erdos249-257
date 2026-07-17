@@ -93,9 +93,17 @@
 
 \begin{abstract}
 \noindent
-We place Erd\H{o}s~\#249 and the distinguished half-value counterexample route to Erd\H{o}s~\#257 in exact finite-to-cofinal form: each open endpoint is proved equivalent to a cofinal supply of checkable finite events.  The universal \#257 assertion itself is not reduced to this chain.
-For the totient constant
-$S=\sum_{n\ge1}\ph(n)/2^n$, one certified Farey window excludes every rational
+For the totient constant $S=\sum_{n\ge1}\ph(n)/2^n$ of Erd\H{o}s~\#249 and
+the Mersenne support sums $\sum_{n\in A}(2^n-1)^{-1}$ of Erd\H{o}s~\#257,
+rationality would impose rigid discrete structure: eventually periodic
+binary tails for $S$, and an integral carry orbit with Boolean M\"obius
+quotient stream for a support sum.  We formalise both forms of rigidity in
+Lean and place \#249 and the distinguished half-value counterexample
+route to \#257 in exact finite-to-cofinal form:
+each open endpoint is proved equivalent to a cofinal supply of checkable
+finite events.  The universal \#257 assertion itself is not reduced to this
+chain.
+One certified Farey window excludes every rational
 representation $S=p/q$ with
 $q\le\Qzero\approx7.96\times10^{34}$; hence a rational representation must
 have $q>\Qzero$.  Irrationality of \(S\) is also
@@ -113,10 +121,9 @@ for every $e$; no upper bound is known, so this does not prove irrationality.
 For Erd\H{o}s~\#257, we formalise Erd\H{o}s's classical theorem for full
 support in every base and several structured-support cases.  At base \(2\)
 we prove exact achievement-set geometry and necessary carry and gap
-constraints on hypothetical rational infinite supports.  In particular,
-if $X_A=p/(2^c v)$, then for every $\varepsilon>0$ every zero window after
-$c+N$ has length at most $\varepsilon\log_2(N+1)+B_{\varepsilon,c,v}$,
-uniformly in $A,p,N$ and the window.  Membership of
+constraints on hypothetical rational infinite supports; in particular, the
+divisor stream of a rational support admits only sublogarithmic zero
+windows, uniformly in the support.  Membership of
 \(1/2\), which would refute the universal statement, is exactly equivalent to
 infinitely many greedy skips.  Nonmembership is exactly equivalent to an
 eventually right integer seam, a finite fatal gap, and a final greedy skip.
@@ -188,7 +195,7 @@ arithmetic mechanisms.
   >{\raggedright\arraybackslash}p{0.20\linewidth}
   >{\raggedright\arraybackslash}p{0.45\linewidth}@{}}
 \toprule
-Question or result & Status & What has actually been proved \\
+Question or result & Status & What is proved \\
 \midrule
 Irrationality in \#249 & Open & No proof of \(S\notin\Q\) is claimed. \\
 Denominator exclusion & Proved & If \(S=p/q\), then \(q>\Qzero\). \\
