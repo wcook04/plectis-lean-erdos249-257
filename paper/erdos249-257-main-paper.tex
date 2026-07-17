@@ -2897,13 +2897,11 @@ any cycle length $h$ with $2^h\equiv1\pmod v$ the repetend identity holds:
 \qquad
 w=\sum_{N<h}k_N,
 \]
-with $w\ge1$ when $p$ is coprime to $v>1$. Formalised:
+with $w\ge1$ when $p$ is coprime to $v>1$. The formal development records
+the displayed equality as the
 \lword{RationalSupportCarrySkeleton.lean}{171}{sum_doublingResidue_eq_mul_wrapCount}{wrap-count identity}
-and \lword{RationalSupportCarrySkeleton.lean}{181}{doublingWrapCount_pos}{positive wrap count};
-residues, digits, and counts are
-\lword{RationalSupportCarrySkeleton.lean}{35}{doublingResidue}{doubling residue},
-\lword{RationalSupportCarrySkeleton.lean}{39}{doublingWrapDigit}{wrap digit},
-\lword{RationalSupportCarrySkeleton.lean}{43}{doublingWrapCount}{wrap count}.
+and its non-vanishing as the
+\lword{RationalSupportCarrySkeleton.lean}{181}{doublingWrapCount_pos}{positive-wrap theorem}.
 
 \begin{proposition}[one-wrap classification]\label{res:onewrap}
 Let $v>1$ be odd, $p$ coprime to $v$, and $h\ge1$ with $2^h\equiv1\pmod v$.
@@ -2916,16 +2914,14 @@ $2^a/(2^h-1)$. Formalised:
 from the generic closed-cycle form
 \lword{RationalSupportCarrySkeleton.lean}{353}{one_wrap_cycle_classification}{one-wrap cycle classification},
 and instantiated at the true order $h=\operatorname{ord}_v(2)$
-(\lword{RationalSupportCarrySkeleton.lean}{478}{one_oddOrder_doublingWrap_classification}{odd-order one-wrap classification},
-with \lword{RationalSupportCarrySkeleton.lean}{436}{oddDoublingOrder}{odd doubling order}). The
+(\lword{RationalSupportCarrySkeleton.lean}{478}{one_oddOrder_doublingWrap_classification}{odd-order one-wrap classification}). The
 classification is algebraic; a finite check of $446$ coprime starting residues
 across twelve modulus/order rows is retained as kernel-checked validation, not
 as the proof
 (\lword{RationalSupportCarrySkeleton.lean}{2454}{orderWrapValidation446_passes}{446-start finite validation}).
 
 The analytic bridge is Ces\`aro averaging. Write $\rho(A)=\sum_{a\in A}1/a$
-for the reciprocal mass
-(\lword{RationalSupportCarrySkeleton.lean}{790}{reciprocalMass}{reciprocal mass}). When the
+for the reciprocal mass. When the
 reciprocal family is summable, the mean of $f_A(1),\dots,f_A(N)$ converges to
 $\rho(A)$ --- the density of the multiples of $a$, summed over the support ---
 and the mean of the scaled tails has the same limit
@@ -2935,8 +2931,7 @@ The divergent case is carried as an explicit disjunction, not through a
 default value assigned to a divergent formal sum
 (\lword{RationalSupportCarrySkeleton.lean}{796}{ReciprocalMassDivergesOrAtLeast}{reciprocal-mass dichotomy}).
 Each tail state splits exactly as $u(N)=v\,e_N+r_N$ with integral excess
-$e_N=\lfloor u(N)/v\rfloor\ge0$
-(\lword{RationalSupportCarrySkeleton.lean}{501}{oddTailExcess}{odd-tail excess}).
+$e_N=\lfloor u(N)/v\rfloor\ge0$.
 
 \begin{proposition}[order-wrap lower bound, with exact excess mean]\label{res:orderwrap}
 Let $A$ and $p/(2^c v)$ be as above with $v>1$ odd, and let $w$ be the wrap
