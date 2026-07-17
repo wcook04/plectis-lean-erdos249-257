@@ -2175,13 +2175,15 @@ uses an arithmetic coupling identity, and it gives no irrationality criterion
 for $S$.
 
 \paragraph{Appendix consequence.}
-The first subsection gives exact normal forms for the same unbounded supply
-as Theorem~\ref{res:red21}; the second turns those forms into finite
-projections and checked instances.  The last two subsections identify
-additional arithmetic inputs and prove that several weaker parity,
-prime-adjunction, scalar, and residual-blind rank criteria cannot provide
-them.  No layer changes the quantifier: a positive proof must still produce
-certificates beyond every threshold.
+Nothing in this appendix strengthens the fixed-parameter completeness of
+Proposition~\ref{res:complete} into an unbounded supply.  Its exact handoff is
+therefore the still-open quantifier in Theorem~\ref{res:red21}:
+\[
+ \forall h\geq1\;\forall N_0\;\exists N\geq N_0\;\exists L\geq1,\qquad
+ \textsf{certifiedKill}(h,N,L).
+\]
+The finite projections and no-go results delimit possible ways to prove this
+statement; they do not provide the required cofinal certificates.
 
 }
 
@@ -2691,13 +2693,12 @@ objects, not stages of a proof search.
 \HalfValueTechnicalAppendix
 
 \paragraph{Appendix consequence.}
-The compactness and final-skip subsections give exact implications: a cofinal
-window, seam, or terminal approximation would produce \(1/2\in\mathcal A\),
-whereas an eventual right tail is exactly nonmembership.  The other
-subsections localise possible inputs, verify bounded instances, and close
-stronger but invalid local inferences.  None produces the required cofinal
-input, so the residual remains precisely the two obligations in
-Theorem~\ref{res:fatalright}.
+This appendix supplies the implications used in
+Theorem~\ref{res:fatalright}, but it does not eliminate the two remaining
+middle cells \(C_D=-2,-1\).  The handoff is exact: one still needs either a
+cofinal window, seam, or terminal approximation producing
+\(1/2\in\mathcal A\), or a proof of \(\Theta_D<C_D\) on those cells.  The
+bounded checks and local no-go theorems provide neither input.
 
 \section{Auxiliary rationality criteria from binary carry systems}\label{sec:carry}
 
@@ -3125,12 +3126,13 @@ asserted.  Neither the global geometry nor the finite death certificates
 exclude rational values for either open series.
 
 \paragraph{Appendix consequence.}
-Appendices~B.1--B.2 give exact normal forms for rationality;
-Appendices~B.3--B.4 impose necessary asymptotic constraints on any infinite
-rational support; and Appendix~B.5 gives the canonical achievement-set
-representation and finite nonmembership certificates.  None of these
-necessary conditions is contradictory.  Their role is to make the rational
-side exact and auditable, not to close either open problem.
+The transfer to the main text is Theorem~\ref{res:rigidity-main}: rationality
+of \(X_A\) forces an unbounded integral carry orbit, sublogarithmic
+divisor-coverage gaps, and the stated wrap--density constraint.  Appendix~B.5
+also supplies the finite death certificates used in
+Theorem~\ref{res:greedy}.  What is not proved is that the support attached to
+either target violates one of these necessary conditions.  That contradiction,
+not another rational normal form, is the missing premise.
 
 \section{Technical reductions for the totient-certificate branch}
 \label{app:totient-technical}
@@ -3167,13 +3169,13 @@ either open proof spine.
 \FurtherLambertAppendix
 
 \paragraph{Appendix consequence.}
-This appendix contains three different statuses.  The periodic-weight
-irrationality theorems are unconditional but lie within the cited classical
-and modern theory; the M\"obius-square, gcd-moment, cylinder, and continuant
-statements are unconditional structural results; and the finite-algebraic
-propositions delimit strategies without producing an irrationality
-criterion.  None supplies the unbounded certificate or half-membership input
-isolated in Section~\ref{sec:further}.
+The periodic-weight results extend the Mersenne--Lambert ladder in
+Section~\ref{sec:ladder}; the M\"obius-square, gcd-moment, cylinder, and
+continuant identities refine the coprime-pair representation in
+Proposition~\ref{res:coprime}.  Neither handoff implies the cofinal
+\(\textsf{certifiedKill}\) supply for \(S\) or a producer of
+\(1/2\in\mathcal A\).  Those, rather than any result internal to this
+appendix, remain the missing main-spine inputs.
 
 \section{Guide to the formal sources}\label{app:index}
 

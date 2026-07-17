@@ -56,7 +56,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "Erd\\H{o}s \\#249",
-    "line": 2590
+    "line": 2592
    }
   },
   {
@@ -67,7 +67,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "unbounded certificate supply",
-    "line": 2601
+    "line": 2603
    }
   },
   {
@@ -78,7 +78,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "the half-value counterexample route",
-    "line": 2616
+    "line": 2618
    }
   },
   {
@@ -89,7 +89,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "universal Erd\\H{o}s \\#257",
-    "line": 2607
+    "line": 2609
    }
   }
  ],
@@ -554,18 +554,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_appendix_consequence_audit",
+   "id": "main_paper_appendix_internal_argument_hierarchy_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "an appendix consequence paragraph can repeat a topic inventory instead of stating the exact result that transfers back to the main spine and the premise that remains unavailable",
-   "statement": "Audit appendix consequence paragraphs, retaining only the mathematical handoff back to the main theorem and one precise statement of the unresolved producer."
+   "defect_class": "a long appendix subsection can contain correct theorem sequences without exposing which result supplies the next premise and which statement is only a boundary or no-go result",
+   "statement": "Audit internal appendix theorem sequences for local premise-to-result-to-consequence bridges, beginning with the longest carry and totient subsections."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "a16aa24af5236b6508a34b8a4c4b41fdcf620a98",
-  "committed_navigation_snapshot": "69ebfb45f1f3c1ceb13a97ab5f9c628fe669ee8f",
-  "main_paper_source_digest": "sha256:c7fc6192538493ac1ec47e1c8c1d9804d34099ab0362697aec25b9475a243832"
+  "committed_navigation_snapshot": "65b63d79922590ed841b24ed448de44200a662fd",
+  "main_paper_source_digest": "sha256:14bc6348f4d96f3cc1c54f2086351376f4e33f99cbca1e1cf495589b4c9a9c10"
  },
  "reading_routes": [
   {
