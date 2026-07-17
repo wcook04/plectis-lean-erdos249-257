@@ -56,7 +56,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "Erd\\H{o}s \\#249",
-    "line": 2609
+    "line": 2590
    }
   },
   {
@@ -67,7 +67,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "unbounded certificate supply",
-    "line": 2620
+    "line": 2601
    }
   },
   {
@@ -78,7 +78,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "the half-value counterexample route",
-    "line": 2635
+    "line": 2616
    }
   },
   {
@@ -89,7 +89,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "universal Erd\\H{o}s \\#257",
-    "line": 2626
+    "line": 2607
    }
   }
  ],
@@ -554,18 +554,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_appendix_spine_deduplication_audit",
+   "id": "main_paper_appendix_entry_map_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "an appendix can obscure its specialist role when it restates a main-spine theorem before presenting the additional normal form, obstruction, or local lemma that belongs there",
-   "statement": "Audit appendix entries against the main theorem spine, replacing duplicate theorem narration with backward references while preserving every genuinely stronger hypothesis, equivalent form, and local proof ingredient."
+   "defect_class": "an appendix can be correctly referenced yet still open without telling the reader which main theorem it supports and what additional mathematical object is introduced there",
+   "statement": "Audit the opening map of each appendix, ensuring it names its main-spine consumer and the genuinely new normal forms, local lemmas, or obstructions that justify the appendix."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "a16aa24af5236b6508a34b8a4c4b41fdcf620a98",
-  "committed_navigation_snapshot": "5696110ac4487c12e1fb39df8797e6f5808139dd",
-  "main_paper_source_digest": "sha256:79212be43550ba4497930e541721d7243887fbb0a030abd9ca8e5587f1ffd743"
+  "committed_navigation_snapshot": "02eb0be5751cedec7d3d68fcb558d798ac43d46a",
+  "main_paper_source_digest": "sha256:511c238bb2c7483b813da147c8d15c383a61bdec34cf8e642e9c09e89fc40b20"
  },
  "reading_routes": [
   {

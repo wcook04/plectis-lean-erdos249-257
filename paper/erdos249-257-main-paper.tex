@@ -1751,30 +1751,11 @@ $\theta_t$ for every $k\ge1$.
 \end{proposition}
 \noindent Formalised: \lword{LcmConeFlatness.lean}{90}{rational_totient_series_forces_lcm_cone_flatness}{cone flatness under rationality}.
 
-The certificates are exact: a certificate exists exactly
-when the object it certifies is non-integral. Thus the finite computations are
-machine-checked witnesses rather than numerical experiments.
-
-\begin{proposition}[certificate completeness, expanded form]\label{app:complete-detail}
-For every $h\ge1$ and $N\ge0$,
-\[
-\big(\exists L\ge1,\ \textsf{certifiedKill}(h,N,L)\big)
-\quad\Longleftrightarrow\quad
-R_{N+h}-R_N\notin\Z.
-\]
-\end{proposition}
-\noindent Formalised: \lword{LcmConeFlatness.lean}{316}{exists_certifiedKill_iff_tail_diff_notMem_int}{certificate-completeness equivalence}.
-Conversely, integrality of one positive-shift tail difference forces $S$ to be
-rational.  Thus $S$ is irrational if and only if every positive-shift tail
-difference is non-integral, equivalently if every such pair admits a finite
-certificate.  These normal forms are formalised at
-\lword{LcmConeFlatness.lean}{357}{not_irrational_of_tail_diff_mem_int}{integral-difference rationality criterion},
-\lword{LcmConeFlatness.lean}{386}{irrational_totient_series_iff_all_tail_diffs_nonintegral}{all-differences criterion},
-and \lword{LcmConeFlatness.lean}{399}{irrational_totient_series_iff_pointwise_certificates}{pointwise certificate criterion}.
-Finite certificates witness non-integrality. A joint refuter
-can interrogate a menu of cone vertices at once and is sharper than any pairwise
-test: it refutes the single-fractional-part model that rationality predicts on a
-finite sample of cone vertices
+Proposition~\ref{res:complete} already states both fixed-parameter certificate
+completeness and its global pointwise form.  Their additional role here is
+cone-level: a joint finite refuter can interrogate several cone vertices at
+once and is sharper than any pairwise test.  It refutes the
+single-fractional-part model that rationality predicts on a finite sample
 (\lword{LcmConeNonflat.lean}{126}{exists_nonintegral_pair_of_coneNonflatCert}{finite cone-nonflatness refuter}).
 
 \paragraph{A reduced-denominator finite predicate.}  Separately, there is a
