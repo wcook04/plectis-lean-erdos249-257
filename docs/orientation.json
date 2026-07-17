@@ -56,7 +56,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "Erd\\H{o}s \\#249",
-    "line": 2607
+    "line": 2655
    }
   },
   {
@@ -67,7 +67,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "unbounded certificate supply",
-    "line": 2618
+    "line": 2666
    }
   },
   {
@@ -78,7 +78,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "the half-value counterexample route",
-    "line": 2633
+    "line": 2681
    }
   },
   {
@@ -89,7 +89,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "universal Erd\\H{o}s \\#257",
-    "line": 2624
+    "line": 2672
    }
   }
  ],
@@ -554,18 +554,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_appendix_assumption_scope_audit",
+   "id": "main_paper_appendix_bundled_statement_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "an appendix theorem can rely on phrases such as 'as above' or 'under the stated conditions', leaving its quantified hypotheses outside the theorem statement",
-   "statement": "Audit appendix theorem statements for non-local hypothesis references and make the mathematical ranges and assumptions locally recoverable."
+   "defect_class": "one numbered appendix proposition can bundle a finite base case, several conditional transitions, a no-go inequality, and a cofinal conclusion without exposing their dependency order",
+   "statement": "Audit multi-part appendix propositions, beginning with the suffix-cylinder feedback statement, and separate independent facts from the actual conditional chain."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "a16aa24af5236b6508a34b8a4c4b41fdcf620a98",
-  "committed_navigation_snapshot": "9979e45efb37ded113411a4953f4aaea72562eb4",
-  "main_paper_source_digest": "sha256:5dda435fec7aae48bc94f56a555bcc3f5b50dac11c2ec46f6855e50f1a112758"
+  "committed_navigation_snapshot": "5bd0d314f7ac073bc4d05752a3d3c84258cd508b",
+  "main_paper_source_digest": "sha256:afb8e11c1a3aaf093ce4064c2bc59c763e9708e72a50c4a2de7332a708045a9f"
  },
  "reading_routes": [
   {

@@ -919,8 +919,13 @@ centred carry yields a support selected by the greedy expansion whose series
 value is $1/2$; the finite-support exclusion makes that support infinite.
 
 \begin{proposition}[cofinal strip-return criterion]\label{res:cofinalstripreturn}
-If the canonical greedy half carry returns cofinally to the stated
-square-root strip, then $1/2$ belongs to the Mersenne achievement set.
+Let \(G_M\) be the uncentred integer carry of the canonical greedy expansion
+of \(1/2\).  If
+\[
+ \forall N\in\N\;\exists M\geq N,\qquad
+ G_M\leq 2\lfloor\sqrt{M+1}\rfloor+4,
+\]
+then \(1/2\in\mathcal A\), and its canonical greedy support is infinite.
 \end{proposition}
 \noindent Formalised:
 \lword{CofinalStripReturn.lean}{84}{greedy_integerHalfCarry_scaled_tendsto_zero_of_cofinalStripReturn}{scaled-carry decay}
@@ -1892,9 +1897,20 @@ quantity is farther than that bound from every integer, then the full target
 is missed.
 
 \begin{proposition}[finite foreign-residue projection]\label{res:foreignresidue}
-The finite residue diagonal splits exactly into projected foreign and divisor
-channels.  A controlled projected foreign defect with the stated integer
-separation cannot meet the full target.
+Let \(F_H^{(D)}\) be the retained nondivisor projection at cutoff \(D\), let
+\(F_H\) be the actual foreign defect, and let \(Q_H\) be the scaled explicit
+divisor shadow.  The finite residue diagonal is exactly the sum of
+\(F_H^{(D)}\) and its divisor-channel complement.  For \(2H\leq D\), put
+\[
+ B_{H,D}=c_H\left(\frac{2}{2^D}+\frac{4}{3\,4^D}\right).
+\]
+If
+\[
+ |F_H-F_H^{(D)}|\leq B_{H,D}
+ \quad\text{and}\quad
+ |Q_H+F_H^{(D)}-z|>B_{H,D}\quad\text{for every }z\in\Z,
+\]
+then the full target at height \(H\) is not attained.
 \end{proposition}
 \noindent Formalised:
 \lword{ActualForeignResidueProjection.lean}{307}{finiteResidueDiagonal_eq_projectedForeign_add_divisor}{foreign--divisor channel split},
@@ -1915,14 +1931,26 @@ odd Jordan scalar defined in the algebraic shadow chain, then
  {\gcd\!\bigl(2^{r_t}-1,\,s_t\lvert J(r_t)\rvert\bigr)}.
 \]
 For $t\geq5$, the product of the Mersenne factors $2^p-1$ over primes
-$t/2<p\leq t$ divides $d_t$; in particular $d_t\geq2^{t/2}$.  This is a
+$t/2<p\leq t$ divides $d_t$; in particular
+$d_t\geq2^{\lfloor t/2\rfloor}$.  This is a
 denominator theorem for $Q_t$ only.  Cancellation by $F_t$ is exactly what the
 full-target condition retains.
 
 \begin{proposition}[Mersenne-shadow denominator]\label{res:shadowden}
-At lcm height $t$, the reduced denominator of the scaled M\"obius shadow is
-given exactly by the formal denominator formula.  The upper-half Mersenne
-product divides it and yields the stated lower bounds.
+Let \(r_t\) be the square-free kernel of \(H_t\), let \(s_t=H_t/r_t\), and
+let \(J(r_t)\) be the odd Jordan scalar.  The reduced denominator \(d_t\) of
+the scaled M\"obius shadow is
+\[
+ d_t=
+ \frac{2^{r_t}-1}
+ {\gcd\!\bigl(2^{r_t}-1,\,s_t\lvert J(r_t)\rvert\bigr)}.
+\]
+If \(t\geq5\), then
+\[
+ \prod_{\substack{p\ \mathrm{prime}\\ t/2<p\leq t}}(2^p-1)
+ \ \mid\ d_t,
+ \qquad d_t\geq2^{\lfloor t/2\rfloor}.
+\]
 \end{proposition}
 \noindent Formalised:
 \lword{MersenneShadowDenominatorGrowth.lean}{99}{exists_upperHalf_mersenne_channel_dvd_den_with_bounds}{upper-half Mersenne divisor bound}
@@ -1950,15 +1978,25 @@ $2H_t$; replacing them by a symmetric slogan would lose part of the checked
 statement.
 
 \begin{corollary}[finite residue projection]\label{res:freshloss}
-The diagonal residue certificate is equivalent to its projection
-inequality, and the projection forces full-target avoidance.  Hence an
-unbounded projection supply, or either stronger adjacent-suffix supply stated
-in the corresponding theorem, implies irrationality of $S$.
+For every \(t,L\in\N\), the diagonal projection certificate is equivalent to
+\[
+ H_t+L+2<\eta_{t,L}<2^L-(2H_t+L+2),
+\]
+and either condition forces full-target avoidance at height \(t\).
+Consequently,
+\[
+ \forall t_0\in\N\;\exists t\geq t_0\;\exists L\in\N,\qquad
+ H_t+L+2<\eta_{t,L}<2^L-(2H_t+L+2)
+\]
+implies that \(S\) is irrational.
 \end{corollary}
 \noindent Formalised:
 \lword{DiagonalFreshLossBridge.lean}{61}{diagonalFreshLossResidueCert_iff_projectionCert}{residue--projection equivalence}
 and
 \lword{DiagonalFreshLossBridge.lean}{191}{irrational_totientSeries_of_diagonalFreshLossProjectionSupply}{unbounded projection criterion}.
+The stronger adjacent-suffix supplies formalised in the same module imply the
+displayed cofinal supply; they are not additional conclusions of one finite
+certificate.
 Finite instances of this implication are proved, but no unbounded projection
 or suffix supply is established.
 
@@ -2051,17 +2089,27 @@ This is a finite arithmetic equivalence.  It does not supply the required
 cofactors at unbounded scales and gives no irrationality conclusion.
 
 \paragraph{Parity is not a margin certificate.}  The preceding lift does not
-settle the reduced signed-margin interval condition.  For every positive even
-modulus and every radius in the stated nontrivial range, each parity class
-contains both a residue inside the interval and one outside it.  The same
-statement applies to a positive
+settle the reduced signed-margin interval condition.  For a positive even
+modulus \(m\) and integral radius parameter \(a\) with
+\(16<a<8m-16\), each parity class contains both a residue inside the interval
+and one outside it.  The same statement applies to a positive
 power-of-two modulus.  Thus even a fifth-bit computation, by itself, cannot
 decide the required margin condition.
 
 \begin{proposition}[parity does not decide the reduced margin condition]
 \label{res:paritysocket}
-Under the explicit radius inequalities, parity does not decide membership in
-the reduced margin interval, including at a positive power-of-two modulus.
+Let \(m,a\in\Z\), with \(m>0\) even and
+\[
+ 16<a<8m-16,
+\]
+and put
+\[
+ \mathcal M_{m,a}
+ =\{y\in\Z:\exists k\in\Z,\ 16|y-km|<a\}.
+\]
+Each parity class contains both a member and a nonmember of
+\(\mathcal M_{m,a}\).  In particular, the conclusion holds for
+\(m=2^j\) whenever \(j\geq1\).
 \end{proposition}
 \noindent Formalised:
 \lword{Totient827ParitySocketCeiling.lean}{73}{reducedMarginSocket_not_decided_by_parity}{parity obstruction}
@@ -3012,12 +3060,21 @@ Each tail state splits exactly as $u(N)=v\,e_N+\bar p_N$ with integral excess
 $e_N=\lfloor u(N)/v\rfloor\ge0$.
 
 \begin{proposition}[order-wrap lower bound, with exact excess mean]\label{res:orderwrap}
-Let $A$ and $p/(2^c v)$ be as above with $v>1$ odd, and let $w$ be the wrap
-count of $p$ over one cycle of length $h=\operatorname{ord}_v(2)$. Then
-$\sum_{a\in A}1/a$ diverges or $\rho(A)\ge w/h$; if moreover $p$ is coprime to
-$v$, then $w\ge1$, so $\rho(A)\ge1/\operatorname{ord}_v(2)$. In the summable
-case the bound is the periodic part of an exact identity: the Ces\`aro mean of
-the excess $e_N$ converges automatically, and
+Let \(A\subseteq\N\setminus\{0\}\) be nonempty and suppose
+\[
+ X_A=\frac{p}{2^cv},
+ \qquad p\in\Z,\quad c\in\N,\quad v>1\ \text{odd}.
+\]
+Let \(h=\operatorname{ord}_v(2)\), let \(w\) be the number of wraps in the
+least-residue cycle \(p2^N\bmod v\) for \(0\leq N<h\), and set
+\[
+ u(N)=vT_{f_A}(c+N),\qquad e_N=\left\lfloor\frac{u(N)}v\right\rfloor.
+\]
+Then $\sum_{a\in A}1/a$ diverges or $\rho(A)\ge w/h$; if moreover $p$ is
+coprime to $v$, then $w\ge1$, so
+$\rho(A)\ge1/\operatorname{ord}_v(2)$. In the summable case the bound is the
+periodic part of an exact identity: the Ces\`aro mean of \(e_N\) converges,
+and
 \[
 \rho(A)\;=\;\frac{w}{h}\;+\;\lim_{N\to\infty}\frac1N\sum_{n<N}e_n .
 \]
