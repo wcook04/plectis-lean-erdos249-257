@@ -907,15 +907,15 @@
         "schema": "erdos249257-editorial-state/1",
         "scope": "continuous_whole_main_paper_exposition",
         "current_priority": {
-          "id": "main_paper_formal_link_caption_readability_audit",
+          "id": "main_paper_appendix_a45_formal_link_caption_readability",
           "surface": "paper/erdos249-257-main-paper.tex",
           "defect_class": "exact formal-source links sometimes retain declaration-shaped captions that interrupt the mathematical prose and make technical pages resemble a source index",
-          "statement": "Audit Formalised lines throughout the gateway, preserve every exact declaration target, and replace raw-style captions with concise mathematical descriptions or grouped source references."
+          "statement": "Continue the declaration-caption audit through Appendices A.4 and A.5, preserving every exact Lean target while replacing raw identifier-derived labels with concise mathematical descriptions."
         },
         "last_verified_wave": {
-          "id": "main_paper_reader_facing_vocabulary_cleanup",
+          "id": "main_paper_appendix_a1_a4_link_caption_humanisation",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "result": "Replaced the remaining reader-facing consumer, deposit, and adapter vocabulary in the gateway appendix maps, subsection titles, and conclusions with implication, verified instance, bounded instance, and coordinate translation language."
+          "result": "Replaced 43 declaration-shaped link captions across Appendices A.1 through A.3 and the opening nonmembership classification in A.4 with authored mathematical labels, without changing any formal target."
         },
         "active_inconsistencies": [],
         "blocked_decisions": []

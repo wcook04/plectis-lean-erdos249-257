@@ -777,9 +777,9 @@ The interval has exact width
   \frac{q^2}{(q+m)(q+m-1)}.
 \]
 Formalised:
-\lrefx{HalfGreedyTwoThirdsBand.lean}{88}{postTakeUnsafeAt_iff_band}
+\lword{HalfGreedyTwoThirdsBand.lean}{88}{postTakeUnsafeAt_iff_band}{the general unsafe-band equivalence}
 and
-\lref{HalfGreedyTwoThirdsBand.lean}{104}{band_width_general}.
+\lword{HalfGreedyTwoThirdsBand.lean}{104}{band_width_general}{the general band-width formula}.
 
 For a single intervening skip, $c=b+2$ and $m=2q+2$.  The band becomes
 \[
@@ -789,12 +789,12 @@ with width $q^2/((3q+1)(3q+2))<1/9$, entirely between $2q/3$ and
 $2q/3+2/9$.  No integral reciprocal lies in this window.  In the
 corresponding positive odd integer formulation, with residual $p/(2D)$,
 membership in the cleared band forces $p\ge7$.  Formalised:
-\lrefx{HalfGreedyTwoThirdsBand.lean}{127}{singletonUnsafe_iff_twoThirdsBand},
-\lrefx{HalfGreedyTwoThirdsBand.lean}{154}{band_width},
-\lrefx{HalfGreedyTwoThirdsBand.lean}{163}{band_width_lt_ninth},
-\lrefx{HalfGreedyTwoThirdsBand.lean}{185}{not_twoThirdsBand_of_int},
+\lword{HalfGreedyTwoThirdsBand.lean}{127}{singletonUnsafe_iff_twoThirdsBand}{the one-skip band equivalence},
+\lword{HalfGreedyTwoThirdsBand.lean}{154}{band_width}{the one-skip width formula},
+\lword{HalfGreedyTwoThirdsBand.lean}{163}{band_width_lt_ninth}{the width bound},
+\lword{HalfGreedyTwoThirdsBand.lean}{185}{not_twoThirdsBand_of_int}{the integral-reciprocal exclusion},
 and
-\lref{HalfGreedyTwoThirdsBand.lean}{231}{seven_le_of_intBand_odd}.
+\lword{HalfGreedyTwoThirdsBand.lean}{231}{seven_le_of_intBand_odd}{the odd-coordinate lower bound}.
 
 These are localizers, not orbit-level eliminations.  They do not show that
 the greedy orbit of $1/2$ avoids any such band, and they do not identify the
@@ -818,9 +818,9 @@ at every positive binary scale it chooses a carry slot with a normalized tail
 at most $16$.  Lean proves that this predicate supplies the needed forced-carry
 certificates and hence irrationality of the base-$2$ support series.  The
 result is
-\lref{SupportSunflowerDichotomy.lean}{540}{irrational_erdosSupportSeries_of_orthogonalPetalBouquet},
+\lword{SupportSunflowerDichotomy.lean}{540}{irrational_erdosSupportSeries_of_orthogonalPetalBouquet}{the conditional bouquet irrationality theorem},
 with the carry bridge at
-\lrefx{SupportSunflowerDichotomy.lean}{531}{sunflowerForcedCarrySupply_of_orthogonalPetalBouquet}.
+\lword{SupportSunflowerDichotomy.lean}{531}{sunflowerForcedCarrySupply_of_orthogonalPetalBouquet}{the forced-carry implication}.
 The tail-selection predicate itself is not proved here.  Thus this is a
 conditional reduction for one structured support family, not a further
 unconditional case of Erd\H{o}s~\#257.
@@ -831,10 +831,10 @@ For a support divisor count $f_A(x)=\#\{d\in A:d\mid x\}$, multiplication by
 a composite support element $a$ has an exact correction term.  Besides the
 distinguished divisor $a$, the new divisors are counted by a finite defect
 which excludes divisors already present at $x$.  The formal identity is
-\lref{CompositeDilationDefect.lean}{30}{supportCoeff_mul_eq_add_defect}.
+\lword{CompositeDilationDefect.lean}{30}{supportCoeff_mul_eq_add_defect}{the composite-dilation identity}.
 For a finite-core orthogonal-petal bouquet, the defect at a ray is bounded by
 the finite exceptional frame plus the divisor count of the petal support:
-\lrefx{CompositeDilationDefect.lean}{151}{compositeDilationDefect_le_exceptional_add_petalCoeff}.
+\lword{CompositeDilationDefect.lean}{151}{compositeDilationDefect_le_exceptional_add_petalCoeff}{the bouquet defect bound}.
 This records the local correction needed when dilation is not prime.  It does
 not prove a correlation estimate, the sunflower tail selector, or an
 irrationality statement.
@@ -845,7 +845,7 @@ The one-prime-power layer has a two-signature extension.  Exact $p$-adic and
 $q$-adic layer operators commute, and, for distinct primes with the residual
 argument coprime to $pq$, their composite extracts the iterated exact-valuation
 pullback of the support coefficient.  This is formalised by
-\lref{MaximalOmegaLayer.lean}{39}{mixedPrimePowerLayerTwo_supportCoeffInt}.
+\lword{MaximalOmegaLayer.lean}{39}{mixedPrimePowerLayerTwo_supportCoeffInt}{the two-prime layer identity}.
 The singleton support $\{12\}$ gives a checked $(2^2,3)$ example with value
 one at residual argument $1$:
 \lword{MaximalOmegaLayer.lean}{65}{mixedPrimePowerLayerTwo_twelve_fixture}{the singleton-support calculation}.
@@ -857,12 +857,12 @@ transport, a bounded-$\Omega$ conclusion, or an irrationality theorem.
 If rational-linear channels vanish on every relation killed by one scalar
 evaluation, their evaluation matrix has rank at most one; every nontrivial
 square minor therefore vanishes.  The all-rank determinant statement is
-\lref{HalfTrappingReturnCarry.lean}{42}{relationInvariantLinearChannels_det_eq_zero}.
+\lword{HalfTrappingReturnCarry.lean}{42}{relationInvariantLinearChannels_det_eq_zero}{the rank-one determinant criterion}.
 For two reverse carries with a common coefficient word, a $1/0$ seam, and a
 common following overlap, the terminal difference is a power of two times an
 odd integer.  A shared nonnegative Archimedean bound then gives the matching
 dyadic spacing inequality, formalised at
-\lrefx{HalfTrappingReturnCarry.lean}{191}{overlappingReverseCarryWords_twoPow_le_realBound}.
+\lword{HalfTrappingReturnCarry.lean}{191}{overlappingReverseCarryWords_twoPow_le_realBound}{the dyadic spacing inequality}.
 The argument does not produce reverse-carry presentations or an earlier
 overlapping return; it supplies only the algebraic core of that conditional
 criterion.
@@ -872,13 +872,13 @@ criterion.
 There is also a finite-prefix criterion for the target $1/2$.  At an unresolved
 even seam, the scalar transition reaches every integer terminal carry except
 the single value $2\delta-c$; this is the exact equivalence
-\lref{HalfCarryReachability.lean}{235}{evenSeamReachable_iff}.  A canonical
+\lword{HalfCarryReachability.lean}{235}{evenSeamReachable_iff}{the even-seam reachability equivalence}.  A canonical
 description of such a seam at every sufficiently large even depth is an
 unproved hypothesis.  Under that hypothesis, the finite admissible words are
 cofinal, by
-\lrefx{HalfCarryReachability.lean}{999}{cofinalAdmissibility_of_canonicalEvenSeamSupply},
+\lword{HalfCarryReachability.lean}{999}{cofinalAdmissibility_of_canonicalEvenSeamSupply}{the cofinal-admissibility implication},
 and compactness then produces an infinite support with sum exactly $1/2$:
-\lrefx{HalfCarryReachability.lean}{1027}{exists_infinite_support_half_of_canonicalEvenSeamSupply}.
+\lword{HalfCarryReachability.lean}{1027}{exists_infinite_support_half_of_canonicalEvenSeamSupply}{the half-value compactness conclusion}.
 Thus the formal result is a conditional reduction.  It does not establish the
 canonical seam supply and does not prove Erd\H{o}s~\#257.
 
@@ -895,9 +895,9 @@ If the canonical greedy half carry returns cofinally to the stated
 square-root strip, then $1/2$ belongs to the Mersenne achievement set.
 \end{proposition}
 \noindent Formalised:
-\lref{CofinalStripReturn.lean}{84}{greedy_integerHalfCarry_scaled_tendsto_zero_of_cofinalStripReturn}
+\lword{CofinalStripReturn.lean}{84}{greedy_integerHalfCarry_scaled_tendsto_zero_of_cofinalStripReturn}{scaled-carry decay}
 and
-\lref{CofinalStripReturn.lean}{157}{half_mem_mersenneAchievementSet_of_cofinalStripReturn}.
+\lword{CofinalStripReturn.lean}{157}{half_mem_mersenneAchievementSet_of_cofinalStripReturn}{the strip-return membership criterion}.
 The cofinal return condition itself is not established.  It is weaker than a
 uniform strip bound and still does not give an unconditional membership
 theorem.
@@ -920,10 +920,10 @@ $1/2$ belongs to the Mersenne achievement set, and hence that an infinite
 support has support-series value $1/2$.
 \end{proposition}
 \noindent Formalised:
-\lref{TerminalOnlyCofinal.lean}{68}{dist_half_erdosSupportSeries_wordSupport_le_of_terminalOnlyWitness},
-\lref{TerminalOnlyCofinal.lean}{134}{half_mem_mersenneAchievementSet_of_cofinalTerminalOnlyStrip},
+\lword{TerminalOnlyCofinal.lean}{68}{dist_half_erdosSupportSeries_wordSupport_le_of_terminalOnlyWitness}{the terminal approximation bound},
+\lword{TerminalOnlyCofinal.lean}{134}{half_mem_mersenneAchievementSet_of_cofinalTerminalOnlyStrip}{the terminal-strip compactness criterion},
 and
-\lref{TerminalOnlyCofinal.lean}{192}{exists_infinite_support_half_of_cofinalTerminalOnlyStrip}.
+\lword{TerminalOnlyCofinal.lean}{192}{exists_infinite_support_half_of_cofinalTerminalOnlyStrip}{the infinite-support conclusion}.
 The cofinal terminal-witness supply is not proved.  In particular, the
 proposition does not establish membership of $1/2$ unconditionally.
 
@@ -942,10 +942,10 @@ vanishing binary-scaled terminal carries yields an infinite support with
 support-series value $1/2$.
 \end{proposition}
 \noindent Formalised:
-\lref{TerminalOnlyScaledVanishing.lean}{24}{dist_half_erdosSupportSeries_wordSupport_le_carry_add_tail},
-\lref{TerminalOnlyScaledVanishing.lean}{165}{half_mem_mersenneAchievementSet_of_terminalScaledVanishing},
+\lword{TerminalOnlyScaledVanishing.lean}{24}{dist_half_erdosSupportSeries_wordSupport_le_carry_add_tail}{the scaled terminal error bound},
+\lword{TerminalOnlyScaledVanishing.lean}{165}{half_mem_mersenneAchievementSet_of_terminalScaledVanishing}{the scaled-vanishing compactness criterion},
 and
-\lref{TerminalOnlyScaledVanishing.lean}{221}{exists_infinite_support_half_of_terminalScaledVanishing}.
+\lword{TerminalOnlyScaledVanishing.lean}{221}{exists_infinite_support_half_of_terminalScaledVanishing}{the scaled-vanishing support conclusion}.
 No such scaled-vanishing sequence is constructed here; the result is a
 conditional reduction, not an unconditional membership theorem.
 
@@ -956,10 +956,10 @@ conditional reduction, not an unconditional membership theorem.
 For an admissible finite word, the residual from $1/2$ is given exactly by its
 terminal half carry minus the future coefficient tail, scaled by a power of
 two; see
-\lref{HalfCylinderFiniteShadow.lean}{55}{halfStripAdmissible_residual_eq}.
+\lword{HalfCylinderFiniteShadow.lean}{55}{halfStripAdmissible_residual_eq}{the finite-shadow residual identity}.
 At a first seam, avoiding the integer strip is equivalent to full scalar
 reachability of that strip:
-\lrefx{HalfCylinderFiniteShadow.lean}{807}{evenSeam_fullIntegerStrip_iff_escape}.
+\lword{HalfCylinderFiniteShadow.lean}{807}{evenSeam_fullIntegerStrip_iff_escape}{the seam-escape equivalence}.
 The rank-three greedy example is raw dyadically safe while its seam has an
 in-strip hole, so raw safety alone does not imply this escape.  Finally, an
 explicit frozen-margin hypothesis implies $1/2$ belongs to the Mersenne
@@ -972,12 +972,12 @@ a proof of Erd\H{o}s~\#257.
 
 For a finite list of common coefficients, the canonical inverse-parent map has
 an exact closed form with a power-of-two denominator:
-\lref{HalfCarryCeilParentContraction.lean}{49}{rewind_eq_closedForm}.
+\lword{HalfCarryCeilParentContraction.lean}{49}{rewind_eq_closedForm}{the rewind closed form}.
 An interval of width at most that denominator contracts either to one ancestor
 or to two adjacent ancestors.  The singleton alternative is equivalent to the
 explicit dyadic phase inequality, while the other alternative is a seam pair;
 see
-\lrefx{HalfCarryCeilParentContraction.lean}{180}{rewind_singleton_or_isSeamPair}.
+\lword{HalfCarryCeilParentContraction.lean}{180}{rewind_singleton_or_isSeamPair}{the singleton-or-seam dichotomy}.
 Thus width alone does not justify a singleton conclusion.  This is a finite
 rewind lemma, and supplies neither a seam exclusion nor an Erd\H{o}s~\#257
 conclusion.
@@ -988,9 +988,9 @@ The selected-window construction keeps an explicit admissible word for each
 terminal carry in a finite protected interval.  A supply of such windows at
 all sufficiently large levels gives cofinal admissibility and hence an
 infinite support with sum $1/2$:
-\lref{HalfCarrySelectedWindow.lean}{831}{cofinalAdmissibility_of_selectedHalfWindows}
+\lword{HalfCarrySelectedWindow.lean}{831}{cofinalAdmissibility_of_selectedHalfWindows}{selected-window cofinality}
 and
-\lrefx{HalfCarrySelectedWindow.lean}{864}{exists_infinite_support_half_of_selectedHalfWindows}.
+\lword{HalfCarrySelectedWindow.lean}{864}{exists_infinite_support_half_of_selectedHalfWindows}{the selected-window half-value conclusion}.
 The unresolved input is the coherent history at each step: either a common
 next-row divisor cylinder, or the canonical adjacent seam.  The theorem
 states this input exactly; it does not construct the window supply and does
@@ -1000,11 +1000,11 @@ not prove Erd\H{o}s~\#257.
 
 For a realized fixed-coefficient history, the dyadic rewind phase is the
 complementary binary suffix numeral:
-\lref{HalfCarryRewindPhase.lean}{39}{phase_eq_denom_sub_one_sub_suffixNumeral}.
+\lword{HalfCarryRewindPhase.lean}{39}{phase_eq_denom_sub_one_sub_suffixNumeral}{the suffix-phase identity}.
 Consequently the singleton criterion is exactly the inequality that this
 suffix numeral covers the rest of the terminal interval,
 formalised by
-\lrefx{HalfCarryRewindPhase.lean}{65}{rewind_interval_singleton_iff_suffixNumeral_covers}.
+\lword{HalfCarryRewindPhase.lean}{65}{rewind_interval_singleton_iff_suffixNumeral_covers}{the suffix-coverage criterion}.
 This converts the phase condition into support-history coordinates, but does
 not prove the required coverage inequality globally.
 
@@ -1013,10 +1013,10 @@ not prove the required coverage inequality globally.
 The compactness argument needs only one admissible word at cofinally many
 depths.  At a localized one-hole seam, one of the two protected carries $3$
 and $4$ survives; therefore a cofinal supply of realized protected seams
-implies cofinal admissibility,
-\lref{HalfCarryProtectedSeamConsumer.lean}{31}{cofinalAdmissibility_of_cofinalProtectedEvenSeamRealization},
+implies cofinal admissibility by
+\lword{HalfCarryProtectedSeamConsumer.lean}{31}{cofinalAdmissibility_of_cofinalProtectedEvenSeamRealization}{the protected-seam cofinality implication},
 and hence an infinite support with sum $1/2$,
-\lrefx{HalfCarryProtectedSeamConsumer.lean}{53}{exists_infinite_support_half_of_cofinalProtectedEvenSeamRealization}.
+\lword{HalfCarryProtectedSeamConsumer.lean}{53}{exists_infinite_support_half_of_cofinalProtectedEvenSeamRealization}{by compactness}.
 The cofinal realization supply is not proved.
 
 \subsubsection{Combining the two cofinal half-carry criteria}\label{res:cofinalwindowseam}
@@ -1025,9 +1025,9 @@ Assume that at each requested scale there is either a selected protected
 window or a localized realized seam.  Each alternative supplies the one
 admissible word needed for compactness, so this cofinal disjunction implies
 an infinite support with sum $1/2$:
-\lref{HalfCarryCofinalWindowOrSeamConsumer.lean}{32}{cofinalAdmissibility_of_cofinalSelectedWindowOrProtectedSeam}
+\lword{HalfCarryCofinalWindowOrSeamConsumer.lean}{32}{cofinalAdmissibility_of_cofinalSelectedWindowOrProtectedSeam}{by window-or-seam cofinality}
 and
-\lrefx{HalfCarryCofinalWindowOrSeamConsumer.lean}{58}{exists_infinite_support_half_of_cofinalSelectedWindowOrProtectedSeam}.
+\lword{HalfCarryCofinalWindowOrSeamConsumer.lean}{58}{exists_infinite_support_half_of_cofinalSelectedWindowOrProtectedSeam}{by the window-or-seam half-value conclusion}.
 The cofinal disjunction remains unproved.
 
 \subsubsection{Integer-greedy first-wrap reduction}\label{res:integergreedy}
@@ -1036,7 +1036,7 @@ The first-wrap seam has exact truncated Mersenne weights with a quantitative
 gap-dominance property.  For these weights, a small positive subset-sum defect
 exists exactly when the descending integer-greedy remainder is small and
 positive; this is formalised by
-\lref{HalfCylinderIntegerGreedy.lean}{654}{seam_smallPositiveDefect_iff_integerGreedyRemainder}.
+\lword{HalfCylinderIntegerGreedy.lean}{654}{seam_smallPositiveDefect_iff_integerGreedyRemainder}{the integer-greedy remainder equivalence}.
 The remaining arithmetic input is an unbounded lower bound for that
 deterministic remainder sequence.  No such lower bound is proved here.
 
@@ -1045,7 +1045,7 @@ deterministic remainder sequence.  No such lower bound is proved here.
 The finite seam-word construction realizes the abstract adjacent cut by
 concrete Boolean words and identifies its next word with the integer-greedy
 choice:
-\lref{HalfCylinderConcreteSeamAdapter.lean}{667}{seamCutNextWord_eq_greedyWord_succ}.
+\lword{HalfCylinderConcreteSeamAdapter.lean}{667}{seamCutNextWord_eq_greedyWord_succ}{the seam-word recurrence}.
 It implements a finite recurrence, not the unbounded remainder estimate.
 
 \subsection{Fatal gaps and the final-skip reduction}
@@ -1054,13 +1054,13 @@ It implements a finite recurrence, not the unbounded remainder estimate.
 
 For the concrete integer seam words, eventual right extension is equivalent
 to nonmembership of $1/2$ in the Mersenne achievement set:
-\lref{HalfCylinderFatalGapRightTail.lean}{787}{seamGreedyEventuallyRight_iff_half_not_mem}.
+\lword{HalfCylinderFatalGapRightTail.lean}{787}{seamGreedyEventuallyRight_iff_half_not_mem}{the eventual-right nonmembership equivalence}.
 The same condition is equivalent to the existence of a finite fatal half gap,
 by
-\lrefx{HalfCylinderFatalGapRightTail.lean}{781}{seamGreedyEventuallyRight_iff_existsFatalHalfGap},
+\lword{HalfCylinderFatalGapRightTail.lean}{781}{seamGreedyEventuallyRight_iff_existsFatalHalfGap}{the fatal-gap equivalence},
 and also to a final skipped exponent in the real greedy orbit,
 by
-\lrefx{HalfCylinderFatalGapRightTail.lean}{802}{seamGreedyEventuallyRight_iff_exists_isLastHalfGreedySkip}.
+\lword{HalfCylinderFatalGapRightTail.lean}{802}{seamGreedyEventuallyRight_iff_exists_isLastHalfGreedySkip}{the final-skip equivalence}.
 Thus this equivalence gives an exact classification of the nonmembership branch.
 It neither decides whether $1/2$ belongs to the achievement set nor proves
 the universal Erd\H{o}s~\#257 statement.
@@ -1074,7 +1074,7 @@ separate obstruction: if the orbit extends right after the last false rank,
 then the cell with transition carry $-3$ makes the lazy cofinite tail strictly
 smaller than $1/2$ while its centred carry becomes negative.  This is
 impossible by the analytic nonnegativity identity,
-\lrefx{HalfCylinderFinalMiddleCellEscape.lean}{587}{finalMiddleCell_neg_three_not_last}.
+\lword{HalfCylinderFinalMiddleCellEscape.lean}{587}{finalMiddleCell_neg_three_not_last}{the middle-\(-3\) exclusion}.
 It removes that one conditional terminal configuration; it does not decide
 the right-tail branch or the remaining two middle cells.
 

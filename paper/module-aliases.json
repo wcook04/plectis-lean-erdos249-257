@@ -3,7 +3,7 @@
   "artifact_role": "paper_sigil_to_lean_module_navigation_crosswalk",
   "authority_posture": "generated_navigation_projection_not_proof_authority",
   "heuristic": "Each CamelCase component contributes at most its first three characters.",
-  "alias_count": 74,
+  "alias_count": 55,
   "aliases": [
     {
       "sigil": "ActForResPro",
@@ -34,16 +34,6 @@
       "sigil": "CerKer",
       "module": "CertificateKernel.lean",
       "path": "Erdos249257/CertificateKernel.lean"
-    },
-    {
-      "sigil": "CofStrRet",
-      "module": "CofinalStripReturn.lean",
-      "path": "Erdos249257/CofinalStripReturn.lean"
-    },
-    {
-      "sigil": "ComDilDef",
-      "module": "CompositeDilationDefect.lean",
-      "path": "Erdos249257/CompositeDilationDefect.lean"
     },
     {
       "sigil": "DiaFleOddWinAff",
@@ -111,36 +101,6 @@
       "path": "Erdos249257/GreedyAchievementSet.lean"
     },
     {
-      "sigil": "HalCarCeiParCon",
-      "module": "HalfCarryCeilParentContraction.lean",
-      "path": "Erdos249257/HalfCarryCeilParentContraction.lean"
-    },
-    {
-      "sigil": "HalCarCofWinOrSeaCon",
-      "module": "HalfCarryCofinalWindowOrSeamConsumer.lean",
-      "path": "Erdos249257/HalfCarryCofinalWindowOrSeamConsumer.lean"
-    },
-    {
-      "sigil": "HalCarProSeaCon",
-      "module": "HalfCarryProtectedSeamConsumer.lean",
-      "path": "Erdos249257/HalfCarryProtectedSeamConsumer.lean"
-    },
-    {
-      "sigil": "HalCarRea",
-      "module": "HalfCarryReachability.lean",
-      "path": "Erdos249257/HalfCarryReachability.lean"
-    },
-    {
-      "sigil": "HalCarRewPha",
-      "module": "HalfCarryRewindPhase.lean",
-      "path": "Erdos249257/HalfCarryRewindPhase.lean"
-    },
-    {
-      "sigil": "HalCarSelWin",
-      "module": "HalfCarrySelectedWindow.lean",
-      "path": "Erdos249257/HalfCarrySelectedWindow.lean"
-    },
-    {
       "sigil": "HalCarSelWinBas",
       "module": "HalfCarrySelectedWindowBase.lean",
       "path": "Erdos249257/HalfCarrySelectedWindowBase.lean"
@@ -151,26 +111,6 @@
       "path": "Erdos249257/HalfCylinderBoundaryPulse.lean"
     },
     {
-      "sigil": "HalCylConSeaAda",
-      "module": "HalfCylinderConcreteSeamAdapter.lean",
-      "path": "Erdos249257/HalfCylinderConcreteSeamAdapter.lean"
-    },
-    {
-      "sigil": "HalCylFatGapRigTai",
-      "module": "HalfCylinderFatalGapRightTail.lean",
-      "path": "Erdos249257/HalfCylinderFatalGapRightTail.lean"
-    },
-    {
-      "sigil": "HalCylFinMidCelEsc",
-      "module": "HalfCylinderFinalMiddleCellEscape.lean",
-      "path": "Erdos249257/HalfCylinderFinalMiddleCellEscape.lean"
-    },
-    {
-      "sigil": "HalCylFinSha",
-      "module": "HalfCylinderFiniteShadow.lean",
-      "path": "Erdos249257/HalfCylinderFiniteShadow.lean"
-    },
-    {
       "sigil": "HalCylFixTaiSoc",
       "module": "HalfCylinderFixedTailSocket.lean",
       "path": "Erdos249257/HalfCylinderFixedTailSocket.lean"
@@ -179,11 +119,6 @@
       "sigil": "HalCylHalMemCla",
       "module": "HalfCylinderHalfMembershipClassification.lean",
       "path": "Erdos249257/HalfCylinderHalfMembershipClassification.lean"
-    },
-    {
-      "sigil": "HalCylIntGre",
-      "module": "HalfCylinderIntegerGreedy.lean",
-      "path": "Erdos249257/HalfCylinderIntegerGreedy.lean"
     },
     {
       "sigil": "HalCylLarSkiGap",
@@ -211,16 +146,6 @@
       "path": "Erdos249257/HalfDivisorUnitDrop.lean"
     },
     {
-      "sigil": "HalGreTwoThiBan",
-      "module": "HalfGreedyTwoThirdsBand.lean",
-      "path": "Erdos249257/HalfGreedyTwoThirdsBand.lean"
-    },
-    {
-      "sigil": "HalTraRetCar",
-      "module": "HalfTrappingReturnCarry.lean",
-      "path": "Erdos249257/HalfTrappingReturnCarry.lean"
-    },
-    {
       "sigil": "LcmConFla",
       "module": "LcmConeFlatness.lean",
       "path": "Erdos249257/LcmConeFlatness.lean"
@@ -234,11 +159,6 @@
       "sigil": "LcmDiaRed",
       "module": "LcmDiagonalReduction.lean",
       "path": "Erdos249257/LcmDiagonalReduction.lean"
-    },
-    {
-      "sigil": "MaxOmeLay",
-      "module": "MaximalOmegaLayer.lean",
-      "path": "Erdos249257/MaximalOmegaLayer.lean"
     },
     {
       "sigil": "MerLamLad",
@@ -344,21 +264,6 @@
       "sigil": "SufCylThr",
       "module": "SuffixCylinderThreshold.lean",
       "path": "Erdos249257/SuffixCylinderThreshold.lean"
-    },
-    {
-      "sigil": "SupSunDic",
-      "module": "SupportSunflowerDichotomy.lean",
-      "path": "Erdos249257/SupportSunflowerDichotomy.lean"
-    },
-    {
-      "sigil": "TerOnlCof",
-      "module": "TerminalOnlyCofinal.lean",
-      "path": "Erdos249257/TerminalOnlyCofinal.lean"
-    },
-    {
-      "sigil": "TerOnlScaVan",
-      "module": "TerminalOnlyScaledVanishing.lean",
-      "path": "Erdos249257/TerminalOnlyScaledVanishing.lean"
     },
     {
       "sigil": "TotCarKerRig",
