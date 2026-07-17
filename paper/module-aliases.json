@@ -3,7 +3,7 @@
   "artifact_role": "paper_sigil_to_lean_module_navigation_crosswalk",
   "authority_posture": "generated_navigation_projection_not_proof_authority",
   "heuristic": "Each CamelCase component contributes at most its first three characters.",
-  "alias_count": 29,
+  "alias_count": 23,
   "aliases": [
     {
       "sigil": "AdeHeiObs",
@@ -21,11 +21,6 @@
       "path": "Erdos249257/CampbellShiftSynchronization.lean"
     },
     {
-      "sigil": "CarSurExt",
-      "module": "CarrySurvivorExtinction.lean",
-      "path": "Erdos249257/CarrySurvivorExtinction.lean"
-    },
-    {
       "sigil": "CerKer",
       "module": "CertificateKernel.lean",
       "path": "Erdos249257/CertificateKernel.lean"
@@ -36,11 +31,6 @@
       "path": "Erdos249257/DiagonalFreshLossBridge.lean"
     },
     {
-      "sigil": "DiaPinCerT64",
-      "module": "DiagonalPincerCertificatesT64.lean",
-      "path": "Erdos249257/DiagonalPincerCertificatesT64.lean"
-    },
-    {
       "sigil": "DiaPinDec",
       "module": "DiagonalPincerDecomposition.lean",
       "path": "Erdos249257/DiagonalPincerDecomposition.lean"
@@ -49,11 +39,6 @@
       "sigil": "FulTarPriAdjNoGo",
       "module": "FullTargetPrimeAdjunctionNoGo.lean",
       "path": "Erdos249257/FullTargetPrimeAdjunctionNoGo.lean"
-    },
-    {
-      "sigil": "GapFarBou",
-      "module": "GapFareyBound.lean",
-      "path": "Erdos249257/GapFareyBound.lean"
     },
     {
       "sigil": "GcdMomCal",
@@ -96,16 +81,6 @@
       "path": "Erdos249257/MersenneShadowDenominatorGrowth.lean"
     },
     {
-      "sigil": "MerTaiAto",
-      "module": "MersenneTailAtoms.lean",
-      "path": "Erdos249257/MersenneTailAtoms.lean"
-    },
-    {
-      "sigil": "PriDetLif",
-      "module": "PrimitiveDeterminantLift.lean",
-      "path": "Erdos249257/PrimitiveDeterminantLift.lean"
-    },
-    {
       "sigil": "RatSupCarSke",
       "module": "RationalSupportCarrySkeleton.lean",
       "path": "Erdos249257/RationalSupportCarrySkeleton.lean"
@@ -129,11 +104,6 @@
       "sigil": "SquMerDiaEnc",
       "module": "SquaredMersenneDiagonalEnclosure.lean",
       "path": "Erdos249257/SquaredMersenneDiagonalEnclosure.lean"
-    },
-    {
-      "sigil": "SteBroRunGeo",
-      "module": "SternBrocotRunGeometry.lean",
-      "path": "Erdos249257/SternBrocotRunGeometry.lean"
     },
     {
       "sigil": "SubDivCov",

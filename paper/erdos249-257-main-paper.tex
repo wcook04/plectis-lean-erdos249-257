@@ -1538,9 +1538,9 @@ each a mediant/Farey argument that traps any candidate $m/q$ inside a forbidden
 gap. The mediant framework is historically associated with Farey's 1816 note
 on vulgar fractions~\cite{farey1816}; the finite exclusions themselves are
 Lean-checked arguments in the formal-source checkpoint. See
-\lrefx{CertificateKernel.lean}{15347}{tsum_totient_div_pow_two_ne_ratCast_of_den_le_4838}
-for the first rung and \lrefx{GapFareyBound.lean}{88}{gap_check_window_1_120_le_248672326362367909},
-\lrefx{GapFareyBound.lean}{176}{gap_check_window_1_240_le_79639646646701375323355774875831053}
+\lword{CertificateKernel.lean}{15347}{tsum_totient_div_pow_two_ne_ratCast_of_den_le_4838}{denominator exclusion through 4838}
+for the first rung and \lword{GapFareyBound.lean}{88}{gap_check_window_1_120_le_248672326362367909}{120-term Farey bound},
+\lword{GapFareyBound.lean}{176}{gap_check_window_1_240_le_79639646646701375323355774875831053}{240-term Farey bound}
 for the two Farey windows.
 
 This is an explicit lower bound on the denominator of any rational
@@ -1574,9 +1574,9 @@ S \;=\; \tfrac12 \;+\; \Pr\!\big(\gcd(X,Y)=1\big)
 \;=\; \tfrac12 \;+\!\!\sum_{\substack{a,b\ge1\\ \gcd(a,b)=1}}\!\! 2^{-(a+b)}.
 \]
 \end{proposition}
-\noindent Formalised: \lref{CertificateKernel.lean}{18229}{totient_series_eq_half_add_visible_coprime_pairs},
+\noindent Formalised: \lword{CertificateKernel.lean}{18229}{totient_series_eq_half_add_visible_coprime_pairs}{coprime-pair representation},
 with the underlying lattice identity at
-\lrefx{CertificateKernel.lean}{18216}{tsum_visible_coprime_pairs_eq_totient_series}.
+\lword{CertificateKernel.lean}{18216}{tsum_visible_coprime_pairs_eq_totient_series}{visible-lattice-point identity}.
 Base $2$ is the one point where $\Pr(X=a)\Pr(Y=b)=2^{-(a+b)}$ needs no normalising
 constant, so the totient sum and the coprimality probability line up with no
 boundary correction. In this reading, Erd\H{o}s \#249 asks whether two independent
@@ -1620,10 +1620,10 @@ while its conclusion concerns the infinite tail difference.
 $S$ is irrational if and only if, for every period $h\ge1$ and every threshold
 $N_0$, there exist $N\ge N_0$ and $L$ with $\textsf{certifiedKill}(h,N,L)$.
 \end{theorem}
-\noindent Formalised: \lref{LcmConeFlatness.lean}{412}{irrational_totient_series_iff_certificate_supply};
+\noindent Formalised: \lword{LcmConeFlatness.lean}{412}{irrational_totient_series_iff_certificate_supply}{certificate-supply equivalence};
 the tail $R_N$ and the predicate are
-\lrefx{TotientTailPeriodKiller.lean}{57}{totientTail} and
-\lrefx{TotientTailPeriodKiller.lean}{72}{certifiedKill}.
+\lword{TotientTailPeriodKiller.lean}{57}{totientTail}{scaled totient tail} and
+\lword{TotientTailPeriodKiller.lean}{72}{certifiedKill}{finite certificate predicate}.
 
 Every multiple of an eventual period is again a period.  The least common
 multiple $M_t$ therefore provides a useful sufficient diagonal form of
@@ -1634,7 +1634,7 @@ Suppose that for every threshold $t_0$ there are parameters $t\ge t_0$ and
 $L$ for which $\textsf{certifiedKill}(M_t,M_t,L)$ holds. Then $S$ is
 irrational.
 \end{corollary}
-\noindent Formalised: \lref{LcmDiagonalReduction.lean}{112}{irrational_totient_series_of_lcm_diagonal_certificate_supply}.
+\noindent Formalised: \lword{LcmDiagonalReduction.lean}{112}{irrational_totient_series_of_lcm_diagonal_certificate_supply}{diagonal-supply criterion}.
 
 \begin{proposition}[certificate completeness]\label{res:complete}
 For every $h\ge1$ and $N\ge0$,
@@ -1655,13 +1655,13 @@ Moreover, the following are equivalent:
 \]
 \end{proposition}
 \noindent Formalised:
-\lref{LcmConeFlatness.lean}{316}{exists_certifiedKill_iff_tail_diff_notMem_int},
-\lrefx{LcmConeFlatness.lean}{386}{irrational_totient_series_iff_all_tail_diffs_nonintegral},
+\lword{LcmConeFlatness.lean}{316}{exists_certifiedKill_iff_tail_diff_notMem_int}{certificate-completeness equivalence},
+\lword{LcmConeFlatness.lean}{386}{irrational_totient_series_iff_all_tail_diffs_nonintegral}{all-differences criterion},
 and
-\lrefx{LcmConeFlatness.lean}{399}{irrational_totient_series_iff_pointwise_certificates}.
+\lword{LcmConeFlatness.lean}{399}{irrational_totient_series_iff_pointwise_certificates}{pointwise certificate criterion}.
 The converse direction uses the fact that integrality of even one
 positive-shift tail difference forces $S$ to be rational
-(\lrefx{LcmConeFlatness.lean}{357}{not_irrational_of_tail_diff_mem_int}).
+(\lword{LcmConeFlatness.lean}{357}{not_irrational_of_tail_diff_mem_int}{integral-difference rationality criterion}).
 Thus the finite predicate is complete at each fixed pair $(h,N)$; the open
 problem is to prove that the required pairs occur without bound.
 
@@ -1680,12 +1680,12 @@ of vertices.
 \end{itemize}
 \end{example}
 \noindent Formalised:
-\lrefx{TotientTailPeriodKiller.lean}{404}{certifiedKill_all_small},
-\lrefx{CarrySurvivorExtinction.lean}{574}{certifiedKill_all_upto_sixteen},
-\lrefx{LcmDiagonalReduction.lean}{237}{certifiedKill_periodLcm_diagonal_upto_six},
-\lrefx{DiagonalPincerCertificatesT64.lean}{1967}{certifiedKill_diagonal_all_imported_through_t64},
+\lword{TotientTailPeriodKiller.lean}{404}{certifiedKill_all_small}{small-window certificate family},
+\lword{CarrySurvivorExtinction.lean}{574}{certifiedKill_all_upto_sixteen}{periods through sixteen},
+\lword{LcmDiagonalReduction.lean}{237}{certifiedKill_periodLcm_diagonal_upto_six}{diagonal certificates through scale six},
+\lword{DiagonalPincerCertificatesT64.lean}{1967}{certifiedKill_diagonal_all_imported_through_t64}{imported diagonal certificates through scale 64},
 and
-\lrefx{LcmConeNonflat.lean}{506}{coneNonflatCert_cells}.
+\lword{LcmConeNonflat.lean}{506}{coneNonflatCert_cells}{cone-cell certificate table}.
 
 For example, at $(h,N,L)=(1,12,16)$,
 \[
@@ -2310,18 +2310,21 @@ For \(L_b(\gamma)=\sum_{a\ge1}\gamma(a)/(b^a-1)\), the checked endpoints are:
 An eventually-periodic nonnegative rational weight with a positive periodic
 value gives an irrational series.
 \end{theorem}
-\lrefx{CertificateKernel.lean}{12397}{irrational_weightedErdosSeries_eventuallyPeriodic}
+\noindent Formalised:
+\lword{CertificateKernel.lean}{12397}{irrational_weightedErdosSeries_eventuallyPeriodic}{eventually-periodic nonnegative criterion}.
 This is contained in a broader theorem of Luca--Tachiya~\cite{lucatachiya}.
 \begin{theorem}[periodic signed-weight dichotomy]\label{res:periodicsigned}
 For a periodic integer weight, the series is irrational or terminating in
 base \(b\).
 \end{theorem}
-\lrefx{CertificateKernel.lean}{13847}{irrational_or_bpow_mul_eq_intCast_intWeightedErdosSeries_periodic}
+\noindent Formalised:
+\lword{CertificateKernel.lean}{13847}{irrational_or_bpow_mul_eq_intCast_intWeightedErdosSeries_periodic}{periodic signed-weight dichotomy}.
 \begin{proposition}[residue-blind obstruction]\label{res:periodfourobstruction}
 For the period-four weight \(1,0,-1,0\), the divisor coefficient vanishes on
 \(n\equiv3\pmod4\).
 \end{proposition}
-\lref{CertificateKernel.lean}{13898}{intWeightedCoeff_periodFourSignWeight_eq_zero_of_mod_four_eq_three}
+\noindent Formalised:
+\lword{CertificateKernel.lean}{13898}{intWeightedCoeff_periodFourSignWeight_eq_zero_of_mod_four_eq_three}{period-four coefficient obstruction}.
 
 \paragraph{Finite algebraic boundaries.}\label{sec:primitiveindex}
 Put \(a_n=(\ph*\mu)(n)/n\).  If an integer \(D\) clears these coordinates
@@ -2331,7 +2334,8 @@ through \(N\), the exact obstruction is:
 \(D\) is divisible by an explicit two-tier primorial \(T_N\); hence no fixed
 \(D\) clears every \(a_n\).
 \end{proposition}
-\lref{PrimitiveDeterminantLift.lean}{148}{twoTierPrimorial_dvd_of_integral_jet}
+\noindent Formalised:
+\lword{PrimitiveDeterminantLift.lean}{148}{twoTierPrimorial_dvd_of_integral_jet}{two-tier primorial obstruction}.
 
 For \(d\ge1\), define the pointed periodic atom
 \[
@@ -2359,10 +2363,10 @@ If the integer on the right is nonzero, then the absolute value of the
 cleared determinant on the left is at least \(1\).
 \end{proposition}
 \noindent Formalised:
-\lrefx{MersenneTailAtoms.lean}{28}{mersenneTailAtom_step},
-\lrefx{MersenneTailAtoms.lean}{158}{weightedMersenneAtom_denominatorProduct_mul_det},
+\lword{MersenneTailAtoms.lean}{28}{mersenneTailAtom_step}{Mersenne-atom carry law},
+\lword{MersenneTailAtoms.lean}{158}{weightedMersenneAtom_denominatorProduct_mul_det}{determinant-clearing identity},
 and
-\lrefx{MersenneTailAtoms.lean}{181}{one_le_abs_weightedMersenneAtom_cleared_det}.
+\lword{MersenneTailAtoms.lean}{181}{one_le_abs_weightedMersenneAtom_cleared_det}{cleared-determinant lower bound}.
 Thus finite Mersenne-atom determinants recover exactly their explicit column
 denominators; the clearing creates no additional height surplus.
 These are scoped finite-denominator obstructions, not irrationality criteria
@@ -2373,7 +2377,7 @@ for \(S\).
 S \;=\; \tfrac12 \;+\; \sum_{d\ge1}\frac{\mu(d)}{(2^d-1)^2}.
 \]
 \end{proposition}
-\noindent Formalised: \lref{CertificateKernel.lean}{18126}{totient_series_eq_half_add_moebius_mersenne_square}.
+\noindent Formalised: \lword{CertificateKernel.lean}{18126}{totient_series_eq_half_add_moebius_mersenne_square}{M\"obius-square identity}.
 Writing $T=\sum_{d\ge1}\mu(d)/(2^d-1)^2$, irrationality of $S$ is equivalent to
 irrationality of $T$, since $S=\tfrac12+T$. The factor $1/(2^d-1)^2$ is the
 probability that $d$ divides two independent fair-coin waiting times
@@ -2384,8 +2388,9 @@ quantity.
 \paragraph{Squared Lambert calculus.}\label{sec:squared}
 For \(L_2(f)=\sum_{d\ge1}f(d)/(2^d-1)^2\), the denominator is the probability
 that \(d\) divides two independent geometric waiting times.  The formal
-transfer theorem therefore gives a divisor calculus for their gcd.
-\lref{GcdMomentCalculus.lean}{105}{tsum_lambert_linear_weight_sq_pure}
+transfer theorem,
+\lword{GcdMomentCalculus.lean}{105}{tsum_lambert_linear_weight_sq_pure}{squared Lambert transfer},
+therefore gives a divisor calculus for their gcd.
 \begin{proposition}[squared Lambert ladder]\label{res:gcdmoment}
 At \(r=1/2\), the three rows \(f=\mu,\mathbf 1,\ph\) yield respectively
 \[
@@ -2395,7 +2400,8 @@ At \(r=1/2\), the three rows \(f=\mu,\mathbf 1,\ph\) yield respectively
 \]
 where \(P\) is Pillai's gcd-sum function.
 \end{proposition}
-\lrefx{GcdMomentCalculus.lean}{235}{tsum_totient_div_mersenne_sq_eq_gcd_moment_series}
+\noindent Formalised:
+\lword{GcdMomentCalculus.lean}{235}{tsum_totient_div_mersenne_sq_eq_gcd_moment_series}{totient gcd-moment identity}.
 Postelmans--Van Assche imply irrationality of the middle row
 ~\cite{postelmansvanassche}; this does not transfer to the M\"obius row, which
 is exactly the open constant \(S-\tfrac12\).
@@ -2432,10 +2438,10 @@ and, uniformly in \(a,b\) and \(d\),
 Consequently \(M_d(a,b)\to M(a,b)\); at the root \(M(1,1)=1\).
 \end{theorem}
 \noindent Formalised:
-\lrefx{GcdMomentCalculus.lean}{349}{tsum_pos_coprime_inv_mersenne_eq_one},
-\lrefx{GcdMomentCalculus.lean}{474}{cylinderMass_split},
-\lrefx{GcdMomentCalculus.lean}{525}{sternBrocotDepthMass_error}, and
-\lrefx{GcdMomentCalculus.lean}{560}{tendsto_sternBrocotDepthMass}.
+\lword{GcdMomentCalculus.lean}{349}{tsum_pos_coprime_inv_mersenne_eq_one}{reduced-direction mass one},
+\lword{GcdMomentCalculus.lean}{474}{cylinderMass_split}{cylinder mass recursion},
+\lword{GcdMomentCalculus.lean}{525}{sternBrocotDepthMass_error}{depth-$d$ remainder bound}, and
+\lword{GcdMomentCalculus.lean}{560}{tendsto_sternBrocotDepthMass}{cylinder convergence}.
 The recursion is the elementary rational identity obtained after setting
 \(A=2^a\), \(B=2^b\); the quantitative point is that the two children retain
 at most two thirds of their parent's mass.
@@ -2473,12 +2479,12 @@ mass \(1/2\), while the natural denominator exponent on the all-unit spine is
 \]
 \end{theorem}
 \noindent Formalised:
-\lrefx{SternBrocotRunGeometry.lean}{185}{runHeight_fib_lower},
-\lrefx{SternBrocotRunGeometry.lean}{263}{runHeight_defectRunLengths},
-\lrefx{SternBrocotRunGeometry.lean}{343}{runHeight_defect_fib_sum_lower},
-\lrefx{SternBrocotRunGeometry.lean}{413}{runHeight_oneSiteDefect},
-\lrefx{SternBrocotRunGeometry.lean}{467}{oneRunMass_eq_half}, and
-\lrefx{SternBrocotRunGeometry.lean}{491}{naturalRunDenominatorExponent_add_two}.
+\lword{SternBrocotRunGeometry.lean}{185}{runHeight_fib_lower}{Fibonacci height lower bound},
+\lword{SternBrocotRunGeometry.lean}{263}{runHeight_defectRunLengths}{multiaffine run-height formula},
+\lword{SternBrocotRunGeometry.lean}{343}{runHeight_defect_fib_sum_lower}{aggregate defect lower bound},
+\lword{SternBrocotRunGeometry.lean}{413}{runHeight_oneSiteDefect}{one-site defect identity},
+\lword{SternBrocotRunGeometry.lean}{467}{oneRunMass_eq_half}{one-run mass}, and
+\lword{SternBrocotRunGeometry.lean}{491}{naturalRunDenominatorExponent_add_two}{natural denominator exponent}.
 
 The Lambert and M\"obius identities used above are classical
 ~\cite{apostol,merca2017,mercaschmidt}, and the mediant language goes back to
@@ -2511,10 +2517,10 @@ If nonnegative slack occurs at arbitrarily large strict jumps
 $M_t<M_{t+1}$, then $S$ is irrational.
 \end{proposition}
 \noindent Formalised:
-\lrefx{DiagonalFreshLossBridge.lean}{2469}{canonicalAdjacentSuffixCentral_iff_slack_nonneg},
-\lrefx{DiagonalFreshLossBridge.lean}{2559}{canonicalAdjacentSuffixJumpCentralSupply_iff_slackSupply},
+\lword{DiagonalFreshLossBridge.lean}{2469}{canonicalAdjacentSuffixCentral_iff_slack_nonneg}{canonical central-band equivalence},
+\lword{DiagonalFreshLossBridge.lean}{2559}{canonicalAdjacentSuffixJumpCentralSupply_iff_slackSupply}{strict-jump slack equivalence},
 and
-\lref{DiagonalFreshLossBridge.lean}{2731}{irrational_totientSeries_of_canonicalAdjacentSuffixJumpSlackSupply}.
+\lword{DiagonalFreshLossBridge.lean}{2731}{irrational_totientSeries_of_canonicalAdjacentSuffixJumpSlackSupply}{cofinal-slack irrationality criterion}.
 The proposition is an equivalence followed by a sufficient criterion.  It
 does not prove that $\sigma_t$ is nonnegative cofinally.
 
@@ -2534,10 +2540,10 @@ $1\le n\le6$.  If it holds for every $n\ge7$, then
 $1/2$ belongs to the Mersenne achievement set $\mathcal A$.
 \end{proposition}
 \noindent Formalised:
-\lrefx{GreedyAchievementSet.lean}{2695}{HalfSecondChannelSeparatedRat},
-\lrefx{GreedyAchievementSet.lean}{2723}{halfSecondChannelSeparatedRat_of_pos_le_six},
+\lword{GreedyAchievementSet.lean}{2695}{HalfSecondChannelSeparatedRat}{second-channel predicate},
+\lword{GreedyAchievementSet.lean}{2723}{halfSecondChannelSeparatedRat_of_pos_le_six}{finite second-channel verification},
 and
-\lref{GreedyAchievementSet.lean}{2901}{half_mem_mersenneAchievementSet_of_secondChannelSeparationRat_from_seven}.
+\lword{GreedyAchievementSet.lean}{2901}{half_mem_mersenneAchievementSet_of_secondChannelSeparationRat_from_seven}{from-seven membership criterion}.
 The membership conclusion is itself exact:
 \[
   1/2\in\mathcal A
@@ -2545,7 +2551,7 @@ The membership conclusion is itself exact:
   \text{the canonical greedy orbit omits infinitely many exponents}.
 \]
 This is formalised at
-\lref{GreedyAchievementSet.lean}{2514}{half_mem_mersenneAchievementSet_iff_greedySkippedSupport_infinite}.
+\lword{GreedyAchievementSet.lean}{2514}{half_mem_mersenneAchievementSet_iff_greedySkippedSupport_infinite}{half-membership--infinite-skip equivalence}.
 The forward implication uses Theorem~\ref{res:full}; the reverse implication
 uses the absorbing fatal-state
 criterion.  Thus the second-channel hypothesis is one sufficient route to the
