@@ -854,8 +854,13 @@ support and a counterexample to the universal \#257 statement.
 
 \long\def\HalfValueTechnicalAppendix{
 
-\subsection{A band formula for the final skip between two takes}
+\subsection{Exact localizer: a band formula for the final skip between two takes}
 \label{res:twothirdsband}
+
+This subsection has one diagnostic role: it gives the exact unsafe interval
+for a specified take--skip--take configuration.  It helps interpret the
+transition geometry used in the final-skip analysis, but it is neither an
+orbit-level exclusion nor a premise that produces half-value membership.
 
 One local configuration admits a simple exact description in full generality.
 Suppose a take at rank $b$ is followed by the next take at $c>b+1$.  Put
@@ -894,7 +899,14 @@ the greedy orbit of $1/2$ avoids any such band, and they do not identify the
 two remaining exceptional transition coordinates $-2,-1$ with dyadically
 unsafe skips.
 
-\subsection{Conditional criteria for structured supports}
+\subsection{Conditional producers and local inputs for structured supports}
+
+The results here have three distinct roles.  The bouquet criterion is a
+conditional irrationality theorem for one structured support family.  The
+seam, strip, and terminal criteria are conditional producers of
+\(1/2\in\mathcal A\).  The dilation, prime-power, and return-carry results are
+local algebraic inputs that yield neither endpoint without an additional
+supply hypothesis.  Nothing in this subsection is a new unconditional case.
 
 \subsubsection{A conditional pairwise-coprime dilation criterion}\label{res:sunflower}
 
@@ -1047,7 +1059,20 @@ and
 No such scaled-vanishing sequence is constructed here; the result is a
 conditional reduction, not an unconditional membership theorem.
 
-\subsection{Finite-window reductions and compactness criteria}
+\subsection{Finite-to-cofinal criteria: windows, seams, and compactness}
+
+Every half-value route in this subsection factors as
+\[
+ \text{finite witness at depth }N
+ \quad+\quad
+ \text{a cofinal supply of such depths}
+ \quad\Longrightarrow\quad
+ \frac12\in\mathcal A.
+\]
+The local identities and recurrences describe or advance one finite witness.
+The compactness statements consume a cofinal supply.  No result below proves
+that supply, so a verified window or seam at one depth is evidence for a
+producer mechanism, not the producer itself.
 
 \subsubsection{Finite shadows of the half cylinder}\label{res:halfcylindershadow}
 
@@ -1146,7 +1171,15 @@ choice:
 \lword{HalfCylinderConcreteSeamAdapter.lean}{667}{seamCutNextWord_eq_greedyWord_succ}{the seam-word recurrence}.
 It implements a finite recurrence, not the unbounded remainder estimate.
 
-\subsection{Fatal gaps and the final-skip reduction}
+\subsection{Exact final-skip spine and its residual cells}
+
+This is the only subsection that feeds the main final-skip reduction
+directly.  It first identifies nonmembership with a final skip and membership
+with cofinal terminal zeros.  It then separates the terminal cells already
+excluded from the two unresolved middle coordinates and the unresolved
+future-tail inequality.  The later largest-skip, pulse, and reset formulas
+are conditional ways to attack those residual obligations; they do not add a
+second conclusion.
 
 \subsubsection{Fatal gaps and eventual right tails}\label{app:fatalright-detail}
 
@@ -1319,7 +1352,14 @@ the next two rows:
 This is an exact coordinate change between the seam and transition
 coordinates; it does not supply a sign or size estimate for that carry.
 
-\subsection{Finite computations, exact identities, and counterexamples}
+\subsection{Finite evidence, coordinate adapters, and closed branches}
+
+This subsection has no open-endpoint theorem.  Its verified bases and stages
+are bounded evidence for the cofinal criteria in A.2--A.3; its coordinate
+adapters translate one finite producer formulation into another; and its
+counterexamples and incompatibility theorems close shortcuts that would
+otherwise be mistaken for global arguments.  Each item must therefore be
+read through the earlier criterion it supports or blocks.
 
 \subsubsection{A verified initial selected window}\label{res:selectedwindowbase}
 
@@ -2916,6 +2956,27 @@ Appendix~A.4 develops the equivalent final-skip coordinates; and
 Appendix~A.5 records verified finite instances, exact coordinate
 translations, counterexamples, and closed strategy branches.  This is a
 dependency map, not a second route to a conclusion.
+
+The logical spine is
+\[
+\begin{array}{rcl}
+ \text{cofinal half-value witnesses from A.2--A.3}
+ &\Longrightarrow& \frac12\in\mathcal A,\\
+ \frac12\in\mathcal A
+ &\Longrightarrow& \text{an infinite rational-valued support},\\
+ \text{a final greedy skip}
+ &\Longleftrightarrow& \frac12\notin\mathcal A,\\
+ \text{the A.4 residual cell exclusions and tail bound}
+ &\Longrightarrow& \text{no final skip},\\
+ \text{no final skip}
+ &\Longrightarrow& \frac12\in\mathcal A.
+\end{array}
+\]
+The first two and last two lines are conditional producer routes; the middle
+line is an exact classification.  Appendix~A.1 only localises one transition
+configuration, while Appendix~A.5 supplies bounded evidence, coordinate
+changes, and no-go results.  Neither creates a further implication to an open
+endpoint.
 
 Throughout this appendix, a \emph{seam} is an adjacent pair of finite greedy
 words at a branch boundary, a \emph{rewind} is the corresponding inverse
