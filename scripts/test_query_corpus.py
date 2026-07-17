@@ -598,7 +598,7 @@ def main() -> int:
     assert paper_label["attached_claims"][0]["id"] == "denominator_exclusion"
     assert paper_label["anchor_class"] == "registered_claim_anchor"
     assert any(
-        row["source_ref"] == "Erdos249257/CertificateKernel.lean:18055"
+        row["source_ref"] == "Erdos249257/CertificateKernel.lean:18056"
         for row in paper_label["source_links"]
     )
     assert paper_label["lean_source_identity"] == adelic["lean_source_identity"]

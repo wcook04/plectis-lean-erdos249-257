@@ -56,7 +56,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "Erd\\H{o}s \\#249",
-    "line": 2540
+    "line": 2541
    }
   },
   {
@@ -67,7 +67,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "unbounded certificate supply",
-    "line": 2551
+    "line": 2552
    }
   },
   {
@@ -78,7 +78,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "the half-value counterexample route",
-    "line": 2566
+    "line": 2567
    }
   },
   {
@@ -89,7 +89,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "universal Erd\\H{o}s \\#257",
-    "line": 2557
+    "line": 2558
    }
   }
  ],
@@ -554,18 +554,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_raw_location_provenance",
+   "id": "main_paper_dense_clause_hierarchy_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "three remaining raw source-location links in Section 5.1 render as generic Lean-source anchors even though each target is a named theorem with a precise denominator-exclusion meaning",
-   "statement": "Replace the remaining raw Section 5.1 locations with authored theorem links for the main denominator exclusion and its positive-lift and signed-Mobius-square transfers."
+   "defect_class": "the remaining paragraphs with five or more formal anchors may be justified one-to-one theorem maps or may still hide duplicate proof plumbing; link count alone no longer distinguishes them",
+   "statement": "Audit every remaining high-density formalisation clause against the mathematical claims immediately above it, preserving case-by-case and clause-by-clause mappings and compressing only duplicated or internal anchors."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "a16aa24af5236b6508a34b8a4c4b41fdcf620a98",
-  "committed_navigation_snapshot": "6a700bc77b8a36d83d4e1eef442aed92dbe4e8e3",
-  "main_paper_source_digest": "sha256:e83e113c189a9b3b10fc27254614c521ec63bef4afc1148b48e36a3b58d74047"
+  "committed_navigation_snapshot": "3e0a6bf847359f056fbea5850e9251a12739aeba",
+  "main_paper_source_digest": "sha256:2febc0bc2325fbbcc91467c8f7c5f8769f979f26667e3a2012b22b1ea8094c6c"
  },
  "reading_routes": [
   {

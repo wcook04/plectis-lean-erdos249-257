@@ -1511,7 +1511,8 @@ S \;\ne\; \frac{p}{q}.
 \]
 Equivalently, if $S$ is rational then its reduced denominator exceeds that bound.
 \end{theorem}
-\noindent Formalised: \lloc{CertificateKernel.lean}{18055}.
+\noindent Formalised as the
+\lword{CertificateKernel.lean}{18056}{tsum_totient_div_pow_two_ne_ratCast_of_den_le_79639646646701375323355774875831053}{record denominator exclusion}.
 The bound is reached by a ladder of finite, elementary exclusions,
 \[
 4838 \;\to\; 4\,194\,304 = 2^{22} \;\to\; 2.49\times10^{17}\ (\text{Farey } K{=}120)
@@ -1534,9 +1535,9 @@ denominator is not excluded by it.
 Because the ladder identities of Section~\ref{sec:ladder} are equalities, the same
 finite record transfers verbatim to three other representations of the constant:
 to the positive lift $\sum_d A(d)/(2^d-1)$
-(\lloc{CertificateKernel.lean}{18144}),
+(\lword{CertificateKernel.lean}{18145}{tsum_primWeight_div_two_pow_sub_one_ne_int_div_of_den_le_79639646646701375323355774875831053}{positive-lift denominator transfer}),
 to the signed M\"obius-square constant $T=\sum_d\mu(d)/(2^d-1)^2$ at half the bound
-(\lloc{CertificateKernel.lean}{18158}),
+(\lword{CertificateKernel.lean}{18159}{tsum_moebius_div_two_pow_sub_one_sq_ne_int_div_of_den_le_39819823323350687661677887437915526}{signed-square denominator transfer}),
 and to the coprimality probability of Section~\ref{sec:geom} at half the bound.
 Half appears because $S=\tfrac12+T$ turns a denominator $d$ for $T$ into $2d$ for $S$.
 \end{remark}
