@@ -435,7 +435,7 @@ def main() -> int:
         for row in last_producer["argument_neighbourhood"]["incoming"]
     }
     phase_sieve = query("--claim", "final_middle_neg_two_phase_sieve")
-    assert "35 of the 210 joint residue classes survive" in phase_sieve["claim"]["statement"]
+    assert "Exactly 412 of the 2730 joint residue classes survive" in phase_sieve["claim"]["statement"]
     assert ("builds_on", "fatal_gap_right_tail_classification") in {
         (row["relation"], row["neighbour"]["id"])
         for row in phase_sieve["argument_neighbourhood"]["outgoing"]

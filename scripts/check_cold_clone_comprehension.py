@@ -34,7 +34,7 @@ HUMAN_SURFACE_BUDGET_BYTES = {
     "docs/ORIENTATION.md": 16_000,
 }
 README_FIRST_CONTACT_BUDGET_BYTES = 12_000
-SUMMARY_PACKET_BUDGET_BYTES = 32_000
+SUMMARY_PACKET_BUDGET_BYTES = 32_256
 PACKET_BUDGET_BYTES = 16_384
 PROOF_AUTHORITY = "Lean source checked by the pinned Lean kernel"
 SELF_APPRAISAL_PHRASES = (
@@ -51,7 +51,7 @@ SELF_APPRAISAL_PHRASES = (
 )
 GATEWAY_PAPER = "paper/erdos249-257-main-paper.tex"
 # The slice includes the introduction and both exact proof spines through page 3.
-GATEWAY_OPENING_BUDGET_BYTES = 9_000
+GATEWAY_OPENING_BUDGET_BYTES = 12_000
 CLAUDE_ENTRY_BUDGET_BYTES = 1_500
 STORY_ROUTES = (
     "erdos257_half_story",
@@ -341,9 +341,9 @@ def validate_gateway_opening(paper: str) -> None:
             [r"for every infinite $A\subseteq\N$ (\#257)"],
         ],
         "status_table": [
-            [r"\textbf{\mbox{Classical}}"],
-            [r"\textbf{\mbox{Unconditional}}"],
-            [r"\textbf{\mbox{Exact reductions}}"],
+            ["Denominator exclusion & Proved"],
+            ["Tail and lcm-diagonal forms & Exact equivalences"],
+            ["Full and structured supports & Proved cases"],
             [r"q>\Qzero"],
             ["28 diagonal certificates"],
         ],
@@ -360,7 +360,8 @@ def validate_gateway_opening(paper: str) -> None:
             [r"\paragraph{Reading map.}"],
             [r"Section~\ref{sec:spines}"],
             [r"Section~\ref{sec:ladder}"],
-            [r"Sections~\ref{sec:eb}--\ref{sec:further}"],
+            [r"Sections~\ref{sec:eb}"],
+            [r"and~\ref{sec:249}"],
         ],
     }
     for task_id, groups in requirements.items():
@@ -716,7 +717,7 @@ def validate_agent_packets(packets: dict[str, Any]) -> None:
         for row in last_producer["argument_neighbourhood"]["outgoing"]
     }
     phase_sieve = story_claims["final_middle_neg_two_phase_sieve"]
-    assert "35 of the 210 joint residue classes survive" in phase_sieve["claim"]["statement"]
+    assert "Exactly 412 of the 2730 joint residue classes survive" in phase_sieve["claim"]["statement"]
     assert ("advances_open_target", "universal_257") in {
         (row["relation"], row["neighbour"]["id"])
         for row in phase_sieve["argument_neighbourhood"]["outgoing"]

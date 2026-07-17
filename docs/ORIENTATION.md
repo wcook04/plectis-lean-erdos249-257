@@ -24,10 +24,10 @@ The workflow provenance explains the release discipline; it does not imply hidde
 | Surface | Count |
 |---|---:|
 | Lean modules | 635 |
-| Lean declarations | 12,568 |
-| Theorem-like declarations | 11,530 |
+| Lean declarations | 12,577 |
+| Theorem-like declarations | 11,538 |
 | Generated certificate declarations | 2,925 |
-| Principal claim links | 288 |
+| Principal claim links | 289 |
 
 The exhaustive declaration and import index is
 [`docs/declaration_atlas.json`](declaration_atlas.json). Generated certificate
@@ -153,7 +153,6 @@ settle the open proposition attached to it.
 - Source routes by mathematical question: [`docs/SOURCE_MAP.md`](SOURCE_MAP.md)
 - Development chronology: [`docs/WAVE_INDEX.md`](WAVE_INDEX.md)
 - Human mathematical account: [`erdos249-257-main-paper.pdf`](../erdos249-257-main-paper.pdf)
-- Transport and curvature companion: [`erdos249-transport-curvature-companion-note.pdf`](../erdos249-transport-curvature-companion-note.pdf)
 - Machine form of this page: [`docs/orientation.json`](orientation.json)
 
 ## External corpus registration

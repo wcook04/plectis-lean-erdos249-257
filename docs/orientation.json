@@ -19,23 +19,23 @@
   "version": "0.6.0",
   "tag": "v0.6.0",
   "lean_toolchain": "leanprover/lean4:v4.29.1",
-  "formal_source_ref": "b862cb72674fd6ecb3e31e33604051e729281d6d",
+  "formal_source_ref": "c2c5c3f0151d58c3d8f21843a9fffead4b27f8e3",
   "formal_source_publication_state": "committed_checkpoint_pending_remote_publication"
  },
  "scale": {
   "module_count": 635,
-  "declaration_count": 12568,
-  "theorem_like_count": 11530,
+  "declaration_count": 12577,
+  "theorem_like_count": 11538,
   "generated_certificate_declaration_count": 2925,
-  "principal_claim_link_count": 288,
+  "principal_claim_link_count": 289,
   "kind_counts": {
    "abbrev": 9,
-   "def": 991,
+   "def": 992,
    "inductive": 4,
    "instance": 5,
    "lemma": 354,
    "structure": 29,
-   "theorem": 11176
+   "theorem": 11184
   }
  },
  "status_taxonomy": {
@@ -191,7 +191,7 @@
   {
    "id": "certificate_reduction",
    "status": "conditional reduction",
-   "statement": "S is irrational if and only if certified non-integrality witnesses occur at unbounded parameters; the lcm-diagonal reduction is a sufficient one-parameter form of that supply. The unboundedness of the supply is the remaining open hypothesis.",
+   "statement": "S is irrational if and only if certified non-integrality witnesses occur at unbounded parameters. The pointwise completeness theorem and the diagonal supply theorem together show that an unbounded lcm-diagonal supply is equivalent as well. Producing that supply remains open.",
    "paper_label": "res:diag",
    "declarations": [
     {
@@ -210,9 +210,19 @@
      "line": 90
     },
     {
+     "name": "irrational_totient_series_iff_pointwise_certificates",
+     "module": "Erdos249257/LcmConeFlatness.lean",
+     "line": 399
+    },
+    {
      "name": "irrational_totient_series_iff_certificate_supply",
      "module": "Erdos249257/LcmConeFlatness.lean",
      "line": 412
+    },
+    {
+     "name": "irrational_totient_series_iff_lcm_diagonal_certificate_supply",
+     "module": "Erdos249257/LcmConeFlatness.lean",
+     "line": 426
     }
    ],
    "remaining_open_proposition_ids": [
@@ -558,9 +568,9 @@
   "blocked_decisions": []
  },
  "source_revision": {
-  "formal_source_ref": "b862cb72674fd6ecb3e31e33604051e729281d6d",
-  "committed_navigation_snapshot": "cdd3492cb34215e59c1b94b62f9636da1cfb5881",
-  "main_paper_source_digest": "sha256:439e478f1410327d9aa1b9e67259496af902bd668732b3cb8e13298068810ba4"
+  "formal_source_ref": "c2c5c3f0151d58c3d8f21843a9fffead4b27f8e3",
+  "committed_navigation_snapshot": "e802df8deb172be62de40f5e019d389b1ae3f81f",
+  "main_paper_source_digest": "sha256:29cfde760437d33618b0ce0614e78310825a925f42cc28b35c5ad1fb9a3f2fe8"
  },
  "reading_routes": [
   {
@@ -707,7 +717,6 @@
   "exhaustive_declarations": "docs/declaration_atlas.json",
   "mathematical_methodology": "docs/methodology.json",
   "human_exposition": "erdos249-257-main-paper.pdf",
-  "technical_companion": "erdos249-transport-curvature-companion-note.pdf",
   "paper_source_sigils": "paper/module-aliases.json",
   "source_by_question": "docs/SOURCE_MAP.md",
   "development_chronology": "docs/WAVE_INDEX.md",
@@ -749,7 +758,6 @@
    "docs/declaration_atlas.json",
    "docs/methodology.json",
    "erdos249-257-main-paper.pdf",
-   "erdos249-transport-curvature-companion-note.pdf",
    "paper/module-aliases.json"
   ]
  }

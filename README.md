@@ -94,7 +94,7 @@ boundary.
 | Library | Current size |
 |---|---:|
 | Lean modules | 635 |
-| Formal results and supporting lemmas | 11,530 |
+| Formal results and supporting lemmas | 11,538 |
 | Curated claim records | 99 |
 | Contribution families | 21 |
 

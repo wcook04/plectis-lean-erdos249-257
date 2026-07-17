@@ -23,9 +23,9 @@
 },
 "identity": {
 "formal_source": {
-"ref": "b862cb72674fd6ecb3e31e33604051e729281d6d",
+"ref": "c2c5c3f0151d58c3d8f21843a9fffead4b27f8e3",
 "ref_kind": "commit",
-"resolved_commit": "b862cb72674fd6ecb3e31e33604051e729281d6d",
+"resolved_commit": "c2c5c3f0151d58c3d8f21843a9fffead4b27f8e3",
 "publication_state": "committed_checkpoint_pending_remote_publication",
 "relationship_to_last_tag": "post_tag_checkpoint",
 "last_release": {
@@ -36,25 +36,25 @@
 "authority_role": "proof_bearing_committed_source_anchor"
 },
 "navigation_snapshot": {
-"commit": "cdd3492cb34215e59c1b94b62f9636da1cfb5881",
+"commit": "e802df8deb172be62de40f5e019d389b1ae3f81f",
 "authority_role": "machine_readable_navigation_anchor",
 "publication_state": "main_history_snapshot",
 "published_ref": "main",
-"repository_resolution": "https://github.com/wcook04/plectis-lean-erdos249-257/tree/cdd3492cb34215e59c1b94b62f9636da1cfb5881"
+"repository_resolution": "https://github.com/wcook04/plectis-lean-erdos249-257/tree/e802df8deb172be62de40f5e019d389b1ae3f81f"
 },
 "content": {
 "machine_readable_paper": {
 "path": "docs/claims.json::machine_readable_paper",
-"content_digest": "sha256:db3a7f33997c9b7cdfee8813562a0337ce199adebef8d03680f6f237bd5e79e3"
+"content_digest": "sha256:707b88b4d063548f6b6b8d62bbb9ffc72a416a1fcf38fe9669c448daea1d87e7"
 },
 "claims_document": {
 "path": "docs/claims.json",
-"content_digest": "sha256:4004106e0e253e38e3070a837c4271b79209829467a813ab99bdd6f5722718e9"
+"content_digest": "sha256:a18714d469ba45c309cd786c514fa52bf5daf7ed984de1dd19377722b760de58"
 },
 "declaration_atlas": {
 "path": "docs/declaration_atlas.json",
-"content_digest": "sha256:82f04f394004533a96c3b551252ff8521c1ae93e74cca661aeff71e329c8e3bf",
-"source_input_fingerprint": "sha256:941a7110ce687a42184e22f64ece4f87601d6fea636dfe58dad54d2f9a9a1519"
+"content_digest": "sha256:673b1c977dc9b9212b90dfed08feb91d56dbca0b62c1b181169186cfe954350f",
+"source_input_fingerprint": "sha256:4ded9128d60ebb824d8952dfcb80bfaf22abd2c0740a2524fb836c24e1e40672"
 },
 "methodology_contract": {
 "path": "docs/methodology.json",
@@ -62,22 +62,14 @@
 },
 "bounded_orientation": {
 "path": "docs/orientation.json",
-"content_digest": "sha256:8063823f9de462fa5f2966fd9285f6f6d9f9765b2256f6e045014f4041cc397a"
+"content_digest": "sha256:7ed80bee039252aa06e9874d1307382ff7db8f808d1512d65cc6730a65bdfd98"
 },
 "human_exposition": {
 "source_path": "paper/erdos249-257-main-paper.tex",
-"source_content_digest": "sha256:439e478f1410327d9aa1b9e67259496af902bd668732b3cb8e13298068810ba4",
+"source_content_digest": "sha256:29cfde760437d33618b0ce0614e78310825a925f42cc28b35c5ad1fb9a3f2fe8",
 "rendered_path": "erdos249-257-main-paper.pdf",
-"rendered_content_digest": "sha256:80e832fd7e29d3249931f6648a981be89180ccb07e7aefbabef2c8834e2455cb",
+"rendered_content_digest": "sha256:307275556f6e68b038a2e33d9400593b63e120a26af9c367f75b01d30e6e3502",
 "artifact_role": "authored_mathematician_facing_exposition",
-"authority_posture": "authored_editorial_surface_not_Lean_proof_authority"
-},
-"technical_companion": {
-"source_path": "paper/erdos249-transport-curvature-companion-note.tex",
-"source_content_digest": "sha256:e3232541cb35f49e7e2bf520357de9b9e7defadd47972bd002db8697563c6c5d",
-"rendered_path": "erdos249-transport-curvature-companion-note.pdf",
-"rendered_content_digest": "sha256:3a49eaf971bd5abe832a7da360f0973ba23bba2b2eaeaf0a73b177f70b3ef9dd",
-"artifact_role": "authored_transport_and_curvature_companion",
 "authority_posture": "authored_editorial_surface_not_Lean_proof_authority"
 },
 "paper_source_sigils": {
@@ -148,18 +140,18 @@
 },
 "summary": {
 "module_count": 635,
-"declaration_count": 12568,
-"theorem_like_count": 11530,
+"declaration_count": 12577,
+"theorem_like_count": 11538,
 "generated_certificate_declaration_count": 2925,
-"principal_claim_link_count": 288,
+"principal_claim_link_count": 289,
 "kind_counts": {
 "abbrev": 9,
-"def": 991,
+"def": 992,
 "inductive": 4,
 "instance": 5,
 "lemma": 354,
 "structure": 29,
-"theorem": 11176
+"theorem": 11184
 }
 },
 "compact_graph": {
@@ -244,7 +236,7 @@
 {
 "id": "certificate_reduction",
 "status": "conditional reduction",
-"statement": "S is irrational if and only if certified non-integrality witnesses occur at unbounded parameters; the lcm-diagonal reduction is a sufficient one-parameter form of that supply. The unboundedness of the supply is the remaining open hypothesis.",
+"statement": "S is irrational if and only if certified non-integrality witnesses occur at unbounded parameters. The pointwise completeness theorem and the diagonal supply theorem together show that an unbounded lcm-diagonal supply is equivalent as well. Producing that supply remains open.",
 "paper_label": "res:diag",
 "declarations": [
 {
@@ -263,9 +255,19 @@
 "line": 90
 },
 {
+"name": "irrational_totient_series_iff_pointwise_certificates",
+"module": "Erdos249257/LcmConeFlatness.lean",
+"line": 399
+},
+{
 "name": "irrational_totient_series_iff_certificate_supply",
 "module": "Erdos249257/LcmConeFlatness.lean",
 "line": 412
+},
+{
+"name": "irrational_totient_series_iff_lcm_diagonal_certificate_supply",
+"module": "Erdos249257/LcmConeFlatness.lean",
+"line": 426
 }
 ],
 "remaining_open_proposition_ids": [
@@ -961,7 +963,7 @@
 "remaining_open_effect": {
 "remaining_open_proposition_id": "remaining_open.half_value_membership",
 "operation": "narrows",
-"statement": "Restricts a hypothetical final middle -2 cell to 35 of 210 joint residue classes after the exact rank-21 seam prefix; the surviving classes, the middle -1 cell, and the right-tail branch remain open."
+"statement": "Restricts a hypothetical final middle -2 cell to 412 of 2730 joint residue classes after the exact rank-26 seam prefix; the surviving classes, the middle -1 cell, and the right-tail branch remain open."
 }
 },
 {
@@ -1630,9 +1632,21 @@
 },
 {
 "claim_id": "certificate_reduction",
+"name": "irrational_totient_series_iff_pointwise_certificates",
+"module": "Erdos249257/LcmConeFlatness.lean",
+"line": 399
+},
+{
+"claim_id": "certificate_reduction",
 "name": "irrational_totient_series_iff_certificate_supply",
 "module": "Erdos249257/LcmConeFlatness.lean",
 "line": 412
+},
+{
+"claim_id": "certificate_reduction",
+"name": "irrational_totient_series_iff_lcm_diagonal_certificate_supply",
+"module": "Erdos249257/LcmConeFlatness.lean",
+"line": 426
 },
 {
 "claim_id": "certificate_completeness",
@@ -1773,7 +1787,7 @@
 "expansion": {
 "machine_readable_paper": {
 "path": "docs/claims.json::machine_readable_paper",
-"expected_content_digest": "sha256:db3a7f33997c9b7cdfee8813562a0337ce199adebef8d03680f6f237bd5e79e3",
+"expected_content_digest": "sha256:707b88b4d063548f6b6b8d62bbb9ffc72a416a1fcf38fe9669c448daea1d87e7",
 "contains": [
 "all_claims",
 "authored_argument_graph",
@@ -1784,8 +1798,8 @@
 },
 "exhaustive_declaration_atlas": {
 "path": "docs/declaration_atlas.json",
-"expected_content_digest": "sha256:82f04f394004533a96c3b551252ff8521c1ae93e74cca661aeff71e329c8e3bf",
-"expected_source_input_fingerprint": "sha256:941a7110ce687a42184e22f64ece4f87601d6fea636dfe58dad54d2f9a9a1519",
+"expected_content_digest": "sha256:673b1c977dc9b9212b90dfed08feb91d56dbca0b62c1b181169186cfe954350f",
+"expected_source_input_fingerprint": "sha256:4ded9128d60ebb824d8952dfcb80bfaf22abd2c0740a2524fb836c24e1e40672",
 "availability": "optional_attached_corpus",
 "check": "python3 scripts/build_declaration_atlas.py --check"
 },
@@ -1797,16 +1811,9 @@
 },
 "human_exposition": {
 "source_path": "paper/erdos249-257-main-paper.tex",
-"expected_source_content_digest": "sha256:439e478f1410327d9aa1b9e67259496af902bd668732b3cb8e13298068810ba4",
+"expected_source_content_digest": "sha256:29cfde760437d33618b0ce0614e78310825a925f42cc28b35c5ad1fb9a3f2fe8",
 "rendered_path": "erdos249-257-main-paper.pdf",
-"expected_rendered_content_digest": "sha256:80e832fd7e29d3249931f6648a981be89180ccb07e7aefbabef2c8834e2455cb",
-"authority_posture": "authored_editorial_surface_not_Lean_proof_authority"
-},
-"technical_companion": {
-"source_path": "paper/erdos249-transport-curvature-companion-note.tex",
-"expected_source_content_digest": "sha256:e3232541cb35f49e7e2bf520357de9b9e7defadd47972bd002db8697563c6c5d",
-"rendered_path": "erdos249-transport-curvature-companion-note.pdf",
-"expected_rendered_content_digest": "sha256:3a49eaf971bd5abe832a7da360f0973ba23bba2b2eaeaf0a73b177f70b3ef9dd",
+"expected_rendered_content_digest": "sha256:307275556f6e68b038a2e33d9400593b63e120a26af9c367f75b01d30e6e3502",
 "authority_posture": "authored_editorial_surface_not_Lean_proof_authority"
 },
 "paper_source_sigils": {
