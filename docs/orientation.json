@@ -56,7 +56,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "Erd\\H{o}s \\#249",
-    "line": 2913
+    "line": 2945
    }
   },
   {
@@ -67,7 +67,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "unbounded certificate supply",
-    "line": 2924
+    "line": 2956
    }
   },
   {
@@ -78,7 +78,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "the half-value counterexample route",
-    "line": 2945
+    "line": 2977
    }
   },
   {
@@ -89,7 +89,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "universal Erd\\H{o}s \\#257",
-    "line": 2936
+    "line": 2968
    }
   }
  ],
@@ -554,18 +554,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_cross_appendix_handoff_audit",
+   "id": "main_paper_local_statement_role_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "The revised appendices now expose their internal roles, but main-text forward references and appendix consequences may still use generic handoffs that hide the exact consumer or non-consumer relation",
-   "statement": "Audit every main-text-to-appendix and appendix-to-main handoff so each reference names the exact theorem consumer, supporting role, and open boundary."
+   "defect_class": "Section and appendix hierarchies are explicit, but some individual theorem clusters may still reveal their exact, conditional, finite, or obstruction role only after the formal-source links",
+   "statement": "Audit local result clusters for statements whose role or consumer is delayed, and move the classification to the cluster opening without adding symbolic density for its own sake."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "a16aa24af5236b6508a34b8a4c4b41fdcf620a98",
-  "committed_navigation_snapshot": "c6e00a56b4e078a6dbe2f836df3b6812f1b44383",
-  "main_paper_source_digest": "sha256:ed256cf4bb91e1e0c12c2dc6b855cce3793db26f5401a0dc2908507b8ff1e1c0"
+  "committed_navigation_snapshot": "1cd76acaf45f05348f6c14409afbc21885c53320",
+  "main_paper_source_digest": "sha256:be274f385be48950746215e6d041c9a8920b98aa79992a279a544f02a7d45edc"
  },
  "reading_routes": [
   {

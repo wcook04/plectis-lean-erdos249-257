@@ -283,7 +283,12 @@ The conditional residual is the
 Its local transition exclusions are stated in
 Proposition~\ref{res:finalskipexclusions}, and its sufficient global
 hypothesis is Corollary~\ref{res:taildominance}.
-Appendix~\ref{app:half-technical} contains the supporting coordinate analysis.
+Appendix~\ref{app:half-final-skip} supplies the exact final-skip coordinates
+consumed by those two statements.
+Appendices~\ref{app:half-conditional-producers}--\ref{app:half-finite-cofinal}
+record alternative conditional half-value producers, while
+Appendix~\ref{app:half-evidence} supplies bounded evidence and closes invalid
+shortcuts; none discharges the residual above.
 
 \paragraph{Prior-art boundary.}
 The full-support theorem is Erd\H{o}s's, and Borwein proved a broader
@@ -386,7 +391,7 @@ Thus Erd\H{o}s~\#249 also asks whether the probability that two independent
 fair-coin waiting times are coprime is irrational.  The exact identity is
 Proposition~\ref{res:coprime}; its M\"obius-square form and the periodic and
 finite-algebraic variants of the ladder are collected in
-Appendix~\ref{app:lambert-complements}.
+Appendices~\ref{app:lambert-weighted}--\ref{app:lambert-algebraic}.
 
 \paragraph{Section consequence and residual.}
 The exact contribution of this section is the coordinate change
@@ -408,8 +413,12 @@ classical and structured irrationality theorems, then gives the base-\(2\)
 achievement-set geometry and the constraints forced by a hypothetical
 rational value.  It ends with the exact classification of the target \(1/2\)
 and the exact residual condition left by the current final-skip argument.
-Local rewind, window, cylinder, and finite-stage results are
-collected in Appendix~\ref{app:half-technical}.
+The final-skip theorems consume Appendix~\ref{app:half-final-skip};
+Appendices~\ref{app:half-conditional-producers}--\ref{app:half-finite-cofinal}
+contain alternative conditional producers; and
+Appendix~\ref{app:half-evidence} contains finite evidence, adapters, and
+closed branches.  These are supporting lanes, not additional conclusions of
+this section.
 
 \subsection{Full support: the Erd\H{o}s--Borwein constant, every base}
 
@@ -584,7 +593,9 @@ perfect, totally disconnected, nowhere dense, and of Lebesgue measure \(1\).
 Proposition~\ref{res:death} proves soundness of exact rational evaluation and
 gives finite nonmembership certificates.  These results use the same greedy
 coordinates, but neither is a clause of the membership equivalence above.
-No novelty claim is made for the strict-tail geometry.
+Their detailed statements and one-sided boundary are in
+Appendix~\ref{app:carry-geometry}.  No novelty claim is made for the
+strict-tail geometry.
 
 \paragraph{Consequence for the half-value branch.}
 Theorem~\ref{res:greedy} makes the greedy support canonical;
@@ -666,9 +677,11 @@ Under the hypotheses of Theorem~\ref{res:rigidity-main}, if \(v=1\) and
 \noindent This is Corollary~\ref{res:collision}.
 
 These are four independent necessary consequences of the common rationality
-premise, not steps in a proof chain and not a contradiction.  Their supporting
-Boolean-certificate coordinates are developed in
-Appendix~\ref{sec:carry}; no corollary above is used to prove another.
+premise, not steps in a proof chain and not a contradiction.
+Appendices~\ref{app:carry-normal-form}--\ref{app:carry-boolean} supply the
+common recurrence and Boolean certificate; Appendices~\ref{app:carry-sublog}
+and~\ref{app:carry-mass} supply the independent filters.  No corollary above
+is used to prove another.
 
 \subsection{The target \(1/2\)}
 
@@ -702,8 +715,9 @@ The Boolean word \((\beta_{s,2},\ldots,\beta_{s,s-1})\) is the
 \end{definition}
 
 \noindent This is an exact integer coordinate model of the real greedy
-process; Appendix~\ref{app:half-technical} develops its transition formulas
-and the comparison with the real residuals.
+process.  Appendix~\ref{app:half-final-skip} develops the equivalence with
+final skips and the unresolved transition cells; the finite adapters in
+Appendix~\ref{app:half-evidence} do not strengthen that equivalence.
 
 \begin{theorem}[exact half-membership classification]\label{res:halfmembership}
 The following are equivalent:
@@ -856,6 +870,7 @@ support and a counterexample to the universal \#257 statement.
 
 \subsection{Exact localizer: a band formula for the final skip between two takes}
 \label{res:twothirdsband}
+\label{app:half-localizer}
 
 This subsection has one diagnostic role: it gives the exact unsafe interval
 for a specified take--skip--take configuration.  It helps interpret the
@@ -900,6 +915,7 @@ two remaining exceptional transition coordinates $-2,-1$ with dyadically
 unsafe skips.
 
 \subsection{Conditional producers and local inputs for structured supports}
+\label{app:half-conditional-producers}
 
 The results here have three distinct roles.  The bouquet criterion is a
 conditional irrationality theorem for one structured support family.  The
@@ -1060,6 +1076,7 @@ No such scaled-vanishing sequence is constructed here; the result is a
 conditional reduction, not an unconditional membership theorem.
 
 \subsection{Finite-to-cofinal criteria: windows, seams, and compactness}
+\label{app:half-finite-cofinal}
 
 Every half-value route in this subsection factors as
 \[
@@ -1172,6 +1189,7 @@ choice:
 It implements a finite recurrence, not the unbounded remainder estimate.
 
 \subsection{Exact final-skip spine and its residual cells}
+\label{app:half-final-skip}
 
 This is the only subsection that feeds the main final-skip reduction
 directly.  It first identifies nonmembership with a final skip and membership
@@ -1353,6 +1371,7 @@ This is an exact coordinate change between the seam and transition
 coordinates; it does not supply a sign or size estimate for that carry.
 
 \subsection{Finite evidence, coordinate adapters, and closed branches}
+\label{app:half-evidence}
 
 This subsection has no open-endpoint theorem.  Its verified bases and stages
 are bounded evidence for the cofinal criteria in A.2--A.3; its coordinate
@@ -1667,9 +1686,13 @@ eventual binary period.  Third, many such certificates are verified at
 bounded parameters.  Fourth, and still missing, is a theorem supplying them
 at unbounded parameters.  Only the fourth layer would settle the problem.
 
-The main section states this theorem spine.  Appendix~\ref{app:totient-technical}
-contains the cone, projection, denominator, parity, and closed-strategy
-reductions that refine the open fourth layer.
+The main section states this theorem spine.
+Appendix~\ref{app:totient-normal} gives equivalent cofinal coordinates;
+Appendix~\ref{app:totient-finite} contains fixed-scale projections and
+bounded evidence; and
+Appendices~\ref{app:totient-boundaries}--\ref{app:totient-rank} record
+necessary inputs, scoped no-go results, and conditional rank routes.  Only
+the first is an exact reformulation of the open fourth layer.
 
 \subsection{Unconditional: no small denominator}\label{sec:uncond}
 
@@ -1741,11 +1764,11 @@ constant, so the totient sum and the coprimality probability line up with no
 boundary correction. In this reading, Erd\H{o}s \#249 asks whether two independent
 fair-coin waiting times are coprime with irrational probability.
 After reducing $(X,Y)$ by their gcd, the same distribution has an exact
-Stern--Brocot cylinder decomposition.  Appendix~\ref{app:lambert-complements}
-states the resulting probability law and the sharp Fibonacci stability of its
-alternating runs.  These are unconditional structural theorems about the
-representation of $S$; they do not supply the denominator survival needed for
-irrationality.
+Stern--Brocot cylinder decomposition.
+Appendix~\ref{app:lambert-probability} states the resulting probability law
+and the sharp Fibonacci stability of its alternating runs.  These are
+unconditional structural theorems inside one representation of \(S\); they
+do not supply the denominator survival needed for irrationality.
 
 \subsection{Exact certificate characterisation}\label{sec:reduction}
 
@@ -1888,14 +1911,17 @@ quantifier pattern.  No theorem in the formal source proves
 \eqref{eq:unbounded-certificate-supply}; consequently no irrationality claim
 for $S$ is made here.
 
-Appendix~\ref{app:totient-technical} records exact reformulations of this open
-obligation, finite projections and denominator formulae, obstructions to
-several stronger local criteria, and closed strategy branches.  They sharpen
-the target but do not supply its missing unbounded quantifier.
+Appendix~\ref{app:totient-normal} records the exact reformulations of this
+open obligation.  Appendix~\ref{app:totient-finite} records only fixed-scale
+enclosures, projections, and certificates; Appendices~
+\ref{app:totient-boundaries}--\ref{app:totient-rank} delimit candidate
+unbounded routes.  The latter three sharpen or test the target but do not
+supply its missing cofinal quantifier.
 
 \long\def\TotientTechnicalAppendix{%
 
 \subsection{Exact cofinal normal forms and cone consequences}
+\label{app:totient-normal}
 
 This subsection contains two different kinds of statement.  Cone flatness is
 a necessary consequence of rationality that a finite joint refuter may
@@ -1966,13 +1992,14 @@ Thus the proposition is the fixed-scale equivalence and the corollary is its
 exact global consumer.  The cofinal avoidance statement remains open.
 
 \subsection{Fixed-scale projections and bounded evidence}
+\label{app:totient-finite}
 
 This subsection contains finite or one-scale statements only.  The
 reduced-denominator predicate is a stronger finite test not known to follow
 cofinally from rationality; the checked certificate families prove specific
 non-integral tail differences; and the projection criteria turn additional
 finite hypotheses into target avoidance.  None supplies the unbounded
-quantifier in Appendix~C.1.
+quantifier in Appendix~\ref{app:totient-normal}.
 
 \paragraph{A one-way analytic enclosure.}
 Truncate the M\"obius-square identity of
@@ -2218,6 +2245,7 @@ not force escape at any finite number of ranks,
 \lword{DiagonalFlexibleOddWindowAffine.lean}{225}{zeroAffineOrbit_stays_in_scaled_edge}{zero-orbit obstruction}.
 
 \subsection{Necessary inputs and no-go boundaries: fresh primes and bits}
+\label{app:totient-boundaries}
 
 The results below are independent filters, not consecutive steps of a proof.
 The fresh-prime decomposition and one-bit lift expose exact correction terms
@@ -2362,6 +2390,7 @@ Thus the result gives neither an unbounded certificate supply nor an
 irrationality criterion for $S$.
 
 \subsection{Conditional determinant and rank routes}
+\label{app:totient-rank}
 
 This route has two conditional rank consumers.  The first transfers a
 hypothetical rational totient series into unbounded carry-section ranks under
@@ -2567,6 +2596,7 @@ statement, while nonmembership would close only that route.
 
 \subsection{Weighted Lambert comparison families}
 \label{sec:additional-lambert}
+\label{app:lambert-weighted}
 
 This subsection changes the coefficient input.  Its eventually-periodic
 theorems settle or classify those comparison series, while the period-four
@@ -2597,6 +2627,7 @@ For the period-four weight \(1,0,-1,0\), the divisor coefficient vanishes on
 \lword{CertificateKernel.lean}{13898}{intWeightedCoeff_periodFourSignWeight_eq_zero_of_mod_four_eq_three}{period-four coefficient obstruction}.
 
 \subsection{Finite algebraic boundaries and squared-Lambert coordinates}
+\label{app:lambert-algebraic}
 
 This subsection keeps the relevant coordinates but separates three roles:
 finite denominator-clearing obstructions, the exact M\"obius-square identity
@@ -2685,6 +2716,7 @@ Postelmans--Van Assche imply irrationality of the middle row
 is exactly the open constant \(S-\tfrac12\).
 
 \subsection{Probability-coordinate geometry: reduced slopes and cylinders}
+\label{app:lambert-probability}
 
 These results live entirely inside the coprime-pair probability coordinate.
 They normalise reduced directions and quantify Stern--Brocot cylinder and run
@@ -3001,13 +3033,16 @@ appendix is included so that the hypotheses in the main reduction can be
 audited without turning the main theorem section into a chronology of the
 formal development.
 
-The order is by mathematical use.  Appendix~A.1 localises one possible unsafe
-skip; Appendix~A.2 records conditional structured-support criteria;
-Appendix~A.3 collects the finite-window and compactness implications;
-Appendix~A.4 develops the equivalent final-skip coordinates; and
-Appendix~A.5 records verified finite instances, exact coordinate
-translations, counterexamples, and closed strategy branches.  This is a
-dependency map, not a second route to a conclusion.
+The order is by mathematical use.
+Appendix~\ref{app:half-localizer} localises one possible unsafe skip;
+Appendix~\ref{app:half-conditional-producers} records conditional
+structured-support criteria; Appendix~\ref{app:half-finite-cofinal} collects
+the finite-window and compactness implications;
+Appendix~\ref{app:half-final-skip} develops the equivalent final-skip
+coordinates; and Appendix~\ref{app:half-evidence} records verified finite
+instances, exact coordinate translations, counterexamples, and closed
+strategy branches.  This is a dependency map, not a second route to a
+conclusion.
 
 The logical spine is
 \[
@@ -3025,10 +3060,10 @@ The logical spine is
 \end{array}
 \]
 The first two and last two lines are conditional producer routes; the middle
-line is an exact classification.  Appendix~A.1 only localises one transition
-configuration, while Appendix~A.5 supplies bounded evidence, coordinate
-changes, and no-go results.  Neither creates a further implication to an open
-endpoint.
+line is an exact classification.  Appendix~\ref{app:half-localizer} only
+localises one transition configuration, while Appendix~\ref{app:half-evidence}
+supplies bounded evidence, coordinate changes, and no-go results.  Neither
+creates a further implication to an open endpoint.
 
 Throughout this appendix, a \emph{seam} is an adjacent pair of finite greedy
 words at a branch boundary, a \emph{rewind} is the corresponding inverse
@@ -3057,16 +3092,19 @@ and the detailed greedy geometry cited after Theorem~\ref{res:greedy}.  Its
 new working objects are a tempered integer tail orbit, its Boolean M\"obius
 coordinate, the wrap--excess decomposition modulo the odd denominator, and
 exact rational death certificates for the achievement set.
-Appendices~B.1--B.4 describe necessary or equivalent forms of a hypothetical
-rational support; Appendix~B.5 describes the ambient achievement set and its
-one-sided finite nonmembership test.  None of these objects by itself
+Appendices~\ref{app:carry-normal-form}--\ref{app:carry-mass} describe
+necessary or equivalent forms of a hypothetical rational support;
+Appendix~\ref{app:carry-geometry} describes the ambient achievement set and
+its one-sided finite nonmembership test.  None of these objects by itself
 excludes a rational value.
 
 The reading order is: a generic tail-orbit rationality normal form in
-Appendix~B.1; its Boolean--M\"obius specialisation in Appendix~B.2;
-divisor-coverage constraints in Appendix~B.3; denominator-wrap, reciprocal
-mass, and unbounded-state constraints in Appendix~B.4; and the exact greedy
-geometry with one-sided finite death certificates in Appendix~B.5.
+Appendix~\ref{app:carry-normal-form}; its Boolean--M\"obius specialisation in
+Appendix~\ref{app:carry-boolean}; divisor-coverage constraints in
+Appendix~\ref{app:carry-sublog}; denominator-wrap, reciprocal-mass, and
+unbounded-state constraints in Appendix~\ref{app:carry-mass}; and the exact
+greedy geometry with one-sided finite death certificates in
+Appendix~\ref{app:carry-geometry}.
 
 The dependency spine is
 \[
@@ -3085,7 +3123,8 @@ The dependency spine is
 \end{array}
 \]
 The last two lines list independent necessary conditions, not converses and
-not contradictions.  Appendix~B.5 is orthogonal to this rationality chain:
+not contradictions.  Appendix~\ref{app:carry-geometry} is orthogonal to this
+rationality chain:
 finite greedy death proves nonmembership in the achievement set, whereas
 survival through any finite depth proves nothing.
 
@@ -3098,8 +3137,10 @@ priority for the converse/rigidity, certificate-normal-form, or coupled
 reciprocal-mass/collision statements collected here.
 
 \subsection{Exact normal form: tail-orbit rigidity}
+\label{app:carry-normal-form}
 
-This subsection supplies the generic equivalence consumed in Appendix~B.2.
+This subsection supplies the generic equivalence consumed in
+Appendix~\ref{app:carry-boolean}.
 It converts rationality into an integer recurrence with a boundary condition;
 it does not itself exclude such an orbit or impose the Boolean support
 constraint.
@@ -3151,9 +3192,10 @@ $\ph(n)\le n$ for the \#249 coefficients, and $f_A(n)\le\tau(n)\le n$ for the
 \#257 support coefficients $f_A(n)=\#\{a\in A:a\mid n\}$.  The results below
 instantiate the criterion on supports.  Its separate totient
 anti-compression consequence belongs to the \#249 rank route in
-Appendix~C.4.
+Appendix~\ref{app:totient-rank}.
 
 \subsection{Exact \#257 coordinates: Boolean--M\"obius carry certificates}
+\label{app:carry-boolean}
 
 This subsection has one preliminary boundary result and then one exact
 equivalence chain.  The boundary result rules out extracting the desired
@@ -3254,6 +3296,7 @@ infinite Boolean carry paths, and no finite search is promoted to a
 completeness argument.
 
 \subsection{Necessary condition I: sublogarithmic divisor coverage}
+\label{app:carry-sublog}
 
 This theorem is a one-way consequence of a rational support value and is used
 in Corollary~\ref{res:rigidity-sublog-main}.  It limits zero gaps in the
@@ -3295,6 +3338,7 @@ after $\varepsilon$ gives the theorem. This controls gaps in divisor coverage;
 it does not assert a subpower bound for the carry state itself.
 
 \subsection{Necessary conditions II: wraps, mass, and unbounded states}
+\label{app:carry-mass}
 
 The dependency order is
 \[
@@ -3309,7 +3353,8 @@ the general mass bound.
 
 Suppose now the support series equals $p/(2^c v)$ with $v$ odd and $A$
 containing a positive element.  Let $U$ be the unshifted tempered orbit of
-Appendix~B.2 with multiplier $q=2^c v$.  The odd-denominator coordinate used
+Appendix~\ref{app:carry-boolean} with multiplier $q=2^c v$.  The
+odd-denominator coordinate used
 here is
 \[
  u(N)=\frac{U(c+N)}{2^c}=v\,T_{f_A}(c+N);
@@ -3432,6 +3477,7 @@ no claim of mathematical novelty for the coupled reciprocal-mass bounds,
 collision strengthening, or global unboundedness statement.
 
 \subsection{Independent geometry and one-sided nonmembership certificates}
+\label{app:carry-geometry}
 
 Finally, consider the set of all values a base-$2$ support series can
 take. For $n\ge1$ put $w_n=1/(2^n-1)$, let $T(n)$ be the mass strictly after
@@ -3527,8 +3573,8 @@ Rationality yields the exact carry recurrence; an infinite rational support
 must separately satisfy the unbounded-state theorem, the sublogarithmic
 divisor-coverage bound, and the applicable odd- or dyadic-denominator
 reciprocal-mass constraint.
-Appendix~B.5 also supplies the finite death certificates used in
-Theorem~\ref{res:greedy}.  What is not proved is that the support attached to
+Appendix~\ref{app:carry-geometry} also supplies the finite death certificates
+used in Theorem~\ref{res:greedy}.  What is not proved is that the support attached to
 either target violates one of these necessary conditions.  That
 contradiction, not another rational normal form, is the missing premise.
 
@@ -3557,11 +3603,13 @@ The exact spine is
  \textsf{certifiedKill}(h,N,L).
 \end{array}
 \]
-Appendix~C.1 gives equivalent coordinates for this fixed-to-cofinal spine.
-Appendix~C.2 contains one-scale enclosures, projections, and bounded
-certificates.  Appendices~C.3--C.4 expose possible inputs to an unbounded
-producer and close several shortcuts.  None of the latter three sections
-performs the missing passage from fixed-scale evidence to the second line.
+Appendix~\ref{app:totient-normal} gives equivalent coordinates for this
+fixed-to-cofinal spine.  Appendix~\ref{app:totient-finite} contains one-scale
+enclosures, projections, and bounded certificates.
+Appendices~\ref{app:totient-boundaries}--\ref{app:totient-rank} expose
+possible inputs to an unbounded producer and close several shortcuts.  None
+of the latter three sections performs the missing passage from fixed-scale
+evidence to the second line.
 
 \TotientTechnicalAppendix
 
@@ -3576,11 +3624,13 @@ Lambert identities, and the Stern--Brocot cylinder and continuant laws.
 These enlarge the two coordinate pictures; they are not additional steps in
 either open proof spine.
 
-The three families are parallel, not cumulative.  Appendix~D.1 proves or
-classifies weighted Lambert series with coefficient inputs different from the
-open totient input.  Appendix~D.2 gives exact identities and finite algebraic
-boundaries for the squared and M\"obius coordinates.  Appendix~D.3 develops
-unconditional geometry internal to the coprime-pair probability coordinate.
+The three families are parallel, not cumulative.
+Appendix~\ref{app:lambert-weighted} proves or classifies weighted Lambert
+series with coefficient inputs different from the open totient input.
+Appendix~\ref{app:lambert-algebraic} gives exact identities and finite
+algebraic boundaries for the squared and M\"obius coordinates.
+Appendix~\ref{app:lambert-probability} develops unconditional geometry
+internal to the coprime-pair probability coordinate.
 No conclusion about a comparison input transfers irrationality to \(S\), and
 none of the three families supplies the cofinal
 \(\textsf{certifiedKill}\) producer.
@@ -3588,10 +3638,12 @@ none of the three families supplies the cofinal
 \FurtherLambertAppendix
 
 \paragraph{Appendix consequence.}
-The transfer is coordinate extension only.  Appendix~D.1 enlarges the
-Mersenne--Lambert comparison family in Section~\ref{sec:ladder};
-Appendix~D.2 supplies the M\"obius-square and gcd-moment coordinates; and
-Appendix~D.3 refines the coprime-pair representation in
+The transfer is coordinate extension only.
+Appendix~\ref{app:lambert-weighted} enlarges the Mersenne--Lambert comparison
+family in Section~\ref{sec:ladder};
+Appendix~\ref{app:lambert-algebraic} supplies the M\"obius-square and
+gcd-moment coordinates; and Appendix~\ref{app:lambert-probability} refines
+the coprime-pair representation in
 Proposition~\ref{res:coprime}.  These are three independent handoffs.  None
 implies the cofinal \(\textsf{certifiedKill}\) supply for \(S\) or a producer
 of \(1/2\in\mathcal A\).  Those, rather than any result internal to this
