@@ -28,7 +28,7 @@
 % the repository verifies that it matches docs/claims.json and that every
 % \lref/\lrefx/\lword/\lloc target resolves to the named declaration at that line.
 % ---------------------------------------------------------------------------
-\newcommand{\commit}{62c8c3660ce90e4a0dfe6a02b9168fc4f287fcb5}
+\newcommand{\commit}{c24e2c2a781aa4a104d10884bacae52ef35cff30}
 \newcommand{\repobase}{https://github.com/wcook04/plectis-lean-erdos249-257/blob/\commit}
 \newcommand{\sourceurl}{https://github.com/wcook04/plectis-lean-erdos249-257/tree/\commit}
 \newcommand{\rootbase}{https://github.com/wcook04/plectis-lean-erdos249-257/blob/main}
@@ -1262,6 +1262,27 @@ impossible by the analytic nonnegativity identity,
 \lword{HalfCylinderFinalMiddleCellEscape.lean}{587}{finalMiddleCell_neg_three_not_last}{the middle-\(-3\) exclusion}.
 It removes that one conditional terminal configuration; it does not decide
 the right-tail branch or the remaining two middle cells.
+
+\paragraph{Second final-middle cell.}  The next cell, with transition carry
+$-2$, is not yet eliminated, but its possible phase is sharply constrained.
+Uniformly for seam rows $s\ge21$, the greedy decisions through rank $20$
+select exactly the ranks
+\[
+  2,3,6,7,14,20,
+\]
+by
+\lword{HalfFinalMiddlePhaseSieve.lean}{834}{seamGreedyBits_head2367_14_20}{the exact rank-(20) prefix}.
+Consequently, if a putative last skipped rank $D\ge20$ lies in this middle
+cell and is followed by an all-right suffix, then
+\[
+ D\bmod 21\in\{8,11,14,17,20\},\qquad D\bmod10\ne8,
+\]
+and the class $D\bmod10=7$ cannot pair with
+$D\bmod21\in\{8,11\}$.  Thus only $43$ of the $210$ joint residue classes
+survive,
+\lword{HalfFinalMiddlePhaseSieve.lean}{1189}{finalMiddleCell_neg_two_forces_phase_refinement}{the final-middle phase sieve}.
+This is a uniform exact reduction of the $-2$ cell, not its exclusion; the
+surviving phases, the $-1$ cell, and the right-tail branch remain open.
 
 The remaining global reduction is now precise.  If every genuine middle
 transition other than that discharged cell has transition carry larger than

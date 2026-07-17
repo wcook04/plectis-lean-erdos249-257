@@ -19,15 +19,15 @@
   "version": "0.6.0",
   "tag": "v0.6.0",
   "lean_toolchain": "leanprover/lean4:v4.29.1",
-  "formal_source_ref": "62c8c3660ce90e4a0dfe6a02b9168fc4f287fcb5",
+  "formal_source_ref": "c24e2c2a781aa4a104d10884bacae52ef35cff30",
   "formal_source_publication_state": "committed_checkpoint_pending_remote_publication"
  },
  "scale": {
-  "module_count": 633,
-  "declaration_count": 12535,
-  "theorem_like_count": 11497,
+  "module_count": 635,
+  "declaration_count": 12563,
+  "theorem_like_count": 11525,
   "generated_certificate_declaration_count": 2925,
-  "principal_claim_link_count": 284,
+  "principal_claim_link_count": 288,
   "kind_counts": {
    "abbrev": 9,
    "def": 991,
@@ -35,7 +35,7 @@
    "instance": 5,
    "lemma": 354,
    "structure": 29,
-   "theorem": 11143
+   "theorem": 11171
   }
  },
  "status_taxonomy": {
@@ -56,7 +56,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "Erd\\H{o}s \\#249",
-    "line": 2996
+    "line": 3017
    }
   },
   {
@@ -67,7 +67,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "unbounded certificate supply",
-    "line": 3007
+    "line": 3028
    }
   },
   {
@@ -78,7 +78,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "the half-value counterexample route",
-    "line": 3028
+    "line": 3049
    }
   },
   {
@@ -89,7 +89,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "universal Erd\\H{o}s \\#257",
-    "line": 3019
+    "line": 3040
    }
   }
  ],
@@ -396,7 +396,7 @@
    "title": "Achievement-set geometry and the half-value seam",
    "mathematical_focus": "Greedy coding, exact achievement-set geometry, dyadic skip bands, seam classification, and the last-producer tail residual for the target 1/2.",
    "claim_ceiling": "Exact geometry and reductions for the half-value branch; neither half-membership nor universal Erdős #257 is proved.",
-   "core_claim_count": 6,
+   "core_claim_count": 7,
    "representative_claim_ids": [
     "greedy_achievement_geometry",
     "half_greedy_two_thirds_band"
@@ -563,9 +563,9 @@
   "blocked_decisions": []
  },
  "source_revision": {
-  "formal_source_ref": "62c8c3660ce90e4a0dfe6a02b9168fc4f287fcb5",
+  "formal_source_ref": "c24e2c2a781aa4a104d10884bacae52ef35cff30",
   "committed_navigation_snapshot": "a80920213c65fd5909ec91bf088fe2ea4e4a4e8c",
-  "main_paper_source_digest": "sha256:4c6c144bea02391bdb03b2f246af12021d75bf73c19d61c7256d1939ff851f3b"
+  "main_paper_source_digest": "sha256:8d3e587faf917ee56236b264565ad1edcd2fc00595fcaca65214b04467de966f"
  },
  "reading_routes": [
   {

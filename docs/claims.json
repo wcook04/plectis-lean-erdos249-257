@@ -170,6 +170,7 @@
           "half_membership_seam_classification",
           "fatal_gap_right_tail_classification",
           "final_middle_cell_escape",
+          "final_middle_neg_two_phase_sieve",
           "last_producer_tail_escape_reduction"
         ],
         "remaining_open_proposition_ids": [
@@ -190,6 +191,7 @@
           "python3 scripts/query_corpus.py --claim half_membership_seam_classification",
           "python3 scripts/query_corpus.py --claim fatal_gap_right_tail_classification",
           "python3 scripts/query_corpus.py --claim final_middle_cell_escape",
+          "python3 scripts/query_corpus.py --claim final_middle_neg_two_phase_sieve",
           "python3 scripts/query_corpus.py --claim last_producer_tail_escape_reduction",
           "python3 scripts/query_corpus.py --open remaining_open.half_value_membership",
           "python3 scripts/query_corpus.py --open remaining_open.universal_257_all_infinite_supports"
@@ -199,6 +201,7 @@
           "Erdos249257/HalfGreedyTwoThirdsBand.lean",
           "Erdos249257/HalfCylinderFatalGapRightTail.lean",
           "Erdos249257/HalfCylinderFinalMiddleCellEscape.lean",
+          "Erdos249257/HalfFinalMiddlePhaseSieve.lean",
           "Erdos249257/HalfCylinderLastProducerContradiction.lean",
           "docs/claims.json::machine_readable_paper.argument_graph"
         ],
@@ -1049,6 +1052,7 @@
           "claim_ids": [
             "fatal_gap_right_tail_classification",
             "final_middle_cell_escape",
+            "final_middle_neg_two_phase_sieve",
             "half_membership_seam_classification",
             "seam_producer_carry_alignment",
             "concrete_producer_carry_coordinates",
@@ -1059,11 +1063,11 @@
             "integer_greedy_first_wrap_reduction",
             "concrete_seam_adapter"
           ],
-          "status_summary": "Exact half-membership/nonmembership classifications, proved branch eliminations, and explicit conditional tail consumers.",
+          "status_summary": "Exact half-membership/nonmembership classifications, proved branch eliminations, a rank-20 phase sieve for the middle -2 cell, and explicit conditional tail consumers.",
           "prior_art_posture": "No exact local seam or last-producer antecedent is recorded beyond strict-tail achievement-set background.",
           "primary_narrative_owner": "paper/erdos249-257-main-paper.tex",
           "source_route": "python3 scripts/query_corpus.py --claim half_membership_seam_classification",
-          "consumer_or_open_obligation": "Prove future-tail escape for the remaining middle producers.",
+          "consumer_or_open_obligation": "Eliminate the 43 surviving joint phase classes in the middle -2 cell, then handle the middle -1 and right-tail branches or prove future-tail escape directly.",
           "view_decision": "gateway_spine_future_257_companion_detail"
         },
         {
@@ -6183,6 +6187,14 @@
           ]
         },
         {
+          "id": "Erdos249257.HalfCylinderFinalMiddleTailSocket",
+          "path": "Erdos249257/HalfCylinderFinalMiddleTailSocket.lean",
+          "role": "Analytic tail socket for the final middle seam cells",
+          "imports": [
+            "Erdos249257.HalfCylinderFinalMiddleCellEscape"
+          ]
+        },
+        {
           "id": "Erdos249257.HalfCylinderFiniteShadow",
           "path": "Erdos249257/HalfCylinderFiniteShadow.lean",
           "role": "Finite shadows of the half cylinder",
@@ -6349,6 +6361,16 @@
           "role": "Half-divisor unit coefficient drop at the feedback row",
           "imports": [
             "Erdos249257.HalfCarrySelectedWindow"
+          ]
+        },
+        {
+          "id": "Erdos249257.HalfFinalMiddlePhaseSieve",
+          "path": "Erdos249257/HalfFinalMiddlePhaseSieve.lean",
+          "role": "Rank-20 final-middle phase sieve for the half seam",
+          "imports": [
+            "Erdos249257.HalfCylinderMiddleCarryLowerBound",
+            "Erdos249257.HalfCylinderFinalMiddleTailSocket",
+            "Erdos249257.HalfCylinderFiniteShadow"
           ]
         },
         {
@@ -7057,6 +7079,21 @@
           "to": "last_producer_tail_escape_reduction"
         },
         {
+          "from": "final_middle_neg_two_phase_sieve",
+          "relation": "builds_on",
+          "to": "fatal_gap_right_tail_classification"
+        },
+        {
+          "from": "final_middle_neg_two_phase_sieve",
+          "relation": "advances_open_target",
+          "to": "universal_257",
+          "remaining_open_effect": {
+            "remaining_open_proposition_id": "remaining_open.half_value_membership",
+            "operation": "narrows",
+            "statement": "Restricts a hypothetical final middle -2 cell to 43 of 210 joint residue classes after the exact rank-20 seam prefix; the surviving classes, the middle -1 cell, and the right-tail branch remain open."
+          }
+        },
+        {
           "from": "largest_skip_gap_propagation",
           "relation": "builds_on",
           "to": "half_membership_seam_classification"
@@ -7476,7 +7513,7 @@
     "lean_toolchain": "leanprover/lean4:v4.29.1",
     "repository": "https://github.com/wcook04/plectis-lean-erdos249-257",
     "formal_source": {
-      "ref": "62c8c3660ce90e4a0dfe6a02b9168fc4f287fcb5",
+      "ref": "c24e2c2a781aa4a104d10884bacae52ef35cff30",
       "ref_kind": "commit",
       "publication_state": "committed_checkpoint_pending_remote_publication",
       "relationship_to_last_tag": "post_tag_checkpoint"
@@ -7512,7 +7549,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 2996
+        "line": 3017
       }
     },
     {
@@ -7523,7 +7560,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 3007
+        "line": 3028
       }
     },
     {
@@ -7534,7 +7571,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "the half-value counterexample route",
-        "line": 3028
+        "line": 3049
       }
     },
     {
@@ -7545,7 +7582,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 3019
+        "line": 3040
       }
     }
   ],
@@ -8215,6 +8252,39 @@
           "name": "finalMiddleCell_neg_three_not_last",
           "module": "Erdos249257/HalfCylinderFinalMiddleCellEscape.lean",
           "line": 587
+        }
+      ]
+    },
+    {
+      "id": "final_middle_neg_two_phase_sieve",
+      "label": "Rank-20 phase sieve for the final middle -2 cell",
+      "status": "conditional reduction",
+      "statement": "For every seam row s ≥ 21, the greedy decisions through rank 20 select exactly ranks 2, 3, 6, 7, 14, and 20. Consequently, in a hypothetical final middle -2 cell at rank D ≥ 20 followed by an all-right suffix, D mod 21 lies in {8, 11, 14, 17, 20}, D mod 10 is not 8, and the mod-10 class 7 cannot pair with mod-21 classes 8 or 11. Thus only 43 of the 210 joint residue classes survive. This phase sieve restricts but does not eliminate the -2 cell, and it does not decide the middle -1 or right-tail branches.",
+      "remaining_open_proposition_ids": [
+        "remaining_open.half_value_membership"
+      ],
+      "paper_label": "res:finalskipexclusions",
+      "readme_headline": false,
+      "declarations": [
+        {
+          "name": "seamGreedy_postFourteen_decisions_through_twenty",
+          "module": "Erdos249257/HalfFinalMiddlePhaseSieve.lean",
+          "line": 650
+        },
+        {
+          "name": "seamGreedyBits_head2367_14_20",
+          "module": "Erdos249257/HalfFinalMiddlePhaseSieve.lean",
+          "line": 834
+        },
+        {
+          "name": "finalMiddleCell_neg_two_forces_mod_twenty_one",
+          "module": "Erdos249257/HalfFinalMiddlePhaseSieve.lean",
+          "line": 1044
+        },
+        {
+          "name": "finalMiddleCell_neg_two_forces_phase_refinement",
+          "module": "Erdos249257/HalfFinalMiddlePhaseSieve.lean",
+          "line": 1189
         }
       ]
     },

@@ -392,6 +392,7 @@ def main() -> int:
         "python3 scripts/query_corpus.py --claim half_membership_seam_classification",
         "python3 scripts/query_corpus.py --claim fatal_gap_right_tail_classification",
         "python3 scripts/query_corpus.py --claim final_middle_cell_escape",
+        "python3 scripts/query_corpus.py --claim final_middle_neg_two_phase_sieve",
         "python3 scripts/query_corpus.py --claim last_producer_tail_escape_reduction",
         "python3 scripts/query_corpus.py --open remaining_open.half_value_membership",
         "python3 scripts/query_corpus.py --open remaining_open.universal_257_all_infinite_supports",
@@ -432,6 +433,16 @@ def main() -> int:
     assert ("eliminates_case", "final_middle_cell_escape") in {
         (row["relation"], row["neighbour"]["id"])
         for row in last_producer["argument_neighbourhood"]["incoming"]
+    }
+    phase_sieve = query("--claim", "final_middle_neg_two_phase_sieve")
+    assert "43 of the 210 joint residue classes survive" in phase_sieve["claim"]["statement"]
+    assert ("builds_on", "fatal_gap_right_tail_classification") in {
+        (row["relation"], row["neighbour"]["id"])
+        for row in phase_sieve["argument_neighbourhood"]["outgoing"]
+    }
+    assert ("advances_open_target", "universal_257") in {
+        (row["relation"], row["neighbour"]["id"])
+        for row in phase_sieve["argument_neighbourhood"]["outgoing"]
     }
 
     certificate_route = query("--route", "erdos249_certificate_story")["route"]
@@ -682,7 +693,7 @@ def main() -> int:
     open_expectations = {
         "remaining_open.erdos_249_irrationality": ("erdos_249", 1),
         "remaining_open.unbounded_certificate_supply": ("erdos_249", 10),
-        "remaining_open.half_value_membership": ("universal_257", 4),
+        "remaining_open.half_value_membership": ("universal_257", 5),
         "remaining_open.universal_257_all_infinite_supports": ("universal_257", 6),
     }
     for open_id, (target, advancing_count) in open_expectations.items():

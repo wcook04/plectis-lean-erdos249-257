@@ -108,9 +108,9 @@
   "authority_posture": "navigation_projection_not_Lean_proof_authority_and_not_historical_evidence_authority",
   "content_hashes": {
     "claim-faithful-publication-systems-paper.pdf": "sha256:9fa880067ae52f06075696d2999ca1d3e0745027858fe483e7c08381565d5b02",
-    "docs/claims.json": "sha256:ebd25a6fd5d70b5ff739738396dadcc21d74953f38cb96b1156a932e4e5dcbd6",
+    "docs/claims.json": "sha256:b36a5e438782cbe4f760ef7c9a92e9e2a49ebca2949461728fec9df2e595628a",
     "docs/methodology.json": "sha256:d2dab3ef7bd853be6bd086ad2ff448d97996280c648878f6aa5066e1616a722e",
-    "docs/publication_contract.json": "sha256:015337a5c0f3d9ce832f394d0157778feb5f304b939c49a02b2915b9ecdc3c35",
+    "docs/publication_contract.json": "sha256:d21a70354e06fa46bb948b6fa4c9514b675fe919953541f1d114e4318b1953ea",
     "docs/publication_entry_source.json": "sha256:31004274bba09a44cfeac3aa82ec2748fa225c395bd292e0002091a620137550",
     "docs/publication_evidence.json": "sha256:8dad402702a9650279d0526dc648633937783fb7226d81b1e8940c5d93d8b32d",
     "experiments/publication_mutations.json": "sha256:9243e270257869e7a191c7598e917457cab61194299d1651e21bbc45a2d4c1e3",
@@ -127,7 +127,7 @@
   "historical_checker_example": {
     "current_owner_snapshot": {
       "contribution_family_count": 21,
-      "curated_claim_count": 98,
+      "curated_claim_count": 99,
       "remaining_open_proposition_count": 4,
       "snapshot_kind": "current_canonical_owners",
       "status_count": 7
@@ -265,7 +265,7 @@
       "open_target_claim": "erdos_249",
       "paper_anchor": {
         "environment": "problem",
-        "line": 2996,
+        "line": 3017,
         "source": "paper/erdos249-257-main-paper.tex",
         "title": "Erd\\H{o}s \\#249"
       },
@@ -276,7 +276,7 @@
       "open_target_claim": "erdos_249",
       "paper_anchor": {
         "environment": "problem",
-        "line": 3007,
+        "line": 3028,
         "source": "paper/erdos249-257-main-paper.tex",
         "title": "unbounded certificate supply"
       },
@@ -287,7 +287,7 @@
       "open_target_claim": "universal_257",
       "paper_anchor": {
         "environment": "problem",
-        "line": 3028,
+        "line": 3049,
         "source": "paper/erdos249-257-main-paper.tex",
         "title": "the half-value counterexample route"
       },
@@ -298,7 +298,7 @@
       "open_target_claim": "universal_257",
       "paper_anchor": {
         "environment": "problem",
-        "line": 3019,
+        "line": 3040,
         "source": "paper/erdos249-257-main-paper.tex",
         "title": "universal Erd\\H{o}s \\#257"
       },
@@ -310,7 +310,7 @@
     "evaluation_checkpoint": "0e5aaf9b2f81912d477fa43b8a3bfa993155a68c",
     "formal_source": {
       "publication_state": "committed_checkpoint_pending_remote_publication",
-      "ref": "62c8c3660ce90e4a0dfe6a02b9168fc4f287fcb5",
+      "ref": "c24e2c2a781aa4a104d10884bacae52ef35cff30",
       "ref_kind": "commit",
       "relationship_to_last_tag": "post_tag_checkpoint"
     },

@@ -71,6 +71,7 @@ STORY_CLAIMS = (
     "half_membership_seam_classification",
     "fatal_gap_right_tail_classification",
     "final_middle_cell_escape",
+    "final_middle_neg_two_phase_sieve",
     "last_producer_tail_escape_reduction",
     "certificate_reduction",
     "certificate_completeness",
@@ -669,7 +670,7 @@ def validate_agent_packets(packets: dict[str, Any]) -> None:
         step.rsplit(" ", 1)[-1]
         for step in story_routes["erdos257_half_story"]["route"]["query_steps"]
     ] == [
-        *STORY_CLAIMS[:6],
+        *STORY_CLAIMS[:7],
         "remaining_open.half_value_membership",
         "remaining_open.universal_257_all_infinite_supports",
     ]
@@ -713,6 +714,12 @@ def validate_agent_packets(packets: dict[str, Any]) -> None:
     assert ("builds_on", "fatal_gap_right_tail_classification") in {
         (row["relation"], row["neighbour"]["id"])
         for row in last_producer["argument_neighbourhood"]["outgoing"]
+    }
+    phase_sieve = story_claims["final_middle_neg_two_phase_sieve"]
+    assert "43 of the 210 joint residue classes survive" in phase_sieve["claim"]["statement"]
+    assert ("advances_open_target", "universal_257") in {
+        (row["relation"], row["neighbour"]["id"])
+        for row in phase_sieve["argument_neighbourhood"]["outgoing"]
     }
     first_harmonic = story_claims["first_harmonic_certificate_interface"]
     assert {
