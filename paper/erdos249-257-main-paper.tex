@@ -1895,7 +1895,14 @@ the target but do not supply its missing unbounded quantifier.
 
 \long\def\TotientTechnicalAppendix{%
 
-\subsection{Exact normal forms for the open supply}
+\subsection{Exact cofinal normal forms and cone consequences}
+
+This subsection contains two different kinds of statement.  Cone flatness is
+a necessary consequence of rationality that a finite joint refuter may
+contradict at chosen vertices.  The diagonal-pincer identity and its cofinal
+full-target-avoidance corollary are the exact fixed-scale and global normal
+forms of the open supply.  Only the latter corollary is equivalent to the
+irrationality endpoint.
 
 \paragraph{Cone flatness and completeness.} On the cone
 $\{kM_t:k\ge1\}$, rationality forces a single fractional constant across the
@@ -1915,6 +1922,84 @@ refuter can interrogate several cone vertices at once and is sharper than any
 pairwise test.  It refutes the
 single-fractional-part model that rationality predicts on a finite sample
 (\lword{LcmConeNonflat.lean}{126}{exists_nonintegral_pair_of_coneNonflatCert}{finite cone-nonflatness refuter}).
+
+\paragraph{An exact target interval.} The diagonal calculation also admits a
+more local normal form.  Put $H_t=M_t$ and
+\[
+ D_t=R_{2H_t}-R_{H_t}.
+\]
+Separate an exact rational M\"obius shadow
+$Q_t=a_t/d_t$ in lowest terms and define the remaining \emph{foreign defect}
+by $F_t=D_t-Q_t$.  The full target is the residue class of $-a_t$ modulo $d_t$:
+\[
+ \textsf{FullTargetHit}(t)
+ \quad\Longleftrightarrow\quad
+ \exists k\in\Z,\qquad d_tF_t=-a_t+d_tk.
+\]
+Since $D_t=a_t/d_t+F_t$, this is exactly the condition $D_t\in\Z$; no
+complementary term is discarded or assigned a conjectural sign.
+
+\begin{proposition}[diagonal pincer decomposition]\label{res:pincer}
+For every $t$, diagonal integrality is equivalent to the foreign diagonal
+defect meeting the full target.
+\end{proposition}
+\noindent This is the
+\lword{DiagonalPincerDecomposition.lean}{215}{diagonal_int_iff_foreignDiagonalDefect_hits_fullTarget}{full-target equivalence}.
+
+\begin{corollary}[exact full-target avoidance characterisation]
+\label{res:fulltargetavoidance}
+The following are equivalent:
+\[
+\begin{aligned}
+ &S\notin\Q;\\
+ &\forall\,t_0\in\N\ \exists\,t\geq t_0,\qquad
+   \neg\textsf{FullTargetHit}(t).
+\end{aligned}
+\]
+\end{corollary}
+\noindent The reverse implication is the
+\lword{DiagonalPincerDecomposition.lean}{290}{irrational_totientSeries_of_full_target_avoidance_supply}{unbounded target-avoidance criterion}.
+For the forward implication, Theorem~\ref{res:diag} supplies cofinally many
+non-integral diagonal differences, and
+Proposition~\ref{res:pincer} converts each one into a missed full target.
+Thus the proposition is the fixed-scale equivalence and the corollary is its
+exact global consumer.  The cofinal avoidance statement remains open.
+
+\subsection{Fixed-scale projections and bounded evidence}
+
+This subsection contains finite or one-scale statements only.  The
+reduced-denominator predicate is a stronger finite test not known to follow
+cofinally from rationality; the checked certificate families prove specific
+non-integral tail differences; and the projection criteria turn additional
+finite hypotheses into target avoidance.  None supplies the unbounded
+quantifier in Appendix~C.1.
+
+\paragraph{A one-way analytic enclosure.}
+Truncate the M\"obius-square identity of
+Proposition~\ref{res:lens} after $D$ terms.  The resulting rational quantity
+gives a Lambert-projected centre $C_{H,D}$ for the scaled diagonal
+difference.  The error is exactly a signed squared-Mersenne tail:
+\[
+ \textsf{scaledDiagonal}(H)-C_{H,D}
+   =c_H\sum_{d>D}\frac{\mu(d)}{(2^d-1)^2},
+\]
+where $c_H$ is the explicit diagonal coefficient in the formal source.  The
+absolute value of the sum is bounded geometrically by
+$4/[3(2^{D+1}-1)^2]$.  Thus a rational separation of the centre from every
+integer by more than the scaled bound proves target avoidance; the argument
+does not estimate the sign of the tail.
+
+\begin{proposition}[squared-Mersenne enclosure]\label{res:squareenclosure}
+The scaled diagonal tail difference differs from its Lambert-projected centre
+by the squared-Mersenne tail.  Separation of the centre from the full target by
+more than the proved tail bound forces target avoidance.
+\end{proposition}
+\noindent Formalised:
+\lword{SquaredMersenneDiagonalEnclosure.lean}{116}{scaleDiagonalTailDifference_sub_lambertProjectedDiagonal}{squared-Mersenne tail identity}
+and
+\lword{SquaredMersenneDiagonalEnclosure.lean}{237}{scaleFullTarget_miss_of_lambert_projected_separation}{Lambert-projected separation criterion}.
+The enclosure is one-way: separation at a chosen truncation forces target
+avoidance, but target avoidance is not asserted to force that separation.
 
 \paragraph{A reduced-denominator finite predicate.}  Separately, there is a
 stricter finite condition for an odd reduced denominator
@@ -1979,77 +2064,6 @@ This is precisely $\textsf{certifiedKill}(1,12,16)$.  The soundness theorem
 (\lword{TotientTailPeriodKiller.lean}{262}{tail_diff_notMem_int_of_certifiedKill}{certificate soundness})
 therefore gives $R_{13}-R_{12}\notin\Z$.  It is one exact non-integral tail
 difference, not an assertion that such differences occur at unbounded scales.
-
-\paragraph{An exact target interval.} The diagonal calculation also admits a
-more local normal form.  Put $H_t=M_t$ and
-\[
- D_t=R_{2H_t}-R_{H_t}.
-\]
-Separate an exact rational M\"obius shadow
-$Q_t=a_t/d_t$ in lowest terms and define the remaining \emph{foreign defect}
-by $F_t=D_t-Q_t$.  The full target is the residue class of $-a_t$ modulo $d_t$:
-\[
- \textsf{FullTargetHit}(t)
- \quad\Longleftrightarrow\quad
- \exists k\in\Z,\qquad d_tF_t=-a_t+d_tk.
-\]
-Since $D_t=a_t/d_t+F_t$, this is exactly the condition $D_t\in\Z$; no
-complementary term is discarded or assigned a conjectural sign.
-
-\begin{proposition}[diagonal pincer decomposition]\label{res:pincer}
-For every $t$, diagonal integrality is equivalent to the foreign diagonal
-defect meeting the full target.
-\end{proposition}
-\noindent This is the
-\lword{DiagonalPincerDecomposition.lean}{215}{diagonal_int_iff_foreignDiagonalDefect_hits_fullTarget}{full-target equivalence}.
-
-\begin{corollary}[exact full-target avoidance characterisation]
-\label{res:fulltargetavoidance}
-The following are equivalent:
-\[
-\begin{aligned}
- &S\notin\Q;\\
- &\forall\,t_0\in\N\ \exists\,t\geq t_0,\qquad
-   \neg\textsf{FullTargetHit}(t).
-\end{aligned}
-\]
-\end{corollary}
-\noindent The reverse implication is the
-\lword{DiagonalPincerDecomposition.lean}{290}{irrational_totientSeries_of_full_target_avoidance_supply}{unbounded target-avoidance criterion}.
-For the forward implication, Theorem~\ref{res:diag} supplies cofinally many
-non-integral diagonal differences, and
-Proposition~\ref{res:pincer} converts each one into a missed full target.
-Thus the proposition is the fixed-scale equivalence and the corollary is its
-exact global consumer.  The cofinal avoidance statement remains open.
-
-Two algebraic inputs make this interval test explicit.  First, truncate the
-M\"obius-square identity of Proposition~\ref{res:lens} after $D$ terms.  The
-resulting rational quantity gives a Lambert-projected centre $C_{H,D}$ for the
-scaled diagonal difference.  The error is exactly a signed squared-Mersenne
-tail:
-\[
- \textsf{scaledDiagonal}(H)-C_{H,D}
-   =c_H\sum_{d>D}\frac{\mu(d)}{(2^d-1)^2},
-\]
-where $c_H$ is the explicit diagonal coefficient in the formal source.  The
-absolute value of the sum is bounded geometrically by
-$4/[3(2^{D+1}-1)^2]$.  Thus a rational separation of the centre from every
-integer by more than the scaled bound proves target avoidance; the argument
-does not estimate the sign of the tail.
-
-\begin{proposition}[squared-Mersenne enclosure]\label{res:squareenclosure}
-The scaled diagonal tail difference differs from its Lambert-projected centre
-by the squared-Mersenne tail.  Separation of the centre from the full target by
-more than the proved tail bound forces target avoidance.
-\end{proposition}
-\noindent Formalised:
-\lword{SquaredMersenneDiagonalEnclosure.lean}{116}{scaleDiagonalTailDifference_sub_lambertProjectedDiagonal}{squared-Mersenne tail identity}
-and
-\lword{SquaredMersenneDiagonalEnclosure.lean}{237}{scaleFullTarget_miss_of_lambert_projected_separation}{Lambert-projected separation criterion}.
-The enclosure is one-way: separation at a chosen truncation forces target
-avoidance, but target avoidance is not asserted to force that separation.
-
-\subsection{Finite projections and verified instances}
 
 \paragraph{Finite foreign-residue projection.}  There is a second finite
 presentation of the same obstruction.  For a cutoff $D$, split the finite
@@ -2203,7 +2217,7 @@ A zero-start affine orbit shows that a uniform correction envelope alone does
 not force escape at any finite number of ranks,
 \lword{DiagonalFlexibleOddWindowAffine.lean}{225}{zeroAffineOrbit_stays_in_scaled_edge}{zero-orbit obstruction}.
 
-\subsection{Fresh-prime and bit-level boundaries}
+\subsection{Necessary inputs and no-go boundaries: fresh primes and bits}
 
 The results below are independent filters, not consecutive steps of a proof.
 The fresh-prime decomposition and one-bit lift expose exact correction terms
@@ -2347,7 +2361,7 @@ separate checked clean cube with second coefficient $-4$
 Thus the result gives neither an unbounded certificate supply nor an
 irrationality criterion for $S$.
 
-\subsection{Finite determinant and rank routes}
+\subsection{Conditional determinant and rank routes}
 
 This route has two conditional rank consumers.  The first transfers a
 hypothetical rational totient series into unbounded carry-section ranks under
@@ -3511,12 +3525,23 @@ candidate strategies.  Each statement retains its own hypotheses and status.
 None proves the unbounded certificate supply
 \eqref{eq:unbounded-certificate-supply}.
 
-The dependency order is: exact normal forms in Appendix~C.1; finite
-projections and verified instances in Appendix~C.2; fresh-prime and bit-level
-requirements, including scoped no-go results, in Appendix~C.3; and finite
-determinant and rank routes in Appendix~C.4.  The first two say exactly what
-can be checked at one scale; the latter two delimit what would be needed to
-make those checks unbounded.
+The exact spine is
+\[
+\begin{array}{rcl}
+ R_{N+h}-R_N\notin\Z
+ &\Longleftrightarrow&
+ \exists L\geq1,\ \textsf{certifiedKill}(h,N,L),\\
+ S\notin\Q
+ &\Longleftrightarrow&
+ \forall h\geq1\ \forall N_0\ \exists N\geq N_0\ \exists L\geq1,\
+ \textsf{certifiedKill}(h,N,L).
+\end{array}
+\]
+Appendix~C.1 gives equivalent coordinates for this fixed-to-cofinal spine.
+Appendix~C.2 contains one-scale enclosures, projections, and bounded
+certificates.  Appendices~C.3--C.4 expose possible inputs to an unbounded
+producer and close several shortcuts.  None of the latter three sections
+performs the missing passage from fixed-scale evidence to the second line.
 
 \TotientTechnicalAppendix
 

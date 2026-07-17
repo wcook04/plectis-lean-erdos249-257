@@ -56,7 +56,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "Erd\\H{o}s \\#249",
-    "line": 2879
+    "line": 2893
    }
   },
   {
@@ -67,7 +67,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "unbounded certificate supply",
-    "line": 2890
+    "line": 2904
    }
   },
   {
@@ -78,7 +78,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "the half-value counterexample route",
-    "line": 2911
+    "line": 2925
    }
   },
   {
@@ -89,7 +89,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "universal Erd\\H{o}s \\#257",
-    "line": 2902
+    "line": 2916
    }
   }
  ],
@@ -554,18 +554,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_appendix_c_dependency_hierarchy_audit",
+   "id": "main_paper_appendix_d_role_hierarchy_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "Appendix C separates four result families, but its long exact-normal-form, finite-evidence, no-go, and rank routes can still obscure which statements consume or merely delimit the open cofinal certificate supply",
-   "statement": "Audit Appendix C's dependency spine and subsection openings so fixed-scale equivalences, bounded evidence, necessary inputs, and closed strategies remain visibly distinct."
+   "defect_class": "Appendix D groups Lambert, probability, and finite-algebraic complements, but its internal result families may read as additional proof steps unless their coordinate-extension roles and non-consumer status stay explicit",
+   "statement": "Audit Appendix D's opening, subsection hierarchy, and consequence so parallel coordinate extensions remain distinct from both open theorem spines."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "a16aa24af5236b6508a34b8a4c4b41fdcf620a98",
-  "committed_navigation_snapshot": "77761791f1eb6dbcc1bdbd1e85976b1467d10da0",
-  "main_paper_source_digest": "sha256:87582b6c851aef3f7428655ccb69d33de88c534cc204452e84666e7ef5fed640"
+  "committed_navigation_snapshot": "17ffe7b37f40b6a391ec907eec176a857a3bfcfc",
+  "main_paper_source_digest": "sha256:d2ace2f42871487950eaf1b62939fc4f1b434f8dd39c80b35c56211984d6bca2"
  },
  "reading_routes": [
   {
