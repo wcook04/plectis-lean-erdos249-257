@@ -56,7 +56,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "Erd\\H{o}s \\#249",
-    "line": 2553
+    "line": 2565
    }
   },
   {
@@ -67,7 +67,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "unbounded certificate supply",
-    "line": 2564
+    "line": 2576
    }
   },
   {
@@ -78,7 +78,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "the half-value counterexample route",
-    "line": 2579
+    "line": 2591
    }
   },
   {
@@ -89,7 +89,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "universal Erd\\H{o}s \\#257",
-    "line": 2570
+    "line": 2582
    }
   }
  ],
@@ -554,18 +554,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_symbol_first_use_audit",
+   "id": "main_paper_quantifier_scope_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "the paper's macro-assembled appendices and forward references can place a symbol in a theorem statement before its local meaning is recoverable from the current reading route",
-   "statement": "Audit every displayed theorem spine and appendix entry for symbol first use, adding only the minimal local definition or backward reference needed to make each statement readable without reconstructing source order."
+   "defect_class": "compressed theorem prose can hide whether a hypothesis is pointwise, eventual, cofinal, or uniform, especially when an equivalence is followed by a separate sufficient criterion",
+   "statement": "Audit the displayed theorem spines and frontier propositions for quantifier scope, making every conditional dependency and unbounded-range requirement recoverable from the statement itself without expanding settled derivations."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "a16aa24af5236b6508a34b8a4c4b41fdcf620a98",
-  "committed_navigation_snapshot": "1ea3a426bcf3fa86840ef08e48220414d075ab05",
-  "main_paper_source_digest": "sha256:5776e30842e4426fc28b02a2f12f387ea531a225db7fa762b45085296fc9aa0b"
+  "committed_navigation_snapshot": "18b65029a5f8482e394eed9fd17b764f0c3be253",
+  "main_paper_source_digest": "sha256:e2ec229bf3b16e9b3edb27f02f6cac45834d1671b594d52d4d1e88fa2259ec19"
  },
  "reading_routes": [
   {

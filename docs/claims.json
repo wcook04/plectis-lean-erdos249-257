@@ -907,15 +907,15 @@
         "schema": "erdos249257-editorial-state/1",
         "scope": "continuous_whole_main_paper_exposition",
         "current_priority": {
-          "id": "main_paper_symbol_first_use_audit",
+          "id": "main_paper_quantifier_scope_audit",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "defect_class": "the paper's macro-assembled appendices and forward references can place a symbol in a theorem statement before its local meaning is recoverable from the current reading route",
-          "statement": "Audit every displayed theorem spine and appendix entry for symbol first use, adding only the minimal local definition or backward reference needed to make each statement readable without reconstructing source order."
+          "defect_class": "compressed theorem prose can hide whether a hypothesis is pointwise, eventual, cofinal, or uniform, especially when an equivalence is followed by a separate sufficient criterion",
+          "statement": "Audit the displayed theorem spines and frontier propositions for quantifier scope, making every conditional dependency and unbounded-range requirement recoverable from the statement itself without expanding settled derivations."
         },
         "last_verified_wave": {
-          "id": "main_paper_symbol_overloading_repair",
+          "id": "main_paper_symbol_first_use_repair",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "result": "Removed four avoidable overloads: the bundled rigidity theorem now separates zero-window length ell from order h; the generic binary coefficient stream is gamma rather than the dyadic shift c; the primitive-conductor weight is alpha rather than the support set A; and the finite #249 residue is eta rather than the reciprocal mass rho."
+          "result": "Made the #249 scalar criterion self-contained by giving exact formulas for its window numerator, canonical depth, and residue at the point of use; reordered the Appendix C finite-projection paragraph so that the window numerator is defined before W and eta."
         },
         "active_inconsistencies": [],
         "blocked_decisions": []
@@ -7512,7 +7512,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 2553
+        "line": 2565
       }
     },
     {
@@ -7523,7 +7523,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 2564
+        "line": 2576
       }
     },
     {
@@ -7534,7 +7534,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "the half-value counterexample route",
-        "line": 2579
+        "line": 2591
       }
     },
     {
@@ -7545,7 +7545,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 2570
+        "line": 2582
       }
     }
   ],

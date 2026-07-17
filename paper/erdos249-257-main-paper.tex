@@ -1926,13 +1926,17 @@ and
 \lword{MersenneShadowDenominatorGrowth.lean}{147}{lcmHeight_scaledMobiusShadow_den_exact}{exact shadow denominator}.
 
 Finally, the remaining diagonal error can be represented by a finite integer
-projection and then by binary suffix data.  At depth $L$, define
+projection and then by binary suffix data.  At depth $L$, let
+\[
+ P_L(M)=\sum_{j=0}^{L-1}\ph(M+1+j)\,2^{L-1-j}
+\]
+be the length-$L$ window numerator underlying
+Definition~\ref{def:totient-certificate}, and define
 \[
  W_{t,L}=P_L(2H_t)-P_L(H_t),\qquad
  \eta_{t,L}=W_{t,L}\bmod 2^L,
 \]
-where $P_L(M)$ is the length-$L$ window numerator underlying
-Definition~\ref{def:totient-certificate}.  The finite
+with the residue chosen in $[0,2^L)$.  The finite
 residue certificate is the asymmetric safe interval
 \[
  H_t+L+2<\eta_{t,L}<2^L-(2H_t+L+2).
@@ -2494,8 +2498,16 @@ Two scalar conditions give concrete sufficient routes toward the two open
 directions.  Both are exact arithmetic statements; neither is proved at the
 unbounded range needed for its final conclusion.
 
-For \#249, let $m_t$ be the canonical adjacent-suffix depth and let $d_t$ be
-the corresponding residue in $[0,2^{m_t})$.  Define
+For \#249, retain $M_t=\lcm(1,\ldots,t)$ and write
+\[
+ P_L(N)=\sum_{j=0}^{L-1}\ph(N+1+j)\,2^{L-1-j}.
+\]
+The canonical adjacent-suffix depth and its residue are
+\[
+ m_t=\lfloor\log_2 M_t\rfloor+10,\qquad
+ d_t=\bigl(P_{m_t}(2M_t)-P_{m_t}(M_t)\bigr)\bmod 2^{m_t},
+\]
+where $0\le d_t<2^{m_t}$.  Define
 \[
   \sigma_t=\min\bigl(d_t-2^{m_t-5},
     (2^{m_t}-2^{m_t-5})-d_t\bigr)\in\Z.
