@@ -766,6 +766,27 @@ Since \(\Theta_D\geq0\), condition~(4.2) would in particular exclude the
 remaining cells \(-2\) and \(-1\).  No proof of~(4.2) for the actual greedy
 orbit is known here.
 
+\paragraph{Logical status of the final-skip argument.}
+The three levels of the argument are
+\[
+\begin{array}{rcl}
+ \frac12\notin\mathcal A
+ &\Longleftrightarrow
+   \text{a final skipped exponent exists}
+ &[\text{proved}],\\
+ \text{final upper, or final middle with }C_D=-3
+ &\Longrightarrow\bot
+ &[\text{proved}].
+\end{array}
+\]
+The first two lines do not imply membership.  The unproved producer has two
+parts: exclude final middle transitions with \(C_D\in\{-2,-1\}\), and
+prove~\textup{(4.2)} at every other non-\((-3)\) middle transition.  Together
+these would exclude every possible final skip; only then would
+Theorem~\ref{res:halfmembership} give \(1/2\in\mathcal A\), hence an infinite
+rational-valued support and a counterexample to the universal \#257
+statement.
+
 \long\def\HalfValueTechnicalAppendix{
 
 \subsection{A band formula for the final skip between two takes}
@@ -2561,6 +2582,32 @@ uses the absorbing fatal-state
 criterion.  Thus the second-channel hypothesis is one sufficient route to the
 infinite-skip condition.  It does not prove that condition, and membership alone
 is not the universal \#257 theorem.
+
+\paragraph{Dependency direction.}
+The two criteria have the proved logical form
+\[
+\begin{array}{c}
+ \text{cofinal nonnegative slack}\\[-1pt]
+ \text{at strict lcm jumps}\\
+ \Downarrow\\
+ \text{unbounded \#249 certificate supply}\\
+ \Downarrow\\
+ S\notin\Q
+\end{array}
+\qquad\qquad
+\begin{array}{c}
+ \text{second-channel separation}\\[-1pt]
+ \text{for every }n\ge7\\
+ \Downarrow\\
+ \dfrac12\in\mathcal A\\
+ \Updownarrow\\
+ \mathcal S(1/2)\text{ is infinite}.
+\end{array}
+\]
+Neither left-hand premise is proved.  The verified range \(1\le n\le6\)
+closes only the finite prefix of the second criterion; it gives no part of
+the missing universal range \(n\ge7\).  The first conclusion settles \#249,
+whereas the second would refute, not prove, the universal \#257 statement.
 
 \subsection{The unresolved statements}
 

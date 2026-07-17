@@ -56,7 +56,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "Erd\\H{o}s \\#249",
-    "line": 2567
+    "line": 2614
    }
   },
   {
@@ -67,7 +67,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "unbounded certificate supply",
-    "line": 2578
+    "line": 2625
    }
   },
   {
@@ -78,7 +78,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "the half-value counterexample route",
-    "line": 2593
+    "line": 2640
    }
   },
   {
@@ -89,7 +89,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "universal Erd\\H{o}s \\#257",
-    "line": 2584
+    "line": 2631
    }
   }
  ],
@@ -554,18 +554,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_conditional_chain_audit",
+   "id": "main_paper_argument_transition_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "a sequence of exact equivalences, finite verifications, and sufficient criteria can read as one cumulative proof unless each handoff states which premise remains unproved",
-   "statement": "Audit conditional theorem chains in the main spine and frontier section, separating established equivalences from unproved producers and making the direction of every sufficient implication explicit."
+   "defect_class": "theorem sequences can remain locally correct while leaving the reader to infer why the next result is introduced and which previous object it consumes",
+   "statement": "Audit transitions between consecutive main-spine results, adding only the shortest mathematical handoff needed to identify the input, output, and reason for the next theorem."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "a16aa24af5236b6508a34b8a4c4b41fdcf620a98",
-  "committed_navigation_snapshot": "0ae065a8ad6cab8545995bda0fc58c1607adbea6",
-  "main_paper_source_digest": "sha256:a784b1630fb9dcadceede2981c4ddca3d56ea8062d4f0a892f1e4a9cf0cd1130"
+  "committed_navigation_snapshot": "f7d75d8e10779cb315aa74e91a29e86e311717aa",
+  "main_paper_source_digest": "sha256:961df67a400e51507ca66b8115b73cdd1392ccd5a7fc6c791c1a9130bb2e89fb"
  },
  "reading_routes": [
   {
