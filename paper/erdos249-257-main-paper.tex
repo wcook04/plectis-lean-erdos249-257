@@ -126,13 +126,17 @@ divisor stream of a rational support admits only sublogarithmic zero
 windows, uniformly in the support.  Membership of
 \(1/2\), which would refute the universal statement, is exactly equivalent to
 infinitely many greedy skips.  Nonmembership is exactly equivalent to an
-eventually right integer seam, a finite fatal gap, and a final greedy skip.
+eventually right integer seam (beyond some row, every new rank is taken), a
+finite fatal gap, and a final greedy skip.
 
 The current final-skip route excludes a final upper transition and the
 middle transition carry \(-3\).  One global tail-dominance hypothesis
 remains: exclude the middle carries \(-2\) and \(-1\), and prove the
 future-tail inequality at the remaining nonnegative-carry middle
-transitions.  An unbounded certificate
+transitions.  Both series are values of one Lambert transform, and the
+manuscript organises the two problems and the half-value target as an image
+question, a restricted-domain question, and a fibre question about that
+single transform.  An unbounded certificate
 supply for \#249 and cofinal terminal zeros for \#257 are not proved.  The
 universal \#257 statement and half-value membership remain open.  Neither
 problem is settled.
@@ -159,7 +163,8 @@ cofinality statement.
 
 \subsection*{Overview for a first reading}
 
-The totient \(\ph(n)\) is Euler's totient.  A \emph{support} selects terms;
+The totient \(\ph(n)\) counts the integers in \(\{1,\ldots,n\}\) that are
+coprime to \(n\).  A \emph{support} selects terms;
 its \emph{achievement set} contains the resulting sums.  \emph{Cofinally}
 means beyond every bound.  A \emph{spine} is a displayed chain of
 equivalences or implications leading to one open quantified statement.
@@ -184,9 +189,11 @@ For \#249, a denominator exclusion and 28 diagonal certificates are proved,
 but no unbounded certificate supply is known.  For the half-value branch of
 \#257, finite-support exclusion and the exact greedy classification are
 proved, but no cofinal supply of terminal zeros is known.  This shared
-quantifier pattern is the reason for treating the problems together; it is
-an architectural comparison, not a common theorem connecting their
-arithmetic mechanisms.
+quantifier pattern is one reason for treating the problems together.  The
+second is exact: both series are values of one Lambert transform, and
+rationality acts on both through the same integral carry mechanism;
+Section~\ref{sec:architecture} organises the open questions inside that one
+map and records why no status transfers between them.
 
 \begin{center}
 \small
@@ -250,12 +257,11 @@ $1/2$; no unbounded supply is proved.
 \paragraph{Reading map.}
 Section~\ref{sec:spines} gives the exact spines, Section~\ref{sec:ladder} their
 common coordinates, and Sections~\ref{sec:eb} and~\ref{sec:249} the results,
-verification, and frontiers.  Appendices~\ref{app:half-technical}
+verification, and frontiers; Section~\ref{sec:architecture} then states the
+shared structure and its limits.  Appendices~\ref{app:half-technical}
 and~\ref{sec:carry} contain the local half-value and carry arguments; later
 appendices treat the totient certificate and Lambert structure.  Linked
-phrases open exact Lean proofs.  The former one-sided \#249 companion is
-retired; its checked transport and first-harmonic claims remain available
-through the registry without changing the problem's open status.
+phrases open exact Lean proofs.
 
 \medskip
 \noindent\textbf{Keywords.} irrationality; Erd\H{o}s--Borwein constant;
@@ -400,6 +406,13 @@ convolution by the constant $\mathbf 1=\zeta$); Apostol supplies the classical
 arithmetic-function and Dirichlet-convolution background~\cite{apostol}; Merca
 introduced a modern Lambert-series factorisation theorem~\cite{merca2017}, and
 Merca--Schmidt give a synthesis/unification treatment~\cite{mercaschmidt}.
+It is convenient to read the rearrangement as a composite of two maps: the
+divisor transform \(f\mapsto f*\mathbf 1\), followed by evaluation of the
+resulting coefficient stream at binary scales,
+\(\gamma\mapsto\sum_{m\ge1}\gamma(m)2^{-m}\).  Every series in this paper is
+the image of an arithmetic input under this composite;
+Section~\ref{sec:architecture} uses that observation to place the open
+questions in one frame.
 Three inputs form the convolution chain
 \[
  \alpha \xrightarrow{*\mathbf 1} \ph
@@ -726,7 +739,9 @@ Then \(u_N=vT_{f_A}(c+N)\) is a positive integer for every \(N\), and
 The recurrence is binary long division: since
 \(2T_f(M)=f(M+1)+T_f(M+1)\), doubling the scaled tail surrenders the next
 coefficient, and rationality is what makes the states \(u_N\) integers.
-Its tail-orbit normal form is Theorem~\ref{res:rigidity}.
+Its tail-orbit normal form is Theorem~\ref{res:rigidity}.  A two-element
+support, with its explicit period-six orbit and multiplier \(21\), is worked
+at the end of Appendix~\ref{app:carry-boolean}.
 
 \begin{corollary}[unbounded-state consequence]
 \label{res:rigidity-unbounded-main}
@@ -802,6 +817,18 @@ algorithm: the orbit condition and the support it reconstructs are infinite
 objects.
 
 \subsection{The target \(1/2\)}
+
+\paragraph{Why this target.}
+Any infinite support with any rational value would refute the universal
+statement; fixing one target value turns the search into a point-membership
+question.  The value \(1/2\) is a canonical choice rather than a forced one:
+it is the value of the signed M\"obius rung \(L(\mu)=1/2\) of
+Section~\ref{sec:ladder}, so the question asks whether a genuinely Boolean
+support can attain what the signed M\"obius weights attain
+(Proposition~\ref{res:mobiussignnogo} shows that the signs cannot simply be
+truncated); no finite normalised support attains it
+(Proposition~\ref{res:nofinitehalf} below); and the strict-tail coding of
+Theorem~\ref{res:greedy} makes its candidate support unique.
 
 Let
 \[
@@ -1000,6 +1027,9 @@ locally discharged value $-3$.  Thus the single displayed hypothesis contains
 two different requirements: exclusion of the unresolved cells
 $C_D\in\{-2,-1\}$, and the future-tail bound~\textup{(4.2)} on the remaining
 nonnegative coordinates.  Neither requirement is proved for the greedy orbit.
+The universal quantifier in the hypothesis also cannot be weakened to a
+density statement: nonmembership requires only one final middle transition,
+so a bound holding at all but one row would prove nothing.
 
 \paragraph{Logical status of the final-skip argument.}
 The proved levels of the argument are
@@ -1405,6 +1435,11 @@ Exactly $412$ of the $2730$ joint residue classes survive; this separate finite 
 \lword{HalfFinalMiddlePhaseSieve.lean}{2050}{finalMiddleTwentySixPhaseSurvivors_card}{the exact survivor count}.
 This is a uniform exact reduction of the $-2$ cell, not its exclusion; the
 surviving phases, the $-1$ cell, and the right-tail branch remain open.
+Shrinking survivor proportions at deeper ranks would not by themselves
+exclude the cell: a nested system of nonempty residue classes can have
+vanishing density and still a nonempty inverse limit, so this route ends
+either in finite extinction at some rank or in an added Archimedean input at
+a surviving phase.
 
 The remaining global reduction is now precise.  If every genuine middle
 transition other than the already discharged $C_D=-3$ cell has transition carry larger than
@@ -2129,6 +2164,27 @@ quantifier pattern.  No theorem in the formal source proves
 \eqref{eq:unbounded-certificate-supply}; consequently no irrationality claim
 for $S$ is made here.
 
+\begin{remark}[finite inspection cannot close the supply]
+The finite status of the verified scales is forced, not cautious.  Fix a
+bound \(B\ge1\) and a period \(P>B\), and define \(\gamma(n)=\ph(n)\) for
+\(n\le B\), while for \(n>B\) let \(\gamma(n)=n-1\) if \(P\mid n\) and
+\(\gamma(n)=n\) otherwise.  Then \(0\le\gamma(n)\le n\), and
+\[
+ \sum_{n\ge1}\frac{\gamma(n)}{2^n}
+ =\sum_{n\le B}\frac{\ph(n)}{2^n}+\frac{B+2}{2^B}-\frac1{2^P-1}
+\]
+is rational, and its reduced denominator has odd part exactly \(2^P-1\).  Every
+finite computation that inspects only coefficients with index at most \(B\)
+--- in particular every certificate \(\mathsf{Sep}(h,N,L)\) with
+\(N+h+L\le B\) --- returns the same result for \(\gamma\) as for \(\ph\),
+and choosing \(P\) with \(2^P-1>\Qzero\) makes the splice consistent with
+the denominator exclusion as well.  This elementary splice is not formalised
+in the source and proves nothing about \(\ph\) itself; it shows that a proof
+of~\eqref{eq:unbounded-certificate-supply} must consume unboundedly many
+totient values, so no extension of the finite record in
+Example~\ref{res:deposits} can close the supply.
+\end{remark}
+
 Appendix~\ref{app:totient-normal} records the exact reformulations of this
 open obligation.  Appendix~\ref{app:totient-finite} records fixed-scale
 enclosures, projections, and certificates, then states separately the
@@ -2636,6 +2692,20 @@ and
 The theorem concerns the coefficient kernel.  It does not imply that $S$ is
 irrational.
 
+\paragraph{Prior-art boundary for the kernel theorem.}
+The qualitative conclusion is not new.  Finite-dimensionality of the span of
+all sections is \(2\)-regularity of the sequence in the sense of Allouche
+and Shallit~\cite{alloucheshallit}, and Coons proved in 2010 that \(\ph\) is
+not \(k\)-regular for any \(k\ge2\), by counting poles of
+\(\zeta(s-1)/\zeta(s)\) against the meromorphic continuation available to
+the Dirichlet series of a regular sequence~\cite{coons2010}.  In particular
+the infinite-dimensionality of the full kernel span follows from Coons's
+theorem.  What Theorem~\ref{res:dyadictotient} adds is quantitative and
+constructive: the exact canonical rank \(2^e+1\) at every level, with an
+explicit separated minor, proved by elementary CRT--Dirichlet arithmetic
+that the formal source checks without analytic continuation.
+Proposition~\ref{res:carryrank} consumes exactly this level-by-level form.
+
 \begin{proposition}[finite-level carry anti-compression]\label{res:carryrank}
 If the totient coefficient series were rational, there would be a positive-
 multiplier tempered integral carry orbit whose canonical carry-section span
@@ -2648,6 +2718,24 @@ and
 No theorem bounds the dyadic section rank of every rationality-supplied
 tempered carry.  The proposition therefore identifies an infinite
 rationality-side barrier, not an irrationality criterion for $S$.
+
+\begin{remark}[rank alone cannot decide rationality]
+No converse dimension bound is available at this generality: the same
+coefficient class contains rational series whose tempered orbits have
+infinite-dimensional section span.  Choose Boolean values
+\(a_N\in\{0,1\}\) with \(a_0=a_1=1\) whose dyadic sections satisfy no
+nontrivial rational linear relation (a routine diagonal choice on sparse
+index blocks); set \(u_N=N+a_N\) and \(\gamma(N+1)=2u_N-u_{N+1}\).  Then
+\(0\le\gamma(n)\le n\), the orbit \(u\) is tempered, and
+Theorem~\ref{res:rigidity} evaluates
+\(\sum_{n\ge1}\gamma(n)2^{-n}=u_0=1\in\Q\); yet the sections of \(u\) span
+an infinite-dimensional space, because the sections of \(N\mapsto N\) span
+only two dimensions.  This elementary observation is not formalised in the
+source.  It fixes the shape of the missing ingredient: a route through
+Proposition~\ref{res:carryrank} must couple carry-section rank to the
+arithmetic size of a totient carry, since dimension alone is compatible
+with rationality.
+\end{remark}
 
 \begin{proposition}[rectangular determinant expansion]\label{res:signedmoment}
 For matrices $M:\iota\times\kappa\to R$ and
@@ -2728,13 +2816,85 @@ statement.  None provides the required cofinal certificates.
 
 }
 
-\section{The shared finite-to-cofinal bottleneck}
+\section{One transform and the shared finite-to-cofinal bottleneck}
 \label{sec:architecture}
 
-\noindent This section makes one comparison between the two open spines; it
-introduces no additional mathematical claim and is not a further proof step.
-Both use complete finite predicates, but their cofinal conclusions point in
-opposite directions:
+\noindent This section collects the structure the two open spines share and
+states its limits.  Every mathematical assertion in it is proved elsewhere
+in the paper; the section adds organisation, not theorems, and its closing
+remark is an elementary unformalised observation, flagged as such.
+
+\subsection{One transform, one mechanism, three questions}
+
+The Lambert rearrangement of Section~\ref{sec:ladder} factors the common
+transform through two maps, the divisor transform followed by binary
+evaluation:
+\[
+ f\;\longmapsto\;f*\mathbf 1\;\longmapsto\;
+ \sum_{m\ge1}\frac{(f*\mathbf 1)(m)}{2^m}\;=\;L(f).
+\]
+Every series in this paper is an instance.  The primitive-conductor input
+\(f=\alpha\) gives \(L(\alpha)=S\) with divisor stream
+\(\alpha*\mathbf 1=\ph\) (Proposition~\ref{res:lift}); a support indicator
+\(f=\mathbf 1_A\) gives \(L(\mathbf 1_A)=X_A\) with divisor stream \(f_A\)
+(Appendix~\ref{app:carry-boolean}); and the comparison inputs
+\(\mu\), \(\mathbf 1\), and \(\ph\) give the rungs of
+Section~\ref{sec:ladder}.
+
+Rationality acts on all of these through one mechanism.  For any coefficient
+stream \(\gamma\) with \(0\le\gamma(n)\le n\), a class containing both
+\(\ph\) and every \(f_A\), Theorem~\ref{res:rigidity} identifies rationality
+of \(\sum_n\gamma(n)2^{-n}\) with the existence of a tempered integer orbit:
+after multiplication by one denominator, the coefficient stream is the exact
+one-step doubling difference \(2u(N)-u(N+1)\) of an integer sequence of size
+\(o(2^N)\).  The tail differences of
+Section~\ref{sec:reduction} and the carry states of
+Theorem~\ref{res:rigidity-main} are two coordinate systems for this one
+orbit condition.  M\"obius inversion then identifies the arithmetic input
+beneath the coefficient stream: the fixed weight \(\alpha=\ph*\mu\) on the
+\#249 side, and the Boolean indicator \(\mu*f_A=\mathbf 1_A\) on the \#257
+side (Proposition~\ref{res:boolmob}).
+
+The three open questions are then three different questions about this one
+map.
+\begin{enumerate}[label=\textup{(\roman*)},leftmargin=2.2em]
+\item Erd\H{o}s~\#249 fixes the input and asks about one image point:
+is \(L(\alpha)=S\) rational?
+\item Universal \#257 restricts the domain to indicators of infinite
+supports and asks whether the image of that domain meets \(\Q\) at all.
+\item The half-value route fixes the target and asks whether the fibre over
+\(1/2\) meets the same domain; by Theorem~\ref{res:greedy} the fibre over
+any value contains at most one normalised support, so the question concerns
+one canonical greedy orbit.
+\end{enumerate}
+The trichotomy describes where the questions sit inside one transform.  It
+is not a theorem transferring information between them, and the next
+subsection records exactly why no transfer follows.
+
+\subsection{Why no status transfers}
+
+The transform itself has no arithmetic force.  Its formalised values realise
+every behaviour: \(L(\ph)=2\) and \(L(\mu)=1/2\) are rational,
+\(L(\mathbf 1)=E\) is irrational, \(L(\mathrm{Id})\) is cited
+transcendental, and \(L(\alpha)=S\) is open.  Positivity, multiplicativity,
+and linear coefficient growth are shared by \(\ph\), whose value is
+rational, and by \(\mathbf 1\), whose value is irrational, so no such
+property can decide an endpoint.  On the support side, every finite support
+is Boolean with rational value, and the infinite supports of
+Theorem~\ref{res:support} are Boolean with irrational values, so Booleanity
+decides nothing without the joint force of infinitude and arithmetic.  An
+endpoint theorem must therefore consume input-specific arithmetic: exact
+totient values and their dyadic structure for \#249; the interaction of the
+Boolean M\"obius condition with infinitude for universal \#257; the exact
+divisor feedback of the greedy orbit for the half-value fibre.  The formal
+source also closes several shortcuts of exactly this generic kind
+(Appendix~\ref{app:totient-boundaries}); each closure names the additional
+arithmetic information a successful method would have to use.
+
+\subsection{The shared bottleneck}
+
+Both spines end at complete finite predicates whose cofinal conclusions
+point in opposite directions:
 \[
 \begin{aligned}
  S\notin\Q
@@ -2747,14 +2907,16 @@ opposite directions:
 \]
 For \(S\), Proposition~\ref{res:complete} supplies fixed completeness,
 Theorem~\ref{res:pointwisecomplete} gives the pointwise global form, and
-Theorem~\ref{res:red21} gives the displayed cofinal form.  What is missing is
-a theorem producing finite refuters without bound.  For \(1/2\),
-Theorem~\ref{res:halfmembership} already identifies cofinal terminal zeros
-with membership; what is missing is a theorem producing those zeros.  The
+Theorem~\ref{res:red21} gives the displayed cofinal form.  For \(1/2\),
+Theorem~\ref{res:halfmembership} identifies membership with cofinal zeros of
+the terminal bit \(\tau_s\) of Definition~\ref{def:terminal-bit}.  Call a
+theorem that produces the required finite events at
+unbounded scales a \emph{producer}.  Neither producer is known.  The
 classical full-support theorem is the closed comparison case because its
 Bertrand--CRT and averaging argument constructs the required witnesses
-uniformly.  The coordinate identities and rational-support filters used
-elsewhere in the paper do not alter either missing quantifier.
+uniformly at every precision.  The coordinate identities and
+rational-support filters used elsewhere in the paper do not alter either
+missing quantifier.
 
 Thus the comparison also gives a criterion for further progress.  On the
 \#249 side, a new local identity affects the endpoint only if it produces or
@@ -2762,6 +2924,22 @@ rules out \(\mathsf{Sep}\)-certificates at unbounded parameters.  On the
 half-value side of \#257, it must produce cofinal terminal zeros or prove that
 the greedy seam is eventually right.  Further fixed-scale computation, by
 itself, changes neither open statement.
+
+\begin{remark}[boundaries visible from the normal forms]
+Two elementary observations, neither formalised in the source, show that
+the missing quantifiers cannot be crossed by finite inspection or by the
+shared geometry alone.  For \#249, a coefficient stream agreeing with
+\(\ph\) on every index inspected by any fixed finite family of
+computations extends to a rational series in the same class; the splice
+is recorded in Section~\ref{sec:249-open}.  For the half-value fibre, the
+strict-tail axioms and any finite prefix of greedy decisions are jointly
+consistent with both endpoints: replacing the weights beyond the inspected
+range by a geometric sequence whose total mass lies below the pending
+residual preserves strict tails, leaves every inspected decision
+unchanged, and makes the last inspected skip final in the modified system.
+A membership proof must therefore consume the Mersenne arithmetic of the
+tail, not only its superincreasing geometry.
+\end{remark}
 
 \section{Formal verification and reproducibility}\label{sec:verify}
 
@@ -3570,6 +3748,15 @@ leaves a coefficient $1/(k-1)$ in front of the binary logarithm. Choosing $k$
 after $\varepsilon$ gives the theorem. This controls gaps in divisor coverage;
 it does not assert a subpower bound for the carry state itself.
 
+For one fixed support the conclusion is elementary, since every zero window
+is shorter than the least support element.  The content is uniformity:
+\(B\) does not depend on \(A\), and taking \(N=0\) shows that a rational
+value with denominator data \((c,v)\) bounds the least element of its
+support in terms of \((\varepsilon,c,v)\) alone.  Against the half-value
+fibre the constraint is inert: the greedy candidate support there contains
+\(2\), so its divisor stream has no zero window of length above one and
+satisfies the bound with room to spare.
+
 \subsection{Necessary conditions II: wraps, mass, and unbounded states}
 \label{app:carry-mass}
 
@@ -3896,7 +4083,8 @@ Proposition~\ref{res:complete} and
 Theorems~\ref{res:pointwisecomplete}--\ref{res:diag} for the exact certificate
 normal forms; and Theorems~\ref{res:halfmembership}
 and~\ref{res:fatalright} for the two half-value classifications.
-Theorem~\ref{res:full} is the classical closed comparison case.  For the
+Theorem~\ref{res:full} is the classical closed comparison case, and
+Section~\ref{sec:architecture} states the structure the spines share.  For the
 strongest independent structure beyond the two open spines, see
 Theorem~\ref{res:dyadictotient}, the sublogarithmic zero-window corollary in
 the main \#257 results, and
@@ -3999,6 +4187,13 @@ Campbell shift-synchronisation boundary & \lrefx{CampbellShiftSynchronization.le
 \bibitem{farey1816} J.~Farey, \emph{On a curious property of vulgar fractions},
   Philos. Mag. \textbf{47} (1816), 385--386,
   doi:\href{https://doi.org/10.1080/14786441608628487}{10.1080/14786441608628487}.
+\bibitem{alloucheshallit} J.-P. Allouche and J. Shallit, \emph{Automatic
+  Sequences: Theory, Applications, Generalizations}, Cambridge University
+  Press, 2003,
+  doi:\href{https://doi.org/10.1017/CBO9780511546563}{10.1017/CBO9780511546563}.
+\bibitem{coons2010} M.~Coons, \emph{(Non)automaticity of number theoretic
+  functions}, J. Th\'eor. Nombres Bordeaux \textbf{22} (2010), no.~2,
+  339--352, doi:\href{https://doi.org/10.5802/jtnb.718}{10.5802/jtnb.718}.
 \bibitem{nesterenko} Yu.~V. Nesterenko, \emph{Modular functions and transcendence questions},
   Mat. Sb. \textbf{187} (1996), no.~9, 65--96; English transl., Sb. Math. \textbf{187} (1996), no.~9, 1319--1348,
   doi:\href{https://doi.org/10.1070/SM1996v187n09ABEH000158}{10.1070/SM1996v187n09ABEH000158}.
