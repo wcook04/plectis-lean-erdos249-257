@@ -2954,15 +2954,11 @@ least $|F|$ support divisors land on the same index, so $f_A\ge|F|$ there,
 while the exact carry equation $f_A(n)+e_n=k_{n-1}+2e_{n-1}$ with
 $k_{n-1}\le1$ lets one step absorb at most one unit --- so the preceding
 excess must spike to at least $\lceil(|F|-1)/2\rceil$, and the spikes recur
-with density $1/L$. Formalised:
-\lword{RationalSupportCarrySkeleton.lean}{2037}{booleanCollision_wrap_bound_of_common_multiple}{common-multiple wrap bound}
-(denominator-shifted form
-\lloc{RationalSupportCarrySkeleton.lean}{1863}),
-the carry equation
-\lword{RationalSupportCarrySkeleton.lean}{1651}{supportCoeff_add_oddTailExcess_succ_eq_wrap_add_two_excess}{wrap--excess recurrence},
-and the dyadic corollary
-\lword{RationalSupportCarrySkeleton.lean}{2200}{dyadic_support_fraction_reciprocalMass_diverges_or_gt_one}{dyadic reciprocal-mass dichotomy}
-(via \lloc{RationalSupportCarrySkeleton.lean}{2003}).
+with density $1/L$. The three steps are formalised by the
+\lword{RationalSupportCarrySkeleton.lean}{1963}{shiftedBooleanCollision_wrap_bound_of_common_multiple}{shifted common-multiple bound},
+\lword{RationalSupportCarrySkeleton.lean}{1868}{shiftedSupportCoeff_add_oddTailExcess_succ_eq_wrap_add_two_excess}{shifted wrap--excess recurrence},
+and
+\lword{RationalSupportCarrySkeleton.lean}{2200}{dyadic_support_fraction_reciprocalMass_diverges_or_gt_one}{dyadic reciprocal-mass alternative}.
 
 \begin{theorem}[carry states are unbounded over infinite supports]\label{res:unbounded}
 Let $A$ be infinite with value $p/(2^c v)$, $v\ge1$. Then the positive integer

@@ -907,15 +907,15 @@
         "schema": "erdos249257-editorial-state/1",
         "scope": "continuous_whole_main_paper_exposition",
         "current_priority": {
-          "id": "appendix_b_collision_provenance_hierarchy",
+          "id": "appendix_b_unbounded_carry_provenance_hierarchy",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "defect_class": "the collision corollary's three mathematical components are followed by five anchors, including two uncaptioned raw source locations for shifted variants, so direct results and implementation variants are visually conflated",
-          "statement": "Recast the Appendix B.4 collision provenance around the common-multiple bound, the exact wrap-excess recurrence, and the dyadic divergent-or-greater-than-one corollary."
+          "defect_class": "the unbounded-carry theorem has one conclusion and one displayed proof mechanism but its provenance continues through an internal bridge theorem and a finite example validation, obscuring the direct theorem-to-lemma dependency",
+          "statement": "Recast the Appendix B.4 unbounded-carry provenance around the fraction-facing unboundedness theorem and the local support-cardinality inequality, demoting internal proof plumbing and nonessential example validation."
         },
         "last_verified_wave": {
-          "id": "appendix_b_order_wrap_provenance_compression",
+          "id": "appendix_b_collision_provenance_compression",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "result": "Reduced the order-wrap proposition's six overlapping generic, divergent, shifted, and named-limit anchors to the three direct fraction-facing theorems matching its wrap-ratio alternative, coprime specialization, and exact excess-mean conclusion."
+          "result": "Reduced the collision corollary's five mixed theorem and raw-location anchors to the three direct shifted results matching its common-multiple bound, wrap-excess recurrence, and dyadic reciprocal-mass alternative."
         },
         "active_inconsistencies": [],
         "blocked_decisions": []

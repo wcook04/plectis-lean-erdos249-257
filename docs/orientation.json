@@ -554,18 +554,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "appendix_b_collision_provenance_hierarchy",
+   "id": "appendix_b_unbounded_carry_provenance_hierarchy",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "the collision corollary's three mathematical components are followed by five anchors, including two uncaptioned raw source locations for shifted variants, so direct results and implementation variants are visually conflated",
-   "statement": "Recast the Appendix B.4 collision provenance around the common-multiple bound, the exact wrap-excess recurrence, and the dyadic divergent-or-greater-than-one corollary."
+   "defect_class": "the unbounded-carry theorem has one conclusion and one displayed proof mechanism but its provenance continues through an internal bridge theorem and a finite example validation, obscuring the direct theorem-to-lemma dependency",
+   "statement": "Recast the Appendix B.4 unbounded-carry provenance around the fraction-facing unboundedness theorem and the local support-cardinality inequality, demoting internal proof plumbing and nonessential example validation."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "a16aa24af5236b6508a34b8a4c4b41fdcf620a98",
-  "committed_navigation_snapshot": "5a1f13fbc27d7dae75a85aeb4ec93173b1723da9",
-  "main_paper_source_digest": "sha256:9d28a7534170b577b57b89766e1259913bf6c5fd4ab7076aed81e153dd53f94c"
+  "committed_navigation_snapshot": "117e11c80296fa62df75fda6b03257df7c50edd2",
+  "main_paper_source_digest": "sha256:90b4ec8c1e81dc57427edc0e749e78d3c42b34b8791ee7552c02127c5dfedfed"
  },
  "reading_routes": [
   {
