@@ -13,7 +13,11 @@ ROOT = Path(__file__).resolve().parent.parent
 GUIDE = ROOT / "ARCHITECTURE.md"
 README = ROOT / "README.md"
 AGENTS = ROOT / "AGENTS.md"
+PAPER_README = ROOT / "paper" / "README.md"
+SYSTEMS_PAPER = ROOT / "paper" / "claim-faithful-publication-systems-paper.tex"
+SYSTEMS_PDF = ROOT / "claim-faithful-publication-systems-paper.pdf"
 MAX_GUIDE_BYTES = 18_000
+MAX_SYSTEMS_PAPER_BYTES = 40_000
 
 SECTION_ORDER = (
     "## What this repository is",
@@ -91,9 +95,83 @@ BANNED_SHORTHAND = (
     re.compile(r"\bVinum\b", re.IGNORECASE),
 )
 
+PAPER_SECTION_ORDER = (
+    r"\section{What this repository is for}",
+    r"\section{The architecture in one picture}",
+    r"\section{The real files and their responsibilities}",
+    r"\section{One result from Lean proof to public page}",
+    r"\section{What happens when a file changes}",
+    r"\section{Who decides what}",
+    r"\section{A claim the checker did not yet cover}",
+    r"\section{Operating and adapting the repository}",
+    r"\section{Scope and limitations}",
+)
+
+PAPER_REQUIRED_ANCHOR_GROUPS = {
+    "plain_purpose": (
+        "This document explains how one public mathematics repository is organised",
+        "Both problems remain open",
+        "does not claim to solve either problem",
+    ),
+    "five_real_parts": (
+        "Lean source",
+        "human-reviewed claim record",
+        "authored public documents",
+        "generated indexes and summaries",
+        "release program and continuous-integration workflow",
+    ),
+    "plain_diagram_labels": (
+        "reading map, code index",
+        "machine-readable summary",
+    ),
+    "real_owners": (
+        "Erdos249257.lean",
+        "docs/claims.json",
+        "docs/publication_contract.json",
+        "docs/publication_evidence.json",
+        "scripts/check_release.py",
+        ".github/workflows/lean.yml",
+    ),
+    "decision_boundary": (
+        "Lean checks the formal proofs",
+        "Mathematicians review what those proofs mean",
+        "The release machinery checks that the reviewed relationships remain intact",
+        "does not technically force a second independent mathematician",
+    ),
+    "worked_trace": (
+        "Lean has checked a finite calculation at 28 listed input values",
+        "successful values beyond every fixed cutoff",
+        "public meaning, not its internal name",
+        "certified_kill_instances",
+    ),
+    "release_flow": (
+        "lake build",
+        "python3 scripts/check_release.py",
+        "The public workflow has two independent jobs",
+        "Any failed recorded relationship stops the release",
+    ),
+    "coverage_ceiling": (
+        "A claim the checker did not yet cover",
+        "coverage boundary, not a reliability score",
+        "only after a person has identified and recorded that relationship",
+    ),
+}
+
 
 def normalise(text: str) -> str:
     return " ".join(text.split())
+
+
+def normalise_tex(text: str) -> str:
+    """Flatten the small subset of TeX used by load-bearing prose anchors."""
+    for _ in range(3):
+        text = re.sub(
+            r"\\(?:textbf|emph|texttt)\{([^{}]*)\}",
+            r"\1",
+            text,
+        )
+    text = text.replace(r"\_", "_").replace("{", "").replace("}", "")
+    return normalise(text)
 
 
 def validate_guide(text: str) -> None:
@@ -108,7 +186,7 @@ def validate_guide(text: str) -> None:
     )
     assert positions == sorted(positions), "architecture guide sections are out of order"
 
-    compact = normalise(text)
+    compact = normalise_tex(text)
     for group_id, anchors in REQUIRED_ANCHOR_GROUPS.items():
         for anchor in anchors:
             assert normalise(anchor).casefold() in compact.casefold(), (
@@ -131,19 +209,89 @@ def validate_guide(text: str) -> None:
         assert (ROOT / path).exists(), f"architecture guide has broken local link {target}"
 
 
-def validate_entry_links(readme: str, agents: str) -> None:
-    readme_prefix = readme.encode("utf-8")[:2_000].decode("utf-8", errors="ignore")
+def validate_systems_paper(text: str) -> None:
+    """Keep the PDF source architecture-first rather than experiment-first."""
+    size = len(text.encode("utf-8"))
+    assert size <= MAX_SYSTEMS_PAPER_BYTES, (
+        f"systems architecture paper is {size} bytes "
+        f"(budget {MAX_SYSTEMS_PAPER_BYTES})"
+    )
+
+    assert (
+        "How a Lean Repository Turns Formal Proofs" in text
+        and "Repository architecture, release flow, and trust boundaries" in text
+    ), "systems paper lost its plain architecture title"
+
+    positions = [text.find(heading) for heading in PAPER_SECTION_ORDER]
+    assert all(position >= 0 for position in positions), (
+        f"systems paper lost section sequence {PAPER_SECTION_ORDER}"
+    )
+    assert positions == sorted(positions), "systems paper sections are out of order"
+
+    compact = normalise_tex(text)
+    for group_id, anchors in PAPER_REQUIRED_ANCHOR_GROUPS.items():
+        for anchor in anchors:
+            assert normalise(anchor).casefold() in compact.casefold(), (
+                f"systems paper lost {group_id} anchor {anchor!r}"
+            )
+
+    for pattern in BANNED_SHORTHAND:
+        assert not pattern.search(text), (
+            f"systems paper exposes private or score-like shorthand {pattern.pattern!r}"
+        )
+
+    assert len(re.findall(r"\bsentence\b", text, flags=re.IGNORECASE)) <= 4, (
+        "systems paper has drifted back to a sentence-centred case study"
+    )
+    public_meaning = text.find("public meaning, not its internal name")
+    internal_id = text.find("certified_kill_instances")
+    assert 0 <= public_meaning < internal_id, (
+        "systems paper exposes its internal claim id before the public meaning"
+    )
+    assert SYSTEMS_PDF.is_file(), "rendered systems architecture PDF is missing"
+
+
+def validate_entry_links(readme: str, agents: str, paper_readme: str) -> None:
+    readme_prefix = readme.encode("utf-8")[:6_000].decode("utf-8", errors="ignore")
     assert "[architecture and repository guide](ARCHITECTURE.md)" in readme_prefix
+    assert (
+        "[printable PDF](claim-faithful-publication-systems-paper.pdf)"
+        in readme_prefix
+    )
     assert "It assumes no Lean or project history" in normalise(readme_prefix)
+    for phrase in (
+        "conditional producer",
+        "unbounded or cofinal supply",
+        "lcm-diagonal scales",
+        "producer carry",
+    ):
+        assert phrase not in readme_prefix.casefold(), (
+            f"README first impression exposes unexplained phrase {phrase!r}"
+        )
     assert "ARCHITECTURE.md" in agents
     assert "plain-language human guide" in agents
+    compact_paper_readme = normalise(paper_readme)
+    assert "[`ARCHITECTURE.md`](../ARCHITECTURE.md)" in paper_readme
+    assert "authored papers with narrower jobs" in compact_paper_readme
+    assert "architecture and access guide" in compact_paper_readme
+    assert "historical checker example appears only after the architecture" in (
+        compact_paper_readme
+    )
+    for manuscript in (
+        "erdos249-257-main-paper.tex",
+        "erdos249-transport-curvature-companion-note.tex",
+        "claim-faithful-publication-systems-paper.tex",
+    ):
+        assert manuscript in paper_readme
 
 
 def main() -> int:
     validate_guide(GUIDE.read_text(encoding="utf-8"))
+    validate_systems_paper(SYSTEMS_PAPER.read_text(encoding="utf-8"))
     validate_entry_links(
         README.read_text(encoding="utf-8"),
         AGENTS.read_text(encoding="utf-8"),
+        PAPER_README.read_text(encoding="utf-8"),
     )
     print("architecture guide: first-principles structure and entry links verified")
     return 0

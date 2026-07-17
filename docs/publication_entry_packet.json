@@ -1,38 +1,23 @@
 {
-  "active_evidence_residuals": [
-    {
-      "id": "original_raw_mutation_logs_absent",
-      "kind": "evidence_boundary",
-      "reentry_condition": "Register authenticated original logs and bind their content identities before changing this boundary.",
-      "statement": "The original mutation run logs are not registered; historical timings remain a structured transcription.",
-      "status": "known_absence"
-    },
-    {
-      "exact_original_target_ids": [
-        "M6",
-        "M8",
-        "M10"
-      ],
-      "id": "exact_original_mutation_targets_partial",
-      "kind": "evidence_boundary",
-      "reentry_condition": "Recover and authenticate an original target before marking another operator exact.",
-      "statement": "Only the explicitly named mutation operators preserve exact original targets; the remaining targets are deterministic reconstructions.",
-      "status": "known_absence"
-    },
-    {
-      "id": "historical_post_repair_full_rerun_absent",
-      "kind": "evaluation_boundary",
-      "reentry_condition": "Keep later deterministic reconstructions separate from the historical result unless the original experiment is rerun with equivalent targets and archived logs.",
-      "statement": "The historical study did not rerun the other nine mutations after the M8 repair.",
-      "status": "not_run"
-    }
-  ],
+  "architecture_summary": {
+    "decision_boundary": "Lean checks formal proofs; people review public meaning; release software preserves only relationships that people explicitly recorded.",
+    "five_parts": [
+      "Lean source",
+      "human-reviewed public claims",
+      "authored reader documents",
+      "generated navigation views",
+      "release checks and GitHub continuous integration"
+    ],
+    "human_start": "ARCHITECTURE.md",
+    "printable_start": "claim-faithful-publication-systems-paper.pdf",
+    "purpose": "This public repository separates five parts: Lean source, a human-reviewed record of selected public claims, authored reader documents, generated navigation views, and a release workflow that checks the relationships people explicitly recorded."
+  },
   "artifact_owners": {
     "entry_packet": "docs/publication_entry_packet.json",
     "entry_source": "docs/publication_entry_source.json",
     "mutation_harness": "scripts/run_publication_mutations.py",
     "mutation_manifest": "experiments/publication_mutations.json",
-    "publication_artifact_id": "systems_case_study",
+    "publication_artifact_id": "repository_architecture_guide",
     "publication_contract": "docs/publication_contract.json",
     "publication_evidence": "docs/publication_evidence.json",
     "rendered_path": "claim-faithful-publication-systems-paper.pdf",
@@ -62,8 +47,8 @@
         "to": "publication_contract"
       },
       {
-        "from": "mutation_reconstruction",
-        "relation": "reconstructs mutation classes under an explicit provenance ceiling",
+        "from": "test_edit_reconstruction",
+        "relation": "reconstructs deliberate edit types under an explicit evidence limit",
         "to": "publication_evidence"
       },
       {
@@ -106,10 +91,10 @@
       {
         "id": "publication_evidence",
         "owner": "docs/publication_evidence.json",
-        "role": "historical mutation protocol, matrix, limitations, and post-repair scope"
+        "role": "historical deliberately-altered-copy protocol, outcomes, limitations, and post-repair scope"
       },
       {
-        "id": "mutation_reconstruction",
+        "id": "test_edit_reconstruction",
         "owner": "experiments/publication_mutations.json and scripts/run_publication_mutations.py",
         "role": "separately versioned deterministic reconstruction, not original raw logs"
       },
@@ -122,23 +107,24 @@
   },
   "authority_posture": "navigation_projection_not_Lean_proof_authority_and_not_historical_evidence_authority",
   "content_hashes": {
-    "claim-faithful-publication-systems-paper.pdf": "sha256:cd03b30978fa5d5533cdcc92429159d08bd6f530e9998fdefc6462ab962654c6",
-    "docs/claims.json": "sha256:51ee622d6116bfeb33cb42741aa3552fcac3b93529aab16f8db5654ebe4f4cd4",
+    "claim-faithful-publication-systems-paper.pdf": "sha256:1f5755f98ea6c1b87ed645362df6f53711982f87fcc6d13743e8c1a98390bd49",
+    "docs/claims.json": "sha256:bf78742330f5d7ebf34acb02cb7924ca00c1ab91fd70fc29d28948f459767db2",
     "docs/methodology.json": "sha256:d2dab3ef7bd853be6bd086ad2ff448d97996280c648878f6aa5066e1616a722e",
-    "docs/publication_contract.json": "sha256:34f85910c73739ffd656e4a324562b306e9692ff0e8b3a4a910935c30b68ca14",
-    "docs/publication_entry_source.json": "sha256:8e43c8b75e0d664d0731c8bd44cbd03b7dd910f812e2f34d4909b9aa0df6d699",
-    "docs/publication_evidence.json": "sha256:69df3b371c23a365b2870ae905b1b3fe65fe4dcdb6c8cc31ee3d7d1f128ccc91",
+    "docs/publication_contract.json": "sha256:b06e88f68ccdd4a154c6072eb25acefdd7c84199a09655f1ef53c1bb281996d8",
+    "docs/publication_entry_source.json": "sha256:31004274bba09a44cfeac3aa82ec2748fa225c395bd292e0002091a620137550",
+    "docs/publication_evidence.json": "sha256:8dad402702a9650279d0526dc648633937783fb7226d81b1e8940c5d93d8b32d",
     "experiments/publication_mutations.json": "sha256:9243e270257869e7a191c7598e917457cab61194299d1651e21bbc45a2d4c1e3",
-    "paper/claim-faithful-publication-systems-paper.tex": "sha256:f7ba2d8e600c8a00305c945530fbbb646a618b8ac27cb998bf23367d00900156",
+    "paper/claim-faithful-publication-systems-paper.tex": "sha256:863eaa6cc6497e7bd110bb7242f3234ee7bb5e025b1e3e151551c6c7b398e97b",
     "scripts/run_publication_mutations.py": "sha256:e6a5a2fdd51032a5db5687d35e37bfbe42b83784d29d34b4bfd416621c44c83b"
   },
-  "evaluation": {
-    "baseline": {
-      "negative_fixture_count": 69,
-      "release_check_count": 5207,
-      "result": "all_checks_passed",
-      "wall_time_seconds": 144.5
-    },
+  "five_sentence_summary": [
+    "Lean checks formal statements and proofs; it does not read the README or papers that explain them.",
+    "A mathematician reviews what selected formal results mean, how the public pages may describe them, and what remains open.",
+    "The reviewed result record is docs/claims.json, while docs/publication_contract.json separately inventories the papers and docs/publication_evidence.json separately retains historical checker evidence.",
+    "Generated views reorganise those records, and the release program plus GitHub workflow stop publication when a written relationship fails.",
+    "A passing release means the recorded comparisons succeeded; it does not mean software understood every public statement or proved that the list is complete."
+  ],
+  "historical_checker_example": {
     "current_owner_snapshot": {
       "contribution_family_count": 21,
       "curated_claim_count": 98,
@@ -146,179 +132,34 @@
       "snapshot_kind": "current_canonical_owners",
       "status_count": 7
     },
-    "historical_checkpoint_snapshot": {
-      "claims_source": "docs/claims.json",
-      "contribution_family_count": 20,
-      "curated_claim_count": 96,
-      "declaration_atlas_source": "docs/declaration_atlas.json",
-      "declaration_count": 12496,
-      "generated_certificate_declaration_count": 2925,
-      "module_count": 633,
-      "remaining_open_proposition_count": 3,
-      "snapshot_kind": "evaluation_checkpoint_not_current_tree",
-      "status_count": 7,
-      "theorem_like_count": 11471
-    },
-    "invariant_families": [
-      {
-        "id": "proof_trust",
-        "label": "proof trust"
-      },
-      {
-        "id": "registry_structure",
-        "label": "registry"
-      },
-      {
-        "id": "source_coordinates",
-        "label": "coordinates"
-      },
-      {
-        "id": "paper_anchoring",
-        "label": "anchoring"
-      },
-      {
-        "id": "boundary_language",
-        "label": "boundary"
-      },
-      {
-        "id": "projection_freshness",
-        "label": "freshness"
-      },
-      {
-        "id": "byte_budgets",
-        "label": "budgets"
-      }
-    ],
-    "mutations": [
-      {
-        "additional_detectors": [],
-        "description": "Status upgraded from conditional reduction to proved here.",
-        "first_detector": "projection_freshness",
-        "id": "M1",
-        "outcome": "rejected",
-        "wall_time_seconds": 139.4
-      },
-      {
-        "additional_detectors": [],
-        "description": "README open-boundary clause does not solve was deleted.",
-        "first_detector": "boundary_language",
-        "id": "M2",
-        "outcome": "rejected",
-        "wall_time_seconds": 171.5
-      },
-      {
-        "additional_detectors": [
-          "projection_freshness"
-        ],
-        "description": "A declaration coordinate was drifted by 40 lines.",
-        "first_detector": "source_coordinates",
-        "id": "M3",
-        "outcome": "rejected",
-        "wall_time_seconds": 239.1
-      },
-      {
-        "additional_detectors": [
-          "projection_freshness"
-        ],
-        "description": "A paper source link was retargeted by 50 lines.",
-        "first_detector": "source_coordinates",
-        "id": "M4",
-        "outcome": "rejected",
-        "wall_time_seconds": 192.2
-      },
-      {
-        "additional_detectors": [
-          "source_coordinates",
-          "projection_freshness"
-        ],
-        "description": "One claim was placed in two contribution families.",
-        "first_detector": "registry_structure",
-        "id": "M5",
-        "outcome": "rejected",
-        "wall_time_seconds": 121.4
-      },
-      {
-        "additional_detectors": [],
-        "description": "The corpus descriptor module count was hand-edited by one.",
-        "first_detector": "projection_freshness",
-        "id": "M6",
-        "outcome": "rejected",
-        "wall_time_seconds": 184.8
-      },
-      {
-        "additional_detectors": [],
-        "checks_before_rejection": 639,
-        "description": "native_decide was introduced into a proof.",
-        "first_detector": "proof_trust",
-        "id": "M7",
-        "outcome": "rejected",
-        "wall_time_seconds": 4.7
-      },
-      {
-        "additional_detectors": [],
-        "description": "A finite-evidence boundary clause was strengthened from does not supply to completes.",
-        "first_detector": null,
-        "gate_result": "all_checks_passed",
-        "id": "M8",
-        "outcome": "escaped",
-        "wall_time_seconds": 176.0
-      },
-      {
-        "additional_detectors": [
-          "source_coordinates",
-          "projection_freshness"
-        ],
-        "description": "An authored open-problem anchor title was mangled.",
-        "first_detector": "paper_anchoring",
-        "id": "M9",
-        "outcome": "rejected",
-        "wall_time_seconds": 122.8
-      },
-      {
-        "additional_detectors": [
-          "projection_freshness"
-        ],
-        "description": "The orientation surface was padded past its byte budget.",
-        "first_detector": "byte_budgets",
-        "id": "M10",
-        "outcome": "rejected",
-        "wall_time_seconds": 210.5
-      }
-    ],
-    "post_repair": {
-      "claim_ceiling": "The repaired checker rejects M8. No post-repair ten-of-ten result is reported.",
-      "intact_baseline_rechecked": true,
-      "other_original_mutations_rerun": false,
-      "post_repair_detection_ratio": null,
-      "repair": "The M8 boundary clause became a declared anchor group with a derived rejection fixture.",
-      "rerun_mutation_ids": [
-        "M8"
-      ]
-    },
-    "protocol": {
-      "application_mode": "one_mutation_at_a_time",
-      "full_release_gate_run_after_each_mutation": true,
-      "mutation_author_relationship": "mutations_authored_by_checker_author",
-      "tree_restored_between_runs": true,
-      "worktree_posture": "isolated_worktree_pinned_at_evaluation_checkpoint"
-    },
-    "same_snapshot": false,
-    "summary": {
-      "authored_mutation_count": 10,
-      "coverage_depth_posture": "one_deep_coverage_not_family_depth",
-      "escaped_mutation_ids": [
-        "M8"
-      ],
-      "observed_detection_ratio": "9/10",
-      "rejected_mutation_count": 9
-    }
+    "evidence_owner": "docs/publication_evidence.json",
+    "plain_result": "One false README edit passed because its public claim had not been recorded. After the claim was recorded, the intact text passed and the same false edit failed.",
+    "purpose": "Illustrate the boundary of explicitly recorded checks; this is not an architecture component or reliability score.",
+    "summary_query": "python3 scripts/query_corpus.py --publication-evidence summary"
   },
-  "five_sentence_summary": [
-    "Lean checks formal declarations and proofs, not every natural-language sentence that later describes them.",
-    "This repository records mathematical claim status, source coordinates, publication artifacts, and declared release invariants in machine-readable owners.",
-    "At evaluation checkpoint 0e5aaf9, the release gate rejected nine of ten authored corruptions and allowed M8, which strengthened a finite-evidence boundary into a false unbounded claim.",
-    "After that sentence became a declared boundary with a negative fixture, the same M8 corruption was rejected.",
-    "A green release gate means the declared checks passed; it does not mean the system understood arbitrary prose or proved that its invariant family is complete."
+  "historical_evidence_residuals": [
+    {
+      "id": "original_raw_mutation_logs_absent",
+      "kind": "evidence_boundary",
+      "reentry_condition": "Register authenticated original logs and bind their content identities before changing this boundary.",
+      "statement": "The original mutation run logs are not registered; historical timings remain a structured transcription.",
+      "status": "known_absence"
+    },
+    {
+      "exact_original_target_count": 3,
+      "id": "exact_original_mutation_targets_partial",
+      "kind": "evidence_boundary",
+      "reentry_condition": "Recover and authenticate an original target before marking another operator exact.",
+      "statement": "Only the explicitly named mutation operators preserve exact original targets; the remaining targets are deterministic reconstructions.",
+      "status": "known_absence"
+    },
+    {
+      "id": "historical_post_repair_full_rerun_absent",
+      "kind": "evaluation_boundary",
+      "reentry_condition": "Keep later deterministic reconstructions separate from the historical result unless the original experiment is rerun with equivalent targets and archived logs.",
+      "statement": "The historical study did not rerun the other nine deliberately altered copies after the false README edit was repaired.",
+      "status": "not_run"
+    }
   ],
   "known_limitations": [
     "The mutation author and checker author were the same person.",
@@ -335,15 +176,16 @@
   "public_claims": [
     {
       "evidence_refs": [
-        "docs/publication_evidence.json::evaluation.baseline",
-        "docs/publication_evidence.json::evaluation.protocol"
+        "docs/claims.json::release",
+        "docs/publication_contract.json::artifacts",
+        ".github/workflows/lean.yml"
       ],
       "explicitly_not_claimed": [
-        "The invariant family is complete.",
-        "The release gate understands arbitrary prose."
+        "The release workflow is mathematical proof authority.",
+        "Every repository file is governed by one universal owner."
       ],
-      "id": "declared_invariants_executable_at_corpus_scale",
-      "statement": "The declared publication invariants were executable on this corpus at the recorded evaluation checkpoint."
+      "id": "public_release_architecture_is_explicit",
+      "statement": "The repository names separate owners for formal proof, reviewed public meaning, paper identity, generated navigation, historical evidence, and release checks."
     },
     {
       "evidence_refs": [
@@ -351,42 +193,43 @@
         "docs/publication_evidence.json::evaluation.summary"
       ],
       "explicitly_not_claimed": [
+        "The historical outcomes are a reliability score or future detection probability.",
         "This is a controlled comparison with ordinary continuous integration.",
-        "The mutation author was independent of the checker author."
+        "The author of the deliberately altered copies was independent of the checker author."
       ],
-      "id": "nine_of_ten_authored_mutations_rejected",
-      "statement": "The release gate rejected nine of ten authored corruptions at the evaluation checkpoint."
+      "id": "selected_deliberate_errors_were_rejected",
+      "statement": "The retained historical exercise records that several deliberately altered copies were rejected by the release program."
     },
     {
       "evidence_refs": [
-        "docs/publication_evidence.json::evaluation.mutations.M8",
+        "docs/publication_evidence.json::evaluation.mutations",
         "docs/publication_evidence.json::post_repair"
       ],
       "explicitly_not_claimed": [
-        "The system can infer every semantically important sentence automatically."
+        "The release program can infer every important public claim automatically."
       ],
-      "id": "m8_exposed_enumeration_boundary",
-      "statement": "M8 passed because the strengthened sentence was outside the declared boundary set."
+      "id": "unrecorded_boundary_claim_passed",
+      "statement": "One false README edit passed because the public claim it changed had not yet been listed among the relationships the release program must preserve."
     },
     {
       "evidence_refs": [
         "docs/publication_evidence.json::post_repair"
       ],
       "explicitly_not_claimed": [
-        "The original ten-mutation study was rerun in full after the repair.",
+        "The original set of deliberate edits was rerun in full after the repair.",
         "A post-repair ten-of-ten historical result exists."
       ],
-      "id": "same_m8_corruption_now_rejected",
-      "statement": "After the boundary was declared, the intact baseline passed and the same M8 corruption was rejected."
+      "id": "same_false_edit_rejected_after_recording",
+      "statement": "After the public boundary was recorded, the intact text passed and the same false edit was rejected."
     }
   ],
   "publication_non_claims": [
-    "The release gate does not semantically understand arbitrary prose.",
-    "The invariant family and status taxonomy are not proved complete.",
+    "The release program does not understand arbitrary prose.",
+    "The selected comparisons and result labels are not proved complete.",
     "There is no controlled comparison with ordinary continuous integration or disciplined manual review.",
     "Reader-comprehension improvement was not measured.",
     "Byte budgets are not claimed to cause comprehension.",
-    "Transfer beyond this corpus has not been demonstrated.",
+    "Transfer beyond this repository has not been demonstrated.",
     "Porting and maintenance cost beyond recorded implementation size and runtime has not been measured.",
     "Lean acceptance alone does not prove that a formal statement matches the intended informal mathematics."
   ],
@@ -479,14 +322,14 @@
     "revision_embedding_boundary": "A tracked file cannot contain its own Git commit id without self-reference. Content freshness is enforced by the owner hashes below; agents query the checkout revision at runtime."
   },
   "schema": "erdos249257-publication-entry-packet/1",
-  "thesis": "A proof assistant checks the formal theorem, but people and AI agents read papers and summaries; this project records the strength of each public claim and checks declared properties of published retellings against that record before release.",
+  "thesis": "This public repository separates five parts: Lean source, a human-reviewed record of selected public claims, authored reader documents, generated navigation views, and a release workflow that checks the relationships people explicitly recorded.",
   "validation_commands": [
     "python3 scripts/build_publication_entry_packet.py --check",
     "python3 scripts/check_publication_contract.py",
     "python3 scripts/test_publication_artifact_contract.py",
     "python3 scripts/run_publication_mutations.py --verify-operators",
     "python3 scripts/check_release.py",
-    "python3 scripts/query_corpus.py --publication-evidence M8",
+    "python3 scripts/query_corpus.py --publication-evidence summary",
     "python3 scripts/run_publication_mutations.py --all --receipt <output.json>",
     "python3 scripts/check_release_ref.py --ref HEAD --receipt <output.json>",
     "python3 scripts/check_publication_contract.py --git-ref :",

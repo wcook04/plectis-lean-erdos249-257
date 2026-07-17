@@ -5,7 +5,9 @@
 
 **New here?** Read the
 [architecture and repository guide](ARCHITECTURE.md) for the purpose, file map,
-checks, and trust boundary. It assumes no Lean or project history.
+checks, and trust boundary, or use the
+[printable PDF](claim-faithful-publication-systems-paper.pdf). It assumes no
+Lean or project history.
 
 Lean 4 formal work on two unsolved irrationality problems.
 
@@ -36,15 +38,19 @@ kernel is proof authority.
 
 ## What the formal source establishes
 
+Labels are descriptions, not scores. **Verified finite instance** means
+Lean checked only the listed inputs; **conditional reduction** means the
+conclusion depends on a named open condition.
+
 | Status | Result |
 |---|---|
 | **formalised here** | For every integer `b ≥ 2`, the full-support series `∑ 1/(bⁿ - 1)` is irrational. Several named infinite-support families are also formalised; this does not cover every infinite support. |
 | **formalised here** | The base-2 Mersenne achievement set is compact, perfect, totally disconnected, nowhere dense, and has Lebesgue measure one. Membership is equivalent to greedy survival at every level. |
 | **unconditional progress** | If `S` is rational, its denominator is greater than `79 639 646 646 701 375 323 355 774 875 831 053` (about `7.96 × 10³⁴`). |
-| **exact equivalence / conditional producer** | `S` is irrational exactly when every positive binary tail difference is non-integral, equivalently when every fixed pair has a finite certificate. The unresolved producer is an unbounded or cofinal supply of these witnesses. |
-| **verified finite instance** | The kernel checks 28 explicit lcm-diagonal scales through `t = 64`. This bounded range does not supply the unbounded quantifier required above. |
+| **exact equivalence / open step** | `S` is irrational exactly when every positive binary tail difference is non-integral, equivalently when every fixed pair has a finite certificate. Finishing the argument would require certificates at arbitrarily large stages; that step is not proved. |
+| **verified finite instance** | Lean checks 28 explicitly listed cases through `t = 64`. This finite list does not prove successful cases beyond every fixed cutoff. |
 | **proved here** | For the #257 test value `1/2`, achievement-set membership is equivalent to infinitely many greedy skips and would produce an infinite support of rational sum, refuting universal #257. Under a last-skip hypothesis, the upper branch and the middle coordinate `-3` are impossible. |
-| **conditional reduction** | The two remaining middle coordinates `-2` and `-1` would also be eliminated if the producer carry dominated its complete future divisor-incidence tail. That inequality is not proved. |
+| **conditional reduction** | The two remaining cases, `-2` and `-1`, would also be ruled out if one current contribution were larger than the sum of all later possible contributions. That inequality is not proved. |
 
 ### Other exact mathematics in the corpus
 
@@ -178,8 +184,8 @@ python3 scripts/check_release.py
 python3 scripts/test_methodology_contract.py
 ```
 
-The quick check needs no Lean build. `lake exe cache get` only downloads pinned
-compiled dependencies; `lake build` is the fresh local kernel check.
+The quick check needs no Lean build; `lake exe cache get` only downloads pinned
+dependencies.
 
 The pinned public Lean source contains no `sorry`, `admit`, project-defined
 `axiom`, or `native_decide`; finite computations use kernel-checked `decide`.
@@ -193,10 +199,8 @@ import Erdos249257
 ```
 
 [`examples/Examples.lean`](examples/Examples.lean) is the minimal downstream
-consumer. It imports the package root and derives the base-3 instance of the
-full-support theorem. It also exercises a conditional rational shell-pressure
-interface while leaving its analytic hypothesis explicit; that example does
-not prove the still-open universal Erdős #257 statement.
+consumer. It derives one base-3 result and exercises a conditional interface
+without proving the still-open universal Erdős #257 statement.
 
 ## Citation and licence
 
@@ -207,6 +211,5 @@ Code, scripts, and documentation are Apache-2.0. The manuscript layer, including
 the paper source and rendered PDFs, is CC-BY-4.0. The complete licence map is in
 [`REUSE.toml`](REUSE.toml).
 
-Errors and corrections are welcome through the repository issue forms.
-[`CONTRIBUTING.md`](CONTRIBUTING.md) explains the release-pinning rule and local
-checks; [`SECURITY.md`](SECURITY.md) gives the private reporting route.
+Use the issue forms for corrections. [`CONTRIBUTING.md`](CONTRIBUTING.md)
+explains local checks; [`SECURITY.md`](SECURITY.md) gives the private route.

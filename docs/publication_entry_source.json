@@ -2,69 +2,71 @@
   "schema": "erdos249257-publication-entry-source/1",
   "packet_path": "docs/publication_entry_packet.json",
   "packet_max_bytes": 32768,
-  "thesis": "A proof assistant checks the formal theorem, but people and AI agents read papers and summaries; this project records the strength of each public claim and checks declared properties of published retellings against that record before release.",
+  "thesis": "This public repository separates five parts: Lean source, a human-reviewed record of selected public claims, authored reader documents, generated navigation views, and a release workflow that checks the relationships people explicitly recorded.",
   "five_sentence_summary": [
-    "Lean checks formal declarations and proofs, not every natural-language sentence that later describes them.",
-    "This repository records mathematical claim status, source coordinates, publication artifacts, and declared release invariants in machine-readable owners.",
-    "At evaluation checkpoint 0e5aaf9, the release gate rejected nine of ten authored corruptions and allowed M8, which strengthened a finite-evidence boundary into a false unbounded claim.",
-    "After that sentence became a declared boundary with a negative fixture, the same M8 corruption was rejected.",
-    "A green release gate means the declared checks passed; it does not mean the system understood arbitrary prose or proved that its invariant family is complete."
+    "Lean checks formal statements and proofs; it does not read the README or papers that explain them.",
+    "A mathematician reviews what selected formal results mean, how the public pages may describe them, and what remains open.",
+    "The reviewed result record is docs/claims.json, while docs/publication_contract.json separately inventories the papers and docs/publication_evidence.json separately retains historical checker evidence.",
+    "Generated views reorganise those records, and the release program plus GitHub workflow stop publication when a written relationship fails.",
+    "A passing release means the recorded comparisons succeeded; it does not mean software understood every public statement or proved that the list is complete."
   ],
   "publication_claims": [
     {
-      "id": "declared_invariants_executable_at_corpus_scale",
-      "statement": "The declared publication invariants were executable on this corpus at the recorded evaluation checkpoint.",
+      "id": "public_release_architecture_is_explicit",
+      "statement": "The repository names separate owners for formal proof, reviewed public meaning, paper identity, generated navigation, historical evidence, and release checks.",
       "evidence_refs": [
-        "docs/publication_evidence.json::evaluation.baseline",
-        "docs/publication_evidence.json::evaluation.protocol"
+        "docs/claims.json::release",
+        "docs/publication_contract.json::artifacts",
+        ".github/workflows/lean.yml"
       ],
       "explicitly_not_claimed": [
-        "The invariant family is complete.",
-        "The release gate understands arbitrary prose."
+        "The release workflow is mathematical proof authority.",
+        "Every repository file is governed by one universal owner."
       ]
     },
     {
-      "id": "nine_of_ten_authored_mutations_rejected",
-      "statement": "The release gate rejected nine of ten authored corruptions at the evaluation checkpoint.",
+      "id": "selected_deliberate_errors_were_rejected",
+      "statement": "The retained historical exercise records that several deliberately altered copies were rejected by the release program.",
       "evidence_refs": [
         "docs/publication_evidence.json::evaluation.mutations",
         "docs/publication_evidence.json::evaluation.summary"
       ],
       "explicitly_not_claimed": [
+        "The historical outcomes are a reliability score or future detection probability.",
         "This is a controlled comparison with ordinary continuous integration.",
-        "The mutation author was independent of the checker author."
+        "The author of the deliberately altered copies was independent of the checker author."
       ]
     },
     {
-      "id": "m8_exposed_enumeration_boundary",
-      "statement": "M8 passed because the strengthened sentence was outside the declared boundary set.",
+      "id": "unrecorded_boundary_claim_passed",
+      "statement": "One false README edit passed because the public claim it changed had not yet been listed among the relationships the release program must preserve.",
       "evidence_refs": [
-        "docs/publication_evidence.json::evaluation.mutations.M8",
+        "docs/publication_evidence.json::evaluation.mutations",
         "docs/publication_evidence.json::post_repair"
       ],
       "explicitly_not_claimed": [
-        "The system can infer every semantically important sentence automatically."
+        "The release program can infer every important public claim automatically."
       ]
     },
     {
-      "id": "same_m8_corruption_now_rejected",
-      "statement": "After the boundary was declared, the intact baseline passed and the same M8 corruption was rejected.",
+      "id": "same_false_edit_rejected_after_recording",
+      "statement": "After the public boundary was recorded, the intact text passed and the same false edit was rejected.",
       "evidence_refs": [
         "docs/publication_evidence.json::post_repair"
       ],
       "explicitly_not_claimed": [
-        "The original ten-mutation study was rerun in full after the repair.",
+        "The original set of deliberate edits was rerun in full after the repair.",
         "A post-repair ten-of-ten historical result exists."
       ]
     }
   ],
   "publication_non_claims": [
-    "The release gate does not semantically understand arbitrary prose.",
-    "The invariant family and status taxonomy are not proved complete.",
+    "The release program does not understand arbitrary prose.",
+    "The selected comparisons and result labels are not proved complete.",
     "There is no controlled comparison with ordinary continuous integration or disciplined manual review.",
     "Reader-comprehension improvement was not measured.",
     "Byte budgets are not claimed to cause comprehension.",
-    "Transfer beyond this corpus has not been demonstrated.",
+    "Transfer beyond this repository has not been demonstrated.",
     "Porting and maintenance cost beyond recorded implementation size and runtime has not been measured.",
     "Lean acceptance alone does not prove that a formal statement matches the intended informal mathematics."
   ],
@@ -92,10 +94,10 @@
     {
       "id": "publication_evidence",
       "owner": "docs/publication_evidence.json",
-      "role": "historical mutation protocol, matrix, limitations, and post-repair scope"
+      "role": "historical deliberately-altered-copy protocol, outcomes, limitations, and post-repair scope"
     },
     {
-      "id": "mutation_reconstruction",
+      "id": "test_edit_reconstruction",
       "owner": "experiments/publication_mutations.json and scripts/run_publication_mutations.py",
       "role": "separately versioned deterministic reconstruction, not original raw logs"
     },
@@ -127,9 +129,9 @@
       "relation": "supplies digest-bound systems evidence"
     },
     {
-      "from": "mutation_reconstruction",
+      "from": "test_edit_reconstruction",
       "to": "publication_evidence",
-      "relation": "reconstructs mutation classes under an explicit provenance ceiling"
+      "relation": "reconstructs deliberate edit types under an explicit evidence limit"
     },
     {
       "from": "claim_registry",

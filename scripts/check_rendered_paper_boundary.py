@@ -39,6 +39,9 @@ PAPERS = (
         ROOT / "erdos249-transport-curvature-companion-note.pdf",
     ),
 )
+ARCHITECTURE_PAPERS = (
+    ROOT / "claim-faithful-publication-systems-paper.pdf",
+)
 ALIASES = ROOT / "paper" / "module-aliases.json"
 FIRST_MINUTE_CONTRACT = {
     "erdos249-257-main-paper.pdf": {
@@ -63,6 +66,18 @@ FIRST_MINUTE_CONTRACT = {
             "phase-separation characterisation",
             "local no-go boundaries",
             "remains open because no cofinal",
+        ),
+    },
+    "claim-faithful-publication-systems-paper.pdf": {
+        (1, 2): (
+            "this document explains how one public mathematics repository is organised",
+            "both problems remain open",
+            "the repository addresses this gap with five visible parts",
+            "the architecture in one picture",
+            "docs/claims.json",
+            "scripts/check_release.py",
+            ".github/workflows/lean.yml",
+            "lean checks the formal proofs",
         ),
     },
 }
@@ -255,6 +270,26 @@ def rendered_errors(
     return [f"{pdf.relative_to(ROOT)}: {error}" for error in sorted(set(errors))]
 
 
+def architecture_rendered_errors(pdf: Path, text: str) -> list[str]:
+    """Reject a rebuilt architecture paper that regresses to private scorekeeping."""
+    compact = semantic_text(text)
+    errors: list[str] = []
+    banned = (
+        re.compile(r"\bm(?:10|[1-9])\b"),
+        re.compile(r"\b9/10\b"),
+        re.compile(r"\b5,207\b"),
+        re.compile(r"\bunbounded quantifier\b"),
+    )
+    for pattern in banned:
+        if pattern.search(compact):
+            errors.append(
+                f"prints private or score-like shorthand {pattern.pattern!r}"
+            )
+    if len(re.findall(r"\bsentence\b", compact)) > 4:
+        errors.append("has regressed to a sentence-centred case study")
+    return [f"{pdf.relative_to(ROOT)}: {error}" for error in errors]
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -281,6 +316,17 @@ def main() -> int:
                     errors.append(str(error))
                     continue
                 errors.extend(rendered_errors(pdf, text, aliases))
+                errors.extend(first_minute_errors(pdf, pdftotext))
+            for pdf in ARCHITECTURE_PAPERS:
+                if not pdf.is_file():
+                    errors.append(f"{pdf.relative_to(ROOT)}: rendered paper is missing")
+                    continue
+                try:
+                    text = rendered_text(pdf, pdftotext)
+                except RuntimeError as error:
+                    errors.append(str(error))
+                    continue
+                errors.extend(architecture_rendered_errors(pdf, text))
                 errors.extend(first_minute_errors(pdf, pdftotext))
 
     if errors:

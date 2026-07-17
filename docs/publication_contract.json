@@ -43,20 +43,22 @@
       ]
     },
     {
-      "id": "systems_case_study",
-      "title": "Claim-Faithful Publication of a Formalised Mathematics Corpus",
-      "artifact_class": "systems_case_study",
+      "id": "repository_architecture_guide",
+      "title": "How a Lean Repository Turns Formal Proofs into a Checked Public Release",
+      "artifact_class": "repository_architecture_guide",
       "source_path": "paper/claim-faithful-publication-systems-paper.tex",
-      "source_content_digest": "sha256:f7ba2d8e600c8a00305c945530fbbb646a618b8ac27cb998bf23367d00900156",
+      "source_content_digest": "sha256:863eaa6cc6497e7bd110bb7242f3234ee7bb5e025b1e3e151551c6c7b398e97b",
       "rendered_path": "claim-faithful-publication-systems-paper.pdf",
-      "rendered_content_digest": "sha256:cd03b30978fa5d5533cdcc92429159d08bd6f530e9998fdefc6462ab962654c6",
-      "authority_posture": "authored_systems_evidence_not_Lean_proof_authority",
-      "claim_scope": "A systems case study about publication controls, declared invariants, mutation evidence, and their limits. It makes no mathematical claim beyond the registered corpus boundaries.",
-      "architecture_ref": "docs/claims.json::machine_readable_paper.publication_assembly.publication_architecture.systems_case_studies",
-      "entry_route_id": "understand_publication_system",
+      "rendered_content_digest": "sha256:1f5755f98ea6c1b87ed645362df6f53711982f87fcc6d13743e8c1a98390bd49",
+      "authority_posture": "authored_repository_architecture_not_Lean_proof_authority",
+      "claim_scope": "A first-principles architecture and access guide to the public Lean source, reviewed claim record, authored documents, generated views, release flow, CI jobs, and human trust boundary. A later historical example illustrates the limit of explicitly recorded checks; the guide adds no mathematical result.",
+      "architecture_ref": "docs/claims.json::machine_readable_paper.publication_assembly.publication_architecture.architecture_guides",
+      "entry_route_id": "understand_repository_architecture",
       "evidence_receipt_path": "docs/publication_evidence.json",
-      "evidence_receipt_digest": "sha256:69df3b371c23a365b2870ae905b1b3fe65fe4dcdb6c8cc31ee3d7d1f128ccc91",
+      "evidence_receipt_digest": "sha256:8dad402702a9650279d0526dc648633937783fb7226d81b1e8940c5d93d8b32d",
       "validation": [
+        "python3 scripts/check_architecture_guide.py",
+        "python3 scripts/check_rendered_paper_boundary.py",
         "python3 scripts/check_publication_contract.py",
         "python3 scripts/run_publication_mutations.py --verify-operators",
         "python3 scripts/check_release.py"
@@ -67,7 +69,7 @@
         "authored_mutation_count": 10,
         "rejected_mutation_count": 9,
         "escaped_mutation_id": "M8",
-        "post_repair_validation": "The intact baseline and the M8 corruption were rechecked after the missing boundary was declared.",
+        "post_repair_validation": "The intact baseline and the same false README edit were rechecked after the missing boundary was declared.",
         "post_repair_full_mutation_rerun": false,
         "forbidden_inference": "Do not report a post-repair ten-of-ten result unless all ten mutations are rerun against the extended invariant set."
       }
@@ -75,25 +77,27 @@
   ],
   "entrypoints": [
     {
-      "id": "understand_publication_system",
-      "title": "Publication contract, release gate, and mutation evidence",
-      "intent": "Inspect how shipped papers, public claim strength, release checks, negative fixtures, and the M8 limitation are represented and validated without treating systems prose as mathematical proof authority.",
+      "id": "understand_repository_architecture",
+      "title": "Repository architecture, access paths, release flow, and trust boundary",
+      "intent": "Understand how Lean source, reviewed public claims, authored documents, generated views, release checks, and CI connect before drilling into the separate historical checker evidence.",
       "discovery_terms": [
-        "claim faithful publication",
-        "publication contract case study",
-        "M8 mutation",
-        "reproduce the publication mutation study",
+        "how does this repository work",
+        "repository architecture guide",
+        "Lean proof and public claim boundary",
+        "release flow and CI",
         "how are shipped papers registered"
       ],
       "read": [
+        "ARCHITECTURE.md",
+        "paper/claim-faithful-publication-systems-paper.tex",
         "docs/publication_contract.json",
         "docs/publication_evidence.json",
         "experiments/publication_mutations.json",
         "docs/orientation.json"
       ],
       "query_steps": [
-        "python3 scripts/query_corpus.py --publication-artifact systems_case_study",
-        "python3 scripts/query_corpus.py --publication-evidence M8",
+        "python3 scripts/query_corpus.py --publication-artifact repository_architecture_guide",
+        "python3 scripts/query_corpus.py --publication-evidence summary",
         "python3 scripts/query_corpus.py --artifact claim-faithful-publication-systems-paper.pdf"
       ],
       "authority_owners": [
@@ -115,7 +119,7 @@
   "reproducibility": {
     "publication_contract_check": "python3 scripts/check_publication_contract.py",
     "publication_contract_fixture_test": "python3 scripts/test_publication_artifact_contract.py",
-    "mutation_evidence_query": "python3 scripts/query_corpus.py --publication-evidence M8",
+    "mutation_evidence_query": "python3 scripts/query_corpus.py --publication-evidence summary",
     "mutation_operator_verification": "python3 scripts/run_publication_mutations.py --verify-operators",
     "mutation_reconstruction_run": "python3 scripts/run_publication_mutations.py --all --receipt <output.json>",
     "clean_snapshot_release_gate": "python3 scripts/check_release_ref.py --ref HEAD --receipt <output.json>",

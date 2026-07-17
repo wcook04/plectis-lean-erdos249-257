@@ -1,12 +1,18 @@
 <!-- SPDX-FileCopyrightText: 2026 Will Cook -->
 <!-- SPDX-License-Identifier: Apache-2.0 -->
 
-# Exposition
+# Papers
 
-A guide to this repository for mathematicians who do not read Lean.
+For the repository layout, sources of truth, build path, and release
+infrastructure, start with the plain-language
+[`ARCHITECTURE.md`](../ARCHITECTURE.md) at the repository root. The files in
+this directory are authored papers with narrower jobs.
 
-`erdos249-257-main-paper.tex` states, in ordinary notation, what the Lean development
-proves, cites, and leaves open. Every formal statement links to the exact source
+`erdos249-257-main-paper.tex` is the mathematical gateway for readers who do
+not read Lean. It states, in ordinary notation, what the Lean development
+proves, cites, and leaves open.
+
+Every formal statement links to the exact source
 line on GitHub, pinned to the formal-source checkpoint named in
 `docs/claims.json`, so a reader can go from a sentence of prose to the checked
 proof in one click. The visible link text is theorem-specific: important
@@ -24,6 +30,13 @@ transport/curvature frontier. It separates unconditional affine-channel
 cancellation, sharp finite consumers, and the fixed-precision no-go theorem
 from the explicitly open unbounded-supply and first-harmonic hypotheses.
 
+`claim-faithful-publication-systems-paper.tex` is the printable architecture
+and access guide. It names the real source files, reviewed records, generated
+views, release commands, CI jobs, and human trust boundary, then follows one
+claim from Lean proof to public page. The historical checker example appears
+only after the architecture and illustrates its coverage limit; it is not a
+score and adds no mathematical result.
+
 ## Build
 
 ```sh
@@ -37,9 +50,10 @@ pdflatex erdos249-257-main-paper.tex && pdflatex erdos249-257-main-paper.tex
 make
 ```
 
-The outputs are `erdos249-257-main-paper.pdf` and
-`erdos249-transport-curvature-companion-note.pdf`; `make` also synchronises
-the tracked reader-facing copies at repository root.
+The outputs are `erdos249-257-main-paper.pdf`,
+`erdos249-transport-curvature-companion-note.pdf`, and
+`claim-faithful-publication-systems-paper.pdf`; `make` also synchronises the
+tracked reader-facing copies at repository root.
 
 ## Contents
 

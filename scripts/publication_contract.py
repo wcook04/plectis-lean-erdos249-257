@@ -231,10 +231,15 @@ def manuscript_source_license_errors(path: str, text: str) -> list[str]:
 
 def normalize_latex_evidence(text: str) -> str:
     """Flatten stable prose anchors without pretending to parse all of TeX."""
-    normalized = text.replace("{,}", ",").replace("~", " ").replace("$", "")
+    normalized = (
+        text.replace("{,}", ",")
+        .replace("~", " ")
+        .replace("$", "")
+        .replace(r"\_", "_")
+    )
     for _ in range(3):
         normalized = re.sub(
-            r"\\(?:emph|texttt)\{([^{}]*)\}",
+            r"\\(?:emph|textbf|texttt)\{([^{}]*)\}",
             r"\1",
             normalized,
         )
@@ -246,42 +251,41 @@ def validate_systems_evidence_source(
     artifact: dict[str, Any],
     source_text: str,
 ) -> list[str]:
-    """Bind structured experiment metadata to load-bearing manuscript prose."""
+    """Keep the public paper architecture-first while linking its evidence owner."""
     errors: list[str] = []
-    evidence = artifact["evidence_boundary"]
     normalized = normalize_latex_evidence(source_text)
-    checkpoint_prefix = evidence["evaluation_checkpoint"][:7]
-    release_check_count = evidence["release_check_count_at_evaluation"]
-    escaped_mutation = evidence["escaped_mutation_id"].lower()
-
     required_patterns = {
-        "evaluation checkpoint": (
-            rf"evaluation checkpoint .{{0,80}}{re.escape(checkpoint_prefix)}"
+        "plain architecture title": (
+            r"how a lean repository turns formal proofs into a checked public release"
         ),
-        "release-check baseline": (
-            rf"{release_check_count:,} release checks pass"
+        "formal source owner": r"erdos249257\.lean",
+        "reviewed claim owner": r"docs/claims\.json",
+        "paper inventory owner": r"docs/publication_contract\.json",
+        "historical evidence owner": r"docs/publication_evidence\.json",
+        "release program": r"scripts/check_release\.py",
+        "continuous-integration owner": r"\.github/workflows/lean\.yml",
+        "human judgement boundary": (
+            r"does not technically force a second independent mathematician"
         ),
-        "observed mutation ratio": (
-            r"reports .{0,20}9/10 for the ten authored mutations"
-        ),
-        "escaped mutation identity": (
-            rf"mutation {re.escape(escaped_mutation)} survived"
-        ),
-        "post-repair baseline scope": (
-            r"repaired checker passes the intact baseline and rejects the same corruption"
-        ),
-        "post-repair rerun limitation": (
-            r"we did not rerun the other nine mutations against the extended invariant family"
-        ),
-        "post-repair ratio limitation": (
-            r"no post-repair detection ratio is reported"
-        ),
+        "coverage boundary": r"coverage boundary, not a reliability score",
+        "post-repair example": r"intact text passed and the same false edit failed",
     }
     for label, pattern in required_patterns.items():
         if not re.search(pattern, normalized):
             errors.append(
                 f"systems artifact {artifact['id']!r} source lost its "
                 f"{label} evidence anchor"
+            )
+    for pattern in (
+        r"\bm(?:10|[1-9])\b",
+        r"\b9/10\b",
+        r"\b5,207\b",
+        r"\bunbounded quantifier\b",
+    ):
+        if re.search(pattern, normalized):
+            errors.append(
+                f"architecture artifact {artifact['id']!r} exposes private or "
+                f"score-like shorthand {pattern!r}"
             )
     return errors
 
@@ -455,40 +459,6 @@ def validate_mutation_evidence_receipt(
                 "publication evidence corpus snapshot drifted from the "
                 "evaluation-checkpoint claims and declaration atlas"
             )
-        try:
-            normalized_source = normalize_latex_evidence(
-                reader.read_text(artifact["source_path"])
-            )
-        except (FileNotFoundError, UnicodeError):
-            normalized_source = ""
-        snapshot_patterns = {
-            "module/declaration census": (
-                rf"{derived_snapshot['module_count']} lean modules and "
-                rf"{derived_snapshot['declaration_count']:,} declarations"
-            ),
-            "theorem-like/certificate census": (
-                rf"{derived_snapshot['theorem_like_count']:,} of the declarations "
-                rf"are theorem-like, and "
-                rf"{derived_snapshot['generated_certificate_declaration_count']:,} "
-                r"of those are generated"
-            ),
-            "claim/family census": (
-                rf"{derived_snapshot['curated_claim_count']} public claims in "
-                rf"{derived_snapshot['contribution_family_count']} contribution families"
-            ),
-            "remaining-open census": (
-                r"(?:3|three) typed remaining-open propositions"
-            ),
-            "status-taxonomy census": (
-                r"(?:7|seven) (?:logical )?statuses"
-            ),
-        }
-        for label, pattern in snapshot_patterns.items():
-            if not re.search(pattern, normalized_source):
-                errors.append(
-                    f"systems artifact {artifact['id']!r} source lost its "
-                    f"{label} checkpoint anchor"
-                )
 
     protocol = evaluation.get("protocol", {})
     expected_protocol = {
@@ -615,7 +585,7 @@ def build_publication_entry_packet(reader: RepositoryReader) -> dict[str, Any]:
     systems_artifact = next(
         row
         for row in contract["artifacts"]
-        if row["id"] == "systems_case_study"
+        if row["id"] == "repository_architecture_guide"
     )
     release = claims["release"]
     evaluation = evidence["evaluation"]
@@ -682,7 +652,7 @@ def build_publication_entry_packet(reader: RepositoryReader) -> dict[str, Any]:
                     "exact original targets; the remaining targets are "
                     "deterministic reconstructions."
                 ),
-                "exact_original_target_ids": exact_target_ids,
+                "exact_original_target_count": len(exact_target_ids),
                 "reentry_condition": (
                     "Recover and authenticate an original target before "
                     "marking another operator exact."
@@ -697,7 +667,8 @@ def build_publication_entry_packet(reader: RepositoryReader) -> dict[str, Any]:
                 "status": "not_run",
                 "statement": (
                     "The historical study did not rerun the other nine "
-                    "mutations after the M8 repair."
+                    "deliberately altered copies after the false README "
+                    "edit was repaired."
                 ),
                 "reentry_condition": (
                     "Keep later deterministic reconstructions separate from "
@@ -720,6 +691,23 @@ def build_publication_entry_packet(reader: RepositoryReader) -> dict[str, Any]:
             "navigation_projection_not_Lean_proof_authority_and_not_"
             "historical_evidence_authority"
         ),
+        "architecture_summary": {
+            "purpose": source["thesis"],
+            "five_parts": [
+                "Lean source",
+                "human-reviewed public claims",
+                "authored reader documents",
+                "generated navigation views",
+                "release checks and GitHub continuous integration",
+            ],
+            "decision_boundary": (
+                "Lean checks formal proofs; people review public meaning; "
+                "release software preserves only relationships that people "
+                "explicitly recorded."
+            ),
+            "human_start": "ARCHITECTURE.md",
+            "printable_start": systems_artifact["rendered_path"],
+        },
         "thesis": source["thesis"],
         "five_sentence_summary": source["five_sentence_summary"],
         "revision_and_identity": {
@@ -745,30 +733,24 @@ def build_publication_entry_packet(reader: RepositoryReader) -> dict[str, Any]:
             "nodes": source["authority_nodes"],
             "edges": source["authority_edges"],
         },
-        "evaluation": {
-            "historical_checkpoint_snapshot": evaluation["corpus_snapshot"],
-            "current_owner_snapshot": current_snapshot,
-            "same_snapshot": (
-                evaluation["corpus_snapshot"]["curated_claim_count"]
-                == current_snapshot["curated_claim_count"]
-                and evaluation["corpus_snapshot"]["contribution_family_count"]
-                == current_snapshot["contribution_family_count"]
-                and evaluation["corpus_snapshot"]["status_count"]
-                == current_snapshot["status_count"]
-                and evaluation["corpus_snapshot"][
-                    "remaining_open_proposition_count"
-                ]
-                == current_snapshot["remaining_open_proposition_count"]
+        "historical_checker_example": {
+            "purpose": (
+                "Illustrate the boundary of explicitly recorded checks; "
+                "this is not an architecture component or reliability score."
             ),
-            "baseline": evaluation["baseline"],
-            "protocol": evaluation["protocol"],
-            "invariant_families": evaluation["invariant_families"],
-            "mutations": evaluation["mutations"],
-            "summary": evaluation["summary"],
-            "post_repair": evidence["post_repair"],
+            "plain_result": (
+                "One false README edit passed because its public claim had "
+                "not been recorded. After the claim was recorded, the intact "
+                "text passed and the same false edit failed."
+            ),
+            "evidence_owner": EVIDENCE_PATH,
+            "summary_query": (
+                "python3 scripts/query_corpus.py --publication-evidence summary"
+            ),
+            "current_owner_snapshot": current_snapshot,
         },
         "known_limitations": evidence["threats_to_validity"],
-        "active_evidence_residuals": active_residuals,
+        "historical_evidence_residuals": active_residuals,
         "artifact_owners": {
             "publication_artifact_id": systems_artifact["id"],
             "source_path": systems_artifact["source_path"],
@@ -1047,10 +1029,10 @@ def validate_publication_contract(
     if by_class.get("mathematical_companion", set()) != retained_sources:
         errors.append("publication mathematical companions drifted from docs/claims.json")
     systems_sources = {
-        row["source"] for row in architecture.get("systems_case_studies", [])
+        row["source"] for row in architecture.get("architecture_guides", [])
     }
-    if by_class.get("systems_case_study", set()) != systems_sources:
-        errors.append("publication systems case studies drifted from docs/claims.json")
+    if by_class.get("repository_architecture_guide", set()) != systems_sources:
+        errors.append("publication architecture guides drifted from docs/claims.json")
 
     rejected_ids = set(contract.get("rejected_artifact_ids", []))
     registered_ids = set(artifact_ids)
@@ -1069,7 +1051,9 @@ def validate_publication_contract(
         )
 
     systems_artifacts = [
-        row for row in artifacts if row.get("artifact_class") == "systems_case_study"
+        row
+        for row in artifacts
+        if row.get("artifact_class") == "repository_architecture_guide"
     ]
     for artifact in systems_artifacts:
         evidence = artifact.get("evidence_boundary")
@@ -1154,7 +1138,9 @@ def mutation_fixture_failures(reader: RepositoryReader) -> list[str]:
 
     missing = copy.deepcopy(contract)
     missing["artifacts"] = [
-        row for row in missing["artifacts"] if row["id"] != "systems_case_study"
+        row
+        for row in missing["artifacts"]
+        if row["id"] != "repository_architecture_guide"
     ]
     if not validate_publication_contract(reader, contract_override=missing):
         failures.append("unregistered_built_systems_paper")
@@ -1213,13 +1199,15 @@ def mutation_fixture_failures(reader: RepositoryReader) -> list[str]:
             failures.append("manuscript_source_relicensed_as_software")
 
     rejected = copy.deepcopy(contract)
-    rejected["rejected_artifact_ids"].append("systems_case_study")
+    rejected["rejected_artifact_ids"].append("repository_architecture_guide")
     if not validate_publication_contract(reader, contract_override=rejected):
         failures.append("registered_and_rejected_artifact")
 
     inflated = copy.deepcopy(contract)
     systems = next(
-        row for row in inflated["artifacts"] if row["id"] == "systems_case_study"
+        row
+        for row in inflated["artifacts"]
+        if row["id"] == "repository_architecture_guide"
     )
     systems["evidence_boundary"]["post_repair_full_mutation_rerun"] = True
     if not validate_publication_contract(reader, contract_override=inflated):
@@ -1229,7 +1217,7 @@ def mutation_fixture_failures(reader: RepositoryReader) -> list[str]:
     systems = next(
         row
         for row in checkpoint_drift["artifacts"]
-        if row["id"] == "systems_case_study"
+        if row["id"] == "repository_architecture_guide"
     )
     systems["evidence_boundary"]["evaluation_checkpoint"] = (
         "a16aa24af5236b6508a34b8a4c4b41fdcf620a98"
@@ -1241,18 +1229,15 @@ def mutation_fixture_failures(reader: RepositoryReader) -> list[str]:
     systems = next(
         row
         for row in source_inflation["artifacts"]
-        if row["id"] == "systems_case_study"
+        if row["id"] == "repository_architecture_guide"
     )
     source_path = systems["source_path"]
     original_source = reader.read_text(source_path)
     limited_sentence = (
-        "We did\nnot rerun the other nine mutations against the extended invariant family, "
-        "so\nno post-repair detection ratio is reported; the claim is only that this\n"
-        "corruption is now caught."
+        "This example demonstrates a coverage boundary, not a reliability score."
     )
     inflated_sentence = (
-        "We reran all ten mutations against the extended invariant family, so a\n"
-        "post-repair ten-of-ten detection ratio is reported."
+        "This example establishes a general reliability score for future errors."
     )
     if limited_sentence not in original_source:
         failures.append("post_repair_source_fixture_anchor_missing")
@@ -1351,7 +1336,7 @@ def mutation_fixture_failures(reader: RepositoryReader) -> list[str]:
         failures.append("publication_entry_owner_hash_drift")
 
     residual_loss = copy.deepcopy(packet)
-    residual_loss["active_evidence_residuals"] = []
+    residual_loss["historical_evidence_residuals"] = []
     if not validate_publication_entry_packet(reader, packet_override=residual_loss):
         failures.append("publication_entry_residual_loss")
 

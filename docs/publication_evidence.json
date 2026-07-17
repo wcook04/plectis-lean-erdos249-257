@@ -3,11 +3,11 @@
   "record_id": "claim_faithful_publication_mutation_study_v1",
   "record_kind": "structured_transcription_of_reported_historical_runs",
   "authority_posture": "historical_systems_evidence_not_Lean_proof_authority_and_not_a_fresh_rerun",
-  "publication_artifact_id": "systems_case_study",
+  "publication_artifact_id": "repository_architecture_guide",
   "source": {
     "manuscript": "paper/claim-faithful-publication-systems-paper.tex",
-    "table_label": "tab:matrix",
-    "evaluation_section_label": "sec:eval",
+    "architecture_section_label": "sec:failure",
+    "reproducibility_appendix_label": "app:repro",
     "contract": "docs/publication_contract.json"
   },
   "provenance": {

@@ -82,7 +82,7 @@ single file that is authoritative for everything.
 | What evidence and review are required when a claim changes? | [`docs/methodology.json`](docs/methodology.json) | Change classes and review requirements |
 | What does a reader see? | [`README.md`](README.md), [`SCOPE.md`](SCOPE.md), and authored papers such as [`paper/erdos249-257-main-paper.tex`](paper/erdos249-257-main-paper.tex) | Human explanation; these files must stay within the claim record |
 | Which manuscripts are shipped? | [`docs/publication_contract.json`](docs/publication_contract.json) | Paper inventory, file identities, entry routes, and evidence boundaries |
-| What evidence supports the release-checking case study? | [`docs/publication_evidence.json`](docs/publication_evidence.json) | The recorded experiment and its limitations |
+| What evidence supports the historical checker example? | [`docs/publication_evidence.json`](docs/publication_evidence.json) | The recorded exercise and its limitations |
 | How are releases blocked? | [`scripts/check_release.py`](scripts/check_release.py) and [`.github/workflows/lean.yml`](.github/workflows/lean.yml) | Local release checks and continuous integration |
 
 Some other files are generated views. For example,
@@ -104,7 +104,7 @@ examples/                        a small downstream Lean user of the library
 docs/claims.json                 reviewed record of public mathematical claims
 docs/methodology.json            rules for changing those claims
 docs/publication_contract.json   inventory of shipped papers
-docs/publication_evidence.json   evidence and limits for the systems case study
+docs/publication_evidence.json   evidence and limits for a historical checker exercise
 docs/ORIENTATION.md              generated human reading map
 docs/SOURCE_MAP.md               routes from mathematical questions to Lean files
 
@@ -233,11 +233,12 @@ Human mathematical review therefore remains part of the architecture. The
 software makes reviewed decisions repeatable; it does not make those decisions
 on its own.
 
-The separate
+The printable
 [`claim-faithful-publication-systems-paper.pdf`](claim-faithful-publication-systems-paper.pdf)
-studies this release-checking boundary by deliberately changing copies of the
-repository. That document is an evaluation of one subsystem. It is not needed
-to understand the repository architecture.
+expands this guide into a paper: it shows the real file map, release flow,
+trust boundary, and one claim from Lean source to public page. A short
+historical checker example appears only after that architecture and illustrates
+the limit of explicitly recorded checks.
 
 ## Where to start
 
@@ -251,9 +252,9 @@ to understand the repository architecture.
 - **You want to change the repository:** read [`AGENTS.md`](AGENTS.md) and
   [`CONTRIBUTING.md`](CONTRIBUTING.md), then run the checks for the files you
   touched.
-- **You want to reproduce the release-checking evaluation:** read
+- **You want to inspect the historical release-checking exercise:** read
   [`docs/publication_evidence.json`](docs/publication_evidence.json) and the
-  systems case study.
+  reproducibility appendix of the architecture paper.
 
 The shortest accurate summary is this: Lean checks the formal proofs, people
 review what the project says about them, and the release machinery keeps those
