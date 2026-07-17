@@ -303,50 +303,70 @@ convolution by the constant $\mathbf 1=\zeta$); Apostol supplies the classical
 arithmetic-function and Dirichlet-convolution background~\cite{apostol}; Merca
 introduced a modern Lambert-series factorisation theorem~\cite{merca2017}, and
 Merca--Schmidt give a synthesis/unification treatment~\cite{mercaschmidt}.
-Walking the ladder by convolution gives five values with
-rational, irrational, open, or transcendental status.
+Three inputs form the convolution chain
+\[
+ \alpha \xrightarrow{*\mathbf 1} \ph
+ \xrightarrow{*\mathbf 1} \mathrm{Id},
+ \qquad \alpha=\ph*\mu,
+\]
+whereas \(\mu\) and \(\mathbf 1\) are comparison inputs.  The corresponding
+values have the following statuses.
 
 \begin{center}
 \begin{tabular}{@{}llll@{}}
 \toprule
 input $f$ & value & mathematical status & treatment here\\
 \midrule
-$\mu$ & $L(\mu)=1/2$ & rational & formalised\\
-$\ph$ & $L(\ph)=2$ & rational & formalised\\
-$\mathbf 1$ & $L(\mathbf 1)=E$ & irrational & formalised\\
+\multicolumn{4}{@{}l}{\emph{Convolution chain}}\\
 $\alpha=\ph*\mu$ & $L(\alpha)=S$ & open (\#249) & identities and bounds formalised\\
+$\ph$ & $L(\ph)=2$ & rational & formalised\\
 $\mathrm{Id}$ & $L(\mathrm{Id})=\sum\sigma(m)/2^m$ & transcendental & cited~\cite{nesterenko}\\
+\addlinespace
+\multicolumn{4}{@{}l}{\emph{Comparison inputs}}\\
+$\mu$ & $L(\mu)=1/2$ & rational & formalised\\
+$\mathbf 1$ & $L(\mathbf 1)=E$ & irrational & formalised\\
 \bottomrule
 \end{tabular}
 \end{center}
 
-The weight $\alpha=\ph*\mu$ is the primitive-conductor count:
-$\alpha(p)=p-2$ on primes, $\alpha\ge0$, and $\alpha*\zeta=\ph$. One
-convolution by $\zeta$ separates the open
-constant $S$ from the rational $2$, and one more separates rational from
-transcendental ($\ph*\zeta=\mathrm{Id}$, $\mathrm{Id}*\zeta=\sigma$). So $S$ is
-the rung one convolution from the machine-checked irrational $E$: the same series
-$\sum(\cdot)/(2^d-1)$, with the constant weight $1$ replaced by the nonnegative
-weight $\alpha$.
+The weight \(\alpha\) is the primitive-conductor count:
+\(\alpha(p)=p-2\) on primes and \(\alpha\ge0\).  The chain records
+\(\alpha*\mathbf 1=\ph\) and
+\(\ph*\mathbf 1=\mathrm{Id}\).  Its associated values are open at
+\(L(\alpha)=S\), rational at \(L(\ph)=2\), and cited transcendental at
+\(L(\mathrm{Id})=\sum_m\sigma(m)/2^m\).  The rows \(L(\mu)=1/2\) and
+\(L(\mathbf 1)=E\) are not further steps in this chain.  In particular,
+\(S\) and \(E\) have the same Mersenne-denominator form, with weights
+\(\alpha\) and \(\mathbf 1\), but passing between those weights is not a
+convolution step.
 
-\begin{proposition}[the rational rungs]
-$\sum_{d\ge1}\mu(d)/(2^d-1)=1/2$ and $\sum_{d\ge1}\ph(d)/(2^d-1)=2$, exactly.
+\begin{proposition}[M\"obius rational rung]
+\[
+ \sum_{d\ge1}\frac{\mu(d)}{2^d-1}=\frac12.
+\]
 \end{proposition}
 \noindent Formalised as the
-\lword{MersenneLambertLadder.lean}{587}{tsum_moebius_div_two_pow_sub_one_eq_half}{M\"obius rung}
-and the
+\lword{MersenneLambertLadder.lean}{587}{tsum_moebius_div_two_pow_sub_one_eq_half}{M\"obius rung}.
+
+\begin{proposition}[totient rational rung]
+\[
+ \sum_{d\ge1}\frac{\ph(d)}{2^d-1}=2.
+\]
+\end{proposition}
+\noindent Formalised as the
 \lword{MersenneLambertLadder.lean}{575}{tsum_totient_div_two_pow_sub_one_eq_two}{totient rung}.
 
-\begin{proposition}[the positive lift, $L(\alpha)=S$]\label{res:lift}
+\begin{proposition}[positive lift]\label{res:lift}
 With the primitive-conductor weight $\alpha=\ph*\mu$,
 \[
 \sum_{d\ge1}\frac{\alpha(d)}{2^d-1}\;=\;\sum_{n\ge1}\frac{\ph(n)}{2^n}\;=\;S.
 \]
 \end{proposition}
-\noindent Formalised as the
+\noindent The first equality is formalised as the
 \lword{CertificateKernel.lean}{18117}{tsum_primWeight_div_two_pow_sub_one_eq_totient_series}{positive-lift identity}.
-This places $S$ in the same $\sum(\cdot)/(2^d-1)$ family as $E$, with a
-nonnegative weight.
+The second is the definition of \(S\).  The proposition places \(S\) in the
+same \(\sum(\cdot)/(2^d-1)\) family as \(E\), with the nonnegative weight
+\(\alpha\).
 
 \paragraph{Probabilistic reading.}
 If \(X,Y\) are independent fair-coin waiting times,
@@ -362,13 +382,13 @@ Section~\ref{sec:additional-lambert}.
 
 \paragraph{Section consequence and residual.}
 The exact contribution of this section is the coordinate change
-\(L(\alpha)=S\), together with the two rational rungs above it in the same
-Lambert family.  These identities explain why the Mersenne--Lambert
-coordinates are natural for both problems, but they do not imply that \(S\)
-is irrational.  For \#249 the remaining issue is still the unbounded
-certificate supply isolated in Section~\ref{sec:249}; for \#257 the ladder
-supplies context rather than either the universal theorem or a rational
-counterexample.
+\(L(\alpha)=S\), together with the two separate rational-rung propositions
+above.  The convolution chain relates \(S\) to rational and transcendental
+neighbouring values, while the comparison inputs place \(1/2\) and \(E\) in
+the same transform.  No status transfers from one input to another.  For
+\#249 the remaining issue is still the unbounded certificate supply isolated
+in Section~\ref{sec:249}; for \#257 the ladder supplies context rather than
+either the universal theorem or a rational counterexample.
 
 \section{Erd\H{o}s--Borwein-type irrationality (the \#257 direction)}\label{sec:eb}
 

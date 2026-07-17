@@ -56,7 +56,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "Erd\\H{o}s \\#249",
-    "line": 2805
+    "line": 2825
    }
   },
   {
@@ -67,7 +67,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "unbounded certificate supply",
-    "line": 2816
+    "line": 2836
    }
   },
   {
@@ -78,7 +78,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "the half-value counterexample route",
-    "line": 2832
+    "line": 2852
    }
   },
   {
@@ -89,7 +89,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "universal Erd\\H{o}s \\#257",
-    "line": 2823
+    "line": 2843
    }
   }
  ],
@@ -554,18 +554,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_section3_ladder_bundle_audit",
+   "id": "main_paper_section6_architecture_hierarchy_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "Section 3's rational-rung and positive-lift propositions may still bundle several identities or a transfer with its endpoint, obscuring the exact common ladder mechanism",
-   "statement": "Audit the Section 3 Mersenne--Lambert ladder results for independent clauses, exact transfer direction, and a visible handoff to the two problem spines."
+   "defect_class": "Section 6 is explicitly interpretive, but its architecture paragraphs may still mix proved transformations, downstream consumers, and open producers without a uniform dependency order",
+   "statement": "Audit Section 6 as an argument map: preserve explanatory prose, but make every paragraph expose the proved object, its consumer, and the exact missing producer without repeating a theorem inventory."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "a16aa24af5236b6508a34b8a4c4b41fdcf620a98",
-  "committed_navigation_snapshot": "ad3a5fe65028a537da842b042a4c39acc2f1ca5c",
-  "main_paper_source_digest": "sha256:3d4e6772d2e3743a301345744e1bd9fffa0bb0baf5bc0db194d8c1452b7e7a1f"
+  "committed_navigation_snapshot": "a5228641b2f34db2f28bc8fbd0160cb03b5882c6",
+  "main_paper_source_digest": "sha256:01c277234d34b9410e9111eefe1c89730df4a99fb813475741aaed42f8096a61"
  },
  "reading_routes": [
   {
