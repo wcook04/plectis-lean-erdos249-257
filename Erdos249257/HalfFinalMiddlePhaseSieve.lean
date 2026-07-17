@@ -864,6 +864,124 @@ theorem twenty_mem_seamGreedySupport
   refine ⟨⟨18, by omega⟩, ?_, by norm_num⟩
   simp [seamGreedyWord, SeamRowWord.ofList, hbits]
 
+/-- Once `s ≥ 26`, the positive reciprocal deficit left after rank `20`
+also forces rank `21`.  The exact deficit is
+`12932167 / 567347188334850`; the dyadic side term fits inside it from
+row twenty-six onward. -/
+theorem seamGreedy_postTwenty_decision_twentyOne
+    (s : ℕ) (hs : 26 ≤ s) :
+    truncatedMersenneWeight s 21 ≤
+      seamSubsetTarget s - truncatedMersenneWeight s 2 -
+        truncatedMersenneWeight s 3 - truncatedMersenneWeight s 6 -
+        truncatedMersenneWeight s 7 - truncatedMersenneWeight s 14 -
+        truncatedMersenneWeight s 20 := by
+  let X := 4 ^ s
+  let w2 := truncatedMersenneWeight s 2
+  let w3 := truncatedMersenneWeight s 3
+  let w6 := truncatedMersenneWeight s 6
+  let w7 := truncatedMersenneWeight s 7
+  let w14 := truncatedMersenneWeight s 14
+  let w20 := truncatedMersenneWeight s 20
+  let w21 := truncatedMersenneWeight s 21
+  have hfour : X = 2 * 2 ^ (2 * s - 1) := by
+    dsimp [X]
+    calc
+      4 ^ s = 2 ^ (2 * s) := by
+        rw [show 4 = 2 ^ 2 by norm_num, pow_mul]
+      _ = 2 ^ ((2 * s - 1) + 1) := by
+        congr 1
+        omega
+      _ = 2 * 2 ^ (2 * s - 1) := by
+        rw [pow_succ]
+        ring
+  have hyA : 2 ^ s ≤ 2 ^ (2 * s - 1) :=
+    Nat.pow_le_pow_right (by norm_num) (by omega)
+  have htargetAdd : seamSubsetTarget s + 2 ^ s = 2 ^ (2 * s - 1) := by
+    unfold seamSubsetTarget
+    omega
+  have hpow26 : 567347188334850 ≤ 12932167 * 2 ^ s := by
+    have hmono : 2 ^ 26 ≤ 2 ^ s :=
+      Nat.pow_le_pow_right (by norm_num) (by omega)
+    have hbase : 567347188334850 ≤ 12932167 * 2 ^ 26 := by norm_num
+    exact hbase.trans (Nat.mul_le_mul_left 12932167 hmono)
+  have hside : 567347188334850 * 2 ^ s ≤ 12932167 * X := by
+    have hmul := Nat.mul_le_mul_right (2 ^ s) hpow26
+    calc
+      567347188334850 * 2 ^ s ≤ (12932167 * 2 ^ s) * 2 ^ s := hmul
+      _ = 12932167 * X := by
+        have hpow : 4 ^ s = 2 ^ s * 2 ^ s := by
+          calc
+            4 ^ s = 2 ^ (2 * s) := by
+              rw [show 4 = 2 ^ 2 by norm_num, pow_mul]
+            _ = 2 ^ (s + s) := by congr 1 <;> omega
+            _ = 2 ^ s * 2 ^ s := by rw [pow_add]
+        dsimp [X]
+        rw [hpow]
+        ring
+  have hw2Upper : 3 * w2 ≤ X := by
+    dsimp [X, w2, truncatedMersenneWeight]
+    simpa [Nat.mul_comm] using Nat.div_mul_le_self (4 ^ s) 3
+  have hw3Upper : 7 * w3 ≤ X := by
+    dsimp [X, w3, truncatedMersenneWeight]
+    simpa [Nat.mul_comm] using Nat.div_mul_le_self (4 ^ s) 7
+  have hw6Upper : 63 * w6 ≤ X := by
+    dsimp [X, w6, truncatedMersenneWeight]
+    simpa [Nat.mul_comm] using Nat.div_mul_le_self (4 ^ s) 63
+  have hw7Upper : 127 * w7 ≤ X := by
+    dsimp [X, w7, truncatedMersenneWeight]
+    simpa [Nat.mul_comm] using Nat.div_mul_le_self (4 ^ s) 127
+  have hw14Upper : 16383 * w14 ≤ X := by
+    dsimp [X, w14, truncatedMersenneWeight]
+    simpa [Nat.mul_comm] using Nat.div_mul_le_self (4 ^ s) 16383
+  have hw20Upper : 1048575 * w20 ≤ X := by
+    dsimp [X, w20, truncatedMersenneWeight]
+    simpa [Nat.mul_comm] using Nat.div_mul_le_self (4 ^ s) 1048575
+  have hw21Upper : 2097151 * w21 ≤ X := by
+    dsimp [X, w21, truncatedMersenneWeight]
+    simpa [Nat.mul_comm] using Nat.div_mul_le_self (4 ^ s) 2097151
+  have h2u := Nat.mul_le_mul_left 94557864722475 hw2Upper
+  have h3u := Nat.mul_le_mul_left 40524799166775 hw3Upper
+  have h6u := Nat.mul_le_mul_left 4502755462975 hw6Upper
+  have h7u := Nat.mul_le_mul_left 2233650347775 hw7Upper
+  have h14u := Nat.mul_le_mul_left 17315118975 hw14Upper
+  have h20u := Nat.mul_le_mul_left 270532479 hw20Upper
+  have h21u := Nat.mul_le_mul_left 135266175 hw21Upper
+  have hsumUpper :
+      283673594167425 * (w2 + w3 + w6 + w7 + w14 + w20 + w21) ≤
+        141836790617629 * X := by
+    omega
+  have htake21 : w21 ≤
+      seamSubsetTarget s - w2 - w3 - w6 - w7 - w14 - w20 := by
+    omega
+  simpa [w2, w3, w6, w7, w14, w20, w21] using htake21
+
+/-- List-level normal form of the forced seam decisions through rank `21`. -/
+theorem seamGreedyBits_head2367_14_20_21
+    (s : ℕ) (hs : 26 ≤ s) :
+    integerGreedyBits (seamWeights s) (seamSubsetTarget s) =
+      true :: true :: false :: false :: true :: true ::
+        false :: false :: false :: false :: false :: false :: true ::
+          false :: false :: false :: false :: false :: true :: true ::
+            integerGreedyBits (seamWeightsFrom s 22)
+              (seamSubsetTarget s - truncatedMersenneWeight s 2 -
+                truncatedMersenneWeight s 3 - truncatedMersenneWeight s 6 -
+                truncatedMersenneWeight s 7 - truncatedMersenneWeight s 14 -
+                truncatedMersenneWeight s 20 - truncatedMersenneWeight s 21) := by
+  have h21 := seamGreedy_postTwenty_decision_twentyOne s hs
+  rw [seamGreedyBits_head2367_14_20 s (by omega),
+    seamWeightsFrom_eq_cons (by omega : 21 < s)]
+  simp only [integerGreedyBits]
+  rw [if_pos h21]
+
+/-- Rank `21` is a seventh mandatory selected seam rank from row twenty-six. -/
+theorem twentyOne_mem_seamGreedySupport
+    (s : ℕ) (hs : 26 ≤ s) :
+    21 ∈ seamWordSupport (seamGreedyWord s) := by
+  have hbits := seamGreedyBits_head2367_14_20_21 s hs
+  apply mem_seamWordSupport_iff.mpr
+  refine ⟨⟨19, by omega⟩, ?_, by norm_num⟩
+  simp [seamGreedyWord, SeamRowWord.ofList, hbits]
+
 /-- When `s = 9 (mod 10)`, forced ranks `2` and `20` each contribute one
 unit of boundary pulse. -/
 private theorem two_le_belowPulse_of_mod_ten_nine
@@ -901,6 +1019,60 @@ private theorem one_le_belowPulse
   have hp := rowPulse_le_wordPulse (s := s) h2mem
   change 1 ≤ wordPulse s (seamGreedyWord s).toNatWord
   omega
+
+/-- At phase `s = 10 (mod 21)`, ranks `2`, `3`, `7`, and the newly forced
+rank `21` contribute respectively `1`, `2`, `2`, and `2` pulse units. -/
+private theorem seven_le_belowPulse_of_mod_twentyOne_ten
+    (s : ℕ) (hs26 : 26 ≤ s) (hmod : s % 21 = 10) :
+    7 ≤ (seamAdjacentCut s (by omega)).belowPulse := by
+  classical
+  have h236 := two_three_six_mem_seamGreedySupport s (by omega : 13 ≤ s)
+  have h7mem := seven_mem_seamGreedySupport s (by omega)
+  have h21mem := twentyOne_mem_seamGreedySupport s hs26
+  have h2even : 2 ∣ 2 * s + 2 := by omega
+  have h2odd : ¬ 2 ∣ 2 * s + 1 := by omega
+  have h3odd : 3 ∣ 2 * s + 1 :=
+    Nat.dvd_iff_mod_eq_zero.mpr (by omega)
+  have h3even : ¬ 3 ∣ 2 * s + 2 := by
+    intro hdiv
+    have hzero := Nat.dvd_iff_mod_eq_zero.mp hdiv
+    omega
+  have h7odd : 7 ∣ 2 * s + 1 :=
+    Nat.dvd_iff_mod_eq_zero.mpr (by omega)
+  have h7even : ¬ 7 ∣ 2 * s + 2 := by
+    intro hdiv
+    have hzero := Nat.dvd_iff_mod_eq_zero.mp hdiv
+    omega
+  have h21odd : 21 ∣ 2 * s + 1 :=
+    Nat.dvd_iff_mod_eq_zero.mpr (by omega)
+  have h21even : ¬ 21 ∣ 2 * s + 2 := by
+    intro hdiv
+    have hzero := Nat.dvd_iff_mod_eq_zero.mp hdiv
+    omega
+  have hp2 : rowPulse s 2 = 1 := by
+    simp [rowPulse, h2even, h2odd]
+  have hp3 : rowPulse s 3 = 2 := by
+    simp [rowPulse, h3even, h3odd]
+  have hp7 : rowPulse s 7 = 2 := by
+    simp [rowPulse, h7even, h7odd]
+  have hp21 : rowPulse s 21 = 2 := by
+    simp [rowPulse, h21even, h21odd]
+  change 7 ≤ wordPulse s (seamGreedyWord s).toNatWord
+  rw [wordPulse_eq_sum_seamWordSupport]
+  calc
+    7 = ∑ d ∈ ({2, 3, 7, 21} : Finset ℕ), rowPulse s d := by
+      simp [hp2, hp3, hp7, hp21]
+    _ ≤ ∑ d ∈ seamWordSupport (seamGreedyWord s), rowPulse s d := by
+      apply Finset.sum_le_sum_of_subset_of_nonneg
+      · intro d hd
+        simp only [Finset.mem_insert, Finset.mem_singleton] at hd
+        rcases hd with rfl | rfl | rfl | rfl
+        · exact h236.1
+        · exact h236.2.1
+        · exact h7mem
+        · exact h21mem
+      · intro d _ _
+        omega
 
 /-- At the simultaneous phases `s = 1 (mod 3)`, `s = 9 (mod 10)`, and
 `s = 3` or `6 (mod 7)`, the forced prefix supplies at least six units of
@@ -1320,6 +1492,90 @@ theorem finalMiddleCell_neg_two_forces_phase_refinement
     D (by omega) hncarry hmiddle hright hcell,
     hnot10eight, hnot10sevenPhases⟩
 
+/-- The forced rank `21` removes the entire phase `D = 8 (mod 21)`.
+Together with the rank-`20` sieve, this leaves thirty-five classes modulo
+`210`: four surviving `21`-phases, none paired with `D = 8 (mod 10)`, and
+the phase `11 (mod 21)` also not paired with `D = 7 (mod 10)`. -/
+theorem finalMiddleCell_neg_two_forces_phase_refinement_through_twentyOne
+    (D : ℕ) (hD26 : 26 ≤ D)
+    (hncarry : ¬ (seamAdjacentCut D (by omega)).successorCarries)
+    (hmiddle :
+      4 * (seamAdjacentCut D (by omega)).remainder +
+            (seamPerturbedFamily D (by omega)).gap -
+            (seamAdjacentCut D (by omega)).belowPulse <
+          (seamAdjacentCut D (by omega)).terminalWeight)
+    (hright : ∀ s : ℕ, D + 1 ≤ s →
+      seamGreedyWord (s + 1) = (seamGreedyWord s).extend true)
+    (hcell :
+      4 * ((seamAdjacentCut D (by omega)).remainder : ℤ) -
+          ((seamAdjacentCut D (by omega)).belowPulse : ℤ) - 4 = -2) :
+    D % 21 ∈ ({11, 14, 17, 20} : Finset ℕ) ∧
+      D % 10 ≠ 8 ∧
+      ¬ (D % 10 = 7 ∧ D % 21 = 11) := by
+  have hold := finalMiddleCell_neg_two_forces_phase_refinement
+    D (by omega) hncarry hmiddle hright hcell
+  have hnotEight : D % 21 ≠ 8 := by
+    intro hmod21
+    let hs5 : 5 ≤ D := by omega
+    have hmiddleRec := seamMiddleBranch_nextRemainder_add_belowPulse_eq
+      hs5 hncarry hmiddle
+    have hmiddleRecZ := congrArg (fun n : ℕ ↦ (n : ℤ)) hmiddleRec
+    push_cast at hmiddleRecZ
+    have hcellR :
+        4 * (seamIntegerGreedyRemainder D : ℤ) -
+            ((seamAdjacentCut D hs5).belowPulse : ℤ) - 4 = -2 := by
+      simpa [seamAdjacentCut_remainder] using hcell
+    have hlanding :
+        (seamIntegerGreedyRemainder (D + 1) : ℤ) -
+            ((2 ^ (D + 1) : ℕ) : ℤ) = 2 := by
+      omega
+    have horbit := eventualRightTail_positive_affineExcess
+      (S := D + 1) (by omega) hright
+    have hpulse1 := one_le_belowPulse (D + 1) (by omega)
+    have hpulse1Z : (1 : ℤ) ≤
+        ((seamAdjacentCut (D + 1) (by omega)).belowPulse : ℤ) := by
+      exact_mod_cast hpulse1
+    have hstep1 := (horbit (D + 1) le_rfl).2
+    norm_num only [show D + 1 + 1 = D + 2 by omega] at hstep1
+    have hE2le :
+        (seamIntegerGreedyRemainder (D + 2) : ℤ) -
+            ((2 ^ (D + 2) : ℕ) : ℤ) ≤ 3 := by
+      rw [hlanding] at hstep1
+      omega
+    have hpulse2 := seven_le_belowPulse_of_mod_twentyOne_ten
+      (D + 2) (by omega) (by omega)
+    have hpulse2Z : (7 : ℤ) ≤
+        ((seamAdjacentCut (D + 2) (by omega)).belowPulse : ℤ) := by
+      exact_mod_cast hpulse2
+    have hstep2 := (horbit (D + 2) (by omega)).2
+    norm_num only [show D + 2 + 1 = D + 3 by omega] at hstep2
+    have hE3le :
+        (seamIntegerGreedyRemainder (D + 3) : ℤ) -
+            ((2 ^ (D + 3) : ℕ) : ℤ) ≤ 1 := by
+      omega
+    have hpulse3 := three_le_belowPulse_of_mod_three_two
+      (D + 3) (by omega) (by omega)
+    have hpulse3Z : (3 : ℤ) ≤
+        ((seamAdjacentCut (D + 3) (by omega)).belowPulse : ℤ) := by
+      exact_mod_cast hpulse3
+    have hstep3 := (horbit (D + 3) (by omega)).2
+    norm_num only [show D + 3 + 1 = D + 4 by omega] at hstep3
+    have hpos4 := (horbit (D + 4) (by omega)).1
+    omega
+  have hphase : D % 21 ∈ ({11, 14, 17, 20} : Finset ℕ) := by
+    have hphaseOld := hold.1
+    simp only [Finset.mem_insert, Finset.mem_singleton] at hphaseOld ⊢
+    rcases hphaseOld with h8 | h11 | h14 | h17 | h20
+    · exact False.elim (hnotEight h8)
+    · exact Or.inl h11
+    · exact Or.inr (Or.inl h14)
+    · exact Or.inr (Or.inr (Or.inl h17))
+    · exact Or.inr (Or.inr (Or.inr h20))
+  have hnotSevenEleven : ¬ (D % 10 = 7 ∧ D % 21 = 11) := by
+    rintro ⟨h10, h21⟩
+    exact hold.2.2 ⟨h10, by simp [h21]⟩
+  exact ⟨hphase, hold.2.1, hnotSevenEleven⟩
+
 #print axioms finalMiddleCell_neg_two_forces_mod_twenty_one
 #print axioms seamGreedy_postSeven_decisions_through_fourteen
 #print axioms seamGreedyBits_head2367_14
@@ -1328,6 +1584,10 @@ theorem finalMiddleCell_neg_two_forces_phase_refinement
 #print axioms seamGreedyBits_head2367_14_20
 #print axioms twenty_mem_seamGreedySupport
 #print axioms finalMiddleCell_neg_two_forces_phase_refinement
+#print axioms seamGreedy_postTwenty_decision_twentyOne
+#print axioms seamGreedyBits_head2367_14_20_21
+#print axioms twentyOne_mem_seamGreedySupport
+#print axioms finalMiddleCell_neg_two_forces_phase_refinement_through_twentyOne
 
 end
 
