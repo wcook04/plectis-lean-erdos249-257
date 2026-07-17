@@ -12,7 +12,8 @@ Lean or project history.
 Lean 4 formal work on two unsolved irrationality problems.
 
 [**Gateway paper**](erdos249-257-main-paper.pdf) ·
-[**#249 companion**](erdos249-transport-curvature-companion-note.pdf) ·
+[**Publication systems paper**](claim-faithful-publication-systems-paper.pdf) ·
+[**Retired #249-only note**](erdos249-transport-curvature-companion-note.pdf) ·
 [Release v0.6.0](https://github.com/wcook04/plectis-lean-erdos249-257/releases/tag/v0.6.0) ·
 [![Lean CI](https://github.com/wcook04/plectis-lean-erdos249-257/actions/workflows/lean.yml/badge.svg)](https://github.com/wcook04/plectis-lean-erdos249-257/actions/workflows/lean.yml) ·
 [Plectis](https://wcook04.github.io/plectis/)
@@ -76,8 +77,10 @@ an unsafe band.
 
 [Orientation](docs/ORIENTATION.md) routes claims. The
 [gateway paper](erdos249-257-main-paper.pdf) states both spines; the
-[#249 companion](erdos249-transport-curvature-companion-note.pdf) covers
-transport and curvature.
+[former #249-only companion](erdos249-transport-curvature-companion-note.pdf)
+has been scrapped as a standalone publication. Its source is preserved, but
+it will only be revived as part of a matched #249/#257 specialist-note pair or
+folded selectively into the main exposition.
 
 ## What remains open
 

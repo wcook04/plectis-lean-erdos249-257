@@ -61,11 +61,13 @@ FIRST_MINUTE_CONTRACT = {
         ),
     },
     "erdos249-transport-curvature-companion-note.pdf": {
-        (1, 2): (
-            "affine-channel annihilation",
-            "phase-separation characterisation",
-            "local no-go boundaries",
-            "remains open because no cofinal",
+        (1, 1): (
+            "scrapped",
+            "not an active mathematical paper",
+            "the only two coherent successors",
+            "matched pair of specialist notes",
+            "what was preserved",
+            "makes no mathematical status change",
         ),
     },
     "claim-faithful-publication-systems-paper.pdf": {

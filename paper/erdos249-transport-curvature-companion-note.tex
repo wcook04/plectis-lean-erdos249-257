@@ -2,498 +2,57 @@
 % SPDX-License-Identifier: CC-BY-4.0
 \documentclass[11pt]{article}
 \usepackage[T1]{fontenc}
-\usepackage[utf8]{inputenc}
 \usepackage[a4paper,margin=1in]{geometry}
-\usepackage{amsmath,amssymb,amsthm,booktabs,array}
 \usepackage[dvipsnames]{xcolor}
-\usepackage[colorlinks=true,linkcolor=black,urlcolor=RoyalBlue,citecolor=black]{hyperref}
+\usepackage[colorlinks=true,urlcolor=RoyalBlue]{hyperref}
 \hypersetup{
-  pdftitle={Finite-Difference Certificates and a Phase-Separation Characterisation for Erdős Problem 249},
+  pdftitle={SCRAPPED — Former Erdős Problem 249 specialist note},
   pdfauthor={Will Cook},
-  pdfsubject={Companion note on transport, curvature, and local obstructions; specialist companion to the Erdős 249/257 gateway paper},
+  pdfsubject={Retirement notice for the former one-sided specialist note},
 }
-\newcommand{\commit}{c24e2c2a781aa4a104d10884bacae52ef35cff30}
-\newcommand{\repobase}{https://github.com/wcook04/plectis-lean-erdos249-257/blob/\commit}
-\newcommand{\PK}{Erdos249257}
-\input{module-aliases.tex}
-\newcommand{\lref}[3]{\href{\repobase/\PK/#1\#L#2}{Lean proof}}
-\newcommand{\lword}[4]{\href{\repobase/\PK/#1\#L#2}{#4}}
-\emergencystretch=2em
-\newtheorem{theorem}{Theorem}[section]
-\newtheorem{proposition}[theorem]{Proposition}
-\theoremstyle{remark}\newtheorem*{remark}{Remark}
-\newcommand{\Z}{\mathbb Z}
-\newcommand{\ph}{\varphi}
-\title{Finite-Difference Certificates and a Phase-Separation\\
-Characterisation for Erd\H{o}s Problem 249\\
-{\large A companion note on transport, curvature, and local obstructions}}
-\author{Will Cook}
-\date{July 2026}
-
 \begin{document}
-\sloppy
-\maketitle
-\begin{abstract}
-Let $S=\sum_{n\geq1}\ph(n)/2^n$ and
-$R_N=\sum_{j\geq1}\ph(N+j)/2^j$.  The M\"obius residue kernel governing
-transport of the tails $R_N$ is affine in its scale coordinate, with periodic
-slope and intercept.  Consequently, every finite coefficient system satisfying
-$\sum_i c_i=\sum_i c_im_i=0$ annihilates all divisor channels already present
-at a base height.  Curvature, prime-jump, balanced $(1,2,3,6)$, and anchored
-$(1,3,5,15)$ observables admit exact dyadic-window decompositions and
-decidable central-residue conditions implying non-integrality.  A
-first-harmonic saving on a finite block forces a tail-difference certificate,
-and an exact four-term large-prime pivot decomposition reduces such a saving
-to centred, fibre-mean, bad-supplier, and non-supplier budgets.  The fibre-free
-cofinal window-pair separation predicate is equivalent to the irrationality
-of $S$.  We also prove two local obstructions: every fixed-precision
-valuation--unit word has a prefix-locked centred completion, and a synthetic
-nonzero lcm carry satisfying the stated factor and anchor constraints survives
-every finite integer shift polynomial.  The finite criteria and obstruction
-theorems are unconditional.  Erd\H{o}s Problem~249 remains open because no
-cofinal arithmetic input or harmonic bound is proved.
-\end{abstract}
-
-\section{Main results and logical boundary}\label{sec:scope}
-
-The gateway exposition~\cite{mainpaper} proves the denominator exclusion and
-the complete finite-certificate normal form for $S$.  This paper has a
-different thesis.  Its argument has three stages.  First, finite differences
-annihilate the old affine divisor channels and turn the surviving channels
-into exact dyadic-window residues.  Second, a first-harmonic gap turns residue
-dispersion into a finite certificate, while the large-prime pivot
-decomposition identifies four precise budgets that would produce that gap.
-Third, phase separation gives a complete geometric normal form and two
-countermodels delimit what fixed local transport data can prove.  Thus the
-paper isolates exact implications and exact obstructions; it does not prove
-the cofinal arithmetic input needed to settle the problem.
-
-\begin{theorem}[affine-channel annihilation]\label{thm:affine}
-Let \(m_i\in\mathbb N\) and \(c_i\in\mathbb R\) satisfy
-\(\sum_i c_i=0\) and \(\sum_i c_im_i=0\).  If \(d\mid H\), then
-\[
-  \sum_i c_i K_d(m_iH)=0,
-\]
-where \(K_d\) is the exact M\"obius transport-residue kernel.
-\end{theorem}
-\noindent Formalised as
-\lword{JointExponentTransport.lean}{36}{oldChannel_affine_moment_annihilation}{affine-channel annihilation}.
-The anchored coefficients at \(H,3H,5H,15H\) are one primitive instance.
-Sections~\ref{sec:windows}--\ref{sec:primejump} turn this cancellation into
-finite central-residue criteria.
-
-\paragraph{The harmonic bridge.}
-Theorem~\ref{thm:first-pivot} decomposes the first-harmonic block sum into
-centred, fibre-mean, bad-supplier, and non-supplier terms.  Its exact budget
-implies a finite tail-difference certificate; the corresponding cofinal
-budget would imply irrationality.  This is the analytic implication connecting
-the transport identities to the phase geometry, not an additional proof of
-the missing estimates.
-
-\begin{theorem}[phase-separation characterisation]\label{thm:phase}
-The cofinal fibre-free window-pair separation predicate of
-Section~\ref{sec:pivot} holds if and only if \(S\) is irrational.
-\end{theorem}
-\noindent Formalised as the
-\lword{PivotAntiReconstruction.lean}{1744}{dtwWindowSeparatedPairs_iff_irrational_totient_series}{phase-separation equivalence}.
-This is an exact equivalence, not a weaker sufficient condition.  Its required
-arithmetic input remains open.
-
-\begin{proposition}[local no-go boundaries]\label{prop:nogo}
-At every fixed valuation--unit precision, each compatible finite word has a
-prefix-locked centred carry completion.  Separately, for every lcm height
-\(t\ge3\), a nonzero synthetic carry satisfies the stated factor ideals,
-whole-ray anchors, and every finite integer shift polynomial while remaining
-a strict survivor.
-\end{proposition}
-\noindent Formalised by the
-\lword{TropicalCurvatureCarry.lean}{137}{fixedPrecisionTropicalNoGo}{fixed-precision countermodel}
-and the
-\lword{LcmFactorIdealPulseObstruction.lean}{798}{lcm_factorIdeal_finiteRank_shiftAlgebra_not_sufficient}{finite shift-algebra countermodel}.
-These are scoped countermodels, not global impossibility theorems.
-
-Every positive endpoint below still has the form
-\[
- \text{cofinal supply of finite certificates}\Longrightarrow S\notin\mathbb Q.
-\]
-The finite identities, criteria, equivalence, and countermodels are
-unconditional; no cofinal supply is proved.  The open problem is recorded in
-the original collection and maintained catalogue
-\cite{erdosgraham1980,erdos1988,erdosproblems}.  The Lambert-series and
-M\"obius/divisor background is classical~\cite{erdos1948,apostol};
-Borwein's theorem gives a neighbouring general irrationality
-benchmark~\cite{borwein1992}.  None supplies the cofinal input isolated
-here.  The theorem-specific comparison boundary is maintained with the
-gateway paper.  Linked mathematical phrases open the pinned Lean proofs; the
-claim registry and release gate that validate these links are described in
-the suite's systems companion~\cite{syspaper}.
-
-\paragraph{Reading map.}
-Sections~\ref{sec:windows}--\ref{sec:primejump} build the exact transport and
-window algebra.  Sections~\ref{sec:harmonic}--\ref{sec:pivot} give the two
-global routes: a sufficient harmonic-budget route and an equivalent
-phase-separation route.  Sections~\ref{sec:nogo} and~\ref{sec:factorideal}
-then show why bounded local transport data cannot by itself produce either
-cofinal hypothesis.
-
-\section{Dyadic windows}\label{sec:windows}
-For a finite integer combination $X(H)=\sum_i c_iR_{m_iH}$, truncate each
-tail at depth $L$.  Multiplication by $2^L$ gives
-\[
- 2^LX(H)=A(H,L)+E(H,L),
-\]
-where $A(H,L)\in\Z$ is computable.  If $|E(H,L)|\le B(H,L)$, then
-$X(H)\notin\Z$ whenever
-\[
- B(H,L)<A(H,L)\bmod2^L<2^L-B(H,L).
-\]
-This reusable test is the formal
-\lword{PrimeJumpWindow.lean}{53}{notMem_int_of_window_remainder_bound}{central-residue criterion}.
-Lean checks the exact decomposition, radius, and concrete modular arithmetic;
-an external analytic or arithmetic argument must provide unbounded instances.
-
-\section{Curvature on the lcm cone}\label{sec:curvature}
-Set
-\[
- Q_H=R_{4H}-3R_{2H}+2R_H.
-\]
-Its depth-$L$ window $C(H,L)$ satisfies
-\[
- 2^LQ_H=C(H,L)+E_C(H,L),\qquad |E_C(H,L)|\le6H+3L+3.
-\]
-The exact split and the tail bound are both checked in Lean:
-\lword{CurvatureCarry.lean}{119}{two_pow_mul_curvature_eq_window_add_shifted}{exact curvature split}
-and
-\lword{CurvatureCarry.lean}{137}{abs_curvatureShiftedTail_le}{curvature tail bound}.
-The
-\lword{CurvatureCarry.lean}{159}{curvature_notMem_int_of_sharpCurvatureCert}{sharp curvature criterion}
-therefore proves $Q_H\notin\Z$.  An unbounded supply of these certificates
-would imply irrationality by the
-\lword{CurvatureCarry.lean}{206}{irrational_totientSeries_of_sharpCurvatureSupply}{curvature-supply implication},
-but that supply is not proved.
-
-The window evolves by
-$C(H,L+1)=2C(H,L)+d(H,L+1)$; see the
-\lword{CurvatureCarry.lean}{259}{curvatureWindow_succ}{exact curvature recurrence}.
-Exact phase-certificate and common-carrier formulas expose possible routes to
-a supply theorem without asserting one.
-
-\section{Exponent transport and affine cancellation}\label{sec:transport}
-If $p\mid H$, multiplication by $p$ adds no squarefree divisor support:
-\[
- d\mid pH\Longleftrightarrow d\mid H\qquad(d\text{ squarefree}).
-\]
-This is the formal
-\lword{ExponentOnlyTransport.lean}{36}{squarefree_dvd_mul_iff_of_dvd}{squarefree support invariance}.
-The exact residue kernel is affine, not merely periodic:
-\[
- K_d(N)=N\,a_d(N)+b_d(N),
-\]
-where both $a_d$ and $b_d$ are periodic modulo $d$, as recorded in the
-\lword{ExponentOnlyTransport.lean}{141}{transportResidueKernel_eq_affineState}{affine transport-kernel theorem}.
-Keeping both blocks prevents an intercept-only matrix calculation from being
-misread as global non-cancellation. The exact $H\mapsto3H$ two-block transfer
-is also formalised
-\lword{ExponentOnlyTransport.lean}{176}{residueTransportDefect_three_eq_affineState}{by the three-scale transfer identity}.
-
-Every old channel $d\mid H$ is killed by the first-order defect
-\lword{ExponentOnlyTransport.lean}{112}{residueTransportDefect_eq_zero_of_dvd}{in the old-channel cancellation theorem}.
-The resulting irrationality theorem remains conditional on a fixed-three
-tower supply; see the
-\lword{ExponentOnlyTransport.lean}{205}{irrational_totient_series_of_exponentOnlyThreeTransportSupply}{exponent-transport supply implication}.
-
-More generally, coefficients satisfying $\sum_i c_i=\sum_i c_im_i=0$
-annihilate every old affine channel
-\lword{JointExponentTransport.lean}{36}{oldChannel_affine_moment_annihilation}{by affine moment annihilation}.
-For $q(X,Y)=XY-3X-2Y+4$, the vanishing $q(1,1)=q(3,5)=0$ gives
-\[
- K_d(15H)-3K_d(3H)-2K_d(5H)+4K_d(H)=0\quad(d\mid H),
-\]
-as checked in Lean
-\lword{JointExponentTransport.lean}{71}{joint35_oldChannel_zero}{by anchored \((3,5)\) cancellation}.
-The associated window radius is $19H+5L+5$; it gives a finite
-non-integrality criterion
-\lword{JointExponentTransport.lean}{172}{joint35Cone_notMem_int_of_cert}{in the joint-transport certificate}.
-The corresponding irrationality endpoint is conditional on the
-\lword{JointExponentTransport.lean}{217}{irrational_totient_series_of_anchoredJoint35ConeSupply}{anchored joint-cone supply}.
-
-\section{Prime jumps and three-transport boundaries}\label{sec:primejump}
-When $p\nmid H$, a jump from $H$ to $pH$ creates new squarefree support.  The
-residue Hecke defect splits into a post-jump channel and an explicit migration
-correction
-\lword{PrimeJumpMigration.lean}{38}{residueHeckeDefect_eq_postJump_add_migration}{by the prime-jump migration identity}.
-For $d\mid H$ the total old-channel defect is zero
-\lword{PrimeJumpMigration.lean}{46}{residueHeckeDefect_eq_zero_of_dvd}{by prime-jump old-channel cancellation}; the
-$(d,H,p)=(5,12,5)$ calculation records the two cancelling terms.
-
-Set
-\[
- J(H,p)=(R_{2pH}-R_{pH})-p(R_{2H}-R_H).
-\]
-Its exact remainder radius is $3pH+(p+1)(L+2)$, with a checked window split
-\lword{PrimeJumpWindow.lean}{91}{primeJumpTailCommutator_eq_window_add_remainder}{in the prime-jump window identity}.
-This yields a finite non-integrality criterion
-\lword{PrimeJumpWindow.lean}{178}{primeJumpTailCommutator_notMem_int_of_sharpKill}{from a sharp prime-jump certificate}.
-Lean verifies the instance $(H,p,L)=(12,5,15)$
-\lword{PrimeJumpWindow.lean}{186}{primeJumpSharpKill_twelve_five}{in the \((12,5,15)\) calculation}; this is one
-verified finite instance, not an unbounded sequence.
-
-The balanced vertices $H,2H,3H,6H$ give a related radius $9H+4L+4$.
-The corresponding finite criterion is formalised
-\lword{ThreeTransportBoundary.lean}{126}{threeTransport_notMem_int_of_cert}{as the three-transport certificate};
-the irrationality theorem is conditional on an unbounded supply
-\lword{ThreeTransportBoundary.lean}{177}{irrational_totientSeries_of_roughnessBoundaryLatticeSupply}{through the roughness-boundary implication}.
-The concrete instance $(H,L)=(60,12)$ is checked
-\lword{ThreeTransportBoundary.lean}{203}{sharpThreeTransportCert_60_12}{in the \((60,12)\) calculation}.
-
-\section{A first-harmonic criterion}\label{sec:harmonic}
-For the window discrepancy $A(h,N,L)$ define
-\[
- W_1(h,N,L)=\cos\left(2\pi\frac{A(h,N,L)\bmod2^L}{2^L}\right).
-\]
-Assume $N\in[X,2X)$ and $16(2X+h+L+2)\le2^L$.  If every $N$ failed the
-central-residue certificate, each phase would lie within $\pi/8$ of an
-integer turn, so each cosine would exceed $9/10$.  Hence
-\[
- \sum_{X\le N<2X}W_1(h,N,L)\le\frac9{10}X
-\]
-forces a certificate in the block
-\lword{FirstHarmonicGap.lean}{128}{exists_certifiedKill_of_first_harmonic_gap}{by the block first-harmonic criterion}.
-More generally, if $T$ is any nonempty finite set of indices below $2X$ and
-\[
- \sum_{N\in T}W_1(h,N,L)\le\frac9{10}|T|,
-\]
-then a certificate occurs at some $N\in T$
-\lword{FirstHarmonicGap.lean}{104}{exists_certifiedKill_of_first_harmonic_gap_subset}{by the finite-subset criterion}.
-By certificate completeness, the witness produced here is an exact
-non-integral tail difference, not a heuristic phase test.  Hence a
-first-harmonic saving on one finite block produces exactly the kind of witness
-required by the tail-difference criterion.  What is still missing is a
-first-harmonic estimate that supplies such blocks at unbounded parameters; no
-such estimate is proved here.
-
-\section{The exact large-prime pivot decomposition}\label{sec:first-pivot}
-The preceding criterion becomes useful only after the harmonic sum has been
-split into terms for which an arithmetic estimate is plausible.  We record
-that split explicitly.  Put
-\[
- Z_N=\exp\!\left(
-   2\pi i\,\frac{A(h,N,L)\bmod 2^L}{2^L}\right),
- \qquad X\le N<2X,
-\]
-so that \(\Re Z_N=W_1(h,N,L)\) and \(|Z_N|=1\).
-Fix an overlap depth \(s\), set \(q_N=N+(L-s+1)\), and write
-\(q_N=m_Np_N\), where \(p_N\) is its largest prime factor.  Call \(N\) a
-\emph{supplier} when
-\[
- 0<m_N\le\frac{\sqrt X}{2},
- \qquad 2\sqrt X<p_N,
-\]
-with the displayed factorisation certified; call it \(\eta\)-good when also
-\(\eta m_N\le\ph(m_N)\).  On a supplier define the pivot phase
-\[
- P_N=\exp\!\left(
- 2\pi i\,\frac{(2^h-1)\ph(m_N)(p_N-1)}{2^{L-s+1}}\right),
- \qquad \rho_N=\frac{Z_N}{P_N}.
-\]
-The identity \(\ph(m_Np_N)=\ph(m_N)(p_N-1)\) is exact here because the size
-conditions force \(p_N\nmid m_N\).  For the supplier fibre
-\(\mathcal F_m=\{N:m_N=m\}\), let
-\[
- \overline P_m=\frac1{|\mathcal F_m|}
-                 \sum_{N\in\mathcal F_m}P_N.
-\]
-Finally, let \(\mathcal G,\mathcal B,\mathcal U\) be respectively the good
-suppliers, bad suppliers, and non-suppliers in \([X,2X)\), and put
-\[
-\begin{aligned}
- C&=\sum_{N\in\mathcal G}\rho_N(P_N-\overline P_{m_N}),&
- M&=\sum_{N\in\mathcal G}\rho_N\overline P_{m_N},\\
- B&=\sum_{N\in\mathcal B}Z_N,&
- U&=\sum_{N\in\mathcal U}Z_N.
-\end{aligned}
-\]
-
-\begin{theorem}[four-term pivot decomposition and budget]
-\label{thm:first-pivot}
-For every choice of \(h,X,L,s,\eta\),
-\[
-  \sum_{X\le N<2X}Z_N=C+M+B+U.
-\]
-If \(X>0\), \(16(2X+h+L+2)\le2^L\), and
-\[
- \Re C\le\frac{14}{25}X,\qquad
- |M|\le\frac1{100}X,\qquad
- |B|\le\frac1{100}X,\qquad
- |U|\le\frac8{25}X,
-\]
-then
-\[
- \sum_{X\le N<2X}W_1(h,N,L)\le\frac9{10}X,
-\]
-so the block contains a finite tail-difference certificate.  Consequently,
-if for every \(h>0\) there are fixed \(s>0\) and \(0<\eta<1\) for which these
-four budgets hold at arbitrarily large \(X\), with \(h\le L-s\), then \(S\)
-is irrational.
-\end{theorem}
-\noindent The exact split is formalised
-\lword{FirstHarmonicPivot.lean}{342}{windowFirstExp_sum_eq_pivot_decomposition}{by the four-term decomposition};
-the budget implication is
-\lword{FirstHarmonicPivot.lean}{377}{first_harmonic_gap_of_pivotBudgetAt}{the one-sided pivot budget};
-and the cofinal conditional endpoint is
-\lword{FirstHarmonicPivot.lean}{405}{irrational_totient_series_of_pivotResidualDecorrelation}{the residual-decorrelation implication}.
-
-The constants are not heuristic bookkeeping:
-\[
- \frac{14}{25}+\frac1{100}+\frac1{100}+\frac8{25}
- =\frac9{10}.
-\]
-Only the real part of the centred term is bounded; no unnecessary complex-norm
-estimate is assumed there.  The theorem proves the exact algebraic reduction.
-It does not prove a prime-distribution or residual-decorrelation estimate
-supplying the four inequalities at cofinal scales.
-
-\section{Adjacent-pair phase separation}\label{sec:adjacentphase}
-At a scale satisfying the same room inequality, with $N+1<2X$, suppose that
-the first harmonic phases at two adjacent indices obey
-\[
- \left\lVert
- \operatorname{windowFirstExp}(h,N+1,L)-\operatorname{windowFirstExp}(h,N,L)
- \right\rVert^2\ge\frac{19}{25}.
-\]
-Then a certificate occurs at one of $N$ and $N+1$
-\lword{AdjacentPhaseSeparation.lean}{258}{exists_certifiedKill_of_phasePairSeparation}{by adjacent-phase separation}.
-Consequently, a cofinal supply of adjacent pairs satisfying this inequality
-implies irrationality of the totient constant
-\lword{AdjacentPhaseSeparation.lean}{295}{irrational_totient_series_of_adjacentPhaseSeparation}{through the adjacent-phase supply implication}.
-No cofinal adjacent-pair separation is proved here.
-
-\section{Pivot anti-reconstruction and window-pair geometry}\label{sec:pivot}
-The first-harmonic phase of a finite window is the exact additive character of
-its dyadic discrepancy residue.  It differs from the corresponding infinite
-tail-orbit phase by the explicitly bounded omitted tail.  On a finite supplier
-fibre, the anchored defect is the squared distance of the window phases from
-the constant phase $1$; its centred form is the usual pairwise-energy identity.
-Thus a counted family of separated phase pairs of sufficient total squared
-chord mass produces a finite certificate.
-
-The formal proof records several equivalent sufficient cofinal hypotheses.  In
-particular, a cofinal pivot
-anti-reconstruction bound, a cofinal centred reconstruction-variance bound, or
-a cofinal counted-separated-pairs bound is sufficient for irrationality of
-$S$. The direct finite criterion and the resulting conditional irrationality
-theorem are both formalised
-\lword{PivotAntiReconstruction.lean}{1105}{exists_certifiedKill_of_pivotFiberSeparatedPairs}{by the pivot-fibre certificate}
-and
-\lword{PivotAntiReconstruction.lean}{1502}{irrational_totient_series_of_pivotAntiReconstruction}{the pivot anti-reconstruction implication}.
-
-There is also an exact fibre-free formulation: the cofinal window-pair
-predicate is equivalent to irrationality of $S$, not merely sufficient for it.
-The reverse implication uses the expansive doubling orbit to obtain adjacent
-infinite-tail separation and then chooses a finite window depth
-\lword{PivotAntiReconstruction.lean}{1744}{dtwWindowSeparatedPairs_iff_irrational_totient_series}{in the exact window-pair equivalence}.
-The development does not prove any of these cofinal arithmetic hypotheses, so it does
-not settle Erd\H{o}s~\#249.
-
-\section{Fixed local precision cannot finish the argument}\label{sec:nogo}
-A finite valuation--unit symbol records a bounded amount of local transport
-data.  For every positive precision $u$, every finite compatible word admits
-a prefix-locked centred completion.  Thus no finite word over this fixed local
-alphabet excludes all centred endpoints
-\lword{TropicalCurvatureCarry.lean}{137}{fixedPrecisionTropicalNoGo}{by the fixed-precision no-go theorem}.
-This does not say curvature certificates are rare.  A proof may use precision
-growing with scale, global correlations, or a harmonic gap.  It rules out only
-the inference that a bounded local signature alone forces escape.
-
-\section{LCM factor ideals and whole-ray anchors}\label{sec:factorideal}
-For every $t\geq 3$, there is a nonzero synthetic affine carry whose forcing
-letters lie in the principal ideal generated by
-$\varphi(\operatorname{lcm}(1,\ldots,t))$, satisfy the exact whole-ray anchor
-values, and remain inside the relevant diagonal bounds. Nevertheless its
-state is a strict survivor
-\lword{LcmFactorIdealPulseObstruction.lean}{866}{lcm_factorIdeal_sparseAnchor_not_sufficient}{in the sparse-anchor countermodel}.
-
-The same example remains a dyadic coboundary after every finite integer shift
-polynomial. In particular, the finite-rank LCM shift algebra alone cannot
-remove its terminal compensation
-\lword{LcmFactorIdealPulseObstruction.lean}{798}{lcm_factorIdeal_finiteRank_shiftAlgebra_not_sufficient}{in the finite shift-algebra countermodel}.
-This is a synthetic countermodel: it does not assert that these forcing letters
-are actual totient differences, and it does not rule out a nonlinear argument
-using the missing fresh divisor channels.
-
-\section{Conclusion and exact boundary}\label{sec:index}
-
-The results form one chain rather than a list of unrelated certificate
-constructions.  Affine transport explains which divisor channels a finite
-difference removes; a dyadic window converts the remaining tail observable
-into an exact central-residue test; and harmonic or pairwise phase dispersion
-turns that test into a certificate.  The four-term pivot theorem makes the
-first of these global routes arithmetically explicit, while the
-window-pair theorem shows that the second is logically complete.
-
-What remains missing is not another finite identity.  One must produce the
-required dispersion cofinally, either through estimates meeting the four
-pivot budgets or through an equivalent window-pair separation mechanism.
-The two countermodels explain why fixed local precision, factor ideals,
-whole-ray anchors, and finite shift algebra do not force such dispersion.
-They delimit the current methods without asserting a global impossibility.
-
-For reference, the exact status of each layer is:
-\begin{center}\small
-\begin{tabular}{@{}
->{\raggedright\arraybackslash}p{0.21\textwidth}
->{\raggedright\arraybackslash}p{0.40\textwidth}
->{\raggedright\arraybackslash}p{0.29\textwidth}@{}}
-\toprule Layer & Checked statement & Status \\
-\midrule
-Curvature & exact split, radius, recurrence, criterion & finite certificate criterion \\
-Exponent transport & stable support, affine state, cancellation & exact identity \\
-Joint $(3,5)$ transport & moment annihilation and criterion & identity and finite criterion \\
-Prime jump & migration, sharp window, $(12,5,15)$ & identity and finite instance \\
-Three transport & sharp window and $(60,12)$ & criterion and finite instance \\
-First harmonic & cosine gap forces a certificate & finite certificate criterion \\
-Large-prime pivot & exact four-term split and one-sided budget & identity and conditional endpoint \\
-Adjacent phases & squared chord separation forces a certificate & finite certificate criterion \\
-Pivot anti-reconstruction & pairwise phase energy and exact window-pair equivalence & exact equivalence \\
-Tropical signature & fixed precision has a completion & scoped countermodel \\
-LCM factor ideals & factor/anchor and finite shift algebra have a synthetic survivor & scoped synthetic countermodel \\
-Irrationality of $S$ & follows from a named unbounded supply & open \\
-\bottomrule
-\end{tabular}
+\begin{center}
+{\Huge\bfseries\color{BrickRed} SCRAPPED}\par
+\vspace{1em}
+{\Large Former Erd\H{o}s Problem 249 specialist note}\par
+\vspace{0.8em}
+{\large This is not an active mathematical paper.}
 \end{center}
-No cofinal arithmetic input or harmonic bound is proved.  Therefore the chain
-stops at exact finite criteria and equivalent reformulations, and
-Erd\H{o}s~\#249 remains open.
 
-\begin{thebibliography}{9}
-\bibitem{erdos1948} P.~Erd\H{o}s,
-\emph{On arithmetical properties of Lambert series},
-J. Indian Math. Soc. (N.S.) \textbf{12} (1948), 63--66,
-\href{https://users.renyi.hu/~p_erdos/1948-04.pdf}{archive scan}.
-\bibitem{apostol} T.~M. Apostol,
-\emph{Introduction to Analytic Number Theory},
-Undergraduate Texts in Mathematics, Springer, 1976,
-doi:\href{https://doi.org/10.1007/978-1-4757-5579-4}{10.1007/978-1-4757-5579-4}.
-\bibitem{borwein1992} P.~B. Borwein,
-\emph{On the irrationality of certain series},
-Math. Proc. Cambridge Philos. Soc. \textbf{112} (1992), no.~1, 141--146,
-doi:\href{https://doi.org/10.1017/S030500410007081X}{10.1017/S030500410007081X}.
-\bibitem{erdosgraham1980} P.~Erd\H{o}s and R.~L. Graham,
-\emph{Old and New Problems and Results in Combinatorial Number Theory},
-Monographies de l'Enseignement Math\'ematique 28 (1980), 61--62,
-\href{https://mathweb.ucsd.edu/~ronspubs/80_11_number_theory.pdf}{scan}.
-\bibitem{erdos1988} P.~Erd\H{o}s,
-\emph{On the irrationality of certain series: problems and results},
-in \emph{New Advances in Transcendence Theory}, ed.~A.~Baker,
-Cambridge University Press, 1988, pp.~102--109,
-doi:\href{https://doi.org/10.1017/CBO9780511897184.009}{10.1017/CBO9780511897184.009}.
-\bibitem{erdosproblems} T.~Bloom (ed.), \emph{Erd\H{o}s Problems}, entry 249,
-\href{https://www.erdosproblems.com/249}{\texttt{erdosproblems.com/249}},
-accessed July 2026.
-\bibitem{mainpaper} W.~Cook, \emph{Tail Certificates and Achievement-Set
-Geometry for Erd\H{o}s Problems 249 and 257}, gateway exposition in this
-release.
-\bibitem{syspaper} W.~Cook, \emph{Claim-Faithful Publication of a Formalised
-Mathematics Corpus}, systems companion in this release.
-\end{thebibliography}
+\section*{Why this note was retired}
+
+The repository studies two Erd\H{o}s problems, 249 and 257. Publishing a
+standalone technical companion for only Problem 249 gives one exploratory
+route a status that the overall paper programme does not justify. It also
+fragments the reader's route through mathematics that is already being
+reworked in the main exposition.
+
+The former note is therefore scrapped as a publication artefact. Its
+mathematics has not been declared false; the problem is the one-sided paper
+boundary and the resulting duplication.
+
+\section*{The only two coherent successors}
+
+\begin{enumerate}
+  \item Keep one main mathematical paper and fold only the necessary
+  specialist exposition into it; or
+  \item revive a matched pair of specialist notes, one for Problem 249 and
+  one for Problem 257, with equally clear jobs and boundaries.
+\end{enumerate}
+
+There is no active plan to polish the former 249-only note in isolation.
+
+\section*{What was preserved}
+
+The full source and rendered PDF that preceded this notice remain in
+\texttt{paper/archive/} under filenames ending
+\texttt{-retired-2026-07-17}. They are retained as provenance and a source of
+potentially reusable exposition, not as current publications.
+
+The main Erd\H{o}s mathematics paper remains a separate live manuscript. This
+retirement notice makes no mathematical status change and must not be used to
+infer that either open problem has been solved.
+
+\vfill
+\noindent Retired 17 July 2026.
 \end{document}
