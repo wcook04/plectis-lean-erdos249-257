@@ -554,18 +554,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_frontier_section_redundancy_audit",
+   "id": "main_paper_ladder_table_prose_duplication_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "The Exact frontiers section may repeat conditional criteria and open-boundary statements already classified at their point of use, obscuring which content is the closing synthesis",
-   "statement": "Audit the frontier section so every repeated status sentence either serves the final decision map or is removed; retain the exact open problems and genuinely distinct scalar closing criteria."
+   "defect_class": "The Mersenne--Lambert ladder status table is immediately followed by prose that repeats several of the same rows before reaching the actual structural warning",
+   "statement": "Remove row-by-row prose duplication after the ladder table while retaining the primitive-conductor fact, the distinction between convolution-chain and comparison inputs, and the no-status-transfer conclusion."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "a16aa24af5236b6508a34b8a4c4b41fdcf620a98",
-  "committed_navigation_snapshot": "203b8f10d2370a75022522d2e8ed7f1240683ff9",
-  "main_paper_source_digest": "sha256:029b0e6d6ffebfbc11e64509aeda411200c014fac95abcd9d30f9a32da8a196e"
+  "committed_navigation_snapshot": "8f682a45925a0cc06ad7e62d1dd7fe1e6d7714e5",
+  "main_paper_source_digest": "sha256:75f8ad01f0c9881c3b2351a22c0bad974d45e12626cb9725b8b14e026de98abf"
  },
  "reading_routes": [
   {
