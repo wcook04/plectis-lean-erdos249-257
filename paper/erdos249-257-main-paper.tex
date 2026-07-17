@@ -270,9 +270,10 @@ and the
 \lword{HalfCarryReachability.lean}{589}{finite_boolSupport_ne_half}{finite-support exclusion}.
 The conditional residual is the
 \lword{HalfCylinderLastProducerContradiction.lean}{387}{half_mem_mersenneAchievementSet_of_middleProducerTailEscapeExceptNegThree}{remaining-tail implication}.
-Its local transition exclusions are stated and linked where they are used in
-Theorem~\ref{res:fatalright}; Appendix~\ref{app:half-technical} contains the
-supporting coordinate analysis.
+Its local transition exclusions are stated in
+Proposition~\ref{res:finalskipexclusions}, and its sufficient global
+hypothesis is Corollary~\ref{res:taildominance}.
+Appendix~\ref{app:half-technical} contains the supporting coordinate analysis.
 
 \paragraph{Prior-art boundary.}
 The full-support theorem is Erd\H{o}s's, and Borwein proved a broader
@@ -781,9 +782,10 @@ then no final skipped exponent exists, and hence \(1/2\in\mathcal A\).
 \end{corollary}
 \noindent This implication is the
 \lword{HalfCylinderLastProducerContradiction.lean}{387}{half_mem_mersenneAchievementSet_of_middleProducerTailEscapeExceptNegThree}{tail-dominance theorem}.
-Since \(\Theta_D\geq0\), condition~(4.2) can apply only after final middle
-cells \(C_D=-2,-1\) have been excluded.  No such exclusion, and no proof
-of~(4.2) on the remaining actual greedy transitions, is known here.
+Because \(\Theta_D\geq0\), the hypothesis of this corollary already rules out
+every actual middle transition with \(C_D\in\{-2,-1\}\).  No proof that the
+greedy orbit avoids those cells, and no proof of~(4.2) on its remaining
+non-\((-3)\) middle transitions, is known here.
 
 \paragraph{Logical status of the final-skip argument.}
 The proved levels of the argument are
@@ -799,9 +801,9 @@ The proved levels of the argument are
 \end{array}
 \]
 These lines do not imply membership.  The unproved producer has two parts:
-exclude final middle transitions with \(C_D\in\{-2,-1\}\), and
-prove~\textup{(4.2)} at every other non-\((-3)\) middle transition.  Together
-they discharge the hypotheses of
+exclude all actual middle transitions with \(C_D\in\{-2,-1\}\), and
+prove~\textup{(4.2)} at every remaining non-\((-3)\) middle transition.
+Together they establish the global hypothesis of
 Corollary~\ref{res:taildominance}; only then does
 Corollary~\ref{res:halfcounterexample} produce an infinite rational-valued
 support and a counterexample to the universal \#257 statement.
@@ -1554,10 +1556,12 @@ families, and Theorem~\ref{res:rigidity-main} constrains a hypothetical
 rational support, but neither result supplies the universal quantifier.
 \item The counterexample problem is to prove \(1/2\in\mathcal A\).
 Theorem~\ref{res:halfmembership} identifies this with infinitely many greedy
-skips, while Theorem~\ref{res:fatalright} reduces the current final-skip
-argument to two exact obligations: exclude the remaining exceptional cells
-\(C_D=-2,-1\), and prove the tail inequality~\textup{(4.2)} at every other
-non-\(-3\) middle transition.  Neither obligation is discharged.
+skips, while Theorem~\ref{res:fatalright} identifies nonmembership with a
+final skip.  Proposition~\ref{res:finalskipexclusions} removes the final upper
+and middle-\((-3)\) branches.  Corollary~\ref{res:taildominance} would finish
+the argument if every actual middle transition avoided \(C_D=-2,-1\) and
+satisfied~\textup{(4.2)} in every remaining non-\((-3)\) cell.  Neither
+global obligation is discharged.
 \end{enumerate}
 Appendix~\ref{app:half-technical} records the exact local reductions, finite
 certificates, counterexamples to stronger local assertions, and closed
@@ -2809,13 +2813,15 @@ Erd\H{o}s Problems catalogue maintained by Thomas Bloom~\cite{erdosproblems}.
 \label{app:half-technical}
 
 This appendix records the local arithmetic used to reach
-Theorems~\ref{res:halfmembership} and~\ref{res:fatalright}.  Its statements
-fall into four classes: exact coordinate identities, conditional compactness
-criteria, bounded finite certificates, and counterexamples to tempting local
-inductions.  None changes the two open conclusions at the end of
-Section~\ref{sec:eb}.  The appendix is included so that the hypotheses in the
-main reduction can be audited without turning the main theorem section into a
-chronology of the formal development.
+Theorems~\ref{res:halfmembership} and~\ref{res:fatalright},
+Proposition~\ref{res:finalskipexclusions}, and
+Corollary~\ref{res:taildominance}.  Its statements fall into four classes:
+exact coordinate identities, conditional compactness criteria, bounded
+finite certificates, and counterexamples to tempting local inductions.  None
+changes the two open conclusions at the end of Section~\ref{sec:eb}.  The
+appendix is included so that the hypotheses in the main reduction can be
+audited without turning the main theorem section into a chronology of the
+formal development.
 
 The order is by mathematical use.  Appendix~A.1 localises one possible unsafe
 skip; Appendix~A.2 records conditional structured-support criteria;
@@ -2834,12 +2840,14 @@ objects, not stages of a proof search.
 \HalfValueTechnicalAppendix
 
 \paragraph{Appendix consequence.}
-This appendix supplies the implications used in
-Theorem~\ref{res:fatalright}, but it does not eliminate the two remaining
-middle cells \(C_D=-2,-1\).  The handoff is exact: one still needs either a
-cofinal window, seam, or terminal approximation producing
-\(1/2\in\mathcal A\), or a proof of \(\Theta_D<C_D\) on those cells.  The
-bounded checks and local no-go theorems provide neither input.
+This appendix supplies the local implications behind
+Theorem~\ref{res:fatalright}, Proposition~\ref{res:finalskipexclusions}, and
+Corollary~\ref{res:taildominance}.  It does not establish the corollary's
+global hypothesis.  The exact handoff is either a cofinal window, seam, or
+terminal approximation producing \(1/2\in\mathcal A\), or both an exclusion
+of every actual middle transition with \(C_D=-2,-1\) and a proof of
+\(\Theta_D<C_D\) at every remaining non-\((-3)\) middle transition.  The
+bounded checks and local no-go theorems provide neither route.
 
 \section{Auxiliary rationality criteria from binary carry systems}\label{sec:carry}
 

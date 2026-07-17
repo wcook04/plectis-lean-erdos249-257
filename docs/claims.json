@@ -907,15 +907,15 @@
         "schema": "erdos249257-editorial-state/1",
         "scope": "continuous_whole_main_paper_exposition",
         "current_priority": {
-          "id": "main_paper_main_spine_equivalence_direction_audit",
+          "id": "main_paper_section5_certificate_direction_audit",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "defect_class": "main-spine exposition can use 'equivalent', 'reduction', or 'criterion' where the displayed mathematics proves only one implication or where an extra cofinality hypothesis is required",
-          "statement": "Audit equivalence and reduction language across Sections 4--8 against the displayed quantifiers and the exact direction of each formal theorem."
+          "defect_class": "Section 5 places fixed-parameter certificate equivalence, cofinal tail-period equivalence, and one-way diagonal criteria close together, so their distinct quantifier patterns require a declaration-level audit",
+          "statement": "Audit every equivalence and sufficient criterion in the Section 5 certificate spine against its displayed quantifiers and cited Lean declaration."
         },
         "last_verified_wave": {
-          "id": "main_paper_section4_half_value_aggregate_repair",
+          "id": "main_paper_section4_tail_socket_direction_repair",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "result": "Separated half-membership equivalence, finite-support exclusion, and the counterexample corollary; then split final-skip classification, proved branch exclusions, and the one-way tail-dominance membership criterion into distinct numbered statements and claim anchors."
+          "result": "Corrected every main-spine and appendix reference affected by the Section 4 split and stated the tail-dominance socket in its actual global direction: its hypothesis excludes every -2 or -1 middle cell and cannot be proved on those negative cells."
         },
         "active_inconsistencies": [],
         "blocked_decisions": []
@@ -7512,7 +7512,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 2733
+        "line": 2737
       }
     },
     {
@@ -7523,7 +7523,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 2744
+        "line": 2748
       }
     },
     {
@@ -7534,7 +7534,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "the half-value counterexample route",
-        "line": 2759
+        "line": 2763
       }
     },
     {
@@ -7545,7 +7545,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 2750
+        "line": 2754
       }
     }
   ],

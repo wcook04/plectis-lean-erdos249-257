@@ -56,7 +56,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "Erd\\H{o}s \\#249",
-    "line": 2733
+    "line": 2737
    }
   },
   {
@@ -67,7 +67,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "unbounded certificate supply",
-    "line": 2744
+    "line": 2748
    }
   },
   {
@@ -78,7 +78,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "the half-value counterexample route",
-    "line": 2759
+    "line": 2763
    }
   },
   {
@@ -89,7 +89,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "universal Erd\\H{o}s \\#257",
-    "line": 2750
+    "line": 2754
    }
   }
  ],
@@ -554,18 +554,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_main_spine_equivalence_direction_audit",
+   "id": "main_paper_section5_certificate_direction_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "main-spine exposition can use 'equivalent', 'reduction', or 'criterion' where the displayed mathematics proves only one implication or where an extra cofinality hypothesis is required",
-   "statement": "Audit equivalence and reduction language across Sections 4--8 against the displayed quantifiers and the exact direction of each formal theorem."
+   "defect_class": "Section 5 places fixed-parameter certificate equivalence, cofinal tail-period equivalence, and one-way diagonal criteria close together, so their distinct quantifier patterns require a declaration-level audit",
+   "statement": "Audit every equivalence and sufficient criterion in the Section 5 certificate spine against its displayed quantifiers and cited Lean declaration."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "a16aa24af5236b6508a34b8a4c4b41fdcf620a98",
-  "committed_navigation_snapshot": "fd78ce0c1bddb704778f65116bd93c8d50326782",
-  "main_paper_source_digest": "sha256:d7de2313c72e5bbb860800b9ea582f0426c2fa2ed6a7b20ffca85c6aed467063"
+  "committed_navigation_snapshot": "1d7ca458f421a9a5b951845f0bdd23e7a2eaa86b",
+  "main_paper_source_digest": "sha256:1f859a82224f4ffe23cd891f5f503d2791f2b50b2f35245ec62f3455adf51d67"
  },
  "reading_routes": [
   {
