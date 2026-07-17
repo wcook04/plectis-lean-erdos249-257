@@ -630,7 +630,7 @@ def main() -> int:
     unlabelled_handle = next(
         anchor["canonical_handle"]
         for row in unlabelled_declaration
-        if row["module"] == "Erdos249257/CertificateKernel.lean"
+        if row["module"] == "Erdos249257/MersenneLambertLadder.lean"
         for anchor in row["paper_anchors"]
         if anchor["anchor_class"] == "authored_formal_anchor_without_registered_claim"
     )
