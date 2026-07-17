@@ -87,7 +87,7 @@ programmes, and source owners without loading the exhaustive graph.
 | `support_families` | formalised here | `res:support` | `erdos257_family_factorial_instance` in `Erdos249257/CertificateKernel.lean:5754` |
 | `denominator_exclusion` | unconditional progress | `res:farey` | `tsum_totient_div_pow_two_ne_ratCast_of_den_le_79639646646701375323355774875831053` in `Erdos249257/CertificateKernel.lean:18056` |
 | `certificate_reduction` | conditional reduction | `res:diag` | `irrational_totient_series_of_certificate_supply` in `Erdos249257/TotientTailPeriodKiller.lean:394` |
-| `certificate_completeness` | proved here | `res:complete` | `exists_certifiedKill_iff_tail_diff_notMem_int` in `Erdos249257/LcmConeFlatness.lean:316` |
+| `certificate_completeness` | proved here | `res:pointwisecomplete` | `exists_certifiedKill_iff_tail_diff_notMem_int` in `Erdos249257/LcmConeFlatness.lean:316` |
 | `certified_kill_instances` | verified finite instance | `res:deposits` | `certifiedKill_all_small` in `Erdos249257/TotientTailPeriodKiller.lean:404` |
 | `diagonal_pincer_reduction` | conditional reduction | `res:fulltargetavoidance` | `diagonal_int_iff_foreignDiagonalDefect_hits_fullTarget` in `Erdos249257/DiagonalPincerDecomposition.lean:215` |
 | `adelic_height_obstruction` | proved here | `res:adelic` | `scalarLocalization_complement_dvd` in `Erdos249257/AdelicHeightObstruction.lean:23` |

@@ -36,20 +36,20 @@
 "authority_role": "proof_bearing_committed_source_anchor"
 },
 "navigation_snapshot": {
-"commit": "11fc8f92276e1fcbd818e8747b663d62d18555f5",
+"commit": "cd6508d4b3f7d032255919d3bbe4e3a1be764416",
 "authority_role": "machine_readable_navigation_anchor",
 "publication_state": "main_history_snapshot",
 "published_ref": "main",
-"repository_resolution": "https://github.com/wcook04/plectis-lean-erdos249-257/tree/11fc8f92276e1fcbd818e8747b663d62d18555f5"
+"repository_resolution": "https://github.com/wcook04/plectis-lean-erdos249-257/tree/cd6508d4b3f7d032255919d3bbe4e3a1be764416"
 },
 "content": {
 "machine_readable_paper": {
 "path": "docs/claims.json::machine_readable_paper",
-"content_digest": "sha256:d4bd6723a0ef4e68538da8364d8865297444d7133fd53eb07f52c2b0dd32a862"
+"content_digest": "sha256:323d62160f352b6ebd7aeab2869e13e416bceb86fd97ebeb38e4cfd6fa7dd5a6"
 },
 "claims_document": {
 "path": "docs/claims.json",
-"content_digest": "sha256:d7c4940f46cd7a3de03ddc9cf23d3d80c272a230affad061ba698e78f320d4c8"
+"content_digest": "sha256:ef327fdbd6727c6f4a1d70e3df0ec2c2f11c13531739f8e0b09a2c1613b64077"
 },
 "declaration_atlas": {
 "path": "docs/declaration_atlas.json",
@@ -62,13 +62,13 @@
 },
 "bounded_orientation": {
 "path": "docs/orientation.json",
-"content_digest": "sha256:155241df25573c7ad7eff85e0e546ddbfee3b6799a90efa9ee4ddf0a74855779"
+"content_digest": "sha256:b7734781def6018d8fda294f7df7f555f1609f574567d13e79429d66631039c2"
 },
 "human_exposition": {
 "source_path": "paper/erdos249-257-main-paper.tex",
-"source_content_digest": "sha256:fefbeabc56f8fb9813af0e5ed0258503967735a39f5552295b03810419ee08f5",
+"source_content_digest": "sha256:196eb049fdd21def33dd748ab08e6fc84064e79c9f3d76f2a7f7b8204db36f8d",
 "rendered_path": "erdos249-257-main-paper.pdf",
-"rendered_content_digest": "sha256:3bd1e15f53f4fd5ed317374130cd9d523f730fac499afe03e8d8991a6bde8233",
+"rendered_content_digest": "sha256:0ca835c36669045c3ab8a62a82cb0dd1e74b9f48a41aede098218635a05239a8",
 "artifact_role": "authored_mathematician_facing_exposition",
 "authority_posture": "authored_editorial_surface_not_Lean_proof_authority"
 },
@@ -276,7 +276,7 @@
 "id": "certificate_completeness",
 "status": "proved here",
 "statement": "At fixed parameters, a certified kill exists exactly when the corresponding tail difference is non-integral. At every positive shift, integrality of one tail difference forces S to be rational; thus irrationality is equivalent to pointwise non-integrality, and to pointwise finite certificates.",
-"paper_label": "res:complete",
+"paper_label": "res:pointwisecomplete",
 "declarations": [
 {
 "name": "exists_certifiedKill_iff_tail_diff_notMem_int",
@@ -478,7 +478,7 @@
 "source": "paper/erdos249-257-main-paper.tex",
 "environment": "problem",
 "title": "Erd\\H{o}s \\#249",
-"line": 2779
+"line": 2787
 }
 },
 {
@@ -489,7 +489,7 @@
 "source": "paper/erdos249-257-main-paper.tex",
 "environment": "problem",
 "title": "unbounded certificate supply",
-"line": 2790
+"line": 2798
 }
 },
 {
@@ -500,7 +500,7 @@
 "source": "paper/erdos249-257-main-paper.tex",
 "environment": "problem",
 "title": "the half-value counterexample route",
-"line": 2806
+"line": 2814
 }
 },
 {
@@ -511,7 +511,7 @@
 "source": "paper/erdos249-257-main-paper.tex",
 "environment": "problem",
 "title": "universal Erd\\H{o}s \\#257",
-"line": 2797
+"line": 2805
 }
 }
 ],
@@ -1757,7 +1757,7 @@
 "expansion": {
 "machine_readable_paper": {
 "path": "docs/claims.json::machine_readable_paper",
-"expected_content_digest": "sha256:d4bd6723a0ef4e68538da8364d8865297444d7133fd53eb07f52c2b0dd32a862",
+"expected_content_digest": "sha256:323d62160f352b6ebd7aeab2869e13e416bceb86fd97ebeb38e4cfd6fa7dd5a6",
 "contains": [
 "all_claims",
 "authored_argument_graph",
@@ -1781,9 +1781,9 @@
 },
 "human_exposition": {
 "source_path": "paper/erdos249-257-main-paper.tex",
-"expected_source_content_digest": "sha256:fefbeabc56f8fb9813af0e5ed0258503967735a39f5552295b03810419ee08f5",
+"expected_source_content_digest": "sha256:196eb049fdd21def33dd748ab08e6fc84064e79c9f3d76f2a7f7b8204db36f8d",
 "rendered_path": "erdos249-257-main-paper.pdf",
-"expected_rendered_content_digest": "sha256:3bd1e15f53f4fd5ed317374130cd9d523f730fac499afe03e8d8991a6bde8233",
+"expected_rendered_content_digest": "sha256:0ca835c36669045c3ab8a62a82cb0dd1e74b9f48a41aede098218635a05239a8",
 "authority_posture": "authored_editorial_surface_not_Lean_proof_authority"
 },
 "technical_companion": {

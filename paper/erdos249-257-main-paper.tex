@@ -1699,7 +1699,14 @@ For every $h\ge1$ and $N\ge0$,
 \quad\Longleftrightarrow\quad
 R_{N+h}-R_N\notin\Z.
 \]
-Moreover, the following are equivalent:
+\end{proposition}
+\noindent This is the
+\lword{LcmConeFlatness.lean}{316}{exists_certifiedKill_iff_tail_diff_notMem_int}{certificate-completeness equivalence}.
+Thus the finite predicate loses no information at a fixed pair \((h,N)\).
+
+\begin{theorem}[pointwise certificate characterisation]
+\label{res:pointwisecomplete}
+The following are equivalent:
 \[
 \begin{aligned}
  &S\notin\Q,\\
@@ -1708,17 +1715,14 @@ Moreover, the following are equivalent:
       \textsf{certifiedKill}(h,N,L).
 \end{aligned}
 \]
-\end{proposition}
+\end{theorem}
 \noindent Formalised:
-\lword{LcmConeFlatness.lean}{316}{exists_certifiedKill_iff_tail_diff_notMem_int}{certificate-completeness equivalence},
-\lword{LcmConeFlatness.lean}{386}{irrational_totient_series_iff_all_tail_diffs_nonintegral}{all-differences criterion},
+\lword{LcmConeFlatness.lean}{386}{irrational_totient_series_iff_all_tail_diffs_nonintegral}{all-differences equivalence},
 and
-\lword{LcmConeFlatness.lean}{399}{irrational_totient_series_iff_pointwise_certificates}{pointwise certificate criterion}.
+\lword{LcmConeFlatness.lean}{399}{irrational_totient_series_iff_pointwise_certificates}{pointwise certificate equivalence}.
 The converse direction uses the fact that integrality of even one
 positive-shift tail difference forces $S$ to be rational
 (\lword{LcmConeFlatness.lean}{357}{not_irrational_of_tail_diff_mem_int}{integral-difference rationality criterion}).
-Thus the finite predicate loses no information at a fixed pair $(h,N)$.
-The remaining step is purely the placement of such pairs without bound.
 
 \begin{theorem}[exact tail-period characterisation]\label{res:red21}
 $S$ is irrational if and only if, for every period $h\ge1$ and every threshold
@@ -1727,7 +1731,9 @@ $N_0$, there exist $N\ge N_0$ and $L$ with $\textsf{certifiedKill}(h,N,L)$.
 \noindent Formalised as the
 \lword{LcmConeFlatness.lean}{412}{irrational_totient_series_iff_certificate_supply}{certificate-supply equivalence}.
 Proposition~\ref{res:complete} supplies the fixed-parameter equivalence;
-Theorem~\ref{res:red21} adds exactly the unbounded placement quantifier.
+Theorem~\ref{res:pointwisecomplete} assembles all fixed pairs; and
+Theorem~\ref{res:red21} replaces pointwise placement by the equivalent
+cofinal placement quantifier.
 
 Every multiple of an eventual period is again a period.  The least common
 multiple $M_t$ therefore provides an exact one-parameter form.
@@ -1745,7 +1751,7 @@ The following are equivalent:
 \noindent The reverse implication is the
 \lword{LcmDiagonalReduction.lean}{112}{irrational_totient_series_of_lcm_diagonal_certificate_supply}{diagonal-supply theorem}.
 For the forward implication, the pointwise equivalence in
-Proposition~\ref{res:complete} supplies a certificate at every diagonal pair,
+Theorem~\ref{res:pointwisecomplete} supplies a certificate at every diagonal pair,
 so one may take \(t=t_0\).
 The theorem replaces the two free parameters \(h,N\) by \((M_t,M_t)\);
 producing that cofinal one-parameter family is still open.
@@ -1819,10 +1825,11 @@ $\theta_t$ for every $k\ge1$.
 \end{proposition}
 \noindent Formalised: \lword{LcmConeFlatness.lean}{90}{rational_totient_series_forces_lcm_cone_flatness}{cone flatness under rationality}.
 
-Proposition~\ref{res:complete} already states both fixed-parameter certificate
-completeness and its global pointwise form.  Their additional role here is
-cone-level: a joint finite refuter can interrogate several cone vertices at
-once and is sharper than any pairwise test.  It refutes the
+Proposition~\ref{res:complete} states fixed-parameter certificate
+completeness, and Theorem~\ref{res:pointwisecomplete} gives its global
+pointwise form.  Their additional role here is cone-level: a joint finite
+refuter can interrogate several cone vertices at once and is sharper than any
+pairwise test.  It refutes the
 single-fractional-part model that rationality predicts on a finite sample
 (\lword{LcmConeNonflat.lean}{126}{exists_nonintegral_pair_of_coneNonflatCert}{finite cone-nonflatness refuter}).
 
@@ -2369,7 +2376,8 @@ without bound}.
 For \#249 the rigid law is integrality of a period difference:
 Proposition~\ref{res:complete} proves that
 \(\textsf{certifiedKill}(h,N,L)\) is complete at fixed \(h,N\), whereas
-Theorem~\ref{res:red21} isolates the unbounded producer.  In the classical
+Theorem~\ref{res:pointwisecomplete} identifies the pointwise global form and
+Theorem~\ref{res:red21} isolates the cofinal producer.  In the classical
 full-support theorem that producer is constructed by the Bertrand--CRT and
 averaging argument of Section~\ref{sec:eb}.  In the half-value branch, exact
 seam and terminal predicates play the finite role, while cofinal terminal
@@ -3358,7 +3366,8 @@ not another rational normal form, is the missing premise.
 \label{app:totient-technical}
 
 This appendix expands the supporting mathematics behind
-Theorem~\ref{res:red21}, Proposition~\ref{res:complete}, and
+Proposition~\ref{res:complete}, Theorems~\ref{res:pointwisecomplete}
+and~\ref{res:red21}, and
 Theorem~\ref{res:diag}.  It contains exact cone-flatness and target-interval
 reformulations, finite residue projections, denominator and bit-lifting
 formulae, bounded certificate families, and rigorous obstructions to several

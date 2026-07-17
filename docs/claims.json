@@ -907,15 +907,15 @@
         "schema": "erdos249257-editorial-state/1",
         "scope": "continuous_whole_main_paper_exposition",
         "current_priority": {
-          "id": "main_paper_result_status_caption_audit",
+          "id": "main_paper_section4_rigidity_bundle_audit",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "defect_class": "numbered main-spine statements and their formal-link captions can still combine or blur fixed-scale equivalence, finite verification, necessary consequence, and sufficient consumer status",
-          "statement": "Audit every remaining numbered result in Sections 3--8 for a single visible logical status and a caption whose direction matches its cited declaration."
+          "defect_class": "Theorem 4.4 deliberately retains three necessary consequences under one rationality premise, but its visible hierarchy must justify that bundle and prevent the clauses from reading as a proof chain",
+          "statement": "Audit Theorem 4.4 and its Appendix B handoffs, preserving a shared-premise bundle only where the three clauses are visibly independent and individually sourced."
         },
         "last_verified_wave": {
-          "id": "main_paper_section8_scalar_aggregate_repair",
+          "id": "main_paper_section5_completeness_aggregate_repair",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "result": "Split the scalar slack bundle into a fixed-scale equivalence and one-way cofinal corollary, and split the second-channel bundle into a six-level finite proposition and an unbounded sufficient corollary."
+          "result": "Separated fixed-parameter certificate completeness from the global pointwise characterisation, leaving the cofinal tail-period and one-parameter diagonal characterisations as the next two distinct theorem levels."
         },
         "active_inconsistencies": [],
         "blocked_decisions": []
@@ -7512,7 +7512,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 2779
+        "line": 2787
       }
     },
     {
@@ -7523,7 +7523,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 2790
+        "line": 2798
       }
     },
     {
@@ -7534,7 +7534,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "the half-value counterexample route",
-        "line": 2806
+        "line": 2814
       }
     },
     {
@@ -7545,7 +7545,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 2797
+        "line": 2805
       }
     }
   ],
@@ -9090,7 +9090,7 @@
       "label": "Certificate completeness",
       "status": "proved here",
       "statement": "At fixed parameters, a certified kill exists exactly when the corresponding tail difference is non-integral. At every positive shift, integrality of one tail difference forces S to be rational; thus irrationality is equivalent to pointwise non-integrality, and to pointwise finite certificates.",
-      "paper_label": "res:complete",
+      "paper_label": "res:pointwisecomplete",
       "readme_headline": true,
       "declarations": [
         {

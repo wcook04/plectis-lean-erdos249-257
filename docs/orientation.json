@@ -56,7 +56,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "Erd\\H{o}s \\#249",
-    "line": 2779
+    "line": 2787
    }
   },
   {
@@ -67,7 +67,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "unbounded certificate supply",
-    "line": 2790
+    "line": 2798
    }
   },
   {
@@ -78,7 +78,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "the half-value counterexample route",
-    "line": 2806
+    "line": 2814
    }
   },
   {
@@ -89,7 +89,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "universal Erd\\H{o}s \\#257",
-    "line": 2797
+    "line": 2805
    }
   }
  ],
@@ -223,7 +223,7 @@
    "id": "certificate_completeness",
    "status": "proved here",
    "statement": "At fixed parameters, a certified kill exists exactly when the corresponding tail difference is non-integral. At every positive shift, integrality of one tail difference forces S to be rational; thus irrationality is equivalent to pointwise non-integrality, and to pointwise finite certificates.",
-   "paper_label": "res:complete",
+   "paper_label": "res:pointwisecomplete",
    "declarations": [
     {
      "name": "exists_certifiedKill_iff_tail_diff_notMem_int",
@@ -554,18 +554,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_result_status_caption_audit",
+   "id": "main_paper_section4_rigidity_bundle_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "numbered main-spine statements and their formal-link captions can still combine or blur fixed-scale equivalence, finite verification, necessary consequence, and sufficient consumer status",
-   "statement": "Audit every remaining numbered result in Sections 3--8 for a single visible logical status and a caption whose direction matches its cited declaration."
+   "defect_class": "Theorem 4.4 deliberately retains three necessary consequences under one rationality premise, but its visible hierarchy must justify that bundle and prevent the clauses from reading as a proof chain",
+   "statement": "Audit Theorem 4.4 and its Appendix B handoffs, preserving a shared-premise bundle only where the three clauses are visibly independent and individually sourced."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "a16aa24af5236b6508a34b8a4c4b41fdcf620a98",
-  "committed_navigation_snapshot": "11fc8f92276e1fcbd818e8747b663d62d18555f5",
-  "main_paper_source_digest": "sha256:fefbeabc56f8fb9813af0e5ed0258503967735a39f5552295b03810419ee08f5"
+  "committed_navigation_snapshot": "cd6508d4b3f7d032255919d3bbe4e3a1be764416",
+  "main_paper_source_digest": "sha256:196eb049fdd21def33dd748ab08e6fc84064e79c9f3d76f2a7f7b8204db36f8d"
  },
  "reading_routes": [
   {
