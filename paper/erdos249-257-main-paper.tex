@@ -28,7 +28,7 @@
 % the repository verifies that it matches docs/claims.json and that every
 % \lref/\lrefx/\lword/\lloc target resolves to the named declaration at that line.
 % ---------------------------------------------------------------------------
-\newcommand{\commit}{c24e2c2a781aa4a104d10884bacae52ef35cff30}
+\newcommand{\commit}{b862cb72674fd6ecb3e31e33604051e729281d6d}
 \newcommand{\repobase}{https://github.com/wcook04/plectis-lean-erdos249-257/blob/\commit}
 \newcommand{\sourceurl}{https://github.com/wcook04/plectis-lean-erdos249-257/tree/\commit}
 \newcommand{\rootbase}{https://github.com/wcook04/plectis-lean-erdos249-257/blob/main}
@@ -1265,22 +1265,22 @@ the right-tail branch or the remaining two middle cells.
 
 \paragraph{Second final-middle cell.}  The next cell, with transition carry
 $-2$, is not yet eliminated, but its possible phase is sharply constrained.
-Uniformly for seam rows $s\ge21$, the greedy decisions through rank $20$
+Uniformly for seam rows $s\ge26$, the greedy decisions through rank $21$
 select exactly the ranks
 \[
-  2,3,6,7,14,20,
+  2,3,6,7,14,20,21,
 \]
 by
-\lword{HalfFinalMiddlePhaseSieve.lean}{834}{seamGreedyBits_head2367_14_20}{the exact rank-(20) prefix}.
-Consequently, if a putative last skipped rank $D\ge20$ lies in this middle
+\lword{HalfFinalMiddlePhaseSieve.lean}{959}{seamGreedyBits_head2367_14_20_21}{the exact rank-(21) prefix}.
+Consequently, if a putative last skipped rank $D\ge26$ lies in this middle
 cell and is followed by an all-right suffix, then
 \[
- D\bmod 21\in\{8,11,14,17,20\},\qquad D\bmod10\ne8,
+ D\bmod 21\in\{11,14,17,20\},\qquad D\bmod10\ne8,
 \]
-and the class $D\bmod10=7$ cannot pair with
-$D\bmod21\in\{8,11\}$.  Thus only $43$ of the $210$ joint residue classes
+and the class $D\bmod10=7$ cannot pair with $D\bmod21=11$.
+Thus only $35$ of the $210$ joint residue classes
 survive,
-\lword{HalfFinalMiddlePhaseSieve.lean}{1189}{finalMiddleCell_neg_two_forces_phase_refinement}{the final-middle phase sieve}.
+\lword{HalfFinalMiddlePhaseSieve.lean}{1499}{finalMiddleCell_neg_two_forces_phase_refinement_through_twentyOne}{the final-middle phase sieve}.
 This is a uniform exact reduction of the $-2$ cell, not its exclusion; the
 surviving phases, the $-1$ cell, and the right-tail branch remain open.
 

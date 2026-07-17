@@ -4,8 +4,7 @@
 # Tail certificates and achievement-set geometry for Erdős Problems 249 and 257
 
 **New here?** Read the
-[architecture and repository guide](ARCHITECTURE.md) for the purpose, file map,
-checks, and trust boundary, or use the
+[architecture and repository guide](ARCHITECTURE.md) or the
 [printable PDF](claim-faithful-publication-systems-paper.pdf). It assumes no
 Lean or project history.
 
@@ -25,9 +24,8 @@ Lean 4 formal work on two unsolved irrationality problems.
 - **Erdős #257 asks whether** `∑_{n∈A} 1/(2ⁿ - 1)` is irrational for every
   infinite `A ⊆ ℕ`.
 
-Both remain open. This project formalises results around both questions; **it
-does not solve Erdős #249 or the universal form of Erdős #257.** Each row
-stays within the Lean source.
+Both remain open. **This project does not solve Erdős #249 or universal Erdős
+#257.** Every table row stays within Lean source.
 
 This self-contained public checkout is not an entrypoint into any private
 development system; do not infer results from private or unreleased work.
@@ -67,7 +65,7 @@ conclusion depends on a named open condition.
 
 Typed routes expose sources: `probabilistic_gcd_geometry` for the first four
 rows, `boolean_mobius_constraints` for tail rigidity, and
-`arithmetic_obstruction_interfaces` for the last two. Other routes cover
+`arithmetic_obstruction_interfaces` for the last two. Orientation lists
 eventually-periodic nonnegative weighted irrationality, a signed
 irrational-or-base-terminating dichotomy, five binary-carry
 criteria/consequences, and two scoped #249 no-go countermodels.
@@ -75,12 +73,10 @@ criteria/consequences, and two scoped #249 no-go countermodels.
 An exact final-skip band formula does not show that the actual orbit avoids
 an unsafe band.
 
-[Orientation](docs/ORIENTATION.md) routes claims. The
-[gateway paper](erdos249-257-main-paper.pdf) states both spines; the
-[former #249-only companion](erdos249-transport-curvature-companion-note.pdf)
-has been scrapped as a standalone publication. Its source is preserved, but
-it will only be revived as part of a matched #249/#257 specialist-note pair or
-folded selectively into the main exposition.
+[Orientation](docs/ORIENTATION.md) routes claims; the
+[gateway paper](erdos249-257-main-paper.pdf) owns the current exposition. The
+[former #249-only note](erdos249-transport-curvature-companion-note.pdf) is a
+retirement notice; its predecessor is archived.
 
 ## What remains open
 
@@ -101,7 +97,7 @@ boundary.
 | Library | Current size |
 |---|---:|
 | Lean modules | 635 |
-| Formal results and supporting lemmas | 11,525 |
+| Formal results and supporting lemmas | 11,530 |
 | Curated claim records | 99 |
 | Contribution families | 21 |
 

@@ -23,9 +23,9 @@
 },
 "identity": {
 "formal_source": {
-"ref": "c24e2c2a781aa4a104d10884bacae52ef35cff30",
+"ref": "b862cb72674fd6ecb3e31e33604051e729281d6d",
 "ref_kind": "commit",
-"resolved_commit": "c24e2c2a781aa4a104d10884bacae52ef35cff30",
+"resolved_commit": "b862cb72674fd6ecb3e31e33604051e729281d6d",
 "publication_state": "committed_checkpoint_pending_remote_publication",
 "relationship_to_last_tag": "post_tag_checkpoint",
 "last_release": {
@@ -45,16 +45,16 @@
 "content": {
 "machine_readable_paper": {
 "path": "docs/claims.json::machine_readable_paper",
-"content_digest": "sha256:6e53a8a76e51a1c470cb41ff983114e3a382ab612f42945c29e589cbf34be27c"
+"content_digest": "sha256:db3a7f33997c9b7cdfee8813562a0337ce199adebef8d03680f6f237bd5e79e3"
 },
 "claims_document": {
 "path": "docs/claims.json",
-"content_digest": "sha256:b36a5e438782cbe4f760ef7c9a92e9e2a49ebca2949461728fec9df2e595628a"
+"content_digest": "sha256:4004106e0e253e38e3070a837c4271b79209829467a813ab99bdd6f5722718e9"
 },
 "declaration_atlas": {
 "path": "docs/declaration_atlas.json",
-"content_digest": "sha256:7f99cc6cc13ac9702f7d6365222f1a9f928862e0f95915500fcd8b815d590112",
-"source_input_fingerprint": "sha256:97a2089f528ab97c7fe74ccfe1c9c3adde2b0904951431cd86691212f1909259"
+"content_digest": "sha256:82f04f394004533a96c3b551252ff8521c1ae93e74cca661aeff71e329c8e3bf",
+"source_input_fingerprint": "sha256:941a7110ce687a42184e22f64ece4f87601d6fea636dfe58dad54d2f9a9a1519"
 },
 "methodology_contract": {
 "path": "docs/methodology.json",
@@ -62,21 +62,21 @@
 },
 "bounded_orientation": {
 "path": "docs/orientation.json",
-"content_digest": "sha256:d6dccf35646e2cd69b0c419be39bbc06aabea94e1ff3beff1fded55287ad6f71"
+"content_digest": "sha256:3e16600635c0f795ac35d0f63473f4c143eb226ac8272f5cf39a615a31497962"
 },
 "human_exposition": {
 "source_path": "paper/erdos249-257-main-paper.tex",
-"source_content_digest": "sha256:8d3e587faf917ee56236b264565ad1edcd2fc00595fcaca65214b04467de966f",
+"source_content_digest": "sha256:439e478f1410327d9aa1b9e67259496af902bd668732b3cb8e13298068810ba4",
 "rendered_path": "erdos249-257-main-paper.pdf",
-"rendered_content_digest": "sha256:8fbfd47518888546a4ec3eef3b4c87bcabb81cb7086969ff2177d98e7f284545",
+"rendered_content_digest": "sha256:80e832fd7e29d3249931f6648a981be89180ccb07e7aefbabef2c8834e2455cb",
 "artifact_role": "authored_mathematician_facing_exposition",
 "authority_posture": "authored_editorial_surface_not_Lean_proof_authority"
 },
 "technical_companion": {
 "source_path": "paper/erdos249-transport-curvature-companion-note.tex",
-"source_content_digest": "sha256:cf9fb04a4da965570d2ac3a2bfceab5300d7380d66d1ec60c956488cfcf96019",
+"source_content_digest": "sha256:e3232541cb35f49e7e2bf520357de9b9e7defadd47972bd002db8697563c6c5d",
 "rendered_path": "erdos249-transport-curvature-companion-note.pdf",
-"rendered_content_digest": "sha256:4209e212180a80e55925267654da3751a8a677c1733e9900c446932f7a2f345e",
+"rendered_content_digest": "sha256:3a49eaf971bd5abe832a7da360f0973ba23bba2b2eaeaf0a73b177f70b3ef9dd",
 "artifact_role": "authored_transport_and_curvature_companion",
 "authority_posture": "authored_editorial_surface_not_Lean_proof_authority"
 },
@@ -148,8 +148,8 @@
 },
 "summary": {
 "module_count": 635,
-"declaration_count": 12563,
-"theorem_like_count": 11525,
+"declaration_count": 12568,
+"theorem_like_count": 11530,
 "generated_certificate_declaration_count": 2925,
 "principal_claim_link_count": 288,
 "kind_counts": {
@@ -159,7 +159,7 @@
 "instance": 5,
 "lemma": 354,
 "structure": 29,
-"theorem": 11171
+"theorem": 11176
 }
 },
 "compact_graph": {
@@ -961,7 +961,7 @@
 "remaining_open_effect": {
 "remaining_open_proposition_id": "remaining_open.half_value_membership",
 "operation": "narrows",
-"statement": "Restricts a hypothetical final middle -2 cell to 43 of 210 joint residue classes after the exact rank-20 seam prefix; the surviving classes, the middle -1 cell, and the right-tail branch remain open."
+"statement": "Restricts a hypothetical final middle -2 cell to 35 of 210 joint residue classes after the exact rank-21 seam prefix; the surviving classes, the middle -1 cell, and the right-tail branch remain open."
 }
 },
 {
@@ -1773,7 +1773,7 @@
 "expansion": {
 "machine_readable_paper": {
 "path": "docs/claims.json::machine_readable_paper",
-"expected_content_digest": "sha256:6e53a8a76e51a1c470cb41ff983114e3a382ab612f42945c29e589cbf34be27c",
+"expected_content_digest": "sha256:db3a7f33997c9b7cdfee8813562a0337ce199adebef8d03680f6f237bd5e79e3",
 "contains": [
 "all_claims",
 "authored_argument_graph",
@@ -1784,8 +1784,8 @@
 },
 "exhaustive_declaration_atlas": {
 "path": "docs/declaration_atlas.json",
-"expected_content_digest": "sha256:7f99cc6cc13ac9702f7d6365222f1a9f928862e0f95915500fcd8b815d590112",
-"expected_source_input_fingerprint": "sha256:97a2089f528ab97c7fe74ccfe1c9c3adde2b0904951431cd86691212f1909259",
+"expected_content_digest": "sha256:82f04f394004533a96c3b551252ff8521c1ae93e74cca661aeff71e329c8e3bf",
+"expected_source_input_fingerprint": "sha256:941a7110ce687a42184e22f64ece4f87601d6fea636dfe58dad54d2f9a9a1519",
 "availability": "optional_attached_corpus",
 "check": "python3 scripts/build_declaration_atlas.py --check"
 },
@@ -1797,16 +1797,16 @@
 },
 "human_exposition": {
 "source_path": "paper/erdos249-257-main-paper.tex",
-"expected_source_content_digest": "sha256:8d3e587faf917ee56236b264565ad1edcd2fc00595fcaca65214b04467de966f",
+"expected_source_content_digest": "sha256:439e478f1410327d9aa1b9e67259496af902bd668732b3cb8e13298068810ba4",
 "rendered_path": "erdos249-257-main-paper.pdf",
-"expected_rendered_content_digest": "sha256:8fbfd47518888546a4ec3eef3b4c87bcabb81cb7086969ff2177d98e7f284545",
+"expected_rendered_content_digest": "sha256:80e832fd7e29d3249931f6648a981be89180ccb07e7aefbabef2c8834e2455cb",
 "authority_posture": "authored_editorial_surface_not_Lean_proof_authority"
 },
 "technical_companion": {
 "source_path": "paper/erdos249-transport-curvature-companion-note.tex",
-"expected_source_content_digest": "sha256:cf9fb04a4da965570d2ac3a2bfceab5300d7380d66d1ec60c956488cfcf96019",
+"expected_source_content_digest": "sha256:e3232541cb35f49e7e2bf520357de9b9e7defadd47972bd002db8697563c6c5d",
 "rendered_path": "erdos249-transport-curvature-companion-note.pdf",
-"expected_rendered_content_digest": "sha256:4209e212180a80e55925267654da3751a8a677c1733e9900c446932f7a2f345e",
+"expected_rendered_content_digest": "sha256:3a49eaf971bd5abe832a7da360f0973ba23bba2b2eaeaf0a73b177f70b3ef9dd",
 "authority_posture": "authored_editorial_surface_not_Lean_proof_authority"
 },
 "paper_source_sigils": {

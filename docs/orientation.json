@@ -19,13 +19,13 @@
   "version": "0.6.0",
   "tag": "v0.6.0",
   "lean_toolchain": "leanprover/lean4:v4.29.1",
-  "formal_source_ref": "c24e2c2a781aa4a104d10884bacae52ef35cff30",
+  "formal_source_ref": "b862cb72674fd6ecb3e31e33604051e729281d6d",
   "formal_source_publication_state": "committed_checkpoint_pending_remote_publication"
  },
  "scale": {
   "module_count": 635,
-  "declaration_count": 12563,
-  "theorem_like_count": 11525,
+  "declaration_count": 12568,
+  "theorem_like_count": 11530,
   "generated_certificate_declaration_count": 2925,
   "principal_claim_link_count": 288,
   "kind_counts": {
@@ -35,7 +35,7 @@
    "instance": 5,
    "lemma": 354,
    "structure": 29,
-   "theorem": 11171
+   "theorem": 11176
   }
  },
  "status_taxonomy": {
@@ -541,12 +541,7 @@
    "source": "paper/erdos249-257-main-paper.tex",
    "decision": "retain_and_reconstruct"
   },
-  "retained_companions": [
-   {
-    "source": "paper/erdos249-transport-curvature-companion-note.tex",
-    "decision": "retain_and_rebuild"
-   }
-  ],
+  "retained_companions": [],
   "qualified_future_companion": {
    "id": "erdos257_half_value_carry_companion",
    "decision": "qualified_but_not_created_in_this_wave"
@@ -563,9 +558,9 @@
   "blocked_decisions": []
  },
  "source_revision": {
-  "formal_source_ref": "c24e2c2a781aa4a104d10884bacae52ef35cff30",
+  "formal_source_ref": "b862cb72674fd6ecb3e31e33604051e729281d6d",
   "committed_navigation_snapshot": "9da6387a51e9a5fcbb6b2461375930791fc32957",
-  "main_paper_source_digest": "sha256:8d3e587faf917ee56236b264565ad1edcd2fc00595fcaca65214b04467de966f"
+  "main_paper_source_digest": "sha256:439e478f1410327d9aa1b9e67259496af902bd668732b3cb8e13298068810ba4"
  },
  "reading_routes": [
   {

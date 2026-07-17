@@ -716,7 +716,7 @@ def validate_agent_packets(packets: dict[str, Any]) -> None:
         for row in last_producer["argument_neighbourhood"]["outgoing"]
     }
     phase_sieve = story_claims["final_middle_neg_two_phase_sieve"]
-    assert "43 of the 210 joint residue classes survive" in phase_sieve["claim"]["statement"]
+    assert "35 of the 210 joint residue classes survive" in phase_sieve["claim"]["statement"]
     assert ("advances_open_target", "universal_257") in {
         (row["relation"], row["neighbour"]["id"])
         for row in phase_sieve["argument_neighbourhood"]["outgoing"]

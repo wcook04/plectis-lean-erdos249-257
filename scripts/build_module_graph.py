@@ -63,7 +63,7 @@ NEW_ROLES = {
     "Erdos249257.HalfCylinderQuarterBandEndpoints": "Quarter-band endpoint cells for adjacent half-cylinder cuts",
     "Erdos249257.HalfCylinderResetDeficitEscape": "Reset-deficit escape geometry for the largest-skip crossing",
     "Erdos249257.HalfCylinderSeamProducerAlignment": "Seam-to-producer carry alignment identity",
-    "Erdos249257.HalfFinalMiddlePhaseSieve": "Rank-20 final-middle phase sieve for the half seam",
+    "Erdos249257.HalfFinalMiddlePhaseSieve": "Rank-21 final-middle phase sieve for the half seam",
     "Erdos249257.HalfCarrySelectedWindowBase": "Computed depth-18 selected half-carry window base",
     "Erdos249257.RewindSeamOperationalBridge": "Operational bridge from rewind seams to protected next-row seams",
     "Erdos249257.SelectedSuffixCylinder": "Terminally indexed selected suffix-cylinder propagation",

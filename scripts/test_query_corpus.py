@@ -435,7 +435,7 @@ def main() -> int:
         for row in last_producer["argument_neighbourhood"]["incoming"]
     }
     phase_sieve = query("--claim", "final_middle_neg_two_phase_sieve")
-    assert "43 of the 210 joint residue classes survive" in phase_sieve["claim"]["statement"]
+    assert "35 of the 210 joint residue classes survive" in phase_sieve["claim"]["statement"]
     assert ("builds_on", "fatal_gap_right_tail_classification") in {
         (row["relation"], row["neighbour"]["id"])
         for row in phase_sieve["argument_neighbourhood"]["outgoing"]
@@ -531,8 +531,7 @@ def main() -> int:
         anchor_window = "\n".join(source_lines[paper["line"] - 1 : paper["line"] + 1])
         assert re.search(rf"\\label\{{{re.escape(row['paper_label'])}\}}", anchor_window)
     companion = query("--claim", "transport_curvature_reductions")
-    assert companion["paper"]["source"] == "paper/erdos249-transport-curvature-companion-note.tex"
-    assert companion["paper"]["rendered"] == "erdos249-transport-curvature-companion-note.pdf"
+    assert companion["paper"] is None
     assert companion["lean_source_identity"] == {
         **formal_source,
         "repository": claims_document["release"]["repository"],
@@ -627,10 +626,6 @@ def main() -> int:
         "eb_constant",
         "eb_full_support",
     }
-    companion_paper_label = query("--paper-label", "sec:curvature")
-    assert companion_paper_label["paper"]["source"] == (
-        "paper/erdos249-transport-curvature-companion-note.tex"
-    )
     local_result = query("--paper-anchor", "res:lift")
     assert local_result["anchor_class"] == "authored_formal_anchor_without_registered_claim"
     assert local_result["attachment_receipt"]["claim_count"] == 0
@@ -659,8 +654,8 @@ def main() -> int:
     )
     navigation_anchor = query("--paper-anchor", "sec:intro")
     assert navigation_anchor["anchor_class"] == "section_navigation_anchor"
+    assert navigation_anchor["anchor_neighbourhood"]["previous"] is None
     assert query("--paper-anchor", "app:index")["anchor_neighbourhood"]["next"] is None
-    assert query("--paper-anchor", "sec:scope")["anchor_neighbourhood"]["previous"] is None
     unknown_paper_label = run("--paper-label", "prop:not-a-real-label")
     assert unknown_paper_label.returncode == 2
     assert "unknown paper label" in unknown_paper_label.stderr

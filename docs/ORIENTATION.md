@@ -24,8 +24,8 @@ The workflow provenance explains the release discipline; it does not imply hidde
 | Surface | Count |
 |---|---:|
 | Lean modules | 635 |
-| Lean declarations | 12,563 |
-| Theorem-like declarations | 11,525 |
+| Lean declarations | 12,568 |
+| Theorem-like declarations | 11,530 |
 | Generated certificate declarations | 2,925 |
 | Principal claim links | 288 |
 
