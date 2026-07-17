@@ -564,15 +564,19 @@ def main() -> int:
     assert signed_moment_claim["lean_source_identity"] == square_crt_claim["lean_source_identity"]
 
     dyadic_totient_claim = query("--claim", "dyadic_totient_certificate_interface")
-    assert dyadic_totient_claim["claim"]["status"] == "proved here"
-    assert "No theorem here produces the separated minors for all e" in (
+    assert dyadic_totient_claim["claim"]["status"] == "unconditional progress"
+    assert "full dyadic totient kernel is not finite-dimensional" in (
         dyadic_totient_claim["claim"]["statement"]
     )
     assert dyadic_totient_claim["claim"]["declarations"][0] == {
-        "name": "finrank_canonicalTotientKernel_eq_of_certificate",
+        "name": "exists_separatedMinorCertificate_totientAffineOddFamily",
         "module": "Erdos249257/TotientMahlerDefect.lean",
-        "line": 98,
+        "line": 847,
     }
+    assert any(
+        row["name"] == "not_finiteDimensional_span_fullTotientKernel"
+        for row in dyadic_totient_claim["claim"]["declarations"]
+    )
     assert dyadic_totient_claim["lean_source_identity"] == signed_moment_claim["lean_source_identity"]
 
     residual_gauge_claim = query("--claim", "residual_gauge_obstruction")

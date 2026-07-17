@@ -28,7 +28,7 @@
 % the repository verifies that it matches docs/claims.json and that every
 % \lref/\lrefx/\lword/\lloc target resolves to the named declaration at that line.
 % ---------------------------------------------------------------------------
-\newcommand{\commit}{a16aa24af5236b6508a34b8a4c4b41fdcf620a98}
+\newcommand{\commit}{62c8c3660ce90e4a0dfe6a02b9168fc4f287fcb5}
 \newcommand{\repobase}{https://github.com/wcook04/plectis-lean-erdos249-257/blob/\commit}
 \newcommand{\sourceurl}{https://github.com/wcook04/plectis-lean-erdos249-257/tree/\commit}
 \newcommand{\rootbase}{https://github.com/wcook04/plectis-lean-erdos249-257/blob/main}
@@ -101,11 +101,17 @@ complete finite certificates at fixed parameters, and to a cofinal
 lcm-diagonal certificate supply.  Certificates are verified at the 28 scales
 up to \(t=64\) at which the lcm diagonal changes (including the initial scale);
 this is finite evidence only, and the cofinal supply is open.
+A CRT--Dirichlet construction also gives exact dyadic totient-kernel rank
+$2^e+1$ at every level, so the full kernel span is infinite-dimensional.
+Rationality would force a tempered carry of rank at least $2^e-1$ at every
+level; no upper bound is known, so this does not prove irrationality.
 
 For Erd\H{o}s~\#257, we formalise Erd\H{o}s's classical theorem for full
 support in every base and several structured-support cases.  At base \(2\)
 we prove exact achievement-set geometry and necessary carry and gap
-constraints on hypothetical rational infinite supports.  Membership of
+constraints on hypothetical rational infinite supports.  In particular,
+rationality forces the divisor-count coefficient's zero windows to have
+length $o(\log N)$, uniformly in the support.  Membership of
 \(1/2\), which would refute the universal statement, is exactly equivalent to
 infinitely many greedy skips.  Nonmembership is exactly equivalent to an
 eventually right integer seam, a finite fatal gap, and a final greedy skip.
@@ -128,16 +134,15 @@ collection and Erd\H{o}s's later survey~\cite{erdosgraham1980,erdos1988};
 the numbering follows the maintained catalogue~\cite{erdosproblems}.
 
 For \#257, an infinite support summing to $1/2$ would refute the universal
-claim.  Below are proved positive cases, exact reductions, and conditional
-routes, but neither endpoint.  In both open spines, tail and carry identities
+claim.  Neither endpoint is proved.  In both open spines, tail and carry identities
 separate exact finite arithmetic from one analytic or combinatorial
 cofinality statement.
 
 \subsection*{Overview for a first reading}
 
-The totient \(\ph(n)\) counts positive integers at most $n$ and coprime to
-$n$.  A \emph{support} selects terms; its \emph{achievement set} contains the
-resulting sums.  \emph{Cofinally} means beyond every prescribed bound.
+The totient \(\ph(n)\) is Euler's totient.  A \emph{support} selects terms;
+its \emph{achievement set} contains the resulting sums.  \emph{Cofinally}
+means beyond every bound.
 
 The totient constant also has the elementary probabilistic form
 \[
@@ -164,31 +169,33 @@ an architectural comparison, not a common theorem connecting their
 arithmetic mechanisms.
 
 \paragraph{Principal results and contribution.}
-Three theorem families carry the paper:
+Four theorem families carry the paper:
 \begin{enumerate}[label=\textup{(\roman*)},leftmargin=2.2em]
-\item the denominator exclusion in Theorem~\ref{res:farey};
+\item the denominator exclusion in Theorem~\ref{res:farey} and the
+infinite-dimensional dyadic totient-kernel theorem in
+Theorem~\ref{res:dyadictotient};
 \item the fixed, pointwise, cofinal, and lcm-diagonal certificate equivalences
 in Proposition~\ref{res:complete} and
 Theorems~\ref{res:pointwisecomplete}--\ref{res:diag};
+\item the infinite state, zero-window, and denominator-mass constraints in
+Corollaries~\ref{res:rigidity-unbounded-main}--\ref{res:rigidity-dyadic-mass-main};
 \item the half-membership and final-skip classifications in
 Theorems~\ref{res:halfmembership} and~\ref{res:fatalright}, with the residual
 obligations in Proposition~\ref{res:finalskipexclusions} and
 Corollary~\ref{res:taildominance}.
 \end{enumerate}
-The statuses are distinct: \textbf{\mbox{Unconditional}} is the denominator
-bound; \textbf{\mbox{Exact reductions}} are equivalences with open global
-producers; and \textbf{\mbox{Classical}} are known support theorems
+Statuses: \textbf{\mbox{Unconditional}} exact progress includes
+the denominator bound, infinite dyadic-kernel rank, and the rational-support
+constraints; \textbf{\mbox{Exact reductions}} are equivalences with open
+global producers; and \textbf{\mbox{Classical}} are known support theorems
 formalised here.  The 28 diagonal rows remain finite evidence, and both
 endpoints remain open.
 
-The denominator bound, certificate equivalences, and half-value and final-skip
-classifications are proved here, not presented as formalisations of cited
-classical theorems.  This states the contribution without inferring priority
-from the comparison record.  The main article is the mathematical gateway;
-the appendices carry auxiliary, conditional, and audit material, with no
-stronger endpoint conclusion.  The exact half-value counterexample spine uses
-that a finite normalised support cannot have value $1/2$; no unbounded supply
-is proved.
+These results are proved here without a priority claim.  The main article is
+the gateway; appendices carry auxiliary and audit material.  Neither
+evidence nor an exact reduction supplies a global producer.
+The exact half-value counterexample spine uses that a finite normalised
+support cannot have value $1/2$; no unbounded supply is proved.
 
 \paragraph{Reading map.}
 Section~\ref{sec:spines} gives the exact spines, Section~\ref{sec:ladder} their
@@ -2423,33 +2430,49 @@ separate checked clean cube with second coefficient $-4$
 Thus the result gives neither an unbounded certificate supply nor an
 irrationality criterion for $S$.
 
-\subsection{Conditional determinant and rank routes}
+\subsection{Unconditional dyadic rank and carry anti-compression}
 \label{app:totient-rank}
 
-This route has two conditional rank implications.  The first transfers a
-hypothetical rational totient series into unbounded carry-section ranks under
-an all-level kernel-independence hypothesis.  The second turns a separated
-nonzero minor into maximal rank at one fixed level; the two generic algebraic
-lemmas below supply possible inputs to that minor route.  The even-residue and
-compressed-adjoint propositions are independent reductions, and the
-residual-gauge proposition marks the boundary of residual-blind minor
-constructions.
+The determinant producer in this route is unconditional.  At every level, a
+CRT construction prescribes one target prime channel and fresh off-target
+prime divisors; Dirichlet's theorem supplies the required primes in the
+resulting progressions.  After the exact powers of two are divided from the
+columns, the evaluation matrix is the identity modulo two.  This proves a
+nonzero separated minor at every level rather than merely postulating one.
+
+\begin{theorem}[infinite dyadic totient-kernel rank]
+\label{res:dyadictotient}
+For every $e\geq0$, the canonical level-$e$ dyadic totient-kernel family is
+linearly independent over $\Q$ and its span has dimension $2^e+1$.
+Consequently, the span of all sections
+\[
+ n\longmapsto \ph(2^j n+r),\qquad j\geq0,\quad 0\leq r<2^j,
+\]
+is not finite-dimensional over $\Q$.
+\end{theorem}
+\noindent Formalised by the all-level minor producer
+\lword{TotientMahlerDefect.lean}{847}{exists_separatedMinorCertificate_totientAffineOddFamily}{CRT--Dirichlet separated minors},
+the independence theorem
+\lword{TotientMahlerDefect.lean}{900}{linearIndependent_canonicalTotientKernelFamily}{canonical kernel independence},
+the exact rank formula
+\lword{TotientMahlerDefect.lean}{954}{finrank_canonicalTotientKernel_eq}{exact canonical rank},
+and
+\lword{TotientMahlerDefect.lean}{1014}{not_finiteDimensional_span_fullTotientKernel}{infinite full-kernel dimension}.
+The theorem concerns the coefficient kernel.  It does not imply that $S$ is
+irrational.
 
 \begin{proposition}[finite-level carry anti-compression]\label{res:carryrank}
-Suppose a tempered integral carry orbit for the totient sequence has positive
-multiplier.  If the canonical level-$e$ totient kernel family is linearly
-independent, then the span of its canonical carry sections has dimension at
-least $2^e-1$.  Consequently, an all-level independence hypothesis together
-with rationality of the totient coefficient series would force one tempered
-carry orbit with unbounded finite-level section ranks.
+If the totient coefficient series were rational, there would be a positive-
+multiplier tempered integral carry orbit whose canonical carry-section span
+has dimension at least $2^e-1$ for every $e$.
 \end{proposition}
 \noindent Formalised:
 \lword{TotientCarryKernelRigidity.lean}{211}{finrank_canonicalCarryKernel_ge_of_linearIndependent}{the carry-kernel rank lower bound}
 and
-\lword{TotientCarryKernelRigidity.lean}{261}{not_irrational_totientSeries_implies_unbounded_carryRank}{the unbounded-rank consequence of rationality}.
-The all-level independence hypothesis is not proved here.  Thus the
-proposition records an exact conditional anti-compression consequence, not an
-irrationality criterion for $S$.
+\lword{TotientCarryKernelRigidity.lean}{284}{not_irrational_totientSeries_implies_unbounded_carryRank_unconditional}{the unconditional unbounded-rank consequence of rationality}.
+No theorem bounds the dyadic section rank of every rationality-supplied
+tempered carry.  The proposition therefore identifies an infinite
+rationality-side barrier, not an irrationality criterion for $S$.
 
 \begin{proposition}[rectangular determinant expansion]\label{res:signedmoment}
 For matrices $M:\iota\times\kappa\to R$ and
@@ -2473,30 +2496,26 @@ These are finite algebraic inputs to a signed-moment route.  They do not show
 that any actual totient Hankel determinant is nonzero, and they give no
 irrationality criterion for $S$.
 
-\begin{proposition}[separated-minor rank criterion]\label{res:dyadictotient}
-For every fixed level $e$, a separated nonzero evaluation minor of the
-canonical dyadic totient-kernel family gives its span dimension
-$2^e+1$.
-\end{proposition}
-\noindent This is the
-\lword{TotientMahlerDefect.lean}{98}{finrank_canonicalTotientKernel_eq_of_certificate}{separated-minor rank criterion}.
-What is missing is an all-level construction of the separated minors, for
-example by a CRT--Dirichlet argument.
+The formal proof also exposes the producer-neutral
+\lword{TotientMahlerDefect.lean}{101}{finrank_canonicalTotientKernel_eq_of_certificate}{separated-minor rank criterion}.
+The two generic algebraic propositions above remain useful as possible inputs
+to other determinant routes, but the totient-kernel minor itself is supplied
+at every level by Theorem~\ref{res:dyadictotient}.
 
 \begin{proposition}[even-residue reduction]\label{res:evenresidue}
 Every even residue channel in the canonical dyadic totient-kernel family is
 exactly a scalar multiple of its odd-core channel.
 \end{proposition}
 \noindent Formalised as the
-\lword{TotientMahlerDefect.lean}{156}{totientKernel_even_residue_reduce}{even-residue reduction}.
-This removes duplicate channels; it does not construct a separated minor.
+\lword{TotientMahlerDefect.lean}{159}{totientKernel_even_residue_reduce}{even-residue reduction}.
+This removes duplicate channels before the separated minor is constructed.
 
 \begin{proposition}[compressed-adjoint contradiction]\label{res:compressedadjoint}
 A compressed-adjoint certificate whose nonzero multiple is strictly smaller
 in absolute value than its positive modulus is inconsistent.
 \end{proposition}
 \noindent Formalised as the
-\lword{TotientMahlerDefect.lean}{197}{false_of_compressedAdjointCertificate}{compressed-adjoint contradiction}.
+\lword{TotientMahlerDefect.lean}{1051}{false_of_compressedAdjointCertificate}{compressed-adjoint contradiction}.
 This is a conditional finite contradiction, not a source of certificates at
 every level.
 
@@ -3694,6 +3713,8 @@ normal forms; and Theorems~\ref{res:halfmembership}
 and~\ref{res:fatalright} for the two half-value classifications.
 Theorem~\ref{res:full} is the classical closed comparison case.  For the
 strongest independent structure beyond the two open spines, see
+Theorem~\ref{res:dyadictotient}, the sublogarithmic zero-window corollary in
+the main \#257 results, and
 Theorems~\ref{res:sternbrocotcylinders} and~\ref{res:sternbrocotruns}.
 The public repository contains a complete searchable cross-reference for
 readers who need declaration-level detail.
@@ -3740,7 +3761,7 @@ prime-adjunction diamond no-go & \lrefx{FullTargetPrimeAdjunctionNoGo.lean}{196}
 scalar-localisation height obstruction & \lrefx{AdelicHeightObstruction.lean}{23}{scalarLocalization_complement_dvd}\ (\texttt{AdelicHeightObstruction})\\
 square-CRT correction suppression & \lrefx{SquareCRTCube.lean}{198}{exists_squareCRT_clean_totient_family}\ (\texttt{SquareCRTCube})\\
 signed dyadic-moment algebra & \lrefx{SignedQMomentObstruction.lean}{28}{det_mul_rectangular}\ (\texttt{SignedQMomentObstruction})\\
-dyadic totient certificate rank criterion & \lrefx{TotientMahlerDefect.lean}{98}{finrank_canonicalTotientKernel_eq_of_certificate}\ (\texttt{TotientMahlerDefect})\\
+infinite-dimensional dyadic totient kernel & \lrefx{TotientMahlerDefect.lean}{1014}{not_finiteDimensional_span_fullTotientKernel}\ (\texttt{TotientMahlerDefect})\\
 residual-gauge obstruction for monomial minors & \lrefx{ResidualGaugeObstruction.lean}{55}{det_residualMonomialMatrix_ne_zero_iff}\ (\texttt{ResidualGaugeObstruction})\\
 tail-orbit rationality criterion & \lrefx{GenericTailOrbitRigidity.lean}{425}{binaryCoeffSeries_rational_iff_exists_temperedBinaryOrbit}\ (\texttt{GenericTailOrbitRigidity})\\
 Boolean carry certificate $\Leftrightarrow$ support fraction & \lrefx{BooleanMobiusCarry.lean}{948}{exists_normalized_support_fraction_iff_exists_booleanMobiusCarry}\ (\texttt{BooleanMobiusCarry})\\

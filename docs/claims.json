@@ -7476,7 +7476,7 @@
     "lean_toolchain": "leanprover/lean4:v4.29.1",
     "repository": "https://github.com/wcook04/plectis-lean-erdos249-257",
     "formal_source": {
-      "ref": "a16aa24af5236b6508a34b8a4c4b41fdcf620a98",
+      "ref": "62c8c3660ce90e4a0dfe6a02b9168fc4f287fcb5",
       "ref_kind": "commit",
       "publication_state": "committed_checkpoint_pending_remote_publication",
       "relationship_to_last_tag": "post_tag_checkpoint"
@@ -7512,7 +7512,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 2977
+        "line": 2996
       }
     },
     {
@@ -7523,7 +7523,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 2988
+        "line": 3007
       }
     },
     {
@@ -7534,7 +7534,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "the half-value counterexample route",
-        "line": 3009
+        "line": 3028
       }
     },
     {
@@ -7545,7 +7545,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 3000
+        "line": 3019
       }
     }
   ],
@@ -9013,11 +9013,11 @@
     },
     {
       "id": "totient_carry_kernel_anti_compression",
-      "label": "Conditional carry-kernel anti-compression",
-      "status": "conditional reduction",
-      "statement": "A positive-multiplier tempered totient carry orbit has canonical carry-section span dimension at least 2^e − 1 whenever the canonical level-e totient kernel family is linearly independent. Therefore an all-level independence producer, together with rationality of the totient coefficient series, would force unbounded finite-level carry ranks. The all-level producer is not supplied, so this is not an irrationality criterion for S.",
+      "label": "Unconditional carry-kernel anti-compression",
+      "status": "unconditional progress",
+      "statement": "If the totient coefficient series were rational, one positive-multiplier tempered integral carry would have canonical carry-section span dimension at least 2^e − 1 for every e. The all-level kernel-independence producer is supplied by the CRT–Dirichlet minor theorem. No finite-rank bound for every rationality-supplied carry is proved, so this is an infinite anti-compression barrier rather than an irrationality criterion for S.",
       "remaining_open_proposition_ids": [
-        "remaining_open.unbounded_certificate_supply"
+        "remaining_open.erdos_249_irrationality"
       ],
       "paper_label": "res:carryrank",
       "readme_headline": false,
@@ -9028,9 +9028,9 @@
           "line": 211
         },
         {
-          "name": "not_irrational_totientSeries_implies_unbounded_carryRank",
+          "name": "not_irrational_totientSeries_implies_unbounded_carryRank_unconditional",
           "module": "Erdos249257/TotientCarryKernelRigidity.lean",
-          "line": 261
+          "line": 284
         }
       ]
     },
@@ -9540,26 +9540,44 @@
     },
     {
       "id": "dyadic_totient_certificate_interface",
-      "label": "Dyadic totient certificate interface",
-      "status": "proved here",
-      "statement": "At every fixed level e, a separated nonzero evaluation minor for the canonical dyadic totient-kernel family yields dimension 2^e + 1; even residue channels reduce exactly to odd-core channels. A compressed-adjoint certificate satisfying the stated divisibility and strict-boundary conditions is impossible. No theorem here produces the separated minors for all e, and no irrationality criterion is obtained.",
+      "label": "Unconditional dyadic totient-kernel rank",
+      "status": "unconditional progress",
+      "statement": "For every e, a CRT–Dirichlet construction produces a separated nonzero evaluation minor for the canonical dyadic totient-kernel family, which is linearly independent with exact span dimension 2^e + 1. Consequently the span of the full dyadic totient kernel is not finite-dimensional over Q. Even residues reduce to odd-core channels, and the compressed-adjoint boundary remains available. These coefficient-side theorems do not prove that S is irrational.",
+      "remaining_open_proposition_ids": [
+        "remaining_open.erdos_249_irrationality"
+      ],
       "paper_label": "res:dyadictotient",
       "readme_headline": false,
       "declarations": [
         {
-          "name": "finrank_canonicalTotientKernel_eq_of_certificate",
+          "name": "exists_separatedMinorCertificate_totientAffineOddFamily",
           "module": "Erdos249257/TotientMahlerDefect.lean",
-          "line": 98
+          "line": 847
+        },
+        {
+          "name": "linearIndependent_canonicalTotientKernelFamily",
+          "module": "Erdos249257/TotientMahlerDefect.lean",
+          "line": 900
+        },
+        {
+          "name": "finrank_canonicalTotientKernel_eq",
+          "module": "Erdos249257/TotientMahlerDefect.lean",
+          "line": 954
+        },
+        {
+          "name": "not_finiteDimensional_span_fullTotientKernel",
+          "module": "Erdos249257/TotientMahlerDefect.lean",
+          "line": 1014
         },
         {
           "name": "totientKernel_even_residue_reduce",
           "module": "Erdos249257/TotientMahlerDefect.lean",
-          "line": 156
+          "line": 159
         },
         {
           "name": "false_of_compressedAdjointCertificate",
           "module": "Erdos249257/TotientMahlerDefect.lean",
-          "line": 197
+          "line": 1051
         }
       ]
     },
