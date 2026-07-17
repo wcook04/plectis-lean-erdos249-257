@@ -2720,14 +2720,14 @@ $u(N)=v\,T_c(N)$ for all $N$; and $X_c$ is rational if and only if a tempered
 orbit exists for some multiplier $v\ge1$.
 \end{theorem}
 \noindent Formalised:
-\lref{GenericTailOrbitRigidity.lean}{338}{temperedBinaryOrbit_eq_scaledTail}
+\lword{GenericTailOrbitRigidity.lean}{338}{temperedBinaryOrbit_eq_scaledTail}{the scaled-tail orbit identity}
 (rigidity) and
-\lref{GenericTailOrbitRigidity.lean}{425}{binaryCoeffSeries_rational_iff_exists_temperedBinaryOrbit}
+\lword{GenericTailOrbitRigidity.lean}{425}{binaryCoeffSeries_rational_iff_exists_temperedBinaryOrbit}{the rationality--orbit equivalence}
 (the criterion), restated in Mathlib's irrationality vocabulary at
-\lrefx{GenericTailOrbitRigidity.lean}{434}{not_irrational_binaryCoeffSeries_iff_exists_temperedBinaryOrbit}.
+\lword{GenericTailOrbitRigidity.lean}{434}{not_irrational_binaryCoeffSeries_iff_exists_temperedBinaryOrbit}{the non-irrationality--orbit equivalence}.
 The engine is one observation: a real orbit with $d(N+1)=2\,d(N)$ and
 $d(N)=o(2^N)$ vanishes identically
-(\lrefx{GenericTailOrbitRigidity.lean}{314}{doublingOrbit_eq_zero_of_tempered}).
+(\lword{GenericTailOrbitRigidity.lean}{314}{doublingOrbit_eq_zero_of_tempered}{zero-tail rigidity}).
 
 The tempered boundary is essential: the
 homogeneous parasite $N\mapsto2^N$ can be added to any orbit without
@@ -2749,9 +2749,9 @@ with rationality of the totient coefficient series would force one tempered
 carry orbit with unbounded finite-level section ranks.
 \end{proposition}
 \noindent Formalised:
-\lref{TotientCarryKernelRigidity.lean}{211}{finrank_canonicalCarryKernel_ge_of_linearIndependent}
+\lword{TotientCarryKernelRigidity.lean}{211}{finrank_canonicalCarryKernel_ge_of_linearIndependent}{the carry-kernel rank lower bound}
 and
-\lref{TotientCarryKernelRigidity.lean}{261}{not_irrational_totientSeries_implies_unbounded_carryRank}.
+\lword{TotientCarryKernelRigidity.lean}{261}{not_irrational_totientSeries_implies_unbounded_carryRank}{the unbounded-rank consequence of rationality}.
 The all-level independence hypothesis is not proved here.  Thus the
 proposition records an exact conditional anti-compression consequence, not an
 irrationality criterion for $S$.
@@ -2760,7 +2760,7 @@ irrationality criterion for $S$.
 
 At base $2$ the support series of Section~\ref{sec:eb} is itself a binary
 coefficient series, $\sum_{n\in A}1/(2^n-1)=X_{f_A}$
-(\lrefx{BooleanMobiusCarry.lean}{376}{erdosSupportSeries_two_eq_binaryCoeffSeries}).
+(\lword{BooleanMobiusCarry.lean}{376}{erdosSupportSeries_two_eq_binaryCoeffSeries}{the support-series/binary-series identity}).
 Two exact coordinate changes then turn a hypothetical rational value into a
 support-free object. The divisor transform and M\"obius inversion below are
 classical Lambert-series tools~\cite{apostol,merca2017,mercaschmidt}; the
@@ -2784,9 +2784,9 @@ Boolean support of value \(1/2\) merely by selecting the negative M\"obius
 indices.
 \end{proposition}
 \noindent Formalised:
-\lref{MobiusSignSupportNoGo.lean}{111}{tsum_negativeMobius_eq_half_add_positiveMobiusTail}
+\lword{MobiusSignSupportNoGo.lean}{111}{tsum_negativeMobius_eq_half_add_positiveMobiusTail}{the negative-M\"obius decomposition}
 and
-\lref{MobiusSignSupportNoGo.lean}{150}{half_add_one_div_sixty_three_le_tsum_negativeMobius}.
+\lword{MobiusSignSupportNoGo.lean}{150}{half_add_one_div_sixty_three_le_tsum_negativeMobius}{the strict lower bound}.
 The term \(d=6\) supplies the displayed \(1/63\).  This closes one
 sign-truncation route only; it does not exclude another infinite Boolean
 support with value \(1/2\).
@@ -2799,29 +2799,29 @@ $(\mu*f)(n)\in\{0,1\}$ for all $n\ge1$, satisfies $f=f_B$ for the support
 $B=\{n\ge1:(\mu*f)(n)=1\}$ selected by that transform.
 \end{proposition}
 \noindent Formalised:
-\lref{BooleanMobiusCarry.lean}{76}{positiveSupportBitAF_mul_zeta},
-\lref{BooleanMobiusCarry.lean}{94}{moebius_mul_supportCoeffAF}, and, with no
+\lword{BooleanMobiusCarry.lean}{76}{positiveSupportBitAF_mul_zeta}{the positive-support zeta identity},
+\lword{BooleanMobiusCarry.lean}{94}{moebius_mul_supportCoeffAF}{the M\"obius inversion identity}, and, with no
 search or finiteness hypothesis, the converse
-\lref{BooleanMobiusCarry.lean}{180}{eq_supportCoeffAF_booleanMobiusSupport_of_boolean};
+\lword{BooleanMobiusCarry.lean}{180}{eq_supportCoeffAF_booleanMobiusSupport_of_boolean}{the Boolean reconstruction theorem};
 the selected support is
-\lrefx{BooleanMobiusCarry.lean}{139}{booleanMobiusSupport}.
+\lword{BooleanMobiusCarry.lean}{139}{booleanMobiusSupport}{the Boolean M\"obius support}.
 
 On the carry side, Theorem~\ref{res:rigidity} applies at $c=f_A$: the support
 series is rational exactly when a tempered carry orbit for $f_A$ exists
-(\lrefx{BooleanMobiusCarry.lean}{383}{erdosSupportSeries_rational_iff_exists_temperedCarry});
+(\lword{BooleanMobiusCarry.lean}{383}{erdosSupportSeries_rational_iff_exists_temperedCarry}{the rationality--carry equivalence});
 a displayed fraction $p/q$ corresponds to an orbit $U$ with multiplier $q$ and
 initial value $U(0)=p$
-(\lrefx{BooleanMobiusCarry.lean}{466}{support_fraction_iff_exists_temperedCarry});
+(\lword{BooleanMobiusCarry.lean}{466}{support_fraction_iff_exists_temperedCarry}{the support-fraction carry equivalence});
 and exact division recovers the coefficient from the orbit,
 $\bigl(2U(N)-U(N+1)\bigr)/q=f_A(N+1)$
-(\lrefx{BooleanMobiusCarry.lean}{680}{temperedCarry_quotient_eq_supportCoeff}).
+(\lword{BooleanMobiusCarry.lean}{680}{temperedCarry_quotient_eq_supportCoeff}{carry-quotient recovery}).
 The elementary divisor-pair bound $\tau(n)\le2\lfloor\sqrt n\rfloor$
-(\lrefx{BooleanMobiusCarry.lean}{208}{card_divisors_le_two_mul_sqrt}) confines
+(\lword{BooleanMobiusCarry.lean}{208}{card_divisors_le_two_mul_sqrt}{the divisor-count bound}) confines
 the tails to a square-root strip, $T_{f_A}(N)\le2\sqrt N+4$
-(\lrefx{BooleanMobiusCarry.lean}{289}{binaryCoeffTail_supportCoeff_le_two_sqrt_add_four}),
+(\lword{BooleanMobiusCarry.lean}{289}{binaryCoeffTail_supportCoeff_le_two_sqrt_add_four}{the coefficient-tail bound}),
 hence every orbit state to $0<U(N)\le q\,(2\sqrt N+4)$
-(\lrefx{BooleanMobiusCarry.lean}{690}{temperedCarry_pos_of_exists_pos_mem},
-\lrefx{BooleanMobiusCarry.lean}{705}{temperedCarry_le_denominator_mul_two_sqrt_add_four});
+(\lword{BooleanMobiusCarry.lean}{690}{temperedCarry_pos_of_exists_pos_mem}{carry positivity},
+\lword{BooleanMobiusCarry.lean}{705}{temperedCarry_le_denominator_mul_two_sqrt_add_four}{the carry upper bound});
 and the strip is strong enough to re-derive the tempered boundary, so the
 analytic side condition can be traded for one inequality. The two coordinate
 changes compose.
@@ -2836,20 +2836,20 @@ Boolean. The support is not guessed: it is reconstructed from the certificate
 by Proposition~\ref{res:boolmob}.
 \end{theorem}
 \noindent Formalised:
-\lref{BooleanMobiusCarry.lean}{948}{exists_normalized_support_fraction_iff_exists_booleanMobiusCarry},
+\lword{BooleanMobiusCarry.lean}{948}{exists_normalized_support_fraction_iff_exists_booleanMobiusCarry}{the normalized support-fraction certificate equivalence},
 with the certificate packaged as
-\lrefx{BooleanMobiusCarry.lean}{775}{BooleanMobiusCarryCertificate} and the
+\lword{BooleanMobiusCarry.lean}{775}{BooleanMobiusCarryCertificate}{the Boolean carry certificate} and the
 quotient normalized at index zero
-(\lrefx{BooleanMobiusCarry.lean}{766}{carryQuotient}).
+(\lword{BooleanMobiusCarry.lean}{766}{carryQuotient}{the carry quotient}).
 
 \begin{example}[the support $\{2,3\}$]
 The support $\{2,3\}$ has value
 $\tfrac13+\tfrac17=\tfrac{10}{21}$
-(\lrefx{BooleanMobiusCarry.lean}{1054}{erdosSupportSeries_support23_eq_ten_div_twenty_one}),
+(\lword{BooleanMobiusCarry.lean}{1054}{erdosSupportSeries_support23_eq_ten_div_twenty_one}{the two-point series value}),
 its orbit is the pure period-six cycle $10,20,19,17,13,26$ with multiplier
-$21$ (\lrefx{BooleanMobiusCarry.lean}{1103}{carryOrbit23_isTempered}), and the
+$21$ (\lword{BooleanMobiusCarry.lean}{1103}{carryOrbit23_isTempered}{the tempered two-point orbit}), and the
 M\"obius transform of the carry quotient recovers exactly $\{2,3\}$
-(\lrefx{BooleanMobiusCarry.lean}{1140}{mobius_carryOrbit23_recovers_support}).
+(\lword{BooleanMobiusCarry.lean}{1140}{mobius_carryOrbit23_recovers_support}{support recovery}).
 \end{example}
 
 These are coordinates, not by themselves a strategy: nothing here excludes

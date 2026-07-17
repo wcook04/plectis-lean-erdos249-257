@@ -36,20 +36,20 @@
 "authority_role": "proof_bearing_committed_source_anchor"
 },
 "navigation_snapshot": {
-"commit": "f5bb0aacfb05514e7908537ba6111b8b2ce53856",
+"commit": "34d7b2f69d6c14004559432cefa797ca446b6c95",
 "authority_role": "machine_readable_navigation_anchor",
 "publication_state": "main_history_snapshot",
 "published_ref": "main",
-"repository_resolution": "https://github.com/wcook04/plectis-lean-erdos249-257/tree/f5bb0aacfb05514e7908537ba6111b8b2ce53856"
+"repository_resolution": "https://github.com/wcook04/plectis-lean-erdos249-257/tree/34d7b2f69d6c14004559432cefa797ca446b6c95"
 },
 "content": {
 "machine_readable_paper": {
 "path": "docs/claims.json::machine_readable_paper",
-"content_digest": "sha256:1d1d3ff426e42e434c6c138e1794c9b60277e98319990a36c1190674ad05bbbd"
+"content_digest": "sha256:359a13e24d98f28d5e5d108c54de784db3a37448ad4f5973d64db0e7ca0b6519"
 },
 "claims_document": {
 "path": "docs/claims.json",
-"content_digest": "sha256:8308de15501fb09dfa45ae4c6e0ba2800cb5b7a79e0543782aeb0122df140399"
+"content_digest": "sha256:da6684dd7ca380d3ef10d9208258877c02a1c5174502f987de6ddf1c92a6e74c"
 },
 "declaration_atlas": {
 "path": "docs/declaration_atlas.json",
@@ -62,13 +62,13 @@
 },
 "bounded_orientation": {
 "path": "docs/orientation.json",
-"content_digest": "sha256:fc43bfab101553f90a49ca86d9641dcef19abe8c2e1927e909cf62285edd69f0"
+"content_digest": "sha256:b1ee2e04ffaf1f0fdc833bfa57a82e269851e0fc35165ee526e7777437414601"
 },
 "human_exposition": {
 "source_path": "paper/erdos249-257-main-paper.tex",
-"source_content_digest": "sha256:0d51e0ef4e7c24692a697aac62854912e6d950fa44a7d412716e817e0d9e9156",
+"source_content_digest": "sha256:16fd2f1b719ebfe9070b06560882da7233d5bcc4925ae5c2c46906367203cdce",
 "rendered_path": "erdos249-257-main-paper.pdf",
-"rendered_content_digest": "sha256:802e4404ccfe733fd2ada42bfb0dbe4eeeec5bd16b3983669363ac60d4c3e29f",
+"rendered_content_digest": "sha256:02b98850b806acecd579f75de936bb5e1f479f9bcb14f82cb8d13d18ee1fa387",
 "artifact_role": "authored_mathematician_facing_exposition",
 "authority_posture": "authored_editorial_surface_not_Lean_proof_authority"
 },
@@ -82,7 +82,7 @@
 },
 "paper_source_sigils": {
 "path": "paper/module-aliases.json",
-"content_digest": "sha256:fba1a8b08f03f757373cb47b0e948c45e766ba96bcff57b9894a114b07544850",
+"content_digest": "sha256:93795a8895ac046853533d9f3842aab22f90ce0895dc92c5a8ae9e28f9e5c02c",
 "schema": "erdos249257-paper-module-aliases/1",
 "artifact_role": "paper_sigil_to_lean_module_navigation_crosswalk",
 "authority_posture": "generated_navigation_projection_not_proof_authority"
@@ -1757,7 +1757,7 @@
 "expansion": {
 "machine_readable_paper": {
 "path": "docs/claims.json::machine_readable_paper",
-"expected_content_digest": "sha256:1d1d3ff426e42e434c6c138e1794c9b60277e98319990a36c1190674ad05bbbd",
+"expected_content_digest": "sha256:359a13e24d98f28d5e5d108c54de784db3a37448ad4f5973d64db0e7ca0b6519",
 "contains": [
 "all_claims",
 "authored_argument_graph",
@@ -1781,9 +1781,9 @@
 },
 "human_exposition": {
 "source_path": "paper/erdos249-257-main-paper.tex",
-"expected_source_content_digest": "sha256:0d51e0ef4e7c24692a697aac62854912e6d950fa44a7d412716e817e0d9e9156",
+"expected_source_content_digest": "sha256:16fd2f1b719ebfe9070b06560882da7233d5bcc4925ae5c2c46906367203cdce",
 "rendered_path": "erdos249-257-main-paper.pdf",
-"expected_rendered_content_digest": "sha256:802e4404ccfe733fd2ada42bfb0dbe4eeeec5bd16b3983669363ac60d4c3e29f",
+"expected_rendered_content_digest": "sha256:02b98850b806acecd579f75de936bb5e1f479f9bcb14f82cb8d13d18ee1fa387",
 "authority_posture": "authored_editorial_surface_not_Lean_proof_authority"
 },
 "technical_companion": {
@@ -1795,7 +1795,7 @@
 },
 "paper_source_sigils": {
 "path": "paper/module-aliases.json",
-"expected_content_digest": "sha256:fba1a8b08f03f757373cb47b0e948c45e766ba96bcff57b9894a114b07544850",
+"expected_content_digest": "sha256:93795a8895ac046853533d9f3842aab22f90ce0895dc92c5a8ae9e28f9e5c02c",
 "schema": "erdos249257-paper-module-aliases/1",
 "check": "python3 scripts/build_paper_module_aliases.py --check"
 }
