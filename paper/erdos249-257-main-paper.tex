@@ -192,6 +192,8 @@ Write
 \[
  R_N=\sum_{m\geq1}\frac{\ph(N+m)}{2^m}.
 \]
+
+\paragraph{Exact reduction.}
 The formal source proves the exact chain
 \[
 \begin{split}
@@ -209,25 +211,29 @@ rigorous tail allowance.  The second equivalence is completeness of the
 certificate: at fixed \(h,N\), some finite depth succeeds exactly when the
 tail difference is non-integral.  Conversely, integrality of one
 positive-shift difference forces \(S\) to be rational.
-
-This normal form is accompanied by an unconditional theorem: if \(S=p/q\),
-then
-\[
- q>\Qzero
- =79\,639\,646\,646\,701\,375\,323\,355\,774\,875\,831\,053.
-\]
-The exact open statement is an unbounded supply of non-integral tail
-differences, equivalently of finite certificates.
-Theorem~\ref{res:diag} compresses this to the equivalent one-parameter
-lcm-diagonal supply.  Finite diagonal instances are verified through \(t=64\),
-but no unbounded supply is proved.  The displayed chain is formalised by the
+The three statements are formalised by the
 \lword{LcmConeFlatness.lean}{386}{irrational_totient_series_iff_all_tail_diffs_nonintegral}{tail-difference equivalence},
 the
 \lword{LcmConeFlatness.lean}{399}{irrational_totient_series_iff_pointwise_certificates}{pointwise certificate equivalence},
 and the fixed-parameter
 \lword{LcmConeFlatness.lean}{316}{exists_certifiedKill_iff_tail_diff_notMem_int}{certificate-completeness theorem}.
-The unconditional finite bound is the
+
+\paragraph{Unconditional finite baseline.}
+Independently of the unbounded certificate supply, if \(S=p/q\), then
+\[
+ q>\Qzero
+ =79\,639\,646\,646\,701\,375\,323\,355\,774\,875\,831\,053.
+\]
+\noindent This is the
 \lword{CertificateKernel.lean}{18056}{tsum_totient_div_pow_two_ne_ratCast_of_den_le_79639646646701375323355774875831053}{denominator exclusion}.
+
+\paragraph{Open producer.}
+The exact open statement is an unbounded supply of non-integral tail
+differences, equivalently of finite certificates.
+Theorem~\ref{res:diag} compresses this to the equivalent one-parameter
+lcm-diagonal supply.  Finite diagonal instances are verified through \(t=64\),
+but no unbounded supply is proved.  Neither the finite denominator exclusion
+nor the verified diagonal instances discharge this quantifier.
 
 \subsection{Erd\H{o}s \#257: the exact half-value counterexample spine}
 \label{res:halfstory}
@@ -236,8 +242,11 @@ Let
 \[
   \mathcal A=\left\{\sum_{n\in A}\frac1{2^n-1}:A\subseteq\N,\ 0\notin A\right\}.
 \]
+
+\paragraph{Exact reduction and finite exclusion.}
 The weights are strictly superincreasing, so the normalised support of a value
-is unique.  For \(1/2\), the following are equivalent:
+is unique.  A finite normalised support cannot have value \(1/2\).  For
+\(1/2\), the following are equivalent:
 \[
 \begin{aligned}
 \frac12\in\mathcal A
@@ -247,29 +256,27 @@ is unique.  For \(1/2\), the following are equivalent:
 \text{a successor terminal bit equal to zero occurs beyond every bound}.
 \end{aligned}
 \]
-A finite normalised support cannot have value \(1/2\).  Thus membership would
-produce an infinite support of rational sum and refute the universal statement
-of Erd\H{o}s~\#257.  The required counterexample condition is therefore exact:
-cofinally many terminal zeros, equivalently no last greedy skip.
 
-More generally, rationality over an infinite support forces an unbounded
-positive integer carry orbit.  Further exact consequences are
-reciprocal-mass lower bounds and sublogarithmic zero-window bounds for the divisor-count
-coefficient of any rational-valued support.  These are unconditional rigidity
-theorems, not a proof that rational infinite supports cannot exist.
-
-The strongest current last-skip contradiction is conditional.  At the seam
-following a putative last skip, the upper transition is impossible, and among
-the middle coordinates \(-3,-2,-1\), the coordinate \(-3\) is impossible.
-The remaining proof must exclude the exceptional coordinates \(-2,-1\) and
-establish the exact future-tail inequality at every other non-\(-3\) middle
-transition.  Neither assertion is proved for the actual greedy orbit.  The
-membership chain is formalised by the
+\paragraph{Counterexample consequence.}
+Membership would produce an infinite support of rational sum and refute the
+universal statement of Erd\H{o}s~\#257.  The required counterexample
+condition is therefore exact: cofinally many terminal zeros, equivalently no
+last greedy skip.
+The reduction and finite exclusion are formalised by the
 \lword{GreedyAchievementSet.lean}{2514}{half_mem_mersenneAchievementSet_iff_greedySkippedSupport_infinite}{infinite-skip equivalence},
 \lword{HalfCylinderHalfMembershipClassification.lean}{126}{half_mem_mersenneAchievementSet_iff_unboundedTerminalFalse}{unbounded-terminal equivalence},
 \lword{HalfCylinderHalfMembershipClassification.lean}{235}{half_mem_mersenneAchievementSet_iff_no_lastHalfGreedySkip}{no-last-skip equivalence},
 and the
 \lword{HalfCarryReachability.lean}{589}{finite_boolSupport_ne_half}{finite-support exclusion}.
+
+\paragraph{Open producer.}
+The missing input is a proof that terminal zeros occur cofinally.  The
+strongest current last-skip route is conditional.  After a putative last
+skip, the upper transition and the middle coordinate \(-3\) are impossible.
+The route still has to exclude the actual middle coordinates \(-2,-1\) and
+establish the exact future-tail inequality at every other non-\(-3\) middle
+transition.  Neither assertion is proved for the greedy orbit, so this route
+does not yet produce cofinal terminal zeros.
 The conditional residual is the
 \lword{HalfCylinderLastProducerContradiction.lean}{387}{half_mem_mersenneAchievementSet_of_middleProducerTailEscapeExceptNegThree}{remaining-tail implication}.
 Its local transition exclusions are stated in

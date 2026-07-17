@@ -56,7 +56,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "Erd\\H{o}s \\#249",
-    "line": 2820
+    "line": 2827
    }
   },
   {
@@ -67,7 +67,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "unbounded certificate supply",
-    "line": 2831
+    "line": 2838
    }
   },
   {
@@ -78,7 +78,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "the half-value counterexample route",
-    "line": 2847
+    "line": 2854
    }
   },
   {
@@ -89,7 +89,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "universal Erd\\H{o}s \\#257",
-    "line": 2838
+    "line": 2845
    }
   }
  ],
@@ -554,18 +554,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_section2_spine_hierarchy_audit",
+   "id": "main_paper_section8_frontier_hierarchy_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "Section 2 compresses each target's proved results, exact reduction, and missing premise into long prose blocks that may still make status boundaries look sequential or stronger than they are",
-   "statement": "Audit Section 2's two problem-spine summaries so each has one proved base, one exact reduction, and one visibly open producer, without duplicating later theorem inventories."
+   "defect_class": "Section 8 may restate results and open boundaries as a closing inventory rather than two exact frontier maps, risking duplication and status blur",
+   "statement": "Audit Section 8 so each problem closes on its exact unresolved quantifier and the finite or conditional results appear only as delimiters."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "a16aa24af5236b6508a34b8a4c4b41fdcf620a98",
-  "committed_navigation_snapshot": "4838e400f86061d6438e0a80345b966c93bfffbb",
-  "main_paper_source_digest": "sha256:f9b21e4c0ec6a71a1acd91da6f581aeb07b521b004ceab9b394282a08651e583"
+  "committed_navigation_snapshot": "309db51e66f4f55fbcb7dd5d707292632430aa83",
+  "main_paper_source_digest": "sha256:3a67cf8b7c57d231c636d8146fdcf1dd1508393ed4a0eb8d4ef3c6919009a5bc"
  },
  "reading_routes": [
   {
