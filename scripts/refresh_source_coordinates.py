@@ -20,7 +20,6 @@ CLAIMS = ROOT / "docs" / "claims.json"
 ATLAS = ROOT / "docs" / "declaration_atlas.json"
 PAPERS = (
     ROOT / "paper" / "erdos249-257-main-paper.tex",
-    ROOT / "paper" / "erdos249-transport-curvature-companion-note.tex",
 )
 LINK_RE = re.compile(
     r"\\(lrefx?|lword)\{([^}]+)\}\{\d+\}\{([^}]+)\}"

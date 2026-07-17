@@ -49,7 +49,7 @@ FIRST_MINUTE_CONTRACT = {
             "an unbounded certificate supply",
             "cofinal terminal zeros",
         ),
-        (2, 2): (
+        (2, 4): (
             "an exact certificate normal form",
             "the exact half-value counterexample spine",
             "a finite normalised support cannot have value 1/2",

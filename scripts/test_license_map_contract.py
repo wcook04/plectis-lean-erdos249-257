@@ -18,12 +18,10 @@ MANUSCRIPT_BINARIES = {
     ".github/banner.png",
     "claim-faithful-publication-systems-paper.pdf",
     "erdos249-257-main-paper.pdf",
-    "erdos249-transport-curvature-companion-note.pdf",
 }
 MANUSCRIPT_SOURCES = {
     "paper/claim-faithful-publication-systems-paper.tex",
     "paper/erdos249-257-main-paper.tex",
-    "paper/erdos249-transport-curvature-companion-note.tex",
     "paper/module-aliases.tex",
 }
 

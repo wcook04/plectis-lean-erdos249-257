@@ -139,11 +139,9 @@ valuation–unit precision alone cannot exclude all centred completions.
   conditional cofinal budget-to-irrationality socket.
 - `TropicalCurvatureCarry` — fixed-precision local-signature no-go theorem.
 
-The technical exposition is `paper/erdos249-transport-curvature-companion-note.tex`.  This
-band is included as a separate companion because it has its own definitions
-and proof spine; folding it into the principal paper would obscure the latter's
-global result map.  Every irrationality endpoint in the band remains a
-conditional reduction.
+The former one-sided transport companion is retired.  Its exact Lean results
+remain available through the claim registry and source routes; no separate
+active manuscript or rendered companion is part of this release.
 
 ### Paper-curation boundary
 
