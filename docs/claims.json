@@ -1054,11 +1054,11 @@
             "integer_greedy_first_wrap_reduction",
             "concrete_seam_adapter"
           ],
-          "status_summary": "Exact half-membership/nonmembership classifications, proved branch eliminations, a rank-21 phase sieve for the middle -2 cell, and explicit conditional tail consumers.",
+          "status_summary": "Exact half-membership/nonmembership classifications, proved branch eliminations, a rank-26 phase sieve for the middle -2 cell, and explicit conditional tail consumers.",
           "prior_art_posture": "No exact local seam or last-producer antecedent is recorded beyond strict-tail achievement-set background.",
           "primary_narrative_owner": "paper/erdos249-257-main-paper.tex",
           "source_route": "python3 scripts/query_corpus.py --claim half_membership_seam_classification",
-          "consumer_or_open_obligation": "Eliminate the 35 surviving joint phase classes in the middle -2 cell, then handle the middle -1 and right-tail branches or prove future-tail escape directly.",
+          "consumer_or_open_obligation": "Eliminate the 412 surviving classes modulo 2730 in the middle -2 cell, then handle the middle -1 and right-tail branches or prove future-tail escape directly.",
           "view_decision": "gateway_spine_future_257_companion_detail"
         },
         {
@@ -6357,7 +6357,7 @@
         {
           "id": "Erdos249257.HalfFinalMiddlePhaseSieve",
           "path": "Erdos249257/HalfFinalMiddlePhaseSieve.lean",
-          "role": "Rank-21 final-middle phase sieve for the half seam",
+          "role": "Rank-26 final-middle phase sieve for the half seam",
           "imports": [
             "Erdos249257.HalfCylinderMiddleCarryLowerBound",
             "Erdos249257.HalfCylinderFinalMiddleTailSocket",
@@ -7081,7 +7081,7 @@
           "remaining_open_effect": {
             "remaining_open_proposition_id": "remaining_open.half_value_membership",
             "operation": "narrows",
-            "statement": "Restricts a hypothetical final middle -2 cell to 35 of 210 joint residue classes after the exact rank-21 seam prefix; the surviving classes, the middle -1 cell, and the right-tail branch remain open."
+            "statement": "Restricts a hypothetical final middle -2 cell to 412 of 2730 joint residue classes after the exact rank-26 seam prefix; the surviving classes, the middle -1 cell, and the right-tail branch remain open."
           }
         },
         {
@@ -7504,7 +7504,7 @@
     "lean_toolchain": "leanprover/lean4:v4.29.1",
     "repository": "https://github.com/wcook04/plectis-lean-erdos249-257",
     "formal_source": {
-      "ref": "b862cb72674fd6ecb3e31e33604051e729281d6d",
+      "ref": "c2c5c3f0151d58c3d8f21843a9fffead4b27f8e3",
       "ref_kind": "commit",
       "publication_state": "committed_checkpoint_pending_remote_publication",
       "relationship_to_last_tag": "post_tag_checkpoint"
@@ -8248,9 +8248,9 @@
     },
     {
       "id": "final_middle_neg_two_phase_sieve",
-      "label": "Rank-21 phase sieve for the final middle -2 cell",
+      "label": "Rank-26 phase sieve for the final middle -2 cell",
       "status": "conditional reduction",
-      "statement": "For every seam row s ≥ 26, the greedy decisions through rank 21 select exactly ranks 2, 3, 6, 7, 14, 20, and 21. Consequently, in a hypothetical final middle -2 cell at rank D ≥ 26 followed by an all-right suffix, D mod 21 lies in {11, 14, 17, 20}, D mod 10 is not 8, and the mod-10 class 7 cannot pair with the mod-21 class 11. Thus only 35 of the 210 joint residue classes survive. This phase sieve restricts but does not eliminate the -2 cell, and it does not decide the middle -1 or right-tail branches.",
+      "statement": "For every seam row s ≥ 27, the greedy decisions through rank 26 select exactly ranks 2, 3, 6, 7, 14, 20, 21, and 26. Consequently, in a hypothetical final middle -2 cell at rank D ≥ 27 followed by an all-right suffix, D mod 21 lies in {11, 14, 17, 20}, D mod 10 is not 8, the mod-10 class 7 cannot pair with the mod-21 class 11, D mod 13 is not 11, and the mod-13 class 10 cannot pair with the mod-21 class 11. Exactly 412 of the 2730 joint residue classes survive. This phase sieve restricts but does not eliminate the -2 cell, and it does not decide the middle -1 or right-tail branches.",
       "remaining_open_proposition_ids": [
         "remaining_open.half_value_membership"
       ],
@@ -8258,24 +8258,24 @@
       "readme_headline": false,
       "declarations": [
         {
-          "name": "seamGreedy_postTwenty_decision_twentyOne",
+          "name": "seamGreedy_postTwentyOne_decisions_through_twentySix",
           "module": "Erdos249257/HalfFinalMiddlePhaseSieve.lean",
-          "line": 871
+          "line": 990
         },
         {
-          "name": "seamGreedyBits_head2367_14_20_21",
+          "name": "seamGreedyBits_head2367_14_20_21_26",
           "module": "Erdos249257/HalfFinalMiddlePhaseSieve.lean",
-          "line": 959
+          "line": 1190
         },
         {
-          "name": "twentyOne_mem_seamGreedySupport",
+          "name": "finalMiddleCell_neg_two_forces_phase_refinement_through_twentySix",
           "module": "Erdos249257/HalfFinalMiddlePhaseSieve.lean",
-          "line": 977
+          "line": 1913
         },
         {
-          "name": "finalMiddleCell_neg_two_forces_phase_refinement_through_twentyOne",
+          "name": "finalMiddleTwentySixPhaseSurvivors_card",
           "module": "Erdos249257/HalfFinalMiddlePhaseSieve.lean",
-          "line": 1499
+          "line": 2050
         }
       ]
     },
@@ -9117,7 +9117,7 @@
       "id": "certificate_reduction",
       "label": "Exact reduction of #249 to finite decidable certificates",
       "status": "conditional reduction",
-      "statement": "S is irrational if and only if certified non-integrality witnesses occur at unbounded parameters; the lcm-diagonal reduction is a sufficient one-parameter form of that supply. The unboundedness of the supply is the remaining open hypothesis.",
+      "statement": "S is irrational if and only if certified non-integrality witnesses occur at unbounded parameters. The pointwise completeness theorem and the diagonal supply theorem together show that an unbounded lcm-diagonal supply is equivalent as well. Producing that supply remains open.",
       "remaining_open_proposition_ids": [
         "remaining_open.unbounded_certificate_supply"
       ],
@@ -9140,9 +9140,19 @@
           "line": 90
         },
         {
+          "name": "irrational_totient_series_iff_pointwise_certificates",
+          "module": "Erdos249257/LcmConeFlatness.lean",
+          "line": 399
+        },
+        {
           "name": "irrational_totient_series_iff_certificate_supply",
           "module": "Erdos249257/LcmConeFlatness.lean",
           "line": 412
+        },
+        {
+          "name": "irrational_totient_series_iff_lcm_diagonal_certificate_supply",
+          "module": "Erdos249257/LcmConeFlatness.lean",
+          "line": 426
         }
       ]
     },
