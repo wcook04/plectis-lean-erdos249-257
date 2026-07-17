@@ -13,6 +13,11 @@ evidence of that workflow. They do not create hidden proof authority.
 
 ## First read
 
+If the task is to understand the repository architecture, release
+infrastructure, sources of truth, or newcomer path, read `ARCHITECTURE.md`
+first. It is the plain-language human guide. The machine-readable orientation
+below is the bounded route into mathematical claims and Lean source.
+
 1. Read `docs/orientation.json`. It is the bounded first-read capsule: release
    scale, exact open propositions, mathematical programme routes, principal
    claim routes, and typed drilldowns. Its human projection is
@@ -185,6 +190,8 @@ A separate diagnostic checks that a cold clone stays readable:
 
 ```sh
 python3 scripts/check_cold_clone_comprehension.py --quick
+python3 scripts/check_architecture_guide.py
+python3 scripts/test_architecture_guide.py
 python3 scripts/check_cold_clone_comprehension.py
 python3 scripts/test_cold_clone_comprehension.py
 ```

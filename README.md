@@ -3,9 +3,11 @@
 
 # Tail certificates and achievement-set geometry for Erdős Problems 249 and 257
 
-Lean 4 formal corpus of exact reductions, explicit bounds, classical
-formalisation, finite evidence, and open producers for unsolved
-irrationality problems.
+**New here?** Read the
+[architecture and repository guide](ARCHITECTURE.md) for the purpose, file map,
+checks, and trust boundary. It assumes no Lean or project history.
+
+Lean 4 formal work on two unsolved irrationality problems.
 
 [**Gateway paper**](erdos249-257-main-paper.pdf) ·
 [**#249 companion**](erdos249-transport-curvature-companion-note.pdf) ·
@@ -56,14 +58,12 @@ kernel is proof authority.
 | Exact Möbius-shadow denominator | The reduced denominator of the lcm-height scaled Möbius shadow is computed exactly; an explicit upper-half product of Mersenne factors divides it and gives a quantitative lower bound. | This is denominator survival on the diagonal reduction, not the missing unbounded avoidance supply. |
 | Scalar-localisation height obstruction | If `H ∣ x.den` and `(c·x).den ∣ H`, then `x.den/H ∣ |c|`: denominator clearing transfers the complement into the coefficient. | Local height obstruction, not an irrationality criterion. |
 
-Typed routes expose the source declarations and argument neighbours. Use
-`probabilistic_gcd_geometry` for the first four rows,
-`boolean_mobius_constraints` for tail rigidity, and
-`arithmetic_obstruction_interfaces` for the denominator and height rows.
-Separate packages establish eventually-periodic nonnegative weighted
-irrationality, a signed irrational-or-base-terminating dichotomy, five
-binary-carry criteria/consequences forced by rational support values, and two
-scoped #249 no-go countermodels.
+Typed routes expose sources: `probabilistic_gcd_geometry` for the first four
+rows, `boolean_mobius_constraints` for tail rigidity, and
+`arithmetic_obstruction_interfaces` for the last two. Other routes cover
+eventually-periodic nonnegative weighted irrationality, a signed
+irrational-or-base-terminating dichotomy, five binary-carry
+criteria/consequences, and two scoped #249 no-go countermodels.
 
 An exact final-skip band formula does not show that the actual orbit avoids
 an unsafe band.

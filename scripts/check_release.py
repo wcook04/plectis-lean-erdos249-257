@@ -902,6 +902,7 @@ def main() -> int:
     # --- 8. agent entry ------------------------------------------------------------
     agents = read(ROOT / "AGENTS.md")
     for required in (
+        "ARCHITECTURE.md",
         "docs/orientation.json",
         "docs/ORIENTATION.md",
         "docs/claims.json",
@@ -911,6 +912,8 @@ def main() -> int:
         "SCOPE.md",
         "Erdos249257.lean",
         "scripts/check_release.py",
+        "scripts/check_architecture_guide.py",
+        "scripts/test_architecture_guide.py",
         "scripts/query_corpus.py",
     ):
         check(required in agents, f"AGENTS.md does not route through {required}")
@@ -920,6 +923,31 @@ def main() -> int:
           "AGENTS.md must preserve the public-projection provenance boundary")
     check("mathematical programme" in agents,
           "AGENTS.md must expose mathematical programme routes")
+
+    architecture_check = subprocess.run(
+        [sys.executable, str(ROOT / "scripts" / "check_architecture_guide.py")],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    check(
+        architecture_check.returncode == 0,
+        "newcomer architecture guide failed: "
+        f"{architecture_check.stdout.strip() or architecture_check.stderr.strip()}",
+    )
+    architecture_fixture_check = subprocess.run(
+        [sys.executable, str(ROOT / "scripts" / "test_architecture_guide.py")],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    check(
+        architecture_fixture_check.returncode == 0,
+        "newcomer architecture guide fixtures failed: "
+        f"{architecture_fixture_check.stdout.strip() or architecture_fixture_check.stderr.strip()}",
+    )
 
     contributing = read(ROOT / "CONTRIBUTING.md")
     contributing_errors = contributor_gate_posture_errors(contributing)

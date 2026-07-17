@@ -45,6 +45,11 @@ jobs:
       - name: Install metadata validators
         run: pip install cffconvert reuse
 
+      - name: Check newcomer architecture guide
+        run: |
+          python3 scripts/check_architecture_guide.py
+          python3 scripts/test_architecture_guide.py
+
       # Every check below is blocking, and every check below reports.  The
       # `!cancelled()` guard exists because release-surface failures are not
       # ordered by severity: a first-contact wording check runs before the
