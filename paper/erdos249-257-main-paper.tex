@@ -93,7 +93,7 @@
 
 \begin{abstract}
 \noindent
-We place Erd\H{o}s~\#249 and the distinguished half-value counterexample route to Erd\H{o}s~\#257 in exact finite-to-cofinal form; the universal \#257 assertion itself is not reduced to this chain.
+We place Erd\H{o}s~\#249 and the distinguished half-value counterexample route to Erd\H{o}s~\#257 in exact finite-to-cofinal form: each open endpoint is proved equivalent to a cofinal supply of checkable finite events.  The universal \#257 assertion itself is not reduced to this chain.
 For the totient constant
 $S=\sum_{n\ge1}\ph(n)/2^n$, one certified Farey window excludes every rational
 representation $S=p/q$ with
@@ -121,10 +121,11 @@ uniformly in $A,p,N$ and the window.  Membership of
 infinitely many greedy skips.  Nonmembership is exactly equivalent to an
 eventually right integer seam, a finite fatal gap, and a final greedy skip.
 
-The current final-skip route excludes the upper transition and middle
-coordinate \(-3\), but one global tail-dominance hypothesis remains: on
-negative coordinates it includes excluding \(-2,-1\), and on the remaining
-nonnegative coordinates it is the future-tail inequality.  An unbounded certificate
+The current final-skip route excludes a final upper transition and the
+middle transition carry \(-3\).  One global tail-dominance hypothesis
+remains: exclude the middle carries \(-2\) and \(-1\), and prove the
+future-tail inequality at the remaining nonnegative-carry middle
+transitions.  An unbounded certificate
 supply for \#249 and cofinal terminal zeros for \#257 are not proved.  The
 universal \#257 statement and half-value membership remain open.  Neither
 problem is settled.
@@ -153,10 +154,8 @@ cofinality statement.
 
 The totient \(\ph(n)\) is Euler's totient.  A \emph{support} selects terms;
 its \emph{achievement set} contains the resulting sums.  \emph{Cofinally}
-means beyond every bound.
-Below, a \emph{spine} means only a displayed chain of mathematical
-equivalences or implications leading to one open quantified statement.  It
-does not denote a software component or an additional theorem.
+means beyond every bound.  A \emph{spine} is a displayed chain of
+equivalences or implications leading to one open quantified statement.
 
 The totient constant also has the elementary probabilistic form
 \[
@@ -266,6 +265,10 @@ Write
 \[
  R_N=\sum_{m\geq1}\frac{\ph(N+m)}{2^m}.
 \]
+Each \(R_N\) is \(2^NS\) minus an integer.  Rationality of \(S\) would
+force one binary period \(h\) whose tail differences \(R_{N+h}-R_N\) are
+eventually all integral; the certificates below refute exactly such
+candidate periods (Section~\ref{sec:reduction}).
 
 \paragraph{Exact reduction.}
 The formal source proves the exact chain
@@ -331,6 +334,9 @@ is unique.  A finite normalised support cannot have value \(1/2\).  For
 \text{a successor terminal bit equal to zero occurs beyond every bound}.
 \end{aligned}
 \]
+Concretely, the greedy expansion of \(1/2\) skips rank \(1\), takes ranks
+\(2,3\), skips \(4,5\), and takes \(6,7\); membership asks whether such
+skips recur beyond every bound.
 
 \paragraph{Counterexample consequence.}
 Membership would produce an infinite support of rational sum and refute the
@@ -542,7 +548,7 @@ small middle contribution; see the
 Third, the elementary estimate $\tau(n)\leq n$ controls the infinite tail after
 $L$.  The parameters are chosen so that the middle and far-tail bounds together
 are smaller than $1/q$; the shifted tail is strictly positive because every
-divisor count is positive, so the resulting dilation is not an integer.
+divisor count is positive, so the dilated sum is not an integer.
 
 Thus the analytic series is consumed only at the Lambert identity and the
 geometric tail estimate.  The remaining proof is a finite CRT construction,
@@ -642,6 +648,8 @@ For \(x\geq0\), define the greedy residuals by \(r_0(x)=x\) and
  \qquad
  r_n(x)=r_{n-1}(x)-\varepsilon_n(x)w_n.
 \]
+When \(\varepsilon_n(x)=1\) we say the expansion \emph{takes} rank \(n\);
+otherwise it \emph{skips} rank \(n\).
 
 \begin{theorem}[strict-tail greedy coding]\label{res:greedy}
 For every \(n\geq1\),
@@ -708,8 +716,10 @@ Then \(u_N=vT_{f_A}(c+N)\) is a positive integer for every \(N\), and
 \end{theorem}
 \noindent This is formalised by
 \lword{RationalSupportCarrySkeleton.lean}{668}{exists_shifted_odd_tail_nat_states_of_support_fraction}{the shifted natural-state theorem}.
-It is the exact carry recurrence forced by rationality; its tail-orbit normal
-form is Theorem~\ref{res:rigidity}.
+The recurrence is binary long division: since
+\(2T_f(M)=f(M+1)+T_f(M+1)\), doubling the scaled tail surrenders the next
+coefficient, and rationality is what makes the states \(u_N\) integers.
+Its tail-orbit normal form is Theorem~\ref{res:rigidity}.
 
 \begin{corollary}[unbounded-state consequence]
 \label{res:rigidity-unbounded-main}
@@ -792,6 +802,26 @@ Let
 \]
 be the set of exponents omitted by the greedy expansion.
 
+\paragraph{A worked start.}
+The greedy expansion of \(1/2\) begins: \(w_1=1>\tfrac12\), so rank \(1\)
+is skipped; \(w_2=\tfrac13\) is taken, leaving \(\tfrac16\);
+\(w_3=\tfrac17\) is taken, leaving \(\tfrac1{42}\); ranks \(4,5\) are
+skipped because \(w_4=\tfrac1{15}\) and \(w_5=\tfrac1{31}\) exceed
+\(\tfrac1{42}\); and \(w_6=\tfrac1{63}\), \(w_7=\tfrac1{127}\) are taken,
+leaving
+\[
+ \frac12-\Bigl(\frac13+\frac17+\frac1{63}+\frac1{127}\Bigr)
+ =\frac1{16002}.
+\]
+The next take is at rank \(14\), and through rank \(26\) the expansion
+takes exactly the ranks \(2,3,6,7,14,20,21,26\) (the kernel-checked
+rank-\(26\) prefix cited in Appendix~\ref{app:half-final-skip}).  Membership of \(1/2\)
+in \(\mathcal A\) asks whether the complementary skips recur beyond every
+bound.  A \emph{last} skip is precisely a skip whose residual lies
+strictly above the whole remaining tail
+(Appendix~\ref{res:fixedtailsocket}), and Theorem~\ref{res:fatalright}
+below identifies nonmembership with the existence of one.
+
 \begin{definition}[finite greedy seam and terminal bit]\label{def:terminal-bit}
 For an integer \(s\geq6\), set
 \[
@@ -815,8 +845,12 @@ The Boolean word \((\beta_{s,2},\ldots,\beta_{s,s-1})\) is the
 \(\tau_s=\beta_{s,s-1}\) is its terminal bit.
 \end{definition}
 
-\noindent This is an exact integer coordinate model of the real greedy
-process.  Appendix~\ref{app:half-final-skip} develops the equivalence with
+\noindent Here \(q_{s,d}=\lfloor4^sw_d\rfloor\) is the weight \(w_d\) at
+resolution \(4^{-s}\), and \(K_s=4^s\cdot\tfrac12-2^s\) is the target
+\(1/2\) at the same resolution, lowered by a guard of \(2^s\); the word
+\(\beta\) records which weights this integer greedy run takes.  The seam
+is thus an exact integer coordinate model of the real greedy process.
+Appendix~\ref{app:half-final-skip} develops the equivalence with
 final skips and the unresolved transition cells; the finite coordinate changes in
 Appendix~\ref{app:half-evidence} do not strengthen that equivalence.
 
@@ -896,8 +930,16 @@ and write
  C_D=4R_{D,D}-P_D-4\in\Z,\qquad
  \Theta_D=\sum_{j\geq1}\frac{f_{A_D}(2D+2+j)}{2^j}.
 \]
-Here \(C_D\) is the affine carry at the transition and \(\Theta_D\) is its
-complete future divisor-incidence tail.
+Here \(C_D\) is the integer transition carry and \(\Theta_D\) its
+complete future divisor-incidence tail.  Their comparison has an exact
+meaning: by the residual identity of
+Appendix~\ref{res:producercarry},
+\[
+ \frac12-\sum_{a\in A_D}w_a
+ =2^{-(2D+2)}\bigl(C_D-\Theta_D\bigr),
+\]
+so the inequality \(\Theta_D<C_D\) says exactly that the augmented
+support \(A_D\) falls short of \(\tfrac12\).
 
 For a finite set \(u\subseteq\{1,\ldots,d\}\), write
 \(V(u)=\sum_{n\in u}w_n\).  Call \((u,d)\) a \emph{fatal half-gap} if
@@ -1908,6 +1950,24 @@ The reduction uses only the elementary bound $\ph(n)\le n$, geometric tail
 estimates, and finite integer arithmetic.
 For $t\ge1$, write $M_t=\lcm(1,\ldots,t)$.
 
+\paragraph{Why tail differences detect rationality.}
+Since \(2^NS=\sum_{n\le N}\ph(n)\,2^{N-n}+R_N\), each scaled tail
+\(R_N\) is \(2^NS\) minus an integer.  Suppose \(S=p/q\) with
+\(q=2^cv\) and \(v\) odd.  For every multiple \(h\) of the
+multiplicative order of \(2\) modulo \(v\) and every \(N\geq c\),
+\[
+ R_{N+h}-R_N
+ =\frac{2^N\bigl(2^h-1\bigr)p}{q}-k
+ \in\Z
+\]
+for some integer \(k\), because \(v\mid2^h-1\) and \(2^c\mid2^N\).
+Rationality therefore supplies one period \(h\) all of whose tail
+differences at large \(N\) are integral; conversely, a single integral
+positive-shift difference already forces \(S\) to be rational.  A finite
+certificate refutes one candidate integrality, and refuting every period
+at cofinally many \(N\) refutes rationality outright.  This is the
+mechanism behind the equivalences of this subsection.
+
 \begin{definition}[tail differences and finite certificates]
 \label{def:totient-certificate}
 For $N\ge0$, define the scaled tail
@@ -1982,8 +2042,10 @@ Theorem~\ref{res:pointwisecomplete} assembles all fixed pairs; and
 Theorem~\ref{res:red21} replaces pointwise placement by the equivalent
 cofinal placement quantifier.
 
-Every multiple of an eventual period is again a period.  The least common
-multiple $M_t$ therefore provides an exact one-parameter form.
+Every multiple of an eventual period is again a period, and every fixed
+\(h\) divides \(M_t\) for all \(t\geq h\).  The least common multiple
+therefore provides an exact one-parameter form: the single diagonal
+family \((M_t,M_t)\) tests every candidate period at once.
 
 \begin{theorem}[exact diagonal characterisation]\label{res:diag}
 The following are equivalent:
@@ -2223,22 +2285,11 @@ and \lword{LcmConeNonflat.lean}{506}{coneNonflatCert_cells}{cone-cell certificat
 that each layer of the reduction is non-vacuous and, by completeness, exact. They
 are not evidence that the unbounded supply exists.
 
-The first row of this finite table can be read without any search procedure.
-Take $(h,N,L)=(1,12,16)$.  The integer in the definition is
-\[
- \Delta_{1,12,16}
- =\sum_{j=0}^{15}\bigl(\ph(14+j)-\ph(13+j)\bigr)2^{15-j}
- =-143140.
-\]
-Its least nonnegative residue modulo $2^{16}$ is $53468$.  The tail allowance
-is $N+h+L+2=31$, and hence
-\[
-       31<53468<65536-31=65505.
-\]
-This is precisely $\mathsf{Sep}(1,12,16)$.  The soundness theorem
+The first row of this table is worked in full following
+Example~\ref{res:deposits}.  The soundness theorem
 (\lword{TotientTailPeriodKiller.lean}{262}{tail_diff_notMem_int_of_certifiedKill}{certificate soundness})
-therefore gives $R_{13}-R_{12}\notin\Z$.  It is one exact non-integral tail
-difference, not an assertion that such differences occur at unbounded scales.
+converts each successful row into one exact non-integral tail difference;
+no row asserts that such differences occur at unbounded scales.
 
 \paragraph{Finite foreign-residue projection.}  There is a second finite
 presentation of the same obstruction.  For a cutoff $D$, split the finite
@@ -2708,7 +2759,7 @@ The Lean~4 proof assistant~\cite{lean} and Mathlib library~\cite{mathlib} check
 the named results.  The source, exact informal-to-formal links, and build
 instructions are available in the
 \href{https://github.com/wcook04/plectis-lean-erdos249-257}{public repository}.
-The supplied draft names formal-source revision \texttt{\commitshort},
+This draft names formal-source revision \texttt{\commitshort},
 but that revision must be present in the public repository before release.
 Until the source commit is pushed and the source-coordinate checker is rerun,
 the blue links are navigation text rather than a reproducible proof-authority
@@ -2719,7 +2770,7 @@ versions; the intended toolchain is Lean \texttt{v4.29.1}.
 For release, a cold clone at the published revision must pass \texttt{lake build};
 the release-validation command must then check the claim registry, source
 coordinates, manuscript anchors, projections, trust guards, the rendered PDF,
-and the immutable committed reference.  The supplied rank-26 draft does not
+and the immutable committed reference.  This draft does not
 carry that completed release receipt.  The machine-readable corpus descriptor records SHA-256 identities for
 the claim registry, declaration atlas, manuscript source, rendered PDF, and
 toolchain projections, together with their regeneration commands.  No
@@ -3226,11 +3277,18 @@ localises one transition configuration, while Appendix~\ref{app:half-evidence}
 supplies bounded evidence, coordinate changes, and no-go results.  Neither
 creates a further implication to an open endpoint.
 
-Throughout this appendix, a \emph{seam} is an adjacent pair of finite greedy
-words at a branch boundary, a \emph{rewind} is the corresponding inverse
-finite recurrence, and the \emph{transition carry} is the integer coordinate
-appearing in the exact residual identity.  These terms denote mathematical
-objects, not stages of a proof search.
+Throughout this appendix, a \emph{take} (respectively a \emph{skip}) at
+rank \(n\) is the greedy decision \(\varepsilon_n=1\) (respectively
+\(\varepsilon_n=0\)); a \emph{seam} is an adjacent pair of finite greedy
+words at a branch boundary; a \emph{rewind} is the corresponding inverse
+finite recurrence; the \emph{transition carry} is the integer coordinate
+appearing in the exact residual identity; the \emph{remainder} of a row is
+its integer greedy residual; and the \emph{pulse} of a rank at row \(s\)
+counts its divisor incidences at \(2s+1\) and \(2s+2\), the first
+counting twice, the pulse of a word being the sum over its ranks.  These terms denote mathematical objects, not stages of a proof
+search.  Module-local coordinates not listed here (for example the
+centred, lazy, or first-wrap variants) are defined in the linked formal
+statements.
 
 \HalfValueTechnicalAppendix
 
