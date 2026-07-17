@@ -90,6 +90,7 @@
 
 \begin{abstract}
 \noindent
+We place two open irrationality questions in exact finite-to-cofinal form.
 For the totient constant
 $S=\sum_{n\ge1}\ph(n)/2^n$, one certified Farey window excludes every rational
 representation $S=p/q$ with
@@ -106,7 +107,8 @@ support in every base and several structured-support cases.  At base \(2\)
 we prove exact achievement-set geometry and necessary carry and gap
 constraints on hypothetical rational infinite supports.  Membership of
 \(1/2\), which would refute the universal statement, is exactly equivalent to
-infinitely many greedy skips.
+infinitely many greedy skips.  Nonmembership is exactly equivalent to an
+eventually right integer seam, a finite fatal gap, and a final greedy skip.
 
 The current final-skip route excludes the upper transition and middle
 coordinate \(-3\), but still has two final-skip obligations: exclude
@@ -161,37 +163,32 @@ quantifier pattern is the reason for treating the problems together; it is
 an architectural comparison, not a common theorem connecting their
 arithmetic mechanisms.
 
-The principal results have separate logical and provenance statuses.
+\paragraph{Principal results and contribution.}
+Three theorem families carry the paper:
+\begin{enumerate}[label=\textup{(\roman*)},leftmargin=2.2em]
+\item the denominator exclusion in Theorem~\ref{res:farey};
+\item the fixed, pointwise, cofinal, and lcm-diagonal certificate equivalences
+in Proposition~\ref{res:complete} and
+Theorems~\ref{res:pointwisecomplete}--\ref{res:diag};
+\item the half-membership and final-skip classifications in
+Theorems~\ref{res:halfmembership} and~\ref{res:fatalright}, with the residual
+obligations in Proposition~\ref{res:finalskipexclusions} and
+Corollary~\ref{res:taildominance}.
+\end{enumerate}
+The statuses are distinct: \textbf{\mbox{Unconditional}} is the denominator
+bound; \textbf{\mbox{Exact reductions}} are equivalences with open global
+producers; and \textbf{\mbox{Classical}} are known support theorems
+formalised here.  The 28 diagonal rows remain finite evidence, and both
+endpoints remain open.
 
-\begin{center}
-\footnotesize
-\begin{tabular}{@{}
->{\raggedright\arraybackslash}p{3.1cm}
->{\raggedright\arraybackslash}p{3.05cm}
->{\raggedright\arraybackslash}p{3.7cm}
->{\raggedright\arraybackslash}p{3.1cm}@{}}
-\toprule
-result & logical status & provenance and formal status & role at the endpoint\\
-\midrule
-\textbf{\mbox{Unconditional}}: denominator exclusion for $S$ & finite bound & proved and
-Lean-checked here & necessary condition only\\
-\textbf{\mbox{Exact reductions}}: certificate characterisations for $S$ & exact equivalences & proved and
-Lean-checked here & exact reduction; cofinal supply open\\
-\textbf{\mbox{Classical}}: full-support and named support cases & unconditional theorems & classical or
-previously known; newly formalised & closed comparison cases for \#257\\
-half-membership and final-skip classifications & exact equivalences, followed
-by a conditional criterion & proved or formalised here; Lean-checked & exact
-counterexample route; final obligations open\\
-28 changing-lcm scales through $64$, and other bounded rows & verified finite
-instances & kernel-checked computations & evidence only; no quantifier change\\
-the two Erd\H{o}s endpoints & open & original problem statements & neither is
-settled\\
-\bottomrule
-\end{tabular}
-\end{center}
-
-The exact half-value counterexample spine uses that a finite normalised support
-cannot have value $1/2$; no unbounded supply is proved.
+The denominator bound, certificate equivalences, and half-value and final-skip
+classifications are proved here, not presented as formalisations of cited
+classical theorems.  This states the contribution without inferring priority
+from the comparison record.  The main article is the mathematical gateway;
+the appendices carry auxiliary, conditional, and audit material, with no
+stronger endpoint conclusion.  The exact half-value counterexample spine uses
+that a finite normalised support cannot have value $1/2$; no unbounded supply
+is proved.
 
 \paragraph{Reading map.}
 Section~\ref{sec:spines} gives the exact spines, Section~\ref{sec:ladder} their
@@ -2565,6 +2562,13 @@ Bertrand--CRT and averaging argument constructs the required witnesses
 uniformly.  The coordinate identities and rational-support filters used
 elsewhere in the paper do not alter either missing quantifier.
 
+Thus the comparison also gives a criterion for further progress.  On the
+\#249 side, a new local identity affects the endpoint only if it produces or
+rules out \(\mathsf{Sep}\)-certificates at unbounded parameters.  On the
+half-value side of \#257, it must produce cofinal terminal zeros or prove that
+the greedy seam is eventually right.  Further fixed-scale computation, by
+itself, changes neither open statement.
+
 \section{Formal verification and reproducibility}\label{sec:verify}
 
 \noindent This section records proof authority and reproducibility; it does
@@ -3010,6 +3014,18 @@ infinite support of rational value $1/2$ and refute the universal \#257
 statement; a negative answer would close this distinguished counterexample
 route only.
 \end{problem}
+
+\paragraph{How the frontier has changed.}
+The results above change the form, not the status, of the open problems.  For
+\#249, the unresolved content is one unbounded certificate-supply theorem,
+with the pointwise and lcm-diagonal forms proved equivalent to irrationality.
+For the half-value route to \#257, the search over arbitrary supports has been
+replaced by one canonical greedy-orbit question.  In the present final-skip
+argument that question is localised further to two obligations: exclude the
+middle cells \(-2,-1\), and prove the future-tail inequality at the remaining
+middle transitions.  A cofinal \#249 certificate producer would prove \#249;
+a cofinal terminal-zero producer would refute universal \#257; and a proof of
+eventual right behaviour would close only the half-value route.
 
 \subsection*{Statements and declarations}
 
@@ -3670,12 +3686,14 @@ following formalised statements are optional links to the exact checked
 theorems in the \href{\sourceurl}{archived source revision}. Exact declaration
 names remain in the machine-readable audit layer.
 
-For a first reading, the main landmarks are Theorem~\ref{res:full} for the
-full-support irrationality theorem, Theorem~\ref{res:farey} for the totient
-denominator exclusion, Theorem~\ref{res:red21} for the exact
-tail-certificate reduction, and Proposition~\ref{res:greedytopology} for the
-geometry of the Mersenne achievement set.  For the strongest independent
-structure beyond those two proof spines, see
+For a first reading, the principal landmarks are
+Theorem~\ref{res:farey} for the totient denominator exclusion;
+Proposition~\ref{res:complete} and
+Theorems~\ref{res:pointwisecomplete}--\ref{res:diag} for the exact certificate
+normal forms; and Theorems~\ref{res:halfmembership}
+and~\ref{res:fatalright} for the two half-value classifications.
+Theorem~\ref{res:full} is the classical closed comparison case.  For the
+strongest independent structure beyond the two open spines, see
 Theorems~\ref{res:sternbrocotcylinders} and~\ref{res:sternbrocotruns}.
 The public repository contains a complete searchable cross-reference for
 readers who need declaration-level detail.
