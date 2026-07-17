@@ -907,15 +907,15 @@
         "schema": "erdos249257-editorial-state/1",
         "scope": "continuous_whole_main_paper_exposition",
         "current_priority": {
-          "id": "main_paper_finite_record_provenance_alignment",
+          "id": "main_paper_raw_location_provenance",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "defect_class": "the main Section 5 finite-instance record states four validation classes but uses five anchors because an early diagonal theorem overlaps the aggregate 28-scale theorem, unlike the now-aligned Appendix C record",
-          "statement": "Align the main Section 5 finite-instance provenance with its four stated validation classes and let the aggregate scale-64 theorem own the displayed diagonal family."
+          "defect_class": "three remaining raw source-location links in Section 5.1 render as generic Lean-source anchors even though each target is a named theorem with a precise denominator-exclusion meaning",
+          "statement": "Replace the remaining raw Section 5.1 locations with authored theorem links for the main denominator exclusion and its positive-lift and signed-Mobius-square transfers."
         },
         "last_verified_wave": {
-          "id": "appendix_b_unbounded_carry_provenance_compression",
+          "id": "main_paper_finite_record_provenance_alignment",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "result": "Reduced the unbounded-carry theorem from four anchors to the direct fraction-facing unboundedness theorem and its displayed local support-cardinality inequality, removing an internal bridge and nonessential finite-example validation."
+          "result": "Aligned the main Section 5 finite-instance record with its four stated validation classes, removing the early diagonal theorem duplicated by the aggregate theorem that owns all 28 displayed scales."
         },
         "active_inconsistencies": [],
         "blocked_decisions": []
@@ -7512,7 +7512,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 2541
+        "line": 2540
       }
     },
     {
@@ -7523,7 +7523,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 2552
+        "line": 2551
       }
     },
     {
@@ -7534,7 +7534,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "the half-value counterexample route",
-        "line": 2567
+        "line": 2566
       }
     },
     {
@@ -7545,7 +7545,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 2558
+        "line": 2557
       }
     }
   ],
