@@ -1733,7 +1733,7 @@ If $S$ is rational, then for every sufficiently large $t$ there is
 $\theta_t\in[0,1)$ such that the fractional part of the tail $R_{kM_t}$ equals
 $\theta_t$ for every $k\ge1$.
 \end{proposition}
-\noindent Formalised: \lref{LcmConeFlatness.lean}{90}{rational_totient_series_forces_lcm_cone_flatness}.
+\noindent Formalised: \lword{LcmConeFlatness.lean}{90}{rational_totient_series_forces_lcm_cone_flatness}{cone flatness under rationality}.
 
 The certificates are exact: a certificate exists exactly
 when the object it certifies is non-integral. Thus the finite computations are
@@ -1747,19 +1747,19 @@ For all $h,N$,
 R_{N+h}-R_N\notin\Z.
 \]
 \end{proposition}
-\noindent Formalised: \lref{LcmConeFlatness.lean}{316}{exists_certifiedKill_iff_tail_diff_notMem_int}.
+\noindent Formalised: \lword{LcmConeFlatness.lean}{316}{exists_certifiedKill_iff_tail_diff_notMem_int}{certificate-completeness equivalence}.
 Conversely, integrality of one positive-shift tail difference forces $S$ to be
 rational.  Thus $S$ is irrational if and only if every positive-shift tail
 difference is non-integral, equivalently if every such pair admits a finite
 certificate.  These normal forms are formalised at
-\lrefx{LcmConeFlatness.lean}{357}{not_irrational_of_tail_diff_mem_int},
-\lrefx{LcmConeFlatness.lean}{386}{irrational_totient_series_iff_all_tail_diffs_nonintegral},
-and \lrefx{LcmConeFlatness.lean}{399}{irrational_totient_series_iff_pointwise_certificates}.
+\lword{LcmConeFlatness.lean}{357}{not_irrational_of_tail_diff_mem_int}{integral-difference rationality criterion},
+\lword{LcmConeFlatness.lean}{386}{irrational_totient_series_iff_all_tail_diffs_nonintegral}{all-differences criterion},
+and \lword{LcmConeFlatness.lean}{399}{irrational_totient_series_iff_pointwise_certificates}{pointwise certificate criterion}.
 Finite certificates witness non-integrality. A joint refuter
 can interrogate a menu of cone vertices at once and is sharper than any pairwise
 test: it refutes the single-fractional-part model that rationality predicts on a
 finite sample of cone vertices
-(\lref{LcmConeNonflat.lean}{126}{exists_nonintegral_pair_of_coneNonflatCert}).
+(\lword{LcmConeNonflat.lean}{126}{exists_nonintegral_pair_of_coneNonflatCert}{finite cone-nonflatness refuter}).
 
 \paragraph{A reduced-denominator finite predicate.}  Separately, there is a
 stricter finite condition for an odd reduced denominator
@@ -1777,10 +1777,10 @@ one.  The row $(u,N,K)=(3,3,5)$ satisfies this predicate, although its
 corresponding ordinary empty-gap inequality fails.
 \end{proposition}
 \noindent Formalised:
-\lref{PrimitiveWeightCertificate.lean}{54}{reducedDenominatorUnitGapCert_prime_pow_iff},
-\lrefx{PrimitiveWeightCertificate.lean}{111}{reducedDenominatorCandidateCount_prime_pow_le_one},
-\lrefx{PrimitiveWeightCertificate.lean}{151}{reducedDenominatorUnitGapCert_three_window_3_5}, and
-\lrefx{PrimitiveWeightCertificate.lean}{157}{not_ordinary_gap_certificate_three_window_3_5}.
+\lword{PrimitiveWeightCertificate.lean}{54}{reducedDenominatorUnitGapCert_prime_pow_iff}{prime-power unit-gap characterisation},
+\lword{PrimitiveWeightCertificate.lean}{111}{reducedDenominatorCandidateCount_prime_pow_le_one}{prime-power one-candidate bound},
+\lword{PrimitiveWeightCertificate.lean}{151}{reducedDenominatorUnitGapCert_three_window_3_5}{three-window unit-gap certificate}, and
+\lword{PrimitiveWeightCertificate.lean}{157}{not_ordinary_gap_certificate_three_window_3_5}{three-window ordinary-gap failure}.
 This is a finite certificate-level strengthening.  We do not establish that
 rationality of $S$ supplies these predicates at unbounded parameters.
 
@@ -1800,13 +1800,13 @@ The following are checked by the Lean kernel:
 \item a tabulated joint cone-vertex certificate.
 \end{itemize}
 \end{example}
-\noindent Formalised: \lrefx{TotientTailPeriodKiller.lean}{404}{certifiedKill_all_small},
-\lrefx{CarrySurvivorExtinction.lean}{574}{certifiedKill_all_upto_sixteen},
-\lrefx{LcmDiagonalReduction.lean}{237}{certifiedKill_periodLcm_diagonal_upto_six}
-(with \lrefx{LcmDiagonalReduction.lean}{242}{certifiedKill_periodLcm_diagonal_at_seven},
-\lrefx{LcmDiagonalReduction.lean}{246}{certifiedKill_periodLcm_diagonal_at_eight}),
-\lrefx{DiagonalPincerCertificatesT64.lean}{1967}{certifiedKill_diagonal_all_imported_through_t64},
-and \lrefx{LcmConeNonflat.lean}{506}{coneNonflatCert_cells}. These instances show
+\noindent Formalised: \lword{TotientTailPeriodKiller.lean}{404}{certifiedKill_all_small}{small-window certificate family},
+\lword{CarrySurvivorExtinction.lean}{574}{certifiedKill_all_upto_sixteen}{periods through sixteen},
+\lword{LcmDiagonalReduction.lean}{237}{certifiedKill_periodLcm_diagonal_upto_six}{diagonal certificates through scale six}
+(with \lword{LcmDiagonalReduction.lean}{242}{certifiedKill_periodLcm_diagonal_at_seven}{scale-seven diagonal certificate},
+\lword{LcmDiagonalReduction.lean}{246}{certifiedKill_periodLcm_diagonal_at_eight}{scale-eight diagonal certificate}),
+\lword{DiagonalPincerCertificatesT64.lean}{1967}{certifiedKill_diagonal_all_imported_through_t64}{imported diagonal certificates through scale 64},
+and \lword{LcmConeNonflat.lean}{506}{coneNonflatCert_cells}{cone-cell certificate table}. These instances show
 that each layer of the reduction is non-vacuous and, by completeness, exact. They
 are not evidence that the unbounded supply exists.
 
@@ -1823,7 +1823,7 @@ is $N+h+L+2=31$, and hence
        31<53468<65536-31=65505.
 \]
 This is precisely $\textsf{certifiedKill}(1,12,16)$.  The soundness theorem
-(\lrefx{TotientTailPeriodKiller.lean}{262}{tail_diff_notMem_int_of_certifiedKill})
+(\lword{TotientTailPeriodKiller.lean}{262}{tail_diff_notMem_int_of_certifiedKill}{certificate soundness})
 therefore gives $R_{13}-R_{12}\notin\Z$.  It is one exact non-integral tail
 difference, not an assertion that such differences occur at unbounded scales.
 
@@ -1849,9 +1849,9 @@ defect meeting the full target.  Consequently, full-target avoidance at
 unbounded scales implies irrationality of $S$.
 \end{proposition}
 \noindent Formalised:
-\lref{DiagonalPincerDecomposition.lean}{215}{diagonal_int_iff_foreignDiagonalDefect_hits_fullTarget}
+\lword{DiagonalPincerDecomposition.lean}{215}{diagonal_int_iff_foreignDiagonalDefect_hits_fullTarget}{full-target equivalence}
 and
-\lref{DiagonalPincerDecomposition.lean}{290}{irrational_totientSeries_of_full_target_avoidance_supply}.
+\lword{DiagonalPincerDecomposition.lean}{290}{irrational_totientSeries_of_full_target_avoidance_supply}{unbounded target-avoidance criterion}.
 The proposition is an exact reduction; the unbounded avoidance hypothesis is
 still open.
 
@@ -1876,9 +1876,9 @@ by the squared-Mersenne tail.  Separation of the centre from the full target by
 more than the proved tail bound forces target avoidance.
 \end{proposition}
 \noindent Formalised:
-\lref{SquaredMersenneDiagonalEnclosure.lean}{116}{scaleDiagonalTailDifference_sub_lambertProjectedDiagonal}
+\lword{SquaredMersenneDiagonalEnclosure.lean}{116}{scaleDiagonalTailDifference_sub_lambertProjectedDiagonal}{squared-Mersenne tail identity}
 and
-\lref{SquaredMersenneDiagonalEnclosure.lean}{237}{scaleFullTarget_miss_of_lambert_projected_separation}.
+\lword{SquaredMersenneDiagonalEnclosure.lean}{237}{scaleFullTarget_miss_of_lambert_projected_separation}{Lambert-projected separation criterion}.
 
 \subsection{Finite projections and verified instances}
 
@@ -1902,10 +1902,10 @@ channels.  A controlled projected foreign defect with the stated integer
 separation cannot meet the full target.
 \end{proposition}
 \noindent Formalised:
-\lref{ActualForeignResidueProjection.lean}{307}{finiteResidueDiagonal_eq_projectedForeign_add_divisor},
-\lref{ActualForeignResidueProjection.lean}{275}{abs_foreignTailWindow_le_foreignComplementBound},
+\lword{ActualForeignResidueProjection.lean}{307}{finiteResidueDiagonal_eq_projectedForeign_add_divisor}{foreign--divisor channel split},
+\lword{ActualForeignResidueProjection.lean}{275}{abs_foreignTailWindow_le_foreignComplementBound}{omitted-channel bound},
 and
-\lref{ActualForeignResidueProjection.lean}{348}{scaleFullTarget_miss_of_projected_separation}.
+\lword{ActualForeignResidueProjection.lean}{348}{scaleFullTarget_miss_of_projected_separation}{projected-separation criterion}.
 The passage from finite windows to the analytic foreign complement, including
 the corresponding kernel identity, is not supplied here.  Nor is an
 unbounded family of separated projections; these are parts of the open
@@ -1930,9 +1930,9 @@ given exactly by the formal denominator formula.  The upper-half Mersenne
 product divides it and yields the stated lower bounds.
 \end{proposition}
 \noindent Formalised:
-\lref{MersenneShadowDenominatorGrowth.lean}{99}{exists_upperHalf_mersenne_channel_dvd_den_with_bounds}
+\lword{MersenneShadowDenominatorGrowth.lean}{99}{exists_upperHalf_mersenne_channel_dvd_den_with_bounds}{upper-half Mersenne divisor bound}
 and
-\lref{MersenneShadowDenominatorGrowth.lean}{147}{lcmHeight_scaledMobiusShadow_den_exact}.
+\lword{MersenneShadowDenominatorGrowth.lean}{147}{lcmHeight_scaledMobiusShadow_den_exact}{exact shadow denominator}.
 
 Finally, the remaining diagonal error can be represented by a finite integer
 projection and then by binary suffix data.  At depth $L$, define
@@ -1966,7 +1966,7 @@ or suffix supply is established.
 \paragraph{Primality certificates through $t=64$.}\label{res:t64closure}
 A finite family of Lucas certificates proves the primality facts required by
 the diagonal-pincer certificates through $t=64$; for example,
-\lref{DiagonalPincerPrimeCertificates/ClosureT64.lean}{51759}{prime_lucas_2364533768205644535022723273}.
+\lword{DiagonalPincerPrimeCertificates/ClosureT64.lean}{51759}{prime_lucas_2364533768205644535022723273}{representative Lucas primality certificate}.
 This is a finite theorem family, not an unbounded certificate supply or an
 irrationality proof.
 
@@ -1974,25 +1974,25 @@ irrationality proof.
 Using those primality facts, Lean checks the individual diagonal-pincer
 certificate
 at $t=64$,
-\lref{DiagonalPincerCertificateT64Endpoint.lean}{1928}{certifiedKill_diagonal_t64}.
+\lword{DiagonalPincerCertificateT64Endpoint.lean}{1928}{certifiedKill_diagonal_t64}{scale-64 diagonal certificate}.
 This is one finite endpoint certificate, not an unbounded supply.
 
 \paragraph{A three-rank odd window.}\label{res:flexibleoddwindow}
 At an analytically admissible odd power-of-two rank, centrality at any one of
 the canonical odd rank or its next two base-four successors yields the
 required adjacent-suffix gap condition,
-\lref{DiagonalFlexibleOddWindowSupply.lean}{93}{diagonalAdjacentSuffixGapSupply_of_powerTwoOddGuardThreeRankBand}.
+\lword{DiagonalFlexibleOddWindowSupply.lean}{93}{diagonalAdjacentSuffixGapSupply_of_powerTwoOddGuardThreeRankBand}{three-rank suffix-gap implication}.
 Thus a cofinal three-rank band supply implies irrationality,
-\lrefx{DiagonalFlexibleOddWindowSupply.lean}{136}{irrational_totientSeries_of_powerTwoOddGuardThreeRankBandSupply};
+\lword{DiagonalFlexibleOddWindowSupply.lean}{136}{irrational_totientSeries_of_powerTwoOddGuardThreeRankBandSupply}{cofinal three-rank criterion};
 that supply is not proved.
 
 \paragraph{Affine form of the three-rank condition.}\label{res:flexibleoddaffine}
 With the stated short-correction bounds, the three central-band predicates are
 equivalent to one three-scale affine escape condition,
-\lref{DiagonalFlexibleOddWindowAffine.lean}{236}{threeRankBandAt_iff_threeScaleAffineEscapeAt_of_shortCorrections}.
+\lword{DiagonalFlexibleOddWindowAffine.lean}{236}{threeRankBandAt_iff_threeScaleAffineEscapeAt_of_shortCorrections}{three-scale affine equivalence}.
 A zero-start affine orbit shows that a uniform correction envelope alone does
 not force escape at any finite number of ranks,
-\lrefx{DiagonalFlexibleOddWindowAffine.lean}{225}{zeroAffineOrbit_stays_in_scaled_edge}.
+\lword{DiagonalFlexibleOddWindowAffine.lean}{225}{zeroAffineOrbit_stays_in_scaled_edge}{zero-orbit obstruction}.
 
 \subsection{Fresh-prime and bit-level boundaries}
 
@@ -2011,10 +2011,10 @@ The endpoint fresh deficits are nonnegative, give an exact decomposition of
 the foreign channel, and bound the loss from the old-prime curvature margins.
 \end{proposition}
 \noindent Formalised:
-\lref{FreshPrimeDeficitDecomposition.lean}{91}{endpointFreshDeficit_nonneg},
-\lref{FreshPrimeDeficitDecomposition.lean}{184}{finiteForeignChannelIncrement_eq_endpointFreshDeficit_sub},
+\lword{FreshPrimeDeficitDecomposition.lean}{91}{endpointFreshDeficit_nonneg}{endpoint-deficit nonnegativity},
+\lword{FreshPrimeDeficitDecomposition.lean}{184}{finiteForeignChannelIncrement_eq_endpointFreshDeficit_sub}{foreign-increment decomposition},
 and
-\lref{FreshPrimeDeficitDecomposition.lean}{269}{oldFivePoint_sub_secondBranchAdverseDeficit_le_actual}.
+\lword{FreshPrimeDeficitDecomposition.lean}{269}{oldFivePoint_sub_secondBranchAdverseDeficit_le_actual}{adverse-deficit curvature bound}.
 This supplies the exact correction term for the finite evaluations.  It supplies
 neither a cofinal deficit bound nor an irrationality criterion.
 
@@ -2031,16 +2031,16 @@ The fifth-bit question after fourth-bit agreement is exactly one cofactor
 parity test, with the complementary offset class characterising failure.
 \end{proposition}
 \noindent Formalised:
-\lref{PowerTwoBitLift.lean}{34}{two_pow_succ_dvd_iff_quotient_even},
-\lref{PowerTwoBitLift.lean}{111}{modEq_thirtyTwo_iff_even_difference_cofactor},
+\lword{PowerTwoBitLift.lean}{34}{two_pow_succ_dvd_iff_quotient_even}{one-bit divisibility lift},
+\lword{PowerTwoBitLift.lean}{111}{modEq_thirtyTwo_iff_even_difference_cofactor}{mod-32 cofactor criterion},
 and
-\lref{PowerTwoBitLift.lean}{129}{not_modEq_thirtyTwo_iff_offset_sixteen}.
+\lword{PowerTwoBitLift.lean}{129}{not_modEq_thirtyTwo_iff_offset_sixteen}{offset-16 complement}.
 The centered-state formulation identifies the signed-margin interval
 condition with failure of this next lift, subject to its stated correction and margin
 budget:
-\lrefx{PowerTwoCenteredBitLift.lean}{121}{actualPenultimateSignedMargin_centeredLift_iff_not_twice_dvd}
+\lword{PowerTwoCenteredBitLift.lean}{121}{actualPenultimateSignedMargin_centeredLift_iff_not_twice_dvd}{centred-lift equivalence}
 and
-\lrefx{PowerTwoCenteredBitLift.lean}{159}{actualPenultimateSignedMargin_centeredThirtyTwo_iff_not_thirtyTwo_dvd}.
+\lword{PowerTwoCenteredBitLift.lean}{159}{actualPenultimateSignedMargin_centeredThirtyTwo_iff_not_thirtyTwo_dvd}{centred mod-32 equivalence}.
 This is a finite arithmetic equivalence.  It does not supply the required
 cofactors at unbounded scales and gives no irrationality conclusion.
 
@@ -2075,10 +2075,10 @@ For every positive $k$, the actual diagonal satisfies an affine transport law
 \]
 Hence integrality at $H$ propagates to every multiple, and the four target hits
 at the prime-adjunction diamond are equivalent to the single hit at its root
-(\lref{FullTargetPrimeAdjunctionNoGo.lean}{196}{fullTarget_primeAdjunction_diamond_iff_root}).
+(\lword{FullTargetPrimeAdjunctionNoGo.lean}{196}{fullTarget_primeAdjunction_diamond_iff_root}{prime-adjunction diamond collapse}).
 The corresponding transport of the complete foreign defect has zero diamond
 curvature
-(\lrefx{FullTargetPrimeAdjunctionNoGo.lean}{247}{foreignTransportCorrection_primeAdjunction_flat}).
+(\lword{FullTargetPrimeAdjunctionNoGo.lean}{247}{foreignTransportCorrection_primeAdjunction_flat}{foreign-correction flatness}).
 Thus explicit-shadow fibres alone cannot create a holonomy obstruction.  A
 future positive route would need a separately defined projection together with
 a theorem controlling what that projection discards.  This is a proved
@@ -2092,8 +2092,8 @@ of $cx$ divides $H$, then
 \]
 \end{proposition}
 \noindent Formalised:
-\lrefx{AdelicHeightObstruction.lean}{23}{scalarLocalization_complement_dvd}
-and \lrefx{AdelicHeightObstruction.lean}{56}{scalarLocalization_integer_eq_mul_num}.
+\lword{AdelicHeightObstruction.lean}{23}{scalarLocalization_complement_dvd}{complementary-denominator divisibility}
+and \lword{AdelicHeightObstruction.lean}{56}{scalarLocalization_integer_eq_mul_num}{scalar-localisation identity}.
 Thus a scalar localisation can move a complementary denominator factor into
 its coefficient, but cannot erase it.  This rules out a scalar-denominator
 shortcut of that form.  It neither proves full-target avoidance nor supplies
@@ -2111,13 +2111,13 @@ for a suitable $t\in\N$.  In particular, if every $p_i$ exceeds a fixed
 horizon $J$, the choice $a_i=0$ works simultaneously for all $1\le h\le J$.
 \end{proposition}
 \noindent Formalised:
-\lrefx{SquareCRTCube.lean}{198}{exists_squareCRT_clean_totient_family}
-and \lrefx{SquareCRTCube.lean}{228}{exists_squareCRT_clean_horizon}.
+\lword{SquareCRTCube.lean}{198}{exists_squareCRT_clean_totient_family}{finite clean totient family}
+and \lword{SquareCRTCube.lean}{228}{exists_squareCRT_clean_horizon}{clean horizon family}.
 The finite mechanism does not force a cube coefficient to be nonzero: there
 is a checked clean two-step cube with both displayed coefficients zero
-(\lrefx{SquareCRTCube.lean}{285}{squareCRT_clean_block_can_vanish}) and a
+(\lword{SquareCRTCube.lean}{285}{squareCRT_clean_block_can_vanish}{vanishing clean block}) and a
 separate checked clean cube with second coefficient $-4$
-(\lrefx{SquareCRTCube.lean}{303}{squareCRT_clean_block_can_be_nonzero}).
+(\lword{SquareCRTCube.lean}{303}{squareCRT_clean_block_can_be_nonzero}{nonzero clean block}).
 Thus the result gives neither an unbounded certificate supply nor an
 irrationality criterion for $S$.
 
@@ -2134,9 +2134,9 @@ then the common numerator after dyadic denominator clearing is odd and hence
 nonzero.
 \end{proposition}
 \noindent Formalised:
-\lrefx{SignedQMomentObstruction.lean}{28}{det_mul_rectangular},
-\lrefx{SignedQMomentObstruction.lean}{77}{scaled_dyadic_sum_odd}, and
-\lrefx{SignedQMomentObstruction.lean}{95}{scaled_dyadic_sum_ne_zero}.
+\lword{SignedQMomentObstruction.lean}{28}{det_mul_rectangular}{rectangular determinant expansion},
+\lword{SignedQMomentObstruction.lean}{77}{scaled_dyadic_sum_odd}{dominant dyadic parity}, and
+\lword{SignedQMomentObstruction.lean}{95}{scaled_dyadic_sum_ne_zero}{dominant dyadic nonvanishing}.
 These are finite algebraic inputs to a signed-moment route.  They do not show
 that any actual totient Hankel determinant is nonzero, and they give no
 irrationality criterion for $S$.
@@ -2150,9 +2150,9 @@ multiple is strictly smaller in absolute value than its positive modulus is
 inconsistent.
 \end{proposition}
 \noindent Formalised:
-\lrefx{TotientMahlerDefect.lean}{98}{finrank_canonicalTotientKernel_eq_of_certificate},
-\lrefx{TotientMahlerDefect.lean}{156}{totientKernel_even_residue_reduce}, and
-\lrefx{TotientMahlerDefect.lean}{197}{false_of_compressedAdjointCertificate}.
+\lword{TotientMahlerDefect.lean}{98}{finrank_canonicalTotientKernel_eq_of_certificate}{separated-minor rank criterion},
+\lword{TotientMahlerDefect.lean}{156}{totientKernel_even_residue_reduce}{even-residue reduction}, and
+\lword{TotientMahlerDefect.lean}{197}{false_of_compressedAdjointCertificate}{compressed-adjoint contradiction}.
 What is missing is an all-level construction of the separated minors, for
 example by a CRT--Dirichlet argument.  The proposition does not provide those
 certificates for every $e$, and it gives no irrationality criterion for $S$.
@@ -2167,9 +2167,9 @@ allowed to depend on both row and column, it reconstructs a consecutive-power
 matrix whose zeroth row is identically $1$.
 \end{proposition}
 \noindent Formalised:
-\lrefx{ResidualGaugeObstruction.lean}{55}{det_residualMonomialMatrix_ne_zero_iff},
-\lrefx{ResidualGaugeObstruction.lean}{94}{locked_reconstruction_preserves_nonzero_minor}, and
-\lrefx{ResidualGaugeObstruction.lean}{145}{rowReconstruction_zero_row_one}.
+\lword{ResidualGaugeObstruction.lean}{55}{det_residualMonomialMatrix_ne_zero_iff}{residual-gauge determinant equivalence},
+\lword{ResidualGaugeObstruction.lean}{94}{locked_reconstruction_preserves_nonzero_minor}{locked-reconstruction nonvanishing}, and
+\lword{ResidualGaugeObstruction.lean}{145}{rowReconstruction_zero_row_one}{reconstructed zero row}.
 Thus a residual-blind rank, determinant, or conditioning criterion alone cannot
 exclude the target.  The proposition does not exclude a criterion that also
 uses an arithmetic coupling identity, and it gives no irrationality criterion

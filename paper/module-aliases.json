@@ -3,13 +3,8 @@
   "artifact_role": "paper_sigil_to_lean_module_navigation_crosswalk",
   "authority_posture": "generated_navigation_projection_not_proof_authority",
   "heuristic": "Each CamelCase component contributes at most its first three characters.",
-  "alias_count": 38,
+  "alias_count": 29,
   "aliases": [
-    {
-      "sigil": "ActForResPro",
-      "module": "ActualForeignResidueProjection.lean",
-      "path": "Erdos249257/ActualForeignResidueProjection.lean"
-    },
     {
       "sigil": "AdeHeiObs",
       "module": "AdelicHeightObstruction.lean",
@@ -36,24 +31,9 @@
       "path": "Erdos249257/CertificateKernel.lean"
     },
     {
-      "sigil": "DiaFleOddWinAff",
-      "module": "DiagonalFlexibleOddWindowAffine.lean",
-      "path": "Erdos249257/DiagonalFlexibleOddWindowAffine.lean"
-    },
-    {
-      "sigil": "DiaFleOddWinSup",
-      "module": "DiagonalFlexibleOddWindowSupply.lean",
-      "path": "Erdos249257/DiagonalFlexibleOddWindowSupply.lean"
-    },
-    {
       "sigil": "DiaFreLosBri",
       "module": "DiagonalFreshLossBridge.lean",
       "path": "Erdos249257/DiagonalFreshLossBridge.lean"
-    },
-    {
-      "sigil": "DiaPinCerT64End",
-      "module": "DiagonalPincerCertificateT64Endpoint.lean",
-      "path": "Erdos249257/DiagonalPincerCertificateT64Endpoint.lean"
     },
     {
       "sigil": "DiaPinCerT64",
@@ -64,16 +44,6 @@
       "sigil": "DiaPinDec",
       "module": "DiagonalPincerDecomposition.lean",
       "path": "Erdos249257/DiagonalPincerDecomposition.lean"
-    },
-    {
-      "sigil": "DiaPinPriCerT64",
-      "module": "DiagonalPincerPrimeCertificates/ClosureT64.lean",
-      "path": "Erdos249257/DiagonalPincerPrimeCertificates/ClosureT64.lean"
-    },
-    {
-      "sigil": "FrePriDefDec",
-      "module": "FreshPrimeDeficitDecomposition.lean",
-      "path": "Erdos249257/FreshPrimeDeficitDecomposition.lean"
     },
     {
       "sigil": "FulTarPriAdjNoGo",
@@ -131,24 +101,9 @@
       "path": "Erdos249257/MersenneTailAtoms.lean"
     },
     {
-      "sigil": "PowTwoBitLif",
-      "module": "PowerTwoBitLift.lean",
-      "path": "Erdos249257/PowerTwoBitLift.lean"
-    },
-    {
-      "sigil": "PowTwoCenBitLif",
-      "module": "PowerTwoCenteredBitLift.lean",
-      "path": "Erdos249257/PowerTwoCenteredBitLift.lean"
-    },
-    {
       "sigil": "PriDetLif",
       "module": "PrimitiveDeterminantLift.lean",
       "path": "Erdos249257/PrimitiveDeterminantLift.lean"
-    },
-    {
-      "sigil": "PriWeiCer",
-      "module": "PrimitiveWeightCertificate.lean",
-      "path": "Erdos249257/PrimitiveWeightCertificate.lean"
     },
     {
       "sigil": "RatSupCarSke",
