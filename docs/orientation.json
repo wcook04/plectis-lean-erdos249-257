@@ -56,7 +56,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "Erd\\H{o}s \\#249",
-    "line": 2714
+    "line": 2719
    }
   },
   {
@@ -67,7 +67,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "unbounded certificate supply",
-    "line": 2725
+    "line": 2730
    }
   },
   {
@@ -78,7 +78,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "the half-value counterexample route",
-    "line": 2740
+    "line": 2745
    }
   },
   {
@@ -89,7 +89,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "universal Erd\\H{o}s \\#257",
-    "line": 2731
+    "line": 2736
    }
   }
  ],
@@ -554,18 +554,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_section4_aggregate_theorem_audit",
+   "id": "main_paper_section4_half_value_aggregate_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "a Section 4 main-spine theorem can become an omnibus wrapper whose numbered clauses share a topic but not a single premise-to-conclusion role",
-   "statement": "Re-audit the aggregate Theorems 4.3--4.4 after the appendix cleanup, retaining an aggregate theorem only where its clauses share hypotheses and a common main-spine consumer."
+   "defect_class": "a Section 4 half-value theorem can mix an equivalence classification with a separate conditional sufficient criterion, obscuring which statements are mutually equivalent and which are only one-way",
+   "statement": "Audit the half-membership and final-skip aggregate theorems, keeping equivalence classes, exclusions, and sufficient producer conditions logically distinct."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "a16aa24af5236b6508a34b8a4c4b41fdcf620a98",
-  "committed_navigation_snapshot": "1296befccda36adcee0d884cce26f0b64da01b73",
-  "main_paper_source_digest": "sha256:e306b90f6b25a2fba773dbf38c38d4a1cca885c9be936e5f239b16b4b40a7353"
+  "committed_navigation_snapshot": "28e24dd9a56767ea048f73ecd3c734658e272926",
+  "main_paper_source_digest": "sha256:bb1c4b3c3271673b2535855982691a69e34c8f0e0b4aea7dada2dd42c7fe4d8a"
  },
  "reading_routes": [
   {

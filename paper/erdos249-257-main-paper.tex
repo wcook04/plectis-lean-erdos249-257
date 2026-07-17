@@ -528,38 +528,39 @@ For \(x\geq0\), define the greedy residuals by \(r_0(x)=x\) and
  r_n(x)=r_{n-1}(x)-\varepsilon_n(x)w_n.
 \]
 
-\begin{theorem}[achievement-set geometry and greedy coding]\label{res:greedy}
-The following statements hold.
-\begin{enumerate}[label=\textup{(\roman*)},leftmargin=2.2em]
-\item \(T_n<w_n\) for every \(n\geq1\).  Hence every \(x\in\mathcal A\)
+\begin{theorem}[strict-tail greedy coding]\label{res:greedy}
+For every \(n\geq1\),
+\[
+ T_n<w_n.
+\]
+Hence every \(x\in\mathcal A\)
 has a unique normalised support.
-\item A real number \(x\) lies in \(\mathcal A\) if and only if \(x\geq0\)
+Moreover, a real number \(x\) lies in \(\mathcal A\) if and only if \(x\geq0\)
 and \(r_n(x)\leq T_n\) for every \(n\geq0\).  In that case
 \(x=\sum_{n\geq1}\varepsilon_n(x)w_n\).
-\item The set \(\mathcal A\) is compact, perfect, totally disconnected, and
-nowhere dense, and its Lebesgue measure is \(1\).
-\item Exact rational evaluation of the greedy recurrence is sound.  In
-particular, if an exact residual exceeds an exact upper bound for the
-remaining tail at some finite level, then \(x\notin\mathcal A\).
-\end{enumerate}
 \end{theorem}
 \noindent The strict-tail inequality and greedy criterion are the
 \lword{GreedyAchievementSet.lean}{180}{mersenneTail_lt_weight}{strict-tail theorem}
 and
 \lword{GreedyAchievementSet.lean}{1445}{mem_mersenneAchievementSet_iff_greedy_survival}{greedy membership theorem}.
 Uniqueness is the
-\lword{GreedyAchievementSet.lean}{1527}{positiveMersenneSupportValue_injective_normalized}{support-coding theorem};
-the four topological and measure properties in part~\textup{(iii)} are proved
-and linked together in Proposition~\ref{res:greedytopology}.
-Kova\v{c}--Tao provide the strict-tail Cantor-set context~\cite{kovactao};
-no novelty claim is made for that geometry.  Exact rational death
-certificates are given in Appendix~\ref{sec:carry}.
+\lword{GreedyAchievementSet.lean}{1527}{positiveMersenneSupportValue_injective_normalized}{support-coding theorem}.
+Kova\v{c}--Tao provide the strict-tail Cantor-set context~\cite{kovactao}.
+
+\paragraph{Separate geometric and finite-arithmetic consequences.}
+Proposition~\ref{res:greedytopology} proves that \(\mathcal A\) is compact,
+perfect, totally disconnected, nowhere dense, and of Lebesgue measure \(1\).
+Proposition~\ref{res:death} proves soundness of exact rational evaluation and
+gives finite nonmembership certificates.  These results use the same greedy
+coordinates, but neither is a clause of the membership equivalence above.
+No novelty claim is made for the strict-tail geometry.
 
 \paragraph{Consequence for the half-value branch.}
-Parts~\textup{(i)}, \textup{(ii)}, and~\textup{(iv)} make the greedy code a
-canonical decision procedure, while compactness in part~\textup{(iii)} allows
-cofinal finite approximations to pass to a point of \(\mathcal A\).  The
-measure-one statement is global: it does not decide whether the particular
+Theorem~\ref{res:greedy} makes the greedy support canonical;
+Proposition~\ref{res:greedytopology} supplies the compactness needed to pass
+from cofinal finite approximations to a point of \(\mathcal A\); and
+Proposition~\ref{res:death} supplies one-sided finite refuters.  The
+measure-one statement is global and does not decide whether the particular
 point \(1/2\) belongs to \(\mathcal A\).  Before specialising to that point,
 we record the carry constraints forced by any rational
 \(X_A\in\mathcal A\); these are necessary conditions in the universal
@@ -587,7 +588,8 @@ Then \(u_N=vT_{f_A}(c+N)\) is a positive integer for every \(N\), and
 \[
  u_{N+1}+v f_A(c+N+1)=2u_N. \tag{4.1}
 \]
-Moreover:
+The recurrence is the common premise for the following three independent
+necessary consequences:
 \begin{enumerate}[label=\textup{(\roman*)},leftmargin=2.2em]
 \item if \(A\) is infinite, then \((u_N)\) is unbounded;
 \item for every \(\varepsilon>0\) there is
@@ -619,6 +621,9 @@ tail-orbit statement is Theorem~\ref{res:rigidity}.  Parts~\textup{(i)} and
 Proposition~\ref{res:orderwrap}, and its dyadic endpoint is
 Corollary~\ref{res:collision}.  The supporting Boolean-certificate
 coordinates are developed in Appendix~\ref{sec:carry}.
+The three clauses remain together because they share the displayed rationality
+hypothesis and the same consumer---testing a hypothetical rational support;
+no clause is used to prove another.
 
 \subsection{The target \(1/2\)}
 
