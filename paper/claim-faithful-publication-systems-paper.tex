@@ -1,650 +1,536 @@
 % SPDX-FileCopyrightText: 2026 Will Cook
 % SPDX-License-Identifier: CC-BY-4.0
+%
+% The printable companion paper on release checks and trust boundaries.
+% Build with `tectonic claim-faithful-publication-systems-paper.tex` or `make`.
+% The repository guide ARCHITECTURE.md is the living route map; this paper is
+% the stable explanation of why authority is divided and where checks end.
 \documentclass[11pt]{article}
-\usepackage[T1]{fontenc}
-\usepackage[utf8]{inputenc}
+\usepackage{iftex}
+\ifpdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\fi
 \usepackage[a4paper,margin=1in]{geometry}
-\usepackage{amsmath,amssymb,booktabs,array,graphicx,float}
+\usepackage{amsmath,amssymb,booktabs,array,float}
 \usepackage[dvipsnames]{xcolor}
 \usepackage{tikz}
-\usetikzlibrary{arrows.meta,positioning,calc}
+\usetikzlibrary{arrows.meta,positioning,calc,shapes.geometric}
 \usepackage[colorlinks=true,linkcolor=black,urlcolor=RoyalBlue,citecolor=black]{hyperref}
 \hypersetup{
-  pdftitle={How a Lean Repository Turns Formal Proofs into a Checked Public Release},
+  pdftitle={From Lean Proofs to Public Claims},
   pdfauthor={Will Cook},
-  pdfsubject={Repository architecture, release flow, and trust boundaries},
+  pdfsubject={Release checks and trust boundaries in one formal mathematics repository},
 }
-\newcommand{\formalcommit}{62c8c3660ce90e4a0dfe6a02b9168fc4f287fcb5}
 \newcommand{\repobase}{https://github.com/wcook04/plectis-lean-erdos249-257}
-\newcommand{\formalbase}{\repobase/blob/\formalcommit}
-\newcommand{\currentfile}[2]{\href{\repobase/blob/main/#1}{#2}}
-\newcommand{\formalfile}[2]{\href{\formalbase/#1}{#2}}
-\emergencystretch=2em
-\title{How a Lean Repository Turns Formal Proofs\
-into a Checked Public Release\\
-{\large Repository architecture, release flow, and trust boundaries}}
+\emergencystretch=1.5em
+\title{From Lean Proofs to Public Claims\\[2pt]
+{\large Release checks and trust boundaries in one formal mathematics repository}}
 \author{Will Cook}
 \date{July 2026}
 
 \begin{document}
-\sloppy
 \maketitle
 
 \begin{abstract}
-This document explains how one public mathematics repository is organised.
-The repository contains formal statements and proofs written in Lean, a
-program that checks proofs.  It also contains papers, a front page, and other
-files that explain those proofs to people.  Lean checks the formal mathematics;
-it does not read those explanations.  The repository therefore adds a reviewed
-claim record between the proofs and the public documents.  That record says
-what selected results mean, what evidence supports them, and what remains
-open.  Programs build navigation files from the record and stop a release when
-named relationships no longer agree.  GitHub runs the formal proof check and
-the public-release checks as separate jobs.  A mathematician still decides
-whether the formal statement is the intended one and whether the public words
-describe it faithfully.  The architecture makes those reviewed decisions
-repeatable; it does not replace them.  This paper names the actual files,
-shows the complete flow, follows one result from Lean source to a public page,
-and states exactly where the automatic guarantee ends.
+Lean verifies that a proof establishes the formal statement written in the
+source.  It does not verify that a README or a paper describes that statement
+faithfully.  This paper explains how one public mathematics repository manages
+the gap.  A maintainer-reviewed claim record states, for selected results, the public
+wording, the supporting Lean declarations, the finite domain, and the
+conclusion that remains open.  A release checker then verifies recorded
+relationships: declaration names near their recorded source lines, the exact
+identity of the checked Lean source, required limitation wording, and freshly
+rebuilt generated files.  Continuous integration runs that checker and the
+Lean build as two separate jobs.  We follow one finite result through every
+layer, and we describe a deliberate exercise in which a false strengthening of
+the public wording passed every check because the relevant relationship had
+not yet been recorded.  The checks preserve reviewed relationships; they do
+not interpret unrestricted prose, and the mathematical judgement remains
+human.
 \end{abstract}
 
-\section{What this repository is for}\label{sec:purpose}
+\section{The publication gap}\label{sec:gap}
 
-This is a public collection of files about two unsolved problems in
-mathematics, Erd\H{o}s Problems 249 and 257.  Both problems remain open.  The
-project proves intermediate results, exact reformulations, and finite examples
-around them.  It does not claim to solve either problem.
+The repository at \url{https://github.com/wcook04/plectis-lean-erdos249-257}
+is a public Lean development around two unsolved problems in number theory,
+Erd\H{o}s Problems 249 and 257.  Both problems remain open.  The project
+proves intermediate results, exact reformulations, and finite certificates
+around them; it does not claim a solution to either problem.
 
-The collection has two jobs:
+One theorem in the development illustrates the problem this paper is about.
+Lean has checked a finite certificate at each of 28 listed scales, the largest
+labelled $t = 64$: at each listed scale, a finite calculation, checked in full
+by Lean, establishes the required property at that scale.  The registered open
+requirement asks for such certificates beyond every fixed cutoff.  Whatever
+the largest checked scale is, one may choose a cutoff beyond it, and the
+finite list says nothing there.  The finite list therefore does not settle the
+open problem.
 
-\begin{enumerate}
-\item It stores precise mathematical statements and proofs in \emph{Lean}.
-  Lean is a proof assistant: a program that checks whether a formal proof
-  establishes the exact formal statement written for it.
-\item It explains that work to people through a README, a scope statement,
-  papers, source maps, and data that other programs can read.
-\end{enumerate}
+A README can nevertheless drift.  An edit can replace ``28 checked cases,
+open beyond them'' with wording that presents the finite cases as completing
+the open requirement.  Every Lean proof remains valid under that edit, because
+the README is not part of any proof.  No program in the repository decides
+whether a line of English has the same meaning as a formal statement.
 
-A \emph{repository} is simply the versioned collection containing those
-files.  A \emph{public claim} is a statement to readers about what the project
-has proved or has not proved.  A \emph{release} is one fixed version of the
-files offered to readers.  No knowledge of Lean, Git, number theory, or the
-project's development history is assumed in this document.
-
-The central problem is easy to state.  A Lean proof can remain correct while a
-paper or README describes it incorrectly.  For example, a proof covering a
-finite list of inputs can be described accidentally as a result covering all
-inputs.  Lean cannot catch that wording error because the README is not part of
-the formal proof.
-
-The repository addresses this gap with five visible parts:
-
-\begin{enumerate}
-\item \textbf{Lean source} containing formal statements and proofs;
-\item a \textbf{human-reviewed claim record} describing selected results and
-  their limits;
-\item \textbf{authored public documents} such as the README and papers;
-\item \textbf{generated indexes and summaries} that reorganise recorded
-  information; and
-\item a \textbf{release program and continuous-integration workflow} that run
-  the recorded comparisons before publication.
-\end{enumerate}
-
-The shortest accurate summary is:
+The repository uses \texttt{docs/claims.json} as a \emph{maintainer-reviewed
+claim record}.  For each selected result the record
+states the public wording, its status, the Lean declarations that support it,
+the bounded domain it covers, and the registered conclusion that remains open.
+A release checker,
+\texttt{scripts/\allowbreak check\_\allowbreak release.py}, then verifies that the
+recorded relationships still hold across the Lean source, the record itself,
+the authored public pages, and the generated files.  The shortest accurate
+summary of the division of labour is:
 
 \begin{quote}
-Lean checks the formal proofs.  Mathematicians review what those proofs mean
-and how they may be described.  The release machinery checks that the reviewed
-relationships remain intact before publication.
+Lean checks the formal proofs.  A maintainer reviews what those proofs mean
+and how they may be described.  The release machinery checks that the recorded
+relationships remain intact before a release.
 \end{quote}
 
-\section{The architecture in one picture}\label{sec:picture}
+Two boundaries should be fixed before any detail.  First, the record covers
+\emph{registered} claims, not every line of prose in the repository; software
+cannot preserve a relationship it was never pointed at, and Section~\ref{sec:failure}
+shows this limit operating in practice.  Second, the repository
+does not technically force a second independent mathematician to approve a
+change.  A single maintainer can edit a Lean statement, its claim record, and
+the public wording together, and every check can pass while the shared
+interpretation is wrong.  The checks are drift detection for reviewed
+decisions; they are not a substitute for review, and they add no authority of
+their own.
 
-Figure~\ref{fig:architecture} names the real components.  A solid arrow denotes
-work performed by a program.  A dashed arrow denotes a human decision.  The
-human step is deliberately visible because no program in this repository
-decides whether arbitrary English has the same meaning as a Lean proposition.
+\section{The release workflow}\label{sec:picture}
+
+Figure~\ref{fig:architecture} shows the whole path.  Solid boxes and lines are
+files and programs; dashed boxes and lines are human judgements.  The figure
+has five visible parts: the Lean source; the maintainer-reviewed claim record;
+authored public documents; generated indexes and summaries derived from the
+record; and the release program and continuous-integration workflow that rerun
+the recorded comparisons.
 
 \begin{figure}[H]
 \centering
-\resizebox{\textwidth}{!}{%
 \begin{tikzpicture}[
-  font=\footnotesize,
-  box/.style={draw, semithick, rounded corners=1.5pt, align=center,
-    inner xsep=8pt, inner ysep=7pt, text width=12.5em, minimum height=5.8em},
-  action/.style={draw, very thick, rounded corners=1.5pt, align=center,
-    inner xsep=9pt, inner ysep=7pt, text width=15em, minimum height=5em},
-  arrow/.style={-{Stealth[length=2.2mm]}, semithick},
-  humanarrow/.style={-{Stealth[length=2.2mm]}, semithick, densely dashed}
+  x=1cm, y=1cm,
+  artefact/.style={draw, semithick, rounded corners=1.5pt, align=center,
+    fill=white, inner xsep=5pt, inner ysep=5pt, text width=3.25cm, font=\small},
+  humanbox/.style={draw, densely dashed, rounded corners=3pt, align=center,
+    inner xsep=5pt, inner ysep=4pt, text width=2.75cm, font=\small},
+  checkbox/.style={draw, thick, align=center, fill=white,
+    inner xsep=5pt, inner ysep=5pt, text width=4.35cm, font=\small},
+  gate/.style={draw, thick, diamond, aspect=2.4, align=center, font=\small,
+    fill=white, inner sep=1.2pt},
+  outcome/.style={draw, semithick, align=center, fill=white,
+    inner xsep=5pt, inner ysep=4pt, text width=3.4cm, font=\small},
+  flow/.style={-{Stealth[length=2.4mm]}, semithick},
+  human/.style={-{Stealth[length=2.4mm]}, semithick, densely dashed},
+  lab/.style={font=\footnotesize, fill=white, inner sep=1.5pt}
 ]
-\node[box] (lean) at (-6,1.4) {\textbf{formal source}\\[2pt]
-  \texttt{Erdos249257.lean}\\
-  \texttt{Erdos249257/*.lean}};
-\node[action] (claim) at (0,1.4) {\textbf{reviewed public claims}\\[2pt]
-  \texttt{docs/claims.json}\\
-  meaning, evidence, and limits};
-\node[box] (public) at (6,1.4) {\textbf{authored public pages}\\[2pt]
-  \texttt{README.md}, \texttt{SCOPE.md}\\
-  \texttt{paper/*.tex}};
-\node[box] (generated) at (3,-1.7) {\textbf{generated views}\\[2pt]
-  reading map, code index,\\
-  machine-readable summary};
-\node[action] (release) at (0,-4.5) {\textbf{public-release check}\\[2pt]
-  \texttt{scripts/check\_release.py}\\
-  compare, rebuild, test, pass or stop};
-\node[action] (build) at (-5.7,-1.7) {\textbf{formal proof check}\\[2pt]
-  \texttt{lake build}\\
-  Lean accepts or rejects proofs};
-\node[action] (ci) at (0,-7.1) {\textbf{GitHub continuous integration}\\[2pt]
-  \texttt{.github/workflows/lean.yml}\\
-  runs both independent jobs};
-\node[above=1.0em of claim, align=center] (human) {\textbf{human mathematical review}\\
-  judges intended meaning and public wording};
-
-\draw[arrow] (lean) -- (build);
-\draw[humanarrow] (lean) -- (claim);
-\draw[humanarrow] (claim) -- (public);
-\draw[arrow] (claim) -- (generated);
-\draw[arrow] (lean.south east) -- (release.north west);
-\draw[arrow] (claim) -- (release);
-\draw[arrow] (public.south west) -- (release.north east);
-\draw[arrow] (generated) -- (release);
-\draw[humanarrow] (human) -- (claim);
-\draw[humanarrow] (human) -- (public);
-\draw[arrow] (build) -- (ci);
-\draw[arrow] (release) -- (ci);
-\end{tikzpicture}}
-\caption{The complete public-release flow.  Lean checks formal proofs.  A
-person reviews the bridge from a formal statement to a public claim.  The
-release program checks only relationships that have been written down.  The
-GitHub workflow runs the Lean build and the release checks; it does not add a
-new source of mathematical authority.}
+% ---- artefact row
+\node[artefact] (lean) at (1.8, 0) {\textbf{Lean source}\\[1pt]
+  {\footnotesize\texttt{Erdos249257.lean}\\ \texttt{Erdos249257/*.lean}}};
+\node[artefact] (claim) at (7.0, 0) {\textbf{claim record}\\[1pt]
+  {\footnotesize\texttt{docs/claims.json}}};
+\node[artefact] (public) at (12.2, 0) {\textbf{public documents}\\[1pt]
+  {\footnotesize\texttt{README.md}, \texttt{SCOPE.md},\\ \texttt{paper/*.tex}}};
+% ---- human review row
+\node[humanbox] (hone) at (4.4, 1.85) {\textbf{maintainer review}\\
+  {\footnotesize intended meaning}};
+\node[humanbox] (htwo) at (9.6, 1.85) {\textbf{wording review}\\
+  {\footnotesize claim strength and limits}};
+\draw[human] (lean.north) |- (hone.west);
+\draw[human] (hone.east) -| ([xshift=-7mm]claim.north);
+\draw[human] ([xshift=7mm]claim.north) |- (htwo.west);
+\draw[human] (htwo.east) -| (public.north);
+% ---- generated views
+\node[artefact] (gen) at (9.6, -1.95) {\textbf{generated views}\\[1pt]
+  {\footnotesize reading map, code index,\\
+  machine-readable summary}};
+\draw[flow] (claim.south) |- (gen.west) node[lab, pos=0.68] {build};
+% ---- comparison rail: the release check consumes all four solid artefacts
+\draw[semithick] (1.8,-3.10) -- (12.2,-3.10);
+\draw[semithick] (lean.south) -- (1.8,-3.10);
+\draw[semithick] (claim.south) -- (7.0,-3.10);
+\draw[semithick] (gen.south) -- (9.6,-3.10);
+\draw[semithick] (public.south) -- (12.2,-3.10);
+% ---- continuous-integration frame (drawn behind the two jobs)
+\draw[rounded corners=4pt, fill=gray!8, draw=gray!55]
+  (-0.1,-5.75) rectangle (14.1,-3.45);
+\node[font=\scriptsize, fill=white, inner sep=1pt] at (5.5,-3.45)
+  {\textsc{configured CI workflow} (clean checkout)};
+% ---- the two checks
+\node[checkbox] (build) at (2.4, -4.75) {\textbf{formal proof job}\\[1pt]
+  {\footnotesize\texttt{lake build}}};
+\node[checkbox, text width=5.4cm] (release) at (9.6, -4.75)
+  {\textbf{release-surface job}\\[1pt]
+   {\footnotesize\texttt{python3 scripts/check\_release.py}\\
+   source identity, claim fields, generated files, required wording}};
+\draw[flow] (1.8,-3.10) -- (build.north) node[lab, pos=0.55] {proof sources};
+\draw[flow] (9.6,-3.10) -- (release.north);
+% ---- release gate
+\node[gate] (gate) at (6.0, -6.65) {\footnotesize both jobs pass?};
+\draw[flow] (build.south) |- (gate.west);
+\draw[flow] (release.south) -- (9.6,-6.05) -| (gate.north);
+\node[outcome] (ship) at (11.8, -6.65) {\textbf{workflow passes}\\
+  {\footnotesize publication remains a human action}};
+\node[outcome, text width=4.6cm] (stop) at (6.0, -8.10) {\textbf{workflow fails}\\
+  {\footnotesize the failed job records the broken check}};
+\draw[flow] (gate.east) -- (ship.west) node[lab, pos=0.40] {yes};
+\draw[flow] (gate.south) -- (stop.north) node[lab, pos=0.42] {no};
+\end{tikzpicture}
+\caption{The configured checks for one revision of the repository.  Dashed
+elements are human judgements; solid elements are files and programs.  Maintainer
+review records the intended relation between the Lean source, the claim record,
+and the public wording.  \texttt{lake build} checks the formal proofs.
+\texttt{scripts/check\_release.py} compares only recorded relationships:
+source identity, claim fields, required wording, and freshly rebuilt generated
+files.  Neither job reads unrestricted prose, and neither adds mathematical
+authority.}
 \label{fig:architecture}
 \end{figure}
 
-Two commands answer different questions:
+The two checks answer different questions.  \texttt{lake build} asks whether
+Lean accepts the imported formal statements and proofs; it knows nothing about
+the README.  \texttt{python3 scripts/check\_release.py} asks whether the
+recorded relationships between the proofs, the claim record, the public pages,
+and the generated files still hold; it confirms the identity of the Lean
+source but does not run Lean.  After a mathematical change, project policy
+requires both.  The workflow in \texttt{.github/workflows/lean.yml} runs them
+as two separate jobs on every push and pull request, in a clean checkout.  A
+failed comparison makes \texttt{scripts/check\_release.py} exit with an error,
+and the configured workflow treats that exit as a failing job.  Blocking is
+therefore a property of the repository's configuration, not of the script: the
+script can only refuse to succeed.
 
-\begin{center}
-\begin{tabular}{@{}p{0.29\textwidth}p{0.29\textwidth}p{0.32\textwidth}@{}}
-\toprule
-Command & Question answered & Question not answered \\
-\midrule
-\texttt{lake build}
-& Does Lean accept the imported formal statements and proofs?
-& Does the public explanation describe the intended mathematics correctly? \\
-\addlinespace
-\texttt{python3 scripts/}\newline\texttt{check\_release.py}
-& Do the recorded claims, links, generated files, paper identities, and
-selected wording checks agree?
-& Is every unrecorded sentence true, or is the list of checks complete? \\
-\bottomrule
-\end{tabular}
-\end{center}
+The generated views deserve one sentence of demystification.  They select and
+reorganise recorded information (a reading map, a code index, a
+machine-readable summary) so that a reader or a program can enter the
+repository without opening every file.  They create no new mathematics, each
+names the program that builds it, and a stale view is rebuilt by that owner
+rather than repaired by hand.  The complete file map, ownership table, and
+maintenance commands live in the repository guide
+\href{https://github.com/wcook04/plectis-lean-erdos249-257/blob/main/ARCHITECTURE.md}{\texttt{ARCHITECTURE.md}};
+this paper keeps only what the trust argument needs.
 
-After a mathematical change, both commands are required.  The release program
-confirms the identity of the public Lean source but does not itself run Lean.
-
-\section{The real files and their responsibilities}\label{sec:files}
-
-The following tree is intentionally short.  It shows the entry points and
-ownership boundaries, not every one of the hundreds of Lean modules.
-
-\begin{verbatim}
-Erdos249257.lean                  supported root of the Lean library
-Erdos249257/                      definitions, theorems, finite certificates
-examples/                         small downstream user of the library
-
-docs/claims.json                  reviewed mathematical claims and limits
-docs/methodology.json             review rules when a claim changes
-docs/publication_contract.json    inventory and identity of shipped papers
-docs/publication_evidence.json    historical evidence for checker testing
-
-README.md and SCOPE.md            short public explanation and open boundary
-paper/                            authored paper source and PDF build rules
-docs/SOURCE_MAP.md                routes from questions to Lean files
-
-docs/ORIENTATION.md               generated human reading map
-docs/declaration_atlas.json       generated index of Lean declarations
-docs/publication_entry_packet.json generated bounded machine entry point
-
-scripts/                          builders, queries, tests, release checks
-.github/workflows/lean.yml        checks run on pushes and pull requests
-\end{verbatim}
-
-There is no single file that is authoritative for every question.  The
-division is as follows.
-
-\begin{table}[H]
-\centering\small
-\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.23\textwidth}
-                    >{\raggedright\arraybackslash}p{0.31\textwidth}
-                    >{\raggedright\arraybackslash}p{0.36\textwidth}@{}}
-\toprule
-Question & Source of truth & What that source controls \\
-\midrule
-What has been checked formally?
-& \texttt{Erdos249257.lean} and the Lean modules it imports
-& Formal statements and proofs at the fixed source version named in
-  \texttt{docs/claims.json}. \\
-\addlinespace
-What may the project say publicly about a result?
-& \texttt{docs/claims.json}
-& Public wording, result kind, supporting Lean names, bounded ranges, and the
-  exact questions that remain open. \\
-\addlinespace
-What review is required when meaning changes?
-& \texttt{docs/methodology.json}
-& Change classes, required evidence, and review policy. \\
-\addlinespace
-Which papers are shipped?
-& \texttt{docs/}\newline\texttt{publication\_contract.json}
-& Manuscript roles, source and PDF identities, and validation commands. \\
-\addlinespace
-What supports the historical checker example?
-& \texttt{docs/}\newline\texttt{publication\_evidence.json}
-& The retained experiment record and its limitations. \\
-\addlinespace
-What do readers see?
-& \texttt{README.md}, \texttt{SCOPE.md}, and \texttt{paper/*.tex}
-& Human explanation, constrained by the reviewed claims but not proof
-  authority themselves. \\
-\bottomrule
-\end{tabular}
-\caption{The main ownership boundaries.  The three JSON files in the middle
-have different jobs: mathematical claims, paper inventory, and historical
-evidence.}
-\label{tab:owners}
-\end{table}
-
-Some boundaries run through a file rather than around it.  For example, most
-of the README is authored prose, while marked blocks inside it are written by
-a builder.  The claim file is reviewed data, while scripts refresh source-line
-coordinates and a module graph inside it.  The rule is therefore not ``JSON is
-authored'' or ``Markdown is generated.''  Each generated region names its
-builder.  A stale generated region is rebuilt by that owner, not repaired by
-hand.
-
-The generated views do not create new mathematics.  They select and reorganise
-information so that a person or another program can enter the repository
-without reading every source file.  Examples include:
-
-\begin{itemize}
-\item \texttt{scripts/build\_corpus\_descriptor.py}, which writes the human and
-  machine orientation views;
-\item \texttt{scripts/build\_declaration\_atlas.py}, which writes an index of
-  Lean declarations; and
-\item \texttt{scripts/build\_publication\_entry\_packet.py}, which writes a
-  bounded machine-readable entry point from authored publication metadata.
-\end{itemize}
-
-\section{One result from Lean proof to public page}\label{sec:example}
+\section{One claim from Lean theorem to public page}\label{sec:example}
 
 The architecture becomes concrete when one result is followed through every
 layer.  We begin with its public meaning, not its internal name:
 
 \begin{quote}
-Lean has checked a finite calculation at 28 listed input values.  The open
-theorem requires successful values beyond every fixed cutoff.  The 28
-calculations therefore do not prove the open theorem.
+Lean has checked a finite certificate at each of 28 listed scales through
+$t = 64$.  The registered open requirement asks for certificates beyond every
+fixed cutoff.  The finite list does not settle it.
 \end{quote}
-
-This distinction needs no specialist vocabulary.  If a finite list ends at
-64, one may choose a cutoff larger than 64.  The open theorem still asks for a
-successful value after that cutoff.
 
 \subsection{The formal evidence}
 
-The module
-\formalfile{Erdos249257/DiagonalPincerCertificatesT64.lean}
-{\texttt{Erdos249257/DiagonalPincerCertificatesT64.lean}}
-lists the 28 values and contains a Lean theorem assembling their checked
-calculations.  The supported root file \texttt{Erdos249257.lean} imports that
-module.  Running \texttt{lake build} asks Lean to check the theorem and every
-proof on which it depends.
+The Lean module \texttt{Erdos249257/DiagonalPincerCertificatesT64.lean}
+defines the explicit list of scales,
+\[
+\{1, 2, 3, 4, 5, 7, 8, 9, 11, 13, 16, 17, 19, 23, 25, 27, 29, 31, 32, 37,
+41, 43, 47, 49, 53, 59, 61, 64\},
+\]
+and proves the assembling theorem
+\texttt{certifiedKill\_diagonal\_all\_imported\_through\_t64}.  Put
+$H_t=\operatorname{lcm}(1,\ldots,t)$.  For every listed $t$, the theorem gives a
+finite checking depth $d_t$ and a decidable arithmetic witness at
+$(H_t,H_t,d_t)$.  The witness says that a finite weighted difference of
+totient values has a residue modulo a power of 2 outside a specified
+neighbourhood of zero.  Imported modules prove the individual cases, and the
+terminal theorem combines them.  The proofs use kernel-checked arithmetic
+computation, including \texttt{decide} and arithmetic normalisation.  The root
+\texttt{Erdos249257.lean} imports the module, so \texttt{lake build} checks it.
 
-\subsection{The reviewed public record}
+The boundary is logical, not merely a matter of scale.  The checked result
+says: for every $t$ in the displayed finite set, the required witness exists.
+The open requirement says: for every cutoff $T$, some witness exists at a
+parameter beyond $T$.  No finite list, however long or expensive to verify,
+implies the second statement without a further theorem that produces new
+witnesses.  Thus $t=64$ is the endpoint of this verified computation, not a
+frontier that Lean has proved will continue.
 
-The corresponding object in \texttt{docs/claims.json} contains a public
-statement, a result kind, the exact finite domain, five supporting Lean
-declarations, and a link to the still-open requirement.  The following is a
-shortened view of the real entry; ellipses omit repeated paths and values only
-to fit the page.
+\clearpage
+\subsection{The reviewed record}
 
-\begin{verbatim}
-{
-  "id": "certified_kill_instances",
-  "status": "verified finite instance",
-  "statement": "Kernel-checked ... at 28 explicit ... scales
-                through t = 64 ...",
-  "bounded_domain": "the 28 values listed in this record",
-  "remaining_open_proposition_ids": [
-    "remaining_open.unbounded_certificate_supply"
-  ],
-  "declarations": [
-    "Erdos249257/TotientTailPeriodKiller.lean:404",
-    "Erdos249257/LcmDiagonalReduction.lean:237",
-    "... three further supporting declarations ..."
-  ]
-}
-\end{verbatim}
-
-The field called \texttt{status} is not a score.  Here ``verified finite
-instance'' means only that Lean checked a stated finite set of inputs.  The
-field called \texttt{id} is an internal lookup handle for software.  It appears
-after the ordinary-language claim because readers should not have to decode it
-to understand the result.
-
-\subsection{The public pages and generated routes}
-
-The README and the main mathematical paper state the finite result and the
-open boundary.  Generated orientation files provide links and source
-locations.  A reader or tool can request the same trace with
-
-\begin{verbatim}
-python3 scripts/query_corpus.py --claim certified_kill_instances
-\end{verbatim}
-
-The release program then checks several concrete relationships: the five Lean
-names occur in the fixed formal source; the source locations remain nearby;
-the finite domain is recorded; required public limitation text remains
-present; and generated views match a fresh rebuild.  Lean checks the theorem.
-The release program checks the recorded description around it.  A person is
-still responsible for judging that the description is mathematically faithful.
-
-\section{What happens when a file changes}\label{sec:lifecycle}
-
-For a change to a formal statement or proof, the release path is:
-
-\begin{enumerate}
-\item Edit the relevant file under \texttt{Erdos249257/}.
-\item Run \texttt{lake build}.  If Lean rejects a proof, stop and repair the
-  formal source.
-\item Review whether the statement, assumptions, intended meaning, or public
-  significance changed.  This is a mathematical judgement.
-\item If public meaning changed, update \texttt{docs/claims.json} and follow
-  the review requirements in \texttt{docs/methodology.json}.
-\item Update the authored README, scope statement, or paper where a reader
-  encounters the claim.
-\item Run the named builders for generated indexes, source coordinates, and
-  paper metadata.
-\item Run \texttt{python3 scripts/check\_release.py}.  Any failed recorded
-  relationship stops the release.
-\item Push the change.  The workflow in \texttt{.github/workflows/lean.yml}
-  runs the formal and public-release jobs again in a clean environment.
-\end{enumerate}
-
-If only explanatory prose changes, the Lean proof may be untouched, but the
-public boundary still matters.  The release check must run.  If the words now
-make a stronger or different mathematical claim, the claim record and human
-review must change as well.
-
-If a generated file is stale, its builder should be run.  Hand-editing the
-output can make the worktree appear fixed while leaving the next rebuild ready
-to erase the change.  Builders and generated regions therefore state their
-ownership explicitly.
-
-\subsection{What GitHub runs}
-
-The public workflow has two independent jobs.
-
-\begin{itemize}
-\item The \textbf{Lean job} checks the dependency lock, installs the pinned
-  Lean and Mathlib environment, builds the formal library with a memory-bounded
-  planner, completes an ordinary Lake authority check, and builds a small
-  downstream example.
-\item The \textbf{release-surface job} runs the newcomer checks and the public
-  release program.  It then verifies source identity, scope, manuscript and
-  licence records, query routes, and deliberately invalid examples for the
-  checking programs.
-\end{itemize}
-
-Continuous integration repeats commands in a clean checkout.  It does not
-perform independent mathematical review and does not turn a consistency check
-into proof authority.
-
-\section{Who decides what}\label{sec:trust}
-
-The architecture separates four roles because combining them would make the
-guarantee sound stronger than it is.
+Table~\ref{tab:record} shows the substance of the corresponding entry in
+\texttt{docs/claims.json}.  The entry also records an exact source line for
+each declaration; those coordinates are omitted from the table, and the full
+entry is in the file.
 
 \begin{table}[H]
-\centering\small
-\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.18\textwidth}
-                    >{\raggedright\arraybackslash}p{0.34\textwidth}
-                    >{\raggedright\arraybackslash}p{0.37\textwidth}@{}}
+\centering\footnotesize
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.185\textwidth}
+                    >{\raggedright\arraybackslash}p{0.745\textwidth}@{}}
 \toprule
-Layer & What it establishes & What it cannot establish \\
+Field & Content \\
 \midrule
-Lean kernel
-& A formal proof has the written formal statement under its imported
-  definitions, theorems, and assumptions.
-& That the author chose the intended statement or that an English summary is
-  faithful. \\
+Claim identifier & \texttt{certified\_kill\_instances} \\
 \addlinespace
-Human mathematical review
-& The formal statement is judged to have the intended meaning; a selected
-  public description and its limits are judged appropriate.
-& That Lean accepts the proof, or that every important public claim has been
-  noticed and recorded. \\
+Status & \emph{verified finite instance}: Lean checked stated finite inputs;
+  this is not a score. \\
 \addlinespace
-Release program
-& Recorded names, fields, links, generated files, paper identities, and
-  selected phrases agree with the declared rules.
-& The meaning of arbitrary unrecorded prose, or completeness of the chosen
-  comparisons. \\
+Public statement & ``Kernel-checked certified kills for small periods and at
+  28 explicit lcm-diagonal scales through $t = 64$, plus finite certificate
+  shards, each discharged by \texttt{decide}.'' \\
 \addlinespace
-GitHub workflow
-& Required commands ran in a clean environment and their processes succeeded.
-& Independent approval, mathematical truth beyond the formal statements, or
-  quality of human review. \\
+Bounded domain & The listed small periods, the 28 scales above, and the
+  parameters encoded by the finite certificate shards. \\
+\addlinespace
+Supporting declarations & Five named Lean declarations with recorded modules
+  and source lines, ending in
+  \texttt{certifiedKill\_diagonal\_all\_imported\_through\_t64}. \\
+\addlinespace
+Remaining open & A link to the registered open requirement \emph{unbounded
+  certificate supply}: produce certified witnesses at unbounded parameters. \\
 \bottomrule
 \end{tabular}
-\caption{The guarantee and non-guarantee of each layer.}
+\caption{The reviewed claim record entry for the worked example, with exact
+source coordinates omitted.}
+\label{tab:record}
+\end{table}
+
+The claim identifier is a lookup handle for software, which is why it appears
+after the ordinary-language claim rather than in place of it.  The status
+vocabulary is fixed in the record itself, and the release checker rejects a
+status outside that vocabulary.  What no field can do is make the English
+faithful to the Lean: the maintainer judged that the public statement above
+describes the five declarations correctly, and the record stores the outcome
+of that judgement.
+
+\subsection{What the checker verifies here}
+
+For this claim, \texttt{scripts/check\_release.py} verifies a specific,
+finite set of relationships.  Each declaration name must appear in the Lean
+source within three lines of its recorded coordinate; this is a drift check
+on names and positions, not a check that the declarations entail the public
+wording.  The checked Lean source itself must be exactly the formal-source
+checkpoint named in the claim record: the checker compares the supported root
+and the whole library directory against that recorded version and rejects the
+release if they differ or if untracked Lean files are present, so the verified
+names cannot refer to an older source than the one being shipped.  The
+required limitation wording must remain present on the registered public
+pages.  The generated views must equal a fresh rebuild from their sources.
+Presence, identity, and proximity are all the checker can test.  Lean checks
+the theorem; the checker checks the recorded description around it; a person
+remains responsible for the claim that the two say the same thing.
+
+\section{What the checks establish}\label{sec:trust}
+
+Table~\ref{tab:trust} states the guarantee and the non-guarantee of each
+layer.  The separation exists because combining the layers in prose makes the
+guarantee sound stronger than it is.
+
+\begin{table}[t]
+\centering\small
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.16\textwidth}
+                    >{\raggedright\arraybackslash}p{0.385\textwidth}
+                    >{\raggedright\arraybackslash}p{0.365\textwidth}@{}}
+\toprule
+Layer & What it can establish & What it cannot establish \\
+\midrule
+Lean build and kernel
+& The written formal statements are proved from their imported definitions
+  and assumptions, in the pinned toolchain.
+& That a formal statement is the one the author intended, or that any English
+  description of it is faithful. \\
+\addlinespace
+Maintainer review
+& A recorded judgement that a formal statement has the intended meaning and
+  that selected public wording describes it within stated limits.
+& That Lean accepts the proofs; that every important claim was noticed and
+  registered; its own independence or quality. \\
+\addlinespace
+Release checker
+& That recorded names, coordinates, fields, links, required wording, source
+  identity, and generated files agree with the declared rules, and that its
+  own deliberately wrong examples still fail.
+& The meaning of unregistered prose; the completeness of the recorded
+  checklist; the correctness of the human judgements it preserves. \\
+\addlinespace
+Continuous integration
+& That both jobs ran in a clean checkout of the pushed revision and exited
+  successfully.
+& Independent mathematical approval; anything beyond what the two jobs
+  themselves establish. \\
+\bottomrule
+\end{tabular}
+\caption{The trust boundary, one layer at a time.}
 \label{tab:trust}
 \end{table}
 
-The repository records review requirements, but it does not technically force
-a second independent mathematician to approve every change.  A maintainer can
-edit a Lean statement, its public record, and the prose together.  The checks
-can show that those files agree with one another; they cannot show that the
-maintainer's shared decision was correct.  Review policy and social process
-remain outside the automatic trust base.
+Some of the release checker's work is stronger than the phrase ``consistency
+check'' may suggest, and it is worth stating exactly.  As a project-source
+policy, the checker rejects \texttt{sorry}, \texttt{admit}, new
+\texttt{axiom} declarations, and \texttt{native\_decide}; the last exclusion
+keeps finite certificates on the repository's kernel-checkable computation
+path.  This lexical policy does not show that imported libraries use no
+classical axioms, and the pinned toolchain and imported definitions remain
+part of the trust base.  The checker also compares the entire public proof surface byte for byte
+against the recorded formal-source checkpoint and rejects untracked Lean
+files.  It rebuilds the generated views and requires exact agreement rather
+than plausible freshness.  It verifies the recorded source and PDF
+fingerprints of the shipped papers.  And it carries its own negative
+examples: deliberately wrong inputs that must keep failing, so that a check
+cannot silently become vacuous.  None of this reaches semantics.  A
+fingerprint can prove two files identical; it cannot say which of two
+differing files expresses the right mathematics.
 
-Similarly, a program-produced fingerprint can prove that two files differ or
-match byte for byte.  It cannot determine which differing file expresses the
-right mathematics.  The architecture uses automation for repeatable
-comparisons and keeps semantic decisions visible as human work.
+When a file changes, the path to a release is short to state.  Edit the
+formal source and run \texttt{lake build}; review whether the statement,
+assumptions, or intended meaning changed, which is a mathematical judgement;
+if public meaning changed, update \texttt{docs/claims.json} under the review
+rules in \texttt{docs/methodology.json} and update the authored pages where
+readers meet the claim; rerun the named builders for the generated views; run
+\texttt{python3 scripts/check\_release.py}; push, and the workflow repeats
+both jobs in a clean checkout.  A prose-only edit skips nothing after the
+first step: if the words now make a stronger or different mathematical claim,
+the record and the review must change with them.
 
-\section{A claim the checker did not yet cover}\label{sec:failure}
+\section{A boundary the checklist missed}\label{sec:failure}
 
-The boundary in Table~\ref{tab:trust} was exposed by one deliberately altered
-temporary copy of the repository.  The real README said that 28 checked finite
-cases do not provide successful cases beyond every fixed cutoff.  In the test
-copy, that wording was changed to say that the finite cases completed the open
-requirement.
+The limits in Table~\ref{tab:trust} are not hypothetical.  They were probed
+by a deliberate exercise, recorded in \texttt{docs/publication\_evidence.json},
+whose shape is worth describing exactly.
 
-The formal proofs did not change.  The public-release program also passed,
-because nobody had yet listed that particular claim among the phrases and
-relationships it must preserve.  The error was outside the written checklist.
+The retained maintainer record reports that, at a pinned checkpoint of the
+repository, ten deliberate false edits were applied to an isolated working
+copy, one at a time, with the copy restored between runs and the full release
+gate run after each edit.  The
+edits targeted the seven recorded relationship families: status labels,
+record structure, source coordinates, paper link anchors, boundary wording,
+generated-view freshness, and size budgets.  Representative edits upgraded a
+conditional status to ``proved here'', deleted an open-boundary clause from
+the README, drifted a declaration coordinate by forty lines, introduced
+\texttt{native\_decide} into a proof, and hand-edited a generated module
+count by one.
 
-The repair had two parts.  First, the boundary was added to the reviewed
-public record and required on the appropriate public page.  Second, a small
-opposing test case was added: a temporary copy with the required phrase removed
-must be rejected.  After the repair, the intact text passed and the same false
-edit failed.
+According to that record, nine of the ten edits were rejected.  One escaped:
+an edit that strengthened
+a finite-evidence boundary clause in the README, replacing wording that the
+finite cases \emph{do not supply} the open requirement with wording that they
+\emph{complete} it.  The formal proofs were untouched, and the release gate
+passed in full, because that clause was not among the recorded relationships.
+The error was outside the written checklist, and the checker preserved
+exactly what it had been given.
 
-This example demonstrates a coverage boundary, not a reliability score.  It
-does not show how likely the program is to catch a future error.  It shows
-something narrower and more useful for understanding the architecture:
+The repair had two parts.  The clause became a declared anchor: required
+wording on the public page, recorded in the checklist.  And the checklist
+derives from each such anchor an opposing example: a copy of the page with
+the clause weakened or removed must be rejected.  The intact text was then
+rechecked and passed; the same false edit now fails.  The other nine edits
+were not rerun against the extended checklist, and no aggregate result is
+claimed for the repaired configuration.
+
+This exercise demonstrates a coverage boundary, not a reliability score.  Its
+ceilings should be stated as plainly as its outcome.  The edits were authored
+by the author of the checker.  Most relationship families were probed by
+exactly one edit.  The exercise covers one repository, one maintainer, and
+one working style, with no comparison against ordinary continuous integration
+or careful manual review.  The original run logs were not retained; the
+evidence file records the protocol, the outcomes, and these limitations, and
+a deterministic reconstruction of the edits can be replayed against the
+current checker, but the reconstruction is not the original evidence.  What
+survives all of these ceilings is the design lesson:
 
 \begin{quote}
 The program can preserve a relationship only after a person has identified
 and recorded that relationship.
 \end{quote}
 
-The detailed historical record is kept separately in
-\texttt{docs/publication\_evidence.json}.  That file records the deliberately
-altered copies, the original study's limitations, and the fact that original
-run logs were not retained.  Internal order labels used by the reconstruction
-scripts are bookkeeping for those scripts, not concepts a reader needs in
-order to understand this repository.
+The residual risk follows the same line.  Requiring a clause to be present
+does not detect a contradictory stronger claim elsewhere on the page.
+Coverage grows only by the route above: notice a relationship, record it,
+and give it an example that must fail.
 
-\section{Operating and adapting the repository}\label{sec:operate}
+\section{Scope, reuse, and limits}\label{sec:limits}
 
-\subsection{Where a reader should start}
+Another formal project could reuse the pattern without copying any file
+format.  Select the public claims whose strength matters.  Record, for each,
+the ordinary-language meaning, the formal evidence, the bounded domain or
+assumptions, and the conclusion that remains open.  Encode the relationships
+that should survive routine edits, giving every encoded relationship both an
+agreeing example and a deliberately disagreeing example.  Configure the
+workflow so that a failed proof check or a failed comparison makes the
+configured workflow fail.  The reusable content is the separation of authority and
+the explicit, reviewed bridge from formal result to public claim; the data
+shapes and scripts in this repository are local detail.
 
-\begin{itemize}
-\item For the purpose, file map, and trust boundary, read the root
-  \texttt{ARCHITECTURE.md} or this paper.
-\item For the mathematical headline and its exact limits, read
-  \texttt{README.md} and \texttt{SCOPE.md}.
-\item For the mathematical argument, read
-  \texttt{erdos249-257-main-paper.pdf}.
-\item To follow one result into Lean, use \texttt{docs/SOURCE\_MAP.md} or
-  \texttt{scripts/query\_corpus.py}.
-\item To change the repository, read \texttt{AGENTS.md} and
-  \texttt{CONTRIBUTING.md}, then run the checks owned by the changed files.
-\end{itemize}
-
-The public checkout is self-contained.  It is not an interface to a private
-agent system, and no public mathematical claim depends on private files.
-
-\subsection{Build dependencies}
-
-The file \texttt{lean-toolchain} pins the Lean version.  The Lake files pin
-Mathlib and describe the Lean library.  Python release tools use the standard
-library except for named metadata validators installed by continuous
-integration.  The paper Makefile uses Tectonic when available and otherwise
-uses a standard \LaTeX{} installation.
-
-The principal local commands are:
-
-\begin{verbatim}
-# formal proofs
-lake build
-
-# newcomer-facing architecture and entry surfaces
-python3 scripts/check_architecture_guide.py
-python3 scripts/check_cold_clone_comprehension.py --quick
-
-# public claims, documents, generated files, and release rules
-python3 scripts/check_release.py
-
-# papers
-make -C paper
-\end{verbatim}
-
-Each failing command names the file or relationship that did not meet its
-recorded rule.  A failure is a stop signal, not evidence that the mathematical
-theorem itself is false.  The responsible layer must be inspected: Lean
-source, reviewed claim, authored document, generated output, or checking code.
-
-\subsection{What another project could reuse}
-
-Another formal project could reuse the pattern without copying the project's
-internal names.  It would need to:
-
-\begin{enumerate}
-\item identify the public claims whose strength matters;
-\item record, for each selected claim, its ordinary-language meaning, formal
-  evidence, finite domain or assumptions, and unresolved conclusion;
-\item define which document is authoritative for proofs, public status,
-  authored explanation, generated views, and release rules;
-\item write comparisons for the relationships that should survive routine
-  edits;
-\item test each important comparison with both an agreeing and a deliberately
-  disagreeing example; and
-\item stop publication when any required proof or release check fails.
-\end{enumerate}
-
-The data shapes and scripts in this repository are project-local.  The
-reusable idea is the separation of authority and the explicit bridge from
-formal result to public claim.
-
-\section{Scope and limitations}\label{sec:limits}
-
-This paper documents a public release-engineering subsystem for a Lean
-repository.  It is not an architecture for AI agents, model training, or
-private research orchestration.  AI systems contributed to development, but
-their output has no special authority.  Formal proof authority comes from the
-pinned Lean source checked by Lean; public meaning still requires human review.
-
-The architecture does not establish any of the following:
-
-\begin{itemize}
-\item a solution of Erd\H{o}s Problem 249 or the universal form of Problem 257;
-\item that a formal proposition is the proposition the author intended;
-\item that every public sentence has been understood by software;
-\item that every important claim has been entered in the reviewed record;
-\item that one maintainer's review is independent or adequate;
-\item that this project-local design transfers unchanged to another project;
-  or
-\item that a large number of passing comparisons measures reader
-  comprehension, mathematical coverage, or future error-detection probability.
-\end{itemize}
-
-The architecture does establish a narrower operational fact: before a public
-release, Lean can check the formal proofs, and software can recheck the
-specific relationships that people have chosen to record between those proofs
-and their public descriptions.
+The limits are the mirror image of the design.  The architecture does not
+establish a solution to either Erd\H{o}s problem; that a formal statement is
+the statement the author intended; that software understood any unregistered
+prose; that the record is complete; that one maintainer's review is
+independent or adequate; or that the design transfers to other projects with
+its behaviour intact.  A large number of passing comparisons measures none of
+those things.  What a green workflow run establishes is narrower: Lean
+accepted the formal proofs, and every configured comparison passed for the
+named revision.  This paper is an architecture note with one bounded case study,
+not an empirical evaluation of the design.
 
 \section{Related systems}\label{sec:related}
 
-Tools such as \texttt{leanblueprint} and LeanArchitect connect proof plans or
-exposition to Lean declarations~\cite{leanblueprint,leanarchitect}.  Lean Atlas
-helps people inspect whether a formal proposition states the intended
-mathematics~\cite{leanatlas}.  Isabelle/DOF assigns checked structure to parts
-of formal documents~\cite{isadof}.  Documentation-consistency and mutation
-testing research studies how executable systems can be checked against written
-descriptions or deliberately faulty inputs~\cite{cascade,demillo,jiaharman}.
+Proof blueprints connect plans and exposition to Lean declarations and track
+dependency and completion status: \texttt{leanblueprint} for authored
+blueprints~\cite{leanblueprint}, LeanArchitect for generating and maintaining
+them~\cite{leanarchitect}.  The claim record here sits later in the pipeline
+and answers a different question: not ``what remains to formalise'', but
+``what may the finished formalisation be said to establish, and with what
+limits''.  Lean Atlas supports judging whether a formal statement expresses
+the intended mathematics~\cite{leanatlas}; the present system takes that
+judgement as an input and preserves its recorded consequences.  Isabelle/DOF
+places typed, checked structure inside formal documents
+themselves~\cite{isadof}; this repository leaves most prose outside the proof
+assistant and checks an external record instead, which buys a clear human
+review surface at the cost of open-world coverage.  Documentation-consistency
+systems such as CASCADE interpret prose to generate tests~\cite{cascade}; the
+design here takes the opposite point in that trade: it avoids automatic prose
+interpretation, while leaving unrecorded drift invisible.  The deliberately
+wrong copies of Section~\ref{sec:failure} are
+known-answer regression fixtures in the tradition of mutation
+analysis~\cite{demillo,jiaharman}, not a mutation-score evaluation.
 
-This repository combines narrower, ordinary mechanisms: a reviewed JSON
-record, links to fixed Lean declarations, generated navigation, exact file
-comparisons, known-answer tests, and a blocking release command.  Its purpose
-is not to interpret unrestricted prose.  It is to keep selected, reviewed
-relationships from drifting silently.
+\section{Conclusion}\label{sec:conclusion}
+
+The workflow described here does not make prose formally true.  It makes a
+selected set of proof-to-prose relationships explicit, reviewed, and
+mechanically persistent, and it makes the configured workflow fail when one
+of them breaks.  The worked example shows both halves of that claim: the
+repaired checker accepts the intact wording and rejects the reconstructed
+false edit, while the earlier unrecorded boundary passed unnoticed.  The architecture is
+therefore best understood as release discipline around formal proof, not as
+an extension of the proof assistant, and its value in any other project
+should be judged the same way: by whether it prevents consequential
+publication drift at an acceptable cost of maintaining the record.
 
 \appendix
-\section{A small glossary}\label{app:glossary}
+\section{Reproducibility}\label{app:repro}
 
-\begin{description}
-\item[Lean] A proof assistant that checks formal statements and proofs.
-\item[Declaration] Lean's name for a definition, theorem, or other named formal
-  object.  Declaration names are lookup handles, not reader-facing concepts.
-\item[Claim record] A structured entry describing one selected public claim,
-  its evidence, its limits, and any unresolved conclusion.
-\item[Generated view] A file or marked file region written by a program from a
-  more authoritative source.  It is an index or presentation, not new proof.
-\item[Commit] A fixed saved version of the repository.  Formal links use a
-  fixed commit so that later edits do not change the theorem being cited.
-\item[Digest] A short fingerprint computed from a file's exact bytes.  Equal
-  digests support exact identity; they do not judge mathematical meaning.
-\item[Continuous integration] Commands run automatically in a clean GitHub
-  environment after a push or pull request.
-\end{description}
+The reviewed claim record is \texttt{docs/claims.json}.  Its release block
+names the saved Git revision of the Lean source, and the release checker
+requires an exact match.  The paper omits that changing identifier because
+the record is its single owner; copying it into prose would create a second
+value that can drift.
 
-\section{Reproducibility pointers}\label{app:repro}
+The paper inventory, with source and rendered fingerprints for each shipped
+manuscript and the commands that validate them, is
+\texttt{docs/publication\_contract.json}.  The record of the deliberate
+exercise in Section~\ref{sec:failure}, including its protocol, outcomes,
+and limitations, is \texttt{docs/publication\_evidence.json}; the
+deterministic reconstruction of its edits is described by
+\texttt{experiments/publication\_mutations.json} and replayed with
+\texttt{python3 scripts/\allowbreak run\_publication\_mutations.py}
+\texttt{--verify-operators}.
+The original raw outputs of the historical runs were not retained, and the
+reconstruction does not claim to be them.
 
-The reviewed mathematical claims are in \texttt{docs/claims.json}.  The paper
-inventory and file identities are in
-\texttt{docs/publication\_contract.json}.  The separate historical checker
-record is in \texttt{docs/publication\_evidence.json}; executable
-reconstructions of its deliberately altered copies are described by
-\texttt{experiments/publication\_mutations.json} and checked with
-
-\begin{verbatim}
-python3 scripts/run_publication_mutations.py --verify-operators
-\end{verbatim}
-
-The original raw outputs for that historical exercise are not registered, and
-the reconstruction does not turn replacement targets into original evidence.
-The exact formal source cited by the mathematical papers is the saved version
-whose full identifier is
-\texttt{a16aa24af5236b6508a34b8a4c4b41fdcf620a98}.  These identifiers support
-reproduction; they are not concepts needed for first contact.
+The papers build with Tectonic or a standard \LaTeX{} installation via
+\texttt{make -C paper}.  Buildability, not byte-identical output across TeX
+engines, is the claim.  The shipped PDF is the tracked root copy, whose
+fingerprint the paper inventory records and checks.
 
 {\footnotesize
-\begin{thebibliography}{99}
+\begin{thebibliography}{9}
 \setlength{\itemsep}{0pt}
 \setlength{\parsep}{0pt}
 \bibitem{leanblueprint} P.~Massot, \emph{leanblueprint: a plasTeX plugin for

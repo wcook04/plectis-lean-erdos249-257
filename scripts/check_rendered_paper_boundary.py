@@ -58,14 +58,16 @@ FIRST_MINUTE_CONTRACT = {
     },
     "claim-faithful-publication-systems-paper.pdf": {
         (1, 2): (
-            "this document explains how one public mathematics repository is organised",
+            "from lean proofs to public claims",
+            "lean verifies that a proof establishes the formal statement written in the source",
             "both problems remain open",
-            "the repository addresses this gap with five visible parts",
-            "the architecture in one picture",
+            "finite certificate at each of 28 listed scales",
+            "registered claims",
+            "the release workflow",
             "docs/claims.json",
             "scripts/check_release.py",
-            ".github/workflows/lean.yml",
             "lean checks the formal proofs",
+            "both jobs pass?",
         ),
     },
 }

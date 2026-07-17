@@ -26,30 +26,13 @@
       ]
     },
     {
-      "id": "technical_companion",
-      "title": "SCRAPPED — Former Erdős Problem 249 specialist note",
-      "artifact_class": "retirement_notice",
-      "source_path": "paper/erdos249-transport-curvature-companion-note.tex",
-      "source_content_digest": "sha256:e3232541cb35f49e7e2bf520357de9b9e7defadd47972bd002db8697563c6c5d",
-      "rendered_path": "erdos249-transport-curvature-companion-note.pdf",
-      "rendered_content_digest": "sha256:3a49eaf971bd5abe832a7da360f0973ba23bba2b2eaeaf0a73b177f70b3ef9dd",
-      "authority_posture": "retirement_notice_not_active_mathematical_exposition_not_Lean_proof_authority",
-      "claim_scope": "Retirement notice only. It makes no active mathematical claim; the former note is archived as historical material and the underlying Lean claims remain owned by docs/claims.json.",
-      "architecture_ref": "docs/claims.json::machine_readable_paper.publication_assembly.publication_architecture.retirement_notices",
-      "entry_route_id": "transport_curvature_programme",
-      "validation": [
-        "python3 scripts/check_rendered_paper_boundary.py",
-        "python3 scripts/check_release.py"
-      ]
-    },
-    {
       "id": "repository_architecture_guide",
-      "title": "How a Lean Repository Turns Formal Proofs into a Checked Public Release",
+      "title": "From Lean Proofs to Public Claims",
       "artifact_class": "repository_architecture_guide",
       "source_path": "paper/claim-faithful-publication-systems-paper.tex",
-      "source_content_digest": "sha256:f5c9c633a85bd16eb6cdf2170fb7a7b928cbf231d349f562f9b5d4fba8692aa3",
+      "source_content_digest": "sha256:5b2962bda6c9c1da8f89217c9bde76d98b294ba271529af3a53ebaaa3d1dc927",
       "rendered_path": "claim-faithful-publication-systems-paper.pdf",
-      "rendered_content_digest": "sha256:9fa880067ae52f06075696d2999ca1d3e0745027858fe483e7c08381565d5b02",
+      "rendered_content_digest": "sha256:424fff84e04acc511b9de38452fed5038e36a658323f8a9fc3ac86d019ca4b8c",
       "authority_posture": "authored_repository_architecture_not_Lean_proof_authority",
       "claim_scope": "A first-principles architecture and access guide to the public Lean source, reviewed claim record, authored documents, generated views, release flow, CI jobs, and human trust boundary. A later historical example illustrates the limit of explicitly recorded checks; the guide adds no mathematical result.",
       "architecture_ref": "docs/claims.json::machine_readable_paper.publication_assembly.publication_architecture.architecture_guides",

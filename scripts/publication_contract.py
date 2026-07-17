@@ -256,7 +256,7 @@ def validate_systems_evidence_source(
     normalized = normalize_latex_evidence(source_text)
     required_patterns = {
         "plain architecture title": (
-            r"how a lean repository turns formal proofs into a checked public release"
+            r"from lean proofs to public claims"
         ),
         "formal source owner": r"erdos249257\.lean",
         "reviewed claim owner": r"docs/claims\.json",
@@ -268,7 +268,10 @@ def validate_systems_evidence_source(
             r"does not technically force a second independent mathematician"
         ),
         "coverage boundary": r"coverage boundary, not a reliability score",
-        "post-repair example": r"intact text passed and the same false edit failed",
+        "post-repair example": (
+            r"repaired checker accepts the intact wording and rejects the "
+            r"reconstructed false edit"
+        ),
     }
     for label, pattern in required_patterns.items():
         if not re.search(pattern, normalized):
@@ -1234,7 +1237,7 @@ def mutation_fixture_failures(reader: RepositoryReader) -> list[str]:
     source_path = systems["source_path"]
     original_source = reader.read_text(source_path)
     limited_sentence = (
-        "This example demonstrates a coverage boundary, not a reliability score."
+        "This exercise demonstrates a coverage boundary, not a reliability score."
     )
     inflated_sentence = (
         "This example establishes a general reliability score for future errors."

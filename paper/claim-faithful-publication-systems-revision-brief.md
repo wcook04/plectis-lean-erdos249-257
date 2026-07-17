@@ -3,10 +3,10 @@
 
 # Revision brief: Lean publication-systems paper
 
-The current ten-page paper is the clearest paper in this group, but it is not
-a finished exemplar. Its useful feature is its order: it gives the reader a
-plain mental model before implementation details. Future revisions should
-keep that order while testing whether the paper actually earns every page.
+The current seven-page paper is an architecture note with one bounded case
+study. Its useful feature is its order: it gives the reader a plain mental
+model before implementation details. Future revisions should keep that order
+while testing whether the paper actually earns every page.
 
 ## Reader and decision
 
@@ -22,6 +22,10 @@ should be able to explain:
 6. where to inspect one complete example.
 
 The paper's purpose is trust calibration, not exhaustive documentation.
+Use ordinary mathematical and software language for that calibration. Give a
+reader the public meaning before a claim identifier, declaration name, file
+path, or repository-specific status label, and omit internal workflow
+vocabulary that the argument does not need.
 
 ## Distinct job from `ARCHITECTURE.md`
 
@@ -48,4 +52,6 @@ For each reading, record:
 
 The paper remains under a ten-page ceiling. Prefer removing duplication,
 making one worked example more concrete, and clarifying authority over adding
-terminology, counts, scripts, or new claims of importance.
+terminology, counts, scripts, or new claims of importance. A revision is not
+ready merely because the TeX compiles: render every page, inspect the diagram
+and tables at reading size, and leave no clipping, overlap, or layout warning.

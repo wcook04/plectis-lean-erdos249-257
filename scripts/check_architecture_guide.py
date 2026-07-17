@@ -96,26 +96,26 @@ BANNED_SHORTHAND = (
 )
 
 PAPER_SECTION_ORDER = (
-    r"\section{What this repository is for}",
-    r"\section{The architecture in one picture}",
-    r"\section{The real files and their responsibilities}",
-    r"\section{One result from Lean proof to public page}",
-    r"\section{What happens when a file changes}",
-    r"\section{Who decides what}",
-    r"\section{A claim the checker did not yet cover}",
-    r"\section{Operating and adapting the repository}",
-    r"\section{Scope and limitations}",
+    r"\section{The publication gap}",
+    r"\section{The release workflow}",
+    r"\section{One claim from Lean theorem to public page}",
+    r"\section{What the checks establish}",
+    r"\section{A boundary the checklist missed}",
+    r"\section{Scope, reuse, and limits}",
+    r"\section{Related systems}",
+    r"\section{Conclusion}",
+    r"\section{Reproducibility}",
 )
 
 PAPER_REQUIRED_ANCHOR_GROUPS = {
     "plain_purpose": (
-        "This document explains how one public mathematics repository is organised",
+        "Lean verifies that a proof establishes the formal statement written in the source",
         "Both problems remain open",
-        "does not claim to solve either problem",
+        "does not claim a solution to either problem",
     ),
     "five_real_parts": (
         "Lean source",
-        "human-reviewed claim record",
+        "maintainer-reviewed claim record",
         "authored public documents",
         "generated indexes and summaries",
         "release program and continuous-integration workflow",
@@ -134,24 +134,24 @@ PAPER_REQUIRED_ANCHOR_GROUPS = {
     ),
     "decision_boundary": (
         "Lean checks the formal proofs",
-        "Mathematicians review what those proofs mean",
-        "The release machinery checks that the reviewed relationships remain intact",
+        "A maintainer reviews what those proofs mean",
+        "The release machinery checks that the recorded relationships remain intact",
         "does not technically force a second independent mathematician",
     ),
     "worked_trace": (
-        "Lean has checked a finite calculation at 28 listed input values",
-        "successful values beyond every fixed cutoff",
+        "Lean has checked a finite certificate at each of 28 listed scales",
+        "beyond every fixed cutoff",
         "public meaning, not its internal name",
         "certified_kill_instances",
     ),
     "release_flow": (
         "lake build",
         "python3 scripts/check_release.py",
-        "The public workflow has two independent jobs",
-        "Any failed recorded relationship stops the release",
+        "two separate jobs",
+        "treats that exit as a failing job",
     ),
     "coverage_ceiling": (
-        "A claim the checker did not yet cover",
+        "A boundary the checklist missed",
         "coverage boundary, not a reliability score",
         "only after a person has identified and recorded that relationship",
     ),
@@ -218,8 +218,9 @@ def validate_systems_paper(text: str) -> None:
     )
 
     assert (
-        "How a Lean Repository Turns Formal Proofs" in text
-        and "Repository architecture, release flow, and trust boundaries" in text
+        "From Lean Proofs to Public Claims" in text
+        and "Release checks and trust boundaries in one formal mathematics repository"
+        in text
     ), "systems paper lost its plain architecture title"
 
     positions = [text.find(heading) for heading in PAPER_SECTION_ORDER]
@@ -243,8 +244,8 @@ def validate_systems_paper(text: str) -> None:
     assert len(re.findall(r"\bsentence\b", text, flags=re.IGNORECASE)) <= 4, (
         "systems paper has drifted back to a sentence-centred case study"
     )
-    public_meaning = text.find("public meaning, not its internal name")
-    internal_id = text.find("certified_kill_instances")
+    public_meaning = compact.find("public meaning, not its internal name")
+    internal_id = compact.find("certified_kill_instances")
     assert 0 <= public_meaning < internal_id, (
         "systems paper exposes its internal claim id before the public meaning"
     )
@@ -279,7 +280,6 @@ def validate_entry_links(readme: str, agents: str, paper_readme: str) -> None:
     )
     for manuscript in (
         "erdos249-257-main-paper.tex",
-        "erdos249-transport-curvature-companion-note.tex",
         "claim-faithful-publication-systems-paper.tex",
     ):
         assert manuscript in paper_readme

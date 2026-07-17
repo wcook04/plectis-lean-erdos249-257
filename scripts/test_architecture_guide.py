@@ -66,7 +66,7 @@ def main() -> int:
     paper_mutations = (
         (
             systems_paper.replace(
-                r"\section{The architecture in one picture}",
+                r"\section{The release workflow}",
                 r"\section{Background}",
             ),
             "real architecture section removed",
@@ -77,7 +77,7 @@ def main() -> int:
         ),
         (
             systems_paper.replace(
-                "does not technically force\na second independent mathematician",
+                "does not technically force a second independent mathematician",
                 "enforces independent review",
             ),
             "review-enforcement boundary inflated",
