@@ -2396,58 +2396,53 @@ mathematical claim.  Its purpose is to identify which parts of the checked
 arguments are finite and complete, which parts require a uniform theorem, and
 why the chosen coordinates expose that distinction.
 
-\paragraph{Finite predicate and uniform producer.}
-The checked arguments separate according to the schema
+\paragraph{Two finite-to-cofinal passages.}
+Both open spines use finite predicates, but their conclusions point in
+opposite directions:
 \[
-\begin{array}{c}
-\text{a hypothetical rational value imposes a rigid tail or carry law}\\
-\Downarrow\\
-\text{a finite predicate can refute that law at fixed parameters}\\
-\Downarrow\\
-\text{a global conclusion requires a theorem producing such refutations
-without bound}.
-\end{array}
+\begin{aligned}
+ S\notin\Q
+ &\quad\Longleftrightarrow\quad
+ \text{\(\textsf{certifiedKill}(h,N,L)\) occurs cofinally for every \(h\)},\\
+ \frac12\in\mathcal A
+ &\quad\Longleftrightarrow\quad
+ \text{\(\tau_s=0\) occurs cofinally}.
+\end{aligned}
 \]
-For \#249 the rigid law is integrality of a period difference:
-Proposition~\ref{res:complete} proves that
-\(\textsf{certifiedKill}(h,N,L)\) is complete at fixed \(h,N\), whereas
-Theorem~\ref{res:pointwisecomplete} identifies the pointwise global form and
-Theorem~\ref{res:red21} isolates the cofinal producer.  In the classical
-full-support theorem that producer is constructed by the Bertrand--CRT and
-averaging argument of Section~\ref{sec:eb}.  In the half-value branch, exact
-seam and terminal predicates play the finite role, while cofinal terminal
-zeros remain the missing producer.  This is the architectural distinction;
-no additional status summary is needed here.
+For the first equivalence, Proposition~\ref{res:complete} supplies fixed
+completeness, Theorem~\ref{res:pointwisecomplete} gives the pointwise global
+form, and Theorem~\ref{res:red21} gives the cofinal form displayed above.
+The missing input is a producer of finite refuters without bound.  For the
+second equivalence, Theorem~\ref{res:halfmembership} already identifies
+cofinal terminal zeros with membership; the missing input is instead a
+producer of those zeros.  The classical full-support theorem is the closed
+comparison case: its producer is the Bertrand--CRT and averaging construction
+of Section~\ref{sec:eb}.
 
-\paragraph{Equivalent representations.}
-Three further changes of coordinates serve different mathematical purposes. The
-Mersenne--Lambert transform places $S$ next to the Erd\H{o}s--Borwein constant
-and exposes the nonnegative primitive-conductor weight. The M\"obius-square
-identity turns the same number into a signed rapidly convergent series. The
-coprime-pair identity turns it into a probability. Formalising all three and
-proving that the denominator exclusion transfers between them prevents an
-informal change of representation from silently changing the claim.  Reducing
-the random pair by its gcd then yields the exact Stern--Brocot cylinder law of
-Theorem~\ref{res:sternbrocotcylinders} and the Fibonacci--continuant estimates
-of Theorem~\ref{res:sternbrocotruns}.  These are unconditional structure inside
-the probability representation, not a substitute for the certificate supply.
+\paragraph{Parallel coordinates for \(S\).}
+The Mersenne--Lambert, M\"obius-square, and coprime-pair identities are three
+equal representations of \(S\), not successive implications.  They expose,
+respectively, the nonnegative primitive-conductor weight, a signed rapidly
+convergent series, and a probability.  Equality of the represented number is
+what transfers the denominator exclusion between them.  None supplies the
+cofinal \(\textsf{certifiedKill}\) family.
 
-\paragraph{Necessary conditions on a rational support.}
-The mathematical assertions in this part of the architecture are exactly
-Theorem~\ref{res:rigidity-main} and
-Corollaries~\ref{res:rigidity-unbounded-main}--\ref{res:rigidity-dyadic-mass-main},
-with their proofs and auxiliary coordinates in Appendix~\ref{sec:carry}.
-Their role is diagnostic.  The zero-window bound in
-Corollary~\ref{res:rigidity-sublog-main} is obtained
-by transporting the fixed-power divisor estimate
-\(\tau(n)^k\le(k^{2^k})^k n\) through the binary tail and the exact carry
-recurrence.  Corollary~\ref{res:rigidity-unbounded-main} excludes a bounded
-carry alphabet, while Corollary~\ref{res:rigidity-mass-main} relates the odd
-denominator to reciprocal mass and
-Corollary~\ref{res:rigidity-dyadic-mass-main} retains divergence as an
-explicit alternative at the dyadic endpoint.  None of these necessary
-conditions is a contradiction; they describe the infinite Boolean carry path
-that a future proof would have to exclude.
+\paragraph{Structure inside the probability coordinate.}
+Reducing the random pair by its gcd yields the exact Stern--Brocot cylinder
+law of Theorem~\ref{res:sternbrocotcylinders} and the
+Fibonacci--continuant estimates of Theorem~\ref{res:sternbrocotruns}.  These
+are unconditional consequences inside one coordinate, not another step
+toward the missing certificate producer.
+
+\paragraph{Parallel filters on a rational support.}
+Theorem~\ref{res:rigidity-main} is the common node: rationality forces its
+carry recurrence.  Its four corollaries are parallel filters on the same
+hypothetical support---unbounded carry states, sublogarithmic coverage gaps,
+the odd-denominator reciprocal-mass identity, and the dyadic mass endpoint.
+No filter proves another.  Their proofs and auxiliary coordinates are in
+Appendix~\ref{sec:carry}.  A proof through this route would have to show that
+every infinite rational support violates at least one filter; no such
+exclusion is proved here.
 
 \section{Formal verification and reproducibility}\label{sec:verify}
 
