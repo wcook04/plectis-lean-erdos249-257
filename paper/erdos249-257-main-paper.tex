@@ -2206,47 +2206,61 @@ irrationality criterion for $S$.
 
 \subsection{Finite determinant and rank routes}
 
-These three propositions have different logical roles.  The signed
-dyadic-moment algebra is a generic finite ingredient.  The dyadic-kernel
-criterion is a conditional consumer of separated nonzero minors at one fixed
-level.  The residual-gauge proposition shows why residual-blind minors cannot
-by themselves supply the missing arithmetic contradiction.  Thus the absent
-bridge is an all-level arithmetic construction of the separated minors, not
-another formal consequence of the finite determinant identities.
+This route has three layers.  Two generic algebraic lemmas expand a
+rectangular determinant and prevent cancellation by a unique largest dyadic
+exponent.  The separated-minor proposition is the conditional rank consumer
+at one fixed level; the even-residue and compressed-adjoint propositions are
+independent reductions, not inputs to that consumer.  The residual-gauge
+proposition then marks the boundary of residual-blind minor constructions.
 
-\begin{proposition}[signed dyadic-moment algebra]\label{res:signedmoment}
+\begin{proposition}[rectangular determinant expansion]\label{res:signedmoment}
 For matrices $M:\iota\times\kappa\to R$ and
 $N:\kappa\times\iota\to R$ over a commutative ring, the determinant of
 $MN$ is the sum over all maps $p:\iota\to\kappa$ of the determinant of the
 corresponding selected-column matrix times the diagonal product
-$\prod_i N_{p(i),i}$.  Separately, if a selected integer numerator is odd and
-its dyadic exponent is strictly larger than every other selected exponent,
-then the common numerator after dyadic denominator clearing is odd and hence
-nonzero.
+$\prod_i N_{p(i),i}$.
 \end{proposition}
-\noindent Formalised:
-\lword{SignedQMomentObstruction.lean}{28}{det_mul_rectangular}{rectangular determinant expansion},
+\noindent This is the
+\lword{SignedQMomentObstruction.lean}{28}{det_mul_rectangular}{rectangular determinant expansion}.
+
+\begin{proposition}[dominant dyadic term]\label{res:dominantdyadic}
+If one selected integer numerator is odd and its dyadic exponent is strictly
+larger than every other selected exponent, then the common numerator after
+dyadic denominator clearing is odd and hence nonzero.
+\end{proposition}
+\noindent Formalised by
 \lword{SignedQMomentObstruction.lean}{77}{scaled_dyadic_sum_odd}{dominant dyadic parity}, and
 \lword{SignedQMomentObstruction.lean}{95}{scaled_dyadic_sum_ne_zero}{dominant dyadic nonvanishing}.
 These are finite algebraic inputs to a signed-moment route.  They do not show
 that any actual totient Hankel determinant is nonzero, and they give no
 irrationality criterion for $S$.
 
-\begin{proposition}[dyadic-kernel rank criterion]\label{res:dyadictotient}
+\begin{proposition}[separated-minor rank criterion]\label{res:dyadictotient}
 For every fixed level $e$, a separated nonzero evaluation minor of the
 canonical dyadic totient-kernel family gives its span dimension
-$2^e+1$.  Every even residue channel is exactly a scalar multiple of its
-odd-core channel.  Moreover, a compressed-adjoint certificate whose nonzero
-multiple is strictly smaller in absolute value than its positive modulus is
-inconsistent.
+$2^e+1$.
 \end{proposition}
-\noindent Formalised:
-\lword{TotientMahlerDefect.lean}{98}{finrank_canonicalTotientKernel_eq_of_certificate}{separated-minor rank criterion},
-\lword{TotientMahlerDefect.lean}{156}{totientKernel_even_residue_reduce}{even-residue reduction}, and
-\lword{TotientMahlerDefect.lean}{197}{false_of_compressedAdjointCertificate}{compressed-adjoint contradiction}.
+\noindent This is the
+\lword{TotientMahlerDefect.lean}{98}{finrank_canonicalTotientKernel_eq_of_certificate}{separated-minor rank criterion}.
 What is missing is an all-level construction of the separated minors, for
-example by a CRT--Dirichlet argument.  The proposition does not provide those
-certificates for every $e$, and it gives no irrationality criterion for $S$.
+example by a CRT--Dirichlet argument.
+
+\begin{proposition}[even-residue reduction]\label{res:evenresidue}
+Every even residue channel in the canonical dyadic totient-kernel family is
+exactly a scalar multiple of its odd-core channel.
+\end{proposition}
+\noindent Formalised as the
+\lword{TotientMahlerDefect.lean}{156}{totientKernel_even_residue_reduce}{even-residue reduction}.
+This removes duplicate channels; it does not construct a separated minor.
+
+\begin{proposition}[compressed-adjoint contradiction]\label{res:compressedadjoint}
+A compressed-adjoint certificate whose nonzero multiple is strictly smaller
+in absolute value than its positive modulus is inconsistent.
+\end{proposition}
+\noindent Formalised as the
+\lword{TotientMahlerDefect.lean}{197}{false_of_compressedAdjointCertificate}{compressed-adjoint contradiction}.
+This is a conditional finite contradiction, not a source of certificates at
+every level.
 
 \begin{proposition}[residual-gauge obstruction for monomial minors]\label{res:residualgauge}
 Let a monomial matrix have a common nonzero residual weight in each column.
