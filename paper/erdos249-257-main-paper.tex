@@ -147,14 +147,14 @@ problem is settled.
 The two questions are whether
 $S=\sum_{n\ge1}\ph(n)/2^n$ is irrational (\#249), and whether
 $\sum_{n\in A}(2^n-1)^{-1}$ is irrational for every infinite
-$A\subseteq\N$ (\#257).  The formulations occur in the Erd\H{o}s--Graham
+$A\subseteq\N$ (\#257).  The problems appear in the Erd\H{o}s--Graham
 collection and Erd\H{o}s's later survey~\cite{erdosgraham1980,erdos1988};
-the numbering follows the maintained catalogue~\cite{erdosproblems}.
+numbering follows the maintained catalogue~\cite{erdosproblems}.
 
 Throughout, \(\N=\{0,1,2,\ldots\}\) and
 \(\Npos=\{1,2,3,\ldots\}\).  Supports for \#257 are subsets of
-\(\Npos\); allowing the exponent \(0\) would introduce the undefined
-denominator \(2^0-1\).
+\(\Npos\); exponent \(0\) would give the undefined denominator
+\(2^0-1\).
 
 For \#257, an infinite support summing to $1/2$ would refute the universal
 claim.  Neither endpoint is proved.  In both open spines, tail and carry identities
@@ -167,7 +167,9 @@ The totient \(\ph(n)\) counts the integers in \(\{1,\ldots,n\}\) that are
 coprime to \(n\).  A \emph{support} selects terms;
 its \emph{achievement set} contains the resulting sums.  \emph{Cofinally}
 means beyond every bound.  A \emph{spine} is a displayed chain of
-equivalences or implications leading to one open quantified statement.
+statements leading to one open quantified statement.  A \emph{certificate}
+is a finite integer computation proving an exact statement about an
+infinite tail; a \emph{carry} is an integer state of binary long division.
 
 The totient constant also has the elementary probabilistic form
 \[
@@ -192,8 +194,8 @@ proved, but no cofinal supply of terminal zeros is known.  This shared
 quantifier pattern is one reason for treating the problems together.  The
 second is exact: both series are values of one Lambert transform, and
 rationality acts on both through the same integral carry mechanism;
-Section~\ref{sec:architecture} organises the open questions inside that one
-map and records why no status transfers between them.
+Section~\ref{sec:architecture} organises the open questions inside that map
+and records why no status transfers.
 
 \begin{center}
 \small
@@ -207,12 +209,12 @@ Question or result & Status & What is proved \\
 Irrationality in \#249 & Open & No proof of \(S\notin\Q\) is claimed. \\
 Denominator exclusion & Proved & If \(S=p/q\), then \(q>\Qzero\). \\
 Tail and lcm-diagonal forms & Exact equivalences & Either certificate supply is equivalent to \(S\notin\Q\); the supply itself is open. \\
-Diagonal computations through \(t=64\) & Finite evidence & Lean checks the 28 lcm-height changes in that range; this is not a cofinal theorem. \\
+Diagonal computations through \(t=64\) & Finite evidence & Lean checks the 28 lcm-height changes; not a cofinal theorem. \\
 Universal assertion in \#257 & Open & No proof covers every infinite support. \\
 Full and structured supports & Proved cases & Classical full-support irrationality and several restricted support families are formalised. \\
 Rational-support carry laws & Necessary conditions & Any hypothetical rational support must satisfy the stated orbit, gap, mass, and unbounded-state constraints. \\
 Membership of \(1/2\) & Open & Membership would give an infinite rational support and refute universal \#257. \\
-Greedy and final-skip forms of \(1/2\) & Exact equivalences & They identify the missing cofinal event but do not prove that it occurs. \\
+Greedy and final-skip forms of \(1/2\) & Exact equivalences & They identify the missing cofinal event without proving it occurs. \\
 Rank-26 final-middle sieve & Conditional reduction & The orbit restrictions and the exact count of 412 surviving phases are proved; the survivors are not excluded. \\
 \bottomrule
 \end{tabular}
@@ -244,8 +246,8 @@ obligations in Proposition~\ref{res:finalskipexclusions} and
 Corollary~\ref{res:taildominance}.
 \end{enumerate}
 The table above separates proved results, exact reformulations, conditional
-implications, finite evidence, and open endpoints.  In particular, the 28
-diagonal rows remain finite evidence, and both endpoints remain open.
+implications, finite evidence, and open endpoints.  The 28 diagonal rows remain finite
+evidence; both endpoints remain open.
 
 These results carry no priority claim.  Appendices carry auxiliary and
 audit material.  On each side
@@ -257,11 +259,11 @@ $1/2$; no unbounded supply is proved.
 \paragraph{Reading map.}
 Section~\ref{sec:spines} gives the exact spines, Section~\ref{sec:ladder} their
 common coordinates, and Sections~\ref{sec:eb} and~\ref{sec:249} the results,
-verification, and frontiers; Section~\ref{sec:architecture} then states the
+verification, and frontiers; Section~\ref{sec:architecture} states the
 shared structure and its limits.  Appendices~\ref{app:half-technical}
 and~\ref{sec:carry} contain the local half-value and carry arguments; later
 appendices treat the totient certificate and Lambert structure.  Linked
-phrases open exact Lean proofs.
+phrases open Lean proofs.
 
 \medskip
 \noindent\textbf{Keywords.} irrationality; Erd\H{o}s--Borwein constant;
@@ -323,8 +325,8 @@ unbounded supply of non-integral tail differences.
 Theorem~\ref{res:diag} compresses this to the equivalent one-parameter
 lcm-diagonal supply.  Finite diagonal instances are verified at the 28
 changing-lcm scales through \(t=64\),
-but no unbounded supply is proved.  Neither the finite denominator exclusion
-nor the verified diagonal instances discharge this quantifier.
+but no unbounded supply is proved.  The denominator exclusion does not
+discharge this quantifier either.
 
 \subsection{Erd\H{o}s \#257: the exact half-value counterexample spine}
 \label{res:halfstory}
@@ -778,6 +780,7 @@ Under the hypotheses of Theorem~\ref{res:rigidity-main}, if
    +\lim_{M\to\infty}\frac1M\sum_{N<M}e_N\geq\frac{w}{h},
 \]
 where \(w\) is the number of wraps in one doubling-residue cycle and
+\(e_N=\lfloor u_N/v\rfloor\) is the integral excess in the split
 \(u_N=ve_N+(p2^N\bmod v)\).  If \((p,v)=1\), then \(w\geq1\).
 \end{corollary}
 \noindent The exact excess-mean identity is
@@ -800,7 +803,7 @@ common recurrence and Boolean certificate; Appendices~\ref{app:carry-sublog}
 and~\ref{app:carry-mass} supply the independent filters.  No corollary above
 is used to prove another.
 
-\begin{corollary}[exact Boolean--M\"obius obstruction for universal \#257]
+\begin{corollary}[Boolean--M\"obius orbit form of universal \#257]
 \label{res:universal-boolean-obstruction}
 The universal assertion in Erd\H{o}s~\#257 is equivalent to the following
 orbit statement: for every rational number \(p/q\), every
@@ -814,9 +817,9 @@ Theorem~\ref{res:carrycert}.  That theorem is the Lean-checked
 fraction-by-fraction equivalence
 \lword{BooleanMobiusCarry.lean}{948}{exists_normalized_support_fraction_iff_exists_booleanMobiusCarry}{between supports and carry certificates};
 the corollary merely quantifies it over \(p/q\) and separates finite from
-infinite reconstructed supports.  This is an exact obstruction, not a finite
-algorithm: the orbit condition and the support it reconstructs are infinite
-objects.
+infinite reconstructed supports.  This is an exact reformulation, not a
+finite algorithm: the orbit condition and the support it reconstructs are
+infinite objects.
 
 \subsection{The target \(1/2\)}
 
@@ -943,7 +946,9 @@ For each \(s\geq6\), let
 \]
 Let \(H_s\) be the unique subset of \(\{2,\ldots,s-1\}\) for which
 \(\sum_{d\in H_s}q_{s,d}\) is least among the subset sums strictly exceeding
-\(K_s\).  The transition from row \(s\) to row \(s+1\) is called
+\(K_s\).  Informally, \(G_s\) records what the integer greedy run has taken
+through row \(s\), and \(H_s\) is its cheapest strict overshoot of the
+target.  The transition from row \(s\) to row \(s+1\) is called
 \emph{upper}, \emph{middle}, or \emph{right} according as
 \[
  G_{s+1}=H_s,\qquad G_{s+1}=G_s,\qquad
@@ -1569,7 +1574,7 @@ statement for the concrete seam orbit is proved.
 \subsubsection{Reset-deficit escape}\label{res:resetdeficit}
 
 At a late largest skipped rank, a right successor branch pins the integer
-greedy remainder between an explicit quarter threshold and carry threshold:
+greedy remainder between an explicit quarter threshold and a carry threshold:
 \lword{HalfCylinderResetDeficitEscape.lean}{200}{rightBranch_remainder_window}{the right-branch remainder window}.
 Along such a branch the remainder satisfies an exact affine recurrence,
 \lword{HalfCylinderResetDeficitEscape.lean}{218}{rightBranch_remainder_succ_eq}{the right-branch affine recurrence}.
@@ -1593,7 +1598,7 @@ coordinates; it does not supply a sign or size estimate for that carry.
 
 This subsection has no open-endpoint theorem.  Its verified bases and stages
 are bounded evidence for the cofinal criteria in A.2--A.3; its coordinate
-coordinate changes translate one finite formulation into another; and its
+changes translate one finite formulation into another; and its
 counterexamples and incompatibility theorems close shortcuts that would
 otherwise be mistaken for global arguments.  Each item must therefore be
 read through the earlier criterion it supports or blocks.
@@ -2237,7 +2242,8 @@ more local normal form.  Put $H_t=M_t$ and
 \]
 Separate an exact rational M\"obius shadow
 $Q_t=a_t/d_t$ in lowest terms and define the remaining \emph{foreign defect}
-by $F_t=D_t-Q_t$.  The full target is the residue class of $-a_t$ modulo $d_t$:
+by $F_t=D_t-Q_t$; the shadow collects the explicitly summed M\"obius
+channels, and the defect is everything that explicit part does not see.  The full target is the residue class of $-a_t$ modulo $d_t$:
 \[
  \mathsf{Hit}(t)
  \quad\Longleftrightarrow\quad
@@ -2404,8 +2410,9 @@ unbounded family of separated projections; these are parts of the open
 certificate-supply problem.
 
 Second, the rational M\"obius shadow has an exact reduced denominator.  If
-$r_t$ is the square-free kernel of $H_t$, $s_t=H_t/r_t$, and $J(r_t)$ is the
-odd Jordan scalar defined in the algebraic shadow chain, then
+$r_t$ is the square-free kernel of $H_t$, $s_t=H_t/r_t$, and
+$J(r_t)=\prod_{q}(q^2-1)$ is the odd Jordan scalar, the product running over
+the odd prime divisors $q$ of $r_t$, then
 \[
  d_t=
  \frac{2^{r_t}-1}
@@ -2619,9 +2626,10 @@ Hence integrality at $H$ propagates to every multiple, and the four target hits
 at the prime-adjunction diamond are equivalent to the single hit at its root
 (\lword{FullTargetPrimeAdjunctionNoGo.lean}{196}{fullTarget_primeAdjunction_diamond_iff_root}{prime-adjunction diamond collapse}).
 The corresponding transport of the complete foreign defect has zero diamond
-curvature
+curvature, in the sense that the two transport compositions around the
+diamond agree exactly
 (\lword{FullTargetPrimeAdjunctionNoGo.lean}{247}{foreignTransportCorrection_primeAdjunction_flat}{foreign-correction flatness}).
-Thus explicit-shadow fibres alone cannot create a holonomy obstruction.  A
+Thus explicit-shadow fibres alone cannot create a transport obstruction.  A
 future positive route would need a separately defined projection together with
 a theorem controlling what that projection discards.  This is a proved
 obstruction to one strategy, not progress on the unbounded-supply proposition.
@@ -3502,18 +3510,28 @@ localises one transition configuration, while Appendix~\ref{app:half-evidence}
 supplies bounded evidence, coordinate changes, and no-go results.  Neither
 creates a further implication to an open endpoint.
 
-Throughout this appendix, a \emph{take} (respectively a \emph{skip}) at
-rank \(n\) is the greedy decision \(\varepsilon_n=1\) (respectively
-\(\varepsilon_n=0\)); a \emph{seam} is an adjacent pair of finite greedy
-words at a branch boundary; a \emph{rewind} is the corresponding inverse
-finite recurrence; the \emph{transition carry} is the integer coordinate
-appearing in the exact residual identity; the \emph{remainder} of a row is
-its integer greedy residual; and the \emph{pulse} of a rank at row \(s\)
-counts its divisor incidences at \(2s+1\) and \(2s+2\), the first
-counting twice, the pulse of a word being the sum over its ranks.  These terms denote mathematical objects, not stages of a proof
-search.  Module-local coordinates not listed here (for example the
-centred, lazy, or first-wrap variants) are defined in the linked formal
-statements.
+Throughout this appendix:
+\begin{itemize}[leftmargin=1.6em]
+\item a \emph{take} (respectively a \emph{skip}) at rank \(n\) is the
+greedy decision \(\varepsilon_n=1\) (respectively \(\varepsilon_n=0\));
+\item the \emph{finite greedy seam at row \(s\)} is the Boolean word of
+Definition~\ref{def:terminal-bit}; an unqualified \emph{seam} in this
+appendix is an adjacent pair of such words at a branch boundary, and the
+compounds seam pair, one-hole seam, first-wrap seam, and rewind seam carry
+this pair sense;
+\item a \emph{hole} of a seam is the missing carry value in an otherwise
+covered protected interval;
+\item a \emph{rewind} is the inverse finite recurrence of a seam;
+\item the \emph{transition carry} is the integer coordinate appearing in
+the exact residual identity, and the \emph{remainder} of a row is its
+integer greedy residual;
+\item the \emph{pulse} of a rank at row \(s\) counts its divisor
+incidences at \(2s+1\) and \(2s+2\), the first counting twice; the pulse
+of a word is the sum over its ranks.
+\end{itemize}
+These terms denote mathematical objects, not stages of a proof search.
+Module-local coordinates not listed here (for example the centred, lazy,
+or first-wrap variants) are defined in the linked formal statements.
 
 \HalfValueTechnicalAppendix
 
