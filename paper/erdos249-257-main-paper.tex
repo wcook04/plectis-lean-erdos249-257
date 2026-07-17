@@ -1102,7 +1102,7 @@ branch has a kernel-checked finite certificate: for every upper transition
 from rows $13$ through $30$, every subsequent dyadic danger band is avoided.
 The certificate shares each exact successor remainder across all its band
 indices,
-\lrefx{HalfCylinderUpperResetBandCertificates.lean}{78}{seamUpperResetDyadicBandEscape_through_thirty}.
+\lword{HalfCylinderUpperResetBandCertificates.lean}{78}{seamUpperResetDyadicBandEscape_through_thirty}{the verified upper-reset certificate}.
 It is a bounded transition check and does not supply the cofinal band-escape
 hypothesis.
 
@@ -1111,12 +1111,12 @@ hypothesis.
 The complementary branch has an equally exact seam formulation.  Membership
 of $1/2$ in the Mersenne achievement set is equivalent to false successor
 terminal bits beyond every bound,
-\lref{HalfCylinderHalfMembershipClassification.lean}{126}{half_mem_mersenneAchievementSet_iff_unboundedTerminalFalse};
+\lword{HalfCylinderHalfMembershipClassification.lean}{126}{half_mem_mersenneAchievementSet_iff_unboundedTerminalFalse}{the unbounded terminal-skip equivalence};
 equivalently, it is equivalent to a cofinal sequence of such false terminals,
-\lrefx{HalfCylinderHalfMembershipClassification.lean}{203}{half_mem_mersenneAchievementSet_iff_cofinalTerminalFalse}.
+\lword{HalfCylinderHalfMembershipClassification.lean}{203}{half_mem_mersenneAchievementSet_iff_cofinalTerminalFalse}{the cofinal terminal-skip equivalence}.
 It is also equivalent to a cofinal integer-seam sequence with skipped ranks
 tending to infinity,
-\lrefx{HalfCylinderHalfMembershipClassification.lean}{213}{half_mem_mersenneAchievementSet_iff_exists_unboundedSkippedRanksAlong}.
+\lword{HalfCylinderHalfMembershipClassification.lean}{213}{half_mem_mersenneAchievementSet_iff_exists_unboundedSkippedRanksAlong}{the unbounded skipped-rank equivalence}.
 These equivalences isolate the required cofinal skipped-rank condition; they
 do not establish that condition.
 
@@ -1129,12 +1129,12 @@ identity is
   3L+\bigl(3\cdot2^{s+1}+2\cdot4^{s-d}+4\bigr)=3U
 \]
 whenever $2s<3d$; this is formalised at
-\lref{HalfCylinderLargestSkipGap.lean}{259}{three_mul_largestSkipLowerWeight_add_exactLateGap_eq_upperWeight}.
+\lword{HalfCylinderLargestSkipGap.lean}{259}{three_mul_largestSkipLowerWeight_add_exactLateGap_eq_upperWeight}{the exact late-gap identity}.
 The upper and middle successor branches create a terminal largest skipped
 rank, while the right branch preserves an existing one:
-\lrefx{HalfCylinderLargestSkipGap.lean}{328}{seamGreedyWord_succ_isLargestFalseRank_terminal_of_upperOrMiddle}
+\lword{HalfCylinderLargestSkipGap.lean}{328}{seamGreedyWord_succ_isLargestFalseRank_terminal_of_upperOrMiddle}{the terminal largest-skip branch}
 and
-\lrefx{HalfCylinderLargestSkipGap.lean}{339}{IsLargestFalseRank.seamGreedyWord_succ_of_rightBranch}.
+\lword{HalfCylinderLargestSkipGap.lean}{339}{IsLargestFalseRank.seamGreedyWord_succ_of_rightBranch}{right-branch persistence}.
 The first-crossing branch hypothesis required to use this identity globally
 is not proved.
 
@@ -1142,11 +1142,11 @@ is not proved.
 
 Above a late largest skipped rank, every filled suffix rank has zero row
 pulse, so the word pulse is carried entirely by the lower prefix:
-\lref{HalfCylinderBoundaryPulse.lean}{85}{exists_lowerPrefix_wordPulse_eq_of_largestFalse_late}.
+\lword{HalfCylinderBoundaryPulse.lean}{85}{exists_lowerPrefix_wordPulse_eq_of_largestFalse_late}{the lower-prefix pulse localization}.
 At the first crossing of the two-thirds boundary there are exactly two cases,
 $3d=2s+1$ and $3d=2s+2$, and the skipped rank has pulse respectively two or
 one:
-\lrefx{HalfCylinderBoundaryPulse.lean}{150}{rowPulse_boundary_of_late_firstCrossing}.
+\lword{HalfCylinderBoundaryPulse.lean}{150}{rowPulse_boundary_of_late_firstCrossing}{the first-crossing pulse classification}.
 This supplies the incidence normalization for a transition-carry estimate;
 it does not establish that estimate.
 
@@ -1166,10 +1166,10 @@ The first-crossing hypothesis itself remains unproved.
 
 A skipped rank is final exactly when its post-decision remainder lies strictly
 above the complete remaining Mersenne tail:
-\lref{HalfCylinderFixedTailSocket.lean}{22}{isLastHalfGreedySkip_iff_skip_and_fatal}.
+\lword{HalfCylinderFixedTailSocket.lean}{22}{isLastHalfGreedySkip_iff_skip_and_fatal}{the final-skip criterion}.
 Consequently membership of $1/2$ is equivalent to the pointwise assertion that
 every actual skipped rank has remainder at most its full future tail,
-\lrefx{HalfCylinderFixedTailSocket.lean}{73}{half_mem_iff_every_actual_skip_survives}.
+\lword{HalfCylinderFixedTailSocket.lean}{73}{half_mem_iff_every_actual_skip_survives}{the half-membership survival equivalence}.
 This is an exact local reformulation; the tail-survival inequality is not
 proved.
 
@@ -1192,10 +1192,10 @@ These are local criteria, not a proof that the required carries occur.
 
 For the adjacent seam recurrence, failure of the desired next-row upper bound
 on the middle branch is exactly one multiple-of-four pulse cell,
-\lref{HalfCylinderQuarterBandEndpoints.lean}{153}{seamAdjacentCut_middleNextUpperFailure_iff_pulseCell}.
+\lword{HalfCylinderQuarterBandEndpoints.lean}{153}{seamAdjacentCut_middleNextUpperFailure_iff_pulseCell}{the middle-branch pulse-cell equivalence}.
 On the terminal-reset branch, the same failure is exactly a constrained
 $3\cdot2^{s-1}+k$ pulse cell,
-\lrefx{HalfCylinderQuarterBandEndpoints.lean}{175}{seamAdjacentCut_rightNextUpperFailure_iff_pulseCell}.
+\lword{HalfCylinderQuarterBandEndpoints.lean}{175}{seamAdjacentCut_rightNextUpperFailure_iff_pulseCell}{the reset-branch pulse-cell equivalence}.
 These are arithmetic normal forms for the exceptional cells; no avoidance
 statement for the concrete seam orbit is proved.
 
@@ -1203,12 +1203,12 @@ statement for the concrete seam orbit is proved.
 
 At a late largest skipped rank, a right successor branch pins the integer
 greedy remainder between an explicit quarter threshold and carry threshold:
-\lref{HalfCylinderResetDeficitEscape.lean}{200}{rightBranch_remainder_window}.
+\lword{HalfCylinderResetDeficitEscape.lean}{200}{rightBranch_remainder_window}{the right-branch remainder window}.
 Along such a branch the remainder satisfies an exact affine recurrence,
-\lrefx{HalfCylinderResetDeficitEscape.lean}{218}{rightBranch_remainder_succ_eq}.
+\lword{HalfCylinderResetDeficitEscape.lean}{218}{rightBranch_remainder_succ_eq}{the right-branch affine recurrence}.
 Moreover, a doubled-scale deficit forces an upper-or-middle branch within the
 corresponding number of rows,
-\lrefx{HalfCylinderResetDeficitEscape.lean}{261}{upperOrMiddle_within_of_two_pow_deficit}.
+\lword{HalfCylinderResetDeficitEscape.lean}{261}{upperOrMiddle_within_of_two_pow_deficit}{the deficit escape bound}.
 The remaining input is the deterministic anti-concentration needed to exclude
 the pinned right-branch window globally.
 
@@ -1229,22 +1229,22 @@ The selected half-carry construction has a checked depth-$18$ base: twelve
 Boolean words cover every terminal carry in the strip $[1,12]$, with all
 intermediate carries in the corresponding half strip.  The reflected table is
 formalised at
-\lref{HalfCarrySelectedWindowBase.lean}{79}{depth18TableCheck_eq_true};
+\lword{HalfCarrySelectedWindowBase.lean}{79}{depth18TableCheck_eq_true}{the depth-\(18\) table verification};
 the resulting selected window is defined at
-\lrefx{HalfCarrySelectedWindowBase.lean}{129}{depth18SelectedHalfWindow}.
+\lword{HalfCarrySelectedWindowBase.lean}{129}{depth18SelectedHalfWindow}{the depth-\(18\) selected window}.
 All twelve words share the same restriction at depth $13$, giving the first
 next-row divisor-agreement certificate,
-\lrefx{HalfCarrySelectedWindowBase.lean}{172}{depth18SelectedHalfWindow_nextRowDivisorAgreement}.
+\lword{HalfCarrySelectedWindowBase.lean}{172}{depth18SelectedHalfWindow_nextRowDivisorAgreement}{the depth-\(18\) divisor-agreement certificate}.
 This finite base does not provide selected windows at unbounded depths.
 
 \subsubsection{Rewind-to-seam equivalence}\label{res:rewindseambridge}
 
 For a selected window with a rewind seam, a two-value coefficient profile on
 the adjacent base ancestors induces the live next-row profile,
-\lref{RewindSeamOperationalBridge.lean}{140}{nextRow_profile_of_rewindSeam}.
+\lword{RewindSeamOperationalBridge.lean}{140}{nextRow_profile_of_rewindSeam}{the next-row rewind profile}.
 Under the stated strip and buffer inequalities, that profile realizes a
 protected one-hole seam at the next row,
-\lrefx{RewindSeamOperationalBridge.lean}{217}{protectedEvenSeamRealizedAt_succ_of_profile}.
+\lword{RewindSeamOperationalBridge.lean}{217}{protectedEvenSeamRealizedAt_succ_of_profile}{the protected-seam realization}.
 The base-ancestor coefficient drop is an explicit input, not a theorem here.
 
 \subsubsection{Selected suffix cylinders}
@@ -1375,23 +1375,23 @@ record makes no novelty claim for the recurrence itself.
 
 Before the first half-divisor feedback row, Lean constructs a full selected
 window at every depth from $18$ through $27$,
-\lref{SelectedSuffixCylinderPreFeedback.lean}{118}{nonempty_stage_of_eighteen_le_of_le_twentySeven}.
+\lword{SelectedSuffixCylinderPreFeedback.lean}{118}{nonempty_stage_of_eighteen_le_of_le_twentySeven}{the stages through depth \(27\)}.
 At depth $27$ the common suffix cylinder remains and its endpoint covers the
 whole protected strip,
-\lrefx{SelectedSuffixCylinderPreFeedback.lean}{141}{depth27SelectedHalfWindow_hasSuffixCylinderAt_thirteen}
+\lword{SelectedSuffixCylinderPreFeedback.lean}{141}{depth27SelectedHalfWindow_hasSuffixCylinderAt_thirteen}{the depth-\(27\) suffix cylinder}
 and
-\lrefx{SelectedSuffixCylinderPreFeedback.lean}{147}{depth27SelectedHalfWindow_endpoint_covers_strip}.
+\lword{SelectedSuffixCylinderPreFeedback.lean}{147}{depth27SelectedHalfWindow_endpoint_covers_strip}{its strip coverage}.
 The shared depth-$13$ prefix gives an explicit checked coefficient recurrence,
 including the resulting depth-$27$ endpoint,
-\lrefx{SuffixCylinderFirstFeedback.lean}{144}{stage27_endpoint_eq}.
+\lword{SuffixCylinderFirstFeedback.lean}{144}{stage27_endpoint_eq}{the depth-\(27\) endpoint calculation}.
 This is a finite run, not an unbounded induction.
 The threshold-stage continuation extends this explicit window through depth
 $29$: its endpoint still covers the strip and its common suffix cylinder is
 certified at every cutoff from $14$ through $25$, while cutoff $26$ is
 explicitly not common,
-\lrefx{SuffixCylinderThreshold.lean}{700}{depth29SelectedHalfWindow_endpoint_covers_strip}
+\lword{SuffixCylinderThreshold.lean}{700}{depth29SelectedHalfWindow_endpoint_covers_strip}{the depth-\(29\) strip coverage}
 and
-\lrefx{SuffixCylinderThreshold.lean}{806}{depth29SelectedHalfWindow_not_commonRestrictionAt_twentySix}.
+\lword{SuffixCylinderThreshold.lean}{806}{depth29SelectedHalfWindow_not_commonRestrictionAt_twentySix}{the cutoff-\(26\) obstruction}.
 
 An independent exact run reaches depth \(51\) with endpoint
 \(51{,}327{,}745\), beyond the next feedback head threshold, and therefore
@@ -1407,14 +1407,14 @@ Proposition~\ref{res:selectsuffix}\textup{(v)}.
 
 At the doubled feedback row, changing only the terminal half-divisor bit from
 false to true increases the support coefficient by exactly one:
-\lref{HalfDivisorUnitDrop.lean}{20}{supportCoeff_extend_true_eq_false_add_one_at_double}.
+\lword{HalfDivisorUnitDrop.lean}{20}{supportCoeff_extend_true_eq_false_add_one_at_double}{the terminal-bit unit-drop identity}.
 The same holds for any explicitly identified adjacent boundary pair,
-\lrefx{HalfDivisorUnitDrop.lean}{35}{supportCoeff_boundaryPair_unitDrop_at_double}.
+\lword{HalfDivisorUnitDrop.lean}{35}{supportCoeff_boundaryPair_unitDrop_at_double}{the boundary-pair unit-drop identity}.
 The inverse-parent recurrence transfers such a pair to the next protected
 seam while retaining the exact unit-drop witness,
-\lrefx{RewindHalfDivisorAdapter.lean}{86}{rewindBaseUnitDropAt_of_halfDivisorBoundaryPair}
+\lword{RewindHalfDivisorAdapter.lean}{86}{rewindBaseUnitDropAt_of_halfDivisorBoundaryPair}{the rewind unit-drop transfer}
 and
-\lrefx{RewindHalfDivisorAdapter.lean}{147}{protectedEvenSeamRealizedAt_succ_of_fullStrip_rewindHalfDivisorBoundaryPair}.
+\lword{RewindHalfDivisorAdapter.lean}{147}{protectedEvenSeamRealizedAt_succ_of_fullStrip_rewindHalfDivisorBoundaryPair}{the protected-seam transfer}.
 This is the local coefficient input for the rewind-seam profile, not a global
 construction of such boundary pairs.
 
@@ -1425,7 +1425,7 @@ boundary predicate.  Lean gives a concrete depth-$26$ selected two-word
 window whose depth-$27$ explicit step has rewind history $[1]$, is a width-two
 seam pair, and satisfies the doubled-row identity, but has no depth-$13$
 half-divisor boundary-pair witness:
-\lrefx{RewindBoundaryPairCounterexample.lean}{169}{depth27_actualRewindSeam_not_boundaryPair}.
+\lword{RewindBoundaryPairCounterexample.lean}{169}{depth27_actualRewindSeam_not_boundaryPair}{the depth-\(27\) boundary-pair counterexample}.
 Thus the protected-window buffer in the compactness criterion is a genuine
 hypothesis, not a consequence of the scalar seam facts alone.
 
@@ -1461,16 +1461,16 @@ requirements cannot be synchronized: if the combined progression modulus is
 $d\ge2$, the phase factor is at most $d$, the fatal-window prime cap is at
 most four times that phase, and Campbell's applicability requires
 $d^4$ below the cap, then the inequalities are inconsistent.  Formalised:
-\lrefx{CampbellShiftSynchronization.lean}{299}{campbellQuarterExponent_periodFreeze_noSync}
+\lword{CampbellShiftSynchronization.lean}{299}{campbellQuarterExponent_periodFreeze_noSync}{the period-freeze incompatibility}
 and
-\lref{CampbellShiftSynchronization.lean}{320}{campbellPhaseFreeze_parameters_impossible}.
+\lword{CampbellShiftSynchronization.lean}{320}{campbellPhaseFreeze_parameters_impossible}{the parameter incompatibility}.
 
 The associated shifted-zero condition is not an independent hypothesis.  It
 is exactly equivalent both to infinitely many actual greedy skips and to
 $1/2\in\mathcal A$:
-\lrefx{CampbellShiftSynchronization.lean}{471}{shiftWindowZero_iff_greedyMersenneSkippedSupport_infinite}
+\lword{CampbellShiftSynchronization.lean}{471}{shiftWindowZero_iff_greedyMersenneSkippedSupport_infinite}{the shifted-zero/skip equivalence}
 and
-\lref{CampbellShiftSynchronization.lean}{488}{shiftWindowZero_iff_half_mem_mersenneAchievementSet}.
+\lword{CampbellShiftSynchronization.lean}{488}{shiftWindowZero_iff_half_mem_mersenneAchievementSet}{the shifted-zero/half-membership equivalence}.
 This closes one synchronization strategy and one reformulation; it does not
 advance either endpoint beyond the already stated half-achievement problem.
 
