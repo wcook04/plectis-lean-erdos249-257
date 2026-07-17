@@ -217,11 +217,14 @@ then
 The exact open statement is an unbounded supply of non-integral tail
 differences, equivalently of finite certificates.  Corollary~\ref{res:diag}
 gives a sufficient lcm-diagonal form, and finite diagonal instances are
-verified through \(t=64\), but no unbounded supply is proved.  The exact Lean
-anchors for the equivalences and denominator theorem are the
+verified through \(t=64\), but no unbounded supply is proved.  The displayed
+chain is formalised by the
 \lword{LcmConeFlatness.lean}{386}{irrational_totient_series_iff_all_tail_diffs_nonintegral}{tail-difference equivalence},
-\lword{LcmConeFlatness.lean}{316}{exists_certifiedKill_iff_tail_diff_notMem_int}{certificate completeness theorem},
+the
 \lword{LcmConeFlatness.lean}{399}{irrational_totient_series_iff_pointwise_certificates}{pointwise certificate equivalence},
+and the fixed-parameter
+\lword{LcmConeFlatness.lean}{316}{exists_certifiedKill_iff_tail_diff_notMem_int}{certificate-completeness theorem}.
+The unconditional finite bound is the
 \lword{CertificateKernel.lean}{18056}{tsum_totient_div_pow_two_ne_ratCast_of_den_le_79639646646701375323355774875831053}{denominator exclusion}.
 
 \subsection{Erd\H{o}s \#257: the exact half-value counterexample spine}
@@ -259,16 +262,17 @@ the middle coordinates \(-3,-2,-1\), the coordinate \(-3\) is impossible.
 The remaining proof must exclude the exceptional coordinates \(-2,-1\) and
 establish the exact future-tail inequality at every other non-\(-3\) middle
 transition.  Neither assertion is proved for the actual greedy orbit.  The
-exact Lean anchors are the
+membership chain is formalised by the
 \lword{GreedyAchievementSet.lean}{2514}{half_mem_mersenneAchievementSet_iff_greedySkippedSupport_infinite}{infinite-skip equivalence},
 \lword{HalfCylinderHalfMembershipClassification.lean}{126}{half_mem_mersenneAchievementSet_iff_unboundedTerminalFalse}{unbounded-terminal equivalence},
 \lword{HalfCylinderHalfMembershipClassification.lean}{235}{half_mem_mersenneAchievementSet_iff_no_lastHalfGreedySkip}{no-last-skip equivalence},
-\lword{HalfCarryReachability.lean}{589}{finite_boolSupport_ne_half}{finite-support exclusion},
-\lword{HalfCylinderLastProducerContradiction.lean}{250}{upperProducer_not_last}{upper-transition exclusion},
-\lword{HalfCylinderLastProducerContradiction.lean}{315}{middleProducer_neg_three_not_last}{middle-\(-3\) exclusion},
-\lword{HalfCylinderFinalMiddleCellEscape.lean}{587}{finalMiddleCell_neg_three_not_last}{analytic \(-3\) contradiction},
 and the
+\lword{HalfCarryReachability.lean}{589}{finite_boolSupport_ne_half}{finite-support exclusion}.
+The conditional residual is the
 \lword{HalfCylinderLastProducerContradiction.lean}{387}{half_mem_mersenneAchievementSet_of_middleProducerTailEscapeExceptNegThree}{remaining-tail implication}.
+Its local transition exclusions are stated and linked where they are used in
+Theorem~\ref{res:fatalright}; Appendix~\ref{app:half-technical} contains the
+supporting coordinate analysis.
 
 \paragraph{Prior-art boundary.}
 The full-support theorem is Erd\H{o}s's, and Borwein proved a broader
@@ -2262,8 +2266,8 @@ the named results.  The source, exact informal-to-formal links, and build
 instructions are available in the
 \href{https://github.com/wcook04/plectis-lean-erdos249-257}{public repository}.
 This paper is tied to an
-\href{\sourceurl}{archived formal-source revision}; every blue declaration name
-links directly to the corresponding checked theorem there. The repository
+\href{\sourceurl}{archived formal-source revision}; every blue mathematical
+caption links directly to the corresponding checked theorem there. The repository
 pins the theorem prover and library versions needed to reproduce the build.
 
 \paragraph{Computational and expository boundary.}
