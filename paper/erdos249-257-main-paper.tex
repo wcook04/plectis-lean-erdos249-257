@@ -1361,34 +1361,31 @@ record makes no novelty claim for the recurrence itself.
 
 \subsubsection{Verified finite suffix-cylinder stages}\label{res:prefeedback}
 
-Before the first half-divisor feedback row, Lean constructs a full selected
-window at every depth from $18$ through $27$,
-\lword{SelectedSuffixCylinderPreFeedback.lean}{118}{nonempty_stage_of_eighteen_le_of_le_twentySeven}{the stages through depth \(27\)}.
-At depth $27$ the common suffix cylinder remains and its endpoint covers the
-whole protected strip,
-\lword{SelectedSuffixCylinderPreFeedback.lean}{141}{depth27SelectedHalfWindow_hasSuffixCylinderAt_thirteen}{the depth-\(27\) suffix cylinder}
+The finite record has three milestones.
+\begin{enumerate}[label=\textup{(\arabic*)},leftmargin=2.2em]
+\item \emph{Depth \(27\).}  Before the first half-divisor feedback row, a full
+selected window exists at every depth from \(18\) through \(27\), and the
+depth-\(27\) endpoint covers the whole protected strip:
+\lword{SelectedSuffixCylinderPreFeedback.lean}{118}{nonempty_stage_of_eighteen_le_of_le_twentySeven}{stages through depth \(27\)}
 and
-\lword{SelectedSuffixCylinderPreFeedback.lean}{147}{depth27SelectedHalfWindow_endpoint_covers_strip}{its strip coverage}.
-The shared depth-$13$ prefix gives an explicit checked coefficient recurrence,
-including the resulting depth-$27$ endpoint,
-\lword{SuffixCylinderFirstFeedback.lean}{144}{stage27_endpoint_eq}{the depth-\(27\) endpoint calculation}.
-This is a finite run, not an unbounded induction.
-The threshold-stage continuation extends this explicit window through depth
-$29$: its endpoint still covers the strip and its common suffix cylinder is
-certified at every cutoff from $14$ through $25$, while cutoff $26$ is
-explicitly not common,
-\lword{SuffixCylinderThreshold.lean}{700}{depth29SelectedHalfWindow_endpoint_covers_strip}{the depth-\(29\) strip coverage}
-and
-\lword{SuffixCylinderThreshold.lean}{806}{depth29SelectedHalfWindow_not_commonRestrictionAt_twentySix}{the cutoff-\(26\) obstruction}.
+\lword{SelectedSuffixCylinderPreFeedback.lean}{147}{depth27SelectedHalfWindow_endpoint_covers_strip}{depth-\(27\) strip coverage}.
 
-An independent exact run reaches depth \(51\) with endpoint
-\(51{,}327{,}745\), beyond the next feedback head threshold, and therefore
-promotes the cutoff.  The promoted successor at depth \(52\) is also checked:
+\item \emph{Depth \(29\).}  The threshold-stage continuation still covers the
+strip and has a common suffix cylinder at every cutoff from \(14\) through
+\(25\), while cutoff \(26\) is explicitly not common:
+\lword{SuffixCylinderThreshold.lean}{700}{depth29SelectedHalfWindow_endpoint_covers_strip}{depth-\(29\) strip coverage}
+and
+\lword{SuffixCylinderThreshold.lean}{806}{depth29SelectedHalfWindow_not_commonRestrictionAt_twentySix}{cutoff-\(26\) obstruction}.
+
+\item \emph{Depth \(52\).}  An independent exact run reaches depth \(51\)
+with endpoint \(51{,}327{,}745\), beyond the next feedback head threshold,
+and the promoted successor at depth \(52\) is checked:
 \lword{SuffixCylinderStage51.lean}{536}{fullCylinderStage51_feedback_headThreshold_margin}{depth-\(51\) threshold margin}
 and
 \lword{SuffixCylinderTerminalOnlyBridge.lean}{118}{fullCylinderStage52_halfTerminalOnlyStripWitness}{depth-\(52\) terminal-strip witness}.
-These computations establish finite stages only; they do not provide the
-arbitrarily large stages required by
+\end{enumerate}
+These are finite milestones, not an unbounded induction; they do not provide
+the arbitrarily large stages required by
 Proposition~\ref{res:selectsuffix}\textup{(v)}.
 
 \subsubsection{Half-divisor unit drop}\label{res:halfdivisordrop}

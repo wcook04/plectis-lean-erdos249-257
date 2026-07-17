@@ -56,7 +56,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "Erd\\H{o}s \\#249",
-    "line": 2551
+    "line": 2548
    }
   },
   {
@@ -67,7 +67,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "unbounded certificate supply",
-    "line": 2562
+    "line": 2559
    }
   },
   {
@@ -78,7 +78,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "the half-value counterexample route",
-    "line": 2577
+    "line": 2574
    }
   },
   {
@@ -89,7 +89,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "universal Erd\\H{o}s \\#257",
-    "line": 2568
+    "line": 2565
    }
   }
  ],
@@ -554,18 +554,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_finite_stage_provenance_density",
+   "id": "main_paper_validation_provenance_density",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "chronological finite-stage records can still expose several construction-level links at each milestone, obscuring which finite endpoints and obstructions matter mathematically",
-   "statement": "Audit the finite-stage chronology in Appendix A.5.4 and retain links to the decisive depth-27, depth-29, and depth-52 milestones while demoting duplicate construction-level provenance."
+   "defect_class": "finite validation paragraphs can expose counts, pass flags, and component tables as separate reader-facing links even when one validation theorem is sufficient for the mathematical narrative",
+   "statement": "Audit finite-validation clauses, beginning with the one-wrap validation in Appendix B.4, and retain the theorem-level validation target while demoting count and table plumbing."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "a16aa24af5236b6508a34b8a4c4b41fdcf620a98",
-  "committed_navigation_snapshot": "f0511826a1dbb75bed8af4922a1a2fe92f5d22e8",
-  "main_paper_source_digest": "sha256:cc3d4d8f100a15d6577ddf9c2bb868eae6618804317b938947eb6d08682bf5bd"
+  "committed_navigation_snapshot": "abdb67104144e4619203fa99c52a988cd617ee70",
+  "main_paper_source_digest": "sha256:ad1aef28724c77f86668885dec69e4810dc93c781558bc80390be474f52f7876"
  },
  "reading_routes": [
   {
