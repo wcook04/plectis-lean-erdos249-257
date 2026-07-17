@@ -53,7 +53,7 @@ FIRST_MINUTE_CONTRACT = {
         (2, 2): (
             "an exact certificate normal form",
             "the exact half-value counterexample spine",
-            "a finite normalized support cannot have value 1/2",
+            "a finite normalised support cannot have value 1/2",
             "no unbounded supply is proved",
         ),
     },

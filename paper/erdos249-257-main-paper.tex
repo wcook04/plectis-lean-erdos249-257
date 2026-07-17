@@ -234,7 +234,7 @@ Let
 \[
   \mathcal A=\left\{\sum_{n\in A}\frac1{2^n-1}:A\subseteq\N,\ 0\notin A\right\}.
 \]
-The weights are strictly superincreasing, so the normalized support of a value
+The weights are strictly superincreasing, so the normalised support of a value
 is unique.  For \(1/2\), the following are equivalent:
 \[
 \begin{aligned}
@@ -245,7 +245,7 @@ is unique.  For \(1/2\), the following are equivalent:
 \text{false successor terminals occur beyond every bound}.
 \end{aligned}
 \]
-A finite normalized support cannot have value \(1/2\).  Thus membership would
+A finite normalised support cannot have value \(1/2\).  Thus membership would
 produce an infinite support of rational sum and refute the universal statement
 of Erd\H{o}s~\#257.  The required counterexample condition is therefore exact:
 cofinally many false terminals, equivalently no last greedy skip.
@@ -531,7 +531,7 @@ For \(x\geq0\), define the greedy residuals by \(r_0(x)=x\) and
 The following statements hold.
 \begin{enumerate}[label=\textup{(\roman*)},leftmargin=2.2em]
 \item \(T_n<w_n\) for every \(n\geq1\).  Hence every \(x\in\mathcal A\)
-has a unique normalized support.
+has a unique normalised support.
 \item A real number \(x\) lies in \(\mathcal A\) if and only if \(x\geq0\)
 and \(r_n(x)\leq T_n\) for every \(n\geq0\).  In that case
 \(x=\sum_{n\geq1}\varepsilon_n(x)w_n\).
@@ -559,7 +559,7 @@ Parts~\textup{(i)}, \textup{(ii)}, and~\textup{(iv)} make the greedy code a
 canonical decision procedure, while compactness in part~\textup{(iii)} allows
 cofinal finite approximations to pass to a point of \(\mathcal A\).  The
 measure-one statement is global: it does not decide whether the particular
-point \(1/2\) belongs to \(\mathcal A\).  Before specializing to that point,
+point \(1/2\) belongs to \(\mathcal A\).  Before specialising to that point,
 we record the carry constraints forced by any rational
 \(X_A\in\mathcal A\); these are necessary conditions in the universal
 direction, not yet a contradiction.
@@ -666,7 +666,7 @@ The following are equivalent:
   \text{ with }\tau_s=0.
 \end{aligned}
 \]
-No finite normalized support has value \(1/2\).  Consequently, any one of
+No finite normalised support has value \(1/2\).  Consequently, any one of
 \textup{(i)}--\textup{(iv)} produces an infinite support \(A\) with
 \(X_A=1/2\), and therefore refutes the universal form of
 Erd\H{o}s~\#257.
@@ -820,7 +820,7 @@ squared prime petals; every member of this support has exactly three prime
 factors with multiplicity.
 
 For such a bouquet, the remaining input is an exact tail-selection predicate:
-at every positive binary scale it chooses a carry slot with a normalized tail
+at every positive binary scale it chooses a carry slot with a normalised tail
 at most $16$.  Lean proves that this predicate supplies the needed forced-carry
 certificates and hence irrationality of the base-$2$ support series.  The
 result is
@@ -1002,9 +1002,9 @@ next-row divisor cylinder, or the canonical adjacent seam.  The theorem
 states this input exactly; it does not construct the window supply and does
 not prove Erd\H{o}s~\#257.
 
-\subsubsection{A realized rewind criterion}\label{res:rewindphase}
+\subsubsection{A realised rewind criterion}\label{res:rewindphase}
 
-For a realized fixed-coefficient history, the dyadic rewind phase is the
+For a realised fixed-coefficient history, the dyadic rewind phase is the
 complementary binary suffix numeral:
 \lword{HalfCarryRewindPhase.lean}{39}{phase_eq_denom_sub_one_sub_suffixNumeral}{the suffix-phase identity}.
 Consequently the singleton criterion is exactly the inequality that this
@@ -1014,21 +1014,21 @@ formalised by
 This converts the phase condition into support-history coordinates, but does
 not prove the required coverage inequality globally.
 
-\subsubsection{Localized protected seams}\label{res:protectedseam}
+\subsubsection{Localised protected seams}\label{res:protectedseam}
 
 The compactness argument needs only one admissible word at cofinally many
-depths.  At a localized one-hole seam, one of the two protected carries $3$
-and $4$ survives; therefore a cofinal supply of realized protected seams
+depths.  At a localised one-hole seam, one of the two protected carries $3$
+and $4$ survives; therefore a cofinal supply of realised protected seams
 implies cofinal admissibility by
 \lword{HalfCarryProtectedSeamConsumer.lean}{31}{cofinalAdmissibility_of_cofinalProtectedEvenSeamRealization}{the protected-seam cofinality implication},
 and hence an infinite support with sum $1/2$,
 \lword{HalfCarryProtectedSeamConsumer.lean}{53}{exists_infinite_support_half_of_cofinalProtectedEvenSeamRealization}{by compactness}.
-The cofinal realization supply is not proved.
+The cofinal realisation supply is not proved.
 
 \subsubsection{Combining the two cofinal half-carry criteria}\label{res:cofinalwindowseam}
 
 Assume that at each requested scale there is either a selected protected
-window or a localized realized seam.  Each alternative supplies the one
+window or a localised realised seam.  Each alternative supplies the one
 admissible word needed for compactness, so this cofinal disjunction implies
 an infinite support with sum $1/2$:
 \lword{HalfCarryCofinalWindowOrSeamConsumer.lean}{32}{cofinalAdmissibility_of_cofinalSelectedWindowOrProtectedSeam}{by window-or-seam cofinality}
@@ -1048,7 +1048,7 @@ deterministic remainder sequence.  No such lower bound is proved here.
 
 \subsubsection{Exact finite recurrence for the greedy seam}\label{res:concreteseam}
 
-The finite seam-word construction realizes the abstract adjacent cut by
+The finite seam-word construction realises the abstract adjacent cut by
 concrete Boolean words and identifies its next word with the integer-greedy
 choice:
 \lword{HalfCylinderConcreteSeamAdapter.lean}{667}{seamCutNextWord_eq_greedyWord_succ}{the seam-word recurrence}.
@@ -1071,7 +1071,7 @@ Thus this equivalence gives an exact classification of the nonmembership branch.
 It neither decides whether $1/2$ belongs to the achievement set nor proves
 the universal Erd\H{o}s~\#257 statement.
 
-This is the nonmembership half of the argument summarized earlier: a last
+This is the nonmembership half of the argument summarised earlier: a last
 greedy skip is equivalent to eventual right extension.  The following
 paragraph records the first exceptional middle case that can be ruled out.
 
@@ -1144,16 +1144,16 @@ and
 The first-crossing branch hypothesis required to use this identity globally
 is not proved.
 
-\subsubsection{Boundary-pulse normalization}\label{res:boundarypulse}
+\subsubsection{Boundary-pulse normalisation}\label{res:boundarypulse}
 
 Above a late largest skipped rank, every filled suffix rank has zero row
 pulse, so the word pulse is carried entirely by the lower prefix:
-\lword{HalfCylinderBoundaryPulse.lean}{85}{exists_lowerPrefix_wordPulse_eq_of_largestFalse_late}{the lower-prefix pulse localization}.
+\lword{HalfCylinderBoundaryPulse.lean}{85}{exists_lowerPrefix_wordPulse_eq_of_largestFalse_late}{the lower-prefix pulse localisation}.
 At the first crossing of the two-thirds boundary there are exactly two cases,
 $3d=2s+1$ and $3d=2s+2$, and the skipped rank has pulse respectively two or
 one:
 \lword{HalfCylinderBoundaryPulse.lean}{150}{rowPulse_boundary_of_late_firstCrossing}{the first-crossing pulse classification}.
-This supplies the incidence normalization for a transition-carry estimate;
+This supplies the incidence normalisation for a transition-carry estimate;
 it does not establish that estimate.
 
 \subsubsection{Largest-skip induction}\label{res:largestskipinduction}
@@ -1248,9 +1248,9 @@ This finite base does not provide selected windows at unbounded depths.
 For a selected window with a rewind seam, a two-value coefficient profile on
 the adjacent base ancestors induces the live next-row profile,
 \lword{RewindSeamOperationalBridge.lean}{140}{nextRow_profile_of_rewindSeam}{the next-row rewind profile}.
-Under the stated strip and buffer inequalities, that profile realizes a
+Under the stated strip and buffer inequalities, that profile realises a
 protected one-hole seam at the next row,
-\lword{RewindSeamOperationalBridge.lean}{217}{protectedEvenSeamRealizedAt_succ_of_profile}{the protected-seam realization}.
+\lword{RewindSeamOperationalBridge.lean}{217}{protectedEvenSeamRealizedAt_succ_of_profile}{the protected-seam realisation}.
 The base-ancestor coefficient drop is an explicit input, not a theorem here.
 
 \subsubsection{Selected suffix cylinders}
@@ -1437,7 +1437,7 @@ coordinate
 \]
 The generic row-word identity is
 \lword{HalfCylinderProducerLowerBound.lean}{105}{producerCarry_insert_seamWordSupport_eq}{row-word transition identity},
-with the below and above specializations at
+with the below and above specialisations at
 \lword{HalfCylinderProducerLowerBound.lean}{150}{producerCarry_insert_seamBelowSupport_eq_middleCoordinate}{middle-coordinate identity}
 and
 \lword{HalfCylinderProducerLowerBound.lean}{183}{producerCarry_insert_seamAboveSupport_eq_neg_upperCoordinate}{upper-coordinate identity}.
@@ -1445,12 +1445,12 @@ These identities make the remaining quantitative task exact: they do not
 prove exponential lower bounds, sign persistence, or a universal escape
 mechanism.
 
-\subsubsection{Strategy boundary: Campbell shift synchronization}
+\subsubsection{Strategy boundary: Campbell shift synchronisation}
 \label{res:campbellboundary}
 
 A proposed route combines a finite Mersenne shift from a putative last greedy
 skip with Campbell's quarter-exponent prime progression.  The exact parameter
-requirements cannot be synchronized: if the combined progression modulus is
+requirements cannot be synchronised: if the combined progression modulus is
 $d\ge2$, the phase factor is at most $d$, the fatal-window prime cap is at
 most four times that phase, and Campbell's applicability requires
 $d^4$ below the cap, then the inequalities are inconsistent.  Formalised:
@@ -1464,7 +1464,7 @@ $1/2\in\mathcal A$:
 \lword{CampbellShiftSynchronization.lean}{471}{shiftWindowZero_iff_greedyMersenneSkippedSupport_infinite}{the shifted-zero/skip equivalence}
 and
 \lword{CampbellShiftSynchronization.lean}{488}{shiftWindowZero_iff_half_mem_mersenneAchievementSet}{the shifted-zero/half-membership equivalence}.
-This closes one synchronization strategy and one reformulation; it does not
+This closes one synchronisation strategy and one reformulation; it does not
 advance either endpoint beyond the already stated half-achievement problem.
 
 }
@@ -2024,7 +2024,7 @@ parity test, with the complementary offset class characterising failure.
 \lword{PowerTwoBitLift.lean}{111}{modEq_thirtyTwo_iff_even_difference_cofactor}{mod-32 cofactor criterion},
 and
 \lword{PowerTwoBitLift.lean}{129}{not_modEq_thirtyTwo_iff_offset_sixteen}{offset-16 complement}.
-The centered-state formulation identifies the signed-margin interval
+The centred-state formulation identifies the signed-margin interval
 condition with failure of this next lift, subject to its stated correction and margin
 budget:
 \lword{PowerTwoCenteredBitLift.lean}{121}{actualPenultimateSignedMargin_centeredLift_iff_not_twice_dvd}{centred-lift equivalence}
@@ -2635,7 +2635,7 @@ Section~\ref{sec:eb}.  The appendix is included so that the hypotheses in the
 main reduction can be audited without turning the main theorem section into a
 chronology of the formal development.
 
-The order is by mathematical use.  Appendix~A.1 localizes one possible unsafe
+The order is by mathematical use.  Appendix~A.1 localises one possible unsafe
 skip; Appendix~A.2 records conditional structured-support criteria;
 Appendix~A.3 collects the finite-window and compactness implications;
 Appendix~A.4 develops the equivalent final-skip coordinates; and
@@ -2655,7 +2655,7 @@ objects, not stages of a proof search.
 The compactness and final-skip subsections give exact implications: a cofinal
 window, seam, or terminal approximation would produce \(1/2\in\mathcal A\),
 whereas an eventual right tail is exactly nonmembership.  The other
-subsections localize possible inputs, verify bounded instances, and close
+subsections localise possible inputs, verify bounded instances, and close
 stronger but invalid local inferences.  None produces the required cofinal
 input, so the residual remains precisely the two obligations in
 Theorem~\ref{res:fatalright}.
@@ -2679,7 +2679,7 @@ converse/rigidity, certificate-normal-form, or coupled reciprocal-mass/collision
 statements collected here.
 
 The reading order is: a generic tail-orbit rationality normal form in
-Appendix~B.1; its Boolean--M\"obius specialization in Appendix~B.2;
+Appendix~B.1; its Boolean--M\"obius specialisation in Appendix~B.2;
 divisor-coverage constraints in Appendix~B.3; denominator-wrap, reciprocal
 mass, and unbounded-state constraints in Appendix~B.4; and the exact greedy
 geometry with one-sided finite death certificates in Appendix~B.5.
@@ -2826,7 +2826,7 @@ Boolean. The support is not guessed: it is reconstructed from the certificate
 by Proposition~\ref{res:boolmob}.
 \end{theorem}
 \noindent Formalised as
-\lword{BooleanMobiusCarry.lean}{948}{exists_normalized_support_fraction_iff_exists_booleanMobiusCarry}{the normalized support-fraction certificate equivalence}.
+\lword{BooleanMobiusCarry.lean}{948}{exists_normalized_support_fraction_iff_exists_booleanMobiusCarry}{the normalised support-fraction certificate equivalence}.
 
 \begin{example}[the support $\{2,3\}$]
 The support $\{2,3\}$ has value
@@ -2942,7 +2942,7 @@ the excess $e_N$ converges automatically, and
 \end{proposition}
 \noindent The divergent-or-bounded conclusion is formalised by the
 \lword{RationalSupportCarrySkeleton.lean}{1501}{support_fraction_oddOrder_wrapRatio_reciprocalMassDivergesOrAtLeast}{wrap-ratio mass alternative},
-its coprime specialization by the
+its coprime specialisation by the
 \lword{RationalSupportCarrySkeleton.lean}{1517}{support_fraction_one_div_oddOrder_reciprocalMassDivergesOrAtLeast}{odd-order mass alternative},
 and the automatic excess limit in the fraction-facing coordinates above by the
 \lword{RationalSupportCarrySkeleton.lean}{1577}{exists_shifted_oddTailExcess_mean_of_support_fraction}{shifted excess-mean identity}.
@@ -3196,7 +3196,7 @@ unbounded carry states & \lrefx{RationalSupportCarrySkeleton.lean}{2377}{exists_
 sublogarithmic zero windows & \lrefx{SublogDivisorCoverage.lean}{392}{supportCoeffZeroWindow_length_le_eps_logb_add}\ (\texttt{SublogDivisorCoverage})\\
 greedy membership criterion & \lrefx{GreedyAchievementSet.lean}{1445}{mem_mersenneAchievementSet_iff_greedy_survival}\ (\texttt{GreedyAchievementSet})\\
 Mersenne achievement set: measure one and nowhere dense & \lrefx{GreedyAchievementSet.lean}{996}{volume_mersenneAchievementSet}, \lrefx{GreedyAchievementSet.lean}{1645}{isNowhereDense_mersenneAchievementSet}\ (\texttt{GreedyAchievementSet})\\
-Campbell shift-synchronization boundary & \lrefx{CampbellShiftSynchronization.lean}{299}{campbellQuarterExponent_periodFreeze_noSync}, \lrefx{CampbellShiftSynchronization.lean}{488}{shiftWindowZero_iff_half_mem_mersenneAchievementSet}\ (\texttt{CampbellShiftSynchronization})\\
+Campbell shift-synchronisation boundary & \lrefx{CampbellShiftSynchronization.lean}{299}{campbellQuarterExponent_periodFreeze_noSync}, \lrefx{CampbellShiftSynchronization.lean}{488}{shiftWindowZero_iff_half_mem_mersenneAchievementSet}\ (\texttt{CampbellShiftSynchronization})\\
 \bottomrule
 \end{tabular}
 \end{center}
