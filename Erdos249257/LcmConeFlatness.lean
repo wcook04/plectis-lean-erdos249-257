@@ -419,6 +419,21 @@ theorem irrational_totient_series_iff_certificate_supply :
       (irrational_totient_series_iff_pointwise_certificates.mp hirr) h hh N₀⟩
   · exact irrational_totient_series_of_certificate_supply
 
+/-- The one-parameter lcm-diagonal certificate supply is an exact normal
+form for #249, not only a sufficient criterion.  In the forward direction,
+pointwise certificate completeness supplies the diagonal certificate already
+at `t = t₀`; the reverse direction is the diagonal collapse. -/
+theorem irrational_totient_series_iff_lcm_diagonal_certificate_supply :
+    Irrational (∑' n : ℕ, (Nat.totient n : ℝ) / 2 ^ n) ↔
+      ∀ t₀ : ℕ, ∃ t, t₀ ≤ t ∧ ∃ L,
+        certifiedKill (periodLcm t) (periodLcm t) L := by
+  constructor
+  · intro hirr t₀
+    refine ⟨t₀, le_rfl, ?_⟩
+    exact (irrational_totient_series_iff_pointwise_certificates.mp hirr)
+      (periodLcm t₀) (periodLcm_pos t₀) (periodLcm t₀)
+  · exact irrational_totient_series_of_lcm_diagonal_certificate_supply
+
 /-- The wave-23 predicate `P t` in pure form: a diagonal certificate depth
 exists iff the diagonal tail difference is a non-integer. -/
 theorem periodLcm_diagonal_kill_iff_tail_diff_notMem_int (t : ℕ) :
