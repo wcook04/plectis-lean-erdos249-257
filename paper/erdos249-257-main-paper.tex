@@ -474,18 +474,16 @@ specialisation directly contains case (e)~\cite{lucatachiya}. Their
 Chowla--Erd\H{o}s-style large-modulus proof is distinct from the periodic-divisor
 certificate route formalised here, and the full mixed-sign coefficient theorem is
 not claimed.}
-The corresponding Lean theorems are:
-(a) \lword{CertificateKernel.lean}{5707}{irrational_erdosSum_factorial_support}{factorial support};
-(b) \lword{CertificateKernel.lean}{5731}{irrational_erdosSum_two_pow_support}{power-of-two support};
-(c) \lword{CertificateKernel.lean}{8775}{irrational_erdosSupportSeries_multiples}{multiples};
-(d) \lword{CertificateKernel.lean}{10448}{irrational_erdosSupportSeries_pairwise_coprime}{pairwise-coprime support};
-and (e) \lword{CertificateKernel.lean}{11276}{irrational_erdosSupportSeries_eventuallyPeriodic}{eventually-periodic support},
-\lword{CertificateKernel.lean}{11344}{irrational_erdosSupportSeries_residueClass}{residue classes},
-and \lword{CertificateKernel.lean}{11358}{irrational_erdosSupportSeries_odd}{odd support}.
-The two base-$2$ instances that name the problem directly are the
-\lword{CertificateKernel.lean}{5754}{erdos257_family_factorial_instance}{factorial instance}
+\noindent Formalised case by case by the
+\lword{CertificateKernel.lean}{5707}{irrational_erdosSum_factorial_support}{factorial-support theorem},
+\lword{CertificateKernel.lean}{5731}{irrational_erdosSum_two_pow_support}{power-of-two-support theorem},
+\lword{CertificateKernel.lean}{8775}{irrational_erdosSupportSeries_multiples}{multiple-support theorem},
+\lword{CertificateKernel.lean}{10448}{irrational_erdosSupportSeries_pairwise_coprime}{pairwise-coprime-support theorem},
 and
-\lword{CertificateKernel.lean}{5762}{erdos257_family_two_pow_instance}{power-of-two instance}.
+\lword{CertificateKernel.lean}{11276}{irrational_erdosSupportSeries_eventuallyPeriodic}{eventually-periodic-support theorem}.
+The residue-class and odd supports in part~\textup{(e)} are direct
+specialisations of the last theorem; the first two theorems already hold for
+every base \(b\geq2\).
 
 The prime support is now known unconditionally: Tao and Ter\"av\"ainen proved
 that
@@ -548,12 +546,8 @@ and
 \lword{GreedyAchievementSet.lean}{1445}{mem_mersenneAchievementSet_iff_greedy_survival}{greedy membership theorem}.
 Uniqueness is the
 \lword{GreedyAchievementSet.lean}{1527}{positiveMersenneSupportValue_injective_normalized}{support-coding theorem};
-the topological and measure statements are the
-\lword{GreedyAchievementSet.lean}{996}{volume_mersenneAchievementSet}{measure theorem},
-\lword{GreedyAchievementSet.lean}{1620}{perfect_mersenneAchievementSet}{perfectness theorem},
-\lword{GreedyAchievementSet.lean}{1636}{isTotallyDisconnected_mersenneAchievementSet}{total-disconnectedness theorem},
-and
-\lword{GreedyAchievementSet.lean}{1645}{isNowhereDense_mersenneAchievementSet}{nowhere-density theorem}.
+the four topological and measure properties in part~\textup{(iii)} are proved
+and linked together in Proposition~\ref{res:greedytopology}.
 Kova\v{c}--Tao provide the strict-tail Cantor-set context~\cite{kovactao};
 no novelty claim is made for that geometry.  Exact rational death
 certificates are given in Appendix~\ref{sec:carry}.
@@ -1344,28 +1338,18 @@ there is an infinite set \(A\subseteq\N\) such that
 
 \noindent Part~\textup{(i)} is the
 \lword{SelectedSuffixCylinder.lean}{88}{depth18SelectedHalfWindow_hasSuffixCylinderAt_thirteen}{depth-\(18\) cylinder}.
-The one-row law and the feedback alternatives are the
+Part~\textup{(ii)} is the
 \lword{SelectedSuffixCylinder.lean}{136}{SelectedHalfWindow.hasSuffixCylinderAt_stepExplicit}{endpoint recurrence},
-\lword{SuffixCylinderPromotion.lean}{322}{promotedSuffixCylinder_or_protectedEvenSeamRealizedAt}{promotion-or-seam alternative},
 \lword{SuffixCylinderGlobalProducer.lean}{174}{CylinderStage.feedbackStep_or_protectedSeam}{feedback dichotomy},
-\lword{SuffixCylinderBelow.lean}{117}{SelectedHalfWindow.word_stepTailExplicit}{lower-family witness},
-\lword{SuffixCylinderTwoSheet.lean}{26}{hasSuffixCylinderAt_take}{upper-family witness},
-\lword{SuffixCylinderFeedbackFanIn.lean}{62}{CylinderStage.feedbackAdvance_or_protectedSeam_inStrip}{in-strip reduction},
 and
 \lword{SuffixCylinderInStrip.lean}{665}{CylinderStage.feedbackAdvance_or_inStripTwoSheet}{two-family gap alternative}.
 Part~\textup{(iii)} is the
-\lword{SuffixCylinderFiniteGap.lean}{256}{InStripGapStage.advanceOfCommonNextCoeff}{common-coefficient gap recurrence}
-and its
-\lword{SuffixCylinderProfiledGap.lean}{124}{ProfiledGapStage.advanceOfNextCoeffProfile}{two-coefficient form};
-the cutoff and adjacency statements are the
-\lword{SuffixCylinderProfiledPromotion.lean}{107}{selectedHalfIntervalPromoteHigh}{upper-family promotion},
-\lword{SuffixCylinderProfiledAdjacency.lean}{232}{ProfiledGapStage.lowerNextCoeff_le_upperNextCoeff_add_one}{coefficient adjacency bound},
-\lword{SuffixCylinderProfiledPromotionAdjacency.lean}{65}{ProfiledGapStage.promoteCutoff_hasAdjacentPrefixes}{adjacency after promotion},
+\lword{SuffixCylinderProfiledGap.lean}{124}{ProfiledGapStage.advanceOfNextCoeffProfile}{two-coefficient gap recurrence}
 and
 \lword{SuffixCylinderProfiledAutoStep.lean}{110}{ProfiledGapStage.promoteThenAdvance_hasAdjacentPrefixes}{promote-and-advance theorem}.
-The quarter-band condition is
+Part~\textup{(iv)} is the
 \lword{SuffixCylinderProfiledSwallow.lean}{254}{nextBound_le_four_gapWidth_add_two_of_macro_swallow}{swallow bound}.
-The cofinal implication is formalised directly by
+Part~\textup{(v)} is the
 \lword{SuffixCylinderTerminalOnlyBridge.lean}{138}{exists_infinite_support_half_of_cofinalCylinderStages}{cofinal-cylinder criterion}.
 
 \paragraph{Status and prior-art boundary.}

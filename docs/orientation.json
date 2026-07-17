@@ -56,7 +56,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "Erd\\H{o}s \\#249",
-    "line": 2567
+    "line": 2551
    }
   },
   {
@@ -67,7 +67,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "unbounded certificate supply",
-    "line": 2578
+    "line": 2562
    }
   },
   {
@@ -78,7 +78,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "the half-value counterexample route",
-    "line": 2593
+    "line": 2577
    }
   },
   {
@@ -89,7 +89,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "universal Erd\\H{o}s \\#257",
-    "line": 2584
+    "line": 2568
    }
   }
  ],
@@ -554,18 +554,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_theorem_group_provenance_density",
+   "id": "main_paper_finite_stage_provenance_density",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "bundled mathematical theorems can still be followed by case-by-case provenance sentences whose enumeration competes with the theorem's own grouping",
-   "statement": "Audit the formalisation clauses after bundled results, beginning with Theorems 4.2 and 4.3, and retain exact source targets while making the theorem's mathematical partition visually primary."
+   "defect_class": "chronological finite-stage records can still expose several construction-level links at each milestone, obscuring which finite endpoints and obstructions matter mathematically",
+   "statement": "Audit the finite-stage chronology in Appendix A.5.4 and retain links to the decisive depth-27, depth-29, and depth-52 milestones while demoting duplicate construction-level provenance."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "a16aa24af5236b6508a34b8a4c4b41fdcf620a98",
-  "committed_navigation_snapshot": "758019e59c73b20ffb9c2495b0783f7177f07113",
-  "main_paper_source_digest": "sha256:954590b237e1388808e629368500eedf67c0e8415a731f31b538d493d7a2c089"
+  "committed_navigation_snapshot": "f0511826a1dbb75bed8af4922a1a2fe92f5d22e8",
+  "main_paper_source_digest": "sha256:cc3d4d8f100a15d6577ddf9c2bb868eae6618804317b938947eb6d08682bf5bd"
  },
  "reading_routes": [
   {
