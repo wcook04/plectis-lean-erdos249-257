@@ -255,9 +255,7 @@ theorem finrank_canonicalCarryKernel_ge_of_certificate
 
 /-- Rationality of the totient coefficient series, together with an all-level
 canonical independence producer, yields one tempered integral carry whose
-finite-level section ranks grow at least as `2^e-1`.  This theorem records the
-exact endpoint composition without asserting that the still-open adaptive-row
-producer has already been formalized. -/
+finite-level section ranks grow at least as `2^e-1`. -/
 theorem not_irrational_totientSeries_implies_unbounded_carryRank
     (hcanon : ∀ e : ℕ,
       LinearIndependent ℚ (canonicalTotientKernelFamily e))
@@ -274,5 +272,25 @@ theorem not_irrational_totientSeries_implies_unbounded_carryRank
       Nat.totient Nat.totient_le).mp hirr
   exact ⟨v, hv, u, hu, fun e =>
     finrank_canonicalCarryKernel_ge_of_linearIndependent hv hu e (hcanon e)⟩
+
+/-- **Unconditional anti-compression consequence of the CRT--Dirichlet
+minor.**  If the totient series were rational, its tempered integral carry
+would have unbounded dyadic section rank.
+
+This does not by itself prove irrationality: a separate theorem bounding the
+dyadic section rank of every rationality-supplied tempered carry is still
+required, and no such finite-rank compression theorem follows from the
+recurrence and temperedness alone. -/
+theorem not_irrational_totientSeries_implies_unbounded_carryRank_unconditional
+    (hirr : ¬ Irrational (binaryCoeffSeries Nat.totient)) :
+    ∃ v : ℕ, 0 < v ∧ ∃ u : ℕ → ℤ,
+      IsTemperedBinaryOrbit Nat.totient v u ∧
+        ∀ e : ℕ,
+          2 ^ e - 1 ≤
+            finrank ℚ
+              (Submodule.span ℚ
+                (Set.range (canonicalCarryKernelFamily u e))) :=
+  not_irrational_totientSeries_implies_unbounded_carryRank
+    linearIndependent_canonicalTotientKernelFamily hirr
 
 end Erdos249257
