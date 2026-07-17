@@ -554,18 +554,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_appendix_entry_map_audit",
+   "id": "main_paper_appendix_consequence_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "an appendix can be correctly referenced yet still open without telling the reader which main theorem it supports and what additional mathematical object is introduced there",
-   "statement": "Audit the opening map of each appendix, ensuring it names its main-spine consumer and the genuinely new normal forms, local lemmas, or obstructions that justify the appendix."
+   "defect_class": "an appendix consequence paragraph can repeat a topic inventory instead of stating the exact result that transfers back to the main spine and the premise that remains unavailable",
+   "statement": "Audit appendix consequence paragraphs, retaining only the mathematical handoff back to the main theorem and one precise statement of the unresolved producer."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "a16aa24af5236b6508a34b8a4c4b41fdcf620a98",
-  "committed_navigation_snapshot": "02eb0be5751cedec7d3d68fcb558d798ac43d46a",
-  "main_paper_source_digest": "sha256:511c238bb2c7483b813da147c8d15c383a61bdec34cf8e642e9c09e89fc40b20"
+  "committed_navigation_snapshot": "69ebfb45f1f3c1ceb13a97ab5f9c628fe669ee8f",
+  "main_paper_source_digest": "sha256:c7fc6192538493ac1ec47e1c8c1d9804d34099ab0362697aec25b9475a243832"
  },
  "reading_routes": [
   {
