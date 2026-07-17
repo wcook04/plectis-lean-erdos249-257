@@ -907,15 +907,15 @@
         "schema": "erdos249257-editorial-state/1",
         "scope": "continuous_whole_main_paper_exposition",
         "current_priority": {
-          "id": "main_paper_appendix_d_bundled_statement_audit",
+          "id": "main_paper_section4_aggregate_theorem_audit",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "defect_class": "the Appendix D cylinder and run-geometry theorems can combine a probability normalisation, recursive identity, convergence estimate, height inequality, defect formula, and mass calculation under two broad theorem numbers",
-          "statement": "Audit the Appendix D cylinder and alternating-run theorem bundles, separating coherent implication chains from independent normalisation and boundary identities."
+          "defect_class": "a Section 4 main-spine theorem can become an omnibus wrapper whose numbered clauses share a topic but not a single premise-to-conclusion role",
+          "statement": "Re-audit the aggregate Theorems 4.3--4.4 after the appendix cleanup, retaining an aggregate theorem only where its clauses share hypotheses and a common main-spine consumer."
         },
         "last_verified_wave": {
-          "id": "main_paper_remaining_bundled_statement_repair",
+          "id": "main_paper_appendix_d_bundled_statement_repair",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "result": "Split the C.4 determinant bundle into a rectangular expansion, dominant-dyadic noncancellation lemma, separated-minor rank criterion, even-residue reduction, and compressed-adjoint contradiction, preserving the residual-gauge result as a separate boundary."
+          "result": "Separated reduced-direction normalisation from the cylinder recursion/convergence chain and separated Fibonacci height/defect stability from the independent one-run mass and unit-spine denominator identities."
         },
         "active_inconsistencies": [],
         "blocked_decisions": []
@@ -7512,7 +7512,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 2698
+        "line": 2714
       }
     },
     {
@@ -7523,7 +7523,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 2709
+        "line": 2725
       }
     },
     {
@@ -7534,7 +7534,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "the half-value counterexample route",
-        "line": 2724
+        "line": 2740
       }
     },
     {
@@ -7545,7 +7545,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 2715
+        "line": 2731
       }
     }
   ],

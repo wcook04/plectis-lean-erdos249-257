@@ -2519,12 +2519,17 @@ The first quantity is the probability that the reduced direction is
 generations below that root, where a node \((u,v)\) has stop mass
 \((2^{u+v}-1)^{-1}\) and children \((u+v,v)\), \((u,u+v)\).
 
-\begin{theorem}[reduced-direction and cylinder law]
-\label{res:sternbrocotcylinders}
+\begin{proposition}[reduced-direction normalisation]\label{res:directionnormalization}
 The reduced directions form a probability distribution,
 \[
   \sum_{\substack{a,b\ge1\\(a,b)=1}}\nu(a,b)=1.
 \]
+\end{proposition}
+\noindent This is the
+\lword{GcdMomentCalculus.lean}{349}{tsum_pos_coprime_inv_mersenne_eq_one}{reduced-direction mass one}.
+
+\begin{theorem}[Stern--Brocot cylinder recursion and convergence]
+\label{res:sternbrocotcylinders}
 At every positive node,
 \[
   M(a,b)=\frac1{2^{a+b}-1}+M(a+b,b)+M(a,a+b),
@@ -2537,7 +2542,6 @@ and, uniformly in \(a,b\) and \(d\),
 Consequently \(M_d(a,b)\to M(a,b)\); at the root \(M(1,1)=1\).
 \end{theorem}
 \noindent Formalised:
-\lword{GcdMomentCalculus.lean}{349}{tsum_pos_coprime_inv_mersenne_eq_one}{reduced-direction mass one},
 \lword{GcdMomentCalculus.lean}{474}{cylinderMass_split}{cylinder mass recursion},
 \lword{GcdMomentCalculus.lean}{525}{sternBrocotDepthMass_error}{depth-$d$ remainder bound}, and
 \lword{GcdMomentCalculus.lean}{560}{tendsto_sternBrocotDepthMass}{cylinder convergence}.
@@ -2556,7 +2560,7 @@ Write an alternating Stern--Brocot word as \(r\) nonempty runs of lengths
 Thus \(H\) is the arithmetic height of the primitive pair reached by the
 word.  Let \(F_0=0,F_1=1\).
 
-\begin{theorem}[Fibonacci--continuant stability]
+\begin{theorem}[Fibonacci--continuant height stability]
 \label{res:sternbrocotruns}
 Every \(r\)-run word satisfies
 \[
@@ -2571,18 +2575,30 @@ and \(H(1,\ldots,1)=F_{r+3}\).  A defect confined to position
  =F_{r+3}+F_{i+2}F_{r-i+1}e.
 \]
 More generally, the checked recurrence gives the full positive multiaffine
-continuant defect.  The two orientations with one nonempty run have total
-mass \(1/2\), while the natural denominator exponent on the all-unit spine is
-\[
-  \sum_{j=0}^{r-1}F_{j+2}=F_{r+3}-2.
-\]
+continuant defect.
 \end{theorem}
 \noindent Formalised:
 \lword{SternBrocotRunGeometry.lean}{185}{runHeight_fib_lower}{Fibonacci height lower bound},
 \lword{SternBrocotRunGeometry.lean}{263}{runHeight_defectRunLengths}{multiaffine run-height formula},
 \lword{SternBrocotRunGeometry.lean}{343}{runHeight_defect_fib_sum_lower}{aggregate defect lower bound},
-\lword{SternBrocotRunGeometry.lean}{413}{runHeight_oneSiteDefect}{one-site defect identity},
-\lword{SternBrocotRunGeometry.lean}{467}{oneRunMass_eq_half}{one-run mass}, and
+\lword{SternBrocotRunGeometry.lean}{413}{runHeight_oneSiteDefect}{one-site defect identity}.
+
+\begin{proposition}[one-run probability mass]\label{res:onerunmass}
+The two orientations with one nonempty Stern--Brocot run have total mass
+\[
+ \frac12.
+\]
+\end{proposition}
+\noindent This is the
+\lword{SternBrocotRunGeometry.lean}{467}{oneRunMass_eq_half}{one-run mass}.
+
+\begin{proposition}[unit-spine denominator exponent]\label{res:rundenominator}
+The natural denominator exponent on the all-unit \(r\)-run spine is
+\[
+  \sum_{j=0}^{r-1}F_{j+2}=F_{r+3}-2.
+\]
+\end{proposition}
+\noindent This is the
 \lword{SternBrocotRunGeometry.lean}{491}{naturalRunDenominatorExponent_add_two}{natural denominator exponent}.
 
 The Lambert and M\"obius identities used above are classical
