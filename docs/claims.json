@@ -907,15 +907,15 @@
         "schema": "erdos249257-editorial-state/1",
         "scope": "continuous_whole_main_paper_exposition",
         "current_priority": {
-          "id": "mathematics_papers_notation_and_status_vocabulary_audit",
+          "id": "main_paper_formal_link_caption_readability_audit",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "defect_class": "the same mathematical role may still be described with inconsistent notation or status vocabulary across the gateway, companion, and claim registry",
-          "statement": "Audit definitions, theorem titles, cross-references, and status words across both mathematics papers; distinguish exact identities, finite criteria, conditional cofinal endpoints, equivalences, scoped countermodels, and open propositions consistently."
+          "defect_class": "exact formal-source links sometimes retain declaration-shaped captions that interrupt the mathematical prose and make technical pages resemble a source index",
+          "statement": "Audit Formalised lines throughout the gateway, preserve every exact declaration target, and replace raw-style captions with concise mathematical descriptions or grouped source references."
         },
         "last_verified_wave": {
-          "id": "mathematics_papers_status_and_pivot_notation_consistency",
-          "surface": "paper/erdos249-transport-curvature-companion-note.tex",
-          "result": "Separated verified finite results from conditional endpoints in the gateway status table, reserved R_N for the scaled totient tail by naming the pivot residual phase rho_N, and replaced reader-facing producer, consumer, module, and deposit vocabulary in the mathematical companion with standard mathematical descriptions."
+          "id": "main_paper_reader_facing_vocabulary_cleanup",
+          "surface": "paper/erdos249-257-main-paper.tex",
+          "result": "Replaced the remaining reader-facing consumer, deposit, and adapter vocabulary in the gateway appendix maps, subsection titles, and conclusions with implication, verified instance, bounded instance, and coordinate translation language."
         },
         "active_inconsistencies": [],
         "blocked_decisions": []
