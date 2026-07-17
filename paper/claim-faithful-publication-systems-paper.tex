@@ -44,7 +44,9 @@ and the Lean build as two separate jobs.  We follow one finite result through ev
 layer and describe a deliberate exercise in which a false strengthening of
 the public wording passed every check because the relevant relationship had
 not yet been recorded; under a proved equivalence, the altered wording
-amounted to claiming an open problem settled.  The checks preserve reviewed relationships; they do
+amounted to claiming an open problem settled.  Recording the missing
+relationship afterwards makes the same false edit fail, which is coverage
+growth rather than demonstrated reliability.  The checks preserve reviewed relationships; they do
 not interpret unrestricted prose, and the mathematical judgement remains
 human.
 \end{abstract}
@@ -199,7 +201,7 @@ question: once a person has approved a proof-to-claim relationship, how are
 later revisions kept from silently eroding it?  Whether the approval was
 correct is a different question, and no part of the design answers it.
 
-A second boundary should be fixed equally early.  The repository
+A boundary of a different kind should be fixed equally early.  The repository
 does not technically force a second independent mathematician to approve a
 change.  A single maintainer can edit a Lean statement, its claim record, and
 the public wording together, and every check can pass while the shared
@@ -259,9 +261,9 @@ proves that this repetition forces the differences $R_{N+h}-R_N$ to be
 integers from some position on; conversely, a single integral difference at
 any positive shift already forces $S$ to be rational.  The chain checked in
 Lean is exact: $S$ is irrational precisely when every such difference, over
-every period $h$ and every position $N$, fails to be an integer, and at
-fixed parameters that failure is decided by a finite residue computation
-with a rigorous tail allowance.  A \emph{certificate} at fixed parameters is
+every period $h$ and every position $N$, fails to be an integer; and, at
+fixed parameters, some finite residue computation with a rigorous tail
+allowance succeeds exactly when the failure holds.  A \emph{certificate} at fixed parameters is
 that finite computation: a weighted difference of totient values whose
 residue, modulo a power of two, lies outside the neighbourhood of zero that
 integrality would demand.  The project calls a kernel-checked certificate a
@@ -381,7 +383,11 @@ statement above describes the five declarations correctly, and the record
 stores the outcome of that judgement, not a justification of it.  The
 judgement itself is mundane: read the terminal theorem, check that the
 wording claims the listed scales and no more, confirm that the unbounded
-requirement stays named as open.  What that decision must survive is not a
+requirement stays named as open.  It is also an event rather than a
+permanent property: the review covered particular declarations and
+particular wording, so a later change to either reopens it, and the
+machinery of the next sections can only carry its recorded consequences
+forward in time.  What that decision must survive is not a
 rival mathematician but an ordinary rewrite months later.
 
 \subsection{What the checker verifies here}
@@ -463,9 +469,9 @@ accepts nothing that carries the finite list to the open requirement.
 Interpretive assurance: a maintainer's recorded judgement that the public
 wording asserts the finite theorem, confines it to the listed scales, and
 keeps the open requirement named as open.  Persistence assurance: the
-recorded traces of that judgement, declaration names near their coordinates,
-the exact source identity, the limitation clause on the public pages, the
-freshly rebuilt views, still hold at the current revision.  Execution
+recorded traces of that judgement (declaration names near their coordinates,
+exact source identity, the limitation clause on the public pages, freshly
+rebuilt views) still hold at the current revision.  Execution
 assurance: both jobs ran on that revision in a clean checkout and passed.
 The non-guarantees follow the same lines.  Lean cannot notice English that
 quietly implies the open requirement met.  Review cannot promise that every
@@ -655,7 +661,13 @@ its behaviour intact.  A large number of passing comparisons measures none of
 those things.  What a green workflow run establishes is narrower: Lean
 accepted the formal proofs, and every configured comparison passed for the
 named revision.  This paper is an architecture note with one bounded case study,
-not an empirical evaluation of the design.
+not an empirical evaluation of the design.  An evaluation would have to be
+built in stages, each with its own ceiling: authenticated records of future
+review and release runs, which establish provenance and denominators but no
+effectiveness; challenge edits authored by people other than the checker's
+author, which measure response to unseen faults but not field behaviour; and
+only then comparison against ordinary review on the same changes.  None of
+those stages exists yet, and this paper claims none of them.
 
 \section{Related systems}\label{sec:related}
 
@@ -717,8 +729,7 @@ reviewed; the reviewed relationship is preserved.  Lean supplies the first.
 Only a person can supply the second.  The machinery here supplies
 the third, for the relationships it has been given.
 
-The whole case fits in one chain, and a reader who keeps nothing else can
-keep this.  Lean proves the finite theorem.  Lean proves the equivalence.
+The whole case fits in one chain.  Lean proves the finite theorem.  Lean proves the equivalence.
 No theorem carries the one to the other.  A person approved wording that
 keeps the distinction.  An edit erased the distinction without touching a
 proof.  Every configured check passed while the relationship was

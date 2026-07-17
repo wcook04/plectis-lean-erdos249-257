@@ -140,7 +140,10 @@ still open: prove that successful cases exist beyond every fixed limit.
 The phrase *verified finite instance* is not a score or a project-specific
 milestone. It means only that Lean checked a stated finite set of inputs. The
 open problem requires cases beyond every fixed limit, so the finite list does
-not settle it.
+not settle it. The development also proves an exact equivalence: a supply of
+cases beyond every fixed limit would settle the open problem itself. An edit
+that erased this boundary would therefore be a false mathematical
+announcement, not a small wording change.
 
 This one record connects the layers:
 

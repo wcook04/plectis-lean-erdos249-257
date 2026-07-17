@@ -3,10 +3,13 @@
 
 # Revision brief: Lean publication-systems paper
 
-The current seven-page paper is an architecture note with one bounded case
+The current eleven-page paper is an architecture note with one bounded case
 study. Its useful feature is its order: it gives the reader a plain mental
-model before implementation details. Future revisions should keep that order
-while testing whether the paper actually earns every page.
+model before implementation details, and one worked example (the finite
+theorem, the open requirement, and the proved equivalence between the open
+requirement and irrationality) carries every section. Future revisions should
+keep that order and that recurrence while testing whether the paper actually
+earns every page.
 
 ## Reader and decision
 
@@ -50,7 +53,10 @@ For each reading, record:
 - what they still cannot locate after reading; and
 - what they would remove first.
 
-The paper remains under a ten-page ceiling. Prefer removing duplication,
+The paper remains under a twelve-page ceiling, matching the 48,000-byte
+source budget in `scripts/check_architecture_guide.py` (raised from 40,000 by
+maintainer decision, July 2026, to admit the example-instantiated assurance,
+coverage, and reuse material). Prefer removing duplication,
 making one worked example more concrete, and clarifying authority over adding
 terminology, counts, scripts, or new claims of importance. A revision is not
 ready merely because the TeX compiles: render every page, inspect the diagram
