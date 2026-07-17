@@ -56,7 +56,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "Erd\\H{o}s \\#249",
-    "line": 2719
+    "line": 2733
    }
   },
   {
@@ -67,7 +67,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "unbounded certificate supply",
-    "line": 2730
+    "line": 2744
    }
   },
   {
@@ -78,7 +78,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "the half-value counterexample route",
-    "line": 2745
+    "line": 2759
    }
   },
   {
@@ -89,7 +89,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "universal Erd\\H{o}s \\#257",
-    "line": 2736
+    "line": 2750
    }
   }
  ],
@@ -554,18 +554,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_section4_half_value_aggregate_audit",
+   "id": "main_paper_main_spine_equivalence_direction_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "a Section 4 half-value theorem can mix an equivalence classification with a separate conditional sufficient criterion, obscuring which statements are mutually equivalent and which are only one-way",
-   "statement": "Audit the half-membership and final-skip aggregate theorems, keeping equivalence classes, exclusions, and sufficient producer conditions logically distinct."
+   "defect_class": "main-spine exposition can use 'equivalent', 'reduction', or 'criterion' where the displayed mathematics proves only one implication or where an extra cofinality hypothesis is required",
+   "statement": "Audit equivalence and reduction language across Sections 4--8 against the displayed quantifiers and the exact direction of each formal theorem."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "a16aa24af5236b6508a34b8a4c4b41fdcf620a98",
-  "committed_navigation_snapshot": "28e24dd9a56767ea048f73ecd3c734658e272926",
-  "main_paper_source_digest": "sha256:bb1c4b3c3271673b2535855982691a69e34c8f0e0b4aea7dada2dd42c7fe4d8a"
+  "committed_navigation_snapshot": "fd78ce0c1bddb704778f65116bd93c8d50326782",
+  "main_paper_source_digest": "sha256:d7de2313c72e5bbb860800b9ea582f0426c2fa2ed6a7b20ffca85c6aed467063"
  },
  "reading_routes": [
   {

@@ -672,10 +672,6 @@ The following are equivalent:
   \text{ with }\tau_s=0.
 \end{aligned}
 \]
-No finite normalised support has value \(1/2\).  Consequently, any one of
-\textup{(i)}--\textup{(iv)} produces an infinite support \(A\) with
-\(X_A=1/2\), and therefore refutes the universal form of
-Erd\H{o}s~\#257.
 \end{theorem}
 \noindent The omitted-set equivalence is the
 \lword{GreedyAchievementSet.lean}{2514}{half_mem_mersenneAchievementSet_iff_greedySkippedSupport_infinite}{infinite-skip theorem};
@@ -683,8 +679,21 @@ the terminal forms are the
 \lword{HalfCylinderHalfMembershipClassification.lean}{126}{half_mem_mersenneAchievementSet_iff_unboundedTerminalFalse}{unbounded-terminal theorem}
 and
 \lword{HalfCylinderHalfMembershipClassification.lean}{235}{half_mem_mersenneAchievementSet_iff_no_lastHalfGreedySkip}{no-final-skip theorem}.
-Finite supports are excluded by the
+
+\begin{proposition}[finite half-value exclusion]\label{res:nofinitehalf}
+No finite normalised support has value \(1/2\).
+\end{proposition}
+\noindent This is the
 \lword{HalfCarryReachability.lean}{589}{finite_boolSupport_ne_half}{finite-support theorem}.
+
+\begin{corollary}[counterexample from half-membership]\label{res:halfcounterexample}
+Any one of the equivalent conditions in
+Theorem~\ref{res:halfmembership} produces an infinite support
+\(A\subseteq\N\setminus\{0\}\) with \(X_A=1/2\), and therefore refutes the
+universal form of Erd\H{o}s~\#257.
+\end{corollary}
+\noindent This combines the unique greedy support from
+Theorem~\ref{res:greedy} with Proposition~\ref{res:nofinitehalf}.
 A tempting signed-to-Boolean shortcut also fails: selecting precisely the
 negative M\"obius indices overshoots \(1/2\) by at least \(1/63\).
 Proposition~\ref{res:mobiussignnogo} gives the exact sign-separation identity.
@@ -734,7 +743,7 @@ For a finite set \(u\subseteq\{1,\ldots,d\}\), write
 Such a pair certifies that no support agreeing with \(u\) through rank \(d\)
 can represent \(1/2\).
 
-\begin{theorem}[final-skip classification and residual inequality]
+\begin{theorem}[final-skip classification]
 \label{res:fatalright}
 Nonmembership of \(1/2\) in \(\mathcal A\) is equivalent to each of the
 following:
@@ -743,36 +752,41 @@ following:
 \item a fatal half-gap exists;
 \item the real greedy expansion of \(1/2\) has a final skipped exponent.
 \end{enumerate}
-At such a final exponent \(D\geq13\), the upper successor is impossible.
-On the middle branch the value \(C_D=-3\) is impossible.  The only unresolved
-exceptional cells for the current two-sided dyadic induction are
-\(C_D=-2\) and \(C_D=-1\).
-
-If every middle transition at a row \(D\geq13\) with \(C_D\neq-3\) satisfies
-\[
- \Theta_D<C_D, \tag{4.2}
-\]
-then a final skipped exponent cannot exist, and hence \(1/2\in\mathcal A\).
 \end{theorem}
 \noindent The three equivalent nonmembership criteria are formalised in
 \lword{HalfCylinderFatalGapRightTail.lean}{781}{seamGreedyEventuallyRight_iff_existsFatalHalfGap}{fatal-gap classification},
 \lword{HalfCylinderFatalGapRightTail.lean}{787}{seamGreedyEventuallyRight_iff_half_not_mem}{nonmembership classification},
 and
 \lword{HalfCylinderFatalGapRightTail.lean}{802}{seamGreedyEventuallyRight_iff_exists_isLastHalfGreedySkip}{final-skip classification}.
-The upper and \(C_D=-3\) exclusions are the
+
+\begin{proposition}[excluded final-skip branches]\label{res:finalskipexclusions}
+At a final skipped exponent \(D\geq13\), the upper successor is impossible.
+On the middle branch the value \(C_D=-3\) is impossible.  Among the three
+exceptional dyadic cells identified by the two-sided induction, only
+\(C_D=-2\) and \(C_D=-1\) remain unresolved.
+\end{proposition}
+\noindent The upper and \(C_D=-3\) exclusions are the
 \lword{HalfCylinderLastProducerContradiction.lean}{250}{upperProducer_not_last}{upper-branch exclusion}
 and
 \lword{HalfCylinderLastProducerContradiction.lean}{315}{middleProducer_neg_three_not_last}{middle-\(-3\) exclusion}.
 The three exceptional dyadic cells are identified by the
 \lword{HalfCylinderMiddleCarryLowerBound.lean}{3090}{seamMiddleCoordinate_not_safe_iff_three_cells}{three-cell classification}.
-The implication from~(4.2) is the
+
+\begin{corollary}[tail-dominance membership criterion]\label{res:taildominance}
+If every middle transition at a row \(D\geq13\) with \(C_D\neq-3\) satisfies
+\[
+ \Theta_D<C_D, \tag{4.2}
+\]
+then no final skipped exponent exists, and hence \(1/2\in\mathcal A\).
+\end{corollary}
+\noindent This implication is the
 \lword{HalfCylinderLastProducerContradiction.lean}{387}{half_mem_mersenneAchievementSet_of_middleProducerTailEscapeExceptNegThree}{tail-dominance theorem}.
-Since \(\Theta_D\geq0\), condition~(4.2) would in particular exclude the
-remaining cells \(-2\) and \(-1\).  No proof of~(4.2) for the actual greedy
-orbit is known here.
+Since \(\Theta_D\geq0\), condition~(4.2) can apply only after final middle
+cells \(C_D=-2,-1\) have been excluded.  No such exclusion, and no proof
+of~(4.2) on the remaining actual greedy transitions, is known here.
 
 \paragraph{Logical status of the final-skip argument.}
-The three levels of the argument are
+The proved levels of the argument are
 \[
 \begin{array}{rcl}
  \frac12\notin\mathcal A
@@ -784,13 +798,13 @@ The three levels of the argument are
  &[\text{proved}].
 \end{array}
 \]
-The first two lines do not imply membership.  The unproved producer has two
-parts: exclude final middle transitions with \(C_D\in\{-2,-1\}\), and
+These lines do not imply membership.  The unproved producer has two parts:
+exclude final middle transitions with \(C_D\in\{-2,-1\}\), and
 prove~\textup{(4.2)} at every other non-\((-3)\) middle transition.  Together
-these would exclude every possible final skip; only then would
-Theorem~\ref{res:halfmembership} give \(1/2\in\mathcal A\), hence an infinite
-rational-valued support and a counterexample to the universal \#257
-statement.
+they discharge the hypotheses of
+Corollary~\ref{res:taildominance}; only then does
+Corollary~\ref{res:halfcounterexample} produce an infinite rational-valued
+support and a counterexample to the universal \#257 statement.
 
 \long\def\HalfValueTechnicalAppendix{
 

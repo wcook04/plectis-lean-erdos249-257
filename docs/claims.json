@@ -907,15 +907,15 @@
         "schema": "erdos249257-editorial-state/1",
         "scope": "continuous_whole_main_paper_exposition",
         "current_priority": {
-          "id": "main_paper_section4_half_value_aggregate_audit",
+          "id": "main_paper_main_spine_equivalence_direction_audit",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "defect_class": "a Section 4 half-value theorem can mix an equivalence classification with a separate conditional sufficient criterion, obscuring which statements are mutually equivalent and which are only one-way",
-          "statement": "Audit the half-membership and final-skip aggregate theorems, keeping equivalence classes, exclusions, and sufficient producer conditions logically distinct."
+          "defect_class": "main-spine exposition can use 'equivalent', 'reduction', or 'criterion' where the displayed mathematics proves only one implication or where an extra cofinality hypothesis is required",
+          "statement": "Audit equivalence and reduction language across Sections 4--8 against the displayed quantifiers and the exact direction of each formal theorem."
         },
         "last_verified_wave": {
-          "id": "main_paper_section4_aggregate_theorem_repair",
+          "id": "main_paper_section4_half_value_aggregate_repair",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "result": "Reduced Theorem 4.3 to the strict-tail and greedy-membership equivalence, moved topology/measure and finite rational refuters to their own appendix propositions, and retained Theorem 4.4 only after exposing its shared rationality premise and three independent consequence branches."
+          "result": "Separated half-membership equivalence, finite-support exclusion, and the counterexample corollary; then split final-skip classification, proved branch exclusions, and the one-way tail-dominance membership criterion into distinct numbered statements and claim anchors."
         },
         "active_inconsistencies": [],
         "blocked_decisions": []
@@ -7512,7 +7512,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 2719
+        "line": 2733
       }
     },
     {
@@ -7523,7 +7523,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 2730
+        "line": 2744
       }
     },
     {
@@ -7534,7 +7534,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "the half-value counterexample route",
-        "line": 2745
+        "line": 2759
       }
     },
     {
@@ -7545,7 +7545,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 2736
+        "line": 2750
       }
     }
   ],
@@ -8198,7 +8198,7 @@
       "remaining_open_proposition_ids": [
         "remaining_open.half_value_membership"
       ],
-      "paper_label": "res:fatalright",
+      "paper_label": "res:finalskipexclusions",
       "readme_headline": false,
       "declarations": [
         {
@@ -8226,7 +8226,7 @@
       "remaining_open_proposition_ids": [
         "remaining_open.half_value_membership"
       ],
-      "paper_label": "res:fatalright",
+      "paper_label": "res:taildominance",
       "readme_headline": false,
       "declarations": [
         {
@@ -8249,7 +8249,7 @@
       "remaining_open_proposition_ids": [
         "remaining_open.universal_257_all_infinite_supports"
       ],
-      "paper_label": "res:fatalright",
+      "paper_label": "res:taildominance",
       "readme_headline": false,
       "declarations": [
         {
@@ -8270,7 +8270,7 @@
       "status": "verified finite instance",
       "bounded_domain": "Upper transitions from rows 13 through 30, with every relevant subsequent dyadic danger band checked for each row.",
       "statement": "For every upper transition from rows 13 through 30, every relevant subsequent dyadic danger band is avoided. The check shares one exact successor remainder across all band indices for each row. It is bounded evidence and does not prove the cofinal upper-reset band-escape hypothesis.",
-      "paper_label": "res:fatalright",
+      "paper_label": "res:finalskipexclusions",
       "readme_headline": false,
       "declarations": [
         {
