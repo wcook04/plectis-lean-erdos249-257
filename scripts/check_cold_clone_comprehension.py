@@ -341,7 +341,8 @@ def validate_gateway_opening(paper: str) -> None:
         ],
         "status_table": [
             [r"\textbf{\mbox{Classical}}"],
-            [r"\textbf{\mbox{Unconditional/exact}}"],
+            [r"\textbf{\mbox{Unconditional}}"],
+            [r"\textbf{\mbox{Exact reductions}}"],
             [r"q>\Qzero"],
             ["28 diagonal certificates"],
         ],
@@ -356,8 +357,9 @@ def validate_gateway_opening(paper: str) -> None:
         ],
         "reading_map": [
             [r"\paragraph{Reading map.}"],
-            [r"Sections~\ref{sec:eb}"],
-            [r"and~\ref{sec:249}"],
+            [r"Section~\ref{sec:spines}"],
+            [r"Section~\ref{sec:ladder}"],
+            [r"Sections~\ref{sec:eb}--\ref{sec:further}"],
         ],
     }
     for task_id, groups in requirements.items():

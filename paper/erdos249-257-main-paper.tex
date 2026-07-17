@@ -92,23 +92,24 @@
 For the totient constant
 $S=\sum_{n\ge1}\ph(n)/2^n$, one certified Farey window excludes every rational
 representation $S=p/q$ with
-$q\le\Qzero\approx7.96\times10^{34}$.  We also prove that irrationality of
-$S$ is equivalent to non-integrality of every positive binary tail difference,
-with a complete finite certificate at each fixed pair of parameters; one
-integral difference would instead force rationality.  Equivalently, \(S\) is
-irrational exactly when lcm-diagonal certificates occur cofinally; the checks
-through \(t=64\) are finite evidence only.  For Erd\H{o}s~\#257, we formalise
-Erd\H{o}s's classical
-full-support theorem in every integer base and several structured-support
-cases.  At base $2$, the Mersenne achievement set is compact, perfect, nowhere
-dense, and of measure one.  Any infinite rational-valued support must have
-unbounded positive carry states and sublogarithmic divisor-coverage gaps.
-Membership of $1/2$, which would refute the universal statement, is equivalent
-to infinitely many greedy skips.  The upper transition and the middle
-coordinate $-3$ cannot be final.  To exclude a final skip altogether, it
-remains to rule out the exceptional coordinates $-2,-1$ and prove the exact
-future-tail inequality for every other non-$-3$ middle transition.  Neither
-problem is settled.
+$q\le\Qzero\approx7.96\times10^{34}$.  Irrationality of \(S\) is also
+equivalent to non-integrality of every positive binary tail difference, to
+complete finite certificates at fixed parameters, and to a cofinal
+lcm-diagonal certificate supply.  The checks through \(t=64\) are finite
+evidence only; the cofinal supply is open.
+
+For Erd\H{o}s~\#257, we formalise Erd\H{o}s's classical full-support theorem
+in every integer base and several structured-support cases.  At base \(2\)
+we prove exact achievement-set geometry and necessary carry and gap
+constraints on hypothetical rational infinite supports.  Membership of
+\(1/2\), which would refute the universal statement, is exactly equivalent to
+infinitely many greedy skips.
+
+The current final-skip route excludes the upper transition and middle
+coordinate \(-3\), but still requires the \(-2,-1\) exclusions and the
+future-tail inequality.  The \#249 certificate supply, universal \#257
+statement, and half-value membership remain open.  Neither problem is
+settled.
 \end{abstract}
 
 \section{Introduction}\label{sec:intro}
@@ -122,12 +123,12 @@ the numbering follows the maintained catalogue~\cite{erdosproblems}.
 
 For \#257, proving irrationality for every infinite support is the universal
 direction; constructing an infinite support of sum $1/2$ would refute it.
-The results below contain unconditional positive cases and an exact conditional
-counterexample route, but they reach neither endpoint.  For \#249, and for the
-half-value counterexample branch of \#257, tail and carry identities separate
-exact finite arithmetic from one analytic or combinatorial cofinality
-statement.  The universal \#257 direction remains open for arbitrary infinite
-supports.  The status classes are:
+The results below contain unconditional positive cases, exact reductions, and
+conditional sufficient routes, but they reach neither endpoint.  For \#249,
+and for the half-value counterexample branch of \#257, tail and carry
+identities separate exact finite arithmetic from one analytic or
+combinatorial cofinality statement.  The universal \#257 direction remains
+open for arbitrary infinite supports.  The status classes are:
 
 \begin{center}
 \scriptsize
@@ -138,24 +139,26 @@ status & Erd\H{o}s \#249 & Erd\H{o}s \#257\\
 \textbf{\mbox{Classical}} &
 Lambert-series and convolution identities used to represent $S$. &
 Full support in every base $b\ge2$; pairwise-coprime and periodic support
-families.\\[2pt]
-\textbf{\mbox{Unconditional/exact}} &
-One window gives $q>\Qzero$ for every rational $S=p/q$; irrationality is
-equivalent to non-integrality of every positive tail difference and to
-pointwise finite certificates, hence also to cofinal lcm-diagonal
-certificates. &
-Measure-one nowhere-dense achievement geometry; exact rational carry
-certificates; unbounded states and sublogarithmic zero gaps over infinite
-rational supports; exact classification of $1/2$.\\[2pt]
+families.\\
+\textbf{\mbox{Unconditional}} &
+One window gives $q>\Qzero$ for every rational $S=p/q$. &
+Measure-one nowhere-dense achievement geometry; structured-support theorems;
+carry and zero-gap constraints on rational supports.\\
+\textbf{\mbox{Exact reductions}} &
+Irrationality is equivalent to non-integrality of every positive tail
+difference; equivalently, pointwise certificates exist and lcm-diagonal
+certificates occur cofinally. &
+Half-value membership is equivalent to cofinal terminal zeros; finite
+support cannot have value \(1/2\).\\
 \textbf{\mbox{Verified finite}} &
 28 diagonal certificates through $t=64$ and further bounded exact
 verifications. &
 Local band and window identities, bounded reset rows, and explicit finite
-counterexamples.\\[2pt]
+counterexamples.\\
 \textbf{\mbox{Conditional}} &
 A cofinal scalar-slack supply implies irrationality. &
 Cofinal seam, window, strip, or terminal hypotheses imply an infinite
-support of sum $1/2$.\\[2pt]
+support of sum $1/2$.\\
 \textbf{\mbox{Open}} &
 An unbounded certificate supply. &
 Universal direction: all infinite supports.  Counterexample direction:
@@ -166,16 +169,14 @@ Section~\ref{sec:eb}.\\
 \end{center}
 
 \paragraph{Reading map.}
-Section~\ref{sec:spines} states the two exact proof spines and their unresolved
-hypotheses.  Section~\ref{sec:ladder} gives the common Mersenne--Lambert
-transform; Sections~\ref{sec:eb} and~\ref{sec:249} give the theorem-level
-detail.  Section~\ref{sec:further} states the remaining questions.
+Section~\ref{sec:spines} gives the exact spines; Section~\ref{sec:ladder} the
+common coordinates; and Sections~\ref{sec:eb}--\ref{sec:further} the theorem
+details, architecture, verification, and open frontiers.
 Appendices~\ref{app:half-technical} and~\ref{sec:carry} contain the local
-half-value and rational-carry machinery; the later appendices contain the
-totient-certificate reductions and the independent Lambert, probability, and
-finite-algebraic structure.  Linked mathematical phrases open exact Lean
-proofs.  The companion develops the affine and first-harmonic \#249 theory
-without changing its open status.
+half-value and carry arguments; the later appendices contain the
+totient-certificate and independent Lambert structure.  Linked phrases open
+exact Lean proofs.  The companion treats the affine and first-harmonic
+\#249 theory without changing its open status.
 
 \medskip
 \noindent\textbf{Keywords.} irrationality; Erd\H{o}s--Borwein constant;

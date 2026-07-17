@@ -907,15 +907,15 @@
         "schema": "erdos249257-editorial-state/1",
         "scope": "continuous_whole_main_paper_exposition",
         "current_priority": {
-          "id": "main_paper_abstract_first_page_status_audit",
+          "id": "main_paper_appendix_a_dependency_hierarchy_audit",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "defect_class": "The abstract and scope roadmap may still mix proved result inventories with open boundaries before the reader reaches the two exact spine map",
-          "statement": "Audit the abstract and Section 1 so a first-minute reader sees proved finite or structural results, exact reductions, and open producers as distinct statuses before source-module detail."
+          "defect_class": "Appendix A opens as a result-class inventory and contains many local lemmas whose dependency on the final-skip reduction may not remain visible across subsections",
+          "statement": "Audit Appendix A's subsection openings and consequence so each local result is classified as an exact coordinate, sufficient criterion, finite check, or obstruction and tied to its specific main-text consumer."
         },
         "last_verified_wave": {
-          "id": "main_paper_section8_frontier_hierarchy_repair",
+          "id": "main_paper_abstract_first_page_status_repair",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "result": "Grouped the two #249 problem environments as equivalent forms, separated the universal #257 statement from its counterexample route, and closed on three distinct missing inputs rather than one false common template."
+          "result": "Separated the abstract into #249 results, #257 results, and the open boundary, and split the first-page status table into unconditional results and exact reductions."
         },
         "active_inconsistencies": [],
         "blocked_decisions": []
@@ -7512,7 +7512,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 2820
+        "line": 2821
       }
     },
     {
@@ -7523,7 +7523,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 2831
+        "line": 2832
       }
     },
     {
@@ -7534,7 +7534,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "the half-value counterexample route",
-        "line": 2852
+        "line": 2853
       }
     },
     {
@@ -7545,7 +7545,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 2843
+        "line": 2844
       }
     }
   ],
