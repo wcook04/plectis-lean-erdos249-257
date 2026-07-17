@@ -70,8 +70,15 @@ A README can nevertheless drift, and the stakes are easy to state.  By
 an equivalence proved in the development (Section~\ref{sec:example}),
 certificates beyond every fixed cutoff are not merely better evidence: their
 existence is equivalent to the irrationality of Problem 249 itself.
-An edit that presents the finite cases as completing the open requirement
-would, in substance, announce a solution to an open problem.  Every Lean proof remains valid under
+Three objects therefore recur throughout this paper: the \emph{finite
+theorem}, certificates at the 28 listed scales; the \emph{open
+requirement}, certificates beyond every cutoff; and the \emph{equivalence}
+between the open requirement and the irrationality.  Lean has checked the
+first and the third; no Lean theorem carries the first to the second, and
+producing one would settle the problem.  An edit that presents the finite
+cases as completing the open requirement therefore asserts, in English,
+exactly the bridge the development does not contain; in substance it
+announces a solution to an open problem.  Every Lean proof remains valid under
 that edit, because the README is not part of any proof.  No program in the
 repository decides whether a line of English has the same meaning as a formal
 statement; a machine-checked theorem is, in that sense, not a self-publishing
@@ -84,8 +91,11 @@ the bounded domain it covers, and the registered conclusion that remains open.
 A release checker,
 \texttt{scripts/\allowbreak check\_\allowbreak release.py}, then verifies that the
 recorded relationships still hold across the Lean source, the record itself,
-the authored public pages, and the generated files.  The shortest accurate
-summary of the division of labour is:
+the authored public pages, and the generated files.  The record covers
+\emph{registered} claims, not every line of prose in the repository;
+software cannot preserve a relationship it was never pointed at, and
+Section~\ref{sec:failure} shows this limit operating in practice.  The
+shortest accurate summary of the division of labour is:
 
 \begin{quote}
 Lean checks the formal proofs.  A maintainer reviews what those proofs mean
@@ -93,24 +103,7 @@ and how they may be described.  The release machinery checks that the recorded
 relationships remain intact before a release.
 \end{quote}
 
-Two boundaries should be fixed before any detail.  First, the record covers
-\emph{registered} claims, not every line of prose in the repository; software
-cannot preserve a relationship it was never pointed at, and Section~\ref{sec:failure}
-shows this limit operating in practice.  Second, the repository
-does not technically force a second independent mathematician to approve a
-change.  A single maintainer can edit a Lean statement, its claim record, and
-the public wording together, and every check can pass while the shared
-interpretation is wrong.  The checks are drift detection for reviewed
-decisions, not a substitute for review, and they add no authority of their
-own.
-
 \section{The release workflow}\label{sec:picture}
-
-Figure~\ref{fig:architecture} shows the path in five visible
-parts: the Lean source; the maintainer-reviewed claim record;
-authored public documents; generated indexes and summaries derived from the
-record; and the release program and continuous-integration workflow that rerun
-the recorded comparisons.
 
 \begin{figure}[H]
 \centering
@@ -130,50 +123,53 @@ the recorded comparisons.
   human/.style={-{Stealth[length=2.4mm]}, semithick, densely dashed},
   lab/.style={font=\footnotesize, fill=white, inner sep=1.5pt}
 ]
-\node[artefact] (lean) at (1.8, 0) {\textbf{Lean source}\\[1pt]
-  {\footnotesize\texttt{Erdos249257.lean}\\ \texttt{Erdos249257/*.lean}}};
-\node[artefact] (claim) at (7.0, 0) {\textbf{claim record}\\[1pt]
-  {\footnotesize\texttt{docs/claims.json}}};
-\node[artefact] (public) at (12.2, 0) {\textbf{public documents}\\[1pt]
-  {\footnotesize\texttt{README.md}, \texttt{SCOPE.md},\\ \texttt{paper/*.tex}}};
-\node[humanbox] (hone) at (4.4, 1.70) {\textbf{maintainer review}\\
+\node[artefact, text width=3.6cm] (lean) at (1.8, 0) {\textbf{Lean source}\\[1pt]
+  {\footnotesize\texttt{Erdos249257.lean}\\ \texttt{Erdos249257/*.lean}}\\[1pt]
+  {\footnotesize\itshape proves the finite theorem\\ and the equivalence}};
+\node[artefact, text width=3.6cm] (claim) at (7.0, 0) {\textbf{claim record}\\[1pt]
+  {\footnotesize\texttt{docs/claims.json}}\\[1pt]
+  {\footnotesize\itshape finite theorem: proved;\\ open requirement: open}};
+\node[artefact, text width=3.6cm] (public) at (12.2, 0) {\textbf{public documents}\\[1pt]
+  {\footnotesize\texttt{README.md}, \texttt{SCOPE.md},\\ \texttt{paper/*.tex}}\\[1pt]
+  {\footnotesize\itshape state the claim and\\ keep its limits visible}};
+\node[humanbox] (hone) at (4.4, 2.00) {\textbf{maintainer review}\\
   {\footnotesize intended meaning}};
-\node[humanbox] (htwo) at (9.6, 1.70) {\textbf{wording review}\\
+\node[humanbox] (htwo) at (9.6, 2.00) {\textbf{wording review}\\
   {\footnotesize claim strength and limits}};
 \draw[human] (lean.north) |- (hone.west);
 \draw[human] (hone.east) -| ([xshift=-7mm]claim.north);
 \draw[human] ([xshift=7mm]claim.north) |- (htwo.west);
 \draw[human] (htwo.east) -| (public.north);
-\node[artefact, text width=4.3cm] (gen) at (9.6, -1.90) {\textbf{generated views}\\[1pt]
+\node[artefact, text width=4.3cm] (gen) at (9.6, -2.35) {\textbf{generated views}\\[1pt]
   {\footnotesize reading map, code index,\\
   machine-readable summary}};
 \draw[flow] (claim.south) |- (gen.west) node[lab, pos=0.45, anchor=east, xshift=-0.5mm] {build};
-\draw[semithick] (1.8,-2.90) -- (12.2,-2.90);
-\draw[semithick] (lean.south) -- (1.8,-2.90);
-\draw[semithick] (claim.south) -- (7.0,-2.90);
-\draw[semithick] (gen.south) -- (9.6,-2.90);
-\draw[semithick] (public.south) -- (12.2,-2.90);
+\draw[semithick] (1.8,-3.35) -- (12.2,-3.35);
+\draw[semithick] (lean.south) -- (1.8,-3.35);
+\draw[semithick] (claim.south) -- (7.0,-3.35);
+\draw[semithick] (gen.south) -- (9.6,-3.35);
+\draw[semithick] (public.south) -- (12.2,-3.35);
 \draw[rounded corners=4pt, fill=gray!8, draw=gray!55]
-  (-0.1,-5.30) rectangle (14.1,-3.20);
-\node[font=\scriptsize, fill=white, inner sep=1pt] at (5.5,-3.20)
+  (-0.1,-5.65) rectangle (14.1,-3.65);
+\node[font=\scriptsize, fill=white, inner sep=1pt] at (5.5,-3.65)
   {\textsc{configured CI workflow} (clean checkout)};
-\node[checkbox] (build) at (2.4, -4.30) {\textbf{formal proof job}\\[1pt]
+\node[checkbox] (build) at (2.4, -4.70) {\textbf{formal proof job}\\[1pt]
   {\footnotesize\texttt{lake build}}};
-\node[checkbox, text width=5.4cm] (release) at (9.6, -4.30)
+\node[checkbox, text width=5.4cm] (release) at (9.6, -4.70)
   {\textbf{release-surface job}\\[1pt]
    {\footnotesize\texttt{python3 scripts/check\_release.py}\\
    source identity, claim fields, generated files, required wording}};
-\draw[flow] (1.8,-2.90) -- (build.north) node[lab, pos=0.30, anchor=east, xshift=-0.5mm] {proof sources};
-\draw[flow] (9.6,-2.90) -- (release.north);
-\node[gate] (gate) at (6.0, -6.05) {\footnotesize both jobs pass?};
+\draw[flow] (1.8,-3.35) -- (build.north) node[lab, pos=0.62, anchor=east, xshift=-0.5mm] {proof sources};
+\draw[flow] (9.6,-3.35) -- (release.north);
+\node[gate] (gate) at (6.0, -6.35) {\footnotesize both jobs pass?};
 \draw[flow] (build.south) |- (gate.west);
-\draw[flow] (release.south) -- (9.6,-5.55) -| (gate.north);
-\node[outcome] (ship) at (11.8, -6.05) {\textbf{workflow passes}\\
+\draw[flow] (release.south) -- (9.6,-5.95) -| (gate.north);
+\node[outcome] (ship) at (11.8, -6.35) {\textbf{workflow passes}\\
   {\footnotesize publication remains a human action}};
-\node[outcome, text width=5.6cm] (stop) at (6.0, -7.35) {\textbf{workflow fails}\\
+\node[outcome, text width=5.6cm] (stop) at (6.0, -7.62) {\textbf{workflow fails}\\
   {\footnotesize the failed job records the broken check}};
 \draw[flow] (gate.east) -- (ship.west) node[lab, pos=0.40] {yes};
-\draw[flow, shorten >=1.5pt] (gate.south) -- (stop.north) node[lab, pos=0.40, anchor=west, xshift=0.6mm] {no};
+\draw[flow, shorten >=1.5pt] (gate.south) -- (stop.north) node[lab, pos=0.30, anchor=west, xshift=0.6mm] {no};
 \end{tikzpicture}
 \caption{The configured checks for one revision.  Dashed elements are human
 judgements; solid elements are files and programs.  Three relations of
@@ -183,9 +179,17 @@ source proves the stated theorems.  Maintainer review asserts the
 within stated limits.  The release job checks \emph{persistence relations}:
 recorded names, wording, identities, and generated files still agree.
 Continuous integration reruns the first and third; nothing performs the
-second mechanically, and neither job reads unrestricted prose or adds authority.}
+second mechanically, and neither job reads unrestricted prose.
+In the worked example the protected object is the recorded boundary between
+the finite theorem and the open requirement.}
 \label{fig:architecture}
 \end{figure}
+
+Figure~\ref{fig:architecture} shows the path in five visible
+parts: the Lean source; the maintainer-reviewed claim record;
+authored public documents; generated indexes and summaries derived from the
+record; and the release program and continuous-integration workflow that
+rerun the checks.
 
 The division in the figure rests on a distinction the paper elaborates.  Establishing that public wording is faithful to a formal
 theorem, within stated limits, is a semantic act: someone must read both and
@@ -195,9 +199,18 @@ question: once a person has approved a proof-to-claim relationship, how are
 later revisions kept from silently eroding it?  Whether the approval was
 correct is a different question, and no part of the design answers it.
 
+A second boundary should be fixed equally early.  The repository
+does not technically force a second independent mathematician to approve a
+change.  A single maintainer can edit a Lean statement, its claim record, and
+the public wording together, and every check can pass while the shared
+interpretation is wrong.  The checks are drift detection for reviewed
+decisions, not a substitute for review, and they add no authority of their
+own.
+
 The two checks answer different questions.  \texttt{lake build} asks whether
 Lean accepts the imported formal statements and proofs; it knows nothing about
-the README.  \texttt{python3 scripts/check\_release.py} asks whether the
+the README, and it would accept, unchanged, a revision whose README announces
+the open requirement met, because no public document is among its inputs.  \texttt{python3 scripts/check\_release.py} asks whether the
 recorded relationships among proofs, record, public pages, and generated
 files still hold; it confirms the identity of the Lean
 source but does not run Lean.  The workflow in \texttt{.github/workflows/lean.yml} runs them
@@ -237,20 +250,34 @@ constant
 S=\sum_{n\ge 1}\frac{\varphi(n)}{2^{n}}
 \]
 is irrational, where $\varphi(n)$ counts the integers in $\{1,\dots,n\}$
-sharing no factor with $n$.  The development proves an exact
-reformulation: $S$ is irrational precisely when a family of finite arithmetic
-statements holds at
-every parameter; a one-parameter form runs along the scales $H_t=\operatorname{lcm}(1,\dots,t)$.  A
-\emph{certificate} at a given scale is a finite, fully checkable computation
-witnessing the
-statement there: a certain finite weighted difference of totient values leaves a residue, modulo a power of two, outside
-a specified neighbourhood of zero.  The project calls such a kernel-checked
-certificate a \emph{certified kill}: each one eliminates
-the family of candidate rational representations of $S$ tied to its
-parameters.  Certificates at scales beyond every fixed cutoff would eliminate
-every candidate, and by the reformulation their existence is equivalent to
-the irrationality itself.  Certificates on a finite list, however long, are
-not.
+sharing no factor with $n$.  The certificates take their force from the
+equivalence, which is worth seeing at human scale.  Write $R_N$ for the tail
+of the series beyond position $N$, rescaled to the binary point, so that
+$R_N$ is $2^N S$ minus an integer.  If $S$ were a fraction, its binary
+digits would eventually repeat with some period $h$, and the development
+proves that this repetition forces the differences $R_{N+h}-R_N$ to be
+integers from some position on; conversely, a single integral difference at
+any positive shift already forces $S$ to be rational.  The chain checked in
+Lean is exact: $S$ is irrational precisely when every such difference, over
+every period $h$ and every position $N$, fails to be an integer, and at
+fixed parameters that failure is decided by a finite residue computation
+with a rigorous tail allowance.  A \emph{certificate} at fixed parameters is
+that finite computation: a weighted difference of totient values whose
+residue, modulo a power of two, lies outside the neighbourhood of zero that
+integrality would demand.  The project calls a kernel-checked certificate a
+\emph{certified kill}, and the name marks an ordinary exclusion argument:
+each certificate eliminates the family of candidate rational representations
+of $S$ tied to its parameters, the fractions whose period and position would
+make that particular difference integral.
+
+The scales in the worked result make the requirement one-parameter.  The
+diagonal $H_t=\operatorname{lcm}(1,\dots,t)$ is divisible by every candidate
+period up to $t$, so, roughly speaking, one certificate along the diagonal
+speaks to all of those periods at once.  The development proves the
+compression exact: certificates along the diagonal beyond every fixed cutoff
+are equivalent to the full requirement, and therefore, through the chain
+above, to the irrationality itself.  Certificates on a finite list, however
+long, are not.
 
 Writing $\mathrm{Cert}(t)$ for ``a certificate exists at scale $t$'', the
 two statements then read:
@@ -260,7 +287,10 @@ two statements then read:
 \text{open:}&\ \ \text{for every cutoff }T,\ \mathrm{Cert}(t)\ \text{for
 some }t>T.
 \end{align*}
-The boundary between them is a matter of logical form, not of scale.  No
+The boundary between them is a matter of logical form, not of scale.
+Twenty-eight scales, two hundred and eighty, or twenty-eight thousand stand
+in the same relation to the open requirement: each is a fixed finite list
+with a cutoff beyond it.  No
 finite list, however long or expensive to verify, implies the second
 statement without a further theorem that produces new witnesses.  Thus
 $t=64$ is the endpoint of this verified computation, not a frontier that
@@ -270,13 +300,11 @@ silently delete.
 \subsection{The formal evidence}
 
 The Lean module \texttt{Erdos249257/DiagonalPincerCertificatesT64.lean}
-defines the explicit list of scales,
-\[
-\{1,2,3,4,5,7,8,9,11,13,16,17,19,23,25,27,29,31,32,37,41,43,47,49,53,59,
-61,64\},
-\]
-the scales up to $64$ at which the diagonal $H_t$ attains a new value, and
-proves the assembling theorem
+defines the explicit list of scales: the 28 values of $t$ up to 64 at which
+the diagonal $H_t$ attains a new value, which are the prime powers up to 64
+together with the initial scale 1.  The sparseness is structural, not a
+sampling choice: between prime powers the diagonal does not move, so no new
+statement exists to check.  Its assembling theorem is
 \texttt{certifiedKill\_diagonal\_all\_imported\_through\_t64}: for every
 listed $t$, the theorem gives a finite checking depth $d_t$ and a decidable
 arithmetic witness at $(H_t,H_t,d_t)$.  Imported modules prove the cases; the
@@ -331,7 +359,10 @@ The public statement is exact but not self-explanatory.  Two of its terms
 appear in Section~\ref{sec:mathrole}, \emph{certified kills} and the
 \emph{lcm-diagonal scales} $H_t$; the third, \emph{certificate shards},
 names smaller reusable certificates at fixed parameters, each discharged by
-the kernel tactic \texttt{decide}.  A record can be precise
+the kernel tactic \texttt{decide}.  The remaining-open field is the open
+requirement of Section~\ref{sec:mathrole}, and under the equivalence it is
+part of the claim's identity rather than an optional caution: remove it, and
+the entry describes a repository that has answered Problem 249.  A record can be precise
 without being pedagogy: its job is to be the stable object that explanatory
 prose, the release checker, and the generated views refer to; the
 explanation a cold reader needs is the job of prose like this section.
@@ -426,6 +457,22 @@ Continuous integration
 \label{tab:trust}
 \end{table}
 
+Instantiated on the worked example, the four assurances read as follows.
+Proof assurance: Lean accepts the finite theorem and the equivalence, and
+accepts nothing that carries the finite list to the open requirement.
+Interpretive assurance: a maintainer's recorded judgement that the public
+wording asserts the finite theorem, confines it to the listed scales, and
+keeps the open requirement named as open.  Persistence assurance: the
+recorded traces of that judgement, declaration names near their coordinates,
+the exact source identity, the limitation clause on the public pages, the
+freshly rebuilt views, still hold at the current revision.  Execution
+assurance: both jobs ran on that revision in a clean checkout and passed.
+The non-guarantees follow the same lines.  Lean cannot notice English that
+quietly implies the open requirement met.  Review cannot promise that every
+page repeating the claim was found.  The checker cannot reject a paraphrase
+it was never given.  A green run cannot make a mistaken reading of the
+equivalence correct.
+
 Parts of the release checker are stronger than the phrase ``consistency
 check'' suggests, and worth stating.  As a project-source
 policy, the checker rejects \texttt{sorry}, \texttt{admit}, new
@@ -478,7 +525,9 @@ an edit strengthening a finite-evidence boundary clause in the README, replacing
 finite cases \emph{do not supply} the open requirement with wording that they
 \emph{complete} it.  Under the registered equivalence of
 Section~\ref{sec:mathrole}, the altered page claimed, in effect, that the
-open problem was settled.  The formal
+open problem was settled: the edit wrote into the README exactly the bridge
+from the finite theorem to the open requirement that no Lean declaration
+supplies.  The formal
 proofs were untouched, and the release gate passed in full, because that
 clause was not among the recorded relationships.  The error was outside the
 written checklist, and the checker preserved exactly what it had been given.
@@ -492,10 +541,11 @@ The repair had two parts.  The clause became a declared anchor: required
 wording on the public page, recorded in the checklist.  And the checklist
 derives from each such anchor an opposing example: a copy of the page with
 the clause weakened or removed must be rejected.  The intact text was then
-rechecked and passed; the same false edit now fails.  What the repaired
-configuration demonstrates is narrow: for this one relationship the check is
-not vacuous, because a known disagreeing example fails; that is coverage
-growth, not general effectiveness.  The other nine edits
+rechecked and passed; the same false edit now fails.  The retained failing
+copy is a \emph{boundary witness}: it demonstrates that, for this one
+relationship, the check separates the approved page from a known false
+neighbour, and it demonstrates nothing else; that is coverage growth, not
+general effectiveness.  The other nine edits
 were not rerun against the extended checklist, and no aggregate result is
 claimed for the repaired configuration.
 
@@ -521,6 +571,15 @@ Coverage grows only by the route above, notice a relationship, record it,
 give it an example that must fail, and the exercise is one full turn of
 that loop.
 
+The shape of this limit is familiar from Section~\ref{sec:mathrole}.  The
+recorded checklist stands to unrestricted prose roughly as the finite
+certificate list stands to the open requirement: every registered
+relationship is real and checked, and no finite list of relationships
+exhausts an open-ended domain.  The parallel is structural rather than
+exact, since prose enjoys no equivalence theorem and no diagonal compresses
+it, but it says why the checker's silence outside its records is a boundary
+to be governed rather than a defect to be patched once.
+
 \section{Scope, reuse, and limits}\label{sec:limits}
 
 \paragraph{The failures the design addresses.}
@@ -539,18 +598,23 @@ or a new public document the record never mentions; requiring a clause to be
 present is not the same as requiring the page to agree with it.  Second,
 coordinated change: a maintainer with authority over source, record, and
 prose can move all three together, and perfect structural agreement then
-preserves a shared error; what remains is the quality and
-governance of the review itself.  Third, wrong review: if the original
+preserves a shared error.  Were the certificate notion itself weakened in
+the source while record and prose were updated to match, every comparison
+could agree while the revised reading of the equivalence is wrong; what
+remains is the quality and governance of the review itself.  Third, wrong review: if the original
 judgement was mistaken, persistence faithfully preserves the mistake.  The
 machinery has no opinion about the judgements it protects.
 
 \paragraph{Essential and contingent limits.}
 Some limits are essential to the chosen shape: while claims live in
 unrestricted prose beside an external record, human interpretation cannot be
-eliminated, coverage is selective (registration is itself a
-judgement, weighted here toward headline results and wording whose accidental
-strengthening would change the repository's public status), and unregistered
-wording is invisible.
+eliminated, and coverage is selective.  The record draws an \emph{assurance
+perimeter}: inside it, named commitments carry mechanical obligations;
+outside it, silence is expected rather than exceptional.  Where the
+perimeter runs is itself a judgement, weighted here toward headline results
+and wording whose accidental strengthening would change the repository's
+public status, as one deleted boundary clause would under the equivalence.
+Unregistered wording is invisible.
 Others are contingent and could be engineered away without
 changing the architecture: the single maintainer, the three-line proximity
 window, exact-wording anchors, one edit per relationship family in the
@@ -558,7 +622,14 @@ exercise, and the unretained logs.
 
 \paragraph{Reuse.}
 Another formal project could reuse the pattern without copying any file
-format.  The portable obligations are short to state: a defined unit of
+format, and the worked example says where the pattern pays: wherever bounded
+formal evidence sits beside a stronger public target.  Finite instances
+beside a universal statement, as here; a conditional theorem beside its
+unresolved hypothesis; one direction of an implication beside a claimed
+equivalence; a result under named assumptions beside an unconditional
+headline.  In each case the portable unit is the reviewed boundary between
+what is established and the adjacent stronger statement that is not.  The
+portable obligations are short to state: a defined unit of
 public claim; each claim naming its formal evidence and the source
 state that evidence lives in; explicit scope, assumptions, or finite domain,
 with consequential non-conclusions recordable; a human review act
@@ -593,19 +664,24 @@ formalisation they act, and where their semantic structure lives.  Proof
 blueprints act before and during formalisation, connecting plans to Lean
 declarations and tracking dependency and completion: \texttt{leanblueprint} for authored blueprints~\cite{leanblueprint},
 LeanArchitect for generating and maintaining them~\cite{leanarchitect}.  The
-claim record here acts after: not ``what remains to formalise'', but ``what
+claim record here acts after: not ``what remains to formalise'', which for a
+blueprint would list the open requirement as planned work, but ``what
 may the finished formalisation be said to establish, and with what limits''.
 Lean Atlas supports judging whether a formal statement expresses the intended
 mathematics~\cite{leanatlas}; this system takes that judgement as input and
 preserves its recorded consequences.  On the second axis,
 Isabelle/DOF places typed, checked structure inside formal documents
 themselves~\cite{isadof}, gaining coverage over whatever is written in that
-structure at the cost of constraining the document; this repository leaves
+structure at the cost of constraining the document; the bounded domain and
+remaining-open fields of Table~\ref{tab:record} could live there as typed
+fields.  This repository instead leaves
 prose unrestricted and checks an external record, buying a clear human
 review surface at the cost of open-world coverage.  Documentation-consistency
 systems such as CASCADE interpret prose to generate tests~\cite{cascade},
 reaching text that explicit records cannot see at the price of probabilistic
-interpretation; the design here takes the opposite point and leaves
+interpretation: such a system might have flagged the strengthened README of
+Section~\ref{sec:failure} unprompted, and might equally flag a faithful
+rewrite.  The design here takes the opposite point and leaves
 unrecorded drift invisible.  The deliberately wrong copies of
 Section~\ref{sec:failure} are known-answer regression fixtures in the
 mutation-analysis tradition~\cite{demillo,jiaharman}, keeping checks
@@ -641,6 +717,14 @@ reviewed; the reviewed relationship is preserved.  Lean supplies the first.
 Only a person can supply the second.  The machinery here supplies
 the third, for the relationships it has been given.
 
+The whole case fits in one chain, and a reader who keeps nothing else can
+keep this.  Lean proves the finite theorem.  Lean proves the equivalence.
+No theorem carries the one to the other.  A person approved wording that
+keeps the distinction.  An edit erased the distinction without touching a
+proof.  Every configured check passed while the relationship was
+unrecorded.  The relationship is now recorded and its known false form
+fails.  Unrecorded false forms remain possible.
+
 The evidence here should be weighed at three strengths.  That the
 architecture exists and behaves as described at one revision is demonstrated.
 That reviewed proof-to-prose relationships can be made mechanically
@@ -649,8 +733,9 @@ argued, and the case study supports it.  That such an architecture reduces
 consequential publication drift at acceptable maintenance cost across
 projects is a hypothesis for future evaluation, not a result of this paper.
 Both Erd\H{o}s problems remain open, and nothing here changes their status:
-the unbounded certificate supply is exactly as unproved after these checks as
-before them.
+the finite theorem is proved, the equivalence is proved, and the open
+requirement, the unbounded certificate supply, is exactly as unproved after
+these checks as before them.
 
 \appendix
 \section{Reproducibility}\label{app:repro}

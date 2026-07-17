@@ -17,7 +17,10 @@ PAPER_README = ROOT / "paper" / "README.md"
 SYSTEMS_PAPER = ROOT / "paper" / "claim-faithful-publication-systems-paper.tex"
 SYSTEMS_PDF = ROOT / "claim-faithful-publication-systems-paper.pdf"
 MAX_GUIDE_BYTES = 18_000
-MAX_SYSTEMS_PAPER_BYTES = 40_000
+# Raised from 40_000 (maintainer decision, July 2026) to admit the
+# example-instantiated assurance, coverage, and reuse material; the budget
+# still exists so the paper cannot grow without a deliberate decision.
+MAX_SYSTEMS_PAPER_BYTES = 48_000
 
 SECTION_ORDER = (
     "## What this repository is",
@@ -154,6 +157,15 @@ PAPER_REQUIRED_ANCHOR_GROUPS = {
         "A boundary the checklist missed",
         "coverage boundary, not a reliability score",
         "only after a person has identified and recorded that relationship",
+    ),
+    # The three named objects and the passages that instantiate the general
+    # machinery on them are load-bearing: losing them returns the paper to a
+    # generic systems essay beside a decorative example.
+    "worked_example_governs": (
+        "No Lean theorem carries the first to the second",
+        "Instantiated on the worked example",
+        "boundary witness",
+        "assurance perimeter",
     ),
 }
 
