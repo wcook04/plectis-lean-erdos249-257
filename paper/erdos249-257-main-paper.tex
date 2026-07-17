@@ -247,8 +247,8 @@ The table above separates proved results, exact reformulations, conditional
 implications, finite evidence, and open endpoints.  In particular, the 28
 diagonal rows remain finite evidence, and both endpoints remain open.
 
-These results carry no priority claim.  The main article is the expository
-entry point; appendices carry auxiliary and audit material.  On each side
+These results carry no priority claim.  Appendices carry auxiliary and
+audit material.  On each side
 the missing piece is the unbounded witness family: neither finite evidence
 nor an exact reduction supplies it.  The half-value spine is a genuine
 counterexample route because a finite normalised support cannot have value
@@ -344,9 +344,10 @@ is unique.  A finite normalised support cannot have value \(1/2\).  For
 &\quad\Longleftrightarrow\quad
 \text{the set of exponents omitted by the greedy expansion is infinite}\\
 &\quad\Longleftrightarrow\quad
-\text{a successor terminal bit equal to zero occurs beyond every bound}.
+\text{a successor terminal bit equal to zero occurs beyond every bound}
 \end{aligned}
 \]
+(the terminal bit is defined in Section~\ref{sec:eb}).
 Concretely, the greedy expansion of \(1/2\) skips rank \(1\), takes ranks
 \(2,3\), skips \(4,5\), and takes \(6,7\); membership asks whether such
 skips recur beyond every bound.
@@ -2927,6 +2928,22 @@ half-value side of \#257, it must produce cofinal terminal zeros or prove that
 the greedy seam is eventually right.  Further fixed-scale computation, by
 itself, changes neither open statement.
 
+\paragraph{What the finite languages could ever settle.}
+The two finite layers certify open conditions: a certificate proves that one
+tail difference lies at positive distance from \(\Z\), and a fatal half-gap
+proves that the residual at one rank exceeds the whole remaining tail.
+Their complements admit no finite witness in these languages, so each
+endpoint equivalence sits exactly one cofinal quantifier above its finite
+layer.  One asymmetry follows.  Half-value nonmembership is equivalent to
+the existence of a fatal half-gap, and the greedy orbit is exactly
+computable with sound rational tail enclosures
+(Proposition~\ref{res:death}), so the negative endpoint of the fibre
+question is in principle a single finite discovery; membership can only
+arrive through a cofinal supply.  For \(S\) neither direction is one
+certificate away: a certificate proves one non-integral difference, and
+rationality asserts eventual integrality, which no single finite check of
+this kind certifies.
+
 \begin{remark}[boundaries visible from the normal forms]
 Two elementary observations, neither formalised in the source, show that
 the missing quantifiers cannot be crossed by finite inspection or by the
@@ -3279,7 +3296,11 @@ then $S$ is irrational.
 \noindent This implication is the
 \lword{DiagonalFreshLossBridge.lean}{2731}{irrational_totientSeries_of_canonicalAdjacentSuffixJumpSlackSupply}{cofinal-slack irrationality criterion}.
 The proposition identifies equivalent scalar forms; the corollary is
-one-way and does not prove that $\sigma_t$ is nonnegative cofinally.
+one-way and does not prove that $\sigma_t$ is nonnegative cofinally.  It is
+also not necessary: completeness supplies some successful depth at every
+non-integral diagonal difference, but nothing forces success at the
+canonical depth $m_t$, so cofinal failure of this scalar condition would
+refute the route, not the endpoint.
 
 For \#257, write $r_n$ for the exact greedy residual of the target $1/2$ and
 put
@@ -3402,6 +3423,15 @@ middle cells \(-2,-1\), and prove the future-tail inequality at the remaining
 middle transitions.  A cofinal \#249 certificate producer would prove \#249;
 a cofinal terminal-zero producer would refute universal \#257; and a proof of
 eventual right behaviour would close only the half-value route.
+
+\paragraph{Two refinements not pursued.}
+Certificate completeness guarantees a least successful depth at every
+non-integral pair; we prove nothing about its growth in \((h,N)\), and a
+proved bound would decide each fixed pair by a bounded computation.  On the
+support side, the zero-window theorem is inert against supports containing a
+small element (Appendix~\ref{app:carry-sublog}); a coverage law for the
+support outside every finite core would remove that triviality.  We have
+not pursued either question.
 
 \subsection*{Statements and declarations}
 
