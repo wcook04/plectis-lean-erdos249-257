@@ -36,20 +36,20 @@
 "authority_role": "proof_bearing_committed_source_anchor"
 },
 "navigation_snapshot": {
-"commit": "88daca71bbcbeda705f61ee9ade93723ec859a4a",
+"commit": "d08ae17881132613427d4ca20e2e202d093ae54e",
 "authority_role": "machine_readable_navigation_anchor",
 "publication_state": "main_history_snapshot",
 "published_ref": "main",
-"repository_resolution": "https://github.com/wcook04/plectis-lean-erdos249-257/tree/88daca71bbcbeda705f61ee9ade93723ec859a4a"
+"repository_resolution": "https://github.com/wcook04/plectis-lean-erdos249-257/tree/d08ae17881132613427d4ca20e2e202d093ae54e"
 },
 "content": {
 "machine_readable_paper": {
 "path": "docs/claims.json::machine_readable_paper",
-"content_digest": "sha256:2e0a3f2670b6d12b7f9bba06ff913ad0eba46b6bc99e5b633093c26c68a6c44e"
+"content_digest": "sha256:2394c54e9fb2e377a0d94bf4ed481049a65c5fc3c69ad64239407d3e36e9412e"
 },
 "claims_document": {
 "path": "docs/claims.json",
-"content_digest": "sha256:b608e594bf0812000093e73a8a0d80c67e52185a12417946f45c3df65c3d7015"
+"content_digest": "sha256:baf42284c679d5cd1913b54c5f88409ec7c52086422f50de9e7f3eafcbc4d76e"
 },
 "declaration_atlas": {
 "path": "docs/declaration_atlas.json",
@@ -62,21 +62,21 @@
 },
 "bounded_orientation": {
 "path": "docs/orientation.json",
-"content_digest": "sha256:7eac98b268b247cc6b50e28c2c02aabe6bb42bc14964a92e298e32a3a107217d"
+"content_digest": "sha256:aa5982cff42775a9b8eb1950735245674701f29a869693b5724d4597478bd161"
 },
 "human_exposition": {
 "source_path": "paper/erdos249-257-main-paper.tex",
-"source_content_digest": "sha256:8f48603c37d2710d6925752371295bb48b709cacff5e002d735b7266891b0f67",
+"source_content_digest": "sha256:f711d5a891ef49323523d3aca5f56bfdef3e99bdced3ab160689847ef8b09120",
 "rendered_path": "erdos249-257-main-paper.pdf",
-"rendered_content_digest": "sha256:8c1abdfe88d519b2ef1e7046c637c0bf2973dcedf53ba4d8ff8e9bdfb9b91ac5",
+"rendered_content_digest": "sha256:96bd1ea55119063f15695c4344a97f997a376dfa7801394b10697745102aefdc",
 "artifact_role": "authored_mathematician_facing_exposition",
 "authority_posture": "authored_editorial_surface_not_Lean_proof_authority"
 },
 "technical_companion": {
 "source_path": "paper/erdos249-transport-curvature-companion-note.tex",
-"source_content_digest": "sha256:4c10373b5758d5f155cb72b52f67733146d8007ce3f8d0306c6ff8b91eedeb83",
+"source_content_digest": "sha256:08c1cfc58992198b2f6307f79d8b4a4b58fcb81df7b17f6fd7e21c1a1cafdb7d",
 "rendered_path": "erdos249-transport-curvature-companion-note.pdf",
-"rendered_content_digest": "sha256:61da12cff513d0ba1281b2570f50fec997d92a4b210786bbdffca7f176fbe74d",
+"rendered_content_digest": "sha256:6ecb00878761ce7eb5492ec5110f06a2d8354ed1764f73dca3bedde185a4436f",
 "artifact_role": "authored_transport_and_curvature_companion",
 "authority_posture": "authored_editorial_surface_not_Lean_proof_authority"
 },
@@ -478,7 +478,7 @@
 "source": "paper/erdos249-257-main-paper.tex",
 "environment": "problem",
 "title": "Erd\\H{o}s \\#249",
-"line": 2553
+"line": 2557
 }
 },
 {
@@ -489,7 +489,7 @@
 "source": "paper/erdos249-257-main-paper.tex",
 "environment": "problem",
 "title": "unbounded certificate supply",
-"line": 2564
+"line": 2568
 }
 },
 {
@@ -500,7 +500,7 @@
 "source": "paper/erdos249-257-main-paper.tex",
 "environment": "problem",
 "title": "the half-value counterexample route",
-"line": 2579
+"line": 2583
 }
 },
 {
@@ -511,7 +511,7 @@
 "source": "paper/erdos249-257-main-paper.tex",
 "environment": "problem",
 "title": "universal Erd\\H{o}s \\#257",
-"line": 2570
+"line": 2574
 }
 }
 ],
@@ -1757,7 +1757,7 @@
 "expansion": {
 "machine_readable_paper": {
 "path": "docs/claims.json::machine_readable_paper",
-"expected_content_digest": "sha256:2e0a3f2670b6d12b7f9bba06ff913ad0eba46b6bc99e5b633093c26c68a6c44e",
+"expected_content_digest": "sha256:2394c54e9fb2e377a0d94bf4ed481049a65c5fc3c69ad64239407d3e36e9412e",
 "contains": [
 "all_claims",
 "authored_argument_graph",
@@ -1781,16 +1781,16 @@
 },
 "human_exposition": {
 "source_path": "paper/erdos249-257-main-paper.tex",
-"expected_source_content_digest": "sha256:8f48603c37d2710d6925752371295bb48b709cacff5e002d735b7266891b0f67",
+"expected_source_content_digest": "sha256:f711d5a891ef49323523d3aca5f56bfdef3e99bdced3ab160689847ef8b09120",
 "rendered_path": "erdos249-257-main-paper.pdf",
-"expected_rendered_content_digest": "sha256:8c1abdfe88d519b2ef1e7046c637c0bf2973dcedf53ba4d8ff8e9bdfb9b91ac5",
+"expected_rendered_content_digest": "sha256:96bd1ea55119063f15695c4344a97f997a376dfa7801394b10697745102aefdc",
 "authority_posture": "authored_editorial_surface_not_Lean_proof_authority"
 },
 "technical_companion": {
 "source_path": "paper/erdos249-transport-curvature-companion-note.tex",
-"expected_source_content_digest": "sha256:4c10373b5758d5f155cb72b52f67733146d8007ce3f8d0306c6ff8b91eedeb83",
+"expected_source_content_digest": "sha256:08c1cfc58992198b2f6307f79d8b4a4b58fcb81df7b17f6fd7e21c1a1cafdb7d",
 "rendered_path": "erdos249-transport-curvature-companion-note.pdf",
-"expected_rendered_content_digest": "sha256:61da12cff513d0ba1281b2570f50fec997d92a4b210786bbdffca7f176fbe74d",
+"expected_rendered_content_digest": "sha256:6ecb00878761ce7eb5492ec5110f06a2d8354ed1764f73dca3bedde185a4436f",
 "authority_posture": "authored_editorial_surface_not_Lean_proof_authority"
 },
 "paper_source_sigils": {

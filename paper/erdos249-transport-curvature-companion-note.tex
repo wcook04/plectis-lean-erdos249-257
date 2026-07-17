@@ -51,7 +51,7 @@ valuation--unit word has a prefix-locked centred completion, and a synthetic
 nonzero lcm carry satisfying the stated factor and anchor constraints survives
 every finite integer shift polynomial.  The finite criteria and obstruction
 theorems are unconditional.  Erd\H{o}s Problem~249 remains open because no
-cofinal arithmetic or harmonic producer is proved.
+cofinal arithmetic input or harmonic bound is proved.
 \end{abstract}
 
 \section{Main results and logical boundary}\label{sec:scope}
@@ -65,8 +65,8 @@ dispersion into a finite certificate, while the large-prime pivot
 decomposition identifies four precise budgets that would produce that gap.
 Third, phase separation gives a complete geometric normal form and two
 countermodels delimit what fixed local transport data can prove.  Thus the
-paper isolates exact consumers and exact obstructions; it does not supply the
-cofinal arithmetic producer needed to settle the problem.
+paper isolates exact implications and exact obstructions; it does not prove
+the cofinal arithmetic input needed to settle the problem.
 
 \begin{theorem}[affine-channel annihilation]\label{thm:affine}
 Let \(m_i\in\mathbb N\) and \(c_i\in\mathbb R\) satisfy
@@ -86,9 +86,9 @@ finite central-residue criteria.
 Theorem~\ref{thm:first-pivot} decomposes the first-harmonic block sum into
 centred, fibre-mean, bad-supplier, and non-supplier terms.  Its exact budget
 implies a finite tail-difference certificate; the corresponding cofinal
-budget would imply irrationality.  This is the analytic consumer between the
-transport identities and the phase geometry, not an additional proof of the
-missing estimates.
+budget would imply irrationality.  This is the analytic implication connecting
+the transport identities to the phase geometry, not an additional proof of
+the missing estimates.
 
 \begin{theorem}[phase-separation characterisation]\label{thm:phase}
 The cofinal fibre-free window-pair separation predicate of
@@ -96,8 +96,8 @@ Section~\ref{sec:pivot} holds if and only if \(S\) is irrational.
 \end{theorem}
 \noindent Formalised as the
 \lword{PivotAntiReconstruction.lean}{1744}{dtwWindowSeparatedPairs_iff_irrational_totient_series}{phase-separation equivalence}.
-This is an exact equivalence, not a weaker sufficient condition.  Its
-arithmetic producer remains open.
+This is an exact equivalence, not a weaker sufficient condition.  Its required
+arithmetic input remains open.
 
 \begin{proposition}[local no-go boundaries]\label{prop:nogo}
 At every fixed valuation--unit precision, each compatible finite word has a
@@ -122,7 +122,7 @@ the original collection and maintained catalogue
 \cite{erdosgraham1980,erdos1988,erdosproblems}.  The Lambert-series and
 M\"obius/divisor background is classical~\cite{erdos1948,apostol};
 Borwein's theorem gives a neighbouring general irrationality
-benchmark~\cite{borwein1992}.  None supplies the cofinal producer isolated
+benchmark~\cite{borwein1992}.  None supplies the cofinal input isolated
 here.  The theorem-specific comparison boundary is maintained with the
 gateway paper.  Linked mathematical phrases open the pinned Lean proofs; the
 claim registry and release gate that validate these links are described in
@@ -131,7 +131,7 @@ the suite's systems companion~\cite{syspaper}.
 \paragraph{Reading map.}
 Sections~\ref{sec:windows}--\ref{sec:primejump} build the exact transport and
 window algebra.  Sections~\ref{sec:harmonic}--\ref{sec:pivot} give the two
-global consumers: a sufficient harmonic-budget route and an equivalent
+global routes: a sufficient harmonic-budget route and an equivalent
 phase-separation route.  Sections~\ref{sec:nogo} and~\ref{sec:factorideal}
 then show why bounded local transport data cannot by itself produce either
 cofinal hypothesis.
@@ -236,7 +236,7 @@ This yields a finite non-integrality criterion
 \lword{PrimeJumpWindow.lean}{178}{primeJumpTailCommutator_notMem_int_of_sharpKill}{from a sharp prime-jump certificate}.
 Lean verifies the instance $(H,p,L)=(12,5,15)$
 \lword{PrimeJumpWindow.lean}{186}{primeJumpSharpKill_twelve_five}{in the \((12,5,15)\) calculation}; this is one
-finite deposit, not an unbounded sequence.
+verified finite instance, not an unbounded sequence.
 
 The balanced vertices $H,2H,3H,6H$ give a related radius $9H+4L+4$.
 The corresponding finite criterion is formalised
@@ -294,7 +294,7 @@ with the displayed factorisation certified; call it \(\eta\)-good when also
 \[
  P_N=\exp\!\left(
  2\pi i\,\frac{(2^h-1)\ph(m_N)(p_N-1)}{2^{L-s+1}}\right),
- \qquad R_N=\frac{Z_N}{P_N}.
+ \qquad \rho_N=\frac{Z_N}{P_N}.
 \]
 The identity \(\ph(m_Np_N)=\ph(m_N)(p_N-1)\) is exact here because the size
 conditions force \(p_N\nmid m_N\).  For the supplier fibre
@@ -307,8 +307,8 @@ Finally, let \(\mathcal G,\mathcal B,\mathcal U\) be respectively the good
 suppliers, bad suppliers, and non-suppliers in \([X,2X)\), and put
 \[
 \begin{aligned}
- C&=\sum_{N\in\mathcal G}R_N(P_N-\overline P_{m_N}),&
- M&=\sum_{N\in\mathcal G}R_N\overline P_{m_N},\\
+ C&=\sum_{N\in\mathcal G}\rho_N(P_N-\overline P_{m_N}),&
+ M&=\sum_{N\in\mathcal G}\rho_N\overline P_{m_N},\\
  B&=\sum_{N\in\mathcal B}Z_N,&
  U&=\sum_{N\in\mathcal U}Z_N.
 \end{aligned}
@@ -349,7 +349,7 @@ The constants are not heuristic bookkeeping:
  =\frac9{10}.
 \]
 Only the real part of the centred term is bounded; no unnecessary complex-norm
-estimate is assumed there.  The theorem proves the exact algebraic consumer.
+estimate is assumed there.  The theorem proves the exact algebraic reduction.
 It does not prove a prime-distribution or residual-decorrelation estimate
 supplying the four inequalities at cofinal scales.
 
@@ -424,11 +424,11 @@ using the missing fresh divisor channels.
 \section{Conclusion and exact boundary}\label{sec:index}
 
 The results form one chain rather than a list of unrelated certificate
-modules.  Affine transport explains which divisor channels a finite
+constructions.  Affine transport explains which divisor channels a finite
 difference removes; a dyadic window converts the remaining tail observable
 into an exact central-residue test; and harmonic or pairwise phase dispersion
 turns that test into a certificate.  The four-term pivot theorem makes the
-first of these global consumers arithmetically explicit, while the
+first of these global routes arithmetically explicit, while the
 window-pair theorem shows that the second is logically complete.
 
 What remains missing is not another finite identity.  One must produce the
@@ -461,8 +461,8 @@ Irrationality of $S$ & follows from a named unbounded supply & open \\
 \bottomrule
 \end{tabular}
 \end{center}
-No cofinal arithmetic or harmonic producer is proved.  Therefore the chain
-stops at exact finite consumers and equivalent reformulations, and
+No cofinal arithmetic input or harmonic bound is proved.  Therefore the chain
+stops at exact finite criteria and equivalent reformulations, and
 Erd\H{o}s~\#249 remains open.
 
 \begin{thebibliography}{9}
