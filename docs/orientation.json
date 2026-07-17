@@ -56,7 +56,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "Erd\\H{o}s \\#249",
-    "line": 2546
+    "line": 2541
    }
   },
   {
@@ -67,7 +67,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "unbounded certificate supply",
-    "line": 2557
+    "line": 2552
    }
   },
   {
@@ -78,7 +78,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "the half-value counterexample route",
-    "line": 2572
+    "line": 2567
    }
   },
   {
@@ -89,7 +89,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "universal Erd\\H{o}s \\#257",
-    "line": 2563
+    "line": 2558
    }
   }
  ],
@@ -554,18 +554,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_residual_definition_provenance_density",
+   "id": "appendix_b_order_wrap_provenance_hierarchy",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "the paper still occasionally appends Lean definition links immediately after giving the complete mathematical definition in displayed notation, mixing provenance for objects with provenance for results",
-   "statement": "Audit residual definition-level links across the main paper, beginning with the exact tail-period predicate and the Mersenne achievement set, while preserving links that supply a theorem or a definition absent from the prose."
+   "defect_class": "the order-wrap proposition states three mathematical conclusions but follows them with six overlapping generic, shifted, named-limit, and divergent-form anchors, so the direct fraction-facing proof hierarchy is not visible",
+   "statement": "Recast the Appendix B.4 order-wrap provenance around the divergent wrap-ratio alternative, its coprime specialization, and the fraction-facing shifted excess-mean theorem."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "a16aa24af5236b6508a34b8a4c4b41fdcf620a98",
-  "committed_navigation_snapshot": "7ec23447e601864923dcac053c14d76ce9bd4515",
-  "main_paper_source_digest": "sha256:9c401b5127618512a57e25724061e4b46be9588b19f4a15a3d157559ed0d296a"
+  "committed_navigation_snapshot": "dc1620fde3ee3e0b700f58af93c4b008bd51150a",
+  "main_paper_source_digest": "sha256:4699a6e6520adaf4088e53290015c28fac7411f423ba2776b1a6b8b4358d411c"
  },
  "reading_routes": [
   {

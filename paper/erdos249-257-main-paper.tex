@@ -343,10 +343,8 @@ With the primitive-conductor weight $A=\ph*\mu$,
 \sum_{d\ge1}\frac{A(d)}{2^d-1}\;=\;\sum_{n\ge1}\frac{\ph(n)}{2^n}\;=\;S.
 \]
 \end{proposition}
-\noindent The
-\lword{CertificateKernel.lean}{18117}{tsum_primWeight_div_two_pow_sub_one_eq_totient_series}{positive-lift identity}
-is formalised with the
-\lword{MersenneLambertLadder.lean}{252}{primWeight}{primitive-conductor weight}.
+\noindent Formalised as the
+\lword{CertificateKernel.lean}{18117}{tsum_primWeight_div_two_pow_sub_one_eq_totient_series}{positive-lift identity}.
 This places $S$ in the same $\sum(\cdot)/(2^d-1)$ family as $E$, with a
 nonnegative weight.
 
@@ -1605,10 +1603,8 @@ while its conclusion concerns the infinite tail difference.
 $S$ is irrational if and only if, for every period $h\ge1$ and every threshold
 $N_0$, there exist $N\ge N_0$ and $L$ with $\textsf{certifiedKill}(h,N,L)$.
 \end{theorem}
-\noindent Formalised: \lword{LcmConeFlatness.lean}{412}{irrational_totient_series_iff_certificate_supply}{certificate-supply equivalence};
-the tail $R_N$ and the predicate are
-\lword{TotientTailPeriodKiller.lean}{57}{totientTail}{scaled totient tail} and
-\lword{TotientTailPeriodKiller.lean}{72}{certifiedKill}{finite certificate predicate}.
+\noindent Formalised as the
+\lword{LcmConeFlatness.lean}{412}{irrational_totient_series_iff_certificate_supply}{certificate-supply equivalence}.
 
 Every multiple of an eventual period is again a period.  The least common
 multiple $M_t$ therefore provides a useful sufficient diagonal form of
@@ -2522,10 +2518,9 @@ The second-channel condition is decidable over $\Q$ and holds for
 $1\le n\le6$.  If it holds for every $n\ge7$, then
 $1/2$ belongs to the Mersenne achievement set $\mathcal A$.
 \end{proposition}
-\noindent Formalised:
-\lword{GreedyAchievementSet.lean}{2695}{HalfSecondChannelSeparatedRat}{second-channel predicate},
-\lword{GreedyAchievementSet.lean}{2723}{halfSecondChannelSeparatedRat_of_pos_le_six}{finite second-channel verification},
-and
+\noindent The finite check and the unbounded-range implication are formalised as
+\lword{GreedyAchievementSet.lean}{2723}{halfSecondChannelSeparatedRat_of_pos_le_six}{finite second-channel verification}
+and the
 \lword{GreedyAchievementSet.lean}{2901}{half_mem_mersenneAchievementSet_of_secondChannelSeparationRat_from_seven}{from-seven membership criterion}.
 The membership conclusion is itself exact:
 \[
@@ -2791,9 +2786,7 @@ $B=\{n\ge1:(\mu*f)(n)=1\}$ selected by that transform.
 \lword{BooleanMobiusCarry.lean}{76}{positiveSupportBitAF_mul_zeta}{the positive-support zeta identity},
 \lword{BooleanMobiusCarry.lean}{94}{moebius_mul_supportCoeffAF}{the M\"obius inversion identity}, and, with no
 search or finiteness hypothesis, the converse
-\lword{BooleanMobiusCarry.lean}{180}{eq_supportCoeffAF_booleanMobiusSupport_of_boolean}{the Boolean reconstruction theorem};
-the selected support is
-\lword{BooleanMobiusCarry.lean}{139}{booleanMobiusSupport}{the Boolean M\"obius support}.
+\lword{BooleanMobiusCarry.lean}{180}{eq_supportCoeffAF_booleanMobiusSupport_of_boolean}{the Boolean reconstruction theorem}.
 
 On the carry side, Theorem~\ref{res:rigidity} applies at $c=f_A$: the support
 series is rational exactly when a tempered carry orbit for $f_A$ exists
@@ -2822,12 +2815,8 @@ M\"obius transform of the quotient sequence $\bigl(2U(N)-U(N+1)\bigr)/q$ is
 Boolean. The support is not guessed: it is reconstructed from the certificate
 by Proposition~\ref{res:boolmob}.
 \end{theorem}
-\noindent Formalised:
-\lword{BooleanMobiusCarry.lean}{948}{exists_normalized_support_fraction_iff_exists_booleanMobiusCarry}{the normalized support-fraction certificate equivalence},
-with the certificate packaged as
-\lword{BooleanMobiusCarry.lean}{775}{BooleanMobiusCarryCertificate}{the Boolean carry certificate} and the
-quotient normalized at index zero
-(\lword{BooleanMobiusCarry.lean}{766}{carryQuotient}{the carry quotient}).
+\noindent Formalised as
+\lword{BooleanMobiusCarry.lean}{948}{exists_normalized_support_fraction_iff_exists_booleanMobiusCarry}{the normalized support-fraction certificate equivalence}.
 
 \begin{example}[the support $\{2,3\}$]
 The support $\{2,3\}$ has value
@@ -2926,8 +2915,7 @@ and the mean of the scaled tails has the same limit
 (\lword{RationalSupportCarrySkeleton.lean}{945}{tendsto_supportCoeff_mean_reciprocalMass}{divisor-mean limit},
 \lword{RationalSupportCarrySkeleton.lean}{1036}{tendsto_binaryCoeffTail_supportCoeff_mean_reciprocalMass}{coefficient-tail mean limit}).
 The divergent case is carried as an explicit disjunction, not through a
-default value assigned to a divergent formal sum
-(\lword{RationalSupportCarrySkeleton.lean}{796}{ReciprocalMassDivergesOrAtLeast}{reciprocal-mass dichotomy}).
+default value assigned to a divergent formal sum.
 Each tail state splits exactly as $u(N)=v\,e_N+r_N$ with integral excess
 $e_N=\lfloor u(N)/v\rfloor\ge0$.
 
@@ -3015,8 +3003,7 @@ exponent $n$, and let
 the \emph{Mersenne achievement set}, the exponent $0$ being normalised away as
 analytically invisible. Coding by supports of positive exponents is literally
 the formal support series
-(\lword{GreedyAchievementSet.lean}{554}{positiveMersenneSupportValue_eq_erdosSupportSeries}{support-value identity};
-the set is \lword{GreedyAchievementSet.lean}{571}{mersenneAchievementSet}{achievement-set definition}). In
+(\lword{GreedyAchievementSet.lean}{554}{positiveMersenneSupportValue_eq_erdosSupportSeries}{support-value identity}). In
 this language the base-$2$ \#257 statement reads: the rational members of
 $\mathcal A$ are exactly the finite subset sums. Nothing below decides that.
 Kova\v{c} and Tao verify, for every fixed integer $t\ge2$, that
@@ -3069,20 +3056,24 @@ priority claim for them.
 
 \begin{proposition}[exact rational runs and finite non-membership certificates]\label{res:death}
 The greedy recursion executed in exact rational arithmetic agrees step by step
-with the real recursion under casting. A finite decidable certificate --- the
-exact rational residual at some level is at least an exact rational upper
-enclosure of the remaining tail --- soundly proves non-membership in
-$\mathcal A$; the level-one instance shows $3/4\notin\mathcal A$. And a
-rational number already known to lie in $\mathcal A$ has computable support
-bits.
+with the real recursion under casting. For a rational target $x$, write
+$r_n(x)$ for its exact rational residual after level $n$ and, for a lookahead
+$\ell\ge0$, put
+\[
+\widehat T_{n,\ell}
+  =\sum_{k=0}^{\ell-1}w_{n+k+1}+2w_{n+\ell+1}\in\Q .
+\]
+The sum is empty when $\ell=0$, and always
+$T(n)<\widehat T_{n,\ell}$. Hence the finite inequality
+$\widehat T_{n,\ell}\le r_n(x)$ soundly proves $x\notin\mathcal A$; its
+level-one instance shows $3/4\notin\mathcal A$. A rational number already
+known to lie in $\mathcal A$ has computable support bits.
 \end{proposition}
 \noindent Formalised:
-\lword{GreedyAchievementSet.lean}{1130}{cast_greedyMersenneRemainderRat}{rational--real greedy agreement};
-\lword{GreedyAchievementSet.lean}{1726}{certifiedGreedyMersenneDeath_not_mem}{finite death certificate},
-with the certificate
-\lword{GreedyAchievementSet.lean}{1720}{CertifiedGreedyMersenneDeath}{death-certificate predicate} and the
-enclosure \lword{GreedyAchievementSet.lean}{1687}{mersenneTailUpperRat}{rational tail enclosure};
-\lword{GreedyAchievementSet.lean}{1748}{three_fourths_not_mem_mersenneAchievementSet}{three-quarters nonmembership};
+\lword{GreedyAchievementSet.lean}{1130}{cast_greedyMersenneRemainderRat}{rational--real greedy agreement},
+\lword{GreedyAchievementSet.lean}{1692}{mersenneTail_lt_cast_tailUpperRat}{rational tail-enclosure bound},
+\lword{GreedyAchievementSet.lean}{1726}{certifiedGreedyMersenneDeath_not_mem}{finite death-certificate soundness},
+\lword{GreedyAchievementSet.lean}{1748}{three_fourths_not_mem_mersenneAchievementSet}{three-quarters nonmembership},
 and \lword{GreedyAchievementSet.lean}{1832}{rational_member_support_bit_iff}{rational-member support-bit equivalence}.
 The certificates are one-sided: survival through any finite depth proves
 nothing about membership, and no decidability of membership in $\mathcal A$ is
