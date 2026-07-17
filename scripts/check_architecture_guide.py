@@ -18,9 +18,11 @@ SYSTEMS_PAPER = ROOT / "paper" / "claim-faithful-publication-systems-paper.tex"
 SYSTEMS_PDF = ROOT / "claim-faithful-publication-systems-paper.pdf"
 MAX_GUIDE_BYTES = 18_000
 # Raised from 40_000 (maintainer decision, July 2026) to admit the
-# example-instantiated assurance, coverage, and reuse material; the budget
-# still exists so the paper cannot grow without a deliberate decision.
-MAX_SYSTEMS_PAPER_BYTES = 48_000
+# example-instantiated assurance, coverage, and reuse material, then to
+# 50_000 for the cold-reader repairs (named equivalence declarations,
+# witness glosses, integer-arithmetic detail); the budget still exists so
+# the paper cannot grow without a deliberate decision.
+MAX_SYSTEMS_PAPER_BYTES = 50_000
 
 SECTION_ORDER = (
     "## What this repository is",

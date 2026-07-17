@@ -3,7 +3,7 @@
 
 # Revision brief: Lean publication-systems paper
 
-The current eleven-page paper is an architecture note with one bounded case
+The current twelve-page paper is an architecture note with one bounded case
 study. Its useful feature is its order: it gives the reader a plain mental
 model before implementation details, and one worked example (the finite
 theorem, the open requirement, and the proved equivalence between the open
@@ -53,10 +53,10 @@ For each reading, record:
 - what they still cannot locate after reading; and
 - what they would remove first.
 
-The paper remains under a twelve-page ceiling, matching the 48,000-byte
+The paper remains under a twelve-page ceiling, matching the 50,000-byte
 source budget in `scripts/check_architecture_guide.py` (raised from 40,000 by
 maintainer decision, July 2026, to admit the example-instantiated assurance,
-coverage, and reuse material). Prefer removing duplication,
+coverage, and reuse material, then the cold-reader repairs). Prefer removing duplication,
 making one worked example more concrete, and clarifying authority over adding
 terminology, counts, scripts, or new claims of importance. A revision is not
 ready merely because the TeX compiles: render every page, inspect the diagram
