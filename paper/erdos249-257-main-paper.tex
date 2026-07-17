@@ -1908,15 +1908,29 @@ complementary term is discarded or assigned a conjectural sign.
 
 \begin{proposition}[diagonal pincer decomposition]\label{res:pincer}
 For every $t$, diagonal integrality is equivalent to the foreign diagonal
-defect meeting the full target.  Consequently, full-target avoidance at
-unbounded scales implies irrationality of $S$.
+defect meeting the full target.
 \end{proposition}
-\noindent Formalised:
-\lword{DiagonalPincerDecomposition.lean}{215}{diagonal_int_iff_foreignDiagonalDefect_hits_fullTarget}{full-target equivalence}
-and
+\noindent This is the
+\lword{DiagonalPincerDecomposition.lean}{215}{diagonal_int_iff_foreignDiagonalDefect_hits_fullTarget}{full-target equivalence}.
+
+\begin{corollary}[exact full-target avoidance characterisation]
+\label{res:fulltargetavoidance}
+The following are equivalent:
+\[
+\begin{aligned}
+ &S\notin\Q;\\
+ &\forall\,t_0\in\N\ \exists\,t\geq t_0,\qquad
+   \neg\textsf{FullTargetHit}(t).
+\end{aligned}
+\]
+\end{corollary}
+\noindent The reverse implication is the
 \lword{DiagonalPincerDecomposition.lean}{290}{irrational_totientSeries_of_full_target_avoidance_supply}{unbounded target-avoidance criterion}.
-The proposition is an exact reduction; the unbounded avoidance hypothesis is
-still open.
+For the forward implication, Theorem~\ref{res:diag} supplies cofinally many
+non-integral diagonal differences, and
+Proposition~\ref{res:pincer} converts each one into a missed full target.
+Thus the proposition is the fixed-scale equivalence and the corollary is its
+exact global consumer.  The cofinal avoidance statement remains open.
 
 Two algebraic inputs make this interval test explicit.  First, truncate the
 M\"obius-square identity of Proposition~\ref{res:lens} after $D$ terms.  The
@@ -1942,6 +1956,8 @@ more than the proved tail bound forces target avoidance.
 \lword{SquaredMersenneDiagonalEnclosure.lean}{116}{scaleDiagonalTailDifference_sub_lambertProjectedDiagonal}{squared-Mersenne tail identity}
 and
 \lword{SquaredMersenneDiagonalEnclosure.lean}{237}{scaleFullTarget_miss_of_lambert_projected_separation}{Lambert-projected separation criterion}.
+The enclosure is one-way: separation at a chosen truncation forces target
+avoidance, but target avoidance is not asserted to force that separation.
 
 \subsection{Finite projections and verified instances}
 
@@ -2057,6 +2073,9 @@ implies that \(S\) is irrational.
 \lword{DiagonalFreshLossBridge.lean}{61}{diagonalFreshLossResidueCert_iff_projectionCert}{residue--projection equivalence}
 and
 \lword{DiagonalFreshLossBridge.lean}{191}{irrational_totientSeries_of_diagonalFreshLossProjectionSupply}{unbounded projection criterion}.
+The finite equivalence is only between the residue inequality and the
+projection certificate.  Neither condition is asserted to be necessary for
+full-target avoidance or for irrationality.
 The stronger adjacent-suffix supplies formalised in the same module imply the
 displayed cofinal supply; they are not additional conclusions of one finite
 certificate.

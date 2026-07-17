@@ -56,7 +56,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "Erd\\H{o}s \\#249",
-    "line": 2748
+    "line": 2767
    }
   },
   {
@@ -67,7 +67,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "unbounded certificate supply",
-    "line": 2759
+    "line": 2778
    }
   },
   {
@@ -78,7 +78,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "the half-value counterexample route",
-    "line": 2775
+    "line": 2794
    }
   },
   {
@@ -89,7 +89,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "universal Erd\\H{o}s \\#257",
-    "line": 2766
+    "line": 2785
    }
   }
  ],
@@ -286,8 +286,8 @@
   {
    "id": "diagonal_pincer_reduction",
    "status": "conditional reduction",
-   "statement": "At each lcm-diagonal scale, integrality is equivalent to a foreign-defect term landing in an explicit full-target interval. Avoidance at unbounded scales implies irrationality; that unbounded supply is not proved.",
-   "paper_label": "res:pincer",
+   "statement": "At each lcm-diagonal scale, integrality is equivalent to a foreign-defect term landing in an explicit full-target interval. Globally, S is irrational if and only if the full target is avoided at arbitrarily large diagonal scales; that cofinal avoidance is not proved.",
+   "paper_label": "res:fulltargetavoidance",
    "declarations": [
     {
      "name": "diagonal_int_iff_foreignDiagonalDefect_hits_fullTarget",
@@ -554,18 +554,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_appendixC_target_avoidance_direction_audit",
+   "id": "main_paper_section8_scalar_direction_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "Appendix C can understate which target-avoidance supplies inherit a reverse implication from pointwise certificate completeness and which finite projection or separation criteria remain genuinely one-way",
-   "statement": "Audit the full-target, fresh-loss, enclosure, and scalar criteria in Appendix C, separating exact global characterisations from one-way finite producers."
+   "defect_class": "Section 8 juxtaposes exact scalar equivalences, sufficient cofinal consumers, and finite-prefix checks, so the displayed dependency arrows must agree with the formal quantifiers",
+   "statement": "Audit the strict-jump slack and second-channel results in Section 8, separating local equivalence, global sufficient conditions, and verified finite prefixes."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "a16aa24af5236b6508a34b8a4c4b41fdcf620a98",
-  "committed_navigation_snapshot": "0960f4885f765578168077ecf9f0e9e590e7efc6",
-  "main_paper_source_digest": "sha256:22d889abf30fa896e0dca6b74355c788714ed91bf96a44a53a1cdb4b780c8881"
+  "committed_navigation_snapshot": "b4a35e3dc6e6ac505983a9265d90960c8d2bb2c0",
+  "main_paper_source_digest": "sha256:05a043bd0cd255f119d543aa51d973c0a7ace25cfe3cb7af72298f81d8b9f488"
  },
  "reading_routes": [
   {

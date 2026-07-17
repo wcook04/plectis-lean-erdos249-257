@@ -36,20 +36,20 @@
 "authority_role": "proof_bearing_committed_source_anchor"
 },
 "navigation_snapshot": {
-"commit": "0960f4885f765578168077ecf9f0e9e590e7efc6",
+"commit": "b4a35e3dc6e6ac505983a9265d90960c8d2bb2c0",
 "authority_role": "machine_readable_navigation_anchor",
 "publication_state": "main_history_snapshot",
 "published_ref": "main",
-"repository_resolution": "https://github.com/wcook04/plectis-lean-erdos249-257/tree/0960f4885f765578168077ecf9f0e9e590e7efc6"
+"repository_resolution": "https://github.com/wcook04/plectis-lean-erdos249-257/tree/b4a35e3dc6e6ac505983a9265d90960c8d2bb2c0"
 },
 "content": {
 "machine_readable_paper": {
 "path": "docs/claims.json::machine_readable_paper",
-"content_digest": "sha256:71bb523f6312749c5d28f125a79c1b2cd0be74758792bd36c0329d551cdd343c"
+"content_digest": "sha256:e196a16d65b7a66783fc3c45b508a6ec888b05888e7eec63b71dd980685cad68"
 },
 "claims_document": {
 "path": "docs/claims.json",
-"content_digest": "sha256:1eddbfa5af691f1df1e6b33efae7eb2d6e3295f9d855e8f330cf0bde70fe3300"
+"content_digest": "sha256:58166379f6dcea0aeac8ee0ca5d8a26eb0828b59d4af8a02f82e48558fc058b2"
 },
 "declaration_atlas": {
 "path": "docs/declaration_atlas.json",
@@ -62,13 +62,13 @@
 },
 "bounded_orientation": {
 "path": "docs/orientation.json",
-"content_digest": "sha256:82ef3d55a05dc45b8f4609aad5f371f7aaebb8bc4061fd78dbfe477b287e2306"
+"content_digest": "sha256:56b5bfa2314a0dbca7a586aff2b5c569a776aafbe3079e2a92b76d79268c3ef4"
 },
 "human_exposition": {
 "source_path": "paper/erdos249-257-main-paper.tex",
-"source_content_digest": "sha256:22d889abf30fa896e0dca6b74355c788714ed91bf96a44a53a1cdb4b780c8881",
+"source_content_digest": "sha256:05a043bd0cd255f119d543aa51d973c0a7ace25cfe3cb7af72298f81d8b9f488",
 "rendered_path": "erdos249-257-main-paper.pdf",
-"rendered_content_digest": "sha256:98e6c62ee8412217df87b1419e6d7ad824f3eaf3008b4c02da32e2e7600469e3",
+"rendered_content_digest": "sha256:848139d754a8ef36ab980f22c3795bdaa77dc238e099311a0dc52acf28e31b53",
 "artifact_role": "authored_mathematician_facing_exposition",
 "authority_posture": "authored_editorial_surface_not_Lean_proof_authority"
 },
@@ -339,8 +339,8 @@
 {
 "id": "diagonal_pincer_reduction",
 "status": "conditional reduction",
-"statement": "At each lcm-diagonal scale, integrality is equivalent to a foreign-defect term landing in an explicit full-target interval. Avoidance at unbounded scales implies irrationality; that unbounded supply is not proved.",
-"paper_label": "res:pincer",
+"statement": "At each lcm-diagonal scale, integrality is equivalent to a foreign-defect term landing in an explicit full-target interval. Globally, S is irrational if and only if the full target is avoided at arbitrarily large diagonal scales; that cofinal avoidance is not proved.",
+"paper_label": "res:fulltargetavoidance",
 "declarations": [
 {
 "name": "diagonal_int_iff_foreignDiagonalDefect_hits_fullTarget",
@@ -478,7 +478,7 @@
 "source": "paper/erdos249-257-main-paper.tex",
 "environment": "problem",
 "title": "Erd\\H{o}s \\#249",
-"line": 2748
+"line": 2767
 }
 },
 {
@@ -489,7 +489,7 @@
 "source": "paper/erdos249-257-main-paper.tex",
 "environment": "problem",
 "title": "unbounded certificate supply",
-"line": 2759
+"line": 2778
 }
 },
 {
@@ -500,7 +500,7 @@
 "source": "paper/erdos249-257-main-paper.tex",
 "environment": "problem",
 "title": "the half-value counterexample route",
-"line": 2775
+"line": 2794
 }
 },
 {
@@ -511,7 +511,7 @@
 "source": "paper/erdos249-257-main-paper.tex",
 "environment": "problem",
 "title": "universal Erd\\H{o}s \\#257",
-"line": 2766
+"line": 2785
 }
 }
 ],
@@ -1757,7 +1757,7 @@
 "expansion": {
 "machine_readable_paper": {
 "path": "docs/claims.json::machine_readable_paper",
-"expected_content_digest": "sha256:71bb523f6312749c5d28f125a79c1b2cd0be74758792bd36c0329d551cdd343c",
+"expected_content_digest": "sha256:e196a16d65b7a66783fc3c45b508a6ec888b05888e7eec63b71dd980685cad68",
 "contains": [
 "all_claims",
 "authored_argument_graph",
@@ -1781,9 +1781,9 @@
 },
 "human_exposition": {
 "source_path": "paper/erdos249-257-main-paper.tex",
-"expected_source_content_digest": "sha256:22d889abf30fa896e0dca6b74355c788714ed91bf96a44a53a1cdb4b780c8881",
+"expected_source_content_digest": "sha256:05a043bd0cd255f119d543aa51d973c0a7ace25cfe3cb7af72298f81d8b9f488",
 "rendered_path": "erdos249-257-main-paper.pdf",
-"expected_rendered_content_digest": "sha256:98e6c62ee8412217df87b1419e6d7ad824f3eaf3008b4c02da32e2e7600469e3",
+"expected_rendered_content_digest": "sha256:848139d754a8ef36ab980f22c3795bdaa77dc238e099311a0dc52acf28e31b53",
 "authority_posture": "authored_editorial_surface_not_Lean_proof_authority"
 },
 "technical_companion": {

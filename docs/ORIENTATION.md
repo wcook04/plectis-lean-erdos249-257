@@ -89,7 +89,7 @@ programmes, and source owners without loading the exhaustive graph.
 | `certificate_reduction` | conditional reduction | `res:diag` | `irrational_totient_series_of_certificate_supply` in `Erdos249257/TotientTailPeriodKiller.lean:394` |
 | `certificate_completeness` | proved here | `res:complete` | `exists_certifiedKill_iff_tail_diff_notMem_int` in `Erdos249257/LcmConeFlatness.lean:316` |
 | `certified_kill_instances` | verified finite instance | `res:deposits` | `certifiedKill_all_small` in `Erdos249257/TotientTailPeriodKiller.lean:404` |
-| `diagonal_pincer_reduction` | conditional reduction | `res:pincer` | `diagonal_int_iff_foreignDiagonalDefect_hits_fullTarget` in `Erdos249257/DiagonalPincerDecomposition.lean:215` |
+| `diagonal_pincer_reduction` | conditional reduction | `res:fulltargetavoidance` | `diagonal_int_iff_foreignDiagonalDefect_hits_fullTarget` in `Erdos249257/DiagonalPincerDecomposition.lean:215` |
 | `adelic_height_obstruction` | proved here | `res:adelic` | `scalarLocalization_complement_dvd` in `Erdos249257/AdelicHeightObstruction.lean:23` |
 | `sublog_zero_windows` | proved here | `res:sublog` | `supportCoeffZeroWindow_length_le_eps_logb_add` in `Erdos249257/SublogDivisorCoverage.lean:392` |
 | `greedy_achievement_geometry` | formalised here | `res:greedy` | `volume_mersenneAchievementSet` in `Erdos249257/GreedyAchievementSet.lean:996` |

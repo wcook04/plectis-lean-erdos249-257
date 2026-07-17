@@ -907,15 +907,15 @@
         "schema": "erdos249257-editorial-state/1",
         "scope": "continuous_whole_main_paper_exposition",
         "current_priority": {
-          "id": "main_paper_appendixC_target_avoidance_direction_audit",
+          "id": "main_paper_section8_scalar_direction_audit",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "defect_class": "Appendix C can understate which target-avoidance supplies inherit a reverse implication from pointwise certificate completeness and which finite projection or separation criteria remain genuinely one-way",
-          "statement": "Audit the full-target, fresh-loss, enclosure, and scalar criteria in Appendix C, separating exact global characterisations from one-way finite producers."
+          "defect_class": "Section 8 juxtaposes exact scalar equivalences, sufficient cofinal consumers, and finite-prefix checks, so the displayed dependency arrows must agree with the formal quantifiers",
+          "statement": "Audit the strict-jump slack and second-channel results in Section 8, separating local equivalence, global sufficient conditions, and verified finite prefixes."
         },
         "last_verified_wave": {
-          "id": "main_paper_section5_exact_diagonal_characterisation",
+          "id": "main_paper_appendixC_target_avoidance_direction_repair",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "result": "Upgraded the lcm-diagonal certificate supply from a merely sufficient corollary to its exact equivalence with irrationality, using pointwise certificate completeness for the forward direction and the existing diagonal-supply theorem for the reverse direction."
+          "result": "Separated fixed-scale full-target equivalence from its exact cofinal characterisation, while explicitly retaining squared-Mersenne separation and fresh-loss projection as one-way sufficient producers."
         },
         "active_inconsistencies": [],
         "blocked_decisions": []
@@ -7512,7 +7512,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 2748
+        "line": 2767
       }
     },
     {
@@ -7523,7 +7523,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 2759
+        "line": 2778
       }
     },
     {
@@ -7534,7 +7534,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "the half-value counterexample route",
-        "line": 2775
+        "line": 2794
       }
     },
     {
@@ -7545,7 +7545,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 2766
+        "line": 2785
       }
     }
   ],
@@ -9158,11 +9158,11 @@
       "id": "diagonal_pincer_reduction",
       "label": "Exact full-target reduction on the lcm diagonal",
       "status": "conditional reduction",
-      "statement": "At each lcm-diagonal scale, integrality is equivalent to a foreign-defect term landing in an explicit full-target interval. Avoidance at unbounded scales implies irrationality; that unbounded supply is not proved.",
+      "statement": "At each lcm-diagonal scale, integrality is equivalent to a foreign-defect term landing in an explicit full-target interval. Globally, S is irrational if and only if the full target is avoided at arbitrarily large diagonal scales; that cofinal avoidance is not proved.",
       "remaining_open_proposition_ids": [
         "remaining_open.unbounded_certificate_supply"
       ],
-      "paper_label": "res:pincer",
+      "paper_label": "res:fulltargetavoidance",
       "readme_headline": true,
       "declarations": [
         {
