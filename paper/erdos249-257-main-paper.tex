@@ -17,9 +17,9 @@
 \usepackage[dvipsnames]{xcolor}
 \usepackage[colorlinks=true,linkcolor=black,urlcolor=RoyalBlue,citecolor=black]{hyperref}
 \hypersetup{
-  pdftitle={Tail Certificates and Achievement-Set Geometry: Lean-checked exact reductions for Erdős Problems 249 and 257},
+  pdftitle={Tail Certificates and Achievement-Set Geometry: Lean-checked exact reductions for Erdős 249 and the half-value branch of Erdős 257},
   pdfauthor={Will Cook},
-  pdfsubject={Main gateway paper for the Erdős 249/257 Lean formalisation},
+  pdfsubject={Main expository paper for the Erdős 249/257 Lean formalisation},
 }
 
 % ---------------------------------------------------------------------------
@@ -28,7 +28,9 @@
 % the repository verifies that it matches docs/claims.json and that every
 % \lref/\lrefx/\lword/\lloc target resolves to the named declaration at that line.
 % ---------------------------------------------------------------------------
-\newcommand{\commit}{b862cb72674fd6ecb3e31e33604051e729281d6d}
+% RELEASE BLOCKER: replace this sentinel with the pushed source commit that contains every linked declaration.
+\newcommand{\commit}{c2c5c3f0151d58c3d8f21843a9fffead4b27f8e3}
+\newcommand{\commitshort}{c2c5c3f0151d}
 \newcommand{\repobase}{https://github.com/wcook04/plectis-lean-erdos249-257/blob/\commit}
 \newcommand{\sourceurl}{https://github.com/wcook04/plectis-lean-erdos249-257/tree/\commit}
 \newcommand{\rootbase}{https://github.com/wcook04/plectis-lean-erdos249-257/blob/main}
@@ -71,6 +73,7 @@
 \newtheorem*{remark}{Remark}
 
 \newcommand{\N}{\mathbb{N}}
+\newcommand{\Npos}{\mathbb{N}_{>0}}
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\Q}{\mathbb{Q}}
 \newcommand{\R}{\mathbb{R}}
@@ -80,7 +83,7 @@
 \newcommand{\Qzero}{Q_0}
 
 \title{\vspace{-4em}Tail Certificates and Achievement-Set Geometry\\
-{\large Lean-checked exact reductions for Erd\H{o}s Problems 249 and 257}}
+{\large Lean-checked exact reductions for Erd\H{o}s~\#249 and the half-value branch of Erd\H{o}s~\#257}}
 \author{Will Cook \qquad July 2026}
 \date{}
 
@@ -90,7 +93,7 @@
 
 \begin{abstract}
 \noindent
-We place two open irrationality questions in exact finite-to-cofinal form.
+We place Erd\H{o}s~\#249 and the distinguished half-value counterexample route to Erd\H{o}s~\#257 in exact finite-to-cofinal form; the universal \#257 assertion itself is not reduced to this chain.
 For the totient constant
 $S=\sum_{n\ge1}\ph(n)/2^n$, one certified Farey window excludes every rational
 representation $S=p/q$ with
@@ -103,22 +106,25 @@ up to \(t=64\) at which the lcm diagonal changes (including the initial scale);
 this is finite evidence only, and the cofinal supply is open.
 A CRT--Dirichlet construction also gives exact dyadic totient-kernel rank
 $2^e+1$ at every level, so the full kernel span is infinite-dimensional.
-Rationality would force a tempered carry of rank at least $2^e-1$ at every
-level; no upper bound is known, so this does not prove irrationality.
+Rationality would supply a positive-multiplier tempered integral carry orbit
+whose canonical level-$e$ carry-section span has dimension at least $2^e-1$
+for every $e$; no upper bound is known, so this does not prove irrationality.
 
 For Erd\H{o}s~\#257, we formalise Erd\H{o}s's classical theorem for full
 support in every base and several structured-support cases.  At base \(2\)
 we prove exact achievement-set geometry and necessary carry and gap
 constraints on hypothetical rational infinite supports.  In particular,
-rationality forces the divisor-count coefficient's zero windows to have
-length $o(\log N)$, uniformly in the support.  Membership of
+if $X_A=p/(2^c v)$, then for every $\varepsilon>0$ every zero window after
+$c+N$ has length at most $\varepsilon\log_2(N+1)+B_{\varepsilon,c,v}$,
+uniformly in $A,p,N$ and the window.  Membership of
 \(1/2\), which would refute the universal statement, is exactly equivalent to
 infinitely many greedy skips.  Nonmembership is exactly equivalent to an
 eventually right integer seam, a finite fatal gap, and a final greedy skip.
 
 The current final-skip route excludes the upper transition and middle
-coordinate \(-3\), but still has two final-skip obligations: exclude
-\(-2,-1\) and prove the future-tail inequality.  An unbounded certificate
+coordinate \(-3\), but one global tail-dominance hypothesis remains: on
+negative coordinates it includes excluding \(-2,-1\), and on the remaining
+nonnegative coordinates it is the future-tail inequality.  An unbounded certificate
 supply for \#249 and cofinal terminal zeros for \#257 are not proved.  The
 universal \#257 statement and half-value membership remain open.  Neither
 problem is settled.
@@ -133,6 +139,11 @@ $A\subseteq\N$ (\#257).  The formulations occur in the Erd\H{o}s--Graham
 collection and Erd\H{o}s's later survey~\cite{erdosgraham1980,erdos1988};
 the numbering follows the maintained catalogue~\cite{erdosproblems}.
 
+Throughout, \(\N=\{0,1,2,\ldots\}\) and
+\(\Npos=\{1,2,3,\ldots\}\).  Supports for \#257 are subsets of
+\(\Npos\); allowing the exponent \(0\) would introduce the undefined
+denominator \(2^0-1\).
+
 For \#257, an infinite support summing to $1/2$ would refute the universal
 claim.  Neither endpoint is proved.  In both open spines, tail and carry identities
 separate exact finite arithmetic from one analytic or combinatorial
@@ -143,6 +154,9 @@ cofinality statement.
 The totient \(\ph(n)\) is Euler's totient.  A \emph{support} selects terms;
 its \emph{achievement set} contains the resulting sums.  \emph{Cofinally}
 means beyond every bound.
+Below, a \emph{spine} means only a displayed chain of mathematical
+equivalences or implications leading to one open quantified statement.  It
+does not denote a software component or an additional theorem.
 
 The totient constant also has the elementary probabilistic form
 \[
@@ -168,6 +182,38 @@ quantifier pattern is the reason for treating the problems together; it is
 an architectural comparison, not a common theorem connecting their
 arithmetic mechanisms.
 
+\begin{center}
+\small
+\begin{tabular}{@{}
+  >{\raggedright\arraybackslash}p{0.27\linewidth}
+  >{\raggedright\arraybackslash}p{0.20\linewidth}
+  >{\raggedright\arraybackslash}p{0.45\linewidth}@{}}
+\toprule
+Question or result & Status & What has actually been proved \\
+\midrule
+Irrationality in \#249 & Open & No proof of \(S\notin\Q\) is claimed. \\
+Denominator exclusion & Proved & If \(S=p/q\), then \(q>\Qzero\). \\
+Tail and lcm-diagonal forms & Exact equivalences & Either certificate supply is equivalent to \(S\notin\Q\); the supply itself is open. \\
+Diagonal computations through \(t=64\) & Finite evidence & Lean checks the 28 lcm-height changes in that range; this is not a cofinal theorem. \\
+Universal assertion in \#257 & Open & No proof covers every infinite support. \\
+Full and structured supports & Proved cases & Classical full-support irrationality and several restricted support families are formalised. \\
+Rational-support carry laws & Necessary conditions & Any hypothetical rational support must satisfy the stated orbit, gap, mass, and unbounded-state constraints. \\
+Membership of \(1/2\) & Open & Membership would give an infinite rational support and refute universal \#257. \\
+Greedy and final-skip forms of \(1/2\) & Exact equivalences & They identify the missing cofinal event but do not prove that it occurs. \\
+Rank-26 final-middle sieve & Conditional reduction & The orbit restrictions and the exact count of 412 surviving phases are proved; the survivors are not excluded. \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\paragraph{What ``Lean-checked'' means here.}
+A linked theorem statement has a proof term accepted by Lean from the pinned
+source and dependencies.  An exact equivalence remains an equivalence even
+when both sides are open; a finite calculation remains finite; and a theorem
+with a rationality hypothesis does not prove that a rational support exists.
+The manuscript, its link checker, and its generated indexes help a reader find
+the proof but are not themselves proof authority.  The release section states
+the additional source-pin and trust checks required for a reproducible copy.
+
 \paragraph{Principal results and contribution.}
 Four theorem families carry the paper:
 \begin{enumerate}[label=\textup{(\roman*)},leftmargin=2.2em]
@@ -184,22 +230,20 @@ Theorems~\ref{res:halfmembership} and~\ref{res:fatalright}, with the residual
 obligations in Proposition~\ref{res:finalskipexclusions} and
 Corollary~\ref{res:taildominance}.
 \end{enumerate}
-Statuses: \textbf{\mbox{Unconditional}} exact progress includes
-the denominator bound, infinite dyadic-kernel rank, and the rational-support
-constraints; \textbf{\mbox{Exact reductions}} are equivalences with open
-global producers; and \textbf{\mbox{Classical}} are known support theorems
-formalised here.  The 28 diagonal rows remain finite evidence, and both
-endpoints remain open.
+The table above separates proved results, exact reformulations, conditional
+implications, finite evidence, and open endpoints.  In particular, the 28
+diagonal rows remain finite evidence, and both endpoints remain open.
 
 These results are proved here without a priority claim.  The main article is
-the gateway; appendices carry auxiliary and audit material.  Neither
-evidence nor an exact reduction supplies a global producer.
+the expository entry point; appendices carry auxiliary and audit material.
+Neither evidence nor an exact reduction supplies the missing unbounded
+witness family.
 The exact half-value counterexample spine uses that a finite normalised
 support cannot have value $1/2$; no unbounded supply is proved.
 
 \paragraph{Reading map.}
 Section~\ref{sec:spines} gives the exact spines, Section~\ref{sec:ladder} their
-common coordinates, and Sections~\ref{sec:eb}--\ref{sec:further} the results,
+common coordinates, and Sections~\ref{sec:eb} and~\ref{sec:249} the results,
 verification, and frontiers.  Appendices~\ref{app:half-technical}
 and~\ref{sec:carry} contain the local half-value and carry arguments; later
 appendices treat the totient certificate and Lambert structure.  Linked
@@ -270,7 +314,7 @@ nor the verified diagonal instances discharge this quantifier.
 
 Let
 \[
-  \mathcal A=\left\{\sum_{n\in A}\frac1{2^n-1}:A\subseteq\N,\ 0\notin A\right\}.
+  \mathcal A=\left\{\sum_{n\in A}\frac1{2^n-1}:A\subseteq\Npos\right\}.
 \]
 
 \paragraph{Exact reduction and finite exclusion.}
@@ -640,7 +684,7 @@ direction, not yet a contradiction.
 
 \subsection{Rigidity of a hypothetical rational support}
 
-For \(A\subseteq\N\setminus\{0\}\), define
+For \(A\subseteq\Npos\), define
 \[
  f_A(m)=\#\{a\in A:a\mid m\},
  \qquad
@@ -661,16 +705,19 @@ Then \(u_N=vT_{f_A}(c+N)\) is a positive integer for every \(N\), and
  u_{N+1}+v f_A(c+N+1)=2u_N. \tag{4.1}
 \]
 \end{theorem}
-\noindent This is the exact carry recurrence forced by rationality; its
-tail-orbit normal form is Theorem~\ref{res:rigidity}.
+\noindent This is formalised by
+\lword{RationalSupportCarrySkeleton.lean}{668}{exists_shifted_odd_tail_nat_states_of_support_fraction}{the shifted natural-state theorem}.
+It is the exact carry recurrence forced by rationality; its tail-orbit normal
+form is Theorem~\ref{res:rigidity}.
 
 \begin{corollary}[unbounded-state consequence]
 \label{res:rigidity-unbounded-main}
 Under the hypotheses of Theorem~\ref{res:rigidity-main}, if \(A\) is
 infinite, then \((u_N)\) is unbounded.
 \end{corollary}
-\noindent This is Theorem~\ref{res:unbounded}; it rules out every bounded-state
-model for an infinite rational support.
+\noindent This is formalised by
+\lword{RationalSupportCarrySkeleton.lean}{2377}{exists_unbounded_shifted_odd_tail_nat_state_of_support_fraction}{the fraction-facing unbounded-state theorem};
+see also Theorem~\ref{res:unbounded}.
 
 \begin{corollary}[sublogarithmic coverage consequence]
 \label{res:rigidity-sublog-main}
@@ -682,8 +729,9 @@ Under the hypotheses of Theorem~\ref{res:rigidity-main}, for every
  \ell\leq\varepsilon\log_2(N+1)+B;
 \]
 \end{corollary}
-\noindent This is Theorem~\ref{res:sublog}; it prevents logarithmically long
-gaps in divisor coverage.
+\noindent This is formalised by
+\lword{SublogDivisorCoverage.lean}{392}{supportCoeffZeroWindow_length_le_eps_logb_add}{the sublogarithmic zero-window theorem};
+see also Theorem~\ref{res:sublog}.
 
 \begin{corollary}[odd-denominator reciprocal-mass consequence]
 \label{res:rigidity-mass-main}
@@ -697,14 +745,18 @@ Under the hypotheses of Theorem~\ref{res:rigidity-main}, if
 where \(w\) is the number of wraps in one doubling-residue cycle and
 \(u_N=ve_N+(p2^N\bmod v)\).  If \((p,v)=1\), then \(w\geq1\).
 \end{corollary}
-\noindent This is Proposition~\ref{res:orderwrap}.
+\noindent The exact excess-mean identity is
+\lword{RationalSupportCarrySkeleton.lean}{1577}{exists_shifted_oddTailExcess_mean_of_support_fraction}{the shifted excess-mean theorem};
+see also Proposition~\ref{res:orderwrap}.
 
 \begin{corollary}[dyadic reciprocal-mass consequence]
 \label{res:rigidity-dyadic-mass-main}
 Under the hypotheses of Theorem~\ref{res:rigidity-main}, if \(v=1\) and
 \(A\) is infinite, then either \(\rho(A)\) diverges or \(\rho(A)>1\).
 \end{corollary}
-\noindent This is Corollary~\ref{res:collision}.
+\noindent This is formalised by
+\lword{RationalSupportCarrySkeleton.lean}{2200}{dyadic_support_fraction_reciprocalMass_diverges_or_gt_one}{the dyadic reciprocal-mass alternative};
+see also Corollary~\ref{res:collision}.
 
 These are four independent necessary consequences of the common rationality
 premise, not steps in a proof chain and not a contradiction.
@@ -712,6 +764,24 @@ Appendices~\ref{app:carry-normal-form}--\ref{app:carry-boolean} supply the
 common recurrence and Boolean certificate; Appendices~\ref{app:carry-sublog}
 and~\ref{app:carry-mass} supply the independent filters.  No corollary above
 is used to prove another.
+
+\begin{corollary}[exact Boolean--M\"obius obstruction for universal \#257]
+\label{res:universal-boolean-obstruction}
+The universal assertion in Erd\H{o}s~\#257 is equivalent to the following
+orbit statement: for every rational number \(p/q\), every
+Boolean--M\"obius carry certificate for \(p/q\) reconstructs a finite
+support.  Equivalently, the universal assertion fails exactly when one such
+certificate reconstructs an infinite support.
+\end{corollary}
+\noindent Here a certificate is the positive, square-root-bounded integral
+orbit with divisibility and Boolean M\"obius conditions stated in
+Theorem~\ref{res:carrycert}.  That theorem is the Lean-checked
+fraction-by-fraction equivalence
+\lword{BooleanMobiusCarry.lean}{948}{exists_normalized_support_fraction_iff_exists_booleanMobiusCarry}{between supports and carry certificates};
+the corollary merely quantifies it over \(p/q\) and separates finite from
+infinite reconstructed supports.  This is an exact obstruction, not a finite
+algorithm: the orbit condition and the support it reconstructs are infinite
+objects.
 
 \subsection{The target \(1/2\)}
 
@@ -778,7 +848,7 @@ No finite normalised support has value \(1/2\).
 \begin{corollary}[counterexample from half-membership]\label{res:halfcounterexample}
 Any one of the equivalent conditions in
 Theorem~\ref{res:halfmembership} produces an infinite support
-\(A\subseteq\N\setminus\{0\}\) with \(X_A=1/2\), and therefore refutes the
+\(A\subseteq\Npos\) with \(X_A=1/2\), and therefore refutes the
 universal form of Erd\H{o}s~\#257.
 \end{corollary}
 \noindent This combines the unique greedy support from
@@ -1265,27 +1335,29 @@ the right-tail branch or the remaining two middle cells.
 
 \paragraph{Second final-middle cell.}  The next cell, with transition carry
 $-2$, is not yet eliminated, but its possible phase is sharply constrained.
-Uniformly for seam rows $s\ge26$, the greedy decisions through rank $21$
+Uniformly for seam rows $s\ge27$, the greedy decisions through rank $26$
 select exactly the ranks
 \[
-  2,3,6,7,14,20,21,
+  2,3,6,7,14,20,21,26,
 \]
 by
-\lword{HalfFinalMiddlePhaseSieve.lean}{959}{seamGreedyBits_head2367_14_20_21}{the exact rank-(21) prefix}.
-Consequently, if a putative last skipped rank $D\ge26$ lies in this middle
+\lword{HalfFinalMiddlePhaseSieve.lean}{1190}{seamGreedyBits_head2367_14_20_21_26}{the exact rank-(26) prefix}.
+Consequently, if a putative last skipped rank $D\ge27$ lies in this middle
 cell and is followed by an all-right suffix, then
 \[
- D\bmod 21\in\{11,14,17,20\},\qquad D\bmod10\ne8,
+ D\bmod21\in\{11,14,17,20\},\qquad D\bmod10\ne8,
+ \qquad D\bmod13\ne11,
 \]
-and the class $D\bmod10=7$ cannot pair with $D\bmod21=11$.
-Thus only $35$ of the $210$ joint residue classes
-survive,
-\lword{HalfFinalMiddlePhaseSieve.lean}{1499}{finalMiddleCell_neg_two_forces_phase_refinement_through_twentyOne}{the final-middle phase sieve}.
+the class $D\bmod10=7$ cannot pair with $D\bmod21=11$, and the class
+$D\bmod13=10$ cannot pair with $D\bmod21=11$.  The orbit theorem is
+\lword{HalfFinalMiddlePhaseSieve.lean}{1913}{finalMiddleCell_neg_two_forces_phase_refinement_through_twentySix}{the final-middle phase sieve}.
+Exactly $412$ of the $2730$ joint residue classes survive; this separate finite count is
+\lword{HalfFinalMiddlePhaseSieve.lean}{2050}{finalMiddleTwentySixPhaseSurvivors_card}{the exact survivor count}.
 This is a uniform exact reduction of the $-2$ cell, not its exclusion; the
 surviving phases, the $-1$ cell, and the right-tail branch remain open.
 
 The remaining global reduction is now precise.  If every genuine middle
-transition other than that discharged cell has transition carry larger than
+transition other than the already discharged $C_D=-3$ cell has transition carry larger than
 its complete future divisor-incidence tail, then an eventual right seam is
 impossible and $1/2$ belongs to the Mersenne achievement set:
 \lword{HalfCylinderLastProducerContradiction.lean}{387}{half_mem_mersenneAchievementSet_of_middleProducerTailEscapeExceptNegThree}{middle-tail implication}.
@@ -1296,9 +1368,11 @@ Neither hypothesis is supplied here.
 For finite seam prefixes the remaining tail bound sharpens further: the
 future divisor-incidence tail is bounded by the cardinality of the prefix.
 Thus the explicit row-scale inequality
-\(|c|+\mathrm{belowPulse}+5<4\,\mathrm{remainder}\) is sufficient for
-the same half-membership conclusion,
-\lword{HalfCylinderMiddleCarryLowerBound.lean}{1503}{half_mem_mersenneAchievementSet_of_middleProducerCardEscape}{prefix-cardinality bound};
+\(\#G_D+\mathrm{belowPulse}_D+5<4\,\mathrm{remainder}_D\) is sufficient for
+the same half-membership conclusion.  The hypothesis is
+\lword{HalfCylinderMiddleCarryLowerBound.lean}{111}{SeamMiddleProducerCardEscape}{the cardinality escape condition},
+and its membership consumer is
+\lword{HalfCylinderMiddleCarryLowerBound.lean}{1503}{half_mem_mersenneAchievementSet_of_middleProducerCardEscape}{the prefix-cardinality bound};
 it is enough in turn that every late middle remainder is at least its row,
 \lword{HalfCylinderMiddleCarryLowerBound.lean}{1510}{half_mem_mersenneAchievementSet_of_middleProducerRowEscape}{row-scale sufficient condition}.
 These are exact conditional reductions, not proofs of the row bound.
@@ -1711,7 +1785,7 @@ advance either endpoint beyond the already stated half-achievement problem.
 The two directions remain separate.
 \begin{enumerate}[label=\textup{(\alph*)},leftmargin=2.2em]
 \item The universal problem is to prove \(X_A\notin\Q\) for every infinite
-\(A\subseteq\N\setminus\{0\}\).  Theorem~\ref{res:support} proves several
+\(A\subseteq\Npos\).  Theorem~\ref{res:support} proves several
 families, while Theorem~\ref{res:rigidity-main} and its four corollaries
 constrain a hypothetical rational support.  Neither route supplies the
 universal quantifier.
@@ -1839,10 +1913,11 @@ For $N\ge0$, define the scaled tail
 \[
 R_N \;=\; \sum_{m\ge1}\frac{\ph(N+m)}{2^m}.
 \]
-For $h\ge1$ and $L\ge1$, define
+For $h\in\Npos$ and $N,L\in\N$, define
 \[
 \Delta_{h,N,L}=\sum_{j=0}^{L-1}\big(\ph(N+h+1+j)-\ph(N+1+j)\big)\,2^{\,L-1-j}\in\Z,
 \]
+with the sum empty when \(L=0\),
 and say that $(h,N,L)$ is a \emph{finite certificate} when
 \[
 \mathsf{Sep}(h,N,L):\quad
@@ -1852,20 +1927,28 @@ N+h+L+2 \;<\; \big(\Delta_{h,N,L}\bmod 2^L\big) \;<\; 2^L-(N+h+L+2).
 
 The integer $\Delta_{h,N,L}$ contains the first $L$ binary places of
 $R_{N+h}-R_N$; the two margins bound the omitted tail using
-$\ph(n)\le n$.  Thus the predicate is decidable by finite integer arithmetic,
-while its conclusion concerns the infinite tail difference.
+$\ph(n)\le n$.  Thus each instance of the predicate is decidable by finite
+integer arithmetic, while its conclusion concerns the infinite tail
+difference.  The depth-floor theorem implies that a successful instance has
+\(L>0\), even though the formal existential quantifier ranges over all of
+\(\N\).
 
 \begin{proposition}[certificate completeness]\label{res:complete}
 For every $h\ge1$ and $N\ge0$,
 \[
-\bigl(\exists L\ge1,\ \mathsf{Sep}(h,N,L)\bigr)
+\bigl(\exists L,\ \mathsf{Sep}(h,N,L)\bigr)
 \quad\Longleftrightarrow\quad
 R_{N+h}-R_N\notin\Z.
 \]
 \end{proposition}
 \noindent This is the
 \lword{LcmConeFlatness.lean}{316}{exists_certifiedKill_iff_tail_diff_notMem_int}{certificate-completeness equivalence}.
-Thus the finite predicate loses no information at a fixed pair \((h,N)\).
+Thus the finite predicate loses no information at a fixed pair \((h,N)\).  The certificate depth-floor lemma forces every witness to have positive depth.
+Searching \(L=0,1,2,\ldots\) is therefore a complete positive
+semi-decision procedure for non-integrality at fixed \((h,N)\): it halts
+exactly when the difference is non-integral.  When the difference is integral,
+completeness says that no depth succeeds, so this search does not halt.  It is
+not a two-sided decision procedure for an infinite tail.
 
 \begin{theorem}[pointwise certificate characterisation]
 \label{res:pointwisecomplete}
@@ -1874,7 +1957,7 @@ The following are equivalent:
 \begin{aligned}
  &S\notin\Q,\\
  &\forall\,h\ge1\ \forall\,N\ge0,\qquad R_{N+h}-R_N\notin\Z,\\
- &\forall\,h\ge1\ \forall\,N\ge0\ \exists\,L\ge1,\qquad
+ &\forall\,h\ge1\ \forall\,N\ge0\ \exists\,L,\qquad
       \mathsf{Sep}(h,N,L).
 \end{aligned}
 \]
@@ -1906,16 +1989,16 @@ The following are equivalent:
 \[
 \begin{aligned}
  &S\notin\Q;\\
- &\forall\,t_0\in\N\ \exists\,t\geq t_0\ \exists\,L\geq1,\qquad
+ &\forall\,t_0\in\N\ \exists\,t\geq t_0\ \exists\,L,\qquad
    \mathsf{Sep}(M_t,M_t,L).
 \end{aligned}
 \]
 \end{theorem}
-\noindent The reverse implication is the
-\lword{LcmDiagonalReduction.lean}{112}{irrational_totient_series_of_lcm_diagonal_certificate_supply}{diagonal-supply theorem}.
-For the forward implication, the pointwise equivalence in
-Theorem~\ref{res:pointwisecomplete} supplies a certificate at every diagonal pair,
-so one may take \(t=t_0\).
+\noindent The complete equivalence is the
+\lword{LcmConeFlatness.lean}{426}{irrational_totient_series_iff_lcm_diagonal_certificate_supply}{exact lcm-diagonal characterisation}.
+Its reverse implication reuses the diagonal-supply theorem, while its forward
+implication uses Theorem~\ref{res:pointwisecomplete} at the pair
+\((M_{t_0},M_{t_0})\).
 The theorem replaces the two free parameters \(h,N\) by \((M_t,M_t)\);
 producing that cofinal one-parameter family is still open.
 
@@ -1925,7 +2008,7 @@ Lean checks:
 \item $\mathsf{Sep}(h,12,16)$ for every $1\le h\le8$;
 \item a fixed-window certificate for every $1\le h\le16$;
 \item diagonal certificates $\mathsf{Sep}(M_t,M_t,L)$ at $t=1$ and every
-strict lcm-jump scale through $64$, namely
+lcm-height change endpoint $2\le t\le64$ (that is, $M_{t-1}<M_t$), namely
 \[
 t\in\{1,2,3,4,5,7,8,9,11,13,16,17,19,23,25,27,29,31,32,37,41,43,
 47,49,53,59,61,64\};
@@ -2006,6 +2089,11 @@ refuter can interrogate several cone vertices at once and is sharper than any
 pairwise test.  It refutes the
 single-fractional-part model that rationality predicts on a finite sample
 (\lword{LcmConeNonflat.lean}{126}{exists_nonintegral_pair_of_coneNonflatCert}{finite cone-nonflatness refuter}).
+This finite cone predicate is sound in the direction just stated: a
+certificate produces a non-integral pair and hence contradicts the sampled
+flatness model.  No converse is proved saying that every non-flat finite
+sample, or every irrational value of \(S\), must be detected by this joint
+predicate.  It is therefore a refuter, not a complete decision procedure.
 
 \paragraph{An exact target interval.} The diagonal calculation also admits a
 more local normal form.  Put $H_t=M_t$ and
@@ -2619,17 +2707,19 @@ The Lean~4 proof assistant~\cite{lean} and Mathlib library~\cite{mathlib} check
 the named results.  The source, exact informal-to-formal links, and build
 instructions are available in the
 \href{https://github.com/wcook04/plectis-lean-erdos249-257}{public repository}.
-This paper is tied to an
-\href{\sourceurl}{archived formal-source revision}; every blue mathematical
-caption links directly to the corresponding checked theorem there.  The
-archived link and dependency lock fix the exact source and Mathlib revisions;
-the toolchain pins Lean \texttt{v4.29.1}.
+The supplied draft names formal-source revision \texttt{\commitshort},
+but that revision must be present in the public repository before release.
+Until the source commit is pushed and the source-coordinate checker is rerun,
+the blue links are navigation text rather than a reproducible proof-authority
+route.  The final published revision must also pin the Lean and Mathlib
+versions; the intended toolchain is Lean \texttt{v4.29.1}.
 
 \paragraph{Reproduction commands and artefact identities.}
-From a cold clone at the archived revision, \texttt{lake build} checks the
-supported root import; the documented release-validation command checks the
-claim registry, source coordinates, manuscript anchors, projections, and trust
-guards.  The machine-readable corpus descriptor records SHA-256 identities for
+For release, a cold clone at the published revision must pass \texttt{lake build};
+the release-validation command must then check the claim registry, source
+coordinates, manuscript anchors, projections, trust guards, the rendered PDF,
+and the immutable committed reference.  The supplied rank-26 draft does not
+carry that completed release receipt.  The machine-readable corpus descriptor records SHA-256 identities for
 the claim registry, declaration atlas, manuscript source, rendered PDF, and
 toolchain projections, together with their regeneration commands.  No
 hardware-independent build time is claimed;
@@ -2637,20 +2727,20 @@ elapsed time depends on the Lean cache and machine, and is not part of the
 mathematical claim.
 
 \paragraph{Computational and expository boundary.}
-Every declaration is elaborated and every proof term is checked by the Lean
-kernel.  Finite computations use kernel-checked decision procedures rather
-than an external evaluator.  Generated certificate shards are Lean source and
-are checked by the same kernel; no external certificate dataset is trusted as
-a proof.  The source contains no proof placeholders or project-defined axioms.
-The trusted proof boundary is therefore the pinned Lean kernel together with
-the imported Mathlib axioms and definitions, not the Python release scripts,
-JSON projections, or this manuscript.  Appendix~\ref{app:index} explains how
+Every declaration is elaborated by Lean and every proof term is checked by
+the kernel.  Finite calculations use kernel-reducible procedures such as
+\texttt{decide}, \texttt{norm\_num}, or explicit certificate proofs.  In
+particular, \texttt{finalMiddleTwentySixPhaseSurvivors\_card} uses
+\texttt{decide} under a finite declaration-local recursion-depth budget; its
+axiom audit contains no \texttt{Lean.trustCompiler} and no proof placeholder.
+Generated certificate shards are Lean source; no external certificate dataset,
+Python release script, JSON projection, or this manuscript is proof authority.  Appendix~\ref{app:index} explains how
 each displayed result is connected to its exact formal statement.
 
 \paragraph{Section consequence.}
-The linked declarations and their checked proof terms certify the stated
-proved, conditional, finite, and equivalence results at the archived source
-revision.  That verification does not change the mathematical status of the
+After the source commit is published and the committed-ref release checks pass,
+the linked declarations and their checked proof terms will certify the stated
+proved, conditional, finite, and equivalence results at that revision.  That verification does not change the mathematical status of the
 unresolved statements: the open problems collected in
 Section~\ref{sec:further} remain open.
 
@@ -3478,7 +3568,7 @@ Each tail state splits exactly as $u(N)=v\,e_N+\bar p_N$ with integral excess
 $e_N=\lfloor u(N)/v\rfloor\ge0$.
 
 \begin{proposition}[order-wrap lower bound, with exact excess mean]\label{res:orderwrap}
-Let \(A\subseteq\N\setminus\{0\}\) be nonempty and suppose
+Let \(A\subseteq\Npos\) be nonempty and suppose
 \[
  X_A=\frac{p}{2^cv},
  \qquad p\in\Z,\quad c\in\N,\quad v>1\ \text{odd}.
@@ -3722,8 +3812,9 @@ appendix, remain the missing main-spine inputs.
 \section{Guide to the formal sources}\label{app:index}
 
 The paper is meant to be read as mathematics. The blue mathematical phrases
-following formalised statements are optional links to the exact checked
-theorems in the \href{\sourceurl}{archived source revision}. Exact declaration
+following formalised statements are intended as links to exact checked
+theorems in the final published source revision.  In this draft the common
+source pin is a release blocker. Exact declaration
 names remain in the machine-readable audit layer.
 
 For a first reading, the principal landmarks are
@@ -3768,8 +3859,8 @@ $L_2(\mathbf1)$ and $L_2(\ph)$ gcd moments & \lrefx{GcdMomentCalculus.lean}{216}
 Stern--Brocot cylinder recursion and rate & \lrefx{GcdMomentCalculus.lean}{474}{cylinderMass_split}, \lrefx{GcdMomentCalculus.lean}{525}{sternBrocotDepthMass_error}\ (\texttt{GcdMomentCalculus})\\
 $S=\tfrac12+\Pr(\gcd=1)$ & \lrefx{CertificateKernel.lean}{18229}{totient_series_eq_half_add_visible_coprime_pairs}\ (\texttt{CertificateKernel})\\
 $S\ne p/q$ for $q\le\Qzero$ & \lrefx{CertificateKernel.lean}{18056}{tsum_totient_div_pow_two_ne_ratCast_of_den_le_79639646646701375323355774875831053}\ (\texttt{CertificateKernel})\\
-tail-period reduction & \lrefx{TotientTailPeriodKiller.lean}{394}{irrational_totient_series_of_certificate_supply}\ (\texttt{TotientTailPeriodKiller})\\
-diagonal reduction & \lrefx{LcmDiagonalReduction.lean}{112}{irrational_totient_series_of_lcm_diagonal_certificate_supply}\ (\texttt{LcmDiagonalReduction})\\
+tail-period exact equivalence & \lrefx{LcmConeFlatness.lean}{412}{irrational_totient_series_iff_certificate_supply}\ (\texttt{LcmConeFlatness})\\
+exact lcm-diagonal equivalence & \lrefx{LcmConeFlatness.lean}{426}{irrational_totient_series_iff_lcm_diagonal_certificate_supply}\ (\texttt{LcmConeFlatness})\\
 cone flatness from rationality & \lrefx{LcmConeFlatness.lean}{90}{rational_totient_series_forces_lcm_cone_flatness}\ (\texttt{LcmConeFlatness})\\
 certificate completeness & \lrefx{LcmConeFlatness.lean}{316}{exists_certifiedKill_iff_tail_diff_notMem_int}\ (\texttt{LcmConeFlatness})\\
 joint cone refuter & \lrefx{LcmConeNonflat.lean}{126}{exists_nonintegral_pair_of_coneNonflatCert}\ (\texttt{LcmConeNonflat})\\
@@ -3787,7 +3878,7 @@ residual-gauge obstruction for monomial minors & \lrefx{ResidualGaugeObstruction
 tail-orbit rationality criterion & \lrefx{GenericTailOrbitRigidity.lean}{425}{binaryCoeffSeries_rational_iff_exists_temperedBinaryOrbit}\ (\texttt{GenericTailOrbitRigidity})\\
 Boolean carry certificate $\Leftrightarrow$ support fraction & \lrefx{BooleanMobiusCarry.lean}{948}{exists_normalized_support_fraction_iff_exists_booleanMobiusCarry}\ (\texttt{BooleanMobiusCarry})\\
 one-wrap classification & \lrefx{RationalSupportCarrySkeleton.lean}{415}{one_doublingWrap_classification}\ (\texttt{RationalSupportCarrySkeleton})\\
-order-wrap mass bound & \lrefx{RationalSupportCarrySkeleton.lean}{1478}{one_div_oddOrder_le_reciprocalMass_of_support_fraction}\ (\texttt{RationalSupportCarrySkeleton})\\
+order-wrap mass alternative and exact excess mean & \lrefx{RationalSupportCarrySkeleton.lean}{1517}{support_fraction_one_div_oddOrder_reciprocalMassDivergesOrAtLeast}, \lrefx{RationalSupportCarrySkeleton.lean}{1577}{exists_shifted_oddTailExcess_mean_of_support_fraction}\ (\texttt{RationalSupportCarrySkeleton})\\
 unbounded carry states & \lrefx{RationalSupportCarrySkeleton.lean}{2377}{exists_unbounded_shifted_odd_tail_nat_state_of_support_fraction}\ (\texttt{RationalSupportCarrySkeleton})\\
 sublogarithmic zero windows & \lrefx{SublogDivisorCoverage.lean}{392}{supportCoeffZeroWindow_length_le_eps_logb_add}\ (\texttt{SublogDivisorCoverage})\\
 greedy membership criterion & \lrefx{GreedyAchievementSet.lean}{1445}{mem_mersenneAchievementSet_iff_greedy_survival}\ (\texttt{GreedyAchievementSet})\\
