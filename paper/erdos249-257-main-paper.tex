@@ -2807,12 +2807,10 @@ and exact division recovers the coefficient from the orbit,
 $\bigl(2U(N)-U(N+1)\bigr)/q=f_A(N+1)$
 (\lword{BooleanMobiusCarry.lean}{680}{temperedCarry_quotient_eq_supportCoeff}{carry-quotient recovery}).
 The elementary divisor-pair bound $\tau(n)\le2\lfloor\sqrt n\rfloor$
-(\lword{BooleanMobiusCarry.lean}{208}{card_divisors_le_two_mul_sqrt}{the divisor-count bound}) confines
-the tails to a square-root strip, $T_{f_A}(N)\le2\sqrt N+4$
-(\lword{BooleanMobiusCarry.lean}{289}{binaryCoeffTail_supportCoeff_le_two_sqrt_add_four}{the coefficient-tail bound}),
-hence every orbit state to $0<U(N)\le q\,(2\sqrt N+4)$
-(\lword{BooleanMobiusCarry.lean}{690}{temperedCarry_pos_of_exists_pos_mem}{carry positivity},
-\lword{BooleanMobiusCarry.lean}{705}{temperedCarry_le_denominator_mul_two_sqrt_add_four}{the carry upper bound});
+confines the tails to a square-root strip,
+$T_{f_A}(N)\le2\sqrt N+4$.  For a nonempty support the orbit states are
+positive and satisfy $U(N)\le q\,(2\sqrt N+4)$
+(\lword{BooleanMobiusCarry.lean}{705}{temperedCarry_le_denominator_mul_two_sqrt_add_four}{the carry upper bound});
 and the strip is strong enough to re-derive the tempered boundary, so the
 analytic side condition can be traded for one inequality. The two coordinate
 changes compose.
