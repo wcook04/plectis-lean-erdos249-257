@@ -56,7 +56,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "Erd\\H{o}s \\#249",
-    "line": 2592
+    "line": 2607
    }
   },
   {
@@ -67,7 +67,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "unbounded certificate supply",
-    "line": 2603
+    "line": 2618
    }
   },
   {
@@ -78,7 +78,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "the half-value counterexample route",
-    "line": 2618
+    "line": 2633
    }
   },
   {
@@ -89,7 +89,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "universal Erd\\H{o}s \\#257",
-    "line": 2609
+    "line": 2624
    }
   }
  ],
@@ -554,18 +554,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_appendix_internal_argument_hierarchy_audit",
+   "id": "main_paper_appendix_assumption_scope_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "a long appendix subsection can contain correct theorem sequences without exposing which result supplies the next premise and which statement is only a boundary or no-go result",
-   "statement": "Audit internal appendix theorem sequences for local premise-to-result-to-consequence bridges, beginning with the longest carry and totient subsections."
+   "defect_class": "an appendix theorem can rely on phrases such as 'as above' or 'under the stated conditions', leaving its quantified hypotheses outside the theorem statement",
+   "statement": "Audit appendix theorem statements for non-local hypothesis references and make the mathematical ranges and assumptions locally recoverable."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "a16aa24af5236b6508a34b8a4c4b41fdcf620a98",
-  "committed_navigation_snapshot": "65b63d79922590ed841b24ed448de44200a662fd",
-  "main_paper_source_digest": "sha256:14bc6348f4d96f3cc1c54f2086351376f4e33f99cbca1e1cf495589b4c9a9c10"
+  "committed_navigation_snapshot": "9979e45efb37ded113411a4953f4aaea72562eb4",
+  "main_paper_source_digest": "sha256:5dda435fec7aae48bc94f56a555bcc3f5b50dac11c2ec46f6855e50f1a112758"
  },
  "reading_routes": [
   {

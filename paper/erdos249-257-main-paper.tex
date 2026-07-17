@@ -1995,6 +1995,13 @@ not force escape at any finite number of ranks,
 
 \subsection{Fresh-prime and bit-level boundaries}
 
+The results below are independent filters, not consecutive steps of a proof.
+The fresh-prime decomposition and one-bit lift expose exact correction terms
+that an unbounded argument would have to control.  The parity,
+prime-adjunction, scalar-localisation, and square-CRT results then show that
+four natural shortcuts do not provide that control.  No proposition in the
+second group consumes the preceding one as a hypothesis.
+
 \paragraph{Fresh-prime deficit decomposition.}  The literal foreign channel
 also has an endpoint form suited to curvature tests.  Retain only the prime
 support already present at $H$ in the two endpoints $H+s$ and $2H+s$, and
@@ -2121,6 +2128,14 @@ Thus the result gives neither an unbounded certificate supply nor an
 irrationality criterion for $S$.
 
 \subsection{Finite determinant and rank routes}
+
+These three propositions have different logical roles.  The signed
+dyadic-moment algebra is a generic finite ingredient.  The dyadic-kernel
+criterion is a conditional consumer of separated nonzero minors at one fixed
+level.  The residual-gauge proposition shows why residual-blind minors cannot
+by themselves supply the missing arithmetic contradiction.  Thus the absent
+bridge is an all-level arithmetic construction of the separated minors, not
+another formal consequence of the finite determinant identities.
 
 \begin{proposition}[signed dyadic-moment algebra]\label{res:signedmoment}
 For matrices $M:\iota\times\kappa\to R$ and
@@ -2794,14 +2809,10 @@ irrationality criterion for $S$.
 
 \subsection{Boolean--M\"obius carry coordinates (the \#257 direction)}
 
-At base $2$ the support series of Section~\ref{sec:eb} is itself a binary
-coefficient series, $\sum_{n\in A}1/(2^n-1)=X_{f_A}$
-(\lword{BooleanMobiusCarry.lean}{376}{erdosSupportSeries_two_eq_binaryCoeffSeries}{the support-series/binary-series identity}).
-Two exact coordinate changes then turn a hypothetical rational value into a
-support-free object. The divisor transform and M\"obius inversion below are
-classical Lambert-series tools~\cite{apostol,merca2017,mercaschmidt}; the
-contribution here is their Lean-checked composition with the tempered-orbit
-criterion.
+This subsection has one preliminary boundary result and then one exact
+equivalence chain.  The boundary result rules out extracting the desired
+Boolean support directly from the signs in \(L(\mu)=1/2\); it is not a premise
+of the carry equivalence that follows.
 
 \begin{proposition}[M\"obius-sign support no-go]\label{res:mobiussignnogo}
 Let
@@ -2826,6 +2837,18 @@ and
 The term \(d=6\) supplies the displayed \(1/63\).  This closes one
 sign-truncation route only; it does not exclude another infinite Boolean
 support with value \(1/2\).
+
+\paragraph{The exact coordinate chain.}
+At base $2$ the support series of Section~\ref{sec:eb} is itself a binary
+coefficient series, $\sum_{n\in A}1/(2^n-1)=X_{f_A}$
+(\lword{BooleanMobiusCarry.lean}{376}{erdosSupportSeries_two_eq_binaryCoeffSeries}{the support-series/binary-series identity}).
+Boolean M\"obius inversion first identifies the support from its divisor
+coefficients; tail-orbit rigidity then identifies rationality with a tempered
+integer orbit.  Theorem~\ref{res:carrycert} is exactly the composition of
+those two equivalences.  The divisor transform and M\"obius inversion are
+classical Lambert-series tools~\cite{apostol,merca2017,mercaschmidt}; the
+contribution here is their Lean-checked composition with the tempered-orbit
+criterion.
 
 \begin{proposition}[Boolean M\"obius inversion, both directions]\label{res:boolmob}
 On positive integers, $f_A=\mathbf 1_A*\zeta$ and $\mu*f_A=\mathbf 1_A$, where
@@ -2921,6 +2944,17 @@ after $\varepsilon$ gives the theorem. This controls gaps in divisor coverage;
 it does not assert a subpower bound for the carry state itself.
 
 \subsection{Residue wraps, reciprocal mass, and unbounded carries}
+
+The dependency order is
+\[
+\text{doubling residues}\ \longrightarrow\ \text{wrap count}\
+\longrightarrow\ \text{reciprocal-mass bound}\
+\longrightarrow\ \text{collision strengthening}.
+\]
+The final unbounded-state theorem uses the same common-multiple collision
+mechanism without a summability hypothesis.  The one-wrap classification
+identifies the extremal residue cycles; it is a side branch, not a premise of
+the general mass bound.
 
 Suppose now the support series equals $p/(2^c v)$ with $v$ odd and $A$
 containing a positive element.  Let $U$ be the unshifted tempered orbit of
