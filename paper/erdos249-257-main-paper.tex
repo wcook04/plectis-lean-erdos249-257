@@ -450,11 +450,11 @@ mathematics.
 
 \begin{theorem}[support-class family]\label{res:support}
 For every integer $b\ge2$, the series $\sum_{n\in A} 1/(b^n-1)$ is irrational for
-each of the following supports $A$:
+each of the following infinite supports $A$:
 \begin{enumerate}[label=\textup{(\alph*)},leftmargin=2em]
 \item factorial support $A=\{n! : n\ge1\}$, giving $\sum 1/(b^{n!}-1)$;
 \item power-of-two support $A=\{2^n : n\ge0\}$, giving $\sum 1/(b^{2^n}-1)$;
-\item multiples $A=d\N$;
+\item multiples $A=d\N$ with $d\ge1$;
 \item pairwise-coprime supports with summable reciprocals (Erd\H{o}s's
 condition~\cite{erdos1968});
 \item eventually-periodic supports, residue classes, and the odd numbers.
@@ -1641,10 +1641,9 @@ Moreover, the following are equivalent:
 \[
 \begin{aligned}
  &S\notin\Q,\\
- &R_{N+h}-R_N\notin\Z
-      &&\text{for every }h\ge1\text{ and }N\ge0,\\
- &\exists L\ge1,\ \textsf{certifiedKill}(h,N,L)
-      &&\text{for every }h\ge1\text{ and }N\ge0.
+ &\forall\,h\ge1\ \forall\,N\ge0,\qquad R_{N+h}-R_N\notin\Z,\\
+ &\forall\,h\ge1\ \forall\,N\ge0\ \exists\,L\ge1,\qquad
+      \textsf{certifiedKill}(h,N,L).
 \end{aligned}
 \]
 \end{proposition}
@@ -1733,9 +1732,9 @@ when the object it certifies is non-integral. Thus the finite computations are
 machine-checked witnesses rather than numerical experiments.
 
 \begin{proposition}[certificate completeness, expanded form]\label{app:complete-detail}
-For all $h,N$,
+For every $h\ge1$ and $N\ge0$,
 \[
-\big(\exists L,\ \textsf{certifiedKill}(h,N,L)\big)
+\big(\exists L\ge1,\ \textsf{certifiedKill}(h,N,L)\big)
 \quad\Longleftrightarrow\quad
 R_{N+h}-R_N\notin\Z.
 \]
@@ -2514,10 +2513,13 @@ where $0\le d_t<2^{m_t}$.  Define
 \]
 
 \begin{proposition}[canonical strict-jump slack]\label{res:slackfrontier}
-The canonical residue lies in the central band
+For every $t\ge1$, the canonical residue lies in the central band
 $[2^{m_t-5},2^{m_t}-2^{m_t-5}]$ if and only if $\sigma_t\ge0$.
-If nonnegative slack occurs at arbitrarily large strict jumps
-$M_t<M_{t+1}$, then $S$ is irrational.
+If, for every $t_0$, there is a $t\ge\max\{3,t_0\}$ such that
+\[
+ M_t<M_{t+1}\qquad\text{and}\qquad \sigma_t\ge0,
+\]
+then $S$ is irrational.
 \end{proposition}
 \noindent Formalised:
 \lword{DiagonalFreshLossBridge.lean}{2469}{canonicalAdjacentSuffixCentral_iff_slack_nonneg}{canonical central-band equivalence},

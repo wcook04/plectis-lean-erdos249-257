@@ -56,7 +56,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "Erd\\H{o}s \\#249",
-    "line": 2565
+    "line": 2567
    }
   },
   {
@@ -67,7 +67,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "unbounded certificate supply",
-    "line": 2576
+    "line": 2578
    }
   },
   {
@@ -78,7 +78,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "the half-value counterexample route",
-    "line": 2591
+    "line": 2593
    }
   },
   {
@@ -89,7 +89,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "universal Erd\\H{o}s \\#257",
-    "line": 2582
+    "line": 2584
    }
   }
  ],
@@ -554,18 +554,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_quantifier_scope_audit",
+   "id": "main_paper_conditional_chain_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "compressed theorem prose can hide whether a hypothesis is pointwise, eventual, cofinal, or uniform, especially when an equivalence is followed by a separate sufficient criterion",
-   "statement": "Audit the displayed theorem spines and frontier propositions for quantifier scope, making every conditional dependency and unbounded-range requirement recoverable from the statement itself without expanding settled derivations."
+   "defect_class": "a sequence of exact equivalences, finite verifications, and sufficient criteria can read as one cumulative proof unless each handoff states which premise remains unproved",
+   "statement": "Audit conditional theorem chains in the main spine and frontier section, separating established equivalences from unproved producers and making the direction of every sufficient implication explicit."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "a16aa24af5236b6508a34b8a4c4b41fdcf620a98",
-  "committed_navigation_snapshot": "18b65029a5f8482e394eed9fd17b764f0c3be253",
-  "main_paper_source_digest": "sha256:e2ec229bf3b16e9b3edb27f02f6cac45834d1671b594d52d4d1e88fa2259ec19"
+  "committed_navigation_snapshot": "0ae065a8ad6cab8545995bda0fc58c1607adbea6",
+  "main_paper_source_digest": "sha256:a784b1630fb9dcadceede2981c4ddca3d56ea8062d4f0a892f1e4a9cf0cd1130"
  },
  "reading_routes": [
   {
