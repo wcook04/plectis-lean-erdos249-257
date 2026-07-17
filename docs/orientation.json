@@ -56,7 +56,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "Erd\\H{o}s \\#249",
-    "line": 2614
+    "line": 2617
    }
   },
   {
@@ -67,7 +67,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "unbounded certificate supply",
-    "line": 2625
+    "line": 2628
    }
   },
   {
@@ -78,7 +78,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "the half-value counterexample route",
-    "line": 2640
+    "line": 2643
    }
   },
   {
@@ -89,7 +89,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "universal Erd\\H{o}s \\#257",
-    "line": 2631
+    "line": 2634
    }
   }
  ],
@@ -554,18 +554,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_argument_transition_audit",
+   "id": "main_paper_repetition_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "theorem sequences can remain locally correct while leaving the reader to infer why the next result is introduced and which previous object it consumes",
-   "statement": "Audit transitions between consecutive main-spine results, adding only the shortest mathematical handoff needed to identify the input, output, and reason for the next theorem."
+   "defect_class": "the same theorem status is sometimes restated in the spine, architecture section, frontier, and appendix, so repeated caveats can bury the one new mathematical point of each location",
+   "statement": "Audit repeated theorem and status prose across the main paper, retaining repetition only when it changes the reader's local decision and otherwise replacing it with a precise backward reference."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "a16aa24af5236b6508a34b8a4c4b41fdcf620a98",
-  "committed_navigation_snapshot": "f7d75d8e10779cb315aa74e91a29e86e311717aa",
-  "main_paper_source_digest": "sha256:961df67a400e51507ca66b8115b73cdd1392ccd5a7fc6c791c1a9130bb2e89fb"
+  "committed_navigation_snapshot": "fc03202e44a1c2ece68a933749ae5b087afe49ab",
+  "main_paper_source_digest": "sha256:90c4631f6e9344763f7a11c4353a325d34a815720002992537b6efd7abac31c4"
  },
  "reading_routes": [
   {

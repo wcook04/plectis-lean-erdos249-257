@@ -907,15 +907,15 @@
         "schema": "erdos249257-editorial-state/1",
         "scope": "continuous_whole_main_paper_exposition",
         "current_priority": {
-          "id": "main_paper_argument_transition_audit",
+          "id": "main_paper_repetition_audit",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "defect_class": "theorem sequences can remain locally correct while leaving the reader to infer why the next result is introduced and which previous object it consumes",
-          "statement": "Audit transitions between consecutive main-spine results, adding only the shortest mathematical handoff needed to identify the input, output, and reason for the next theorem."
+          "defect_class": "the same theorem status is sometimes restated in the spine, architecture section, frontier, and appendix, so repeated caveats can bury the one new mathematical point of each location",
+          "statement": "Audit repeated theorem and status prose across the main paper, retaining repetition only when it changes the reader's local decision and otherwise replacing it with a precise backward reference."
         },
         "last_verified_wave": {
-          "id": "main_paper_conditional_chain_repair",
+          "id": "main_paper_argument_transition_repair",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "result": "Separated the proved and open levels of the Section 4 final-skip argument, then displayed the exact dependency direction of the two scalar criteria: all implication arrows are proved, while their cofinal or universal left-hand producers remain open and finite checks discharge only finite prefixes."
+          "result": "Reordered the Section 5 certificate spine into mathematical dependency order: finite certificate definition, fixed-parameter completeness, global unbounded characterisation, then the lcm-diagonal sufficient specialization; added one-sentence handoffs naming exactly what each step adds."
         },
         "active_inconsistencies": [],
         "blocked_decisions": []
@@ -7512,7 +7512,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 2614
+        "line": 2617
       }
     },
     {
@@ -7523,7 +7523,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 2625
+        "line": 2628
       }
     },
     {
@@ -7534,7 +7534,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "the half-value counterexample route",
-        "line": 2640
+        "line": 2643
       }
     },
     {
@@ -7545,7 +7545,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 2631
+        "line": 2634
       }
     }
   ],

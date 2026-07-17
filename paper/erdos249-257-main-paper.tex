@@ -1633,24 +1633,6 @@ $R_{N+h}-R_N$; the two margins bound the omitted tail using
 $\ph(n)\le n$.  Thus the predicate is decidable by finite integer arithmetic,
 while its conclusion concerns the infinite tail difference.
 
-\begin{theorem}[exact tail-period characterisation]\label{res:red21}
-$S$ is irrational if and only if, for every period $h\ge1$ and every threshold
-$N_0$, there exist $N\ge N_0$ and $L$ with $\textsf{certifiedKill}(h,N,L)$.
-\end{theorem}
-\noindent Formalised as the
-\lword{LcmConeFlatness.lean}{412}{irrational_totient_series_iff_certificate_supply}{certificate-supply equivalence}.
-
-Every multiple of an eventual period is again a period.  The least common
-multiple $M_t$ therefore provides a useful sufficient diagonal form of
-Theorem~\ref{res:red21}.
-
-\begin{corollary}[diagonal reduction]\label{res:diag}
-Suppose that for every threshold $t_0$ there are parameters $t\ge t_0$ and
-$L$ for which $\textsf{certifiedKill}(M_t,M_t,L)$ holds. Then $S$ is
-irrational.
-\end{corollary}
-\noindent Formalised: \lword{LcmDiagonalReduction.lean}{112}{irrational_totient_series_of_lcm_diagonal_certificate_supply}{diagonal-supply criterion}.
-
 \begin{proposition}[certificate completeness]\label{res:complete}
 For every $h\ge1$ and $N\ge0$,
 \[
@@ -1676,8 +1658,29 @@ and
 The converse direction uses the fact that integrality of even one
 positive-shift tail difference forces $S$ to be rational
 (\lword{LcmConeFlatness.lean}{357}{not_irrational_of_tail_diff_mem_int}{integral-difference rationality criterion}).
-Thus the finite predicate is complete at each fixed pair $(h,N)$; the open
-problem is to prove that the required pairs occur without bound.
+Thus the finite predicate loses no information at a fixed pair $(h,N)$.
+The remaining step is purely the placement of such pairs without bound.
+
+\begin{theorem}[exact tail-period characterisation]\label{res:red21}
+$S$ is irrational if and only if, for every period $h\ge1$ and every threshold
+$N_0$, there exist $N\ge N_0$ and $L$ with $\textsf{certifiedKill}(h,N,L)$.
+\end{theorem}
+\noindent Formalised as the
+\lword{LcmConeFlatness.lean}{412}{irrational_totient_series_iff_certificate_supply}{certificate-supply equivalence}.
+Proposition~\ref{res:complete} supplies the fixed-parameter equivalence;
+Theorem~\ref{res:red21} adds exactly the unbounded placement quantifier.
+
+Every multiple of an eventual period is again a period.  The least common
+multiple $M_t$ therefore provides a useful one-parameter sufficient form.
+
+\begin{corollary}[diagonal reduction]\label{res:diag}
+Suppose that for every threshold $t_0$ there are parameters $t\ge t_0$ and
+$L$ for which $\textsf{certifiedKill}(M_t,M_t,L)$ holds. Then $S$ is
+irrational.
+\end{corollary}
+\noindent Formalised: \lword{LcmDiagonalReduction.lean}{112}{irrational_totient_series_of_lcm_diagonal_certificate_supply}{diagonal-supply criterion}.
+The corollary replaces the two free parameters \(h,N\) by the diagonal pair
+\((M_t,M_t)\); producing that cofinal one-parameter family is still open.
 
 \begin{example}[verified finite range]\label{res:deposits}
 Lean checks:
