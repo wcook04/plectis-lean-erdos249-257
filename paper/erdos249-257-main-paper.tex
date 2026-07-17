@@ -2212,24 +2212,27 @@ mathematical claim.  Its purpose is to identify which parts of the checked
 arguments are finite and complete, which parts require a uniform theorem, and
 why the chosen coordinates expose that distinction.
 
-\paragraph{Finite arithmetic versus uniform supply.}
-The arguments repeatedly separate a finite arithmetic core from a statement
-that must hold uniformly.  In the full-support Erd\H{o}s--Borwein theorem, the
-finite core consists of a Bertrand--CRT choice, divisor-pair averaging, and
-explicit parameter inequalities.  For \#249 the separation is sharper:
-eventual binary periodicity predicts an integral tail difference; finite
-modular arithmetic can refute that prediction at fixed parameters; and
-Proposition~\ref{res:complete} proves that the finite certificate loses no
-information there.  The missing ingredient is therefore not a larger finite
-verification, but a theorem producing such witnesses without bound.
-
-\paragraph{Tail coordinates and completeness.}
-The choice of tail coordinates is essential.  Rather than reason about an
-informal repeating digit string, one uses the scaled tails $R_N$ and the fact
-that rationality forces suitable period differences to be integers.
-Certificate completeness then separates two logically distinct tasks: finite
-arithmetic decides non-integrality at a fixed pair $(h,N)$, while
-Theorem~\ref{res:red21} requires those pairs beyond every threshold.
+\paragraph{Finite predicate and uniform producer.}
+The checked arguments separate according to the schema
+\[
+\begin{array}{c}
+\text{a hypothetical rational value imposes a rigid tail or carry law}\\
+\Downarrow\\
+\text{a finite predicate can refute that law at fixed parameters}\\
+\Downarrow\\
+\text{a global conclusion requires a theorem producing such refutations
+without bound}.
+\end{array}
+\]
+For \#249 the rigid law is integrality of a period difference:
+Proposition~\ref{res:complete} proves that
+\(\textsf{certifiedKill}(h,N,L)\) is complete at fixed \(h,N\), whereas
+Theorem~\ref{res:red21} isolates the unbounded producer.  In the classical
+full-support theorem that producer is constructed by the Bertrand--CRT and
+averaging argument of Section~\ref{sec:eb}.  In the half-value branch, exact
+seam and terminal predicates play the finite role, while cofinal terminal
+zeros remain the missing producer.  This is the architectural distinction;
+no additional status summary is needed here.
 
 \paragraph{Equivalent representations.}
 Three further changes of coordinates serve different mathematical purposes. The
@@ -2257,17 +2260,6 @@ odd denominator to reciprocal mass, retaining divergence as an explicit
 alternative.  None of these necessary conditions is a contradiction; they
 describe the infinite Boolean carry path that a future proof would have to
 exclude.
-
-\paragraph{General proof template and residual.}
-The same architecture is useful beyond the two named problems: choose a
-representation in which rationality imposes a rigid tail law, isolate a finite
-predicate that soundly refutes that law, prove the predicate complete at fixed
-parameters, and state the remaining uniformity theorem separately. The last
-step matters as much as the first three. It prevents a large verified finite
-range from being mistaken for the infinite theorem.  Thus the exact
-consequence of this section is organisational rather than mathematical:
-fixed-parameter completeness has been separated from the unbounded supply
-required for \#249 and from the two unresolved \#257 directions.
 
 \section{Formal verification and reproducibility}\label{sec:verify}
 
