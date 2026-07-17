@@ -311,19 +311,20 @@ input $f$ & value & mathematical status & treatment here\\
 $\mu$ & $L(\mu)=1/2$ & rational & formalised\\
 $\ph$ & $L(\ph)=2$ & rational & formalised\\
 $\mathbf 1$ & $L(\mathbf 1)=E$ & irrational & formalised\\
-$A=\ph*\mu$ & $L(A)=S$ & open (\#249) & identities and bounds formalised\\
+$\alpha=\ph*\mu$ & $L(\alpha)=S$ & open (\#249) & identities and bounds formalised\\
 $\mathrm{Id}$ & $L(\mathrm{Id})=\sum\sigma(m)/2^m$ & transcendental & cited~\cite{nesterenko}\\
 \bottomrule
 \end{tabular}
 \end{center}
 
-The weight $A=\ph*\mu$ is the primitive-conductor count: $A(p)=p-2$ on primes,
-$A\ge0$, and $A*\zeta=\ph$. One convolution by $\zeta$ separates the open
+The weight $\alpha=\ph*\mu$ is the primitive-conductor count:
+$\alpha(p)=p-2$ on primes, $\alpha\ge0$, and $\alpha*\zeta=\ph$. One
+convolution by $\zeta$ separates the open
 constant $S$ from the rational $2$, and one more separates rational from
 transcendental ($\ph*\zeta=\mathrm{Id}$, $\mathrm{Id}*\zeta=\sigma$). So $S$ is
 the rung one convolution from the machine-checked irrational $E$: the same series
 $\sum(\cdot)/(2^d-1)$, with the constant weight $1$ replaced by the nonnegative
-weight $A$.
+weight $\alpha$.
 
 \begin{proposition}[the rational rungs]
 $\sum_{d\ge1}\mu(d)/(2^d-1)=1/2$ and $\sum_{d\ge1}\ph(d)/(2^d-1)=2$, exactly.
@@ -333,10 +334,10 @@ $\sum_{d\ge1}\mu(d)/(2^d-1)=1/2$ and $\sum_{d\ge1}\ph(d)/(2^d-1)=2$, exactly.
 and the
 \lword{MersenneLambertLadder.lean}{575}{tsum_totient_div_two_pow_sub_one_eq_two}{totient rung}.
 
-\begin{proposition}[the positive lift, $L(A)=S$]\label{res:lift}
-With the primitive-conductor weight $A=\ph*\mu$,
+\begin{proposition}[the positive lift, $L(\alpha)=S$]\label{res:lift}
+With the primitive-conductor weight $\alpha=\ph*\mu$,
 \[
-\sum_{d\ge1}\frac{A(d)}{2^d-1}\;=\;\sum_{n\ge1}\frac{\ph(n)}{2^n}\;=\;S.
+\sum_{d\ge1}\frac{\alpha(d)}{2^d-1}\;=\;\sum_{n\ge1}\frac{\ph(n)}{2^n}\;=\;S.
 \]
 \end{proposition}
 \noindent Formalised as the
@@ -358,7 +359,7 @@ Section~\ref{sec:additional-lambert}.
 
 \paragraph{Section consequence and residual.}
 The exact contribution of this section is the coordinate change
-\(L(A)=S\), together with the two rational rungs above it in the same
+\(L(\alpha)=S\), together with the two rational rungs above it in the same
 Lambert family.  These identities explain why the Mersenne--Lambert
 coordinates are natural for both problems, but they do not imply that \(S\)
 is irrational.  For \#249 the remaining issue is still the unbounded
@@ -591,9 +592,9 @@ Moreover:
 \item if \(A\) is infinite, then \((u_N)\) is unbounded;
 \item for every \(\varepsilon>0\) there is
 \(B=B(\varepsilon,c,v)\) such that every interval
-\(\{c+N+1,\ldots,c+N+h\}\) on which \(f_A\) vanishes satisfies
+\(\{c+N+1,\ldots,c+N+\ell\}\) on which \(f_A\) vanishes satisfies
 \[
- h\leq\varepsilon\log_2(N+1)+B;
+ \ell\leq\varepsilon\log_2(N+1)+B;
 \]
 \item if \(\rho(A)=\sum_{a\in A}a^{-1}<\infty\), \(v>1\), and
 \(h=\operatorname{ord}_v(2)\), then
@@ -1544,7 +1545,7 @@ denominator is not excluded by it.
 \begin{remark}[one bound, four representations]
 Because the ladder identities of Section~\ref{sec:ladder} are equalities, the same
 finite record transfers verbatim to three other representations of the constant:
-to the positive lift $\sum_d A(d)/(2^d-1)$
+to the positive lift $\sum_d \alpha(d)/(2^d-1)$
 (\lword{CertificateKernel.lean}{18145}{tsum_primWeight_div_two_pow_sub_one_ne_int_div_of_den_le_79639646646701375323355774875831053}{positive-lift denominator transfer}),
 to the signed M\"obius-square constant $T=\sum_d\mu(d)/(2^d-1)^2$ at half the bound
 (\lword{CertificateKernel.lean}{18159}{tsum_moebius_div_two_pow_sub_one_sq_ne_int_div_of_den_le_39819823323350687661677887437915526}{signed-square denominator transfer}),
@@ -1557,7 +1558,8 @@ Half appears because $S=\tfrac12+T$ turns a denominator $d$ for $T$ into $2d$ fo
 Let $X,Y$ be independent fair-coin waiting times, $\Pr(X=n)=2^{-n}$ for $n\ge1$.
 Then $\Pr(d\mid X)=1/(2^d-1)$, so the Lambert transform is a divisor calculus of
 $X$: $L(f)=\mathbb E[(f*\zeta)(X)]$. The rungs read as $L(\mu)=\Pr(X=1)=1/2$,
-$L(\ph)=\mathbb E[X]=2$, $L(\mathbf 1)=\mathbb E[\tau(X)]=E$, and $L(A)=\mathbb E[\ph(X)]=S$.
+$L(\ph)=\mathbb E[X]=2$, $L(\mathbf 1)=\mathbb E[\tau(X)]=E$, and
+$L(\alpha)=\mathbb E[\ph(X)]=S$.
 
 Counting visible lattice points $(a,b)$ with $a+b=n$, $a>0$, $\gcd(a,b)=1$ gives
 exactly $\ph(n)$, uniformly in $n$, so $S$ is itself a coprime-pair mass.
@@ -1927,13 +1929,13 @@ Finally, the remaining diagonal error can be represented by a finite integer
 projection and then by binary suffix data.  At depth $L$, define
 \[
  W_{t,L}=P_L(2H_t)-P_L(H_t),\qquad
- \rho_{t,L}=W_{t,L}\bmod 2^L,
+ \eta_{t,L}=W_{t,L}\bmod 2^L,
 \]
 where $P_L(M)$ is the length-$L$ window numerator underlying
 Definition~\ref{def:totient-certificate}.  The finite
 residue certificate is the asymmetric safe interval
 \[
- H_t+L+2<\rho_{t,L}<2^L-(2H_t+L+2).
+ H_t+L+2<\eta_{t,L}<2^L-(2H_t+L+2).
 \]
 The two unequal margins are the tail bounds at the two cone vertices $H_t$ and
 $2H_t$; replacing them by a symmetric slogan would lose part of the checked
@@ -2686,31 +2688,31 @@ geometry with one-sided finite death certificates in Appendix~B.5.
 
 \subsection{Tail-orbit rigidity: a rationality criterion}
 
-For a coefficient sequence $c:\N\to\N$ with $c(n)\le n$, write
+For a coefficient sequence $\gamma:\N\to\N$ with $\gamma(n)\le n$, write
 \[
-X_c=\sum_{n\ge1}\frac{c(n)}{2^n},
+X_\gamma=\sum_{n\ge1}\frac{\gamma(n)}{2^n},
 \qquad
-T_c(N)=\sum_{j\ge1}\frac{c(N+j)}{2^j},
+T_\gamma(N)=\sum_{j\ge1}\frac{\gamma(N+j)}{2^j},
 \]
 the series and its scaled tail after $N$ binary digits. Call an integer
-sequence $u$ a \emph{tempered orbit} for $c$ with multiplier $v\ge1$ if
+sequence $u$ a \emph{tempered orbit} for $\gamma$ with multiplier $v\ge1$ if
 \[
-u(N+1)=2\,u(N)-v\,c(N+1)\ \text{ for all } N,
+u(N+1)=2\,u(N)-v\,\gamma(N+1)\ \text{ for all } N,
 \qquad\text{and}\qquad
 u(N)/2^N\to0 .
 \]
 The recurrence is exact binary long division against the coefficient stream;
 the boundary condition forbids the homogeneous solution. Wang and Grau Ribas
 use the integral carry recurrence forced by rationality for the weighted binary
-special case $c(n)=n d_n$~\cite{wanggrauribas}. The theorem below extends that
-forward mechanism to arbitrary nonnegative $c(n)\le n$; its explicit converse
+special case $\gamma(n)=n d_n$~\cite{wanggrauribas}. The theorem below extends that
+forward mechanism to arbitrary nonnegative $\gamma(n)\le n$; its explicit converse
 and subexponential-orbit rigidity are the local additions, with no priority
 claim attached. Wang--Grau Ribas's positive-density theorem and its Erd\H{o}s
 \#260 corollary are not used or formalised here.
 
 \begin{theorem}[tail-orbit rigidity]\label{res:rigidity}
-Let $c(n)\le n$ for all $n$. Every tempered orbit is the scaled tail,
-$u(N)=v\,T_c(N)$ for all $N$; and $X_c$ is rational if and only if a tempered
+Let $\gamma(n)\le n$ for all $n$. Every tempered orbit is the scaled tail,
+$u(N)=v\,T_\gamma(N)$ for all $N$; and $X_\gamma$ is rational if and only if a tempered
 orbit exists for some multiplier $v\ge1$.
 \end{theorem}
 \noindent Formalised:
@@ -2798,7 +2800,7 @@ $B=\{n\ge1:(\mu*f)(n)=1\}$ selected by that transform.
 search or finiteness hypothesis, the converse
 \lword{BooleanMobiusCarry.lean}{180}{eq_supportCoeffAF_booleanMobiusSupport_of_boolean}{the Boolean reconstruction theorem}.
 
-On the carry side, Theorem~\ref{res:rigidity} applies at $c=f_A$: the support
+On the carry side, Theorem~\ref{res:rigidity} applies at $\gamma=f_A$: the support
 series is rational exactly when a tempered carry orbit for $f_A$ exists
 (\lword{BooleanMobiusCarry.lean}{383}{erdosSupportSeries_rational_iff_exists_temperedCarry}{the rationality--carry equivalence});
 a displayed fraction $p/q$ corresponds to an orbit $U$ with multiplier $q$ and
@@ -3172,7 +3174,7 @@ periodic signed-weight irrational-or-terminating dichotomy & \lrefx{CertificateK
 period-four residue obstruction & \lrefx{CertificateKernel.lean}{13898}{intWeightedCoeff_periodFourSignWeight_eq_zero_of_mod_four_eq_three}\ (\texttt{CertificateKernel})\\
 $L(\mu)=1/2$ & \lrefx{MersenneLambertLadder.lean}{587}{tsum_moebius_div_two_pow_sub_one_eq_half}\ (\texttt{MersenneLambertLadder})\\
 $L(\ph)=2$ & \lrefx{MersenneLambertLadder.lean}{575}{tsum_totient_div_two_pow_sub_one_eq_two}\ (\texttt{MersenneLambertLadder})\\
-positive lift $L(A)=S$ & \lrefx{CertificateKernel.lean}{18117}{tsum_primWeight_div_two_pow_sub_one_eq_totient_series}\ (\texttt{CertificateKernel})\\
+positive lift $L(\alpha)=S$ & \lrefx{CertificateKernel.lean}{18117}{tsum_primWeight_div_two_pow_sub_one_eq_totient_series}\ (\texttt{CertificateKernel})\\
 M\"obius-square lens & \lrefx{CertificateKernel.lean}{18126}{totient_series_eq_half_add_moebius_mersenne_square}\ (\texttt{CertificateKernel})\\
 $L_2(\mathbf1)$ and $L_2(\ph)$ gcd moments & \lrefx{GcdMomentCalculus.lean}{216}{tsum_one_div_mersenne_sq_eq_sigma_sub_tau_series}, \lrefx{GcdMomentCalculus.lean}{235}{tsum_totient_div_mersenne_sq_eq_gcd_moment_series}\ (\texttt{GcdMomentCalculus})\\
 Stern--Brocot cylinder recursion and rate & \lrefx{GcdMomentCalculus.lean}{474}{cylinderMass_split}, \lrefx{GcdMomentCalculus.lean}{525}{sternBrocotDepthMass_error}\ (\texttt{GcdMomentCalculus})\\
