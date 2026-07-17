@@ -56,7 +56,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "Erd\\H{o}s \\#249",
-    "line": 2541
+    "line": 2551
    }
   },
   {
@@ -67,7 +67,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "unbounded certificate supply",
-    "line": 2552
+    "line": 2562
    }
   },
   {
@@ -78,7 +78,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "the half-value counterexample route",
-    "line": 2567
+    "line": 2577
    }
   },
   {
@@ -89,7 +89,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "universal Erd\\H{o}s \\#257",
-    "line": 2558
+    "line": 2568
    }
   }
  ],
@@ -554,18 +554,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_section4_transition_audit",
+   "id": "main_paper_section4_proof_outline_density_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "the mathematical results in Section 4 are individually precise, but transitions can still present them as a sequence of modules rather than an argument with explicit inputs, mechanisms, consequences, and remaining obstruction",
-   "statement": "Audit every transition in Section 4 for its argumentative role, repairing passages where the reader cannot tell why the next result is needed or how it advances the two reduction programmes."
+   "defect_class": "Section 4 mixes a substantial mathematical proof outline for the classical full-support theorem with shorter result summaries and source inventories, so explanatory density must be checked against each result's role in the argument",
+   "statement": "Audit the proof and consequence paragraphs in Section 4, preserving mathematical mechanisms while compressing declaration enumeration or local detail that does not help the reader follow the gateway argument."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "a16aa24af5236b6508a34b8a4c4b41fdcf620a98",
-  "committed_navigation_snapshot": "61c910e65cea371b3270692860f2243b3b9856b1",
-  "main_paper_source_digest": "sha256:837bb47f75010e075127779650e30a8a670cbd47b58076dbdf41401ffc4f89a2"
+  "committed_navigation_snapshot": "335360c8cdf53bb394ce437ccc084321e5895ad0",
+  "main_paper_source_digest": "sha256:e682784c44b3a43bc1d057248c72fdcba5e4777c59d3294048e45836628570ac"
  },
  "reading_routes": [
   {
