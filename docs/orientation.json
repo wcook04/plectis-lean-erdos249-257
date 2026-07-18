@@ -56,7 +56,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "Erd\\H{o}s \\#249",
-    "line": 3534
+    "line": 3535
    }
   },
   {
@@ -67,7 +67,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "unbounded certificate supply",
-    "line": 3545
+    "line": 3546
    }
   },
   {
@@ -78,7 +78,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "the half-value counterexample route",
-    "line": 3566
+    "line": 3567
    }
   },
   {
@@ -89,7 +89,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "universal Erd\\H{o}s \\#257",
-    "line": 3557
+    "line": 3558
    }
   }
  ],
@@ -559,18 +559,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_realized_rewind_phase_plain_language_audit",
+   "id": "main_paper_localized_protected_seam_plain_language_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "The realised-rewind passage calls the phase a complementary binary suffix numeral and says that the suffix covers the terminal interval without defining the bit order, displaying the phase identity, or stating the exact coverage inequality",
-   "statement": "Define the suffix numeral with the newest row as the low bit, state phase = D - 1 - X and the exact singleton equivalence B - 1 <= X, and relate this to the frozen-prefix carry form B <= Z. Preserve that no theorem supplies the coverage inequality globally and that this is not an Erdős #257 proof."
+   "defect_class": "The protected-seam passage says that one of carries 3 and 4 survives a localized one-hole seam and that cofinal realizations imply half-membership without defining localized realization, naming the unique hole, or explaining the carry choice",
+   "statement": "Define localized realization as the forward implication from scalar reachability to an admissible depth-N word for each carry k in [3,27]. Name the unique missing carry H = 2 delta - c, explain the choice of 4 when H = 3 and of 3 otherwise, and show how cofinal repetitions feed compactness. Preserve that no cofinal realization supply is proved and that this is not an Erdős #257 proof."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "ebc98ee71f6819bd9fe344a0bb343542c604e533",
-  "committed_navigation_snapshot": "f8e1df814fb8c5b1ffcd3c2503c5c57ac2111dbc",
-  "main_paper_source_digest": "sha256:7060e2c0955bc1d104423eba4378b4955f4411f7f9996d75c3f44eb11e12d423"
+  "committed_navigation_snapshot": "db40639f4fb7699304fc437c0bda7d2f40d9a1c5",
+  "main_paper_source_digest": "sha256:c12b44c4a5b41c5a59ae01b2bf011a21b2a2920ab615be3f908058f7e193dadb"
  },
  "reading_routes": [
   {
