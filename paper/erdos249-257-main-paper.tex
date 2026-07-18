@@ -743,7 +743,12 @@ Under the hypotheses of Theorem~\ref{res:rigidity-main}, if
 \]
 where \(w\) is the number of wraps in one doubling-residue cycle and
 \(e_N=\lfloor u_N/v\rfloor\) is the integral excess in the split
-\(u_N=ve_N+(p2^N\bmod v)\).  If \((p,v)=1\), then \(w\geq1\).
+\(u_N=ve_N+\bar p_N\), with \(\bar p_N\) the least residue of
+\(p2^N\) modulo \(v\).  A step wraps precisely when doubling
+\(\bar p_N\) crosses \(v\); thus \(w\) counts the resulting carry digits
+over one cycle of length \(h\).  The term \(w/h\) is the cycle's mean
+residue contribution, while the displayed excess mean is nonnegative.  If
+\((p,v)=1\), then \(w\geq1\).
 \end{corollary}
 \noindent The exact excess-mean identity is
 \lword{RationalSupportCarrySkeleton.lean}{1577}{exists_shifted_oddTailExcess_mean_of_support_fraction}{the shifted excess-mean theorem};
@@ -778,8 +783,12 @@ Boolean--M\"obius carry certificate for \(p/q\) reconstructs a finite
 support.  Equivalently, the universal assertion fails exactly when one such
 certificate reconstructs an infinite support.
 \end{corollary}
-\noindent Here a certificate is the positive, square-root-bounded integral
-orbit with divisibility and Boolean M\"obius conditions stated in
+\noindent Concretely, a certificate is an integer sequence \(U\) with
+\(U(0)=p\), positive states bounded by \(q(2\sqrt N+4)\), and
+\(q\mid 2U(N)-U(N+1)\).  Dividing these differences by \(q\) gives an
+integer coefficient sequence \(f_U\).  Its Boolean M\"obius condition is
+\((\mu*f_U)(n)\in\{0,1\}\), and inversion reconstructs the support as
+\(A_U=\{n\geq1:(\mu*f_U)(n)=1\}\).  These are exactly the conditions in
 Theorem~\ref{res:carrycert}.  That theorem is the Lean-checked
 fraction-by-fraction equivalence
 \lword{BooleanMobiusCarry.lean}{948}{exists_normalized_support_fraction_iff_exists_booleanMobiusCarry}{between supports and carry certificates};
