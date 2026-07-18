@@ -27,7 +27,7 @@ The workflow provenance explains the release discipline; it does not imply hidde
 | Lean declarations | 12,578 |
 | Theorem-like declarations | 11,539 |
 | Generated certificate declarations | 2,925 |
-| Principal claim links | 290 |
+| Principal claim links | 291 |
 
 The exhaustive declaration and import index is
 [`docs/declaration_atlas.json`](declaration_atlas.json). Generated certificate

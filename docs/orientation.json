@@ -27,7 +27,7 @@
   "declaration_count": 12578,
   "theorem_like_count": 11539,
   "generated_certificate_declaration_count": 2925,
-  "principal_claim_link_count": 290,
+  "principal_claim_link_count": 291,
   "kind_counts": {
    "abbrev": 9,
    "def": 992,
@@ -56,7 +56,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "Erd\\H{o}s \\#249",
-    "line": 3537
+    "line": 3540
    }
   },
   {
@@ -67,7 +67,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "unbounded certificate supply",
-    "line": 3548
+    "line": 3551
    }
   },
   {
@@ -78,7 +78,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "the half-value counterexample route",
-    "line": 3569
+    "line": 3572
    }
   },
   {
@@ -89,7 +89,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "universal Erd\\H{o}s \\#257",
-    "line": 3560
+    "line": 3563
    }
   }
  ],
@@ -559,18 +559,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_integer_greedy_first_wrap_plain_language_audit",
+   "id": "main_paper_fatal_gap_right_tail_plain_language_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "The first-wrap passage calls the exact greedy remainder condition merely small and positive without defining the target, the strip bound, the descending greedy remainder, or the inequality that is equivalent to a seam defect",
-   "statement": "For s >= 3, define the seam target C_s = 2^(2s-1) - 2^s, the strip bound B_s = 2 sqrt(2s) + 4, and the descending greedy remainder r_s for the proper-divisor seam weights. State the exact equivalence between a positive subset-sum defect at most B_s and 1 <= r_s <= B_s, and explain the role of the 2^(s+1) gap. Preserve that no theorem supplies the required unbounded-scale remainder bound and that this does not prove Erdős #257."
+   "defect_class": "The fatal-gap paragraph gives three equivalences but does not define eventual right extension or show the two strict inequalities that make a finite half gap fatal for every continuation",
+   "statement": "Define eventual right extension as the existence of S such that every seam word after row S is obtained by appending true. Define a fatal half gap using a finite prefix u at depth d: its completed future tail remains below 1/2, while adding the next Mersenne weight jumps above 1/2. State the exact equivalence with half nonmembership and a final real-greedy skip, while preserving that the equivalence does not decide which branch holds or prove universal Erdős #257."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "ebc98ee71f6819bd9fe344a0bb343542c604e533",
-  "committed_navigation_snapshot": "bdf1ac22131d16bb1bd014511d4dd74a9b490c92",
-  "main_paper_source_digest": "sha256:56684b04ab496e8b7411d0b944b83dceb2424e795d9daa5cd739904e98c84d53"
+  "committed_navigation_snapshot": "d4439d1451291b2c13934336232af5d344e7626f",
+  "main_paper_source_digest": "sha256:74cddcc3db87456132d69ce4418fb3da386cd50867b85ed2e91e034d475fbc6a"
  },
  "reading_routes": [
   {
