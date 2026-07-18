@@ -1218,13 +1218,19 @@ support of value $1/2$
 (\lword{HalfCarryReachability.lean}{1027}{exists_infinite_support_half_of_canonicalEvenSeamSupply}{the half-value conclusion}).
 The seam supply is unproved, so Erd\H{o}s~\#257 remains undecided.
 
-\paragraph{Cofinal strip returns.}  The all-level strip hypothesis can be
-weakened for the canonical greedy half carry.  Its uncentred, binary-scaled
-form is antitone.  Consequently, if it returns to the square-root strip
-cofinally, then one sufficiently late return bounds every later scaled carry;
-the strip envelope divided by $2^N$ tends to zero.  The resulting tempered
-centred carry yields a support selected by the greedy expansion whose series
-value is $1/2$; the finite-support exclusion makes that support infinite.
+\paragraph{Cofinal strip returns.}  Let $A_g$ be the canonical greedy support
+of $1/2$, and set $G_N=K_{N+1}$, $S_N=G_N/2^N$, and
+$B_N=H_{N+1}/2^N$.  The recurrence yields
+$S_{N+1}=S_N-f_{A_g}(N+2)/2^{N+1}\leq S_N$, so $S_N$ is non-increasing
+(\lword{CofinalStripReturn.lean}{23}{scaled_integerHalfCarry_antitone}{the scaled-carry monotonicity}),
+and the proved nonnegativity of $G_N-1$ gives $S_N\geq0$; meanwhile $B_N\to0$
+(\lword{CofinalStripReturn.lean}{42}{tendsto_halfStripBound_succ_div_pow_zero}{the strip-envelope limit}).
+Cofinal returns give arbitrarily late $M$ with $S_M\leq B_M$.  For
+$\varepsilon>0$, choose one with $B_M<\varepsilon$; then
+$0\leq S_N\leq S_M\leq B_M<\varepsilon$ for
+$N\geq M$, so $S_N\to0$.  Hence the centred carry $C_N=G_N-1$ satisfies
+$C_N/2^N\to0$, and the tempered-carry theorem gives an infinite greedy support
+of value $1/2$.
 
 \begin{proposition}[cofinal strip-return criterion]\label{res:cofinalstripreturn}
 Let \(G_M\) be the uncentred integer carry of the canonical greedy expansion
@@ -4265,20 +4271,17 @@ appendix, remain the missing statements identified in the main text.
 
 \section{Guide to the formal sources}\label{app:index}
 
-The paper is meant to be read as mathematics.  Each blue phrase following a
-formalised statement links to its exact checked theorem at one pinned public
-revision; the machine-readable audit layer records declaration names.
-For a first reading, use
-Theorem~\ref{res:farey} for the totient denominator exclusion;
-Proposition~\ref{res:complete} and
-Theorems~\ref{res:pointwisecomplete}--\ref{res:diag} for the exact certificate
-equivalences; and the half-value classifications, Theorems~\ref{res:halfmembership}
-and~\ref{res:fatalright}.  Theorem~\ref{res:full} gives the classical
-full-support result, while Section~\ref{sec:architecture} compares the reductions.
-For the strongest independent structure, see Theorem~\ref{res:dyadictotient},
-the sublogarithmic zero-window corollary, and
-Theorems~\ref{res:sternbrocotcylinders} and~\ref{res:sternbrocotruns}.
-The public repository supplies the complete searchable cross-reference.
+Each blue mathematical phrase links to its exact checked theorem at one pinned
+public revision; the machine-readable audit layer records declaration names.
+For a first reading, use Theorem~\ref{res:farey},
+Proposition~\ref{res:complete}, Theorems~\ref{res:pointwisecomplete}--\ref{res:diag},
+and the half-value classifications, Theorems~\ref{res:halfmembership}
+and~\ref{res:fatalright}.  Theorem~\ref{res:full} gives the classical result,
+while Section~\ref{sec:architecture} compares the reductions.  For the
+strongest independent structure, see Theorem~\ref{res:dyadictotient}, the
+sublogarithmic zero-window corollary, and Theorems~\ref{res:sternbrocotcylinders}
+and~\ref{res:sternbrocotruns}.  The public repository supplies the complete
+searchable cross-reference.
 
 % Retain the exhaustive source-link manifest in the authored TeX for automated
 % validation and query tooling, but keep it outside the printed paper.
