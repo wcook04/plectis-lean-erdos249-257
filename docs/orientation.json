@@ -559,18 +559,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_249_certificate_quantifiers_reader_entry_audit",
+   "id": "main_paper_249_cone_flatness_finite_example_reader_entry_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "The exact tail-period theorem displays four nested certificate variables without first assigning their reader-facing roles, making the open supply harder to distinguish from the verified finite instances",
-   "statement": "Before the exact tail-period characterisation, explain that h is a candidate rational period, N_0 demands evidence arbitrarily far out, N chooses the later location, and L is the finite verification depth; preserve the exact equivalence and the boundary that bounded examples do not supply these quantifiers."
+   "defect_class": "The verified finite-range list invokes cone flatness and vertices before giving a cold reader their mathematical meaning, obscuring what the joint finite certificate actually rules out",
+   "statement": "Replace or immediately gloss the cone-flatness item with a plain description of the simultaneous tail-integrality pattern refuted by the tabulated finite certificate; preserve its formal link and the boundary that it is not an unbounded certificate supply."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "ebc98ee71f6819bd9fe344a0bb343542c604e533",
-  "committed_navigation_snapshot": "7411530384aacdcd1a262b38d9cb9add2f123a2c",
-  "main_paper_source_digest": "sha256:52cb0e52d43855868df3024db7693fb70798dd59fc8786ce961b10b703b54f06"
+  "committed_navigation_snapshot": "631db854a1a2cc05210337ac626b0995e709983c",
+  "main_paper_source_digest": "sha256:8a625b9c6d424ca015edc2066b3ce983b22605e1d298a8b49ce7a601e1df7913"
  },
  "reading_routes": [
   {
