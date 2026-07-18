@@ -1120,30 +1120,33 @@ half-membership without an additional supply hypothesis.  Nothing in this subsec
 
 \subsubsection{A conditional pairwise-coprime dilation criterion}\label{res:sunflower}
 
-Let $A$ be a finite-core orthogonal-petal bouquet: outside a finite frame, its
-elements have the form $c_i p_i$, where the cores $c_i$ divide one fixed
-integer and the nontrivial petals $p_i$ are pairwise coprime to that frame and
-to one another, with summable reciprocal mass.  The formal construction also
-contains an explicit infinite example with alternating cores $2$ and $3$ and
-squared prime petals; every member of this support has exactly three prime
-factors with multiplicity.
+Write $A=E\cup\{c_ip_i:i\geq0\}$, where $E$ is a finite set of positive
+integers and $Q,c_i,p_i$ are positive.  Suppose that $Q$ is divisible by every
+$d\in E$ and every $c_i$, while $p_i>1$ is coprime to $Q$ and to $p_j$ for
+$j\ne i$, and $\sum_i1/p_i<\infty$.  We call this a
+\emph{finite-core orthogonal-petal bouquet}: $Q$ carries the fixed factors and
+the $p_i$ are mutually coprime.  Lean includes the example $E=\varnothing$,
+$Q=6$, with $c_i$ alternating between $2,3$ and
+$p_i=5^2,7^2,11^2,\ldots$; each support element has three prime factors with
+multiplicity.
 
-For such a bouquet, the remaining input is an exact tail-selection predicate:
-at every positive binary scale it chooses a carry slot with a normalised tail
-at most $16$.  Lean proves that this predicate supplies the needed forced-carry
-certificates and hence irrationality of the base-$2$ support series.  The
-result is
-\lword{SupportSunflowerDichotomy.lean}{540}{irrational_erdosSupportSeries_of_orthogonalPetalBouquet}{the conditional bouquet irrationality theorem},
-with the carry bridge at
-\lword{SupportSunflowerDichotomy.lean}{531}{sunflowerForcedCarrySupply_of_orthogonalPetalBouquet}{the forced-carry implication}.
-The tail-selection predicate itself is not proved here.  Thus this is a
-conditional reduction for one structured support family, not a further
-unconditional case of Erd\H{o}s~\#257.
+Put $f_A(n)=\#\{d\in A:d\mid n\}$ and
+$T_A(M)=\sum_{j\geq1}f_A(M+j)2^{-j}$.  For every $K\geq1$, the unproved
+selector requires some $N$ for which
+$2^K\mid\sum_{r=1}^K f_A(N+r)2^{K-r}$ and $T_A(N+K)\leq16$.
+These are the carry divisibility and scaled-tail bounds.  Lean proves that
+they imply the
+\lword{SupportSunflowerDichotomy.lean}{531}{sunflowerForcedCarrySupply_of_orthogonalPetalBouquet}{forced-carry certificate supply}
+and hence
+\lword{SupportSunflowerDichotomy.lean}{540}{irrational_erdosSupportSeries_of_orthogonalPetalBouquet}{irrationality of the support series}.
+The selector itself is not proved.  This is therefore a conditional reduction
+for one structured support family, not an unconditional case of
+Erd\H{o}s~\#257.
 
 \subsubsection{Composite dilation defects}\label{res:compositedefect}
 
-For a support divisor count $f_A(x)=\#\{d\in A:d\mid x\}$, multiplication by
-a composite support element $a$ has an exact correction term.  Besides the
+For the same divisor count $f_A$, multiplication by a composite support
+element $a$ has an exact correction term.  Besides the
 distinguished divisor $a$, the new divisors are counted by a finite defect
 which excludes divisors already present at $x$.  The formal identity is
 \lword{CompositeDilationDefect.lean}{30}{supportCoeff_mul_eq_add_defect}{the composite-dilation identity}.
