@@ -2040,7 +2040,7 @@ Rationality therefore supplies one period \(h\) all of whose tail
 differences at large \(N\) are integral; conversely, a single integral
 positive-shift difference already forces \(S\) to be rational.  A finite
 certificate refutes one candidate integrality, and refuting every period
-at cofinally many \(N\) refutes rationality outright.  This is the
+at arbitrarily large \(N\) refutes rationality outright.  This is the
 mechanism behind the equivalences of this subsection.
 
 \begin{definition}[tail differences and finite certificates]
@@ -2073,8 +2073,8 @@ Heuristically, the two margins together occupy a proportion of about
 \(2^L\) is large compared with \(N+h+L\); a certificate can fail only
 when the residue lies exceptionally close to \(0\) or \(2^L\), that is,
 when the tail difference is exceptionally close to an integer.  Nothing
-in this paper converts that observation into the required cofinal
-supply.
+in this paper converts that observation into the required supply at
+arbitrarily large \(N\).
 
 \begin{proposition}[certificate completeness]\label{res:complete}
 For every $h\ge1$ and $N\ge0$,
@@ -2113,16 +2113,16 @@ The converse direction uses the fact that integrality of even one
 positive-shift tail difference forces $S$ to be rational
 (\lword{LcmConeFlatness.lean}{357}{not_irrational_of_tail_diff_mem_int}{integral-difference rationality criterion}).
 
+Here $h$ tests a candidate rational period, $N_0$ means ``after every cutoff'',
+$N\geq N_0$ chooses the location, and $L$ is the finite binary depth checked
+there.  A bounded list cannot cover every $h$ and every $N_0$.
+
 \begin{theorem}[exact tail-period characterisation]\label{res:red21}
 $S$ is irrational if and only if, for every period $h\ge1$ and every threshold
 $N_0$, there exist $N\ge N_0$ and $L$ with $\mathsf{Sep}(h,N,L)$.
 \end{theorem}
 \noindent Formalised as the
 \lword{LcmConeFlatness.lean}{412}{irrational_totient_series_iff_certificate_supply}{certificate-supply equivalence}.
-Proposition~\ref{res:complete} supplies the fixed-parameter equivalence;
-Theorem~\ref{res:pointwisecomplete} assembles all fixed pairs; and
-Theorem~\ref{res:red21} allows the certificate location \(N\) to be chosen
-beyond any prescribed threshold.
 
 Every multiple of an eventual period is again a period, and every fixed
 \(h\) divides \(M_t\) for all \(t\geq h\).  The least common multiple
@@ -2145,7 +2145,7 @@ Its reverse implication reuses the diagonal-supply theorem, while its forward
 implication uses Theorem~\ref{res:pointwisecomplete} at the pair
 \((M_{t_0},M_{t_0})\).
 The theorem replaces the two free parameters \(h,N\) by \((M_t,M_t)\);
-producing that cofinal one-parameter family is still open.
+producing such certificates at arbitrarily large \(t\) is still open.
 
 \begin{example}[verified finite range]\label{res:deposits}
 Lean checks:
