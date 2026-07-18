@@ -901,15 +901,15 @@
         "schema": "erdos249257-editorial-state/1",
         "scope": "continuous_whole_main_paper_exposition",
         "current_priority": {
-          "id": "main_paper_249_scalar_criterion_plain_language_audit",
+          "id": "main_paper_257_scalar_criterion_plain_language_audit",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "defect_class": "The #249 half of the scalar-criteria section introduces canonical adjacent-suffix depth, central-band residue, cofinal strict-jump slack, and cofinal failure faster than a cold reader can connect them to the finite certificate test just developed",
-          "statement": "Explain the roles of M_t, m_t, d_t, and sigma_t in ordinary terms and replace cofinal shorthand with beyond-every-cutoff language, while preserving the fixed-scale central-band equivalence, the sufficient-only strict-jump corollary, the absence of a necessity implication, and that failure refutes only this route rather than proving irrationality."
+          "defect_class": "The #257 half of the scalar-criteria section introduces a normalized phase, a second geometric channel, distance from one third, and a from-seven membership criterion faster than a cold reader can see what r_n and u_n measure or why the scalar inequality controls skipped exponents",
+          "statement": "Explain r_n and u_n in reader-facing terms and say why separation from one third is useful, while preserving the verified prefix 1 <= n <= 6, the conditional range n >= 7, the exact membership--infinite-omission equivalence, and that this route would refute rather than prove universal #257."
         },
         "last_verified_wave": {
-          "id": "main_paper_proof_authority_plain_language_audit",
+          "id": "main_paper_249_scalar_criterion_plain_language_audit",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "result": "Replaced Lean-internal trust shorthand with a compact reader-facing account: tactics construct proof terms that the kernel checks; norm_num and decide are glossed; maxRecDepth is identified as an unfolding limit; native_decide, Lean.trustCompiler, sorryAx, generated Lean certificates, and external release artefacts are placed on the correct sides of the trust boundary. The paper remains 53 pages."
+          "result": "Explained P_L(N) as a base-two weighted totient block, m_t as the prescribed logarithmic depth, d_t as the block-difference residue, and sigma_t as signed distance from the central-band edge; replaced cofinal shorthand with beyond-every-cutoff language and retained the fixed-depth equivalence, sufficient-only irrationality criterion, no-converse boundary, and route-specific failure statement. The paper remains 53 pages."
         },
         "active_inconsistencies": [],
         "blocked_decisions": []
@@ -7540,7 +7540,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 3486
+        "line": 3491
       }
     },
     {
@@ -7551,7 +7551,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 3497
+        "line": 3502
       }
     },
     {
@@ -7562,7 +7562,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "the half-value counterexample route",
-        "line": 3518
+        "line": 3523
       }
     },
     {
@@ -7573,7 +7573,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 3509
+        "line": 3514
       }
     }
   ],

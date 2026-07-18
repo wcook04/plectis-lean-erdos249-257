@@ -131,8 +131,9 @@ decide whether $1/2$ is attainable.
 
 The two questions are whether
 $S=\sum_{n\ge1}\ph(n)/2^n$ is irrational (\#249), and whether
-$\sum_{n\in A}(2^n-1)^{-1}$ is irrational for every infinite
-$A\subseteq\Npos$ (\#257).  Here \(\ph(n)\) is Euler's totient, the number
+$\sum_{n\in A}(2^n-1)^{-1}$ is irrational
+for every infinite $A\subseteq\Npos$ (\#257).
+Here \(\ph(n)\) is Euler's totient, the number
 of integers from \(1\) to \(n\) that are coprime to \(n\).  Problem \#249
 appears on p.~61 of Erd\H{o}s--Graham and p.~102 of Erd\H{o}s's
 survey~\cite[p.~61]{erdosgraham1980}\cite[p.~102]{erdos1988}; problem
@@ -3374,28 +3375,33 @@ For \#249, retain $M_t=\lcm(1,\ldots,t)$ and write
 \[
  P_L(N)=\sum_{j=0}^{L-1}\ph(N+1+j)\,2^{L-1-j}.
 \]
-The canonical adjacent-suffix depth and its residue are
+Thus \(P_L(N)\) is the base-two weighted block of the next \(L\) totient
+values after \(N\).  At scale \(t\), choose one logarithmic depth and compare
+the blocks after \(M_t\) and \(2M_t\):
 \[
  m_t=\lfloor\log_2 M_t\rfloor+10,\qquad
  d_t=\bigl(P_{m_t}(2M_t)-P_{m_t}(M_t)\bigr)\bmod 2^{m_t},
 \]
-where $0\le d_t<2^{m_t}$.  Define
+where $0\le d_t<2^{m_t}$.  The integer \(d_t\) is their block-difference
+residue.  Define
 \[
   \sigma_t=\min\bigl(d_t-2^{m_t-5},
     (2^{m_t}-2^{m_t-5})-d_t\bigr)\in\Z.
 \]
+This is the signed distance from the nearer edge of the central band below:
+it is nonnegative exactly on that band and negative outside it.
 
-\begin{proposition}[canonical central-band equivalence]\label{res:slackfrontier}
-For every $t\ge1$, the canonical residue lies in the central band
+\begin{proposition}[fixed-depth central-band equivalence]\label{res:slackfrontier}
+For every $t\ge1$, the residue \(d_t\) lies in the central band
 $[2^{m_t-5},2^{m_t}-2^{m_t-5}]$ if and only if $\sigma_t\ge0$.
 \end{proposition}
-\noindent This fixed-scale equivalence and its cofinal strict-jump form are
-the
+\noindent This fixed-scale equivalence and its beyond-every-cutoff strict-jump
+form are the
 \lword{DiagonalFreshLossBridge.lean}{2469}{canonicalAdjacentSuffixCentral_iff_slack_nonneg}{canonical central-band equivalence}
 and
 \lword{DiagonalFreshLossBridge.lean}{2559}{canonicalAdjacentSuffixJumpCentralSupply_iff_slackSupply}{strict-jump slack equivalence}.
 
-\begin{corollary}[cofinal strict-jump slack criterion]
+\begin{corollary}[strict-jump slack criterion]
 \label{res:slackcriterion}
 If, for every $t_0$, there is a $t\ge\max\{3,t_0\}$ such that
 \[
@@ -3404,13 +3410,13 @@ If, for every $t_0$, there is a $t\ge\max\{3,t_0\}$ such that
 then $S$ is irrational.
 \end{corollary}
 \noindent This implication is the
-\lword{DiagonalFreshLossBridge.lean}{2731}{irrational_totientSeries_of_canonicalAdjacentSuffixJumpSlackSupply}{cofinal-slack irrationality criterion}.
-The proposition identifies equivalent scalar forms; the corollary is
-one-way and does not prove that $\sigma_t$ is nonnegative cofinally.  No
-necessity implication is proved: completeness supplies some successful depth
-at every non-integral diagonal difference, but nothing forces success at the
-canonical depth $m_t$.  Cofinal failure would refute this route, not prove
-irrationality of \(S\).
+\lword{DiagonalFreshLossBridge.lean}{2731}{irrational_totientSeries_of_canonicalAdjacentSuffixJumpSlackSupply}{strict-jump slack irrationality criterion}.
+The proposition is an equivalence at each fixed \(t\); the corollary is
+one-way and does not prove that nonnegative slack occurs after every cutoff.
+No converse is known.  Completeness allows the successful depth to depend on
+the tail difference, whereas this criterion prescribes \(m_t\).  Eventual
+negative slack at every strict jump would refute only this route; it would not
+decide whether \(S\) is rational.
 
 For \#257, write $r_n$ for the exact greedy residual of the target $1/2$ and
 put
@@ -3458,8 +3464,8 @@ The finite proposition supplies no case of the missing range \(n\ge7\).
 The two criteria have the proved logical form
 \[
 \begin{array}{c}
- \text{cofinal nonnegative slack}\\[-1pt]
- \text{at strict lcm jumps}\\
+ \text{after every cutoff, nonnegative slack}\\[-1pt]
+ \text{occurs at a strict lcm jump}\\
  \Downarrow\\
  \text{unbounded \#249 certificate supply}\\
  \Downarrow\\
@@ -3498,7 +3504,7 @@ following exact quantifier statement.
 Prove~\eqref{eq:unbounded-certificate-supply}.
 Equivalently, prove the lcm-diagonal supply in
 Theorem~\ref{res:diag}.  The finite scales in
-Example~\ref{res:deposits} do not establish either cofinal form.
+Example~\ref{res:deposits} do not establish either unbounded form.
 \end{problem}
 
 These are not two independent open problems: Theorem~\ref{res:red21} and
@@ -3532,8 +3538,9 @@ For the half-value route to \#257, the search over arbitrary supports has been
 replaced by one canonical greedy-orbit question.  In the present final-skip
 argument that question is localised further to two obligations: exclude the
 middle cells \(-2,-1\), and prove the future-tail inequality at the remaining
-nonnegative-carry middle transitions.  A cofinal \#249 certificate theorem would prove \#249;
-a cofinal terminal-zero theorem would refute universal \#257; and a proof of
+nonnegative-carry middle transitions.  A \#249 certificate theorem beyond
+every cutoff would prove \#249; a terminal-zero theorem beyond every row
+cutoff would refute universal \#257; and a proof of
 eventual right behaviour would prove only \(1/2\notin\mathcal A\).
 
 \paragraph{Two refinements not pursued.}
