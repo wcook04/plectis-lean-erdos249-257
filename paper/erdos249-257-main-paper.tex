@@ -84,8 +84,8 @@
 \newcommand{\Irr}{\text{ irrational}}
 \newcommand{\Qzero}{Q_0}
 
-\title{\vspace{-4em}Tail Certificates and Achievement-Set Geometry\\
-{\large Lean-checked exact reductions for Erd\H{o}s~\#249 and the half-value branch of Erd\H{o}s~\#257}}
+\title{\vspace{-4em}Exact Reductions for Two Open Irrationality Problems of Erd\H{o}s\\
+{\large A Lean formalisation of Problem~\#249 and the half-value branch of Problem~\#257}}
 \author{Will Cook \qquad July 2026}
 \date{}
 
@@ -95,58 +95,41 @@
 
 \begin{abstract}
 \noindent
-For the totient constant $S=\sum_{n\ge1}\ph(n)/2^n$ of Erd\H{o}s~\#249 and
-the Mersenne support sums $\sum_{n\in A}(2^n-1)^{-1}$ of Erd\H{o}s~\#257,
-we formalise two exact rationality constraints in Lean.  Rationality of $S$
-is equivalent to eventual periodicity of its binary expansion; its shifted
-tails record this period.  For a rational support sum, binary long division
-gives an integer remainder recurrence;
-M\"obius inversion of its successive quotients recovers the $0$--$1$
-indicator of $A$.  We also give two exact reformulations in terms of events
-beyond every bound:
-irrationality of $S$ is equivalent to finite certificates occurring at
-arbitrarily large least-common-multiple scales, while some support sum equals
-$1/2$ exactly when the greedy construction skips weights beyond every bound.
-The latter would refute \#257 but concerns only the half-value target.
-A finite exact calculation excludes every rational representation $S=p/q$ with
-$q\le\Qzero\approx7.96\times10^{34}$; hence a rational representation must
-have $q>\Qzero$.  At fixed shifts, a certificate exists exactly when the
-difference between the corresponding tails is non-integral.
-Writing \(M_t=\lcm(1,\ldots,t)\), Lean verifies certificates at all 28
-values through \(t=64\) for which \(M_t\) changes, including \(t=1\).
-This is finite evidence only; the unbounded supply is open.  A construction using
-the Chinese remainder theorem and
-Dirichlet's theorem also proves that the
-residue-class subsequences \(n\mapsto\ph(2^j n+r)\) span an
-infinite-dimensional space: a canonical level-$e$ family has exact dimension
-$2^e+1$.  If $S$ were rational, binary long division would instead produce
-an integer state sequence of subexponential growth whose level-$e$
-residue-class subsequences span at least $2^e-1$ dimensions.  No matching
-upper bound is known, so this does not prove irrationality.
+Let $S=\sum_{n\geq1}\ph(n)/2^n$, and for $A\subseteq\Npos$ let
+$X_A=\sum_{n\in A}(2^n-1)^{-1}$.  Erd\H{o}s asked whether $S$ is
+irrational (Problem~\#249) and whether $X_A$ is irrational for every
+infinite $A$ (Problem~\#257).  Both problems remain open.  We formalise in
+Lean two exact reductions that isolate the missing unbounded step in each
+question.
 
-For Erd\H{o}s~\#257, we formalise Erd\H{o}s's classical theorem for full
-support in every base and several structured-support cases.  At base \(2\)
-we prove the geometry of the achievement set (the set of all support sums)
-and necessary carry and gap constraints on hypothetical rational infinite
-supports.  In particular, consecutive stretches on which the divisor-count
-function
-\(f_A(m)=\#\{a\in A:a\mid m\}\) vanishes have sublogarithmic length,
-uniformly in the support.
-Membership of
-\(1/2\), which would refute the universal statement, is exactly equivalent to
-infinitely many greedy skips; a skip is a weight omitted by the greedy
-construction.  Nonmembership is exactly equivalent both to a
-finite stage whose residual exceeds all remaining mass and to a final greedy skip.
+For \#249, irrationality of $S$ is equivalent to the existence, beyond
+every bound, of a finite integer calculation plus a rigorous tail estimate
+showing that two shifted binary tails differ by a non-integer.  We also prove
+unconditionally that any rational representation $S=p/q$ has
+$q>\Qzero\approx7.96\times10^{34}$.  Writing
+$M_t=\lcm(1,\ldots,t)$, Lean checks such a calculation for $t=1$ and for
+every subsequent $t\leq64$ at which $M_t$ changes, 28 values in all.  These
+checks remain finite; they do not prove the required unbounded supply.
 
-After a putative final skip, the recurrence has two possible branches.  The
-current argument rules out one branch completely and the carry value \(-3\)
-in the other.  It leaves the values \(-2\) and \(-1\) and a future-tail
-inequality for the nonnegative carries.  Both series arise from one Lambert transform;
-this explains their common coordinates but transfers no theorem between
-them.  Neither the required unbounded \#249 certificate supply nor the
-required recurrence of \#257 greedy skips is proved.  The universal \#257
-statement and half-value membership remain open.  Neither problem is
-settled.
+For \#257, we formalise the classical irrationality theorem for the sum over
+all positive exponents in every integer base $b\geq2$, together with several
+structured infinite choices of $A$.  For any rational
+value $X_A$, binary long division yields integer remainders from which the
+$0$--$1$ indicator of $A$ can be recovered exactly.  At base $2$, each
+weight exceeds the sum of all later weights, so every attainable value has a
+unique set of selected exponents.  The value $1/2$ is attainable exactly when
+its greedy expansion omits weights at arbitrarily large ranks.  This would give an
+infinite $A$ with rational sum $X_A=1/2$ and refute the universal assertion
+in \#257.  Nonattainment is exactly equivalent to a final omitted weight.  If
+such a final omission existed, the next-step recurrence would have two
+branches.  We exclude one branch and the integer remainder value $-3$ in the
+other; the values $-2,-1$ and an inequality involving the entire future tail
+remain unresolved.
+
+An exact change of variables places both series in one common formula, but
+transfers no irrationality theorem between them.  We prove neither the
+irrationality of $S$ nor the universal assertion in \#257, and we do not
+decide whether $1/2$ is attainable.
 \end{abstract}
 
 \section{Introduction}\label{sec:intro}

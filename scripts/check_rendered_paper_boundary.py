@@ -43,11 +43,11 @@ FIRST_MINUTE_CONTRACT = {
     "erdos249-257-main-paper.pdf": {
         (1, 1): (
             "q > q0",
-            "full support in every base",
-            "would refute the universal statement",
+            "all positive exponents in every integer base",
+            "refute the universal assertion",
             "neither problem is settled",
-            "required unbounded #249 certificate supply",
-            "required recurrence of #257 greedy skips",
+            "do not prove the required unbounded supply",
+            "we do not decide whether 1/2 is attainable",
         ),
         (2, 4): (
             "an exact certificate normal form",
