@@ -2139,12 +2139,9 @@ The following are equivalent:
 \end{aligned}
 \]
 \end{theorem}
-\noindent The complete equivalence is the
+\noindent Formalised as the
 \lword{LcmConeFlatness.lean}{426}{irrational_totient_series_iff_lcm_diagonal_certificate_supply}{exact lcm-diagonal characterisation}.
-Its reverse implication reuses the diagonal-supply theorem, while its forward
-implication uses Theorem~\ref{res:pointwisecomplete} at the pair
-\((M_{t_0},M_{t_0})\).
-The theorem replaces the two free parameters \(h,N\) by \((M_t,M_t)\);
+This replaces the two free parameters \(h,N\) by \((M_t,M_t)\);
 producing such certificates at arbitrarily large \(t\) is still open.
 
 \begin{example}[verified finite range]\label{res:deposits}
@@ -2158,11 +2155,10 @@ lcm-height change endpoint $2\le t\le64$ (that is, $M_{t-1}<M_t$), namely
 t\in\{1,2,3,4,5,7,8,9,11,13,16,17,19,23,25,27,29,31,32,37,41,43,
 47,49,53,59,61,64\};
 \]
-\item a finite joint certificate refuting cone flatness at a tabulated family
-of vertices.
+\item three finite menus of tails that cannot all share one fractional part.
 \end{itemize}
 \end{example}
-\noindent The four validation classes are formalised, in order, by the
+\noindent These four classes are formalised by the
 \lword{TotientTailPeriodKiller.lean}{404}{certifiedKill_all_small}{small-window certificate family},
 \lword{CarrySurvivorExtinction.lean}{574}{certifiedKill_all_upto_sixteen}{periods through sixteen},
 \lword{DiagonalPincerCertificatesT64.lean}{1967}{certifiedKill_diagonal_all_imported_through_t64}{28 imported diagonal certificates through scale 64},
@@ -2179,8 +2175,8 @@ while the omitted-tail allowance is $12+1+16+2=31$.  Hence
 31<53468<2^{16}-31,
 \]
 which is exactly $\mathsf{Sep}(1,12,16)$ and therefore proves
-$R_{13}-R_{12}\notin\Z$.  Every row above has this exact status: it proves a
-particular non-integral tail difference, not an unbounded supply.
+$R_{13}-R_{12}\notin\Z$.  Pairwise rows name a non-integral difference; joint
+rows prove that one exists within the menu.  They do not form an unbounded family.
 
 \subsection{What remains open}\label{sec:249-open}
 
