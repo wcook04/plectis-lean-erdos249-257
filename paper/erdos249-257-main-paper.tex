@@ -1145,17 +1145,21 @@ Erd\H{o}s~\#257.
 
 \subsubsection{Composite dilation defects}\label{res:compositedefect}
 
-For the same divisor count $f_A$, multiplication by a composite support
-element $a$ has an exact correction term.  Besides the
-distinguished divisor $a$, the new divisors are counted by a finite defect
-which excludes divisors already present at $x$.  The formal identity is
+Let $\Delta_A(a,x)$ count the $d\in A$ such that $d\mid ax$, $d\nmid x$,
+and $d\ne a$.  For $a\in A$ and $a,x>0$, partitioning the support divisors of
+$ax$ gives
+$f_A(ax)=f_A(x)+\mathbf 1_{a\nmid x}+\Delta_A(a,x)$:
 \lword{CompositeDilationDefect.lean}{30}{supportCoeff_mul_eq_add_defect}{the composite-dilation identity}.
-For a finite-core orthogonal-petal bouquet, the defect at a ray is bounded by
-the finite exceptional frame plus the divisor count of the petal support:
+For $A=\{2,6\}$ and $(a,x)=(6,1)$, the additional divisor $2$ gives
+\lword{CompositeDilationDefect.lean}{218}{compositeDilationDefect_two_six_fixture}{\(\Delta_A(6,1)=1\)}.
+
+If $A=E\cup\{c_jp_j:j\geq0\}$ is a bouquet and $a=c_ip_i$, every divisor
+counted by $\Delta_A(a,x)$ either lies in $E$ or equals $c_jp_j$ with
+$j\ne i$ and $p_j\mid x$.  Hence, for $P=\{p_j:j\geq0\}$,
+$\Delta_A(c_ip_i,x)\leq |E|+f_P(x)$:
 \lword{CompositeDilationDefect.lean}{151}{compositeDilationDefect_le_exceptional_add_petalCoeff}{the bouquet defect bound}.
-This records the local correction needed when dilation is not prime.  It does
-not prove a correlation estimate, the sunflower tail selector, or an
-irrationality statement.
+These finite local identities prove neither a correlation estimate, the tail
+selector, nor irrationality.
 
 \subsubsection{Mixed prime-power layers}\label{res:mixedlayer}
 
