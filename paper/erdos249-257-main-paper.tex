@@ -1501,13 +1501,13 @@ $\Theta_D<C_D$ at every actual middle transition $D\ge13$ except $C_D=-3$.
 Since $\Theta_D\ge0$, exactly two open tasks remain: exclude $C_D=-2,-1$,
 and prove $\Theta_D<C_D$ at every remaining transition with $C_D\ge0$.
 Together they imply half-membership,
-\lword{HalfCylinderLastProducerContradiction.lean}{387}{half_mem_mersenneAchievementSet_of_middleProducerTailEscapeExceptNegThree}{middle-tail implication}.
-Neither task is proved.  A square-root lower bound is a separate sufficient
-but unproved hypothesis,
-\lword{HalfCylinderLastProducerContradiction.lean}{409}{half_mem_mersenneAchievementSet_of_middleProducerSqrtEscape}{square-root sufficient condition}.
+\lword{HalfCylinderLastProducerContradiction.lean}{387}{half_mem_mersenneAchievementSet_of_middleProducerTailEscapeExceptNegThree}{middle-tail implication};
+a separate square-root lower bound also suffices,
+\lword{HalfCylinderLastProducerContradiction.lean}{409}{half_mem_mersenneAchievementSet_of_middleProducerSqrtEscape}{square-root condition}.
+Neither input is proved.
 
-A single stronger finite hypothesis supplies both tasks.  Put $g_D=\#G_D$.
-Since $A_D=G_D\cup\{D\}$ has $g_D+1$ elements, $\Theta_D\le g_D+1$.
+A stronger finite hypothesis puts $g_D=\#G_D$.  Since
+$A_D=G_D\cup\{D\}$ has $g_D+1$ elements, $\Theta_D\le g_D+1$.
 Using $C_D=4R_{D,D}-P_D-4$, the condition
 $g_D+P_D+5<4R_{D,D}$ is exactly $g_D+1<C_D$.  At every late middle row it
 therefore excludes the negative cells and proves tail dominance.  This is
@@ -1518,14 +1518,15 @@ it follows in turn from $R_{D,D}\ge D$ at every late middle row,
 \lword{HalfCylinderMiddleCarryLowerBound.lean}{1510}{half_mem_mersenneAchievementSet_of_middleProducerRowEscape}{row-scale sufficient condition}.
 Both hypotheses are unproved.
 
-\paragraph{Finite upper-reset band certificates.}  The companion upper
-branch has a kernel-checked finite certificate: for every upper transition
-from rows $13$ through $30$, every subsequent dyadic danger band is avoided.
-The certificate shares each exact successor remainder across all its band
-indices,
-\lword{HalfCylinderUpperResetBandCertificates.lean}{78}{seamUpperResetDyadicBandEscape_through_thirty}{the verified upper-reset certificate}.
-It is a bounded transition check and does not supply the cofinal band-escape
-hypothesis.
+\paragraph{Finite upper-reset band certificates.}  At an upper transition
+$G_{d+1}=H_d$, let $O_d$ be the upper overshoot, $A_d$ its divisor pulse,
+$Q_d=4O_d+A_d$, and $B_{d,j}=2^{d-j+1}$.  For $13\le d\le30$ and $j\le d$,
+Lean proves
+$B_{d,j}<Q_d$ or $Q_d+2(d+j)\le B_{d,j}$,
+\lword{HalfCylinderUpperResetBandCertificates.lean}{78}{seamUpperResetDyadicBandEscape_through_thirty}{the finite upper-reset certificate}.
+Thus $Q_d$ avoids the danger band $Q_d\le B_{d,j}<Q_d+2(d+j)$.
+For fixed $d$, one exact $R_{d+1,d+1}$ certifies every $j$; no $d>30$ is
+checked, so the global band-escape hypothesis remains open.
 
 \subsubsection{Positive half-membership classification}\label{app:halfmembership-detail}
 

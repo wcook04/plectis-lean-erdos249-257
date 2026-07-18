@@ -901,15 +901,15 @@
         "schema": "erdos249257-editorial-state/1",
         "scope": "continuous_whole_main_paper_exposition",
         "current_priority": {
-          "id": "main_paper_upper_reset_band_certificate_plain_language_audit",
+          "id": "main_paper_largest_skip_gap_plain_language_audit",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "defect_class": "The finite upper-reset paragraph uses danger band, shared successor remainder, band index, and cofinal band escape as internal terms without explaining the finite quantified statement or why rows 13 through 30 do not address the unbounded reset problem",
-          "statement": "Define the upper-reset successor and its dyadic danger bands in reader-facing notation, state exactly what is checked for every reset row 13 <= D <= 30, and separate the reused exact remainder from the band inequalities. Preserve that this is a bounded certificate family and supplies no cofinal upper-reset escape theorem."
+          "defect_class": "The largest-skipped-rank paragraph displays an exact identity in L and U without defining those integer word weights, and it names the first-crossing branch hypothesis without explaining how the late-range condition 2s < 3d limits the identity",
+          "statement": "Define L and U as the integer weights of the adjacent lower and upper seam words, explain the exact late-range gap identity under 2s < 3d, and keep the terminal-branch facts separate from the unproved first-crossing hypothesis needed for global propagation."
         },
         "last_verified_wave": {
-          "id": "main_paper_remaining_middle_tail_obligations_plain_language_audit",
+          "id": "main_paper_upper_reset_band_certificate_plain_language_audit",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "result": "Separated the finite -2 residue sieve from the global tail criterion: 412 of 2730 classes are a necessary condition, not an exclusion, and vanishing survivor density need not imply extinction. Stated the two open inputs exactly: exclude C_D = -2,-1 and prove Theta_D < C_D for remaining C_D >= 0. Replaced internal belowPulse/remainder notation by P_D and R_(D,D), and explained that g_D + P_D + 5 < 4 R_(D,D) is exactly g_D + 1 < C_D and therefore dominates Theta_D."
+          "result": "Defined an upper transition G_(d+1) = H_d and the reader-facing quantities Q_d = 4 O_d + A_d and B_(d,j) = 2^(d-j+1). Stated the exact disjunction B_(d,j) < Q_d or Q_d + 2(d+j) <= B_(d,j) for every 13 <= d <= 30 and j <= d, equivalently avoidance of the displayed danger band. Clarified that one exact successor remainder R_(d+1,d+1) is reused across j only as the finite proof device, and that no row beyond 30 or global band-escape hypothesis is proved."
         },
         "active_inconsistencies": [],
         "blocked_decisions": []
@@ -7540,7 +7540,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 3541
+        "line": 3542
       }
     },
     {
@@ -7551,7 +7551,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 3552
+        "line": 3553
       }
     },
     {
@@ -7562,7 +7562,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "the half-value counterexample route",
-        "line": 3573
+        "line": 3574
       }
     },
     {
@@ -7573,7 +7573,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 3564
+        "line": 3565
       }
     }
   ],
@@ -8334,8 +8334,8 @@
       "id": "upper_reset_band_certificates_through_thirty",
       "label": "Upper-reset dyadic-band certificates through row 30",
       "status": "verified finite instance",
-      "bounded_domain": "Upper transitions from rows 13 through 30, with every relevant subsequent dyadic danger band checked for each row.",
-      "statement": "For every upper transition from rows 13 through 30, every relevant subsequent dyadic danger band is avoided. The check shares one exact successor remainder across all band indices for each row. It is bounded evidence and does not prove the cofinal upper-reset band-escape hypothesis.",
+      "bounded_domain": "Upper transitions at every row 13 <= d <= 30 and every band index j <= d; no row d > 30 is checked.",
+      "statement": "At an upper transition G_(d+1) = H_d, put Q_d = 4 O_d + A_d from the upper overshoot and divisor pulse and B_(d,j) = 2^(d-j+1). For every 13 <= d <= 30 and j <= d, Lean proves B_(d,j) < Q_d or Q_d + 2(d+j) <= B_(d,j), equivalently avoidance of Q_d <= B_(d,j) < Q_d + 2(d+j). For fixed d, one exact successor remainder R_(d+1,d+1) certifies every j. This is bounded evidence and proves no global upper-reset band-escape hypothesis.",
       "paper_label": "res:finalskipexclusions",
       "readme_headline": false,
       "declarations": [
