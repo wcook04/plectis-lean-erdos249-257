@@ -803,11 +803,12 @@ Under the hypotheses of Theorem~\ref{res:rigidity-main}, if \(v=1\) and
 see also Corollary~\ref{res:collision}.
 
 These are four independent necessary consequences of the common rationality
-premise, not steps in a proof chain and not a contradiction.
+premise, not a contradiction.
 Appendices~\ref{app:carry-normal-form}--\ref{app:carry-boolean} supply the
 common recurrence and Boolean certificate; Appendices~\ref{app:carry-sublog}
 and~\ref{app:carry-mass} supply the independent filters.  No corollary above
-is used to prove another.
+appears as a hypothesis of another; their appendix proofs do share the carry
+machinery, in the order displayed in Appendix~\ref{app:carry-mass}.
 
 \begin{corollary}[Boolean--M\"obius orbit form of universal \#257]
 \label{res:universal-boolean-obstruction}
@@ -1026,7 +1027,10 @@ exceptional dyadic cells identified by the two-sided induction, only
 \noindent The upper and \(C_D=-3\) exclusions are the
 \lword{HalfCylinderLastProducerContradiction.lean}{250}{upperProducer_not_last}{upper-branch exclusion}
 and
-\lword{HalfCylinderLastProducerContradiction.lean}{315}{middleProducer_neg_three_not_last}{middle-\(-3\) exclusion}.
+\lword{HalfCylinderLastProducerContradiction.lean}{315}{middleProducer_neg_three_not_last}{middle-\(-3\) exclusion};
+the upper case is proved directly at the linked declaration, and
+Appendix~\ref{app:half-final-skip} sketches a prose argument only for the
+\(-3\) cell.
 The three exceptional dyadic cells are identified by the
 \lword{HalfCylinderMiddleCarryLowerBound.lean}{3090}{seamMiddleCoordinate_not_safe_iff_three_cells}{three-cell classification}.
 
@@ -1593,7 +1597,8 @@ Moreover, a doubled-scale deficit forces an upper-or-middle branch within the
 corresponding number of rows,
 \lword{HalfCylinderResetDeficitEscape.lean}{261}{upperOrMiddle_within_of_two_pow_deficit}{the deficit escape bound}.
 The remaining input is the deterministic anti-concentration needed to exclude
-the pinned right-branch window globally.
+the pinned right-branch window globally; no such anti-concentration
+statement is proved here.
 
 \subsubsection{Alignment of seam and transition carries}\label{res:seamproducer}
 
@@ -1636,7 +1641,8 @@ the adjacent base ancestors induces the live next-row profile,
 Under the stated strip and buffer inequalities, that profile realises a
 protected one-hole seam at the next row,
 \lword{RewindSeamOperationalBridge.lean}{217}{protectedEvenSeamRealizedAt_succ_of_profile}{the protected-seam realisation}.
-The base-ancestor coefficient drop is an explicit input, not a theorem here.
+The base-ancestor coefficient drop is an explicit input, not a theorem here,
+and so are the stated strip and buffer inequalities.
 
 \subsubsection{Selected suffix cylinders}
 
@@ -1901,9 +1907,10 @@ the argument if every actual middle transition avoided \(C_D=-2,-1\) and
 satisfied~\textup{(4.2)} in every remaining non-\((-3)\) cell.  Neither
 global obligation is discharged.
 \end{enumerate}
-Appendix~\ref{app:half-technical} records the exact local reductions, finite
-certificates, counterexamples to stronger local assertions, and closed
-strategy branches supporting this conclusion.  They refine the obstruction;
+Appendix~\ref{app:half-technical} records the exact local reductions,
+conditional compactness criteria, finite certificates, counterexamples to
+stronger local assertions, and closed strategy branches supporting this
+conclusion.  They refine the obstruction;
 they do not constitute a second theorem spine.
 
 \section{The totient constant $S$ (Erd\H{o}s \#249)}\label{sec:249}
@@ -2628,18 +2635,22 @@ particular scale; it excludes parity as a sufficient standalone criterion.
 unbounded obstruction is to compare the full target at $H$, $pH$, $qH$, and
 $pqH$.  The following affine transport law rules out this route before any
 projection is introduced.
-For every positive $k$, the actual diagonal satisfies an affine transport law
+\begin{proposition}[prime-adjunction transport collapse]\label{res:primeadjunction}
+For every positive $k$, the actual diagonal satisfies
 \[
  D_{kH}=Q_k(H)D_H+Z_k(H),
  \qquad Q_k(H)\in\N,\quad Z_k(H)\in\Z.
 \]
-Hence integrality at $H$ propagates to every multiple, and the four target hits
-at the prime-adjunction diamond are equivalent to the single hit at its root
-(\lword{FullTargetPrimeAdjunctionNoGo.lean}{196}{fullTarget_primeAdjunction_diamond_iff_root}{prime-adjunction diamond collapse}).
-The corresponding transport of the complete foreign defect has zero diamond
-curvature, in the sense that the two transport compositions around the
-diamond agree exactly
-(\lword{FullTargetPrimeAdjunctionNoGo.lean}{247}{foreignTransportCorrection_primeAdjunction_flat}{foreign-correction flatness}).
+Hence integrality at $H$ propagates to every multiple, and the four target
+hits at the prime-adjunction diamond are equivalent to the single hit at its
+root.  The corresponding transport of the complete foreign defect has zero
+diamond curvature: the two transport compositions around the diamond agree
+exactly.
+\end{proposition}
+\noindent Formalised:
+\lword{FullTargetPrimeAdjunctionNoGo.lean}{196}{fullTarget_primeAdjunction_diamond_iff_root}{the prime-adjunction diamond collapse}
+and
+\lword{FullTargetPrimeAdjunctionNoGo.lean}{247}{foreignTransportCorrection_primeAdjunction_flat}{the foreign-correction flatness}.
 Thus explicit-shadow fibres alone cannot create a transport obstruction.  A
 future positive route would need a separately defined projection together with
 a theorem controlling what that projection discards.  This is a proved
@@ -3566,8 +3577,11 @@ The logical spine is
  &\Longrightarrow& \frac12\in\mathcal A.
 \end{array}
 \]
-The first two and last two lines are conditional implications; the middle
-line is an exact classification.  Appendix~\ref{app:half-localizer} only
+Every displayed implication is proved; the middle line is an exact
+classification.  The open content lies in the antecedents of the first and
+fourth lines, which are the unproved cofinal and exclusion hypotheses; the
+second and fifth lines are unconditional consequences of results already
+stated.  Appendix~\ref{app:half-localizer} only
 localises one transition configuration, while Appendix~\ref{app:half-evidence}
 supplies bounded evidence, coordinate changes, and no-go results.  Neither
 creates a further implication to an open endpoint.
@@ -3581,6 +3595,9 @@ Definition~\ref{def:terminal-bit}; an unqualified \emph{seam} in this
 appendix is an adjacent pair of such words at a branch boundary, and the
 compounds seam pair, one-hole seam, first-wrap seam, and rewind seam carry
 this pair sense;
+\item the \emph{square-root strip} at depth \(N\) is the carry interval
+\([1,H_N]\) with \(H_N=2\lfloor\sqrt N\rfloor+4\); an interval of carries
+kept available by a construction is \emph{protected};
 \item a \emph{hole} of a seam is the missing carry value in an otherwise
 covered protected interval;
 \item a \emph{rewind} is the inverse finite recurrence of a seam;
@@ -3599,7 +3616,8 @@ or first-wrap variants) are defined in the linked formal statements.
 
 \paragraph{Appendix consequence.}
 This appendix supplies the local implications behind
-Theorem~\ref{res:fatalright}, Proposition~\ref{res:finalskipexclusions}, and
+Theorems~\ref{res:halfmembership} and~\ref{res:fatalright},
+Proposition~\ref{res:finalskipexclusions}, and
 Corollary~\ref{res:taildominance}.  It does not establish the corollary's
 global hypothesis.  The exact handoff is either a cofinal window, seam, or
 terminal approximation producing \(1/2\in\mathcal A\), or both an exclusion
@@ -3639,15 +3657,22 @@ The dependency spine is
  \text{a specified support fraction \(p/q\)}
  &\Longleftrightarrow& \text{a Boolean--M\"obius carry certificate}
  \quad\text{(B.2)},\\
- \text{an infinite rational support}
+ \text{a nonempty rational support}
  &\Longrightarrow& \text{sublogarithmic zero gaps}\quad\text{(B.3)},\\
+ \text{a nonempty support, odd part }v>1
+ &\Longrightarrow& \text{wrap and reciprocal-mass bounds}
+ \quad\text{(B.4)},\\
  \text{an infinite rational support}
- &\Longrightarrow& \text{unbounded-state and mass constraints}
+ &\Longrightarrow& \text{unbounded carry states}
+ \quad\text{(B.4)},\\
+ \text{an infinite dyadic-denominator support}
+ &\Longrightarrow& \text{the reciprocal-mass alternative}
  \quad\text{(B.4).}
 \end{array}
 \]
-The last two lines list independent necessary conditions, not converses and
-not contradictions.  Appendix~\ref{app:carry-geometry} is orthogonal to this
+The last four lines list independent necessary conditions, at the weakest
+hypotheses under which they are proved, not converses and not
+contradictions.  Appendix~\ref{app:carry-geometry} is orthogonal to this
 rationality chain:
 finite greedy death proves nonmembership in the achievement set, whereas
 survival through any finite depth proves nothing.
@@ -4102,10 +4127,11 @@ exclude rational values for either open series.
 The transfer to the main text is Theorem~\ref{res:rigidity-main} followed by
 the four independent
 Corollaries~\ref{res:rigidity-unbounded-main}--\ref{res:rigidity-dyadic-mass-main}.
-Rationality yields the exact carry recurrence; an infinite rational support
-must separately satisfy the unbounded-state theorem, the sublogarithmic
-divisor-coverage bound, and the applicable odd- or dyadic-denominator
-reciprocal-mass constraint.
+Rationality yields the exact carry recurrence; any nonempty rational support
+must satisfy the sublogarithmic divisor-coverage bound, and the odd-part
+wrap and mass bounds when its denominator has odd part \(v>1\); an infinite
+one must in addition satisfy the unbounded-state theorem and, at a dyadic
+denominator, the reciprocal-mass alternative.
 Appendix~\ref{app:carry-geometry} also supplies the finite death certificates
 used in Theorem~\ref{res:greedy}.  What is not proved is that the support attached to
 either target violates one of these necessary conditions.  That
