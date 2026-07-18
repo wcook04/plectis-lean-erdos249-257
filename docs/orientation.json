@@ -56,7 +56,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "Erd\\H{o}s \\#249",
-    "line": 3518
+    "line": 3524
    }
   },
   {
@@ -67,7 +67,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "unbounded certificate supply",
-    "line": 3529
+    "line": 3535
    }
   },
   {
@@ -78,7 +78,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "the half-value counterexample route",
-    "line": 3550
+    "line": 3556
    }
   },
   {
@@ -89,7 +89,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "universal Erd\\H{o}s \\#257",
-    "line": 3541
+    "line": 3547
    }
   }
  ],
@@ -559,18 +559,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_cofinal_strip_return_plain_language_audit",
+   "id": "main_paper_terminal_only_cofinal_plain_language_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "The cofinal strip-return paragraph says that an uncentred binary-scaled carry is antitone and that one late return controls every later carry without defining the scaled quantity or displaying the monotonicity argument",
-   "statement": "Define the scaled greedy carry and the square-root envelope, then explain why antitonicity plus arbitrarily late strip returns forces convergence to zero and exact half-membership, while preserving the unproved return hypothesis and conditional claim boundary."
+   "defect_class": "The terminal-only cofinal paragraph invokes a normalised terminal witness, its support-series error, closedness, and the absence of coherence without defining the witness data or displaying the residual-to-error implication",
+   "statement": "Define a normalised finite terminal witness and its terminal carry, explain how the exact residual identity gives the stated error bound and why cofinal depths plus closedness yield half-membership, while preserving that no witness supply or unconditional membership theorem is proved."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "ebc98ee71f6819bd9fe344a0bb343542c604e533",
-  "committed_navigation_snapshot": "b8c0a5256475338977e30d8cba11af13912c4148",
-  "main_paper_source_digest": "sha256:f83c17aeda3bfb2d481e460f9cc07e4a83ef1c1a426c21ff1f11b1ca883c9b11"
+  "committed_navigation_snapshot": "902e724ef413a07cd7f9719c573a459b09589248",
+  "main_paper_source_digest": "sha256:0f442edf696c7f78bb60eff383181f87c443cdb97433d75dd0703e1797623d61"
  },
  "reading_routes": [
   {
