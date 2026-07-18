@@ -56,7 +56,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "Erd\\H{o}s \\#249",
-    "line": 3533
+    "line": 3534
    }
   },
   {
@@ -67,7 +67,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "unbounded certificate supply",
-    "line": 3544
+    "line": 3545
    }
   },
   {
@@ -78,7 +78,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "the half-value counterexample route",
-    "line": 3565
+    "line": 3566
    }
   },
   {
@@ -89,7 +89,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "universal Erd\\H{o}s \\#257",
-    "line": 3556
+    "line": 3557
    }
   }
  ],
@@ -559,18 +559,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_selected_half_carry_window_plain_language_audit",
+   "id": "main_paper_realized_rewind_phase_plain_language_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "The selected-window passage names protected half-carry windows, carry-one representatives, common next-row divisor data, and adjacent seams without defining the selected-window object or explaining how its carry-one member feeds the cofinal compactness theorem",
-   "statement": "Define a selected window as an explicit admissible depth-N word for every terminal carry k in [1,R], explain why the k=1 representative supplies the finite witness consumed by cofinal compactness, and identify coherent histories through a common next-row coefficient or an adjacent seam as the unproved construction input. Preserve the absence of a cofinal window producer and of any Erdős #257 conclusion."
+   "defect_class": "The realised-rewind passage calls the phase a complementary binary suffix numeral and says that the suffix covers the terminal interval without defining the bit order, displaying the phase identity, or stating the exact coverage inequality",
+   "statement": "Define the suffix numeral with the newest row as the low bit, state phase = D - 1 - X and the exact singleton equivalence B - 1 <= X, and relate this to the frozen-prefix carry form B <= Z. Preserve that no theorem supplies the coverage inequality globally and that this is not an Erdős #257 proof."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "ebc98ee71f6819bd9fe344a0bb343542c604e533",
-  "committed_navigation_snapshot": "7adf5b6d93218600480010f366be3778da43b7ee",
-  "main_paper_source_digest": "sha256:24f3dc3747f747854fd86af312d473783084d9f17ef61efbd64596528ee5b971"
+  "committed_navigation_snapshot": "f8e1df814fb8c5b1ffcd3c2503c5c57ac2111dbc",
+  "main_paper_source_digest": "sha256:7060e2c0955bc1d104423eba4378b4955f4411f7f9996d75c3f44eb11e12d423"
  },
  "reading_routes": [
   {
