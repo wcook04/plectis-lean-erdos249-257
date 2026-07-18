@@ -948,26 +948,30 @@ false terminal row satisfies \(D\geq13\); the lower bound comes from this
 calculation rather than an omitted range of cases.  This is the
 \lword{HalfCylinderLastProducerContradiction.lean}{178}{exists_last_false_terminal_of_eventuallyRight}{last-false row theorem}.
 
-At a middle transition \(D\geq13\), put
+At a middle transition \(D\geq13\), the next question is whether restoring the
+skipped rank \(D\) still leaves the support below \(1/2\).  Let
 \[
- A_D=G_D\cup\{D\},\qquad
- P_D=2f_{G_D}(2D+1)+f_{G_D}(2D+2),
+ A_D=G_D\cup\{D\}
 \]
-and write
+be this augmented support.  The two local divisor counts entering the next
+carry are packaged as
 \[
- C_D=4R_{D,D}-P_D-4\in\Z,\qquad
+ P_D=2f_{G_D}(2D+1)+f_{G_D}(2D+2),
+ \qquad C_D=4R_{D,D}-P_D-4\in\Z.
+\]
+Thus \(C_D\) is the finite integer transition carry.  The contribution from
+all later divisor counts is the infinite tail
+\[
  \Theta_D=\sum_{j\geq1}\frac{f_{A_D}(2D+2+j)}{2^j}.
 \]
-Here \(C_D\) is the integer transition carry.  The sum \(\Theta_D\) includes
-every later divisor count \(f_{A_D}(2D+2+j)\), with binary weight \(2^{-j}\).
-Their comparison has an exact meaning: by the residual identity of
-Appendix~\ref{res:producercarry},
+This tail is complete, not a finite truncation.  The residual identity of
+Appendix~\ref{res:producercarry} compares the two quantities exactly:
 \[
  \frac12-\sum_{a\in A_D}w_a
  =2^{-(2D+2)}\bigl(C_D-\Theta_D\bigr),
 \]
-so the inequality \(\Theta_D<C_D\) says exactly that the augmented
-support \(A_D\) falls short of \(\tfrac12\).
+so \(\Theta_D<C_D\) is equivalent to
+\(\sum_{a\in A_D}w_a<\tfrac12\).
 
 For a finite set \(u\subseteq\{1,\ldots,d\}\), write
 \(V(u)=\sum_{n\in u}w_n\).  Call \((u,d)\) a \emph{fatal half-gap} if
