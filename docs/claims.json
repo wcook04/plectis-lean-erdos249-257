@@ -901,15 +901,15 @@
         "schema": "erdos249257-editorial-state/1",
         "scope": "continuous_whole_main_paper_exposition",
         "current_priority": {
-          "id": "main_paper_non_right_transition_carry_plain_language_audit",
+          "id": "main_paper_quarter_band_endpoint_cells_plain_language_audit",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "defect_class": "The non-right-transition carry paragraph names a finite support, an integer carry, and a complete future divisor-incidence tail without giving the reader their exact coordinates or explaining how the carry sign controls the side of 1/2",
-          "statement": "Define the transition-aligned support, scaled carry, and complete future tail in the existing notation; then explain the residual identity and its positive, negative, and gap-margin consequences without implying that the required carries occur."
+          "defect_class": "The quarter-band endpoint paragraph calls two failures pulse cells without displaying the cell predicates or explaining which branch variables enter them",
+          "statement": "Write the exact middle and terminal-reset pulse-cell conditions in the paper's established seam notation, explain each equivalence direction in one sentence, and preserve that no avoidance theorem for the concrete orbit is proved."
         },
         "last_verified_wave": {
-          "id": "main_paper_fixed_tail_survival_plain_language_audit",
+          "id": "main_paper_non_right_transition_carry_plain_language_audit",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "result": "Defined r_M(1/2) as the residual after processing ranks through M and T_M as the complete future Mersenne mass. Stated that an actual skip M is final exactly when T_M < r_M(1/2), explained that negation yields r_M(1/2) <= T_M at every M in the actual skipped set, and then connected no final skip to membership of 1/2. Distinguished the proved equivalences from the unproved inequalities along the actual greedy orbit."
+          "result": "For a finite transition-aligned support A through rank d, defined the divisor-incidence coefficients f_A, the affine integer carry C_(A,d), and the complete future tail Theta_(A,d). Displayed the exact residual 1/2 - X_A = 2^(-(2d+2))(C_(A,d) - Theta_(A,d)); explained both sign equivalences, the negative-carry consequence from tail nonnegativity, and the full-gap consequence at carry at most -8. Preserved that no occurrence theorem for the required carries is proved."
         },
         "active_inconsistencies": [],
         "blocked_decisions": []
@@ -7540,7 +7540,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 3547
+        "line": 3545
       }
     },
     {
@@ -7551,7 +7551,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 3558
+        "line": 3556
       }
     },
     {
@@ -7562,7 +7562,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "the half-value counterexample route",
-        "line": 3579
+        "line": 3577
       }
     },
     {
@@ -7573,7 +7573,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 3570
+        "line": 3568
       }
     }
   ],
@@ -8493,9 +8493,9 @@
     },
     {
       "id": "producer_carry_future_tail_socket",
-      "label": "Producer-carry and future-tail comparison socket",
+      "label": "Exact producer-carry residual and sign criteria",
       "status": "conditional reduction",
-      "statement": "For a producer-aligned finite support, its residual from 1/2 is exactly the integer producer carry minus the complete future divisor-incidence tail, scaled by a power of two. A negative carry places the support above 1/2, and carry at most -8 gives a Mersenne-gap margin. No occurrence theorem for these carries is proved.",
+      "statement": "For A contained in {2,...,d}, let f_A(n) count support divisors, let C_(A,d) be the affine integer state after 2d+1 updates from 1, and let Theta_(A,d) be the complete scaled coefficient tail after depth 2d+2. Then 1/2 - X_A = 2^(-(2d+2))(C_(A,d) - Theta_(A,d)). Hence C_(A,d) > Theta_(A,d) iff X_A < 1/2 and C_(A,d) < Theta_(A,d) iff X_A > 1/2; a negative carry is sufficient for the latter because the tail is nonnegative, and carry at most -8 gives a full Mersenne-gap margin. No occurrence theorem for these carries is proved.",
       "remaining_open_proposition_ids": [
         "remaining_open.universal_257_all_infinite_supports"
       ],
@@ -8511,6 +8511,16 @@
           "name": "producerCarry_gt_tail_iff_supportSeries_lt_half",
           "module": "Erdos249257/HalfCylinderProducerCarrySocket.lean",
           "line": 48
+        },
+        {
+          "name": "producerCarry_lt_tail_iff_half_lt_supportSeries",
+          "module": "Erdos249257/HalfCylinderProducerCarrySocket.lean",
+          "line": 78
+        },
+        {
+          "name": "producerCarry_neg_forces_half_lt_supportSeries",
+          "module": "Erdos249257/HalfCylinderProducerCarrySocket.lean",
+          "line": 145
         },
         {
           "name": "producerCarry_le_neg_eight_forces_gap_margin",

@@ -27,7 +27,7 @@
   "declaration_count": 12578,
   "theorem_like_count": 11539,
   "generated_certificate_declaration_count": 2925,
-  "principal_claim_link_count": 294,
+  "principal_claim_link_count": 296,
   "kind_counts": {
    "abbrev": 9,
    "def": 992,
@@ -56,7 +56,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "Erd\\H{o}s \\#249",
-    "line": 3547
+    "line": 3545
    }
   },
   {
@@ -67,7 +67,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "unbounded certificate supply",
-    "line": 3558
+    "line": 3556
    }
   },
   {
@@ -78,7 +78,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "the half-value counterexample route",
-    "line": 3579
+    "line": 3577
    }
   },
   {
@@ -89,7 +89,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "universal Erd\\H{o}s \\#257",
-    "line": 3570
+    "line": 3568
    }
   }
  ],
@@ -559,10 +559,10 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_non_right_transition_carry_plain_language_audit",
+   "id": "main_paper_quarter_band_endpoint_cells_plain_language_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "The non-right-transition carry paragraph names a finite support, an integer carry, and a complete future divisor-incidence tail without giving the reader their exact coordinates or explaining how the carry sign controls the side of 1/2",
-   "statement": "Define the transition-aligned support, scaled carry, and complete future tail in the existing notation; then explain the residual identity and its positive, negative, and gap-margin consequences without implying that the required carries occur."
+   "defect_class": "The quarter-band endpoint paragraph calls two failures pulse cells without displaying the cell predicates or explaining which branch variables enter them",
+   "statement": "Write the exact middle and terminal-reset pulse-cell conditions in the paper's established seam notation, explain each equivalence direction in one sentence, and preserve that no avoidance theorem for the concrete orbit is proved."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
@@ -570,7 +570,7 @@
  "source_revision": {
   "formal_source_ref": "ebc98ee71f6819bd9fe344a0bb343542c604e533",
   "committed_navigation_snapshot": "67f11bc987f2ab46cfca233636fb8e6473651c8f",
-  "main_paper_source_digest": "sha256:33768b65a23719220e222a782885e0347502eb694053dce444979693b0c8a1fb"
+  "main_paper_source_digest": "sha256:c4d1e6186f108ab0117cd7692a65eb56f85199a989fd3913bd42da036393309c"
  },
  "reading_routes": [
   {

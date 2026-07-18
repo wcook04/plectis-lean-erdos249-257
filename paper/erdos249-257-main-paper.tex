@@ -952,20 +952,16 @@ calculation rather than an omitted range of cases.  This is the
 At a middle transition \(D\geq13\), the next question is whether restoring the
 skipped rank \(D\) still leaves the support below \(1/2\).  Let
 \[
- A_D=G_D\cup\{D\}
+ A_D=G_D\cup\{D\},\qquad f_A(n)=\#\{a\in A:a\mid n\},
 \]
-be this augmented support.  The two local divisor counts entering the next
-carry are packaged as
+and put
 \[
  P_D=2f_{G_D}(2D+1)+f_{G_D}(2D+2),
- \qquad C_D=4R_{D,D}-P_D-4\in\Z.
+ \quad C_D=4R_{D,D}-P_D-4,
+ \quad \Theta_D=\sum_{j\geq1}\frac{f_{A_D}(2D+2+j)}{2^j}.
 \]
-Thus \(C_D\) is the finite integer transition carry.  The contribution from
-all later divisor counts is the infinite tail
-\[
- \Theta_D=\sum_{j\geq1}\frac{f_{A_D}(2D+2+j)}{2^j}.
-\]
-This tail is complete, not a finite truncation.  The residual identity of
+Here \(C_D\in\Z\) is the transition carry and \(\Theta_D\) is the complete
+future divisor-incidence tail, not a finite truncation.  The residual identity of
 Appendix~\ref{res:producercarry} compares the two quantities exactly:
 \[
  \frac12-\sum_{a\in A_D}w_a
@@ -1602,18 +1598,20 @@ The equivalence is proved; the orbit inequalities are not.
 
 \subsubsection{The carry identity at a non-right transition}\label{res:producercarry}
 
-For a finite support aligned with a non-right transition, the residual from
-$1/2$ is exactly the integer transition carry minus the complete future
-divisor-incidence tail, scaled by $2^{-(2d+2)}$:
-\lword{HalfCylinderProducerCarrySocket.lean}{27}{producerCarry_residual_identity}{transition-carry residual identity}.
-Thus the carry exceeds that tail exactly when the support series lies below
-$1/2$, and a negative carry places it above $1/2$;
-\lword{HalfCylinderProducerCarrySocket.lean}{48}{producerCarry_gt_tail_iff_supportSeries_lt_half}{positive-carry criterion}
+For the middle-transition coordinates $A_D,C_D,\Theta_D$ defined above, the
+generic finite-support theorem reads
+$1/2-X_{A_D}=2^{-(2D+2)}(C_D-\Theta_D)$,
+\lword{HalfCylinderProducerCarrySocket.lean}{27}{producerCarry_residual_identity}{the residual identity}.
+Since the scale is positive, $C_D>\Theta_D\iff X_{A_D}<1/2$ and
+$C_D<\Theta_D\iff X_{A_D}>1/2$,
+\lword{HalfCylinderProducerCarrySocket.lean}{48}{producerCarry_gt_tail_iff_supportSeries_lt_half}{the below-half equivalence}
 and
-\lword{HalfCylinderProducerCarrySocket.lean}{145}{producerCarry_neg_forces_half_lt_supportSeries}{negative-carry criterion}.
-An upper carry at most $-8$ even gives a full Mersenne-gap margin,
-\lword{HalfCylinderProducerCarrySocket.lean}{190}{producerCarry_le_neg_eight_forces_gap_margin}{full-gap carry criterion}.
-These are local criteria, not a proof that the required carries occur.
+\lword{HalfCylinderProducerCarrySocket.lean}{78}{producerCarry_lt_tail_iff_half_lt_supportSeries}{the above-half equivalence}.
+Tail nonnegativity makes $C_D<0$ sufficient for $X_{A_D}>1/2$,
+\lword{HalfCylinderProducerCarrySocket.lean}{145}{producerCarry_neg_forces_half_lt_supportSeries}{the negative-carry corollary}.
+A carry at most $-8$ strengthens this to $1/2+(w_D-T_D)<X_{A_D}$,
+\lword{HalfCylinderProducerCarrySocket.lean}{190}{producerCarry_le_neg_eight_forces_gap_margin}{the full-gap corollary}.
+These criteria do not prove that the required carries occur.
 
 \subsubsection{Quarter-band endpoint cells}\label{res:quarterband}
 
