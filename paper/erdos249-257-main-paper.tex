@@ -1544,21 +1544,25 @@ do not establish that condition.
 
 \subsubsection{Largest skipped ranks}\label{res:largestskip}
 
-At a named largest skipped rank $d$, the lower seam word and its adjacent
-upper competitor have an exact late-range gap.  In division-free form, the
-identity is
+At row $s$, let $d$ be the largest skipped rank and put
+$u=G_s\cap\{2,\ldots,d-1\}$.  Then
+$G_s=u\cup\{d+1,\ldots,s-1\}$.  Write $L=\sum_{e\in G_s}q_{s,e}$ and
+$U=\sum_{e\in u\cup\{d\}}q_{s,e}$: $U$ replaces the filled suffix above $d$
+by $d$.  In the late range $d>2s/3$ (equivalently $2s<3d$), its exact gap is
 \[
   3L+\bigl(3\cdot2^{s+1}+2\cdot4^{s-d}+4\bigr)=3U
 \]
-whenever $2s<3d$; this is formalised at
+in division-free form,
 \lword{HalfCylinderLargestSkipGap.lean}{259}{three_mul_largestSkipLowerWeight_add_exactLateGap_eq_upperWeight}{the exact late-gap identity}.
-The upper and middle successor branches create a terminal largest skipped
-rank, while the right branch preserves an existing one:
+
+The branch recurrence is separate.  An upper or middle step to row $s+1$
+skips the new rank $s$, making it the largest skip; a right step selects $s$
+and preserves $d$:
 \lword{HalfCylinderLargestSkipGap.lean}{328}{seamGreedyWord_succ_isLargestFalseRank_terminal_of_upperOrMiddle}{the terminal largest-skip branch}
 and
 \lword{HalfCylinderLargestSkipGap.lean}{339}{IsLargestFalseRank.seamGreedyWord_succ_of_rightBranch}{right-branch persistence}.
-The first-crossing branch hypothesis required to use this identity globally
-is not proved.
+Global propagation still requires an upper or middle step whenever $2s<3d$
+but $2(s+1)<3d$ fails.  This first-crossing statement is not proved.
 
 \subsubsection{Boundary-pulse normalisation}\label{res:boundarypulse}
 
