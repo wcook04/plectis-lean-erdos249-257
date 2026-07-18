@@ -56,7 +56,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "Erd\\H{o}s \\#249",
-    "line": 3530
+    "line": 3533
    }
   },
   {
@@ -67,7 +67,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "unbounded certificate supply",
-    "line": 3541
+    "line": 3544
    }
   },
   {
@@ -78,7 +78,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "the half-value counterexample route",
-    "line": 3562
+    "line": 3565
    }
   },
   {
@@ -89,7 +89,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "universal Erd\\H{o}s \\#257",
-    "line": 3553
+    "line": 3556
    }
   }
  ],
@@ -559,18 +559,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_fixed_coefficient_rewind_plain_language_audit",
+   "id": "main_paper_selected_half_carry_window_plain_language_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "The fixed-coefficient rewind passage invokes a canonical inverse-parent map, a dyadic closed form, a phase-fit inequality, and a singleton-or-seam conclusion without defining the rewind map or stating the exact inequality that selects the surviving ancestor set",
-   "statement": "Define the one-step inverse-parent operation and its iterated dyadic closed form, state the phase-fit equivalence explicitly, and explain why the width bound leaves either one ancestor or an adjacent seam pair without deciding which alternative occurs. Preserve the absence of a seam exclusion and of any Erdős #257 conclusion."
+   "defect_class": "The selected-window passage names protected half-carry windows, carry-one representatives, common next-row divisor data, and adjacent seams without defining the selected-window object or explaining how its carry-one member feeds the cofinal compactness theorem",
+   "statement": "Define a selected window as an explicit admissible depth-N word for every terminal carry k in [1,R], explain why the k=1 representative supplies the finite witness consumed by cofinal compactness, and identify coherent histories through a common next-row coefficient or an adjacent seam as the unproved construction input. Preserve the absence of a cofinal window producer and of any Erdős #257 conclusion."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "ebc98ee71f6819bd9fe344a0bb343542c604e533",
-  "committed_navigation_snapshot": "a3c1223a9c55d5193dd3a2c698750fa2af56c88e",
-  "main_paper_source_digest": "sha256:38bcbeec0e6ecc00a7664b09a08c7bca6d77eb8b7ba8c9f8d576b3d8f2126540"
+  "committed_navigation_snapshot": "7adf5b6d93218600480010f366be3778da43b7ee",
+  "main_paper_source_digest": "sha256:24f3dc3747f747854fd86af312d473783084d9f17ef61efbd64596528ee5b971"
  },
  "reading_routes": [
   {
