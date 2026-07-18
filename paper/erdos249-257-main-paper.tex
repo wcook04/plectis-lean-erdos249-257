@@ -1196,18 +1196,27 @@ Neither theorem constructs the two words or an earlier overlap.
 
 \subsubsection{Half-carry reachability}\label{res:halfcarryreachability}
 
-There is also a finite-prefix criterion for the target $1/2$.  At an unresolved
-even seam, the scalar transition reaches every integer terminal carry except
-the single value $2\delta-c$; this is the exact equivalence
-\lword{HalfCarryReachability.lean}{235}{evenSeamReachable_iff}{the even-seam reachability equivalence}.  A canonical
-description of such a seam at every sufficiently large even depth is an
-unproved hypothesis.  Under that hypothesis, the finite admissible words are
-cofinal, by
-\lword{HalfCarryReachability.lean}{999}{cofinalAdmissibility_of_canonicalEvenSeamSupply}{the cofinal-admissibility implication},
-and compactness then produces an infinite support with sum exactly $1/2$:
-\lword{HalfCarryReachability.lean}{1027}{exists_infinite_support_half_of_canonicalEvenSeamSupply}{the half-value compactness conclusion}.
-Thus the formal result is a conditional reduction.  It does not establish the
-canonical seam supply and does not prove Erd\H{o}s~\#257.
+For a Boolean word $a$, set
+$f_a(n)=\#\{d:d\mid n,\ a_d=1\}$, $K_1=1$,
+$K_n=2K_{n-1}-f_a(n)$, and $H_n=2\lfloor\sqrt n\rfloor+4$.
+Admissibility through $N$ means $a_0=a_1=0$ and
+$1\leq K_n\leq H_n$ for $1\leq n\leq N$; $K_N$ is its terminal carry.
+At an unresolved half-divisor step to depth $2d$, let $h$ be the parent
+carry, $\delta$ the last parent that takes the divisor, $c$ the remaining
+coefficient, and $b\in\{0,1\}$ the new bit.  The child is $2h-c-1-b$ when
+$h\leq\delta$ and $2h-c-b$ otherwise.  Hence $h,b$ realise exactly
+$k\neq2\delta-c$: one missing carry and no others
+(\lword{HalfCarryReachability.lean}{235}{evenSeamReachable_iff}{the exact one-hole equivalence}).
+
+A \emph{canonical even seam} identifies these scalar values with actual
+admissible words.  The unproved supply hypothesis gives one at every $2d$,
+$d\geq10$.  Choose $k=1$, except $k=2$ when the hole is $1$; this gives words
+cofinally
+(\lword{HalfCarryReachability.lean}{999}{cofinalAdmissibility_of_canonicalEvenSeamSupply}{the cofinal-admissibility implication}).
+Restriction fills earlier depths, and K\"onig compactness gives one infinite
+support of value $1/2$
+(\lword{HalfCarryReachability.lean}{1027}{exists_infinite_support_half_of_canonicalEvenSeamSupply}{the half-value conclusion}).
+The seam supply is unproved, so Erd\H{o}s~\#257 remains undecided.
 
 \paragraph{Cofinal strip returns.}  The all-level strip hypothesis can be
 weakened for the canonical greedy half carry.  Its uncentred, binary-scaled
@@ -4256,25 +4265,20 @@ appendix, remain the missing statements identified in the main text.
 
 \section{Guide to the formal sources}\label{app:index}
 
-The paper is meant to be read as mathematics.  The blue mathematical phrases
-following formalised statements link to exact checked theorems in the pinned
-public source revision.  All such links use one published source pin; exact
-declaration names remain in the machine-readable audit layer.
-
-For a first reading, the principal landmarks are
+The paper is meant to be read as mathematics.  Each blue phrase following a
+formalised statement links to its exact checked theorem at one pinned public
+revision; the machine-readable audit layer records declaration names.
+For a first reading, use
 Theorem~\ref{res:farey} for the totient denominator exclusion;
 Proposition~\ref{res:complete} and
 Theorems~\ref{res:pointwisecomplete}--\ref{res:diag} for the exact certificate
-equivalences and diagonal form; and Theorems~\ref{res:halfmembership}
-and~\ref{res:fatalright} for the two half-value classifications.
-Theorem~\ref{res:full} records the classical full-support result, and
-Section~\ref{sec:architecture} states the structure the reductions share.  For the
-strongest independent structure beyond the two open reductions, see
-Theorem~\ref{res:dyadictotient}, the sublogarithmic zero-window corollary in
-the main \#257 results, and
+equivalences; and the half-value classifications, Theorems~\ref{res:halfmembership}
+and~\ref{res:fatalright}.  Theorem~\ref{res:full} gives the classical
+full-support result, while Section~\ref{sec:architecture} compares the reductions.
+For the strongest independent structure, see Theorem~\ref{res:dyadictotient},
+the sublogarithmic zero-window corollary, and
 Theorems~\ref{res:sternbrocotcylinders} and~\ref{res:sternbrocotruns}.
-The public repository contains a complete searchable cross-reference for
-readers who need declaration-level detail.
+The public repository supplies the complete searchable cross-reference.
 
 % Retain the exhaustive source-link manifest in the authored TeX for automated
 % validation and query tooling, but keep it outside the printed paper.

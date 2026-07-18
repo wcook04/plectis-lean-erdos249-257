@@ -901,15 +901,15 @@
         "schema": "erdos249257-editorial-state/1",
         "scope": "continuous_whole_main_paper_exposition",
         "current_priority": {
-          "id": "main_paper_half_carry_reachability_plain_language_audit",
+          "id": "main_paper_cofinal_strip_return_plain_language_audit",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "defect_class": "Appendix A.2.5 begins with an unresolved even seam, scalar transition, terminal carry, exceptional value 2δ-c, canonical seam supply, and cofinal admissibility without defining the seam coordinates or explaining the implication chain to half-membership",
-          "statement": "Define the even-seam data and state the exact reachable-terminal-carry equivalence in reader-facing notation, then explain how the unproved canonical seam supply yields cofinal finite words and compactness, while preserving the single excluded value and the boundary that neither the seam supply nor Erdős Problem 257 is proved."
+          "defect_class": "The cofinal strip-return paragraph says that an uncentred binary-scaled carry is antitone and that one late return controls every later carry without defining the scaled quantity or displaying the monotonicity argument",
+          "statement": "Define the scaled greedy carry and the square-root envelope, then explain why antitonicity plus arbitrarily late strip returns forces convergence to zero and exact half-membership, while preserving the unproved return hypothesis and conditional claim boundary."
         },
         "last_verified_wave": {
-          "id": "main_paper_half_trapping_return_carry_plain_language_audit",
+          "id": "main_paper_half_carry_reachability_plain_language_audit",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "result": "Replaced the channel shorthand with the exact normalized evaluation and kernel-inclusion hypotheses, making the rank-one determinant conclusion explicit. Defined a reverse-carry word by its recurrence and showed how a 1/0 seam followed by an ℓ-position overlap forces a 2^ℓ-times-odd terminal difference and hence the dyadic spacing bound. Preserved the missing-presentation and missing-overlap boundary and the 53-page length."
+          "result": "Defined the finite half-carry recurrence, strip admissibility, terminal carry, and both branches of the even-seam transition. Explained why the scalar image omits exactly 2δ-c, how the unproved canonical seam supply realises an admissible word by choosing carry 1 or 2, and how cofinal restriction plus König compactness yields an infinite support of value 1/2. Preserved the single-hole theorem and the boundary that the supply hypothesis and Erdős Problem 257 remain open."
         },
         "active_inconsistencies": [],
         "blocked_decisions": []
@@ -7540,7 +7540,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 3509
+        "line": 3518
       }
     },
     {
@@ -7551,7 +7551,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 3520
+        "line": 3529
       }
     },
     {
@@ -7562,7 +7562,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "the half-value counterexample route",
-        "line": 3541
+        "line": 3550
       }
     },
     {
@@ -7573,7 +7573,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 3532
+        "line": 3541
       }
     }
   ],
