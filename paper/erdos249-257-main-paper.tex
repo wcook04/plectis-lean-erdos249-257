@@ -2848,17 +2848,18 @@ The one-scale mechanisms and conditional implications in
 Appendix~\ref{app:totient-finite}, the candidate inputs and no-go boundaries
 in Appendix~\ref{app:totient-boundaries}, and the conditional rank routes in
 Appendix~\ref{app:totient-rank} delimit possible approaches to this
-statement.  None provides the required cofinal certificates.
+statement.  None provides the required certificates after every cutoff.
 
 }
 
-\section{One transform and the shared finite-to-cofinal bottleneck}
+\section{One transform and the limit of finite evidence}
 \label{sec:architecture}
 
-\noindent This section collects the structure the two open reductions share and
-states its limits.  Every mathematical assertion in it is proved elsewhere
-in the paper; the section adds organisation, not theorems, and its closing
-remark is an elementary unformalised observation, flagged as such.
+\noindent This section compares the structure of the two open reductions and
+the point where finite evidence stops.  Every mathematical assertion in it
+is proved elsewhere in the paper; the section adds organisation, not
+theorems, and its closing remark is an elementary unformalised observation,
+flagged as such.
 
 \subsection{One transform, one mechanism, three questions}
 \label{sec:one-transform}
@@ -2985,25 +2986,26 @@ successful method would still need.
 
 \subsection{The shared bottleneck}
 
-Both reductions express their conclusions through finite events that must occur
-at arbitrarily large scales, but the conclusions point in opposite directions:
+Both reductions require finite events beyond every proposed cutoff, but the
+conclusions point in opposite directions.  In literal quantifiers,
 \[
 \begin{aligned}
  S\notin\Q
  &\quad\Longleftrightarrow\quad
- \text{\(\mathsf{Sep}(h,N,L)\) occurs cofinally for every \(h\)},\\
+ \forall h\ge 1\;\forall N_0\;\exists N\ge N_0\;\exists L\;
+ \mathsf{Sep}(h,N,L),\\
  \frac12\in\mathcal A
  &\quad\Longleftrightarrow\quad
- \text{\(\tau_s=0\) occurs cofinally}.
+ \forall N_0\;\exists s\ge\max\{N_0,6\}\;(\tau_s=0).
 \end{aligned}
 \]
 For \(S\), Proposition~\ref{res:complete} supplies fixed completeness,
 Theorem~\ref{res:pointwisecomplete} gives the pointwise global form, and
-Theorem~\ref{res:red21} gives the displayed cofinal form.  For \(1/2\),
-Theorem~\ref{res:halfmembership} identifies membership with cofinal zeros of
-the terminal bit \(\tau_s\) of Definition~\ref{def:terminal-bit}.  In both
-cases the missing step is a theorem producing the required finite events at
-unbounded scales.  Neither such theorem is known.  The
+Theorem~\ref{res:red21} gives the first displayed equivalence.  For \(1/2\),
+Theorem~\ref{res:halfmembership} gives the second: a zero terminal bit occurs
+beyond every row cutoff.  In both cases the missing step is a theorem
+producing the required finite events beyond every cutoff.  Neither such
+theorem is known.  The
 classical full-support comparison is already proved: its
 Bertrand--CRT and averaging argument constructs the required witnesses
 uniformly at every precision.  The coordinate identities and
@@ -3013,9 +3015,9 @@ missing quantifier.
 Thus the comparison also gives a criterion for further progress.  On the
 \#249 side, a new local identity affects the open problem only if it produces or
 rules out \(\mathsf{Sep}\)-certificates at unbounded parameters.  On the
-half-value side of \#257, it must produce cofinal terminal zeros or prove that
-the greedy seam is eventually right.  Further fixed-scale computation, by
-itself, changes neither open statement.
+half-value side of \#257, it must produce terminal zeros beyond every row
+cutoff or prove that the greedy seam is eventually right.  Further fixed-scale
+computation, by itself, changes neither open statement.
 
 \paragraph{What finite witnesses can decide.}
 The two reductions use different finite witnesses.  A \(\mathsf{Sep}\)-certificate proves that
@@ -3030,7 +3032,7 @@ discovery.  Membership still requires terminal zeros at arbitrarily large rows.
 
 For \(S\), neither rationality nor irrationality has a single finite witness in this certificate system.  One
 \(\mathsf{Sep}\)-certificate proves one non-integral tail difference, whereas irrationality requires such
-certificates cofinally for every positive shift.  Rationality forces eventual integrality, but failure to find a
+certificates after every cutoff for every positive shift.  Rationality forces eventual integrality, but failure to find a
 certificate at a given truncation is inconclusive: a longer truncation may still certify the same tail difference.
 
 \begin{remark}[boundaries visible from the normal forms]
