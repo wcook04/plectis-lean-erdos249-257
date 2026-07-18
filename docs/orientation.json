@@ -56,7 +56,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "Erd\\H{o}s \\#249",
-    "line": 3440
+    "line": 3439
    }
   },
   {
@@ -67,7 +67,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "unbounded certificate supply",
-    "line": 3451
+    "line": 3450
    }
   },
   {
@@ -78,7 +78,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "the half-value counterexample route",
-    "line": 3472
+    "line": 3471
    }
   },
   {
@@ -89,7 +89,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "universal Erd\\H{o}s \\#257",
-    "line": 3463
+    "line": 3462
    }
   }
  ],
@@ -559,18 +559,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_ladder_table_prose_duplication_audit",
+   "id": "main_paper_257_section_opening_redundancy_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "The Mersenne--Lambert ladder status table is immediately followed by prose that repeats several of the same rows before reaching the actual structural warning",
-   "statement": "Remove row-by-row prose duplication after the ladder table while retaining the primitive-conductor fact, the distinction between convolution-chain and comparison inputs, and the no-status-transfer conclusion."
+   "defect_class": "The opening of the #257 results section repeats the universal-versus-counterexample distinction already established in the introduction and exact-reductions section, then routes through several appendices before presenting the full-support theorem",
+   "statement": "Compress the repeated status framing into a short result map while preserving base-2 criticality, the universal open boundary, and the ownership of the detailed final-skip arguments."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "ebc98ee71f6819bd9fe344a0bb343542c604e533",
-  "committed_navigation_snapshot": "59fd7005867ffef5db9c0731e3cbf4e0e08fac33",
-  "main_paper_source_digest": "sha256:079faa199529bb1aa7c4c220301119845ba83a44d900d26aa2eb4b030e95d484"
+  "committed_navigation_snapshot": "c6742987f11d69c46e8863872bc9b4772caadb4f",
+  "main_paper_source_digest": "sha256:3aced8774b662e5a5be6ead6a9185b1147332d48923f0f0701b381e4dcf8cf62"
  },
  "reading_routes": [
   {
