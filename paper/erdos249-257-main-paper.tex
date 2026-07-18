@@ -354,7 +354,7 @@ greedy orbit.  The exact conditional implication is the
 Proposition~\ref{res:finalskipexclusions} gives the local exclusions and
 Corollary~\ref{res:taildominance} states the sufficient global hypothesis.
 
-\paragraph{Prior-art boundary.}
+\paragraph{Relation to prior work.}
 Prior results are cited at their first use in the body, beginning in
 Section~\ref{sec:ladder}.  No priority claim is made for the reductions above.
 
@@ -1061,7 +1061,7 @@ support and a counterexample to the universal \#257 statement.
 
 \long\def\HalfValueTechnicalAppendix{
 
-\subsection{Exact localiser: a band formula for the final skip between two takes}
+\subsection{Exact band for a final skip between two takes}
 \label{res:twothirdsband}
 \label{app:half-localizer}
 
@@ -1284,7 +1284,7 @@ The compactness statements turn a cofinal supply into membership.  No result
 below proves that supply, so a verified window or seam at one depth is evidence
 for a possible recurrence, not an unbounded theorem.
 
-\subsubsection{Finite shadows of the half cylinder}\label{res:halfcylindershadow}
+\subsubsection{Finite residuals for the half-value problem}\label{res:halfcylindershadow}
 
 For an admissible finite word, the residual from $1/2$ is given exactly by its
 terminal half carry minus the future coefficient tail, scaled by a power of
@@ -1324,10 +1324,10 @@ infinite support with sum $1/2$:
 \lword{HalfCarrySelectedWindow.lean}{831}{cofinalAdmissibility_of_selectedHalfWindows}{selected-window cofinality}
 and
 \lword{HalfCarrySelectedWindow.lean}{864}{exists_infinite_support_half_of_selectedHalfWindows}{the selected-window half-value conclusion}.
-The unresolved input is the coherent history at each step: either a common
-next-row divisor cylinder, or the canonical adjacent seam.  The theorem
-states this input exactly; it does not construct the window supply and does
-not prove Erd\H{o}s~\#257.
+The unresolved input is a construction of such a window at every sufficiently
+large depth.  The later propagation results require either common next-row
+divisor data or an adjacent seam.  None constructs the required window supply,
+so these theorems do not prove Erd\H{o}s~\#257.
 
 \subsubsection{A realised rewind criterion}\label{res:rewindphase}
 
@@ -1768,7 +1768,7 @@ there is an infinite set \(A\subseteq\Npos\) such that
 \noindent This is the
 \lword{SuffixCylinderTerminalOnlyBridge.lean}{148}{exists_infinite_positive_support_half_of_cofinalCylinderStages}{positive-support cofinal-cylinder criterion}.
 
-\paragraph{Status and prior-art boundary.}
+\paragraph{Status and relation to prior work.}
 The two transition propositions do not supply their coefficient inequalities,
 and the finite base does not supply the cofinal family required by
 Corollary~\ref{res:cofinalcylinder}.  The
@@ -1854,7 +1854,7 @@ These identities make the remaining quantitative task exact: they do not
 prove exponential lower bounds, sign persistence, or a universal escape
 mechanism.
 
-\subsubsection{Strategy boundary: Campbell shift synchronisation}
+\subsubsection{Incompatibility with Campbell's prime-progression bound}
 \label{res:campbellboundary}
 
 Crandall asked whether the binary block \(11\) occurs infinitely often in
@@ -2717,7 +2717,7 @@ and
 The theorem concerns the coefficient kernel.  It does not imply that $S$ is
 irrational.
 
-\paragraph{Prior-art boundary for the kernel theorem.}
+\paragraph{Relation to prior work.}
 The qualitative conclusion is not new.  Finite-dimensionality of the span of
 all sections is \(2\)-regularity of the sequence in the sense of Allouche
 and Shallit~\cite{alloucheshallit}, and Coons proved in 2010 that \(\ph\) is
@@ -3058,18 +3058,19 @@ The release also pins the Lean and Mathlib
 versions; the toolchain is Lean \texttt{v4.29.1}.
 
 \paragraph{Reproduction commands and artefact identities.}
-A cold clone at the published revision is checked with \texttt{lake build};
-the release-validation command separately checks the claim registry, source
-coordinates, manuscript anchors, projections, trust guards, the rendered PDF,
-and the immutable committed reference.  Its receipt is release metadata rather
-than mathematical proof authority.  The machine-readable corpus descriptor records SHA-256 identities for
-the claim registry, declaration atlas, manuscript source, rendered PDF, and
-toolchain projections, together with their regeneration commands.  No
+A cold clone at the published revision is checked with \texttt{lake build}.
+The release-validation command also checks that every registered claim resolves
+to its stated Lean declaration and manuscript location, that the PDF matches
+the committed source, and that the public source pin resolves to the recorded
+revision.  The resulting report records release validation; it is not
+mathematical proof authority.  The repository records SHA-256 identities for
+the claims file, Lean-declaration index, manuscript source, rendered PDF, and
+generated navigation files, together with their regeneration commands.  No
 hardware-independent build time is claimed;
 elapsed time depends on the Lean cache and machine, and is not part of the
 mathematical claim.
 
-\paragraph{Computational and expository boundary.}
+\paragraph{What the computation establishes.}
 Every declaration is elaborated by Lean and every proof term is checked by
 the kernel.  Finite calculations use kernel-reducible procedures such as
 \texttt{decide}, \texttt{norm\_num}, or explicit certificate proofs.  In
@@ -3549,10 +3550,11 @@ Proposition~\ref{res:finalskipexclusions}, and
 Corollary~\ref{res:taildominance}.  Its statements fall into four classes:
 exact coordinate identities, conditional compactness criteria, bounded
 finite certificates, and counterexamples to tempting local inductions.  None
-changes the two open conclusions at the end of Section~\ref{sec:eb}.  The
-appendix is included so that the hypotheses in the main reduction can be
-audited without turning the main theorem section into a chronology of the
-formal development.
+changes the two open conclusions at the end of Section~\ref{sec:eb}.
+Readers concerned only with the two exact reductions may skip this appendix.
+It is included so that the hypotheses in the main reduction can be audited
+without turning the main theorem section into a chronology of the formal
+development.
 
 The order is by mathematical use.
 Appendix~\ref{app:half-localizer} localises one possible unsafe skip;
@@ -4287,7 +4289,7 @@ unbounded carry states & \lrefx{RationalSupportCarrySkeleton.lean}{2377}{exists_
 sublogarithmic zero windows & \lrefx{SublogDivisorCoverage.lean}{392}{supportCoeffZeroWindow_length_le_eps_logb_add}\ (\texttt{SublogDivisorCoverage})\\
 greedy membership criterion & \lrefx{GreedyAchievementSet.lean}{1445}{mem_mersenneAchievementSet_iff_greedy_survival}\ (\texttt{GreedyAchievementSet})\\
 Mersenne achievement set: measure one and nowhere dense & \lrefx{GreedyAchievementSet.lean}{996}{volume_mersenneAchievementSet}, \lrefx{GreedyAchievementSet.lean}{1645}{isNowhereDense_mersenneAchievementSet}\ (\texttt{GreedyAchievementSet})\\
-Campbell shift-synchronisation boundary & \lrefx{CampbellShiftSynchronization.lean}{299}{campbellQuarterExponent_periodFreeze_noSync}, \lrefx{CampbellShiftSynchronization.lean}{488}{shiftWindowZero_iff_half_mem_mersenneAchievementSet}\ (\texttt{CampbellShiftSynchronization})\\
+Campbell prime-progression incompatibility & \lrefx{CampbellShiftSynchronization.lean}{299}{campbellQuarterExponent_periodFreeze_noSync}, \lrefx{CampbellShiftSynchronization.lean}{488}{shiftWindowZero_iff_half_mem_mersenneAchievementSet}\ (\texttt{CampbellShiftSynchronization})\\
 \bottomrule
 \end{tabular}
 \end{center}
