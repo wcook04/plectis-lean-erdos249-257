@@ -394,6 +394,13 @@ $\mathbf 1$ & $L(\mathbf 1)=E$ & irrational & formalised\\
 \end{tabular}
 \end{center}
 
+The transcendental row is a direct specialization of Nesterenko's
+transcendence-degree theorem.  Since
+\(E_2(q)=1-24\sum_{m\ge1}\sigma(m)q^m\), its specialization at the
+algebraic point \(q=1/2\) implies that
+\(L(\mathrm{Id})=\sum_{m\ge1}\sigma(m)/2^m\) is
+transcendental~\cite{nesterenko}.
+
 The nonnegative weight \(\alpha=\ph*\mu\) satisfies
 \(\alpha*\mathbf 1=\ph\); for example, \(\alpha(p)=p-2\) on primes.
 The rows for \(\mu\) and \(\mathbf 1\) are separate comparisons, not further
@@ -1389,16 +1396,19 @@ It removes that one conditional terminal configuration; it does not decide
 the right-tail branch or the remaining two middle cells.
 
 \paragraph{Second final-middle cell.}  The next cell, with transition carry
-$-2$, is not yet eliminated, but its possible phase is sharply constrained.
-Uniformly for seam rows $s\ge27$, the greedy decisions through rank $26$
-select exactly the ranks
+$-2$, is not eliminated.  Here its \emph{phase} means the triple of residue
+classes of the putative last skip \(D\) modulo \(21\), \(10\), and \(13\).
+The possible phases are nevertheless sharply constrained.  Uniformly for
+seam rows $s\ge27$, the greedy decisions through rank $26$ select exactly
+the ranks
 \[
   2,3,6,7,14,20,21,26,
 \]
 by
 \lword{HalfFinalMiddlePhaseSieve.lean}{1190}{seamGreedyBits_head2367_14_20_21_26}{the exact rank-(26) prefix}.
-Consequently, if a putative last skipped rank $D\ge27$ lies in this middle
-cell and is followed by an all-right suffix, then
+
+If \(D\ge27\) lies in this middle cell and is followed by an all-right
+suffix, then
 \[
  D\bmod21\in\{11,14,17,20\},\qquad D\bmod10\ne8,
  \qquad D\bmod13\ne11,
@@ -1406,15 +1416,16 @@ cell and is followed by an all-right suffix, then
 the class $D\bmod10=7$ cannot pair with $D\bmod21=11$, and the class
 $D\bmod13=10$ cannot pair with $D\bmod21=11$.  The orbit theorem is
 \lword{HalfFinalMiddlePhaseSieve.lean}{1913}{finalMiddleCell_neg_two_forces_phase_refinement_through_twentySix}{the final-middle phase sieve}.
-Exactly $412$ of the $2730$ joint residue classes survive; this separate finite count is
+The three moduli are pairwise coprime, so their phase triples correspond to
+the \(21\cdot10\cdot13=2730\) residue classes modulo \(2730\).  Exactly
+\(412\) survive; this finite count is
 \lword{HalfFinalMiddlePhaseSieve.lean}{2050}{finalMiddleTwentySixPhaseSurvivors_card}{the exact survivor count}.
 This is a uniform exact reduction of the $-2$ cell, not its exclusion; the
 surviving phases, the $-1$ cell, and the right-tail branch remain open.
-Shrinking survivor proportions at deeper ranks would not by themselves
-exclude the cell: a nested system of nonempty residue classes can have
-vanishing density and still a nonempty inverse limit, so this route ends
-either in finite extinction at some rank or in an added Archimedean input at
-a surviving phase.
+A smaller survivor proportion at deeper ranks would still not exclude the
+cell.  A nested system of nonempty residue classes can have vanishing density
+and a nonempty inverse limit.  This route must therefore either reach finite
+extinction at some rank or add an Archimedean estimate at a surviving phase.
 
 The remaining global reduction is now precise.  If every genuine middle
 transition other than the already discharged $C_D=-3$ cell has transition carry larger than
@@ -2906,25 +2917,28 @@ Appendix~\ref{sec:carry}; it asserts nothing further.}
 
 \subsection{Why no status transfers}
 
-The transform itself has no arithmetic force.  Its formalised values realise
-every behaviour: \(L(\ph)=2\) and \(L(\mu)=1/2\) are rational,
-\(L(\mathbf 1)=E\) is irrational, \(L(\mathrm{Id})\) is cited
-transcendental, and \(L(\alpha)=S\) is open.  Positivity, multiplicativity,
-and linear coefficient growth are shared by \(\ph\), whose value is
-rational, and by \(\mathbf 1\), whose value is irrational, so no such
-property can decide an endpoint.  On the support side, every finite support
-is Boolean with rational value (the support \(\{2,3\}\), with value
-\(10/21\) and an explicit period-six carry orbit, is worked in
-Appendix~\ref{app:carry-boolean}), and the infinite supports of
-Theorem~\ref{res:support} are Boolean with irrational values, so a Boolean
-input decides nothing without the joint force of infinitude and arithmetic.  An
-endpoint theorem must therefore exploit input-specific arithmetic: exact
-totient values and their dyadic structure for \#249; the interaction of the
-Boolean M\"obius condition with infinitude for universal \#257; the exact
-divisor feedback of the greedy orbit for the half-value fibre.  The formal
-source also closes several shortcuts of exactly this generic kind
-(Appendix~\ref{app:totient-boundaries}); each closure names the additional
-arithmetic information a successful method would have to use.
+The transform alone does not determine arithmetic status.  The values
+formalised or cited in Section~\ref{sec:ladder} include rational examples
+\(L(\ph)=2\) and \(L(\mu)=1/2\), the irrational example
+\(L(\mathbf 1)=E\), the transcendental example \(L(\mathrm{Id})\), and the
+open value \(L(\alpha)=S\).
+
+Simple properties of the input do not distinguish these cases.  Both
+\(\ph\) and \(\mathbf 1\) are positive and multiplicative with at most
+linear growth, yet their transforms are respectively rational and
+irrational.  Boolean coefficients alone are also insufficient: every finite
+support has rational value, while the infinite supports of
+Theorem~\ref{res:support} have irrational values.  The finite example
+\(\{2,3\}\), whose value is \(10/21\), and its period-six carry orbit are
+worked out in Appendix~\ref{app:carry-boolean}.
+
+A proof of an open case must therefore use arithmetic specific to its input:
+the dyadic structure of exact totient values for \#249, the interaction
+between the Boolean M\"obius condition and infinitude for universal \#257,
+or the divisor feedback of the greedy orbit for the half-value fibre.
+Appendix~\ref{app:totient-boundaries} rules out several arguments based only
+on generic input properties and identifies arithmetic information that a
+successful method would still need.
 
 \subsection{The shared bottleneck}
 
