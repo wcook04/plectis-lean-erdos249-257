@@ -1028,15 +1028,14 @@ then no final skipped exponent exists, and hence \(1/2\in\mathcal A\).
 \end{corollary}
 \noindent This implication is the
 \lword{HalfCylinderLastProducerContradiction.lean}{387}{half_mem_mersenneAchievementSet_of_middleProducerTailEscapeExceptNegThree}{tail-dominance theorem}.
-Because \(\Theta_D\geq0\), the hypothesis of this corollary already rules out
-every actual middle transition with a negative coordinate other than the
-locally discharged value $-3$.  Thus the single displayed hypothesis contains
-two different requirements: exclusion of the unresolved cells
-$C_D\in\{-2,-1\}$, and the future-tail bound~\textup{(4.2)} on the remaining
-nonnegative coordinates.  Neither requirement is proved for the greedy orbit.
-The universal quantifier in the hypothesis also cannot be weakened to a
-density statement: nonmembership requires only one final middle transition,
-so a bound holding at all but one row would prove nothing.
+Since \(\Theta_D\geq0\), inequality~\textup{(4.2)} cannot hold when
+\(C_D=-2\) or \(-1\).  The corollary therefore has two open inputs.  First,
+these two carry values must be shown not to occur at any actual middle
+transition.  Second, every remaining middle transition with \(C_D\geq0\)
+must have complete future tail smaller than \(C_D\).  Neither input is proved
+for the greedy orbit.  The word ``every'' is essential: one final middle
+transition is enough for nonmembership, so a bound that failed at even one
+row would not rule it out.
 
 \paragraph{Logical status of the final-skip argument.}
 The proved levels of the argument are
