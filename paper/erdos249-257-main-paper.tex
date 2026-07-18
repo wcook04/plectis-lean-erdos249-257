@@ -1579,7 +1579,7 @@ coordinates; it does not supply a sign or size estimate for that carry.
 This subsection has no open-endpoint theorem.  Its verified bases and stages
 are bounded evidence for the cofinal criteria in A.2--A.3; its coordinate
 changes translate one finite formulation into another; and its
-counterexamples and incompatibility theorems close shortcuts that would
+counterexamples and incompatibility theorems rule out shortcuts that would
 otherwise be mistaken for global arguments.  Each item must therefore be
 read through the earlier criterion it supports or blocks.
 
@@ -1848,7 +1848,7 @@ $1/2\in\mathcal A$:
 \lword{CampbellShiftSynchronization.lean}{471}{shiftWindowZero_iff_greedyMersenneSkippedSupport_infinite}{the shifted-zero/skip equivalence}
 and
 \lword{CampbellShiftSynchronization.lean}{488}{shiftWindowZero_iff_half_mem_mersenneAchievementSet}{the shifted-zero/half-membership equivalence}.
-This closes one synchronisation strategy and one reformulation; it does not
+This settles one synchronisation question and gives an equivalent reformulation; it does not
 advance either endpoint beyond the already stated half-achievement problem.
 
 }
@@ -1873,8 +1873,8 @@ global obligation is discharged.
 \end{enumerate}
 Appendix~\ref{app:half-technical} records the exact local reductions,
 conditional compactness criteria, finite certificates, counterexamples to
-stronger local assertions, and closed strategy branches supporting this
-conclusion.  They refine the obstruction;
+stronger local assertions, and arguments that rule out several proposed
+strategies.  These results refine the obstruction;
 they do not constitute a second endpoint theorem.
 
 \section{The totient constant $S$ (Erd\H{o}s \#249)}\label{sec:249}
@@ -2153,7 +2153,7 @@ quantifier pattern.  No theorem in the formal source proves
 \eqref{eq:unbounded-certificate-supply}; consequently no irrationality claim
 for $S$ is made here.
 
-\begin{remark}[finite inspection cannot close the supply]
+\begin{remark}[finite inspection cannot establish the supply]
 The finite status of the verified scales is forced, not cautious.  Fix a
 bound \(B\ge1\) and a period \(P>B\), and define \(\gamma(n)=\ph(n)\) for
 \(n\le B\), while for \(n>B\) let \(\gamma(n)=n-1\) if \(P\mid n\) and
@@ -2171,7 +2171,7 @@ the denominator exclusion as well.  This elementary splice is not formalised
 in the source and proves nothing about \(\ph\) itself; it shows that a proof
 of~\eqref{eq:unbounded-certificate-supply} must use totient values at
 unbounded indices, so no extension of the finite record in
-Example~\ref{res:deposits} can close the supply.
+Example~\ref{res:deposits} can establish the supply.
 \end{remark}
 
 Appendix~\ref{app:totient-normal} records the exact reformulations of this
@@ -2497,7 +2497,7 @@ condition from uniform correction bounds alone.  The remaining results are indep
 filters, not consecutive proof steps: the fresh-prime decomposition and
 one-bit lift expose exact correction terms that an unbounded argument would
 have to control, and the parity, prime-adjunction, scalar-localisation, and
-square-CRT results close four natural shortcuts.  No no-go result uses
+square-CRT results rule out four natural shortcuts.  No no-go result uses
 the preceding filter as a hypothesis.
 
 \paragraph{A three-rank odd window.}\label{res:flexibleoddwindow}
@@ -2961,7 +2961,7 @@ Theorem~\ref{res:halfmembership} identifies membership with cofinal zeros of
 the terminal bit \(\tau_s\) of Definition~\ref{def:terminal-bit}.  In both
 cases the missing step is a theorem producing the required finite events at
 unbounded scales.  Neither such theorem is known.  The
-classical full-support theorem is the closed comparison case because its
+classical full-support comparison is already proved: its
 Bertrand--CRT and averaging argument constructs the required witnesses
 uniformly at every precision.  The coordinate identities and
 rational-support filters used elsewhere in the paper do not alter either
@@ -3062,7 +3062,7 @@ concrete sufficient criteria and then state the unresolved questions.
 Erd\H{o}s \#249 has one open obligation in two equivalent forms.  Erd\H{o}s
 \#257 has a universal statement and a counterexample route pointing in
 opposite directions: half-value membership would refute the universal
-statement, while nonmembership would close only that route.
+statement, while nonmembership would decide only the half-value question.
 
 \long\def\FurtherLambertAppendix{%
 
@@ -3417,7 +3417,7 @@ The two criteria have the proved logical form
 \end{array}
 \]
 Neither left-hand premise is proved.  The verified range \(1\le n\le6\)
-closes only the finite prefix of the second criterion; it gives no part of
+establishes only the finite prefix of the second criterion; it gives no part of
 the missing universal range \(n\ge7\).  The first conclusion settles \#249,
 whereas the second would refute, not prove, the universal \#257 statement.
 
@@ -3461,8 +3461,8 @@ Decide whether $1/2\in\mathcal A$.  By
 Theorem~\ref{res:halfmembership}, this is equivalent to the canonical greedy
 orbit omitting infinitely many exponents.  A positive answer would give an
 infinite support of rational value $1/2$ and refute the universal \#257
-statement; a negative answer would close this distinguished counterexample
-route only.
+statement; a negative answer would decide only this distinguished
+point-membership question.
 \end{problem}
 
 \paragraph{What the reductions change.}
@@ -3475,7 +3475,7 @@ argument that question is localised further to two obligations: exclude the
 middle cells \(-2,-1\), and prove the future-tail inequality at the remaining
 nonnegative-carry middle transitions.  A cofinal \#249 certificate theorem would prove \#249;
 a cofinal terminal-zero theorem would refute universal \#257; and a proof of
-eventual right behaviour would close only the half-value route.
+eventual right behaviour would prove only \(1/2\notin\mathcal A\).
 
 \paragraph{Two refinements not pursued.}
 Certificate completeness guarantees a least successful depth at every
@@ -3529,9 +3529,9 @@ structured-support criteria; Appendix~\ref{app:half-finite-cofinal} collects
 the finite-window and compactness implications;
 Appendix~\ref{app:half-final-skip} develops the equivalent final-skip
 coordinates; and Appendix~\ref{app:half-evidence} records verified finite
-instances, exact coordinate translations, counterexamples, and closed
-strategy branches.  This is a dependency map, not a second route to a
-conclusion.
+instances, exact coordinate translations, counterexamples, and arguments that
+rule out several proposed strategies.  This is a dependency map, not a second
+route to a conclusion.
 
 The logical chain is
 \[
@@ -3742,7 +3742,7 @@ indices.
 \lword{MobiusSignSupportNoGo.lean}{111}{tsum_negativeMobius_eq_half_add_positiveMobiusTail}{the negative-M\"obius decomposition}
 and
 \lword{MobiusSignSupportNoGo.lean}{150}{half_add_one_div_sixty_three_le_tsum_negativeMobius}{the strict lower bound}.
-The term \(d=6\) supplies the displayed \(1/63\).  This closes one
+The term \(d=6\) supplies the displayed \(1/63\).  This rules out one
 sign-truncation route only; it does not exclude another infinite Boolean
 support with value \(1/2\).
 
@@ -3998,8 +3998,8 @@ pushes the state past $B$. The conclusion is the
 its local engine is the
 \lword{RationalSupportCarrySkeleton.lean}{2228}{one_add_mul_card_le_two_mul_shifted_state}{support-cardinality state bound}.
 So a rational value over an infinite support cannot run on a bounded carry
-alphabet. That closes finite-state readings of the carry system; it does not
-close the problem. Nothing in the constraints above
+alphabet. That rules out finite-state readings of the carry system; it does not
+decide the problem. Nothing in the constraints above
 prevents an infinite support from satisfying every one of these constraints.
 The repetend identities and divisor averages used here are classical. We make
 no claim of mathematical novelty for the coupled reciprocal-mass bounds,
@@ -4137,7 +4137,7 @@ Appendix~\ref{app:totient-normal} gives equivalent coordinates for this
 fixed-to-cofinal reduction.  Appendix~\ref{app:totient-finite} distinguishes
 one-scale mechanisms from the conditional cofinal implications that use them.
 Appendices~\ref{app:totient-boundaries}--\ref{app:totient-rank} expose
-possible inputs to an unbounded supply theorem and close several shortcuts.  None
+possible inputs to an unbounded supply theorem and rule out several shortcuts.  None
 of the latter three sections proves the missing cofinal supply in the second
 line.
 
@@ -4194,7 +4194,7 @@ Proposition~\ref{res:complete} and
 Theorems~\ref{res:pointwisecomplete}--\ref{res:diag} for the exact certificate
 normal forms; and Theorems~\ref{res:halfmembership}
 and~\ref{res:fatalright} for the two half-value classifications.
-Theorem~\ref{res:full} is the classical closed comparison case, and
+Theorem~\ref{res:full} records the classical full-support result, and
 Section~\ref{sec:architecture} states the structure the reductions share.  For the
 strongest independent structure beyond the two open reductions, see
 Theorem~\ref{res:dyadictotient}, the sublogarithmic zero-window corollary in
