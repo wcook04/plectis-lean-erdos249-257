@@ -813,14 +813,22 @@ leaving
  \frac12-\Bigl(\frac13+\frac17+\frac1{63}+\frac1{127}\Bigr)
  =\frac1{16002}.
 \]
-The next take is at rank \(14\), and through rank \(26\) the expansion
-takes exactly the ranks \(2,3,6,7,14,20,21,26\) (the kernel-checked
-rank-\(26\) prefix cited in Appendix~\ref{app:half-final-skip}).  Membership of \(1/2\)
-in \(\mathcal A\) asks whether the complementary skips recur beyond every
-bound.  A \emph{last} skip is precisely a skip whose residual lies
-strictly above the whole remaining tail
-(Appendix~\ref{res:fixedtailsocket}), and Theorem~\ref{res:fatalright}
-below identifies nonmembership with the existence of one.
+The exact calculation continues with the next take at rank \(14\), and through
+rank \(26\) it takes exactly
+\[
+ 2,3,6,7,14,20,21,26.
+\]
+The finite seam model introduced below reproduces this prefix uniformly for
+every row \(s\geq27\); this is the
+\lword{HalfFinalMiddlePhaseSieve.lean}{1190}{seamGreedyBits_head2367_14_20_21_26}{kernel-checked rank-(26) prefix}
+used again in Appendix~\ref{app:half-final-skip}.
+
+This is only an initial segment.  Membership of \(1/2\) in \(\mathcal A\)
+requires the complementary skips to recur beyond every bound.  Nonmembership
+has a finite alternative: one skip is the \emph{last}, precisely when its
+residual lies strictly above the whole remaining tail
+(Appendix~\ref{res:fixedtailsocket}).  Theorem~\ref{res:fatalright} below
+identifies nonmembership with the existence of such a skip.
 
 \begin{definition}[finite greedy seam and terminal bit]\label{def:terminal-bit}
 For an integer \(s\geq6\), set
