@@ -974,12 +974,17 @@ so \(\Theta_D<C_D\) is equivalent to
 \(\sum_{a\in A_D}w_a<\tfrac12\).
 
 For a finite set \(u\subseteq\{1,\ldots,d\}\), write
-\(V(u)=\sum_{n\in u}w_n\).  Call \((u,d)\) a \emph{fatal half-gap} if
+\(V(u)=\sum_{n\in u}w_n\).  Once this prefix through rank \(d\) is fixed,
+the next decision is whether to take \(w_{d+1}\).  If it is skipped, even
+taking every later weight reaches at most \(V(u)+T_{d+1}\); if it is taken,
+the resulting sum is at least \(V(u)+w_{d+1}\).  We call \((u,d)\) a
+\emph{fatal half-gap} when \(1/2\) lies strictly between these two bounds:
 \[
  V(u)+T_{d+1}<\frac12<V(u)+w_{d+1}.
 \]
-Such a pair certifies that no support agreeing with \(u\) through rank \(d\)
-can represent \(1/2\).
+No support agreeing with \(u\) through rank \(d\) can then represent \(1/2\):
+extensions omitting rank \(d+1\) fall short, while those containing it
+overshoot.
 
 \begin{theorem}[final-skip classification]
 \label{res:fatalright}
