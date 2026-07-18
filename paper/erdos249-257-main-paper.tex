@@ -1578,15 +1578,15 @@ The required transition-carry estimate remains unproved.
 
 \subsubsection{Largest-skip induction}\label{res:largestskipinduction}
 
-Assume that at the first crossing a late largest skipped rank either
-remains late at the next row or forces an upper-or-middle successor branch.
-This hypothesis propagates a late largest skipped rank from row
-$14$ onward,
-\lword{HalfCylinderLargestSkipInduction.lean}{90}{LargestSkipLateStepSocket.largestSkipLateAt_succ}{largest-skip propagation step},
-and hence yields cofinal skipped ranks and membership of $1/2$ in the Mersenne
-achievement set,
+Assume that for every $s\geq14$ and largest skip $d$ with $2s<3d$, either
+$2(s+1)<3d$ or the step to row $s+1$ is upper or middle.  This hypothesis is
+unproved.  Lean checks the base $s=14$, $d=13$ directly, including $28<39$,
+\lword{HalfCylinderLargestSkipInduction.lean}{73}{largestSkipLateAt_fourteen}{the row-14 base}.
+Induction with the branch recurrence then gives a late largest skip at every
+row $s\geq14$,
+\lword{HalfCylinderLargestSkipInduction.lean}{120}{largestSkipLateAt_of_stepSocket}{the row-by-row induction}.
+Those ranks tend to infinity, so $1/2$ belongs to the Mersenne achievement set,
 \lword{HalfCylinderLargestSkipInduction.lean}{167}{half_mem_mersenneAchievementSet_of_largestSkipLateStepSocket}{largest-skip membership criterion}.
-The first-crossing hypothesis itself remains unproved.
 
 \subsubsection{The fixed-tail survival criterion}\label{res:fixedtailsocket}
 

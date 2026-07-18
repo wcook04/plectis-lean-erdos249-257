@@ -901,15 +901,15 @@
         "schema": "erdos249257-editorial-state/1",
         "scope": "continuous_whole_main_paper_exposition",
         "current_priority": {
-          "id": "main_paper_largest_skip_induction_plain_language_audit",
+          "id": "main_paper_fixed_tail_survival_plain_language_audit",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "defect_class": "The largest-skip induction paragraph compresses the quantified next-row hypothesis, the verified row-14 base, the inductive invariant, and the conditional half-membership conclusion into internal first-crossing and propagation language",
-          "statement": "State the hypothesis for every row s >= 14 and late largest skip d: either 2(s+1) < 3d still holds or the successor is upper or middle. Identify the checked row-14 base and then state the conditional induction and half-membership conclusion, without socket terminology or any suggestion that the hypothesis is proved."
+          "defect_class": "The fixed-tail survival paragraph calls a post-decision remainder final when it exceeds a complete Mersenne tail but does not display the two quantities or explain how the pointwise inequality over every actual skip is equivalent to half-membership",
+          "statement": "Define the post-skip remainder and full future tail in the paper's existing notation, state the exact final-skip equivalence, and explain the quantifier change from no final skip to survival at every actual skip. Preserve that the survival inequality itself is unproved."
         },
         "last_verified_wave": {
-          "id": "main_paper_boundary_pulse_plain_language_audit",
+          "id": "main_paper_largest_skip_induction_plain_language_audit",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "result": "Defined the row-s pulse as the weighted divisor count that contributes two for divisibility of 2s+1 and one for divisibility of 2s+2, and defined the word pulse as the selected-rank sum. Explained that for a late largest skip every filled suffix rank divides neither new index, so the entire word pulse localizes below d. At the first crossing 2s < 3d <= 2(s+1), stated the exact alternatives 3d = 2s+1 and 3d = 2s+2 and their pulse values two and one. Preserved that the transition-carry estimate using these counts is unproved."
+          "result": "Replaced first-crossing and propagation shorthand by the exact universal hypothesis: for every s >= 14 and largest skip d with 2s < 3d, either 2(s+1) < 3d or the next branch is upper or middle. Identified the checked base s = 14, d = 13 with 28 < 39. Stated the resulting induction at every row, the unbounded skipped ranks, and the conditional conclusion that 1/2 belongs to the Mersenne achievement set. Marked the universal hypothesis unproved before giving any consequence."
         },
         "active_inconsistencies": [],
         "blocked_decisions": []
@@ -8427,15 +8427,20 @@
     },
     {
       "id": "largest_skip_induction_reduction",
-      "label": "Largest-skip induction from a first-crossing producer socket",
+      "label": "Largest-skip induction from a quantified first-crossing hypothesis",
       "status": "conditional reduction",
-      "statement": "If every late largest skipped rank either remains late at the next row or forces an upper-or-middle successor branch, then the late invariant holds from row 14 onward, produces cofinal skipped ranks, and places 1/2 in the Mersenne achievement set. The first-crossing socket is not proved.",
+      "statement": "Assume that for every s >= 14 and largest skip d with 2s < 3d, either 2(s+1) < 3d or the transition to row s+1 is upper or middle. Lean checks the base s = 14, d = 13 with 28 < 39. Under the hypothesis, induction gives a largest skip beyond two thirds at every row s >= 14; these skipped ranks tend to infinity, so 1/2 belongs to the Mersenne achievement set. The universal next-row hypothesis is not proved.",
       "remaining_open_proposition_ids": [
         "remaining_open.universal_257_all_infinite_supports"
       ],
       "paper_label": "res:largestskipinduction",
       "readme_headline": false,
       "declarations": [
+        {
+          "name": "largestSkipLateAt_fourteen",
+          "module": "Erdos249257/HalfCylinderLargestSkipInduction.lean",
+          "line": 73
+        },
         {
           "name": "LargestSkipLateStepSocket.largestSkipLateAt_succ",
           "module": "Erdos249257/HalfCylinderLargestSkipInduction.lean",
@@ -8445,6 +8450,11 @@
           "name": "largestSkipLateAt_of_stepSocket",
           "module": "Erdos249257/HalfCylinderLargestSkipInduction.lean",
           "line": 120
+        },
+        {
+          "name": "seamGreedyUnboundedSkippedRanksAlong_of_largestSkipLateStepSocket",
+          "module": "Erdos249257/HalfCylinderLargestSkipInduction.lean",
+          "line": 130
         },
         {
           "name": "half_mem_mersenneAchievementSet_of_largestSkipLateStepSocket",
