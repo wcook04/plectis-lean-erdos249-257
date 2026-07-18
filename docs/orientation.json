@@ -56,7 +56,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "Erd\\H{o}s \\#249",
-    "line": 3431
+    "line": 3434
    }
   },
   {
@@ -67,7 +67,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "unbounded certificate supply",
-    "line": 3442
+    "line": 3445
    }
   },
   {
@@ -78,7 +78,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "the half-value counterexample route",
-    "line": 3463
+    "line": 3466
    }
   },
   {
@@ -89,7 +89,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "universal Erd\\H{o}s \\#257",
-    "line": 3454
+    "line": 3457
    }
   }
  ],
@@ -559,18 +559,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_257_half_target_motivation_density_audit",
+   "id": "main_paper_257_worked_start_transition_density_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "The 'Why this target' paragraph packs the rational-counterexample status, Möbius comparison, failed sign truncation, finite-support exclusion, and unique coding into one long sentence before the worked greedy expansion",
-   "statement": "Separate the reason for choosing 1/2 from its exact status, define the Boolean-support contrast plainly, and retain the finite-support and uniqueness boundaries without presenting the target as forced."
+   "defect_class": "The worked start moves from the first greedy decisions to the rank-26 prefix, the unresolved membership question, and the final-skip criterion in one continuous paragraph",
+   "statement": "Separate the checked finite computation from its interpretation, preserve the exact rank-26 source boundary, and introduce the last-skip reduction without making finite survival evidence for membership."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "ebc98ee71f6819bd9fe344a0bb343542c604e533",
-  "committed_navigation_snapshot": "2112db6cdc02296d035512b0d64ecf4a19796e62",
-  "main_paper_source_digest": "sha256:fd94ed141491a45e0076a6883ac042e6ade2beab1941455ad441a64350479561"
+  "committed_navigation_snapshot": "b3fa547349ba4709286ff594e1b9b3ec5ee1fd78",
+  "main_paper_source_digest": "sha256:5abfeffe5b542fe85e22885047f58747298f1774293c2343df712cba7c321ad0"
  },
  "reading_routes": [
   {
