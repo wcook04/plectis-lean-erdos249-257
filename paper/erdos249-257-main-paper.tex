@@ -1566,15 +1566,15 @@ but $2(s+1)<3d$ fails.  This first-crossing statement is not proved.
 
 \subsubsection{Boundary-pulse normalisation}\label{res:boundarypulse}
 
-Above a late largest skipped rank, every filled suffix rank has zero row
-pulse, so the word pulse is carried entirely by the lower prefix:
+For a selected rank $e$, its row-$s$ pulse counts two if $e\mid2s+1$ and one
+if $e\mid2s+2$; the word pulse sums these counts.  If $d$ is a largest skip
+with $2s<3d$, every filled suffix rank $d<e<s$ divides neither new index, so
+the whole word pulse comes from the selected prefix below $d$:
 \lword{HalfCylinderBoundaryPulse.lean}{85}{exists_lowerPrefix_wordPulse_eq_of_largestFalse_late}{the lower-prefix pulse localisation}.
-At the first crossing of the two-thirds boundary there are exactly two cases,
-$3d=2s+1$ and $3d=2s+2$, and the skipped rank has pulse respectively two or
-one:
+At the first crossing $2s<3d\leq2(s+1)$, either $3d=2s+1$ or $3d=2s+2$;
+the twice- and once-counted alternatives give pulses two and one:
 \lword{HalfCylinderBoundaryPulse.lean}{150}{rowPulse_boundary_of_late_firstCrossing}{the first-crossing pulse classification}.
-This supplies the incidence normalisation for a transition-carry estimate;
-it does not establish that estimate.
+The required transition-carry estimate remains unproved.
 
 \subsubsection{Largest-skip induction}\label{res:largestskipinduction}
 
