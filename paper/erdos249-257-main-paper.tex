@@ -2036,13 +2036,13 @@ N+h+L+2 \;<\; \big(\Delta_{h,N,L}\bmod 2^L\big) \;<\; 2^L-(N+h+L+2).
 \]
 \end{definition}
 
-The integer $\Delta_{h,N,L}$ contains the first $L$ binary places of
-$R_{N+h}-R_N$; the two margins bound the omitted tail using
-$\ph(n)\le n$.  Thus each instance of the predicate is decidable by finite
-integer arithmetic, while its conclusion concerns the infinite tail
-difference.  The depth-floor theorem implies that a successful instance has
-\(L>0\), even though the formal existential quantifier ranges over all of
-\(\N\).
+Here \(x\bmod 2^L\) denotes the least residue in
+\(\{0,\ldots,2^L-1\}\).  The integer $\Delta_{h,N,L}$ contains the first
+$L$ binary places of $R_{N+h}-R_N$; the two margins bound the omitted tail
+using $\ph(n)\le n$.  Thus each instance of the predicate is decidable by
+finite integer arithmetic, while its conclusion concerns the infinite tail
+difference.  The strict inequalities are impossible when \(L=0\), so every
+successful certificate has positive depth.
 Heuristically, the two margins together occupy a proportion of about
 \(2(N{+}h{+}L{+}2)/2^L\) of the modulus, which is small as soon as
 \(2^L\) is large compared with \(N+h+L\); a certificate can fail only
@@ -2061,8 +2061,8 @@ R_{N+h}-R_N\notin\Z.
 \end{proposition}
 \noindent This is the
 \lword{LcmConeFlatness.lean}{316}{exists_certifiedKill_iff_tail_diff_notMem_int}{certificate-completeness equivalence}.
-Thus the finite predicate loses no information at a fixed pair \((h,N)\).  The certificate depth-floor lemma forces every witness to have positive depth.
-Searching \(L=0,1,2,\ldots\) is therefore a complete positive
+Thus the finite predicate loses no information at a fixed pair \((h,N)\).
+Searching \(L=1,2,\ldots\) is therefore a complete positive
 semi-decision procedure for non-integrality at fixed \((h,N)\): it halts
 exactly when the difference is non-integral.  When the difference is integral,
 completeness says that no depth succeeds, so this search does not halt.  It is
@@ -2096,8 +2096,8 @@ $N_0$, there exist $N\ge N_0$ and $L$ with $\mathsf{Sep}(h,N,L)$.
 \lword{LcmConeFlatness.lean}{412}{irrational_totient_series_iff_certificate_supply}{certificate-supply equivalence}.
 Proposition~\ref{res:complete} supplies the fixed-parameter equivalence;
 Theorem~\ref{res:pointwisecomplete} assembles all fixed pairs; and
-Theorem~\ref{res:red21} replaces pointwise placement by the equivalent
-cofinal placement quantifier.
+Theorem~\ref{res:red21} allows the certificate location \(N\) to be chosen
+beyond any prescribed threshold.
 
 Every multiple of an eventual period is again a period, and every fixed
 \(h\) divides \(M_t\) for all \(t\geq h\).  The least common multiple
@@ -3671,7 +3671,7 @@ finite greedy death proves nonmembership in the achievement set, whereas
 survival through any finite depth proves nothing.
 
 The prior-art boundary is theorem-family-specific. The integral carry
-recurrence has a direct antecedent in Wang--Grau Ribas~\cite{wanggrauribas};
+recurrence has a direct antecedent in Wang~\cite{wang2026};
 the strict-tail geometry is recorded by Kova\v{c}--Tao~\cite{kovactao};
 M\"obius inversion, repetend algebra, and divisor averaging are classical
 (see, for example, Apostol~\cite{apostol}). We make no claim of mathematical
@@ -3701,12 +3701,12 @@ u(N+1)=2\,u(N)-v\,\gamma(N+1)\ \text{ for all } N,
 u(N)/2^N\to0 .
 \]
 The recurrence is exact binary long division against the coefficient stream;
-the boundary condition forbids the homogeneous solution. Wang and Grau Ribas
-use the integral carry recurrence forced by rationality for the weighted binary
-special case $\gamma(n)=n d_n$~\cite{wanggrauribas}. The theorem below extends that
+the boundary condition forbids the homogeneous solution. Wang uses the
+integral carry recurrence forced by rationality for the weighted binary
+special case $\gamma(n)=n d_n$~\cite{wang2026}. The theorem below extends that
 forward mechanism to arbitrary nonnegative $\gamma(n)\le n$; its explicit converse
 and subexponential-orbit rigidity are the local additions, with no priority
-claim attached. Wang--Grau Ribas's positive-density theorem and its Erd\H{o}s
+claim attached. Wang's positive-density theorem and its Erd\H{o}s
 \#260 corollary are not used or formalised here.
 
 \begin{theorem}[tail-orbit rigidity]\label{res:rigidity}
@@ -4342,8 +4342,8 @@ Campbell shift-synchronisation boundary & \lrefx{CampbellShiftSynchronization.le
 \bibitem{kovactao} V.~Kova\v{c} and T.~Tao, \emph{On several irrationality problems for
   Ahmes series}, Acta Math. Hungar. \textbf{175} (2025), 572--608,
   doi:\href{https://doi.org/10.1007/s10474-025-01528-0}{10.1007/s10474-025-01528-0}.
-\bibitem{wanggrauribas} H.~Wang and J.~M. Grau Ribas, \emph{Positive dyadic density for
-  rational weighted binary expansions}, arXiv:2606.24972 (2026),
+\bibitem{wang2026} H.~Wang, \emph{Positive dyadic density for
+  rational weighted binary expansions}, arXiv:2606.24972v2 (2026),
   doi:\href{https://doi.org/10.48550/arXiv.2606.24972}{10.48550/arXiv.2606.24972}.
 \bibitem{crandall} R.~Crandall, \emph{The googol-th bit of the Erd\H{o}s--Borwein constant},
   Integers \textbf{12} (2012), no.~5, 811--840,
