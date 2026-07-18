@@ -56,7 +56,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "Erd\\H{o}s \\#249",
-    "line": 3442
+    "line": 3447
    }
   },
   {
@@ -67,7 +67,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "unbounded certificate supply",
-    "line": 3453
+    "line": 3458
    }
   },
   {
@@ -78,7 +78,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "the half-value counterexample route",
-    "line": 3474
+    "line": 3479
    }
   },
   {
@@ -89,7 +89,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "universal Erd\\H{o}s \\#257",
-    "line": 3465
+    "line": 3470
    }
   }
  ],
@@ -559,18 +559,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_257_finite_seam_reader_entry_audit",
+   "id": "main_paper_257_final_skip_transition_reader_entry_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "Definition 4.10 introduces q_{s,d}, K_s, R_{s,d}, beta_{s,d}, and tau_s before the prose explains that the construction is an exact integer rescaling of the real greedy process",
-   "statement": "Give the reader the purpose of the finite seam before the formulas, explain what a row and terminal bit record in plain language, and preserve the exact recurrence and theorem boundaries."
+   "defect_class": "Section 4.6 opens with G_s, H_s, and the upper/middle/right transition labels before explaining that the construction compares consecutive seam rows to detect whether one skipped exponent is final",
+   "statement": "State the purpose of the adjacent-row comparison before its notation, define the cheapest strict overshoot in reader-facing terms, and preserve the exact three-case transition and unresolved-branch boundaries."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "ebc98ee71f6819bd9fe344a0bb343542c604e533",
-  "committed_navigation_snapshot": "63348729ba7da663baa5208ce17408b2ae7fa1b2",
-  "main_paper_source_digest": "sha256:6c1cce37b72d3e196b1fa39caa570376db198ffb29715ef78950f81d1d431cf3"
+  "committed_navigation_snapshot": "147dd0c38b1bd3cf54d4050b8bf286f3d3360469",
+  "main_paper_source_digest": "sha256:769c6624b7b93e305952c5ebf419ab19000a27558d9053688712b91e74431f31"
  },
  "reading_routes": [
   {
