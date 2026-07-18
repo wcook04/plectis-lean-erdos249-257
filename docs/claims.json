@@ -901,15 +901,15 @@
         "schema": "erdos249257-editorial-state/1",
         "scope": "continuous_whole_main_paper_exposition",
         "current_priority": {
-          "id": "main_paper_mixed_cofinal_half_carry_fan_in_plain_language_audit",
+          "id": "main_paper_integer_greedy_first_wrap_plain_language_audit",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "defect_class": "The mixed window-or-seam passage says that one branch occurs at each requested scale without spelling out the cofinal quantifier, the one-word extraction in each branch, or that no producer for this disjunction is proved",
-          "statement": "State the mixed hypothesis as: for every N there is M >= N carrying either a selected window or a localized realized seam. Explain that the window branch chooses carry 1 while the seam branch chooses the protected non-hole carry 4 when H = 3 and 3 otherwise, so either branch supplies exactly the one admissible word compactness needs. Preserve that the branches may alternate, no cofinal mixed producer is proved, and this is not an Erdős #257 proof."
+          "defect_class": "The first-wrap passage calls the exact greedy remainder condition merely small and positive without defining the target, the strip bound, the descending greedy remainder, or the inequality that is equivalent to a seam defect",
+          "statement": "For s >= 3, define the seam target C_s = 2^(2s-1) - 2^s, the strip bound B_s = 2 sqrt(2s) + 4, and the descending greedy remainder r_s for the proper-divisor seam weights. State the exact equivalence between a positive subset-sum defect at most B_s and 1 <= r_s <= B_s, and explain the role of the 2^(s+1) gap. Preserve that no theorem supplies the required unbounded-scale remainder bound and that this does not prove Erdős #257."
         },
         "last_verified_wave": {
-          "id": "main_paper_localized_protected_seam_plain_language_audit",
+          "id": "main_paper_mixed_cofinal_half_carry_fan_in_plain_language_audit",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "result": "Defined realized localized seam at depth M in its exact forward-only sense: every seam-reachable carry k in [3,27] comes from an admissible word. Named the unique hole H = 2 delta - c and the proof's explicit choice of carry 4 when H = 3 and 3 otherwise. Preserved that compactness is conditional on an unproved cofinal realization supply and that Erdős #257 remains open."
+          "result": "Stated the mixed cofinal hypothesis with its exact quantifier: for every N there is M >= N carrying a selected window or a realized seam. Explained that the window branch uses carry 1, while the seam branch uses 4 when its hole is 3 and 3 otherwise; either supplies one admissible word and the alternatives may vary with N. Preserved that the hypothesis is unproved and Erdős #257 is open."
         },
         "active_inconsistencies": [],
         "blocked_decisions": []
@@ -8115,7 +8115,7 @@
       "id": "mixed_cofinal_half_carry_fan_in",
       "label": "Mixed cofinal half-carry fan-in",
       "status": "conditional reduction",
-      "statement": "At every requested scale, either a selected protected half-carry window or a localized realized one-hole seam supplies an admissible finite word. If this mixed producer is cofinal, then compactness yields an infinite support A with erdosSupportSeries 2 A = 1/2. The mixed producer is not proved.",
+      "statement": "For every N, suppose there is M >= N carrying either a selected protected half-carry window or a localized realized one-hole seam. The window branch chooses carry 1; the seam branch chooses 4 when its unique hole is 3 and 3 otherwise. Either branch supplies one admissible finite word, and the branches may alternate with N. Hence cofinal admissibility and, by compactness, an infinite support A with erdosSupportSeries 2 A = 1/2 follow. This mixed cofinal hypothesis is not proved, so Erdős #257 remains open.",
       "remaining_open_proposition_ids": [
         "remaining_open.universal_257_all_infinite_supports"
       ],

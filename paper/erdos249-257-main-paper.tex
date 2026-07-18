@@ -1395,14 +1395,14 @@ The cofinal supply is unproved, so Erd\H{o}s~\#257 remains open.
 
 \subsubsection{Combining the two cofinal half-carry criteria}\label{res:cofinalwindowseam}
 
-Assume that at each requested scale there is either a selected protected
-window or a localised realised seam.  Each alternative supplies the one
-admissible word needed for compactness, so this cofinal disjunction implies
-an infinite support with sum $1/2$:
-\lword{HalfCarryCofinalWindowOrSeamConsumer.lean}{32}{cofinalAdmissibility_of_cofinalSelectedWindowOrProtectedSeam}{by window-or-seam cofinality}
-and
-\lword{HalfCarryCofinalWindowOrSeamConsumer.lean}{58}{exists_infinite_support_half_of_cofinalSelectedWindowOrProtectedSeam}{by the window-or-seam half-value conclusion}.
-The cofinal disjunction remains unproved.
+For every $N$, the hypothesis gives an $M\geq N$ with a selected window or a
+realised seam.  The window uses carry $1$; the seam uses $4$ if its hole is
+$3$, otherwise $3$.  Either gives an admissible word, hence cofinal admissibility
+(\lword{HalfCarryCofinalWindowOrSeamConsumer.lean}{32}{cofinalAdmissibility_of_cofinalSelectedWindowOrProtectedSeam}{fan-in})
+and, by compactness, an infinite support summing to $1/2$
+(\lword{HalfCarryCofinalWindowOrSeamConsumer.lean}{58}{exists_infinite_support_half_of_cofinalSelectedWindowOrProtectedSeam}{half-value}).
+Branches may alternate.  The hypothesis is unproved;
+Erd\H{o}s~\#257 is open.
 
 \subsubsection{Integer-greedy first-wrap reduction}\label{res:integergreedy}
 
