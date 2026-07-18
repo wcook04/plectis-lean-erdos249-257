@@ -1163,16 +1163,19 @@ selector, nor irrationality.
 
 \subsubsection{Mixed prime-power layers}\label{res:mixedlayer}
 
-The one-prime-power layer has a two-signature extension.  Exact $p$-adic and
-$q$-adic layer operators commute, and, for distinct primes with the residual
-argument coprime to $pq$, their composite extracts the iterated exact-valuation
-pullback of the support coefficient.  This is formalised by
+For $e\geq1$ and an integer-valued coefficient $g$, put
+$L_{p,e}g(n)=g(p^en)-g(p^{e-1}n)$.  This finite difference records the change
+between the two adjacent $p$-power arguments.  The operators commute,
+$L_{q,f}L_{p,e}=L_{p,e}L_{q,f}$:
+\lword{MaximalOmegaLayer.lean}{29}{primePowerLayer_comm}{the layer-commutation identity}.
+If $p\ne q$ are prime, $e,f\geq1$, and $\gcd(n,pq)=1$, then, viewing $f_A$
+as integer-valued, $L_{q,f}L_{p,e}f_A(n)=f_B(n)$ for
+$B=\{d:\gcd(d,pq)=1,\ p^eq^fd\in A\}$:
 \lword{MaximalOmegaLayer.lean}{39}{mixedPrimePowerLayerTwo_supportCoeffInt}{the two-prime layer identity}.
-The singleton support $\{12\}$ gives a checked $(2^2,3)$ example with value
-one at residual argument $1$:
+For $A=\{12\}$, $(p^e,q^f,n)=(4,3,1)$, and the value is one:
 \lword{MaximalOmegaLayer.lean}{65}{mixedPrimePowerLayerTwo_twelve_fixture}{the singleton-support calculation}.
-These are finite coefficient identities.  They do not provide a decimation
-transport, a bounded-$\Omega$ conclusion, or an irrationality theorem.
+These finite identities provide no decimation transport, bounded-$\Omega$
+conclusion, or irrationality theorem.
 
 \subsubsection{Half-trapping return carries}\label{res:halftrapping}
 
