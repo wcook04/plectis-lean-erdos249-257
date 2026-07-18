@@ -3358,23 +3358,23 @@ put
 \[
   u_n=4^n(2r_n-2^{-n}).
 \]
-The second-channel condition is the rational inequality
+Here $u_n$ is the normalized phase exposing the Mersenne tail's second geometric channel.
 \[
   \frac16+\frac{37}{56}2^{-n}\le \left|u_n-\frac13\right|.
 \]
-The quantity \(u_n\) may be negative (it is at \(n=3,4\)); the condition
-constrains only its distance from \(1/3\).
+We call this the \emph{second-channel separation condition}; it constrains the distance
+from \(1/3\), and \(u_n\) may be negative (as it is at \(n=3,4\)).
 
-\begin{proposition}[finite second-channel verification]\label{res:secondfrontier}
-The second-channel condition is decidable over $\Q$ and holds for
+\begin{proposition}[finite second-channel separation]\label{res:secondfrontier}
+The second-channel separation condition is decidable over $\Q$ and holds for
 $1\le n\le6$.
 \end{proposition}
 \noindent This is the
-\lword{GreedyAchievementSet.lean}{2723}{halfSecondChannelSeparatedRat_of_pos_le_six}{finite second-channel verification}.
+\lword{GreedyAchievementSet.lean}{2723}{halfSecondChannelSeparatedRat_of_pos_le_six}{finite second-channel separation}.
 
-\begin{corollary}[second-channel membership criterion]
+\begin{corollary}[second-channel separation criterion]
 \label{res:secondcriterion}
-If the second-channel condition holds for every \(n\ge7\), then
+If the second-channel separation condition holds for every \(n\ge7\), then
 \(1/2\) belongs to the Mersenne achievement set \(\mathcal A\).
 \end{corollary}
 \noindent This implication is the
@@ -3390,7 +3390,7 @@ This is formalised at
 The forward implication uses the
 \hyperref[res:full]{full-support irrationality theorem}; the reverse implication
 uses the absorbing fatal-state
-criterion.  Thus the second-channel hypothesis is one sufficient route to the
+criterion.  Thus this separation hypothesis is one sufficient route to the
 infinite-skip condition.  It does not prove that condition, and membership alone
 is not the universal \#257 theorem.
 The finite proposition supplies no case of the missing range \(n\ge7\).
