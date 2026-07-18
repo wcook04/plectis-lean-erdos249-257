@@ -1655,10 +1655,14 @@ the actual orbit out of that window globally is not.
 
 \subsubsection{Alignment of seam and transition carries}\label{res:seamproducer}
 
-At a first-wrap seam, the left boundary carry is four times the shifted seam
-hole minus the paired incidence pulse at the next two rows,
+Let $P$ omit $s$, put $A=P\cup\{s\}$, and let $\delta$ be the half-carry of
+$A$ at row $2s-2$.  With first-wrap hole
+$H=2\delta-f_P(2s)$ and paired pulse
+$\Pi=2f_A(2s+1)+f_A(2s+2)$, the producer carry satisfies
+$C(A,s)=4(H-1)-\Pi$,
 \lword{HalfCylinderSeamProducerAlignment.lean}{24}{producerCarry_insert_eq_four_mul_shiftedHole_sub_pulse}{seam--carry alignment}.
-This coordinate identity supplies neither a sign nor a size estimate.
+Thus two coefficient rows align the seam carry $H-1$ with the producer
+coordinate.  The identity supplies no sign, size, or occurrence estimate.
 
 \subsection{Finite evidence, coordinate changes, and eliminated special cases}
 \label{app:half-evidence}
@@ -1681,14 +1685,13 @@ This finite base supplies no windows at unbounded depths.
 
 \subsubsection{Rewind-to-seam equivalence}\label{res:rewindseambridge}
 
-For a selected window with a rewind seam, a two-value coefficient profile on
-the adjacent base ancestors induces the live next-row profile,
+For a selected window with a rewind seam, a two-value profile on the adjacent
+base ancestors induces the live next-row profile,
 \lword{RewindSeamOperationalBridge.lean}{140}{nextRow_profile_of_rewindSeam}{the next-row rewind profile}.
 Under the stated strip and buffer inequalities, that profile realises a
 protected one-hole seam at the next row,
 \lword{RewindSeamOperationalBridge.lean}{217}{protectedEvenSeamRealizedAt_succ_of_profile}{the protected-seam realisation}.
-The base-ancestor coefficient drop is an explicit input, not a theorem here,
-and so are the stated strip and buffer inequalities.
+The coefficient drop and both inequalities are inputs, not conclusions.
 
 \subsubsection{Selected suffix cylinders}
 
