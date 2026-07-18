@@ -171,8 +171,8 @@ The paper separates finite arithmetic from the remaining infinite
 quantifier.  A \emph{certificate} is a finite integer calculation that
 proves an exact assertion about an infinite tail.  A \emph{carry} is an
 integer state in binary long division, and \emph{cofinally} means beyond
-every prescribed bound.  A \emph{spine} below is simply a displayed chain
-from such finite statements to one open cofinal statement.  In both spines,
+every prescribed bound.  The two displayed chains below connect finite
+statements to open cofinal statements.  In both reductions,
 tail and carry identities separate exact finite arithmetic from one analytic
 or combinatorial cofinality statement:
 \[
@@ -244,7 +244,7 @@ Euler totient; Lambert series; achievement sets; binary carry systems; Lean~4.
 \qquad
 \textbf{MSC 2020.} 11J72 (primary); 11A25, 68V20 (secondary).
 
-\section{The two exact spines}\label{sec:spines}
+\section{The two exact reductions}\label{sec:spines}
 
 \subsection{Erd\H{o}s \#249: an exact certificate normal form}
 \label{res:249story}
@@ -296,7 +296,7 @@ one-parameter lcm-diagonal form.  The 28 changing-lcm scales through
 \(t=64\) are verified, but neither this finite computation nor the
 denominator bound proves the unbounded supply.
 
-\subsection{Erd\H{o}s \#257: the exact half-value counterexample spine}
+\subsection{Erd\H{o}s \#257: the exact half-value counterexample reduction}
 \label{res:halfstory}
 
 Let
@@ -1356,7 +1356,7 @@ choice:
 \lword{HalfCylinderConcreteSeamAdapter.lean}{667}{seamCutNextWord_eq_greedyWord_succ}{the seam-word recurrence}.
 It implements a finite recurrence, not the unbounded remainder estimate.
 
-\subsection{Exact final-skip spine and its residual cells}
+\subsection{Exact final-skip reduction and its residual cells}
 \label{app:half-final-skip}
 
 This is the only subsection that feeds the main final-skip reduction
@@ -1875,7 +1875,7 @@ Appendix~\ref{app:half-technical} records the exact local reductions,
 conditional compactness criteria, finite certificates, counterexamples to
 stronger local assertions, and closed strategy branches supporting this
 conclusion.  They refine the obstruction;
-they do not constitute a second theorem spine.
+they do not constitute a second endpoint theorem.
 
 \section{The totient constant $S$ (Erd\H{o}s \#249)}\label{sec:249}
 
@@ -1891,7 +1891,7 @@ eventual binary period.  Third, many such certificates are verified at
 bounded parameters.  Fourth, and still missing, is a theorem supplying them
 at unbounded parameters.  Only the fourth layer would settle the problem.
 
-The main section states this theorem spine.
+The main section states this reduction.
 Appendix~\ref{app:totient-normal} gives equivalent cofinal coordinates;
 Appendix~\ref{app:totient-finite} separates fixed-scale mechanisms from the
 conditional cofinal criteria that use them as hypotheses; and
@@ -2815,7 +2815,7 @@ statement.  None provides the required cofinal certificates.
 \section{One transform and the shared finite-to-cofinal bottleneck}
 \label{sec:architecture}
 
-\noindent This section collects the structure the two open spines share and
+\noindent This section collects the structure the two open reductions share and
 states its limits.  Every mathematical assertion in it is proved elsewhere
 in the paper; the section adds organisation, not theorems, and its closing
 remark is an elementary unformalised observation, flagged as such.
@@ -3011,7 +3011,7 @@ tail, not only its superincreasing geometry.
 \section{Formal verification and reproducibility}\label{sec:verify}
 
 \noindent This section records proof authority and reproducibility; it does
-not add a mathematical conclusion to either theorem spine.
+not add a mathematical conclusion to either reduction.
 
 \paragraph{Proof authority and source identity.}
 The Lean~4 proof assistant~\cite{lean} and Mathlib library~\cite{mathlib} check
@@ -3285,8 +3285,8 @@ The two orientations with one nonempty Stern--Brocot run have total mass
 \noindent This is the
 \lword{SternBrocotRunGeometry.lean}{467}{oneRunMass_eq_half}{one-run mass}.
 
-\begin{proposition}[unit-spine denominator exponent]\label{res:rundenominator}
-The natural denominator exponent on the all-unit \(r\)-run spine is
+\begin{proposition}[unit-run denominator exponent]\label{res:rundenominator}
+The natural denominator exponent along the all-unit \(r\)-run is
 \[
   \sum_{j=0}^{r-1}F_{j+2}=F_{r+3}-2.
 \]
@@ -3533,7 +3533,7 @@ instances, exact coordinate translations, counterexamples, and closed
 strategy branches.  This is a dependency map, not a second route to a
 conclusion.
 
-The logical spine is
+The logical chain is
 \[
 \begin{array}{rcl}
  \text{cofinal half-value witnesses from A.2--A.3}
@@ -3619,7 +3619,7 @@ unbounded-state constraints in Appendix~\ref{app:carry-mass}; and the exact
 greedy geometry with one-sided finite death certificates in
 Appendix~\ref{app:carry-geometry}.
 
-The dependency spine is
+The dependency chain is
 \[
 \begin{array}{rcl}
  \text{a rational support value}
@@ -4121,7 +4121,7 @@ candidate strategies.  Each statement retains its own hypotheses and status.
 None proves the unbounded certificate supply
 \eqref{eq:unbounded-certificate-supply}.
 
-The exact spine is
+The exact chain is
 \[
 \begin{array}{rcl}
  R_{N+h}-R_N\notin\Z
@@ -4134,7 +4134,7 @@ The exact spine is
 \end{array}
 \]
 Appendix~\ref{app:totient-normal} gives equivalent coordinates for this
-fixed-to-cofinal spine.  Appendix~\ref{app:totient-finite} distinguishes
+fixed-to-cofinal reduction.  Appendix~\ref{app:totient-finite} distinguishes
 one-scale mechanisms from the conditional cofinal implications that use them.
 Appendices~\ref{app:totient-boundaries}--\ref{app:totient-rank} expose
 possible inputs to an unbounded supply theorem and close several shortcuts.  None
@@ -4152,7 +4152,7 @@ Proposition~\ref{res:coprime}.  Its new results are the periodic-weight
 endpoints, finite denominator obstructions, the M\"obius-square and squared
 Lambert identities, and the Stern--Brocot cylinder and continuant laws.
 These enlarge the two coordinate pictures; they are not additional steps in
-either open proof spine.
+either open proof.
 
 The three families are parallel, not cumulative.
 Appendix~\ref{app:lambert-weighted} proves or classifies weighted Lambert
@@ -4195,8 +4195,8 @@ Theorems~\ref{res:pointwisecomplete}--\ref{res:diag} for the exact certificate
 normal forms; and Theorems~\ref{res:halfmembership}
 and~\ref{res:fatalright} for the two half-value classifications.
 Theorem~\ref{res:full} is the classical closed comparison case, and
-Section~\ref{sec:architecture} states the structure the spines share.  For the
-strongest independent structure beyond the two open spines, see
+Section~\ref{sec:architecture} states the structure the reductions share.  For the
+strongest independent structure beyond the two open reductions, see
 Theorem~\ref{res:dyadictotient}, the sublogarithmic zero-window corollary in
 the main \#257 results, and
 Theorems~\ref{res:sternbrocotcylinders} and~\ref{res:sternbrocotruns}.
