@@ -56,7 +56,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "Erd\\H{o}s \\#249",
-    "line": 3471
+    "line": 3473
    }
   },
   {
@@ -67,7 +67,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "unbounded certificate supply",
-    "line": 3482
+    "line": 3484
    }
   },
   {
@@ -78,7 +78,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "the half-value counterexample route",
-    "line": 3503
+    "line": 3505
    }
   },
   {
@@ -89,7 +89,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "universal Erd\\H{o}s \\#257",
-    "line": 3494
+    "line": 3496
    }
   }
  ],
@@ -559,10 +559,10 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_shared_bottleneck_plain_language_audit",
+   "id": "main_paper_shared_finite_witness_asymmetry_reader_entry_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "The next main-section title immediately reintroduces finite-to-cofinal bottleneck without defining cofinal for a cold reader, even though the preceding section now states both quantifier roles in plain language",
-   "statement": "Retitle and revise the shared-bottleneck entry in ordinary terms such as finite evidence versus an unbounded conclusion, while preserving the distinct exact requirements for Erdős 249 and 257 and the fact that the section adds organisation rather than theorems."
+   "defect_class": "The finite-witness paragraph states the two certificate systems sequentially and only later surfaces their key asymmetry: a fatal half-gap is a finite nonmembership witness for the half-value route, whereas neither status of S has a single finite witness in the Sep system",
+   "statement": "Make the finite-witness asymmetry explicit in compact parallel prose, while preserving the fatal-gap equivalence, the one-tail-difference scope of each Sep certificate, and the fact that finite survival proves neither positive conclusion."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
@@ -570,7 +570,7 @@
  "source_revision": {
   "formal_source_ref": "ebc98ee71f6819bd9fe344a0bb343542c604e533",
   "committed_navigation_snapshot": "3c7c411374eab06633736ca3cd0fb5e9907726ef",
-  "main_paper_source_digest": "sha256:3ed23b20b9d77578f48ef1321e9b433e4db09b8e7ed4500bd7ee3b3532bac9c2"
+  "main_paper_source_digest": "sha256:a57057f99ee9591a3e583923d83e8e100191edd30351b1eb4acee410ac4691c0"
  },
  "reading_routes": [
   {
