@@ -322,8 +322,8 @@ Independently of the unbounded certificate supply, if \(S=p/q\), then
 \lword{CertificateKernel.lean}{18056}{tsum_totient_div_pow_two_ne_ratCast_of_den_le_79639646646701375323355774875831053}{denominator exclusion}.
 
 \paragraph{Missing theorem.}
-An unbounded certificate supply is the exact open statement, equivalently an
-unbounded supply of non-integral tail differences.
+An unbounded certificate supply is the exact open statement, equivalently
+unboundedly many non-integral tail differences.
 Theorem~\ref{res:diag} compresses this to the equivalent one-parameter
 lcm-diagonal supply.  Finite diagonal instances are verified at the 28
 changing-lcm scales through \(t=64\),
@@ -374,8 +374,8 @@ strongest current last-skip route is conditional.  After a putative last
 skip, the upper transition and the middle transition carry \(-3\) are
 impossible.
 The two final-skip obligations are to exclude the actual middle transition
-carries \(-2,-1\) and establish the exact future-tail inequality at every
-other non-\(-3\) middle transition.  Neither is proved for the greedy orbit, so this route
+carries \(-2,-1\) and establish the future-tail inequality at the remaining
+nonnegative-carry middle transitions.  Neither is proved for the greedy orbit, so this route
 does not yet produce cofinal terminal zeros.
 The conditional residual is the
 \lword{HalfCylinderLastProducerContradiction.lean}{387}{half_mem_mersenneAchievementSet_of_middleProducerTailEscapeExceptNegThree}{remaining-tail implication}.
@@ -3032,9 +3032,11 @@ computations extends to a rational series in the same class; the splice
 is recorded in Section~\ref{sec:249-open}.  For the half-value fibre, the
 strict-tail axioms and any finite prefix of greedy decisions are jointly
 consistent with both endpoints: replacing the weights beyond the inspected
-range by a geometric sequence whose total mass lies below the pending
-residual preserves strict tails, leaves every inspected decision
-unchanged, and makes the last inspected skip final in the modified system.
+range by a ratio-one-third geometric sequence with total mass below the
+pending residual (respectively equal to it) preserves strict tails, leaves
+every inspected decision unchanged, and makes the last inspected skip
+final (respectively realises the target as the modified system's complete
+remaining sum).
 A membership proof must therefore consume the Mersenne arithmetic of the
 tail, not only its superincreasing geometry.
 \end{remark}
@@ -3393,6 +3395,8 @@ The second-channel condition is the rational inequality
 \[
   \frac16+\frac{37}{56}2^{-n}\le \left|u_n-\frac13\right|.
 \]
+The quantity \(u_n\) may be negative (it is at \(n=3,4\)); the condition
+constrains only its distance from \(1/3\).
 
 \begin{proposition}[finite second-channel verification]\label{res:secondfrontier}
 The second-channel condition is decidable over $\Q$ and holds for
@@ -3502,7 +3506,7 @@ For the half-value route to \#257, the search over arbitrary supports has been
 replaced by one canonical greedy-orbit question.  In the present final-skip
 argument that question is localised further to two obligations: exclude the
 middle cells \(-2,-1\), and prove the future-tail inequality at the remaining
-middle transitions.  A cofinal \#249 certificate producer would prove \#249;
+nonnegative-carry middle transitions.  A cofinal \#249 certificate producer would prove \#249;
 a cofinal terminal-zero producer would refute universal \#257; and a proof of
 eventual right behaviour would close only the half-value route.
 
