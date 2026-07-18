@@ -27,7 +27,7 @@
   "declaration_count": 12578,
   "theorem_like_count": 11539,
   "generated_certificate_declaration_count": 2925,
-  "principal_claim_link_count": 291,
+  "principal_claim_link_count": 293,
   "kind_counts": {
    "abbrev": 9,
    "def": 992,
@@ -559,18 +559,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_largest_skip_induction_plain_language_audit",
+   "id": "main_paper_fixed_tail_survival_plain_language_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "The largest-skip induction paragraph compresses the quantified next-row hypothesis, the verified row-14 base, the inductive invariant, and the conditional half-membership conclusion into internal first-crossing and propagation language",
-   "statement": "State the hypothesis for every row s >= 14 and late largest skip d: either 2(s+1) < 3d still holds or the successor is upper or middle. Identify the checked row-14 base and then state the conditional induction and half-membership conclusion, without socket terminology or any suggestion that the hypothesis is proved."
+   "defect_class": "The fixed-tail survival paragraph calls a post-decision remainder final when it exceeds a complete Mersenne tail but does not display the two quantities or explain how the pointwise inequality over every actual skip is equivalent to half-membership",
+   "statement": "Define the post-skip remainder and full future tail in the paper's existing notation, state the exact final-skip equivalence, and explain the quantifier change from no final skip to survival at every actual skip. Preserve that the survival inequality itself is unproved."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "ebc98ee71f6819bd9fe344a0bb343542c604e533",
-  "committed_navigation_snapshot": "de825e37be3fd79ef83444eb28a27c0a219951a6",
-  "main_paper_source_digest": "sha256:1c2a03901a8db5009655add0860b3363acfb12814b770d0572439a2dbf984ee8"
+  "committed_navigation_snapshot": "7e8b4b110d241d1286d35fc358857436e9205fa0",
+  "main_paper_source_digest": "sha256:79f99fdf55a40eb26080aa1a83f0cbd1027d0ecc7ec0a72db1132b6c414d6ca1"
  },
  "reading_routes": [
   {

@@ -36,24 +36,24 @@
 "authority_role": "proof_bearing_committed_source_anchor"
 },
 "navigation_snapshot": {
-"commit": "de825e37be3fd79ef83444eb28a27c0a219951a6",
+"commit": "7e8b4b110d241d1286d35fc358857436e9205fa0",
 "authority_role": "machine_readable_navigation_anchor",
 "publication_state": "main_history_snapshot",
 "published_ref": "main",
-"repository_resolution": "https://github.com/wcook04/plectis-lean-erdos249-257/tree/de825e37be3fd79ef83444eb28a27c0a219951a6"
+"repository_resolution": "https://github.com/wcook04/plectis-lean-erdos249-257/tree/7e8b4b110d241d1286d35fc358857436e9205fa0"
 },
 "content": {
 "machine_readable_paper": {
 "path": "docs/claims.json::machine_readable_paper",
-"content_digest": "sha256:59526d3c6e5b7b98f6eb9ec6db0daa847f0fd2511d0f5a5169d12ce67576fdae"
+"content_digest": "sha256:8c4f4cdb640c22b4dc99dc8a6be4df9881aad86da604827363fc44a89f7a2092"
 },
 "claims_document": {
 "path": "docs/claims.json",
-"content_digest": "sha256:335176eb2b1ae24c0e22b1b29bd143d035d7a5897c0983ba114fc538b61da80b"
+"content_digest": "sha256:d4a4dffc1df3968a40e521f7e585acce27a33fa3d1cadcbcf1998cc53630fae7"
 },
 "declaration_atlas": {
 "path": "docs/declaration_atlas.json",
-"content_digest": "sha256:113040652e5dac9953ca310221ecf9e69abd39d3cc6cdd39c8a31be93e427ae3",
+"content_digest": "sha256:472726858a7bc95aeecd93cded0a9e60cc123c0a6b5c63f261cd443e627391f3",
 "source_input_fingerprint": "sha256:66e0fea63f59ff0df5b69bb6fd7aa692394af6ea2e811dcf12d56e8fb48b7a39"
 },
 "methodology_contract": {
@@ -62,13 +62,13 @@
 },
 "bounded_orientation": {
 "path": "docs/orientation.json",
-"content_digest": "sha256:93b7b7f61ade051201fe1e0a6b90149441ce5d45e2906daa1eb583b165471d30"
+"content_digest": "sha256:3d70ef712e01a39af920f0225469f11305bd35f0dd77cef3ca861ea8d2674328"
 },
 "human_exposition": {
 "source_path": "paper/erdos249-257-main-paper.tex",
-"source_content_digest": "sha256:1c2a03901a8db5009655add0860b3363acfb12814b770d0572439a2dbf984ee8",
+"source_content_digest": "sha256:79f99fdf55a40eb26080aa1a83f0cbd1027d0ecc7ec0a72db1132b6c414d6ca1",
 "rendered_path": "erdos249-257-main-paper.pdf",
-"rendered_content_digest": "sha256:382aa5e89b04d63cde83003423b9ba1c53def927841abfe8be0bd0b9ae874cfa",
+"rendered_content_digest": "sha256:e3a9cce05be8fe6ff6990bfed87aec2c3201ad68c58f4e37c7c696cc7bb6c6f6",
 "artifact_role": "authored_mathematician_facing_exposition",
 "authority_posture": "authored_editorial_surface_not_Lean_proof_authority"
 },
@@ -143,7 +143,7 @@
 "declaration_count": 12578,
 "theorem_like_count": 11539,
 "generated_certificate_declaration_count": 2925,
-"principal_claim_link_count": 291,
+"principal_claim_link_count": 293,
 "kind_counts": {
 "abbrev": 9,
 "def": 992,
@@ -1787,7 +1787,7 @@
 "expansion": {
 "machine_readable_paper": {
 "path": "docs/claims.json::machine_readable_paper",
-"expected_content_digest": "sha256:59526d3c6e5b7b98f6eb9ec6db0daa847f0fd2511d0f5a5169d12ce67576fdae",
+"expected_content_digest": "sha256:8c4f4cdb640c22b4dc99dc8a6be4df9881aad86da604827363fc44a89f7a2092",
 "contains": [
 "all_claims",
 "authored_argument_graph",
@@ -1798,7 +1798,7 @@
 },
 "exhaustive_declaration_atlas": {
 "path": "docs/declaration_atlas.json",
-"expected_content_digest": "sha256:113040652e5dac9953ca310221ecf9e69abd39d3cc6cdd39c8a31be93e427ae3",
+"expected_content_digest": "sha256:472726858a7bc95aeecd93cded0a9e60cc123c0a6b5c63f261cd443e627391f3",
 "expected_source_input_fingerprint": "sha256:66e0fea63f59ff0df5b69bb6fd7aa692394af6ea2e811dcf12d56e8fb48b7a39",
 "availability": "optional_attached_corpus",
 "check": "python3 scripts/build_declaration_atlas.py --check"
@@ -1811,9 +1811,9 @@
 },
 "human_exposition": {
 "source_path": "paper/erdos249-257-main-paper.tex",
-"expected_source_content_digest": "sha256:1c2a03901a8db5009655add0860b3363acfb12814b770d0572439a2dbf984ee8",
+"expected_source_content_digest": "sha256:79f99fdf55a40eb26080aa1a83f0cbd1027d0ecc7ec0a72db1132b6c414d6ca1",
 "rendered_path": "erdos249-257-main-paper.pdf",
-"expected_rendered_content_digest": "sha256:382aa5e89b04d63cde83003423b9ba1c53def927841abfe8be0bd0b9ae874cfa",
+"expected_rendered_content_digest": "sha256:e3a9cce05be8fe6ff6990bfed87aec2c3201ad68c58f4e37c7c696cc7bb6c6f6",
 "authority_posture": "authored_editorial_surface_not_Lean_proof_authority"
 },
 "paper_source_sigils": {
