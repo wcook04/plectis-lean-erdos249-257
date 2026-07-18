@@ -102,7 +102,7 @@ eventually repeat.  For a support sum, binary long division would give an
 integer carry recurrence whose M\"obius-inverted quotients are all $0$ or
 $1$.  We formalise both statements in Lean.  We also express \#249 and the
 distinguished half-value counterexample route to \#257 in finite-to-cofinal
-form: each endpoint is equivalent to finite witnesses occurring beyond every
+form: each of these two conclusions is equivalent to finite witnesses occurring beyond every
 bound.  This chain does not reformulate the universal \#257 assertion.
 A finite exact calculation excludes every rational representation $S=p/q$ with
 $q\le\Qzero\approx7.96\times10^{34}$; hence a rational representation must
@@ -1089,8 +1089,8 @@ The results here have three distinct roles.  The bouquet criterion is a
 conditional irrationality theorem for one structured support family.  The
 seam, strip, and terminal criteria are sufficient hypotheses for
 \(1/2\in\mathcal A\).  The dilation, prime-power, and return-carry results are
-local algebraic inputs that yield neither endpoint without an additional
-supply hypothesis.  Nothing in this subsection is a new unconditional case.
+local algebraic inputs that prove neither an irrationality conclusion nor
+half-membership without an additional supply hypothesis.  Nothing in this subsection is a new unconditional case.
 
 \subsubsection{A conditional pairwise-coprime dilation criterion}\label{res:sunflower}
 
@@ -1576,7 +1576,7 @@ coordinates; it does not supply a sign or size estimate for that carry.
 \subsection{Finite evidence, coordinate changes, and eliminated special cases}
 \label{app:half-evidence}
 
-This subsection has no open-endpoint theorem.  Its verified bases and stages
+This subsection decides no open question.  Its verified bases and stages
 are bounded evidence for the cofinal criteria in A.2--A.3; its coordinate
 changes translate one finite formulation into another; and its
 counterexamples and incompatibility theorems rule out shortcuts that would
@@ -1849,7 +1849,7 @@ $1/2\in\mathcal A$:
 and
 \lword{CampbellShiftSynchronization.lean}{488}{shiftWindowZero_iff_half_mem_mersenneAchievementSet}{the shifted-zero/half-membership equivalence}.
 This settles one synchronisation question and gives an equivalent reformulation; it does not
-advance either endpoint beyond the already stated half-achievement problem.
+decide the half-membership question stated above.
 
 }
 
@@ -1875,7 +1875,7 @@ Appendix~\ref{app:half-technical} records the exact local reductions,
 conditional compactness criteria, finite certificates, counterexamples to
 stronger local assertions, and arguments that rule out several proposed
 strategies.  These results refine the obstruction;
-they do not constitute a second endpoint theorem.
+they do not decide either open \#257 question.
 
 \section{The totient constant $S$ (Erd\H{o}s \#249)}\label{sec:249}
 
@@ -2191,7 +2191,7 @@ a necessary consequence of rationality that a finite joint refuter may
 contradict at chosen vertices.  The diagonal-pincer identity and its cofinal
 full-target-avoidance corollary are the exact fixed-scale and global normal
 forms of the open supply.  Only the latter corollary is equivalent to the
-irrationality endpoint.
+irrationality of \(S\).
 
 \paragraph{Cone flatness and completeness.} On the cone
 $\{kM_t:k\ge1\}$, rationality forces a single fractional constant across the
@@ -2486,7 +2486,7 @@ Using those primality facts, Lean checks the individual diagonal-pincer
 certificate
 at $t=64$,
 \lword{DiagonalPincerCertificateT64Endpoint.lean}{1928}{certifiedKill_diagonal_t64}{scale-64 diagonal certificate}.
-This is one finite endpoint certificate, not an unbounded supply.
+This is one finite certificate, not an unbounded supply.
 
 \subsection{Candidate cofinal inputs and no-go boundaries}
 \label{app:totient-boundaries}
@@ -2942,7 +2942,7 @@ successful method would still need.
 
 \subsection{The shared bottleneck}
 
-Both reductions express their endpoints through finite events that must occur
+Both reductions express their conclusions through finite events that must occur
 at arbitrarily large scales, but the conclusions point in opposite directions:
 \[
 \begin{aligned}
@@ -2968,7 +2968,7 @@ rational-support filters used elsewhere in the paper do not alter either
 missing quantifier.
 
 Thus the comparison also gives a criterion for further progress.  On the
-\#249 side, a new local identity affects the endpoint only if it produces or
+\#249 side, a new local identity affects the open problem only if it produces or
 rules out \(\mathsf{Sep}\)-certificates at unbounded parameters.  On the
 half-value side of \#257, it must produce cofinal terminal zeros or prove that
 the greedy seam is eventually right.  Further fixed-scale computation, by
@@ -2978,14 +2978,14 @@ itself, changes neither open statement.
 The two reductions use different finite witnesses.  A \(\mathsf{Sep}\)-certificate proves that
 one specified
 tail difference is non-integral; a fatal half-gap proves that no support extending one specified prefix can reach
-\(1/2\).  In neither case does survival of every check performed so far prove the opposite endpoint.
+\(1/2\).  In neither case does survival of every check performed so far prove the opposite conclusion.
 
 There is nevertheless an asymmetry.  By Theorem~\ref{res:fatalright}, \(1/2\notin\mathcal A\) is
 equivalent to the existence of a fatal half-gap.  Exact rational evaluation of the greedy orbit, together with the
 rational tail enclosures of Proposition~\ref{res:death}, can therefore certify nonmembership after a finite
 discovery.  Membership still requires terminal zeros at arbitrarily large rows.
 
-For \(S\), neither endpoint has a single finite witness in this certificate system.  One
+For \(S\), neither rationality nor irrationality has a single finite witness in this certificate system.  One
 \(\mathsf{Sep}\)-certificate proves one non-integral tail difference, whereas irrationality requires such
 certificates cofinally for every positive shift.  Rationality forces eventual integrality, but failure to find a
 certificate at a given truncation is inconclusive: a longer truncation may still certify the same tail difference.
@@ -2998,7 +2998,7 @@ shared geometry alone.  For \#249, a coefficient stream agreeing with
 computations extends to a rational series in the same class; the splice
 is recorded in Section~\ref{sec:249-open}.  For the half-value fibre, the
 strict-tail axioms and any finite prefix of greedy decisions are jointly
-consistent with both endpoints: replacing the weights beyond the inspected
+consistent with both outcomes: replacing the weights beyond the inspected
 range by a ratio-one-third geometric sequence with total mass below the
 pending residual (respectively equal to it) preserves strict tails, leaves
 every inspected decision unchanged, and makes the last inspected skip
@@ -3076,7 +3076,7 @@ example blocks one residue-blind shortcut.  None has the totient weight
 defining \(S\), so no irrationality status transfers to Erd\H{o}s~\#249.
 
 \paragraph{Periodic weights.}\label{sec:periodicweights}
-For \(L_b(\gamma)=\sum_{a\ge1}\gamma(a)/(b^a-1)\), the checked endpoints are:
+For \(L_b(\gamma)=\sum_{a\ge1}\gamma(a)/(b^a-1)\), the checked cases are:
 \begin{theorem}[eventually-periodic nonnegative weights]
 \label{res:periodicnonnegative}
 For every $b\ge2$, an eventually-periodic nonnegative rational weight that is
@@ -3350,8 +3350,8 @@ The proposition identifies equivalent scalar forms; the corollary is
 one-way and does not prove that $\sigma_t$ is nonnegative cofinally.  No
 necessity implication is proved: completeness supplies some successful depth
 at every non-integral diagonal difference, but nothing forces success at the
-canonical depth $m_t$.  Cofinal failure would refute this route, not the
-endpoint.
+canonical depth $m_t$.  Cofinal failure would refute this route, not prove
+irrationality of \(S\).
 
 For \#257, write $r_n$ for the exact greedy residual of the target $1/2$ and
 put
@@ -3555,7 +3555,7 @@ second and fifth lines are unconditional consequences of results already
 stated.  Appendix~\ref{app:half-localizer} only
 localises one transition configuration, while Appendix~\ref{app:half-evidence}
 supplies bounded evidence, coordinate changes, and no-go results.  Neither
-creates a further implication to an open endpoint.
+creates a further implication that decides an open question.
 
 Throughout this appendix:
 \begin{itemize}[leftmargin=1.6em]
@@ -4149,7 +4149,7 @@ line.
 This appendix supplies the extensions cited from the Mersenne--Lambert ladder
 in Section~\ref{sec:ladder} and from the coprime-pair representation after
 Proposition~\ref{res:coprime}.  Its new results are the periodic-weight
-endpoints, finite denominator obstructions, the M\"obius-square and squared
+classifications, finite denominator obstructions, the M\"obius-square and squared
 Lambert identities, and the Stern--Brocot cylinder and continuant laws.
 These enlarge the two coordinate pictures; they are not additional steps in
 either open proof.
