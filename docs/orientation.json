@@ -56,7 +56,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "Erd\\H{o}s \\#249",
-    "line": 3463
+    "line": 3475
    }
   },
   {
@@ -67,7 +67,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "unbounded certificate supply",
-    "line": 3474
+    "line": 3486
    }
   },
   {
@@ -78,7 +78,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "the half-value counterexample route",
-    "line": 3495
+    "line": 3507
    }
   },
   {
@@ -89,7 +89,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "universal Erd\\H{o}s \\#257",
-    "line": 3486
+    "line": 3498
    }
   }
  ],
@@ -559,18 +559,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_249_farey_exclusion_mechanism_reader_entry_audit",
+   "id": "main_paper_249_certificate_quantifiers_reader_entry_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "The denominator-exclusion paragraph presents Farey K-values and a forbidden gap without first explaining how the finite interval around S rules out rational numbers with bounded denominator",
-   "statement": "State the rational-separation mechanism before the Farey labels: at each step a certified interval containing S contains no rational with denominator below the new threshold; preserve the exact bound chain, historical attribution, and the fact that larger denominators remain possible."
+   "defect_class": "The exact tail-period theorem displays four nested certificate variables without first assigning their reader-facing roles, making the open supply harder to distinguish from the verified finite instances",
+   "statement": "Before the exact tail-period characterisation, explain that h is a candidate rational period, N_0 demands evidence arbitrarily far out, N chooses the later location, and L is the finite verification depth; preserve the exact equivalence and the boundary that bounded examples do not supply these quantifiers."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "ebc98ee71f6819bd9fe344a0bb343542c604e533",
-  "committed_navigation_snapshot": "32b6edc7551dc9debf0136e9df98c5109774ffbb",
-  "main_paper_source_digest": "sha256:a958875e1cd11a76cf6bcebc28c5a83a90832881491e77bff1fe3eb1af1dce3f"
+  "committed_navigation_snapshot": "7411530384aacdcd1a262b38d9cb9add2f123a2c",
+  "main_paper_source_digest": "sha256:52cb0e52d43855868df3024db7693fb70798dd59fc8786ce961b10b703b54f06"
  },
  "reading_routes": [
   {
