@@ -110,37 +110,39 @@ $q\le\Qzero\approx7.96\times10^{34}$; hence a rational representation must
 have $q>\Qzero$.  Irrationality of \(S\) is also
 equivalent to non-integrality of every positive binary tail difference, to
 complete finite certificates at fixed parameters, and to a cofinal
-lcm-diagonal certificate supply.  Certificates are verified at the 28 scales
-up to \(t=64\) at which the lcm diagonal changes (including the initial scale);
-this is finite evidence only, and the cofinal supply is open.
-A CRT--Dirichlet construction also gives exact dyadic totient-kernel rank
-$2^e+1$ at every level, so the full kernel span is infinite-dimensional.
-Rationality would instead force a subexponential integer recurrence whose
-canonical level-$e$ state vectors span at least $2^e-1$ dimensions for every
-$e$; no matching upper bound is known, so this does not prove irrationality.
+certificate supply along a one-parameter sequence of least-common-multiple
+tests.  Certificates are verified at the 28 changing scales through \(t=64\)
+(including the initial scale); this is finite evidence only, and the cofinal
+supply is open.  A CRT--Dirichlet construction also proves that the
+residue-class subsequences \(n\mapsto\ph(2^j n+r)\) span an
+infinite-dimensional space: a canonical level-$e$ family has exact dimension
+$2^e+1$.  If $S$ were rational, binary long division would instead produce
+an integer state sequence of subexponential growth whose level-$e$
+residue-class subsequences span at least $2^e-1$ dimensions.  No matching
+upper bound is known, so this does not prove irrationality.
 
 For Erd\H{o}s~\#257, we formalise Erd\H{o}s's classical theorem for full
 support in every base and several structured-support cases.  At base \(2\)
 we prove the geometry of the achievement set (the set of all support sums)
 and necessary carry and gap constraints on hypothetical rational infinite
 supports.  In particular, consecutive stretches on which the divisor-count
-stream vanishes have sublogarithmic length, uniformly in the support.
+function
+\(f_A(m)=\#\{a\in A:a\mid m\}\) vanishes have sublogarithmic length,
+uniformly in the support.
 Membership of
 \(1/2\), which would refute the universal statement, is exactly equivalent to
-infinitely many greedy skips.  Nonmembership is exactly equivalent to an
-eventually right integer seam (beyond some row, every new rank is taken), a
-finite fatal gap, and a final greedy skip.
+infinitely many greedy skips.  Nonmembership is exactly equivalent both to a
+finite fatal gap and to the existence of a final greedy skip.
 
 After a putative final skip, the current argument excludes the upper
-transition and middle carry \(-3\).  It remains to exclude middle carries
-\(-2,-1\) and to prove a future-tail inequality for the nonnegative middle
-carries.  Both series are values of one Lambert transform, and the
-manuscript organises the two problems and the half-value target as an image
-question, a restricted-domain question, and a fibre question about that
-single transform.  An unbounded certificate
-supply for \#249 and cofinal terminal zeros for \#257 are not proved.  The
-universal \#257 statement and half-value membership remain open.  Neither
-problem is settled.
+transition and the carry value \(-3\).  The same finite-state analysis leaves
+two negative carry values, \(-2\) and \(-1\), and a future-tail inequality
+for the nonnegative carries.  Both series arise from one Lambert transform;
+this explains their common coordinates but transfers no theorem between
+them.  Neither the required unbounded \#249 certificate supply nor the
+required recurrence of \#257 greedy skips is proved.  The universal \#257
+statement and half-value membership remain open.  Neither problem is
+settled.
 \end{abstract}
 
 \section{Introduction}\label{sec:intro}
@@ -230,7 +232,7 @@ Section~\ref{sec:ladder} introduces their common coordinates.
 Sections~\ref{sec:eb} and~\ref{sec:249} give the \#257 and \#249 results.
 Section~\ref{sec:architecture} explains the shared transform and the limits
 of the comparison.  Sections~\ref{sec:verify} and~\ref{sec:further} give the
-verification protocol and open frontiers.  The appendices contain the local
+verification protocol and remaining open problems.  The appendices contain the local
 arguments and audit tables.  Linked phrases open the corresponding Lean
 proofs.
 
@@ -301,8 +303,9 @@ Let
 \]
 
 \paragraph{Exact reduction and finite exclusion.}
-The weights are strictly superincreasing, so the normalised support of a value
-is unique.  A finite normalised support cannot have value \(1/2\).  For
+The weights satisfy
+\(w_n>\sum_{m>n}w_m\), so a value has at most one support
+\(A\subseteq\Npos\).  No finite such support can have value \(1/2\).  For
 \(1/2\), the following are equivalent:
 \[
 \begin{aligned}
@@ -352,7 +355,7 @@ L(f)\;=\;\sum_{n\ge1}\frac{f(n)}{2^n-1}\;=\;\sum_{m\ge1}\frac{(f*\mathbf 1)(m)}{
 \qquad (f*\mathbf 1)(m)=\sum_{d\mid m} f(d),
 \]
 the second equality being the absolutely convergent Lambert rearrangement (one Dirichlet
-convolution by the constant $\mathbf 1=\zeta$); Apostol supplies the classical
+convolution by the constant arithmetic function $\mathbf 1$); Apostol supplies the classical
 arithmetic-function and Dirichlet-convolution background~\cite{apostol}; Merca
 introduced a modern Lambert-series factorisation theorem~\cite{merca2017}, and
 Merca--Schmidt give a synthesis/unification treatment~\cite{mercaschmidt}.
@@ -389,16 +392,13 @@ $\mathbf 1$ & $L(\mathbf 1)=E$ & irrational & formalised\\
 \end{tabular}
 \end{center}
 
-The weight \(\alpha\) is the primitive-conductor count:
-\(\alpha(p)=p-2\) on primes and \(\alpha\ge0\).  The chain records
-\(\alpha*\mathbf 1=\ph\) and
-\(\ph*\mathbf 1=\mathrm{Id}\).  Its associated values are open at
-\(L(\alpha)=S\), rational at \(L(\ph)=2\), and cited transcendental at
-\(L(\mathrm{Id})=\sum_m\sigma(m)/2^m\).  The rows \(L(\mu)=1/2\) and
-\(L(\mathbf 1)=E\) are not further steps in this chain.  In particular,
-\(S\) and \(E\) have the same Mersenne-denominator form, with weights
-\(\alpha\) and \(\mathbf 1\), but passing between those weights is not a
-convolution step.
+The nonnegative weight \(\alpha=\ph*\mu\) satisfies
+\(\alpha*\mathbf 1=\ph\); for example, \(\alpha(p)=p-2\) on primes.
+The rows for \(\mu\) and \(\mathbf 1\) are separate comparisons, not further
+steps in the displayed chain.  Thus the known rationality or transcendence of
+one row does not transfer to another.  In particular, \(S\) and \(E\) have
+the same Mersenne-denominator form, with weights \(\alpha\) and \(\mathbf 1\),
+but no convolution step carries one weight to the other.
 
 \begin{proposition}[M\"obius rational rung]
 \[
@@ -444,7 +444,7 @@ Proposition~\ref{res:coprime}; its M\"obius-square form and the periodic and
 finite-algebraic variants of the ladder are collected in
 Appendices~\ref{app:lambert-weighted}--\ref{app:lambert-algebraic}.
 
-\paragraph{Section consequence and residual.}
+\paragraph{What this section proves---and does not prove.}
 The exact contribution of this section is the coordinate change
 \(L(\alpha)=S\), together with the two separate rational-rung propositions
 above.  The convolution chain relates \(S\) to rational and transcendental
@@ -464,12 +464,11 @@ classical and structured irrationality theorems, then gives the base-\(2\)
 achievement-set geometry and the constraints forced by a hypothetical
 rational value.  It ends with the exact classification of the target \(1/2\)
 and the exact residual condition left by the current final-skip argument.
-The final-skip theorems consume Appendix~\ref{app:half-final-skip};
+The final-skip analysis is developed in Appendix~\ref{app:half-final-skip};
 Appendices~\ref{app:half-conditional-producers}--\ref{app:half-finite-cofinal}
-contain alternative conditional criteria; and
-Appendix~\ref{app:half-evidence} contains finite evidence, coordinate changes, and
-closed branches.  These are auxiliary implications, not additional conclusions of
-this section.
+give alternative sufficient conditions; and Appendix~\ref{app:half-evidence}
+records finite evidence, coordinate changes, and eliminated special cases.
+These are auxiliary implications, not additional conclusions of this section.
 
 \subsection{Full support: the Erd\H{o}s--Borwein constant, every base}
 
@@ -524,7 +523,7 @@ $L$.  The parameters are chosen so that the middle and far-tail bounds together
 are smaller than $1/q$; the shifted tail is strictly positive because every
 divisor count is positive, so the dilated sum is not an integer.
 
-Thus the analytic series is consumed only at the Lambert identity and the
+Thus the analytic series is used only in the Lambert identity and the
 geometric tail estimate.  The remaining proof is a finite CRT construction,
 divisor counting, and explicit parameter arithmetic.  The final certificate
 existence theorem holds for every $b\geq2$ and every precision $q$; see the
@@ -631,7 +630,8 @@ For every \(n\geq1\),
  T_n<w_n.
 \]
 Hence every \(x\in\mathcal A\)
-has a unique normalised support.
+has a unique support by positive exponents (the ``normalised'' support in the
+formal source).
 Moreover, a real number \(x\) lies in \(\mathcal A\) if and only if \(x\geq0\)
 and \(r_n(x)\leq T_n\) for every \(n\geq0\).  In that case
 \(x=\sum_{n\geq1}\varepsilon_n(x)w_n\).
@@ -782,7 +782,7 @@ it is the value of the signed M\"obius rung \(L(\mu)=1/2\) of
 Section~\ref{sec:ladder}, so the question asks whether a genuinely Boolean
 support can attain what the signed M\"obius weights attain
 (Proposition~\ref{res:mobiussignnogo} shows that the signs cannot simply be
-truncated); no finite normalised support attains it
+truncated); no finite support by positive exponents attains it
 (Proposition~\ref{res:nofinitehalf} below); and the strict-tail coding of
 Theorem~\ref{res:greedy} makes its candidate support unique.
 
@@ -870,7 +870,7 @@ and
 \lword{HalfCylinderHalfMembershipClassification.lean}{235}{half_mem_mersenneAchievementSet_iff_no_lastHalfGreedySkip}{no-final-skip theorem}.
 
 \begin{proposition}[finite half-value exclusion]\label{res:nofinitehalf}
-No finite normalised support has value \(1/2\).
+No finite support \(A\subseteq\Npos\) has value \(1/2\).
 \end{proposition}
 \noindent This is the
 \lword{HalfCarryReachability.lean}{589}{finite_boolSupport_ne_half}{finite-support theorem}.
@@ -1422,7 +1422,7 @@ Thus the explicit row-scale inequality
 \(\#G_D+\mathrm{belowPulse}_D+5<4\,\mathrm{remainder}_D\) is sufficient for
 the same half-membership conclusion.  The hypothesis is
 \lword{HalfCylinderMiddleCarryLowerBound.lean}{111}{SeamMiddleProducerCardEscape}{the cardinality escape condition},
-and its membership consumer is
+and the resulting membership theorem is
 \lword{HalfCylinderMiddleCarryLowerBound.lean}{1503}{half_mem_mersenneAchievementSet_of_middleProducerCardEscape}{the prefix-cardinality bound};
 it is enough in turn that every late middle remainder is at least its row,
 \lword{HalfCylinderMiddleCarryLowerBound.lean}{1510}{half_mem_mersenneAchievementSet_of_middleProducerRowEscape}{row-scale sufficient condition}.
@@ -1553,7 +1553,7 @@ the next two rows:
 This is an exact coordinate change between the seam and transition
 coordinates; it does not supply a sign or size estimate for that carry.
 
-\subsection{Finite evidence, coordinate changes, and closed branches}
+\subsection{Finite evidence, coordinate changes, and eliminated special cases}
 \label{app:half-evidence}
 
 This subsection has no open-endpoint theorem.  Its verified bases and stages
@@ -1874,7 +1874,7 @@ at unbounded parameters.  Only the fourth layer would settle the problem.
 The main section states this theorem spine.
 Appendix~\ref{app:totient-normal} gives equivalent cofinal coordinates;
 Appendix~\ref{app:totient-finite} separates fixed-scale mechanisms from the
-conditional cofinal criteria that consume them; and
+conditional cofinal criteria that use them as hypotheses; and
 Appendices~\ref{app:totient-boundaries}--\ref{app:totient-rank} record
 necessary inputs, scoped no-go results, and conditional rank routes.  Only
 the first is an exact reformulation of the open fourth layer.
@@ -2149,15 +2149,15 @@ finite computation that inspects only coefficients with index at most \(B\)
 and choosing \(P\) with \(2^P-1>\Qzero\) makes the splice consistent with
 the denominator exclusion as well.  This elementary splice is not formalised
 in the source and proves nothing about \(\ph\) itself; it shows that a proof
-of~\eqref{eq:unbounded-certificate-supply} must consume unboundedly many
-totient values, so no extension of the finite record in
+of~\eqref{eq:unbounded-certificate-supply} must use totient values at
+unbounded indices, so no extension of the finite record in
 Example~\ref{res:deposits} can close the supply.
 \end{remark}
 
 Appendix~\ref{app:totient-normal} records the exact reformulations of this
 open obligation.  Appendix~\ref{app:totient-finite} records fixed-scale
 enclosures, projections, and certificates, then states separately the
-conditional cofinal criteria that consume them.  Appendices~
+conditional cofinal criteria that use them as hypotheses.  Appendices~
 \ref{app:totient-boundaries}--\ref{app:totient-rank} delimit candidate
 unbounded routes.  None supplies the missing cofinal quantifier.
 
@@ -2477,7 +2477,7 @@ condition from uniform correction bounds alone.  The remaining results are indep
 filters, not consecutive proof steps: the fresh-prime decomposition and
 one-bit lift expose exact correction terms that an unbounded argument would
 have to control, and the parity, prime-adjunction, scalar-localisation, and
-square-CRT results close four natural shortcuts.  No no-go result consumes
+square-CRT results close four natural shortcuts.  No no-go result uses
 the preceding filter as a hypothesis.
 
 \paragraph{A three-rank odd window.}\label{res:flexibleoddwindow}
@@ -2680,7 +2680,7 @@ theorem.  What Theorem~\ref{res:dyadictotient} adds is quantitative and
 constructive: the exact canonical rank \(2^e+1\) at every level, with an
 explicit separated minor, proved by elementary CRT--Dirichlet arithmetic
 that the formal source checks without analytic continuation.
-Proposition~\ref{res:carryrank} consumes exactly this level-by-level form.
+Proposition~\ref{res:carryrank} uses exactly this level-by-level form.
 
 \begin{proposition}[finite-level carry anti-compression]\label{res:carryrank}
 If the totient coefficient series were rational, there would be a
@@ -2841,7 +2841,7 @@ is \(L(\alpha)=S\) rational?
 supports and asks whether the image of that domain meets \(\Q\) at all.
 \item The half-value route fixes the target and asks whether the fibre over
 \(1/2\) meets the same domain; by Theorem~\ref{res:greedy} the fibre over
-any value contains at most one normalised support, so the question concerns
+any value contains at most one positive-exponent support, so the question concerns
 one canonical greedy orbit.
 \end{enumerate}
 Figure~\ref{fig:transform} displays the five inputs and the three question
@@ -2909,7 +2909,7 @@ is Boolean with rational value (the support \(\{2,3\}\), with value
 Appendix~\ref{app:carry-boolean}), and the infinite supports of
 Theorem~\ref{res:support} are Boolean with irrational values, so a Boolean
 input decides nothing without the joint force of infinitude and arithmetic.  An
-endpoint theorem must therefore consume input-specific arithmetic: exact
+endpoint theorem must therefore exploit input-specific arithmetic: exact
 totient values and their dyadic structure for \#249; the interaction of the
 Boolean M\"obius condition with infinitude for universal \#257; the exact
 divisor feedback of the greedy orbit for the half-value fibre.  The formal
@@ -2935,9 +2935,9 @@ For \(S\), Proposition~\ref{res:complete} supplies fixed completeness,
 Theorem~\ref{res:pointwisecomplete} gives the pointwise global form, and
 Theorem~\ref{res:red21} gives the displayed cofinal form.  For \(1/2\),
 Theorem~\ref{res:halfmembership} identifies membership with cofinal zeros of
-the terminal bit \(\tau_s\) of Definition~\ref{def:terminal-bit}.  Call a
-theorem that produces the required finite events at
-unbounded scales a \emph{producer}.  Neither producer is known.  The
+the terminal bit \(\tau_s\) of Definition~\ref{def:terminal-bit}.  In both
+cases the missing step is a theorem producing the required finite events at
+unbounded scales.  Neither such theorem is known.  The
 classical full-support theorem is the closed comparison case because its
 Bertrand--CRT and averaging argument constructs the required witnesses
 uniformly at every precision.  The coordinate identities and
@@ -2981,7 +2981,7 @@ pending residual (respectively equal to it) preserves strict tails, leaves
 every inspected decision unchanged, and makes the last inspected skip
 final (respectively realises the target as the modified system's complete
 remaining sum).
-A membership proof must therefore consume the Mersenne arithmetic of the
+A membership proof must therefore use the specific Mersenne arithmetic of the
 tail, not only its superincreasing geometry.
 \end{remark}
 
@@ -3032,7 +3032,7 @@ proved, conditional, finite, and equivalence results at that revision.  That ver
 unresolved statements: the open problems collected in
 Section~\ref{sec:further} remain open.
 
-\section{Exact frontiers and further questions}\label{sec:further}
+\section{Exact remaining problems and further questions}\label{sec:further}
 
 Section~\ref{sec:spines} gives the exact reductions.  Here we record two
 concrete sufficient criteria and then state the unresolved questions.
@@ -3442,7 +3442,7 @@ statement; a negative answer would close this distinguished counterexample
 route only.
 \end{problem}
 
-\paragraph{How the frontier has changed.}
+\paragraph{What the reductions change.}
 The results above change the form, not the status, of the open problems.  For
 \#249, the unresolved content is one unbounded certificate-supply theorem,
 with the pointwise and lcm-diagonal forms proved equivalent to irrationality.
@@ -3450,8 +3450,8 @@ For the half-value route to \#257, the search over arbitrary supports has been
 replaced by one canonical greedy-orbit question.  In the present final-skip
 argument that question is localised further to two obligations: exclude the
 middle cells \(-2,-1\), and prove the future-tail inequality at the remaining
-nonnegative-carry middle transitions.  A cofinal \#249 certificate producer would prove \#249;
-a cofinal terminal-zero producer would refute universal \#257; and a proof of
+nonnegative-carry middle transitions.  A cofinal \#249 certificate theorem would prove \#249;
+a cofinal terminal-zero theorem would refute universal \#257; and a proof of
 eventual right behaviour would close only the half-value route.
 
 \paragraph{Two refinements not pursued.}
@@ -3636,7 +3636,7 @@ reciprocal-mass/collision statements collected here.
 \subsection{Exact normal form: tail-orbit rigidity}
 \label{app:carry-normal-form}
 
-This subsection supplies the generic equivalence consumed in
+This subsection supplies the generic equivalence used in
 Appendix~\ref{app:carry-boolean}.
 It converts rationality into an integer recurrence with a boundary condition;
 it does not itself exclude such an orbit or impose the Boolean support
@@ -4151,10 +4151,11 @@ family in Section~\ref{sec:ladder};
 Appendix~\ref{app:lambert-algebraic} supplies the M\"obius-square and
 gcd-moment coordinates; and Appendix~\ref{app:lambert-probability} refines
 the coprime-pair representation in
-Proposition~\ref{res:coprime}.  These are three independent handoffs.  None
+Proposition~\ref{res:coprime}.  These are three independent coordinate
+extensions.  None
 implies the cofinal \(\mathsf{Sep}\) supply for \(S\) or a proof
 of \(1/2\in\mathcal A\).  Those, rather than any result internal to this
-appendix, remain the missing main-spine inputs.
+appendix, remain the missing statements identified in the main text.
 
 \section{Guide to the formal sources}\label{app:index}
 

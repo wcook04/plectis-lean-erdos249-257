@@ -46,14 +46,14 @@ FIRST_MINUTE_CONTRACT = {
             "full support in every base",
             "would refute the universal statement",
             "neither problem is settled",
-            "an unbounded certificate supply",
-            "cofinal terminal zeros",
+            "required unbounded #249 certificate supply",
+            "required recurrence of #257 greedy skips",
         ),
         (2, 4): (
             "an exact certificate normal form",
             "the exact half-value counterexample spine",
-            "a finite normalised support cannot have value 1/2",
-            "no unbounded supply is proved",
+            "no finite such support can have value 1/2",
+            "neither this finite computation nor the denominator bound proves the unbounded supply",
         ),
     },
     "claim-faithful-publication-systems-paper.pdf": {
