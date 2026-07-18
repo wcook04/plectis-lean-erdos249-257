@@ -56,7 +56,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "Erd\\H{o}s \\#249",
-    "line": 3473
+    "line": 3477
    }
   },
   {
@@ -67,7 +67,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "unbounded certificate supply",
-    "line": 3484
+    "line": 3488
    }
   },
   {
@@ -78,7 +78,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "the half-value counterexample route",
-    "line": 3505
+    "line": 3509
    }
   },
   {
@@ -89,7 +89,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "universal Erd\\H{o}s \\#257",
-    "line": 3496
+    "line": 3500
    }
   }
  ],
@@ -559,18 +559,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_shared_finite_witness_asymmetry_reader_entry_audit",
+   "id": "main_paper_shared_geometry_boundary_reader_entry_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "The finite-witness paragraph states the two certificate systems sequentially and only later surfaces their key asymmetry: a fatal half-gap is a finite nonmembership witness for the half-value route, whereas neither status of S has a single finite witness in the Sep system",
-   "statement": "Make the finite-witness asymmetry explicit in compact parallel prose, while preserving the fatal-gap equivalence, the one-tail-difference scope of each Sep certificate, and the fact that finite survival proves neither positive conclusion."
+   "defect_class": "The closing boundary remark compresses two different unformalised countermodels into one dense paragraph and makes a cold reader hold the ratio-one-third tail construction before being told exactly which inference it blocks",
+   "statement": "Separate the #249 finite-splice and half-value modified-tail countermodels into a parallel reader-facing comparison, while preserving that both observations are elementary and unformalised, concern altered systems rather than the actual arithmetic inputs, and block only finite-inspection or shared-geometry arguments."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "ebc98ee71f6819bd9fe344a0bb343542c604e533",
-  "committed_navigation_snapshot": "3c7c411374eab06633736ca3cd0fb5e9907726ef",
-  "main_paper_source_digest": "sha256:a57057f99ee9591a3e583923d83e8e100191edd30351b1eb4acee410ac4691c0"
+  "committed_navigation_snapshot": "b186ae206edc116ced8c195be447f5f674ed1b34",
+  "main_paper_source_digest": "sha256:692bb09fbb9c889b784878f3b4aaef52405677d8b2d4d5fc7f26e882b360653d"
  },
  "reading_routes": [
   {
