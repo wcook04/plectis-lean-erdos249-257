@@ -559,18 +559,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_boundary_pulse_plain_language_audit",
+   "id": "main_paper_largest_skip_induction_plain_language_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "The boundary-pulse paragraph names a row pulse, a lower-prefix localization, and two first-crossing cases without recalling that the pulse counts divisibility at 2s+1 and 2s+2 or explaining why the filled suffix disappears from that count",
-   "statement": "Recall the row-pulse definition at the point of use, explain why every selected rank above a late largest skip divides neither new incidence index, and state how 3d = 2s+1 or 3d = 2s+2 gives pulse two or one. Preserve that the transition-carry estimate using this normalization is unproved."
+   "defect_class": "The largest-skip induction paragraph compresses the quantified next-row hypothesis, the verified row-14 base, the inductive invariant, and the conditional half-membership conclusion into internal first-crossing and propagation language",
+   "statement": "State the hypothesis for every row s >= 14 and late largest skip d: either 2(s+1) < 3d still holds or the successor is upper or middle. Identify the checked row-14 base and then state the conditional induction and half-membership conclusion, without socket terminology or any suggestion that the hypothesis is proved."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "ebc98ee71f6819bd9fe344a0bb343542c604e533",
-  "committed_navigation_snapshot": "32bfa7111b16340a2a09e344718e440409e4d955",
-  "main_paper_source_digest": "sha256:0df9e966e9895ef6819eeb7fc04044eb601a8a90f91b42d55d961245cc737572"
+  "committed_navigation_snapshot": "de825e37be3fd79ef83444eb28a27c0a219951a6",
+  "main_paper_source_digest": "sha256:1c2a03901a8db5009655add0860b3363acfb12814b770d0572439a2dbf984ee8"
  },
  "reading_routes": [
   {
