@@ -42,9 +42,9 @@ identity of the checked Lean source, required limitation wording, and freshly
 rebuilt generated files.  Continuous integration runs that checker
 and the Lean build as two separate jobs.  We follow one finite result through every
 layer and describe a deliberate exercise in which a false strengthening of
-the public wording passed every check because the relevant relationship had
-not yet been recorded; under a proved equivalence, the altered wording
-amounted to claiming an open problem settled.  Recording the missing
+the public wording passed every release check because the relevant relationship had
+not yet been recorded; by an equivalence proved in the development, that
+stronger wording amounted to claiming an open problem settled.  Recording the missing
 relationship afterwards makes the same false edit fail, which is coverage
 growth rather than demonstrated reliability.  The checks preserve reviewed relationships; they do
 not interpret unrestricted prose, and the mathematical judgement remains
@@ -183,7 +183,8 @@ within stated limits.  The release job checks \emph{persistence relations}:
 recorded names, wording, identities, and generated files still agree.
 Continuous integration reruns the first and third; nothing performs the
 second mechanically, and neither job reads unrestricted prose.
-In the worked example the protected object is the recorded boundary between
+In the worked example of Section~\ref{sec:example} the protected object is
+the recorded boundary between
 the finite theorem and the open requirement.}
 \label{fig:architecture}
 \end{figure}
@@ -214,7 +215,8 @@ own.
 The two checks answer different questions.  \texttt{lake build} asks whether
 Lean accepts the imported formal statements and proofs; it knows nothing about
 the README, and it would accept, unchanged, a revision whose README announces
-the open requirement met, because no public document is among its inputs.  \texttt{python3 scripts/check\_release.py} asks whether the
+the open requirement met, because no public document is among its inputs.  \texttt{python3 scripts/check\_release.py}, the figure's
+release-surface job, asks whether the
 recorded relationships among proofs, record, public pages, and generated
 files still hold; it confirms the identity of the Lean
 source but does not run Lean.  The workflow in \texttt{.github/workflows/lean.yml} runs them
@@ -254,7 +256,9 @@ constant
 S=\sum_{n\ge 1}\frac{\varphi(n)}{2^{n}}
 \]
 is irrational, where $\varphi(n)$ counts the integers in $\{1,\dots,n\}$
-sharing no factor greater than $1$ with $n$.  The certificates take their force from the
+sharing no factor greater than $1$ with $n$.  (Problem 257, the repository's
+other subject, concerns the values attained by subset sums of
+$\sum 1/(2^n-1)$ and plays no role in this example.)  The certificates take their force from the
 equivalence, which is worth seeing at human scale.  Write $R_N$ for the tail
 of the series beyond position $N$, rescaled by $2^N$, so that
 $R_N$ is $2^N S$ minus an integer.  If $S$ were a fraction, its binary
@@ -273,8 +277,8 @@ widens the forbidden value zero to a small neighbourhood; the certificate
 checks that the residue lies outside it.  The project calls a kernel-checked certificate a
 \emph{certified kill}, and the name marks an ordinary exclusion argument:
 each certificate eliminates the family of candidate rational representations
-of $S$ tied to its parameters: the fractions that would have made that
-particular difference an integer.
+of $S$ tied to its parameters, namely the fractions that would have made
+that particular difference an integer.
 
 The scales of the finite theorem compress this two-parameter requirement to
 one.  The
@@ -283,7 +287,8 @@ period up to $t$, so, roughly speaking, one certificate along the diagonal,
 which fixes both the period and the position to $H_t$,
 speaks to all of those periods at once.  The development proves the
 compression exact: certificates along the diagonal beyond every fixed cutoff
-are equivalent to the full requirement, and therefore, through the chain
+are equivalent to the full two-parameter requirement, and therefore, through
+the chain
 above, to the irrationality itself.  Certificates on a finite list, however
 long, are not.
 
@@ -296,7 +301,7 @@ two statements then read:
 some }t>T.
 \end{align*}
 The boundary between them is a matter of logical form, not of scale.
-Twenty-eight scales, two hundred and eighty, or twenty-eight thousand stand
+A list of 28 scales, of 280, or of 28{,}000 stands
 in the same relation to the open requirement: each is a fixed finite list
 with a cutoff beyond it.  No
 finite list, however long or expensive to verify, implies the second
@@ -377,13 +382,16 @@ $1$ through $8$, each killed by one explicitly checked certificate; and
 \emph{certificate shards} are smaller reusable certificates at fixed
 parameters, each discharged by
 the kernel tactic \texttt{decide}.  The remaining-open field is the open
-requirement of Section~\ref{sec:mathrole}, and under the equivalence it is
+requirement of Section~\ref{sec:mathrole}, and the status, \emph{verified
+finite instance}, is the record's name for the kind of thing the finite
+theorem is.  Under the equivalence the remaining-open field is
 part of the claim's identity rather than an optional caution: remove it, and
 the entry no longer separates the finite theorem from an answer to
 Problem 249.  A record can be precise
 without being pedagogy: its job is to be the stable object that explanatory
-prose, the release checker, and the generated views refer to; the
-explanation a cold reader needs is the job of prose like this section.
+prose, the release checker, and the generated views refer to; the further
+gap between an exact claim and a reader's understanding of it is the job of
+prose like this section.
 
 The fields differ in kind, and the difference matters for what
 ``reviewed'' means.  The public statement, bounded domain, remaining-open
@@ -398,7 +406,7 @@ make the English faithful to the Lean: the maintainer judged that the public
 statement above describes the five declarations correctly, and the record
 stores the outcome of that judgement, not a justification of it.  The
 judgement itself is mundane: read the terminal theorem, check that the
-wording claims the listed scales and no more, confirm that the unbounded
+wording claims the listed scales and no more, confirm that the open
 requirement stays named as open.  It is also an event rather than a
 permanent property: the review covered particular declarations and
 particular wording, so a later change to either reopens it, and the
@@ -527,7 +535,9 @@ regeneration of derived views by their named builders; and structural
 comparison with \texttt{python3 scripts/check\_release.py}, after which the
 push repeats both jobs in a clean checkout.  A prose-only edit skips only the
 first station: if the words now make a stronger or different mathematical
-claim, the record and the review must change with them.  The command list is
+claim, the record and the review must change with them; the escaped edit of
+Section~\ref{sec:failure} is exactly such an edit with no such change.  The
+command list is
 maintenance detail in the repository guide.
 
 \section{A boundary the checklist missed}\label{sec:failure}
@@ -541,10 +551,10 @@ the retained record, and Appendix~\ref{app:repro} states what survives.
 The retained maintainer record reports that, at a pinned repository
 checkpoint, identified exactly in the evidence file, ten deliberate false
 edits were applied to an isolated working
-copy, one at a time, with the copy restored between runs and the full release
-gate run after each edit (the release checker alone; it does not run Lean,
-so the formal proof job was not part of the per-edit loop).  The
-edits targeted the seven recorded relationship families: status labels,
+copy, one at a time, with the copy restored between runs.  The full release
+gate ran after each edit: the release checker alone, which does not run
+Lean, so the formal proof job was not part of the per-edit loop.  The
+edits targeted the seven recorded relationship families: proof-trust policy,
 record structure, source coordinates, paper link anchors, boundary wording,
 generated-view freshness, and size budgets.  Representative edits upgraded a
 conditional status to ``proved here'', deleted an open-boundary clause from
@@ -562,7 +572,7 @@ Section~\ref{sec:mathrole}, the altered page claimed, in effect, that the
 open problem was settled: the edit wrote into the README exactly the bridge
 from the finite theorem to the open requirement that no Lean declaration
 supplies.  The formal
-proofs were untouched, and the release gate passed in full, because that
+proofs were untouched, and the release checker passed in full, because that
 clause was not among the recorded relationships.  The error was outside the
 written checklist, and the checker preserved exactly what it had been given.
 
@@ -608,7 +618,10 @@ The residual risk follows the same line: requiring a clause to be present
 does not detect a contradictory stronger claim elsewhere on the page.
 Coverage grows only by the route above: notice a relationship, record it,
 give it an example that must fail.  The exercise is one full turn of
-that loop.
+that loop.  Coverage can also shrink, and more quietly than it grows:
+deleting a registered relationship is an edit that every remaining check
+will pass, so the perimeter can contract without any red signal.
+Retiring a commitment therefore deserves the same review as creating one.
 
 The shape of this limit is familiar from Section~\ref{sec:mathrole}.  The
 recorded checklist stands to unrestricted prose roughly as the finite
@@ -696,7 +709,7 @@ establish a solution to either Erd\H{o}s problem; that a formal statement is
 the statement the author intended; that software understood any unregistered
 prose; that the record is complete; that one maintainer's review is
 independent or adequate; or that the design transfers to other projects with
-its behaviour intact.  A large number of passing comparisons measures none of
+its behaviour intact.  A large number of passing comparisons measure none of
 those things.  What a green workflow run establishes is narrower: Lean
 accepted the formal proofs, and every configured comparison passed for the
 named revision.  This paper is an architecture note with one bounded case study,
@@ -739,7 +752,8 @@ Section~\ref{sec:failure} are known-answer regression fixtures in the
 mutation-analysis tradition~\cite{demillo,jiaharman}, keeping checks
 non-vacuous rather than computing a mutation score; the ten-edit exercise is
 itself a small hand-authored mutation run, and its stated ceilings,
-author-written edits, single probes, no rerun, are exactly the concerns that
+author-written edits, single probes, no full post-repair rerun, are exactly
+the concerns that
 tradition studies.  Outside formal
 mathematics, the claim record is a lightweight relative of requirements
 traceability~\cite{gotel} and of assurance cases~\cite{gsn}: a claim with
@@ -762,7 +776,7 @@ listed scales, the finite domain, the registered open requirement, to survive
 years of edits by the hands free to change them?
 
 The answer is narrow and exact within its bounds.  The workflow does not
-make prose formally true.  It makes a selected set of proof-to-prose
+make prose formally true.  It makes a selected set of proof-to-claim
 relationships explicit, reviewed, and mechanically persistent, and it makes
 the configured workflow fail when one of them breaks.  The worked example
 shows both halves: the repaired checker accepts the intact wording and
@@ -776,13 +790,13 @@ the third, for the relationships it has been given.
 The whole case fits in one chain.  Lean proves the finite theorem.  Lean proves the equivalence.
 No theorem carries the one to the other.  A person approved wording that
 keeps the distinction.  An edit erased the distinction without touching a
-proof.  Every configured check passed while the relationship was
+proof.  The release checker passed in full while the relationship was
 unrecorded.  The relationship is now recorded and its known false form
 fails.  Unrecorded false forms remain possible.
 
 The evidence here should be weighed at three strengths.  That the
 architecture exists and behaves as described at one revision is demonstrated.
-That reviewed proof-to-prose relationships can be made mechanically
+That reviewed proof-to-claim relationships can be made mechanically
 persistent, without pretending that software interpreted the prose, is
 argued, and the case study supports it.  That such an architecture reduces
 consequential publication drift at acceptable maintenance cost across
@@ -806,9 +820,10 @@ source and rendered fingerprints for each shipped manuscript, with
 validation commands.  The record of the Section~\ref{sec:failure} exercise
 is \texttt{docs/publication\_evidence.json}: protocol, outcomes,
 and limitations.  Its deterministic reconstruction is described by
-\texttt{experiments/\allowbreak publication\_mutations.json}; the replay
-command is \texttt{scripts/\allowbreak run\_publication\_mutations.py} with
-\texttt{--verify-operators}.
+\texttt{experiments/\allowbreak publication\_mutations.json};
+\texttt{scripts/\allowbreak run\_publication\_mutations.py} verifies that
+each recorded edit still applies uniquely (\texttt{--verify-operators}) and
+replays edits against the current checker (\texttt{--all}).
 The original raw outputs of the historical runs were not retained, and the
 reconstruction does not claim to be them.
 

@@ -132,16 +132,16 @@ In ordinary language, the record says:
 claim id: certified_kill_instances
 public statement: Lean checked the listed finite cases.
 status: verified finite instance
-bounded range: the exact 28 input values are listed in the record.
+bounded range: eight small periods, the 28 scale values, and the shard parameters, all named in the record.
 formal evidence: five named Lean declarations.
-still open: prove that successful cases exist beyond every fixed limit.
+still open: prove that successful cases exist beyond every fixed cutoff.
 ```
 
 The phrase *verified finite instance* is not a score or a project-specific
 milestone. It means only that Lean checked a stated finite set of inputs. The
-open problem requires cases beyond every fixed limit, so the finite list does
+open problem requires cases beyond every fixed cutoff, so the finite list does
 not settle it. The development also proves an exact equivalence: a supply of
-cases beyond every fixed limit would settle the open problem itself. An edit
+cases beyond every fixed cutoff would settle the open problem itself. An edit
 that erased this boundary would therefore be a false mathematical
 announcement, not a small wording change.
 

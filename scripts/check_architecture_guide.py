@@ -20,9 +20,10 @@ MAX_GUIDE_BYTES = 18_000
 # Raised from 40_000 (maintainer decision, July 2026) to admit the
 # example-instantiated assurance, coverage, and reuse material, then to
 # 50_000 for the cold-reader repairs (named equivalence declarations,
-# witness glosses, integer-arithmetic detail); the budget still exists so
-# the paper cannot grow without a deliberate decision.
-MAX_SYSTEMS_PAPER_BYTES = 50_000
+# witness glosses, integer-arithmetic detail), then to 52_000 for the
+# perimeter-contraction and claim-to-reader-gap material; the budget still
+# exists so the paper cannot grow without a deliberate decision.
+MAX_SYSTEMS_PAPER_BYTES = 52_000
 
 SECTION_ORDER = (
     "## What this repository is",
@@ -57,7 +58,7 @@ REQUIRED_ANCHOR_GROUPS = {
     "worked_example": (
         "certified_kill_instances",
         "verified finite instance",
-        "beyond every fixed limit",
+        "beyond every fixed cutoff",
     ),
     "validation_split": (
         "lake build",
@@ -168,6 +169,7 @@ PAPER_REQUIRED_ANCHOR_GROUPS = {
         "Instantiated on the worked example",
         "boundary witness",
         "assurance perimeter",
+        "Coverage can also shrink",
     ),
 }
 

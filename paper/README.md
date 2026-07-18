@@ -38,7 +38,7 @@ claim from Lean proof to public page. The historical checker example appears
 only after the architecture and illustrates its coverage limit; it is not a
 score and adds no mathematical result.
 
-That ten-page paper is still a draft, not a finished exemplar. Its revision
+That twelve-page paper is still a draft, not a finished exemplar. Its revision
 target and cold-reader loop are recorded in
 `claim-faithful-publication-systems-revision-brief.md`.
 
@@ -60,6 +60,9 @@ The outputs are `erdos249-257-main-paper.pdf` and
 tracked reader-facing copies at repository root.
 
 ## Contents
+
+The bullets below index the mathematical gateway paper; the systems paper is
+outlined by its description above.
 
 - The Mersenne–Lambert ladder that places both constants on one line.
 - Erdős–Borwein-type irrationality (the #257 direction): full support at every base, plus named infinite-support cases.
