@@ -56,7 +56,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "Erd\\H{o}s \\#249",
-    "line": 3497
+    "line": 3500
    }
   },
   {
@@ -67,7 +67,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "unbounded certificate supply",
-    "line": 3508
+    "line": 3511
    }
   },
   {
@@ -78,7 +78,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "the half-value counterexample route",
-    "line": 3529
+    "line": 3532
    }
   },
   {
@@ -89,7 +89,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "universal Erd\\H{o}s \\#257",
-    "line": 3520
+    "line": 3523
    }
   }
  ],
@@ -559,18 +559,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_structured_support_bouquet_plain_language_audit",
+   "id": "main_paper_composite_dilation_defect_plain_language_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "Appendix A.2.1 introduces a finite-core orthogonal-petal bouquet, its frame, cores, petals, carry slot, and normalised tail in rapid succession, so the conditional theorem is harder to parse than its support and divisibility hypotheses require",
-   "statement": "Explain the bouquet support in ordinary set and divisibility language before naming the formal structure, and unpack the tail-selection predicate without weakening it, while preserving the explicit example, the forced-carry implication, the conditional status, and the boundary that this is not an unconditional case of Erdős Problem 257."
+   "defect_class": "Appendix A.2.2 names a composite-dilation correction, finite defect, ray, exceptional frame, and petal support without displaying the underlying coefficient identity or explaining which divisors the defect counts",
+   "statement": "State the composite-dilation identity in reader-facing notation and explain the bouquet specialization using the decomposition from A.2.1, while preserving the exact correction terms, the finite defect bound, and the boundary that these local identities prove neither a correlation estimate, the tail selector, nor irrationality."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "ebc98ee71f6819bd9fe344a0bb343542c604e533",
-  "committed_navigation_snapshot": "7505d22a3d035c1e0035598fcdda142428788fb0",
-  "main_paper_source_digest": "sha256:c9f0bb570c70c75afd9c7f5ebd42632c07967b7e4b4d4d50c5c71e0b35528b03"
+  "committed_navigation_snapshot": "6daa012aa96e18ea53f4e09601773b1a9c98930c",
+  "main_paper_source_digest": "sha256:d2d86a668710da1842ca5870e7b65056f38e5d777d8b518728c8ed4c7280a580"
  },
  "reading_routes": [
   {
