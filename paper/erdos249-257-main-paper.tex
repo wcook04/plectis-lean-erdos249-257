@@ -1337,17 +1337,20 @@ not a proof of Erd\H{o}s~\#257.
 
 \subsubsection{Fixed-coefficient rewind}\label{res:fixedcoeffrewind}
 
-For a finite list of common coefficients, the canonical inverse-parent map has
-an exact closed form with a power-of-two denominator:
-\lword{HalfCarryCeilParentContraction.lean}{49}{rewind_eq_closedForm}{the rewind closed form}.
-An interval of width at most that denominator contracts either to one ancestor
-or to two adjacent ancestors.  The singleton alternative is equivalent to the
-explicit dyadic phase inequality, while the other alternative is a seam pair;
-see
-\lword{HalfCarryCeilParentContraction.lean}{180}{rewind_singleton_or_isSeamPair}{the singleton-or-seam dichotomy}.
-Thus width alone does not justify a singleton conclusion.  This is a finite
-rewind lemma, and supplies neither a seam exclusion nor an Erd\H{o}s~\#257
-conclusion.
+For coefficient $c$, the inverse parent of carry $k$ is
+$T_c(k)=\lfloor(k+c+1)/2\rfloor=\lceil(k+c)/2\rceil$.  For a list
+$\mathbf c$ of $L$ rows, write $R_{\mathbf c}$ for their composition,
+$O_{\mathbf c}$ for its accumulated offset, and $D=2^L$.  Then
+$R_{\mathbf c}(k)=\lfloor(k+O_{\mathbf c})/D\rfloor$
+(\lword{HalfCarryCeilParentContraction.lean}{49}{rewind_eq_closedForm}{rewind closed form}).
+Put $\theta=(1+O_{\mathbf c})\bmod D$.  If $1\leq B\leq D$, every target in
+$[1,B]$ has one common ancestor exactly when $\theta+B-1<D$
+(\lword{HalfCarryCeilParentContraction.lean}{99}{rewind_endpoint_eq_iff_phase_fit}{phase-fit equivalence}).
+Otherwise the endpoints differ by one and every target maps to one of those
+adjacent ancestors
+(\lword{HalfCarryCeilParentContraction.lean}{180}{rewind_singleton_or_isSeamPair}{singleton-or-seam dichotomy}).
+The width bound does not select the alternative; this finite lemma supplies
+neither a seam exclusion nor an Erd\H{o}s~\#257 conclusion.
 
 \subsubsection{Selected half-carry windows}\label{res:selectedhalfwindow}
 
