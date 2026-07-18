@@ -27,7 +27,7 @@
   "declaration_count": 12578,
   "theorem_like_count": 11539,
   "generated_certificate_declaration_count": 2925,
-  "principal_claim_link_count": 296,
+  "principal_claim_link_count": 297,
   "kind_counts": {
    "abbrev": 9,
    "def": 992,
@@ -56,7 +56,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "Erd\\H{o}s \\#249",
-    "line": 3545
+    "line": 3551
    }
   },
   {
@@ -67,7 +67,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "unbounded certificate supply",
-    "line": 3556
+    "line": 3562
    }
   },
   {
@@ -78,7 +78,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "the half-value counterexample route",
-    "line": 3577
+    "line": 3583
    }
   },
   {
@@ -89,7 +89,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "universal Erd\\H{o}s \\#257",
-    "line": 3568
+    "line": 3574
    }
   }
  ],
@@ -559,10 +559,10 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_quarter_band_endpoint_cells_plain_language_audit",
+   "id": "main_paper_reset_deficit_escape_plain_language_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "The quarter-band endpoint paragraph calls two failures pulse cells without displaying the cell predicates or explaining which branch variables enter them",
-   "statement": "Write the exact middle and terminal-reset pulse-cell conditions in the paper's established seam notation, explain each equivalence direction in one sentence, and preserve that no avoidance theorem for the concrete orbit is proved."
+   "defect_class": "The reset-deficit paragraph names a right-branch window, an affine recurrence, and a doubled-scale deficit without displaying any of them or explaining why the deficit forces branch escape",
+   "statement": "State the explicit right-branch remainder window and recurrence, define the doubled-scale deficit and its escape horizon, and preserve that the deterministic anti-concentration needed to exclude the window globally is unproved."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
@@ -570,7 +570,7 @@
  "source_revision": {
   "formal_source_ref": "ebc98ee71f6819bd9fe344a0bb343542c604e533",
   "committed_navigation_snapshot": "030791ba37541d7be859006199d10d0749d47ce2",
-  "main_paper_source_digest": "sha256:c4d1e6186f108ab0117cd7692a65eb56f85199a989fd3913bd42da036393309c"
+  "main_paper_source_digest": "sha256:d840e1c7d7e511207292a1339f0d43af04d98c41788e6b26c5c062cb954cc98b"
  },
  "reading_routes": [
   {

@@ -1615,37 +1615,43 @@ These criteria do not prove that the required carries occur.
 
 \subsubsection{Quarter-band endpoint cells}\label{res:quarterband}
 
-For the adjacent seam recurrence, failure of the desired next-row upper bound
-on the middle branch is exactly one multiple-of-four pulse cell,
-\lword{HalfCylinderQuarterBandEndpoints.lean}{153}{seamAdjacentCut_middleNextUpperFailure_iff_pulseCell}{the middle-branch pulse-cell equivalence}.
-On the terminal-reset branch, the same failure is exactly a constrained
-$3\cdot2^{s-1}+k$ pulse cell,
-\lword{HalfCylinderQuarterBandEndpoints.lean}{175}{seamAdjacentCut_rightNextUpperFailure_iff_pulseCell}{the reset-branch pulse-cell equivalence}.
-These are arithmetic normal forms for the exceptional cells; no avoidance
-statement for the concrete seam orbit is proved.
+Put $H=2^{s-1}$, and write $R,U,R',p^-,p^+$ for the adjacent cut's
+remainder, overshoot, next remainder, below pulse, and above pulse.  Its gap
+is $4H$, so the desired next-row bound is $R'<8H$.  On the two non-carry
+branches, failure $R'\geq8H$ is equivalent to the corresponding row:
+\[
+ \begin{array}{ll}
+ \text{middle:}&\exists k:\ R=H+k,\quad p^-\leq4k<p^-+4,\\
+ \text{reset:}&\exists k:\ R=3H+k,\quad p^-+4\leq4k,\quad
+ 4k+16H<4(R+U)+p^+.
+ \end{array}
+\]
+\lword{HalfCylinderQuarterBandEndpoints.lean}{153}{seamAdjacentCut_middleNextUpperFailure_iff_pulseCell}{the middle-cell equivalence};
+and
+\lword{HalfCylinderQuarterBandEndpoints.lean}{175}{seamAdjacentCut_rightNextUpperFailure_iff_pulseCell}{the reset-cell equivalence}.
+The middle-row $k$ is unique,
+\lword{HalfCylinderQuarterBandEndpoints.lean}{34}{pulseCell_unique}{the cell uniqueness}.
+These equivalences classify failure but prove no concrete-orbit avoidance.
 
 \subsubsection{Reset-deficit escape}\label{res:resetdeficit}
 
-At a late largest skipped rank, a right successor branch pins the integer
-greedy remainder between an explicit quarter threshold and a carry threshold:
-\lword{HalfCylinderResetDeficitEscape.lean}{200}{rightBranch_remainder_window}{the right-branch remainder window}.
-Along such a branch the remainder satisfies an exact affine recurrence,
-\lword{HalfCylinderResetDeficitEscape.lean}{218}{rightBranch_remainder_succ_eq}{the right-branch affine recurrence}.
-Moreover, a doubled-scale deficit forces an upper-or-middle branch within the
+At a late largest skip, a right successor pins the integer remainder in an
+explicit window and obeys an exact affine recurrence,
+\lword{HalfCylinderResetDeficitEscape.lean}{200}{rightBranch_remainder_window}{the right-branch window}
+and
+\lword{HalfCylinderResetDeficitEscape.lean}{218}{rightBranch_remainder_succ_eq}{recurrence}.
+A doubled-scale deficit then forces an upper-or-middle branch within the
 corresponding number of rows,
 \lword{HalfCylinderResetDeficitEscape.lean}{261}{upperOrMiddle_within_of_two_pow_deficit}{the deficit escape bound}.
-The remaining input is the deterministic anti-concentration needed to exclude
-the pinned right-branch window globally; no such anti-concentration
-statement is proved here.
+The required deterministic anti-concentration excluding that window globally
+is not proved.
 
 \subsubsection{Alignment of seam and transition carries}\label{res:seamproducer}
 
-At a first-wrap seam, the transition carry of the left boundary support is
-four times the shifted seam hole, less the explicit paired incidence pulse at
-the next two rows:
+At a first-wrap seam, the left boundary carry is four times the shifted seam
+hole minus the paired incidence pulse at the next two rows,
 \lword{HalfCylinderSeamProducerAlignment.lean}{24}{producerCarry_insert_eq_four_mul_shiftedHole_sub_pulse}{seam--carry alignment}.
-This is an exact coordinate change between the seam and transition
-coordinates; it does not supply a sign or size estimate for that carry.
+This coordinate identity supplies neither a sign nor a size estimate.
 
 \subsection{Finite evidence, coordinate changes, and eliminated special cases}
 \label{app:half-evidence}

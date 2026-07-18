@@ -901,15 +901,15 @@
         "schema": "erdos249257-editorial-state/1",
         "scope": "continuous_whole_main_paper_exposition",
         "current_priority": {
-          "id": "main_paper_quarter_band_endpoint_cells_plain_language_audit",
+          "id": "main_paper_reset_deficit_escape_plain_language_audit",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "defect_class": "The quarter-band endpoint paragraph calls two failures pulse cells without displaying the cell predicates or explaining which branch variables enter them",
-          "statement": "Write the exact middle and terminal-reset pulse-cell conditions in the paper's established seam notation, explain each equivalence direction in one sentence, and preserve that no avoidance theorem for the concrete orbit is proved."
+          "defect_class": "The reset-deficit paragraph names a right-branch window, an affine recurrence, and a doubled-scale deficit without displaying any of them or explaining why the deficit forces branch escape",
+          "statement": "State the explicit right-branch remainder window and recurrence, define the doubled-scale deficit and its escape horizon, and preserve that the deterministic anti-concentration needed to exclude the window globally is unproved."
         },
         "last_verified_wave": {
-          "id": "main_paper_non_right_transition_carry_plain_language_audit",
+          "id": "main_paper_quarter_band_endpoint_cells_plain_language_audit",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "result": "For a finite transition-aligned support A through rank d, defined the divisor-incidence coefficients f_A, the affine integer carry C_(A,d), and the complete future tail Theta_(A,d). Displayed the exact residual 1/2 - X_A = 2^(-(2d+2))(C_(A,d) - Theta_(A,d)); explained both sign equivalences, the negative-carry consequence from tail nonnegativity, and the full-gap consequence at carry at most -8. Preserved that no occurrence theorem for the required carries is proved."
+          "result": "Named the adjacent-cut remainder R, overshoot U, next remainder R', below pulse p^-, above pulse p^+, and quarter scale H = 2^(s-1). Stated that middle-branch failure R' >= 8H is equivalent to the unique cell R = H+k and p^- <= 4k < p^-+4. Stated that terminal-reset failure is equivalent to R = 3H+k, p^-+4 <= 4k, and 4k+16H < 4(R+U)+p^+. Preserved that these exact normal forms do not prove concrete-orbit avoidance."
         },
         "active_inconsistencies": [],
         "blocked_decisions": []
@@ -7540,7 +7540,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 3545
+        "line": 3551
       }
     },
     {
@@ -7551,7 +7551,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 3556
+        "line": 3562
       }
     },
     {
@@ -7562,7 +7562,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "the half-value counterexample route",
-        "line": 3577
+        "line": 3583
       }
     },
     {
@@ -7573,7 +7573,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 3568
+        "line": 3574
       }
     }
   ],
@@ -8531,15 +8531,20 @@
     },
     {
       "id": "quarter_band_endpoint_cells",
-      "label": "Quarter-band endpoint cells for adjacent half-cylinder cuts",
+      "label": "Exact quarter-band failure cells for adjacent seam cuts",
       "status": "conditional reduction",
-      "statement": "On the middle and terminal-reset branches of the concrete adjacent seam recurrence, failure of the next-row upper bound is exactly characterized by explicit multiple-of-four pulse cells. The module does not prove that the concrete seam orbit avoids those cells.",
+      "statement": "At row s put H = 2^(s-1), and let R, U, R', p^-, p^+ be the adjacent cut's remainder, overshoot, next remainder, below pulse, and above pulse. On the non-carry middle branch, failure R' >= 8H is equivalent to the unique cell R = H+k with p^- <= 4k < p^-+4. On the terminal-reset branch, failure is equivalent to R = 3H+k with p^-+4 <= 4k and 4k+16H < 4(R+U)+p^+. These are exact failure classifications, not an avoidance theorem for the concrete seam orbit.",
       "remaining_open_proposition_ids": [
         "remaining_open.universal_257_all_infinite_supports"
       ],
       "paper_label": "res:quarterband",
       "readme_headline": false,
       "declarations": [
+        {
+          "name": "pulseCell_unique",
+          "module": "Erdos249257/HalfCylinderQuarterBandEndpoints.lean",
+          "line": 34
+        },
         {
           "name": "seamAdjacentCut_middleNextUpperFailure_iff_pulseCell",
           "module": "Erdos249257/HalfCylinderQuarterBandEndpoints.lean",
