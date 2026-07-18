@@ -56,7 +56,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "Erd\\H{o}s \\#249",
-    "line": 3455
+    "line": 3460
    }
   },
   {
@@ -67,7 +67,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "unbounded certificate supply",
-    "line": 3466
+    "line": 3471
    }
   },
   {
@@ -78,7 +78,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "the half-value counterexample route",
-    "line": 3487
+    "line": 3492
    }
   },
   {
@@ -89,7 +89,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "universal Erd\\H{o}s \\#257",
-    "line": 3478
+    "line": 3483
    }
   }
  ],
@@ -559,18 +559,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_257_fatal_half_gap_reader_entry_audit",
+   "id": "main_paper_257_tail_dominance_hypothesis_unpacking_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "The fatal half-gap inequality appears immediately after the carry comparison without first saying that it places 1/2 above everything reachable from the fixed prefix and below the next available weight",
-   "statement": "Explain the unreachable interval before naming the fatal half-gap, identify the remaining tail capacity and next available weight plainly, and preserve the exact equivalence with nonmembership."
+   "defect_class": "The paragraph after Corollary 4.16 calls the excluded negative carry locally discharged and compresses two independent unproved obligations into one abstract description",
+   "statement": "Explain directly that nonnegative Theta_D makes the tail inequality impossible for carries -2 and -1, then separate their occurrence-exclusion from tail domination on nonnegative carries while preserving the universal quantifier and open status."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "ebc98ee71f6819bd9fe344a0bb343542c604e533",
-  "committed_navigation_snapshot": "c136a600c569e6c0344a4aca8a9cdf32091e925c",
-  "main_paper_source_digest": "sha256:989041918193c57fddf92a81e015ba9b423de8c9ebd52126b4cf60546ddf869d"
+  "committed_navigation_snapshot": "87911ed52c4895cbd614d84edebe76d9b3f7b036",
+  "main_paper_source_digest": "sha256:e9e58569de9bded4a7fa480e042683d42591b7f1b85f31ffc54aae6a1c02335c"
  },
  "reading_routes": [
   {
