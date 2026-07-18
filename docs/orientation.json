@@ -56,7 +56,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "Erd\\H{o}s \\#249",
-    "line": 3434
+    "line": 3442
    }
   },
   {
@@ -67,7 +67,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "unbounded certificate supply",
-    "line": 3445
+    "line": 3453
    }
   },
   {
@@ -78,7 +78,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "the half-value counterexample route",
-    "line": 3466
+    "line": 3474
    }
   },
   {
@@ -89,7 +89,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "universal Erd\\H{o}s \\#257",
-    "line": 3457
+    "line": 3465
    }
   }
  ],
@@ -559,18 +559,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_257_worked_start_transition_density_audit",
+   "id": "main_paper_257_finite_seam_reader_entry_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "The worked start moves from the first greedy decisions to the rank-26 prefix, the unresolved membership question, and the final-skip criterion in one continuous paragraph",
-   "statement": "Separate the checked finite computation from its interpretation, preserve the exact rank-26 source boundary, and introduce the last-skip reduction without making finite survival evidence for membership."
+   "defect_class": "Definition 4.10 introduces q_{s,d}, K_s, R_{s,d}, beta_{s,d}, and tau_s before the prose explains that the construction is an exact integer rescaling of the real greedy process",
+   "statement": "Give the reader the purpose of the finite seam before the formulas, explain what a row and terminal bit record in plain language, and preserve the exact recurrence and theorem boundaries."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "ebc98ee71f6819bd9fe344a0bb343542c604e533",
-  "committed_navigation_snapshot": "b3fa547349ba4709286ff594e1b9b3ec5ee1fd78",
-  "main_paper_source_digest": "sha256:5abfeffe5b542fe85e22885047f58747298f1774293c2343df712cba7c321ad0"
+  "committed_navigation_snapshot": "63348729ba7da663baa5208ce17408b2ae7fa1b2",
+  "main_paper_source_digest": "sha256:6c1cce37b72d3e196b1fa39caa570376db198ffb29715ef78950f81d1d431cf3"
  },
  "reading_routes": [
   {
