@@ -1406,21 +1406,24 @@ Erd\H{o}s~\#257 is open.
 
 \subsubsection{Integer-greedy first-wrap reduction}\label{res:integergreedy}
 
-The first-wrap seam has exact truncated Mersenne weights with a quantitative
-gap-dominance property.  For these weights, a small positive subset-sum defect
-exists exactly when the descending integer-greedy remainder is small and
-positive; this is formalised by
-\lword{HalfCylinderIntegerGreedy.lean}{654}{seam_smallPositiveDefect_iff_integerGreedyRemainder}{the integer-greedy remainder equivalence}.
-The remaining arithmetic input is an unbounded lower bound for that
-deterministic remainder sequence.  No such lower bound is proved here.
+For $s\geq3$, put $C_s=2^{2s-1}-2^s$ and
+$B_s=2\lfloor\sqrt{2s}\rfloor+4$.  Starting at $C_s$, subtract each truncated
+seam weight in descending order whenever possible; let $r_s$ be the final
+remainder.  A positive subset-sum defect at most $B_s$ exists exactly when
+$1\leq r_s\leq B_s$
+(\lword{HalfCylinderIntegerGreedy.lean}{654}{seam_smallPositiveDefect_iff_integerGreedyRemainder}{exact equivalence}).
+Each weight clears its tail by at least $2^{s+1}>B_s$, so this one greedy test
+suffices.  The downstream escape hypothesis asks for $B_s<r_s$ at every
+genuine skipped rank
+(\lword{HalfCylinderFullShellSeamBridge.lean}{687}{HalfGreedySkippedSeamEscape}{escape hypothesis}).
+It is unproved; Erd\H{o}s~\#257 remains open.
 
 \subsubsection{Exact finite recurrence for the greedy seam}\label{res:concreteseam}
 
-The finite seam-word construction realises the abstract adjacent cut by
-concrete Boolean words and identifies its next word with the integer-greedy
-choice:
+The finite seam construction realises the adjacent cut, and its next word is
+the integer-greedy choice:
 \lword{HalfCylinderConcreteSeamAdapter.lean}{667}{seamCutNextWord_eq_greedyWord_succ}{the seam-word recurrence}.
-It implements a finite recurrence, not the unbounded remainder estimate.
+This is a finite recurrence, not the missing escape estimate.
 
 \subsection{Exact final-skip reduction and its residual cells}
 \label{app:half-final-skip}
