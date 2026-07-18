@@ -3020,20 +3020,24 @@ cutoff or prove that the greedy seam is eventually right.  Further fixed-scale
 computation, by itself, changes neither open statement.
 
 \paragraph{What finite witnesses can decide.}
-The two reductions use different finite witnesses.  A \(\mathsf{Sep}\)-certificate proves that
-one specified
-tail difference is non-integral; a fatal half-gap proves that no support extending one specified prefix can reach
-\(1/2\).  In neither case does survival of every check performed so far prove the opposite conclusion.
+For the half-value route, a finite calculation can settle nonmembership.
+By Theorem~\ref{res:fatalright}, \(1/2\notin\mathcal A\) is equivalent to the
+existence of a fatal half-gap.  Exact rational evaluation of the greedy
+prefix, together with the rational tail enclosures of
+Proposition~\ref{res:death}, can verify such a gap after finitely many steps.
+The gap excludes every support agreeing with that prefix.  The reverse
+direction has no finite certificate here: survival through any finite row is
+inconclusive, while membership requires \(\tau_s=0\) beyond every row cutoff.
 
-There is nevertheless an asymmetry.  By Theorem~\ref{res:fatalright}, \(1/2\notin\mathcal A\) is
-equivalent to the existence of a fatal half-gap.  Exact rational evaluation of the greedy orbit, together with the
-rational tail enclosures of Proposition~\ref{res:death}, can therefore certify nonmembership after a finite
-discovery.  Membership still requires terminal zeros at arbitrarily large rows.
-
-For \(S\), neither rationality nor irrationality has a single finite witness in this certificate system.  One
-\(\mathsf{Sep}\)-certificate proves one non-integral tail difference, whereas irrationality requires such
-certificates after every cutoff for every positive shift.  Rationality forces eventual integrality, but failure to find a
-certificate at a given truncation is inconclusive: a longer truncation may still certify the same tail difference.
+For \(S\), each \(\mathsf{Sep}\)-certificate has narrower scope: it proves
+that one specified tail difference is non-integral.  Theorem~\ref{res:red21}
+requires certificates after every cutoff for every positive shift, so no
+single certificate proves irrationality.  Rationality forces eventual
+integrality, but failure to find a certificate at one truncation proves
+neither integrality nor rationality: a greater binary depth \(L\) may still
+certify the same tail difference.  Thus finite discovery can certify
+half-value nonmembership, but not half-value membership or either status of
+\(S\) within these certificate systems.
 
 \begin{remark}[boundaries visible from the normal forms]
 Two elementary observations, neither formalised in the source, show that
