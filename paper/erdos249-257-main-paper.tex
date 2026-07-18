@@ -783,15 +783,18 @@ infinite objects.
 
 \paragraph{Why this target.}
 Any infinite support with any rational value would refute the universal
-statement; fixing one target value turns the search into a point-membership
-question.  The value \(1/2\) is a canonical choice rather than a forced one:
-it is the signed M\"obius comparison value \(L(\mu)=1/2\) from
-Section~\ref{sec:ladder}, so the question asks whether a genuinely Boolean
-support can attain what the signed M\"obius weights attain
-(Proposition~\ref{res:mobiussignnogo} shows that the signs cannot simply be
-truncated); no finite support by positive exponents attains it
-(Proposition~\ref{res:nofinitehalf} below); and the strict-tail coding of
-Theorem~\ref{res:greedy} makes its candidate support unique.
+statement.  Fixing \(1/2\) turns one possible counterexample route into the
+point-membership question \(1/2\in\mathcal A\).  This target is convenient,
+not forced.
+
+The reason it is distinguished is the signed M\"obius identity
+\(L(\mu)=1/2\) from Section~\ref{sec:ladder}.  A support series is different:
+each term has coefficient \(0\) or \(1\).  The most immediate conversion,
+selecting exactly the indices with \(\mu(d)=-1\), overshoots \(1/2\) by at
+least \(1/63\) (Proposition~\ref{res:mobiussignnogo}).  Moreover, no finite
+support attains \(1/2\) (Proposition~\ref{res:nofinitehalf} below), while the
+strict-tail coding of Theorem~\ref{res:greedy} makes any candidate support
+unique.
 
 Let
 \[
