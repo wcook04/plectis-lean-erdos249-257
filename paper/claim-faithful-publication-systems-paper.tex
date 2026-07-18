@@ -152,26 +152,26 @@ relationships remain intact before a release.
 \draw[semithick] (gen.south) -- (9.6,-3.35);
 \draw[semithick] (public.south) -- (12.2,-3.35);
 \draw[rounded corners=4pt, fill=gray!8, draw=gray!55]
-  (-0.1,-6.05) rectangle (14.1,-3.90);
-\node[font=\scriptsize, anchor=west] at (0.35,-4.16)
+  (-0.1,-6.32) rectangle (14.1,-3.90);
+\node[font=\scriptsize, anchor=west] at (0.35,-4.15)
   {\textsc{configured CI workflow} (clean checkout)};
-\node[checkbox] (build) at (2.4, -5.10) {\textbf{formal proof job}\\[1pt]
+\node[checkbox, anchor=north] (build) at (2.4, -4.40) {\textbf{formal proof job}\\[1pt]
   {\footnotesize\texttt{lake build}}};
-\node[checkbox, text width=5.4cm] (release) at (9.6, -5.02)
+\node[checkbox, text width=5.4cm, anchor=north] (release) at (9.6, -4.40)
   {\textbf{release-surface job}\\[1pt]
    {\footnotesize\texttt{python3 scripts/check\_release.py}\\
-   source identity, claim fields, generated files, required wording}};
+   source identity, claim fields,\\ generated files, required wording}};
 \node[lab, anchor=east] at (2.15,-3.62) {proof sources};
 \node[lab, anchor=east] at (9.35,-3.62) {all four artefacts reach the release job};
 \draw[flow] (2.4,-3.35) -- (build.north);
 \draw[flow] (9.6,-3.35) -- (release.north);
-\draw[semithick] (build.south) |- (6.0,-6.32);
-\draw[semithick] (release.south) |- (6.0,-6.32);
-\node[gate] (gate) at (6.0, -7.12) {\footnotesize both jobs pass?};
-\draw[flow] (6.0,-6.32) -- (gate.north);
-\node[outcome] (stop) at (1.9, -7.12) {\textbf{workflow fails}\\
+\draw[semithick] (build.south) |- (7.0,-6.55);
+\draw[semithick] (release.south) |- (7.0,-6.55);
+\node[gate] (gate) at (7.0, -7.35) {\footnotesize both jobs pass?};
+\draw[flow] (7.0,-6.55) -- (gate.north);
+\node[outcome] (stop) at (1.9, -7.35) {\textbf{workflow fails}\\
   {\footnotesize the failed job records the broken check}};
-\node[outcome] (ship) at (11.8, -7.12) {\textbf{workflow passes}\\
+\node[outcome] (ship) at (12.0, -7.35) {\textbf{workflow passes}\\
   {\footnotesize publication remains a human action}};
 \draw[flow] (gate.west) -- (stop.east) node[lab, pos=0.45] {no};
 \draw[flow] (gate.east) -- (ship.west) node[lab, pos=0.45] {yes};
