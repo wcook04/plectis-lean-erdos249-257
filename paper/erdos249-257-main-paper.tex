@@ -381,8 +381,9 @@ Three inputs form the convolution chain
  \xrightarrow{*\mathbf 1} \mathrm{Id},
  \qquad \alpha=\ph*\mu,
 \]
-whereas \(\mu\) and \(\mathbf 1\) are comparison inputs.  The corresponding
-values have the following statuses.
+whereas \(\mu\) and \(\mathbf 1\) are comparison inputs.  Write
+\(E=L(\mathbf 1)=\sum_{n\ge1}(2^n-1)^{-1}\) for the Erd\H{o}s--Borwein
+constant.  The corresponding values have the following statuses.
 
 \begin{center}
 \begin{tabular}{@{}llll@{}}
@@ -1967,7 +1968,7 @@ Half appears because $S=\tfrac12+T$ turns a denominator $d$ for $T$ into $2d$ fo
 
 Let $X,Y$ be independent fair-coin waiting times, $\Pr(X=n)=2^{-n}$ for $n\ge1$.
 Then $\Pr(d\mid X)=1/(2^d-1)$, so the Lambert transform is a divisor calculus of
-$X$: $L(f)=\mathbb E[(f*\zeta)(X)]$. The rungs read as $L(\mu)=\Pr(X=1)=1/2$,
+$X$: $L(f)=\mathbb E[(f*\mathbf 1)(X)]$. The rungs read as $L(\mu)=\Pr(X=1)=1/2$,
 $L(\ph)=\mathbb E[X]=2$, $L(\mathbf 1)=\mathbb E[\tau(X)]=E$, and
 $L(\alpha)=\mathbb E[\ph(X)]=S$.
 
@@ -3781,14 +3782,14 @@ contribution here is their Lean-checked composition with the tempered-orbit
 criterion.
 
 \begin{proposition}[Boolean M\"obius inversion, both directions]\label{res:boolmob}
-On positive integers, $f_A=\mathbf 1_A*\zeta$ and $\mu*f_A=\mathbf 1_A$, where
+On positive integers, $f_A=\mathbf 1_A*\mathbf 1$ and $\mu*f_A=\mathbf 1_A$, where
 $\mathbf 1_A$ is the indicator of $A$. Conversely, every integer-valued
 arithmetic function $f$ whose M\"obius transform is Boolean,
 $(\mu*f)(n)\in\{0,1\}$ for all $n\ge1$, satisfies $f=f_B$ for the support
 $B=\{n\ge1:(\mu*f)(n)=1\}$ selected by that transform.
 \end{proposition}
 \noindent Formalised:
-\lword{BooleanMobiusCarry.lean}{76}{positiveSupportBitAF_mul_zeta}{the positive-support zeta identity},
+\lword{BooleanMobiusCarry.lean}{76}{positiveSupportBitAF_mul_zeta}{the positive-support divisor identity},
 \lword{BooleanMobiusCarry.lean}{94}{moebius_mul_supportCoeffAF}{the M\"obius inversion identity}, and, with no
 search or finiteness hypothesis, the converse
 \lword{BooleanMobiusCarry.lean}{180}{eq_supportCoeffAF_booleanMobiusSupport_of_boolean}{the Boolean reconstruction theorem}.
