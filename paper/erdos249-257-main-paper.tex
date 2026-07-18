@@ -1179,18 +1179,20 @@ conclusion, or irrationality theorem.
 
 \subsubsection{Half-trapping return carries}\label{res:halftrapping}
 
-If rational-linear channels vanish on every relation killed by one scalar
-evaluation, their evaluation matrix has rank at most one; every nontrivial
-square minor therefore vanishes.  The all-rank determinant statement is
+For rational-linear maps $\varepsilon,\lambda_j:V\to\mathbb Q$, assume
+$\varepsilon(v_0)=1$ and
+$\ker\varepsilon\subseteq\ker\lambda_j$ for every $j$.  Each $\lambda_j$ is a
+scalar multiple of $\varepsilon$; hence every square matrix
+$(\lambda_j(v_i))$ of size at least two has determinant zero:
 \lword{HalfTrappingReturnCarry.lean}{42}{relationInvariantLinearChannels_det_eq_zero}{the rank-one determinant criterion}.
-For two reverse carries with a common coefficient word, a $1/0$ seam, and a
-common following overlap, the terminal difference is a power of two times an
-odd integer.  A shared nonnegative Archimedean bound then gives the matching
-dyadic spacing inequality, formalised at
+A reverse-carry word consists of integer sequences $c_m,b_m,u_m$ satisfying
+$b_m+2u_m=c_m+u_{m+1}$.  Two words with a common $c_m$ at a seam, bits $1,0$
+there, and common $c_m,b_m$ for the next $\ell$ positions have terminal carry
+difference $2^\ell z$ with $z$ odd:
+\lword{HalfTrappingReturnCarry.lean}{124}{overlappingReverseCarryWords_carryDifference_eq_twoPow_mul_odd}{the exact carry factorisation}.
+If both terminal carries lie in $[0,B]$, this forces $2^\ell\leq B$:
 \lword{HalfTrappingReturnCarry.lean}{191}{overlappingReverseCarryWords_twoPow_le_realBound}{the dyadic spacing inequality}.
-The argument does not produce reverse-carry presentations or an earlier
-overlapping return; it supplies only the algebraic core of that conditional
-criterion.
+Neither theorem constructs the two words or an earlier overlap.
 
 \subsubsection{Half-carry reachability}\label{res:halfcarryreachability}
 
