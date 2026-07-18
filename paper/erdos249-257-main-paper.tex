@@ -1281,14 +1281,20 @@ and
 The cofinal terminal-witness supply is not proved.  In particular, the
 proposition does not establish membership of $1/2$ unconditionally.
 
-\paragraph{Scaled terminal vanishing.}  The square-root strip is stronger
-than the analytic condition used by the terminal-only argument.  Let the
-depths of normalised finite words tend to infinity.  If their terminal carries,
-after division by the corresponding power of $2$, tend to zero, then the
-universal coefficient-tail error also tends to zero.  The finite support
-values therefore converge to $1/2$, and closedness of the achievement set
-again supplies the limit.  The earlier terminal-only strip condition implies
-this weaker sequential hypothesis.
+\paragraph{Scaled terminal vanishing.}  Let $M_n\to\infty$, and let $a^{(n)}$
+be a normalised word of depth $M_n$.  Write $A_n$ for its finite support,
+$X_n$ for its support-series value, and $K_n$ for its terminal carry.  The
+carry--tail identity gives
+\[
+ \left|X_n-\frac12\right|
+ \leq \frac{|K_n|}{2^{M_n}}
+   +\frac{2\sqrt{M_n}+4}{2^{M_n}}.
+\]
+The second term tends to zero for every such depth sequence.  Thus the sole
+additional hypothesis $|K_n|/2^{M_n}\to0$ gives $X_n\to1/2$; closedness and
+the finite-support obstruction give an infinite support of value $1/2$.
+The preceding square-root-strip condition is stronger, since
+$|K_n|\leq H_{M_n}$ and $H_{M_n}/2^{M_n}\to0$.
 
 \begin{proposition}[scaled terminal-vanishing criterion]\label{res:terminalscaledvanishing}
 A normalised terminal-word sequence with depths tending to infinity and
@@ -1306,18 +1312,11 @@ conditional reduction, not an unconditional membership theorem.
 \subsection{Finite-to-cofinal criteria: windows, seams, and compactness}
 \label{app:half-finite-cofinal}
 
-Every half-value route in this subsection factors as
-\[
- \text{finite witness at depth }N
- \quad+\quad
- \text{a cofinal supply of such depths}
- \quad\Longrightarrow\quad
- \frac12\in\mathcal A.
-\]
-The local identities and recurrences describe or advance one finite witness.
-The compactness statements turn a cofinal supply into membership.  No result
-below proves that supply, so a verified window or seam at one depth is evidence
-for a possible recurrence, not an unbounded theorem.
+Every half-value route below has the form
+``finite witness at depth $N$'' plus ``a cofinal supply of such depths''
+implies $1/2\in\mathcal A$.  The local identities advance one witness; the
+compactness statements consume a cofinal supply.  No result below proves that
+supply, so one verified window or seam is not an unbounded theorem.
 
 \subsubsection{Finite residuals for the half-value problem}\label{res:halfcylindershadow}
 
