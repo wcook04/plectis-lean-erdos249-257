@@ -901,15 +901,15 @@
         "schema": "erdos249257-editorial-state/1",
         "scope": "continuous_whole_main_paper_exposition",
         "current_priority": {
-          "id": "main_paper_half_value_unsafe_band_plain_language_audit",
+          "id": "main_paper_structured_support_bouquet_plain_language_audit",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "defect_class": "Appendix A.1 introduces an unsafe interval, a dyadically unsafe skip, and a cleared band without first saying which tail or survival condition is being violated, so the exact interval theorem is harder to interpret than its algebra requires",
-          "statement": "Define the unsafe-band language in reader-facing terms and explain the reciprocal coordinate R before using the interval, while preserving the exact if-and-only-if, the width formula, the integral-reciprocal exclusion, the local-only boundary, and the fact that the band is not identified with transition cells -2 and -1."
+          "defect_class": "Appendix A.2.1 introduces a finite-core orthogonal-petal bouquet, its frame, cores, petals, carry slot, and normalised tail in rapid succession, so the conditional theorem is harder to parse than its support and divisibility hypotheses require",
+          "statement": "Explain the bouquet support in ordinary set and divisibility language before naming the formal structure, and unpack the tail-selection predicate without weakening it, while preserving the explicit example, the forced-carry implication, the conditional status, and the boundary that this is not an unconditional case of Erdős Problem 257."
         },
         "last_verified_wave": {
-          "id": "main_paper_half_value_appendix_reader_map_audit",
+          "id": "main_paper_half_value_unsafe_band_plain_language_audit",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "result": "Replaced the Appendix A development-roadmap vocabulary with a reader-facing map of A.1 through A.5, stated four exact claim statuses, separated the two open antecedents from the proved implication chains, and retained the skip permission and the boundary that the appendix proves neither open conclusion. The rewrite also restores the paper from 54 to 53 pages."
+          "result": "Defined dyadic safety against the rank-k threshold, explained why safety is sufficient but not necessary for survival, introduced the reciprocal R and its post-take update R', and derived the unsafe band from the exact last-skip and unsafe inequalities. The rewrite preserves the exact width, integral-reciprocal exclusion, odd-coordinate lower bound, and local-only boundary, and keeps the paper at 53 pages."
         },
         "active_inconsistencies": [],
         "blocked_decisions": []
@@ -7540,7 +7540,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 3496
+        "line": 3497
       }
     },
     {
@@ -7551,7 +7551,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 3507
+        "line": 3508
       }
     },
     {
@@ -7562,7 +7562,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "the half-value counterexample route",
-        "line": 3528
+        "line": 3529
       }
     },
     {
@@ -7573,7 +7573,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 3519
+        "line": 3520
       }
     }
   ],

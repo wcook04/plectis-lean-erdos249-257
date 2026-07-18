@@ -1065,16 +1065,18 @@ support and a counterexample to the universal \#257 statement.
 \label{res:twothirdsband}
 \label{app:half-localizer}
 
-This subsection has one diagnostic role: it gives the exact unsafe interval
-for a specified take--skip--take configuration.  It helps interpret the
-transition geometry used in the final-skip analysis, but it is neither an
-orbit-level exclusion nor a premise that produces half-value membership.
+At rank \(k\), call the current residual \emph{dyadically safe} when it is at
+most \(2^{-k}\), and \emph{unsafe} otherwise.  Since the actual Mersenne tail
+satisfies \(T_k>2^{-k}\), safety is sufficient but not necessary for
+survival; an unsafe skip need not stop the orbit.
 
-One local configuration admits a simple exact description in full generality.
-Suppose a take at rank $b$ is followed by the next take at $c>b+1$.  Put
-$q=2^b-1$, $m=2^{c-1}$, and write the residual immediately before the first
-take as $1/R$.  When $0<R<q$, the final intervening skip is dyadically unsafe
-if and only if
+Suppose a take at rank \(b\) is followed by the next take at \(c>b+1\).  Put
+\(q=2^b-1\), \(m=2^{c-1}\), and write the residual just before rank \(b\) as
+\(\rho=1/R\), so \(R\) is its reciprocal.  Taking \(w_b=1/q\) changes the
+reciprocal to \(R'=Rq/(q-R)\), which stays fixed through the intervening
+skips.  The last skip, at rank \(c-1\), occurs exactly when \(R'>m-1\) and is
+dyadically unsafe exactly when \(R'<m\).  For \(0<R<q\), solving
+\(m-1<R'<m\) for the pre-take reciprocal gives
 \[
   \frac{q(m-1)}{q+m-1}<R<\frac{qm}{q+m}.
 \]
@@ -1092,9 +1094,9 @@ For a single intervening skip, $c=b+2$ and $m=2q+2$.  The band becomes
   \frac{q(2q+1)}{3q+1}<R<\frac{2q(q+1)}{3q+2},
 \]
 with width $q^2/((3q+1)(3q+2))<1/9$, entirely between $2q/3$ and
-$2q/3+2/9$.  No integral reciprocal lies in this window.  In the
-corresponding positive odd integer formulation, with residual $p/(2D)$,
-membership in the cleared band forces $p\ge7$.  Formalised:
+$2q/3+2/9$.  No integral \(R\) lies in this window.  If instead
+\(\rho=p/(2D)\), then \(R=2D/p\); for positive odd \(p,D,q\), clearing
+denominators in the same inequalities forces \(p\ge7\).  Formalised:
 \lword{HalfGreedyTwoThirdsBand.lean}{127}{singletonUnsafe_iff_twoThirdsBand}{the one-skip band equivalence},
 \lword{HalfGreedyTwoThirdsBand.lean}{154}{band_width}{the one-skip width formula},
 \lword{HalfGreedyTwoThirdsBand.lean}{163}{band_width_lt_ninth}{the width bound},
@@ -1102,10 +1104,9 @@ membership in the cleared band forces $p\ge7$.  Formalised:
 and
 \lword{HalfGreedyTwoThirdsBand.lean}{231}{seven_le_of_intBand_odd}{the odd-coordinate lower bound}.
 
-These are localisers, not orbit-level eliminations.  They do not show that
-the greedy orbit of $1/2$ avoids any such band, and they do not identify the
-two remaining exceptional transition coordinates $-2,-1$ with dyadically
-unsafe skips.
+These results neither show that the greedy orbit of \(1/2\) enters or avoids
+the band nor identify the remaining transition coordinates \(-2,-1\) with
+dyadically unsafe skips.
 
 \subsection{Conditional criteria and local inputs for structured supports}
 \label{app:half-conditional-producers}
