@@ -338,14 +338,16 @@ def validate_gateway_opening(paper: str) -> None:
     requirements = {
         "both_problem_statements": [
             [r"is irrational (\#249)"],
-            [r"for every infinite $A\subseteq\N$ (\#257)"],
+            [r"for every infinite $A\subseteq\Npos$ (\#257)"],
         ],
         "status_table": [
-            ["Denominator exclusion & Proved"],
-            ["Tail and lcm-diagonal forms & Exact equivalences"],
-            ["Full and structured supports & Proved cases"],
+            [r"Irrationality in \#249 & Open"],
+            [r"Denominator exclusion & Proved"],
             [r"q>\Qzero"],
             ["28 diagonal certificates"],
+            [r"Universal assertion in \#257 & Open"],
+            ["Classical/formalised"],
+            ["Open; exact reductions"],
         ],
         "exact_residuals": [
             ["An unbounded certificate supply"],

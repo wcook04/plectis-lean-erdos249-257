@@ -97,14 +97,13 @@
 \noindent
 For the totient constant $S=\sum_{n\ge1}\ph(n)/2^n$ of Erd\H{o}s~\#249 and
 the Mersenne support sums $\sum_{n\in A}(2^n-1)^{-1}$ of Erd\H{o}s~\#257,
-rationality would impose rigid discrete structure: eventually periodic
-binary tails for $S$, and an integral carry orbit with Boolean M\"obius
-quotient stream for a support sum.  We formalise both forms of rigidity in
-Lean and place \#249 and the distinguished half-value counterexample
-route to \#257 in exact finite-to-cofinal form:
-each open endpoint is proved equivalent to a cofinal supply of checkable
-finite events.  The universal \#257 assertion itself is not reduced to this
-chain.
+rationality would force discrete structure.  For $S$, its binary tails would
+eventually repeat.  For a support sum, binary long division would give an
+integer carry recurrence whose M\"obius-inverted quotients are all $0$ or
+$1$.  We formalise both statements in Lean.  We also express \#249 and the
+distinguished half-value counterexample route to \#257 in finite-to-cofinal
+form: each endpoint is equivalent to finite witnesses occurring beyond every
+bound.  This chain does not reformulate the universal \#257 assertion.
 One certified Farey window excludes every rational
 representation $S=p/q$ with
 $q\le\Qzero\approx7.96\times10^{34}$; hence a rational representation must
@@ -122,20 +121,20 @@ $e$; no matching upper bound is known, so this does not prove irrationality.
 
 For Erd\H{o}s~\#257, we formalise Erd\H{o}s's classical theorem for full
 support in every base and several structured-support cases.  At base \(2\)
-we prove exact achievement-set geometry and necessary carry and gap
-constraints on hypothetical rational infinite supports; in particular, the
-divisor stream of a rational support admits only sublogarithmic zero
-windows, uniformly in the support.  Membership of
+we prove the geometry of the achievement set (the set of all support sums)
+and necessary carry and gap constraints on hypothetical rational infinite
+supports.  In particular, consecutive stretches on which the divisor-count
+stream vanishes have sublogarithmic length, uniformly in the support.
+Membership of
 \(1/2\), which would refute the universal statement, is exactly equivalent to
 infinitely many greedy skips.  Nonmembership is exactly equivalent to an
 eventually right integer seam (beyond some row, every new rank is taken), a
 finite fatal gap, and a final greedy skip.
 
-The current final-skip route excludes a final upper transition and the
-middle transition carry \(-3\).  One global tail-dominance hypothesis
-remains: exclude the middle carries \(-2\) and \(-1\), and prove the
-future-tail inequality at the remaining nonnegative-carry middle
-transitions.  Both series are values of one Lambert transform, and the
+After a putative final skip, the current argument excludes the upper
+transition and middle carry \(-3\).  It remains to exclude middle carries
+\(-2,-1\) and to prove a future-tail inequality for the nonnegative middle
+carries.  Both series are values of one Lambert transform, and the
 manuscript organises the two problems and the half-value target as an image
 question, a restricted-domain question, and a fibre question about that
 single transform.  An unbounded certificate
@@ -149,55 +148,52 @@ problem is settled.
 The two questions are whether
 $S=\sum_{n\ge1}\ph(n)/2^n$ is irrational (\#249), and whether
 $\sum_{n\in A}(2^n-1)^{-1}$ is irrational for every infinite
-$A\subseteq\Npos$ (\#257).  The problems appear in the Erd\H{o}s--Graham
-collection and Erd\H{o}s's later survey~\cite{erdosgraham1980,erdos1988};
-numbering follows the maintained catalogue~\cite{erdosproblems}.
+$A\subseteq\Npos$ (\#257).  Here \(\ph(n)\) is Euler's totient, the number
+of integers from \(1\) to \(n\) that are coprime to \(n\).  The problems
+appear in the Erd\H{o}s--Graham collection and Erd\H{o}s's later
+survey~\cite{erdosgraham1980,erdos1988}; the numbering follows the maintained
+catalogue~\cite{erdosproblems}.  Neither problem is settled.
 
 Throughout, \(\N=\{0,1,2,\ldots\}\) and
-\(\Npos=\{1,2,3,\ldots\}\).  Supports for \#257 are subsets of
-\(\Npos\); exponent \(0\) would give the undefined denominator
-\(2^0-1\).
+\(\Npos=\{1,2,3,\ldots\}\).  A \emph{support} \(A\subseteq\Npos\)
+selects terms of the \#257 series, and its sum belongs to the corresponding
+\emph{achievement set} \(\mathcal A\).  Exponent \(0\) is excluded because
+\(2^0-1=0\).  An infinite support with sum \(1/2\) would therefore refute
+the universal assertion in \#257.
 
-For \#257, an infinite support summing to $1/2$ would refute the universal
-claim.  Neither endpoint is proved.  In both open spines, tail and carry identities
-separate exact finite arithmetic from one analytic or combinatorial
-cofinality statement.
+\subsection*{What is proved}
 
-\subsection*{Overview for a first reading}
-
-The totient \(\ph(n)\) counts the integers in \(\{1,\ldots,n\}\) that are
-coprime to \(n\).  A \emph{support} selects terms;
-its \emph{achievement set} contains the resulting sums.  \emph{Cofinally}
-means beyond every bound.  A \emph{spine} is a displayed chain of
-statements leading to one open quantified statement.  A \emph{certificate}
-is a finite integer computation proving an exact statement about an
-infinite tail; a \emph{carry} is an integer state of binary long division.
-
-The totient constant also has the elementary probabilistic form
-\[
- S=\frac12+\Pr(\gcd(X,Y)=1),
-\]
-where $X$ and $Y$ are independent fair-coin waiting times.  The \#257
-question asks whether every infinite choice of the fractions
-$1/(2^n-1)$ has irrational sum.  The two exact finite-to-cofinal spines are
+The paper separates finite arithmetic from the remaining infinite
+quantifier.  A \emph{certificate} is a finite integer calculation that
+proves an exact assertion about an infinite tail.  A \emph{carry} is an
+integer state in binary long division, and \emph{cofinally} means beyond
+every prescribed bound.  A \emph{spine} below is simply a displayed chain
+from such finite statements to one open cofinal statement.  In both spines,
+tail and carry identities separate exact finite arithmetic from one analytic
+or combinatorial cofinality statement:
 \[
  \begin{aligned}
  \text{cofinally many lcm-diagonal certificates}
  &\quad\Longleftrightarrow\quad S\notin\Q,\\[4pt]
  \text{cofinally many greedy terminal zeros}
- &\quad\Longleftrightarrow\quad \dfrac12\in\mathcal A\\[-1pt]
+ &\quad\Longleftrightarrow\quad \dfrac12\in\mathcal A,\\[-1pt]
  &\quad\Longrightarrow\quad \text{a counterexample to universal \#257}.
  \end{aligned}
 \]
-For \#249, a denominator exclusion and 28 diagonal certificates are proved,
-but no unbounded certificate supply is known.  For the half-value branch of
-\#257, finite-support exclusion and the exact greedy classification are
-proved, but no cofinal supply of terminal zeros is known.  This shared
-quantifier pattern is one reason for treating the problems together.  The
-second is exact: both series are values of one Lambert transform, and
-rationality acts on both through the same integral carry mechanism;
-Section~\ref{sec:architecture} organises the open questions inside that map
-and records why no status transfers.
+The first line is an exact reformulation of \#249.  The second is an exact
+reformulation of the distinguished half-value route, not of universal
+\#257.  An unbounded certificate supply and cofinal terminal zeros are both
+open.  The current final-skip analysis reduces the second statement further
+to two final-skip obligations; neither obligation is proved.
+
+The totient constant also has the elementary form
+\[
+ S=\frac12+\Pr(\gcd(X,Y)=1),
+\]
+where \(X,Y\in\Npos\) are independent and
+\(\Pr(X=n)=\Pr(Y=n)=2^{-n}\).  Both series are values of one Lambert
+transform, but this common description transfers no theorem from one problem
+to the other; Section~\ref{sec:architecture} gives the exact map.
 
 \begin{center}
 \small
@@ -210,14 +206,11 @@ Question or result & Status & What is proved \\
 \midrule
 Irrationality in \#249 & Open & No proof of \(S\notin\Q\) is claimed. \\
 Denominator exclusion & Proved & If \(S=p/q\), then \(q>\Qzero\). \\
-Tail and lcm-diagonal forms & Exact equivalences & Either certificate supply is equivalent to \(S\notin\Q\); the supply itself is open. \\
-Diagonal computations through \(t=64\) & Finite evidence & Lean checks the 28 lcm-height changes; not a cofinal theorem. \\
+Tail and lcm-diagonal forms & Exact equivalences & The unbounded supply is equivalent to \(S\notin\Q\), but remains open. \\
+Diagonal computation & Finite evidence & Lean checks 28 diagonal certificates through \(t=64\); this is not cofinal. \\
 Universal assertion in \#257 & Open & No proof covers every infinite support. \\
-Full and structured supports & Proved cases & Classical full-support irrationality and several restricted support families are formalised. \\
-Rational-support carry laws & Necessary conditions & Any hypothetical rational support must satisfy the stated orbit, gap, mass, and unbounded-state constraints. \\
-Membership of \(1/2\) & Open & Membership would give an infinite rational support and refute universal \#257. \\
-Greedy and final-skip forms of \(1/2\) & Exact equivalences & They identify the missing cofinal event without proving it occurs. \\
-Rank-26 final-middle sieve & Conditional reduction & The orbit restrictions and the exact count of 412 surviving phases are proved; the survivors are not excluded. \\
+Full and structured supports & Classical/formalised & Full support and several restricted families are proved irrational. \\
+Membership of \(1/2\) & Open; exact reductions & Greedy and carry laws identify necessary events without proving they occur. \\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -231,41 +224,15 @@ The manuscript, its link checker, and its generated indexes help a reader find
 the proof but are not themselves proof authority.  The release section states
 the additional source-pin and trust checks required for a reproducible copy.
 
-\paragraph{Principal results and contribution.}
-Four theorem families carry the paper:
-\begin{enumerate}[label=\textup{(\roman*)},leftmargin=2.2em]
-\item the denominator exclusion in Theorem~\ref{res:farey} and the
-infinite-dimensional dyadic totient-kernel theorem in
-Theorem~\ref{res:dyadictotient};
-\item the fixed, pointwise, cofinal, and lcm-diagonal certificate equivalences
-in Proposition~\ref{res:complete} and
-Theorems~\ref{res:pointwisecomplete}--\ref{res:diag};
-\item the infinite state, zero-window, and denominator-mass constraints in
-Corollaries~\ref{res:rigidity-unbounded-main}--\ref{res:rigidity-dyadic-mass-main};
-\item the half-membership and final-skip classifications in
-Theorems~\ref{res:halfmembership} and~\ref{res:fatalright}, with the residual
-obligations in Proposition~\ref{res:finalskipexclusions} and
-Corollary~\ref{res:taildominance}.
-\end{enumerate}
-The table above separates proved results, exact reformulations, conditional
-implications, finite evidence, and open endpoints.  The 28 diagonal rows remain finite
-evidence; both endpoints remain open.
-
-These results carry no priority claim.  Appendices carry auxiliary and
-audit material.  On each side
-the missing piece is the unbounded witness family: neither finite evidence
-nor an exact reduction supplies it.  The half-value spine is a genuine
-counterexample route because a finite normalised support cannot have value
-$1/2$; no unbounded supply is proved.
-
 \paragraph{Reading map.}
-Section~\ref{sec:spines} gives spines; Section~\ref{sec:ladder} gives
-coordinates.  Sections~\ref{sec:eb} and~\ref{sec:249} give results;
-Section~\ref{sec:architecture} gives shared structure.  Sections~\ref{sec:verify}
-and~\ref{sec:further} give verification and frontiers.  Appendices
-~\ref{app:half-technical} and~\ref{sec:carry} hold local arguments;
-appendices hold technical and audit material.  Linked phrases open
-Lean proofs.
+Section~\ref{sec:spines} states the two exact reductions, and
+Section~\ref{sec:ladder} introduces their common coordinates.
+Sections~\ref{sec:eb} and~\ref{sec:249} give the \#257 and \#249 results.
+Section~\ref{sec:architecture} explains the shared transform and the limits
+of the comparison.  Sections~\ref{sec:verify} and~\ref{sec:further} give the
+verification protocol and open frontiers.  The appendices contain the local
+arguments and audit tables.  Linked phrases open the corresponding Lean
+proofs.
 
 \medskip
 \noindent\textbf{Keywords.} irrationality; Erd\H{o}s--Borwein constant;
@@ -301,13 +268,10 @@ The formal source proves the exact chain
 \end{split}
 \]
 Here \(\mathsf{Sep}(h,N,L)\) is a finite residue computation with a
-rigorous tail allowance.  The second equivalence is completeness of the
-certificate: at fixed \(h,N\), some finite depth succeeds exactly when the
-tail difference is non-integral.  Conversely, integrality of one
-positive-shift difference forces \(S\) to be rational.
-The three statements are formalised by the
+rigorous tail allowance.  At fixed \(h,N\), some depth succeeds exactly when
+the tail difference is non-integral; integrality of one positive-shift
+difference forces \(S\) to be rational.  These statements are the
 \lword{LcmConeFlatness.lean}{386}{irrational_totient_series_iff_all_tail_diffs_nonintegral}{tail-difference equivalence},
-the
 \lword{LcmConeFlatness.lean}{399}{irrational_totient_series_iff_pointwise_certificates}{pointwise certificate equivalence},
 and the fixed-parameter
 \lword{LcmConeFlatness.lean}{316}{exists_certifiedKill_iff_tail_diff_notMem_int}{certificate-completeness theorem}.
@@ -318,17 +282,15 @@ Independently of the unbounded certificate supply, if \(S=p/q\), then
  q>\Qzero
  =79\,639\,646\,646\,701\,375\,323\,355\,774\,875\,831\,053.
 \]
-\noindent This is the
-\lword{CertificateKernel.lean}{18056}{tsum_totient_div_pow_two_ne_ratCast_of_den_le_79639646646701375323355774875831053}{denominator exclusion}.
+This is the \lword{CertificateKernel.lean}{18056}{tsum_totient_div_pow_two_ne_ratCast_of_den_le_79639646646701375323355774875831053}{denominator exclusion}.
 
 \paragraph{Missing theorem.}
 An unbounded certificate supply is the exact open statement: for every
-positive \(h\), non-integral differences \(R_{N+h}-R_N\) occur at arbitrarily large \(N\).
-Theorem~\ref{res:diag} compresses this to the equivalent one-parameter
-lcm-diagonal supply.  Finite diagonal instances are verified at the 28
-changing-lcm scales through \(t=64\),
-but no unbounded supply is proved.  The denominator exclusion does not
-discharge this quantifier either.
+positive \(h\), non-integral differences \(R_{N+h}-R_N\) occur at
+arbitrarily large \(N\).  Theorem~\ref{res:diag} gives the equivalent
+one-parameter lcm-diagonal form.  The 28 changing-lcm scales through
+\(t=64\) are verified, but neither this finite computation nor the
+denominator bound proves the unbounded supply.
 
 \subsection{Erd\H{o}s \#257: the exact half-value counterexample spine}
 \label{res:halfstory}
@@ -358,10 +320,9 @@ skips recur beyond every bound.
 
 \paragraph{Counterexample consequence.}
 Membership would produce an infinite support of rational sum and refute the
-universal statement of Erd\H{o}s~\#257.  The required counterexample
-condition is therefore exact: cofinally many terminal zeros, equivalently no
-last greedy skip.
-The reduction and finite exclusion are formalised by the
+universal statement of Erd\H{o}s~\#257.  Thus the counterexample condition is
+exact: cofinally many terminal zeros, equivalently no last greedy skip.  The
+formal statements are the
 \lword{GreedyAchievementSet.lean}{2514}{half_mem_mersenneAchievementSet_iff_greedySkippedSupport_infinite}{infinite-skip equivalence},
 \lword{HalfCylinderHalfMembershipClassification.lean}{126}{half_mem_mersenneAchievementSet_iff_unboundedTerminalFalse}{unbounded-terminal equivalence},
 \lword{HalfCylinderHalfMembershipClassification.lean}{235}{half_mem_mersenneAchievementSet_iff_no_lastHalfGreedySkip}{no-last-skip equivalence},
@@ -370,35 +331,18 @@ and the
 
 \paragraph{Missing theorem.}
 The missing input is a proof that terminal zeros occur cofinally.  The
-strongest current last-skip route is conditional.  After a putative last
-skip, the upper transition and the middle transition carry \(-3\) are
-impossible.
-The two final-skip obligations are to exclude the actual middle transition
-carries \(-2,-1\) and establish the future-tail inequality at the remaining
-nonnegative-carry middle transitions.  Neither is proved for the greedy orbit, so this route
-does not yet produce cofinal terminal zeros.
-The conditional residual is the
+current last-skip route proves that, after a putative last skip, neither the
+upper transition nor middle carry \(-3\) can occur.  It remains to exclude
+middle carries \(-2,-1\) and to prove a future-tail inequality for the
+remaining nonnegative middle carries.  Neither statement is known for the
+greedy orbit.  The exact conditional implication is the
 \lword{HalfCylinderLastProducerContradiction.lean}{387}{half_mem_mersenneAchievementSet_of_middleProducerTailEscapeExceptNegThree}{remaining-tail implication}.
-Its local transition exclusions are stated in
-Proposition~\ref{res:finalskipexclusions}, and its sufficient global
-hypothesis is Corollary~\ref{res:taildominance}.
-Appendix~\ref{app:half-final-skip} supplies the exact final-skip coordinates
-consumed by those two statements.
-Appendices~\ref{app:half-conditional-producers}--\ref{app:half-finite-cofinal}
-record alternative conditional half-value criteria, while
-Appendix~\ref{app:half-evidence} supplies bounded evidence and closes invalid
-shortcuts; none discharges the residual above.
+Proposition~\ref{res:finalskipexclusions} gives the local exclusions and
+Corollary~\ref{res:taildominance} states the sufficient global hypothesis.
 
 \paragraph{Prior-art boundary.}
-Full support is Erd\H{o}s's, and Borwein proved a broader theorem containing
-the same specialisation~\cite{erdos1948,borwein1992}.  Pairwise-coprime and
-periodic-support results are represented by Erd\H{o}s and Luca--Tachiya
-~\cite{erdos1968,lucatachiya}.  Strict-tail and carry precedents are
-Kova\v{c}--Tao and Wang--Grau Ribas~\cite{kovactao,wanggrauribas}; Crandall and
-Campbell address adjacent binary-expansion questions~\cite{crandall,campbell}.
-The maintained record contains no exact antecedent for the denominator bound,
-certificate equivalence, or last-skip reduction; that is not itself a novelty
-claim.
+Prior results are cited at their first use in the body, beginning in
+Section~\ref{sec:ladder}.  No priority claim is made for the reductions above.
 
 \section{The Mersenne--Lambert ladder}\label{sec:ladder}
 
@@ -2834,7 +2778,7 @@ for $S$.
 
 \paragraph{Appendix consequence.}
 Nothing in this appendix strengthens the fixed-parameter completeness of
-Proposition~\ref{res:complete} into an unbounded supply.  Its exact handoff is
+Proposition~\ref{res:complete} into an unbounded supply.  Its remaining condition is
 therefore the still-open quantifier in Theorem~\ref{res:red21}:
 \[
  \forall h\geq1\;\forall N_0\;\exists N\geq N_0\;\exists L\geq1,\qquad
@@ -3623,7 +3567,7 @@ This appendix supplies the local implications behind
 Theorems~\ref{res:halfmembership} and~\ref{res:fatalright},
 Proposition~\ref{res:finalskipexclusions}, and
 Corollary~\ref{res:taildominance}.  It does not establish the corollary's
-global hypothesis.  The exact handoff is either a cofinal window, seam, or
+global hypothesis.  A sufficient hypothesis is either a cofinal window, seam, or
 terminal approximation producing \(1/2\in\mathcal A\), or both an exclusion
 of every actual middle transition with \(C_D=-2,-1\) and a proof of
 \(\Theta_D<C_D\) at every remaining non-\((-3)\) middle transition.  The

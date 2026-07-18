@@ -91,6 +91,27 @@ def main() -> int:
         raise AssertionError("gateway exact-open-edge deletion escaped")
 
     mutated_paper = gateway_paper.replace(
+        r"for every infinite $A\subseteq\Npos$ (\#257)",
+        r"for every infinite $A\subseteq\N$ (\#257)",
+    )
+    try:
+        diagnostic.validate_gateway_opening(mutated_paper)
+    except AssertionError:
+        checks += 1
+    else:
+        raise AssertionError("gateway positive-support notation mutation escaped")
+
+    mutated_paper = gateway_paper.replace(
+        "Open; exact reductions", "Proved"
+    )
+    try:
+        diagnostic.validate_gateway_opening(mutated_paper)
+    except AssertionError:
+        checks += 1
+    else:
+        raise AssertionError("gateway half-value status inflation escaped")
+
+    mutated_paper = gateway_paper.replace(
         r"\paragraph{Reading map.}",
         r"\paragraph{Reading map.} Fake.lean module inventory",
     )
