@@ -56,7 +56,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "Erd\\H{o}s \\#249",
-    "line": 3447
+    "line": 3451
    }
   },
   {
@@ -67,7 +67,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "unbounded certificate supply",
-    "line": 3458
+    "line": 3462
    }
   },
   {
@@ -78,7 +78,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "the half-value counterexample route",
-    "line": 3479
+    "line": 3483
    }
   },
   {
@@ -89,7 +89,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "universal Erd\\H{o}s \\#257",
-    "line": 3470
+    "line": 3474
    }
   }
  ],
@@ -559,18 +559,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_257_final_skip_transition_reader_entry_audit",
+   "id": "main_paper_257_middle_transition_carry_reader_entry_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "Section 4.6 opens with G_s, H_s, and the upper/middle/right transition labels before explaining that the construction compares consecutive seam rows to detect whether one skipped exponent is final",
-   "statement": "State the purpose of the adjacent-row comparison before its notation, define the cheapest strict overshoot in reader-facing terms, and preserve the exact three-case transition and unresolved-branch boundaries."
+   "defect_class": "The middle-transition passage introduces A_D, P_D, C_D, and Theta_D before stating that the residual identity compares a finite integer transition carry with the entire future divisor tail",
+   "statement": "Announce the finite-versus-future comparison before its symbols, explain the augmented support and local divisor contribution plainly, and preserve the exact residual identity and conditional tail-dominance boundary."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "ebc98ee71f6819bd9fe344a0bb343542c604e533",
-  "committed_navigation_snapshot": "147dd0c38b1bd3cf54d4050b8bf286f3d3360469",
-  "main_paper_source_digest": "sha256:769c6624b7b93e305952c5ebf419ab19000a27558d9053688712b91e74431f31"
+  "committed_navigation_snapshot": "ba0bdf9e2efcceeb6b4f73a9a9d8705125473f0c",
+  "main_paper_source_digest": "sha256:ff3a1d2b68c02d826d428cc8255375171f31285ca4217c7519b4595e98f38c29"
  },
  "reading_routes": [
   {
