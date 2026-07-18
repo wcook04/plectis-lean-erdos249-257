@@ -56,7 +56,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "Erd\\H{o}s \\#249",
-    "line": 3477
+    "line": 3481
    }
   },
   {
@@ -67,7 +67,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "unbounded certificate supply",
-    "line": 3488
+    "line": 3492
    }
   },
   {
@@ -78,7 +78,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "the half-value counterexample route",
-    "line": 3509
+    "line": 3513
    }
   },
   {
@@ -89,7 +89,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "universal Erd\\H{o}s \\#257",
-    "line": 3500
+    "line": 3504
    }
   }
  ],
@@ -559,18 +559,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_shared_geometry_boundary_reader_entry_audit",
+   "id": "main_paper_proof_authority_plain_language_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "The closing boundary remark compresses two different unformalised countermodels into one dense paragraph and makes a cold reader hold the ratio-one-third tail construction before being told exactly which inference it blocks",
-   "statement": "Separate the #249 finite-splice and half-value modified-tail countermodels into a parallel reader-facing comparison, while preserving that both observations are elementary and unformalised, concern altered systems rather than the actual arithmetic inputs, and block only finite-inspection or shared-geometry arguments."
+   "defect_class": "The proof-authority section exposes Lean-internal terms such as decide, norm_num, declaration-local recursion-depth budget, and Lean.trustCompiler before explaining their relevance to a reader who does not already know the Lean trust model",
+   "statement": "Translate the computation and trust boundary into plain language while retaining the exact technical identifiers needed for audit: explain that the kernel checks the resulting proof terms, distinguish kernel-reducible finite computation from external evidence, and preserve that generated Lean certificate files are source while Python scripts, indexes, and the manuscript are not proof authority."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "ebc98ee71f6819bd9fe344a0bb343542c604e533",
-  "committed_navigation_snapshot": "b186ae206edc116ced8c195be447f5f674ed1b34",
-  "main_paper_source_digest": "sha256:692bb09fbb9c889b784878f3b4aaef52405677d8b2d4d5fc7f26e882b360653d"
+  "committed_navigation_snapshot": "6b1128209566e83fa3ff09e8affd31e700ec7c6a",
+  "main_paper_source_digest": "sha256:117b5144ec89a8f862622198490e6f617229b38eda3843de3f482d17c76a8cff"
  },
  "reading_routes": [
   {
