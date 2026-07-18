@@ -893,7 +893,12 @@ The Boolean word \((\beta_{s,2},\ldots,\beta_{s,s-1})\) is the
 \noindent Here \(q_{s,d}=\lfloor4^sw_d\rfloor\) is the weight \(w_d\) at
 resolution \(4^{-s}\), and \(K_s=4^s\cdot\tfrac12-2^s\) is the target
 \(1/2\) at the same resolution, lowered by a guard of \(2^s\); the word
-\(\beta\) records which weights this integer greedy run takes.  The seam
+\(\beta\) records which weights this integer greedy run takes.  At
+\(s=7\), for instance, \(K_7=8064\) and the run takes \(q_{7,2}=5461\)
+and \(q_{7,3}=2340\), skips \(1092\) and \(528\), and takes
+\(q_{7,6}=260\), leaving \(3\): the word is \(1,1,0,0,1\), matching the
+real greedy decisions at ranks \(2\)--\(6\), with terminal bit
+\(\tau_7=1\).  The seam
 is thus an exact integer coordinate model of the real greedy process.
 Appendix~\ref{app:half-final-skip} develops the equivalence with
 final skips and the unresolved transition cells; the finite coordinate changes in
