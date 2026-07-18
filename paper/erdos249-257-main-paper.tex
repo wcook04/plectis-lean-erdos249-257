@@ -2942,8 +2942,8 @@ successful method would still need.
 
 \subsection{The shared bottleneck}
 
-Both spines end at complete finite predicates whose cofinal conclusions
-point in opposite directions:
+Both reductions express their endpoints through finite events that must occur
+at arbitrarily large scales, but the conclusions point in opposite directions:
 \[
 \begin{aligned}
  S\notin\Q
@@ -2974,21 +2974,21 @@ half-value side of \#257, it must produce cofinal terminal zeros or prove that
 the greedy seam is eventually right.  Further fixed-scale computation, by
 itself, changes neither open statement.
 
-\paragraph{What the finite languages could ever settle.}
-The two finite layers certify open conditions: a certificate proves that one
-tail difference lies at positive distance from \(\Z\), and a fatal half-gap
-proves that the residual at one rank exceeds the whole remaining tail.
-Their complements admit no finite witness in these languages, so each
-endpoint equivalence sits exactly one cofinal quantifier above its finite
-layer.  One asymmetry follows.  Half-value nonmembership is equivalent to
-the existence of a fatal half-gap, and the greedy orbit is exactly
-computable with sound rational tail enclosures
-(Proposition~\ref{res:death}), so the negative endpoint of the fibre
-question is in principle a single finite discovery; membership can only
-arrive through a cofinal supply.  For \(S\) neither direction is one
-certificate away: a certificate proves one non-integral difference, and
-rationality asserts eventual integrality, which no single finite check of
-this kind certifies.
+\paragraph{What finite witnesses can decide.}
+The two reductions use different finite witnesses.  A \(\mathsf{Sep}\)-certificate proves that
+one specified
+tail difference is non-integral; a fatal half-gap proves that no support extending one specified prefix can reach
+\(1/2\).  In neither case does survival of every check performed so far prove the opposite endpoint.
+
+There is nevertheless an asymmetry.  By Theorem~\ref{res:fatalright}, \(1/2\notin\mathcal A\) is
+equivalent to the existence of a fatal half-gap.  Exact rational evaluation of the greedy orbit, together with the
+rational tail enclosures of Proposition~\ref{res:death}, can therefore certify nonmembership after a finite
+discovery.  Membership still requires terminal zeros at arbitrarily large rows.
+
+For \(S\), neither endpoint has a single finite witness in this certificate system.  One
+\(\mathsf{Sep}\)-certificate proves one non-integral tail difference, whereas irrationality requires such
+certificates cofinally for every positive shift.  Rationality forces eventual integrality, but failure to find a
+certificate at a given truncation is inconclusive: a longer truncation may still certify the same tail difference.
 
 \begin{remark}[boundaries visible from the normal forms]
 Two elementary observations, neither formalised in the source, show that
