@@ -559,18 +559,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_249_open_supply_plain_language_audit",
+   "id": "main_paper_shared_bottleneck_plain_language_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "The What remains open subsection restates its displayed quantifiers using cofinal quantifier pattern and conditional cofinal criteria, including an awkward neither construction, after the core section has already adopted plain arbitrarily-large language",
-   "statement": "Replace the remaining cofinal shorthand in the main open-supply summary with the exact reader-facing requirement: every candidate period must have a certificate after every cutoff, equivalently along arbitrarily large diagonal scales; preserve the splice argument and the fact that no such supply is proved."
+   "defect_class": "The next main-section title immediately reintroduces finite-to-cofinal bottleneck without defining cofinal for a cold reader, even though the preceding section now states both quantifier roles in plain language",
+   "statement": "Retitle and revise the shared-bottleneck entry in ordinary terms such as finite evidence versus an unbounded conclusion, while preserving the distinct exact requirements for Erdős 249 and 257 and the fact that the section adds organisation rather than theorems."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "ebc98ee71f6819bd9fe344a0bb343542c604e533",
-  "committed_navigation_snapshot": "3a6f563919dc5de462437582ad13e78d953e7961",
-  "main_paper_source_digest": "sha256:27e5e3f53c27ad727f669a35e89cd5996e10cb93cf5a1a5e73ce0382727bd7ec"
+  "committed_navigation_snapshot": "3c7c411374eab06633736ca3cd0fb5e9907726ef",
+  "main_paper_source_digest": "sha256:3ed23b20b9d77578f48ef1321e9b433e4db09b8e7ed4500bd7ee3b3532bac9c2"
  },
  "reading_routes": [
   {
