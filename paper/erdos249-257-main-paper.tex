@@ -941,8 +941,11 @@ target.  The transition from row \(s\) to row \(s+1\) is called
  G_{s+1}=H_s,\qquad G_{s+1}=G_s,\qquad
  G_{s+1}=G_s\cup\{s\},
 \]
-respectively.  Thus a final skipped exponent \(D\) is an upper or middle
-transition followed only by right transitions.  The explicit row-$13$
+respectively.  Thus an upper step resets the selected ranks to the cheapest
+overshoot, a middle step keeps the previous ranks and skips \(s\), and a
+right step keeps them and takes \(s\).  A final skipped exponent \(D\) is
+therefore an upper or middle transition followed only by right transitions.
+The explicit row-$13$
 computation gives a false terminal bit there.  Consequently, if the seam is
 eventually right, its last false terminal row automatically satisfies
 $D\geq13$; the lower bound is not an omitted range of cases.  This is the
@@ -958,9 +961,9 @@ and write
  C_D=4R_{D,D}-P_D-4\in\Z,\qquad
  \Theta_D=\sum_{j\geq1}\frac{f_{A_D}(2D+2+j)}{2^j}.
 \]
-Here \(C_D\) is the integer transition carry and \(\Theta_D\) its
-complete future divisor-incidence tail.  Their comparison has an exact
-meaning: by the residual identity of
+Here \(C_D\) is the integer transition carry.  The sum \(\Theta_D\) includes
+every later divisor count \(f_{A_D}(2D+2+j)\), with binary weight \(2^{-j}\).
+Their comparison has an exact meaning: by the residual identity of
 Appendix~\ref{res:producercarry},
 \[
  \frac12-\sum_{a\in A_D}w_a
@@ -995,9 +998,10 @@ and
 
 \begin{proposition}[excluded final-skip branches]\label{res:finalskipexclusions}
 At a final skipped exponent \(D\geq13\), the upper successor is impossible.
-On the middle branch the value \(C_D=-3\) is impossible.  Among the three
-exceptional dyadic cells identified by the two-sided induction, only
-\(C_D=-2\) and \(C_D=-1\) remain unresolved.
+On the middle branch, the only carry values outside the ranges
+\(C_D\leq-4\) and \(C_D\geq0\) are \(C_D\in\{-3,-2,-1\}\).  At a final
+skip, the value \(C_D=-3\) is impossible; the values \(-2\) and \(-1\)
+remain unresolved.
 \end{proposition}
 \noindent The upper and \(C_D=-3\) exclusions are the
 \lword{HalfCylinderLastProducerContradiction.lean}{250}{upperProducer_not_last}{upper-branch exclusion}
@@ -1006,7 +1010,7 @@ and
 the upper case is proved directly at the linked declaration, and
 Appendix~\ref{app:half-final-skip} sketches a prose argument only for the
 \(-3\) cell.
-The three exceptional dyadic cells are identified by the
+The three exceptional values are identified by the
 \lword{HalfCylinderMiddleCarryLowerBound.lean}{3090}{seamMiddleCoordinate_not_safe_iff_three_cells}{three-cell classification}.
 
 \begin{corollary}[tail-dominance membership criterion]\label{res:taildominance}
