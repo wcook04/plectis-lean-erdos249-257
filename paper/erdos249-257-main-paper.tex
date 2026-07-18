@@ -338,27 +338,29 @@ Corollary~\ref{res:taildominance} states the sufficient global hypothesis.
 Prior results are cited at their first use in the body, beginning in
 Section~\ref{sec:ladder}.  No priority claim is made for the reductions above.
 
-\section{The Mersenne--Lambert ladder}\label{sec:ladder}
+\section{Lambert-series identities and comparison values}\label{sec:ladder}
 
 Whenever \(\sum_{n\ge1}|f(n)|/(2^n-1)<\infty\), define the Lambert transform by
 \[
 L(f)\;=\;\sum_{n\ge1}\frac{f(n)}{2^n-1}\;=\;\sum_{m\ge1}\frac{(f*\mathbf 1)(m)}{2^m},
 \qquad (f*\mathbf 1)(m)=\sum_{d\mid m} f(d),
 \]
-the second equality being the absolutely convergent Lambert rearrangement,
-obtained by convolving \(f\) once with the constant function \(\mathbf 1\).
-Here \(\mathbf 1(n)=1\), \(\mathrm{Id}(n)=n\), \(\mu\) is the M\"obius
-function, and \(\sigma(m)=\sum_{d\mid m}d\).  Apostol supplies the classical
-arithmetic-function and Dirichlet-convolution background~\cite{apostol}; Merca
-introduced a modern Lambert-series factorisation theorem~\cite{merca2017}, and
-Merca--Schmidt give a synthesis/unification treatment~\cite{mercaschmidt}.
-It is convenient to read the rearrangement as a composite of two maps: the
-divisor transform \(f\mapsto f*\mathbf 1\), followed by evaluation of the
-resulting coefficient stream at binary scales,
-\(\gamma\mapsto\sum_{m\ge1}\gamma(m)2^{-m}\).  Every series in this paper is
-the image of an arithmetic input under this composite;
-Section~\ref{sec:architecture} uses that observation to place the open
-questions in one frame.
+the second equality being the absolutely convergent Lambert rearrangement.
+It follows by expanding \((2^n-1)^{-1}=\sum_{k\geq1}2^{-nk}\), interchanging
+the sums, and collecting the terms with \(m=nk\).  The coefficient
+\((f*\mathbf 1)(m)\) is the Dirichlet convolution of \(f\) with the constant
+function \(\mathbf 1(n)=1\).  We also write \(\mathrm{Id}(n)=n\), let \(\mu\)
+denote the M\"obius function, and put \(\sigma(m)=\sum_{d\mid m}d\).
+Apostol gives the classical arithmetic-function and Dirichlet-convolution
+background~\cite{apostol}.  Merca introduced a Lambert-series factorisation
+theorem~\cite{merca2017}, and Merca--Schmidt later unified the associated
+matrix formulations~\cite{mercaschmidt}.
+
+The rearrangement separates two operations: the divisor transform
+\(f\mapsto f*\mathbf 1\), followed by evaluation of the resulting coefficients
+at binary scales, \(\gamma\mapsto\sum_{m\ge1}\gamma(m)2^{-m}\).
+Section~\ref{sec:architecture} uses this decomposition to compare the two open
+questions.
 Three inputs form the convolution chain
 \[
  \alpha \xrightarrow{*\mathbf 1} \ph
@@ -367,7 +369,9 @@ Three inputs form the convolution chain
 \]
 whereas \(\mu\) and \(\mathbf 1\) are comparison inputs.  Write
 \(E=L(\mathbf 1)=\sum_{n\ge1}(2^n-1)^{-1}\) for the Erd\H{o}s--Borwein
-constant.  The corresponding values have the following statuses.
+constant.  The weight \(\alpha\) is nonnegative; for example,
+\(\alpha(p)=p-2\) at a prime \(p\).  The corresponding values have the
+following statuses.
 
 \begin{center}
 \begin{tabular}{@{}llll@{}}
@@ -386,49 +390,46 @@ $\mathbf 1$ & $L(\mathbf 1)=E$ & irrational & formalised\\
 \end{tabular}
 \end{center}
 
-The transcendental row is a direct specialization of Nesterenko's
-transcendence-degree theorem.  Since
-\(E_2(q)=1-24\sum_{m\ge1}\sigma(m)q^m\), its specialization at the
-algebraic point \(q=1/2\) implies that
-\(L(\mathrm{Id})=\sum_{m\ge1}\sigma(m)/2^m\) is
-transcendental~\cite{nesterenko}.
+The arrows apply only to the first three rows.  The rows for \(\mu\) and
+\(\mathbf 1\) are separate comparisons, and the table records arithmetic
+statuses rather than implications between them.  In particular, \(S\) and
+\(E\) have the same Mersenne-denominator form, with weights \(\alpha\) and
+\(\mathbf 1\), but no displayed convolution connects those weights.  The
+known status of one row therefore does not transfer to another.
 
-The nonnegative weight \(\alpha=\ph*\mu\) satisfies
-\(\alpha*\mathbf 1=\ph\); for example, \(\alpha(p)=p-2\) on primes.
-The rows for \(\mu\) and \(\mathbf 1\) are separate comparisons, not further
-steps in the displayed chain.  Thus the known rationality or transcendence of
-one row does not transfer to another.  In particular, \(S\) and \(E\) have
-the same Mersenne-denominator form, with weights \(\alpha\) and \(\mathbf 1\),
-but no convolution step carries one weight to the other.
-
-\begin{proposition}[M\"obius rational rung]
+Nesterenko proved that
+\(\mathbb Q(q,E_2(q),E_4(q),E_6(q))\) has transcendence degree at least \(3\)
+when \(0<|q|<1\).  Since \(q=1/2\) is algebraic, the three Eisenstein values at
+\(1/2\) are algebraically independent.  In particular,
 \[
- \sum_{d\ge1}\frac{\mu(d)}{2^d-1}=\frac12.
+ L(\mathrm{Id})=\sum_{m\ge1}\frac{\sigma(m)}{2^m}
+ =\frac{1-E_2(1/2)}{24}
+\]
+is transcendental~\cite{nesterenko}.
+
+\begin{proposition}[Two rational Lambert identities]
+\[
+ L(\mu)=\sum_{d\ge1}\frac{\mu(d)}{2^d-1}=\frac12,
+ \qquad
+ L(\ph)=\sum_{d\ge1}\frac{\ph(d)}{2^d-1}=2.
 \]
 \end{proposition}
-\noindent Formalised as the
-\lword{MersenneLambertLadder.lean}{587}{tsum_moebius_div_two_pow_sub_one_eq_half}{M\"obius rung}.
-The value is transparent in the rearranged coordinates: by M\"obius
-inversion \((\mu*\mathbf 1)(m)=1\) exactly when \(m=1\), so the divisor
-stream of \(\mu\) is \(1,0,0,\ldots\) and the rearranged series is
-\(2^{-1}\).
+\noindent These equalities are formalised as the
+\lword{MersenneLambertLadder.lean}{587}{tsum_moebius_div_two_pow_sub_one_eq_half}{M\"obius identity}
+and the
+\lword{MersenneLambertLadder.lean}{575}{tsum_totient_div_two_pow_sub_one_eq_two}{totient identity}.
+M\"obius inversion gives \(\mu*\mathbf 1=(1,0,0,\ldots)\), while
+\(\ph*\mathbf 1=\mathrm{Id}\); the rearranged sums are therefore
+\(2^{-1}\) and \(\sum_{m\geq1}m2^{-m}=2\), respectively.
 
-\begin{proposition}[totient rational rung]
-\[
- \sum_{d\ge1}\frac{\ph(d)}{2^d-1}=2.
-\]
-\end{proposition}
-\noindent Formalised as the
-\lword{MersenneLambertLadder.lean}{575}{tsum_totient_div_two_pow_sub_one_eq_two}{totient rung}.
-
-\begin{proposition}[positive lift]\label{res:lift}
+\begin{proposition}[Lambert representation of \(S\)]\label{res:lift}
 With the weight $\alpha=\ph*\mu$,
 \[
 \sum_{d\ge1}\frac{\alpha(d)}{2^d-1}\;=\;\sum_{n\ge1}\frac{\ph(n)}{2^n}\;=\;S.
 \]
 \end{proposition}
 \noindent The first equality is formalised as the
-\lword{CertificateKernel.lean}{18117}{tsum_primWeight_div_two_pow_sub_one_eq_totient_series}{positive-lift identity}.
+\lword{CertificateKernel.lean}{18117}{tsum_primWeight_div_two_pow_sub_one_eq_totient_series}{Lambert representation}.
 The second is the definition of \(S\).  The proposition places \(S\) in the
 same \(\sum(\cdot)/(2^d-1)\) family as \(E\), with the nonnegative weight
 \(\alpha\).
@@ -442,17 +443,15 @@ If \(X,Y\) are independent fair-coin waiting times,
 Thus Erd\H{o}s~\#249 also asks whether the probability that two independent
 fair-coin waiting times are coprime is irrational.  The exact identity is
 Proposition~\ref{res:coprime}; its M\"obius-square form and the periodic and
-finite-algebraic variants of the ladder are collected in
+finite-algebraic variants of these identities are collected in
 Appendices~\ref{app:lambert-weighted}--\ref{app:lambert-algebraic}.
 
 \paragraph{What this section proves---and does not prove.}
-The exact contribution of this section is the coordinate change
-\(L(\alpha)=S\), together with the two separate rational-rung propositions
-above.  The convolution chain relates \(S\) to rational and transcendental
-neighbouring values, while the comparison inputs place \(1/2\) and \(E\) in
-the same transform.  No status transfers from one input to another.  For
+The formalised contribution is
+\(L(\mu)=1/2\), \(L(\ph)=2\), and \(L(\alpha)=S\); the transcendental row is
+cited from Nesterenko.  None of these statuses transfers between inputs.  For
 \#249 the remaining issue is still the unbounded certificate supply isolated
-in Section~\ref{sec:249}; for \#257 the ladder supplies context rather than
+in Section~\ref{sec:249}; for \#257 this section supplies context rather than
 either the universal theorem or a rational counterexample.
 
 \section{Erd\H{o}s--Borwein-type irrationality (the \#257 direction)}\label{sec:eb}
@@ -482,8 +481,8 @@ is irrational.
 \lword{CertificateKernel.lean}{8000}{irrational_erdosSum_full_support}{all-base theorem}
 and its
 \lword{CertificateKernel.lean}{8007}{irrational_erdosBorwein_series}{base-\(2\) corollary}
-are formalised.  This is Erd\H{o}s's 1948 theorem~\cite{erdos1948}. In the ladder of
-Section~\ref{sec:ladder} it is the rung $L(\mathbf 1)$, and it is the fixed
+are formalised.  This is Erd\H{o}s's 1948 theorem~\cite{erdos1948}.  In
+Section~\ref{sec:ladder} it is the value $L(\mathbf 1)$, and it is the fixed
 machine-checked comparison point in the same Mersenne--Lambert family as the
 open $S$; as Section~\ref{sec:ladder} notes, it is not a further convolution
 step from $S$.  Borwein later proved a wider rational-shift Lambert-series
@@ -795,7 +794,7 @@ infinite objects.
 Any infinite support with any rational value would refute the universal
 statement; fixing one target value turns the search into a point-membership
 question.  The value \(1/2\) is a canonical choice rather than a forced one:
-it is the value of the signed M\"obius rung \(L(\mu)=1/2\) of
+it is the signed M\"obius comparison value \(L(\mu)=1/2\) from
 Section~\ref{sec:ladder}, so the question asks whether a genuinely Boolean
 support can attain what the signed M\"obius weights attain
 (Proposition~\ref{res:mobiussignnogo} shows that the signs cannot simply be
@@ -1924,7 +1923,7 @@ Equivalently, if $S$ is rational then its reduced denominator exceeds that bound
 \end{theorem}
 \noindent Formalised as the
 \lword{CertificateKernel.lean}{18056}{tsum_totient_div_pow_two_ne_ratCast_of_den_le_79639646646701375323355774875831053}{record denominator exclusion}.
-The bound is reached by a ladder of finite, elementary exclusions,
+The bound is reached by a sequence of finite, elementary exclusions,
 \[
 4838 \;\to\; 4\,194\,304 = 2^{22} \;\to\; 2.49\times10^{17}\ (\text{Farey } K{=}120)
 \;\to\; 7.96\times10^{34}\ (\text{Farey } K{=}240),
@@ -1934,7 +1933,7 @@ gap. The mediant framework is historically associated with Farey's 1816 note
 on vulgar fractions~\cite{farey1816}; the finite exclusions themselves are
 Lean-checked arguments in the formal-source checkpoint. See
 \lword{CertificateKernel.lean}{15347}{tsum_totient_div_pow_two_ne_ratCast_of_den_le_4838}{denominator exclusion through 4838}
-for the first rung and \lword{GapFareyBound.lean}{88}{gap_check_window_1_120_le_248672326362367909}{120-term Farey bound},
+for the first step and \lword{GapFareyBound.lean}{88}{gap_check_window_1_120_le_248672326362367909}{120-term Farey bound},
 \lword{GapFareyBound.lean}{176}{gap_check_window_1_240_le_79639646646701375323355774875831053}{240-term Farey bound}
 for the two Farey windows.
 
@@ -1943,10 +1942,10 @@ representation, not a proof of irrationality. A rational with a larger
 denominator is not excluded by it.
 
 \begin{remark}[one bound, four representations]
-Because the ladder identities of Section~\ref{sec:ladder} are equalities, the same
+Because the Lambert identities of Section~\ref{sec:ladder} are equalities, the same
 finite record transfers verbatim to three other representations of the constant:
-to the positive lift $\sum_d \alpha(d)/(2^d-1)$
-(\lword{CertificateKernel.lean}{18145}{tsum_primWeight_div_two_pow_sub_one_ne_int_div_of_den_le_79639646646701375323355774875831053}{positive-lift denominator transfer}),
+to the Lambert representation $\sum_d \alpha(d)/(2^d-1)$
+(\lword{CertificateKernel.lean}{18145}{tsum_primWeight_div_two_pow_sub_one_ne_int_div_of_den_le_79639646646701375323355774875831053}{Lambert-representation denominator transfer}),
 to the signed M\"obius-square constant $T=\sum_d\mu(d)/(2^d-1)^2$ at half the bound
 (\lword{CertificateKernel.lean}{18159}{tsum_moebius_div_two_pow_sub_one_sq_ne_int_div_of_den_le_39819823323350687661677887437915526}{signed-square denominator transfer}),
 and to the coprimality probability of Section~\ref{sec:geom} at half the bound.
@@ -1957,7 +1956,7 @@ Half appears because $S=\tfrac12+T$ turns a denominator $d$ for $T$ into $2d$ fo
 
 Let $X,Y$ be independent fair-coin waiting times, $\Pr(X=n)=2^{-n}$ for $n\ge1$.
 Then $\Pr(d\mid X)=1/(2^d-1)$, so the Lambert transform is a divisor calculus of
-$X$: $L(f)=\mathbb E[(f*\mathbf 1)(X)]$. The rungs read as $L(\mu)=\Pr(X=1)=1/2$,
+$X$: $L(f)=\mathbb E[(f*\mathbf 1)(X)]$.  The identities give $L(\mu)=\Pr(X=1)=1/2$,
 $L(\ph)=\mathbb E[X]=2$, $L(\mathbf 1)=\mathbb E[\tau(X)]=E$, and
 $L(\alpha)=\mathbb E[\ph(X)]=S$.
 
@@ -2844,7 +2843,7 @@ Every series in this paper is an instance.  The primitive-conductor input
 \(\alpha*\mathbf 1=\ph\) (Proposition~\ref{res:lift}); a support indicator
 \(f=\mathbf 1_A\) gives \(L(\mathbf 1_A)=X_A\) with divisor stream \(f_A\)
 (Appendix~\ref{app:carry-boolean}); and the comparison inputs
-\(\mu\), \(\mathbf 1\), and \(\ph\) give the rungs of
+\(\mu\), \(\mathbf 1\), and \(\ph\) give the comparison values listed in
 Section~\ref{sec:ladder}.
 
 Rationality acts on all of these through one mechanism.  For any \(\N\)-valued
@@ -3185,7 +3184,7 @@ that \(d\) divides two independent geometric waiting times.  The formal
 transfer theorem,
 \lword{GcdMomentCalculus.lean}{105}{tsum_lambert_linear_weight_sq_pure}{squared Lambert transfer},
 therefore gives a divisor calculus for their gcd.
-\begin{proposition}[squared Lambert ladder]\label{res:gcdmoment}
+\begin{proposition}[squared Lambert identity]\label{res:gcdmoment}
 At \(r=1/2\), the three rows \(f=\mu,\mathbf 1,\ph\) yield respectively
 \[
  L_2(\mu)=S-\tfrac12,\qquad
@@ -4160,7 +4159,7 @@ line.
 \section{Lambert, probability, and finite-algebraic complements}
 \label{app:lambert-complements}
 
-This appendix supplies the extensions cited from the Mersenne--Lambert ladder
+This appendix supplies the extensions cited from the Lambert-series identities
 in Section~\ref{sec:ladder} and from the coprime-pair representation after
 Proposition~\ref{res:coprime}.  Its new results are the periodic-weight
 classifications, finite denominator obstructions, the M\"obius-square and squared
@@ -4196,17 +4195,16 @@ appendix, remain the missing statements identified in the main text.
 
 \section{Guide to the formal sources}\label{app:index}
 
-The paper is meant to be read as mathematics. The blue mathematical phrases
-following formalised statements are intended as links to exact checked
-theorems in the final published source revision.  In this draft the common
-source pin is a release blocker. Exact declaration
-names remain in the machine-readable audit layer.
+The paper is meant to be read as mathematics.  The blue mathematical phrases
+following formalised statements link to exact checked theorems in the pinned
+public source revision.  All such links use one published source pin; exact
+declaration names remain in the machine-readable audit layer.
 
 For a first reading, the principal landmarks are
 Theorem~\ref{res:farey} for the totient denominator exclusion;
 Proposition~\ref{res:complete} and
 Theorems~\ref{res:pointwisecomplete}--\ref{res:diag} for the exact certificate
-normal forms; and Theorems~\ref{res:halfmembership}
+equivalences and diagonal form; and Theorems~\ref{res:halfmembership}
 and~\ref{res:fatalright} for the two half-value classifications.
 Theorem~\ref{res:full} records the classical full-support result, and
 Section~\ref{sec:architecture} states the structure the reductions share.  For the
@@ -4239,7 +4237,7 @@ periodic signed-weight irrational-or-terminating dichotomy & \lrefx{CertificateK
 period-four residue obstruction & \lrefx{CertificateKernel.lean}{13898}{intWeightedCoeff_periodFourSignWeight_eq_zero_of_mod_four_eq_three}\ (\texttt{CertificateKernel})\\
 $L(\mu)=1/2$ & \lrefx{MersenneLambertLadder.lean}{587}{tsum_moebius_div_two_pow_sub_one_eq_half}\ (\texttt{MersenneLambertLadder})\\
 $L(\ph)=2$ & \lrefx{MersenneLambertLadder.lean}{575}{tsum_totient_div_two_pow_sub_one_eq_two}\ (\texttt{MersenneLambertLadder})\\
-positive lift $L(\alpha)=S$ & \lrefx{CertificateKernel.lean}{18117}{tsum_primWeight_div_two_pow_sub_one_eq_totient_series}\ (\texttt{CertificateKernel})\\
+Lambert representation $L(\alpha)=S$ & \lrefx{CertificateKernel.lean}{18117}{tsum_primWeight_div_two_pow_sub_one_eq_totient_series}\ (\texttt{CertificateKernel})\\
 M\"obius-square lens & \lrefx{CertificateKernel.lean}{18126}{totient_series_eq_half_add_moebius_mersenne_square}\ (\texttt{CertificateKernel})\\
 $L_2(\mathbf1)$ and $L_2(\ph)$ gcd moments & \lrefx{GcdMomentCalculus.lean}{216}{tsum_one_div_mersenne_sq_eq_sigma_sub_tau_series}, \lrefx{GcdMomentCalculus.lean}{235}{tsum_totient_div_mersenne_sq_eq_gcd_moment_series}\ (\texttt{GcdMomentCalculus})\\
 Stern--Brocot cylinder recursion and rate & \lrefx{GcdMomentCalculus.lean}{474}{cylinderMass_split}, \lrefx{GcdMomentCalculus.lean}{525}{sternBrocotDepthMass_error}\ (\texttt{GcdMomentCalculus})\\

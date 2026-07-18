@@ -633,7 +633,7 @@ def main() -> int:
     assert local_result["source_links"][0]["declaration"] == (
         "tsum_primWeight_div_two_pow_sub_one_eq_totient_series"
     )
-    assert local_result["source_links"][0]["display_label"] == "positive-lift identity"
+    assert local_result["source_links"][0]["display_label"] == "Lambert representation"
     unlabelled_declaration = query(
         "--declaration", "tsum_moebius_div_two_pow_sub_one_eq_half"
     )["matches"]
@@ -838,7 +838,7 @@ def main() -> int:
     assert sigil_search["results"][0]["kind"] == "module"
     assert sigil_search["results"][0]["path"] == "Erdos249257/CertificateKernel.lean"
 
-    anchor_search = query("--search", "positive lift", "--limit", "5")
+    anchor_search = query("--search", "Lambert representation", "--limit", "5")
     assert any(
         row["kind"] == "paper_anchor" and row["canonical_handle"] == "res:lift"
         for row in anchor_search["results"]

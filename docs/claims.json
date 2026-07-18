@@ -901,15 +901,15 @@
         "schema": "erdos249257-editorial-state/1",
         "scope": "continuous_whole_main_paper_exposition",
         "current_priority": {
-          "id": "main_paper_ladder_table_prose_duplication_audit",
+          "id": "main_paper_257_section_opening_redundancy_audit",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "defect_class": "The Mersenne--Lambert ladder status table is immediately followed by prose that repeats several of the same rows before reaching the actual structural warning",
-          "statement": "Remove row-by-row prose duplication after the ladder table while retaining the primitive-conductor fact, the distinction between convolution-chain and comparison inputs, and the no-status-transfer conclusion."
+          "defect_class": "The opening of the #257 results section repeats the universal-versus-counterexample distinction already established in the introduction and exact-reductions section, then routes through several appendices before presenting the full-support theorem",
+          "statement": "Compress the repeated status framing into a short result map while preserving base-2 criticality, the universal open boundary, and the ownership of the detailed final-skip arguments."
         },
         "last_verified_wave": {
-          "id": "main_paper_frontier_section_redundancy_audit",
+          "id": "main_paper_ladder_table_prose_duplication_audit",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "result": "Retained the two scalar criteria, their dependency diagram, and the three exact open obligations, then removed the trailing prose that merely repeated those boundaries."
+          "result": "Moved the no-status-transfer warning immediately after the Lambert status table, combined the two rational identities, stated the Nesterenko specialization explicitly, and replaced the ladder/rung house metaphors with the mathematical objects they denoted."
         },
         "active_inconsistencies": [],
         "blocked_decisions": []
@@ -7540,7 +7540,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 3440
+        "line": 3439
       }
     },
     {
@@ -7551,7 +7551,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 3451
+        "line": 3450
       }
     },
     {
@@ -7562,7 +7562,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "the half-value counterexample route",
-        "line": 3472
+        "line": 3471
       }
     },
     {
@@ -7573,7 +7573,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 3463
+        "line": 3462
       }
     }
   ],

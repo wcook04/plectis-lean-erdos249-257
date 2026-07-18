@@ -309,7 +309,7 @@ def validate_human_first_contact(
 def validate_gateway_opening(paper: str) -> None:
     """Check that the authored introduction works without source inventory."""
     start = paper.index(r"\section{Introduction}")
-    end = paper.index(r"\section{The Mersenne--Lambert ladder}")
+    end = paper.index(r"\section{Lambert-series identities and comparison values}")
     opening = paper[start:end]
     visible_opening = re.sub(
         r"\\lword\{[^{}]*\}\{[^{}]*\}\{[^{}]*\}\{([^{}]*)\}",
