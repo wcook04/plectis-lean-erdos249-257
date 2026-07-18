@@ -559,18 +559,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_fatal_gap_right_tail_plain_language_audit",
+   "id": "main_paper_final_middle_minus_three_plain_language_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "The fatal-gap paragraph gives three equivalences but does not define eventual right extension or show the two strict inequalities that make a finite half gap fatal for every continuation",
-   "statement": "Define eventual right extension as the existence of S such that every seam word after row S is obtained by appending true. Define a fatal half gap using a finite prefix u at depth d: its completed future tail remains below 1/2, while adding the next Mersenne weight jumps above 1/2. State the exact equivalence with half nonmembership and a final real-greedy skip, while preserving that the equivalence does not decide which branch holds or prove universal Erdős #257."
+   "defect_class": "The first final-middle-cell paragraph names transition carry -3, the lazy cofinite tail, and centred-carry nonnegativity without first translating the cell into the exact finite and analytic quantities a cold reader must compare",
+   "statement": "Define the transition carry and lazy cofinite tail needed for the -3 cell, then explain the contradiction between a tail strictly below 1/2 and analytic nonnegativity. Preserve that this excludes only the -3 terminal cell: the -2 and -1 cells, the right-tail branch, half-value membership, and universal Erdős #257 remain open."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "ebc98ee71f6819bd9fe344a0bb343542c604e533",
-  "committed_navigation_snapshot": "306f26b7fd1345a29cc77c2687bb18c86252c021",
-  "main_paper_source_digest": "sha256:74cddcc3db87456132d69ce4418fb3da386cd50867b85ed2e91e034d475fbc6a"
+  "committed_navigation_snapshot": "c2a65653c0a44577fc8122d4bdd20b9fd9a190ab",
+  "main_paper_source_digest": "sha256:a0760cb34c6dc7a4e17ca22f00d07bc6f634d7c0846f8730ef5df717c3bea6e0"
  },
  "reading_routes": [
   {
