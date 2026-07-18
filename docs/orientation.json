@@ -56,7 +56,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "Erd\\H{o}s \\#249",
-    "line": 3535
+    "line": 3537
    }
   },
   {
@@ -67,7 +67,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "unbounded certificate supply",
-    "line": 3546
+    "line": 3548
    }
   },
   {
@@ -78,7 +78,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "the half-value counterexample route",
-    "line": 3567
+    "line": 3569
    }
   },
   {
@@ -89,7 +89,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "universal Erd\\H{o}s \\#257",
-    "line": 3558
+    "line": 3560
    }
   }
  ],
@@ -559,18 +559,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_localized_protected_seam_plain_language_audit",
+   "id": "main_paper_mixed_cofinal_half_carry_fan_in_plain_language_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "The protected-seam passage says that one of carries 3 and 4 survives a localized one-hole seam and that cofinal realizations imply half-membership without defining localized realization, naming the unique hole, or explaining the carry choice",
-   "statement": "Define localized realization as the forward implication from scalar reachability to an admissible depth-N word for each carry k in [3,27]. Name the unique missing carry H = 2 delta - c, explain the choice of 4 when H = 3 and of 3 otherwise, and show how cofinal repetitions feed compactness. Preserve that no cofinal realization supply is proved and that this is not an Erdős #257 proof."
+   "defect_class": "The mixed window-or-seam passage says that one branch occurs at each requested scale without spelling out the cofinal quantifier, the one-word extraction in each branch, or that no producer for this disjunction is proved",
+   "statement": "State the mixed hypothesis as: for every N there is M >= N carrying either a selected window or a localized realized seam. Explain that the window branch chooses carry 1 while the seam branch chooses the protected non-hole carry 4 when H = 3 and 3 otherwise, so either branch supplies exactly the one admissible word compactness needs. Preserve that the branches may alternate, no cofinal mixed producer is proved, and this is not an Erdős #257 proof."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "ebc98ee71f6819bd9fe344a0bb343542c604e533",
-  "committed_navigation_snapshot": "db40639f4fb7699304fc437c0bda7d2f40d9a1c5",
-  "main_paper_source_digest": "sha256:c12b44c4a5b41c5a59ae01b2bf011a21b2a2920ab615be3f908058f7e193dadb"
+  "committed_navigation_snapshot": "c028af8b3fa9259046710beef70550b9fd05f310",
+  "main_paper_source_digest": "sha256:131a42379299d1785aa98d9c37eb38ceacf2a44d38c209d1d5ead0cbfcf152b9"
  },
  "reading_routes": [
   {
