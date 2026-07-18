@@ -1947,17 +1947,29 @@ Equivalently, if $S$ is rational then its reduced denominator exceeds that bound
 \end{theorem}
 \noindent Formalised as the
 \lword{CertificateKernel.lean}{18056}{tsum_totient_div_pow_two_ne_ratCast_of_den_le_79639646646701375323355774875831053}{record denominator exclusion}.
-The bound is reached by a sequence of finite, elementary exclusions,
+For a fixed window length $K$, the checked prefix and a rigorous tail bound
+define a finite gap certificate.  If a denominator $q$ failed that certificate,
+elementary rearrangement would put some rational $r/q$ in a specific short
+interval.  The larger bounds bracket that interval by fractions
+$a/b<c/d$ satisfying $bc-ad=1$.  The mediant lemma says that every rational
+strictly between such neighbours has denominator at least $b+d$.  Thus no
+$q<b+d$ can fail the certificate; for each such $q$, the corresponding scaled
+tail lies strictly between consecutive integers, whereas $S=m/q$ would force it
+to be an integer.
+
+The finite exclusion ladder records the successive verified thresholds
 \[
-4838 \;\to\; 4\,194\,304 = 2^{22} \;\to\; 2.49\times10^{17}\ (\text{Farey } K{=}120)
-\;\to\; 7.96\times10^{34}\ (\text{Farey } K{=}240),
+4838 \;\to\; 4\,194\,304 = 2^{22} \;\to\; 2.49\times10^{17}\ (K{=}120)
+\;\to\; 7.96\times10^{34}\ (K{=}240).
 \]
-each a mediant/Farey argument that traps any candidate $m/q$ inside a forbidden
-gap. The mediant framework is historically associated with Farey's 1816 note
-on vulgar fractions~\cite{farey1816}; the finite exclusions themselves are
-Lean-checked arguments in the formal-source checkpoint. See
+The mediant framework is historically associated with Farey's 1816 note on
+vulgar fractions~\cite{farey1816}; every exclusion above is Lean-checked in the
+formal-source checkpoint.  The first threshold is a direct low-carry check,
+$2^{22}$ is retained as a named intermediate corollary, and the two largest
+thresholds use the Farey separation. See
 \lword{CertificateKernel.lean}{15347}{tsum_totient_div_pow_two_ne_ratCast_of_den_le_4838}{denominator exclusion through 4838}
-for the first step and \lword{GapFareyBound.lean}{88}{gap_check_window_1_120_le_248672326362367909}{120-term Farey bound},
+and \lword{CertificateKernel.lean}{18029}{tsum_totient_div_pow_two_ne_ratCast_of_den_le_4194304}{the intermediate 4194304 bound},
+then \lword{GapFareyBound.lean}{88}{gap_check_window_1_120_le_248672326362367909}{the 120-term Farey bound} and
 \lword{GapFareyBound.lean}{176}{gap_check_window_1_240_le_79639646646701375323355774875831053}{240-term Farey bound}
 for the two Farey windows.
 

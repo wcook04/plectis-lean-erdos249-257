@@ -901,15 +901,15 @@
         "schema": "erdos249257-editorial-state/1",
         "scope": "continuous_whole_main_paper_exposition",
         "current_priority": {
-          "id": "main_paper_249_farey_exclusion_mechanism_reader_entry_audit",
+          "id": "main_paper_249_certificate_quantifiers_reader_entry_audit",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "defect_class": "The denominator-exclusion paragraph presents Farey K-values and a forbidden gap without first explaining how the finite interval around S rules out rational numbers with bounded denominator",
-          "statement": "State the rational-separation mechanism before the Farey labels: at each step a certified interval containing S contains no rational with denominator below the new threshold; preserve the exact bound chain, historical attribution, and the fact that larger denominators remain possible."
+          "defect_class": "The exact tail-period theorem displays four nested certificate variables without first assigning their reader-facing roles, making the open supply harder to distinguish from the verified finite instances",
+          "statement": "Before the exact tail-period characterisation, explain that h is a candidate rational period, N_0 demands evidence arbitrarily far out, N chooses the later location, and L is the finite verification depth; preserve the exact equivalence and the boundary that bounded examples do not supply these quantifiers."
         },
         "last_verified_wave": {
-          "id": "main_paper_249_appendix_roadmap_plain_language_audit",
+          "id": "main_paper_249_farey_exclusion_mechanism_reader_entry_audit",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "result": "Replaced cofinal-coordinate, fixed-scale-mechanism, no-go, and rank-route shorthand with the mathematical role of each appendix: exact equivalent forms, finite estimates with conditional implications, failed shortcuts, and exact rank growth without an irrationality bridge."
+          "result": "Explained the finite rational-separation mechanism before the K-values: a failed gap certificate puts r/q in an interval bracketed by unimodular Farey neighbours, so q is at least the sum of their denominators. Distinguished the direct low-carry threshold, the named 2^22 intermediate corollary, and the two Farey bounds while retaining the larger-denominator caveat."
         },
         "active_inconsistencies": [],
         "blocked_decisions": []
@@ -7540,7 +7540,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 3463
+        "line": 3475
       }
     },
     {
@@ -7551,7 +7551,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 3474
+        "line": 3486
       }
     },
     {
@@ -7562,7 +7562,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "the half-value counterexample route",
-        "line": 3495
+        "line": 3507
       }
     },
     {
@@ -7573,7 +7573,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 3486
+        "line": 3498
       }
     }
   ],
