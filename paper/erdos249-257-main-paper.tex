@@ -3411,24 +3411,29 @@ then $S$ is irrational.
 \end{corollary}
 \noindent This implication is the
 \lword{DiagonalFreshLossBridge.lean}{2731}{irrational_totientSeries_of_canonicalAdjacentSuffixJumpSlackSupply}{strict-jump slack irrationality criterion}.
-The proposition is an equivalence at each fixed \(t\); the corollary is
-one-way and does not prove that nonnegative slack occurs after every cutoff.
-No converse is known.  Completeness allows the successful depth to depend on
-the tail difference, whereas this criterion prescribes \(m_t\).  Eventual
-negative slack at every strict jump would refute only this route; it would not
-decide whether \(S\) is rational.
+The proposition is a fixed-\(t\) equivalence; the corollary gives only
+sufficiency.  No converse is known: completeness may choose a depth from the
+tail difference, whereas this criterion fixes \(m_t\).  Persistent negative
+slack at that depth refutes only this route and does not decide whether \(S\)
+is rational.
 
-For \#257, write $r_n$ for the exact greedy residual of the target $1/2$ and
-put
+For \#257, write \(r_n=r_n(1/2)\) for the unrepresented remainder after rank
+\(n\).  The exact tail expansion and second-scale normalisation are
 \[
-  u_n=4^n(2r_n-2^{-n}).
+ T_n=2^{-n}+\frac13\,4^{-n}+E_n,
+ \qquad u_n=4^n(2r_n-2^{-n}),
 \]
-Here $u_n$ is the normalized phase exposing the Mersenne tail's second geometric channel.
+where \(0\le4^nE_n\le(2/7)2^{-n}\).  The identity
+\(u_n-1/3=4^n(2r_n-T_n)+4^nE_n\) explains the centre \(1/3\): distance from it
+is the scaled residual--tail imbalance, up to the bounded error.  Under
+\(r_n\le T_n\), the next step survives exactly when
+\(\lvert2r_n-T_n\rvert\ge w_{n+1}-T_{n+1}\).  A sufficient condition is
 \[
   \frac16+\frac{37}{56}2^{-n}\le \left|u_n-\frac13\right|.
 \]
-We call this the \emph{second-channel separation condition}; it constrains the distance
-from \(1/3\), and \(u_n\) may be negative (as it is at \(n=3,4\)).
+We call this the \emph{second-channel separation condition}.  Here
+\(37/56=2/7+3/8\) budgets the higher-tail and gap errors, respectively.
+The absolute value is needed because \(u_n<0\) at \(n=3,4\).
 
 \begin{proposition}[finite second-channel separation]\label{res:secondfrontier}
 The second-channel separation condition is decidable over $\Q$ and holds for
@@ -3443,8 +3448,9 @@ If the second-channel separation condition holds for every \(n\ge7\), then
 \(1/2\) belongs to the Mersenne achievement set \(\mathcal A\).
 \end{corollary}
 \noindent This implication is the
-\lword{GreedyAchievementSet.lean}{2901}{half_mem_mersenneAchievementSet_of_secondChannelSeparationRat_from_seven}{from-seven membership criterion}.
-The membership conclusion is itself exact:
+\lword{GreedyAchievementSet.lean}{2901}{half_mem_mersenneAchievementSet_of_secondChannelSeparationRat_from_seven}{conditional from-seven membership criterion}.
+The finite proposition supplies \(1\le n\le6\), but no case with \(n\ge7\);
+no converse is proved.  Membership itself has the exact characterisation
 \[
   1/2\in\mathcal A
   \quad\Longleftrightarrow\quad
@@ -3455,10 +3461,9 @@ This is formalised at
 The forward implication uses the
 \hyperref[res:full]{full-support irrationality theorem}; for the reverse,
 if a residual ever exceeds the remaining tail, every later exponent is
-selected; hence only finitely many omissions remain.  Thus the separation condition suffices for the
-infinite-skip condition.  It does not prove that condition, and membership alone
-is not the universal \#257 theorem.
-The finite proposition supplies no case of the missing range \(n\ge7\).
+selected; hence only finitely many omissions remain.  The \(n\ge7\) hypothesis
+is open.  If proved, it would yield an infinite support of rational value
+\(1/2\), refuting rather than proving the universal \#257 statement.
 
 \paragraph{Dependency direction.}
 The two criteria have the proved logical form
@@ -3481,10 +3486,9 @@ The two criteria have the proved logical form
  \mathcal S(1/2)\text{ is infinite}.
 \end{array}
 \]
-Neither left-hand premise is proved.  The verified range \(1\le n\le6\)
-establishes only the finite prefix of the second criterion; it gives no part of
-the missing universal range \(n\ge7\).  The first conclusion settles \#249,
-whereas the second would refute, not prove, the universal \#257 statement.
+Neither premise is proved.  The range \(1\le n\le6\) is only a finite prefix
+of the second.  The left conclusion settles \#249; the right would refute,
+not prove, the universal \#257 statement.
 
 \subsection{The unresolved statements}
 
@@ -3531,26 +3535,21 @@ point-membership question.
 \end{problem}
 
 \paragraph{What the reductions change.}
-The results above change the form, not the status, of the open problems.  For
-\#249, the unresolved content is one unbounded certificate-supply theorem,
-with the pointwise and lcm-diagonal forms proved equivalent to irrationality.
-For the half-value route to \#257, the search over arbitrary supports has been
-replaced by one canonical greedy-orbit question.  In the present final-skip
-argument that question is localised further to two obligations: exclude the
-middle cells \(-2,-1\), and prove the future-tail inequality at the remaining
-nonnegative-carry middle transitions.  A \#249 certificate theorem beyond
-every cutoff would prove \#249; a terminal-zero theorem beyond every row
-cutoff would refute universal \#257; and a proof of
-eventual right behaviour would prove only \(1/2\notin\mathcal A\).
+The reductions change form, not status.  For \#249 the one missing theorem is
+unbounded certificate supply, equivalently in pointwise or lcm-diagonal form.
+For the half-value route to \#257, arbitrary supports give way to one greedy
+orbit; in final-skip coordinates it remains to exclude cells \(-2,-1\) and
+prove the future-tail inequality at the remaining nonnegative-carry middle
+transitions.  Supply beyond every cutoff proves \#249; terminal zero beyond
+every row cutoff refutes universal \#257; eventual right behaviour proves
+only \(1/2\notin\mathcal A\).
 
 \paragraph{Two refinements not pursued.}
-Certificate completeness guarantees a least successful depth at every
-non-integral pair; we prove nothing about its growth in \((h,N)\), and a
-proved bound would decide each fixed pair by a bounded computation.  On the
-support side, the zero-window theorem is inert against supports containing a
-small element (Appendix~\ref{app:carry-sublog}); a coverage law for the
-support outside every finite core would remove that triviality.  We have
-not pursued either question.
+Certificate completeness gives a least successful depth at every
+non-integral pair, but no growth bound in \((h,N)\); such a bound would decide
+each fixed pair.  Separately, the zero-window theorem is inert when a support
+contains a small element (Appendix~\ref{app:carry-sublog}); coverage outside
+every finite core would remove this.  We have not pursued either question.
 
 \pdfbookmark[1]{Statements and declarations}{statements-declarations}\subsection*{Statements and declarations}
 
