@@ -56,7 +56,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "Erd\\H{o}s \\#249",
-    "line": 3500
+    "line": 3504
    }
   },
   {
@@ -67,7 +67,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "unbounded certificate supply",
-    "line": 3511
+    "line": 3515
    }
   },
   {
@@ -78,7 +78,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "the half-value counterexample route",
-    "line": 3532
+    "line": 3536
    }
   },
   {
@@ -89,7 +89,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "universal Erd\\H{o}s \\#257",
-    "line": 3523
+    "line": 3527
    }
   }
  ],
@@ -559,18 +559,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_composite_dilation_defect_plain_language_audit",
+   "id": "main_paper_mixed_prime_power_layer_plain_language_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "Appendix A.2.2 names a composite-dilation correction, finite defect, ray, exceptional frame, and petal support without displaying the underlying coefficient identity or explaining which divisors the defect counts",
-   "statement": "State the composite-dilation identity in reader-facing notation and explain the bouquet specialization using the decomposition from A.2.1, while preserving the exact correction terms, the finite defect bound, and the boundary that these local identities prove neither a correlation estimate, the tail selector, nor irrationality."
+   "defect_class": "Appendix A.2.3 introduces one-prime-power layers, a two-signature extension, commuting p-adic and q-adic operators, and an iterated exact-valuation pullback without defining the layer operator or saying what coefficient it selects",
+   "statement": "Define the prime-power layer directly from the support coefficient and state the two-prime identity in ordinary valuation language, while preserving the coprimality hypothesis, the singleton {12} fixture, commutation, and the boundary that the result supplies no decimation transport, bounded-Ω conclusion, or irrationality theorem."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "ebc98ee71f6819bd9fe344a0bb343542c604e533",
-  "committed_navigation_snapshot": "6daa012aa96e18ea53f4e09601773b1a9c98930c",
-  "main_paper_source_digest": "sha256:d2d86a668710da1842ca5870e7b65056f38e5d777d8b518728c8ed4c7280a580"
+  "committed_navigation_snapshot": "3a0af9b514b77eecc69fd7beb068ef9a9dfffa61",
+  "main_paper_source_digest": "sha256:dbe3a582d72701a23780ed44eb06c03a25e258e59f4f9a338ad29ede3f904b8f"
  },
  "reading_routes": [
   {
