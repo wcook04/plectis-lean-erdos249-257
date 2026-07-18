@@ -97,22 +97,25 @@
 \noindent
 For the totient constant $S=\sum_{n\ge1}\ph(n)/2^n$ of Erd\H{o}s~\#249 and
 the Mersenne support sums $\sum_{n\in A}(2^n-1)^{-1}$ of Erd\H{o}s~\#257,
-rationality would force discrete structure.  For $S$, its binary tails would
-eventually repeat.  For a support sum, binary long division would give an
-integer carry recurrence whose M\"obius-inverted quotients are all $0$ or
-$1$.  We formalise both statements in Lean.  We also express \#249 and the
-distinguished half-value counterexample route to \#257 in terms of finite witnesses:
-each of these two conclusions is equivalent to such witnesses occurring beyond every
-bound.  This chain does not reformulate the universal \#257 assertion.
+we formalise two exact rationality constraints in Lean.  Rationality of $S$
+is equivalent to eventual periodicity of its binary expansion; its shifted
+tails record this period.  For a rational support sum, binary long division
+gives an integer remainder recurrence;
+M\"obius inversion of its successive quotients recovers the $0$--$1$
+indicator of $A$.  We also give two exact reformulations in terms of events
+beyond every bound:
+irrationality of $S$ is equivalent to finite certificates occurring at
+arbitrarily large least-common-multiple scales, while some support sum equals
+$1/2$ exactly when the greedy construction skips weights beyond every bound.
+The latter would refute \#257 but concerns only the half-value target.
 A finite exact calculation excludes every rational representation $S=p/q$ with
 $q\le\Qzero\approx7.96\times10^{34}$; hence a rational representation must
-have $q>\Qzero$.  Irrationality of \(S\) is also
-equivalent to non-integrality of every positive binary tail difference, to
-complete finite certificates at fixed parameters, and to an unbounded
-certificate supply along a one-parameter sequence of least-common-multiple
-tests.  Certificates are verified at the 28 changing scales through \(t=64\)
-(including the initial scale); this is finite evidence only, and the unbounded
-supply is open.  A construction using the Chinese remainder theorem and
+have $q>\Qzero$.  At fixed shifts, a certificate exists exactly when the
+difference between the corresponding tails is non-integral.
+Writing \(M_t=\lcm(1,\ldots,t)\), Lean verifies certificates at all 28
+values through \(t=64\) for which \(M_t\) changes, including \(t=1\).
+This is finite evidence only; the unbounded supply is open.  A construction using
+the Chinese remainder theorem and
 Dirichlet's theorem also proves that the
 residue-class subsequences \(n\mapsto\ph(2^j n+r)\) span an
 infinite-dimensional space: a canonical level-$e$ family has exact dimension
@@ -131,13 +134,14 @@ function
 uniformly in the support.
 Membership of
 \(1/2\), which would refute the universal statement, is exactly equivalent to
-infinitely many greedy skips.  Nonmembership is exactly equivalent both to a
+infinitely many greedy skips; a skip is a weight omitted by the greedy
+construction.  Nonmembership is exactly equivalent both to a
 finite stage whose residual exceeds all remaining mass and to a final greedy skip.
 
-After a putative final skip, the current argument eliminates one transition
-type and the carry value \(-3\).  It remains to exclude the carry values
-\(-2\) and \(-1\) and prove a future-tail inequality for the nonnegative
-carries.  Both series arise from one Lambert transform;
+After a putative final skip, the recurrence has two possible branches.  The
+current argument rules out one branch completely and the carry value \(-3\)
+in the other.  It leaves the values \(-2\) and \(-1\) and a future-tail
+inequality for the nonnegative carries.  Both series arise from one Lambert transform;
 this explains their common coordinates but transfers no theorem between
 them.  Neither the required unbounded \#249 certificate supply nor the
 required recurrence of \#257 greedy skips is proved.  The universal \#257
