@@ -56,7 +56,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "Erd\\H{o}s \\#249",
-    "line": 3481
+    "line": 3486
    }
   },
   {
@@ -67,7 +67,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "unbounded certificate supply",
-    "line": 3492
+    "line": 3497
    }
   },
   {
@@ -78,7 +78,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "the half-value counterexample route",
-    "line": 3513
+    "line": 3518
    }
   },
   {
@@ -89,7 +89,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "universal Erd\\H{o}s \\#257",
-    "line": 3504
+    "line": 3509
    }
   }
  ],
@@ -559,18 +559,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_proof_authority_plain_language_audit",
+   "id": "main_paper_249_scalar_criterion_plain_language_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "The proof-authority section exposes Lean-internal terms such as decide, norm_num, declaration-local recursion-depth budget, and Lean.trustCompiler before explaining their relevance to a reader who does not already know the Lean trust model",
-   "statement": "Translate the computation and trust boundary into plain language while retaining the exact technical identifiers needed for audit: explain that the kernel checks the resulting proof terms, distinguish kernel-reducible finite computation from external evidence, and preserve that generated Lean certificate files are source while Python scripts, indexes, and the manuscript are not proof authority."
+   "defect_class": "The #249 half of the scalar-criteria section introduces canonical adjacent-suffix depth, central-band residue, cofinal strict-jump slack, and cofinal failure faster than a cold reader can connect them to the finite certificate test just developed",
+   "statement": "Explain the roles of M_t, m_t, d_t, and sigma_t in ordinary terms and replace cofinal shorthand with beyond-every-cutoff language, while preserving the fixed-scale central-band equivalence, the sufficient-only strict-jump corollary, the absence of a necessity implication, and that failure refutes only this route rather than proving irrationality."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "ebc98ee71f6819bd9fe344a0bb343542c604e533",
-  "committed_navigation_snapshot": "6b1128209566e83fa3ff09e8affd31e700ec7c6a",
-  "main_paper_source_digest": "sha256:117b5144ec89a8f862622198490e6f617229b38eda3843de3f482d17c76a8cff"
+  "committed_navigation_snapshot": "f822c7e80778bb1371b55ca4926c39c0d75aeca2",
+  "main_paper_source_digest": "sha256:e12924f3e544253ea581d5531b320899c989140e53720d7da24911daedfdd05f"
  },
  "reading_routes": [
   {
