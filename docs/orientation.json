@@ -27,7 +27,7 @@
   "declaration_count": 12578,
   "theorem_like_count": 11539,
   "generated_certificate_declaration_count": 2925,
-  "principal_claim_link_count": 293,
+  "principal_claim_link_count": 294,
   "kind_counts": {
    "abbrev": 9,
    "def": 992,
@@ -56,7 +56,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "Erd\\H{o}s \\#249",
-    "line": 3546
+    "line": 3547
    }
   },
   {
@@ -67,7 +67,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "unbounded certificate supply",
-    "line": 3557
+    "line": 3558
    }
   },
   {
@@ -78,7 +78,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "the half-value counterexample route",
-    "line": 3578
+    "line": 3579
    }
   },
   {
@@ -89,7 +89,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "universal Erd\\H{o}s \\#257",
-    "line": 3569
+    "line": 3570
    }
   }
  ],
@@ -559,10 +559,10 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_fixed_tail_survival_plain_language_audit",
+   "id": "main_paper_non_right_transition_carry_plain_language_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "The fixed-tail survival paragraph calls a post-decision remainder final when it exceeds a complete Mersenne tail but does not display the two quantities or explain how the pointwise inequality over every actual skip is equivalent to half-membership",
-   "statement": "Define the post-skip remainder and full future tail in the paper's existing notation, state the exact final-skip equivalence, and explain the quantifier change from no final skip to survival at every actual skip. Preserve that the survival inequality itself is unproved."
+   "defect_class": "The non-right-transition carry paragraph names a finite support, an integer carry, and a complete future divisor-incidence tail without giving the reader their exact coordinates or explaining how the carry sign controls the side of 1/2",
+   "statement": "Define the transition-aligned support, scaled carry, and complete future tail in the existing notation; then explain the residual identity and its positive, negative, and gap-margin consequences without implying that the required carries occur."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
@@ -570,7 +570,7 @@
  "source_revision": {
   "formal_source_ref": "ebc98ee71f6819bd9fe344a0bb343542c604e533",
   "committed_navigation_snapshot": "5063bafcd5b4203752b66be42a3aae53e131cc7a",
-  "main_paper_source_digest": "sha256:79f99fdf55a40eb26080aa1a83f0cbd1027d0ecc7ec0a72db1132b6c414d6ca1"
+  "main_paper_source_digest": "sha256:33768b65a23719220e222a782885e0347502eb694053dce444979693b0c8a1fb"
  },
  "reading_routes": [
   {

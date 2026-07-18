@@ -1590,14 +1590,15 @@ Those ranks tend to infinity, so $1/2$ belongs to the Mersenne achievement set,
 
 \subsubsection{The fixed-tail survival criterion}\label{res:fixedtailsocket}
 
-A skipped rank is final exactly when its post-decision remainder lies strictly
-above the complete remaining Mersenne tail:
-\lword{HalfCylinderFixedTailSocket.lean}{22}{isLastHalfGreedySkip_iff_skip_and_fatal}{the final-skip criterion}.
-Consequently membership of $1/2$ is equivalent to the pointwise assertion that
-every actual skipped rank has remainder at most its full future tail,
-\lword{HalfCylinderFixedTailSocket.lean}{73}{half_mem_iff_every_actual_skip_survives}{the half-membership survival equivalence}.
-This is an exact local reformulation; the tail-survival inequality is not
-proved.
+Here $r_M(1/2)=1/2-\sum_{n\leq M}\varepsilon_n(1/2)w_n$ is the post-rank-$M$
+remainder, and $T_M=\sum_{n>M}w_n$ is all future mass.  An actual skip $M$ is
+final exactly when $T_M<r_M(1/2)$: all later mass then falls short,
+\lword{HalfCylinderFixedTailSocket.lean}{22}{isLastHalfGreedySkip_iff_skip_and_fatal}{the final-skip equivalence}.
+Negating gives $r_M(1/2)\leq T_M$ for all $M\in\mathcal S(1/2)$,
+\lword{HalfCylinderFixedTailSocket.lean}{57}{no_lastHalfGreedySkip_iff_every_skip_survives}{the no-final-skip equivalence};
+since $1/2\in\mathcal A$ exactly when there is no final skip, this is the
+\lword{HalfCylinderFixedTailSocket.lean}{73}{half_mem_iff_every_actual_skip_survives}{membership equivalence}.
+The equivalence is proved; the orbit inequalities are not.
 
 \subsubsection{The carry identity at a non-right transition}\label{res:producercarry}
 

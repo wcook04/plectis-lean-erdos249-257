@@ -901,15 +901,15 @@
         "schema": "erdos249257-editorial-state/1",
         "scope": "continuous_whole_main_paper_exposition",
         "current_priority": {
-          "id": "main_paper_fixed_tail_survival_plain_language_audit",
+          "id": "main_paper_non_right_transition_carry_plain_language_audit",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "defect_class": "The fixed-tail survival paragraph calls a post-decision remainder final when it exceeds a complete Mersenne tail but does not display the two quantities or explain how the pointwise inequality over every actual skip is equivalent to half-membership",
-          "statement": "Define the post-skip remainder and full future tail in the paper's existing notation, state the exact final-skip equivalence, and explain the quantifier change from no final skip to survival at every actual skip. Preserve that the survival inequality itself is unproved."
+          "defect_class": "The non-right-transition carry paragraph names a finite support, an integer carry, and a complete future divisor-incidence tail without giving the reader their exact coordinates or explaining how the carry sign controls the side of 1/2",
+          "statement": "Define the transition-aligned support, scaled carry, and complete future tail in the existing notation; then explain the residual identity and its positive, negative, and gap-margin consequences without implying that the required carries occur."
         },
         "last_verified_wave": {
-          "id": "main_paper_largest_skip_induction_plain_language_audit",
+          "id": "main_paper_fixed_tail_survival_plain_language_audit",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "result": "Replaced first-crossing and propagation shorthand by the exact universal hypothesis: for every s >= 14 and largest skip d with 2s < 3d, either 2(s+1) < 3d or the next branch is upper or middle. Identified the checked base s = 14, d = 13 with 28 < 39. Stated the resulting induction at every row, the unbounded skipped ranks, and the conditional conclusion that 1/2 belongs to the Mersenne achievement set. Marked the universal hypothesis unproved before giving any consequence."
+          "result": "Defined r_M(1/2) as the residual after processing ranks through M and T_M as the complete future Mersenne mass. Stated that an actual skip M is final exactly when T_M < r_M(1/2), explained that negation yields r_M(1/2) <= T_M at every M in the actual skipped set, and then connected no final skip to membership of 1/2. Distinguished the proved equivalences from the unproved inequalities along the actual greedy orbit."
         },
         "active_inconsistencies": [],
         "blocked_decisions": []
@@ -7540,7 +7540,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 3546
+        "line": 3547
       }
     },
     {
@@ -7551,7 +7551,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 3557
+        "line": 3558
       }
     },
     {
@@ -7562,7 +7562,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "the half-value counterexample route",
-        "line": 3578
+        "line": 3579
       }
     },
     {
@@ -7573,7 +7573,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 3569
+        "line": 3570
       }
     }
   ],
@@ -8465,9 +8465,9 @@
     },
     {
       "id": "fixed_tail_survival_socket",
-      "label": "Fixed-tail survival classification for half-cylinder skips",
+      "label": "Fixed-tail survival equivalence at every actual skip",
       "status": "conditional reduction",
-      "statement": "A skipped rank is final exactly when its post-decision remainder lies strictly above the complete remaining Mersenne tail. Hence membership of 1/2 is equivalent to the pointwise survival inequality at every actual skipped rank. That inequality is not proved.",
+      "statement": "Writing r_M(1/2) for the residual after ranks through M and T_M for the complete tail after M, an actual skip M is final exactly when T_M < r_M(1/2). Negating the existence of a final skip yields r_M(1/2) <= T_M at every actual skip; together with the no-final-skip classification, this is equivalent to membership of 1/2. The required inequalities along the actual greedy orbit are not proved.",
       "remaining_open_proposition_ids": [
         "remaining_open.universal_257_all_infinite_supports"
       ],
@@ -8478,6 +8478,11 @@
           "name": "isLastHalfGreedySkip_iff_skip_and_fatal",
           "module": "Erdos249257/HalfCylinderFixedTailSocket.lean",
           "line": 22
+        },
+        {
+          "name": "no_lastHalfGreedySkip_iff_every_skip_survives",
+          "module": "Erdos249257/HalfCylinderFixedTailSocket.lean",
+          "line": 57
         },
         {
           "name": "half_mem_iff_every_actual_skip_survives",
