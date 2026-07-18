@@ -30,9 +30,9 @@
 % the repository verifies that it matches docs/claims.json and that every
 % \lref/\lrefx/\lword/\lloc target resolves to the named declaration at that line.
 % ---------------------------------------------------------------------------
-% RELEASE BLOCKER: replace this sentinel with the pushed source commit that contains every linked declaration.
-\newcommand{\commit}{c2c5c3f0151d58c3d8f21843a9fffead4b27f8e3}
-\newcommand{\commitshort}{c2c5c3f0151d}
+% Public checkpoint: tag formal-source-2026-07-18 points to this source commit.
+\newcommand{\commit}{ebc98ee71f6819bd9fe344a0bb343542c604e533}
+\newcommand{\commitshort}{ebc98ee71f68}
 \newcommand{\repobase}{https://github.com/wcook04/plectis-lean-erdos249-257/blob/\commit}
 \newcommand{\sourceurl}{https://github.com/wcook04/plectis-lean-erdos249-257/tree/\commit}
 \newcommand{\rootbase}{https://github.com/wcook04/plectis-lean-erdos249-257/blob/main}
@@ -132,10 +132,10 @@ uniformly in the support.
 Membership of
 \(1/2\), which would refute the universal statement, is exactly equivalent to
 infinitely many greedy skips.  Nonmembership is exactly equivalent both to a
-finite fatal gap and to the existence of a final greedy skip.
+finite stage whose residual exceeds all remaining mass and to a final greedy skip.
 
-After a putative final skip, the current argument excludes the upper
-transition and the carry value \(-3\).  The same finite-state analysis leaves
+After a putative final skip, the current argument excludes one of the two
+possible transition types and the carry value \(-3\).  The remaining cases are
 two negative carry values, \(-2\) and \(-1\), and a future-tail inequality
 for the nonnegative carries.  Both series arise from one Lambert transform;
 this explains their common coordinates but transfers no theorem between
@@ -3018,19 +3018,19 @@ The Lean~4 proof assistant~\cite{lean} and Mathlib library~\cite{mathlib} check
 the named results.  The source, exact informal-to-formal links, and build
 instructions are available in the
 \href{https://github.com/wcook04/plectis-lean-erdos249-257}{public repository}.
-This draft names formal-source revision \texttt{\commitshort},
-but that revision must be present in the public repository before release.
-Until the source commit is pushed and the source-coordinate checker is rerun,
-the blue links are navigation text rather than a reproducible proof-authority
-route.  The final published revision must also pin the Lean and Mathlib
-versions; the intended toolchain is Lean \texttt{v4.29.1}.
+This paper pins formal-source revision \texttt{\commitshort}, published under
+the tag
+\href{https://github.com/wcook04/plectis-lean-erdos249-257/tree/formal-source-2026-07-18}{\texttt{formal-source-2026-07-18}}.
+The blue links resolve to immutable source files at that checkpoint.
+The release also pins the Lean and Mathlib
+versions; the toolchain is Lean \texttt{v4.29.1}.
 
 \paragraph{Reproduction commands and artefact identities.}
-For release, a cold clone at the published revision must pass \texttt{lake build};
-the release-validation command must then check the claim registry, source
+A cold clone at the published revision is checked with \texttt{lake build};
+the release-validation command separately checks the claim registry, source
 coordinates, manuscript anchors, projections, trust guards, the rendered PDF,
-and the immutable committed reference.  This draft does not
-carry that completed release receipt.  The machine-readable corpus descriptor records SHA-256 identities for
+and the immutable committed reference.  Its receipt is release metadata rather
+than mathematical proof authority.  The machine-readable corpus descriptor records SHA-256 identities for
 the claim registry, declaration atlas, manuscript source, rendered PDF, and
 toolchain projections, together with their regeneration commands.  No
 hardware-independent build time is claimed;
@@ -3049,9 +3049,9 @@ dataset, Python release script, generated index, or this manuscript is proof aut
 Appendix~\ref{app:index} explains how each displayed result is connected to its exact formal statement.
 
 \paragraph{Section consequence.}
-After the source commit is published and the committed-ref release checks pass,
-the linked declarations and their checked proof terms will certify the stated
-proved, conditional, finite, and equivalence results at that revision.  That verification does not change the mathematical status of the
+At the published formal-source checkpoint, the linked declarations and their
+checked proof terms certify the stated proved, conditional, finite, and
+equivalence results.  This verification does not change the mathematical status of the
 unresolved statements: the open problems collected in
 Section~\ref{sec:further} remain open.
 

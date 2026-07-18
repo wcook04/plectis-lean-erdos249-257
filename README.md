@@ -97,7 +97,7 @@ an unsafe band.
 | Library | Current size |
 |---|---:|
 | Lean modules | 635 |
-| Formal results and supporting lemmas | 11,538 |
+| Formal results and supporting lemmas | 11,539 |
 | Curated claim records | 99 |
 | Contribution families | 21 |
 

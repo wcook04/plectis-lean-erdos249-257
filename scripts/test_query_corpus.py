@@ -364,7 +364,7 @@ def main() -> int:
         resolved_formal_source
     )
     assert descriptor["identity"]["formal_source"]["publication_state"] == (
-        "committed_checkpoint_pending_remote_publication"
+        "published_committed_checkpoint"
     )
 
     claim = query("--claim", "denominator_exclusion")

@@ -861,7 +861,7 @@ def main() -> int:
     for paper_path, paper_text in paper_sources:
         source_ref = formal_ref
         for macro, fname, line_s, name in re.findall(
-                r"\\(lref|lrefx|lloc)\{([^}]+)\}\{(\d+)\}(?:\{([^}]*)\})?", paper_text):
+                r"\\(lref|lrefx|lword|lloc)\{([^}]+)\}\{(\d+)\}(?:\{([^}]*)\})?(?:\{[^}]*\})?", paper_text):
             rel = f"Erdos249257/{fname}"
             lines = module_lines(cache, rel, source_ref)
             if lines is None:
@@ -869,7 +869,7 @@ def main() -> int:
                 continue
             line = int(line_s)
             check(line <= len(lines), f"{paper_path} \\{macro}: {rel}:{line} beyond end of file")
-            if macro in ("lref", "lrefx") and name and line <= len(lines):
+            if macro in ("lref", "lrefx", "lword") and name and line <= len(lines):
                 check(name_at_line(lines, name, line),
                       f"{paper_path} \\{macro}: {name} not at {rel}:{line} (±{LINE_WINDOW})")
 
