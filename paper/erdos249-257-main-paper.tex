@@ -3092,15 +3092,20 @@ elapsed time depends on the Lean cache and machine, and is not part of the
 mathematical claim.
 
 \paragraph{What the computation establishes.}
-Every declaration is elaborated by Lean and every proof term is checked by
-the kernel.  Finite calculations use kernel-reducible procedures such as
-\texttt{decide}, \texttt{norm\_num}, or explicit certificate proofs.  In
-particular, the \lword{HalfFinalMiddlePhaseSieve.lean}{2050}{finalMiddleTwentySixPhaseSurvivors_card}{finite survivor-count theorem}
-uses \texttt{decide} under a finite declaration-local recursion-depth budget; its axiom
-audit contains no \texttt{Lean.trustCompiler} and no proof placeholder.
-Machine-generated certificate files are Lean source; no external certificate
-dataset, Python release script, generated index, or this manuscript is proof authority.
-Appendix~\ref{app:index} explains how each displayed result is connected to its exact formal statement.
+Lean elaborates each declaration into a proof term, which the kernel checks;
+tactics construct these terms but are not separate proof authority.
+\texttt{norm\_num} constructs concrete arithmetic proofs, and \texttt{decide}
+reduces a decidable finite proposition to obtain a proof.  The
+\lword{HalfFinalMiddlePhaseSieve.lean}{2050}{finalMiddleTwentySixPhaseSurvivors_card}{finite survivor-count theorem}
+uses \texttt{decide} to count 412 phases.  Its local \texttt{maxRecDepth}
+setting only raises the permitted unfolding depth; the proposition and logical
+rules are unchanged.  It does not use compiler-backed native evaluation, and
+its adjoining \texttt{\#print axioms} audit
+reports neither \texttt{Lean.trustCompiler} nor \texttt{sorryAx}, Lean's
+unfinished-proof axiom.  Generated Lean certificate declarations receive the
+same check.  An external dataset, Python release script, generated index, or
+this manuscript does not.  Appendix~\ref{app:index} connects each displayed
+result to its exact formal statement.
 
 \paragraph{Section consequence.}
 At the published formal-source checkpoint, the linked declarations and their
