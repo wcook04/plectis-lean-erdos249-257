@@ -13,7 +13,7 @@
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{array}
 \usepackage{booktabs}
-\usepackage{enumitem}
+\usepackage{enumitem,float}
 \usepackage[dvipsnames]{xcolor}
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta}
@@ -21,7 +21,7 @@
 \hypersetup{
   pdftitle={Tail Certificates and Achievement-Set Geometry: Lean-checked exact reductions for Erdős 249 and the half-value branch of Erdős 257},
   pdfauthor={Will Cook},
-  pdfsubject={Main expository paper for the Erdős 249/257 Lean formalisation},
+  pdfsubject={Main expository paper for the Erdős 249/257 Lean formalisation}, pdflang={en-GB}, pdfkeywords={irrationality, Euler totient, Lambert series, achievement sets, Lean 4},
 }
 
 % ---------------------------------------------------------------------------
@@ -116,9 +116,9 @@ up to \(t=64\) at which the lcm diagonal changes (including the initial scale);
 this is finite evidence only, and the cofinal supply is open.
 A CRT--Dirichlet construction also gives exact dyadic totient-kernel rank
 $2^e+1$ at every level, so the full kernel span is infinite-dimensional.
-Rationality would supply a positive-multiplier tempered integral carry orbit
-whose canonical level-$e$ carry-section span has dimension at least $2^e-1$
-for every $e$; no upper bound is known, so this does not prove irrationality.
+Rationality would instead force a subexponential integer recurrence whose
+canonical level-$e$ state vectors span at least $2^e-1$ dimensions for every
+$e$; no matching upper bound is known, so this does not prove irrationality.
 
 For Erd\H{o}s~\#257, we formalise Erd\H{o}s's classical theorem for full
 support in every base and several structured-support cases.  At base \(2\)
@@ -149,7 +149,7 @@ problem is settled.
 The two questions are whether
 $S=\sum_{n\ge1}\ph(n)/2^n$ is irrational (\#249), and whether
 $\sum_{n\in A}(2^n-1)^{-1}$ is irrational for every infinite
-$A\subseteq\N$ (\#257).  The problems appear in the Erd\H{o}s--Graham
+$A\subseteq\Npos$ (\#257).  The problems appear in the Erd\H{o}s--Graham
 collection and Erd\H{o}s's later survey~\cite{erdosgraham1980,erdos1988};
 numbering follows the maintained catalogue~\cite{erdosproblems}.
 
@@ -259,13 +259,13 @@ counterexample route because a finite normalised support cannot have value
 $1/2$; no unbounded supply is proved.
 
 \paragraph{Reading map.}
-Section~\ref{sec:spines} gives the exact spines, Section~\ref{sec:ladder} their
-common coordinates, and Sections~\ref{sec:eb} and~\ref{sec:249} the results,
-verification, and frontiers; Section~\ref{sec:architecture} states the
-shared structure and its limits.  Appendices~\ref{app:half-technical}
-and~\ref{sec:carry} contain the local half-value and carry arguments; later
-appendices treat the totient certificate and Lambert structure.  Linked
-phrases open Lean proofs.
+Section~\ref{sec:spines} gives spines; Section~\ref{sec:ladder} gives
+coordinates.  Sections~\ref{sec:eb} and~\ref{sec:249} give results;
+Section~\ref{sec:architecture} gives shared structure.  Sections~\ref{sec:verify}
+and~\ref{sec:further} give verification and frontiers.  Appendices
+~\ref{app:half-technical} and~\ref{sec:carry} hold local arguments;
+appendices hold technical and audit material.  Linked phrases open
+Lean proofs.
 
 \medskip
 \noindent\textbf{Keywords.} irrationality; Erd\H{o}s--Borwein constant;
@@ -322,8 +322,8 @@ Independently of the unbounded certificate supply, if \(S=p/q\), then
 \lword{CertificateKernel.lean}{18056}{tsum_totient_div_pow_two_ne_ratCast_of_den_le_79639646646701375323355774875831053}{denominator exclusion}.
 
 \paragraph{Missing theorem.}
-An unbounded certificate supply is the exact open statement, equivalently
-unboundedly many non-integral tail differences.
+An unbounded certificate supply is the exact open statement: for every
+positive \(h\), non-integral differences \(R_{N+h}-R_N\) occur at arbitrarily large \(N\).
 Theorem~\ref{res:diag} compresses this to the equivalent one-parameter
 lcm-diagonal supply.  Finite diagonal instances are verified at the 28
 changing-lcm scales through \(t=64\),
@@ -402,12 +402,12 @@ claim.
 
 \section{The Mersenne--Lambert ladder}\label{sec:ladder}
 
-Define the Lambert-type transform of an arithmetic function $f$ by
+Whenever \(\sum_{n\ge1}|f(n)|/(2^n-1)<\infty\), define the Lambert transform by
 \[
 L(f)\;=\;\sum_{n\ge1}\frac{f(n)}{2^n-1}\;=\;\sum_{m\ge1}\frac{(f*\mathbf 1)(m)}{2^m},
 \qquad (f*\mathbf 1)(m)=\sum_{d\mid m} f(d),
 \]
-the second equality being the standard Lambert rearrangement (one Dirichlet
+the second equality being the absolutely convergent Lambert rearrangement (one Dirichlet
 convolution by the constant $\mathbf 1=\zeta$); Apostol supplies the classical
 arithmetic-function and Dirichlet-convolution background~\cite{apostol}; Merca
 introduced a modern Lambert-series factorisation theorem~\cite{merca2017}, and
@@ -514,8 +514,8 @@ either the universal theorem or a rational counterexample.
 
 There are two logically distinct directions.  The universal direction asks
 for irrationality for every infinite support; the counterexample direction
-asks for one infinite support with rational value, and the target \(1/2\)
-gives an exact formulation of that problem.  This section first states the
+asks for one infinite support with rational value.  The target \(1/2\)
+gives an exact formulation of one distinguished route.  This section states the
 classical and structured irrationality theorems, then gives the base-\(2\)
 achievement-set geometry and the constraints forced by a hypothetical
 rational value.  It ends with the exact classification of the target \(1/2\)
@@ -603,7 +603,7 @@ each of the following infinite supports $A$:
 \begin{enumerate}[label=\textup{(\alph*)},leftmargin=2em]
 \item factorial support $A=\{n! : n\ge1\}$, giving $\sum 1/(b^{n!}-1)$;
 \item power-of-two support $A=\{2^n : n\ge0\}$, giving $\sum 1/(b^{2^n}-1)$;
-\item multiples $A=d\N$ with $d\ge1$;
+\item multiples $A=d\Npos=\{dk:k\ge1\}$ with $d\ge1$;
 \item pairwise-coprime supports with summable reciprocals (Erd\H{o}s's
 condition~\cite{erdos1968});
 \item eventually-periodic supports, residue classes, and the odd numbers.
@@ -1676,11 +1676,11 @@ if all \(a^{(k)}\) have the same prefix through \(M\) and
  \nu_{M,N}(a^{(k)})+k=E
  \qquad(1\leq k\leq R).
 \]
-A \emph{profiled gap stage} additionally permits one missing carry interval
-\([g_-,g_+]\subseteq[1,H_N]\): a lower suffix-cylinder family represents
-\(1,\ldots,g_--1\), an upper family represents
-\(g_++1,\ldots,H_N\), and the two families retain fixed consecutive
-prefixes through the cutoff.
+A \emph{profiled gap stage} permits one missing carry interval
+\([g_-,g_+]\subseteq[1,H_N]\): lower and upper suffix-cylinder families
+represent \(1,\ldots,g_--1\) and \(g_++1,\ldots,H_N\), with independent fixed
+prefixes through \(M\).  Its upper endpoint \(E_+\) covers \(H_N\) and satisfies
+\(E_+=g_++2^{N-M}\); prefix adjacency is a separate transition hypothesis.
 \end{definition}
 
 The results below have five different roles.  The checked base feeds the
@@ -1771,13 +1771,13 @@ This is a necessary quarter-band condition, not a contradiction.
 
 \begin{corollary}[cofinal suffix-cylinder criterion]\label{res:cofinalcylinder}
 If full suffix-cylinder stages exist at arbitrarily large depths, then
-there is an infinite set \(A\subseteq\N\) such that
+there is an infinite set \(A\subseteq\Npos\) such that
 \[
  \sum_{n\in A}\frac1{2^n-1}=\frac12.
 \]
 \end{corollary}
 \noindent This is the
-\lword{SuffixCylinderTerminalOnlyBridge.lean}{138}{exists_infinite_support_half_of_cofinalCylinderStages}{cofinal-cylinder criterion}.
+\lword{SuffixCylinderTerminalOnlyBridge.lean}{148}{exists_infinite_positive_support_half_of_cofinalCylinderStages}{positive-support cofinal-cylinder criterion}.
 
 \paragraph{Status and prior-art boundary.}
 The two transition propositions do not supply their coefficient inequalities,
@@ -1898,7 +1898,7 @@ The two directions remain separate.
 families, while Theorem~\ref{res:rigidity-main} and its four corollaries
 constrain a hypothetical rational support.  Neither route supplies the
 universal quantifier.
-\item The counterexample problem is to prove \(1/2\in\mathcal A\).
+\item The distinguished half-value route asks whether \(1/2\in\mathcal A\).
 Theorem~\ref{res:halfmembership} identifies this with infinitely many greedy
 skips, while Theorem~\ref{res:fatalright} identifies nonmembership with a
 final skip.  Proposition~\ref{res:finalskipexclusions} removes the final upper
@@ -1988,7 +1988,7 @@ $X$: $L(f)=\mathbb E[(f*\zeta)(X)]$. The rungs read as $L(\mu)=\Pr(X=1)=1/2$,
 $L(\ph)=\mathbb E[X]=2$, $L(\mathbf 1)=\mathbb E[\tau(X)]=E$, and
 $L(\alpha)=\mathbb E[\ph(X)]=S$.
 
-Counting visible lattice points $(a,b)$ with $a+b=n$, $a>0$, $\gcd(a,b)=1$ gives
+Counting visible lattice points $(a,b)$ with $a+b=n$, $a\ge1$, $b\ge0$, and $\gcd(a,b)=1$ gives
 exactly $\ph(n)$, uniformly in $n$, so $S$ is itself a coprime-pair mass.
 
 \begin{proposition}[coprimality probability]\label{res:coprime}
@@ -2001,8 +2001,8 @@ S \;=\; \tfrac12 \;+\; \Pr\!\big(\gcd(X,Y)=1\big)
 with the underlying lattice identity at
 \lword{CertificateKernel.lean}{18216}{tsum_visible_coprime_pairs_eq_totient_series}{visible-lattice-point identity}.
 Base $2$ is the one point where $\Pr(X=a)\Pr(Y=b)=2^{-(a+b)}$ needs no normalising
-constant, so the totient sum and the coprimality probability line up with no
-boundary correction. In this reading, Erd\H{o}s \#249 asks whether two independent
+constant.  Restricting the half-open lattice mass to positive waiting times
+removes $(1,0)$, producing the boundary term $1/2$.  Thus \#249 asks whether two independent
 fair-coin waiting times are coprime with irrational probability.
 After reducing $(X,Y)$ by their gcd, the same distribution has an exact
 Stern--Brocot cylinder decomposition.
@@ -2368,8 +2368,8 @@ The following are checked by the Lean kernel:
 \item finite certificates for every period $h\in[1,16]$ at a fixed window;
 \item diagonal certificates $\mathsf{Sep}(M_t,M_t,L)$ at $t=1$ and the 27
 strict lcm-jump scales through $64$, namely
-  $t\in\{1,2,3,4,5,7,8,9,11,13,16,17,19,23,25,27,29,31,32,37,41,43,
-  47,49,53,59,61,64\}$;
+\[t\in\{1,2,3,4,5,7,8,9,11,13,16,17,19,23,25,27,29,31,32,37,41,43,
+47,49,53,59,61,64\};\]
 \item a tabulated joint cone-vertex certificate.
 \end{itemize}
 \end{example}
@@ -2636,7 +2636,7 @@ unbounded obstruction is to compare the full target at $H$, $pH$, $qH$, and
 $pqH$.  The following affine transport law rules out this route before any
 projection is introduced.
 \begin{proposition}[prime-adjunction transport collapse]\label{res:primeadjunction}
-For every positive $k$, the actual diagonal satisfies
+For every positive $H$ and $k$, the actual diagonal satisfies
 \[
  D_{kH}=Q_k(H)D_H+Z_k(H),
  \qquad Q_k(H)\in\N,\quad Z_k(H)\in\Z.
@@ -2696,7 +2696,7 @@ irrationality criterion for $S$.
 \subsection{Unconditional dyadic rank and carry anti-compression}
 \label{app:totient-rank}
 
-The determinant producer in this route is unconditional.  At every level, a
+The determinant construction in this route is unconditional.  At every level, a
 CRT construction prescribes one target prime channel and fresh off-target
 prime divisors; Dirichlet's theorem supplies the required primes in the
 resulting progressions.  After the exact powers of two are divided from the
@@ -2713,7 +2713,7 @@ Consequently, the span of all sections
 \]
 is not finite-dimensional over $\Q$.
 \end{theorem}
-\noindent Formalised by the all-level minor producer
+\noindent Formalised by the all-level minor construction
 \lword{TotientMahlerDefect.lean}{847}{exists_separatedMinorCertificate_totientAffineOddFamily}{CRT--Dirichlet separated minors},
 the independence theorem
 \lword{TotientMahlerDefect.lean}{900}{linearIndependent_canonicalTotientKernelFamily}{canonical kernel independence},
@@ -2791,7 +2791,7 @@ These are finite algebraic inputs to a signed-moment route.  They do not show
 that any actual totient Hankel determinant is nonzero, and they give no
 irrationality criterion for $S$.
 
-The formal proof also exposes the producer-neutral
+The formal proof also exposes the construction-independent
 \lword{TotientMahlerDefect.lean}{101}{finrank_canonicalTotientKernel_eq_of_certificate}{separated-minor rank criterion}.
 The two generic algebraic propositions above remain useful as possible inputs
 to other determinant routes, but the totient-kernel minor itself is supplied
@@ -2874,8 +2874,8 @@ Every series in this paper is an instance.  The primitive-conductor input
 \(\mu\), \(\mathbf 1\), and \(\ph\) give the rungs of
 Section~\ref{sec:ladder}.
 
-Rationality acts on all of these through one mechanism.  For any coefficient
-stream \(\gamma\) with \(0\le\gamma(n)\le n\), a class containing both
+Rationality acts on all of these through one mechanism.  For any \(\N\)-valued
+stream \(\gamma:\N\to\N\) with \(\gamma(n)\le n\), a class containing both
 \(\ph\) and every \(f_A\), Theorem~\ref{res:rigidity} identifies rationality
 of \(\sum_n\gamma(n)2^{-n}\) with the existence of a tempered integer orbit:
 after multiplication by one denominator, the coefficient stream is the exact
@@ -2906,7 +2906,7 @@ The trichotomy describes where the questions sit inside one transform.  It
 is not a theorem transferring information between them, and the next
 subsection records exactly why no transfer follows.
 
-\begin{figure}[t]
+\begin{figure}[H]
 \centering
 \small
 \begin{tikzpicture}[>={Stealth[length=1.8mm]}, yscale=0.92]
@@ -2922,7 +2922,7 @@ subsection records exactly why no transfer follows.
   \node (r2b) at (4.7,-0.9){$\mathrm{Id}$};
   \node[anchor=west] (r2c) at (7.9,-0.9){$2$: rational};
   \node (r3a) at (0,-1.8)  {$\mathbf 1$};
-  \node (r3b) at (4.7,-1.8){$\tau$};
+  \node (r3b) at (4.7,-1.8){$\mathbf 1*\mathbf 1$};
   \node[anchor=west] (r3c) at (7.9,-1.8){$E$: irrational};
   \node (r4a) at (0,-2.7)  {$\mu$};
   \node (r4b) at (4.7,-2.7){$1,0,0,0,\ldots$};
@@ -3074,12 +3074,12 @@ mathematical claim.
 Every declaration is elaborated by Lean and every proof term is checked by
 the kernel.  Finite calculations use kernel-reducible procedures such as
 \texttt{decide}, \texttt{norm\_num}, or explicit certificate proofs.  In
-particular, \texttt{finalMiddleTwentySixPhaseSurvivors\_card} uses
-\texttt{decide} under a finite declaration-local recursion-depth budget; its
-axiom audit contains no \texttt{Lean.trustCompiler} and no proof placeholder.
-Generated certificate shards are Lean source; no external certificate dataset,
-Python release script, JSON projection, or this manuscript is proof authority.  Appendix~\ref{app:index} explains how
-each displayed result is connected to its exact formal statement.
+particular, the \lword{HalfFinalMiddlePhaseSieve.lean}{2050}{finalMiddleTwentySixPhaseSurvivors_card}{finite survivor-count theorem}
+uses \texttt{decide} under a finite declaration-local recursion-depth budget; its axiom
+audit contains no \texttt{Lean.trustCompiler} and no proof placeholder.
+Machine-generated certificate files are Lean source; no external certificate
+dataset, Python release script, generated index, or this manuscript is proof authority.
+Appendix~\ref{app:index} explains how each displayed result is connected to its exact formal statement.
 
 \paragraph{Section consequence.}
 After the source commit is published and the committed-ref release checks pass,
@@ -3112,11 +3112,11 @@ defining \(S\), so no irrationality status transfers to Erd\H{o}s~\#249.
 For \(L_b(\gamma)=\sum_{a\ge1}\gamma(a)/(b^a-1)\), the checked endpoints are:
 \begin{theorem}[eventually-periodic nonnegative weights]
 \label{res:periodicnonnegative}
-An eventually-periodic nonnegative rational weight with a positive periodic
-value gives an irrational series.
+For every $b\ge2$, an eventually-periodic nonnegative rational weight that is
+positive at a positive index in its periodic region gives an irrational series.
 \end{theorem}
 \noindent Formalised:
-\lword{CertificateKernel.lean}{12397}{irrational_weightedErdosSeries_eventuallyPeriodic}{eventually-periodic nonnegative criterion}.
+\lword{CertificateKernel.lean}{12483}{irrational_ratWeightSeries_eventuallyPeriodic}{eventually-periodic nonnegative criterion}.
 This is contained in a broader theorem of Luca--Tachiya~\cite{lucatachiya}.
 \begin{theorem}[periodic signed-weight dichotomy]\label{res:periodicsigned}
 For a periodic integer weight, the series is irrational or terminating in
@@ -3214,7 +3214,7 @@ At \(r=1/2\), the three rows \(f=\mu,\mathbf 1,\ph\) yield respectively
 \]
 where \(P\) is Pillai's gcd-sum function.
 \end{proposition}
-\noindent Formalised:
+\noindent Formalised: \lword{GcdMomentCalculus.lean}{216}{tsum_one_div_mersenne_sq_eq_sigma_sub_tau_series}{constant-weight squared-Lambert identity} and
 \lword{GcdMomentCalculus.lean}{235}{tsum_totient_div_mersenne_sq_eq_gcd_moment_series}{totient gcd-moment identity}.
 Postelmans--Van Assche imply irrationality of the middle row: their linear
 independence of \(1,\zeta_q(1),\zeta_q(2)\) over \(\Q\), proved whenever
@@ -3380,11 +3380,11 @@ then $S$ is irrational.
 \noindent This implication is the
 \lword{DiagonalFreshLossBridge.lean}{2731}{irrational_totientSeries_of_canonicalAdjacentSuffixJumpSlackSupply}{cofinal-slack irrationality criterion}.
 The proposition identifies equivalent scalar forms; the corollary is
-one-way and does not prove that $\sigma_t$ is nonnegative cofinally.  It is
-also not necessary: completeness supplies some successful depth at every
-non-integral diagonal difference, but nothing forces success at the
-canonical depth $m_t$, so cofinal failure of this scalar condition would
-refute the route, not the endpoint.
+one-way and does not prove that $\sigma_t$ is nonnegative cofinally.  No
+necessity implication is proved: completeness supplies some successful depth
+at every non-integral diagonal difference, but nothing forces success at the
+canonical depth $m_t$.  Cofinal failure would refute this route, not the
+endpoint.
 
 For \#257, write $r_n$ for the exact greedy residual of the target $1/2$ and
 put
@@ -3485,7 +3485,7 @@ Prove that
 \[
   \sum_{n\in A}\frac{1}{2^n-1}
 \]
-is irrational for every infinite set $A\subseteq\N$, rather than only for the
+is irrational for every infinite set $A\subseteq\Npos$, rather than only for the
 support families in Theorem~\ref{res:support}.
 \end{problem}
 
@@ -3519,7 +3519,7 @@ small element (Appendix~\ref{app:carry-sublog}); a coverage law for the
 support outside every finite core would remove that triviality.  We have
 not pursued either question.
 
-\subsection*{Statements and declarations}
+\pdfbookmark[1]{Statements and declarations}{statements-declarations}\subsection*{Statements and declarations}
 
 \paragraph{Artefact and data availability.} The
 \href{\sourceurl}{archived formal-source revision} contains the Lean sources,
@@ -4000,7 +4000,7 @@ its support: a summable support with small $\rho(A)$ can only display
 denominators whose odd part has small multiplicative order of $2$.
 
 \begin{corollary}[collision strengthening at common multiples]\label{res:collision}
-In the summable case, let $F\subseteq A$ be finite and let $L$ be a common
+In the summable case, let $F\subseteq A$ be finite and let $L\ge1$ be a common
 multiple of $F$. Then
 \[
 \rho(A)\;\ge\;\frac{w}{h}\;+\;\frac{\lceil(|F|-1)/2\rceil}{L}.
@@ -4294,8 +4294,10 @@ Campbell shift-synchronisation boundary & \lrefx{CampbellShiftSynchronization.le
 \fi
 
 \clearpage
+\pdfbookmark[0]{References}{references}
 \begin{thebibliography}{99}
 \small
+\raggedright
 \setlength{\itemsep}{0pt}
 \bibitem{erdos1948} P.~Erd\H{o}s, \emph{On arithmetical properties of Lambert series},
   J. Indian Math. Soc. (N.S.) \textbf{12} (1948), 63--66,
@@ -4364,9 +4366,9 @@ Campbell shift-synchronisation boundary & \lrefx{CampbellShiftSynchronization.le
   doi:\href{https://doi.org/10.48550/arXiv.2512.01739}{10.48550/arXiv.2512.01739}.
 \bibitem{lean} L.~de Moura, S.~Kong, J.~Avigad, F.~van Doorn, and J.~von Raumer,
   \emph{The Lean theorem prover (system description)}, in \emph{CADE-25}, LNCS 9195,
-  Springer (2015), 378--388, doi:10.1007/978-3-319-21401-6\_26.
+  Springer (2015), 378--388, doi:\href{https://doi.org/10.1007/978-3-319-21401-6_26}{10.1007/978-3-319-21401-6\_26}.
 \bibitem{mathlib} The mathlib Community, \emph{The Lean mathematical library},
-  in \emph{CPP 2020}, ACM (2020), 367--381, doi:10.1145/3372885.3373824.
+  in \emph{CPP 2020}, ACM (2020), 367--381, doi:\href{https://doi.org/10.1145/3372885.3373824}{10.1145/3372885.3373824}.
 \bibitem{erdosproblems} T.~Bloom (ed.), \emph{Erd\H{o}s Problems}, entries 249 and 257,
   \href{https://www.erdosproblems.com}{\texttt{erdosproblems.com}}, accessed July 2026.
 
