@@ -506,7 +506,8 @@ are formalised.  This is Erd\H{o}s's 1948 theorem~\cite{erdos1948}. In the ladde
 Section~\ref{sec:ladder} it is the rung $L(\mathbf 1)$, and it is the fixed
 machine-checked comparison point in the same Mersenne--Lambert family as the
 open $S$; as Section~\ref{sec:ladder} notes, it is not a further convolution
-step from $S$.
+step from $S$.  Borwein later proved a wider rational-shift Lambert-series
+theorem~\cite{borwein1992}; that result is not formalised here.
 
 The proof begins with the Lambert identity
 \[
@@ -1856,12 +1857,16 @@ mechanism.
 \subsubsection{Strategy boundary: Campbell shift synchronisation}
 \label{res:campbellboundary}
 
-A proposed route combines a finite Mersenne shift from a putative last greedy
-skip with Campbell's quarter-exponent prime progression.  The exact parameter
-requirements cannot be synchronised: if the combined progression modulus is
-$d\ge2$, the phase factor is at most $d$, the fatal-window prime cap is at
-most four times that phase, and Campbell's applicability requires
-$d^4$ below the cap, then the inequalities are inconsistent.  Formalised:
+Crandall asked whether the binary block \(11\) occurs infinitely often in
+the Erd\H{o}s--Borwein constant; Campbell proved that it does using primes
+in an arithmetic progression whose modulus \(d\) is constrained by
+\(d^4\le X\), where \(X\) is the prime-search
+bound~\cite{crandall,campbell}.  A proposed route combines this input with the
+finite Mersenne shift from a putative last greedy skip.  If \(t\) is the
+unavoidable phase factor and \(P\) the prime cap forced by the fatal window,
+the required inequalities are
+\(2\le d\), \(t\le d\), \(P\le4t\), and \(d^4\le P\); they are
+inconsistent.  Formalised:
 \lword{CampbellShiftSynchronization.lean}{299}{campbellQuarterExponent_periodFreeze_noSync}{the period-freeze incompatibility}
 and
 \lword{CampbellShiftSynchronization.lean}{320}{campbellPhaseFreeze_parameters_impossible}{the parameter incompatibility}.
@@ -4354,7 +4359,7 @@ Campbell shift-synchronisation boundary & \lrefx{CampbellShiftSynchronization.le
   Integers \textbf{12} (2012), no.~5, 811--840,
   doi:\href{https://doi.org/10.1515/integers-2012-0007}{10.1515/integers-2012-0007}.
 \bibitem{campbell} J.~M. Campbell, \emph{On the binary digits of the Erd\H{o}s--Borwein
-  constant}, arXiv:2605.24160 (2026),
+  constant}, arXiv:2605.24160v1 (2026),
   doi:\href{https://doi.org/10.48550/arXiv.2605.24160}{10.48550/arXiv.2605.24160}.
 \bibitem{taoteravainen} T.~Tao and J.~Ter\"av\"ainen, \emph{Quantitative correlations and
   some problems on prime factors of consecutive integers}, arXiv:2512.01739v2 (2026),
