@@ -1455,14 +1455,15 @@ and to a final skipped exponent in the real greedy orbit,
 This classifies the nonmembership branch exactly.  It does not decide which
 branch holds or prove universal Erd\H{o}s~\#257.
 
-\paragraph{First final-middle cell.}  The first exceptional middle cell has a
-separate obstruction: if the orbit extends right after the last skipped rank,
-then the cell with transition carry $-3$ makes the lazy cofinite tail strictly
-smaller than $1/2$ while its centred carry becomes negative.  This is
-impossible by the analytic nonnegativity identity,
+\paragraph{First final-middle cell.}  At a putative final skip $D$, let $u$ be
+the selected prefix and $B_D=u\cup\{n:n>D\}$ the \emph{lazy support}: it
+skips $D$, takes every later rank, and has value $V(u)+T_D<1/2$.  The finite
+transition carry is $C_D=4R_{D,D}-P_D-4$, and the exact swap makes its centred
+carry $C_D+3$ at row $2D+1$.  For $C_D=-3$ this is zero; forced divisor
+counts at least $1$ and $2$ in the next rows make it negative at $2D+3$,
+contradicting finite-level nonnegativity below $1/2$,
 \lword{HalfCylinderFinalMiddleCellEscape.lean}{587}{finalMiddleCell_neg_three_not_last}{the middle-\(-3\) exclusion}.
-It removes that one conditional terminal configuration; it does not decide
-the right-tail branch or the remaining two middle cells.
+Only $-3$ is excluded; $-2$, $-1$, and the right-tail branch remain open.
 
 \paragraph{Second final-middle cell.}  The next cell, with transition carry
 $-2$, is not eliminated.  Here its \emph{phase} means the triple of residue
