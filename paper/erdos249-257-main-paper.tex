@@ -830,13 +830,21 @@ residual lies strictly above the whole remaining tail
 (Appendix~\ref{res:fixedtailsocket}).  Theorem~\ref{res:fatalright} below
 identifies nonmembership with the existence of such a skip.
 
+The next definition replaces the real greedy calculation by an integer one.
+A \emph{row} \(s\) keeps the ranks \(2,\ldots,s-1\), rescales every weight by
+\(4^s\), rounds down, and uses a target \(2^s\) below the rescaled value
+\(4^s/2\).  The resulting zero--one word records the finite take/skip
+decisions; its last entry is the terminal bit used in
+Theorem~\ref{res:halfmembership}.
+
 \begin{definition}[finite greedy seam and terminal bit]\label{def:terminal-bit}
 For an integer \(s\geq6\), set
 \[
- q_{s,d}=\left\lfloor\frac{4^s}{2^d-1}\right\rfloor
+ q_{s,d}=\lfloor4^sw_d\rfloor
+ =\left\lfloor\frac{4^s}{2^d-1}\right\rfloor
  \quad(2\leq d<s),
  \qquad
- K_s=2^{2s-1}-2^s.
+ K_s=4^s\cdot\frac12-2^s=2^{2s-1}-2^s.
 \]
 Starting from \(R_{s,2}=K_s\), define successively, for \(2\leq d<s\),
 \[
@@ -853,11 +861,8 @@ The Boolean word \((\beta_{s,2},\ldots,\beta_{s,s-1})\) is the
 \(\tau_s=\beta_{s,s-1}\) is its terminal bit.
 \end{definition}
 
-\noindent Here \(q_{s,d}=\lfloor4^sw_d\rfloor\) is the weight \(w_d\) at
-resolution \(4^{-s}\), and \(K_s=4^s\cdot\tfrac12-2^s\) is the target
-\(1/2\) at the same resolution, lowered by a guard of \(2^s\); the word
-\(\beta\) records which weights this integer greedy run takes.  At
-\(s=7\), for instance, \(K_7=8064\) and the run takes \(q_{7,2}=5461\)
+\noindent For example, at \(s=7\) we have \(K_7=8064\), and the run takes
+\(q_{7,2}=5461\)
 and \(q_{7,3}=2340\), skips \(1092\) and \(528\), and takes
 \(q_{7,6}=260\), leaving \(3\): the word is \(1,1,0,0,1\), matching the
 real greedy decisions at ranks \(2\)--\(6\), with terminal bit
