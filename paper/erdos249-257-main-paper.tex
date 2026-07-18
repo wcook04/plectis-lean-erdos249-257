@@ -106,25 +106,20 @@ For \#249, irrationality of $S$ is equivalent to the existence, beyond
 every bound, of a finite integer calculation plus a rigorous tail estimate
 showing that two shifted binary tails differ by a non-integer.  We also prove
 unconditionally that any rational representation $S=p/q$ has
-$q>\Qzero\approx7.96\times10^{34}$.  Writing
-$M_t=\lcm(1,\ldots,t)$, Lean checks such a calculation for $t=1$ and for
-every subsequent $t\leq64$ at which $M_t$ changes, 28 values in all.  These
-checks remain finite; they do not prove the required unbounded supply.
+$q>\Qzero\approx7.96\times10^{34}$.  At the lcm scales
+$M_t=\lcm(1,\ldots,t)$, Lean checks 28 such calculations through $t=64$.
+These checks remain finite; they do not prove the required unbounded supply.
 
 For \#257, we formalise the classical irrationality theorem for the sum over
 all positive exponents in every integer base $b\geq2$, together with several
-structured infinite choices of $A$.  For any rational
-value $X_A$, binary long division yields integer remainders from which the
-$0$--$1$ indicator of $A$ can be recovered exactly.  At base $2$, each
-weight exceeds the sum of all later weights, so every attainable value has a
-unique set of selected exponents.  The value $1/2$ is attainable exactly when
-its greedy expansion omits weights at arbitrarily large ranks.  This would give an
-infinite $A$ with rational sum $X_A=1/2$ and refute the universal assertion
-in \#257.  Nonattainment is exactly equivalent to a final omitted weight.  If
-such a final omission existed, the next-step recurrence would have two
-branches.  We exclude one branch and the integer remainder value $-3$ in the
-other; the values $-2,-1$ and an inequality involving the entire future tail
-remain unresolved.
+structured infinite choices of $A$.  At base $2$, each weight exceeds the
+sum of all later weights, so every attainable value has a unique support.
+The value $1/2$ is attainable exactly when its greedy expansion omits weights
+at arbitrarily large ranks; this would refute the universal assertion in
+\#257.  Nonattainment is equivalent to a final omission.  After a putative
+final omission, the next-step recurrence has two branches.  We exclude one
+branch and the integer remainder $-3$ in the other; the values $-2,-1$ and a
+future-tail inequality remain unresolved.
 
 An exact change of variables places both series in one common formula, but
 transfers no irrationality theorem between them.  We prove neither the
@@ -154,16 +149,14 @@ the universal assertion in \#257.
 
 \subsection*{What is proved}
 
-The paper separates finite arithmetic from the quantifiers that remain open.
-A \emph{certificate} is a finite integer calculation together with a rigorous
-bound for the omitted infinite tail.  A \emph{carry} is the integer remainder
-state produced by binary long division.  For the first chain, put
+Each question is reduced to a finite Lean-checkable calculation and one
+unbounded condition that remains open.  For \#249, a \emph{certificate} is a
+finite integer calculation plus a rigorous bound on the omitted tail.  Put
 \(M_t=\lcm(1,\ldots,t)\) and
-\(R_N=\sum_{m\geq1}\ph(N+m)2^{-m}\).  In the second, a greedy skip at rank
-\(n\) means that the weight \((2^n-1)^{-1}\) is not selected.  Here
-\emph{cofinally} means beyond every bound.  Tail and carry identities separate
-exact finite arithmetic from one analytic or combinatorial cofinality
-statement.  With the later coordinate names expanded, the two statements are:
+\(R_N=\sum_{m\geq1}\ph(N+m)2^{-m}\).  For \#257, skipping rank \(n\) means
+omitting the weight \((2^n-1)^{-1}\).
+\noindent The two central equivalences, stated before the later proof
+machinery, are:
 \[
  \begin{aligned}
  \substack{\text{finite certificates for }R_{2M_t}-R_{M_t}\notin\Z\\
@@ -175,11 +168,10 @@ statement.  With the later coordinate names expanded, the two statements are:
  &\quad\Longrightarrow\quad \text{a counterexample to universal \#257}.
  \end{aligned}
 \]
-The first line is an exact reformulation of \#249.  The second is an exact
-reformulation of the distinguished half-value route, not of universal
-\#257.  In the later technical coordinates these are called the unbounded
-certificate supply and cofinal terminal zeros; both are open.  The current
-final-skip analysis reduces the second statement further to two final-skip
+The first line is an exact reformulation of \#249.  The second concerns only
+the proposed half-value counterexample to \#257, not the universal statement.
+Neither line proves the required unbounded behaviour.  The current analysis
+of the final possible skip reduces the second open condition to two explicit
 obligations; neither obligation is proved.
 
 The totient constant also has the elementary form
@@ -238,7 +230,11 @@ Euler totient; Lambert series; achievement sets; binary carry systems; Lean~4.
 
 \section{The two exact reductions}\label{sec:spines}
 
-\subsection{Erd\H{o}s \#249: an exact certificate normal form}
+The first equivalence below restates \#249 itself.  The second restates only
+the proposed half-value counterexample to \#257.  Neither equivalence proves
+the unbounded behaviour that it identifies.
+
+\subsection{Erd\H{o}s \#249: tail differences and finite certificates}
 \label{res:249story}
 
 Write
@@ -288,7 +284,7 @@ one-parameter lcm-diagonal form.  The 28 changing-lcm scales through
 \(t=64\) are verified, but neither this finite computation nor the
 denominator bound proves the unbounded supply.
 
-\subsection{Erd\H{o}s \#257: the exact half-value counterexample reduction}
+\subsection{Erd\H{o}s \#257: half-value membership and final greedy skips}
 \label{res:halfstory}
 
 Let
@@ -318,8 +314,8 @@ skips recur beyond every bound.
 \paragraph{Counterexample consequence.}
 Membership would produce an infinite support of rational sum and refute the
 universal statement of Erd\H{o}s~\#257.  Thus the counterexample condition is
-exact: cofinally many terminal zeros, equivalently no last greedy skip.  The
-formal statements are the
+exact: terminal zeros beyond every bound, equivalently no last greedy skip.
+The formal statements are the
 \lword{GreedyAchievementSet.lean}{2514}{half_mem_mersenneAchievementSet_iff_greedySkippedSupport_infinite}{infinite-skip equivalence},
 \lword{HalfCylinderHalfMembershipClassification.lean}{126}{half_mem_mersenneAchievementSet_iff_unboundedTerminalFalse}{unbounded-terminal equivalence},
 \lword{HalfCylinderHalfMembershipClassification.lean}{235}{half_mem_mersenneAchievementSet_iff_no_lastHalfGreedySkip}{no-last-skip equivalence},
@@ -327,7 +323,8 @@ and the
 \lword{HalfCarryReachability.lean}{589}{finite_boolSupport_ne_half}{finite-support exclusion}.
 
 \paragraph{Missing theorem.}
-The missing input is a proof that terminal zeros occur cofinally.  The
+The missing input is a proof that the terminal bit is zero beyond every
+bound.  The
 current last-skip route proves that, after a putative last skip, neither the
 upper transition nor middle carry \(-3\) can occur.  It remains to exclude
 middle carries \(-2,-1\) and to prove a future-tail inequality for the

@@ -351,12 +351,12 @@ def validate_gateway_opening(paper: str) -> None:
         ],
         "exact_residuals": [
             ["An unbounded certificate supply"],
-            ["cofinal terminal zeros"],
-            ["two final-skip obligations"],
+            ["the terminal bit is zero beyond every bound"],
+            ["two explicit obligations"],
         ],
-        "common_architecture": [
-            ["tail and carry identities separate exact finite arithmetic"],
-            ["one analytic or combinatorial cofinality statement"],
+        "finite_open_split": [
+            ["finite Lean-checkable calculation and one unbounded condition"],
+            ["Neither equivalence proves the unbounded behaviour"],
         ],
         "reading_map": [
             [r"\paragraph{Reading map.}"],
@@ -374,6 +374,13 @@ def validate_gateway_opening(paper: str) -> None:
     for source_inventory_token in (r"\idn", "module inventory"):
         assert source_inventory_token not in opening, (
             f"gateway opening exposes source-inventory token {source_inventory_token!r}"
+        )
+    for retired_internal_label in (
+        "cofinal terminal zeros",
+        "certificate normal form",
+    ):
+        assert retired_internal_label not in opening, (
+            f"gateway opening restored retired internal label {retired_internal_label!r}"
         )
 
 

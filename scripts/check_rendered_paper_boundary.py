@@ -50,8 +50,8 @@ FIRST_MINUTE_CONTRACT = {
             "we do not decide whether 1/2 is attainable",
         ),
         (2, 4): (
-            "an exact certificate normal form",
-            "the exact half-value counterexample reduction",
+            "tail differences and finite certificates",
+            "half-value membership and final greedy skips",
             "no finite such support can have value 1/2",
             "neither this finite computation nor the denominator bound proves the unbounded supply",
         ),
