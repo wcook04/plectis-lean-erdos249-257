@@ -3579,49 +3579,44 @@ Erd\H{o}s Problems catalogue maintained by Thomas Bloom~\cite{erdosproblems}.
 This appendix records the local arithmetic used to reach
 Theorems~\ref{res:halfmembership} and~\ref{res:fatalright},
 Proposition~\ref{res:finalskipexclusions}, and
-Corollary~\ref{res:taildominance}.  Its statements fall into four classes:
-exact coordinate identities, conditional compactness criteria, bounded
-finite certificates, and counterexamples to tempting local inductions.  None
-changes the two open conclusions at the end of Section~\ref{sec:eb}.
-Readers concerned only with the two exact reductions may skip this appendix.
-It is included so that the hypotheses in the main reduction can be audited
-without turning the main theorem section into a chronology of the formal
-development.
+Corollary~\ref{res:taildominance}.  Its statements have four statuses: exact
+identities or equivalences; implications with an unproved hypothesis; exact
+finite calculations; and counterexamples showing that a proposed local
+argument is insufficient.  None changes the two open conclusions at the end
+of Section~\ref{sec:eb}.  Readers concerned only with the main reductions may
+skip the appendix.
 
-The order is by mathematical use.
-Appendix~\ref{app:half-localizer} localises one possible unsafe skip;
-Appendix~\ref{app:half-conditional-producers} records conditional
-structured-support criteria; Appendix~\ref{app:half-finite-cofinal} collects
-the finite-window and compactness implications;
-Appendix~\ref{app:half-final-skip} develops the equivalent final-skip
-coordinates; and Appendix~\ref{app:half-evidence} records verified finite
-instances, exact coordinate translations, counterexamples, and arguments that
-rule out several proposed strategies.  This is a dependency map, not a second
-route to a conclusion.
+The parts are ordered by their role in the greedy argument.
+Appendix~\ref{app:half-localizer} computes the residual interval for one
+take--skip--take pattern, without showing that the half-value orbit enters or
+avoids it.  Appendix~\ref{app:half-conditional-producers} gives one
+conditional irrationality criterion for a structured support, several
+sufficient hypotheses for \(1/2\in\mathcal A\), and the local identities they
+use.  Appendix~\ref{app:half-finite-cofinal} separates a finite witness from
+the unbounded supply of such witnesses needed for membership.
+Appendix~\ref{app:half-final-skip} identifies nonmembership with a last greedy
+skip, excludes some possible last transitions, and states the two cell
+exclusions and tail inequality still missing.  Appendix~\ref{app:half-evidence}
+contains finite checks, changes of coordinates, and counterexamples to
+shortcuts.
 
-The logical chain is
+The two routes used below have the logical form
+{\setlength{\arraycolsep}{3pt}
 \[
-\begin{array}{rcl}
- \text{cofinal half-value witnesses from A.2--A.3}
- &\Longrightarrow& \frac12\in\mathcal A,\\
- \frac12\in\mathcal A
- &\Longrightarrow& \text{an infinite rational-valued support},\\
- \text{a final greedy skip}
- &\Longleftrightarrow& \frac12\notin\mathcal A,\\
- \text{the A.4 residual cell exclusions and tail bound}
- &\Longrightarrow& \text{no final skip},\\
- \text{no final skip}
- &\Longrightarrow& \frac12\in\mathcal A.
+\begin{array}{rclcl}
+\text{A.2--A.3 unbounded-depth witnesses}
+&\Longrightarrow& \frac12\in\mathcal A
+&\Longrightarrow& \text{infinite support summing to }\frac12,\\
+\text{A.4 exclusions and tail bound}
+&\Longrightarrow& \text{no final skip}
+ &\Longleftrightarrow& \frac12\in\mathcal A.
 \end{array}
 \]
-Every displayed implication is proved; the middle line is an exact
-classification.  The open content lies in the antecedents of the first and
-fourth lines, which are the unproved cofinal and exclusion hypotheses; the
-second and fifth lines are unconditional consequences of results already
-stated.  Appendix~\ref{app:half-localizer} only
-localises one transition configuration, while Appendix~\ref{app:half-evidence}
-supplies bounded evidence, coordinate changes, and no-go results.  Neither
-creates a further implication that decides an open question.
+}
+The displayed implications are proved, and the final equivalence is exact.
+Both leftmost hypotheses are open.  Thus the appendix explains what would
+suffice and why several finite arguments fail; it does not decide whether
+\(1/2\in\mathcal A\).
 
 Throughout this appendix:
 \begin{itemize}[leftmargin=1.6em]
