@@ -901,15 +901,15 @@
         "schema": "erdos249257-editorial-state/1",
         "scope": "continuous_whole_main_paper_exposition",
         "current_priority": {
-          "id": "main_paper_localized_protected_seam_plain_language_audit",
+          "id": "main_paper_mixed_cofinal_half_carry_fan_in_plain_language_audit",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "defect_class": "The protected-seam passage says that one of carries 3 and 4 survives a localized one-hole seam and that cofinal realizations imply half-membership without defining localized realization, naming the unique hole, or explaining the carry choice",
-          "statement": "Define localized realization as the forward implication from scalar reachability to an admissible depth-N word for each carry k in [3,27]. Name the unique missing carry H = 2 delta - c, explain the choice of 4 when H = 3 and of 3 otherwise, and show how cofinal repetitions feed compactness. Preserve that no cofinal realization supply is proved and that this is not an Erdős #257 proof."
+          "defect_class": "The mixed window-or-seam passage says that one branch occurs at each requested scale without spelling out the cofinal quantifier, the one-word extraction in each branch, or that no producer for this disjunction is proved",
+          "statement": "State the mixed hypothesis as: for every N there is M >= N carrying either a selected window or a localized realized seam. Explain that the window branch chooses carry 1 while the seam branch chooses the protected non-hole carry 4 when H = 3 and 3 otherwise, so either branch supplies exactly the one admissible word compactness needs. Preserve that the branches may alternate, no cofinal mixed producer is proved, and this is not an Erdős #257 proof."
         },
         "last_verified_wave": {
-          "id": "main_paper_realized_rewind_phase_plain_language_audit",
+          "id": "main_paper_localized_protected_seam_plain_language_audit",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "result": "Defined the suffix numeral X from bits listed newest row first, so the newest bit has weight 2^0. Stated the exact complementary phase identity theta = D - 1 - X, the singleton equivalence B - 1 <= X, and the equivalent frozen-prefix carry form B <= Z for Z = 1 + X. Preserved that no theorem supplies either coverage inequality at all large depths and that the criterion does not prove Erdős #257."
+          "result": "Defined realized localized seam at depth M in its exact forward-only sense: every seam-reachable carry k in [3,27] comes from an admissible word. Named the unique hole H = 2 delta - c and the proof's explicit choice of carry 4 when H = 3 and 3 otherwise. Preserved that compactness is conditional on an unproved cofinal realization supply and that Erdős #257 remains open."
         },
         "active_inconsistencies": [],
         "blocked_decisions": []
@@ -7540,7 +7540,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 3535
+        "line": 3537
       }
     },
     {
@@ -7551,7 +7551,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 3546
+        "line": 3548
       }
     },
     {
@@ -7562,7 +7562,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "the half-value counterexample route",
-        "line": 3567
+        "line": 3569
       }
     },
     {
@@ -7573,7 +7573,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 3558
+        "line": 3560
       }
     }
   ],
@@ -8087,7 +8087,7 @@
       "id": "localized_protected_seam_compactness",
       "label": "Localized protected seam compactness",
       "status": "conditional reduction",
-      "statement": "At each realized localized one-hole seam, at least one of protected carries 3 and 4 gives an admissible finite word. If such seam realizations occur cofinally, then cofinal admissibility and an infinite support A with erdosSupportSeries 2 A = 1/2 follow. The cofinal realization supply is not proved.",
+      "statement": "At depth M, realized localized seam means only the forward implication: every seam-reachable carry k in [3,27] is the terminal carry of an admissible finite word. The seam's unique hole is H = 2 delta - c, so choosing k = 4 when H = 3 and k = 3 otherwise supplies one admissible word. If such realizations occur cofinally, then cofinal admissibility and an infinite support A with erdosSupportSeries 2 A = 1/2 follow. The cofinal realization supply is not proved, so Erdős #257 remains open.",
       "remaining_open_proposition_ids": [
         "remaining_open.universal_257_all_infinite_supports"
       ],

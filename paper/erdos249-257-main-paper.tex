@@ -1382,14 +1382,16 @@ proof of Erd\H{o}s~\#257 follows.
 
 \subsubsection{Localised protected seams}\label{res:protectedseam}
 
-The compactness argument needs only one admissible word at cofinally many
-depths.  At a localised one-hole seam, one of the two protected carries $3$
-and $4$ survives; therefore a cofinal supply of realised protected seams
-implies cofinal admissibility by
+Here ``realised at depth $M$'' is only forward: each seam-reachable carry
+$k\in[3,27]$ comes from an admissible word
+(\lword{HalfCarryProtectedSeamConsumer.lean}{18}{ProtectedEvenSeamRealizedAt}{forward realisation}).
+The unique hole is $H=2\delta-c$; choose $k=4$ if $H=3$, and $k=3$
+otherwise.  This surviving carry gives cofinal admissibility from cofinally
+many such seams by
 \lword{HalfCarryProtectedSeamConsumer.lean}{31}{cofinalAdmissibility_of_cofinalProtectedEvenSeamRealization}{the protected-seam cofinality implication},
-and hence an infinite support with sum $1/2$,
+then compactness gives an infinite support with sum $1/2$,
 \lword{HalfCarryProtectedSeamConsumer.lean}{53}{exists_infinite_support_half_of_cofinalProtectedEvenSeamRealization}{by compactness}.
-The cofinal realisation supply is not proved.
+The cofinal supply is unproved, so Erd\H{o}s~\#257 remains open.
 
 \subsubsection{Combining the two cofinal half-carry criteria}\label{res:cofinalwindowseam}
 
