@@ -637,24 +637,22 @@ Uniqueness is the
 \lword{GreedyAchievementSet.lean}{1527}{positiveMersenneSupportValue_injective_normalized}{support-coding theorem}.
 Kova\v{c}--Tao provide the strict-tail Cantor-set context~\cite{kovactao}.
 
-\paragraph{Separate geometric and finite-arithmetic consequences.}
+\paragraph{Geometric and finite-arithmetic consequences.}
 Proposition~\ref{res:greedytopology} proves that \(\mathcal A\) is compact,
 perfect, totally disconnected, nowhere dense, and of Lebesgue measure \(1\).
-Proposition~\ref{res:death} proves soundness of exact rational evaluation and
-gives finite nonmembership certificates.  These results use the same greedy
-coordinates, but neither is a clause of the membership equivalence above.
-Their detailed statements and one-sided boundary are in
-Appendix~\ref{app:carry-geometry}.  No novelty claim is made for the
-strict-tail geometry.
-
-For the half-value question, Theorem~\ref{res:greedy} makes the greedy support
-canonical.  Proposition~\ref{res:greedytopology} supplies the compactness
-needed to pass from cofinal finite approximations to a point of \(\mathcal A\),
-whereas Proposition~\ref{res:death} gives finite certificates of
-nonmembership.  The
-measure-one statement is global and does not decide whether the particular
-point \(1/2\) belongs to \(\mathcal A\).  Before specialising to that point,
-we record the carry constraints forced by any rational
+Proposition~\ref{res:death} shows that the greedy recursion in exact rational
+arithmetic agrees step by step with the real recursion and gives sound finite
+certificates of nonmembership.
+For the half-value question, Theorem~\ref{res:greedy} makes the candidate
+support canonical, while compactness allows one to pass from cofinal finite
+approximations to a point of \(\mathcal A\).  The measure-one statement does
+not decide whether \(1/2\in\mathcal A\); a finite certificate can prove
+nonmembership, but survival through any finite depth proves nothing about
+membership.  These consequences use the same greedy coordinates but are not
+clauses of the membership equivalence.  Their detailed statements and the
+one-sided certificate boundary are in Appendix~\ref{app:carry-geometry}.  No
+novelty claim is made for the strict-tail geometry.  Before specialising to
+\(1/2\), we record the carry constraints forced by any rational
 \(X_A\in\mathcal A\); these are necessary conditions in the universal
 direction, not yet a contradiction.
 
