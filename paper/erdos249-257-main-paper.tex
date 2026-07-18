@@ -1438,22 +1438,22 @@ second conclusion.
 
 \subsubsection{Fatal gaps and eventual right tails}\label{app:fatalright-detail}
 
-For the concrete integer seam words, eventual right extension is equivalent
-to nonmembership of $1/2$ in the Mersenne achievement set:
-\lword{HalfCylinderFatalGapRightTail.lean}{787}{seamGreedyEventuallyRight_iff_half_not_mem}{the eventual-right nonmembership equivalence}.
-The same condition is equivalent to the existence of a finite fatal half gap,
-by
-\lword{HalfCylinderFatalGapRightTail.lean}{781}{seamGreedyEventuallyRight_iff_existsFatalHalfGap}{the fatal-gap equivalence},
-and also to a final skipped exponent in the real greedy orbit,
-by
-\lword{HalfCylinderFatalGapRightTail.lean}{802}{seamGreedyEventuallyRight_iff_exists_isLastHalfGreedySkip}{the final-skip equivalence}.
-Thus this equivalence gives an exact classification of the nonmembership branch.
-It neither decides whether $1/2$ belongs to the achievement set nor proves
-the universal Erd\H{o}s~\#257 statement.
+Call the seam eventually right if some $S\geq5$ has
+$G_{s+1}=G_s\cup\{s\}$ for every $s\geq S$: all later words append
+\texttt{true}.  Call a finite prefix $u$ through rank $d$ a fatal half gap if
+$V(u)+T_{d+1}<1/2<V(u)+w_{d+1}$.  Skipping rank $d+1$ then falls short even
+after the full tail, while taking it overshoots, so every continuation misses
+$1/2$.
 
-This is the nonmembership half of the argument summarised earlier: a last
-greedy skip is equivalent to eventual right extension.  The following
-paragraph records the first exceptional middle case that can be ruled out.
+For the concrete integer seam words, eventual right extension is equivalent
+to such a gap,
+\lword{HalfCylinderFatalGapRightTail.lean}{781}{seamGreedyEventuallyRight_iff_existsFatalHalfGap}{the fatal-gap equivalence},
+to nonmembership of $1/2$ in the Mersenne achievement set,
+\lword{HalfCylinderFatalGapRightTail.lean}{787}{seamGreedyEventuallyRight_iff_half_not_mem}{the nonmembership equivalence},
+and to a final skipped exponent in the real greedy orbit,
+\lword{HalfCylinderFatalGapRightTail.lean}{802}{seamGreedyEventuallyRight_iff_exists_isLastHalfGreedySkip}{the final-skip equivalence}.
+This classifies the nonmembership branch exactly.  It does not decide which
+branch holds or prove universal Erd\H{o}s~\#257.
 
 \paragraph{First final-middle cell.}  The first exceptional middle cell has a
 separate obstruction: if the orbit extends right after the last skipped rank,
