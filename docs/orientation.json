@@ -56,7 +56,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "Erd\\H{o}s \\#249",
-    "line": 3504
+    "line": 3507
    }
   },
   {
@@ -67,7 +67,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "unbounded certificate supply",
-    "line": 3515
+    "line": 3518
    }
   },
   {
@@ -78,7 +78,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "the half-value counterexample route",
-    "line": 3536
+    "line": 3539
    }
   },
   {
@@ -89,7 +89,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "universal Erd\\H{o}s \\#257",
-    "line": 3527
+    "line": 3530
    }
   }
  ],
@@ -559,18 +559,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_mixed_prime_power_layer_plain_language_audit",
+   "id": "main_paper_half_trapping_return_carry_plain_language_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "Appendix A.2.3 introduces one-prime-power layers, a two-signature extension, commuting p-adic and q-adic operators, and an iterated exact-valuation pullback without defining the layer operator or saying what coefficient it selects",
-   "statement": "Define the prime-power layer directly from the support coefficient and state the two-prime identity in ordinary valuation language, while preserving the coprimality hypothesis, the singleton {12} fixture, commutation, and the boundary that the result supplies no decimation transport, bounded-Ω conclusion, or irrationality theorem."
+   "defect_class": "Appendix A.2.4 begins with rational-linear channels, relations killed by a scalar evaluation, a rank-one matrix, reverse carries, a 1/0 seam, and an overlapping return without defining the data or showing how the determinant and spacing conclusions are connected",
+   "statement": "Explain the rank-one determinant criterion and the two-reverse-carry spacing argument in reader-facing terms, while preserving the exact relation hypothesis, seam and overlap assumptions, power-of-two-times-odd conclusion, Archimedean bound, and boundary that the argument supplies no reverse-carry presentations or earlier return."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "ebc98ee71f6819bd9fe344a0bb343542c604e533",
-  "committed_navigation_snapshot": "3a0af9b514b77eecc69fd7beb068ef9a9dfffa61",
-  "main_paper_source_digest": "sha256:dbe3a582d72701a23780ed44eb06c03a25e258e59f4f9a338ad29ede3f904b8f"
+  "committed_navigation_snapshot": "4cd83d5ebcf24a892f09b388ed4be57ca66e71de",
+  "main_paper_source_digest": "sha256:0716e5c43c3ec1cc236b2c82588ee0af80a5c6627a4eef8dad740f3b9e2232ef"
  },
  "reading_routes": [
   {
