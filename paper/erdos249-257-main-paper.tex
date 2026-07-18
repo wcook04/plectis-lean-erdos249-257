@@ -3040,21 +3040,25 @@ half-value nonmembership, but not half-value membership or either status of
 \(S\) within these certificate systems.
 
 \begin{remark}[boundaries visible from the normal forms]
-Two elementary observations, neither formalised in the source, show that
-the missing quantifiers cannot be crossed by finite inspection or by the
-shared geometry alone.  For \#249, a coefficient stream agreeing with
-\(\ph\) on every index inspected by any fixed finite family of
-computations extends to a rational series in the same class; the splice
-is recorded in Section~\ref{sec:249-open}.  For the half-value fibre, the
-strict-tail axioms and any finite prefix of greedy decisions are jointly
-consistent with both outcomes: replacing the weights beyond the inspected
-range by a ratio-one-third geometric sequence with total mass below the
-pending residual (respectively equal to it) preserves strict tails, leaves
-every inspected decision unchanged, and makes the last inspected skip
-final (respectively realises the target as the modified system's complete
-remaining sum).
-A membership proof must therefore use the specific Mersenne arithmetic of the
-tail, not only its superincreasing geometry.
+The following two elementary countermodels are not formalised in the source.
+Both alter the object beyond a finite inspected range; neither makes a claim
+about the actual totient stream or the actual Mersenne weights.
+
+For \#249, any fixed finite family of certificate computations inspects only
+finitely many coefficients.  The splice in Section~\ref{sec:249-open}
+constructs a stream \(\gamma\) agreeing with \(\ph\) on all of them, still
+satisfying \(0\leq\gamma(n)\leq n\), whose binary series is rational.  The
+same finite output is therefore compatible with rationality.  A proof of the
+missing supply must use totient values beyond every fixed bound.
+
+For the half-value route, fix any finite prefix of greedy decisions and
+replace only the uninspected weights by a ratio-one-third geometric tail.
+If its total mass is below the pending residual, the complete modified tail
+falls short and the last inspected skip is final.  If its total mass equals
+the residual, that tail realises the target.  Both choices preserve strict
+tails and every inspected decision.  Thus a finite prefix and strict-tail
+geometry do not decide membership; a proof must use the specific Mersenne
+arithmetic of the tail.
 \end{remark}
 
 \section{Formal verification and reproducibility}\label{sec:verify}
