@@ -1249,17 +1249,24 @@ The cofinal return condition itself is not established.  It is weaker than a
 uniform strip bound and still does not give an unconditional membership
 theorem.
 
-\paragraph{Terminal-only cofinal approximation.}  Coherence can be removed
-entirely from a further version of this reduction.  At depth $M$, take only a
-normalised finite word whose terminal half carry lies in the square-root
-strip.  Its finite support then has support-series value within
+\paragraph{Terminal-only cofinal approximation.}  A \emph{terminal-only
+witness} at depth $M$ is a Boolean word $a$ with $a_0=a_1=0$; its earlier
+carries are unrestricted, while its terminal carry $K_M$ satisfies
+$|K_M|\leq H_M$.  Put $A=\{d:a_d=1\}$,
+$X_A=\sum_{d\in A}(2^d-1)^{-1}$, and
+$T_M=\sum_{j\geq1}f_A(M+j)2^{-j}$.  The exact residual identity is
+$K_M=2^M(1/2-X_A)+T_M$.  Since both $|K_M|$ and $T_M$ are at most
+$2\sqrt M+4$,
 \[
- \frac{4M+12}{2^M}
+ \left|X_A-\frac12\right|
+ \leq\frac{4\sqrt M+8}{2^M}
+ \leq\frac{4M+12}{2^M}.
 \]
-of $1/2$.  If such terminal witnesses occur cofinally, these finite values
-converge to $1/2$; closedness of the Mersenne achievement set supplies the
-limit.  No control of the earlier rows, and no compatibility between the
-witnesses, is used.
+For witnesses at cofinally large depths, the last bound tends to zero.  Each
+$X_A$ belongs to the closed Mersenne achievement set, so their limit $1/2$
+also belongs to it.  The words at different depths need not agree, and the
+finite-support obstruction forces the support representing the limit to be
+infinite.
 
 \begin{proposition}[terminal-only cofinal criterion]\label{res:terminalonlycofinal}
 Cofinal normalised terminal witnesses in the square-root strip imply that

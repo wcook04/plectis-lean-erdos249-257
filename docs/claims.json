@@ -901,15 +901,15 @@
         "schema": "erdos249257-editorial-state/1",
         "scope": "continuous_whole_main_paper_exposition",
         "current_priority": {
-          "id": "main_paper_terminal_only_cofinal_plain_language_audit",
+          "id": "main_paper_scaled_terminal_vanishing_plain_language_audit",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "defect_class": "The terminal-only cofinal paragraph invokes a normalised terminal witness, its support-series error, closedness, and the absence of coherence without defining the witness data or displaying the residual-to-error implication",
-          "statement": "Define a normalised finite terminal witness and its terminal carry, explain how the exact residual identity gives the stated error bound and why cofinal depths plus closedness yield half-membership, while preserving that no witness supply or unconditional membership theorem is proved."
+          "defect_class": "The scaled terminal-vanishing paragraph refers to a normalised terminal-word sequence, a universal coefficient-tail error, and a weaker sequential hypothesis without naming the sequence data or displaying the exact error estimate",
+          "statement": "Define the depths, finite supports, and terminal carries in a scaled-vanishing sequence, display the carry-plus-tail error bound, and explain why its two terms vanish and closedness yields half-membership, while preserving that no such sequence or unconditional membership theorem is proved."
         },
         "last_verified_wave": {
-          "id": "main_paper_cofinal_strip_return_plain_language_audit",
+          "id": "main_paper_terminal_only_cofinal_plain_language_audit",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "result": "Defined the uncentred greedy carry G_N, its binary scaling S_N, and the scaled square-root envelope B_N. Displayed the recurrence showing that S_N is non-increasing, the epsilon argument by which one sufficiently late return bounds every later scaled carry, and the conversion from G_N to the centred tempered carry. Preserved the unproved cofinal-return hypothesis and conditional half-membership boundary."
+          "result": "Defined a terminal-only witness by its normalisation and sole terminal-carry bound, with no earlier-row constraints. Displayed the exact residual identity and the resulting square-root and linearised support-series error bounds, then explained how cofinal depths and closedness yield half-membership without coherent words. Preserved the unproved witness supply and the finite-support obstruction giving an infinite limiting support."
         },
         "active_inconsistencies": [],
         "blocked_decisions": []
@@ -7540,7 +7540,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 3524
+        "line": 3531
       }
     },
     {
@@ -7551,7 +7551,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 3535
+        "line": 3542
       }
     },
     {
@@ -7562,7 +7562,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "the half-value counterexample route",
-        "line": 3556
+        "line": 3563
       }
     },
     {
@@ -7573,7 +7573,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 3547
+        "line": 3554
       }
     }
   ],
