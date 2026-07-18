@@ -355,8 +355,10 @@ Whenever \(\sum_{n\ge1}|f(n)|/(2^n-1)<\infty\), define the Lambert transform by
 L(f)\;=\;\sum_{n\ge1}\frac{f(n)}{2^n-1}\;=\;\sum_{m\ge1}\frac{(f*\mathbf 1)(m)}{2^m},
 \qquad (f*\mathbf 1)(m)=\sum_{d\mid m} f(d),
 \]
-the second equality being the absolutely convergent Lambert rearrangement (one Dirichlet
-convolution by the constant arithmetic function $\mathbf 1$); Apostol supplies the classical
+the second equality being the absolutely convergent Lambert rearrangement,
+obtained by convolving \(f\) once with the constant function \(\mathbf 1\).
+Here \(\mathbf 1(n)=1\), \(\mathrm{Id}(n)=n\), \(\mu\) is the M\"obius
+function, and \(\sigma(m)=\sum_{d\mid m}d\).  Apostol supplies the classical
 arithmetic-function and Dirichlet-convolution background~\cite{apostol}; Merca
 introduced a modern Lambert-series factorisation theorem~\cite{merca2017}, and
 Merca--Schmidt give a synthesis/unification treatment~\cite{mercaschmidt}.
@@ -429,7 +431,7 @@ stream of \(\mu\) is \(1,0,0,\ldots\) and the rearranged series is
 \lword{MersenneLambertLadder.lean}{575}{tsum_totient_div_two_pow_sub_one_eq_two}{totient rung}.
 
 \begin{proposition}[positive lift]\label{res:lift}
-With the primitive-conductor weight $\alpha=\ph*\mu$,
+With the weight $\alpha=\ph*\mu$,
 \[
 \sum_{d\ge1}\frac{\alpha(d)}{2^d-1}\;=\;\sum_{n\ge1}\frac{\ph(n)}{2^n}\;=\;S.
 \]
@@ -510,7 +512,7 @@ This is the formal
 \lword{CertificateKernel.lean}{5792}{irrational_of_int_mul_near_int}{near-integer criterion}.
 
 The construction of $N$ is divided into three finite parts.  First, a bounded
-Bertrand argument supplies disjoint prime blocks, and the Chinese remainder
+use of Bertrand's postulate supplies disjoint prime blocks, and the Chinese remainder
 theorem chooses an arithmetic progression on which
 \[
         b^r\mid \tau(N+r) \qquad (1\leq r\leq K).
@@ -587,17 +589,16 @@ that
 \]
 is irrational~\cite{taoteravainen}. Their proof uses quantitative two-point
 correlations of multiplicative functions and is not formalised here. This
-settles an important special case, while the universal support statement
+settles the prime-support case, while the universal support statement
 remains open.
 
-The factorial and power-of-two cases are worth a word because they are not
-reachable by a Liouville shortcut: the power-of-two gap $2^k-\lcm$ stays within a
-bounded ratio of the $\lcm$, so the terms do not decay fast enough for a
-transcendence-measure argument, and a uniform criterion is needed. The mechanism
-is \emph{period noncollapse}: a
-prime-valuation-deficit witness forces the multiplicative order of the base modulo
-the relevant modulus not to collapse, which rules out the long repeated digit
-blocks a rational value would require.
+Cases~\textup{(a)} and~\textup{(b)} both use the lcm-gap criterion.  The
+power-of-two case is not a Liouville argument: before \(2^k\), the prefix lcm is
+\(2^{k-1}\), so the gap has only the same size as the lcm.  Period noncollapse
+gives the finite input: the order of \(b\) modulo the reduced denominator of a
+partial sum equals that prefix lcm.  The denominator therefore exceeds the lcm,
+while the additive gap to the next exponent still tends to infinity; the tail
+is then too small for a rational limit.
 
 \paragraph{Transition to the counterexample direction.}
 The results above enlarge the family of supports for which irrationality is
