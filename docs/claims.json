@@ -901,15 +901,15 @@
         "schema": "erdos249257-editorial-state/1",
         "scope": "continuous_whole_main_paper_exposition",
         "current_priority": {
-          "id": "main_paper_remaining_middle_tail_obligations_plain_language_audit",
+          "id": "main_paper_upper_reset_band_certificate_plain_language_audit",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "defect_class": "The remaining final-middle discussion interleaves a finite 412-of-2730 residue sieve with the distinct complete-tail and row-scale escape sockets, while belowPulse and remainder appear locally without a cold-reader definition",
-          "statement": "Separate the finite phase restriction from the two genuinely open arithmetic obligations: excluding the -2 and -1 cells and proving C_D > Theta_D in the remaining middle cases. Define the finite row quantities used by the cardinality and row-scale sufficient conditions, and preserve that decreasing residue density is not finite extinction."
+          "defect_class": "The finite upper-reset paragraph uses danger band, shared successor remainder, band index, and cofinal band escape as internal terms without explaining the finite quantified statement or why rows 13 through 30 do not address the unbounded reset problem",
+          "statement": "Define the upper-reset successor and its dyadic danger bands in reader-facing notation, state exactly what is checked for every reset row 13 <= D <= 30, and separate the reused exact remainder from the band inequalities. Preserve that this is a bounded certificate family and supplies no cofinal upper-reset escape theorem."
         },
         "last_verified_wave": {
-          "id": "main_paper_final_middle_minus_three_plain_language_audit",
+          "id": "main_paper_remaining_middle_tail_obligations_plain_language_audit",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "result": "Defined the lazy cofinite support B_D = u union {n : n > D} at a putative final skip and restated C_D = 4 R_(D,D) - P_D - 4. Explained the exact sequence: the carry swap sends C_D = -3 to centred carry zero at row 2D+1; coefficient rows with at least one and two forced divisors then make it negative by row 2D+3, contradicting nonnegativity for a support below 1/2. Preserved that only the -3 cell is excluded."
+          "result": "Separated the finite -2 residue sieve from the global tail criterion: 412 of 2730 classes are a necessary condition, not an exclusion, and vanishing survivor density need not imply extinction. Stated the two open inputs exactly: exclude C_D = -2,-1 and prove Theta_D < C_D for remaining C_D >= 0. Replaced internal belowPulse/remainder notation by P_D and R_(D,D), and explained that g_D + P_D + 5 < 4 R_(D,D) is exactly g_D + 1 < C_D and therefore dominates Theta_D."
         },
         "active_inconsistencies": [],
         "blocked_decisions": []
@@ -8255,7 +8255,7 @@
       "id": "final_middle_neg_two_phase_sieve",
       "label": "Rank-26 phase sieve for the final middle -2 cell",
       "status": "conditional reduction",
-      "statement": "For every seam row s ≥ 27, the greedy decisions through rank 26 select exactly ranks 2, 3, 6, 7, 14, 20, 21, and 26. Consequently, in a hypothetical final middle -2 cell at rank D ≥ 27 followed by an all-right suffix, D mod 21 lies in {11, 14, 17, 20}, D mod 10 is not 8, the mod-10 class 7 cannot pair with the mod-21 class 11, D mod 13 is not 11, and the mod-13 class 10 cannot pair with the mod-21 class 11. Exactly 412 of the 2730 joint residue classes survive. This phase sieve restricts but does not eliminate the -2 cell, and it does not decide the middle -1 or right-tail branches.",
+      "statement": "For every seam row s ≥ 27, the greedy decisions through rank 26 select exactly ranks 2, 3, 6, 7, 14, 20, 21, and 26. Consequently, in a hypothetical final middle -2 cell at rank D ≥ 27 followed by an all-right suffix, D mod 21 lies in {11, 14, 17, 20}, D mod 10 is not 8, the mod-10 class 7 cannot pair with the mod-21 class 11, D mod 13 is not 11, and the mod-13 class 10 cannot pair with the mod-21 class 11. Exactly 412 of the 2730 joint residue classes survive. This is a finite necessary condition, not an exclusion; even a later survivor density tending to zero would not suffice without finite extinction or an Archimedean contradiction. The -1 and right-tail branches remain open.",
       "remaining_open_proposition_ids": [
         "remaining_open.half_value_membership"
       ],
@@ -8288,7 +8288,7 @@
       "id": "last_producer_tail_escape_reduction",
       "label": "Last-producer tail-escape reduction",
       "status": "conditional reduction",
-      "statement": "If every genuine middle producer other than the locally discharged -3 cell has producer carry larger than its complete future divisor-incidence tail, then an eventual right seam is impossible and 1/2 belongs to the Mersenne achievement set. A stated square-root producer lower bound is a sufficient stronger socket. Neither socket is proved here.",
+      "statement": "If every actual middle transition at D ≥ 13 other than the discharged cell C_D = -3 satisfies Theta_D < C_D, then an eventual right seam is impossible and 1/2 belongs to the Mersenne achievement set. Since Theta_D ≥ 0, this leaves two open inputs: exclude C_D = -2,-1 and prove Theta_D < C_D at every remaining transition with C_D ≥ 0. A square-root producer lower bound is a separate sufficient hypothesis. None of these arithmetic inputs is proved.",
       "remaining_open_proposition_ids": [
         "remaining_open.half_value_membership"
       ],
@@ -8311,7 +8311,7 @@
       "id": "middle_producer_cardinality_reduction",
       "label": "Finite-prefix middle-producer cardinality reduction",
       "status": "conditional reduction",
-      "statement": "For a finite seam prefix, the future divisor-incidence tail is at most the prefix cardinality. Hence the explicit inequality card(below support) + belowPulse + 5 < 4 * remainder forces half-membership in the Mersenne achievement set; the still stronger hypothesis that every late middle remainder is at least its row also suffices. Neither arithmetic hypothesis is proved here.",
+      "statement": "Put g_D = #G_D. The augmented finite support A_D = G_D union {D} has g_D + 1 elements, so its complete future divisor-incidence tail satisfies Theta_D ≤ g_D + 1. Since C_D = 4 R_(D,D) - P_D - 4, the inequality g_D + P_D + 5 < 4 R_(D,D) is exactly g_D + 1 < C_D; required at every late middle transition, it excludes the negative cells and proves tail dominance, hence half-membership. The stronger row-scale hypothesis R_(D,D) ≥ D also suffices. Neither hypothesis is proved.",
       "remaining_open_proposition_ids": [
         "remaining_open.universal_257_all_infinite_supports"
       ],

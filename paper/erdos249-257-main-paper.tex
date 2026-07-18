@@ -1490,33 +1490,33 @@ The three moduli are pairwise coprime, so their phase triples correspond to
 the \(21\cdot10\cdot13=2730\) residue classes modulo \(2730\).  Exactly
 \(412\) survive; this finite count is
 \lword{HalfFinalMiddlePhaseSieve.lean}{2050}{finalMiddleTwentySixPhaseSurvivors_card}{the exact survivor count}.
-This is a uniform exact reduction of the $-2$ cell, not its exclusion; the
-surviving phases, the $-1$ cell, and the right-tail branch remain open.
-A smaller survivor proportion at deeper ranks would still not exclude the
-cell.  A nested system of nonempty residue classes can have vanishing density
-and a nonempty inverse limit.  This route must therefore either reach finite
-extinction at some rank or add an Archimedean estimate at a surviving phase.
+Thus a hypothetical final $C_D=-2$ transition lies in one of $412$ classes
+modulo $2730$, a finite necessary condition rather than an exclusion; the
+$-1$ cell is untouched.  Even a survivor density tending to zero would not
+suffice, since nested nonempty residue sets can have a nonempty inverse limit.
+This route needs an empty finite sieve or an Archimedean contradiction.
 
-The remaining global reduction is now precise.  If every genuine middle
-transition other than the already discharged $C_D=-3$ cell has transition carry larger than
-its complete future divisor-incidence tail, then an eventual right seam is
-impossible and $1/2$ belongs to the Mersenne achievement set:
+\paragraph{The two remaining inputs.}  The criterion requires
+$\Theta_D<C_D$ at every actual middle transition $D\ge13$ except $C_D=-3$.
+Since $\Theta_D\ge0$, exactly two open tasks remain: exclude $C_D=-2,-1$,
+and prove $\Theta_D<C_D$ at every remaining transition with $C_D\ge0$.
+Together they imply half-membership,
 \lword{HalfCylinderLastProducerContradiction.lean}{387}{half_mem_mersenneAchievementSet_of_middleProducerTailEscapeExceptNegThree}{middle-tail implication}.
-The stronger square-root lower-bound hypothesis is also sufficient,
+Neither task is proved.  A square-root lower bound is a separate sufficient
+but unproved hypothesis,
 \lword{HalfCylinderLastProducerContradiction.lean}{409}{half_mem_mersenneAchievementSet_of_middleProducerSqrtEscape}{square-root sufficient condition}.
-Neither hypothesis is supplied here.
 
-For finite seam prefixes the remaining tail bound sharpens further: the
-future divisor-incidence tail is bounded by the cardinality of the prefix.
-Thus the explicit row-scale inequality
-\(\#G_D+\mathrm{belowPulse}_D+5<4\,\mathrm{remainder}_D\) is sufficient for
-the same half-membership conclusion.  The hypothesis is
+A single stronger finite hypothesis supplies both tasks.  Put $g_D=\#G_D$.
+Since $A_D=G_D\cup\{D\}$ has $g_D+1$ elements, $\Theta_D\le g_D+1$.
+Using $C_D=4R_{D,D}-P_D-4$, the condition
+$g_D+P_D+5<4R_{D,D}$ is exactly $g_D+1<C_D$.  At every late middle row it
+therefore excludes the negative cells and proves tail dominance.  This is
 \lword{HalfCylinderMiddleCarryLowerBound.lean}{111}{SeamMiddleProducerCardEscape}{the cardinality escape condition},
-and the resulting membership theorem is
+and its membership consequence is
 \lword{HalfCylinderMiddleCarryLowerBound.lean}{1503}{half_mem_mersenneAchievementSet_of_middleProducerCardEscape}{the prefix-cardinality bound};
-it is enough in turn that every late middle remainder is at least its row,
+it follows in turn from $R_{D,D}\ge D$ at every late middle row,
 \lword{HalfCylinderMiddleCarryLowerBound.lean}{1510}{half_mem_mersenneAchievementSet_of_middleProducerRowEscape}{row-scale sufficient condition}.
-These are exact conditional reductions, not proofs of the row bound.
+Both hypotheses are unproved.
 
 \paragraph{Finite upper-reset band certificates.}  The companion upper
 branch has a kernel-checked finite certificate: for every upper transition
