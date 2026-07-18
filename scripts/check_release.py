@@ -26,10 +26,12 @@ This script verifies that every other public surface agrees with it:
      without weakening the proof or open-problem boundary, and CONTRIBUTING.md
      describes the cold-clone baseline-plus-adversarial program as a release
      gate rather than an advisory diagnostic.
-  9. Proof-trust guard: no sorry/admit/axiom or native evaluator in the
+ 9. Proof-trust guard: no sorry/admit/axiom or native evaluator in the
      Lean sources.
  10. The methodology source, generated root projection, claim-transition
      requirements, descriptor capsule, and entry routes agree.
+ 11. The systems paper's historical outcome and explicit evidence ceilings
+     agree with the typed publication-evidence receipt.
 Stdlib only; run from the repository root:  python3 scripts/check_release.py
 """
 
@@ -49,6 +51,10 @@ from publication_contract import (
     validate_publication_contract,
 )
 from query_corpus import paper_anchor_inventory
+from systems_paper_evidence import (
+    mutation_fixture_failures as systems_paper_mutation_fixture_failures,
+    validate_systems_paper_evidence,
+)
 
 ROOT = Path(__file__).resolve().parent.parent
 ERRORS: list[str] = []
@@ -367,6 +373,18 @@ def main() -> int:
         not publication_fixture_failures,
         "publication artifact mutation fixtures stopped rejecting: "
         + ", ".join(publication_fixture_failures),
+    )
+    systems_paper_errors = validate_systems_paper_evidence()
+    check(
+        not systems_paper_errors,
+        "systems paper evidence crosswalk failed: "
+        + "; ".join(systems_paper_errors),
+    )
+    systems_paper_fixture_failures = systems_paper_mutation_fixture_failures()
+    check(
+        not systems_paper_fixture_failures,
+        "systems paper evidence fixtures stopped rejecting: "
+        + ", ".join(systems_paper_fixture_failures),
     )
     if ERRORS:
         print(
@@ -1199,6 +1217,18 @@ def main() -> int:
     )
     check(query_check.returncode == 0,
           f"corpus query surface failed: {query_check.stdout.strip() or query_check.stderr.strip()}")
+    mutation_harness_check = subprocess.run(
+        [sys.executable, str(ROOT / "scripts" / "test_publication_mutation_harness.py")],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    check(
+        mutation_harness_check.returncode == 0,
+        "publication mutation harness self-test failed: "
+        f"{mutation_harness_check.stdout.strip() or mutation_harness_check.stderr.strip()}",
+    )
     # The adversarial program starts by running the complete baseline against
     # one collected packet set, then mutates that same set.  Running the
     # standalone diagnostic here as well would repeat every bounded query.

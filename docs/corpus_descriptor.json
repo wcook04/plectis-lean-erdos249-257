@@ -49,7 +49,7 @@
 },
 "claims_document": {
 "path": "docs/claims.json",
-"content_digest": "sha256:43e248ff860f332170495ba6cd60f9e4adb1c19eb03ce05038efc037d7ec9f20"
+"content_digest": "sha256:12623720e35d003ed40473318895f3873e3ae2df525990a97a325c42f81d63e7"
 },
 "declaration_atlas": {
 "path": "docs/declaration_atlas.json",
@@ -62,13 +62,13 @@
 },
 "bounded_orientation": {
 "path": "docs/orientation.json",
-"content_digest": "sha256:4c8920cf589e1ceab3d4852b0359aac19b5d7cc024786fb97bfdfb4b257f358e"
+"content_digest": "sha256:9ff4d5c7595fcb7029f6ca676f1fbc9574da0576faa8c7f64178b8cc9c7e09ad"
 },
 "human_exposition": {
 "source_path": "paper/erdos249-257-main-paper.tex",
-"source_content_digest": "sha256:8312dc9d532633170b851947e016182aed671d012e72fd5f5f454ba9fa05d249",
+"source_content_digest": "sha256:58dfcc8651bdad2b709c7a9c0b22494288220ead8d9d698dc434dde22f3e5d32",
 "rendered_path": "erdos249-257-main-paper.pdf",
-"rendered_content_digest": "sha256:f32c1028efd351b299557c42c1a365fd4c9b5248519916168f488d168a64330b",
+"rendered_content_digest": "sha256:aa0f3303a70ab154edfc60fd6575a18050bd00d173704dfd98e7109d58a5fa36",
 "artifact_role": "authored_mathematician_facing_exposition",
 "authority_posture": "authored_editorial_surface_not_Lean_proof_authority"
 },
@@ -480,7 +480,7 @@
 "source": "paper/erdos249-257-main-paper.tex",
 "environment": "problem",
 "title": "Erd\\H{o}s \\#249",
-"line": 3456
+"line": 3460
 }
 },
 {
@@ -491,7 +491,7 @@
 "source": "paper/erdos249-257-main-paper.tex",
 "environment": "problem",
 "title": "unbounded certificate supply",
-"line": 3467
+"line": 3471
 }
 },
 {
@@ -502,7 +502,7 @@
 "source": "paper/erdos249-257-main-paper.tex",
 "environment": "problem",
 "title": "the half-value counterexample route",
-"line": 3488
+"line": 3492
 }
 },
 {
@@ -513,7 +513,7 @@
 "source": "paper/erdos249-257-main-paper.tex",
 "environment": "problem",
 "title": "universal Erd\\H{o}s \\#257",
-"line": 3479
+"line": 3483
 }
 }
 ],
@@ -1811,9 +1811,9 @@
 },
 "human_exposition": {
 "source_path": "paper/erdos249-257-main-paper.tex",
-"expected_source_content_digest": "sha256:8312dc9d532633170b851947e016182aed671d012e72fd5f5f454ba9fa05d249",
+"expected_source_content_digest": "sha256:58dfcc8651bdad2b709c7a9c0b22494288220ead8d9d698dc434dde22f3e5d32",
 "rendered_path": "erdos249-257-main-paper.pdf",
-"expected_rendered_content_digest": "sha256:f32c1028efd351b299557c42c1a365fd4c9b5248519916168f488d168a64330b",
+"expected_rendered_content_digest": "sha256:aa0f3303a70ab154edfc60fd6575a18050bd00d173704dfd98e7109d58a5fa36",
 "authority_posture": "authored_editorial_surface_not_Lean_proof_authority"
 },
 "paper_source_sigils": {

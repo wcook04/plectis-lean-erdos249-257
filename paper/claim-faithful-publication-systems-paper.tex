@@ -35,8 +35,8 @@ faithfully.  Between a machine-checked theorem and a public mathematical claim
 there is a step no proof assistant performs: a person judges what
 the theorem means and what may responsibly be said about it.  This paper
 describes how one public mathematics repository organises that step.  A maintainer-reviewed claim record states, for selected
-results, the public wording, the supporting Lean declarations, the bounded
-domain, and the conclusion that remains open.  A release checker then verifies
+results, the public wording, status, and supporting Lean declarations and,
+where applicable, a bounded domain and a link to what remains open.  A release checker then verifies
 recorded relationships: declaration names near recorded source lines, exact
 identity of the checked Lean source, required limitation wording, and freshly
 rebuilt generated files.  Continuous integration runs that checker
@@ -46,7 +46,7 @@ the public wording passed every release check because the relevant relationship 
 not yet been recorded; by an equivalence proved in the development, that
 stronger wording amounted to claiming an open problem settled.  Recording the missing
 relationship afterwards makes the same false edit fail, which is coverage
-growth rather than demonstrated reliability.  The checks preserve reviewed relationships; they do
+growth rather than demonstrated reliability.  The checks preserve reviewed relationships within their configured perimeter; they do
 not interpret unrestricted prose, and the mathematical judgement remains
 human.
 \end{abstract}
@@ -88,8 +88,8 @@ claim.
 
 The repository keeps a \emph{maintainer-reviewed claim record} in
 \texttt{docs/claims.json}.  For each selected result the record
-states the public wording, its status, the Lean declarations that support it,
-the bounded domain it covers, and the registered conclusion that remains open.
+states the public wording, its status, and the Lean declarations that support it;
+where applicable it also records a bounded domain and a remaining-open proposition.
 A release checker,
 \texttt{scripts/\allowbreak check\_\allowbreak release.py}, then verifies that the
 recorded relationships still hold across the Lean source, the record itself,
@@ -160,10 +160,9 @@ relationships remain intact before a release.
 \node[checkbox, text width=5.4cm] (release) at (9.6, -4.70)
   {\textbf{release-surface job}\\[1pt]
    {\footnotesize\texttt{python3 scripts/check\_release.py}\\
-   source identity, claim fields, generated files, required wording}};
+   all four artefacts: source identity, claim fields,\\ generated files, required wording}};
 \draw[flow] (1.8,-3.35) -- (build.north) node[lab, pos=0.62, anchor=east, xshift=-0.5mm] {proof sources};
 \draw[flow] (9.6,-3.35) -- (release.north);
-\node[lab] at (10.45,-3.35) {all four artefacts reach the release job};
 \node[gate] (gate) at (6.0, -6.35) {\footnotesize both jobs pass?};
 \draw[flow] (build.south) |- (gate.west);
 \draw[flow] (release.south) -- (9.6,-5.95) -| (gate.north);
@@ -182,7 +181,7 @@ source proves the stated theorems.  Maintainer review asserts the
 within stated limits.  The release job checks \emph{persistence relations}:
 recorded names, wording, identities, and generated files still agree.
 Continuous integration reruns the first and third; nothing performs the
-second mechanically, and neither job reads unrestricted prose.
+second mechanically, and neither job interprets unrestricted prose.
 In the worked example of Section~\ref{sec:example} the protected object is
 the recorded boundary between
 the finite theorem and the open requirement.}
@@ -285,7 +284,8 @@ one.  The
 diagonal $H_t=\operatorname{lcm}(1,\dots,t)$ is divisible by every candidate
 period up to $t$, so, roughly speaking, one certificate along the diagonal,
 which fixes both the period and the position to $H_t$,
-speaks to all of those periods at once.  The development proves the
+speaks to candidate representations with those periods whose pre-period is at
+most $H_t$.  An unbounded supply eventually dominates both quantities.  The development proves the
 compression exact: certificates along the diagonal beyond every fixed cutoff
 are equivalent to the full two-parameter requirement, and therefore, through
 the chain
@@ -386,8 +386,8 @@ requirement of Section~\ref{sec:mathrole}, and the status, \emph{verified
 finite instance}, is the record's name for the kind of thing the finite
 theorem is.  Under the equivalence the remaining-open field is
 part of the claim's identity rather than an optional caution: remove it, and
-the entry no longer separates the finite theorem from an answer to
-Problem 249.  A record can be precise
+the entry loses its explicit link from the finite theorem to the still-open
+condition that, by the equivalence, would answer Problem 249.  A record can be precise
 without being pedagogy: its job is to be the stable object that explanatory
 prose, the release checker, and the generated views refer to; the further
 gap between an exact claim and a reader's understanding of it is the job of
@@ -551,10 +551,10 @@ the retained record, and Appendix~\ref{app:repro} states what survives.
 The retained maintainer record reports that, at a pinned repository
 checkpoint, identified exactly in the evidence file, ten deliberate false
 edits were applied to an isolated working
-copy, one at a time, with the copy restored between runs.  The full release
-gate ran after each edit: the release checker alone, which does not run
-Lean, so the formal proof job was not part of the per-edit loop.  The
-edits targeted the seven recorded relationship families: proof-trust policy,
+copy, one at a time, with the copy restored between runs.  The release checker
+ran after each edit; it does not run Lean, so the formal proof job was not part
+of the per-edit loop.  The
+edits targeted the seven recorded invariant families: proof-trust policy,
 record structure, source coordinates, paper link anchors, boundary wording,
 generated-view freshness, and size budgets.  Representative edits upgraded a
 conditional status to ``proved here'', deleted an open-boundary clause from
@@ -585,8 +585,8 @@ The repair had two parts.  The clause became a declared anchor: required
 wording on the public page, recorded in the checklist.  And the checklist
 derives from each such anchor an opposing example: a copy of the page with
 the clause weakened or removed must be rejected.  The intact text was then
-rechecked and passed; the same false edit now fails.  The retained failing
-copy is a \emph{boundary witness}: it demonstrates that, for this one
+rechecked and passed; the same false edit now fails.  The reconstructed false
+edit is a \emph{boundary witness}: it demonstrates that, for this one
 relationship, the check separates the approved page from a known false
 neighbour, and it demonstrates nothing else; that is coverage growth, not
 general effectiveness.  The other nine edits
@@ -597,7 +597,7 @@ This exercise demonstrates a coverage boundary, not a reliability score.  Its
 ceilings should be stated as plainly as its outcome.  The edits were authored
 by the checker's author, so the human review gate of
 Figure~\ref{fig:architecture} was deliberately out of the loop and the
-exercise measures the recorded checklist alone; most relationship families
+exercise measures the recorded checklist alone; most invariant families
 were probed by
 exactly one edit.  The exercise covers one repository, one maintainer, and
 one working style, with no comparison against ordinary continuous integration
@@ -605,8 +605,8 @@ or careful manual review.  The nine reported rejections rest on the retained
 record alone; only the intact baseline and the escaped edit have present-day
 replays.  The original run logs were not retained; the
 evidence file records the protocol, the outcomes, and these limitations, and
-a deterministic reconstruction of the edits can be replayed against the
-current checker, but the reconstruction is not the original evidence.  What
+a deterministic reconstruction of the edits can be replayed at the pinned
+checkpoint (or another explicitly selected green base), but the reconstruction is not the original evidence.  What
 survives all of these ceilings is the design lesson:
 
 \begin{quote}
@@ -618,10 +618,10 @@ The residual risk follows the same line: requiring a clause to be present
 does not detect a contradictory stronger claim elsewhere on the page.
 Coverage grows only by the route above: notice a relationship, record it,
 give it an example that must fail.  The exercise is one full turn of
-that loop.  Coverage can also shrink, and more quietly than it grows:
-deleting a registered relationship is an edit that every remaining check
-will pass, so the perimeter can contract without any red signal.
-Retiring a commitment therefore deserves the same review as creating one.
+that loop.  Coverage can also shrink: after an owner deliberately removes a
+relationship and updates its dependent fixtures and projections, the remaining
+checks can pass with a smaller perimeter.  No tombstone or history check records
+that contraction, so retiring a commitment deserves the same review as creating one.
 
 The shape of this limit is familiar from Section~\ref{sec:mathrole}.  The
 recorded checklist stands to unrestricted prose roughly as the finite
@@ -777,7 +777,8 @@ years of edits by the hands free to change them?
 
 The answer is narrow and exact within its bounds.  The workflow does not
 make prose formally true.  It makes a selected set of proof-to-claim
-relationships explicit, reviewed, and mechanically persistent, and it makes
+relationships explicit, reviewed, and mechanically persistent within the
+configured perimeter, and it makes
 the configured workflow fail when one of them breaks.  The worked example
 shows both halves: the repaired checker accepts the intact wording and
 rejects the reconstructed false edit, while the earlier unrecorded boundary
@@ -785,7 +786,7 @@ passed unnoticed.  Three achievements should stay separate, because none
 implies the others: a theorem is proved; its public interpretation is
 reviewed; the reviewed relationship is preserved.  Lean supplies the first.
 Only a person can supply the second.  The machinery here supplies
-the third, for the relationships it has been given.
+the third while a relationship remains configured.
 
 The whole case fits in one chain.  Lean proves the finite theorem.  Lean proves the equivalence.
 No theorem carries the one to the other.  A person approved wording that
@@ -822,8 +823,9 @@ is \texttt{docs/publication\_evidence.json}: protocol, outcomes,
 and limitations.  Its deterministic reconstruction is described by
 \texttt{experiments/\allowbreak publication\_mutations.json};
 \texttt{scripts/\allowbreak run\_publication\_mutations.py} verifies that
-each recorded edit still applies uniquely (\texttt{--verify-operators}) and
-replays edits against the current checker (\texttt{--all}).
+each recorded edit still applies uniquely (\texttt{--verify-operators}) and,
+after a green unmutated baseline, replays edits at the pinned checkpoint by
+default (\texttt{--all}).
 The original raw outputs of the historical runs were not retained, and the
 reconstruction does not claim to be them.
 

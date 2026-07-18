@@ -402,7 +402,10 @@ def bounded_tail(text: str, limit: int = 4000) -> str:
 
 
 def parse_check_count(output: str) -> int | None:
-    matches = re.findall(r"across ([0-9,]+) checks", output)
+    matches = re.findall(
+        r"(?:across|all) ([0-9,]+) checks(?: passed)?",
+        output,
+    )
     return int(matches[-1].replace(",", "")) if matches else None
 
 
@@ -411,6 +414,52 @@ def first_failure(output: str) -> str | None:
         (line.strip() for line in output.splitlines() if "FAIL" in line),
         None,
     )
+
+
+def run_gate_command(
+    command: list[str],
+    clone: Path,
+    timeout_seconds: int,
+) -> dict[str, Any]:
+    """Run one gate and retain enough evidence to validate the run itself."""
+    started = time.monotonic()
+    try:
+        completed = subprocess.run(
+            command,
+            cwd=clone,
+            capture_output=True,
+            text=True,
+            check=False,
+            timeout=timeout_seconds,
+        )
+        elapsed = round(time.monotonic() - started, 3)
+        combined = completed.stdout + "\n" + completed.stderr
+        return {
+            "status": "passed" if completed.returncode == 0 else "failed",
+            "gate_returncode": completed.returncode,
+            "wall_time_seconds": elapsed,
+            "reported_check_count": parse_check_count(combined),
+            "first_failure": first_failure(combined),
+            "stdout_tail": bounded_tail(completed.stdout),
+            "stderr_tail": bounded_tail(completed.stderr),
+        }
+    except subprocess.TimeoutExpired as error:
+        elapsed = round(time.monotonic() - started, 3)
+        stdout = error.stdout or ""
+        stderr = error.stderr or ""
+        if isinstance(stdout, bytes):
+            stdout = stdout.decode("utf-8", errors="replace")
+        if isinstance(stderr, bytes):
+            stderr = stderr.decode("utf-8", errors="replace")
+        return {
+            "status": "timeout",
+            "gate_returncode": None,
+            "wall_time_seconds": elapsed,
+            "reported_check_count": None,
+            "first_failure": None,
+            "stdout_tail": bounded_tail(stdout),
+            "stderr_tail": bounded_tail(stderr),
+        }
 
 
 def run_mutations(
@@ -426,49 +475,72 @@ def run_mutations(
         raise MutationError(f"unknown mutation ids: {', '.join(unknown)}")
     started_at = datetime.now(timezone.utc).isoformat()
     historical_comparison_applicable = base_commit == manifest["checkpoint"]
+    base_role = (
+        "historical_evaluation_checkpoint"
+        if historical_comparison_applicable
+        else "selected_later_commit"
+    )
     results = []
     with tempfile.TemporaryDirectory(prefix="publication-mutation-run-") as temp:
         clone = clone_at_checkpoint(base_commit, Path(temp))
+        reset_clone(clone, base_commit)
+        baseline = run_gate_command(
+            manifest["default_gate_command"],
+            clone,
+            timeout_seconds,
+        )
+        if baseline["status"] != "passed":
+            return {
+                "schema": RUN_SCHEMA,
+                "suite_id": manifest["suite_id"],
+                "experiment_kind": manifest["experiment_kind"],
+                "manifest_checkpoint": manifest["checkpoint"],
+                "base_ref": base_ref,
+                "base_commit": base_commit,
+                "base_role": base_role,
+                "historical_evidence": manifest["historical_evidence"],
+                "started_at": started_at,
+                "completed_at": datetime.now(timezone.utc).isoformat(),
+                "status": "invalid_baseline",
+                "baseline": baseline,
+                "mutation_ids": selected_ids,
+                "results": [],
+                "summary": {
+                    "baseline_valid": False,
+                    "run_count": 0,
+                    "rejected_count": 0,
+                    "escaped_count": 0,
+                    "timeout_count": 0,
+                    "historical_comparison_applicable": (
+                        historical_comparison_applicable
+                    ),
+                    "historical_outcome_class_match_count": None,
+                },
+                "claim_ceiling": (
+                    "No mutation outcome is counted because the unmutated "
+                    "selected base did not pass the configured gate."
+                ),
+            }
         for mutation_id in selected_ids:
             reset_clone(clone, base_commit)
             operator = by_id[mutation_id]
             applied = apply_operator(clone, operator)
             changed = changed_paths(clone)
-            started = time.monotonic()
-            try:
-                completed = subprocess.run(
-                    manifest["default_gate_command"],
-                    cwd=clone,
-                    capture_output=True,
-                    text=True,
-                    check=False,
-                    timeout=timeout_seconds,
-                )
-                elapsed = round(time.monotonic() - started, 3)
-                combined = completed.stdout + "\n" + completed.stderr
-                outcome = "escaped" if completed.returncode == 0 else "rejected"
-                result = {
-                    "id": mutation_id,
-                    "outcome": outcome,
-                    "gate_returncode": completed.returncode,
-                    "wall_time_seconds": elapsed,
-                    "reported_check_count": parse_check_count(combined),
-                    "first_failure": first_failure(combined),
-                    "stdout_tail": bounded_tail(completed.stdout),
-                    "stderr_tail": bounded_tail(completed.stderr),
-                }
-            except subprocess.TimeoutExpired as error:
-                elapsed = round(time.monotonic() - started, 3)
-                result = {
-                    "id": mutation_id,
-                    "outcome": "timeout",
-                    "gate_returncode": None,
-                    "wall_time_seconds": elapsed,
-                    "reported_check_count": None,
-                    "first_failure": None,
-                    "stdout_tail": bounded_tail(error.stdout or ""),
-                    "stderr_tail": bounded_tail(error.stderr or ""),
-                }
+            gate = run_gate_command(
+                manifest["default_gate_command"],
+                clone,
+                timeout_seconds,
+            )
+            outcome = {
+                "passed": "escaped",
+                "failed": "rejected",
+                "timeout": "timeout",
+            }[gate["status"]]
+            result = {
+                "id": mutation_id,
+                "outcome": outcome,
+                **{key: value for key, value in gate.items() if key != "status"},
+            }
             result.update(
                 {
                     "expected_historical_outcome": operator[
@@ -494,17 +566,16 @@ def run_mutations(
         "manifest_checkpoint": manifest["checkpoint"],
         "base_ref": base_ref,
         "base_commit": base_commit,
-        "base_role": (
-            "historical_evaluation_checkpoint"
-            if historical_comparison_applicable
-            else "selected_later_commit"
-        ),
+        "base_role": base_role,
         "historical_evidence": manifest["historical_evidence"],
         "started_at": started_at,
         "completed_at": datetime.now(timezone.utc).isoformat(),
+        "status": "completed",
+        "baseline": baseline,
         "mutation_ids": selected_ids,
         "results": results,
         "summary": {
+            "baseline_valid": True,
             "run_count": len(results),
             "rejected_count": sum(row["outcome"] == "rejected" for row in results),
             "escaped_count": sum(row["outcome"] == "escaped" for row in results),
@@ -587,16 +658,16 @@ def main() -> int:
                 if args.all
                 else args.mutation
             )
-            emit(
-                run_mutations(
-                    manifest,
-                    selected,
-                    args.timeout_seconds,
-                    base_ref,
-                    base_commit,
-                ),
-                args.receipt,
+            run_receipt = run_mutations(
+                manifest,
+                selected,
+                args.timeout_seconds,
+                base_ref,
+                base_commit,
             )
+            emit(run_receipt, args.receipt)
+            if run_receipt.get("status") != "completed":
+                return 3
     except (MutationError, OSError, json.JSONDecodeError) as error:
         print(f"run_publication_mutations: {error}")
         return 2
