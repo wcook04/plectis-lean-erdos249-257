@@ -901,15 +901,15 @@
         "schema": "erdos249257-editorial-state/1",
         "scope": "continuous_whole_main_paper_exposition",
         "current_priority": {
-          "id": "main_paper_selected_half_carry_window_plain_language_audit",
+          "id": "main_paper_realized_rewind_phase_plain_language_audit",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "defect_class": "The selected-window passage names protected half-carry windows, carry-one representatives, common next-row divisor data, and adjacent seams without defining the selected-window object or explaining how its carry-one member feeds the cofinal compactness theorem",
-          "statement": "Define a selected window as an explicit admissible depth-N word for every terminal carry k in [1,R], explain why the k=1 representative supplies the finite witness consumed by cofinal compactness, and identify coherent histories through a common next-row coefficient or an adjacent seam as the unproved construction input. Preserve the absence of a cofinal window producer and of any Erdős #257 conclusion."
+          "defect_class": "The realised-rewind passage calls the phase a complementary binary suffix numeral and says that the suffix covers the terminal interval without defining the bit order, displaying the phase identity, or stating the exact coverage inequality",
+          "statement": "Define the suffix numeral with the newest row as the low bit, state phase = D - 1 - X and the exact singleton equivalence B - 1 <= X, and relate this to the frozen-prefix carry form B <= Z. Preserve that no theorem supplies the coverage inequality globally and that this is not an Erdős #257 proof."
         },
         "last_verified_wave": {
-          "id": "main_paper_fixed_coefficient_rewind_plain_language_audit",
+          "id": "main_paper_selected_half_carry_window_plain_language_audit",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "result": "Defined the one-step inverse parent T_c(k) as ceil((k+c)/2), the iterated rewind R_c, its accumulated offset O_c, denominator D = 2^L, and left-endpoint phase theta. Stated the exact closed form and the singleton criterion theta + B - 1 < D. Explained that phase overflow leaves two adjacent endpoint ancestors and maps every target to one of them. Preserved that width alone selects neither alternative and yields no seam exclusion or Erdős #257 conclusion."
+          "result": "Defined a depth-N selected window of radius R as an assignment of an admissible Boolean word with terminal carry k to every k in [1,R]. Explained that, when such windows exist at every large depth with R >= 1, choosing k = 1 gives the cofinal finite witnesses consumed by compactness and hence an infinite support summing to 1/2. Identified the unproved one-row history alternative as next-row divisor agreement or realization of the canonical one-hole seam, and preserved that no cofinal window producer or Erdős #257 proof is supplied."
         },
         "active_inconsistencies": [],
         "blocked_decisions": []
@@ -7540,7 +7540,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 3533
+        "line": 3534
       }
     },
     {
@@ -7551,7 +7551,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 3544
+        "line": 3545
       }
     },
     {
@@ -7562,7 +7562,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "the half-value counterexample route",
-        "line": 3565
+        "line": 3566
       }
     },
     {
@@ -7573,7 +7573,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 3556
+        "line": 3557
       }
     }
   ],
@@ -8031,7 +8031,7 @@
       "id": "selected_half_carry_window_compactness",
       "label": "Selected half-carry windows",
       "status": "conditional reduction",
-      "statement": "If selected protected half-carry windows exist at every sufficiently large level, then their carry-one representatives yield cofinal admissibility and an infinite support with erdosSupportSeries 2 A = 1/2. The unresolved object-level input is a coherent history at each step: a common next-row divisor cylinder or the canonical adjacent seam. The module does not supply that input.",
+      "statement": "A selected half-carry window at depth N and radius R assigns every k in [1,R] an admissible Boolean word of depth N whose terminal carry is k. If such windows exist at every sufficiently large depth with R >= 1, their k = 1 representatives give cofinal finite admissibility; compactness then yields an infinite support A with erdosSupportSeries 2 A = 1/2. The unproved object-level input is a coherent one-row history: either all representatives agree on membership of every divisor of N+1, making their next coefficient common, or the adjacent outcome realizes the canonical one-hole seam. The module supplies no such cofinal history.",
       "remaining_open_proposition_ids": [
         "remaining_open.universal_257_all_infinite_supports"
       ],

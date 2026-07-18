@@ -1354,17 +1354,18 @@ neither a seam exclusion nor an Erd\H{o}s~\#257 conclusion.
 
 \subsubsection{Selected half-carry windows}\label{res:selectedhalfwindow}
 
-The selected-window construction keeps an explicit admissible word for each
-terminal carry in a finite protected interval.  A supply of such windows at
-all sufficiently large levels gives cofinal admissibility and hence an
-infinite support with sum $1/2$:
-\lword{HalfCarrySelectedWindow.lean}{831}{cofinalAdmissibility_of_selectedHalfWindows}{selected-window cofinality}
-and
-\lword{HalfCarrySelectedWindow.lean}{864}{exists_infinite_support_half_of_selectedHalfWindows}{the selected-window half-value conclusion}.
-The unresolved input is a construction of such a window at every sufficiently
-large depth.  The later propagation results require either common next-row
-divisor data or an adjacent seam.  None constructs the required window supply,
-so these theorems do not prove Erd\H{o}s~\#257.
+At depth $N$, a selected window of radius $R$ assigns each $k\in[1,R]$ an
+admissible Boolean word with terminal carry $k$.  If such windows exist for
+every large $N$, with $R\geq1$, choosing $k=1$ gives cofinal finite witnesses
+(\lword{HalfCarrySelectedWindow.lean}{831}{cofinalAdmissibility_of_selectedHalfWindows}{cofinality});
+compactness then gives an infinite support with sum $1/2$
+(\lword{HalfCarrySelectedWindow.lean}{864}{exists_infinite_support_half_of_selectedHalfWindows}{half-value conclusion}).
+The unproved input is a coherent one-row history: the representatives either
+agree on every divisor of $N+1$, making the next coefficient common, or the
+adjacent outcome realises the canonical one-hole seam
+(\lword{HalfCarrySelectedWindow.lean}{236}{SelectedHalfWindow.HistoryAlternative}{history alternative}).
+No such history is supplied at all large depths; hence no cofinal window
+supply and no proof of Erd\H{o}s~\#257 follow.
 
 \subsubsection{A realised rewind criterion}\label{res:rewindphase}
 
