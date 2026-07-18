@@ -901,15 +901,15 @@
         "schema": "erdos249257-editorial-state/1",
         "scope": "continuous_whole_main_paper_exposition",
         "current_priority": {
-          "id": "main_paper_reset_deficit_escape_plain_language_audit",
+          "id": "main_paper_seam_producer_alignment_plain_language_audit",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "defect_class": "The reset-deficit paragraph names a right-branch window, an affine recurrence, and a doubled-scale deficit without displaying any of them or explaining why the deficit forces branch escape",
-          "statement": "State the explicit right-branch remainder window and recurrence, define the doubled-scale deficit and its escape horizon, and preserve that the deterministic anti-concentration needed to exclude the window globally is unproved."
+          "defect_class": "The seam-to-producer alignment paragraph names a left boundary carry, shifted seam hole, and paired incidence pulse without defining the coordinates or displaying the identity",
+          "statement": "Define the seam support, shifted hole, and paired pulse; display the exact producer-carry identity; and preserve that the identity supplies neither sign nor occurrence."
         },
         "last_verified_wave": {
-          "id": "main_paper_quarter_band_endpoint_cells_plain_language_audit",
+          "id": "main_paper_reset_deficit_escape_plain_language_audit",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "result": "Named the adjacent-cut remainder R, overshoot U, next remainder R', below pulse p^-, above pulse p^+, and quarter scale H = 2^(s-1). Stated that middle-branch failure R' >= 8H is equivalent to the unique cell R = H+k and p^- <= 4k < p^-+4. Stated that terminal-reset failure is equivalent to R = 3H+k, p^-+4 <= 4k, and 4k+16H < 4(R+U)+p^+. Preserved that these exact normal forms do not prove concrete-orbit avoidance."
+          "result": "Displayed the exact right-branch remainder window and recurrence at a late largest skip. Defined the half-scale deficit delta_s = 2^s-R_s, explained that it grows by at least four on a right step while the scale doubles, and stated the exact condition 2^s <= 2^k delta_s forcing an upper-or-middle row in [s,s+k]. Preserved that global anti-concentration of the actual deterministic remainder orbit is unproved."
         },
         "active_inconsistencies": [],
         "blocked_decisions": []
@@ -8559,9 +8559,9 @@
     },
     {
       "id": "reset_deficit_escape_geometry",
-      "label": "Reset-deficit escape geometry for the largest-skip crossing",
+      "label": "Exact right-branch window and reset-deficit escape law",
       "status": "conditional reduction",
-      "statement": "A right branch at a late largest skipped rank pins the integer-greedy remainder into an explicit interval and satisfies an exact affine recurrence. A doubled-scale deficit forces an upper-or-middle branch within the stated run length. The global anti-concentration needed to exclude the pinned interval is not proved.",
+      "statement": "Write R_s for the final integer-greedy remainder and p_s^- for the below pulse. At a largest skip d with 2s < 3d, a right branch forces 2^(s+1)+4 <= 4R_s and 12R_s+3*2^(s+1) < 4*(3*2^(s+1)+2*4^(s-d)+4)+6(s-2), and it satisfies R_(s+1)+2^(s+1)+p_s^-+4 = 4R_s. If R_s <= 2^s and delta_s = 2^s-R_s, every further right step gives delta_(s+1) >= 4 delta_s while the reference scale doubles; hence 2^s <= 2^k delta_s forces an upper-or-middle row t in [s,s+k]. The global anti-concentration needed to exclude the pinned interval along the actual orbit is not proved.",
       "remaining_open_proposition_ids": [
         "remaining_open.universal_257_all_infinite_supports"
       ],

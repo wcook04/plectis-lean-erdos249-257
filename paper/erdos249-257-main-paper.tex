@@ -1635,16 +1635,23 @@ These equivalences classify failure but prove no concrete-orbit avoidance.
 
 \subsubsection{Reset-deficit escape}\label{res:resetdeficit}
 
-At a late largest skip, a right successor pins the integer remainder in an
-explicit window and obeys an exact affine recurrence,
-\lword{HalfCylinderResetDeficitEscape.lean}{200}{rightBranch_remainder_window}{the right-branch window}
-and
-\lword{HalfCylinderResetDeficitEscape.lean}{218}{rightBranch_remainder_succ_eq}{recurrence}.
-A doubled-scale deficit then forces an upper-or-middle branch within the
-corresponding number of rows,
+Write $R_s=R_{s,s}$ for the final integer remainder.  At a largest skip $d$
+with $2s<3d$, a right successor forces the explicit window
+\[
+ 2^{s+1}+4\leq4R_s,\qquad
+ 12R_s+3\cdot2^{s+1}<
+ 4\bigl(3\cdot2^{s+1}+2\cdot4^{s-d}+4\bigr)+6(s-2),
+\]
+\lword{HalfCylinderResetDeficitEscape.lean}{200}{rightBranch_remainder_window}{the right-branch window}.
+If $p_s^-$ is the below pulse, the same branch obeys
+$R_{s+1}+2^{s+1}+p_s^-+4=4R_s$,
+\lword{HalfCylinderResetDeficitEscape.lean}{218}{rightBranch_remainder_succ_eq}{the exact recurrence}.
+When $R_s\leq2^s$, put $\delta_s=2^s-R_s$.  A right step makes
+$\delta_{s+1}\geq4\delta_s$ while the reference scale only doubles.
+Consequently, if $2^s\leq2^k\delta_s$, some $t\in[s,s+k]$ is upper or middle,
 \lword{HalfCylinderResetDeficitEscape.lean}{261}{upperOrMiddle_within_of_two_pow_deficit}{the deficit escape bound}.
-The required deterministic anti-concentration excluding that window globally
-is not proved.
+The window and run law are proved; deterministic anti-concentration keeping
+the actual orbit out of that window globally is not.
 
 \subsubsection{Alignment of seam and transition carries}\label{res:seamproducer}
 
@@ -1657,25 +1664,20 @@ This coordinate identity supplies neither a sign nor a size estimate.
 \label{app:half-evidence}
 
 This subsection decides no open question.  Its verified bases and stages
-are bounded evidence for the cofinal criteria in A.2--A.3; its coordinate
-changes translate one finite formulation into another; and its
-counterexamples and incompatibility theorems rule out shortcuts that would
-otherwise be mistaken for global arguments.  Each item must therefore be
+are bounded evidence for A.2--A.3; its coordinate changes translate finite
+formulations; and its counterexamples rule out shortcuts.  Each item must be
 read through the earlier criterion it supports or blocks.
 
 \subsubsection{A verified initial selected window}\label{res:selectedwindowbase}
 
-The selected half-carry construction has a checked depth-$18$ base: twelve
-Boolean words cover every terminal carry in the strip $[1,12]$, with all
-intermediate carries in the corresponding half strip.  The reflected table is
-formalised at
+At depth $18$, twelve checked Boolean words cover every terminal carry in
+$[1,12]$, with all intermediate carries in the half strip,
 \lword{HalfCarrySelectedWindowBase.lean}{79}{depth18TableCheck_eq_true}{the depth-\(18\) table verification};
-the resulting selected window is defined at
+they define
 \lword{HalfCarrySelectedWindowBase.lean}{129}{depth18SelectedHalfWindow}{the depth-\(18\) selected window}.
-All twelve words share the same restriction at depth $13$, giving the first
-next-row divisor-agreement certificate,
+Their common depth-$13$ restriction gives the first next-row certificate,
 \lword{HalfCarrySelectedWindowBase.lean}{172}{depth18SelectedHalfWindow_nextRowDivisorAgreement}{the depth-\(18\) divisor-agreement certificate}.
-This finite base does not provide selected windows at unbounded depths.
+This finite base supplies no windows at unbounded depths.
 
 \subsubsection{Rewind-to-seam equivalence}\label{res:rewindseambridge}
 
