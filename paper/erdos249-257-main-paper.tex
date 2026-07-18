@@ -1615,10 +1615,9 @@ These criteria do not prove that the required carries occur.
 
 \subsubsection{Quarter-band endpoint cells}\label{res:quarterband}
 
-Put $H=2^{s-1}$, and write $R,U,R',p^-,p^+$ for the adjacent cut's
-remainder, overshoot, next remainder, below pulse, and above pulse.  Its gap
-is $4H$, so the desired next-row bound is $R'<8H$.  On the two non-carry
-branches, failure $R'\geq8H$ is equivalent to the corresponding row:
+At row $s$ put $H=2^{s-1}$, and let $R,U,R',p^-,p^+$ denote the adjacent
+cut's remainder, overshoot, successor remainder, and two pulses.  Its gap is
+$4H$; on either non-carry branch, failure of $R'<8H$ is equivalent to:
 \[
  \begin{array}{ll}
  \text{middle:}&\exists k:\ R=H+k,\quad p^-\leq4k<p^-+4,\\
@@ -1650,8 +1649,8 @@ When $R_s\leq2^s$, put $\delta_s=2^s-R_s$.  A right step makes
 $\delta_{s+1}\geq4\delta_s$ while the reference scale only doubles.
 Consequently, if $2^s\leq2^k\delta_s$, some $t\in[s,s+k]$ is upper or middle,
 \lword{HalfCylinderResetDeficitEscape.lean}{261}{upperOrMiddle_within_of_two_pow_deficit}{the deficit escape bound}.
-The window and run law are proved; deterministic anti-concentration keeping
-the actual orbit out of that window globally is not.
+These formulas are proved, but they do not show that the actual orbit avoids
+the window.
 
 \subsubsection{Alignment of seam and transition carries}\label{res:seamproducer}
 
@@ -1661,21 +1660,21 @@ $H=2\delta-f_P(2s)$ and paired pulse
 $\Pi=2f_A(2s+1)+f_A(2s+2)$, the producer carry satisfies
 $C(A,s)=4(H-1)-\Pi$,
 \lword{HalfCylinderSeamProducerAlignment.lean}{24}{producerCarry_insert_eq_four_mul_shiftedHole_sub_pulse}{seam--carry alignment}.
-Thus two coefficient rows align the seam carry $H-1$ with the producer
-coordinate.  The identity supplies no sign, size, or occurrence estimate.
+Thus two coefficient rows align $H-1$ with the producer coordinate; the
+identity supplies no sign, size, or occurrence estimate.
 
 \subsection{Finite evidence, coordinate changes, and eliminated special cases}
 \label{app:half-evidence}
 
-This subsection decides no open question.  Its verified bases and stages
-are bounded evidence for A.2--A.3; its coordinate changes translate finite
-formulations; and its counterexamples rule out shortcuts.  Each item must be
-read through the earlier criterion it supports or blocks.
+Nothing here decides an open question.  The bases are bounded evidence for
+A.2--A.3, the coordinate changes translate finite formulations, and the
+counterexamples rule out shortcuts.  Each item must be read through its
+earlier criterion.
 
 \subsubsection{A verified initial selected window}\label{res:selectedwindowbase}
 
-At depth $18$, twelve checked Boolean words cover every terminal carry in
-$[1,12]$, with all intermediate carries in the half strip,
+At depth $18$, twelve checked words cover every terminal carry in $[1,12]$
+inside the half strip,
 \lword{HalfCarrySelectedWindowBase.lean}{79}{depth18TableCheck_eq_true}{the depth-\(18\) table verification};
 they define
 \lword{HalfCarrySelectedWindowBase.lean}{129}{depth18SelectedHalfWindow}{the depth-\(18\) selected window}.
@@ -1685,13 +1684,15 @@ This finite base supplies no windows at unbounded depths.
 
 \subsubsection{Rewind-to-seam equivalence}\label{res:rewindseambridge}
 
-For a selected window with a rewind seam, a two-value profile on the adjacent
-base ancestors induces the live next-row profile,
-\lword{RewindSeamOperationalBridge.lean}{140}{nextRow_profile_of_rewindSeam}{the next-row rewind profile}.
-Under the stated strip and buffer inequalities, that profile realises a
-protected one-hole seam at the next row,
-\lword{RewindSeamOperationalBridge.lean}{217}{protectedEvenSeamRealizedAt_succ_of_profile}{the protected-seam realisation}.
-The coefficient drop and both inequalities are inputs, not conclusions.
+For a selected depth-$N$ window $W=(a^{(h)})_{1\leq h\leq R}$, suppose the
+depth-$M$ rewind has adjacent ancestors, denominator $D$, and phase $\phi$;
+put $\delta=D-\phi$.  If $M\leq N$, $(N+1)/2\leq M$, $R\leq D$, and the
+ancestor coefficients at $N+1$ are $c+1,c$, then
+$f_{a^{(h)}}(N+1)=c+1$ for $h\leq\delta$ and $c$ otherwise,
+\lword{RewindSeamOperationalBridge.lean}{140}{nextRow_profile_of_rewindSeam}{the profile}.
+With $27\leq S\leq2\lfloor\sqrt{N+1}\rfloor+4$ and $S+c+1\leq2R$,
+\lword{RewindSeamOperationalBridge.lean}{217}{protectedEvenSeamRealizedAt_succ_of_profile}{a protected seam occurs at \(N+1\)}.
+The theorem assumes, rather than proves, every displayed hypothesis.
 
 \subsubsection{Selected suffix cylinders}
 
