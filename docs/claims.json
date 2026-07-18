@@ -901,15 +901,15 @@
         "schema": "erdos249257-editorial-state/1",
         "scope": "continuous_whole_main_paper_exposition",
         "current_priority": {
-          "id": "main_paper_realized_rewind_phase_plain_language_audit",
+          "id": "main_paper_localized_protected_seam_plain_language_audit",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "defect_class": "The realised-rewind passage calls the phase a complementary binary suffix numeral and says that the suffix covers the terminal interval without defining the bit order, displaying the phase identity, or stating the exact coverage inequality",
-          "statement": "Define the suffix numeral with the newest row as the low bit, state phase = D - 1 - X and the exact singleton equivalence B - 1 <= X, and relate this to the frozen-prefix carry form B <= Z. Preserve that no theorem supplies the coverage inequality globally and that this is not an Erdős #257 proof."
+          "defect_class": "The protected-seam passage says that one of carries 3 and 4 survives a localized one-hole seam and that cofinal realizations imply half-membership without defining localized realization, naming the unique hole, or explaining the carry choice",
+          "statement": "Define localized realization as the forward implication from scalar reachability to an admissible depth-N word for each carry k in [3,27]. Name the unique missing carry H = 2 delta - c, explain the choice of 4 when H = 3 and of 3 otherwise, and show how cofinal repetitions feed compactness. Preserve that no cofinal realization supply is proved and that this is not an Erdős #257 proof."
         },
         "last_verified_wave": {
-          "id": "main_paper_selected_half_carry_window_plain_language_audit",
+          "id": "main_paper_realized_rewind_phase_plain_language_audit",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "result": "Defined a depth-N selected window of radius R as an assignment of an admissible Boolean word with terminal carry k to every k in [1,R]. Explained that, when such windows exist at every large depth with R >= 1, choosing k = 1 gives the cofinal finite witnesses consumed by compactness and hence an infinite support summing to 1/2. Identified the unproved one-row history alternative as next-row divisor agreement or realization of the canonical one-hole seam, and preserved that no cofinal window producer or Erdős #257 proof is supplied."
+          "result": "Defined the suffix numeral X from bits listed newest row first, so the newest bit has weight 2^0. Stated the exact complementary phase identity theta = D - 1 - X, the singleton equivalence B - 1 <= X, and the equivalent frozen-prefix carry form B <= Z for Z = 1 + X. Preserved that no theorem supplies either coverage inequality at all large depths and that the criterion does not prove Erdős #257."
         },
         "active_inconsistencies": [],
         "blocked_decisions": []
@@ -7540,7 +7540,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 3534
+        "line": 3535
       }
     },
     {
@@ -7551,7 +7551,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 3545
+        "line": 3546
       }
     },
     {
@@ -7562,7 +7562,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "the half-value counterexample route",
-        "line": 3566
+        "line": 3567
       }
     },
     {
@@ -7573,7 +7573,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 3557
+        "line": 3558
       }
     }
   ],
@@ -8059,7 +8059,7 @@
       "id": "realized_rewind_phase_identity",
       "label": "Realized rewind phase identity",
       "status": "conditional reduction",
-      "statement": "For a realized fixed-coefficient rewind history, the phase is exactly the denominator minus one minus the binary suffix numeral. Thus the singleton rewind criterion is equivalent to the suffix numeral covering the other terminal carries. The global coverage inequality is not proved.",
+      "statement": "For a realized carry-one fixed-coefficient history, list the suffix bits newest row first and let X be their binary numeral, so the newest bit has weight 2^0. If D = 2^L, the rewind phase is exactly theta = D - 1 - X. The interval [1,B] rewinds to one ancestor exactly when B - 1 <= X; equivalently, for the frozen-prefix carry Z = 1 + X, exactly when B <= Z. No theorem proves either coverage inequality at all sufficiently large depths.",
       "remaining_open_proposition_ids": [
         "remaining_open.universal_257_all_infinite_supports"
       ],

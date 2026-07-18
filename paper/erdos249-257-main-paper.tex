@@ -1369,15 +1369,16 @@ supply and no proof of Erd\H{o}s~\#257 follow.
 
 \subsubsection{A realised rewind criterion}\label{res:rewindphase}
 
-For a realised fixed-coefficient history, the dyadic rewind phase is the
-complementary binary suffix numeral:
-\lword{HalfCarryRewindPhase.lean}{39}{phase_eq_denom_sub_one_sub_suffixNumeral}{the suffix-phase identity}.
-Consequently the singleton criterion is exactly the inequality that this
-suffix numeral covers the rest of the terminal interval,
-formalised by
-\lword{HalfCarryRewindPhase.lean}{65}{rewind_interval_singleton_iff_suffixNumeral_covers}{the suffix-coverage criterion}.
-This converts the phase condition into support-history coordinates, but does
-not prove the required coverage inequality globally.
+For a realised carry-one history, list the suffix bits newest first and put
+$X=\sum_{j<L}b_j2^j$, so the newest row is the low bit.  With $D=2^L$,
+$\theta=D-1-X$
+(\lword{HalfCarryRewindPhase.lean}{39}{phase_eq_denom_sub_one_sub_suffixNumeral}{suffix-phase identity}).
+Thus $[1,B]$ rewinds to one ancestor iff $B-1\leq X$
+(\lword{HalfCarryRewindPhase.lean}{65}{rewind_interval_singleton_iff_suffixNumeral_covers}{suffix-coverage equivalence}).
+Equivalently, for frozen-prefix carry $Z=1+X$, this is $B\leq Z$
+(\lword{HalfCarryRewindPhase.lean}{352}{rewind_supportCoeffHistory_singleton_iff_prefixCarry_covers}{prefix-carry equivalence}).
+No theorem proves either coverage inequality at all large depths; hence no
+proof of Erd\H{o}s~\#257 follows.
 
 \subsubsection{Localised protected seams}\label{res:protectedseam}
 
