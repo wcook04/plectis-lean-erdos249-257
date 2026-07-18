@@ -56,7 +56,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "Erd\\H{o}s \\#249",
-    "line": 3451
+    "line": 3455
    }
   },
   {
@@ -67,7 +67,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "unbounded certificate supply",
-    "line": 3462
+    "line": 3466
    }
   },
   {
@@ -78,7 +78,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "the half-value counterexample route",
-    "line": 3483
+    "line": 3487
    }
   },
   {
@@ -89,7 +89,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "universal Erd\\H{o}s \\#257",
-    "line": 3474
+    "line": 3478
    }
   }
  ],
@@ -559,18 +559,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_257_middle_transition_carry_reader_entry_audit",
+   "id": "main_paper_257_fatal_half_gap_reader_entry_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "The middle-transition passage introduces A_D, P_D, C_D, and Theta_D before stating that the residual identity compares a finite integer transition carry with the entire future divisor tail",
-   "statement": "Announce the finite-versus-future comparison before its symbols, explain the augmented support and local divisor contribution plainly, and preserve the exact residual identity and conditional tail-dominance boundary."
+   "defect_class": "The fatal half-gap inequality appears immediately after the carry comparison without first saying that it places 1/2 above everything reachable from the fixed prefix and below the next available weight",
+   "statement": "Explain the unreachable interval before naming the fatal half-gap, identify the remaining tail capacity and next available weight plainly, and preserve the exact equivalence with nonmembership."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "ebc98ee71f6819bd9fe344a0bb343542c604e533",
-  "committed_navigation_snapshot": "ba0bdf9e2efcceeb6b4f73a9a9d8705125473f0c",
-  "main_paper_source_digest": "sha256:ff3a1d2b68c02d826d428cc8255375171f31285ca4217c7519b4595e98f38c29"
+  "committed_navigation_snapshot": "c136a600c569e6c0344a4aca8a9cdf32091e925c",
+  "main_paper_source_digest": "sha256:989041918193c57fddf92a81e015ba9b423de8c9ebd52126b4cf60546ddf869d"
  },
  "reading_routes": [
   {
