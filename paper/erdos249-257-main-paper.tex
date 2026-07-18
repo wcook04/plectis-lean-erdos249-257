@@ -585,13 +585,12 @@ partial sum equals that prefix lcm.  The denominator therefore exceeds the lcm,
 while the additive gap to the next exponent still tends to infinity; the tail
 is then too small for a rational limit.
 
-\paragraph{Transition to the counterexample direction.}
 The results above enlarge the family of supports for which irrationality is
-known, but they do not supply the universal quantifier.  We now fix the base
-at \(2\) and change coordinates: all support sums form one achievement set.
-The counterexample problem thereby becomes a point-membership question, with
-generic constraints on its rational points and a separate exact reduction at
-the target \(1/2\).
+known, but they do not supply the universal quantifier.  We now fix the base at
+\(2\).  The support sums form one achievement set, and an infinite-support
+counterexample is a rational point of this set whose unique support is
+infinite.  We first derive necessary conditions for such a rational point and
+then specialise to \(1/2\), for which finite support is impossible.
 
 \subsection{The base-$2$ achievement set}
 
@@ -648,11 +647,11 @@ Their detailed statements and one-sided boundary are in
 Appendix~\ref{app:carry-geometry}.  No novelty claim is made for the
 strict-tail geometry.
 
-\paragraph{Consequence for the half-value branch.}
-Theorem~\ref{res:greedy} makes the greedy support canonical;
-Proposition~\ref{res:greedytopology} supplies the compactness needed to pass
-from cofinal finite approximations to a point of \(\mathcal A\); and
-Proposition~\ref{res:death} supplies one-sided finite refuters.  The
+For the half-value question, Theorem~\ref{res:greedy} makes the greedy support
+canonical.  Proposition~\ref{res:greedytopology} supplies the compactness
+needed to pass from cofinal finite approximations to a point of \(\mathcal A\),
+whereas Proposition~\ref{res:death} gives finite certificates of
+nonmembership.  The
 measure-one statement is global and does not decide whether the particular
 point \(1/2\) belongs to \(\mathcal A\).  Before specialising to that point,
 we record the carry constraints forced by any rational
@@ -897,12 +896,10 @@ A tempting signed-to-Boolean shortcut also fails: selecting precisely the
 negative M\"obius indices overshoots \(1/2\) by at least \(1/63\).
 Proposition~\ref{res:mobiussignnogo} gives the exact sign-separation identity.
 
-\paragraph{Section consequence.}
-Theorem~\ref{res:halfmembership} replaces a search over arbitrary supports by
-one canonical quantifier question: does the greedy orbit of \(1/2\) skip
-cofinally?  It does not answer that question.  The next subsection assumes a
-possible final skip and identifies exactly what would be required to exclude
-it.
+Theorem~\ref{res:halfmembership} therefore leaves one question: does the
+greedy orbit of \(1/2\) skip cofinally?  It does not answer that question.  The
+next subsection characterises nonmembership by a final skip and identifies
+what would be required to exclude it.
 
 \subsection{The final-skip reduction}
 
