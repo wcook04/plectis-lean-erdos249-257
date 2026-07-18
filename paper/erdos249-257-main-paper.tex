@@ -167,27 +167,33 @@ the universal assertion in \#257.
 
 \subsection*{What is proved}
 
-The paper separates finite arithmetic from the remaining infinite
-quantifier.  A \emph{certificate} is a finite integer calculation proving an
-exact fact about an infinite tail.  A \emph{carry} is an integer state in
-binary long division, and \emph{cofinally} means beyond every bound.  A
-\emph{terminal zero} is a zero in the last position of one finite greedy
-calculation.  In the two chains, tail and carry identities separate exact
-finite arithmetic from one analytic or combinatorial cofinality statement:
+The paper separates finite arithmetic from the quantifiers that remain open.
+A \emph{certificate} is a finite integer calculation together with a rigorous
+bound for the omitted infinite tail.  A \emph{carry} is the integer remainder
+state produced by binary long division.  For the first chain, put
+\(M_t=\lcm(1,\ldots,t)\) and
+\(R_N=\sum_{m\geq1}\ph(N+m)2^{-m}\).  In the second, a greedy skip at rank
+\(n\) means that the weight \((2^n-1)^{-1}\) is not selected.  Here
+\emph{cofinally} means beyond every bound.  Tail and carry identities separate
+exact finite arithmetic from one analytic or combinatorial cofinality
+statement.  With the later coordinate names expanded, the two statements are:
 \[
  \begin{aligned}
- \text{cofinally many lcm-diagonal certificates}
+ \substack{\text{finite certificates for }R_{2M_t}-R_{M_t}\notin\Z\\
+   \text{at arbitrarily large }t}
  &\quad\Longleftrightarrow\quad S\notin\Q,\\[4pt]
- \text{cofinally many greedy terminal zeros}
+ \substack{\text{the greedy expansion of }\tfrac12\text{ skips ranks}\\
+   \text{beyond every bound}}
  &\quad\Longleftrightarrow\quad \dfrac12\in\mathcal A,\\[-1pt]
  &\quad\Longrightarrow\quad \text{a counterexample to universal \#257}.
  \end{aligned}
 \]
 The first line is an exact reformulation of \#249.  The second is an exact
 reformulation of the distinguished half-value route, not of universal
-\#257.  An unbounded certificate supply and cofinal terminal zeros are both
-open.  The current final-skip analysis reduces the second statement further
-to two final-skip obligations; neither obligation is proved.
+\#257.  In the later technical coordinates these are called the unbounded
+certificate supply and cofinal terminal zeros; both are open.  The current
+final-skip analysis reduces the second statement further to two final-skip
+obligations; neither obligation is proved.
 
 The totient constant also has the elementary form
 \[
@@ -209,7 +215,7 @@ Question or result & Status & What is proved \\
 \midrule
 Irrationality in \#249 & Open & No proof of \(S\notin\Q\) is claimed. \\
 Denominator exclusion & Proved & If \(S=p/q\), then \(q>\Qzero\). \\
-Tail and lcm-diagonal forms & Exact equivalences & The unbounded supply is equivalent to \(S\notin\Q\), but remains open. \\
+Tail differences and \(M_t\)-diagonal certificates & Exact equivalences & The unbounded supply is equivalent to \(S\notin\Q\), but remains open. \\
 Diagonal computation & Finite evidence & Lean checks 28 diagonal certificates through \(t=64\); this is not cofinal. \\
 Universal assertion in \#257 & Open & No proof covers every infinite support. \\
 Full and structured supports & Classical/formalised & Full support and several restricted families are proved irrational. \\

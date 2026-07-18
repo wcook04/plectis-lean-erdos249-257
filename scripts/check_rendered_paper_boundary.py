@@ -51,7 +51,7 @@ FIRST_MINUTE_CONTRACT = {
         ),
         (2, 4): (
             "an exact certificate normal form",
-            "the exact half-value counterexample spine",
+            "the exact half-value counterexample reduction",
             "no finite such support can have value 1/2",
             "neither this finite computation nor the denominator bound proves the unbounded supply",
         ),
