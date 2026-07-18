@@ -56,7 +56,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "Erd\\H{o}s \\#249",
-    "line": 3439
+    "line": 3436
    }
   },
   {
@@ -67,7 +67,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "unbounded certificate supply",
-    "line": 3450
+    "line": 3447
    }
   },
   {
@@ -78,7 +78,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "the half-value counterexample route",
-    "line": 3471
+    "line": 3468
    }
   },
   {
@@ -89,7 +89,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "universal Erd\\H{o}s \\#257",
-    "line": 3462
+    "line": 3459
    }
   }
  ],
@@ -559,18 +559,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_257_section_opening_redundancy_audit",
+   "id": "main_paper_257_transition_microheading_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "The opening of the #257 results section repeats the universal-versus-counterexample distinction already established in the introduction and exact-reductions section, then routes through several appendices before presenting the full-support theorem",
-   "statement": "Compress the repeated status framing into a short result map while preserving base-2 criticality, the universal open boundary, and the ownership of the detailed final-skip arguments."
+   "defect_class": "The base-2 half-value arc uses the routing microheadings 'Transition to the counterexample direction', 'Consequence for the half-value branch', and 'Section consequence' to restate links that the surrounding subsection titles already supply",
+   "statement": "Replace redundant routing microheadings with direct connective prose or remove them, while preserving the distinction between necessary rational-support conditions and the exact half-value equivalence."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "ebc98ee71f6819bd9fe344a0bb343542c604e533",
-  "committed_navigation_snapshot": "c6742987f11d69c46e8863872bc9b4772caadb4f",
-  "main_paper_source_digest": "sha256:3aced8774b662e5a5be6ead6a9185b1147332d48923f0f0701b381e4dcf8cf62"
+  "committed_navigation_snapshot": "1a4c9bcdf26821b923680054711605f1943ed434",
+  "main_paper_source_digest": "sha256:3e3f0aeed74fdd34e5ea04f44b277aee02309e24de90be97366213c320c75ba0"
  },
  "reading_routes": [
   {
