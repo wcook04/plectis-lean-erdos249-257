@@ -104,8 +104,7 @@ $1$.  We formalise both statements in Lean.  We also express \#249 and the
 distinguished half-value counterexample route to \#257 in finite-to-cofinal
 form: each endpoint is equivalent to finite witnesses occurring beyond every
 bound.  This chain does not reformulate the universal \#257 assertion.
-One certified Farey window excludes every rational
-representation $S=p/q$ with
+A finite exact calculation excludes every rational representation $S=p/q$ with
 $q\le\Qzero\approx7.96\times10^{34}$; hence a rational representation must
 have $q>\Qzero$.  Irrationality of \(S\) is also
 equivalent to non-integrality of every positive binary tail difference, to
@@ -113,7 +112,8 @@ complete finite certificates at fixed parameters, and to a cofinal
 certificate supply along a one-parameter sequence of least-common-multiple
 tests.  Certificates are verified at the 28 changing scales through \(t=64\)
 (including the initial scale); this is finite evidence only, and the cofinal
-supply is open.  A CRT--Dirichlet construction also proves that the
+supply is open.  A construction using the Chinese remainder theorem and
+Dirichlet's theorem also proves that the
 residue-class subsequences \(n\mapsto\ph(2^j n+r)\) span an
 infinite-dimensional space: a canonical level-$e$ family has exact dimension
 $2^e+1$.  If $S$ were rational, binary long division would instead produce
@@ -151,9 +151,11 @@ The two questions are whether
 $S=\sum_{n\ge1}\ph(n)/2^n$ is irrational (\#249), and whether
 $\sum_{n\in A}(2^n-1)^{-1}$ is irrational for every infinite
 $A\subseteq\Npos$ (\#257).  Here \(\ph(n)\) is Euler's totient, the number
-of integers from \(1\) to \(n\) that are coprime to \(n\).  The problems
-appear in the Erd\H{o}s--Graham collection and Erd\H{o}s's later
-survey~\cite{erdosgraham1980,erdos1988}; the numbering follows the maintained
+of integers from \(1\) to \(n\) that are coprime to \(n\).  Problem \#249
+appears on p.~61 of Erd\H{o}s--Graham and p.~102 of Erd\H{o}s's
+survey~\cite[p.~61]{erdosgraham1980}\cite[p.~102]{erdos1988}; problem
+\#257 appears on pp.~62 and 105, respectively~\cite[p.~62]{erdosgraham1980}
+\cite[p.~105]{erdos1988}.  Numbering follows Bloom's
 catalogue~\cite{erdosproblems}.  Neither problem is settled.
 
 Throughout, \(\N=\{0,1,2,\ldots\}\) and
@@ -676,6 +678,9 @@ For \(A\subseteq\Npos\), define
  \qquad
  T_f(N)=\sum_{j\geq1}\frac{f(N+j)}{2^j}.
 \]
+Thus \(f_A(m)\) counts the selected exponents dividing \(m\), \(X_A\) is the
+original support sum, and \(T_f(N)\) is the binary tail of a coefficient
+sequence after position \(N\).
 
 \begin{theorem}[rational-support carry recurrence]\label{res:rigidity-main}
 Suppose that \(A\neq\varnothing\) and
@@ -691,7 +696,7 @@ Then \(u_N=vT_{f_A}(c+N)\) is a positive integer for every \(N\), and
 \noindent This is formalised by
 \lword{RationalSupportCarrySkeleton.lean}{668}{exists_shifted_odd_tail_nat_states_of_support_fraction}{the shifted natural-state theorem}.
 The recurrence is binary long division: since
-\(2T_f(M)=f(M+1)+T_f(M+1)\), doubling the scaled tail surrenders the next
+\(2T_f(M)=f(M+1)+T_f(M+1)\), doubling the scaled tail separates the next
 coefficient, and rationality is what makes the states \(u_N\) integers.
 Its tail-orbit normal form is Theorem~\ref{res:rigidity}.  A two-element
 support, with its explicit period-six orbit and multiplier \(21\), is worked
@@ -746,8 +751,12 @@ Under the hypotheses of Theorem~\ref{res:rigidity-main}, if \(v=1\) and
 \lword{RationalSupportCarrySkeleton.lean}{2200}{dyadic_support_fraction_reciprocalMass_diverges_or_gt_one}{the dyadic reciprocal-mass alternative};
 see also Corollary~\ref{res:collision}.
 
-These are four independent necessary consequences of the common rationality
-premise, not a contradiction.
+Read together, the four statements say that rationality would force an
+unbounded integer state sequence for an infinite support, severely limit
+intervals containing no support divisor, and constrain the reciprocal mass
+according to whether the reduced denominator has an odd factor.  They are
+independent necessary consequences of one rationality premise, not a
+contradiction.
 Appendices~\ref{app:carry-normal-form}--\ref{app:carry-boolean} supply the
 common recurrence and Boolean certificate; Appendices~\ref{app:carry-sublog}
 and~\ref{app:carry-mass} supply the independent filters.  No corollary above
@@ -4314,8 +4323,9 @@ Campbell shift-synchronisation boundary & \lrefx{CampbellShiftSynchronization.le
   Springer (2015), 378--388, doi:\href{https://doi.org/10.1007/978-3-319-21401-6_26}{10.1007/978-3-319-21401-6\_26}.
 \bibitem{mathlib} The mathlib Community, \emph{The Lean mathematical library},
   in \emph{CPP 2020}, ACM (2020), 367--381, doi:\href{https://doi.org/10.1145/3372885.3373824}{10.1145/3372885.3373824}.
-\bibitem{erdosproblems} T.~Bloom (ed.), \emph{Erd\H{o}s Problems}, entries 249 and 257,
-  \href{https://www.erdosproblems.com}{\texttt{erdosproblems.com}}, accessed July 2026.
+\bibitem{erdosproblems} T.~Bloom (ed.), \emph{Erd\H{o}s Problems},
+  \href{https://www.erdosproblems.com/249}{entry 249} and
+  \href{https://www.erdosproblems.com/257}{entry 257}, accessed 18 July 2026.
 
 \end{thebibliography}
 
