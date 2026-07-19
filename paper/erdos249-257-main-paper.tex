@@ -4002,16 +4002,21 @@ satisfies the bound with room to spare.
 \subsection{Necessary conditions II: wraps, mass, and unbounded states}
 \label{app:carry-mass}
 
-The dependency order is
+Three routes use the carry recurrence:
 \[
-\text{doubling residues}\ \longrightarrow\ \text{wrap count}\
-\longrightarrow\ \text{reciprocal-mass bound}\
-\longrightarrow\ \text{collision strengthening}.
+\begin{array}{rcl}
+\text{odd denominator}&\longrightarrow&
+  \text{doubling-residue wraps}\longrightarrow\text{mass lower bound},\\
+\text{finite common multiple}&\longrightarrow&
+  \text{recurring excess spikes}\longrightarrow\text{collision correction},\\
+\text{infinite support}&\longrightarrow&\text{unbounded carry states}.
+\end{array}
 \]
-The final unbounded-state theorem uses the same common-multiple collision
-mechanism without a summability hypothesis.  The one-wrap classification
-identifies the extremal residue cycles; it is a side branch, not a premise of
-the general mass bound.
+The first two routes use Ces\`aro averages when the reciprocal mass is finite;
+the third needs no summability hypothesis.  These are parallel necessary
+consequences of rationality, not implications from one conclusion to the
+next.  The one-wrap classification identifies the extremal residue cycles
+and is not a premise of any of the three routes.
 
 Suppose now the support series equals $p/(2^c v)$ with $v$ odd and $A$
 containing a positive element.  Let $U$ be the unshifted tempered orbit of
