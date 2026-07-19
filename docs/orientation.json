@@ -56,7 +56,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "Erd\\H{o}s \\#249",
-    "line": 3604
+    "line": 3603
    }
   },
   {
@@ -67,7 +67,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "unbounded certificate supply",
-    "line": 3615
+    "line": 3614
    }
   },
   {
@@ -78,7 +78,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "the half-value counterexample route",
-    "line": 3636
+    "line": 3635
    }
   },
   {
@@ -89,7 +89,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "universal Erd\\H{o}s \\#257",
-    "line": 3627
+    "line": 3626
    }
   }
  ],
@@ -559,18 +559,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_appendix_d_weighted_lambert_status_audit",
+   "id": "main_paper_appendix_d_squared_lambert_reader_map_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "Appendix D.1 changes the coefficient input and then presents several weighted Lambert families with different exact, cited, and finite statuses. The comparison role is stated, but the density of classifications can still let a reader mistake results for other inputs as evidence about the open totient value",
-   "statement": "Audit Appendix D.1 as a comparison family. Define the changed input and the eventually-periodic, signed, and period-four cases before their theorem lists; state which conclusions are formalised here, contained in cited work, or finite examples; verify the associated bibliography and repeat the non-transfer boundary at the points where a reader could infer progress on S, while preserving the 53-page envelope."
+   "defect_class": "Appendix D.2 moves quickly among finite denominator obstructions, Mersenne atoms, the exact Mobius-square identity for S, and squared-Lambert comparison rows. Although their roles are distinguished, the reader still has to reconstruct which statements are coordinate identities, which are finite algebraic boundaries, and which cited irrationality result applies only to a comparison row",
+   "statement": "Audit Appendix D.2 as a reader map for finite versus exact versus comparison results. Define each coordinate at first use, make the implication and non-implication boundaries local to the relevant propositions, verify the Postelmans--Van Assche citation and the classical Lambert/Mobius sources, and preserve both theorem scope and the 53-page envelope."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "ebc98ee71f6819bd9fe344a0bb343542c604e533",
-  "committed_navigation_snapshot": "f5252245cc98983981a2433d77c601117f049f28",
-  "main_paper_source_digest": "sha256:5692d7e4f42d9235d919e9910a77de6df40d51197c669f0e7ba3e9651bd346ac"
+  "committed_navigation_snapshot": "cb70e658f92a59cd9d978171fb134d3e2a41f70c",
+  "main_paper_source_digest": "sha256:1d9610d72e0e1caa05bf15fd5e3a25fb9ed0f4c1af75f91d973b526bb08cf3d6"
  },
  "reading_routes": [
   {
