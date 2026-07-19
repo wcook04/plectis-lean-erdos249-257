@@ -56,7 +56,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "Erd\\H{o}s \\#249",
-    "line": 3618
+    "line": 3619
    }
   },
   {
@@ -67,7 +67,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "unbounded certificate supply",
-    "line": 3629
+    "line": 3630
    }
   },
   {
@@ -78,7 +78,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "the half-value counterexample route",
-    "line": 3650
+    "line": 3651
    }
   },
   {
@@ -89,7 +89,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "universal Erd\\H{o}s \\#257",
-    "line": 3641
+    "line": 3642
    }
   }
  ],
@@ -559,18 +559,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_novelty_and_prior_work_boundary_audit",
+   "id": "main_paper_bibliography_metadata_and_claim_citation_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "Classical theorems formalised here, newly assembled exact reductions, quantitative refinements, finite computations, and local no-go results often appear in adjacent prose. Without a local attribution or novelty cue, a reader can mistake formalisation scope for a priority claim or undervalue a genuinely new normal form.",
-   "statement": "Audit the abstract, status table, theorem introductions, appendix headers, and conclusion for the prior-work/new-contribution boundary. Add or sharpen only evidence-backed attribution and novelty cues; distinguish formalised classical results, exact reformulations, quantitative refinements, checked finite instances, and unproved research targets without making unsupported priority claims or changing the 53-page boundary."
+   "defect_class": "A bibliography entry can resolve while still carrying a wrong year, author list, title, page range, version, or citation scope. Recent preprints and classical sources also require primary-source checks that generic DOI success does not supply.",
+   "statement": "Audit every bibliography entry and every in-text citation against its primary or authoritative metadata source. Verify authors, title, venue, year, pages, DOI or archival URL, version date, and the exact claim attributed; correct only evidence-backed defects, preserve primary-source links, and keep the paper at 53 pages."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "ebc98ee71f6819bd9fe344a0bb343542c604e533",
-  "committed_navigation_snapshot": "8388da03579f1b6175b6a46899002df16492b0a4",
-  "main_paper_source_digest": "sha256:be6efca21e648372d85d09da7f558fddcaaa3857715ca4aa6de5a80551068917"
+  "committed_navigation_snapshot": "4f5716c509bde390ed6e0bb52196237aa8499ad8",
+  "main_paper_source_digest": "sha256:af3dff13830e0945948b14a27f416fbc6a9872e3efb35c4e1bc9500219a64e58"
  },
  "reading_routes": [
   {
