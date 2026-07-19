@@ -901,15 +901,15 @@
         "schema": "erdos249257-editorial-state/1",
         "scope": "continuous_whole_main_paper_exposition",
         "current_priority": {
-          "id": "main_paper_totient_technical_appendix_entry_plain_language_audit",
+          "id": "main_paper_totient_normal_forms_entry_plain_language_audit",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "defect_class": "The technical-reductions appendix opens with cone-flatness, target intervals, residue projections, bit lifting, and certificate families before assigning them roles as exact coordinates, fixed-scale mechanisms, conditional bridges, or ruled-out shortcuts",
-          "statement": "Replace the object inventory with a status map anchored by the two displayed equivalences: remind the reader what a Sep certificate detects, distinguish fixed-scale constructions from the missing cofinal supply, and route the later subsections by logical role."
+          "defect_class": "Appendix C.1 introduces cone vertices, a joint refuter, a Mobius shadow, a foreign defect, and the full target in quick succession, leaving the relation between the rationality consequence and the exact target-avoidance equivalence implicit",
+          "statement": "Give C.1 a compact operational map: remind the reader what the lcm cone is, distinguish the one-way finite nonflatness refuter from the exact diagonal-pincer equivalence, and define the shadow, defect, and full target by what each term records."
         },
         "last_verified_wave": {
-          "id": "main_paper_wrap_mass_entry_plain_language_audit",
+          "id": "main_paper_totient_technical_appendix_entry_plain_language_audit",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "result": "Replaced the sequential arrow display, which could be read as implications among conclusions, with three parallel routes from the common carry recurrence. Separated the odd-denominator wrap-to-mass route, the finite-common-multiple collision correction, and the summability-free unbounded-state consequence; stated explicitly that all three are necessary consequences of rationality and that the one-wrap classification is not a premise of any route."
+          "result": "Replaced the technical object inventory with a quantifier-first entry. Reminded the reader that Sep(h,N,L) is a finite integer test exactly detecting one non-integral tail difference at fixed h,N; separated that equivalence from the cofinal certificate supply required for irrationality; and classified the four subsections as normal-form equivalences, fixed-scale mechanisms with conditional repetitions, candidate inputs and no-go boundaries, and unconditional rank growth without the missing coupling implication."
         },
         "active_inconsistencies": [],
         "blocked_decisions": []

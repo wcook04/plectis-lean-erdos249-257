@@ -4249,14 +4249,13 @@ contradiction, not another rational normal form, is the missing premise.
 \section{Technical reductions for the totient-certificate branch}
 \label{app:totient-technical}
 
-This appendix expands the supporting mathematics behind
-Proposition~\ref{res:complete}, Theorems~\ref{res:pointwisecomplete}
-and~\ref{res:red21}, and
-Theorem~\ref{res:diag}.  It contains exact cone-flatness and target-interval
-reformulations, finite residue projections, denominator and bit-lifting
-formulae, bounded certificate families, and rigorous obstructions to several
-candidate strategies.  Each statement retains its own hypotheses and status.
-None proves the unbounded certificate supply
+Recall that \(\mathsf{Sep}(h,N,L)\) is a finite integer test certifying that
+the tail difference \(R_{N+h}-R_N\) is not an integer.  At a fixed pair
+\((h,N)\), some depth \(L\) succeeds exactly when that difference is
+non-integral.  Irrationality requires the stronger cofinal statement: for
+every candidate period \(h\), a certificate must occur after every cutoff.
+This appendix develops coordinates and finite mechanisms for that statement;
+it does not prove the required cofinal supply
 \eqref{eq:unbounded-certificate-supply}.
 
 The exact chain is
@@ -4271,13 +4270,14 @@ The exact chain is
  \mathsf{Sep}(h,N,L).
 \end{array}
 \]
-Appendix~\ref{app:totient-normal} gives equivalent coordinates for this
-fixed-to-cofinal reduction.  Appendix~\ref{app:totient-finite} distinguishes
-one-scale mechanisms from the conditional cofinal implications that use them.
-Appendices~\ref{app:totient-boundaries}--\ref{app:totient-rank} expose
-possible inputs to an unbounded supply theorem and rule out several shortcuts.  None
-of the latter three sections proves the missing cofinal supply in the second
-line.
+Appendix~\ref{app:totient-normal} gives exact coordinates for the two lines.
+Appendix~\ref{app:totient-finite} separates fixed-scale mechanisms from
+conditional implications that assume their cofinal repetition.
+Appendix~\ref{app:totient-boundaries} records candidate sufficient inputs and
+rules out several shortcuts.  Appendix~\ref{app:totient-rank} proves
+unconditional dyadic rank growth but not the missing implication from rank to
+the second line.  Thus only the normal forms are equivalences; the remaining
+subsections provide finite results, conditional routes, or boundaries.
 
 \TotientTechnicalAppendix
 
