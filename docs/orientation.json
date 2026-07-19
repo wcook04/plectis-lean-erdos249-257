@@ -559,18 +559,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_result_heading_and_local_jargon_audit",
+   "id": "main_paper_source_link_label_and_cross_reference_purpose_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "A theorem or proposition heading is often the only text a scanning reader sees. Internal construction names such as a coordinate, shell, channel, or seam variant can obscure the mathematical content unless the heading or its first sentence names the actual object and logical status.",
-   "statement": "Audit every theorem, proposition, corollary, definition, and subsubsection heading as a standalone reader handle. Replace only project-internal or non-descriptive names, and ensure each unavoidable technical term is defined in the immediately following sentence; preserve source-link identity, exact status, and the 53-page boundary."
+   "defect_class": "The paper contains hundreds of blue source links and numbered cross-references. A link label or reference that merely repeats an internal declaration nickname makes the reader open another surface to learn why it matters.",
+   "statement": "Audit every visible source-link label and purpose-bearing cross-reference as standalone navigation text. Replace raw or project-internal labels with the mathematical claim or role they open, and attach a short reason to ambiguous section or appendix references; do not alter URLs, declaration targets, claim scope, or the 53-page boundary."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "ebc98ee71f6819bd9fe344a0bb343542c604e533",
-  "committed_navigation_snapshot": "0952a51a76b5c987ebc3a51e886bc68f9969b59a",
-  "main_paper_source_digest": "sha256:c4942ccb508e434a0187a494eaaa54c475add3b4b55c7df080030281e386284d"
+  "committed_navigation_snapshot": "5974371c9fc3b9e47293fd7abcbdd7dbc7bff720",
+  "main_paper_source_digest": "sha256:6ab173890a6947601e269dbebdc3c1ddf05d41ecf87af6ae60d15f6ab3bbeaf3"
  },
  "reading_routes": [
   {
