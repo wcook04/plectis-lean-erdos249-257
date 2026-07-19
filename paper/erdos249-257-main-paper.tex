@@ -1336,7 +1336,7 @@ reachable iff $H<1$ or $B<H$
 (\lword{HalfCylinderFiniteShadow.lean}{807}{evenSeam_fullIntegerStrip_iff_escape}{seam equivalence}).
 Raw safety is weaker: rank-three $A=\{2,3\}$ has residual $1/42<1/32$, but its
 depth-six strip $[1,8]$ contains $H=3$.  The sole conditional input is the
-governed frozen-margin producer.  After each skipped rank $k+1$, it requires
+governed frozen-margin condition.  After each skipped rank $k+1$, it requires
 the negative centred carry, iterated by double-plus-next-coefficient, to become
 nonnegative by $J\leq k+1$; then those future rows cover the carry.  This
 unproved condition implies $1/2$-membership
@@ -1440,7 +1440,7 @@ This is the only subsection that feeds the main final-skip reduction
 directly.  It first identifies nonmembership with a final skip and membership
 with cofinal terminal zeros.  It then separates the terminal cells already
 excluded from the two unresolved middle coordinates and the unresolved
-future-tail inequality.  The later largest-skip, pulse, and reset formulas
+future-tail inequality.  The later conditional formulas
 are conditional ways to attack those residual obligations; they do not add a
 second conclusion.
 
@@ -1526,7 +1526,7 @@ it follows in turn from $R_{D,D}\ge D$ at every late middle row,
 \lword{HalfCylinderMiddleCarryLowerBound.lean}{1510}{half_mem_mersenneAchievementSet_of_middleProducerRowEscape}{row-scale sufficient condition}.
 Both hypotheses are unproved.
 
-\paragraph{Finite upper-reset band certificates.}  At an upper transition
+\paragraph{Finite upper-reset band certificates.}  At the upper reset
 $G_{d+1}=H_d$, let $O_d$ be the upper overshoot, $A_d$ its divisor pulse,
 $Q_d=4O_d+A_d$, and $B_{d,j}=2^{d-j+1}$.  For $13\le d\le30$ and $j\le d$,
 Lean proves
@@ -1608,7 +1608,7 @@ since $1/2\in\mathcal A$ exactly when there is no final skip, this is the
 \lword{HalfCylinderFixedTailSocket.lean}{73}{half_mem_iff_every_actual_skip_survives}{membership equivalence}.
 The equivalence is proved; the orbit inequalities are not.
 
-\subsubsection{The carry identity at a non-right transition}\label{res:producercarry}
+\subsubsection{Residual identity for the middle-transition support}\label{res:producercarry}
 
 For the middle-transition coordinates $A_D,C_D,\Theta_D$ defined above, the
 generic finite-support theorem reads
@@ -1633,18 +1633,18 @@ $4H$; on either non-carry branch, failure of $R'<8H$ is equivalent to:
 \[
  \begin{array}{ll}
  \text{middle:}&\exists k:\ R=H+k,\quad p^-\leq4k<p^-+4,\\
- \text{reset:}&\exists k:\ R=3H+k,\quad p^-+4\leq4k,\quad
+ \text{right:}&\exists k:\ R=3H+k,\quad p^-+4\leq4k,\quad
  4k+16H<4(R+U)+p^+.
  \end{array}
 \]
 \lword{HalfCylinderQuarterBandEndpoints.lean}{153}{seamAdjacentCut_middleNextUpperFailure_iff_pulseCell}{the middle-cell equivalence};
 and
-\lword{HalfCylinderQuarterBandEndpoints.lean}{175}{seamAdjacentCut_rightNextUpperFailure_iff_pulseCell}{the reset-cell equivalence}.
+\lword{HalfCylinderQuarterBandEndpoints.lean}{175}{seamAdjacentCut_rightNextUpperFailure_iff_pulseCell}{the right-cell equivalence}.
 The middle-row $k$ is unique,
 \lword{HalfCylinderQuarterBandEndpoints.lean}{34}{pulseCell_unique}{the cell uniqueness}.
 These equivalences classify failure but prove no concrete-orbit avoidance.
 
-\subsubsection{Reset-deficit escape}\label{res:resetdeficit}
+\subsubsection{Right-branch deficit escape}\label{res:resetdeficit}
 
 Write $R_s=R_{s,s}$ for the final integer remainder.  At a largest skip $d$
 with $2s<3d$, a right successor forces the explicit window
@@ -1669,10 +1669,10 @@ the window.
 Let $P$ omit $s$, put $A=P\cup\{s\}$, and let $\delta$ be the half-carry of
 $A$ at row $2s-2$.  With first-wrap hole
 $H=2\delta-f_P(2s)$ and paired pulse
-$\Pi=2f_A(2s+1)+f_A(2s+2)$, the producer carry satisfies
+$\Pi=2f_A(2s+1)+f_A(2s+2)$, the transition carry satisfies
 $C(A,s)=4(H-1)-\Pi$,
 \lword{HalfCylinderSeamProducerAlignment.lean}{24}{producerCarry_insert_eq_four_mul_shiftedHole_sub_pulse}{seam--carry alignment}.
-Thus two coefficient rows align $H-1$ with the producer coordinate; the
+Thus two coefficient rows align $H-1$ with the transition-carry coordinate; the
 identity supplies no sign, size, or occurrence estimate.
 
 \subsection{Finite evidence, coordinate changes, and eliminated special cases}
@@ -1919,12 +1919,12 @@ At an adjacent cut, the \emph{below} and \emph{above} row words are the
 neighbouring subset sums immediately below and above the target.  Their
 unsigned distances from it are the remainder and overshoot; their pulses
 record the paired divisor-incidence contribution of the next two rows.
-After adjoining the terminal rank \(s\ge5\), the below support has producer
+After adjoining the terminal rank \(s\ge5\), the below support has transition
 carry
 \[
   4\,\mathrm{remainder}-\mathrm{belowPulse}-4,
 \]
-whereas the above support has producer carry
+whereas the above support has transition carry
 \[
   -\bigl(4\,\mathrm{overshoot}+\mathrm{abovePulse}+4\bigr).
 \]
@@ -3744,6 +3744,8 @@ covered protected interval;
 \item the \emph{transition carry} is the integer coordinate appearing in
 the exact residual identity, and the \emph{remainder} of a row is its
 integer greedy residual;
+\item the branches are \emph{upper} ($G_{s+1}=H_s$), \emph{middle}
+($G_{s+1}=G_s$), and \emph{right} ($G_{s+1}=G_s\cup\{s\}$);
 \item the \emph{pulse} of a rank at row \(s\) counts its divisor
 incidences at \(2s+1\) and \(2s+2\), the first counting twice; the pulse
 of a word is the sum over its ranks.
