@@ -56,7 +56,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "Erd\\H{o}s \\#249",
-    "line": 3612
+    "line": 3614
    }
   },
   {
@@ -67,7 +67,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "unbounded certificate supply",
-    "line": 3623
+    "line": 3625
    }
   },
   {
@@ -78,7 +78,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "the half-value counterexample route",
-    "line": 3644
+    "line": 3646
    }
   },
   {
@@ -89,7 +89,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "universal Erd\\H{o}s \\#257",
-    "line": 3635
+    "line": 3637
    }
   }
  ],
@@ -559,18 +559,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_half_value_reader_vocabulary_audit",
+   "id": "main_paper_totient_certificate_vocabulary_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "The half-value development necessarily uses carries, rows, terminal bits, windows, seams, pulses, cells, rewinds, and producer coordinates. These terms are locally meaningful but their accumulation can make Section 4 read like an implementation trace unless each is defined at first use and the dependency between coordinate systems remains visible to a cold mathematical reader",
-   "statement": "Audit the half-value narrative from the base-2 achievement set through the final-skip and finite-to-cofinal subsections. Remove or define internal vocabulary, consolidate duplicate coordinate glosses, and preserve the exact distinction between greedy decisions, carry states, finite windows, and unproved cofinal criteria."
+   "defect_class": "The #249 development uses tail differences, certificate depths, lcm cones, flatness, deposits, menus, slack, fresh loss, channels, and changing-lcm scales. The exact equivalences are sound, but specialist construction names can obscure which objects are finite predicates, which are geometric pictures, and which hypotheses actually carry the unbounded quantifier",
+   "statement": "Audit the #249 narrative from the denominator exclusion through the certificate characterisation and candidate unbounded inputs. Define or replace construction-shaped vocabulary at first use, consolidate repeated no-go warnings, and keep fixed-scale mechanisms visibly separate from the exact unbounded certificate supply."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "ebc98ee71f6819bd9fe344a0bb343542c604e533",
-  "committed_navigation_snapshot": "ce83bf1958f50614eaffa182508b271a511a5d29",
-  "main_paper_source_digest": "sha256:dfeaae29da2bf154d25d28e72632223ae2ab3a051bdd6f69825e1bf1cc2762f5"
+  "committed_navigation_snapshot": "f8cf699ad98f2179ec35365a4bf0f81bbc977056",
+  "main_paper_source_digest": "sha256:94dcded94bd3d62dcecf940e6cf93de84a495bc28ba7d21e96634e71e39dd80e"
  },
  "reading_routes": [
   {
