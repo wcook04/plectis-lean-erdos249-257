@@ -1733,12 +1733,17 @@ prefixes through \(M\).  Its upper endpoint \(E_+\) covers \(H_N\) and satisfies
 \(E_+=g_++2^{N-M}\); prefix adjacency is a separate transition hypothesis.
 \end{definition}
 
-The results below have five different roles.  The checked base feeds the
-ordinary one-row update.  At a feedback row there is a dichotomy between a
-new full stage and a local gap.  A separate recurrence advances such a gap
-when its coefficient inequalities hold.  The quarter-band bound is only a
-necessary obstruction.  Finally, the cofinal corollary is the sole step from
-arbitrarily deep full stages to half-membership.
+Reader map: \(R\) lists the represented terminal carries \(k\);
+\(K_{n-1}\) is the carry at row \(n\), bounded by the strip width \(H_n\).
+The cutoff \(M\) separates a shared past from the variable suffix, while
+\(\nu_{M,N}(a)+k=E\) makes every representative meet the same endpoint.
+A full cylinder covers the strip; a profiled gap records its one uncovered
+interval, with separate fixed pasts below and above it.
+
+The logical roles differ.  Depth \(18\) is checked data.  The one-row and
+gap updates are conditional on their coefficient inequalities; the
+quarter-band bound is only necessary for swallowing a gap.  Only cofinal
+full stages---not a finite run---imply half-membership.
 
 \begin{proposition}[verified base and one-row cylinder update]
 \label{res:selectsuffix}
