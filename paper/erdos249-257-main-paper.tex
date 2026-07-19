@@ -4288,10 +4288,14 @@ contradiction, not another rational normal form, is the missing premise.
 \section{Technical reductions for the totient-certificate branch}
 \label{app:totient-technical}
 
-Recall that \(\mathsf{Sep}(h,N,L)\) is a finite integer test certifying that
-the tail difference \(R_{N+h}-R_N\) is not an integer.  At a fixed pair
-\((h,N)\), some depth \(L\) succeeds exactly when that difference is
-non-integral.  Irrationality requires the stronger cofinal statement: for
+Recall the scaled tail
+\(R_N=\sum_{m\geq1}\ph(N+m)/2^m\).
+The predicate \(\mathsf{Sep}(h,N,L)\) retains the first $L$ binary places of
+\(R_{N+h}-R_N\) and checks, by finite integer arithmetic, that their least
+residue modulo $2^L$ clears the rigorous omitted-tail margins at both $0$
+and $2^L$.  Thus $N$ is the tail location and $L$ the finite certificate
+depth.  At a fixed pair \((h,N)\), some $L$ succeeds exactly when the
+difference is non-integral.  Irrationality requires the stronger cofinal statement: for
 every candidate period \(h\), a certificate must occur after every cutoff.
 This appendix develops coordinates and finite mechanisms for that statement;
 it does not prove the required cofinal supply
