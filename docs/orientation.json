@@ -559,18 +559,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_caption_and_cross_reference_standalone_audit",
+   "id": "main_paper_appendix_triage_and_reader_path_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "A figure, table, or cross-reference can be locally correct yet fail when encountered out of sequence or through a link. Captions and re-entry sentences should identify the mathematical object, the logical status, and the non-conclusion without forcing the reader to reconstruct local notation from several pages earlier.",
-   "statement": "Audit every figure, table, long display, appendix consequence, and forward/back reference for standalone readability. Expand only the minimal notation needed at the point of re-entry, remove references that merely say above or below without a stable target, and preserve the 53-page target."
+   "defect_class": "A technically complete appendix can obscure the main reading path when its purpose, dependency on the main theorem spine, or safe skip point is not explicit. Repeated finite reductions should remain available without making a first reader mistake them for additional headline results.",
+   "statement": "Audit the appendix opening, section transitions, and references from the main text so that each appendix states what it verifies, which main result consumes it, and whether a first reader may skip it. Consolidate only genuinely repeated orientation prose, retain every exact claim and source link, and preserve the 53-page target."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "ebc98ee71f6819bd9fe344a0bb343542c604e533",
-  "committed_navigation_snapshot": "087682b4e8aa46488aa471717ff29405b7b8e12d",
-  "main_paper_source_digest": "sha256:08baaf56967a18c928a42d4e7f3ff9b8eac27134d6aaf6225a4e3ad67cc97089"
+  "committed_navigation_snapshot": "ddb5bdc0b3291c5fefeb9d1d0f99b22e9edcfbcf",
+  "main_paper_source_digest": "sha256:a05eec56828f643fe2e8edbe01b7e586be913e743b4a643b4462a31dc6e815a9"
  },
  "reading_routes": [
   {
