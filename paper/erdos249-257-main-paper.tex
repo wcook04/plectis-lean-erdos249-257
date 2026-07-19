@@ -537,8 +537,8 @@ geometric tail estimate.  The remaining proof is a finite CRT construction,
 divisor counting, and explicit parameter arithmetic.  The final certificate
 existence theorem holds for every $b\geq2$ and every precision $q$; see the
 \lword{CertificateKernel.lean}{7859}{exists_weighted_block_certificates}{uniform certificate theorem}.
-Its
-composition with the near-integer criterion is the theorem cited above.  This
+Its composition with the near-integer criterion is
+Theorem~\ref{res:full}.  This
 is a formalisation of the classical full-support theorem, not a new
 irrationality result.
 
@@ -933,7 +933,7 @@ greedy orbit of \(1/2\) skip beyond every bound?  It does not answer this.  The
 next subsection characterises nonmembership by a final skip and identifies
 what would be required to exclude it.
 
-\subsection{The final-skip reduction}
+\subsection{The final-skip reduction}\label{sec:final-skip-reduction}
 
 Appendix~\ref{app:half-final-skip} contains the detailed derivations used in
 this subsection; the statements and their logical status are recorded here.
@@ -1617,7 +1617,8 @@ The equivalence is proved; the orbit inequalities are not.
 
 \subsubsection{Residual identity for the middle-transition support}\label{res:producercarry}
 
-For the middle-transition coordinates $A_D,C_D,\Theta_D$ defined above, the
+For the middle-transition coordinates $A_D,C_D,\Theta_D$ introduced in
+Section~\ref{sec:final-skip-reduction}, the
 generic finite-support theorem reads
 $1/2-X_{A_D}=2^{-(2D+2)}(C_D-\Theta_D)$,
 \lword{HalfCylinderProducerCarrySocket.lean}{27}{producerCarry_residual_identity}{the residual identity}.
@@ -2064,7 +2065,7 @@ The finite exclusion ladder records the successive verified thresholds
 \;\to\; 7.96\times10^{34}\ (K{=}240).
 \]
 The mediant framework is historically associated with Farey's 1816 note on
-vulgar fractions~\cite{farey1816}; every exclusion above is Lean-checked in the
+vulgar fractions~\cite{farey1816}; every exclusion in this ladder is Lean-checked in the
 formal-source checkpoint.  The first threshold is a direct low-carry check,
 $2^{22}$ is retained as a named intermediate corollary, and the two largest
 thresholds use the Farey separation. See
@@ -2718,7 +2719,8 @@ and
 This is a finite arithmetic equivalence.  It does not supply the required
 cofactors at unbounded scales and gives no irrationality conclusion.
 
-\paragraph{Independent no-go: parity is not a margin certificate.}  The preceding lift does not
+\paragraph{Independent no-go: parity is not a margin certificate.}
+Proposition~\ref{res:powertwobitlift} does not
 settle the reduced signed-margin interval condition.  For a positive even
 modulus \(m\) and integral radius parameter \(a\) with
 \(16<a<8m-16\), each parity class contains both a residue inside the interval
@@ -2917,9 +2919,9 @@ irrationality criterion for $S$.
 The formal proof also exposes the generic theorem that any supplied separated
 minor gives the corresponding rank,
 \lword{TotientMahlerDefect.lean}{101}{finrank_canonicalTotientKernel_eq_of_certificate}{separated-minor rank criterion}.
-The two generic algebraic propositions above remain useful as possible inputs
-to other determinant routes, but the totient-kernel minor itself is supplied
-at every level by Theorem~\ref{res:dyadictotient}.
+Propositions~\ref{res:signedmoment} and~\ref{res:dominantdyadic} remain useful
+as possible inputs to other determinant routes, but the totient-kernel minor
+itself is supplied at every level by Theorem~\ref{res:dyadictotient}.
 
 \begin{proposition}[exact even-residue reduction]\label{res:evenresidue}
 If $r=2^{t+1}s$ with $s$ odd and $t+1<j$, then
@@ -4272,7 +4274,8 @@ and nowhere dense.  Its Lebesgue measure is exactly one.
 \lword{GreedyAchievementSet.lean}{1636}{isTotallyDisconnected_mersenneAchievementSet}{total disconnectedness},
 and
 \lword{GreedyAchievementSet.lean}{1645}{isNowhereDense_mersenneAchievementSet}{nowhere density}.
-Kova\v{c}--Tao supply the strict-tail Cantor-set context cited above.  The
+Kova\v{c}--Tao supply the strict-tail Cantor-set context
+\cite[Remark~4.1]{kovactao}.  The
 formalisation records these exact properties without making a novelty or
 priority claim for them.
 
