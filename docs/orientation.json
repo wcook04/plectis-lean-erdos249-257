@@ -56,7 +56,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "Erd\\H{o}s \\#249",
-    "line": 3615
+    "line": 3618
    }
   },
   {
@@ -67,7 +67,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "unbounded certificate supply",
-    "line": 3626
+    "line": 3629
    }
   },
   {
@@ -78,7 +78,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "the half-value counterexample route",
-    "line": 3647
+    "line": 3650
    }
   },
   {
@@ -89,7 +89,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "universal Erd\\H{o}s \\#257",
-    "line": 3638
+    "line": 3641
    }
   }
  ],
@@ -559,18 +559,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_cross_audience_first_contact_audit",
+   "id": "main_paper_appendix_reader_triage_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "A number theorist, a formal-methods researcher, and a mathematically interested general reader enter with different assumed vocabularies. The opening and early theorem spine must introduce support, achievement set, scaled tail, certificate, divisor stream, Lambert transform, formal source, proof term, source pin, and finite-versus-cofinal status at the point each audience first needs them.",
-   "statement": "Audit the title, abstract, introduction, two exact reductions, Lambert-series comparison section, and verification section as three cold-reader routes. Remove unexplained specialist or repository vocabulary, consolidate definitions that arrive twice, and add only short object-first glosses that preserve the opening budget and 53-page boundary."
+   "defect_class": "The appendices contain several independent proof routes, conditional criteria, finite computations, and no-go results. Their opening maps must let a reader decide what to read or skip without first learning internal construction labels.",
+   "statement": "Audit each appendix introduction, heading sequence, and reader map. State what each route consumes, proves, and does not prove; remove residual construction jargon; and distinguish exact equivalences, conditional results, finite evidence, and local exclusions without expanding the 53-page boundary."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "ebc98ee71f6819bd9fe344a0bb343542c604e533",
-  "committed_navigation_snapshot": "cff52efda741d31e22efdbac7f87dca244345bf0",
-  "main_paper_source_digest": "sha256:2984d6c92b26556ca91b35749f7299db7fc9e1d3854ffabdf1399504991de5fb"
+  "committed_navigation_snapshot": "15e77e70c4f1853c2babad6997f12c9180e20227",
+  "main_paper_source_digest": "sha256:4e851256b8a2ecca6b38aabee36bf25f8edb198c7c52deaaab0511b6ac949de7"
  },
  "reading_routes": [
   {
