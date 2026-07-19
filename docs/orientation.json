@@ -559,18 +559,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_appendix_d_probability_geometry_reader_map_audit",
+   "id": "main_paper_full_bibliography_role_and_link_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "Appendix D.3 introduces reduced directions, cylinder masses, truncated depths, Stern--Brocot runs, continuants, and bookkeeping exponents in quick succession. The statements are exact, but a reader can still confuse a probability mass, a coordinate denominator, and the exponent used only for bookkeeping, or infer that local cylinder convergence supplies the open cofinal certificate theorem",
-   "statement": "Audit Appendix D.3 as a probability-geometry reader map. Define the reduced-direction and cylinder constructions before their formulas, distinguish mass, height, and bookkeeping exponents at every transition, verify the Farey and Stern--Brocot background attribution, and keep the local convergence results visibly separate from the open certificate supply while preserving the 53-page envelope."
+   "defect_class": "The bibliography is compact and its links are release-checked, but the 25 entries mix archive scans, books, journal articles, current arXiv versions, software papers, and a living problem index. Link liveness alone does not verify author order, issue data, revision dates, or that each citation is attached to the precise external claim it supports",
+   "statement": "Audit every bibliography entry and its in-text role against a primary publisher, author, archive, or project source. Correct metadata and source-role drift, prefer stable DOI or archival targets, preserve explicit access dates for living resources, and keep the reference list readable within the 53-page envelope."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "ebc98ee71f6819bd9fe344a0bb343542c604e533",
-  "committed_navigation_snapshot": "b98dcc65c5e33707fd852562d14dc204efb67697",
-  "main_paper_source_digest": "sha256:70f075f6a8822bbbf2becfdb60d28d249622ceceecbc5ff94ea124d5430f6f7e"
+  "committed_navigation_snapshot": "f1fc5c61b6a06b00fda7f3bb3b018e21fb922ef8",
+  "main_paper_source_digest": "sha256:35fee2736981d07de49a5a9c0c00673c3cc43c1e991be3f5e7840105ea227e5c"
  },
  "reading_routes": [
   {
