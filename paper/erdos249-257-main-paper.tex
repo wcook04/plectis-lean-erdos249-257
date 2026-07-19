@@ -3227,23 +3227,28 @@ For \(L_b(\gamma)=\sum_{a\ge1}\gamma(a)/(b^a-1)\), the checked cases are:
 \begin{theorem}[eventually-periodic nonnegative weights]
 \label{res:periodicnonnegative}
 For every $b\ge2$, an eventually-periodic nonnegative rational weight that is
-positive at a positive index in its periodic region gives an irrational series.
+not identically zero on its eventual period gives an irrational series.
 \end{theorem}
 \noindent Formalised:
 \lword{CertificateKernel.lean}{12483}{irrational_ratWeightSeries_eventuallyPeriodic}{eventually-periodic nonnegative criterion}.
 This is contained in a broader theorem of Luca--Tachiya~\cite{lucatachiya}.
 \begin{theorem}[periodic signed-weight dichotomy]\label{res:periodicsigned}
-For a periodic integer weight, the series is irrational or terminating in
-base \(b\).
+For a periodic integer weight \(\gamma\), either \(L_b(\gamma)\) is irrational,
+or \(b^kL_b(\gamma)\in\Z\) for some \(k\ge0\); equivalently, its base-\(b\)
+expansion terminates.
 \end{theorem}
 \noindent Formalised:
 \lword{CertificateKernel.lean}{13847}{irrational_or_bpow_mul_eq_intCast_intWeightedErdosSeries_periodic}{periodic signed-weight dichotomy}.
 \begin{proposition}[residue-blind obstruction]\label{res:periodfourobstruction}
-For the period-four weight \(1,0,-1,0\), the divisor coefficient vanishes on
+For the period-four weight \(\gamma=1,0,-1,0,\ldots\), its coefficient after
+Lambert rearrangement, \(c(n)=\sum_{d\mid n}\gamma(d)\), vanishes whenever
 \(n\equiv3\pmod4\).
 \end{proposition}
 \noindent Formalised:
 \lword{CertificateKernel.lean}{13898}{intWeightedCoeff_periodFourSignWeight_eq_zero_of_mod_four_eq_three}{period-four coefficient obstruction}.
+Thus vanishing on one residue class does not certify that the input is zero.
+The proposition says nothing about the nonperiodic totient-derived weight
+\(\alpha=\ph*\mu\).
 
 \subsection{Finite algebraic boundaries and squared-Lambert coordinates}
 \label{app:lambert-algebraic}
