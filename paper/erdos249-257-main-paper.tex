@@ -364,10 +364,10 @@ the sums, and collecting the terms with \(m=nk\).  The coefficient
 \((f*\mathbf 1)(m)\) is the Dirichlet convolution of \(f\) with the constant
 function \(\mathbf 1(n)=1\).  We also write \(\mathrm{Id}(n)=n\), let \(\mu\)
 denote the M\"obius function, and put \(\sigma(m)=\sum_{d\mid m}d\).
-Apostol gives the classical arithmetic-function and Dirichlet-convolution
-background~\cite{apostol}.  Merca introduced a Lambert-series factorisation
-theorem~\cite{merca2017}, and Merca--Schmidt later unified the associated
-matrix formulations~\cite{mercaschmidt}.
+For classical arithmetic-function and Dirichlet-convolution background, see
+Apostol~\cite{apostol}.  Lambert-series factorisations and their matrix
+formulations are treated by Merca~\cite{merca2017} and
+Merca--Schmidt~\cite{mercaschmidt}.
 
 The rearrangement separates two operations: the divisor transform
 \(f\mapsto f*\mathbf 1\), followed by evaluation of the resulting coefficients
@@ -488,7 +488,7 @@ is irrational.
 \lword{CertificateKernel.lean}{8000}{irrational_erdosSum_full_support}{all-base theorem}
 and its
 \lword{CertificateKernel.lean}{8007}{irrational_erdosBorwein_series}{base-\(2\) corollary}
-are formalised.  This is Erd\H{o}s's 1948 theorem~\cite{erdos1948}.  In
+are formalised.  This is Erd\H{o}s's 1948 theorem~\cite[Theorem, p.~63]{erdos1948}.  In
 Section~\ref{sec:ladder} it is the value $L(\mathbf 1)$, and it is the fixed
 machine-checked comparison point in the same Mersenne--Lambert family as the
 open $S$; as Section~\ref{sec:ladder} notes, it is not a further convolution
@@ -557,7 +557,7 @@ each of the following infinite supports $A$:
 \item power-of-two support $A=\{2^n : n\ge0\}$, giving $\sum 1/(b^{2^n}-1)$;
 \item multiples $A=d\Npos=\{dk:k\ge1\}$ with $d\ge1$;
 \item pairwise-coprime supports with summable reciprocals (Erd\H{o}s's
-condition~\cite{erdos1968});
+condition~\cite[Theorem, p.~222]{erdos1968});
 \item eventually-periodic supports, residue classes, and the odd numbers.
 \end{enumerate}
 \end{theorem}
@@ -586,7 +586,7 @@ that
 \[
   \sum_p\frac1{2^p-1}=\sum_{n\ge1}\frac{\omega(n)}{2^n}
 \]
-is irrational~\cite{taoteravainen}. Their proof uses quantitative two-point
+is irrational~\cite[Theorem~3]{taoteravainen}. Their proof uses quantitative two-point
 correlations of multiplicative functions and is not formalised here. This
 settles the prime-support case, while the universal support statement
 remains open.  They also indicate how the argument should extend to
@@ -651,7 +651,7 @@ and
 \lword{GreedyAchievementSet.lean}{1445}{mem_mersenneAchievementSet_iff_greedy_survival}{greedy membership theorem}.
 Uniqueness is the
 \lword{GreedyAchievementSet.lean}{1527}{positiveMersenneSupportValue_injective_normalized}{support-coding theorem}.
-Kova\v{c}--Tao provide the strict-tail Cantor-set context~\cite{kovactao}.
+Kova\v{c}--Tao provide the strict-tail Cantor-set context~\cite[Remark~13]{kovactao}.
 
 \paragraph{Geometric and finite-arithmetic consequences.}
 Proposition~\ref{res:greedytopology} proves that \(\mathcal A\) is compact,
@@ -709,7 +709,7 @@ support, with its explicit period-six orbit and multiplier \(21\), is worked
 at the end of Appendix~\ref{app:carry-boolean}.
 The recurrence is a necessary consequence of rationality, not a criterion by
 itself.  Wang uses the same forward mechanism for
-\(\gamma(n)=n d_n\)~\cite{wang2026}; Appendix~\ref{app:carry-normal-form}
+\(\gamma(n)=n d_n\)~\cite[Section~3]{wang2026}; Appendix~\ref{app:carry-normal-form}
 separates that antecedent from the generic converse and rigidity statements
 formalised here.  Wang's density theorem and its Erd\H{o}s~\#260 corollary
 are not used.
@@ -1861,7 +1861,7 @@ The two transition propositions do not supply their coefficient inequalities,
 and the finite base does not supply the cofinal family required by
 Corollary~\ref{res:cofinalcylinder}.  The
 strict-tail achievement-set literature supplies the surrounding Cantor-set
-geometry~\cite{kovactao}, not this finite carry recurrence; the comparison
+geometry~\cite[Remark~13]{kovactao}, not this finite carry recurrence; the comparison
 record makes no novelty claim for the recurrence itself.
 
 \subsubsection{Verified finite suffix-cylinder stages}\label{res:prefeedback}
@@ -3379,7 +3379,7 @@ Write
 \(\zeta_q(2)=\sum_{n\ge1}nq^n/(1-q^n)\).
 Postelmans--Van Assche prove that \(1,\zeta_q(1),\zeta_q(2)\) are linearly
 independent over \(\Q\) for $q=1/p$ and every integer $p\ge2$
-~\cite{postelmansvanassche}.  Since
+~\cite[Theorem~3]{postelmansvanassche}.  Since
 $L^{(2)}(\mathbf1)=\zeta_{1/2}(2)-\zeta_{1/2}(1)$, their theorem makes the
 constant-weight value irrational.  This cited conclusion is not formalised
 here and does not transfer to the M\"obius row $L^{(2)}(\mu)=S-\tfrac12$.
@@ -3860,8 +3860,8 @@ finite greedy failure proves nonmembership in the achievement set, whereas
 survival through any finite depth proves nothing.
 
 The prior-art boundary is theorem-family-specific. The integral carry
-recurrence has a direct antecedent in Wang~\cite{wang2026};
-the strict-tail geometry is recorded by Kova\v{c}--Tao~\cite{kovactao};
+recurrence has a direct antecedent in Wang~\cite[Section~3]{wang2026};
+the strict-tail geometry is recorded by Kova\v{c}--Tao~\cite[Remark~13]{kovactao};
 M\"obius inversion, repetend algebra, and divisor averaging are classical
 (see, for example, Apostol~\cite{apostol}). We make no claim of mathematical
 priority for the converse/rigidity, certificate-normal-form, or coupled
@@ -3892,7 +3892,7 @@ u(N)/2^N\to0 .
 The recurrence is exact binary long division against the coefficient stream;
 the boundary condition forbids the homogeneous solution. Wang uses the
 integral carry recurrence forced by rationality for the weighted binary
-special case $\gamma(n)=n d_n$~\cite{wang2026}. The theorem below applies that
+special case $\gamma(n)=n d_n$~\cite[Section~3]{wang2026}. The theorem below applies that
 forward mechanism to arbitrary nonnegative $\gamma(n)\le n$ and also proves
 the converse and subexponential-orbit rigidity.  No historical-priority claim
 is made for those clauses. Wang's positive-density theorem and its Erd\H{o}s
@@ -4246,7 +4246,7 @@ Kova\v{c} and Tao verify, for every fixed integer $t\ge2$, that
 \[
   \sum_{\ell>n}\frac1{t^\ell-1}<\frac1{t^n-1},
 \]
-and deduce distinct Lambert subsums and a Cantor set~\cite{kovactao}. At
+and deduce distinct Lambert subsums and a Cantor set~\cite[Remark~13]{kovactao}. At
 $t=2$ this is the relevant Lambert-series instance of Kakeya's classical
 strict-tail criterion for subsum sets~\cite{kakeya1914}. What is checked here,
 beyond that cited geometry, is the greedy criterion, quantitative enclosure,
