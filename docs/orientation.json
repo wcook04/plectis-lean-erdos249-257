@@ -559,18 +559,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_equivalence_direction_and_negation_audit",
+   "id": "main_paper_equation_reader_gloss_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "An exact equivalence, sufficient condition, negation, or counterexample route can be mathematically correct while nearby prose silently reverses its direction or broadens its scope. The half-value route is especially vulnerable because membership refutes universal #257 while nonmembership decides only one target.",
-   "statement": "Audit every displayed equivalence, implication, negation, and open conditional together with the sentence that interprets it. Check both logical directions, quantifier order, and whether the conclusion settles, refutes, or leaves unchanged Erdős #249 or universal #257; repair only real scope defects and keep the paper at 53 pages."
+   "defect_class": "A displayed equation can be formally precise yet pedagogically opaque when the reader is not told what the variables measure, which direction matters, or what conclusion the display changes. Dense appendices are especially prone to correct but uninterpreted formula blocks.",
+   "statement": "Audit each principal displayed equation and dependency diagram for an immediate plain-English gloss. Prioritise the gateway reductions, the #249 certificate machinery, the #257 greedy and carry recurrences, and the final open criteria; add or tighten only local explanations that identify the mathematical object and logical consequence, avoid duplicating proofs, and keep the paper at 53 pages."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "ebc98ee71f6819bd9fe344a0bb343542c604e533",
-  "committed_navigation_snapshot": "f71f106d8d613b5ae6c6c74c49d1c35a3c7ea0ce",
-  "main_paper_source_digest": "sha256:462e20b13c4a085d2736aa02269c25df1fe36ceb4bc99affb83328329e092ab9"
+  "committed_navigation_snapshot": "bdf006ab62c752713f3370c3cc13ce03a6781c98",
+  "main_paper_source_digest": "sha256:f95ced3803439e9d3e562b97a9e1a99404dd1474c34dbcb930ee7c4095545fc3"
  },
  "reading_routes": [
   {
