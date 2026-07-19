@@ -495,7 +495,8 @@ open $S$; as Section~\ref{sec:ladder} notes, it is not a further convolution
 step from $S$.  Borwein later proved a wider rational-shift Lambert-series
 theorem~\cite{borwein1992}; that result is not formalised here.
 
-The proof begins with the Lambert identity
+The proof turns rationality into a spacing obstruction.  Its coefficient
+model is the Lambert identity
 \[
  \sum_{n\geq 1}\frac{1}{b^n-1}
    =\sum_{m\geq 1}\frac{\tau(m)}{b^m},
@@ -937,8 +938,10 @@ what would be required to exclude it.
 
 Appendix~\ref{app:half-final-skip} contains the detailed derivations used in
 this subsection; the statements and their logical status are recorded here.
-To detect whether a skip can be final, we compare the ranks selected in
-consecutive seam rows.
+The strategy is to assume a final skip, classify its successor by comparing
+the ranks selected in consecutive seam rows, and eliminate every branch.  The
+elimination stops at two middle carry values and one future-tail inequality;
+these are the open inputs stated below.
 
 For each \(s\geq6\), let
 \[
@@ -4056,7 +4059,8 @@ The bound is uniform in $A,p,N,$ and $h$.
 \noindent Formalised:
 \lword{SublogDivisorCoverage.lean}{392}{supportCoeffZeroWindow_length_le_eps_logb_add}{sublogarithmic zero-window bound}.
 
-The proof first establishes, for each integer $k\ge2$, the explicit divisor
+The proof uses $k$ as a tunable moment parameter.  For each integer $k\ge2$ it
+first establishes the explicit divisor
 estimate
 \[
   \tau(n)^k\le \bigl(k^{2^k}\bigr)^k n.
@@ -4064,8 +4068,8 @@ estimate
 It transports the resulting $n^{1/k}$ bound through the binary tail and then
 uses the exact carry recurrence across a zero window. Raising the resulting
 inequality to the $k$th power absorbs the occurrence of $h$ on the right and
-leaves a coefficient $1/(k-1)$ in front of the binary logarithm. Choosing $k$
-after $\varepsilon$ gives the theorem. This controls gaps in divisor coverage;
+leaves a coefficient $1/(k-1)$ in front of the binary logarithm; only then is
+$k$ chosen large enough for $\varepsilon$. This controls gaps in divisor coverage;
 it does not assert a subpower bound for the carry state itself.
 
 For one fixed support the conclusion is elementary, since every zero window
