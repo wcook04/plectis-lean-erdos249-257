@@ -56,7 +56,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "Erd\\H{o}s \\#249",
-    "line": 3571
+    "line": 3574
    }
   },
   {
@@ -67,7 +67,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "unbounded certificate supply",
-    "line": 3582
+    "line": 3585
    }
   },
   {
@@ -78,7 +78,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "the half-value counterexample route",
-    "line": 3603
+    "line": 3606
    }
   },
   {
@@ -89,7 +89,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "universal Erd\\H{o}s \\#257",
-    "line": 3594
+    "line": 3597
    }
   }
  ],
@@ -559,18 +559,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_totient_normal_forms_entry_plain_language_audit",
+   "id": "main_paper_totient_fixed_scale_mechanism_map_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "Appendix C.1 introduces cone vertices, a joint refuter, a Mobius shadow, a foreign defect, and the full target in quick succession, leaving the relation between the rationality consequence and the exact target-avoidance equivalence implicit",
-   "statement": "Give C.1 a compact operational map: remind the reader what the lcm cone is, distinguish the one-way finite nonflatness refuter from the exact diagonal-pincer equivalence, and define the shadow, defect, and full target by what each term records."
+   "defect_class": "Appendix C.2 warns that its results are fixed-scale, but then presents an analytic enclosure, a unit-gap ceiling, foreign-residue projections, a denominator identity, and t <= 64 certificates without a compact map of which statements are exact, sufficient only, conditional, or verified finite instances",
+   "statement": "Add a compact C.2 status map separating the one-way analytic enclosure, exact finite residue and denominator coordinates, conditional cofinal implications, and the verified finite certificates through t = 64."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "ebc98ee71f6819bd9fe344a0bb343542c604e533",
-  "committed_navigation_snapshot": "50b71f96ce40737024499f24ed83dad0a9586d66",
-  "main_paper_source_digest": "sha256:40a5aac09a751e33dd4be01efae898b5cd5549945d0477ce28a6eca9b3926aeb"
+  "committed_navigation_snapshot": "aa321e030e1ba0e1f1b9118be9e31d514abe8452",
+  "main_paper_source_digest": "sha256:6bcd1f84894ada68586cb195a6af067cfec78ff659d327501fd78d0979458ae3"
  },
  "reading_routes": [
   {
