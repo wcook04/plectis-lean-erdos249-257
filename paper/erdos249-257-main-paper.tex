@@ -2076,13 +2076,13 @@ representation, not a proof of irrationality. A rational with a larger
 denominator is not excluded by it.
 
 \begin{remark}[one bound, four representations]
-Because the Lambert identities of Section~\ref{sec:ladder} are equalities, the same
-finite record transfers verbatim to three other representations of the constant:
-to the Lambert representation $\sum_d \alpha(d)/(2^d-1)$
+The Lambert identities of Section~\ref{sec:ladder} are equalities, so the same
+finite record transfers verbatim to three other representations of the constant.
+The first is the Lambert representation $\sum_d \alpha(d)/(2^d-1)$
 (\lword{CertificateKernel.lean}{18145}{tsum_primWeight_div_two_pow_sub_one_ne_int_div_of_den_le_79639646646701375323355774875831053}{Lambert-representation denominator transfer}),
-to the signed M\"obius-square constant $T=\sum_d\mu(d)/(2^d-1)^2$ at half the bound
+the second is the signed M\"obius-square constant $T=\sum_d\mu(d)/(2^d-1)^2$ at half the bound
 (\lword{CertificateKernel.lean}{18159}{tsum_moebius_div_two_pow_sub_one_sq_ne_int_div_of_den_le_39819823323350687661677887437915526}{signed-square denominator transfer}),
-and to the coprimality probability of Section~\ref{sec:geom} at half the bound.
+and the third is the coprimality probability of Section~\ref{sec:geom}, also at half the bound.
 Half appears because $S=\tfrac12+T$ turns a denominator $d$ for $T$ into $2d$ for $S$.
 \end{remark}
 
@@ -2170,7 +2170,7 @@ difference.  The strict inequalities are impossible when \(L=0\), so every
 successful certificate has positive depth.
 Heuristically, the two margins together occupy a proportion of about
 \(2(N{+}h{+}L{+}2)/2^L\) of the modulus, which is small as soon as
-\(2^L\) is large compared with \(N+h+L\); a certificate can fail only
+\(2^L\) is large compared with \(N+h+L\).  A certificate can fail only
 when the residue lies exceptionally close to \(0\) or \(2^L\), that is,
 when the tail difference is exceptionally close to an integer.  Nothing
 in this paper converts that observation into the required supply at
@@ -3067,10 +3067,11 @@ it supplies no theorem transferring status between them.
 \end{tikzpicture}
 \caption{The one transform behind the paper, with the statuses of
 Section~\ref{sec:ladder}.  Labels (i)--(iii) are the three questions of
-Section~\ref{sec:one-transform}: \#249 fixes the top input and asks about the single image
-point \(S\); universal \#257 restricts the domain to indicators of
-infinite supports and asks whether its image ever meets \(\Q\); the
-half-value route fixes the value \(1/2\), reached by the signed
+Section~\ref{sec:one-transform}.  Label (i), \#249, fixes the top input and
+asks about the single image point \(S\).  Label (ii), universal \#257,
+restricts the domain to indicators of infinite supports and asks whether
+its image ever meets \(\Q\).  Label (iii), the half-value route, fixes the
+value \(1/2\), reached by the signed
 M\"obius input through the stream \(1,0,0,\ldots\), and asks whether an
 infinite Boolean input reaches it as well.  The figure organises
 statements proved in Sections~\ref{sec:ladder}--\ref{sec:eb} and
@@ -3656,9 +3657,10 @@ point-membership question.
 \end{problem}
 
 \paragraph{Conclusion: what the reductions change.}
-The paper proves exact reductions, finite certificates, and local no-go
-results.  It does not prove an unbounded mechanism deciding either direction;
-the reductions change form, not status.  For \#249 the unresolved statement
+The paper is an obstruction atlas: it turns each open problem into exact
+finite-to-cofinal statements and records finite certificates and local no-go
+results.  It does not supply the unbounded mechanism, so the reductions change
+form, not status.  For \#249 the unresolved statement
 is unbounded certificate supply, equivalently in pointwise or lcm-diagonal form.
 For the half-value route to \#257, arbitrary supports give way to one greedy
 orbit; in final-skip coordinates it remains to exclude exceptional carry
@@ -3780,10 +3782,11 @@ This appendix supplies the local implications behind
 Theorems~\ref{res:halfmembership} and~\ref{res:fatalright},
 Proposition~\ref{res:finalskipexclusions}, and
 Corollary~\ref{res:taildominance}.  It does not establish the corollary's
-global hypothesis.  A sufficient hypothesis is either a cofinal window, seam, or
-terminal approximation producing \(1/2\in\mathcal A\), or both an exclusion
-of every actual middle transition with \(C_D=-2,-1\) and a proof of
-\(\Theta_D<C_D\) at every remaining non-\((-3)\) middle transition.  The
+global hypothesis.  One sufficient route is a cofinal window, seam, or
+terminal approximation producing \(1/2\in\mathcal A\).  A second route
+requires both an exclusion of every actual middle transition with
+\(C_D=-2,-1\) and a proof of \(\Theta_D<C_D\) at every remaining
+non-\((-3)\) middle transition.  The
 bounded checks and local no-go theorems provide neither route.
 
 \section{Auxiliary rationality criteria from binary carry systems}\label{sec:carry}
@@ -3793,11 +3796,11 @@ Theorem~\ref{res:rigidity-main} and
 Corollaries~\ref{res:rigidity-unbounded-main}--\ref{res:rigidity-dyadic-mass-main},
 and the detailed greedy geometry cited after Theorem~\ref{res:greedy}.
 Readers interested only in achievement-set geometry may skip to B.5.
-It has two independent roles.  Appendices~\ref{app:carry-normal-form}
-and~\ref{app:carry-boolean} give exact coordinate changes: rationality is
-equivalent first to a \emph{tempered tail orbit}, an integer recurrence with
-a vanishing boundary condition, and then to a Boolean--M\"obius certificate,
-an integer carry orbit whose quotient stream reconstructs a Boolean support.
+It has two independent roles.  Appendix~\ref{app:carry-normal-form} gives the
+first exact coordinate change: rationality is equivalent to a \emph{tempered
+tail orbit}, an integer recurrence with a vanishing boundary condition.
+Appendix~\ref{app:carry-boolean} gives the second: the orbit becomes a
+Boolean--M\"obius certificate whose quotient stream reconstructs a Boolean support.
 Appendices~\ref{app:carry-sublog} and~\ref{app:carry-mass} use those coordinates
 only forward, to derive necessary divisor-coverage, denominator-wrap,
 reciprocal-mass, and carry-growth conditions.  A \emph{wrap} occurs when
@@ -3961,13 +3964,13 @@ $B=\{n\ge1:(\mu*f)(n)=1\}$ selected by that transform.
 search or finiteness hypothesis, the converse
 \lword{BooleanMobiusCarry.lean}{180}{eq_supportCoeffAF_booleanMobiusSupport_of_boolean}{the Boolean reconstruction theorem}.
 
-On the carry side, Theorem~\ref{res:rigidity} applies at $\gamma=f_A$: the support
-series is rational exactly when a tempered carry orbit for $f_A$ exists
-(\lword{BooleanMobiusCarry.lean}{383}{erdosSupportSeries_rational_iff_exists_temperedCarry}{the rationality--carry equivalence});
-a displayed fraction $p/q$ corresponds to an orbit $U$ with multiplier $q$ and
+On the carry side, Theorem~\ref{res:rigidity} applies at $\gamma=f_A$.
+The support series is rational exactly when a tempered carry orbit for $f_A$ exists
+(\lword{BooleanMobiusCarry.lean}{383}{erdosSupportSeries_rational_iff_exists_temperedCarry}{the rationality--carry equivalence}).
+A displayed fraction $p/q$ corresponds to an orbit $U$ with multiplier $q$ and
 initial value $U(0)=p$
-(\lword{BooleanMobiusCarry.lean}{466}{support_fraction_iff_exists_temperedCarry}{the support-fraction carry equivalence});
-and exact division recovers the coefficient from the orbit,
+(\lword{BooleanMobiusCarry.lean}{466}{support_fraction_iff_exists_temperedCarry}{the support-fraction carry equivalence}).
+Exact division then recovers the coefficient from the orbit,
 $\bigl(2U(N)-U(N+1)\bigr)/q=f_A(N+1)$
 (\lword{BooleanMobiusCarry.lean}{680}{temperedCarry_quotient_eq_supportCoeff}{carry-quotient recovery}).
 The elementary divisor-pair bound $\tau(n)\le2\lfloor\sqrt n\rfloor$
@@ -4172,12 +4175,12 @@ multiple of $F$. Then
 In particular, an infinite support whose value is a dyadic rational $p/2^c$
 has $\sum_{a\in A}1/a$ divergent or $\rho(A)>1$.
 \end{corollary}
-\noindent The mechanism is a collision: at every positive multiple of $L$ at
-least $|F|$ support divisors land on the same index, so $f_A\ge|F|$ there,
-while the exact carry equation $f_A(n)+e_n=k_{n-1}+2e_{n-1}$ with
-$k_{n-1}\le1$ lets one step absorb at most one unit --- so the preceding
-excess must spike to at least $\lceil(|F|-1)/2\rceil$, and the spikes recur
-with density $1/L$. The three steps are formalised by the
+\noindent The mechanism is a collision.  At every positive multiple of $L$,
+at least $|F|$ support divisors land on the same index, so $f_A\ge|F|$ there.
+The exact carry equation $f_A(n)+e_n=k_{n-1}+2e_{n-1}$, with $k_{n-1}\le1$,
+lets one step absorb at most one unit.  The preceding excess must therefore
+spike to at least $\lceil(|F|-1)/2\rceil$, and these spikes recur with density
+$1/L$.  The three steps are formalised by the
 \lword{RationalSupportCarrySkeleton.lean}{1963}{shiftedBooleanCollision_wrap_bound_of_common_multiple}{shifted common-multiple bound},
 \lword{RationalSupportCarrySkeleton.lean}{1868}{shiftedSupportCoeff_add_oddTailExcess_succ_eq_wrap_add_two_excess}{shifted wrap--excess recurrence},
 and
