@@ -2038,7 +2038,8 @@ Equivalently, if $S$ is rational then its reduced denominator exceeds that bound
 \noindent Formalised as the
 \lword{CertificateKernel.lean}{18056}{tsum_totient_div_pow_two_ne_ratCast_of_den_le_79639646646701375323355774875831053}{denominator-exclusion theorem}.
 For a fixed window length $K$, the checked prefix and a rigorous tail bound
-define a finite gap certificate.  If a denominator $q$ failed that certificate,
+define a finite \emph{denominator-gap} certificate, distinct from the
+tail-period certificates below.  If a denominator $q$ failed this check,
 elementary rearrangement would put some rational $r/q$ in a specific short
 interval.  The larger bounds bracket that interval by fractions
 $a/b<c/d$ satisfying $bc-ad=1$.  The mediant lemma says that every rational
@@ -2151,6 +2152,8 @@ N+h+L+2 \;<\; \big(\Delta_{h,N,L}\bmod 2^L\big) \;<\; 2^L-(N+h+L+2).
 \]
 \end{definition}
 
+Reader map: $h$ is the candidate period, $N$ the tail location, and $L$
+the number of binary places retained.
 Here \(x\bmod 2^L\) denotes the least residue in
 \(\{0,\ldots,2^L-1\}\).  The integer $\Delta_{h,N,L}$ contains the first
 $L$ binary places of $R_{N+h}-R_N$; the two margins bound the omitted tail
@@ -2177,8 +2180,8 @@ R_{N+h}-R_N\notin\Z.
 \noindent This is the
 \lword{LcmConeFlatness.lean}{316}{exists_certifiedKill_iff_tail_diff_notMem_int}{certificate-completeness equivalence}.
 Thus the finite predicate loses no information at a fixed pair \((h,N)\).
-Searching \(L=1,2,\ldots\) is therefore a complete positive
-semi-decision procedure for non-integrality at fixed \((h,N)\): it halts
+Searching \(L=1,2,\ldots\) is therefore a complete one-sided test at fixed
+\((h,N)\): it halts
 exactly when the difference is non-integral.  When the difference is integral,
 completeness says that no depth succeeds, so this search does not halt.  It is
 not a two-sided decision procedure for an infinite tail.
@@ -2203,9 +2206,8 @@ The converse direction uses the fact that integrality of even one
 positive-shift tail difference forces $S$ to be rational
 (\lword{LcmConeFlatness.lean}{357}{not_irrational_of_tail_diff_mem_int}{integral-difference rationality criterion}).
 
-Here $h$ tests a candidate rational period, $N_0$ means ``after every cutoff'',
-$N\geq N_0$ chooses the location, and $L$ is the finite binary depth checked
-there.  A bounded list cannot cover every $h$ and every $N_0$.
+The next theorem weakens ``every $N$'' to ``some $N$ after every cutoff
+$N_0$.''  A bounded list cannot cover every period $h$ and cutoff $N_0$.
 
 \begin{theorem}[exact tail-period characterisation]\label{res:red21}
 $S$ is irrational if and only if, for every period $h\ge1$ and every threshold
@@ -2265,8 +2267,9 @@ while the omitted-tail allowance is $12+1+16+2=31$.  Hence
 31<53468<2^{16}-31,
 \]
 which is exactly $\mathsf{Sep}(1,12,16)$ and therefore proves
-$R_{13}-R_{12}\notin\Z$.  Pairwise rows name a non-integral difference; joint
-rows prove that one exists within the menu.  They do not form an unbounded family.
+$R_{13}-R_{12}\notin\Z$.  A pairwise certificate names a non-integral
+difference; a joint-menu certificate proves that one exists within its finite
+menu.  Neither forms an unbounded family.
 
 \subsection{What remains open}\label{sec:249-open}
 
@@ -2313,7 +2316,7 @@ unbounded routes.  None proves \eqref{eq:unbounded-certificate-supply}.
 
 \long\def\TotientTechnicalAppendix{%
 
-\subsection{Exact cofinal normal forms and cone consequences}
+\subsection{Exact unbounded-depth normal forms and cone consequences}
 \label{app:totient-normal}
 
 Put $M_t=\lcm(1,\ldots,t)$.  This subsection has two routes with different
@@ -2324,7 +2327,7 @@ have one fractional part.  A finite joint certificate can contradict this
 prediction at finitely many locations, but no converse completeness theorem
 is claimed.  The diagonal route instead gives an exact decomposition of
 $R_{2M_t}-R_{M_t}$: integrality is equivalent to one residue-class condition
-at each $t$, and missing that class cofinally is equivalent to the
+at each $t$, and missing that class at unbounded $t$ is equivalent to the
 irrationality of $S$.
 
 \paragraph{Cone flatness and completeness.} For fixed $t$, call the tail
@@ -2387,13 +2390,13 @@ The following are equivalent:
 \end{corollary}
 \noindent The reverse implication is the
 \lword{DiagonalPincerDecomposition.lean}{290}{irrational_totientSeries_of_full_target_avoidance_supply}{unbounded target-avoidance criterion}.
-For the forward implication, Theorem~\ref{res:diag} supplies cofinally many
-non-integral diagonal differences, and
+For the forward implication, Theorem~\ref{res:diag} supplies non-integral
+diagonal differences at unbounded $t$, and
 Proposition~\ref{res:pincer} converts each one into a missed full target.
 Thus the proposition is the fixed-scale equivalence and the corollary is its
-exact global form.  The cofinal avoidance statement remains open.
+exact global form.  The unbounded avoidance statement remains open.
 
-\subsection{Fixed-scale mechanisms and conditional cofinal implications}
+\subsection{Fixed-scale mechanisms and conditional unbounded implications}
 \label{app:totient-finite}
 
 This subsection contains four logical statuses.  The squared-Mersenne
@@ -2401,10 +2404,10 @@ enclosure and the projected-separation tests are sufficient only: separation
 forces a missed target, with no converse asserted.  The prime-power unit-gap
 characterisation, channel decompositions, shadow-denominator formula, and
 residue--projection equivalence are exact at fixed parameters; except where
-stated, they are not characterisations of target avoidance.  Any corollary
-concluding irrationality adds an unproved cofinal repetition hypothesis.  The
+stated, they are not characterisations of target avoidance.  Any irrationality
+corollary adds an unproved hypothesis that this repeats at unbounded scales.  The
 tabulated rows, primality facts, and diagonal certificates through $t=64$
-are verified finite instances.  No result here supplies the missing cofinal
+are verified finite instances.  No result here supplies the missing unbounded
 quantifier in Appendix~\ref{app:totient-normal}.
 
 \paragraph{A one-way analytic enclosure.}
@@ -2607,7 +2610,7 @@ The finite equivalence is only between the residue inequality and the
 projection certificate.  Neither condition is asserted to be necessary for
 full-target avoidance or for irrationality.
 The stronger adjacent-suffix supplies formalised in the same module imply the
-displayed cofinal supply; they are not additional conclusions of one finite
+displayed unbounded supply; they are not additional conclusions of one finite
 certificate.
 Finite instances of this implication are proved, but no unbounded projection
 or suffix supply is established.
@@ -2626,26 +2629,26 @@ at $t=64$,
 \lword{DiagonalPincerCertificateT64Endpoint.lean}{1928}{certifiedKill_diagonal_t64}{scale-64 diagonal certificate}.
 This is one finite certificate, not an unbounded supply.
 
-\subsection{Candidate cofinal inputs and no-go boundaries}
+\subsection{Candidate unbounded inputs and no-go boundaries}
 \label{app:totient-boundaries}
 
 The results below have three distinct roles, and are not consecutive proof
-steps.  The unproved three-rank band is a candidate cofinal sufficient input.
+steps.  The unproved three-rank band is a candidate unbounded sufficient input.
 The affine equivalence, fresh-prime decomposition, and one-bit lift are exact
 identities that expose quantities an unbounded argument would have to control;
 the zero affine orbit shows only that uniform correction bounds do not provide
 that control.  The parity, prime-adjunction, scalar-localisation, and square-CRT
 results independently rule out four further shortcuts.  None of these no-go
-results rules out the whole strategy, supplies the missing cofinal input, or
+results rules out the whole strategy, supplies the missing unbounded input, or
 uses another no-go result as a premise.
 
-\paragraph{Candidate cofinal input: a three-rank odd window.}\label{res:flexibleoddwindow}
+\paragraph{Candidate unbounded input: a three-rank odd window.}\label{res:flexibleoddwindow}
 At an analytically admissible odd power-of-two rank, centrality at any one of
 the canonical odd rank or its next two base-four successors yields the
 required adjacent-suffix gap condition,
 \lword{DiagonalFlexibleOddWindowSupply.lean}{93}{diagonalAdjacentSuffixGapSupply_of_powerTwoOddGuardThreeRankBand}{three-rank suffix-gap implication}.
-Thus a cofinal three-rank band supply implies irrationality,
-\lword{DiagonalFlexibleOddWindowSupply.lean}{136}{irrational_totientSeries_of_powerTwoOddGuardThreeRankBandSupply}{cofinal three-rank criterion};
+Thus a three-rank band at unbounded scales implies irrationality,
+\lword{DiagonalFlexibleOddWindowSupply.lean}{136}{irrational_totientSeries_of_powerTwoOddGuardThreeRankBandSupply}{unbounded three-rank criterion};
 that supply is not proved.
 
 \paragraph{Exact affine form and bounded zero-orbit obstruction.}\label{res:flexibleoddaffine}
@@ -2676,7 +2679,7 @@ the foreign channel, and bound the loss from the old-prime curvature margins.
 and
 \lword{FreshPrimeDeficitDecomposition.lean}{269}{oldFivePoint_sub_secondBranchAdverseDeficit_le_actual}{adverse-deficit curvature bound}.
 This supplies the exact correction term for the finite evaluations.  It supplies
-neither a cofinal deficit bound nor an irrationality criterion.
+neither an unbounded deficit bound nor an irrationality criterion.
 
 \paragraph{Exact one-bit lifting.}  The power-of-two signed-margin condition admits a
 separate exact arithmetic reduction.  If a signed difference is already
@@ -4292,10 +4295,10 @@ The predicate \(\mathsf{Sep}(h,N,L)\) retains the first $L$ binary places of
 residue modulo $2^L$ clears the rigorous omitted-tail margins at both $0$
 and $2^L$.  Thus $N$ is the tail location and $L$ the finite certificate
 depth.  At a fixed pair \((h,N)\), some $L$ succeeds exactly when the
-difference is non-integral.  Irrationality requires the stronger cofinal statement: for
+difference is non-integral.  Irrationality requires the stronger unbounded statement: for
 every candidate period \(h\), a certificate must occur after every cutoff.
 This appendix develops coordinates and finite mechanisms for that statement;
-it does not prove the required cofinal supply
+it does not prove the required unbounded supply
 \eqref{eq:unbounded-certificate-supply}.
 
 The exact chain is
@@ -4312,7 +4315,7 @@ The exact chain is
 \]
 Appendix~\ref{app:totient-normal} gives exact coordinates for the two lines.
 Appendix~\ref{app:totient-finite} separates fixed-scale mechanisms from
-conditional implications that assume their cofinal repetition.
+conditional implications that assume repetition at unbounded scales.
 Appendix~\ref{app:totient-boundaries} records candidate sufficient inputs and
 rules out several shortcuts.  Appendix~\ref{app:totient-rank} proves
 unconditional dyadic rank growth but not the missing implication from rank to
