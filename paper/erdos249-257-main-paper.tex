@@ -3439,24 +3439,25 @@ The two orientations with one nonempty Stern--Brocot run have total mass
 \noindent This is the
 \lword{SternBrocotRunGeometry.lean}{467}{oneRunMass_eq_half}{one-run mass}.
 
-\begin{proposition}[unit-run denominator exponent]\label{res:rundenominator}
-The natural denominator exponent along the all-unit \(r\)-run is
-\[
-  \sum_{j=0}^{r-1}F_{j+2}=F_{r+3}-2.
-\]
+\begin{proposition}[unit-run clearing-exponent sum]\label{res:rundenominator}
+Define the clearing-exponent sum along the all-unit \(r\)-run by
+\(E_r=\sum_{j=0}^{r-1}F_{j+2}\).  Then \(E_r=F_{r+3}-2\).
 \end{proposition}
 \noindent This is the
-\lword{SternBrocotRunGeometry.lean}{491}{naturalRunDenominatorExponent_add_two}{natural denominator exponent}.
+\lword{SternBrocotRunGeometry.lean}{491}{naturalRunDenominatorExponent_add_two}{unit-run exponent sum}.
+Here \(E_r\) is the bookkeeping sum for the invariant-coordinate exponents
+encountered along the spine; the proposition does not identify a reduced
+denominator of the probability mass or of \(S\).
 
 The Lambert and M\"obius identities used above are classical
 ~\cite{apostol,merca2017,mercaschmidt}, and the mediant language goes back to
 Farey~\cite{farey1816}.  Postelmans--Van Assche supply the cited irrationality
 of the constant-weight squared-Lambert row, not these cylinder or run
 statements.  We claim the displayed Lean-checked identities and estimates,
-not priority for their assembled package.  In particular, the exact equality
-of the Fibonacci height and denominator scales is a boundary, not an
-irrationality argument: no theorem here proves that a run tail survives
-denominator clearing.
+not priority for their assembled package.  In particular, the minimum height
+\(F_{r+3}\) and the naive clearing scale \(E_r=F_{r+3}-2\) differ by only two.
+This is a boundary, not an irrationality argument: no theorem here proves that
+a run tail survives denominator clearing.
 }
 
 \subsection{Two concrete scalar criteria}
