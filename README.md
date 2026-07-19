@@ -3,8 +3,9 @@
 
 # Tail certificates and achievement-set geometry for Erdős Problems 249 and 257
 
-**New here?** The [architecture and repository guide](ARCHITECTURE.md)
-assumes no Lean or project history.
+**New here?** See the [architecture and repository guide](ARCHITECTURE.md)
+or the [printable PDF](claim-faithful-publication-systems-paper.pdf). It assumes
+no Lean or project history.
 
 Lean 4 formal work on two unsolved irrationality problems.
 
