@@ -4056,18 +4056,22 @@ next.  The one-wrap classification identifies the extremal residue cycles
 and is not a premise of any of the three routes.
 
 Suppose now the support series equals $p/(2^c v)$ with $v$ odd and $A$
-containing a positive element.  Let $U$ be the unshifted tempered orbit of
-Appendix~\ref{app:carry-boolean} with multiplier $q=2^c v$.  The
-odd-denominator coordinate used
-here is
+containing a positive element.  Write $q=2^cv$, and let $U$ be the tempered
+orbit of Appendix~\ref{app:carry-boolean} with multiplier $q$.  Removing the
+first $c$ binary places and the dyadic factor gives the positive integer state
 \[
  u(N)=\frac{U(c+N)}{2^c}=v\,T_{f_A}(c+N);
 \]
-this is the state denoted $u_N$ in Theorem~\ref{res:rigidity-main}.
-Rationality makes $u(N)$ a positive integer satisfying
-$u(N+1)+v\,f_A(c+N+1)=2\,u(N)$.  Moreover, $u(N)$ reduces modulo $v$ to the
-doubling residue $\bar p_N=p\,2^N\bmod v$
-(\lword{RationalSupportCarrySkeleton.lean}{668}{exists_shifted_odd_tail_nat_states_of_support_fraction}{shifted natural-state existence}).
+this is $u_N$ in Theorem~\ref{res:rigidity-main}, and it satisfies
+$u(N+1)+v\,f_A(c+N+1)=2u(N)$.  Its least residue modulo $v$ is
+$\bar p_N=p2^N\bmod v$, with $0\leq\bar p_N<v$.  Put
+\[
+ e_N=\left\lfloor\frac{u(N)}v\right\rfloor,
+ \qquad u(N)=ve_N+\bar p_N;
+\]
+thus $e_N$ is the nonnegative integral excess above the least residue
+(\lword{RationalSupportCarrySkeleton.lean}{668}{exists_shifted_odd_tail_nat_states_of_support_fraction}{shifted natural-state existence},
+\lword{RationalSupportCarrySkeleton.lean}{506}{oddSupportTail_eq_residue_div_add_excess}{residue--excess decomposition}).
 Doubling a least residue either stays under $v$ or wraps past it exactly once,
 so each step emits a wrap digit $k_N=\lfloor2\bar p_N/v\rfloor\in\{0,1\}$, and over
 any cycle length $h$ with $2^h\equiv1\pmod v$ the repetend identity holds:
@@ -4108,8 +4112,6 @@ and the mean of the scaled tails has the same limit
 \lword{RationalSupportCarrySkeleton.lean}{1036}{tendsto_binaryCoeffTail_supportCoeff_mean_reciprocalMass}{coefficient-tail mean limit}).
 The divergent case is carried as an explicit disjunction, not through a
 default value assigned to a divergent formal sum.
-Each tail state splits exactly as $u(N)=v\,e_N+\bar p_N$ with integral excess
-$e_N=\lfloor u(N)/v\rfloor\ge0$.
 
 \begin{proposition}[order-wrap lower bound, with exact excess mean]\label{res:orderwrap}
 Let \(A\subseteq\Npos\) be nonempty and suppose
