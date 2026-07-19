@@ -1445,7 +1445,7 @@ This is a finite recurrence, not the missing escape estimate.
 This subsection alone feeds the main final-skip reduction.  It identifies
 nonmembership with a final skip and membership with terminal zeros beyond
 every bound, then separates the excluded terminal branches from the unresolved
-middle carries and future-tail inequality.  Later formulas only attack those
+middle carries and comparison with the unused tail.  Later formulas only attack those
 obligations; they add no second conclusion.
 
 \subsubsection{Fatal gaps and eventual right tails}\label{app:fatalright-detail}
@@ -3721,7 +3721,7 @@ use.  Appendix~\ref{app:half-finite-cofinal} separates a finite witness from
 the unbounded supply of such witnesses needed for membership.
 Appendix~\ref{app:half-final-skip} identifies nonmembership with a last greedy
 skip, excludes some possible last transitions, and states the two exceptional
-carry exclusions and tail inequality still missing.  Appendix~\ref{app:half-evidence}
+carry exclusions and unused-tail inequality still missing.  Appendix~\ref{app:half-evidence}
 contains finite checks, changes of coordinates, and counterexamples to
 shortcuts.
 
@@ -3793,6 +3793,7 @@ This appendix supplies the general results assembled in
 Theorem~\ref{res:rigidity-main} and
 Corollaries~\ref{res:rigidity-unbounded-main}--\ref{res:rigidity-dyadic-mass-main},
 and the detailed greedy geometry cited after Theorem~\ref{res:greedy}.
+Readers interested only in achievement-set geometry may skip to B.5.
 It has two independent roles.  Appendices~\ref{app:carry-normal-form}
 and~\ref{app:carry-boolean} give exact coordinate changes: rationality is
 equivalent first to a \emph{tempered tail orbit}, an integer recurrence with
@@ -4320,6 +4321,8 @@ every candidate period \(h\), a certificate must occur after every cutoff.
 This appendix develops coordinates and finite mechanisms for that statement;
 it does not prove the required unbounded supply
 \eqref{eq:unbounded-certificate-supply}.
+C.1 contains the exact reduction; C.2--C.4 are independent finite mechanisms,
+candidate inputs and their limits, and dyadic-rank consequences.
 
 The exact chain is
 \[
@@ -4355,7 +4358,7 @@ Lambert identities, and the Stern--Brocot cylinder and continuant laws.
 These enlarge the two coordinate pictures; they are not additional steps in
 either open proof.
 
-The three families are parallel, not cumulative.
+The three parallel families may be skipped on a first reading.
 Appendix~\ref{app:lambert-weighted} proves or classifies weighted Lambert
 series with coefficient inputs different from the open totient input.
 Appendix~\ref{app:lambert-algebraic} gives exact identities and finite
@@ -4375,7 +4378,7 @@ cofinal \(\mathsf{Sep}\) theorem for \(S\) or decides whether \(1/2\in\mathcal A
 
 \section{Guide to the formal sources}\label{app:index}
 
-Each blue phrase opens its Lean declaration at the pinned revision; the JSON
+Each blue phrase opens its Lean declaration at the fixed source revision; the JSON
 claim registry records the same name.  Reader routes are: bounded rational
 exclusion, Theorem~\ref{res:farey}; the exact \#249 reduction,
 Proposition~\ref{res:complete} and Theorems~\ref{res:pointwisecomplete}--\ref{res:diag};
