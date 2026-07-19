@@ -56,7 +56,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "Erd\\H{o}s \\#249",
-    "line": 3563
+    "line": 3567
    }
   },
   {
@@ -67,7 +67,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "unbounded certificate supply",
-    "line": 3574
+    "line": 3578
    }
   },
   {
@@ -78,7 +78,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "the half-value counterexample route",
-    "line": 3595
+    "line": 3599
    }
   },
   {
@@ -89,7 +89,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "universal Erd\\H{o}s \\#257",
-    "line": 3586
+    "line": 3590
    }
   }
  ],
@@ -559,18 +559,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_producer_carry_coordinates_plain_language_audit",
+   "id": "main_paper_campbell_synchronization_plain_language_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "The final non-right transition displays exact middle and upper carry coordinates before a cold reader is told which support each coordinate measures and what quantitative theorem is still missing",
-   "statement": "Map the below and above terminal-augmented supports to their signed carry coordinates, then state the missing lower-bound, sign-persistence, and escape inputs without suggesting that the identities provide them."
+   "defect_class": "The Campbell prime-progression incompatibility introduces the modulus, search bound, phase factor, and fatal-window cap in one paragraph without first stating which proposed synchronization each parameter belongs to",
+   "statement": "Give the proposed Campbell-to-last-skip route one compact parameter map, then preserve that the inequality contradiction kills only that synchronization and that shifted-zero remains equivalent to, rather than a proof of, half-membership."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "ebc98ee71f6819bd9fe344a0bb343542c604e533",
-  "committed_navigation_snapshot": "9ffa41261c0a860520a2c539162c06653442718b",
-  "main_paper_source_digest": "sha256:26950b03c5bbab92a02532384531ba56f9113bf7c2af409f63cf9a229394e50c"
+  "committed_navigation_snapshot": "3da55ed538298028de57b45dfc23238c0486498d",
+  "main_paper_source_digest": "sha256:356485651928c8035370a7f6b3064db62f2c3f19f3719a0aa884f6956c119e9a"
  },
  "reading_routes": [
   {
