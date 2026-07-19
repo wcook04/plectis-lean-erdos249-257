@@ -257,7 +257,7 @@ the limit of explicitly recorded checks.
   touched.
 - **You want to inspect the historical release-checking exercise:** read
   [`docs/publication_evidence.json`](docs/publication_evidence.json) and the
-  reproducibility appendix of the architecture paper.
+  reproducibility appendix of the systems paper.
 
 The shortest accurate summary is this: Lean checks the formal proofs, people
 review what the project says about them, and the release machinery keeps those
