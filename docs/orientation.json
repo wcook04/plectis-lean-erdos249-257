@@ -559,18 +559,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_theorem_statement_scanability_and_hypothesis_order_audit",
+   "id": "main_paper_proof_strategy_signposting_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "A theorem can be exact but difficult to scan when hypotheses appear after notation, a long prose sentence hides a finite condition list, or the principal conclusion is delayed behind implementation coordinates. Formal faithfulness does not require copying Lean's elaboration order into exposition.",
-   "statement": "Audit theorem, proposition, and corollary statements for hypothesis order and visual scanability. Put the mathematical object and governing hypothesis first, group genuinely parallel conditions, expose the principal conclusion early, retain exact quantifiers and exceptional cases, avoid list inflation for short statements, and keep the paper at 53 pages."
+   "defect_class": "A proof can be locally rigorous yet difficult to navigate when it begins with machinery before identifying the one decisive move, or when a long derivation does not tell the reader which implication is being established. Repeated roadmaps are also noise, so signposting must be selective.",
+   "statement": "Audit the principal proofs and longer appendix derivations for a short strategy sentence before technical machinery where the crux is not already visible. Name the decisive implication, obstruction, or invariant; do not paraphrase every subsequent step; preserve all proof content and exact claim boundaries; and keep the paper at 53 pages."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "ebc98ee71f6819bd9fe344a0bb343542c604e533",
-  "committed_navigation_snapshot": "57f481d38a03a21c2bed003261ee293c16e5a826",
-  "main_paper_source_digest": "sha256:8e3832a9214e34d4f8aac7be73da60a164275e45ec39d69f5310c4addf5e195f"
+  "committed_navigation_snapshot": "405db0b133880f13b3c7890d912b42e108402cb8",
+  "main_paper_source_digest": "sha256:0edb3e6a670b89641bb85a3bd7c0a4a22b38e9b967e058824232003120fe5f54"
  },
  "reading_routes": [
   {
