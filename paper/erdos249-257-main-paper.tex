@@ -2302,16 +2302,20 @@ unbounded routes.  None proves \eqref{eq:unbounded-certificate-supply}.
 \subsection{Exact cofinal normal forms and cone consequences}
 \label{app:totient-normal}
 
-This subsection contains two different kinds of statement.  Cone flatness is
-a necessary consequence of rationality that a finite joint refuter may
-contradict at chosen vertices.  The diagonal-pincer identity and its cofinal
-full-target-avoidance corollary are the exact fixed-scale and global normal
-forms of the open supply.  Only the latter corollary is equivalent to the
-irrationality of \(S\).
+Put $M_t=\lcm(1,\ldots,t)$.  This subsection has two routes with different
+logical status.  The cone route starts from a necessary consequence of
+rationality: for large $t$, the tails at the locations
+$M_t,2M_t,3M_t,\ldots$
+have one fractional part.  A finite joint certificate can contradict this
+prediction at finitely many locations, but no converse completeness theorem
+is claimed.  The diagonal route instead gives an exact decomposition of
+$R_{2M_t}-R_{M_t}$: integrality is equivalent to one residue-class condition
+at each $t$, and missing that class cofinally is equivalent to the
+irrationality of $S$.
 
-\paragraph{Cone flatness and completeness.} On the cone
-$\{kM_t:k\ge1\}$, rationality forces a single fractional constant across the
-whole cone.
+\paragraph{Cone flatness and completeness.} For fixed $t$, call the tail
+locations \(\{kM_t:k\ge1\}\) the \emph{lcm cone}.  Rationality eventually
+forces one fractional part across this sequence.
 
 \begin{proposition}[cone flatness]\label{res:flat}
 If $S$ is rational, then for every sufficiently large $t$ there is
@@ -2323,8 +2327,7 @@ $\theta_t$ for every $k\ge1$.
 Proposition~\ref{res:complete} states fixed-parameter certificate
 completeness, and Theorem~\ref{res:pointwisecomplete} gives its global
 pointwise form.  Their additional role here is cone-level: a joint finite
-refuter can interrogate several cone vertices at once and is sharper than any
-pairwise test.  It refutes the
+refuter tests several multipliers $k$ at once rather than one pair.  It refutes the
 single-fractional-part model that rationality predicts on a finite sample
 (\lword{LcmConeNonflat.lean}{126}{exists_nonintegral_pair_of_coneNonflatCert}{finite cone-nonflatness refuter}).
 This finite cone predicate is sound in the direction just stated: a
@@ -2333,15 +2336,15 @@ flatness model.  No converse is proved saying that every non-flat finite
 sample, or every irrational value of \(S\), must be detected by this joint
 predicate.  It is therefore a refuter, not a complete decision procedure.
 
-\paragraph{An exact target interval.} The diagonal calculation also admits a
-more local normal form.  Put $H_t=M_t$ and
+\paragraph{An exact target interval.} Put $H_t=M_t$ and
 \[
  D_t=R_{2H_t}-R_{H_t}.
 \]
-Separate an exact rational M\"obius shadow
-$Q_t=a_t/d_t$ in lowest terms and define the remaining \emph{foreign defect}
-by $F_t=D_t-Q_t$; the shadow collects the explicitly summed M\"obius
-channels, and the defect is everything that explicit part does not see.  The full target is the residue class of $-a_t$ modulo $d_t$:
+Write the explicitly summed M\"obius contribution as the reduced rational
+$Q_t=a_t/d_t$ and call it the \emph{M\"obius shadow}.  Define the remaining
+term $F_t=D_t-Q_t$ to be the \emph{foreign defect}; it contains exactly the
+channels absent from that explicit sum, so no part of $D_t$ is discarded.
+The \emph{full target} is the residue class of $-a_t$ modulo $d_t$:
 \[
  \mathsf{Hit}(t)
  \quad\Longleftrightarrow\quad
