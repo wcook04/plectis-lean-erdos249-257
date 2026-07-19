@@ -901,15 +901,15 @@
         "schema": "erdos249257-editorial-state/1",
         "scope": "continuous_whole_main_paper_exposition",
         "current_priority": {
-          "id": "main_paper_bibliography_metadata_and_claim_citation_audit",
+          "id": "main_paper_definition_before_use_and_reader_assumption_audit",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "defect_class": "A bibliography entry can resolve while still carrying a wrong year, author list, title, page range, version, or citation scope. Recent preprints and classical sources also require primary-source checks that generic DOI success does not supply.",
-          "statement": "Audit every bibliography entry and every in-text citation against its primary or authoritative metadata source. Verify authors, title, venue, year, pages, DOI or archival URL, version date, and the exact claim attributed; correct only evidence-backed defects, preserve primary-source links, and keep the paper at 53 pages."
+          "defect_class": "A technical term or symbol can be defined somewhere in the paper while still appearing without a usable local definition on a reader's chosen route. Status-only, Erdős #249, and Erdős #257 readers should not have to infer notation from an appendix or a later section.",
+          "statement": "Trace three cold-reader routes through the paper (status-only, Erdős #249, and Erdős #257) and audit every technical term and symbol at first use. Add only concise local glosses or precise forward references where needed, avoid duplicating machinery, and keep the paper at 53 pages."
         },
         "last_verified_wave": {
-          "id": "main_paper_novelty_and_prior_work_boundary_audit",
+          "id": "main_paper_bibliography_metadata_and_claim_citation_audit",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "result": "Audited the abstract, opening status table, main result introductions, appendix prior-art boundaries, source guide, and conclusion for unsupported novelty language and ambiguous treatment status. Revised seven places: separated the exact dyadic-rank theorem from known strict-tail coding in the opening table; replaced contribution/new-result language with checked/proved-here language; and made the no-priority boundary explicit around the exact reductions, tail-orbit converse, Boolean-carry composition, and greedy refinements. Primary-source checks confirmed the Luca--Tachiya eventual-periodic theorem, the Tao--Teravainen prime and prime-power wording, Wang's single-authored v2 and carry-recurrence premise, and the Kovač--Tao strict-tail context. A batch metadata check covered the DOI-backed bibliography and found no defect requiring a citation change in this wave. No theorem, formula, source target, or attribution changed. All affected pages render cleanly without overfull boxes, and the paper remains 53 pages."
+          "result": "Audited all 25 bibliography entries and every in-text citation against authoritative metadata and the attributed claim. Crossref records covered the DOI-backed journal literature; primary papers and archival records were checked directly for the classical sources and recent Tao--Teravainen, Wang, Campbell, Kovač--Tao, and Luca--Tachiya results. No author, title, venue, year, page, DOI, archival URL, or preprint-version correction was required. One citation-scope defect was corrected: the bundled Crandall--Campbell--Alford--Granville--Pomerance citation is now split so the question, affirmative proof, and prime-progression estimate each point to their actual source. No theorem, formula, source target, or mathematical claim changed. The affected page renders cleanly without overfull boxes, and the paper remains 53 pages."
         },
         "active_inconsistencies": [],
         "blocked_decisions": []
