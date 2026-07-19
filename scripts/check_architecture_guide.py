@@ -23,7 +23,11 @@ MAX_GUIDE_BYTES = 18_000
 # witness glosses, integer-arithmetic detail), then to 52_000 for the
 # perimeter-contraction and claim-to-reader-gap material; the budget still
 # exists so the paper cannot grow without a deliberate decision.
-MAX_SYSTEMS_PAPER_BYTES = 52_000
+# Raised again to 52_300 for PDF metadata only: a document language for
+# screen readers, keywords, and a numbered outline, matching what the
+# mathematics paper already declares. No prose was added and the rendered
+# paper is still fourteen pages, so this raise funds metadata, not material.
+MAX_SYSTEMS_PAPER_BYTES = 52_300
 
 SECTION_ORDER = (
     "## What this repository is",
