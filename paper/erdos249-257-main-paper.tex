@@ -196,7 +196,8 @@ where \(X,Y\in\Npos\) are independent and
 transform, but this common description transfers no theorem from one problem
 to the other; Section~\ref{sec:architecture} gives the exact map.
 
-\begin{center}
+\begin{table}[t]
+\centering
 \small
 \begin{tabular}{@{}
   >{\raggedright\arraybackslash}p{0.27\linewidth}
@@ -214,7 +215,7 @@ Structural/support results & Explicit rank theorem; Prior work/formalised & Exac
 Membership of \(1/2\) & Open; exact reductions & Greedy and recurrence laws give exact equivalences without proving either event. \\
 \bottomrule
 \end{tabular}
-\end{center}
+\end{table}
 
 \paragraph{What ``Lean-checked'' means here.}
 A \emph{proof term} is a formal expression that Lean's kernel accepts as a
@@ -3059,7 +3060,7 @@ $1/2$ would not prove (ii): another rational target could still be reached.
 Figure~\ref{fig:transform} marks these three ways of interrogating the map;
 it supplies no theorem transferring status between them.
 
-\begin{figure}[H]
+\begin{figure}[t]
 \centering
 \small
 \begin{tikzpicture}[>={Stealth[length=1.8mm]}, yscale=0.92]
@@ -4483,7 +4484,6 @@ Campbell prime-progression incompatibility & \lrefx{CampbellShiftSynchronization
 \end{center}
 \fi
 
-\clearpage
 \pdfbookmark[0]{References}{references}
 \begin{thebibliography}{99}
 \small
