@@ -208,7 +208,7 @@ Denominator exclusion & Proved & If \(S=p/q\), then \(q>\Qzero\). \\
 Tail differences and \(M_t\)-diagonal certificates & Exact equivalences & The unbounded supply is equivalent to \(S\notin\Q\), but remains open. \\
 Diagonal computation & Finite evidence & Lean checks 28 diagonal certificates through \(t=64\); this is not an unbounded family. \\
 Universal assertion in \#257 & Open & No proof covers every infinite support. \\
-Structural/support results & Prior work/formalised & Dyadic-section ranks and unique support coding are checked here; named support cases are formalised or cited.  None settles \#257. \\
+Structural/support results & Proved here; Prior work/formalised & Exact dyadic-section ranks are proved here; strict-tail support coding is formalised with prior-work context; named irrational support cases are formalised or cited.  None settles \#257. \\
 Membership of \(1/2\) & Open; exact reductions & Greedy and carry laws give equivalent events without proving they occur. \\
 \bottomrule
 \end{tabular}
@@ -347,7 +347,8 @@ Corollary~\ref{res:taildominance} states the sufficient global hypothesis.
 
 \paragraph{Relation to prior work.}
 Prior results are cited at their first use in the body, beginning in
-Section~\ref{sec:ladder}.  No priority claim is made for the reductions above.
+Section~\ref{sec:ladder}.  The claims above concern formalisation and exact
+logical status; no historical-priority claim is made for the reductions.
 
 \section{Lambert-series identities and comparison values}\label{sec:ladder}
 
@@ -458,7 +459,7 @@ finite-algebraic variants of these identities are collected in
 Appendices~\ref{app:lambert-weighted}--\ref{app:lambert-algebraic}.
 
 \paragraph{What this section proves---and does not prove.}
-The formalised contribution is
+The content checked here is
 \(L(\mu)=1/2\), \(L(\ph)=2\), and \(L(\alpha)=S\); the transcendental row is
 cited from Nesterenko.  None of these statuses transfers between inputs.  For
 \#249 the remaining issue is still the unbounded certificate supply isolated
@@ -3874,10 +3875,10 @@ u(N)/2^N\to0 .
 The recurrence is exact binary long division against the coefficient stream;
 the boundary condition forbids the homogeneous solution. Wang uses the
 integral carry recurrence forced by rationality for the weighted binary
-special case $\gamma(n)=n d_n$~\cite{wang2026}. The theorem below extends that
-forward mechanism to arbitrary nonnegative $\gamma(n)\le n$; its explicit converse
-and subexponential-orbit rigidity are the local additions, with no priority
-claim attached. Wang's positive-density theorem and its Erd\H{o}s
+special case $\gamma(n)=n d_n$~\cite{wang2026}. The theorem below applies that
+forward mechanism to arbitrary nonnegative $\gamma(n)\le n$ and also proves
+the converse and subexponential-orbit rigidity.  No historical-priority claim
+is made for those clauses. Wang's positive-density theorem and its Erd\H{o}s
 \#260 corollary are not used or formalised here.
 
 \begin{theorem}[tail-orbit rigidity]\label{res:rigidity}
@@ -3948,8 +3949,7 @@ coefficients; tail-orbit rigidity then identifies rationality with a tempered
 integer orbit.  Theorem~\ref{res:carrycert} is exactly the composition of
 those two equivalences.  The divisor transform and M\"obius inversion are
 classical Lambert-series tools~\cite{apostol,merca2017,mercaschmidt}; the
-contribution here is their Lean-checked composition with the tempered-orbit
-criterion.
+composition with the tempered-orbit criterion is what is checked here.
 
 \begin{proposition}[Boolean M\"obius inversion, both directions]\label{res:boolmob}
 On positive integers, $f_A=\mathbf 1_A*\mathbf 1$ and $\mu*f_A=\mathbf 1_A$, where
@@ -4226,10 +4226,10 @@ Kova\v{c} and Tao verify, for every fixed integer $t\ge2$, that
 \]
 and deduce distinct Lambert subsums and a Cantor set~\cite{kovactao}. At
 $t=2$ this is the relevant Lambert-series instance of Kakeya's classical
-strict-tail criterion for subsum sets~\cite{kakeya1914}. The local
-contribution is the checked greedy criterion, quantitative enclosure, and
-finite nonmembership certificates over that known geometry; it does not
-attribute those refinements to the cited sources or settle \#257.
+strict-tail criterion for subsum sets~\cite{kakeya1914}. What is checked here,
+beyond that cited geometry, is the greedy criterion, quantitative enclosure,
+and finite nonmembership certificates.  No historical-priority claim is made
+for those refinements, and they do not settle \#257.
 
 \begin{theorem}[superincreasing geometry and greedy membership]\label{res:greedy-details}
 For every $n\ge1$ the weight dominates the whole tail after it, $T(n)<w_n$,
@@ -4354,7 +4354,7 @@ subsections provide finite results, conditional routes, or boundaries.
 
 This appendix supplies the extensions cited from the Lambert-series identities
 in Section~\ref{sec:ladder} and from the coprime-pair representation after
-Proposition~\ref{res:coprime}.  Its new results are the periodic-weight
+Proposition~\ref{res:coprime}.  The results proved here are the periodic-weight
 classifications, finite denominator obstructions, the M\"obius-square and squared
 Lambert identities, and the Stern--Brocot cylinder and continuant laws.
 These enlarge the two coordinate pictures; they are not additional steps in
