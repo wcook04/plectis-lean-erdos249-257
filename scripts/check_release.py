@@ -903,8 +903,16 @@ def main() -> int:
     # REUSE-IgnoreStart — the strings below are scanner patterns, not licence tags.
     reuse = read(ROOT / "REUSE.toml")
     spdx_ids = set(re.findall(r'SPDX-License-Identifier\s*=\s*"([^"]+)"', reuse))
+    license_scan_excluded_dirs = {
+        ".git",
+        ".lake",
+        ".venv",
+        "LICENSES",
+        "__pycache__",
+        "venv",
+    }
     for dirpath, dirnames, filenames in os.walk(ROOT):
-        dirnames[:] = [d for d in dirnames if d not in (".lake", ".git", "LICENSES")]
+        dirnames[:] = [d for d in dirnames if d not in license_scan_excluded_dirs]
         for fname in filenames:
             path = Path(dirpath) / fname
             try:

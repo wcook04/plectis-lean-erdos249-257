@@ -27,6 +27,7 @@ AGENT_ENTRY_PATH = "AGENTS.md"
 MAKEFILE_PATH = "paper/Makefile"
 REUSE_PATH = "REUSE.toml"
 MANUSCRIPT_LICENSE = "CC-BY-4.0"
+SPDX_LICENSE_HEADER = "SPDX-License-" "Identifier: "
 SCHEMA = "erdos249257-publication-contract/1"
 EVIDENCE_SCHEMA = "erdos249257-publication-evidence/1"
 ENTRY_SOURCE_SCHEMA = "erdos249257-publication-entry-source/1"
@@ -215,13 +216,13 @@ def reuse_manuscript_override_errors(
 def manuscript_source_license_errors(path: str, text: str) -> list[str]:
     """Require a registered manuscript source to declare the manuscript licence."""
     header = "\n".join(text.splitlines()[:12])
-    expected = f"SPDX-License-Identifier: {MANUSCRIPT_LICENSE}"
+    expected = f"{SPDX_LICENSE_HEADER}{MANUSCRIPT_LICENSE}"
     if expected not in header:
         return [
             f"publication manuscript source {path!r} must declare "
             f"{MANUSCRIPT_LICENSE} in its SPDX header"
         ]
-    if "SPDX-License-Identifier: Apache-2.0" in header:
+    if f"{SPDX_LICENSE_HEADER}Apache-2.0" in header:
         return [
             f"publication manuscript source {path!r} must not use the "
             "Apache-2.0 software licence"
@@ -1182,8 +1183,8 @@ def mutation_fixture_failures(reader: RepositoryReader) -> list[str]:
     source_path = gateway["source_path"]
     original_source = reader.read_text(source_path)
     mutated_source = original_source.replace(
-        f"SPDX-License-Identifier: {MANUSCRIPT_LICENSE}",
-        "SPDX-License-Identifier: Apache-2.0",
+        f"{SPDX_LICENSE_HEADER}{MANUSCRIPT_LICENSE}",
+        f"{SPDX_LICENSE_HEADER}Apache-2.0",
         1,
     )
     if mutated_source == original_source:
