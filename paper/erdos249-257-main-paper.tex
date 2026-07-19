@@ -1118,11 +1118,11 @@ dyadically unsafe skips.
 \subsection{Conditional criteria and local inputs for structured supports}
 \label{app:half-conditional-producers}
 
-The results here have three distinct roles.  The bouquet criterion is a
-conditional irrationality theorem for one structured support family.  The
+The results here have three distinct roles.  The pairwise-coprime dilation
+criterion is a conditional irrationality theorem for one structured support family.  The
 seam, strip, and terminal criteria are sufficient hypotheses for
-\(1/2\in\mathcal A\).  The dilation, prime-power, and return-carry results are
-local algebraic inputs that prove neither an irrationality conclusion nor
+\(1/2\in\mathcal A\).  The dilation, prime-power, and reverse-carry spacing
+results are local algebraic inputs that prove neither an irrationality conclusion nor
 half-membership without an additional supply hypothesis.  Nothing in this subsection is a new unconditional case.
 
 \subsubsection{A conditional pairwise-coprime dilation criterion}\label{res:sunflower}
@@ -1131,8 +1131,8 @@ Write $A=E\cup\{c_ip_i:i\geq0\}$, where $E$ is a finite set of positive
 integers and $Q,c_i,p_i$ are positive.  Suppose that $Q$ is divisible by every
 $d\in E$ and every $c_i$, while $p_i>1$ is coprime to $Q$ and to $p_j$ for
 $j\ne i$, and $\sum_i1/p_i<\infty$.  We call this a
-\emph{finite-core orthogonal-petal bouquet}: $Q$ carries the fixed factors and
-the $p_i$ are mutually coprime.  Lean includes the example $E=\varnothing$,
+\emph{finite-core pairwise-coprime dilation family}: $Q$ contains the fixed
+factors and the $p_i$ are mutually coprime.  Lean includes the example $E=\varnothing$,
 $Q=6$, with $c_i$ alternating between $2,3$ and
 $p_i=5^2,7^2,11^2,\ldots$; each support element has three prime factors with
 multiplicity.
@@ -1160,11 +1160,11 @@ $f_A(ax)=f_A(x)+\mathbf 1_{a\nmid x}+\Delta_A(a,x)$:
 For $A=\{2,6\}$ and $(a,x)=(6,1)$, the additional divisor $2$ gives
 \lword{CompositeDilationDefect.lean}{218}{compositeDilationDefect_two_six_fixture}{\(\Delta_A(6,1)=1\)}.
 
-If $A=E\cup\{c_jp_j:j\geq0\}$ is a bouquet and $a=c_ip_i$, every divisor
+If $A=E\cup\{c_jp_j:j\geq0\}$ is such a family and $a=c_ip_i$, every divisor
 counted by $\Delta_A(a,x)$ either lies in $E$ or equals $c_jp_j$ with
 $j\ne i$ and $p_j\mid x$.  Hence, for $P=\{p_j:j\geq0\}$,
 $\Delta_A(c_ip_i,x)\leq |E|+f_P(x)$:
-\lword{CompositeDilationDefect.lean}{151}{compositeDilationDefect_le_exceptional_add_petalCoeff}{the bouquet defect bound}.
+\lword{CompositeDilationDefect.lean}{151}{compositeDilationDefect_le_exceptional_add_petalCoeff}{the dilation-family defect bound}.
 These finite local identities prove neither a correlation estimate, the tail
 selector, nor irrationality.
 
@@ -1184,7 +1184,7 @@ For $A=\{12\}$, $(p^e,q^f,n)=(4,3,1)$, and the value is one:
 These finite identities provide no decimation transport, bounded-$\Omega$
 conclusion, or irrationality theorem.
 
-\subsubsection{Half-trapping return carries}\label{res:halftrapping}
+\subsubsection{Rank-one obstruction and reverse-carry spacing}\label{res:halftrapping}
 
 For rational-linear maps $\varepsilon,\lambda_j:V\to\mathbb Q$, assume
 $\varepsilon(v_0)=1$ and
@@ -1215,8 +1215,9 @@ $h\leq\delta$ and $2h-c-b$ otherwise.  Hence $h,b$ realise exactly
 $k\neq2\delta-c$: one missing carry and no others
 (\lword{HalfCarryReachability.lean}{235}{evenSeamReachable_iff}{the exact one-hole equivalence}).
 
-A \emph{canonical even seam} identifies these scalar values with actual
-admissible words.  The unproved supply hypothesis gives one at every $2d$,
+A \emph{canonical even seam} is the corresponding adjacent pair of admissible
+parent words at depth $2d$ that realises this one-hole pattern.  The unproved
+supply hypothesis gives one at every $2d$,
 $d\geq10$.  Choose $k=1$, except $k=2$ when the hole is $1$; this gives words
 cofinally
 (\lword{HalfCarryReachability.lean}{999}{cofinalAdmissibility_of_canonicalEvenSeamSupply}{the cofinal-admissibility implication}).
@@ -1824,16 +1825,18 @@ prefixes.
 and
 \lword{SuffixCylinderProfiledAutoStep.lean}{110}{ProfiledGapStage.promoteThenAdvance_hasAdjacentPrefixes}{promote-and-advance theorem}.
 
-\begin{proposition}[quarter-band swallow obstruction]\label{res:cylinderswallow}
-If a two-row update swallows a protected strip of bound \(B\), and the
-lower coefficient pulse is at most the upper pulse plus \(2\), then
+\begin{proposition}[two-row full-gap width bound]\label{res:cylinderswallow}
+Suppose that after a two-row update the child gap has lower endpoint at most
+\(1\) and upper endpoint at least \(B\), so neither tracked sheet supplies a
+canonical parent for any protected carry \(1,\ldots,B\).  If the lower
+coefficient pulse is at most the upper pulse plus \(2\), then
 \[
  B\leq4(g_+-g_-+1)+2. \tag{A.1}
 \]
-This is a necessary quarter-band condition, not a contradiction.
+This is a necessary gap-width condition, not a contradiction.
 \end{proposition}
 \noindent Formalised as the
-\lword{SuffixCylinderProfiledSwallow.lean}{254}{nextBound_le_four_gapWidth_add_two_of_macro_swallow}{swallow bound}.
+\lword{SuffixCylinderProfiledSwallow.lean}{254}{nextBound_le_four_gapWidth_add_two_of_macro_swallow}{two-row gap-width bound}.
 
 \begin{corollary}[cofinal suffix-cylinder criterion]\label{res:cofinalcylinder}
 If full suffix-cylinder stages exist at arbitrarily large depths, then
