@@ -1873,10 +1873,12 @@ Corollary~\ref{res:cofinalcylinder}.
 
 \subsubsection{Half-divisor unit drop}\label{res:halfdivisordrop}
 
-At the doubled feedback row, changing only the terminal half-divisor bit from
-\(0\) to \(1\) increases the support coefficient by exactly one:
+Reader map: the terminal half-divisor bit selects whether the row coefficient
+is \(C\) or \(C+1\).  Since the carry update is \(K'=2K-C\), switching that
+bit from \(0\) to \(1\) drops the successor carry by exactly one:
 \lword{HalfDivisorUnitDrop.lean}{20}{supportCoeff_extend_true_eq_false_add_one_at_double}{the terminal-bit unit-drop identity}.
-The same holds for any explicitly identified adjacent boundary pair,
+An explicitly identified adjacent boundary pair packages the same one-unit
+split at a shared cutoff,
 \lword{HalfDivisorUnitDrop.lean}{35}{supportCoeff_boundaryPair_unitDrop_at_double}{the boundary-pair unit-drop identity}.
 The inverse-parent recurrence transfers such a pair to the next protected
 seam while retaining the exact unit-drop witness,
@@ -1888,11 +1890,10 @@ construction of such boundary pairs.
 
 \subsubsection{A finite rewind-boundary obstruction}\label{res:rewindboundarycounterexample}
 
-The scalar one-row rewind data alone still does not supply that missing
-boundary predicate.  Lean gives a concrete depth-$26$ selected two-word
-window whose depth-$27$ explicit step has rewind history $[1]$, is a width-two
-seam pair, and satisfies the doubled-row identity, but has no depth-$13$
-half-divisor boundary-pair witness:
+The next example separates numerical seam data from the structural boundary
+predicate.  A concrete depth-$26$ two-word window has, at depth \(27\),
+rewind history \([1]\), a width-two seam, and the doubled-row identity, yet no
+depth-\(13\) half-divisor boundary-pair witness:
 \lword{RewindBoundaryPairCounterexample.lean}{169}{depth27_actualRewindSeam_not_boundaryPair}{the depth-\(27\) boundary-pair counterexample}.
 Thus the protected-window buffer in the compactness criterion is a genuine
 hypothesis, not a consequence of the scalar seam facts alone.
