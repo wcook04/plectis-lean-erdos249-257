@@ -56,7 +56,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "Erd\\H{o}s \\#249",
-    "line": 3628
+    "line": 3630
    }
   },
   {
@@ -67,7 +67,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "unbounded certificate supply",
-    "line": 3639
+    "line": 3641
    }
   },
   {
@@ -78,7 +78,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "the half-value counterexample route",
-    "line": 3663
+    "line": 3665
    }
   },
   {
@@ -89,7 +89,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "universal Erd\\H{o}s \\#257",
-    "line": 3654
+    "line": 3656
    }
   }
  ],
@@ -559,18 +559,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_equation_reader_gloss_audit",
+   "id": "main_paper_notation_collision_and_overloading_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "A displayed equation can be formally precise yet pedagogically opaque when the reader is not told what the variables measure, which direction matters, or what conclusion the display changes. Dense appendices are especially prone to correct but uninterpreted formula blocks.",
-   "statement": "Audit each principal displayed equation and dependency diagram for an immediate plain-English gloss. Prioritise the gateway reductions, the #249 certificate machinery, the #257 greedy and carry recurrences, and the final open criteria; add or tighten only local explanations that identify the mathematical object and logical consequence, avoid duplicating proofs, and keep the paper at 53 pages."
+   "defect_class": "A locally defined symbol can collide with a central global object or be reused for several unrelated carries, tails, remainders, or cutoffs. The definition may be formally in scope while still making a cold reader backtrack or infer the wrong object.",
+   "statement": "Audit notation reuse and near-collisions across the main routes and appendices, prioritising S, T, R, H, U, C, support indicators, and tail symbols. Rename only genuinely confusing local notation, retain conventional symbols where their scope is clear, add a brief reminder instead of a rename when cheaper, and keep the paper at 53 pages."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "ebc98ee71f6819bd9fe344a0bb343542c604e533",
-  "committed_navigation_snapshot": "bdf006ab62c752713f3370c3cc13ce03a6781c98",
-  "main_paper_source_digest": "sha256:f95ced3803439e9d3e562b97a9e1a99404dd1474c34dbcb930ee7c4095545fc3"
+  "committed_navigation_snapshot": "1ed7f1c5a0c1916f3a38b9ff6e154fe83ab467a3",
+  "main_paper_source_digest": "sha256:55cc1cf463e40ca596c77d04fb2fd8589f3d26bd42242c28f68813936a8a0999"
  },
  "reading_routes": [
   {
