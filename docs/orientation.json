@@ -559,18 +559,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_redundant_boundary_sentence_audit",
+   "id": "main_paper_source_link_semantic_label_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "Repeated scope fences are necessary in a paper this close to open problems, but generic repetitions can obscure the one specific missing quantifier or hypothesis. Each boundary sentence should either prevent a distinct false inference or be consolidated into the nearest sharper statement.",
-   "statement": "Audit repeated sentences of the form does not prove, supplies no, remains open, and finite only. Retain every distinct logical fence, replace generic repetition with the exact missing hypothesis where useful, and remove only genuinely duplicative prose while preserving the theorem order and 53-page target."
+   "defect_class": "A source link may resolve successfully yet still be a poor reader interface when its visible phrase is broader, narrower, or more internal than the declaration it opens. Link text should state the mathematical role a reader will find at the target without exposing module-local vocabulary unnecessarily.",
+   "statement": "Audit visible Lean-link labels for semantic agreement with the surrounding theorem and linked declaration. Replace misleading or internal labels with literal mathematical descriptions, retain immutable targets and exact declaration names behind the links, rerun link and release checks, and preserve 53 pages."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "ebc98ee71f6819bd9fe344a0bb343542c604e533",
-  "committed_navigation_snapshot": "7606139940cbbd57aac64349c7e354b95a63faf5",
-  "main_paper_source_digest": "sha256:6d0aafbe86ae988afc6f4bb56c1dfc7370b3ca869069706d67139a90f45644fa"
+  "committed_navigation_snapshot": "403c02f4e1cce4b24737931732ef2ae7528405d2",
+  "main_paper_source_digest": "sha256:883379cb28099a5688a35ee893c2a5e8d73ef37e6e63b0ab77d83ed5f318f7fc"
  },
  "reading_routes": [
   {
