@@ -131,8 +131,8 @@ universal assertion in \#257, and we do not decide whether $1/2$ is attainable.
 
 \section{Introduction}\label{sec:intro}
 
-The two questions are whether
-$S=\sum_{n\ge1}\ph(n)/2^n$ is irrational (\#249), and whether
+We study two questions.  The first asks whether
+$S=\sum_{n\ge1}\ph(n)/2^n$ is irrational (\#249).  The second asks whether
 $\sum_{n\in A}(2^n-1)^{-1}$ is irrational
 for every infinite $A\subseteq\Npos$ (\#257).
 Here \(\ph(n)\) is Euler's totient, the number
@@ -217,9 +217,10 @@ Membership of \(1/2\) & Open; exact reductions & Greedy and recurrence laws give
 \paragraph{What ``Lean-checked'' means here.}
 A \emph{proof term} is a formal expression that Lean's kernel accepts as a
 proof.  Here a linked theorem is ``Lean-checked'' when such a term is accepted
-from the fixed source revision and dependencies.  An exact equivalence remains an equivalence even
-when both sides are open; a finite calculation remains finite; and a theorem
-with a rationality hypothesis does not prove that a rational support exists.
+from the fixed source revision and dependencies.  An exact equivalence remains
+an equivalence even when both sides are open.  A finite calculation remains
+finite.  A theorem with a rationality hypothesis does not prove that a rational
+support exists.
 The manuscript, its link checker, and its generated indexes help a reader find
 the proof but are not themselves proof authority.  Section~\ref{sec:verify}
 states how the fixed source revision and trusted dependencies are checked.
@@ -481,18 +482,18 @@ Erd\H{o}s~\#257 remains open.
 
 \begin{theorem}[full-support irrationality]\label{res:full}
 For every integer $b\ge2$, the series $\displaystyle\sum_{n\ge1}\frac{1}{b^n-1}$ is
-irrational. In particular the Erd\H{o}s--Borwein constant $E=\sum_{n\ge1}1/(2^n-1)$
+irrational. In particular, the Erd\H{o}s--Borwein constant $E=\sum_{n\ge1}1/(2^n-1)$
 is irrational.
 \end{theorem}
 \noindent The
 \lword{CertificateKernel.lean}{8000}{irrational_erdosSum_full_support}{all-base theorem}
 and its
 \lword{CertificateKernel.lean}{8007}{irrational_erdosBorwein_series}{base-\(2\) corollary}
-are formalised.  This is Erd\H{o}s's 1948 theorem~\cite[Theorem, p.~63]{erdos1948}.  In
-Section~\ref{sec:ladder} it is the value $L(\mathbf 1)$, and it is the fixed
-machine-checked comparison point in the same Mersenne--Lambert family as the
-open $S$; as Section~\ref{sec:ladder} notes, it is not a further convolution
-step from $S$.  Borwein later proved a wider rational-shift Lambert-series
+are formalised.  This is Erd\H{o}s's 1948 theorem~\cite[Theorem, p.~63]{erdos1948}.
+Section~\ref{sec:ladder} writes this constant as $L(\mathbf 1)$, a proved
+comparison value in the same Mersenne--Lambert family as the open $S$.  It is
+not a further convolution step from $S$.  Borwein later proved a wider
+rational-shift Lambert-series
 theorem~\cite{borwein1992}; that result is not formalised here.
 
 The proof turns rationality into a spacing obstruction.  Its coefficient
@@ -505,7 +506,7 @@ where $\tau(m)$ is the number of positive divisors of $m$; see the
 \lword{CertificateKernel.lean}{5865}{erdosSum_full_support_eq_tsum_divisor_count}{Lambert identity}.
 If the right-hand side were rational with reduced denominator $q$, then a
 non-integral integer multiple could not lie at distance less than $1/q$ from an
-integer.  It is therefore enough, for every $q$, to construct $N$ such that
+integer.  The proof therefore seeks, for every $q$, an $N$ such that
 $b^N\sum_m\tau(m)b^{-m}$ is non-integral but lies within $1/q$ of an integer.
 This is the formal
 \lword{CertificateKernel.lean}{5792}{irrational_of_int_mul_near_int}{near-integer criterion}.
@@ -544,10 +545,9 @@ irrationality result.
 
 \subsection{Named infinite-support cases}
 
-Beyond full support, the development proves irrationality for a family of infinite
-supports $A$, at every base $b\ge2$. Each is a formalised case of the \#257
-statement family. None is the universal statement, and none is claimed as new
-mathematics.
+Beyond full support, the development formalises irrationality for several
+infinite supports $A$ at every base $b\ge2$.  Each gives one case of \#257.
+None gives the universal statement, and none is claimed as new mathematics.
 
 \begin{theorem}[irrationality for structured supports]\label{res:support}
 For every integer $b\ge2$, the series $\sum_{n\in A} 1/(b^n-1)$ is irrational for
@@ -589,7 +589,8 @@ that
 is irrational~\cite[Theorem~3]{taoteravainen}. Their proof uses quantitative two-point
 correlations of multiplicative functions and is not formalised here. This
 settles the prime-support case, while the universal support statement
-remains open.  They also indicate how the argument should extend to
+remains open.  Thus this is one proved support case, not the universal theorem.
+They also indicate how the argument should extend to
 prime-power support, but leave that modification to the reader; it is not
 counted here as a proved support case.
 
@@ -601,11 +602,10 @@ partial sum equals that prefix lcm.  The denominator therefore exceeds the lcm,
 while the additive gap to the next exponent still tends to infinity; the tail
 is then too small for a rational limit.
 
-The results above enlarge the family of supports for which irrationality is
-known, but they do not supply the universal quantifier.  We now fix the base at
-\(2\).  The support sums form one achievement set, and an infinite-support
-counterexample is a rational point of this set whose unique support is
-infinite.  We first derive necessary conditions for such a rational point and
+These results cover more support families, but not every infinite support.  We
+now fix the base at \(2\).  The support sums form one achievement set.  An
+infinite-support counterexample is a rational point of this set whose unique
+support is infinite.  We first derive necessary conditions for such a rational point and
 then specialise to \(1/2\), for which finite support is impossible.
 
 \subsection{The base-$2$ achievement set}
@@ -701,9 +701,9 @@ Then \(u_N=vT_{f_A}(c+N)\) is a positive integer for every \(N\), and
 \noindent This is formalised by
 \lword{RationalSupportCarrySkeleton.lean}{668}{exists_shifted_odd_tail_nat_states_of_support_fraction}{the shifted natural-state theorem}.
 Here \(u_N\) is the scaled remaining binary tail, or carry.
-Equation~\textup{(4.1)} is binary long division: since
-\(2T_f(M)=f(M+1)+T_f(M+1)\), doubling the scaled tail separates the next
-coefficient, and rationality is what makes the states \(u_N\) integers.
+Equation~\textup{(4.1)} is binary long division.  The identity
+\(2T_f(M)=f(M+1)+T_f(M+1)\) shows that doubling the scaled tail separates the
+next coefficient.  Rationality makes the states \(u_N\) integers.
 A two-element
 support, with its explicit period-six orbit and multiplier \(21\), is worked
 at the end of Appendix~\ref{app:carry-boolean}.
