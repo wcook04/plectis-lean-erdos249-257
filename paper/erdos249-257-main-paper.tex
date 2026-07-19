@@ -179,11 +179,9 @@ Neither line proves the required unbounded behaviour.  The current analysis
 of the final possible skip reduces the second open condition to two explicit
 obligations; neither obligation is proved.
 
-The phrase ``beyond every bound'' is essential: no fixed number of successful
-computations settles either line.  The paper supplies a checked obstruction atlas and finite
-tools, not a mechanism forcing either event to recur.  The common coordinates
-neither merge the two programmes nor show that either unbounded condition is
-within reach.
+The phrase ``beyond every bound'' is essential: finitely many checks settle
+neither line.  The common coordinates give a checked obstruction atlas, not a
+recurrence mechanism or evidence that the two programmes merge.
 
 The totient constant also has the elementary form
 \[
@@ -231,8 +229,9 @@ Sections~\ref{sec:architecture} and~\ref{sec:unresolved}: the reductions,
 the comparison limit, and every remaining obligation.  Sections~\ref{sec:eb}
 and~\ref{sec:249} contain the
 detailed results; Section~\ref{sec:verify} gives the verification protocol.
-The appendices contain local arguments and audits.  Linked phrases open the
-corresponding Lean proofs.
+The appendices give alternative certificate, carry, M\"obius, and greedy
+interfaces to the obstruction, together with local arguments and audits.
+Linked phrases open the corresponding Lean proofs.
 
 \medskip
 \noindent\textbf{Keywords.} irrationality; Erd\H{o}s--Borwein constant;
@@ -938,7 +937,8 @@ what would be required to exclude it.
 
 Appendix~\ref{app:half-final-skip} contains the detailed derivations used in
 this subsection; the statements and their logical status are recorded here.
-The strategy is to assume a final skip, classify its successor by comparing
+Here \(w_n=(2^n-1)^{-1}\), and \(T_n=\sum_{m>n}w_m\) is the full later
+weight.  Assume a final skip, classify its successor by comparing
 the ranks selected in consecutive seam rows, and eliminate every branch.  The
 elimination stops at two middle carry values and one future-tail inequality;
 these are the open inputs stated below.
@@ -971,7 +971,7 @@ calculation rather than an omitted range of cases.  This is the
 At a middle transition \(D\geq13\), the next question is whether restoring the
 skipped rank \(D\) still leaves the support below \(1/2\).  Let
 \[
- A_D=G_D\cup\{D\},\qquad f_A(n)=\#\{a\in A:a\mid n\},
+ A_D=G_D\cup\{D\},\qquad f_{A_D}(n)=\#\{a\in A_D:a\mid n\},
 \]
 and put
 \[
@@ -979,9 +979,9 @@ and put
  \quad C_D=4R_{D,D}-P_D-4,
  \quad \Theta_D=\sum_{j\geq1}\frac{f_{A_D}(2D+2+j)}{2^j}.
 \]
-Here \(P_D\) is the paired divisor-incidence pulse, \(C_D\in\Z\) is the
-transition carry, and \(\Theta_D\) is the complete future divisor-incidence
-tail, not a finite truncation.  The residual identity of
+Here \(R_{D,D}\) is the final integer remainder in seam row \(D\), \(P_D\)
+is its paired divisor-incidence pulse, \(C_D\in\Z\) is the resulting carry,
+and \(\Theta_D\) is the full future tail, not a finite truncation.  The residual identity of
 Appendix~\ref{res:producercarry} compares the two quantities exactly:
 \[
  \frac12-\sum_{a\in A_D}w_a
@@ -1997,14 +1997,14 @@ final skip.  Proposition~\ref{res:finalskipexclusions} proves that this final
 transition cannot be upper and that a final middle transition cannot have
 \(C_D=-3\).  Corollary~\ref{res:taildominance} would prove membership if no
 actual middle transition had \(C_D=-2\) or \(-1\), and if every remaining
-middle transition with \(C_D\geq0\) satisfied the future-tail
-inequality~\textup{(4.2)}.  Neither statement is proved.
+middle transition with \(C_D\geq0\) satisfied
+\(\Theta_D<C_D\), comparing its full future tail to its transition carry
+as in~\textup{(4.2)}.  Neither statement is proved.
 \end{enumerate}
 Appendix~\ref{app:half-technical} records the exact local reductions,
 conditional compactness criteria, finite certificates, counterexamples to
-stronger local assertions, and arguments that rule out several proposed
-strategies.  These results narrow the remaining cases; they decide neither
-open \#257 question.
+stronger local assertions, and failed strategies.  These narrow the remaining
+cases but decide neither open \#257 question.
 
 \section{The totient constant $S$ (Erd\H{o}s \#249)}\label{sec:249}
 
