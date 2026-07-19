@@ -559,18 +559,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_first_use_definition_and_internal_vocabulary_audit",
+   "id": "main_paper_bibliography_metadata_and_page_precision_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "A term can be locally familiar to the authors yet opaque to an external reader when its first visible use precedes its definition, when a module-local nickname leaks into the paper, or when ordinary mathematical language and project-specific vocabulary are not distinguished. Cross-references do not repair an undefined first encounter.",
-   "statement": "Audit the paper in reading order for every nonstandard noun phrase, abbreviation, named coordinate, and compact branch label. At first visible use, define it in ordinary mathematical language or replace it with a standard term; retain specialised vocabulary only when it compresses repeated mathematics; keep definitions close to use without duplicating the notation section; preserve exact claims and the 53-page limit."
+   "defect_class": "A bibliography can look complete while carrying a wrong year, issue, page range, author spelling, DOI, revision date, or page-specific attribution. Repository link checks establish reachability, not bibliographic identity or whether the cited page supports the exact historical claim.",
+   "statement": "Audit every bibliography entry against a primary bibliographic record or the cited paper itself. Verify author names, title, venue, volume, issue, year, pages, DOI or stable archive identifier, arXiv version date, and every page-specific citation in the prose. Prefer DOI and publisher metadata, record publication-versus-issue-year distinctions explicitly where needed, and preserve the 53-page limit."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "ebc98ee71f6819bd9fe344a0bb343542c604e533",
-  "committed_navigation_snapshot": "5426b3d06ef27820334b057e9fdfdb7e479d7fb8",
-  "main_paper_source_digest": "sha256:06795b30dba418ad6091528ef9d8d21de2317318e7a452c19d709b8e577bca11"
+  "committed_navigation_snapshot": "616335054ccd029ed2072659767a6f748d64db43",
+  "main_paper_source_digest": "sha256:6fd32cd48b7b29bbbd64be0b8e96d0dedc34218f1cd023083235fc15c4da9e63"
  },
  "reading_routes": [
   {
