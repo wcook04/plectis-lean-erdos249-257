@@ -2809,7 +2809,7 @@ finite inputs, while the compressed-adjoint and residual-gauge results delimit
 particular certificate strategies.  None supplies the missing arithmetic
 coupling or proves that (S) is irrational.
 
-\begin{theorem}[infinite dyadic totient-kernel rank]
+\begin{theorem}[unconditional dyadic totient-kernel rank]
 \label{res:dyadictotient}
 For every $e\geq0$, the canonical level-$e$ dyadic totient-kernel family is
 linearly independent over $\Q$ and its span has dimension $2^e+1$.
@@ -2844,7 +2844,7 @@ explicit separated minor, proved by elementary CRT--Dirichlet arithmetic
 that the formal source checks without analytic continuation.
 Proposition~\ref{res:carryrank} uses exactly this level-by-level form.
 
-\begin{proposition}[rationality forces large carry-section rank]\label{res:carryrank}
+\begin{proposition}[carry-section rank forced by rationality]\label{res:carryrank}
 If the totient coefficient series were rational, there would be a
 positive-multiplier tempered integral carry orbit whose canonical
 carry-section span has dimension at least $2^e-1$ for every $e$.
@@ -2852,14 +2852,15 @@ carry-section span has dimension at least $2^e-1$ for every $e$.
 \noindent Formalised:
 \lword{TotientCarryKernelRigidity.lean}{211}{finrank_canonicalCarryKernel_ge_of_linearIndependent}{the carry-kernel rank lower bound}
 and
-\lword{TotientCarryKernelRigidity.lean}{284}{not_irrational_totientSeries_implies_unbounded_carryRank_unconditional}{the unconditional unbounded-rank consequence of rationality}.
+\lword{TotientCarryKernelRigidity.lean}{284}{not_irrational_totientSeries_implies_unbounded_carryRank_unconditional}{the rationality-to-unbounded-rank implication}.
 No theorem bounds the dyadic section rank of every rationality-supplied
 tempered carry.  The proposition therefore identifies an infinite
 rationality-side barrier, not an irrationality criterion for $S$.
 
 \begin{remark}[rank alone cannot decide rationality]
-No converse dimension bound is available at this generality: the same
-coefficient class contains rational series whose tempered orbits have
+No converse dimension bound is available at this generality: the same class
+of coefficient streams satisfying $0\leq\gamma(n)\leq n$ contains rational
+series whose tempered orbits have
 infinite-dimensional section span.  Choose Boolean values
 \(a_N\in\{0,1\}\) with \(a_0=a_1=1\) whose dyadic sections satisfy no
 nontrivial rational linear relation (a routine diagonal choice on sparse
@@ -2875,7 +2876,7 @@ arithmetic size of a totient carry, since dimension alone is compatible
 with rationality.
 \end{remark}
 
-\begin{proposition}[rectangular determinant expansion]\label{res:signedmoment}
+\begin{proposition}[exact rectangular determinant expansion]\label{res:signedmoment}
 For matrices $M:\iota\times\kappa\to R$ and
 $N:\kappa\times\iota\to R$ over a commutative ring, the determinant of
 $MN$ is the sum over all maps $p:\iota\to\kappa$ of the determinant of the
@@ -2885,7 +2886,7 @@ $\prod_i N_{p(i),i}$.
 \noindent This is the
 \lword{SignedQMomentObstruction.lean}{28}{det_mul_rectangular}{rectangular determinant expansion}.
 
-\begin{proposition}[dominant dyadic term]\label{res:dominantdyadic}
+\begin{proposition}[exact dominant-dyadic-term test]\label{res:dominantdyadic}
 If one selected integer numerator is odd and its dyadic exponent is strictly
 larger than every other selected exponent, then the common numerator after
 dyadic denominator clearing is odd and hence nonzero.
@@ -2897,13 +2898,14 @@ These are finite algebraic inputs to a signed-moment route.  They do not show
 that any actual totient Hankel determinant is nonzero, and they give no
 irrationality criterion for $S$.
 
-The formal proof also exposes the construction-independent
+The formal proof also exposes the generic theorem that any supplied separated
+minor gives the corresponding rank,
 \lword{TotientMahlerDefect.lean}{101}{finrank_canonicalTotientKernel_eq_of_certificate}{separated-minor rank criterion}.
 The two generic algebraic propositions above remain useful as possible inputs
 to other determinant routes, but the totient-kernel minor itself is supplied
 at every level by Theorem~\ref{res:dyadictotient}.
 
-\begin{proposition}[even-residue reduction]\label{res:evenresidue}
+\begin{proposition}[exact even-residue reduction]\label{res:evenresidue}
 Every even residue channel in the canonical dyadic totient-kernel family is
 exactly a scalar multiple of its odd-core channel.
 \end{proposition}
@@ -2911,32 +2913,31 @@ exactly a scalar multiple of its odd-core channel.
 \lword{TotientMahlerDefect.lean}{159}{totientKernel_even_residue_reduce}{even-residue reduction}.
 This removes duplicate channels before the separated minor is constructed.
 
-\begin{proposition}[compressed-adjoint contradiction]\label{res:compressedadjoint}
-A compressed-adjoint certificate whose nonzero multiple is strictly smaller
-in absolute value than its positive modulus is inconsistent.
+\begin{proposition}[compressed-adjoint size obstruction]\label{res:compressedadjoint}
+If positive integers $Q,v$ and integers $A,b$ satisfy $QvA=b$ and
+$|b|<Qv$, then $A=0$.
 \end{proposition}
 \noindent Formalised as the
 \lword{TotientMahlerDefect.lean}{1051}{false_of_compressedAdjointCertificate}{compressed-adjoint contradiction}.
-This is a conditional finite contradiction, not a source of certificates at
-every level.
+This finite incompatibility does not construct the data required by a
+compressed-adjoint route.
 
 \begin{proposition}[residual-gauge obstruction for monomial minors]\label{res:residualgauge}
-Let a monomial matrix have a common nonzero residual weight in each column.
-The residual weights act by a right diagonal gauge, and therefore preserve
-determinant nonvanishing.  If one exponent is $1$, the inverse-phase locked
-gauge makes that row identically $1$ while preserving a nonzero determinant
-whenever the coefficient-side determinant is nonzero.  If the residual is
-allowed to depend on both row and column, it reconstructs a consecutive-power
-matrix whose zeroth row is identically $1$.
+Let $z_j,W_j\ne0$ and $M_{ij}=W_jz_j^{e_i}$.  Then
+\(det M=\det(z_j^{e_i})\prod_jW_j\), so the column weights preserve
+determinant nonvanishing.  If $e_i=1$, choosing $W_j=z_j^{-1}$ makes row $i$
+identically $1$.  Allowing row-dependent weights
+$W_{ij}=z_j^i/z_j^{e_i}$ reconstructs a consecutive-power matrix whose
+zeroth row is identically $1$.
 \end{proposition}
 \noindent Formalised:
 \lword{ResidualGaugeObstruction.lean}{55}{det_residualMonomialMatrix_ne_zero_iff}{residual-gauge determinant equivalence},
 \lword{ResidualGaugeObstruction.lean}{94}{locked_reconstruction_preserves_nonzero_minor}{locked-reconstruction nonvanishing}, and
 \lword{ResidualGaugeObstruction.lean}{145}{rowReconstruction_zero_row_one}{reconstructed zero row}.
-Thus a residual-blind rank, determinant, or conditioning criterion alone cannot
-exclude the target.  The proposition does not exclude a criterion that also
-uses an arithmetic coupling identity, and it gives no irrationality criterion
-for $S$.
+Thus rank, determinant, or conditioning information alone cannot exclude the
+target without an arithmetic constraint on the residual weights.  Such a
+coupled criterion remains possible; the proposition gives no irrationality
+criterion for $S$.
 
 \paragraph{Appendix consequence.}
 Nothing in this appendix strengthens the fixed-parameter completeness of
