@@ -2458,10 +2458,10 @@ corresponding ordinary empty-gap inequality fails.
 This is a finite certificate-level strengthening.  We do not establish that
 rationality of $S$ supplies these predicates at unbounded parameters.
 
-\paragraph{The certificates are non-empty.} The initial segment of the required
-supply is machine-checked, so the reduction is not vacuous. By completeness, each
-of these is a kernel-checked proof of a specific non-integral tail difference,
-not a numerical experiment.
+\paragraph{Verified finite certificate families.} Four bounded certificate
+families are machine-checked.  Each successful $\mathsf{Sep}$ row is a
+kernel-checked proof of one stated non-integral tail difference, not a numerical
+experiment; the joint cone table uses its own sound finite refuter.
 
 \begin{example}[verified finite instances, expanded record]\label{app:deposits-detail}
 The following are checked by the Lean kernel:
@@ -2479,17 +2479,18 @@ strict lcm-jump scales through $64$, namely
 \lword{TotientTailPeriodKiller.lean}{404}{certifiedKill_all_small}{small-window certificate family},
 \lword{CarrySurvivorExtinction.lean}{574}{certifiedKill_all_upto_sixteen}{periods through sixteen},
 \lword{DiagonalPincerCertificatesT64.lean}{1967}{certifiedKill_diagonal_all_imported_through_t64}{28 imported diagonal certificates through scale 64},
-and \lword{LcmConeNonflat.lean}{506}{coneNonflatCert_cells}{cone-cell certificate table}. These instances show
-that each layer of the reduction is non-vacuous and, by completeness, exact. They
-are not evidence that the unbounded supply exists.
+and \lword{LcmConeNonflat.lean}{506}{coneNonflatCert_cells}{cone-cell certificate table}.
+For the first three classes, fixed-parameter completeness converts each successful
+$\mathsf{Sep}$ row into the stated non-integral tail difference.  The fourth uses
+the separate cone-refuter soundness theorem.  None is evidence that certificates
+occur at unbounded scales.
 
 The first row of this table is worked in full following
-Example~\ref{res:deposits}.  The soundness theorem
-(\lword{TotientTailPeriodKiller.lean}{262}{tail_diff_notMem_int_of_certifiedKill}{certificate soundness})
-converts each successful row into one exact non-integral tail difference;
-no row asserts that such differences occur at unbounded scales.
+Example~\ref{res:deposits}; its underlying implication is
+\lword{TotientTailPeriodKiller.lean}{262}{tail_diff_notMem_int_of_certifiedKill}{certificate soundness}.
+No row asserts that such differences occur at unbounded scales.
 
-\paragraph{Finite foreign-residue projection.}  There is a second finite
+\paragraph{Exact finite channel split and sufficient projection test.}  There is a second finite
 presentation of the same obstruction.  For a cutoff $D$, split the finite
 M\"obius residue diagonal into the channels $d\leq D$ which divide $H$ and
 the remaining channels.  The divisor part is exactly the truncated M\"obius
