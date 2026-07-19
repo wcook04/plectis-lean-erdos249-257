@@ -208,8 +208,8 @@ Denominator exclusion & Proved & If \(S=p/q\), then \(q>\Qzero\). \\
 Tail differences and \(M_t\)-diagonal certificates & Exact equivalences & The unbounded supply is equivalent to \(S\notin\Q\), but remains open. \\
 Diagonal computation & Finite evidence & Lean checks 28 diagonal certificates through \(t=64\); this is not an unbounded family. \\
 Universal assertion in \#257 & Open & No proof covers every infinite support. \\
-Structural/support results & Proved here; Prior work/formalised & Exact dyadic-section ranks are proved here; support coding when each weight exceeds its later tail is formalised with prior-work context; named irrational support cases are formalised or cited.  None settles \#257. \\
-Membership of \(1/2\) & Open; exact reductions & Greedy and carry laws give equivalent events without proving they occur. \\
+Structural/support results & Proved here; Prior work/formalised & Totient subsequences are proved independent; support coding when each weight exceeds its later tail is formalised with prior-work context; named irrational support cases are formalised or cited.  None settles \#257. \\
+Membership of \(1/2\) & Open; exact reductions & Greedy and recurrence laws give exact equivalences without proving either event. \\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -337,11 +337,11 @@ and the
 
 \paragraph{Open boundary.}
 The open statement is that the terminal bit is zero beyond every bound.  The
-later carry analysis splits a putative final skip into two transition branches.
-It rules out one branch and the exceptional carry \(-3\) in the other, but
-does not exclude the carries \(-2,-1\) or prove the required inequality for
-the unused tail at the remaining nonnegative carries.  Neither statement
-is known for the greedy orbit.  The exact conditional implication is the
+later integer-recurrence analysis splits a putative final skip into two
+transition branches.  It rules out one branch and the integer transition value
+\(-3\) in the other, but does not exclude \(-2,-1\) or prove the required
+unused-tail inequality for the remaining nonnegative transition values.  The exact
+conditional implication is the
 \lword{HalfCylinderLastProducerContradiction.lean}{387}{half_mem_mersenneAchievementSet_of_middleProducerTailEscapeExceptNegThree}{remaining-tail implication}.
 Proposition~\ref{res:finalskipexclusions} gives the local exclusions and
 Corollary~\ref{res:taildominance} states the sufficient global hypothesis.
@@ -2370,7 +2370,7 @@ predicate.  It is therefore a refuter, not a complete decision procedure.
 Write the explicitly summed M\"obius contribution as the reduced rational
 $Q_t=a_t/d_t$ and call it the \emph{M\"obius shadow}.  Define the remaining
 term $F_t=D_t-Q_t$ as the \emph{foreign defect}: exactly the omitted
-divisor-indexed \emph{channels}.  No part of $D_t$ is discarded.
+divisor-indexed terms.  No part of $D_t$ is discarded.
 The \emph{full target} is the residue class of $-a_t$ modulo $d_t$:
 \[
  \mathsf{Hit}(t)
@@ -2413,7 +2413,7 @@ exact global form.  The unbounded avoidance statement remains open.
 This subsection contains four logical statuses.  The squared-Mersenne
 enclosure and the projected-separation tests are sufficient only: separation
 forces a missed target, with no converse asserted.  The prime-power unit-gap
-characterisation, channel decompositions, shadow-denominator formula, and
+characterisation, divisor-index decompositions, shadow-denominator formula, and
 residue--projection equivalence are exact at fixed parameters; except where
 stated, they are not characterisations of target avoidance.  Any irrationality
 corollary adds an unproved hypothesis that this repeats at unbounded scales.  The
@@ -2504,12 +2504,12 @@ Example~\ref{res:deposits}; its underlying implication is
 \lword{TotientTailPeriodKiller.lean}{262}{tail_diff_notMem_int_of_certifiedKill}{certificate soundness}.
 No instance asserts that such differences occur at unbounded scales.
 
-\paragraph{Exact finite channel split and sufficient projection test.}  There is a second finite
+\paragraph{Exact finite divisor-index split and sufficient projection test.}  There is a second finite
 presentation of the same obstruction.  For a cutoff $D$, split the finite
-M\"obius residue diagonal into the channels $d\leq D$ which divide $H$ and
-the remaining channels.  The divisor part is exactly the truncated M\"obius
-shadow, while every retained nondivisor channel is explicit.  Above the
-stable cutoff $2H$, a finite window of omitted channels is bounded by
+M\"obius residue diagonal into the terms indexed by $d\leq D$ which divide
+$H$ and the remaining terms.  The divisor part is exactly the truncated M\"obius
+shadow, while every retained nondivisor term is explicit.  Above the
+stable cutoff $2H$, a finite window of omitted terms is bounded by
 \[
  c_H\left(\frac{2}{2^D}+\frac{4}{3\,4^D}\right),
 \]
@@ -2522,7 +2522,7 @@ is missed.
 Let \(F_H^{(D)}\) be the retained nondivisor projection at cutoff \(D\), let
 \(F_H\) be the actual foreign defect, and let \(Q_H\) be the scaled explicit
 divisor shadow.  The finite residue diagonal is exactly the sum of
-\(F_H^{(D)}\) and its divisor-channel complement.  For \(2H\leq D\), put
+\(F_H^{(D)}\) and its divisor-index complement.  For \(2H\leq D\), put
 \[
  B_{H,D}=c_H\left(\frac{2}{2^D}+\frac{4}{3\,4^D}\right).
 \]
@@ -2535,8 +2535,8 @@ If
 then the full target at height \(H\) is not attained.
 \end{proposition}
 \noindent Formalised:
-\lword{ActualForeignResidueProjection.lean}{307}{finiteResidueDiagonal_eq_projectedForeign_add_divisor}{foreign--divisor channel split},
-\lword{ActualForeignResidueProjection.lean}{275}{abs_foreignTailWindow_le_foreignComplementBound}{omitted-channel bound},
+\lword{ActualForeignResidueProjection.lean}{307}{finiteResidueDiagonal_eq_projectedForeign_add_divisor}{foreign--divisor split},
+\lword{ActualForeignResidueProjection.lean}{275}{abs_foreignTailWindow_le_foreignComplementBound}{omitted-term bound},
 and
 \lword{ActualForeignResidueProjection.lean}{348}{scaleFullTarget_miss_of_projected_separation}{projected-separation criterion}.
 The passage from finite windows to the analytic foreign complement, including
@@ -2683,7 +2683,7 @@ curvature margin loses at most the stated adverse weighted deficit.
 
 \begin{proposition}[fresh-prime deficit decomposition]\label{res:freshprimedeficit}
 The endpoint fresh deficits are nonnegative, give an exact decomposition of
-the foreign channel, and bound the loss from the old-prime curvature margins.
+the foreign-defect increment, and bound the loss from the old-prime curvature margins.
 \end{proposition}
 \noindent Formalised:
 \lword{FreshPrimeDeficitDecomposition.lean}{91}{endpointFreshDeficit_nonneg}{endpoint-deficit nonnegativity},
@@ -2769,8 +2769,8 @@ exactly.
 \lword{FullTargetPrimeAdjunctionNoGo.lean}{196}{fullTarget_primeAdjunction_diamond_iff_root}{the prime-adjunction diamond collapse}
 and
 \lword{FullTargetPrimeAdjunctionNoGo.lean}{247}{foreignTransportCorrection_primeAdjunction_flat}{the foreign-correction flatness}.
-Thus explicit-shadow fibres alone cannot create a transport obstruction.  A
-future positive route would need a separately defined projection together with
+Thus tracking only the explicit shadow cannot create a transport obstruction.
+A future positive route would need a separately defined projection together with
 a theorem controlling what that projection discards.  This is a proved
 obstruction to one strategy, not progress on the unbounded-supply proposition.
 
@@ -2929,7 +2929,7 @@ scalar multiple of an odd-residue section.
 \end{proposition}
 \noindent Formalised as the
 \lword{TotientMahlerDefect.lean}{159}{totientKernel_even_residue_reduce}{even-residue reduction}.
-This removes duplicate channels before the separated minor is constructed.
+This removes duplicate section rows before the separated minor is constructed.
 
 \begin{proposition}[compressed-adjoint size obstruction]\label{res:compressedadjoint}
 If positive integers $Q,v$ and integers $A,b$ satisfy $QvA=b$ and
@@ -3566,12 +3566,12 @@ is the scaled residual--tail imbalance, up to the bounded error.  Under
 \[
   \frac16+\frac{37}{56}2^{-n}\le \left|u_n-\frac13\right|.
 \]
-We call this the \emph{second-channel separation condition}.  Here
+We call this the \emph{residual--tail separation condition}.  Here
 \(37/56=2/7+3/8\) budgets the higher-tail and gap errors, respectively.
 The absolute value is needed because \(u_n<0\) at \(n=3,4\).
 
 \begin{proposition}[verified residual--tail separation through rank \(6\)]\label{res:secondfrontier}
-The second-channel separation condition is decidable over $\Q$ and holds for
+The residual--tail separation condition is decidable over $\Q$ and holds for
 $1\le n\le6$.
 \end{proposition}
 \noindent This is the
@@ -3579,7 +3579,7 @@ $1\le n\le6$.
 
 \begin{corollary}[eventual residual--tail separation criterion]
 \label{res:secondcriterion}
-If the second-channel separation condition holds for every \(n\ge7\), then
+If the residual--tail separation condition holds for every \(n\ge7\), then
 \(1/2\) belongs to the Mersenne achievement set \(\mathcal A\).
 \end{corollary}
 \noindent This implication is the
