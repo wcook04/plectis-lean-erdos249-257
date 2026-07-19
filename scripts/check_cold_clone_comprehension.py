@@ -346,7 +346,7 @@ def validate_gateway_opening(paper: str) -> None:
             [r"q>\Qzero"],
             ["28 diagonal certificates"],
             [r"Universal assertion in \#257 & Open"],
-            ["Classical/formalised"],
+            ["Prior work/formalised"],
             ["Open; exact reductions"],
         ],
         "exact_residuals": [
