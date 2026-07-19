@@ -588,8 +588,7 @@ that
 \]
 is irrational~\cite[Theorem~1.3]{taoteravainen}. Their proof uses quantitative two-point
 correlations of multiplicative functions and is not formalised here. This
-settles the prime-support case, while the universal support statement
-remains open.  Thus this is one proved support case, not the universal theorem.
+settles the prime-support case, not the universal support statement.
 They also indicate how the argument should extend to
 prime-power support, but leave that modification to the reader; it is not
 counted here as a proved support case.
@@ -602,7 +601,9 @@ partial sum equals that prefix lcm.  The denominator therefore exceeds the lcm,
 while the additive gap to the next exponent still tends to infinity; the tail
 is then too small for a rational limit.
 
-These results cover more support families, but not every infinite support.  We
+These theorems apply only when the whole support has one of the stated forms.
+Finding one listed subseries inside an arbitrary support would not suffice:
+its irrational value could be cancelled by the complementary subseries.  We
 now fix the base at \(2\).  The support sums form one achievement set.  An
 infinite-support counterexample is a rational point of this set whose unique
 support is infinite.  We first derive necessary conditions for such a rational point and
@@ -618,7 +619,7 @@ For \(n\geq0\), put
 \[
  T_n=\sum_{m>n}w_m,
  \qquad
- \mathcal A=\left\{\sum_{n\in A}w_n:A\subseteq\N,\ 0\notin A\right\}.
+ \mathcal A=\left\{\sum_{n\in A}w_n:A\subseteq\Npos\right\}.
 \]
 For \(x\geq0\), define the greedy residuals by \(r_0(x)=x\) and
 \[
@@ -2164,9 +2165,9 @@ N+h+L+2 \;<\; \big(\Delta_{h,N,L}\bmod 2^L\big) \;<\; 2^L-(N+h+L+2).
 \]
 \end{definition}
 
-Reader map: $h$ is the candidate period, $N$ the tail location, and $L$
-the number of binary places retained.
-Here \(x\bmod 2^L\) denotes the least residue in
+Here $h$ is the candidate period, $N$ the tail location, and $L$ the number
+of binary places retained.
+The notation \(x\bmod 2^L\) denotes the least residue in
 \(\{0,\ldots,2^L-1\}\).  The integer $\Delta_{h,N,L}$ contains the first
 $L$ binary places of $R_{N+h}-R_N$; the two margins bound the omitted tail
 using $\ph(n)\le n$.  Thus each instance of the predicate is decidable by
@@ -2218,8 +2219,10 @@ The converse direction uses the fact that integrality of even one
 positive-shift tail difference forces $S$ to be rational
 (\lword{LcmConeFlatness.lean}{357}{not_irrational_of_tail_diff_mem_int}{integral-difference rationality criterion}).
 
-The next theorem weakens ``every $N$'' to ``some $N$ after every cutoff
-$N_0$.''  A bounded list cannot cover every period $h$ and cutoff $N_0$.
+The next two equivalences compress the search without changing its conclusion.
+Theorem~\ref{res:red21} replaces ``every \(N\)'' by one \(N\) after every
+cutoff for each \(h\); Theorem~\ref{res:diag} then restricts both \(h\) and
+\(N\) to \(M_t\).  A bounded list satisfies neither condition.
 
 \begin{theorem}[exact tail-period characterisation]\label{res:red21}
 $S$ is irrational if and only if, for every period $h\ge1$ and every threshold
@@ -2228,10 +2231,9 @@ $N_0$, there exist $N\ge N_0$ and $L$ with $\mathsf{Sep}(h,N,L)$.
 \noindent Formalised as the
 \lword{LcmConeFlatness.lean}{412}{irrational_totient_series_iff_certificate_supply}{certificate-supply equivalence}.
 
-Every multiple of an eventual period is again a period, and every fixed
-\(h\) divides \(M_t\) for all \(t\geq h\).  The exact \emph{lcm diagonal}
-simply sets both period and tail location to \(M_t\); this one-parameter
-family tests every candidate period.
+For the diagonal compression, every multiple of an eventual period is again
+a period, and every fixed \(h\) divides \(M_t\) for all \(t\geq h\).  Setting
+both period and tail location to \(M_t\) therefore tests every candidate period.
 
 \begin{theorem}[exact diagonal characterisation]\label{res:diag}
 The following are equivalent:
