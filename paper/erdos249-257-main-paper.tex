@@ -821,12 +821,10 @@ Let
 be the set of exponents omitted by the greedy expansion.
 
 \paragraph{A worked start.}
-The greedy expansion of \(1/2\) begins: \(w_1=1>\tfrac12\), so rank \(1\)
-is skipped; \(w_2=\tfrac13\) is taken, leaving \(\tfrac16\);
-\(w_3=\tfrac17\) is taken, leaving \(\tfrac1{42}\); ranks \(4,5\) are
-skipped because \(w_4=\tfrac1{15}\) and \(w_5=\tfrac1{31}\) exceed
-\(\tfrac1{42}\); and \(w_6=\tfrac1{63}\), \(w_7=\tfrac1{127}\) are taken,
-leaving
+The greedy expansion of \(1/2\) first skips rank \(1\), because
+\(w_1=1>\tfrac12\).  It takes rank \(2\), leaving \(1/6\), and then rank
+\(3\), leaving \(1/42\).  It skips ranks \(4,5\), whose weights \(1/15\)
+and \(1/31\) exceed that residual.  It then takes ranks \(6,7\), leaving
 \[
  \frac12-\Bigl(\frac13+\frac17+\frac1{63}+\frac1{127}\Bigr)
  =\frac1{16002}.
@@ -2997,10 +2995,10 @@ Here \((f*\mathbf 1)(m)=\sum_{d\mid m}f(d)\) is the \emph{divisor stream}:
 the first map sums over divisors, and the second reads those sums as
 binary-series coefficients.  The input \(f=\alpha\) gives
 \(L(\alpha)=S\) with divisor stream \(\alpha*\mathbf 1=\ph\)
-(Proposition~\ref{res:lift}); a support indicator \(f=\mathbf 1_A\) gives
+(Proposition~\ref{res:lift}).  A support indicator \(f=\mathbf 1_A\) gives
 \(L(\mathbf 1_A)=X_A\) with divisor stream
 \(f_A(m)=\sum_{d\mid m}\mathbf 1_A(d)\)
-(Appendix~\ref{app:carry-boolean}); and the comparison inputs
+(Appendix~\ref{app:carry-boolean}).  The comparison inputs
 \(\mu\), \(\mathbf 1\), and \(\ph\) give the comparison values listed in
 Section~\ref{sec:ladder}.
 
@@ -4314,11 +4312,11 @@ exclude rational values for either open series.
 The transfer to the main text is Theorem~\ref{res:rigidity-main} followed by
 the four independent
 Corollaries~\ref{res:rigidity-unbounded-main}--\ref{res:rigidity-dyadic-mass-main}.
-Rationality yields the exact carry recurrence; any nonempty rational support
-must satisfy the sublogarithmic divisor-coverage bound, and the odd-part
-wrap and mass bounds when its denominator has odd part \(v>1\); an infinite
-one must in addition satisfy the unbounded-state theorem and, at a dyadic
-denominator, the reciprocal-mass alternative.
+Rationality yields the exact carry recurrence.  Any nonempty rational support
+must satisfy the sublogarithmic divisor-coverage bound.  If its denominator
+has odd part \(v>1\), it must also satisfy the wrap and mass bounds.  If the
+support is infinite, the carry states are unbounded; at a dyadic denominator,
+the reciprocal-mass alternative also holds.
 Appendix~\ref{app:carry-geometry} also supplies the finite nonmembership certificates
 used in Theorem~\ref{res:greedy}.  What is not proved is that the support attached to
 either target violates one of these necessary conditions.  That

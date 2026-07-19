@@ -901,15 +901,15 @@
         "schema": "erdos249257-editorial-state/1",
         "scope": "continuous_whole_main_paper_exposition",
         "current_priority": {
-          "id": "main_paper_sentence_load_and_parenthetical_audit",
+          "id": "main_paper_theorem_statement_scanability_and_hypothesis_order_audit",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "defect_class": "A sentence can remain grammatically valid while carrying too many hypotheses, coordinate names, caveats, citations, or logical consequences for a cold reader to retain. Dense parentheticals and delayed subjects are especially costly in the technical appendices.",
-          "statement": "Audit sentence load and parenthetical structure across the gateway and appendices. Split only sentences that perform multiple mathematical jobs, move essential hypotheses out of parentheses, keep theorem statements compact, preserve nearby status fences and citations, remove redundant connective prose where that pays for clarity, and keep the paper at 53 pages."
+          "defect_class": "A theorem can be exact but difficult to scan when hypotheses appear after notation, a long prose sentence hides a finite condition list, or the principal conclusion is delayed behind implementation coordinates. Formal faithfulness does not require copying Lean's elaboration order into exposition.",
+          "statement": "Audit theorem, proposition, and corollary statements for hypothesis order and visual scanability. Put the mathematical object and governing hypothesis first, group genuinely parallel conditions, expose the principal conclusion early, retain exact quantifiers and exceptional cases, avoid list inflation for short statements, and keep the paper at 53 pages."
         },
         "last_verified_wave": {
-          "id": "main_paper_notation_collision_and_overloading_audit",
+          "id": "main_paper_sentence_load_and_parenthetical_audit",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "result": "Audited notation reuse across the main reductions, half-value appendices, totient appendices, scalar criteria, carry systems, and Lambert complements, distinguishing conventional local reuse from exact-symbol collisions that make a reader infer the wrong object. Removed the redundant H_t alias for the lcm scale and used M_t directly, separating it from the established square-root strip width H_N. Renamed the scalar-criterion block residue d_t to delta_t, leaving d_t exclusively as the reduced denominator of the Möbius shadow. Renamed a local finite family E to calligraphic E so it cannot be mistaken for the global Erdős--Borwein constant, and renamed a local scalar rho to r so rho remains the reciprocal-mass function rho(A). Conventional subscripted uses such as R_N versus R_{s,d}, T_n versus T_f(N), and C_D versus C_{H,D} remain locally explicit and were not changed. No theorem, formula, source target, attribution, or logical status changed. All affected pages render cleanly without overfull boxes, and the paper remains 53 pages."
+          "result": "Audited high-clause sentences and parenthetical-heavy passages across the status route, worked examples, transform overview, theorem narratives, appendix introductions, and closeout summaries. Retained dense theorem statements and explicit definition lists where their compact structure is mathematically useful. Rewrote three avoidable load points: the opening greedy computation is now four short take/skip steps rather than one semicolon chain; the transform overview gives the alpha, support-indicator, and comparison inputs in separate sentences; and the carry appendix states its divisor-coverage, odd-part, infinite-support, and dyadic necessary conditions as separate conditional sentences. No theorem, formula, source target, attribution, or logical status changed. All affected pages render cleanly without overfull boxes, and the paper remains 53 pages."
         },
         "active_inconsistencies": [],
         "blocked_decisions": []
@@ -7540,7 +7540,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 3630
+        "line": 3628
       }
     },
     {
@@ -7551,7 +7551,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 3641
+        "line": 3639
       }
     },
     {
@@ -7562,7 +7562,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "the half-value counterexample route",
-        "line": 3665
+        "line": 3663
       }
     },
     {
@@ -7573,7 +7573,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 3656
+        "line": 3654
       }
     }
   ],
