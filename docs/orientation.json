@@ -56,7 +56,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "Erd\\H{o}s \\#249",
-    "line": 3588
+    "line": 3590
    }
   },
   {
@@ -67,7 +67,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "unbounded certificate supply",
-    "line": 3599
+    "line": 3601
    }
   },
   {
@@ -78,7 +78,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "the half-value counterexample route",
-    "line": 3620
+    "line": 3622
    }
   },
   {
@@ -89,7 +89,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "universal Erd\\H{o}s \\#257",
-    "line": 3611
+    "line": 3613
    }
   }
  ],
@@ -559,18 +559,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_mobius_square_coordinate_gloss_audit",
+   "id": "main_paper_probability_run_denominator_gloss_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "The paragraph after the Möbius-square lens calls a signed constant, a coprime-pair mass, and tail differences three readings of one quantity without displaying the equalities or reminding the reader which probability event supplies the mass",
-   "statement": "Rewrite the Möbius-square coordinate gloss with the minimum exact equalities needed to identify each reading, while preserving that the identity is an equivalent reformulation of the open constant rather than an irrationality argument."
+   "defect_class": "Appendix D.3 states a 'natural denominator exponent' along the all-unit Stern–Brocot run and later compares it with Fibonacci height, but does not identify the denominator product whose exponent is being counted",
+   "statement": "Trace the denominator-exponent declaration and add the shortest exact gloss that identifies its underlying product or recursion, so the final height-versus-denominator boundary can be understood without Lean-internal vocabulary."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "ebc98ee71f6819bd9fe344a0bb343542c604e533",
-  "committed_navigation_snapshot": "42c4d95e717518460d658459318e88dd9512a1c2",
-  "main_paper_source_digest": "sha256:8af277b34819a7c522ddd0bbae88661e5715ee68688b61209e49d5fb99861cca"
+  "committed_navigation_snapshot": "ac69f83a0d2a0c69b7f0e6e3b3d087444c189c6b",
+  "main_paper_source_digest": "sha256:f258b8b8f888789094d5e542a5c4c4367e5f02be2543e5e41b7a2a0171d14eb1"
  },
  "reading_routes": [
   {
