@@ -901,15 +901,15 @@
         "schema": "erdos249257-editorial-state/1",
         "scope": "continuous_whole_main_paper_exposition",
         "current_priority": {
-          "id": "main_paper_reference_attribution_scope_audit",
+          "id": "main_paper_theorem_status_classifier_audit",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "defect_class": "The bibliography metadata is primary-record checked, but metadata correctness alone does not establish that every prose citation credits a source for exactly the theorem, historical statement, or comparison actually used",
-          "statement": "Audit citation placement and attribution scope against the corresponding primary statements, beginning with the older Erdos sources and the recent preprints; keep cited external results distinct from claims formalised in this repository and correct only evidenced scope drift."
+          "defect_class": "The opening status table is explicit, but the long theorem and appendix sequence can still make classical formalisation, exact reformulation, finite evidence, conditional implication, local addition, and genuinely open input harder to distinguish theorem by theorem",
+          "statement": "Audit the status sentence surrounding each named theorem and appendix result; ensure that classical or cited results, exact reformulations, conditional statements, finite computations, local additions, and open cofinal inputs remain visibly classified at first reading without inflating the manuscript."
         },
         "last_verified_wave": {
-          "id": "main_paper_bibliography_metadata_crosscheck_audit",
+          "id": "main_paper_reference_attribution_scope_audit",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "result": "Cross-checked all bibliography entries against primary arXiv, DOI, journal, publisher, author-archive, project, and problem-database records. Corrected the Tao--Teravainen record to distinguish its 2025 submission from its 2026 revision; confirmed the current Wang and Campbell arXiv versions; and retained Coons as 2010 in accordance with the primary journal record. No other evidenced metadata correction was required. The paper remains 53 pages."
+          "result": "Audited in-text attribution against the corresponding primary statements, including the older Erdos theorems, Borwein's rational-shift result, Luca--Tachiya's eventual-periodic theorem, Postelmans--Van Assche's q-zeta result, Kovac--Tao's strict-tail Cantor-set observation, and the Wang, Campbell, and Tao--Teravainen preprints. No citation-scope correction was required. Sharpened the opening boundary instead: the contribution is a verified map of two finite-to-cofinal bottlenecks, not evidence that either missing unbounded theorem is close, and the two programmes remain separate after the common coordinates are exposed. The paper remains 53 pages."
         },
         "active_inconsistencies": [],
         "blocked_decisions": []
@@ -7540,7 +7540,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 3591
+        "line": 3596
       }
     },
     {
@@ -7551,7 +7551,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 3602
+        "line": 3607
       }
     },
     {
@@ -7562,7 +7562,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "the half-value counterexample route",
-        "line": 3623
+        "line": 3628
       }
     },
     {
@@ -7573,7 +7573,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 3614
+        "line": 3619
       }
     }
   ],
