@@ -559,18 +559,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_novelty_and_prior_art_sentence_audit",
+   "id": "main_paper_equation_to_plain_language_bridge_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "A theorem can be stated correctly yet leave its provenance or claimed contribution ambiguous. Classical results, cited recent results, formalised specialisations, new exact normal forms, quantitative refinements, and finite computations require different attribution sentences.",
-   "statement": "Audit every main theorem family against the bibliography and claim registry for a nearby provenance sentence that states whether the mathematics is classical, cited only, formalised here, an unconditional structural result, a quantitative refinement, or finite evidence. Research any ambiguous boundary from primary sources, avoid global novelty language, and preserve the 53-page target."
+   "defect_class": "A display can be formally precise yet leave a reader outside the speciality unable to say what its variables measure or why the quantifiers matter. The highest-value equations should have a nearby literal sentence translating the mathematical operation without weakening or extending the claim.",
+   "statement": "Audit the headline displays and theorem statements for a one-sentence plain-language bridge at first encounter. Add a gloss only where the variables, direction of implication, or every-after-every quantifier is not recoverable from adjacent prose; remove redundant formula paraphrases elsewhere to preserve 53 pages."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "ebc98ee71f6819bd9fe344a0bb343542c604e533",
-  "committed_navigation_snapshot": "a3773d64918fd05999dc0dc48d1b71b7b44b3edf",
-  "main_paper_source_digest": "sha256:c173af73642aca5560781687f8a90404d4096eb06915660ea8026c9b39eec567"
+  "committed_navigation_snapshot": "51f05d80500b1f2e2dff442714de2401aff17388",
+  "main_paper_source_digest": "sha256:9ca4af64a1074c37ce1358610d516acaf72d708685f6730705d936c2e73f4b14"
  },
  "reading_routes": [
   {
