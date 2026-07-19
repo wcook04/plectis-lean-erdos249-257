@@ -56,7 +56,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "Erd\\H{o}s \\#249",
-    "line": 3617
+    "line": 3618
    }
   },
   {
@@ -67,7 +67,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "unbounded certificate supply",
-    "line": 3628
+    "line": 3629
    }
   },
   {
@@ -78,7 +78,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "the half-value counterexample route",
-    "line": 3649
+    "line": 3650
    }
   },
   {
@@ -89,7 +89,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "universal Erd\\H{o}s \\#257",
-    "line": 3640
+    "line": 3641
    }
   }
  ],
@@ -559,18 +559,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_sentence_density_and_paragraph_breathing_audit",
+   "id": "main_paper_novelty_and_prior_work_boundary_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "Several dense paragraphs combine a definition, logical status, caveat, and source route in one block. Even when every sentence is correct, a cold reader can lose the mathematical subject or mistake a verified identity for an open implication.",
-   "statement": "Audit the longest prose sentences and densest paragraphs across the main paper. Split, trim, or reorder only where the logical subject, verified/open boundary, or reason for the next display is difficult to retain; preserve formulas, claims, source targets, and the 53-page boundary."
+   "defect_class": "Classical theorems formalised here, newly assembled exact reductions, quantitative refinements, finite computations, and local no-go results often appear in adjacent prose. Without a local attribution or novelty cue, a reader can mistake formalisation scope for a priority claim or undervalue a genuinely new normal form.",
+   "statement": "Audit the abstract, status table, theorem introductions, appendix headers, and conclusion for the prior-work/new-contribution boundary. Add or sharpen only evidence-backed attribution and novelty cues; distinguish formalised classical results, exact reformulations, quantitative refinements, checked finite instances, and unproved research targets without making unsupported priority claims or changing the 53-page boundary."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "ebc98ee71f6819bd9fe344a0bb343542c604e533",
-  "committed_navigation_snapshot": "016df20e699356c2a33768f03b2950c14ceee8fc",
-  "main_paper_source_digest": "sha256:ee30d0cd606837c83ada823958e90928ac41fc59a9af5b4aaf81cead5d11d9cc"
+  "committed_navigation_snapshot": "8388da03579f1b6175b6a46899002df16492b0a4",
+  "main_paper_source_digest": "sha256:be6efca21e648372d85d09da7f558fddcaaa3857715ca4aa6de5a80551068917"
  },
  "reading_routes": [
   {
