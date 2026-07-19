@@ -901,15 +901,15 @@
         "schema": "erdos249257-editorial-state/1",
         "scope": "continuous_whole_main_paper_exposition",
         "current_priority": {
-          "id": "main_paper_appendix_d_weighted_lambert_status_audit",
+          "id": "main_paper_appendix_d_squared_lambert_reader_map_audit",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "defect_class": "Appendix D.1 changes the coefficient input and then presents several weighted Lambert families with different exact, cited, and finite statuses. The comparison role is stated, but the density of classifications can still let a reader mistake results for other inputs as evidence about the open totient value",
-          "statement": "Audit Appendix D.1 as a comparison family. Define the changed input and the eventually-periodic, signed, and period-four cases before their theorem lists; state which conclusions are formalised here, contained in cited work, or finite examples; verify the associated bibliography and repeat the non-transfer boundary at the points where a reader could infer progress on S, while preserving the 53-page envelope."
+          "defect_class": "Appendix D.2 moves quickly among finite denominator obstructions, Mersenne atoms, the exact Mobius-square identity for S, and squared-Lambert comparison rows. Although their roles are distinguished, the reader still has to reconstruct which statements are coordinate identities, which are finite algebraic boundaries, and which cited irrationality result applies only to a comparison row",
+          "statement": "Audit Appendix D.2 as a reader map for finite versus exact versus comparison results. Define each coordinate at first use, make the implication and non-implication boundaries local to the relevant propositions, verify the Postelmans--Van Assche citation and the classical Lambert/Mobius sources, and preserve both theorem scope and the 53-page envelope."
         },
         "last_verified_wave": {
-          "id": "main_paper_appendix_c_dyadic_rank_reader_map_audit",
+          "id": "main_paper_appendix_d_weighted_lambert_status_audit",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "result": "Defined dyadic sections and the full kernel before Appendix C.4 uses their ranks; replaced the canonical-family label by its literal zero- and odd-residue sections; and stated the rationality-supplied carry recurrence, tempering limit, and section-rank conclusion in the proposition itself. Marked the rank-only counterexample as unformalised and explained its diagonal construction, wrote the even-residue reduction as an explicit identity, and replaced residual-gauge terminology in the proposition title by column rescaling. Verified the Allouche--Shallit and Coons metadata and primary statements; corrected the prose so Coons's non-finitely-generated Z-module theorem is no longer asserted to imply the paper's stronger explicit Q-rank formula without an intervening equivalence. No formal theorem, quantifier, finite record, or open status changed, and the paper remains 53 pages."
+          "result": "Defined the weighted Lambert series L_b and its rearranged coefficient c_gamma, and distinguished eventual periodicity from periodicity before the theorem list. Clarified that Luca--Tachiya prove irrationality for every nonzero eventually periodic rational weight at every integer base of absolute value greater than one, whereas the linked Lean theorem records only a weaker self-contained irrational-or-b-power-denominator dichotomy for periodic integer weights. Reframed the period-four example as an obstruction to residue-blind coefficient nonvanishing, not as an irrationality counterexample or evidence about the nonperiodic totient-derived input alpha. Verified the Luca--Tachiya metadata and DOI. No formal theorem, quantifier, finite record, or open status changed, and the paper remains 53 pages."
         },
         "active_inconsistencies": [],
         "blocked_decisions": []
@@ -939,7 +939,7 @@
             "period_four_signed_residue_obstruction"
           ],
           "status_summary": "One classical/broader antecedent, one exact signed dichotomy, and one proved residue obstruction.",
-          "prior_art_posture": "Luca–Tachiya prove the broader periodic rational-coefficient theorem by another method; the signed endpoint here is only irrational-or-terminating.",
+          "prior_art_posture": "Luca–Tachiya prove the broader eventually-periodic rational-coefficient theorem by another method; the signed endpoint formalised here is only irrational-or-b-power-denominator.",
           "primary_narrative_owner": "paper/erdos249-257-main-paper.tex",
           "source_route": "python3 scripts/query_corpus.py --claim periodic_nonnegative_weight_irrationality",
           "consumer_or_open_obligation": "Supports structured #257 families; unconditional signed irrationality would require excluding base termination.",
@@ -7540,7 +7540,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 3604
+        "line": 3603
       }
     },
     {
@@ -7551,7 +7551,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 3615
+        "line": 3614
       }
     },
     {
@@ -7562,7 +7562,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "the half-value counterexample route",
-        "line": 3636
+        "line": 3635
       }
     },
     {
@@ -7573,7 +7573,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 3627
+        "line": 3626
       }
     }
   ],
