@@ -901,15 +901,15 @@
         "schema": "erdos249257-editorial-state/1",
         "scope": "continuous_whole_main_paper_exposition",
         "current_priority": {
-          "id": "main_paper_appendix_c_candidate_input_vocabulary_audit",
+          "id": "main_paper_appendix_c_dyadic_rank_reader_map_audit",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "defect_class": "Appendix C.3 correctly separates candidate unbounded inputs from no-go results, but its three-rank bands, affine escape condition, zero orbit, and fresh-prime deficit coordinates still arrive quickly enough that a reader can mistake independent conditional routes for stages of one proof",
-          "statement": "Audit Appendix C.3 as a menu of independent routes. Define the input and output of each route in ordinary language, state immediately whether it is an exact identity, a sufficient hypothesis, or a no-go boundary, and prevent local finite or zero-orbit statements from sounding like progress toward an unbounded supply, while preserving every formal status and the 53-page envelope."
+          "defect_class": "Appendix C.4 correctly fences the unconditional dyadic-rank theorem from the rationality-side carry implication, but kernel sections, tempered carries, compressed adjoints, gauges, and rank obstructions still require more translation than an outside reader should supply",
+          "statement": "Audit Appendix C.4 from the dyadic totient-kernel theorem through its determinant and gauge boundaries. Define what a section, its span, a tempered carry, and each later finite coordinate measures before stating consequences; distinguish the unconditional coefficient theorem from the conditional carry lower bound and from countermodels showing why rank alone cannot decide rationality; preserve exact prior-art attribution, formal statuses, and the 53-page envelope."
         },
         "last_verified_wave": {
-          "id": "main_paper_appendix_c_coordinate_reader_map_audit",
+          "id": "main_paper_appendix_c_candidate_input_vocabulary_audit",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "result": "Audited Appendix C from cone flatness through the fixed-scale coordinate systems. Recast the full target as an exact residue class, stated literally that the Möbius shadow and foreign defect reconstruct the whole diagonal difference, and presented diagonal integrality as one congruence. Clarified that the binary residue is a second finite projection, that adjacent-suffix hypotheses are stronger inputs rather than conclusions, and that changing-lcm scales are precisely the t where M_t increases. Replaced table-oriented instance language where the objects are mathematical certificates. No theorem, quantifier, implication, finite record, or open status changed, and the paper remains 53 pages."
+          "result": "Rewrote Appendix C.3 as a menu rather than a proof sequence. Identified its sole proposed positive input and stated immediately that its unbounded occurrence is unproved; defined the power-of-two scale, odd depth, central half-word interval, centred state, and edge size before using the three-rank and affine criteria; and explained the zero orbit as a counterexample to correction-size reasoning alone. Connected the fresh-prime split back to the foreign defect, made the one-bit congruence literal, labelled scalar localisation and square-CRT suppression as independent no-go results, and replaced cube vocabulary by the actual totient differences being tested. No theorem, quantifier, implication, finite record, or open status changed, and the paper remains 53 pages."
         },
         "active_inconsistencies": [],
         "blocked_decisions": []
@@ -7540,7 +7540,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 3599
+        "line": 3602
       }
     },
     {
@@ -7551,7 +7551,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 3610
+        "line": 3613
       }
     },
     {
@@ -7562,7 +7562,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "the half-value counterexample route",
-        "line": 3631
+        "line": 3634
       }
     },
     {
@@ -7573,7 +7573,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 3622
+        "line": 3625
       }
     }
   ],

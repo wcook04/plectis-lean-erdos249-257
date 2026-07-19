@@ -2632,35 +2632,37 @@ This is one finite certificate, not an unbounded supply.
 \subsection{Candidate unbounded inputs and no-go boundaries}
 \label{app:totient-boundaries}
 
-The results below have three distinct roles, and are not consecutive proof
-steps.  The unproved three-rank band is a candidate unbounded sufficient input.
-The affine equivalence, fresh-prime decomposition, and one-bit lift are exact
-identities that expose quantities an unbounded argument would have to control;
-the zero affine orbit shows only that uniform correction bounds do not provide
-that control.  The parity, prime-adjunction, scalar-localisation, and square-CRT
-results independently rule out four further shortcuts.  None of these no-go
-results rules out the whole strategy, supplies the missing unbounded input, or
-uses another no-go result as a premise.
+Read this subsection as a menu, not a proof sequence.  Its only proposed
+positive input is the three-rank hypothesis: if it holds at arbitrarily large
+power-of-two scales, then $S$ is irrational, but that occurrence statement is
+unproved.  The affine, fresh-prime, and one-bit results rewrite exact finite
+quantities; the zero orbit shows that correction-size bounds alone cannot force
+the needed escape.  The last four results independently exclude particular
+shortcuts.  None supplies the missing unbounded input or rules out the whole
+strategy.
 
 \paragraph{Candidate unbounded input: a three-rank odd window.}\label{res:flexibleoddwindow}
-At an analytically admissible odd power-of-two rank, centrality at any one of
-the canonical odd rank or its next two base-four successors yields the
-required adjacent-suffix gap condition,
+Fix $t=2^a$ and increase the canonical suffix depth by at most one to write it
+as $m=2q+1$.  Call a rank \emph{central} when its half-word residue lies
+between $4^q/32$ and $31\cdot4^q/32$.  Test $q,q+1,q+2$; centrality at any one
+yields the required adjacent-suffix gap condition,
 \lword{DiagonalFlexibleOddWindowSupply.lean}{93}{diagonalAdjacentSuffixGapSupply_of_powerTwoOddGuardThreeRankBand}{three-rank suffix-gap implication}.
-Thus a three-rank band at unbounded scales implies irrationality,
+Thus success of this three-rank test for arbitrarily large $a$ implies
+irrationality,
 \lword{DiagonalFlexibleOddWindowSupply.lean}{136}{irrational_totientSeries_of_powerTwoOddGuardThreeRankBandSupply}{unbounded three-rank criterion};
 that supply is not proved.
 
 \paragraph{Exact affine form and bounded zero-orbit obstruction.}\label{res:flexibleoddaffine}
-With the stated short-correction bounds, the three central-band predicates are
-equivalent to one three-scale affine escape condition,
+Let $x_q$ be the centred half-word residue and put $e_q=4^q/32$.  Centrality is
+$|x_q|\geq e_q$; under the stated bounds on the next two corrections, the three
+tests are equivalent to one affine escape disjunction,
 \lword{DiagonalFlexibleOddWindowAffine.lean}{236}{threeRankBandAt_iff_threeScaleAffineEscapeAt_of_shortCorrections}{three-scale affine equivalence}.
-A zero-start affine orbit shows that a uniform correction envelope alone does
-not force escape at any finite number of ranks,
+Yet the generic recurrence $y_{j+1}=4y_j+c_j$, started at zero, can satisfy
+$|y_j|<4^j e$ for every $j$ even when every $|c_j|<2e$,
 \lword{DiagonalFlexibleOddWindowAffine.lean}{225}{zeroAffineOrbit_stays_in_scaled_edge}{zero-orbit obstruction}.
 
-\paragraph{Exact fresh-prime deficit decomposition.}  The literal foreign channel
-also has an endpoint form suited to curvature tests.  Retain only the prime
+\paragraph{Exact fresh-prime deficit decomposition.}  The foreign defect from
+Appendix~C.1 has an endpoint split suited to curvature tests.  Retain only the prime
 support already present at $H$ in the two endpoints $H+s$ and $2H+s$, and
 write the resulting discrepancy from the actual totient as an endpoint
 deficit.  Each such deficit is nonnegative.  The actual diagonal increment
@@ -2685,9 +2687,9 @@ neither an unbounded deficit bound nor an irrationality criterion.
 separate exact arithmetic reduction.  If a signed difference is already
 divisible by $2^k$, lifting its congruence to $2^{k+1}$ is equivalent to
 evenness of the quotient after division by $2^k$.  Failure of the lift gives
-the unique translated residue class.  In particular, a displayed difference
-$P-N=16c$ agrees modulo $32$ exactly when $c$ is even; otherwise the residue
-is the offset class by $16$.
+the unique translated residue class.  Thus, for integers $P,N,c$ with
+$P-N=16c$, one has $P\equiv N\pmod{32}$ exactly when $c$ is even; otherwise
+the residue is offset by $16$.
 
 \begin{proposition}[one-bit signed-margin lift]\label{res:powertwobitlift}
 The fifth-bit question after fourth-bit agreement is exactly one cofactor
@@ -2762,7 +2764,7 @@ future positive route would need a separately defined projection together with
 a theorem controlling what that projection discards.  This is a proved
 obstruction to one strategy, not progress on the unbounded-supply proposition.
 
-\begin{proposition}[scalar-localisation obstruction]\label{res:adelic}
+\begin{proposition}[independent no-go: scalar localisation]\label{res:adelic}
 Let $x\in\Q$ and $c\in\Z$.  If $H\mid\operatorname{den}(x)$ and the reduced denominator
 of $cx$ divides $H$, then
 \[
@@ -2777,7 +2779,7 @@ its coefficient, but cannot erase it.  This rules out a scalar-denominator
 shortcut of that form.  It neither proves full-target avoidance nor supplies
 any certificates, so it gives no irrationality criterion for $S$.
 
-\begin{proposition}[square-CRT correction suppression]\label{res:squarecrt}
+\begin{proposition}[independent no-go: square-CRT correction suppression]\label{res:squarecrt}
 Let $E$ be a finite family indexed by distinct primes $p_i$, with prescribed
 anchors $A_i$ and residues $a_i$.  There is a bounded common base $n$ such
 that, for each $i\in E$ and each shift $h$ with $p_i\nmid a_i+h$, one has
@@ -2791,10 +2793,11 @@ horizon $J$, the choice $a_i=0$ works simultaneously for all $1\le h\le J$.
 \noindent Formalised:
 \lword{SquareCRTCube.lean}{198}{exists_squareCRT_clean_totient_family}{finite clean totient family}
 and \lword{SquareCRTCube.lean}{228}{exists_squareCRT_clean_horizon}{clean horizon family}.
-The finite mechanism does not force a cube coefficient to be nonzero: there
-is a checked clean two-step cube with both displayed coefficients zero
-(\lword{SquareCRTCube.lean}{285}{squareCRT_clean_block_can_vanish}{vanishing clean block}) and a
-separate checked clean cube with second coefficient $-4$
+The tested coefficient is a difference of two totient values.  Removing the
+prime-dilation correction does not force it to be nonzero: one checked clean
+two-step block has both differences zero
+(\lword{SquareCRTCube.lean}{285}{squareCRT_clean_block_can_vanish}{vanishing clean block}), while
+another has second difference $-4$
 (\lword{SquareCRTCube.lean}{303}{squareCRT_clean_block_can_be_nonzero}{nonzero clean block}).
 Thus the result gives neither an unbounded certificate supply nor an
 irrationality criterion for $S$.
