@@ -248,7 +248,7 @@ the limit of explicitly recorded checks.
 - **You want the basic mathematical result and its limits:** read
   [`README.md`](README.md), then [`SCOPE.md`](SCOPE.md).
 - **You want the mathematical argument:** read the
-  [gateway paper](erdos249-257-main-paper.pdf).
+  [mathematics paper](erdos249-257-main-paper.pdf).
 - **You want to find the Lean behind one claim:** use
   [`docs/SOURCE_MAP.md`](docs/SOURCE_MAP.md), or run
   `python3 scripts/query_corpus.py --claim <claim_id>`.
