@@ -1577,7 +1577,7 @@ and
 Global propagation still requires an upper or middle step whenever $2s<3d$
 but $2(s+1)<3d$ fails.  This first-crossing statement is not proved.
 
-\subsubsection{Boundary-pulse normalisation}\label{res:boundarypulse}
+\subsubsection{Divisor pulses at the largest-skip boundary}\label{res:boundarypulse}
 
 For a selected rank $e$, its row-$s$ pulse counts two if $e\mid2s+1$ and one
 if $e\mid2s+2$; the word pulse sums these counts.  If $d$ is a largest skip
@@ -1789,7 +1789,7 @@ then the radius-\(R'\) successor remains a suffix cylinder, with endpoint
 and
 \lword{SelectedSuffixCylinder.lean}{136}{SelectedHalfWindow.hasSuffixCylinderAt_stepExplicit}{endpoint recurrence}.
 
-\begin{proposition}[first cutoff-divisor dichotomy]\label{res:feedbackdichotomy}
+\begin{proposition}[full-cylinder or profiled-gap transition]\label{res:feedbackdichotomy}
 Let a full suffix-cylinder stage have depth \(N\), cutoff \(M\), with
 \(1\leq N\), \(M+1\leq N\), and
 \[
@@ -1801,11 +1801,11 @@ exceptional carries form a two-sheet profiled gap stage.  If
 one-hole seam.
 \end{proposition}
 \noindent Formalised by the
-\lword{SuffixCylinderGlobalProducer.lean}{174}{CylinderStage.feedbackStep_or_protectedSeam}{first cutoff-divisor dichotomy}
+\lword{SuffixCylinderGlobalProducer.lean}{174}{CylinderStage.feedbackStep_or_protectedSeam}{full-cylinder/gap alternative}
 and
 \lword{SuffixCylinderInStrip.lean}{665}{CylinderStage.feedbackAdvance_or_inStripTwoSheet}{two-family gap alternative}.
 
-\begin{proposition}[profiled-gap transition]\label{res:profiledgap}
+\begin{proposition}[one-row profiled-gap recurrence]\label{res:profiledgap}
 Suppose a profiled gap stage has lower and upper next coefficients
 \(C_-\) and \(C_+\), respectively.  If
 \[
@@ -2516,7 +2516,7 @@ agrees with this projection within the displayed bound, and the projected
 quantity is farther than that bound from every integer, then the full target
 is missed.
 
-\begin{proposition}[finite foreign-residue projection]\label{res:foreignresidue}
+\begin{proposition}[finite sufficient test for diagonal nonintegrality]\label{res:foreignresidue}
 Let \(F_H^{(D)}\) be the retained nondivisor projection at cutoff \(D\), let
 \(F_H\) be the actual foreign defect, and let \(Q_H\) be the scaled explicit
 divisor shadow.  The finite residue diagonal is exactly the sum of
@@ -2557,7 +2557,7 @@ $d_t\geq2^{\lfloor t/2\rfloor}$.  This is a
 denominator theorem for $Q_t$ only.  Cancellation by $F_t$ is exactly what the
 full-target condition retains.
 
-\begin{proposition}[Mersenne-shadow denominator]\label{res:shadowden}
+\begin{proposition}[exact denominator of the M"obius shadow]\label{res:shadowden}
 Let \(r_t\) be the square-free kernel of \(H_t\), let \(s_t=H_t/r_t\), and
 let \(J(r_t)\) be the odd Jordan scalar.  The reduced denominator \(d_t\) of
 the scaled M\"obius shadow is
@@ -3523,7 +3523,7 @@ form are the
 and
 \lword{DiagonalFreshLossBridge.lean}{2559}{canonicalAdjacentSuffixJumpCentralSupply_iff_slackSupply}{strict-jump slack equivalence}.
 
-\begin{corollary}[strict-jump slack criterion]
+\begin{corollary}[central-band supply criterion for irrationality]
 \label{res:slackcriterion}
 If, for every $t_0$, there is a $t\ge\max\{3,t_0\}$ such that
 \[
@@ -3557,20 +3557,20 @@ We call this the \emph{second-channel separation condition}.  Here
 \(37/56=2/7+3/8\) budgets the higher-tail and gap errors, respectively.
 The absolute value is needed because \(u_n<0\) at \(n=3,4\).
 
-\begin{proposition}[finite second-channel separation]\label{res:secondfrontier}
+\begin{proposition}[verified residual--tail separation through rank \(6\)]\label{res:secondfrontier}
 The second-channel separation condition is decidable over $\Q$ and holds for
 $1\le n\le6$.
 \end{proposition}
 \noindent This is the
-\lword{GreedyAchievementSet.lean}{2723}{halfSecondChannelSeparatedRat_of_pos_le_six}{finite second-channel separation}.
+\lword{GreedyAchievementSet.lean}{2723}{halfSecondChannelSeparatedRat_of_pos_le_six}{verified rank-(6) residual--tail separation}.
 
-\begin{corollary}[second-channel separation criterion]
+\begin{corollary}[eventual residual--tail separation criterion]
 \label{res:secondcriterion}
 If the second-channel separation condition holds for every \(n\ge7\), then
 \(1/2\) belongs to the Mersenne achievement set \(\mathcal A\).
 \end{corollary}
 \noindent This implication is the
-\lword{GreedyAchievementSet.lean}{2901}{half_mem_mersenneAchievementSet_of_secondChannelSeparationRat_from_seven}{conditional from-seven membership criterion}.
+\lword{GreedyAchievementSet.lean}{2901}{half_mem_mersenneAchievementSet_of_secondChannelSeparationRat_from_seven}{eventual residual--tail separation criterion}.
 The finite proposition supplies \(1\le n\le6\), but no case with \(n\ge7\);
 no converse is proved.  Membership itself has the exact characterisation
 \[
@@ -3980,7 +3980,7 @@ and the strip is strong enough to re-derive the tempered boundary, so the
 analytic side condition can be traded for one inequality. The two coordinate
 changes compose.
 
-\begin{theorem}[certificate-level equivalence]\label{res:carrycert}
+\begin{theorem}[support fraction--Boolean-carry equivalence]\label{res:carrycert}
 Fix an integer $p$ and an integer $q\ge1$. There is a nonempty support $A$ of
 positive integers with $\sum_{n\in A}1/(2^n-1)=p/q$ if and only if there is an
 integer sequence $U$ with $U(0)=p$ such that: every $U(N)$ is positive;
