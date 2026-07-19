@@ -559,18 +559,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_equation_to_plain_language_bridge_audit",
+   "id": "main_paper_ambiguous_referent_and_scope_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "A display can be formally precise yet leave a reader outside the speciality unable to say what its variables measure or why the quantifiers matter. The highest-value equations should have a nearby literal sentence translating the mathematical operation without weakening or extending the claim.",
-   "statement": "Audit the headline displays and theorem statements for a one-sentence plain-language bridge at first encounter. Add a gloss only where the variables, direction of implication, or every-after-every quantifier is not recoverable from adjacent prose; remove redundant formula paraphrases elsewhere to preserve 53 pages."
+   "defect_class": "After a dense theorem or display, pronouns such as this, it, these, former, and latter can acquire several plausible mathematical antecedents. A locally grammatical sentence is still unclear when a reader must infer whether it refers to a theorem, hypothesis, finite computation, coordinate change, or open conclusion.",
+   "statement": "Audit ambiguous demonstratives and scope words in the main text and appendix consequence paragraphs. Replace only genuinely multi-antecedent references with the theorem, predicate, bound, or hypothesis they name; preserve ordinary local prose and the 53-page target."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "ebc98ee71f6819bd9fe344a0bb343542c604e533",
-  "committed_navigation_snapshot": "51f05d80500b1f2e2dff442714de2401aff17388",
-  "main_paper_source_digest": "sha256:9ca4af64a1074c37ce1358610d516acaf72d708685f6730705d936c2e73f4b14"
+  "committed_navigation_snapshot": "5201cb009983b4d7e44d75fdd90c1da4698fce2c",
+  "main_paper_source_digest": "sha256:582cfe02caadc6809a42d11816e013bb8e21a4b47991efb4f8c4a410e6647f1c"
  },
  "reading_routes": [
   {
