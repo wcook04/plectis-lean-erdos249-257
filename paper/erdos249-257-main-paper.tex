@@ -3232,10 +3232,10 @@ statement, while nonmembership would decide only the half-value question.
 \label{sec:additional-lambert}
 \label{app:lambert-weighted}
 
-This subsection changes the coefficient input.  Its eventually-periodic
-theorems settle or classify those comparison series, while the period-four
-example blocks one residue-blind shortcut.  None has the totient weight
-defining \(S\), so no irrationality status transfers to Erd\H{o}s~\#249.
+This subsection changes the coefficient input.  It settles or classifies
+eventually-periodic comparison series and gives a nonzero period-four input
+whose rearranged coefficients vanish on one residue class.  None has the
+totient weight defining \(S\), so no status transfers to Erd\H{o}s~\#249.
 
 \paragraph{Periodic weights.}\label{sec:periodicweights}
 For \(L_b(\gamma)=\sum_{a\ge1}\gamma(a)/(b^a-1)\), the checked cases are:
@@ -3254,16 +3254,15 @@ expansion terminates.
 \end{theorem}
 \noindent Formalised:
 \lword{CertificateKernel.lean}{13847}{irrational_or_bpow_mul_eq_intCast_intWeightedErdosSeries_periodic}{periodic signed-weight dichotomy}.
-\begin{proposition}[residue-blind obstruction]\label{res:periodfourobstruction}
+\begin{proposition}[period-four example]\label{res:periodfourobstruction}
 For the period-four weight \(\gamma=1,0,-1,0,\ldots\), its coefficient after
 Lambert rearrangement, \(c(n)=\sum_{d\mid n}\gamma(d)\), vanishes whenever
 \(n\equiv3\pmod4\).
 \end{proposition}
 \noindent Formalised:
 \lword{CertificateKernel.lean}{13898}{intWeightedCoeff_periodFourSignWeight_eq_zero_of_mod_four_eq_three}{period-four coefficient obstruction}.
-Thus vanishing on one residue class does not certify that the input is zero.
-The proposition says nothing about the nonperiodic totient-derived weight
-\(\alpha=\ph*\mu\).
+Thus one vanishing coefficient class does not force a zero input; the
+nonperiodic totient-derived weight \(\alpha=\ph*\mu\) is not covered.
 
 \subsection{Finite algebraic boundaries and squared-Lambert coordinates}
 \label{app:lambert-algebraic}
@@ -3274,13 +3273,14 @@ for \(S\), and comparison rows in the squared-Lambert calculus.  The identity
 changes coordinates; the finite propositions delimit algebraic methods; and
 the status of one squared-Lambert row does not pass to another.
 
-\paragraph{Finite algebraic boundaries.}\label{sec:primitiveindex}
-Put \(a_n=(\ph*\mu)(n)/n\).  If an integer \(D\) clears these coordinates
-through \(N\), the exact obstruction is:
-\begin{proposition}[primitive-coordinate finite-jet obstruction]
+\paragraph{Finite denominator-clearing boundaries.}\label{sec:primitiveindex}
+Put \(a_n=(\ph*\mu)(n)/n\).  Let $T_N$ be the product of $4$, every odd
+prime $p\le N$, and one further factor $p$ for each $p^2\le N$.
+\begin{proposition}[finite denominator obstruction]
 \label{res:primitiveindex}
-\(D\) is divisible by an explicit two-tier primorial \(T_N\); hence no fixed
-\(D\) clears every \(a_n\).
+For $N\ge4$, if a positive integer $D$ makes $Da_n$ integral for every
+$1\le n\le N$, then $T_N\mid D$.  Hence no fixed positive $D$ clears every
+$a_n$.
 \end{proposition}
 \noindent Formalised:
 \lword{PrimitiveDeterminantLift.lean}{148}{twoTierPrimorial_dvd_of_integral_jet}{two-tier primorial obstruction}.
@@ -3294,7 +3294,7 @@ It satisfies the exact carry law
  2\omega_d(N)-\omega_d(N+1)=\mathbf1_{d\mid N+1}.
 \]
 
-\begin{proposition}[finite Mersenne-atom determinant boundary]
+\begin{proposition}[finite Mersenne-atom determinant identity]
 \label{res:mersennetailatoms}
 Fix \(m\ge1\), conductors \(d_j\ge1\), indices \(n_{ij}\ge0\), and integer
 column weights \(w_j\), and set
@@ -3315,10 +3315,8 @@ cleared determinant on the left is at least \(1\).
 \lword{MersenneTailAtoms.lean}{158}{weightedMersenneAtom_denominatorProduct_mul_det}{determinant-clearing identity},
 and
 \lword{MersenneTailAtoms.lean}{181}{one_le_abs_weightedMersenneAtom_cleared_det}{cleared-determinant lower bound}.
-Thus finite Mersenne-atom determinants recover exactly their explicit column
-denominators; the clearing creates no additional height surplus.
-These are scoped finite-denominator obstructions, not irrationality criteria
-for \(S\).
+Thus the displayed product makes the determinant integral and gives only the
+lower bound $1$ when nonzero.  It is not an irrationality criterion for \(S\).
 
 \begin{proposition}[M\"obius-square identity for \(S\)]\label{res:lens}
 \[
