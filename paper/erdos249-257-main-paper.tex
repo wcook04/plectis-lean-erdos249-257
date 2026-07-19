@@ -224,14 +224,15 @@ the proof but are not themselves proof authority.  Section~\ref{sec:verify}
 states how the fixed source revision and trusted dependencies are checked.
 
 \paragraph{Reading map.}
-For a concise status summary, read Section~\ref{sec:spines}, followed by
+For a first pass, read Section~\ref{sec:spines}, followed by
 Sections~\ref{sec:architecture} and~\ref{sec:unresolved}: the reductions,
-the comparison limit, and every remaining obligation.  Sections~\ref{sec:eb}
-and~\ref{sec:249} contain the
-detailed results; Section~\ref{sec:verify} gives the verification protocol.
-The appendices give alternative certificate, carry, M\"obius, and greedy
-interfaces to the obstruction, together with local arguments and audits.
-Linked phrases open the corresponding Lean proofs.
+the comparison limit, and every remaining obligation.  That route contains
+the headline claims and their open boundaries; the appendices are not needed
+on a first reading.  Sections~\ref{sec:eb} and~\ref{sec:249} contain the
+detailed results, and Section~\ref{sec:verify} gives the verification protocol.
+The appendices retain alternative certificate, carry, M\"obius, and greedy
+interfaces, local arguments, and audits for readers following a particular
+route.  Linked phrases open the corresponding Lean proofs.
 
 \medskip
 \noindent\textbf{Keywords.} irrationality; Erd\H{o}s--Borwein constant;
@@ -3737,10 +3738,10 @@ The two routes used below have the logical form
 {\setlength{\arraycolsep}{3pt}
 \[
 \begin{array}{rclcl}
-\text{unbounded witnesses (A.2--A.3)}
+\text{unbounded witnesses (\ref{app:half-conditional-producers}--\ref{app:half-finite-cofinal})}
 &\Longrightarrow& \frac12\in\mathcal A
 &\Longrightarrow& \text{infinite support summing to }\frac12,\\
-\text{exclusions and tail bound (A.4)}
+\text{exclusions and tail bound (\ref{app:half-final-skip})}
 &\Longrightarrow& \text{no final skip}
  &\Longleftrightarrow& \frac12\in\mathcal A.
 \end{array}
@@ -3800,7 +3801,8 @@ This appendix supplies the general results assembled in
 Theorem~\ref{res:rigidity-main} and
 Corollaries~\ref{res:rigidity-unbounded-main}--\ref{res:rigidity-dyadic-mass-main},
 and the detailed greedy geometry cited after Theorem~\ref{res:greedy}.
-Readers interested only in achievement-set geometry may skip to B.5.
+Readers interested only in achievement-set geometry may skip to
+Appendix~\ref{app:carry-geometry}.
 It has two independent roles.  Appendix~\ref{app:carry-normal-form} gives the
 first exact coordinate change: rationality is equivalent to a \emph{tempered
 tail orbit}, an integer recurrence with a vanishing boundary condition.
@@ -3822,23 +3824,23 @@ The dependency chain is
 \begin{array}{rcl}
  \text{a rational support value}
  &\Longleftrightarrow& \text{a tempered integral tail orbit}
- \quad\text{(B.1)},\\
+ \quad\text{(\ref{app:carry-normal-form})},\\
  \text{a nonempty support with value \(p/q\)}
  &\Longleftrightarrow& \text{a Boolean--M\"obius carry certificate}
- \quad\text{(B.2)},\\
+ \quad\text{(\ref{app:carry-boolean})},\\
  \text{a nonempty rational support}
- &\Longrightarrow& \text{sublogarithmic zero gaps}\quad\text{(B.3)},\\
+ &\Longrightarrow& \text{sublogarithmic zero gaps}\quad\text{(\ref{app:carry-sublog})},\\
  \substack{\text{a nonempty rational support}\\
  \text{with odd denominator part }v>1}
  &\Longrightarrow& \text{wrap and reciprocal-mass bounds}
- \quad\text{(B.4)},\\
+ \quad\text{(\ref{app:carry-mass})},\\
  \text{an infinite rational support}
  &\Longrightarrow& \text{unbounded carry states}
- \quad\text{(B.4)},\\
+ \quad\text{(\ref{app:carry-mass})},\\
  \substack{\text{an infinite rational support}\\
  \text{with dyadic denominator}}
  &\Longrightarrow& \text{the reciprocal-mass alternative}
- \quad\text{(B.4).}
+ \quad\text{(\ref{app:carry-mass}).}
 \end{array}
 \]
 The last four lines list independent necessary conditions, at the weakest
@@ -4334,8 +4336,11 @@ every candidate period \(h\), a certificate must occur after every cutoff.
 This appendix develops coordinates and finite mechanisms for that statement;
 it does not prove the required unbounded supply
 \eqref{eq:unbounded-certificate-supply}.
-C.1 contains the exact reduction; C.2--C.4 are independent finite mechanisms,
-candidate inputs and their limits, and dyadic-rank consequences.
+Readers following only the exact main reduction may skip the details here.
+Appendix~\ref{app:totient-normal} contains the exact reduction;
+Appendices~\ref{app:totient-finite}--\ref{app:totient-rank} give independent
+finite mechanisms, candidate inputs and their limits, and dyadic-rank
+consequences.
 
 The exact chain is
 \[
