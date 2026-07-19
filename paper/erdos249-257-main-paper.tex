@@ -1087,7 +1087,7 @@ survival; an unsafe skip need not stop the orbit.
 
 Suppose a take at rank \(b\) is followed by the next take at \(c>b+1\).  Put
 \(q=2^b-1\), \(m=2^{c-1}\), and write the residual just before rank \(b\) as
-\(\rho=1/R\), so \(R\) is its reciprocal.  Taking \(w_b=1/q\) changes the
+\(r=1/R\), so \(R\) is its reciprocal.  Taking \(w_b=1/q\) changes the
 reciprocal to \(R'=Rq/(q-R)\), which stays fixed through the intervening
 skips.  The last skip, at rank \(c-1\), occurs exactly when \(R'>m-1\) and is
 dyadically unsafe exactly when \(R'<m\).  For \(0<R<q\), solving
@@ -1110,7 +1110,7 @@ For a single intervening skip, $c=b+2$ and $m=2q+2$.  The band becomes
 \]
 with width $q^2/((3q+1)(3q+2))<1/9$, entirely between $2q/3$ and
 $2q/3+2/9$.  No integral \(R\) lies in this window.  If instead
-\(\rho=p/(2D)\), then \(R=2D/p\); for positive odd \(p,D,q\), clearing
+\(r=p/(2D)\), then \(R=2D/p\); for positive odd \(p,D,q\), clearing
 denominators in the same inequalities forces \(p\ge7\).  Formalised:
 \lword{HalfGreedyTwoThirdsBand.lean}{127}{singletonUnsafe_iff_twoThirdsBand}{the one-skip band equivalence},
 \lword{HalfGreedyTwoThirdsBand.lean}{154}{band_width}{the one-skip width formula},
@@ -2362,9 +2362,9 @@ flatness model.  No converse is proved saying that every non-flat finite
 sample, or every irrational value of \(S\), must be detected by this joint
 predicate.  It is therefore a refuter, not a complete decision procedure.
 
-\paragraph{An exact target residue class.} Put $H_t=M_t$ and
+\paragraph{An exact target residue class.} At the lcm scale \(M_t\), put
 \[
- D_t=R_{2H_t}-R_{H_t}.
+ D_t=R_{2M_t}-R_{M_t}.
 \]
 Write the explicitly summed M\"obius contribution as the reduced rational
 $Q_t=a_t/d_t$ and call it the \emph{M\"obius shadow}.  Define the remaining
@@ -2544,7 +2544,7 @@ unbounded family of separated projections; these are parts of the open
 certificate-supply problem.
 
 Second, the rational M\"obius shadow has an exact reduced denominator.  If
-$r_t$ is the square-free kernel of $H_t$, $s_t=H_t/r_t$, and
+$r_t$ is the square-free kernel of $M_t$, $s_t=M_t/r_t$, and
 $J(r_t)=\prod_{q}(q^2-1)$ is the odd Jordan scalar, the product running over
 the odd prime divisors $q$ of $r_t$, then
 \[
@@ -2559,7 +2559,7 @@ denominator theorem for $Q_t$ only.  Cancellation by $F_t$ is exactly what the
 full-target condition retains.
 
 \begin{proposition}[exact denominator of the M"obius shadow]\label{res:shadowden}
-Let \(r_t\) be the square-free kernel of \(H_t\), let \(s_t=H_t/r_t\), and
+Let \(r_t\) be the square-free kernel of \(M_t\), let \(s_t=M_t/r_t\), and
 let \(J(r_t)\) be the odd Jordan scalar.  The reduced denominator \(d_t\) of
 the scaled M\"obius shadow is
 \[
@@ -2587,28 +2587,28 @@ integer and then to binary suffix data.  At depth $L$, let
 be the length-$L$ window numerator underlying
 Definition~\ref{def:totient-certificate}, and define
 \[
- W_{t,L}=P_L(2H_t)-P_L(H_t),\qquad
+ W_{t,L}=P_L(2M_t)-P_L(M_t),\qquad
  \eta_{t,L}=W_{t,L}\bmod 2^L,
 \]
 with the residue chosen in $[0,2^L)$.  The finite
 residue certificate is the asymmetric safe interval
 \[
- H_t+L+2<\eta_{t,L}<2^L-(2H_t+L+2).
+ M_t+L+2<\eta_{t,L}<2^L-(2M_t+L+2).
 \]
-The two unequal margins are the tail bounds at the two cone vertices $H_t$ and
-$2H_t$; replacing them by a symmetric slogan would lose part of the checked
+The two unequal margins are the tail bounds at the two cone vertices $M_t$ and
+$2M_t$; replacing them by a symmetric slogan would lose part of the checked
 statement.
 
 \begin{corollary}[finite residue projection]\label{res:freshloss}
 For every \(t,L\in\N\), the diagonal projection certificate is equivalent to
 \[
- H_t+L+2<\eta_{t,L}<2^L-(2H_t+L+2),
+ M_t+L+2<\eta_{t,L}<2^L-(2M_t+L+2),
 \]
 and either condition forces full-target avoidance at height \(t\).
 Consequently,
 \[
  \forall t_0\in\N\;\exists t\geq t_0\;\exists L\in\N,\qquad
- H_t+L+2<\eta_{t,L}<2^L-(2H_t+L+2)
+ M_t+L+2<\eta_{t,L}<2^L-(2M_t+L+2)
 \]
 implies that \(S\) is irrational.
 \end{corollary}
@@ -2789,9 +2789,9 @@ shortcut of that form.  It neither proves full-target avoidance nor supplies
 any certificates, so it gives no irrationality criterion for $S$.
 
 \begin{proposition}[independent no-go: square-CRT correction suppression]\label{res:squarecrt}
-Let $E$ be a finite family indexed by distinct primes $p_i$, with prescribed
+Let $\mathcal E$ be a finite family indexed by distinct primes $p_i$, with prescribed
 anchors $A_i$ and residues $a_i$.  There is a bounded common base $n$ such
-that, for each $i\in E$ and each shift $h$ with $p_i\nmid a_i+h$, one has
+that, for each $i\in\mathcal E$ and each shift $h$ with $p_i\nmid a_i+h$, one has
 \[
  n=A_i+p_i(a_i+p_i t)\quad\text{and}\quad
  \ph(n+p_i h-A_i)=(p_i-1)\ph(a_i+p_i t+h)
@@ -3514,19 +3514,19 @@ values after \(N\).  At scale \(t\), choose one logarithmic depth and compare
 the blocks after \(M_t\) and \(2M_t\):
 \[
  m_t=\lfloor\log_2 M_t\rfloor+10,\qquad
- d_t=\bigl(P_{m_t}(2M_t)-P_{m_t}(M_t)\bigr)\bmod 2^{m_t},
+ \delta_t=\bigl(P_{m_t}(2M_t)-P_{m_t}(M_t)\bigr)\bmod 2^{m_t},
 \]
-where $0\le d_t<2^{m_t}$.  The integer \(d_t\) is their block-difference
+where $0\le \delta_t<2^{m_t}$.  The integer \(\delta_t\) is their block-difference
 residue.  Define
 \[
-  \sigma_t=\min\bigl(d_t-2^{m_t-5},
-    (2^{m_t}-2^{m_t-5})-d_t\bigr)\in\Z.
+  \sigma_t=\min\bigl(\delta_t-2^{m_t-5},
+    (2^{m_t}-2^{m_t-5})-\delta_t\bigr)\in\Z.
 \]
 This signed band-edge distance, called \emph{slack} below, is nonnegative
 exactly on the central band and negative outside it.
 
 \begin{proposition}[fixed-depth central-band equivalence]\label{res:slackfrontier}
-For every $t\ge1$, the residue \(d_t\) lies in the central band
+For every $t\ge1$, the residue \(\delta_t\) lies in the central band
 $[2^{m_t-5},2^{m_t}-2^{m_t-5}]$ if and only if $\sigma_t\ge0$.
 \end{proposition}
 \noindent This fixed-scale equivalence and its beyond-every-cutoff strict-jump
