@@ -559,18 +559,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_notation_collision_and_overloading_audit",
+   "id": "main_paper_sentence_load_and_parenthetical_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "A locally defined symbol can collide with a central global object or be reused for several unrelated carries, tails, remainders, or cutoffs. The definition may be formally in scope while still making a cold reader backtrack or infer the wrong object.",
-   "statement": "Audit notation reuse and near-collisions across the main routes and appendices, prioritising S, T, R, H, U, C, support indicators, and tail symbols. Rename only genuinely confusing local notation, retain conventional symbols where their scope is clear, add a brief reminder instead of a rename when cheaper, and keep the paper at 53 pages."
+   "defect_class": "A sentence can remain grammatically valid while carrying too many hypotheses, coordinate names, caveats, citations, or logical consequences for a cold reader to retain. Dense parentheticals and delayed subjects are especially costly in the technical appendices.",
+   "statement": "Audit sentence load and parenthetical structure across the gateway and appendices. Split only sentences that perform multiple mathematical jobs, move essential hypotheses out of parentheses, keep theorem statements compact, preserve nearby status fences and citations, remove redundant connective prose where that pays for clarity, and keep the paper at 53 pages."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "ebc98ee71f6819bd9fe344a0bb343542c604e533",
-  "committed_navigation_snapshot": "1ed7f1c5a0c1916f3a38b9ff6e154fe83ab467a3",
-  "main_paper_source_digest": "sha256:55cc1cf463e40ca596c77d04fb2fd8589f3d26bd42242c28f68813936a8a0999"
+  "committed_navigation_snapshot": "b8c710b636eaffc6e30aadb0a713407112def4e4",
+  "main_paper_source_digest": "sha256:4e517c590b4912bd7ded409004669d853b11967b486290156c3c6d2e9e4b7ed2"
  },
  "reading_routes": [
   {
