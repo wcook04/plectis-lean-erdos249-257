@@ -1218,7 +1218,7 @@ A \emph{canonical even seam} is the corresponding adjacent pair of admissible
 parent words at depth $2d$ that realises this one-hole pattern.  The unproved
 supply hypothesis gives one at every $2d$,
 $d\geq10$.  Choose $k=1$, except $k=2$ when the hole is $1$; this gives words
-cofinally
+at unbounded depths
 (\lword{HalfCarryReachability.lean}{999}{cofinalAdmissibility_of_canonicalEvenSeamSupply}{the cofinal-admissibility implication}).
 Restriction fills earlier depths, and K\"onig compactness gives one infinite
 support of value $1/2$
@@ -1232,7 +1232,7 @@ $S_{N+1}=S_N-f_{A_g}(N+2)/2^{N+1}\leq S_N$, so $S_N$ is non-increasing
 (\lword{CofinalStripReturn.lean}{23}{scaled_integerHalfCarry_antitone}{the scaled-carry monotonicity}),
 and the proved nonnegativity of $G_N-1$ gives $S_N\geq0$; meanwhile $B_N\to0$
 (\lword{CofinalStripReturn.lean}{42}{tendsto_halfStripBound_succ_div_pow_zero}{the strip-envelope limit}).
-Cofinal returns give arbitrarily late $M$ with $S_M\leq B_M$.  For
+A cofinal return means an arbitrarily late $M$ with $S_M\leq B_M$.  For
 $\varepsilon>0$, choose one with $B_M<\varepsilon$; then
 $0\leq S_N\leq S_M\leq B_M<\varepsilon$ for
 $N\geq M$, so $S_N\to0$.  Hence the centred carry $C_N=G_N-1$ satisfies
@@ -1269,7 +1269,7 @@ $2\sqrt M+4$,
  \leq\frac{4\sqrt M+8}{2^M}
  \leq\frac{4M+12}{2^M}.
 \]
-For witnesses at cofinally large depths, the last bound tends to zero.  Each
+For witnesses at unbounded depths, the last bound tends to zero.  Each
 $X_A$ belongs to the closed Mersenne achievement set, so their limit $1/2$
 also belongs to it.  The words at different depths need not agree, and the
 finite-support obstruction forces the support representing the limit to be
@@ -1320,7 +1320,7 @@ conditional reduction, not an unconditional membership theorem.
 \label{app:half-finite-cofinal}
 
 Every half-value route below has the form
-``finite witness at depth $N$'' plus ``a cofinal supply of such depths''
+``finite witness at depth $N$'' plus ``witnesses at unbounded depths''
 implies $1/2\in\mathcal A$.  The local identities advance one witness; the
 compactness statements consume a cofinal supply.  No result below proves that
 supply, so one verified window or seam is not an unbounded theorem.
@@ -1340,11 +1340,11 @@ sole input is that $m_0=-K$, $m_{J+1}=2m_J+f_A(k+J+2)$ reaches $m_J\geq0$
 for some $J\leq k+1$; the first $J$ future rows then cover $K$.  This unproved
 hypothesis implies $1/2$-membership
 (\lword{HalfCylinderFiniteShadow.lean}{1256}{half_mem_mersenneAchievementSet_of_governedFrozenMarginProducer}{the first-passage implication}),
-not Erd\H{o}s~\#257.
+but the hypothesis is not proved here.
 
 \subsubsection{Fixed-coefficient rewind}\label{res:fixedcoeffrewind}
 
-For coefficient $c$, the inverse parent of carry $k$ is
+With fixed coefficient $c$, rewinding carry $k$ gives the parent
 $T_c(k)=\lfloor(k+c+1)/2\rfloor=\lceil(k+c)/2\rceil$.  For a list
 $\mathbf c$ of $L$ rows, write $R_{\mathbf c}$ for their composition,
 $O_{\mathbf c}$ for its accumulated offset, and $D=2^L$.  Then
@@ -1363,7 +1363,7 @@ neither a seam exclusion nor an Erd\H{o}s~\#257 conclusion.
 
 At depth $N$, a selected window of radius $R$ assigns each $k\in[1,R]$ an
 admissible Boolean word with terminal carry $k$.  If such windows exist for
-every large $N$, with $R\geq1$, choosing $k=1$ gives cofinal finite witnesses
+every large $N$ with $R\geq1$, choosing $k=1$ gives unbounded-depth witnesses
 (\lword{HalfCarrySelectedWindow.lean}{831}{cofinalAdmissibility_of_selectedHalfWindows}{cofinality});
 compactness then gives an infinite support with sum $1/2$
 (\lword{HalfCarrySelectedWindow.lean}{864}{exists_infinite_support_half_of_selectedHalfWindows}{half-value conclusion}).
@@ -1389,14 +1389,13 @@ proof of Erd\H{o}s~\#257 follows.
 
 \subsubsection{Localised protected seams}\label{res:protectedseam}
 
-Here ``realised at depth $M$'' is only forward: each seam-reachable carry
-$k\in[3,27]$ comes from an admissible word
+Here ``protected'' means only the band $[3,27]$, and ``realised at $M$''
+means each seam-reachable carry there comes from an admissible word
 (\lword{HalfCarryProtectedSeamConsumer.lean}{18}{ProtectedEvenSeamRealizedAt}{forward realisation}).
-The unique hole is $H=2\delta-c$; choose $k=4$ if $H=3$, and $k=3$
-otherwise.  This surviving carry gives cofinal admissibility from cofinally
-many such seams by
+The hole is $H=2\delta-c$; take $k=4$ if $H=3$, otherwise $k=3$.
+Seams beyond every bound then yield witnesses by
 \lword{HalfCarryProtectedSeamConsumer.lean}{31}{cofinalAdmissibility_of_cofinalProtectedEvenSeamRealization}{the protected-seam cofinality implication},
-then compactness gives an infinite support with sum $1/2$,
+and compactness gives an infinite support with sum $1/2$,
 \lword{HalfCarryProtectedSeamConsumer.lean}{53}{exists_infinite_support_half_of_cofinalProtectedEvenSeamRealization}{by compactness}.
 The cofinal supply is unproved, so Erd\H{o}s~\#257 remains open.
 
@@ -1437,7 +1436,7 @@ This is a finite recurrence, not the missing escape estimate.
 
 This is the only subsection that feeds the main final-skip reduction
 directly.  It first identifies nonmembership with a final skip and membership
-with cofinal terminal zeros.  It then separates the terminal cells already
+with terminal zeros beyond every bound.  It then separates the terminal cells already
 excluded from the two unresolved middle coordinates and the unresolved
 future-tail inequality.  The later conditional formulas
 are conditional ways to attack those residual obligations; they do not add a
@@ -1665,14 +1664,14 @@ the window.
 
 \subsubsection{Alignment of seam and transition carries}\label{res:seamproducer}
 
-Let $P$ omit $s$, put $A=P\cup\{s\}$, and let $\delta$ be the half-carry of
-$A$ at row $2s-2$.  With first-wrap hole
-$H=2\delta-f_P(2s)$ and paired pulse
-$\Pi=2f_A(2s+1)+f_A(2s+2)$, the transition carry satisfies
+Let $P$ omit $s$, put $A=P\cup\{s\}$, and let $\delta$ be its half-carry at
+row $2s-2$.  The one carry not reached at this seam is the first-wrap hole
+$H=2\delta-f_P(2s)$.  With paired pulse
+$\Pi=2f_A(2s+1)+f_A(2s+2)$, the transition carry is
 $C(A,s)=4(H-1)-\Pi$,
 \lword{HalfCylinderSeamProducerAlignment.lean}{24}{producerCarry_insert_eq_four_mul_shiftedHole_sub_pulse}{seam--carry alignment}.
-Thus two coefficient rows align $H-1$ with the transition-carry coordinate; the
-identity supplies no sign, size, or occurrence estimate.
+This aligns $H-1$ with the transition carry but supplies no sign, size, or
+occurrence estimate.
 
 \subsection{Finite evidence, coordinate changes, and eliminated special cases}
 \label{app:half-evidence}
@@ -1746,7 +1745,8 @@ prefixes through \(M\).  Its upper endpoint \(E_+\) covers \(H_N\) and satisfies
 
 Reader map: \(R\) lists the represented terminal carries \(k\);
 \(K_{n-1}\) is the carry at row \(n\), bounded by the strip width \(H_n\).
-The cutoff \(M\) separates a shared past from the variable suffix, while
+The cutoff \(M\) separates a shared past from the variable suffix---the
+shared prefix is why this family is called a cylinder---while
 \(\nu_{M,N}(a)+k=E\) makes every representative meet the same endpoint.
 A full cylinder covers the strip; a profiled gap records its one uncovered
 interval, with separate fixed pasts below and above it.
@@ -1782,7 +1782,7 @@ then the radius-\(R'\) successor remains a suffix cylinder, with endpoint
 and
 \lword{SelectedSuffixCylinder.lean}{136}{SelectedHalfWindow.hasSuffixCylinderAt_stepExplicit}{endpoint recurrence}.
 
-\begin{proposition}[half-divisor-horizon dichotomy]\label{res:feedbackdichotomy}
+\begin{proposition}[first cutoff-divisor dichotomy]\label{res:feedbackdichotomy}
 Let a full suffix-cylinder stage have depth \(N\), cutoff \(M\), with
 \(1\leq N\), \(M+1\leq N\), and
 \[
@@ -1794,7 +1794,7 @@ exceptional carries form a two-sheet profiled gap stage.  If
 one-hole seam.
 \end{proposition}
 \noindent Formalised by the
-\lword{SuffixCylinderGlobalProducer.lean}{174}{CylinderStage.feedbackStep_or_protectedSeam}{half-divisor-horizon dichotomy}
+\lword{SuffixCylinderGlobalProducer.lean}{174}{CylinderStage.feedbackStep_or_protectedSeam}{first cutoff-divisor dichotomy}
 and
 \lword{SuffixCylinderInStrip.lean}{665}{CylinderStage.feedbackAdvance_or_inStripTwoSheet}{two-family gap alternative}.
 
@@ -1859,7 +1859,7 @@ record makes no novelty claim for the recurrence itself.
 
 The finite record has three milestones.
 \begin{enumerate}[label=\textup{(\arabic*)},leftmargin=2.2em]
-\item \emph{Depth \(27\).}  Before the first half-divisor horizon, a full
+\item \emph{Depth \(27\).}  Before the cutoff rank first divides a new row, a full
 selected window exists at every depth from \(18\) through \(27\), and the
 depth-\(27\) endpoint covers the whole protected strip:
 \lword{SelectedSuffixCylinderPreFeedback.lean}{118}{nonempty_stage_of_eighteen_le_of_le_twentySeven}{stages through depth \(27\)}
@@ -3724,6 +3724,8 @@ Throughout this appendix:
 \begin{itemize}[leftmargin=1.6em]
 \item a \emph{take} (respectively a \emph{skip}) at rank \(n\) is the
 greedy decision \(\varepsilon_n=1\) (respectively \(\varepsilon_n=0\));
+\item \emph{cofinal} means at unbounded depths
+(\(\forall N\,\exists M\geq N\)), not at every sufficiently large depth;
 \item the \emph{finite greedy seam at row \(s\)} is the Boolean word of
 Definition~\ref{def:terminal-bit}; an unqualified \emph{seam} in this
 appendix is an adjacent pair of such words at a branch boundary, and the
@@ -3734,12 +3736,13 @@ this pair sense;
 kept available by a construction is \emph{protected};
 \item a \emph{hole} of a seam is the missing carry value in an otherwise
 covered protected interval;
-\item a \emph{rewind} is the inverse finite recurrence of a seam;
+\item a \emph{rewind} runs the fixed carry recurrence backwards to find
+earlier carries that can produce a chosen terminal carry;
 \item the \emph{transition carry} is the integer coordinate appearing in
 the exact residual identity, and the \emph{remainder} of a row is its
 integer greedy residual;
-\item the branches are \emph{upper} ($G_{s+1}=H_s$), \emph{middle}
-($G_{s+1}=G_s$), and \emph{right} ($G_{s+1}=G_s\cup\{s\}$);
+\item the branches are \emph{upper} (reset to $H_s$), \emph{middle} (keep
+$G_s$ and skip $s$), and \emph{right} (keep $G_s$ and take $s$);
 \item the \emph{pulse} of a rank at row \(s\) counts its divisor
 incidences at \(2s+1\) and \(2s+2\), the first counting twice; the pulse
 of a word is the sum over its ranks.
