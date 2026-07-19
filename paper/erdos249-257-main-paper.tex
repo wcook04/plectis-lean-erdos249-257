@@ -790,7 +790,7 @@ integer coefficient sequence \(f_U\).  Its Boolean M\"obius condition is
 \((\mu*f_U)(n)\in\{0,1\}\), and inversion reconstructs the support as
 \(A_U=\{n\geq1:(\mu*f_U)(n)=1\}\).  These are exactly the conditions in
 Theorem~\ref{res:carrycert}, the Lean-checked equivalence
-\lword{BooleanMobiusCarry.lean}{948}{exists_normalized_support_fraction_iff_exists_booleanMobiusCarry}{between supports and carry certificates};
+\lword{BooleanMobiusCarry.lean}{948}{exists_normalized_support_fraction_iff_exists_booleanMobiusCarry}{support/carry equivalence};
 the corollary quantifies it over \(p/q\) and separates finite from infinite
 supports.  This remains an exact reformulation over infinite objects, not a
 finite algorithm.
@@ -1346,7 +1346,7 @@ the selected support $A$ through $k$ and let $K$ be its centred carry.  The
 sole input is that $m_0=-K$, $m_{J+1}=2m_J+f_A(k+J+2)$ reaches $m_J\geq0$
 for some $J\leq k+1$; the first $J$ future rows then cover $K$.  This unproved
 hypothesis implies $1/2$-membership
-(\lword{HalfCylinderFiniteShadow.lean}{1256}{half_mem_mersenneAchievementSet_of_governedFrozenMarginProducer}{the first-passage implication}),
+(\lword{HalfCylinderFiniteShadow.lean}{1256}{half_mem_mersenneAchievementSet_of_governedFrozenMarginProducer}{half-membership}),
 but the hypothesis is not proved here.
 
 \subsubsection{Fixed-coefficient rewind}\label{res:fixedcoeffrewind}
@@ -1378,7 +1378,7 @@ compactness then gives an infinite support with sum $1/2$
 The unproved input is a coherent one-row history: the representatives either
 agree on every divisor of $N+1$, making the next coefficient common, or the
 adjacent outcome realises the canonical one-hole seam
-(\lword{HalfCarrySelectedWindow.lean}{236}{SelectedHalfWindow.HistoryAlternative}{history alternative}).
+(\lword{HalfCarrySelectedWindow.lean}{236}{SelectedHalfWindow.HistoryAlternative}{coefficient-or-hole}).
 No such history is supplied at all large depths; hence no cofinal window
 supply and no proof of Erd\H{o}s~\#257 follow.
 
@@ -1399,22 +1399,22 @@ proof of Erd\H{o}s~\#257 follows.
 
 Here ``protected'' means only the band $[3,27]$, and ``realised at $M$''
 means each seam-reachable carry there comes from an admissible word
-(\lword{HalfCarryProtectedSeamConsumer.lean}{18}{ProtectedEvenSeamRealizedAt}{forward realisation}).
+(\lword{HalfCarryProtectedSeamConsumer.lean}{18}{ProtectedEvenSeamRealizedAt}{protected-seam predicate}).
 The hole is $H=2\delta-c$; take $k=4$ if $H=3$, otherwise $k=3$.
-Seams beyond every bound then yield witnesses by
-\lword{HalfCarryProtectedSeamConsumer.lean}{31}{cofinalAdmissibility_of_cofinalProtectedEvenSeamRealization}{the protected-seam cofinality implication},
-and compactness gives an infinite support with sum $1/2$,
-\lword{HalfCarryProtectedSeamConsumer.lean}{53}{exists_infinite_support_half_of_cofinalProtectedEvenSeamRealization}{by compactness}.
+Seams beyond every bound yield witnesses by
+\lword{HalfCarryProtectedSeamConsumer.lean}{31}{cofinalAdmissibility_of_cofinalProtectedEvenSeamRealization}{protected-seam cofinality},
+and compactness gives
+\lword{HalfCarryProtectedSeamConsumer.lean}{53}{exists_infinite_support_half_of_cofinalProtectedEvenSeamRealization}{an infinite support summing to \(1/2\)}.
 The cofinal supply is unproved, so Erd\H{o}s~\#257 remains open.
 
 \subsubsection{Combining the two cofinal half-carry criteria}\label{res:cofinalwindowseam}
 
 For every $N$, the hypothesis gives an $M\geq N$ with a selected window or a
 realised seam.  The window uses carry $1$; the seam uses $4$ if its hole is
-$3$, otherwise $3$.  Either gives an admissible word, hence cofinal admissibility
-(\lword{HalfCarryCofinalWindowOrSeamConsumer.lean}{32}{cofinalAdmissibility_of_cofinalSelectedWindowOrProtectedSeam}{fan-in})
-and, by compactness, an infinite support summing to $1/2$
-(\lword{HalfCarryCofinalWindowOrSeamConsumer.lean}{58}{exists_infinite_support_half_of_cofinalSelectedWindowOrProtectedSeam}{half-value}).
+$3$, otherwise $3$.  Either gives an admissible word and hence
+\lword{HalfCarryCofinalWindowOrSeamConsumer.lean}{32}{cofinalAdmissibility_of_cofinalSelectedWindowOrProtectedSeam}{cofinal admissibility};
+compactness then gives
+\lword{HalfCarryCofinalWindowOrSeamConsumer.lean}{58}{exists_infinite_support_half_of_cofinalSelectedWindowOrProtectedSeam}{an infinite support summing to \(1/2\)}.
 Branches may alternate.  The hypothesis is unproved;
 Erd\H{o}s~\#257 is open.
 
@@ -1423,14 +1423,13 @@ Erd\H{o}s~\#257 is open.
 For $s\geq3$, put $\kappa_s=2^{2s-1}-2^s$ and
 $B_s=2\lfloor\sqrt{2s}\rfloor+4$.  Starting at $\kappa_s$, subtract each truncated
 seam weight in descending order whenever possible; let $r_s$ be the final
-remainder.  A positive subset-sum defect at most $B_s$ exists exactly when
-$1\leq r_s\leq B_s$
-(\lword{HalfCylinderIntegerGreedy.lean}{654}{seam_smallPositiveDefect_iff_integerGreedyRemainder}{exact equivalence}).
+remainder.  By the
+\lword{HalfCylinderIntegerGreedy.lean}{654}{seam_smallPositiveDefect_iff_integerGreedyRemainder}{defect/remainder equivalence},
+a positive subset-sum defect at most $B_s$ exists exactly when $1\leq r_s\leq B_s$.
 Each weight clears its tail by at least $2^{s+1}>B_s$, so this one greedy test
-suffices.  The downstream escape hypothesis asks for $B_s<r_s$ at every
-genuine skipped rank
-(\lword{HalfCylinderFullShellSeamBridge.lean}{687}{HalfGreedySkippedSeamEscape}{escape hypothesis}).
-It is unproved; Erd\H{o}s~\#257 remains open.
+suffices.  The unproved
+\lword{HalfCylinderFullShellSeamBridge.lean}{687}{HalfGreedySkippedSeamEscape}{skipped-rank escape}
+asks for $B_s<r_s$ at every genuine skipped rank; Erd\H{o}s~\#257 remains open.
 
 \subsubsection{Exact finite recurrence for the greedy seam}\label{res:concreteseam}
 
@@ -1497,7 +1496,7 @@ suffix, then
 \]
 the class $D\bmod10=7$ cannot pair with $D\bmod21=11$, and the class
 $D\bmod13=10$ cannot pair with $D\bmod21=11$.  The orbit theorem is
-\lword{HalfFinalMiddlePhaseSieve.lean}{1913}{finalMiddleCell_neg_two_forces_phase_refinement_through_twentySix}{the final-middle phase sieve}.
+\lword{HalfFinalMiddlePhaseSieve.lean}{1913}{finalMiddleCell_neg_two_forces_phase_refinement_through_twentySix}{the finite \(C_D=-2\) sieve}.
 The three moduli are pairwise coprime, so their phase triples correspond to
 the \(21\cdot10\cdot13=2730\) residue classes modulo \(2730\).  Exactly
 \(412\) survive; this finite count is
@@ -1513,7 +1512,7 @@ $\Theta_D<C_D$ at every actual middle transition $D\ge13$ except $C_D=-3$.
 Since $\Theta_D\ge0$, exactly two open tasks remain: exclude $C_D=-2,-1$,
 and prove $\Theta_D<C_D$ at every remaining transition with $C_D\ge0$.
 Together they imply half-membership,
-\lword{HalfCylinderLastProducerContradiction.lean}{387}{half_mem_mersenneAchievementSet_of_middleProducerTailEscapeExceptNegThree}{middle-tail implication};
+\lword{HalfCylinderLastProducerContradiction.lean}{387}{half_mem_mersenneAchievementSet_of_middleProducerTailEscapeExceptNegThree}{unused-tail criterion};
 a separate square-root lower bound also suffices,
 \lword{HalfCylinderLastProducerContradiction.lean}{409}{half_mem_mersenneAchievementSet_of_middleProducerSqrtEscape}{square-root condition}.
 Neither input is proved.
@@ -1525,9 +1524,9 @@ $g_D+P_D+5<4R_{D,D}$ is exactly $g_D+1<C_D$.  At every late middle row it
 therefore excludes the negative carries and proves tail dominance.  This is
 \lword{HalfCylinderMiddleCarryLowerBound.lean}{111}{SeamMiddleProducerCardEscape}{the cardinality escape condition},
 and its membership consequence is
-\lword{HalfCylinderMiddleCarryLowerBound.lean}{1503}{half_mem_mersenneAchievementSet_of_middleProducerCardEscape}{the prefix-cardinality bound};
+\lword{HalfCylinderMiddleCarryLowerBound.lean}{1503}{half_mem_mersenneAchievementSet_of_middleProducerCardEscape}{the prefix-cardinality criterion};
 it follows in turn from $R_{D,D}\ge D$ at every late middle row,
-\lword{HalfCylinderMiddleCarryLowerBound.lean}{1510}{half_mem_mersenneAchievementSet_of_middleProducerRowEscape}{row-scale sufficient condition}.
+\lword{HalfCylinderMiddleCarryLowerBound.lean}{1510}{half_mem_mersenneAchievementSet_of_middleProducerRowEscape}{row-scale criterion}.
 Both hypotheses are unproved.
 
 \paragraph{Finite upper-reset band certificates.}  At the upper reset
@@ -1706,7 +1705,7 @@ depth-$M$ rewind has adjacent ancestors, denominator $D$, and phase $\phi$;
 put $\delta=D-\phi$.  If $M\leq N$, $(N+1)/2\leq M$, $R\leq D$, and the
 ancestor coefficients at $N+1$ are $c+1,c$, then
 $f_{a^{(h)}}(N+1)=c+1$ for $h\leq\delta$ and $c$ otherwise,
-\lword{RewindSeamOperationalBridge.lean}{140}{nextRow_profile_of_rewindSeam}{the profile}.
+\lword{RewindSeamOperationalBridge.lean}{140}{nextRow_profile_of_rewindSeam}{next-row profile}.
 With $27\leq S\leq2\lfloor\sqrt{N+1}\rfloor+4$ and $S+c+1\leq2R$,
 \lword{RewindSeamOperationalBridge.lean}{217}{protectedEvenSeamRealizedAt_succ_of_profile}{a protected seam occurs at \(N+1\)}.
 The theorem assumes, rather than proves, every displayed hypothesis.
@@ -1829,7 +1828,7 @@ prefixes.
 \noindent Formalised by the
 \lword{SuffixCylinderProfiledGap.lean}{124}{ProfiledGapStage.advanceOfNextCoeffProfile}{two-coefficient gap recurrence}
 and
-\lword{SuffixCylinderProfiledAutoStep.lean}{110}{ProfiledGapStage.promoteThenAdvance_hasAdjacentPrefixes}{promote-and-advance theorem}.
+\lword{SuffixCylinderProfiledAutoStep.lean}{110}{ProfiledGapStage.promoteThenAdvance_hasAdjacentPrefixes}{promote and advance}.
 
 \begin{proposition}[two-row full-gap width bound]\label{res:cylinderswallow}
 Suppose that after a two-row update the child gap has lower endpoint at most
@@ -2263,7 +2262,7 @@ t\in\{1,2,3,4,5,7,8,9,11,13,16,17,19,23,25,27,29,31,32,37,41,43,
 \lword{CarrySurvivorExtinction.lean}{574}{certifiedKill_all_upto_sixteen}{periods through sixteen},
 \lword{DiagonalPincerCertificatesT64.lean}{1967}{certifiedKill_diagonal_all_imported_through_t64}{28 imported diagonal certificates through scale 64},
 and
-\lword{LcmConeNonflat.lean}{506}{coneNonflatCert_cells}{cone-cell certificate table}.
+\lword{LcmConeNonflat.lean}{506}{coneNonflatCert_cells}{joint-nonflatness table}.
 
 For example, at $(h,N,L)=(1,12,16)$,
 \[
@@ -2354,7 +2353,7 @@ completeness, and Theorem~\ref{res:pointwisecomplete} gives its global
 pointwise form.  Their additional role here is cone-level: a joint finite
 refuter tests several multipliers $k$ at once rather than one pair.  It refutes the
 single-fractional-part model that rationality predicts on a finite sample
-(\lword{LcmConeNonflat.lean}{126}{exists_nonintegral_pair_of_coneNonflatCert}{finite cone-nonflatness refuter}).
+(\lword{LcmConeNonflat.lean}{126}{exists_nonintegral_pair_of_coneNonflatCert}{common-fraction contradiction}).
 This finite cone predicate is sound in the direction just stated: a
 certificate produces a non-integral pair and hence contradicts the sampled
 flatness model.  No converse is proved saying that every non-flat finite
@@ -2491,7 +2490,7 @@ strict lcm-jump scales through $64$, namely
 \lword{TotientTailPeriodKiller.lean}{404}{certifiedKill_all_small}{small-window certificate family},
 \lword{CarrySurvivorExtinction.lean}{574}{certifiedKill_all_upto_sixteen}{periods through sixteen},
 \lword{DiagonalPincerCertificatesT64.lean}{1967}{certifiedKill_diagonal_all_imported_through_t64}{28 imported diagonal certificates through scale 64},
-and \lword{LcmConeNonflat.lean}{506}{coneNonflatCert_cells}{cone-cell certificate table}.
+and \lword{LcmConeNonflat.lean}{506}{coneNonflatCert_cells}{joint-nonflatness table}.
 For the first three classes, fixed-parameter completeness converts each successful
 $\mathsf{Sep}$ instance into the stated non-integral tail difference.  The fourth uses
 the separate cone-refuter soundness theorem.  None is evidence that certificates

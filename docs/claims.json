@@ -901,15 +901,15 @@
         "schema": "erdos249257-editorial-state/1",
         "scope": "continuous_whole_main_paper_exposition",
         "current_priority": {
-          "id": "main_paper_source_link_label_and_cross_reference_purpose_audit",
+          "id": "main_paper_sentence_density_and_paragraph_breathing_audit",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "defect_class": "The paper contains hundreds of blue source links and numbered cross-references. A link label or reference that merely repeats an internal declaration nickname makes the reader open another surface to learn why it matters.",
-          "statement": "Audit every visible source-link label and purpose-bearing cross-reference as standalone navigation text. Replace raw or project-internal labels with the mathematical claim or role they open, and attach a short reason to ambiguous section or appendix references; do not alter URLs, declaration targets, claim scope, or the 53-page boundary."
+          "defect_class": "Several dense paragraphs combine a definition, logical status, caveat, and source route in one block. Even when every sentence is correct, a cold reader can lose the mathematical subject or mistake a verified identity for an open implication.",
+          "statement": "Audit the longest prose sentences and densest paragraphs across the main paper. Split, trim, or reorder only where the logical subject, verified/open boundary, or reason for the next display is difficult to retain; preserve formulas, claims, source targets, and the 53-page boundary."
         },
         "last_verified_wave": {
-          "id": "main_paper_result_heading_and_local_jargon_audit",
+          "id": "main_paper_source_link_label_and_cross_reference_purpose_audit",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "result": "Audited all named theorems, propositions, corollaries, definitions, examples, technical subheadings, and their immediately local definitions as standalone reader handles. Most names were conventional or already defined in place. Replaced nine opaque project-facing handles with the mathematical object and logical status: the full-cylinder/profiled-gap alternative, its one-row recurrence, divisor pulses at the largest-skip boundary, a finite sufficient test for diagonal nonintegrality, the exact Möbius-shadow denominator, a central-band supply criterion for irrationality, finite and eventual residual--tail separation, and the support-fraction/Boolean-carry equivalence. Aligned the corresponding visible source-link labels without changing their URLs or Lean declarations. No claim or formula changed. Every affected result page renders cleanly without overfull boxes, and the paper remains 53 pages."
+          "result": "Audited every visible source-link label and every purpose-bearing section, appendix, theorem, proposition, and corollary cross-reference as standalone navigation text. Replaced 19 opaque or project-internal link-label occurrences with the mathematical claim or role they open, including the support/carry equivalence, half-membership and compactness conclusions, protected-seam and skipped-rank conditions, the finite C_D=-2 sieve, and the common-fraction contradiction. URLs and Lean declaration targets are unchanged. The numbered cross-references already state their purpose in the surrounding prose and required no manufactured edits. No claim or formula changed. Every affected page renders cleanly without overfull boxes, and the paper remains 53 pages."
         },
         "active_inconsistencies": [],
         "blocked_decisions": []
@@ -7540,7 +7540,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 3618
+        "line": 3617
       }
     },
     {
@@ -7551,7 +7551,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 3629
+        "line": 3628
       }
     },
     {
@@ -7562,7 +7562,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "the half-value counterexample route",
-        "line": 3650
+        "line": 3649
       }
     },
     {
@@ -7573,7 +7573,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 3641
+        "line": 3640
       }
     }
   ],
