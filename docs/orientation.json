@@ -559,18 +559,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_bibliography_metadata_and_claim_citation_audit",
+   "id": "main_paper_definition_before_use_and_reader_assumption_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "A bibliography entry can resolve while still carrying a wrong year, author list, title, page range, version, or citation scope. Recent preprints and classical sources also require primary-source checks that generic DOI success does not supply.",
-   "statement": "Audit every bibliography entry and every in-text citation against its primary or authoritative metadata source. Verify authors, title, venue, year, pages, DOI or archival URL, version date, and the exact claim attributed; correct only evidence-backed defects, preserve primary-source links, and keep the paper at 53 pages."
+   "defect_class": "A technical term or symbol can be defined somewhere in the paper while still appearing without a usable local definition on a reader's chosen route. Status-only, Erdős #249, and Erdős #257 readers should not have to infer notation from an appendix or a later section.",
+   "statement": "Trace three cold-reader routes through the paper (status-only, Erdős #249, and Erdős #257) and audit every technical term and symbol at first use. Add only concise local glosses or precise forward references where needed, avoid duplicating machinery, and keep the paper at 53 pages."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "ebc98ee71f6819bd9fe344a0bb343542c604e533",
-  "committed_navigation_snapshot": "4f5716c509bde390ed6e0bb52196237aa8499ad8",
-  "main_paper_source_digest": "sha256:af3dff13830e0945948b14a27f416fbc6a9872e3efb35c4e1bc9500219a64e58"
+  "committed_navigation_snapshot": "2ba0df085a38193265ec1315bbefbaf737d27a91",
+  "main_paper_source_digest": "sha256:00e5de22faae69d2f61e2d7999925a03e980cac727032b9308d31f2314644878"
  },
  "reading_routes": [
   {
