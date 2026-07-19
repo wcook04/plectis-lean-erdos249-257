@@ -901,15 +901,15 @@
         "schema": "erdos249257-editorial-state/1",
         "scope": "continuous_whole_main_paper_exposition",
         "current_priority": {
-          "id": "main_paper_bibliography_metadata_crosscheck_audit",
+          "id": "main_paper_reference_attribution_scope_audit",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "defect_class": "The final bibliography mixes archive scans, journal DOIs, books, recent arXiv records, software papers, and a dated problem-database citation; link resolution alone does not verify that titles, years, volumes, pages, versions, and attribution scope agree with primary metadata",
-          "statement": "Cross-check the bibliography against primary publisher, arXiv, author-archive, and project records; correct only evidenced metadata or attribution errors, preserve stable links, and keep the final reference page readable."
+          "defect_class": "The bibliography metadata is primary-record checked, but metadata correctness alone does not establish that every prose citation credits a source for exactly the theorem, historical statement, or comparison actually used",
+          "statement": "Audit citation placement and attribution scope against the corresponding primary statements, beginning with the older Erdos sources and the recent preprints; keep cited external results distinct from claims formalised in this repository and correct only evidenced scope drift."
         },
         "last_verified_wave": {
-          "id": "main_paper_formal_source_guide_reader_route_audit",
+          "id": "main_paper_bibliography_metadata_crosscheck_audit",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "result": "Rewrote Appendix E as a cold-reader routing surface. Each route now names its purpose: bounded rational exclusion, the exact #249 certificate reduction, the #257 half-value classification, the classical benchmark, the comparison section, or independent structural results that close neither problem. Replaced the qualitative phrase 'strongest independent structure' and explained that blue phrases open exact Lean declarations while the JSON claim registry supplies searchable declaration names. The paper remains 53 pages."
+          "result": "Cross-checked all bibliography entries against primary arXiv, DOI, journal, publisher, author-archive, project, and problem-database records. Corrected the Tao--Teravainen record to distinguish its 2025 submission from its 2026 revision; confirmed the current Wang and Campbell arXiv versions; and retained Coons as 2010 in accordance with the primary journal record. No other evidenced metadata correction was required. The paper remains 53 pages."
         },
         "active_inconsistencies": [],
         "blocked_decisions": []
