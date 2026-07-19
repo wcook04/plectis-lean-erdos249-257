@@ -491,8 +491,8 @@ and its
 \lword{CertificateKernel.lean}{8007}{irrational_erdosBorwein_series}{base-\(2\) corollary}
 are formalised.  This is Erd\H{o}s's 1948 theorem~\cite[Theorem, p.~63]{erdos1948}.
 Section~\ref{sec:ladder} writes this constant as $L(\mathbf 1)$, a proved
-comparison value in the same Mersenne--Lambert family as the open $S$.  It is
-not a further convolution step from $S$.  Borwein later proved a wider
+comparison value in the same Mersenne--Lambert family as the open $S$.  This
+comparison supplies no further convolution step from $S$.  Borwein later proved a wider
 rational-shift Lambert-series
 theorem~\cite{borwein1992}; that result is not formalised here.
 
@@ -539,8 +539,7 @@ divisor counting, and explicit parameter arithmetic.  The final certificate
 existence theorem holds for every $b\geq2$ and every precision $q$; see the
 \lword{CertificateKernel.lean}{7859}{exists_weighted_block_certificates}{uniform certificate theorem}.
 Its composition with the near-integer criterion is
-Theorem~\ref{res:full}.  This
-is a formalisation of the classical full-support theorem, not a new
+Theorem~\ref{res:full}, which formalises the classical full-support theorem rather than a new
 irrationality result.
 
 \subsection{Named infinite-support cases}
@@ -2544,8 +2543,8 @@ and
 \lword{ActualForeignResidueProjection.lean}{348}{scaleFullTarget_miss_of_projected_separation}{projected-separation criterion}.
 The passage from finite windows to the analytic foreign complement, including
 the corresponding kernel identity, is not supplied here.  Nor is an
-unbounded family of separated projections; these are parts of the open
-certificate-supply problem.
+unbounded family of separated projections.  Both missing inputs belong to
+the open certificate-supply problem.
 
 Second, the rational M\"obius shadow has an exact reduced denominator.  If
 $r_t$ is the square-free kernel of $M_t$, $s_t=M_t/r_t$, and
@@ -2681,7 +2680,7 @@ write the resulting discrepancy from the actual totient as an endpoint
 deficit, a nonnegative difference attributed to fresh prime support.  The actual diagonal increment
 then equals the old-prime increment plus the lower deficit minus the upper
 deficit.  The second and five-point curvature operators preserve this exact
-split; the latter has coefficient row $[-8,4,2,1,1]$.  Consequently, the old
+split; the five-point operator has coefficient row $[-8,4,2,1,1]$.  Consequently, the old
 curvature margin loses at most the stated adverse weighted deficit.
 
 \begin{proposition}[fresh-prime deficit decomposition]\label{res:freshprimedeficit}
@@ -3227,7 +3226,7 @@ reduces a decidable finite proposition to obtain a proof.  The
 \lword{HalfFinalMiddlePhaseSieve.lean}{2050}{finalMiddleTwentySixPhaseSurvivors_card}{finite survivor-count theorem}
 uses \texttt{decide} to count 412 phases.  Its local \texttt{maxRecDepth}
 setting only raises the permitted unfolding depth; the proposition and logical
-rules are unchanged.  It does not use compiler-backed native evaluation, and
+rules are unchanged.  The finite survivor-count proof does not use compiler-backed native evaluation, and
 its adjoining \texttt{\#print axioms} report lists neither
 \texttt{Lean.trustCompiler}, which would trust compiler evaluation, nor
 \texttt{sorryAx}, Lean's unfinished-proof axiom.  Generated Lean certificate
