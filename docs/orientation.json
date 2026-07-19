@@ -559,18 +559,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_dense_section_local_orientation_audit",
+   "id": "main_paper_novelty_and_prior_art_sentence_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "A long main section can begin with an accurate roadmap yet lose a reader after several pages of exact criteria. Each local cluster should make clear whether it is an equivalence, a necessary condition, a sufficient condition, finite evidence, or a no-go result, and should say which headline obligation it changes, if any.",
-   "statement": "Audit the two long problem sections for local re-entry after dense theorem clusters. Add or compress orientation only where a reader arriving at a subsection cannot recover the active object, logical direction, and open quantifier from the nearby prose. Preserve every exact claim and source link and the 53-page target."
+   "defect_class": "A theorem can be stated correctly yet leave its provenance or claimed contribution ambiguous. Classical results, cited recent results, formalised specialisations, new exact normal forms, quantitative refinements, and finite computations require different attribution sentences.",
+   "statement": "Audit every main theorem family against the bibliography and claim registry for a nearby provenance sentence that states whether the mathematics is classical, cited only, formalised here, an unconditional structural result, a quantitative refinement, or finite evidence. Research any ambiguous boundary from primary sources, avoid global novelty language, and preserve the 53-page target."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "ebc98ee71f6819bd9fe344a0bb343542c604e533",
-  "committed_navigation_snapshot": "47b7fce8970e366a169b81f293d7d3b3f8a966a4",
-  "main_paper_source_digest": "sha256:82e0b09d06a0b7e610d5cd76083b003abb0e7c50f5828fe9fd0228b8a6a8a2ee"
+  "committed_navigation_snapshot": "a3773d64918fd05999dc0dc48d1b71b7b44b3edf",
+  "main_paper_source_digest": "sha256:c173af73642aca5560781687f8a90404d4096eb06915660ea8026c9b39eec567"
  },
  "reading_routes": [
   {
