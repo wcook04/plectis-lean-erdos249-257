@@ -56,7 +56,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "Erd\\H{o}s \\#249",
-    "line": 3602
+    "line": 3604
    }
   },
   {
@@ -67,7 +67,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "unbounded certificate supply",
-    "line": 3613
+    "line": 3615
    }
   },
   {
@@ -78,7 +78,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "the half-value counterexample route",
-    "line": 3634
+    "line": 3636
    }
   },
   {
@@ -89,7 +89,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "universal Erd\\H{o}s \\#257",
-    "line": 3625
+    "line": 3627
    }
   }
  ],
@@ -559,18 +559,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_appendix_c_dyadic_rank_reader_map_audit",
+   "id": "main_paper_appendix_d_weighted_lambert_status_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "Appendix C.4 correctly fences the unconditional dyadic-rank theorem from the rationality-side carry implication, but kernel sections, tempered carries, compressed adjoints, gauges, and rank obstructions still require more translation than an outside reader should supply",
-   "statement": "Audit Appendix C.4 from the dyadic totient-kernel theorem through its determinant and gauge boundaries. Define what a section, its span, a tempered carry, and each later finite coordinate measures before stating consequences; distinguish the unconditional coefficient theorem from the conditional carry lower bound and from countermodels showing why rank alone cannot decide rationality; preserve exact prior-art attribution, formal statuses, and the 53-page envelope."
+   "defect_class": "Appendix D.1 changes the coefficient input and then presents several weighted Lambert families with different exact, cited, and finite statuses. The comparison role is stated, but the density of classifications can still let a reader mistake results for other inputs as evidence about the open totient value",
+   "statement": "Audit Appendix D.1 as a comparison family. Define the changed input and the eventually-periodic, signed, and period-four cases before their theorem lists; state which conclusions are formalised here, contained in cited work, or finite examples; verify the associated bibliography and repeat the non-transfer boundary at the points where a reader could infer progress on S, while preserving the 53-page envelope."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "ebc98ee71f6819bd9fe344a0bb343542c604e533",
-  "committed_navigation_snapshot": "29e1ef6fb938b863b163a3353ee65ee5b5170cdf",
-  "main_paper_source_digest": "sha256:95c06587f9129efa3e30d12c791010bad43e9551d01903d436930dc0d157e7a9"
+  "committed_navigation_snapshot": "f5252245cc98983981a2433d77c601117f049f28",
+  "main_paper_source_digest": "sha256:5692d7e4f42d9235d919e9910a77de6df40d51197c669f0e7ba3e9651bd346ac"
  },
  "reading_routes": [
   {
