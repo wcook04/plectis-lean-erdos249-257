@@ -56,7 +56,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "Erd\\H{o}s \\#249",
-    "line": 3574
+    "line": 3578
    }
   },
   {
@@ -67,7 +67,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "unbounded certificate supply",
-    "line": 3585
+    "line": 3589
    }
   },
   {
@@ -78,7 +78,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "the half-value counterexample route",
-    "line": 3606
+    "line": 3610
    }
   },
   {
@@ -89,7 +89,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "universal Erd\\H{o}s \\#257",
-    "line": 3597
+    "line": 3601
    }
   }
  ],
@@ -559,18 +559,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_totient_fixed_scale_mechanism_map_audit",
+   "id": "main_paper_scaled_diagonal_notation_plain_language_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "Appendix C.2 warns that its results are fixed-scale, but then presents an analytic enclosure, a unit-gap ceiling, foreign-residue projections, a denominator identity, and t <= 64 certificates without a compact map of which statements are exact, sufficient only, conditional, or verified finite instances",
-   "statement": "Add a compact C.2 status map separating the one-way analytic enclosure, exact finite residue and denominator coordinates, conditional cofinal implications, and the verified finite certificates through t = 64."
+   "defect_class": "The first C.2 enclosure displays a code-like scaledDiagonal(H) and refers to c_H only as an explicit coefficient in the formal source, so the paper does not yet tell a reader what quantity is scaled or where the scale enters",
+   "statement": "Replace the code-like display with self-contained mathematical notation: define the scaled diagonal difference and its coefficient c_H in the paper, then restate the one-way enclosure without weakening its exact tail identity or sufficient-only separation conclusion."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "ebc98ee71f6819bd9fe344a0bb343542c604e533",
-  "committed_navigation_snapshot": "aa321e030e1ba0e1f1b9118be9e31d514abe8452",
-  "main_paper_source_digest": "sha256:6bcd1f84894ada68586cb195a6af067cfec78ff659d327501fd78d0979458ae3"
+  "committed_navigation_snapshot": "dd0e46f6a104b64d777d69ef20f68775ee29dd4c",
+  "main_paper_source_digest": "sha256:3e7bcda0a98c6b4367a3a7b308d9e44857aa3208992031b7a4121e585d31fbd9"
  },
  "reading_routes": [
   {
