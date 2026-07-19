@@ -1335,13 +1335,13 @@ A first even seam has sole missing carry $H=2\delta-c$; hence $[1,B]$ is fully
 reachable iff $H<1$ or $B<H$
 (\lword{HalfCylinderFiniteShadow.lean}{807}{evenSeam_fullIntegerStrip_iff_escape}{seam equivalence}).
 Raw safety is weaker: rank-three $A=\{2,3\}$ has residual $1/42<1/32$, but its
-depth-six strip $[1,8]$ contains $H=3$.  The sole conditional input is the
-governed frozen-margin condition.  After each skipped rank $k+1$, it requires
-the negative centred carry, iterated by double-plus-next-coefficient, to become
-nonnegative by $J\leq k+1$; then those future rows cover the carry.  This
-unproved condition implies $1/2$-membership
-(\lword{HalfCylinderFiniteShadow.lean}{1256}{half_mem_mersenneAchievementSet_of_governedFrozenMarginProducer}{conditional implication}),
-not a proof of Erd\H{o}s~\#257.
+depth-six strip $[1,8]$ contains $H=3$.  After a skip at rank $k+1$, freeze
+the selected support $A$ through $k$ and let $K$ be its centred carry.  The
+sole input is that $m_0=-K$, $m_{J+1}=2m_J+f_A(k+J+2)$ reaches $m_J\geq0$
+for some $J\leq k+1$; the first $J$ future rows then cover $K$.  This unproved
+hypothesis implies $1/2$-membership
+(\lword{HalfCylinderFiniteShadow.lean}{1256}{half_mem_mersenneAchievementSet_of_governedFrozenMarginProducer}{the first-passage implication}),
+not Erd\H{o}s~\#257.
 
 \subsubsection{Fixed-coefficient rewind}\label{res:fixedcoeffrewind}
 
@@ -1783,7 +1783,7 @@ then the radius-\(R'\) successor remains a suffix cylinder, with endpoint
 and
 \lword{SelectedSuffixCylinder.lean}{136}{SelectedHalfWindow.hasSuffixCylinderAt_stepExplicit}{endpoint recurrence}.
 
-\begin{proposition}[feedback-row dichotomy]\label{res:feedbackdichotomy}
+\begin{proposition}[half-divisor-horizon dichotomy]\label{res:feedbackdichotomy}
 Let a full suffix-cylinder stage have depth \(N\), cutoff \(M\), with
 \(1\leq N\), \(M+1\leq N\), and
 \[
@@ -1795,7 +1795,7 @@ exceptional carries form a two-sheet profiled gap stage.  If
 one-hole seam.
 \end{proposition}
 \noindent Formalised by the
-\lword{SuffixCylinderGlobalProducer.lean}{174}{CylinderStage.feedbackStep_or_protectedSeam}{feedback dichotomy}
+\lword{SuffixCylinderGlobalProducer.lean}{174}{CylinderStage.feedbackStep_or_protectedSeam}{half-divisor-horizon dichotomy}
 and
 \lword{SuffixCylinderInStrip.lean}{665}{CylinderStage.feedbackAdvance_or_inStripTwoSheet}{two-family gap alternative}.
 
@@ -1860,7 +1860,7 @@ record makes no novelty claim for the recurrence itself.
 
 The finite record has three milestones.
 \begin{enumerate}[label=\textup{(\arabic*)},leftmargin=2.2em]
-\item \emph{Depth \(27\).}  Before the first half-divisor feedback row, a full
+\item \emph{Depth \(27\).}  Before the first half-divisor horizon, a full
 selected window exists at every depth from \(18\) through \(27\), and the
 depth-\(27\) endpoint covers the whole protected strip:
 \lword{SelectedSuffixCylinderPreFeedback.lean}{118}{nonempty_stage_of_eighteen_le_of_le_twentySeven}{stages through depth \(27\)}
@@ -1875,7 +1875,7 @@ and
 \lword{SuffixCylinderThreshold.lean}{806}{depth29SelectedHalfWindow_not_commonRestrictionAt_twentySix}{cutoff-\(26\) obstruction}.
 
 \item \emph{Depth \(52\).}  An independent exact run reaches depth \(51\)
-with endpoint \(51{,}327{,}745\), beyond the next feedback head threshold,
+with endpoint \(51{,}327{,}745\), beyond the next head-bit threshold,
 and the promoted successor at depth \(52\) is checked:
 \lword{SuffixCylinderStage51.lean}{536}{fullCylinderStage51_feedback_headThreshold_margin}{depth-\(51\) threshold margin}
 and
