@@ -56,7 +56,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "Erd\\H{o}s \\#249",
-    "line": 3583
+    "line": 3588
    }
   },
   {
@@ -67,7 +67,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "unbounded certificate supply",
-    "line": 3594
+    "line": 3599
    }
   },
   {
@@ -78,7 +78,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "the half-value counterexample route",
-    "line": 3615
+    "line": 3620
    }
   },
   {
@@ -89,7 +89,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "universal Erd\\H{o}s \\#257",
-    "line": 3606
+    "line": 3611
    }
   }
  ],
@@ -559,18 +559,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_appendix_d_comparison_transfer_audit",
+   "id": "main_paper_mobius_square_coordinate_gloss_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "Appendix D moves among weighted Lambert comparison sequences, squared and Möbius coordinates, and coprime-pair probability geometry; each theorem may be correct locally while a cold reader could still over-transfer a conclusion to the open totient series",
-   "statement": "Audit Appendix D theorem by theorem for coefficient-input changes and transfer boundaries, preserving its three-family parallel structure and stating locally whenever a comparison result supplies neither the totient input nor the missing cofinal separation supply."
+   "defect_class": "The paragraph after the Möbius-square lens calls a signed constant, a coprime-pair mass, and tail differences three readings of one quantity without displaying the equalities or reminding the reader which probability event supplies the mass",
+   "statement": "Rewrite the Möbius-square coordinate gloss with the minimum exact equalities needed to identify each reading, while preserving that the identity is an equivalent reformulation of the open constant rather than an irrationality argument."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "ebc98ee71f6819bd9fe344a0bb343542c604e533",
-  "committed_navigation_snapshot": "603c3f04d63240a8806c1296b72953c27446c910",
-  "main_paper_source_digest": "sha256:f1d437e7cfd9c9c9e62fca66300907b78db52e7098b819281de126a0da232f91"
+  "committed_navigation_snapshot": "42c4d95e717518460d658459318e88dd9512a1c2",
+  "main_paper_source_digest": "sha256:8af277b34819a7c522ddd0bbae88661e5715ee68688b61209e49d5fb99861cca"
  },
  "reading_routes": [
   {
