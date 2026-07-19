@@ -14,6 +14,7 @@ from typing import Any
 ROOT = Path(__file__).resolve().parent.parent
 APACHE = "Apache-2.0"
 MANUSCRIPT_LICENSE = "CC-BY-4.0"
+SPDX_LICENSE_HEADER = "SPDX-License-" "Identifier: "
 MANUSCRIPT_BINARIES = {
     ".github/banner.png",
     "claim-faithful-publication-systems-paper.pdf",
@@ -97,9 +98,9 @@ def license_map_errors(
             )
 
     for path, source in manuscript_sources.items():
-        if f"SPDX-License-Identifier: {MANUSCRIPT_LICENSE}" not in source:
+        if f"{SPDX_LICENSE_HEADER}{MANUSCRIPT_LICENSE}" not in source:
             errors.append(f"manuscript source {path} lost its CC-BY-4.0 header")
-        if f"SPDX-License-Identifier: {APACHE}" in source:
+        if f"{SPDX_LICENSE_HEADER}{APACHE}" in source:
             errors.append(f"manuscript source {path} carries an Apache-2.0 header")
 
     for license_id in (APACHE, MANUSCRIPT_LICENSE):
@@ -161,8 +162,8 @@ def main() -> int:
     lost_source_header = dict(sources)
     path = "paper/erdos249-257-main-paper.tex"
     lost_source_header[path] = lost_source_header[path].replace(
-        f"SPDX-License-Identifier: {MANUSCRIPT_LICENSE}",
-        f"SPDX-License-Identifier: {APACHE}",
+        f"{SPDX_LICENSE_HEADER}{MANUSCRIPT_LICENSE}",
+        f"{SPDX_LICENSE_HEADER}{APACHE}",
         1,
     )
     assert any(

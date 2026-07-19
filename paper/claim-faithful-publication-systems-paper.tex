@@ -2,17 +2,12 @@
 % SPDX-License-Identifier: CC-BY-4.0
 % Companion paper on release checks; build with tectonic.
 \documentclass[11pt]{article}
-\usepackage{iftex}
-\ifpdftex
-  \usepackage[T1]{fontenc}
-  \usepackage[utf8]{inputenc}
-\fi
-\usepackage[a4paper,margin=1in]{geometry}
-\usepackage{amsmath,amssymb,booktabs,array,float,placeins}
-\usepackage[dvipsnames]{xcolor}
+% House typography is shared with the main paper: paper-house-style.sty.
+\usepackage{paper-house-style}
+\usepackage{booktabs,array,float,placeins}
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta,positioning,calc,shapes.geometric}
-\usepackage[colorlinks=true,linkcolor=black,urlcolor=RoyalBlue,citecolor=black]{hyperref}
+\usepackage[colorlinks=true,linkcolor=linkinternal,urlcolor=linkexternal,citecolor=linkinternal]{hyperref}
 \hypersetup{
   pdftitle={From Lean Proofs to Public Claims},
   pdfauthor={Will Cook},
@@ -20,8 +15,10 @@
 }
 \newcommand{\repobase}{https://github.com/wcook04/plectis-lean-erdos249-257}
 \emergencystretch=1.5em
-\title{From Lean Proofs to Public Claims\\[2pt]
-{\large Release checks and trust boundaries in one formal mathematics repository}}
+
+\runninghead{From Lean proofs to public claims}
+\title{From Lean Proofs to Public Claims}
+\subtitle{Release checks and trust boundaries in one formal mathematics repository}
 \author{Will Cook}
 \date{July 2026}
 
@@ -568,7 +565,6 @@ must change with them.  The escaped edit of Section~\ref{sec:failure} changed
 the claim without either change.  The repository guide carries the full
 command list.
 
-\pagebreak
 \section{A boundary the checklist missed}\label{sec:failure}
 
 The evidence comes from three different times.  The historical exercise, the
@@ -693,8 +689,7 @@ per relationship type; and the original logs were not retained.
 
 \paragraph{Reuse.}
 Another formal project could reuse the pattern without copying any file
-format.\par\pagebreak\noindent
-It applies when bounded formal evidence sits beside a stronger public
+format.  It applies when bounded formal evidence sits beside a stronger public
 target.  Examples are finite cases beside a universal statement;
 a conditional theorem beside its unresolved hypothesis; one direction of an
 implication beside a claimed equivalence; or a result under named assumptions beside an unconditional

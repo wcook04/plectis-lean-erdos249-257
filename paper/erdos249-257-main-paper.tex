@@ -7,18 +7,22 @@
 % `tectonic erdos249-257-main-paper.tex` or `make`.
 \documentclass[11pt]{article}
 
-\usepackage[T1]{fontenc}
-\usepackage[utf8]{inputenc}
-\usepackage[a4paper,margin=1in]{geometry}
-\usepackage{amsmath,amssymb,amsthm}
+% House typography (fonts, page architecture, running heads, front matter,
+% link palette) is shared with the companion paper: see paper-house-style.sty.
+\usepackage{paper-house-style}
 \usepackage{array}
 \usepackage{booktabs}
 \usepackage{enumitem,float}
-\usepackage[dvipsnames]{xcolor}
+\setlist{topsep=0.35em,itemsep=0.2em}
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta}
-\usepackage[colorlinks=true,linkcolor=black,urlcolor=RoyalBlue,citecolor=black]{hyperref}
+\usepackage[colorlinks=true,linkcolor=linkinternal,urlcolor=linkexternal,citecolor=linkinternal]{hyperref}
+% Reader navigation lives in the PDF outline (every viewer's sidebar), not an
+% inline contents page: the boundary contract front-loads the first four pages
+% with the paper's exact statements, and an inline contents block would push
+% them out of that first-minute window.
 \hypersetup{
+  bookmarksnumbered=true,bookmarksopen=true,bookmarksopenlevel=1,
   pdftitle={Tail Certificates and Achievement-Set Geometry: Lean-checked exact reductions for Erdős 249 and the half-value branch of Erdős 257},
   pdfauthor={Will Cook},
   pdfsubject={Main expository paper for the Erdős 249/257 Lean formalisation}, pdflang={en-GB}, pdfkeywords={irrationality, Euler totient, Lambert series, achievement sets, Lean 4},
@@ -84,13 +88,13 @@
 \newcommand{\Irr}{\text{ irrational}}
 \newcommand{\Qzero}{Q_0}
 
-\title{\vspace{-4em}Exact Reductions for Two Open Irrationality Problems of Erd\H{o}s\\
-{\large A Lean formalisation of Problem~\#249 and the half-value branch of Problem~\#257}}
-\author{Will Cook \qquad July 2026}
-\date{}
+\runninghead{Exact reductions for Erd\H{o}s \#249 and \#257}
+\title{Exact Reductions for Two Open Irrationality Problems of Erd\H{o}s}
+\subtitle{A Lean formalisation of Problem~\#249 and the half-value branch of Problem~\#257}
+\author{Will Cook}
+\date{July 2026}
 
 \begin{document}
-\sloppy
 \maketitle
 
 \begin{abstract}
@@ -192,7 +196,8 @@ where \(X,Y\in\Npos\) are independent and
 transform, but this common description transfers no theorem from one problem
 to the other; Section~\ref{sec:architecture} gives the exact map.
 
-\begin{center}
+\begin{table}[t]
+\centering
 \small
 \begin{tabular}{@{}
   >{\raggedright\arraybackslash}p{0.27\linewidth}
@@ -210,7 +215,7 @@ Structural/support results & Explicit rank theorem; Prior work/formalised & Exac
 Membership of \(1/2\) & Open; exact reductions & Greedy and recurrence laws give exact equivalences without proving either event. \\
 \bottomrule
 \end{tabular}
-\end{center}
+\end{table}
 
 \paragraph{What ``Lean-checked'' means here.}
 A \emph{proof term} is a formal expression that Lean's kernel accepts as a
@@ -388,6 +393,7 @@ constant.  The weight \(\alpha\) is nonnegative; for example,
 following statuses.
 
 \begin{center}
+\small
 \begin{tabular}{@{}llll@{}}
 \toprule
 input $f$ & value & mathematical status & treatment here\\
@@ -1057,17 +1063,19 @@ row would not rule it out.
 
 \paragraph{Logical status of the final-skip argument.}
 The proved levels of the argument are
+{\small\setlength{\arraycolsep}{3pt}
 \[
 \begin{array}{rcl}
  \frac12\notin\mathcal A
- &\Longleftrightarrow
+ &\Leftrightarrow
    \text{a final skipped exponent exists}
  &[\text{proved}],\\
  \text{final upper, or final middle with }C_D=-3
- &\Longrightarrow\bot
+ &\Rightarrow\bot
  &[\text{proved}].
 \end{array}
 \]
+}
 These lines do not imply membership.  The unproved hypothesis has two parts:
 exclude all actual middle transitions with \(C_D\in\{-2,-1\}\), and
 prove~\textup{(4.2)} at every remaining non-\((-3)\) middle transition.
@@ -2258,8 +2266,10 @@ Lean checks:
 \item diagonal certificates $\mathsf{Sep}(M_t,M_t,L)$ at $t=1$ and every
 lcm-height change endpoint $2\le t\le64$ (that is, $M_{t-1}<M_t$), namely
 \[
-t\in\{1,2,3,4,5,7,8,9,11,13,16,17,19,23,25,27,29,31,32,37,41,43,
-47,49,53,59,61,64\};
+\begin{aligned}
+t\in\{&1,2,3,4,5,7,8,9,11,13,16,17,19,23,25,27,\\
+      &29,31,32,37,41,43,47,49,53,59,61,64\};
+\end{aligned}
 \]
 \item three finite lists of tails that cannot all share one fractional part.
 \end{itemize}
@@ -2487,8 +2497,12 @@ The following are checked by the Lean kernel:
 \item finite certificates for every period $h\in[1,16]$ at a fixed window;
 \item diagonal certificates $\mathsf{Sep}(M_t,M_t,L)$ at $t=1$ and the 27
 strict lcm-jump scales through $64$, namely
-\[t\in\{1,2,3,4,5,7,8,9,11,13,16,17,19,23,25,27,29,31,32,37,41,43,
-47,49,53,59,61,64\};\]
+\[
+\begin{aligned}
+t\in\{&1,2,3,4,5,7,8,9,11,13,16,17,19,23,25,27,\\
+      &29,31,32,37,41,43,47,49,53,59,61,64\};
+\end{aligned}
+\]
 \item a tabulated joint cone-vertex certificate.
 \end{itemize}
 \end{example}
@@ -3046,7 +3060,7 @@ $1/2$ would not prove (ii): another rational target could still be reached.
 Figure~\ref{fig:transform} marks these three ways of interrogating the map;
 it supplies no theorem transferring status between them.
 
-\begin{figure}[H]
+\begin{figure}[t]
 \centering
 \small
 \begin{tikzpicture}[>={Stealth[length=1.8mm]}, yscale=0.92]
@@ -3742,11 +3756,11 @@ The two routes used below have the logical form
 \[
 \begin{array}{rclcl}
 \text{unbounded witnesses (\ref{app:half-conditional-producers}--\ref{app:half-finite-cofinal})}
-&\Longrightarrow& \frac12\in\mathcal A
-&\Longrightarrow& \text{infinite support summing to }\frac12,\\
+&\Rightarrow& \frac12\in\mathcal A
+&\Rightarrow& \text{infinite support summing to }\frac12,\\
 \text{exclusions and tail bound (\ref{app:half-final-skip})}
-&\Longrightarrow& \text{no final skip}
- &\Longleftrightarrow& \frac12\in\mathcal A.
+&\Rightarrow& \text{no final skip}
+ &\Leftrightarrow& \frac12\in\mathcal A.
 \end{array}
 \]
 }
@@ -3823,6 +3837,7 @@ through a finite depth proves nothing.  The following display records these
 statuses before introducing the detailed coordinates.
 
 The dependency chain is
+{\setlength{\arraycolsep}{3.5pt}
 \[
 \begin{array}{rcl}
  \text{a rational support value}
@@ -3846,6 +3861,7 @@ The dependency chain is
  \quad\text{(\ref{app:carry-mass}).}
 \end{array}
 \]
+}
 The last four lines list independent necessary conditions, at the weakest
 hypotheses under which they are proved, not converses and not
 contradictions.  Appendix~\ref{app:carry-geometry} is orthogonal to this
@@ -4468,7 +4484,6 @@ Campbell prime-progression incompatibility & \lrefx{CampbellShiftSynchronization
 \end{center}
 \fi
 
-\clearpage
 \pdfbookmark[0]{References}{references}
 \begin{thebibliography}{99}
 \small

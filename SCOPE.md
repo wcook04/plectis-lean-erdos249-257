@@ -25,6 +25,8 @@ The prose boundary above is backed by machine-resolvable open propositions:
   `python3 scripts/query_corpus.py --open remaining_open.erdos_249_irrationality`
 - `remaining_open.unbounded_certificate_supply`:
   `python3 scripts/query_corpus.py --open remaining_open.unbounded_certificate_supply`
+- `remaining_open.half_value_membership`:
+  `python3 scripts/query_corpus.py --open remaining_open.half_value_membership`
 - `remaining_open.universal_257_all_infinite_supports`:
   `python3 scripts/query_corpus.py --open remaining_open.universal_257_all_infinite_supports`
 

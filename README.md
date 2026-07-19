@@ -3,23 +3,21 @@
 
 # Tail certificates and achievement-set geometry for Erdős Problems 249 and 257
 
-**New here?** See the [architecture and repository guide](ARCHITECTURE.md)
-or the [printable PDF](claim-faithful-publication-systems-paper.pdf). It assumes
+**New here?** See the [architecture and repository guide](ARCHITECTURE.md) or
+the [printable PDF](claim-faithful-publication-systems-paper.pdf). It assumes
 no Lean or project history.
 
 Lean 4 formal work on two unsolved irrationality problems.
 
-[**Gateway paper**](erdos249-257-main-paper.pdf) ·
+[**Mathematics paper**](erdos249-257-main-paper.pdf) ·
 [**Publication systems paper**](claim-faithful-publication-systems-paper.pdf) ·
 [Release v0.6.0](https://github.com/wcook04/plectis-lean-erdos249-257/releases/tag/v0.6.0) ·
 [![Lean CI](https://github.com/wcook04/plectis-lean-erdos249-257/actions/workflows/lean.yml/badge.svg)](https://github.com/wcook04/plectis-lean-erdos249-257/actions/workflows/lean.yml) ·
 [Plectis](https://wcook04.github.io/plectis/)
 
-This repository is one of two public demonstrations of a private system: its
-companion, [Plectis](https://github.com/wcook04/plectis), shows the system's
-machinery as runnable components, and this one shows its mathematical output.
-The [website](https://wcook04.github.io/plectis/) links both and hosts the
-papers; the PDFs above are the fastest route in.
+This repository and [Plectis](https://github.com/wcook04/plectis)
+demonstrate a private system—machinery there, mathematics here. The
+[website](https://wcook04.github.io/plectis/) hosts both papers.
 
 ## The two problems
 
@@ -78,7 +76,7 @@ An exact final-skip band formula does not show that the actual orbit avoids
 an unsafe band.
 
 [Orientation](docs/ORIENTATION.md) routes claims; the
-[gateway paper](erdos249-257-main-paper.pdf) owns the current exposition.
+[mathematics paper](erdos249-257-main-paper.pdf) owns the exposition.
 
 ## What remains open
 
@@ -199,8 +197,9 @@ import Erdos249257
 ```
 
 [`examples/Examples.lean`](examples/Examples.lean) is the minimal downstream
-consumer. It derives one base-3 result and exercises a conditional interface
-without proving the still-open universal Erdős #257 statement.
+consumer. It proves one base-3 result and exercises the conditional rational shell-pressure
+interface, leaving its analytic hypothesis explicit. This does
+not prove the still-open universal Erdős #257 statement.
 
 ## Citation and licence
 

@@ -27,6 +27,7 @@ import re
 import shutil
 import subprocess
 import sys
+import unicodedata
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -256,6 +257,11 @@ def rendered_pages(pdf: Path, pdftotext: str, first: int, last: int) -> str:
 
 
 def semantic_text(text: str) -> str:
+    # Fold font-specific extraction forms (mathematical-alphanumeric letters,
+    # ligature glyphs) to their plain equivalents so the anchor contract tests
+    # wording and page placement rather than the ToUnicode map of the current
+    # font choice.
+    text = unicodedata.normalize("NFKC", text)
     replacements = {
         "ﬁ": "fi",
         "ﬂ": "fl",

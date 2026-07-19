@@ -108,7 +108,8 @@ def main() -> int:
 
     print(
         "test_scope_source_identity: scope separates release identity, proof "
-        "checkpoint, 3 exact open propositions, and 6 exact non-claims; "
+        f"checkpoint, {len(open_ids)} exact open propositions, and "
+        f"{len(non_claim_ids)} exact non-claims; "
         "4 negative fixtures rejected"
     )
     return 0
