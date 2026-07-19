@@ -224,7 +224,7 @@ the proof but are not themselves proof authority.  Section~\ref{sec:verify}
 states how the fixed source revision and trusted dependencies are checked.
 
 \paragraph{Reading map.}
-The status-only route begins with Section~\ref{sec:spines}, followed by
+For a concise status summary, read Section~\ref{sec:spines}, followed by
 Sections~\ref{sec:architecture} and~\ref{sec:unresolved}: the reductions,
 the comparison limit, and every remaining obligation.  Sections~\ref{sec:eb}
 and~\ref{sec:249} contain the
@@ -1331,9 +1331,9 @@ conditional reduction, not an unconditional membership theorem.
 
 Every half-value route below has the form
 ``finite witness at depth $N$'' plus ``witnesses at unbounded depths''
-implies $1/2\in\mathcal A$.  The local identities advance one witness; the
-compactness statements consume a cofinal supply.  No result below proves that
-supply, so one verified window or seam is not an unbounded theorem.
+implies $1/2\in\mathcal A$.  These are alternative sufficient producers, not
+successive stages of one proof.  Local identities advance one witness;
+compactness consumes a cofinal supply, which no result below proves.
 
 \subsubsection{Finite residuals for the half-value problem}\label{res:halfcylindershadow}
 
@@ -1429,8 +1429,8 @@ seam weight in descending order whenever possible; let $r_s$ be the final
 remainder.  By the
 \lword{HalfCylinderIntegerGreedy.lean}{654}{seam_smallPositiveDefect_iff_integerGreedyRemainder}{defect/remainder equivalence},
 a positive subset-sum defect at most $B_s$ exists exactly when $1\leq r_s\leq B_s$.
-Each weight clears its tail by at least $2^{s+1}>B_s$, so this one greedy test
-suffices.  The unproved
+Each weight clears its tail by at least $2^{s+1}>B_s$.  At a fixed row this is
+only a finite repackaging, not a stronger membership criterion.  The unproved
 \lword{HalfCylinderFullShellSeamBridge.lean}{687}{HalfGreedySkippedSeamEscape}{skipped-rank escape}
 asks for $B_s<r_s$ at every genuine skipped rank; Erd\H{o}s~\#257 remains open.
 
@@ -2410,16 +2410,15 @@ exact global form.  The unbounded avoidance statement remains open.
 \subsection{Fixed-scale mechanisms and conditional unbounded implications}
 \label{app:totient-finite}
 
-This subsection contains four logical statuses.  The squared-Mersenne
-enclosure and the projected-separation tests are sufficient only: separation
-forces a missed target, with no converse asserted.  The prime-power unit-gap
-characterisation, divisor-index decompositions, shadow-denominator formula, and
-residue--projection equivalence are exact at fixed parameters; except where
-stated, they are not characterisations of target avoidance.  Any irrationality
-corollary adds an unproved hypothesis that this repeats at unbounded scales.  The
-tabulated rows, primality facts, and diagonal certificates through $t=64$
-are verified finite instances.  No result here supplies the missing unbounded
-quantifier in Appendix~\ref{app:totient-normal}.
+This subsection groups alternative fixed-scale mechanisms, not a dependency
+chain.  Enclosure and projected-separation tests are sufficient only:
+separation forces a missed target, with no converse asserted.  Prime-power
+unit-gap characterisations, divisor-index decompositions, the shadow-denominator
+formula, and the residue--projection equivalence are exact at fixed parameters
+but, unless stated, do not characterise target avoidance.  Irrationality
+corollaries assume unproved repetition at unbounded scales.  The tabulated
+rows, primality facts, and diagonal certificates through $t=64$ are verified
+finite instances; none supplies the missing unbounded quantifier.
 
 \paragraph{A one-way analytic enclosure.}
 For $H\ge1$, put $\mathcal D_H=R_{2H}-R_H$,
@@ -2990,7 +2989,7 @@ evaluation:
  f\;\longmapsto\;f*\mathbf 1\;\longmapsto\;
  \sum_{m\ge1}\frac{(f*\mathbf 1)(m)}{2^m}\;=\;L(f).
 \]
-For this status-only route, \(*\) denotes Dirichlet convolution,
+In this summary, \(*\) denotes Dirichlet convolution,
 \(\mathbf 1\) is the constant-one arithmetic function, \(\mu\) is the
 M\"obius function, and \(\alpha=\ph*\mu\); Section~\ref{sec:ladder} gives
 the full definitions.
@@ -4401,11 +4400,11 @@ cofinal \(\mathsf{Sep}\) theorem for \(S\) or decides whether \(1/2\in\mathcal A
 
 \section{Guide to the formal sources}\label{app:index}
 
-Each blue phrase opens its Lean declaration at the fixed source revision; the JSON
-claim registry records the same name.  Reader routes are: bounded rational
-exclusion, Theorem~\ref{res:farey}; the exact \#249 reduction,
+Each blue phrase opens its Lean declaration at the fixed source revision; the
+accompanying claim index records its name and status.  For bounded rational
+exclusion, see Theorem~\ref{res:farey}; for the exact \#249 reduction, see
 Proposition~\ref{res:complete} and Theorems~\ref{res:pointwisecomplete}--\ref{res:diag};
-and the \#257 half-value classification, Theorems~\ref{res:halfmembership}
+for the \#257 half-value classification, see Theorems~\ref{res:halfmembership}
 and~\ref{res:fatalright}.  Theorem~\ref{res:full} is the classical benchmark,
 and Section~\ref{sec:architecture} compares the reductions.  Independent
 structural results, none of which closes either problem, are
