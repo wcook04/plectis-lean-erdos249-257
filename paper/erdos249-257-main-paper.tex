@@ -1901,13 +1901,16 @@ hypothesis, not a consequence of the scalar seam facts alone.
 \subsubsection{Explicit carry coordinates at the final non-right transition}
 \label{res:producercarrycoordinates}
 
-For every adjacent cut at rank $s\ge5$, the transition carry of the
-terminal-augmented below support equals the concrete middle coordinate:
+At an adjacent cut, the \emph{below} and \emph{above} row words are the
+neighbouring subset sums immediately below and above the target.  Their
+unsigned distances from it are the remainder and overshoot; their pulses
+record the paired divisor-incidence contribution of the next two rows.
+After adjoining the terminal rank \(s\ge5\), the below support has producer
+carry
 \[
   4\,\mathrm{remainder}-\mathrm{belowPulse}-4,
 \]
-and identifies the terminal-augmented above support with the negative upper
-coordinate
+whereas the above support has producer carry
 \[
   -\bigl(4\,\mathrm{overshoot}+\mathrm{abovePulse}+4\bigr).
 \]
@@ -1917,9 +1920,10 @@ with the below and above specialisations at
 \lword{HalfCylinderProducerLowerBound.lean}{150}{producerCarry_insert_seamBelowSupport_eq_middleCoordinate}{middle-coordinate identity}
 and
 \lword{HalfCylinderProducerLowerBound.lean}{183}{producerCarry_insert_seamAboveSupport_eq_neg_upperCoordinate}{upper-coordinate identity}.
-These identities make the remaining quantitative task exact: they do not
-prove exponential lower bounds, sign persistence, or a universal escape
-mechanism.
+Thus the upper carry is negative, while the middle sign depends on the
+competition between remainder and pulse.  The identities supply no uniform
+exponential lower bound, sign persistence at unbounded ranks, or universal
+escape mechanism.
 
 \subsubsection{Incompatibility with Campbell's prime-progression bound}
 \label{res:campbellboundary}
