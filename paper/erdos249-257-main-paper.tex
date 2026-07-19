@@ -3365,23 +3365,24 @@ here and does not transfer to the M\"obius row $L^{(2)}(\mu)=S-\tfrac12$.
 \subsection{Probability-coordinate geometry: reduced slopes and cylinders}
 \label{app:lambert-probability}
 
-These results live entirely inside the coprime-pair probability coordinate.
-They normalise reduced directions and quantify Stern--Brocot cylinder and run
-geometry.  They are unconditional geometric consequences and do not imply
-the open certificate supply.
+Two measures appear below.  The cylinder law uses the reduced-direction mass
+$\nu$, which sums every gcd layer; Proposition~\ref{res:onerunmass} uses only
+the gcd-one contribution $2^{-(a+b)}$.  Neither supplies the open certificate
+theorem.
 
 \paragraph{Reduced directions and cylinder masses.}
-Divide the fair-coin pair by its gcd.  For positive coprime \(a,b\), put
+For the independent fair-coin pair $X,Y$ above, divide $(X,Y)$ by its gcd.
+For positive coprime \(a,b\), put
 \[
   \nu(a,b)=\frac1{2^{a+b}-1},
   \qquad
   M(a,b)=\frac1{(2^a-1)(2^b-1)}.
 \]
-The first quantity is the probability that the reduced direction is
-\((a,b)\); the second is the mass of the Stern--Brocot cylinder rooted at
-\((a,b)\).  Let \(M_d(a,b)\) be the sum, over the first \(d\) generations
-below that root, of the node contribution \((2^{u+v}-1)^{-1}\).  The children
-of \((u,v)\) are \((u+v,v)\) and \((u,u+v)\).
+The first quantity is the probability that the reduced pair equals $(a,b)$.
+The second is the closed form for the Stern--Brocot cylinder rooted there.
+The children of $(u,v)$ are $(u+v,v)$ and $(u,u+v)$.  Let $M_d(a,b)$ sum the
+node masses $(2^{u+v}-1)^{-1}$ over descendants at distance less than $d$;
+thus $M_0=0$, and the theorem below proves $M_d\to M$.
 
 \begin{proposition}[reduced-direction normalisation]\label{res:directionnormalization}
 The reduced directions form a probability distribution,
@@ -3414,8 +3415,10 @@ The recursion is the elementary rational identity obtained after setting
 at most two thirds of their parent's mass.
 
 \paragraph{Run lengths and arithmetic height.}
-Write an alternating Stern--Brocot word as \(r\) nonempty runs of lengths
-\(n_i=1+e_i\), with \(e_i\ge0\).  Starting with \(P_\varnothing=(1,1)\), define
+A \emph{run} is a maximal consecutive block of the same left or right move.
+List the $r$ positive run lengths as $n_i=1+e_i$, newest first, with $e_i\ge0$.
+The starting direction only swaps the two coordinates, so the height depends
+on these lengths alone.  Starting with \(P_\varnothing=(1,1)\), define
 \[
   P_{(n_1,\ldots,n_r)}=(n_1A+B,A)
   \quad\text{when}\quad P_{(n_2,\ldots,n_r)}=(A,B),
@@ -3431,16 +3434,16 @@ Every \(r\)-run word satisfies
  H(1+e_1,\ldots,1+e_r)
  \ge F_{r+3}+F_{r+1}\sum_{i=1}^r e_i,
 \]
-and \(H(1,\ldots,1)=F_{r+3}\).  A defect confined to position
-\(i\in\{0,\ldots,r-1\}\) has the exact size
+and \(H(1,\ldots,1)=F_{r+3}\).  A defect at position
+\(i\in\{0,\ldots,r-1\}\) (the newest run is $i=0$) has the exact size
 \[
  H(\underbrace{1,\ldots,1}_{i},1+e,
    \underbrace{1,\ldots,1}_{r-i-1})
  =F_{r+3}+F_{i+2}F_{r-i+1}e.
 \]
 More generally, the excess over $F_{r+3}$ is a polynomial in the $e_i$, with
-nonnegative coefficients and degree at most one in each variable; the checked
-recurrence gives every mixed term.
+nonnegative coefficients and degree at most one in each variable; the linked
+recursive formula determines every mixed coefficient.
 \end{theorem}
 \noindent Formalised:
 \lword{SternBrocotRunGeometry.lean}{185}{runHeight_fib_lower}{Fibonacci height lower bound},
@@ -3448,34 +3451,31 @@ recurrence gives every mixed term.
 \lword{SternBrocotRunGeometry.lean}{343}{runHeight_defect_fib_sum_lower}{aggregate defect lower bound},
 \lword{SternBrocotRunGeometry.lean}{413}{runHeight_oneSiteDefect}{one-site defect identity}.
 
-\begin{proposition}[one-run probability mass]\label{res:onerunmass}
-The two orientations with one nonempty Stern--Brocot run have total mass
-\[
- \frac12.
-\]
+\begin{proposition}[one-run first-layer mass]\label{res:onerunmass}
+The two orientations with one nonempty Stern--Brocot run have total
+first-layer weight $1/2$.
 \end{proposition}
 \noindent This is the
 \lword{SternBrocotRunGeometry.lean}{467}{oneRunMass_eq_half}{one-run mass}.
 
-\begin{proposition}[unit-run bookkeeping exponent]\label{res:rundenominator}
-Along the all-unit \(r\)-run, let
-\(E_r=\sum_{j=0}^{r-1}F_{j+2}\) be the sum of the invariant-coordinate
-exponents.  Then \(E_r=F_{r+3}-2\).
+\begin{proposition}[unit-run exponent sum]\label{res:rundenominator}
+Along the all-unit $r$-run, denominator-clearing bookkeeping encounters the
+Fibonacci exponents $F_2,\ldots,F_{r+1}$.  Their sum
+$E_r=\sum_{j=0}^{r-1}F_{j+2}$ satisfies \(E_r=F_{r+3}-2\).
 \end{proposition}
 \noindent This is the
 \lword{SternBrocotRunGeometry.lean}{491}{naturalRunDenominatorExponent_add_two}{unit-run exponent sum}.
-This identity does not make $E_r$ a reduced-denominator exponent for the
-probability mass or for \(S\).
+The sum $E_r$ records exponents before any denominator cancellation.  This
+identity does not identify a reduced denominator for a probability mass or
+for \(S\).
 
 For arithmetic functions and M\"obius inversion we use Apostol~\cite{apostol};
 Merca and Merca--Schmidt treat Lambert-series factorisations
-~\cite{merca2017,mercaschmidt}.  The mediant language goes back to
-Farey~\cite{farey1816}.  Postelmans--Van Assche supply the cited irrationality
-of the constant-weight squared-Lambert row, not these cylinder or run
-statements.  We claim the displayed Lean-checked identities and estimates,
-not priority for their assembled package.  The bookkeeping exponent
-\(E_r=F_{r+3}-2\) is two below the minimum height $F_{r+3}$.  No theorem here
-proves that a run tail survives denominator clearing.
+~\cite{merca2017,mercaschmidt}.  Stern supplies the rational enumeration
+underlying the tree~\cite{stern1858}; the Postelmans--Van Assche theorem
+concerns only Appendix~\ref{app:lambert-algebraic}'s constant-weight value.
+The claims here are the linked Lean identities and estimates, not priority for
+the classical mediant or continuant framework.
 }
 
 \subsection{Two concrete scalar criteria}
@@ -4359,29 +4359,19 @@ none of the three families supplies the cofinal
 \FurtherLambertAppendix
 
 \paragraph{Appendix consequence.}
-The transfer is coordinate extension only.
-Appendix~\ref{app:lambert-weighted} enlarges the Mersenne--Lambert comparison
-family in Section~\ref{sec:ladder};
-Appendix~\ref{app:lambert-algebraic} supplies the M\"obius-square and
-gcd-moment coordinates; and Appendix~\ref{app:lambert-probability} refines
-the coprime-pair representation in
-Proposition~\ref{res:coprime}.  These are three independent coordinate
-extensions.  None
-implies the cofinal \(\mathsf{Sep}\) supply for \(S\) or a proof
-of \(1/2\in\mathcal A\).  Those, rather than any result internal to this
-appendix, remain the missing statements identified in the main text.
+The three subsections independently change the Lambert weight, rewrite the
+squared coordinates, and refine the coprime-pair geometry.  None supplies the
+cofinal \(\mathsf{Sep}\) theorem for \(S\) or decides whether \(1/2\in\mathcal A\).
 
 \section{Guide to the formal sources}\label{app:index}
 
-Each blue mathematical phrase opens its exact Lean declaration at the pinned
-public revision.  The repository's JSON claim registry records the same
-declaration names for search.  Reader routes are: bounded rational exclusion,
-Theorem~\ref{res:farey}; the exact \#249 certificate reduction,
-Proposition~\ref{res:complete} and
-Theorems~\ref{res:pointwisecomplete}--\ref{res:diag}; and the \#257 half-value
-classification, Theorems~\ref{res:halfmembership} and~\ref{res:fatalright}.
-The classical benchmark is Theorem~\ref{res:full}, while
-Section~\ref{sec:architecture} compares the reductions.  Independent
+Each blue phrase opens its Lean declaration at the pinned revision; the JSON
+claim registry records the same name.  Reader routes are: bounded rational
+exclusion, Theorem~\ref{res:farey}; the exact \#249 reduction,
+Proposition~\ref{res:complete} and Theorems~\ref{res:pointwisecomplete}--\ref{res:diag};
+and the \#257 half-value classification, Theorems~\ref{res:halfmembership}
+and~\ref{res:fatalright}.  Theorem~\ref{res:full} is the classical benchmark,
+and Section~\ref{sec:architecture} compares the reductions.  Independent
 structural results, none of which closes either problem, are
 Theorem~\ref{res:dyadictotient}, the sublogarithmic zero-window corollary, and
 Theorems~\ref{res:sternbrocotcylinders} and~\ref{res:sternbrocotruns}.
@@ -4450,27 +4440,25 @@ Campbell prime-progression incompatibility & \lrefx{CampbellShiftSynchronization
 \small
 \raggedright
 \setlength{\itemsep}{0pt}
-\bibitem{erdos1948} P.~Erd\H{o}s, \emph{On arithmetical properties of Lambert series},
-  J. Indian Math. Soc. (N.S.) \textbf{12} (1948), 63--66,
-  \href{https://users.renyi.hu/~p_erdos/1948-04.pdf}{archive scan}.
-\bibitem{erdos1968} P.~Erd\H{o}s, \emph{On the irrationality of certain series},
-  Math. Student \textbf{36} (1968), 222--226 (issued 1969),
-  \href{https://users.renyi.hu/~p_erdos/1969-09.pdf}{archive scan}.
-\bibitem{erdosgraham1980} P.~Erd\H{o}s and R.~L. Graham, \emph{Old and New Problems and
-  Results in Combinatorial Number Theory}, Monographies de l'Enseignement
-  Math\'ematique, vol.~28, L'Enseignement Math\'ematique, Geneva, 1980,
-  pp.~61--62,
-  \href{https://mathweb.ucsd.edu/~ronspubs/80_11_number_theory.pdf}{author-hosted scan}.
+\bibitem{erdos1948} P.~Erd\H{o}s,
+  \href{https://users.renyi.hu/~p_erdos/1948-04.pdf}{\emph{On arithmetical properties of Lambert series}},
+  J. Indian Math. Soc. (N.S.) \textbf{12} (1948), 63--66.
+\bibitem{erdos1968} P.~Erd\H{o}s,
+  \href{https://users.renyi.hu/~p_erdos/1969-09.pdf}{\emph{On the irrationality of certain series}},
+  Math. Student \textbf{36} (1968), 222--226 (issued 1969).
+\bibitem{erdosgraham1980} P.~Erd\H{o}s and R.~L. Graham,
+  \href{https://mathweb.ucsd.edu/~ronspubs/80_11_number_theory.pdf}{\emph{Old and New Problems and Results in Combinatorial Number Theory}},
+  Monogr. Enseign. Math. 28, Geneva, 1980, pp.~61--62.
 \bibitem{erdos1988} P.~Erd\H{o}s, \emph{On the irrationality of certain series: problems and
-  results}, in \emph{New Advances in Transcendence Theory}, ed.~A.~Baker,
-  Cambridge University Press, 1988, pp.~102--109,
+  results}, in A.~Baker (ed.), \emph{New Advances in Transcendence Theory},
+  Cambridge UP, 1988, pp.~102--109,
   doi:\href{https://doi.org/10.1017/CBO9780511897184.009}{10.1017/CBO9780511897184.009}.
 \bibitem{borwein1992} P.~B. Borwein, \emph{On the irrationality of certain series},
   Math. Proc. Cambridge Philos. Soc. \textbf{112} (1992), no.~1, 141--146,
   doi:\href{https://doi.org/10.1017/S030500410007081X}{10.1017/S030500410007081X}.
-\bibitem{apostol} T.~M. Apostol, \emph{Introduction to Analytic Number Theory},
-  Springer, 1976,
-  doi:\href{https://doi.org/10.1007/978-1-4757-5579-4}{10.1007/978-1-4757-5579-4}.
+\bibitem{apostol} T.~M. Apostol,
+  \href{https://doi.org/10.1007/978-1-4757-5579-4}{\emph{Introduction to Analytic Number Theory}},
+  Springer, 1976.
 \bibitem{merca2017} M.~Merca, \emph{The Lambert series factorization theorem},
   Ramanujan J. \textbf{44} (2017), no.~2, 417--435,
   doi:\href{https://doi.org/10.1007/s11139-016-9856-3}{10.1007/s11139-016-9856-3}.
@@ -4481,12 +4469,14 @@ Campbell prime-progression incompatibility & \lrefx{CampbellShiftSynchronization
 \bibitem{kakeya1914} S.~Kakeya, \emph{On the set of partial sums of an infinite series},
   Proc. Tokyo Math.-Phys. Soc., 2nd ser. \textbf{7} (1914), 250--251,
   doi:\href{https://doi.org/10.11429/ptmps1907.7.14_250}{10.11429/ptmps1907.7.14\_250}.
-\bibitem{farey1816} J.~Farey, \emph{On a curious property of vulgar fractions},
-  Philos. Mag. \textbf{47} (1816), 385--386,
-  doi:\href{https://doi.org/10.1080/14786441608628487}{10.1080/14786441608628487}.
+\bibitem{farey1816} J.~Farey,
+  \href{https://doi.org/10.1080/14786441608628487}{\emph{On a curious property of vulgar fractions}},
+  Philos. Mag. \textbf{47} (1816), 385--386.
+\bibitem{stern1858} M.~Stern,
+  \href{https://doi.org/10.1515/crll.1858.55.193}{\emph{Ueber eine zahlentheoretische Funktion}},
+  J. Reine Angew. Math. \textbf{55} (1858), 193--220.
 \bibitem{alloucheshallit} J.-P. Allouche and J. Shallit, \emph{Automatic
-  Sequences: Theory, Applications, Generalizations}, Cambridge University
-  Press, 2003,
+  Sequences: Theory, Applications, Generalizations}, Cambridge Univ. Press, 2003,
   doi:\href{https://doi.org/10.1017/CBO9780511546563}{10.1017/CBO9780511546563}.
 \bibitem{coons2010} M.~Coons, \emph{(Non)automaticity of number theoretic
   functions}, J. Th\'eor. Nombres Bordeaux \textbf{22} (2010), no.~2,
@@ -4522,10 +4512,10 @@ Campbell prime-progression incompatibility & \lrefx{CampbellShiftSynchronization
   (2025; revised 2026),
   doi:\href{https://doi.org/10.48550/arXiv.2512.01739}{10.48550/arXiv.2512.01739}.
 \bibitem{lean} L.~de Moura, S.~Kong, J.~Avigad, F.~van Doorn, and J.~von Raumer,
-  \emph{The Lean theorem prover (system description)}, \emph{CADE-25}, LNCS 9195
+  \emph{The Lean theorem prover (system description)}, in \emph{CADE-25}, LNCS 9195
   (2015), 378--388, doi:\href{https://doi.org/10.1007/978-3-319-21401-6_26}{10.1007/978-3-319-21401-6\_26}.
 \bibitem{mathlib} The mathlib Community, \emph{The Lean mathematical library},
-  in \emph{CPP 2020}, ACM (2020), 367--381, doi:\href{https://doi.org/10.1145/3372885.3373824}{10.1145/3372885.3373824}.
+  in \emph{CPP 2020}, ACM, 2020, 367--381, doi:\href{https://doi.org/10.1145/3372885.3373824}{10.1145/3372885.3373824}.
 \bibitem{erdosproblems} T.~Bloom (ed.), \emph{Erd\H{o}s Problems},
   \href{https://www.erdosproblems.com/249}{entry 249} and
   \href{https://www.erdosproblems.com/257}{entry 257}, accessed 18 July 2026.

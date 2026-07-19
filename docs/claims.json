@@ -901,15 +901,15 @@
         "schema": "erdos249257-editorial-state/1",
         "scope": "continuous_whole_main_paper_exposition",
         "current_priority": {
-          "id": "main_paper_appendix_d_probability_geometry_reader_map_audit",
+          "id": "main_paper_full_bibliography_role_and_link_audit",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "defect_class": "Appendix D.3 introduces reduced directions, cylinder masses, truncated depths, Stern--Brocot runs, continuants, and bookkeeping exponents in quick succession. The statements are exact, but a reader can still confuse a probability mass, a coordinate denominator, and the exponent used only for bookkeeping, or infer that local cylinder convergence supplies the open cofinal certificate theorem",
-          "statement": "Audit Appendix D.3 as a probability-geometry reader map. Define the reduced-direction and cylinder constructions before their formulas, distinguish mass, height, and bookkeeping exponents at every transition, verify the Farey and Stern--Brocot background attribution, and keep the local convergence results visibly separate from the open certificate supply while preserving the 53-page envelope."
+          "defect_class": "The bibliography is compact and its links are release-checked, but the 25 entries mix archive scans, books, journal articles, current arXiv versions, software papers, and a living problem index. Link liveness alone does not verify author order, issue data, revision dates, or that each citation is attached to the precise external claim it supports",
+          "statement": "Audit every bibliography entry and its in-text role against a primary publisher, author, archive, or project source. Correct metadata and source-role drift, prefer stable DOI or archival targets, preserve explicit access dates for living resources, and keep the reference list readable within the 53-page envelope."
         },
         "last_verified_wave": {
-          "id": "main_paper_appendix_d_squared_lambert_reader_map_audit",
+          "id": "main_paper_appendix_d_probability_geometry_reader_map_audit",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "result": "Separated Appendix D.2 into finite denominator-clearing boundaries, the exact Mobius-square rewriting of S, and comparison transforms. Corrected the two-tier primorial prose so the extra square factor applies only to odd primes, matching the Lean definition at the exceptional prime 2. Removed the collision between the ordinary base-two notation L_2 and the squared-denominator transform by defining L^(2), supplied the fair-coin divisibility probability explicitly, and identified exactly the two identities formalised in GcdMomentCalculus. Verified Postelmans--Van Assche's theorem and metadata; stated that its linear-independence result makes only the constant-weight value L^(2)(1) irrational and does not transfer to L^(2)(mu)=S-1/2. Scoped the Apostol, Merca, and Merca--Schmidt citations to arithmetic-function background and Lambert factorisations. No Lean theorem, quantifier, finite record, or open status changed, and the paper remains 53 pages."
+          "result": "Distinguished the reduced-direction probability nu, which sums every gcd layer, from the gcd-one weight used by the one-run calculation. Defined the depth-d cylinder truncation by descendant distance and its M_0=0 convention before the convergence theorem. Defined a run as a maximal block, stated the newest-first convention and orientation symmetry, fixed the one-site index origin, and replaced internal recurrence language by the exact linked recursive formula. Recast the one-run result as a first-layer mass and replaced undefined invariant-coordinate terminology by the Fibonacci exponents actually encountered in denominator-clearing bookkeeping; the text states locally that their sum is not a reduced denominator. Added Stern's 1858 primary paper and DOI for the rational enumeration while retaining Farey's separate role in the earlier finite-gap comparison, compressed the repeated appendix consequence and source guide, and kept the resulting 25-entry reference list on one readable page. No Lean theorem, quantifier, finite record, or open status changed, and the paper remains 53 pages."
         },
         "active_inconsistencies": [],
         "blocked_decisions": []
@@ -8986,7 +8986,7 @@
       "id": "stern_brocot_run_fibonacci_stability",
       "label": "Fibonacci and continuant stability of Stern–Brocot runs",
       "status": "formalised here",
-      "statement": "A Stern–Brocot word with r nonempty alternating runs has height at least F_(r+3), with equality on the all-unit run spine. Writing each run length as 1+e_i gives an exact multiaffine continuant-defect expansion, the sharp global gain F_(r+1) sum e_i, and exact one-site coefficient F_(i+2)F_(r-i+1). The first induced run layer has mass 1/2, while the natural denominator exponent is exactly F_(r+3)-2. These are source-level combinatorial and arithmetic facts; no analytic denominator survival or irrationality conclusion is claimed.",
+      "statement": "A Stern–Brocot word with r nonempty alternating runs has height at least F_(r+3), with equality on the all-unit run spine. Writing each run length as 1+e_i gives an exact multiaffine continuant-defect expansion, the sharp global gain F_(r+1) sum e_i, and exact one-site coefficient F_(i+2)F_(r-i+1). Under the gcd-one weight 2^-(a+b), the first induced run layer has mass 1/2, while the natural denominator-bookkeeping exponent is exactly F_(r+3)-2. These are source-level combinatorial and arithmetic facts; no analytic denominator survival or irrationality conclusion is claimed.",
       "paper_label": "res:sternbrocotruns",
       "readme_headline": false,
       "declarations": [
