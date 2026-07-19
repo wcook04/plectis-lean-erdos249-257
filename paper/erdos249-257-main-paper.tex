@@ -3776,14 +3776,16 @@ and the detailed greedy geometry cited after Theorem~\ref{res:greedy}.
 It has two independent roles.  Appendices~\ref{app:carry-normal-form}
 and~\ref{app:carry-boolean} give exact coordinate changes: rationality is
 equivalent first to a \emph{tempered tail orbit}, an integer recurrence with
-a vanishing boundary condition, and then to a Boolean--M\"obius carry
-certificate for a specified support fraction.  Appendices~\ref{app:carry-sublog}
-and~\ref{app:carry-mass} use those coordinates only in the forward direction
-to derive necessary divisor-coverage, denominator-wrap, reciprocal-mass, and
-carry-growth conditions.
+a vanishing boundary condition, and then to a Boolean--M\"obius certificate,
+an integer carry orbit whose quotient stream reconstructs a Boolean support.
+Appendices~\ref{app:carry-sublog} and~\ref{app:carry-mass} use those coordinates
+only forward, to derive necessary divisor-coverage, denominator-wrap,
+reciprocal-mass, and carry-growth conditions.  A \emph{wrap} occurs when
+doubling a least residue crosses its odd modulus; the reciprocal mass is
+\(\rho(A)=\sum_{a\in A}1/a\).
 
 Appendix~\ref{app:carry-geometry} is separate.  It studies the achievement
-set itself: a finite death certificate proves nonmembership, whereas survival
+set itself: a finite nonmembership certificate proves exclusion, whereas survival
 through a finite depth proves nothing.  The following display records these
 statuses before introducing the detailed coordinates.
 
@@ -3813,7 +3815,7 @@ The last four lines list independent necessary conditions, at the weakest
 hypotheses under which they are proved, not converses and not
 contradictions.  Appendix~\ref{app:carry-geometry} is orthogonal to this
 rationality chain:
-finite greedy death proves nonmembership in the achievement set, whereas
+finite greedy failure proves nonmembership in the achievement set, whereas
 survival through any finite depth proves nothing.
 
 The prior-art boundary is theorem-family-specific. The integral carry
@@ -4259,12 +4261,12 @@ known to lie in $\mathcal A$ has computable support bits.
 \noindent Formalised:
 \lword{GreedyAchievementSet.lean}{1130}{cast_greedyMersenneRemainderRat}{rational--real greedy agreement},
 \lword{GreedyAchievementSet.lean}{1692}{mersenneTail_lt_cast_tailUpperRat}{rational tail-enclosure bound},
-\lword{GreedyAchievementSet.lean}{1726}{certifiedGreedyMersenneDeath_not_mem}{finite death-certificate soundness},
+\lword{GreedyAchievementSet.lean}{1726}{certifiedGreedyMersenneDeath_not_mem}{finite-certificate soundness},
 \lword{GreedyAchievementSet.lean}{1748}{three_fourths_not_mem_mersenneAchievementSet}{three-quarters nonmembership},
 and \lword{GreedyAchievementSet.lean}{1832}{rational_member_support_bit_iff}{rational-member support-bit equivalence}.
 The certificates are one-sided: survival through any finite depth proves
 nothing about membership, and no decidability of membership in $\mathcal A$ is
-asserted.  Neither the global geometry nor the finite death certificates
+asserted.  Neither the global geometry nor the finite nonmembership certificates
 exclude rational values for either open series.
 
 \paragraph{Appendix consequence.}
@@ -4276,7 +4278,7 @@ must satisfy the sublogarithmic divisor-coverage bound, and the odd-part
 wrap and mass bounds when its denominator has odd part \(v>1\); an infinite
 one must in addition satisfy the unbounded-state theorem and, at a dyadic
 denominator, the reciprocal-mass alternative.
-Appendix~\ref{app:carry-geometry} also supplies the finite death certificates
+Appendix~\ref{app:carry-geometry} also supplies the finite nonmembership certificates
 used in Theorem~\ref{res:greedy}.  What is not proved is that the support attached to
 either target violates one of these necessary conditions.  That
 contradiction, not another rational normal form, is the missing premise.
