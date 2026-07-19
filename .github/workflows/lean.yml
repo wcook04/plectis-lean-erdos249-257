@@ -8,6 +8,10 @@ name: Lean CI
 on:
   push:
   pull_request:
+  # Merge commits created through the GitHub web UI do not always start a run,
+  # which leaves the README badge reporting an older result than the branch.
+  # Manual dispatch re-runs the same two jobs on any ref without a dummy commit.
+  workflow_dispatch:
 
 permissions:
   contents: read
