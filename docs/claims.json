@@ -901,15 +901,15 @@
         "schema": "erdos249257-editorial-state/1",
         "scope": "continuous_whole_main_paper_exposition",
         "current_priority": {
-          "id": "main_paper_equation_to_plain_language_bridge_audit",
+          "id": "main_paper_ambiguous_referent_and_scope_audit",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "defect_class": "A display can be formally precise yet leave a reader outside the speciality unable to say what its variables measure or why the quantifiers matter. The highest-value equations should have a nearby literal sentence translating the mathematical operation without weakening or extending the claim.",
-          "statement": "Audit the headline displays and theorem statements for a one-sentence plain-language bridge at first encounter. Add a gloss only where the variables, direction of implication, or every-after-every quantifier is not recoverable from adjacent prose; remove redundant formula paraphrases elsewhere to preserve 53 pages."
+          "defect_class": "After a dense theorem or display, pronouns such as this, it, these, former, and latter can acquire several plausible mathematical antecedents. A locally grammatical sentence is still unclear when a reader must infer whether it refers to a theorem, hypothesis, finite computation, coordinate change, or open conclusion.",
+          "statement": "Audit ambiguous demonstratives and scope words in the main text and appendix consequence paragraphs. Replace only genuinely multi-antecedent references with the theorem, predicate, bound, or hypothesis they name; preserve ordinary local prose and the 53-page target."
         },
         "last_verified_wave": {
-          "id": "main_paper_novelty_and_prior_art_sentence_audit",
+          "id": "main_paper_equation_to_plain_language_bridge_audit",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "result": "Compared every headline theorem family with the contribution-family provenance in the claim registry and with the nearby bibliography sentences. Erdős, Tao--Teräväinen, Luca--Tachiya, Wang--Grau Ribas, Kovač--Tao, Nesterenko, Postelmans--Van Assche, and the classical Lambert, Möbius, Farey, and Stern backgrounds were already positioned locally. Primary-source checks of the current #249 record and Coons's article confirmed that #249 remains listed open and that the cited antecedent is qualitative non-k-regularity, whereas the paper states an explicit level-by-level rank formula. Clarified that Farey's note supplies terminology rather than a bound for S, and that the certificate predicate and exact equivalences are a formalised package of classical binary-periodicity and tail inputs with no priority claim. No absence-of-match claim was converted into novelty. No theorem, formula, citation, source target, or problem status changed; the rendered boundary and 53-page target pass."
+          "result": "Audited the headline displays and theorem statements in the introduction, two exact reductions, Lambert ladder, #257 and #249 sections, comparison section, and final unresolved-problem list for an adjacent literal account of their variables, arrows, and quantifiers. The paper already explains the rescaled tail, finite residue margins, binary carry recurrence, denominator exclusion, probability representation, pointwise and lcm-diagonal certificate forms, final-skip branches, and the different consequences of positive and negative half-value answers. Replaced the one remaining indirect transition after the four-clause half-membership theorem with the plain statement that membership means no skip is the last, while preserving that the theorem does not prove skips continue beyond every bound. No theorem, formula, citation, source target, or problem status changed; the rendered boundary and 53-page target pass."
         },
         "active_inconsistencies": [],
         "blocked_decisions": []
