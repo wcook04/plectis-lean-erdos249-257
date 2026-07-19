@@ -56,7 +56,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "Erd\\H{o}s \\#249",
-    "line": 3628
+    "line": 3631
    }
   },
   {
@@ -67,7 +67,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "unbounded certificate supply",
-    "line": 3639
+    "line": 3642
    }
   },
   {
@@ -78,7 +78,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "the half-value counterexample route",
-    "line": 3663
+    "line": 3666
    }
   },
   {
@@ -89,7 +89,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "universal Erd\\H{o}s \\#257",
-    "line": 3654
+    "line": 3657
    }
   }
  ],
@@ -559,18 +559,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_proof_strategy_signposting_audit",
+   "id": "main_paper_reduction_vs_leverage_calibration_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "A proof can be locally rigorous yet difficult to navigate when it begins with machinery before identifying the one decisive move, or when a long derivation does not tell the reader which implication is being established. Repeated roadmaps are also noise, so signposting must be selective.",
-   "statement": "Audit the principal proofs and longer appendix derivations for a short strategy sentence before technical machinery where the crux is not already visible. Name the decisive implication, obstruction, or invariant; do not paraphrase every subsequent step; preserve all proof content and exact claim boundaries; and keep the paper at 53 pages."
+   "defect_class": "An exact reduction can sound like leverage against an open problem when the exposition does not distinguish a sharper target from a mechanism that forces the target at unbounded scales. Repeating generic non-solution disclaimers everywhere is not a substitute for locating the missing mechanism precisely.",
+   "statement": "Audit the abstract, introduction, programme transitions, and conclusion for calibrated language about reductions versus leverage. State where the paper gives exact coordinates, finite baselines, or obstruction maps, and where a genuinely new uniform arithmetic mechanism is still required. Remove any implication of near-solution while avoiding repetitive caution, preserving all exact claims and the 53-page limit."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "ebc98ee71f6819bd9fe344a0bb343542c604e533",
-  "committed_navigation_snapshot": "405db0b133880f13b3c7890d912b42e108402cb8",
-  "main_paper_source_digest": "sha256:0edb3e6a670b89641bb85a3bd7c0a4a22b38e9b967e058824232003120fe5f54"
+  "committed_navigation_snapshot": "e9d0cdd3a013cd32cf71291d9ea8810d3273dff1",
+  "main_paper_source_digest": "sha256:7ecad81421434fd3a3e5685c4160f47c3ca1dcf616ddb695536e281e2abe6758"
  },
  "reading_routes": [
   {
