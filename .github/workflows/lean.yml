@@ -56,8 +56,7 @@ jobs:
             changed=true
           elif git diff --quiet "$base" "$head" -- \
             '*.lean' \
-            lakefile.toml lakefile.lean lake-manifest.json lean-toolchain \
-            scripts/lean_fast_build.py; then
+            lakefile.toml lakefile.lean lake-manifest.json lean-toolchain; then
             changed=false
           else
             changed=true
