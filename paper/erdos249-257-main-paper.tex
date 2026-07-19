@@ -3267,15 +3267,15 @@ nonvanishing, not irrationality, and says nothing about $\alpha$.
 \subsection{Finite algebraic boundaries and squared-Lambert coordinates}
 \label{app:lambert-algebraic}
 
-This subsection keeps the relevant coordinates but separates three roles:
-finite denominator-clearing obstructions, the exact M\"obius-square identity
-for \(S\), and comparison rows in the squared-Lambert calculus.  The identity
-changes coordinates; the finite propositions delimit algebraic methods; and
-the status of one squared-Lambert row does not pass to another.
+This subsection has three logically distinct parts.  Propositions~\ref{res:primitiveindex}
+and~\ref{res:mersennetailatoms} give finite denominator-clearing boundaries,
+not irrationality criteria.  Proposition~\ref{res:lens} rewrites $S$ exactly.
+Proposition~\ref{res:gcdmoment} then compares three squared-denominator transforms;
+only its constant-weight row has a cited irrationality theorem.
 
 \paragraph{Finite denominator-clearing boundaries.}\label{sec:primitiveindex}
-Put \(a_n=(\ph*\mu)(n)/n\).  Let $T_N$ be the product of $4$, every odd
-prime $p\le N$, and one further factor $p$ for each $p^2\le N$.
+Put \(a_n=(\ph*\mu)(n)/n\).  Let $T_N$ be the product of $4$, one factor
+$p$ for every odd prime $p\le N$, and a second factor $p$ when $p^2\le N$.
 \begin{proposition}[finite denominator obstruction]
 \label{res:primitiveindex}
 For $N\ge4$, if a positive integer $D$ makes $Da_n$ integral for every
@@ -3285,7 +3285,7 @@ $a_n$.
 \noindent Formalised:
 \lword{PrimitiveDeterminantLift.lean}{148}{twoTierPrimorial_dvd_of_integral_jet}{two-tier primorial obstruction}.
 
-For \(d\ge1\), define the pointed periodic atom
+For \(d\ge1\) and $N\ge0$, define the periodic Mersenne atom
 \[
  \omega_d(N)=\frac{2^{\,N\bmod d}}{2^d-1}.
 \]
@@ -3315,8 +3315,9 @@ cleared determinant on the left is at least \(1\).
 \lword{MersenneTailAtoms.lean}{158}{weightedMersenneAtom_denominatorProduct_mul_det}{determinant-clearing identity},
 and
 \lword{MersenneTailAtoms.lean}{181}{one_le_abs_weightedMersenneAtom_cleared_det}{cleared-determinant lower bound}.
-Thus the displayed product makes the determinant integral and gives only the
-lower bound $1$ when nonzero.  It is not an irrationality criterion for \(S\).
+Thus finite denominator clearing recovers an integer determinant, whose
+absolute value is at least $1$ when nonzero.  It supplies no sequence of
+nonzero integers tending to $0$, and hence no irrationality criterion for \(S\).
 
 \begin{proposition}[M\"obius-square identity for \(S\)]\label{res:lens}
 \[
@@ -3325,37 +3326,41 @@ S \;=\; \tfrac12 \;+\; \sum_{d\ge1}\frac{\mu(d)}{(2^d-1)^2}.
 \end{proposition}
 \noindent Formalised: \lword{CertificateKernel.lean}{18126}{totient_series_eq_half_add_moebius_mersenne_square}{M\"obius-square identity}.
 Writing \(T=\sum_{d\ge1}\mu(d)/(2^d-1)^2\), Proposition~\ref{res:coprime}
-gives \(T=\Pr(\gcd(X,Y)=1)=S-\tfrac12\), so \(S\) is irrational exactly
-when \(T\) is.  By contrast,
-\(R_N=2^NS-\sum_{n\le N}\ph(n)2^{N-n}\) is an integer translate of a
-scaled copy of \(S\).  Tail differences encode rationality as explained in
-Section~\ref{sec:reduction}; they are not further constants equal to \(T\).
+gives \(T=\Pr(\gcd(X,Y)=1)=S-\tfrac12\); hence $S$ is irrational exactly
+when $T$ is.  By contrast, the tail residual
+\(R_N=2^NS-\sum_{n\le N}\ph(n)2^{N-n}\) depends on $N$ and is an integer
+translate of $2^NS$.  Section~\ref{sec:reduction} uses its differences to
+encode rationality; $R_N$ is not another name for $T$.
 
 \paragraph{Squared Lambert calculus.}\label{sec:squared}
-For \(L_2(f)=\sum_{d\ge1}f(d)/(2^d-1)^2\), the denominator is the probability
-that \(d\) divides two independent geometric waiting times.  The formal
-transfer theorem,
+Write \(L^{(2)}(f)=\sum_{d\ge1}f(d)/(2^d-1)^2\); this notation distinguishes
+the squared-denominator transform from the ordinary base-two transform $L_2$
+in Appendix~\ref{app:lambert-weighted}.  If $X,Y$ are independent and
+$\Pr(X=n)=\Pr(Y=n)=2^{-n}$ for $n\ge1$, then
+$\Pr(d\mid\gcd(X,Y))=(2^d-1)^{-2}$.  The formal transfer theorem,
 \lword{GcdMomentCalculus.lean}{105}{tsum_lambert_linear_weight_sq_pure}{squared Lambert transfer},
 therefore gives a divisor calculus for their gcd.
 \begin{proposition}[squared Lambert identity]\label{res:gcdmoment}
-At \(r=1/2\), the three rows \(f=\mu,\mathbf 1,\ph\) yield respectively
+The three weights \(f=\mu,\mathbf 1,\ph\) give respectively
 \[
- L_2(\mu)=S-\tfrac12,\qquad
- L_2(\mathbf 1)=\sum_{n\ge1}\frac{\sigma(n)-\tau(n)}{2^n},\qquad
- L_2(\ph)=\sum_{n\ge1}\frac{P(n)-n}{2^n},
+ L^{(2)}(\mu)=S-\tfrac12,\qquad
+ L^{(2)}(\mathbf 1)=\sum_{n\ge1}\frac{\sigma(n)-\tau(n)}{2^n},\qquad
+ L^{(2)}(\ph)=\sum_{n\ge1}\frac{P(n)-n}{2^n},
 \]
 where \(P\) is Pillai's gcd-sum function.
 \end{proposition}
-\noindent Formalised: \lword{GcdMomentCalculus.lean}{216}{tsum_one_div_mersenne_sq_eq_sigma_sub_tau_series}{constant-weight squared-Lambert identity} and
+\noindent The first identity is Proposition~\ref{res:lens}.  The other two are
+formalised as \lword{GcdMomentCalculus.lean}{216}{tsum_one_div_mersenne_sq_eq_sigma_sub_tau_series}{constant-weight squared-Lambert identity} and
 \lword{GcdMomentCalculus.lean}{235}{tsum_totient_div_mersenne_sq_eq_gcd_moment_series}{totient gcd-moment identity}.
 Write
 \(\zeta_q(1)=\sum_{n\ge1}q^n/(1-q^n)\) and
 \(\zeta_q(2)=\sum_{n\ge1}nq^n/(1-q^n)\).
 Postelmans--Van Assche prove that \(1,\zeta_q(1),\zeta_q(2)\) are linearly
-independent over \(\Q\) whenever \(1/q\) is an integer at least
-\(2\)~\cite{postelmansvanassche}.  At \(q=1/2\), their difference is the middle
-row, so that row is irrational.  This does not transfer to the M\"obius row,
-which is exactly the open constant \(S-\tfrac12\).
+independent over \(\Q\) for $q=1/p$ and every integer $p\ge2$
+~\cite{postelmansvanassche}.  Since
+$L^{(2)}(\mathbf1)=\zeta_{1/2}(2)-\zeta_{1/2}(1)$, their theorem makes the
+constant-weight value irrational.  This cited conclusion is not formalised
+here and does not transfer to the M\"obius row $L^{(2)}(\mu)=S-\tfrac12$.
 
 \subsection{Probability-coordinate geometry: reduced slopes and cylinders}
 \label{app:lambert-probability}
@@ -3462,8 +3467,9 @@ exponents.  Then \(E_r=F_{r+3}-2\).
 This identity does not make $E_r$ a reduced-denominator exponent for the
 probability mass or for \(S\).
 
-The Lambert and M\"obius identities used above are classical
-~\cite{apostol,merca2017,mercaschmidt}, and the mediant language goes back to
+For arithmetic functions and M\"obius inversion we use Apostol~\cite{apostol};
+Merca and Merca--Schmidt treat Lambert-series factorisations
+~\cite{merca2017,mercaschmidt}.  The mediant language goes back to
 Farey~\cite{farey1816}.  Postelmans--Van Assche supply the cited irrationality
 of the constant-weight squared-Lambert row, not these cylinder or run
 statements.  We claim the displayed Lean-checked identities and estimates,

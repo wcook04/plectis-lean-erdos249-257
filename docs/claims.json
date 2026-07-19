@@ -901,15 +901,15 @@
         "schema": "erdos249257-editorial-state/1",
         "scope": "continuous_whole_main_paper_exposition",
         "current_priority": {
-          "id": "main_paper_appendix_d_squared_lambert_reader_map_audit",
+          "id": "main_paper_appendix_d_probability_geometry_reader_map_audit",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "defect_class": "Appendix D.2 moves quickly among finite denominator obstructions, Mersenne atoms, the exact Mobius-square identity for S, and squared-Lambert comparison rows. Although their roles are distinguished, the reader still has to reconstruct which statements are coordinate identities, which are finite algebraic boundaries, and which cited irrationality result applies only to a comparison row",
-          "statement": "Audit Appendix D.2 as a reader map for finite versus exact versus comparison results. Define each coordinate at first use, make the implication and non-implication boundaries local to the relevant propositions, verify the Postelmans--Van Assche citation and the classical Lambert/Mobius sources, and preserve both theorem scope and the 53-page envelope."
+          "defect_class": "Appendix D.3 introduces reduced directions, cylinder masses, truncated depths, Stern--Brocot runs, continuants, and bookkeeping exponents in quick succession. The statements are exact, but a reader can still confuse a probability mass, a coordinate denominator, and the exponent used only for bookkeeping, or infer that local cylinder convergence supplies the open cofinal certificate theorem",
+          "statement": "Audit Appendix D.3 as a probability-geometry reader map. Define the reduced-direction and cylinder constructions before their formulas, distinguish mass, height, and bookkeeping exponents at every transition, verify the Farey and Stern--Brocot background attribution, and keep the local convergence results visibly separate from the open certificate supply while preserving the 53-page envelope."
         },
         "last_verified_wave": {
-          "id": "main_paper_appendix_d_weighted_lambert_status_audit",
+          "id": "main_paper_appendix_d_squared_lambert_reader_map_audit",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "result": "Defined the weighted Lambert series L_b and its rearranged coefficient c_gamma, and distinguished eventual periodicity from periodicity before the theorem list. Clarified that Luca--Tachiya prove irrationality for every nonzero eventually periodic rational weight at every integer base of absolute value greater than one, whereas the linked Lean theorem records only a weaker self-contained irrational-or-b-power-denominator dichotomy for periodic integer weights. Reframed the period-four example as an obstruction to residue-blind coefficient nonvanishing, not as an irrationality counterexample or evidence about the nonperiodic totient-derived input alpha. Verified the Luca--Tachiya metadata and DOI. No formal theorem, quantifier, finite record, or open status changed, and the paper remains 53 pages."
+          "result": "Separated Appendix D.2 into finite denominator-clearing boundaries, the exact Mobius-square rewriting of S, and comparison transforms. Corrected the two-tier primorial prose so the extra square factor applies only to odd primes, matching the Lean definition at the exceptional prime 2. Removed the collision between the ordinary base-two notation L_2 and the squared-denominator transform by defining L^(2), supplied the fair-coin divisibility probability explicitly, and identified exactly the two identities formalised in GcdMomentCalculus. Verified Postelmans--Van Assche's theorem and metadata; stated that its linear-independence result makes only the constant-weight value L^(2)(1) irrational and does not transfer to L^(2)(mu)=S-1/2. Scoped the Apostol, Merca, and Merca--Schmidt citations to arithmetic-function background and Lambert factorisations. No Lean theorem, quantifier, finite record, or open status changed, and the paper remains 53 pages."
         },
         "active_inconsistencies": [],
         "blocked_decisions": []
@@ -1115,7 +1115,7 @@
             "stern_brocot_run_fibonacci_stability"
           ],
           "status_summary": "Exact coprimality and gcd-moment identities, a Stern–Brocot cylinder law with uniform geometric convergence, and source-level Fibonacci/continuant run stability.",
-          "prior_art_posture": "Classical Lambert-series, convolution, Pillai gcd-sum, probability, and Stern–Brocot background; Postelmans–Van Assche own the cited irrationality theorem for the q-zeta middle row. No priority claim is made for this assembled formal package.",
+          "prior_art_posture": "Classical Lambert-series, convolution, Pillai gcd-sum, probability, and Stern–Brocot background; Postelmans–Van Assche own the cited irrationality theorem for the constant-weight squared-Lambert value. No priority claim is made for this assembled formal package.",
           "primary_narrative_owner": "paper/erdos249-257-main-paper.tex",
           "source_route": "python3 scripts/query_corpus.py --route probabilistic_gcd_geometry",
           "consumer_or_open_obligation": "Recasts #249 and exposes independent gcd-distribution and continued-fraction structure; the run package has no endpoint consumer, and irrationality remains open.",
@@ -7540,7 +7540,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 3603
+        "line": 3609
       }
     },
     {
@@ -7551,7 +7551,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 3614
+        "line": 3620
       }
     },
     {
@@ -7562,7 +7562,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "the half-value counterexample route",
-        "line": 3635
+        "line": 3641
       }
     },
     {
@@ -7573,7 +7573,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 3626
+        "line": 3632
       }
     }
   ],
@@ -8936,7 +8936,7 @@
       "id": "squared_lambert_gcd_moments",
       "label": "Squared-Lambert identities for divisor count and the first gcd moment",
       "status": "proved here",
-      "statement": "The squared-Mersenne Lambert series with weight 1 equals the base-1/2 series of sigma(n)-tau(n), and the series with weight phi equals the base-1/2 series of P(n)-n, where P is Pillai's gcd-sum function. These are the exact divisor-count and first-moment identities for the fair-coin gcd law; the separately cited irrationality of the q-zeta middle row is not claimed as formalised here.",
+      "statement": "The squared-Mersenne Lambert series with weight 1 equals the base-1/2 series of sigma(n)-tau(n), and the series with weight phi equals the base-1/2 series of P(n)-n, where P is Pillai's gcd-sum function. These are the exact divisor-count and first-moment identities for the fair-coin gcd law; the separately cited irrationality of the constant-weight value is not claimed as formalised here.",
       "paper_label": "res:gcdmoment",
       "readme_headline": false,
       "declarations": [
@@ -9081,7 +9081,7 @@
       "id": "mersenne_tail_atom_boundary",
       "label": "Finite Mersenne tail-atom determinant boundary",
       "status": "proved here",
-      "statement": "A pointed Mersenne tail atom has the exact doubling-and-wrap carry law. For any finite atom matrix, clearing the product of its column Mersenne denominators yields the integral numerator determinant; a nonzero cleared weighted minor therefore has absolute value at least one. This is a finite-denominator boundary for an atom-minor route, not an irrationality criterion for S.",
+      "statement": "A periodic Mersenne tail atom has the exact doubling-and-wrap carry law. For any finite atom matrix, clearing the product of its column Mersenne denominators yields the integral numerator determinant; a nonzero cleared weighted minor therefore has absolute value at least one. This is a finite-denominator boundary for an atom-minor route, not an irrationality criterion for S.",
       "paper_label": "res:mersennetailatoms",
       "readme_headline": false,
       "declarations": [
