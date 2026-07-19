@@ -901,15 +901,15 @@
         "schema": "erdos249257-editorial-state/1",
         "scope": "continuous_whole_main_paper_exposition",
         "current_priority": {
-          "id": "main_paper_theorem_status_classifier_audit",
+          "id": "main_paper_internal_vocabulary_definition_audit",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "defect_class": "The opening status table is explicit, but the long theorem and appendix sequence can still make classical formalisation, exact reformulation, finite evidence, conditional implication, local addition, and genuinely open input harder to distinguish theorem by theorem",
-          "statement": "Audit the status sentence surrounding each named theorem and appendix result; ensure that classical or cited results, exact reformulations, conditional statements, finite computations, local additions, and open cofinal inputs remain visibly classified at first reading without inflating the manuscript."
+          "defect_class": "The paper defines its central notation, but the long appendices retain coined labels and development-local compounds whose meaning may be clear only after reading their surrounding construction",
+          "statement": "Audit retained coined terms, italicised first uses, theorem titles, and appendix cross-references; replace internal metaphors when an exact mathematical description is shorter, and define every retained term before it carries an argument."
         },
         "last_verified_wave": {
-          "id": "main_paper_reference_attribution_scope_audit",
+          "id": "main_paper_theorem_status_classifier_audit",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "result": "Audited in-text attribution against the corresponding primary statements, including the older Erdos theorems, Borwein's rational-shift result, Luca--Tachiya's eventual-periodic theorem, Postelmans--Van Assche's q-zeta result, Kovac--Tao's strict-tail Cantor-set observation, and the Wang, Campbell, and Tao--Teravainen preprints. No citation-scope correction was required. Sharpened the opening boundary instead: the contribution is a verified map of two finite-to-cofinal bottlenecks, not evidence that either missing unbounded theorem is close, and the two programmes remain separate after the common coordinates are exposed. The paper remains 53 pages."
+          "result": "Audited every theorem, proposition, and corollary against the surrounding status sentence. The logical fences were already present. Replaced the insider titles 'support-class family' and 'carry anti-compression' with literal result labels, replaced the ambiguous link label 'record denominator exclusion', and moved the Wang antecedent to the first carry-recurrence statement while preserving the boundary that Wang's density theorem and Erdos #260 corollary are not used. The paper remains 53 pages."
         },
         "active_inconsistencies": [],
         "blocked_decisions": []
@@ -7540,7 +7540,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 3596
+        "line": 3602
       }
     },
     {
@@ -7551,7 +7551,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 3607
+        "line": 3613
       }
     },
     {
@@ -7562,7 +7562,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "the half-value counterexample route",
-        "line": 3628
+        "line": 3634
       }
     },
     {
@@ -7573,7 +7573,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 3619
+        "line": 3625
       }
     }
   ],

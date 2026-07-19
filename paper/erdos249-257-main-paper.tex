@@ -541,7 +541,7 @@ supports $A$, at every base $b\ge2$. Each is a formalised case of the \#257
 statement family. None is the universal statement, and none is claimed as new
 mathematics.
 
-\begin{theorem}[support-class family]\label{res:support}
+\begin{theorem}[irrationality for structured supports]\label{res:support}
 For every integer $b\ge2$, the series $\sum_{n\in A} 1/(b^n-1)$ is irrational for
 each of the following infinite supports $A$:
 \begin{enumerate}[label=\textup{(\alph*)},leftmargin=2em]
@@ -696,6 +696,12 @@ coefficient, and rationality is what makes the states \(u_N\) integers.
 Its tail-orbit normal form is Theorem~\ref{res:rigidity}.  A two-element
 support, with its explicit period-six orbit and multiplier \(21\), is worked
 at the end of Appendix~\ref{app:carry-boolean}.
+The recurrence is a necessary consequence of rationality, not a criterion by
+itself.  Wang uses the same forward mechanism for
+\(\gamma(n)=n d_n\)~\cite{wang2026}; Appendix~\ref{app:carry-normal-form}
+separates that antecedent from the generic converse and rigidity statements
+formalised here.  Wang's density theorem and its Erd\H{o}s~\#260 corollary
+are not used.
 
 \begin{corollary}[unbounded-state consequence]
 \label{res:rigidity-unbounded-main}
@@ -2027,7 +2033,7 @@ S \;\ne\; \frac{p}{q}.
 Equivalently, if $S$ is rational then its reduced denominator exceeds that bound.
 \end{theorem}
 \noindent Formalised as the
-\lword{CertificateKernel.lean}{18056}{tsum_totient_div_pow_two_ne_ratCast_of_den_le_79639646646701375323355774875831053}{record denominator exclusion}.
+\lword{CertificateKernel.lean}{18056}{tsum_totient_div_pow_two_ne_ratCast_of_den_le_79639646646701375323355774875831053}{denominator-exclusion theorem}.
 For a fixed window length $K$, the checked prefix and a rigorous tail bound
 define a finite gap certificate.  If a denominator $q$ failed that certificate,
 elementary rearrangement would put some rational $r/q$ in a specific short
@@ -2787,7 +2793,7 @@ separate checked clean cube with second coefficient $-4$
 Thus the result gives neither an unbounded certificate supply nor an
 irrationality criterion for $S$.
 
-\subsection{Unconditional dyadic rank and carry anti-compression}
+\subsection{Unconditional dyadic rank and the rationality-side carry bound}
 \label{app:totient-rank}
 
 The results below again have different logical roles.  The dyadic
@@ -2835,7 +2841,7 @@ explicit separated minor, proved by elementary CRT--Dirichlet arithmetic
 that the formal source checks without analytic continuation.
 Proposition~\ref{res:carryrank} uses exactly this level-by-level form.
 
-\begin{proposition}[finite-level carry anti-compression]\label{res:carryrank}
+\begin{proposition}[rationality forces large carry-section rank]\label{res:carryrank}
 If the totient coefficient series were rational, there would be a
 positive-multiplier tempered integral carry orbit whose canonical
 carry-section span has dimension at least $2^e-1$ for every $e$.
@@ -3869,7 +3875,7 @@ Section~\ref{sec:intro}:
 $\ph(n)\le n$ for the \#249 coefficients, and $f_A(n)\le\tau(n)\le n$ for the
 \#257 support coefficients $f_A(n)=\#\{a\in A:a\mid n\}$.  The results below
 instantiate the criterion on supports.  Its separate totient
-anti-compression consequence belongs to the \#249 rank route in
+carry-rank consequence belongs to the \#249 rank route in
 Appendix~\ref{app:totient-rank}.
 
 \subsection{Exact \#257 coordinates: Boolean--M\"obius carry certificates}
