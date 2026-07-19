@@ -17,7 +17,12 @@
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta}
 \usepackage[colorlinks=true,linkcolor=linkinternal,urlcolor=linkexternal,citecolor=linkinternal]{hyperref}
+% Reader navigation lives in the PDF outline (every viewer's sidebar), not an
+% inline contents page: the boundary contract front-loads the first four pages
+% with the paper's exact statements, and an inline contents block would push
+% them out of that first-minute window.
 \hypersetup{
+  bookmarksnumbered=true,bookmarksopen=true,bookmarksopenlevel=1,
   pdftitle={Tail Certificates and Achievement-Set Geometry: Lean-checked exact reductions for Erdős 249 and the half-value branch of Erdős 257},
   pdfauthor={Will Cook},
   pdfsubject={Main expository paper for the Erdős 249/257 Lean formalisation}, pdflang={en-GB}, pdfkeywords={irrationality, Euler totient, Lambert series, achievement sets, Lean 4},
