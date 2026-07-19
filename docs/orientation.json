@@ -56,7 +56,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "Erd\\H{o}s \\#249",
-    "line": 3578
+    "line": 3579
    }
   },
   {
@@ -67,7 +67,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "unbounded certificate supply",
-    "line": 3589
+    "line": 3590
    }
   },
   {
@@ -78,7 +78,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "the half-value counterexample route",
-    "line": 3610
+    "line": 3611
    }
   },
   {
@@ -89,7 +89,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "universal Erd\\H{o}s \\#257",
-    "line": 3601
+    "line": 3602
    }
   }
  ],
@@ -559,18 +559,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_scaled_diagonal_notation_plain_language_audit",
+   "id": "main_paper_totient_candidate_boundary_map_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "The first C.2 enclosure displays a code-like scaledDiagonal(H) and refers to c_H only as an explicit coefficient in the formal source, so the paper does not yet tell a reader what quantity is scaled or where the scale enters",
-   "statement": "Replace the code-like display with self-contained mathematical notation: define the scaled diagonal difference and its coefficient c_H in the paper, then restate the one-way enclosure without weakening its exact tail identity or sufficient-only separation conclusion."
+   "defect_class": "Appendix C.3 introduces the three-rank band, affine escape, fresh-prime deficit, one-bit lift, parity, prime-adjunction, scalar-localisation, and square-CRT mechanisms before a cold reader can distinguish candidate sufficient inputs, exact correction identities, and counterexamples to shortcuts",
+   "statement": "Add a compact C.3 route map assigning every mechanism to one of three roles: an unproved sufficient supply, an exact decomposition that exposes what must be controlled, or a no-go result that rules out a specific shortcut without ruling out the whole strategy."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "ebc98ee71f6819bd9fe344a0bb343542c604e533",
-  "committed_navigation_snapshot": "dd0e46f6a104b64d777d69ef20f68775ee29dd4c",
-  "main_paper_source_digest": "sha256:3e7bcda0a98c6b4367a3a7b308d9e44857aa3208992031b7a4121e585d31fbd9"
+  "committed_navigation_snapshot": "b881cd0b46e905669e2b36c297553913c00367f4",
+  "main_paper_source_digest": "sha256:06e8fa18c80934f47ac9ef83f04bf356f5c665472e4d872a6d5deab8282f3f16"
  },
  "reading_routes": [
   {
