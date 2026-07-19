@@ -267,9 +267,9 @@ The formal source proves the exact chain
    \text{ with }\mathsf{Sep}(h,N,L).
 \end{split}
 \]
-Here \(\mathsf{Sep}(h,N,L)\) is a finite residue computation with a
-rigorous tail allowance.  At fixed \(h,N\), some depth succeeds exactly when
-the tail difference is non-integral; integrality of one positive-shift
+Here \(\mathsf{Sep}(h,N,L)\) is a retained \(L\)-place residue computation
+with rigorous tail allowance.  At fixed \(h,N\), some \(L\) succeeds exactly
+when the tail difference is non-integral; one integral positive-shift
 difference forces \(S\) to be rational.  These statements are the
 \lword{LcmConeFlatness.lean}{386}{irrational_totient_series_iff_all_tail_diffs_nonintegral}{tail-difference equivalence},
 \lword{LcmConeFlatness.lean}{399}{irrational_totient_series_iff_pointwise_certificates}{pointwise certificate equivalence},
@@ -2222,9 +2222,9 @@ $N_0$, there exist $N\ge N_0$ and $L$ with $\mathsf{Sep}(h,N,L)$.
 \lword{LcmConeFlatness.lean}{412}{irrational_totient_series_iff_certificate_supply}{certificate-supply equivalence}.
 
 Every multiple of an eventual period is again a period, and every fixed
-\(h\) divides \(M_t\) for all \(t\geq h\).  The least common multiple
-therefore provides an exact one-parameter form: the single diagonal
-family \((M_t,M_t)\) tests every candidate period at once.
+\(h\) divides \(M_t\) for all \(t\geq h\).  The exact \emph{lcm diagonal}
+simply sets both period and tail location to \(M_t\); this one-parameter
+family tests every candidate period.
 
 \begin{theorem}[exact diagonal characterisation]\label{res:diag}
 The following are equivalent:
@@ -2252,7 +2252,7 @@ lcm-height change endpoint $2\le t\le64$ (that is, $M_{t-1}<M_t$), namely
 t\in\{1,2,3,4,5,7,8,9,11,13,16,17,19,23,25,27,29,31,32,37,41,43,
 47,49,53,59,61,64\};
 \]
-\item three finite menus of tails that cannot all share one fractional part.
+\item three finite lists of tails that cannot all share one fractional part.
 \end{itemize}
 \end{example}
 \noindent These four classes are formalised by the
@@ -2273,8 +2273,8 @@ while the omitted-tail allowance is $12+1+16+2=31$.  Hence
 \]
 which is exactly $\mathsf{Sep}(1,12,16)$ and therefore proves
 $R_{13}-R_{12}\notin\Z$.  A pairwise certificate names a non-integral
-difference; a joint-menu certificate proves that one exists within its finite
-menu.  Neither forms an unbounded family.
+difference; a joint certificate proves that one exists in a finite list.
+Neither forms an unbounded family.
 
 \subsection{What remains open}\label{sec:249-open}
 
@@ -2335,9 +2335,9 @@ $R_{2M_t}-R_{M_t}$: integrality is equivalent to one residue-class condition
 at each $t$, and missing that class at unbounded $t$ is equivalent to the
 irrationality of $S$.
 
-\paragraph{Cone flatness and completeness.} For fixed $t$, call the tail
-locations \(\{kM_t:k\ge1\}\) the \emph{lcm cone}.  Rationality eventually
-forces one fractional part across this sequence.
+\paragraph{Cone flatness and completeness.} For fixed $t$, the \emph{lcm
+cone} is the sequence \(\{kM_t:k\ge1\}\).  Cone flatness means its tails
+share one fractional part, as rationality eventually forces.
 
 \begin{proposition}[cone flatness]\label{res:flat}
 If $S$ is rational, then for every sufficiently large $t$ there is
@@ -2364,8 +2364,8 @@ predicate.  It is therefore a refuter, not a complete decision procedure.
 \]
 Write the explicitly summed M\"obius contribution as the reduced rational
 $Q_t=a_t/d_t$ and call it the \emph{M\"obius shadow}.  Define the remaining
-term $F_t=D_t-Q_t$ to be the \emph{foreign defect}; it contains exactly the
-channels absent from that explicit sum, so no part of $D_t$ is discarded.
+term $F_t=D_t-Q_t$ as the \emph{foreign defect}: exactly the omitted
+divisor-indexed \emph{channels}.  No part of $D_t$ is discarded.
 The \emph{full target} is the residue class of $-a_t$ modulo $d_t$:
 \[
  \mathsf{Hit}(t)
@@ -2637,8 +2637,8 @@ This is one finite certificate, not an unbounded supply.
 \subsection{Candidate unbounded inputs and no-go boundaries}
 \label{app:totient-boundaries}
 
-Read this subsection as a menu, not a proof sequence.  Its only proposed
-positive input is the three-rank hypothesis: if it holds at arbitrarily large
+This subsection catalogues independent candidate routes, not a proof
+sequence.  Only the three-rank hypothesis is a proposed positive input: if it holds at arbitrarily large
 power-of-two scales, then $S$ is irrational, but that occurrence statement is
 unproved.  The affine, fresh-prime, and one-bit results rewrite exact finite
 quantities; the zero orbit shows that correction-size bounds alone cannot force
@@ -2670,7 +2670,7 @@ $|y_j|<4^j e$ for every $j$ even when every $|c_j|<2e$,
 Appendix~C.1 has an endpoint split suited to curvature tests.  Retain only the prime
 support already present at $H$ in the two endpoints $H+s$ and $2H+s$, and
 write the resulting discrepancy from the actual totient as an endpoint
-deficit.  Each such deficit is nonnegative.  The actual diagonal increment
+deficit, a nonnegative difference attributed to fresh prime support.  The actual diagonal increment
 then equals the old-prime increment plus the lower deficit minus the upper
 deficit.  The second and five-point curvature operators preserve this exact
 split; the latter has coefficient row $[-8,4,2,1,1]$.  Consequently, the old
@@ -3506,8 +3506,8 @@ residue.  Define
   \sigma_t=\min\bigl(d_t-2^{m_t-5},
     (2^{m_t}-2^{m_t-5})-d_t\bigr)\in\Z.
 \]
-This is the signed distance from the nearer edge of the central band below:
-it is nonnegative exactly on that band and negative outside it.
+This signed band-edge distance, called \emph{slack} below, is nonnegative
+exactly on the central band and negative outside it.
 
 \begin{proposition}[fixed-depth central-band equivalence]\label{res:slackfrontier}
 For every $t\ge1$, the residue \(d_t\) lies in the central band
