@@ -901,15 +901,15 @@
         "schema": "erdos249257-editorial-state/1",
         "scope": "continuous_whole_main_paper_exposition",
         "current_priority": {
-          "id": "main_paper_table_and_figure_standalone_readability_audit",
+          "id": "main_paper_first_use_definition_and_internal_vocabulary_audit",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "defect_class": "A status table, dependency diagram, or comparison figure may be correct in sequence but misleading when read alone if its caption omits the logical direction, open boundary, or meaning of a compact symbol. Public readers often scan these objects before reading the surrounding proof narrative.",
-          "statement": "Audit every table, figure, and displayed dependency map for standalone readability. Ensure each caption or immediate lead-in identifies the mathematical objects, distinguishes implication from equivalence and finite evidence from cofinal supply, expands nonstandard compact labels once, and does not duplicate surrounding prose. Preserve exact claims and the 53-page limit."
+          "defect_class": "A term can be locally familiar to the authors yet opaque to an external reader when its first visible use precedes its definition, when a module-local nickname leaks into the paper, or when ordinary mathematical language and project-specific vocabulary are not distinguished. Cross-references do not repair an undefined first encounter.",
+          "statement": "Audit the paper in reading order for every nonstandard noun phrase, abbreviation, named coordinate, and compact branch label. At first visible use, define it in ordinary mathematical language or replace it with a standard term; retain specialised vocabulary only when it compresses repeated mathematics; keep definitions close to use without duplicating the notation section; preserve exact claims and the 53-page limit."
         },
         "last_verified_wave": {
-          "id": "main_paper_external_link_reachability_and_source_pin_audit",
+          "id": "main_paper_table_and_figure_standalone_readability_audit",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "result": "Extracted 416 URI annotations from the 53-page PDF, including 382 rendered Lean-source annotations for 298 unique declaration targets across 89 files. Every Lean target uses the reachable public checkpoint ebc98ee71f6819bd9fe344a0bb343542c604e533; every module exists at that commit; every line anchor is in range; and no old or foreign repository blob ref remains. The repository, pinned commit, public tag, Erdős catalogue, arXiv, archival PDF, and DOI routes resolve; four DOI destinations impose publisher bot-policy responses after valid resolution rather than exposing broken identifiers. Extended scripts/check_rendered_paper_boundary.py so the full rendered check now extracts PDF URI annotations, requires every authored Lean coordinate to survive rendering, and rejects stale or unpinned repository blob targets. No mathematical prose or claim changed."
+          "result": "Audited both visible tables, the transform figure and caption, and every displayed implication or dependency map. Retained the Lambert-status table, transform figure, final-skip status display, Boolean-carry chain, wrap routes, and totient certificate chain because their immediate prose already defines the objects and distinguishes equivalence from implication, finite evidence from cofinal supply, and status from treatment. Strengthened the opening table headers to say mathematical status and treatment in this paper; replaced the internal diagram label second-channel separation with residual--tail separation; and replaced appendix-section shorthand with reader-facing unbounded witnesses and exclusions-and-tail-bound labels. No formula, logical direction, hypothesis, conclusion, source target, attribution, or status changed. The affected pages render cleanly without overfull boxes, and the paper remains 53 pages."
         },
         "active_inconsistencies": [],
         "blocked_decisions": []
