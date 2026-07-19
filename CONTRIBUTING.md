@@ -45,7 +45,9 @@ lake exe cache get                 # fetch the prebuilt Mathlib cache
 python3 scripts/test_dependency_lock_contract.py  # verify the pinned Lean/Mathlib lock
 lake build                         # elaborate and kernel-check the library
 lake build Examples                # build the downstream consumer example
+python3 scripts/refresh_projections.py  # regenerate every projection in dependency order
 python3 scripts/check_release.py   # cross-surface release checks
+python3 scripts/test_projection_checkout_independence.py  # projections ignore the checkout shape
 python3 scripts/build_module_graph.py --check  # exact public Lean import graph
 python3 scripts/refresh_source_coordinates.py --check  # claim/paper line pins
 python3 scripts/test_methodology_contract.py  # adversarial claim-transition fixtures
@@ -66,3 +68,14 @@ cold-clone baseline-plus-adversarial program. A failure therefore blocks the
 release gate. The standalone quick and full comprehension commands remain
 useful while editing because they produce narrower readability receipts
 without running the entire release check.
+
+Editing `docs/claims.json`, `docs/declaration_atlas.json`, `docs/methodology.json`
+or the paper sources changes what the projections should say, so run
+`scripts/refresh_projections.py` and commit whatever it rewrites together with
+the edit that caused it. Two failure modes make this worth doing as one motion.
+Regenerating only some builders leaves the rest stale: on 2026-07-19 a run of
+paper edits refreshed the corpus descriptor but not the source coordinates, and
+the paper anchors in `docs/claims.json` stayed pinned to pre-edit line numbers
+for ten commits. And `docs/corpus_descriptor.json` records the last commit that
+touched its inputs, which it cannot know while it is being written, so a content
+commit pushed on its own is always red until its refresh lands.

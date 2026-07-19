@@ -1064,8 +1064,8 @@ def main() -> int:
     )
 
     descriptor = json.loads(read(ROOT / "docs" / "corpus_descriptor.json"))
-    check(descriptor.get("schema") == "erdos249257-corpus-descriptor/3",
-          "corpus descriptor must use schema erdos249257-corpus-descriptor/3")
+    check(descriptor.get("schema") == "erdos249257-corpus-descriptor/4",
+          "corpus descriptor must use schema erdos249257-corpus-descriptor/4")
     check(descriptor.get("release_provenance") == public_projection,
           "corpus descriptor release provenance drifted from docs/claims.json")
     descriptor_path = ROOT / "docs" / "corpus_descriptor.json"

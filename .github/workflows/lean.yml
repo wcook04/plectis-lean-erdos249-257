@@ -127,6 +127,14 @@ jobs:
       - name: Cross-surface release checks (proof trust, claims, projections)
         if: ${{ !cancelled() }}
         run: python3 scripts/check_release.py
+      # The freshness comparison above is only meaningful if a projection is a
+      # pure function of the committed tree.  This job checks `main` out as a
+      # local branch and a pull request out as a topic branch, so a builder that
+      # consults the refs a checkout carries renders differently in the two and
+      # fails one of them with no file having changed.
+      - name: Test projections do not depend on the checkout shape
+        if: ${{ !cancelled() }}
+        run: python3 scripts/test_projection_checkout_independence.py
       - name: Test immutable release source resolution
         if: ${{ !cancelled() }}
         run: python3 scripts/test_release_source_identity.py

@@ -1,0 +1,99 @@
+#!/usr/bin/env python3
+# SPDX-FileCopyrightText: 2026 Will Cook
+# SPDX-License-Identifier: Apache-2.0
+"""Regenerate every committed projection in dependency order, then verify.
+
+``check_release.py`` regenerates six projections with ``--check`` and fails if
+any committed copy is stale. Refreshing them by hand means remembering six
+commands in the right order, and forgetting one is not hypothetical: on
+2026-07-19 a run of paper edits refreshed the corpus descriptor and the
+publication entry packet but never re-ran ``refresh_source_coordinates.py``, so
+the paper anchors in ``docs/claims.json`` stayed pinned to pre-edit line numbers
+for ten commits and release-surfaces was red the whole way.
+
+Run this after editing claims, the atlas, the methodology, or the paper, and
+commit whatever it rewrites together with the edit that caused it. Pushing the
+content commit on its own leaves a commit in history that continuous integration
+will mark red, because ``docs/corpus_descriptor.json`` records the last commit
+that touched its inputs and cannot cite the commit it is being committed in.
+"""
+
+from __future__ import annotations
+
+import subprocess
+import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
+
+# Dependency order, mirroring the sequence check_release.py verifies: the atlas
+# and module graph read the Lean sources, the source coordinates read the atlas
+# and the paper, and the corpus descriptor reads all of them.
+BUILDERS = (
+    "build_methodology.py",
+    "build_module_graph.py",
+    "build_declaration_atlas.py",
+    "refresh_source_coordinates.py",
+    "build_corpus_descriptor.py",
+    "build_paper_module_aliases.py",
+)
+
+
+def tracked_diff() -> set[str]:
+    result = subprocess.run(
+        ["git", "diff", "--name-only"], cwd=ROOT, capture_output=True, text=True, check=False
+    )
+    return {line for line in result.stdout.split("\n") if line}
+
+
+def main() -> int:
+    before = tracked_diff()
+
+    for builder in BUILDERS:
+        script = ROOT / "scripts" / builder
+        if not script.is_file():
+            print(f"missing builder: scripts/{builder}")
+            return 1
+        result = subprocess.run(
+            [sys.executable, str(script)], cwd=ROOT, capture_output=True, text=True, check=False
+        )
+        if result.returncode != 0:
+            print(f"scripts/{builder} failed:")
+            print(result.stderr.strip() or result.stdout.strip())
+            return 1
+
+    stale = []
+    for builder in BUILDERS:
+        result = subprocess.run(
+            [sys.executable, str(ROOT / "scripts" / builder), "--check"],
+            cwd=ROOT,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        if result.returncode != 0:
+            stale.append((builder, result.stdout.strip() or result.stderr.strip()))
+
+    if stale:
+        print("projections did not converge after a full refresh:")
+        for builder, message in stale:
+            print(f"  scripts/{builder}: {message}")
+        print("this means a builder is not a pure function of the committed tree")
+        return 1
+
+    rewritten = sorted(tracked_diff() - before)
+    if rewritten:
+        print("refreshed:")
+        for path in rewritten:
+            print(f"  {path}")
+        print(
+            "commit these together with the edit that caused them; a content commit "
+            "pushed without its refreshed projections is red in continuous integration"
+        )
+    else:
+        print("refresh_projections: every projection was already current")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

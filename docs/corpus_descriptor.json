@@ -1,5 +1,5 @@
 {
-"schema": "erdos249257-corpus-descriptor/3",
+"schema": "erdos249257-corpus-descriptor/4",
 "artifact_role": "self_describing_external_mathematical_corpus_root",
 "corpus_id": "plectis_lean_erdos249_257_public",
 "release_provenance": {
@@ -38,8 +38,6 @@
 "navigation_snapshot": {
 "commit": "dc6cbb62eac7f8bf12b9af0257bc7f679f615ce8",
 "authority_role": "machine_readable_navigation_anchor",
-"publication_state": "main_history_snapshot",
-"published_ref": "main",
 "repository_resolution": "https://github.com/wcook04/plectis-lean-erdos249-257/tree/dc6cbb62eac7f8bf12b9af0257bc7f679f615ce8"
 },
 "content": {
@@ -62,7 +60,7 @@
 },
 "bounded_orientation": {
 "path": "docs/orientation.json",
-"content_digest": "sha256:a5f9458f908c11fc99d19517c5930fe08306813932af4e560cf1161d01de0522"
+"content_digest": "sha256:c7dba68e453c12d454261e113ee67d885325e6b48d4d7d502e7407a2fd9dd54b"
 },
 "human_exposition": {
 "source_path": "paper/erdos249-257-main-paper.tex",

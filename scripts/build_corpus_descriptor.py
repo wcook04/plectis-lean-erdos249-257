@@ -72,29 +72,6 @@ def git(*args: str, check: bool = True) -> str:
     return completed.stdout.strip() if completed.returncode == 0 else ""
 
 
-def is_ancestor(ancestor: str, descendant: str) -> bool:
-    return (
-        subprocess.run(
-            ["git", "merge-base", "--is-ancestor", ancestor, descendant],
-            cwd=ROOT,
-            capture_output=True,
-            text=True,
-            check=False,
-        ).returncode
-        == 0
-    )
-
-
-def resolve_main_commit() -> str:
-    """Resolve main in developer clones and detached GitHub PR checkouts."""
-
-    for ref in ("refs/heads/main", "refs/remotes/origin/main"):
-        commit = git("rev-parse", "--verify", f"{ref}^{{commit}}", check=False)
-        if commit:
-            return commit
-    return ""
-
-
 def build_orientation(claims: dict[str, Any], atlas: dict[str, Any]) -> dict[str, Any]:
     """Project a bounded first-read capsule from the exhaustive owners."""
     principal_claims = []
@@ -240,7 +217,7 @@ def build_orientation(claims: dict[str, Any], atlas: dict[str, Any]) -> dict[str
         },
         "external_registration": {
             "path": "docs/corpus_descriptor.json",
-            "schema": "erdos249257-corpus-descriptor/3",
+            "schema": "erdos249257-corpus-descriptor/4",
             "maximum_bytes": 64_000,
             "inline": ["release_identity", "content_digests", "principal_claim_handles", "root_module_topology"],
             "expands_to": [
@@ -389,7 +366,7 @@ def render_orientation_markdown(orientation: dict[str, Any]) -> str:
             "## External corpus registration",
             "",
             "[`docs/corpus_descriptor.json`](corpus_descriptor.json) uses schema",
-            "`erdos249257-corpus-descriptor/3`. The release gate keeps it below 64 KB.",
+            "`erdos249257-corpus-descriptor/4`. The release gate keeps it below 64 KB.",
             "It carries release identities, content digests, principal claim and declaration",
             "handles, and the root module topology. Complete claims, module imports,",
             "declaration prose, methodology, both authored papers, and the paper-to-Lean",
@@ -570,12 +547,14 @@ def build() -> dict[str, Any]:
         "docs/declaration_atlas.json",
         "docs/methodology.json",
     )
-    local_main = resolve_main_commit()
-    publication_state = (
-        "main_history_snapshot"
-        if local_main and is_ancestor(navigation_commit, local_main)
-        else "detached_navigation_snapshot"
-    )
+    # The descriptor deliberately records no publication state for the
+    # navigation snapshot. Whether a snapshot commit is reachable from main is a
+    # property of the repository at read time, not of this tree: it depends on
+    # which refs the checkout carries, and it flips when a pull request merges
+    # without any file changing. Consulting origin/main as well as a local main
+    # narrows the gap but does not close it, because a topic branch and the main
+    # branch that later contains it still disagree. Readers resolve publication
+    # state from ``repository_resolution`` instead.
 
     orientation = build_orientation(claims, atlas)
     root_module = next(row for row in atlas["modules"] if row["path"] == "Erdos249257.lean")
@@ -587,7 +566,7 @@ def build() -> dict[str, Any]:
 
     repository = str(release["repository"])
     return {
-        "schema": "erdos249257-corpus-descriptor/3",
+        "schema": "erdos249257-corpus-descriptor/4",
         "artifact_role": "self_describing_external_mathematical_corpus_root",
         "corpus_id": "plectis_lean_erdos249_257_public",
         "release_provenance": release["public_projection"],
@@ -615,8 +594,6 @@ def build() -> dict[str, Any]:
             "navigation_snapshot": {
                 "commit": navigation_commit,
                 "authority_role": "machine_readable_navigation_anchor",
-                "publication_state": publication_state,
-                "published_ref": "main" if publication_state == "main_history_snapshot" else None,
                 "repository_resolution": f"{repository}/tree/{navigation_commit}",
             },
             "content": {

@@ -158,7 +158,7 @@ settle the open proposition attached to it.
 ## External corpus registration
 
 [`docs/corpus_descriptor.json`](corpus_descriptor.json) uses schema
-`erdos249257-corpus-descriptor/3`. The release gate keeps it below 64 KB.
+`erdos249257-corpus-descriptor/4`. The release gate keeps it below 64 KB.
 It carries release identities, content digests, principal claim and declaration
 handles, and the root module topology. Complete claims, module imports,
 declaration prose, methodology, both authored papers, and the paper-to-Lean
