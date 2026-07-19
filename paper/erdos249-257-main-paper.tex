@@ -652,8 +652,8 @@ Proposition~\ref{res:death} shows that the greedy recursion in exact rational
 arithmetic agrees step by step with the real recursion and gives sound finite
 certificates of nonmembership.
 For the half-value question, Theorem~\ref{res:greedy} makes the candidate
-support canonical, while compactness allows one to pass from cofinal finite
-approximations to a point of \(\mathcal A\).  The measure-one statement does
+support canonical, while compactness passes from finite approximations at
+arbitrarily large depths to a point of \(\mathcal A\).  The measure-one statement does
 not decide whether \(1/2\in\mathcal A\); a finite certificate can prove
 nonmembership, but survival through any finite depth proves nothing about
 membership.  These consequences use the same greedy coordinates but are not
@@ -692,10 +692,11 @@ Then \(u_N=vT_{f_A}(c+N)\) is a positive integer for every \(N\), and
 \end{theorem}
 \noindent This is formalised by
 \lword{RationalSupportCarrySkeleton.lean}{668}{exists_shifted_odd_tail_nat_states_of_support_fraction}{the shifted natural-state theorem}.
-The recurrence is binary long division: since
+Here \(u_N\) is the scaled remaining binary tail, or carry.
+Equation~\textup{(4.1)} is binary long division: since
 \(2T_f(M)=f(M+1)+T_f(M+1)\), doubling the scaled tail separates the next
 coefficient, and rationality is what makes the states \(u_N\) integers.
-Its tail-orbit normal form is Theorem~\ref{res:rigidity}.  A two-element
+A two-element
 support, with its explicit period-six orbit and multiplier \(21\), is worked
 at the end of Appendix~\ref{app:carry-boolean}.
 The recurrence is a necessary consequence of rationality, not a criterion by
@@ -711,7 +712,7 @@ Under the hypotheses of Theorem~\ref{res:rigidity-main}, if \(A\) is
 infinite, then \((u_N)\) is unbounded.
 \end{corollary}
 \noindent This is formalised by
-\lword{RationalSupportCarrySkeleton.lean}{2377}{exists_unbounded_shifted_odd_tail_nat_state_of_support_fraction}{the fraction-facing unbounded-state theorem};
+\lword{RationalSupportCarrySkeleton.lean}{2377}{exists_unbounded_shifted_odd_tail_nat_state_of_support_fraction}{the unbounded-state theorem};
 see also Theorem~\ref{res:unbounded}.
 
 \begin{corollary}[sublogarithmic coverage consequence]
@@ -765,11 +766,9 @@ intervals containing no support divisor, and constrain the reciprocal mass
 according to whether the reduced denominator has an odd factor.  They are
 independent necessary consequences of one rationality premise, not a
 contradiction.
-Appendices~\ref{app:carry-normal-form}--\ref{app:carry-boolean} supply the
-common recurrence and Boolean certificate; Appendices~\ref{app:carry-sublog}
-and~\ref{app:carry-mass} supply the independent filters.  No corollary above
-appears as a hypothesis of another; their appendix proofs do share the carry
-machinery, in the order displayed in Appendix~\ref{app:carry-mass}.
+The corresponding appendices develop the common recurrence and Boolean
+certificate, then the sublogarithmic and reciprocal-mass filters.  The
+corollaries share carry machinery but are not hypotheses of one another.
 
 \begin{corollary}[Boolean--M\"obius orbit form of universal \#257]
 \label{res:universal-boolean-obstruction}
@@ -779,19 +778,17 @@ Boolean--M\"obius carry certificate for \(p/q\) reconstructs a finite
 support.  Equivalently, the universal assertion fails exactly when one such
 certificate reconstructs an infinite support.
 \end{corollary}
-\noindent Concretely, a certificate is an integer sequence \(U\) with
+\noindent Concretely, the name means an integer carry orbit \(U\) with
 \(U(0)=p\), positive states bounded by \(q(2\sqrt N+4)\), and
 \(q\mid 2U(N)-U(N+1)\).  Dividing these differences by \(q\) gives an
 integer coefficient sequence \(f_U\).  Its Boolean M\"obius condition is
 \((\mu*f_U)(n)\in\{0,1\}\), and inversion reconstructs the support as
 \(A_U=\{n\geq1:(\mu*f_U)(n)=1\}\).  These are exactly the conditions in
-Theorem~\ref{res:carrycert}.  That theorem is the Lean-checked
-fraction-by-fraction equivalence
+Theorem~\ref{res:carrycert}, the Lean-checked equivalence
 \lword{BooleanMobiusCarry.lean}{948}{exists_normalized_support_fraction_iff_exists_booleanMobiusCarry}{between supports and carry certificates};
-the corollary merely quantifies it over \(p/q\) and separates finite from
-infinite reconstructed supports.  This is an exact reformulation, not a
-finite algorithm: the orbit condition and the support it reconstructs are
-infinite objects.
+the corollary quantifies it over \(p/q\) and separates finite from infinite
+supports.  This remains an exact reformulation over infinite objects, not a
+finite algorithm.
 
 \subsection{The target \(1/2\)}
 
@@ -848,8 +845,9 @@ The next definition replaces the real greedy calculation by an integer one.
 A \emph{row} \(s\) keeps the ranks \(2,\ldots,s-1\), rescales every weight by
 \(4^s\), rounds down, and uses a target \(2^s\) below the rescaled value
 \(4^s/2\).  The resulting zero--one word records the finite take/skip
-decisions; its last entry is the terminal bit used in
-Theorem~\ref{res:halfmembership}.
+decisions across adjacent cutoffs; this aligned family is the ``seam.''  Its
+last entry records whether rank \(s-1\) is taken or skipped and is the terminal
+bit used in Theorem~\ref{res:halfmembership}.
 
 \begin{definition}[finite greedy seam and terminal bit]\label{def:terminal-bit}
 For an integer \(s\geq6\), set
@@ -872,7 +870,7 @@ Starting from \(R_{s,2}=K_s\), define successively, for \(2\leq d<s\),
 \]
 The Boolean word \((\beta_{s,2},\ldots,\beta_{s,s-1})\) is the
 \emph{finite greedy seam at row \(s\)}, and
-\(\tau_s=\beta_{s,s-1}\) is its terminal bit.
+\(\tau_s=\beta_{s,s-1}\) is its terminal bit (zero means a final skip).
 \end{definition}
 
 \noindent For example, at \(s=7\) we have \(K_7=8064\), and the run takes
@@ -925,7 +923,7 @@ negative M\"obius indices overshoots \(1/2\) by at least \(1/63\).
 Proposition~\ref{res:mobiussignnogo} gives the exact sign-separation identity.
 
 Theorem~\ref{res:halfmembership} therefore leaves one question: does the
-greedy orbit of \(1/2\) skip cofinally?  It does not answer that question.  The
+greedy orbit of \(1/2\) skip beyond every bound?  It does not answer this.  The
 next subsection characterises nonmembership by a final skip and identifies
 what would be required to exclude it.
 
@@ -948,14 +946,13 @@ cheapest strict overshoot of the target.
 The recurrence from row \(s\) to row \(s+1\) has three forms:
 \[
 \begin{aligned}
- \textup{upper:}&\quad G_{s+1}=H_s,\\
- \textup{middle:}&\quad G_{s+1}=G_s,\\
- \textup{right:}&\quad G_{s+1}=G_s\cup\{s\}.
+ \textup{reset (upper):}&\quad G_{s+1}=H_s,\\
+ \textup{keep and skip (middle):}&\quad G_{s+1}=G_s,\\
+ \textup{keep and take (right):}&\quad G_{s+1}=G_s\cup\{s\}.
 \end{aligned}
 \]
-An upper step resets the selected ranks to \(H_s\).  A middle step keeps
-\(G_s\) and skips the new rank \(s\); a right step keeps \(G_s\) and takes
-that rank.  A final skipped exponent \(D\) is therefore an upper or middle
+The parenthetical names are the compact labels used in the formal source.
+A final skipped exponent \(D\) is therefore an upper or middle
 transition followed only by right transitions.  The terminal bit at row
 \(13\) is false.  Consequently, if the seam is eventually right, its last
 false terminal row satisfies \(D\geq13\); the lower bound comes from this
