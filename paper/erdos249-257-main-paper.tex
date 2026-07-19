@@ -3366,8 +3366,7 @@ geometry.  They are unconditional geometric consequences and do not imply
 the open certificate supply.
 
 \paragraph{Reduced directions and cylinder masses.}
-The fair-coin pair has a particularly rigid distribution after division by
-its gcd.  For positive coprime \(a,b\), put
+Divide the fair-coin pair by its gcd.  For positive coprime \(a,b\), put
 \[
   \nu(a,b)=\frac1{2^{a+b}-1},
   \qquad
@@ -3375,9 +3374,9 @@ its gcd.  For positive coprime \(a,b\), put
 \]
 The first quantity is the probability that the reduced direction is
 \((a,b)\); the second is the mass of the Stern--Brocot cylinder rooted at
-\((a,b)\).  Let \(M_d(a,b)\) be the total stop mass in the first \(d\)
-generations below that root, where a node \((u,v)\) has stop mass
-\((2^{u+v}-1)^{-1}\) and children \((u+v,v)\), \((u,u+v)\).
+\((a,b)\).  Let \(M_d(a,b)\) be the sum, over the first \(d\) generations
+below that root, of the node contribution \((2^{u+v}-1)^{-1}\).  The children
+of \((u,v)\) are \((u+v,v)\) and \((u,u+v)\).
 
 \begin{proposition}[reduced-direction normalisation]\label{res:directionnormalization}
 The reduced directions form a probability distribution,
@@ -3409,7 +3408,7 @@ The recursion is the elementary rational identity obtained after setting
 \(A=2^a\), \(B=2^b\); the quantitative point is that the two children retain
 at most two thirds of their parent's mass.
 
-\paragraph{Alternating-run stability.}
+\paragraph{Run lengths and arithmetic height.}
 Write an alternating Stern--Brocot word as \(r\) nonempty runs of lengths
 \(n_i=1+e_i\), with \(e_i\ge0\).  Starting with \(P_\varnothing=(1,1)\), define
 \[
@@ -3420,7 +3419,7 @@ Write an alternating Stern--Brocot word as \(r\) nonempty runs of lengths
 Thus \(H\) is the arithmetic height of the primitive pair reached by the
 word.  Let \(F_0=0,F_1=1\).
 
-\begin{theorem}[Fibonacci--continuant height stability]
+\begin{theorem}[Fibonacci height bound and exact run-length defects]
 \label{res:sternbrocotruns}
 Every \(r\)-run word satisfies
 \[
@@ -3434,8 +3433,9 @@ and \(H(1,\ldots,1)=F_{r+3}\).  A defect confined to position
    \underbrace{1,\ldots,1}_{r-i-1})
  =F_{r+3}+F_{i+2}F_{r-i+1}e.
 \]
-More generally, the checked recurrence gives the full positive multiaffine
-continuant defect.
+More generally, the excess over $F_{r+3}$ is a polynomial in the $e_i$, with
+nonnegative coefficients and degree at most one in each variable; the checked
+recurrence gives every mixed term.
 \end{theorem}
 \noindent Formalised:
 \lword{SternBrocotRunGeometry.lean}{185}{runHeight_fib_lower}{Fibonacci height lower bound},
@@ -3452,25 +3452,24 @@ The two orientations with one nonempty Stern--Brocot run have total mass
 \noindent This is the
 \lword{SternBrocotRunGeometry.lean}{467}{oneRunMass_eq_half}{one-run mass}.
 
-\begin{proposition}[unit-run clearing-exponent sum]\label{res:rundenominator}
-Define the clearing-exponent sum along the all-unit \(r\)-run by
-\(E_r=\sum_{j=0}^{r-1}F_{j+2}\).  Then \(E_r=F_{r+3}-2\).
+\begin{proposition}[unit-run bookkeeping exponent]\label{res:rundenominator}
+Along the all-unit \(r\)-run, let
+\(E_r=\sum_{j=0}^{r-1}F_{j+2}\) be the sum of the invariant-coordinate
+exponents.  Then \(E_r=F_{r+3}-2\).
 \end{proposition}
 \noindent This is the
 \lword{SternBrocotRunGeometry.lean}{491}{naturalRunDenominatorExponent_add_two}{unit-run exponent sum}.
-Here \(E_r\) is the bookkeeping sum for the invariant-coordinate exponents
-encountered along the spine; the proposition does not identify a reduced
-denominator of the probability mass or of \(S\).
+This identity does not make $E_r$ a reduced-denominator exponent for the
+probability mass or for \(S\).
 
 The Lambert and M\"obius identities used above are classical
 ~\cite{apostol,merca2017,mercaschmidt}, and the mediant language goes back to
 Farey~\cite{farey1816}.  Postelmans--Van Assche supply the cited irrationality
 of the constant-weight squared-Lambert row, not these cylinder or run
 statements.  We claim the displayed Lean-checked identities and estimates,
-not priority for their assembled package.  In particular, the minimum height
-\(F_{r+3}\) and the naive clearing scale \(E_r=F_{r+3}-2\) differ by only two.
-This is a boundary, not an irrationality argument: no theorem here proves that
-a run tail survives denominator clearing.
+not priority for their assembled package.  The bookkeeping exponent
+\(E_r=F_{r+3}-2\) is two below the minimum height $F_{r+3}$.  No theorem here
+proves that a run tail survives denominator clearing.
 }
 
 \subsection{Two concrete scalar criteria}

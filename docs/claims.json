@@ -901,15 +901,15 @@
         "schema": "erdos249257-editorial-state/1",
         "scope": "continuous_whole_main_paper_exposition",
         "current_priority": {
-          "id": "main_paper_appendix_d_probability_vocabulary_audit",
+          "id": "main_paper_section_6_transform_reader_audit",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "defect_class": "Appendix D.3 introduces reduced directions, Stern--Brocot cylinders, stop mass, run height, continuant defects, and clearing-exponent bookkeeping in a compact sequence; the formulas are exact, but a cold reader may not see which quantities are probabilities, combinatorial heights, or merely bookkeeping exponents",
-          "statement": "Audit Appendix D.3 in reading order for literal definitions and object types; distinguish probability mass, arithmetic height, exact continuant identities, and bookkeeping exponents, preserve the non-transfer fence, and keep every theorem's formal strength and the 53-page envelope."
+          "defect_class": "Section 6 is the conceptual synthesis for expert and non-specialist readers, but it still introduces divisor streams, fibres, tempered integer orbits, question slices, and normal-form countermodels in close succession; each term is locally motivated, yet the section should be audited as a standalone map rather than as a recap for readers who already know the source architecture",
+          "statement": "Audit Section 6 from the displayed transform through the finite-witness boundary; define or replace internal vocabulary at first use, keep the three open questions and their opposite quantifiers visibly distinct, preserve every exact status and the 53-page envelope."
         },
         "last_verified_wave": {
-          "id": "main_paper_appendix_d_comparison_role_audit",
+          "id": "main_paper_appendix_d_probability_vocabulary_audit",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "result": "Made Appendix D.1--D.2 readable without repository vocabulary: the period-four result now states its one-residue-class scope literally; the primitive-coordinate theorem defines T_N by its exact prime factors instead of calling it a two-tier primorial; and the Mersenne determinant conclusion states the precise integrality and lower-bound content instead of 'height surplus'. Primary records confirm the Luca--Tachiya and Postelmans--Van Assche attributions and bibliography metadata. No theorem changed, no status transfers to S, and the paper remains 53 pages."
+          "result": "Separated Appendix D.3's object types in literal prose: stop mass is now the stated node contribution, H is explicitly the arithmetic height of the reached primitive pair, the former continuant-defect phrase is the exact nonnegative multiaffine polynomial in the run excesses, and E_r is labelled as bookkeeping rather than a denominator. The non-transfer and denominator-clearing fences remain explicit. No theorem changed, and the paper remains 53 pages."
         },
         "active_inconsistencies": [],
         "blocked_decisions": []
@@ -7540,7 +7540,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 3604
+        "line": 3603
       }
     },
     {
@@ -7551,7 +7551,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 3615
+        "line": 3614
       }
     },
     {
@@ -7562,7 +7562,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "the half-value counterexample route",
-        "line": 3636
+        "line": 3635
       }
     },
     {
@@ -7573,7 +7573,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 3627
+        "line": 3626
       }
     }
   ],
