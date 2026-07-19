@@ -155,9 +155,10 @@ the universal assertion in \#257.
 Each question is reduced to a finite Lean-checkable calculation and one
 unbounded condition that remains open.  For \#249, a \emph{certificate} is a
 finite integer calculation plus a rigorous bound on the omitted tail.  Put
-\(M_t=\lcm(1,\ldots,t)\) and
+\(M_t=\lcm(1,\ldots,t)\), the least common multiple of \(1,\ldots,t\), and
 \(R_N=\sum_{m\geq1}\ph(N+m)2^{-m}\).  For \#257, skipping rank \(n\) means
-omitting the weight \((2^n-1)^{-1}\).
+omitting the weight \((2^n-1)^{-1}\).  Its greedy rule takes the next weight
+exactly when doing so does not overshoot the target \(1/2\).
 \noindent The two central equivalences, stated before the later proof
 machinery, are:
 \[
@@ -177,10 +178,10 @@ Neither line proves the required unbounded behaviour.  The current analysis
 of the final possible skip reduces the second open condition to two explicit
 obligations; neither obligation is proved.
 
-The contribution is therefore a verified map of the finite calculations and
-the exact beyond-every-cutoff statements still missing.  It is not evidence
-that either missing theorem is close.  After the common Lambert coordinates
-are exposed, the two problems remain separate research programmes.
+The phrase ``beyond every bound'' is essential: no fixed number of successful
+computations settles either line.  The paper supplies a checked map and finite
+tools, not a mechanism forcing either event to recur.  The common coordinates
+neither merge the two programmes nor show that either missing theorem is close.
 
 The totient constant also has the elementary form
 \[
@@ -205,7 +206,7 @@ Denominator exclusion & Proved & If \(S=p/q\), then \(q>\Qzero\). \\
 Tail differences and \(M_t\)-diagonal certificates & Exact equivalences & The unbounded supply is equivalent to \(S\notin\Q\), but remains open. \\
 Diagonal computation & Finite evidence & Lean checks 28 diagonal certificates through \(t=64\); this is not cofinal. \\
 Universal assertion in \#257 & Open & No proof covers every infinite support. \\
-Full and structured supports & Prior work/formalised & Erd\H{o}s's full-support theorem and named restricted families are formalised; the prime-support theorem is cited, not formalised. \\
+Structural/support results & Prior work/formalised & Dyadic-section ranks and unique support coding are checked here; named support cases are formalised or cited.  None settles \#257. \\
 Membership of \(1/2\) & Open; exact reductions & Greedy and carry laws give equivalent events without proving they occur. \\
 \bottomrule
 \end{tabular}
@@ -221,14 +222,13 @@ the proof but are not themselves proof authority.  The release section states
 the additional source-pin and trust checks required for a reproducible copy.
 
 \paragraph{Reading map.}
-Section~\ref{sec:spines} states the two exact reductions, and
-Section~\ref{sec:ladder} introduces their common coordinates.
-Sections~\ref{sec:eb} and~\ref{sec:249} give the \#257 and \#249 results.
-Section~\ref{sec:architecture} explains the shared transform and the limits
-of the comparison.  Sections~\ref{sec:verify} and~\ref{sec:further} give the
-verification protocol and remaining open problems.  The appendices contain the local
-arguments and audit tables.  Linked phrases open the corresponding Lean
-proofs.
+The status-only route begins with Section~\ref{sec:spines}, followed by
+Sections~\ref{sec:architecture} and~\ref{sec:unresolved}: the reductions,
+the comparison limit, and every remaining obligation.  Sections~\ref{sec:eb}
+and~\ref{sec:249} contain the
+detailed results; Section~\ref{sec:verify} gives the verification protocol.
+The appendices contain local arguments and audits.  Linked phrases open the
+corresponding Lean proofs.
 
 \medskip
 \noindent\textbf{Keywords.} irrationality; Erd\H{o}s--Borwein constant;
@@ -3606,7 +3606,7 @@ Neither premise is proved.  The range \(1\le n\le6\) is only a finite prefix
 of the second.  The left conclusion settles \#249; the right would refute,
 not prove, the universal \#257 statement.
 
-\subsection{The unresolved statements}
+\subsection{The unresolved statements}\label{sec:unresolved}
 
 \paragraph{Erd\H{o}s \#249: one obligation in two equivalent forms.}
 \begin{problem}[Erd\H{o}s \#249]
