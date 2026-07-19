@@ -2353,7 +2353,7 @@ flatness model.  No converse is proved saying that every non-flat finite
 sample, or every irrational value of \(S\), must be detected by this joint
 predicate.  It is therefore a refuter, not a complete decision procedure.
 
-\paragraph{An exact target interval.} Put $H_t=M_t$ and
+\paragraph{An exact target residue class.} Put $H_t=M_t$ and
 \[
  D_t=R_{2H_t}-R_{H_t}.
 \]
@@ -2367,17 +2367,18 @@ The \emph{full target} is the residue class of $-a_t$ modulo $d_t$:
  \quad\Longleftrightarrow\quad
  \exists k\in\Z,\qquad d_tF_t=-a_t+d_tk.
 \]
-Since $D_t=a_t/d_t+F_t$, this is exactly the condition $D_t\in\Z$; no
-complementary term is discarded or assigned a conjectural sign.
+Thus $Q_t$ is the explicit part and $F_t$ the exact remainder;
+$\mathsf{Hit}(t)$ asks whether their sum is an integer.  Nothing is discarded
+or assigned a conjectural sign.
 
-\begin{proposition}[diagonal integrality--target equivalence]\label{res:pincer}
-For every $t$, diagonal integrality is equivalent to the foreign diagonal
-defect meeting the full target.
+\begin{proposition}[diagonal integrality as one congruence]\label{res:pincer}
+For every $t$, $D_t\in\Z$ if and only if
+$d_tF_t\equiv-a_t\pmod{d_t}$, that is, if and only if the full target is met.
 \end{proposition}
 \noindent This is the
 \lword{DiagonalPincerDecomposition.lean}{215}{diagonal_int_iff_foreignDiagonalDefect_hits_fullTarget}{full-target equivalence}.
 
-\begin{corollary}[exact full-target avoidance characterisation]
+\begin{corollary}[exact unbounded target-avoidance characterisation]
 \label{res:fulltargetavoidance}
 The following are equivalent:
 \[
@@ -2450,7 +2451,7 @@ candidate.
 \begin{proposition}[prime-power unit-gap ceiling]\label{res:unitgap}
 For every prime power $p^e$ with $e>0$, a
 $\mathsf{UnitGap}(p^e,N,K)$ has candidate count at most
-one.  The row $(u,N,K)=(3,3,5)$ satisfies this predicate, although its
+one.  The instance $(u,N,K)=(3,3,5)$ satisfies this predicate, although its
 corresponding ordinary empty-gap inequality fails.
 \end{proposition}
 \noindent Formalised:
@@ -2462,7 +2463,7 @@ This is a finite certificate-level strengthening.  We do not establish that
 rationality of $S$ supplies these predicates at unbounded parameters.
 
 \paragraph{Verified finite certificate families.} Four bounded certificate
-families are machine-checked.  Each successful $\mathsf{Sep}$ row is a
+families are machine-checked.  Each successful $\mathsf{Sep}$ instance is a
 kernel-checked proof of one stated non-integral tail difference, not a numerical
 experiment; the joint cone table uses its own sound finite refuter.
 
@@ -2484,14 +2485,14 @@ strict lcm-jump scales through $64$, namely
 \lword{DiagonalPincerCertificatesT64.lean}{1967}{certifiedKill_diagonal_all_imported_through_t64}{28 imported diagonal certificates through scale 64},
 and \lword{LcmConeNonflat.lean}{506}{coneNonflatCert_cells}{cone-cell certificate table}.
 For the first three classes, fixed-parameter completeness converts each successful
-$\mathsf{Sep}$ row into the stated non-integral tail difference.  The fourth uses
+$\mathsf{Sep}$ instance into the stated non-integral tail difference.  The fourth uses
 the separate cone-refuter soundness theorem.  None is evidence that certificates
 occur at unbounded scales.
 
-The first row of this table is worked in full following
+The first instance is worked in full following
 Example~\ref{res:deposits}; its underlying implication is
 \lword{TotientTailPeriodKiller.lean}{262}{tail_diff_notMem_int_of_certifiedKill}{certificate soundness}.
-No row asserts that such differences occur at unbounded scales.
+No instance asserts that such differences occur at unbounded scales.
 
 \paragraph{Exact finite channel split and sufficient projection test.}  There is a second finite
 presentation of the same obstruction.  For a cutoff $D$, split the finite
@@ -2569,8 +2570,8 @@ If \(t\geq5\), then
 and
 \lword{MersenneShadowDenominatorGrowth.lean}{147}{lcmHeight_scaledMobiusShadow_den_exact}{exact shadow denominator}.
 
-Finally, the remaining diagonal error can be represented by a finite integer
-projection and then by binary suffix data.  At depth $L$, let
+Finally, a second finite coordinate projects the diagonal difference to an
+integer and then to binary suffix data.  At depth $L$, let
 \[
  P_L(M)=\sum_{j=0}^{L-1}\ph(M+1+j)\,2^{L-1-j}
 \]
@@ -2609,15 +2610,14 @@ and
 The finite equivalence is only between the residue inequality and the
 projection certificate.  Neither condition is asserted to be necessary for
 full-target avoidance or for irrationality.
-The stronger adjacent-suffix supplies formalised in the same module imply the
-displayed unbounded supply; they are not additional conclusions of one finite
-certificate.
+The module's stronger adjacent-suffix hypotheses imply the displayed unbounded
+supply; they are not additional conclusions of one finite certificate.
 Finite instances of this implication are proved, but no unbounded projection
 or suffix supply is established.
 
 \paragraph{Primality certificates at changing-lcm scales through $t=64$.}\label{res:t64closure}
 A finite family of Lucas certificates proves the primality facts required by
-the diagonal certificates at every changing-lcm scale through $t=64$;
+the diagonal certificates at every $t\leq64$ where $M_t$ increases;
 for example,
 \lword{DiagonalPincerPrimeCertificates/ClosureT64.lean}{51759}{prime_lucas_2364533768205644535022723273}{representative Lucas primality certificate}.
 This is a finite theorem family, not an unbounded certificate supply or an
