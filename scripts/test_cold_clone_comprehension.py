@@ -80,8 +80,8 @@ def main() -> int:
     assert_human_rejected(summary, mutated, "self-appraisal language")
     checks += 1
 
-    mutated_paper = gateway_paper.replace(
-        "An unbounded certificate supply", ""
+    mutated_paper = remove_semantic_anchor(
+        gateway_paper, "An unbounded certificate supply"
     )
     try:
         diagnostic.validate_gateway_opening(mutated_paper)
