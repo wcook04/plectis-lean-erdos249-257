@@ -220,6 +220,55 @@ import Pkg.TooLate
                 )
             )
 
+    def test_lake_stale_targets_bisects_to_only_invalid_targets(self) -> None:
+        calls: list[tuple[list[str], bool]] = []
+
+        def up_to_date(names, root=fast.ROOT, *, rehash=True):
+            targets = list(names)
+            calls.append((targets, rehash))
+            return "Pkg.Bad" not in targets
+
+        with mock.patch.object(fast, "lake_targets_up_to_date", side_effect=up_to_date):
+            self.assertEqual(
+                fast.lake_stale_targets(["Pkg.A", "Pkg.Bad", "Pkg.C"]),
+                ["Pkg.Bad"],
+            )
+
+        self.assertEqual(calls[0], (["Pkg.A", "Pkg.Bad", "Pkg.C"], True))
+        self.assertTrue(all(not rehash for _, rehash in calls[1:]))
+
+    def test_lake_trace_check_uses_rehash_and_never_builds(self) -> None:
+        completed = fast.subprocess.CompletedProcess([], 0, "", "")
+        with mock.patch.object(fast.subprocess, "run", return_value=completed) as run:
+            self.assertTrue(fast.lake_targets_up_to_date(["Pkg.Leaf"]))
+
+        self.assertEqual(
+            run.call_args.args[0],
+            ["lake", "--rehash", "--no-build", "build", "+Pkg.Leaf"],
+        )
+        self.assertIs(run.call_args.kwargs["stdout"], fast.subprocess.DEVNULL)
+        self.assertIs(run.call_args.kwargs["stderr"], fast.subprocess.DEVNULL)
+
+    def test_current_cached_root_skips_every_prebuild_wave(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            source = root / "Pkg" / "Root.lean"
+            output = root / ".lake" / "build" / "lib" / "lean" / "Pkg" / "Root.olean"
+            source.parent.mkdir()
+            output.parent.mkdir(parents=True)
+            source.write_text("-- source\n", encoding="utf-8")
+            output.write_text("olean\n", encoding="utf-8")
+            completed = fast.subprocess.CompletedProcess([], 0, "", "")
+            with mock.patch.object(fast, "ROOT", root), mock.patch.object(
+                fast, "lake_targets_up_to_date", return_value=True
+            ) as up_to_date, mock.patch.object(
+                fast, "build_wave", side_effect=AssertionError("cache hit must skip prebuild")
+            ), mock.patch.object(fast.subprocess, "run", return_value=completed) as run:
+                self.assertEqual(fast.main(["Pkg.Root", "--lake-staleness"]), 0)
+
+            up_to_date.assert_called_once_with(["Pkg.Root"], root)
+            self.assertEqual(run.call_args.args[0], ["lake", "build", "+Pkg.Root"])
+
     def test_cycle_is_rejected(self) -> None:
         graph = {"A": {"B"}, "B": {"A"}}
         with self.assertRaisesRegex(RuntimeError, "cycle"):

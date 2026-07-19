@@ -5,7 +5,9 @@ The optional targets may be module names or ``.lean`` paths.  With no targets,
 the public root module is built.  Focused targets keep the edit/test loop from
 paying for every public certificate module while preserving an ordinary Lake
 build as the final authority check.  ``--changed-from`` derives those focused
-targets from Git, including untracked Lean files.
+targets from Git, including untracked Lean files.  ``--lake-staleness`` asks
+Lake's content-trace checker to validate restored CI outputs instead of using
+checkout mtimes, which are new on every GitHub runner.
 """
 
 from __future__ import annotations
@@ -284,6 +286,50 @@ def stale(
     return config_timestamp is not None and config_timestamp > timestamp
 
 
+def lake_targets_up_to_date(
+    names: Iterable[str],
+    root: Path = ROOT,
+    *,
+    rehash: bool = True,
+) -> bool:
+    """Ask Lake whether a target batch is current without rebuilding it."""
+
+    targets = list(names)
+    if not targets:
+        return True
+    command = ["lake"]
+    if rehash:
+        command.append("--rehash")
+    command.extend(["--no-build", "build", *(f"+{name}" for name in targets)])
+    result = subprocess.run(
+        command,
+        cwd=root,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+        check=False,
+    )
+    return result.returncode == 0
+
+
+def lake_stale_targets(
+    names: Iterable[str],
+    root: Path = ROOT,
+    *,
+    rehash: bool = True,
+) -> list[str]:
+    """Bisect a target batch using Lake's content-addressed trace verdicts."""
+
+    targets = list(names)
+    if not targets or lake_targets_up_to_date(targets, root, rehash=rehash):
+        return []
+    if len(targets) == 1:
+        return targets
+    midpoint = len(targets) // 2
+    return lake_stale_targets(
+        targets[:midpoint], root, rehash=False
+    ) + lake_stale_targets(targets[midpoint:], root, rehash=False)
+
+
 def build_one(name: str, root: Path = ROOT) -> tuple[str, int, float]:
     started = time.monotonic()
     result = subprocess.run(["lake", "build", f"+{name}"], cwd=root, check=False)
@@ -344,6 +390,11 @@ def main(argv: list[str] | None = None) -> int:
     )
     parser.add_argument("--jobs", type=int, default=default_jobs())
     parser.add_argument("--plan", action="store_true")
+    parser.add_argument(
+        "--lake-staleness",
+        action="store_true",
+        help="use Lake content traces for restored outputs instead of checkout mtimes",
+    )
     args = parser.parse_args(argv)
     if args.jobs < 1:
         parser.error("--jobs must be at least 1")
@@ -369,27 +420,44 @@ def main(argv: list[str] | None = None) -> int:
         parser.error(str(error))
     graph = reachable_graph(target_modules, modules)
     build_waves = waves(reachable(target_modules, graph), graph)
-    output_mtimes: dict[str, int | None] = {}
-    config_mtime = project_config_mtime_ns(root)
-    pending = [
-        [
-            name
-            for name in wave
-            if stale(
-                name,
-                modules,
-                graph,
-                root,
-                cached_olean_mtimes=output_mtimes,
-                cached_config_mtime_ns=config_mtime,
-            )
+    use_lake_staleness = args.lake_staleness and all(
+        olean(name, root).exists() for name in target_modules
+    )
+    if args.lake_staleness and not use_lake_staleness:
+        print("lean-fast-build: no complete restored target cache; using mtime planner")
+
+    if use_lake_staleness:
+        # The public root being current proves its complete import cone is
+        # current, so the common documentation-only/cache-hit case needs one
+        # Lake query rather than one query per topological wave.
+        pending = (
+            []
+            if lake_targets_up_to_date(target_modules, root)
+            else [lake_stale_targets(wave, root) for wave in build_waves]
+        )
+    else:
+        output_mtimes: dict[str, int | None] = {}
+        config_mtime = project_config_mtime_ns(root)
+        pending = [
+            [
+                name
+                for name in wave
+                if stale(
+                    name,
+                    modules,
+                    graph,
+                    root,
+                    cached_olean_mtimes=output_mtimes,
+                    cached_config_mtime_ns=config_mtime,
+                )
+            ]
+            for wave in build_waves
         ]
-        for wave in build_waves
-    ]
     pending = [wave for wave in pending if wave]
     print(
         f"lean-fast-build: targets={','.join(target_modules)}; "
-        f"{sum(map(len, pending))} stale/missing module(s), jobs={args.jobs}"
+        f"{sum(map(len, pending))} stale/missing module(s), jobs={args.jobs}, "
+        f"staleness={'lake-trace' if use_lake_staleness else 'mtime'}"
     )
     if args.plan:
         for index, wave in enumerate(pending, 1):
@@ -397,7 +465,11 @@ def main(argv: list[str] | None = None) -> int:
         return 0
 
     for wave in pending:
-        current = [name for name in wave if stale(name, modules, graph, root)]
+        current = (
+            lake_stale_targets(wave, root)
+            if use_lake_staleness
+            else [name for name in wave if stale(name, modules, graph, root)]
+        )
         failed = build_wave(current, args.jobs, root)
         if failed:
             raise RuntimeError("module prebuild failed: " + ", ".join(sorted(failed)))

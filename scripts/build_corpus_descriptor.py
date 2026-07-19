@@ -85,6 +85,16 @@ def is_ancestor(ancestor: str, descendant: str) -> bool:
     )
 
 
+def resolve_main_commit() -> str:
+    """Resolve main in developer clones and detached GitHub PR checkouts."""
+
+    for ref in ("refs/heads/main", "refs/remotes/origin/main"):
+        commit = git("rev-parse", "--verify", f"{ref}^{{commit}}", check=False)
+        if commit:
+            return commit
+    return ""
+
+
 def build_orientation(claims: dict[str, Any], atlas: dict[str, Any]) -> dict[str, Any]:
     """Project a bounded first-read capsule from the exhaustive owners."""
     principal_claims = []
@@ -560,7 +570,7 @@ def build() -> dict[str, Any]:
         "docs/declaration_atlas.json",
         "docs/methodology.json",
     )
-    local_main = git("rev-parse", "--verify", "main", check=False)
+    local_main = resolve_main_commit()
     publication_state = (
         "main_history_snapshot"
         if local_main and is_ancestor(navigation_commit, local_main)
