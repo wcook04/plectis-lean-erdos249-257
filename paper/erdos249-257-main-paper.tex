@@ -3311,12 +3311,12 @@ S \;=\; \tfrac12 \;+\; \sum_{d\ge1}\frac{\mu(d)}{(2^d-1)^2}.
 \]
 \end{proposition}
 \noindent Formalised: \lword{CertificateKernel.lean}{18126}{totient_series_eq_half_add_moebius_mersenne_square}{M\"obius-square identity}.
-Writing $T=\sum_{d\ge1}\mu(d)/(2^d-1)^2$, irrationality of $S$ is equivalent to
-irrationality of $T$, since $S=\tfrac12+T$. The factor $1/(2^d-1)^2$ is the
-probability that $d$ divides two independent fair-coin waiting times
-(Section~\ref{sec:geom}). The signed constant, the coprime-pair mass, and the
-tail differences of Section~\ref{sec:reduction} are three readings of the same
-quantity.
+Writing \(T=\sum_{d\ge1}\mu(d)/(2^d-1)^2\), Proposition~\ref{res:coprime}
+gives \(T=\Pr(\gcd(X,Y)=1)=S-\tfrac12\), so \(S\) is irrational exactly
+when \(T\) is.  By contrast,
+\(R_N=2^NS-\sum_{n\le N}\ph(n)2^{N-n}\) is an integer translate of a
+scaled copy of \(S\).  Tail differences encode rationality as explained in
+Section~\ref{sec:reduction}; they are not further constants equal to \(T\).
 
 \paragraph{Squared Lambert calculus.}\label{sec:squared}
 For \(L_2(f)=\sum_{d\ge1}f(d)/(2^d-1)^2\), the denominator is the probability
@@ -3335,12 +3335,14 @@ where \(P\) is Pillai's gcd-sum function.
 \end{proposition}
 \noindent Formalised: \lword{GcdMomentCalculus.lean}{216}{tsum_one_div_mersenne_sq_eq_sigma_sub_tau_series}{constant-weight squared-Lambert identity} and
 \lword{GcdMomentCalculus.lean}{235}{tsum_totient_div_mersenne_sq_eq_gcd_moment_series}{totient gcd-moment identity}.
-Postelmans--Van Assche imply irrationality of the middle row: their linear
-independence of \(1,\zeta_q(1),\zeta_q(2)\) over \(\Q\), proved whenever
-\(1/q\) is an integer at least \(2\), applies at \(q=1/2\), and the middle
-row is \(\zeta_q(2)-\zeta_q(1)\) there~\cite{postelmansvanassche}.  This
-does not transfer to the M\"obius row, which
-is exactly the open constant \(S-\tfrac12\).
+Write
+\(\zeta_q(1)=\sum_{n\ge1}q^n/(1-q^n)\) and
+\(\zeta_q(2)=\sum_{n\ge1}nq^n/(1-q^n)\).
+Postelmans--Van Assche prove that \(1,\zeta_q(1),\zeta_q(2)\) are linearly
+independent over \(\Q\) whenever \(1/q\) is an integer at least
+\(2\)~\cite{postelmansvanassche}.  At \(q=1/2\), their difference is the middle
+row, so that row is irrational.  This does not transfer to the M\"obius row,
+which is exactly the open constant \(S-\tfrac12\).
 
 \subsection{Probability-coordinate geometry: reduced slopes and cylinders}
 \label{app:lambert-probability}
