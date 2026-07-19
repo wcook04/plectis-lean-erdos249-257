@@ -112,7 +112,7 @@ These checks remain finite; they do not prove the required unbounded supply.
 
 For \#257, we formalise the classical irrationality theorem for the sum over
 all positive exponents in every integer base $b\geq2$, together with several
-structured infinite choices of $A$.  At base $2$, each weight exceeds the
+previously known structured choices of infinite $A$.  At base $2$, each weight exceeds the
 sum of all later weights, so every attainable value has a unique support.
 The value $1/2$ is attainable exactly when its greedy expansion omits weights
 at arbitrarily large ranks; this would refute the universal assertion in
@@ -122,9 +122,11 @@ branch and the integer remainder $-3$ in the other; the values $-2,-1$ and a
 future-tail inequality remain unresolved.
 
 An exact change of variables places both series in one common formula, but
-transfers no irrationality theorem between them.  We prove neither the
-irrationality of $S$ nor the universal assertion in \#257, and we do not
-decide whether $1/2$ is attainable.
+transfers no irrationality theorem between them.  The contribution is a
+Lean-checked map from each original question to finite objects and an exact
+beyond-every-cutoff statement; it identifies but does not prove the missing
+unbounded mechanism.  We prove neither the irrationality of $S$ nor the
+universal assertion in \#257, and we do not decide whether $1/2$ is attainable.
 \end{abstract}
 
 \section{Introduction}\label{sec:intro}
@@ -175,10 +177,10 @@ Neither line proves the required unbounded behaviour.  The current analysis
 of the final possible skip reduces the second open condition to two explicit
 obligations; neither obligation is proved.
 
-The contribution is therefore a verified map of two finite-to-cofinal
-bottlenecks, not evidence that either missing unbounded theorem is close.
-After the common Lambert coordinates are exposed, the two problems remain
-separate research programmes.
+The contribution is therefore a verified map of the finite calculations and
+the exact beyond-every-cutoff statements still missing.  It is not evidence
+that either missing theorem is close.  After the common Lambert coordinates
+are exposed, the two problems remain separate research programmes.
 
 The totient constant also has the elementary form
 \[
@@ -203,7 +205,7 @@ Denominator exclusion & Proved & If \(S=p/q\), then \(q>\Qzero\). \\
 Tail differences and \(M_t\)-diagonal certificates & Exact equivalences & The unbounded supply is equivalent to \(S\notin\Q\), but remains open. \\
 Diagonal computation & Finite evidence & Lean checks 28 diagonal certificates through \(t=64\); this is not cofinal. \\
 Universal assertion in \#257 & Open & No proof covers every infinite support. \\
-Full and structured supports & Classical/formalised & Full support and several restricted families are proved irrational. \\
+Full and structured supports & Prior work/formalised & Erd\H{o}s's full-support theorem and named restricted families are formalised; the prime-support theorem is cited, not formalised. \\
 Membership of \(1/2\) & Open; exact reductions & Greedy and carry laws give equivalent events without proving they occur. \\
 \bottomrule
 \end{tabular}
@@ -3634,8 +3636,10 @@ statement; a negative answer would decide only this distinguished
 point-membership question.
 \end{problem}
 
-\paragraph{What the reductions change.}
-The reductions change form, not status.  For \#249 the one missing theorem is
+\paragraph{Conclusion: what the reductions change.}
+The paper supplies a checked map and reusable finite tools, not the unbounded
+mechanism that would decide either direction.  The reductions change form,
+not status.  For \#249 the one missing theorem is
 unbounded certificate supply, equivalently in pointwise or lcm-diagonal form.
 For the half-value route to \#257, arbitrary supports give way to one greedy
 orbit; in final-skip coordinates it remains to exclude cells \(-2,-1\) and
