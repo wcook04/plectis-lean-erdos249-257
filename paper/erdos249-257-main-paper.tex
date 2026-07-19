@@ -1929,27 +1929,31 @@ escape mechanism.
 \label{res:campbellboundary}
 
 Crandall asked whether the binary block \(11\) occurs infinitely often in
-the Erd\H{o}s--Borwein constant; Campbell proved that it does using primes
-in an arithmetic progression whose modulus \(d\) is constrained by
-\(d^4\le X\), where \(X\) is the prime-search
-bound~\cite{crandall,campbell}.  A proposed route combines this input with the
-finite Mersenne shift from a putative last greedy skip.  If \(t\) is the
-unavoidable phase factor and \(P\) the prime cap forced by the fatal window,
-the required inequalities are
-\(2\le d\), \(t\le d\), \(P\le4t\), and \(d^4\le P\); they are
-inconsistent.  Formalised:
+the Erd\H{o}s--Borwein constant; Campbell answered this affirmatively using
+a Chinese-remainder construction and an Alford--Granville--Pomerance
+prime-progression estimate~\cite{crandall,campbell}.  Campbell chooses
+exponent \(\delta=1/4\): at prime-search height \(X\), the progression
+modulus \(d\) must satisfy \(d\le X^{1/4}\), equivalently \(d^4\le X\).
+
+For the proposed last-skip synchronization, \(P\) is the fatal window's
+prime cap, \(t\) its unavoidable phase period, and \(d\) the combined
+progression modulus.  The window gives \(P\le4t\), while absorbing the
+period requires \(t\le d\).  Taking \(X=P\), the four requirements
+\(2\le d\), \(t\le d\), \(P\le4t\), and \(d^4\le P\) are inconsistent.
+Formalised:
 \lword{CampbellShiftSynchronization.lean}{299}{campbellQuarterExponent_periodFreeze_noSync}{the period-freeze incompatibility}
 and
 \lword{CampbellShiftSynchronization.lean}{320}{campbellPhaseFreeze_parameters_impossible}{the parameter incompatibility}.
 
-The associated shifted-zero condition is not an independent hypothesis.  It
-is exactly equivalent both to infinitely many actual greedy skips and to
-$1/2\in\mathcal A$:
+The associated shifted-zero condition is guarded by a putative last skip: it
+requires every such endpoint to violate its own dyadic cylinder.  It is
+therefore exactly equivalent both to infinitely many actual greedy skips and
+to $1/2\in\mathcal A$:
 \lword{CampbellShiftSynchronization.lean}{471}{shiftWindowZero_iff_greedyMersenneSkippedSupport_infinite}{the shifted-zero/skip equivalence}
 and
 \lword{CampbellShiftSynchronization.lean}{488}{shiftWindowZero_iff_half_mem_mersenneAchievementSet}{the shifted-zero/half-membership equivalence}.
-This settles one synchronisation question and gives an equivalent reformulation; it does not
-decide the half-membership question stated above.
+It is an endpoint restatement, not an independent Campbell input, and does
+not decide half-membership.
 
 }
 

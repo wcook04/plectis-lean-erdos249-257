@@ -901,15 +901,15 @@
         "schema": "erdos249257-editorial-state/1",
         "scope": "continuous_whole_main_paper_exposition",
         "current_priority": {
-          "id": "main_paper_campbell_synchronization_plain_language_audit",
+          "id": "main_paper_appendix_b_entry_vocabulary_audit",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "defect_class": "The Campbell prime-progression incompatibility introduces the modulus, search bound, phase factor, and fatal-window cap in one paragraph without first stating which proposed synchronization each parameter belongs to",
-          "statement": "Give the proposed Campbell-to-last-skip route one compact parameter map, then preserve that the inequality contradiction kills only that synchronization and that shifted-zero remains equivalent to, rather than a proof of, half-membership."
+          "defect_class": "The Appendix B entry paragraph names a tempered tail orbit, Boolean-Möbius coordinate, wrap-excess decomposition, rational death certificate, and reciprocal-mass alternative before a cold reader can distinguish definitions from conclusions",
+          "statement": "Replace the object inventory with a compact dependency-oriented reader map, retaining the exact equivalence and one-way arrows and the warning that finite survival proves nothing."
         },
         "last_verified_wave": {
-          "id": "main_paper_producer_carry_coordinates_plain_language_audit",
+          "id": "main_paper_campbell_synchronization_plain_language_audit",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "result": "Defined the adjacent-cut below and above words as the neighbouring subset sums bracketing the target, their remainder and overshoot as unsigned distances, and their pulses as paired divisor-incidence contributions from the next two rows. Mapped the terminal-augmented supports to their exact producer carries, noted that the upper carry is negative while the middle sign depends on the remainder-pulse competition, and preserved that no uniform exponential lower bound, unbounded sign persistence, or universal escape theorem follows."
+          "result": "Verified against Crandall's 2012 paper and Campbell's arXiv:2605.24160v1 that Crandall posed the infinite-11 question, Campbell answered it affirmatively, and Campbell chose the Alford-Granville-Pomerance exponent delta = 1/4, requiring d <= X^(1/4). Defined P as the fatal-window prime cap, t as the unavoidable phase period, and d as the combined progression modulus; derived the incompatible requirements after taking X = P. Explained that the shifted-zero condition is guarded by a last-skip endpoint and is therefore an exact endpoint restatement, not an independent Campbell input or proof of half-membership."
         },
         "active_inconsistencies": [],
         "blocked_decisions": []
@@ -7540,7 +7540,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 3567
+        "line": 3571
       }
     },
     {
@@ -7551,7 +7551,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 3578
+        "line": 3582
       }
     },
     {
@@ -7562,7 +7562,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "the half-value counterexample route",
-        "line": 3599
+        "line": 3603
       }
     },
     {
@@ -7573,7 +7573,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 3590
+        "line": 3594
       }
     }
   ],
@@ -9951,7 +9951,7 @@
       "id": "campbell_shift_synchronization_boundary",
       "label": "Campbell shift-synchronization strategy boundary",
       "status": "unconditional progress",
-      "statement": "The quarter-exponent prime-progression parameters cannot be synchronized with the last-skip fatal window under the stated period-freezing bounds. Moreover, the proposed shifted-zero interface is exactly equivalent to infinitely many actual greedy skips and to membership of 1/2 in the Mersenne achievement set. This closes a synchronization strategy and an exact re-expression; it does not provide an independent producer or prove half-membership.",
+      "statement": "Campbell's application of the Alford-Granville-Pomerance estimate chooses delta = 1/4, so at prime-search height X the progression modulus d must satisfy d <= X^(1/4), equivalently d^4 <= X. In the proposed last-skip synchronization, P is the fatal-window prime cap, t the unavoidable phase period, and d the combined progression modulus. Taking X = P, the requirements 2 <= d, t <= d, P <= 4t, and d^4 <= P are inconsistent. The shifted-zero interface is guarded by a putative last skip and is exactly equivalent to infinitely many actual greedy skips and to membership of 1/2 in the Mersenne achievement set. It is an endpoint restatement, not an independent Campbell input, and proves no half-membership.",
       "paper_label": "res:campbellboundary",
       "readme_headline": false,
       "declarations": [
