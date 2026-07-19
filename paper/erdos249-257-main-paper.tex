@@ -3997,13 +3997,17 @@ analytic side condition can be traded for one inequality. The two coordinate
 changes compose.
 
 \begin{theorem}[support fraction--Boolean-carry equivalence]\label{res:carrycert}
-Fix an integer $p$ and an integer $q\ge1$. There is a nonempty support $A$ of
+Fix $p\in\mathbb Z$ and an integer $q\ge1$. There is a nonempty support $A$ of
 positive integers with $\sum_{n\in A}1/(2^n-1)=p/q$ if and only if there is an
-integer sequence $U$ with $U(0)=p$ such that: every $U(N)$ is positive;
-$U(N)\le q\,(2\sqrt N+4)$; $q$ divides $2U(N)-U(N+1)$ for every $N$; and the
-M\"obius transform of the quotient sequence $\bigl(2U(N)-U(N+1)\bigr)/q$ is
-Boolean. The support is not guessed: it is reconstructed from the certificate
-by Proposition~\ref{res:boolmob}.
+integer sequence $U$, with $U(0)=p$, such that, for every $N$,
+\[
+  0<U(N)\le q\,(2\sqrt N+4)
+  \qquad\text{and}\qquad
+  q\mid 2U(N)-U(N+1),
+\]
+and the M\"obius transform of the quotient sequence
+$N\mapsto\bigl(2U(N)-U(N+1)\bigr)/q$ is Boolean. The support is not guessed:
+it is reconstructed from the certificate by Proposition~\ref{res:boolmob}.
 \end{theorem}
 \noindent Formalised as
 \lword{BooleanMobiusCarry.lean}{948}{exists_normalized_support_fraction_iff_exists_booleanMobiusCarry}{the normalised support-fraction certificate equivalence}.
@@ -4248,11 +4252,10 @@ for those refinements, and they do not settle \#257.
 \begin{theorem}[superincreasing geometry and greedy membership]\label{res:greedy-details}
 For every $n\ge1$ the weight dominates the whole tail after it, $T(n)<w_n$,
 with the two-scale gap $w_n-T(n)=\tfrac23\,4^{-n}+O(8^{-n})$ and explicit
-valid $O$-constant $3$. Consequently a real $x$ belongs to $\mathcal A$
+valid $O$-constant $3$. Consequently, a real $x$ belongs to $\mathcal A$
 exactly when $x\ge0$ and every greedy residual of $x$ is at most the remaining
-tail; and normalised support coding is injective, so each member of
-$\mathcal A$ has a unique support, which the greedy recursion recovers bit by
-bit.
+tail. Normalised support coding is injective; hence each member of $\mathcal A$
+has a unique support, which the greedy recursion recovers bit by bit.
 \end{theorem}
 \noindent Formalised:
 \lword{GreedyAchievementSet.lean}{180}{mersenneTail_lt_weight}{strict-tail inequality},
