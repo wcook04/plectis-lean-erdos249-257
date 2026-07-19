@@ -559,18 +559,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_appendix_reader_triage_audit",
+   "id": "main_paper_notation_scope_and_symbol_collision_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "The appendices contain several independent proof routes, conditional criteria, finite computations, and no-go results. Their opening maps must let a reader decide what to read or skip without first learning internal construction labels.",
-   "statement": "Audit each appendix introduction, heading sequence, and reader map. State what each route consumes, proves, and does not prove; remove residual construction jargon; and distinguish exact equivalences, conditional results, finite evidence, and local exclusions without expanding the 53-page boundary."
+   "defect_class": "A 53-page paper with several coordinate systems can make a locally clear symbol ambiguous when it is reused later or recalled without its defining sentence. Readers should not have to infer whether a letter denotes a tail, carry, depth, modulus, support, or probability coordinate from repository context.",
+   "statement": "Inventory displayed and prose-defined notation across the main text and appendices. Check first use, local scope, later recall, overloaded letters, and symbol-to-object consistency; repair only collisions or missing reminders that can mislead a cold reader, preserving the exact claims and 53-page boundary."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "ebc98ee71f6819bd9fe344a0bb343542c604e533",
-  "committed_navigation_snapshot": "15e77e70c4f1853c2babad6997f12c9180e20227",
-  "main_paper_source_digest": "sha256:4e851256b8a2ecca6b38aabee36bf25f8edb198c7c52deaaab0511b6ac949de7"
+  "committed_navigation_snapshot": "4103716da46cdd34a2650f0309c1372ab3e31771",
+  "main_paper_source_digest": "sha256:3f82c1a6684e72519900fd175b7c590b5d176b407986c01ee03565bcb46e1f18"
  },
  "reading_routes": [
   {
