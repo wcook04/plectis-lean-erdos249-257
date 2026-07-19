@@ -1632,7 +1632,8 @@ Tail nonnegativity makes $C_D<0$ sufficient for $X_{A_D}>1/2$,
 \lword{HalfCylinderProducerCarrySocket.lean}{145}{producerCarry_neg_forces_half_lt_supportSeries}{the negative-carry corollary}.
 A carry at most $-8$ strengthens this to $1/2+(w_D-T_D)<X_{A_D}$,
 \lword{HalfCylinderProducerCarrySocket.lean}{190}{producerCarry_le_neg_eight_forces_gap_margin}{the full-gap corollary}.
-These criteria do not prove that the required carries occur.
+These criteria do not determine $C_D$ on actual middle transitions or
+compare every nonnegative $C_D$ with $\Theta_D$.
 
 \subsubsection{Quarter-band endpoint cases}\label{res:quarterband}
 
@@ -1754,7 +1755,7 @@ prefixes through \(M\).  Its upper endpoint \(E_+\) covers \(H_N\) and satisfies
 \(E_+=g_++2^{N-M}\); prefix adjacency is a separate transition hypothesis.
 \end{definition}
 
-Reader map: \(R\) lists the represented terminal carries \(k\);
+Here \(R\) lists the represented terminal carries \(k\);
 \(K_{n-1}\) is the carry at row \(n\), bounded by the strip width \(H_n\).
 The cutoff \(M\) separates a shared past from the variable suffix---the
 shared prefix is why this family is called a cylinder---while
@@ -1897,7 +1898,7 @@ Corollary~\ref{res:cofinalcylinder}.
 
 \subsubsection{Half-divisor unit drop}\label{res:halfdivisordrop}
 
-Reader map: the terminal half-divisor bit selects whether the row coefficient
+Here the terminal half-divisor bit selects whether the row coefficient
 is \(C\) or \(C+1\).  Since the carry update is \(K'=2K-C\), switching that
 bit from \(0\) to \(1\) drops the successor carry by exactly one:
 \lword{HalfDivisorUnitDrop.lean}{20}{supportCoeff_extend_true_eq_false_add_one_at_double}{the terminal-bit unit-drop identity}.
@@ -2119,7 +2120,7 @@ Stern--Brocot cylinder decomposition.
 Appendix~\ref{app:lambert-probability} states the resulting probability law
 and the sharp Fibonacci stability of its alternating runs.  These are
 unconditional structural theorems inside one representation of \(S\); they
-do not supply the denominator survival needed for irrationality.
+do not produce \(\mathsf{Sep}(h,N,L)\) certificates after every cutoff.
 
 \subsection{Exact certificate characterisation}\label{sec:reduction}
 
@@ -2421,7 +2422,7 @@ formula, and the residue--projection equivalence are exact at fixed parameters
 but, unless stated, do not characterise target avoidance.  Irrationality
 corollaries assume unproved repetition at unbounded scales.  The tabulated
 rows, primality facts, and diagonal certificates through $t=64$ are verified
-finite instances; none supplies the missing unbounded quantifier.
+finite instances; none proves~\eqref{eq:unbounded-certificate-supply}.
 
 \paragraph{A one-way analytic enclosure.}
 For $H\ge1$, put $\mathcal D_H=R_{2H}-R_H$,
@@ -2632,14 +2633,15 @@ A finite family of Lucas certificates proves the primality facts required by
 the diagonal certificates at every $t\leq64$ where $M_t$ increases;
 for example,
 \lword{DiagonalPincerPrimeCertificates/ClosureT64.lean}{51759}{prime_lucas_2364533768205644535022723273}{representative Lucas primality certificate}.
-This is a finite theorem family, not an unbounded certificate supply or an
-irrationality proof.
+This finite theorem family verifies the required primality inputs only through
+$t=64$.
 
 \paragraph{The diagonal certificate at $t=64$.}\label{res:t64endpoint}
 Using those primality facts, Lean checks the individual diagonal certificate
 at $t=64$,
 \lword{DiagonalPincerCertificateT64Endpoint.lean}{1928}{certifiedKill_diagonal_t64}{scale-64 diagonal certificate}.
-This is one finite certificate, not an unbounded supply.
+This endpoint is one of the 28 finite diagonal certificates in
+Example~\ref{res:deposits}.
 
 \subsection{Candidate unbounded inputs and no-go boundaries}
 \label{app:totient-boundaries}
