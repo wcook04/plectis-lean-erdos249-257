@@ -1235,16 +1235,16 @@ support of value $1/2$
 The seam supply is unproved, so Erd\H{o}s~\#257 remains undecided.
 
 \paragraph{Cofinal strip returns.}  Let $A_g$ be the canonical greedy support
-of $1/2$, and set $\Gamma_N=K_{N+1}$, $S_N=\Gamma_N/2^N$, and
-$B_N=H_{N+1}/2^N$.  The recurrence yields
-$S_{N+1}=S_N-f_{A_g}(N+2)/2^{N+1}\leq S_N$, so $S_N$ is non-increasing
+of $1/2$, and set $\Gamma_N=K_{N+1}$,
+$g_N=\Gamma_N/2^N$, and $B_N=H_{N+1}/2^N$.  The normalised carry obeys
+$g_{N+1}=g_N-f_{A_g}(N+2)/2^{N+1}\leq g_N$
 (\lword{CofinalStripReturn.lean}{23}{scaled_integerHalfCarry_antitone}{the scaled-carry monotonicity}),
-and the proved nonnegativity of $\Gamma_N-1$ gives $S_N\geq0$; meanwhile $B_N\to0$
+and the proved nonnegativity of $\Gamma_N-1$ gives $g_N\geq0$; meanwhile $B_N\to0$
 (\lword{CofinalStripReturn.lean}{42}{tendsto_halfStripBound_succ_div_pow_zero}{the strip-envelope limit}).
-A cofinal return means an arbitrarily late $M$ with $S_M\leq B_M$.  For
+A cofinal return means an arbitrarily late $M$ with $g_M\leq B_M$.  For
 $\varepsilon>0$, choose one with $B_M<\varepsilon$; then
-$0\leq S_N\leq S_M\leq B_M<\varepsilon$ for
-$N\geq M$, so $S_N\to0$.  Hence the centred carry $C_N=\Gamma_N-1$ satisfies
+$0\leq g_N\leq g_M\leq B_M<\varepsilon$ for
+$N\geq M$, so $g_N\to0$.  Hence the centred carry $C_N=\Gamma_N-1$ satisfies
 $C_N/2^N\to0$, and the tempered-carry theorem gives an infinite greedy support
 of value $1/2$.
 
@@ -3270,7 +3270,8 @@ Luca--Tachiya prove more: every nonzero eventually periodic rational weight
 gives an irrational series for each integer base $|b|>1$~\cite{lucatachiya}.
 \begin{theorem}[periodic signed-weight dichotomy]\label{res:periodicsigned}
 For a periodic integer weight \(\gamma\), either \(L_b(\gamma)\) is irrational
-or \(b^kL_b(\gamma)\in\Z\) for some \(k\ge0\).
+or \(b^kL_b(\gamma)\in\Z\) for some \(k\ge0\).  In the rational branch its
+denominator therefore divides a power of \(b\); the theorem does not select a branch.
 \end{theorem}
 \noindent Formalised:
 \lword{CertificateKernel.lean}{13847}{irrational_or_bpow_mul_eq_intCast_intWeightedErdosSeries_periodic}{periodic signed-weight dichotomy}.
@@ -3308,10 +3309,11 @@ For \(d\ge1\) and $N\ge0$, define the periodic Mersenne atom
 \[
  \omega_d(N)=\frac{2^{\,N\bmod d}}{2^d-1}.
 \]
-It satisfies the exact carry law
+Its exact carry law is
 \[
  2\omega_d(N)-\omega_d(N+1)=\mathbf1_{d\mid N+1}.
 \]
+The indicator is \(1\) exactly when the binary phase wraps.
 
 \begin{proposition}[finite Mersenne-atom determinant identity]
 \label{res:mersennetailatoms}
