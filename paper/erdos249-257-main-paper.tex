@@ -2364,7 +2364,7 @@ The \emph{full target} is the residue class of $-a_t$ modulo $d_t$:
 Since $D_t=a_t/d_t+F_t$, this is exactly the condition $D_t\in\Z$; no
 complementary term is discarded or assigned a conjectural sign.
 
-\begin{proposition}[diagonal pincer decomposition]\label{res:pincer}
+\begin{proposition}[diagonal integrality--target equivalence]\label{res:pincer}
 For every $t$, diagonal integrality is equivalent to the foreign diagonal
 defect meeting the full target.
 \end{proposition}
@@ -2610,15 +2610,14 @@ or suffix supply is established.
 
 \paragraph{Primality certificates at changing-lcm scales through $t=64$.}\label{res:t64closure}
 A finite family of Lucas certificates proves the primality facts required by
-the diagonal-pincer certificates at every changing-lcm scale through $t=64$;
+the diagonal certificates at every changing-lcm scale through $t=64$;
 for example,
 \lword{DiagonalPincerPrimeCertificates/ClosureT64.lean}{51759}{prime_lucas_2364533768205644535022723273}{representative Lucas primality certificate}.
 This is a finite theorem family, not an unbounded certificate supply or an
 irrationality proof.
 
 \paragraph{The diagonal certificate at $t=64$.}\label{res:t64endpoint}
-Using those primality facts, Lean checks the individual diagonal-pincer
-certificate
+Using those primality facts, Lean checks the individual diagonal certificate
 at $t=64$,
 \lword{DiagonalPincerCertificateT64Endpoint.lean}{1928}{certifiedKill_diagonal_t64}{scale-64 diagonal certificate}.
 This is one finite certificate, not an unbounded supply.
@@ -3316,7 +3315,7 @@ denominators; the clearing creates no additional height surplus.
 These are scoped finite-denominator obstructions, not irrationality criteria
 for \(S\).
 
-\begin{proposition}[the M\"obius-square lens]\label{res:lens}
+\begin{proposition}[M\"obius-square identity for \(S\)]\label{res:lens}
 \[
 S \;=\; \tfrac12 \;+\; \sum_{d\ge1}\frac{\mu(d)}{(2^d-1)^2}.
 \]
@@ -4387,7 +4386,7 @@ period-four residue obstruction & \lrefx{CertificateKernel.lean}{13898}{intWeigh
 $L(\mu)=1/2$ & \lrefx{MersenneLambertLadder.lean}{587}{tsum_moebius_div_two_pow_sub_one_eq_half}\ (\texttt{MersenneLambertLadder})\\
 $L(\ph)=2$ & \lrefx{MersenneLambertLadder.lean}{575}{tsum_totient_div_two_pow_sub_one_eq_two}\ (\texttt{MersenneLambertLadder})\\
 Lambert representation $L(\alpha)=S$ & \lrefx{CertificateKernel.lean}{18117}{tsum_primWeight_div_two_pow_sub_one_eq_totient_series}\ (\texttt{CertificateKernel})\\
-M\"obius-square lens & \lrefx{CertificateKernel.lean}{18126}{totient_series_eq_half_add_moebius_mersenne_square}\ (\texttt{CertificateKernel})\\
+M\"obius-square identity for $S$ & \lrefx{CertificateKernel.lean}{18126}{totient_series_eq_half_add_moebius_mersenne_square}\ (\texttt{CertificateKernel})\\
 $L_2(\mathbf1)$ and $L_2(\ph)$ gcd moments & \lrefx{GcdMomentCalculus.lean}{216}{tsum_one_div_mersenne_sq_eq_sigma_sub_tau_series}, \lrefx{GcdMomentCalculus.lean}{235}{tsum_totient_div_mersenne_sq_eq_gcd_moment_series}\ (\texttt{GcdMomentCalculus})\\
 Stern--Brocot cylinder recursion and rate & \lrefx{GcdMomentCalculus.lean}{474}{cylinderMass_split}, \lrefx{GcdMomentCalculus.lean}{525}{sternBrocotDepthMass_error}\ (\texttt{GcdMomentCalculus})\\
 $S=\tfrac12+\Pr(\gcd=1)$ & \lrefx{CertificateKernel.lean}{18229}{totient_series_eq_half_add_visible_coprime_pairs}\ (\texttt{CertificateKernel})\\
@@ -4401,7 +4400,7 @@ verified finite instances & \lrefx{TotientTailPeriodKiller.lean}{404}{certifiedK
 full-target diagonal reduction & \lrefx{DiagonalPincerDecomposition.lean}{215}{diagonal_int_iff_foreignDiagonalDefect_hits_fullTarget}\ (\texttt{DiagonalPincerDecomposition})\\
 squared-Mersenne enclosure & \lrefx{SquaredMersenneDiagonalEnclosure.lean}{116}{scaleDiagonalTailDifference_sub_lambertProjectedDiagonal}\ (\texttt{SquaredMersenneDiagonalEnclosure})\\
 exact Mersenne-shadow denominator & \lrefx{MersenneShadowDenominatorGrowth.lean}{147}{lcmHeight_scaledMobiusShadow_den_exact}\ (\texttt{MersenneShadowDenominatorGrowth})\\
-fresh-loss projection reduction & \lrefx{DiagonalFreshLossBridge.lean}{191}{irrational_totientSeries_of_diagonalFreshLossProjectionSupply}\ (\texttt{DiagonalFreshLossBridge})\\
+finite residue-projection criterion & \lrefx{DiagonalFreshLossBridge.lean}{191}{irrational_totientSeries_of_diagonalFreshLossProjectionSupply}\ (\texttt{DiagonalFreshLossBridge})\\
 prime-adjunction diamond no-go & \lrefx{FullTargetPrimeAdjunctionNoGo.lean}{196}{fullTarget_primeAdjunction_diamond_iff_root}\ (\texttt{FullTargetPrimeAdjunctionNoGo})\\
 scalar-localisation height obstruction & \lrefx{AdelicHeightObstruction.lean}{23}{scalarLocalization_complement_dvd}\ (\texttt{AdelicHeightObstruction})\\
 square-CRT correction suppression & \lrefx{SquareCRTCube.lean}{198}{exists_squareCRT_clean_totient_family}\ (\texttt{SquareCRTCube})\\
