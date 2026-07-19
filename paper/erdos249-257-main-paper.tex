@@ -861,9 +861,9 @@ For an integer \(s\geq6\), set
  =\left\lfloor\frac{4^s}{2^d-1}\right\rfloor
  \quad(2\leq d<s),
  \qquad
- K_s=4^s\cdot\frac12-2^s=2^{2s-1}-2^s.
+ \kappa_s=4^s\cdot\frac12-2^s=2^{2s-1}-2^s.
 \]
-Starting from \(R_{s,2}=K_s\), define successively, for \(2\leq d<s\),
+Starting from \(R_{s,2}=\kappa_s\), define successively, for \(2\leq d<s\),
 \[
  \beta_{s,d}=
  \begin{cases}
@@ -879,7 +879,7 @@ The Boolean word \((\beta_{s,2},\ldots,\beta_{s,s-1})\) is the
 is skipped; a final skip is the last such zero).
 \end{definition}
 
-\noindent For example, at \(s=7\) we have \(K_7=8064\), and the run takes
+\noindent For example, at \(s=7\) we have \(\kappa_7=8064\), and the run takes
 \(q_{7,2}=5461\)
 and \(q_{7,3}=2340\), skips \(1092\) and \(528\), and takes
 \(q_{7,6}=260\), leaving \(3\): the word is \(1,1,0,0,1\), matching the
@@ -946,13 +946,13 @@ For each \(s\geq6\), let
 \]
 Thus \(G_s\) is the set chosen by the integer greedy run at row \(s\).
 Among all subsets of \(\{2,\ldots,s-1\}\) whose integer weight exceeds
-\(K_s\), let \(H_s\) be the unique one with the smallest weight.  It is the
+\(\kappa_s\), let \(G_s^\uparrow\) be the unique one with the smallest weight.  It is the
 cheapest strict overshoot of the target.
 
 The recurrence from row \(s\) to row \(s+1\) has three forms:
 \[
 \begin{aligned}
- \textup{reset (upper):}&\quad G_{s+1}=H_s,\\
+ \textup{reset (upper):}&\quad G_{s+1}=G_s^\uparrow,\\
  \textup{keep and skip (middle):}&\quad G_{s+1}=G_s,\\
  \textup{keep and take (right):}&\quad G_{s+1}=G_s\cup\{s\}.
 \end{aligned}
@@ -1233,25 +1233,25 @@ support of value $1/2$
 The seam supply is unproved, so Erd\H{o}s~\#257 remains undecided.
 
 \paragraph{Cofinal strip returns.}  Let $A_g$ be the canonical greedy support
-of $1/2$, and set $G_N=K_{N+1}$, $S_N=G_N/2^N$, and
+of $1/2$, and set $\Gamma_N=K_{N+1}$, $S_N=\Gamma_N/2^N$, and
 $B_N=H_{N+1}/2^N$.  The recurrence yields
 $S_{N+1}=S_N-f_{A_g}(N+2)/2^{N+1}\leq S_N$, so $S_N$ is non-increasing
 (\lword{CofinalStripReturn.lean}{23}{scaled_integerHalfCarry_antitone}{the scaled-carry monotonicity}),
-and the proved nonnegativity of $G_N-1$ gives $S_N\geq0$; meanwhile $B_N\to0$
+and the proved nonnegativity of $\Gamma_N-1$ gives $S_N\geq0$; meanwhile $B_N\to0$
 (\lword{CofinalStripReturn.lean}{42}{tendsto_halfStripBound_succ_div_pow_zero}{the strip-envelope limit}).
 A cofinal return means an arbitrarily late $M$ with $S_M\leq B_M$.  For
 $\varepsilon>0$, choose one with $B_M<\varepsilon$; then
 $0\leq S_N\leq S_M\leq B_M<\varepsilon$ for
-$N\geq M$, so $S_N\to0$.  Hence the centred carry $C_N=G_N-1$ satisfies
+$N\geq M$, so $S_N\to0$.  Hence the centred carry $C_N=\Gamma_N-1$ satisfies
 $C_N/2^N\to0$, and the tempered-carry theorem gives an infinite greedy support
 of value $1/2$.
 
 \begin{proposition}[cofinal strip-return criterion]\label{res:cofinalstripreturn}
-Let \(G_M\) be the uncentred integer carry of the canonical greedy expansion
+Let \(\Gamma_M\) be the uncentred integer carry of the canonical greedy expansion
 of \(1/2\).  If
 \[
  \forall N\in\N\;\exists M\geq N,\qquad
- G_M\leq 2\lfloor\sqrt{M+1}\rfloor+4,
+ \Gamma_M\leq 2\lfloor\sqrt{M+1}\rfloor+4,
 \]
 then \(1/2\in\mathcal A\), and its canonical greedy support is infinite.
 \end{proposition}
@@ -1420,8 +1420,8 @@ Erd\H{o}s~\#257 is open.
 
 \subsubsection{Integer-greedy first-wrap reduction}\label{res:integergreedy}
 
-For $s\geq3$, put $C_s=2^{2s-1}-2^s$ and
-$B_s=2\lfloor\sqrt{2s}\rfloor+4$.  Starting at $C_s$, subtract each truncated
+For $s\geq3$, put $\kappa_s=2^{2s-1}-2^s$ and
+$B_s=2\lfloor\sqrt{2s}\rfloor+4$.  Starting at $\kappa_s$, subtract each truncated
 seam weight in descending order whenever possible; let $r_s$ be the final
 remainder.  A positive subset-sum defect at most $B_s$ exists exactly when
 $1\leq r_s\leq B_s$
@@ -1531,7 +1531,7 @@ it follows in turn from $R_{D,D}\ge D$ at every late middle row,
 Both hypotheses are unproved.
 
 \paragraph{Finite upper-reset band certificates.}  At the upper reset
-$G_{d+1}=H_d$, let $O_d$ be the upper overshoot, $A_d$ its corresponding
+$G_{d+1}=G_d^\uparrow$, let $O_d$ be the upper overshoot, $A_d$ its corresponding
 divisor pulse,
 $Q_d=4O_d+A_d$, and $B_{d,j}=2^{d-j+1}$.  For $13\le d\le30$ and $j\le d$,
 Lean proves
@@ -3283,12 +3283,12 @@ Proposition~\ref{res:gcdmoment} then compares three squared-denominator transfor
 only its constant-weight row has a cited irrationality theorem.
 
 \paragraph{Finite denominator-clearing boundaries.}\label{sec:primitiveindex}
-Put \(a_n=(\ph*\mu)(n)/n\).  Let $T_N$ be the product of $4$, one factor
+Put \(a_n=(\ph*\mu)(n)/n\).  Let $\mathcal P_N$ be the product of $4$, one factor
 $p$ for every odd prime $p\le N$, and a second factor $p$ when $p^2\le N$.
 \begin{proposition}[finite denominator obstruction]
 \label{res:primitiveindex}
 For $N\ge4$, if a positive integer $D$ makes $Da_n$ integral for every
-$1\le n\le N$, then $T_N\mid D$.  Hence no fixed positive $D$ clears every
+$1\le n\le N$, then $\mathcal P_N\mid D$.  Hence no fixed positive $D$ clears every
 $a_n$.
 \end{proposition}
 \noindent Formalised:
@@ -3764,7 +3764,7 @@ earlier carries that can produce a chosen terminal carry;
 \item the \emph{transition carry} is the integer coordinate appearing in
 the exact residual identity, and the \emph{remainder} of a row is its
 integer greedy residual;
-\item the branches are \emph{upper} (reset to $H_s$), \emph{middle} (keep
+\item the branches are \emph{upper} (reset to $G_s^\uparrow$), \emph{middle} (keep
 $G_s$ and skip $s$), and \emph{right} (keep $G_s$ and take $s$);
 \item the \emph{pulse} of a rank at row \(s\) counts its divisor
 incidences at \(2s+1\) and \(2s+2\), the first counting twice; the pulse
