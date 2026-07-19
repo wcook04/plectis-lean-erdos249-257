@@ -2394,31 +2394,32 @@ are verified finite instances.  No result here supplies the missing cofinal
 quantifier in Appendix~\ref{app:totient-normal}.
 
 \paragraph{A one-way analytic enclosure.}
-Truncate the M\"obius-square identity of
-Proposition~\ref{res:lens} after $D$ terms.  The resulting rational quantity
-gives a Lambert-projected centre $C_{H,D}$ for the scaled diagonal
-difference.  The error is exactly a signed squared-Mersenne tail:
-\[
- \textsf{scaledDiagonal}(H)-C_{H,D}
-   =c_H\sum_{d>D}\frac{\mu(d)}{(2^d-1)^2},
-\]
-where $c_H$ is the explicit diagonal coefficient in the formal source.  The
-absolute value of the sum is bounded geometrically by
-$4/[3(2^{D+1}-1)^2]$.  Thus a rational separation of the centre from every
-integer by more than the scaled bound proves target avoidance; the argument
-does not estimate the sign of the tail.
+For $H\ge1$, put $\mathcal D_H=R_{2H}-R_H$,
+$c_H=2^H(2^H-1)$, and
+$\Phi_N=\sum_{0\le n\le N}\ph(n)2^{N-n}$.  The binary shift identity gives
+$\mathcal D_H=c_HS+\Phi_H-\Phi_{2H}$.  Truncate the M\"obius-square identity
+of Proposition~\ref{res:lens} after $D$ terms.
 
 \begin{proposition}[squared-Mersenne enclosure]\label{res:squareenclosure}
-The scaled diagonal tail difference differs from its Lambert-projected centre
-by the squared-Mersenne tail.  Separation of the centre from the full target by
-more than the proved tail bound forces target avoidance.
+For $D\ge0$, the rational centre and its exact error are
+\[
+ \begin{aligned}
+ C_{H,D}&=\Phi_H-\Phi_{2H}
+   +c_H\left(\frac12+\sum_{1\le d\le D}
+      \frac{\mu(d)}{(2^d-1)^2}\right),\\
+ \mathcal D_H-C_{H,D}
+   &=c_H\sum_{d>D}\frac{\mu(d)}{(2^d-1)^2}.
+ \end{aligned}
+\]
+The second identity is exact, and
+$|\mathcal D_H-C_{H,D}|\le4c_H/[3(2^{D+1}-1)^2]$.  Hence separation of
+$C_{H,D}$ from every integer by more than this bound forces
+$\mathcal D_H\notin\Z$ and full-target avoidance.  No converse is asserted.
 \end{proposition}
 \noindent Formalised:
 \lword{SquaredMersenneDiagonalEnclosure.lean}{116}{scaleDiagonalTailDifference_sub_lambertProjectedDiagonal}{squared-Mersenne tail identity}
 and
 \lword{SquaredMersenneDiagonalEnclosure.lean}{237}{scaleFullTarget_miss_of_lambert_projected_separation}{Lambert-projected separation criterion}.
-The enclosure is one-way: separation at a chosen truncation forces target
-avoidance, but target avoidance is not asserted to force that separation.
 
 \paragraph{A reduced-denominator finite predicate.}  Separately, there is a
 stricter finite condition for an odd reduced denominator
