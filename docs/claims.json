@@ -901,15 +901,15 @@
         "schema": "erdos249257-editorial-state/1",
         "scope": "continuous_whole_main_paper_exposition",
         "current_priority": {
-          "id": "main_paper_appendix_c_dyadic_rank_reader_map_audit",
+          "id": "main_paper_appendix_d_weighted_lambert_status_audit",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "defect_class": "Appendix C.4 correctly fences the unconditional dyadic-rank theorem from the rationality-side carry implication, but kernel sections, tempered carries, compressed adjoints, gauges, and rank obstructions still require more translation than an outside reader should supply",
-          "statement": "Audit Appendix C.4 from the dyadic totient-kernel theorem through its determinant and gauge boundaries. Define what a section, its span, a tempered carry, and each later finite coordinate measures before stating consequences; distinguish the unconditional coefficient theorem from the conditional carry lower bound and from countermodels showing why rank alone cannot decide rationality; preserve exact prior-art attribution, formal statuses, and the 53-page envelope."
+          "defect_class": "Appendix D.1 changes the coefficient input and then presents several weighted Lambert families with different exact, cited, and finite statuses. The comparison role is stated, but the density of classifications can still let a reader mistake results for other inputs as evidence about the open totient value",
+          "statement": "Audit Appendix D.1 as a comparison family. Define the changed input and the eventually-periodic, signed, and period-four cases before their theorem lists; state which conclusions are formalised here, contained in cited work, or finite examples; verify the associated bibliography and repeat the non-transfer boundary at the points where a reader could infer progress on S, while preserving the 53-page envelope."
         },
         "last_verified_wave": {
-          "id": "main_paper_appendix_c_candidate_input_vocabulary_audit",
+          "id": "main_paper_appendix_c_dyadic_rank_reader_map_audit",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "result": "Rewrote Appendix C.3 as a menu rather than a proof sequence. Identified its sole proposed positive input and stated immediately that its unbounded occurrence is unproved; defined the power-of-two scale, odd depth, central half-word interval, centred state, and edge size before using the three-rank and affine criteria; and explained the zero orbit as a counterexample to correction-size reasoning alone. Connected the fresh-prime split back to the foreign defect, made the one-bit congruence literal, labelled scalar localisation and square-CRT suppression as independent no-go results, and replaced cube vocabulary by the actual totient differences being tested. No theorem, quantifier, implication, finite record, or open status changed, and the paper remains 53 pages."
+          "result": "Defined dyadic sections and the full kernel before Appendix C.4 uses their ranks; replaced the canonical-family label by its literal zero- and odd-residue sections; and stated the rationality-supplied carry recurrence, tempering limit, and section-rank conclusion in the proposition itself. Marked the rank-only counterexample as unformalised and explained its diagonal construction, wrote the even-residue reduction as an explicit identity, and replaced residual-gauge terminology in the proposition title by column rescaling. Verified the Allouche--Shallit and Coons metadata and primary statements; corrected the prose so Coons's non-finitely-generated Z-module theorem is no longer asserted to imply the paper's stronger explicit Q-rank formula without an intervening equivalence. No formal theorem, quantifier, finite record, or open status changed, and the paper remains 53 pages."
         },
         "active_inconsistencies": [],
         "blocked_decisions": []
@@ -7540,7 +7540,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "Erd\\H{o}s \\#249",
-        "line": 3602
+        "line": 3604
       }
     },
     {
@@ -7551,7 +7551,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "unbounded certificate supply",
-        "line": 3613
+        "line": 3615
       }
     },
     {
@@ -7562,7 +7562,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "the half-value counterexample route",
-        "line": 3634
+        "line": 3636
       }
     },
     {
@@ -7573,7 +7573,7 @@
         "source": "paper/erdos249-257-main-paper.tex",
         "environment": "problem",
         "title": "universal Erd\\H{o}s \\#257",
-        "line": 3625
+        "line": 3627
       }
     }
   ],
