@@ -56,7 +56,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "Erd\\H{o}s \\#249",
-    "line": 3609
+    "line": 3612
    }
   },
   {
@@ -67,7 +67,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "unbounded certificate supply",
-    "line": 3620
+    "line": 3623
    }
   },
   {
@@ -78,7 +78,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "the half-value counterexample route",
-    "line": 3641
+    "line": 3644
    }
   },
   {
@@ -89,7 +89,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "universal Erd\\H{o}s \\#257",
-    "line": 3632
+    "line": 3635
    }
   }
  ],
@@ -559,18 +559,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_full_bibliography_role_and_link_audit",
+   "id": "main_paper_referee_scale_and_research_strategy_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "The bibliography is compact and its links are release-checked, but the 25 entries mix archive scans, books, journal articles, current arXiv versions, software papers, and a living problem index. Link liveness alone does not verify author order, issue data, revision dates, or that each citation is attached to the precise external claim it supports",
-   "statement": "Audit every bibliography entry and its in-text role against a primary publisher, author, archive, or project source. Correct metadata and source-role drift, prefer stable DOI or archival targets, preserve explicit access dates for living resources, and keep the reference list readable within the 53-page envelope."
+   "defect_class": "The paper states its open status correctly, but its 53-page accumulation of reductions, coordinates, computations, and appendices can still make bounded progress feel closer to an asymptotic theorem than it is. The high-level framing should let a sceptical referee distinguish reusable infrastructure, theorem-specific refinements, and the genuinely missing cofinal mechanisms without rereading the full technical route",
+   "statement": "Audit the abstract, reader guide, architecture section, and conclusion as one referee-facing scale map. Preserve the exact finite-to-cofinal bottleneck, identify which contributions have independent theorem-level force, and ensure that no density of verified detail implies that either Erdős problem is nearly settled."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "ebc98ee71f6819bd9fe344a0bb343542c604e533",
-  "committed_navigation_snapshot": "f1fc5c61b6a06b00fda7f3bb3b018e21fb922ef8",
-  "main_paper_source_digest": "sha256:35fee2736981d07de49a5a9c0c00673c3cc43c1e991be3f5e7840105ea227e5c"
+  "committed_navigation_snapshot": "e3075676a71e58afd9cd33cc3dbaf9b82b0d6aaa",
+  "main_paper_source_digest": "sha256:159b6f0b6aed3e792535412c57323afdaef6332f17f1d721c034075f8f8c3fbc"
  },
  "reading_routes": [
   {
