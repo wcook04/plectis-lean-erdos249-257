@@ -208,7 +208,7 @@ Denominator exclusion & Proved & If \(S=p/q\), then \(q>\Qzero\). \\
 Tail differences and \(M_t\)-diagonal certificates & Exact equivalences & The unbounded supply is equivalent to \(S\notin\Q\), but remains open. \\
 Diagonal computation & Finite evidence & Lean checks 28 diagonal certificates through \(t=64\); this is not an unbounded family. \\
 Universal assertion in \#257 & Open & No proof covers every infinite support. \\
-Structural/support results & Proved here; Prior work/formalised & Exact dyadic-section ranks are proved here; strict-tail support coding is formalised with prior-work context; named irrational support cases are formalised or cited.  None settles \#257. \\
+Structural/support results & Proved here; Prior work/formalised & Exact dyadic-section ranks are proved here; support coding when each weight exceeds its later tail is formalised with prior-work context; named irrational support cases are formalised or cited.  None settles \#257. \\
 Membership of \(1/2\) & Open; exact reductions & Greedy and carry laws give equivalent events without proving they occur. \\
 \bottomrule
 \end{tabular}
@@ -318,7 +318,8 @@ Writing \(w_n=(2^n-1)^{-1}\), the weights satisfy
 \text{a successor terminal bit equal to zero occurs beyond every bound}
 \end{aligned}
 \]
-(the terminal bit is defined in Section~\ref{sec:eb}).
+Here the terminal bit is the \(0/1\) decision recording whether the next
+greedy weight is taken; Section~\ref{sec:eb} gives its formal definition.
 Concretely, the greedy expansion of \(1/2\) skips rank \(1\), takes ranks
 \(2,3\), skips \(4,5\), and takes \(6,7\); membership asks whether such
 skips recur beyond every bound.
@@ -2988,12 +2989,17 @@ evaluation:
  f\;\longmapsto\;f*\mathbf 1\;\longmapsto\;
  \sum_{m\ge1}\frac{(f*\mathbf 1)(m)}{2^m}\;=\;L(f).
 \]
+For this status-only route, \(*\) denotes Dirichlet convolution,
+\(\mathbf 1\) is the constant-one arithmetic function, \(\mu\) is the
+M\"obius function, and \(\alpha=\ph*\mu\); Section~\ref{sec:ladder} gives
+the full definitions.
 Here \((f*\mathbf 1)(m)=\sum_{d\mid m}f(d)\) is the \emph{divisor stream}:
 the first map sums over divisors, and the second reads those sums as
-binary-series coefficients.  The primitive-conductor input \(f=\alpha\) gives
+binary-series coefficients.  The input \(f=\alpha\) gives
 \(L(\alpha)=S\) with divisor stream \(\alpha*\mathbf 1=\ph\)
 (Proposition~\ref{res:lift}); a support indicator \(f=\mathbf 1_A\) gives
-\(L(\mathbf 1_A)=X_A\) with divisor stream \(f_A\)
+\(L(\mathbf 1_A)=X_A\) with divisor stream
+\(f_A(m)=\sum_{d\mid m}\mathbf 1_A(d)\)
 (Appendix~\ref{app:carry-boolean}); and the comparison inputs
 \(\mu\), \(\mathbf 1\), and \(\ph\) give the comparison values listed in
 Section~\ref{sec:ladder}.
@@ -3011,8 +3017,11 @@ M\"obius inversion recovers the underlying input: \(\alpha=\ph*\mu\) for
 (Proposition~\ref{res:boolmob}).
 
 The three open questions have different quantifiers, even though they use
-this one map.  Write \(\mathcal I_\infty\) for the indicators
-\(\mathbf 1_A\) of infinite supports \(A\subseteq\{2,3,\ldots\}\).  Then:
+this one map.  Write \(\mathcal I_\infty\) for the indicator functions
+\(\mathbf 1_A\) of infinite supports \(A\subseteq\{2,3,\ldots\}\).
+Restricting to exponents at least \(2\) loses no universal-\#257 case:
+toggling exponent \(1\) adds the rational number \(1\), so it preserves
+whether \(X_A\) is rational.  Then:
 \begin{enumerate}[label=\textup{(\roman*)},leftmargin=2.2em]
 \item Erd\H{o}s~\#249 fixes one input and asks for the status of its one
 value: \(L(\alpha)=S\notin\Q\)?
@@ -3628,7 +3637,10 @@ By Theorem~\ref{res:red21}, the preceding problem is equivalent to the
 following exact quantifier statement.
 
 \begin{problem}[unbounded certificate supply]
-Prove~\eqref{eq:unbounded-certificate-supply}.
+Prove that for every \(h\ge1\) and cutoff \(N_0\ge0\), there exist
+\(N\ge N_0\) and \(L\ge1\) with \(\mathsf{Sep}(h,N,L)\), where
+\(\mathsf{Sep}\) is the finite tail-separation certificate defined in
+Section~\ref{res:249story}.
 Equivalently, prove the lcm-diagonal supply in
 Theorem~\ref{res:diag}.  The finite scales in
 Example~\ref{res:deposits} do not establish either unbounded form.
