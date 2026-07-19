@@ -872,7 +872,8 @@ Starting from \(R_{s,2}=K_s\), define successively, for \(2\leq d<s\),
 \]
 The Boolean word \((\beta_{s,2},\ldots,\beta_{s,s-1})\) is the
 \emph{finite greedy seam at row \(s\)}, and
-\(\tau_s=\beta_{s,s-1}\) is its terminal bit (zero means a final skip).
+\(\tau_s=\beta_{s,s-1}\) is its terminal bit (zero means that rank \(s-1\)
+is skipped; a final skip is the last such zero).
 \end{definition}
 
 \noindent For example, at \(s=7\) we have \(K_7=8064\), and the run takes
@@ -883,7 +884,7 @@ real greedy decisions at ranks \(2\)--\(6\), with terminal bit
 \(\tau_7=1\).  The seam
 is thus an exact integer coordinate model of the real greedy process.
 Appendix~\ref{app:half-final-skip} develops the equivalence with
-final skips and the unresolved transition cells; the finite coordinate changes in
+final skips and the unresolved transition carries; the finite coordinate changes in
 Appendix~\ref{app:half-evidence} do not strengthen that equivalence.
 
 \begin{theorem}[exact half-membership classification]\label{res:halfmembership}
@@ -972,8 +973,9 @@ and put
  \quad C_D=4R_{D,D}-P_D-4,
  \quad \Theta_D=\sum_{j\geq1}\frac{f_{A_D}(2D+2+j)}{2^j}.
 \]
-Here \(C_D\in\Z\) is the transition carry and \(\Theta_D\) is the complete
-future divisor-incidence tail, not a finite truncation.  The residual identity of
+Here \(P_D\) is the paired divisor-incidence pulse, \(C_D\in\Z\) is the
+transition carry, and \(\Theta_D\) is the complete future divisor-incidence
+tail, not a finite truncation.  The residual identity of
 Appendix~\ref{res:producercarry} compares the two quantities exactly:
 \[
  \frac12-\sum_{a\in A_D}w_a
@@ -1024,9 +1026,9 @@ and
 \lword{HalfCylinderLastProducerContradiction.lean}{315}{middleProducer_neg_three_not_last}{middle-\(-3\) exclusion};
 the upper case is proved directly at the linked declaration, and
 Appendix~\ref{app:half-final-skip} sketches a prose argument only for the
-\(-3\) cell.
+case \(C_D=-3\).
 The three exceptional values are identified by the
-\lword{HalfCylinderMiddleCarryLowerBound.lean}{3090}{seamMiddleCoordinate_not_safe_iff_three_cells}{three-cell classification}.
+\lword{HalfCylinderMiddleCarryLowerBound.lean}{3090}{seamMiddleCoordinate_not_safe_iff_three_cells}{three exceptional carry values}.
 
 \begin{corollary}[tail-dominance membership criterion]\label{res:taildominance}
 If every middle transition at a row \(D\geq13\) with \(C_D\neq-3\) satisfies
@@ -1363,8 +1365,9 @@ neither a seam exclusion nor an Erd\H{o}s~\#257 conclusion.
 
 \subsubsection{Selected half-carry windows}\label{res:selectedhalfwindow}
 
-At depth $N$, a selected window of radius $R$ assigns each $k\in[1,R]$ an
-admissible Boolean word with terminal carry $k$.  If such windows exist for
+At depth $N$, a finite family called a \emph{selected window} of radius $R$
+assigns each $k\in[1,R]$ an admissible Boolean word with terminal carry $k$.
+If such windows exist for
 every large $N$ with $R\geq1$, choosing $k=1$ gives unbounded-depth witnesses
 (\lword{HalfCarrySelectedWindow.lean}{831}{cofinalAdmissibility_of_selectedHalfWindows}{cofinality});
 compactness then gives an infinite support with sum $1/2$
@@ -1433,16 +1436,14 @@ the integer-greedy choice:
 \lword{HalfCylinderConcreteSeamAdapter.lean}{667}{seamCutNextWord_eq_greedyWord_succ}{the seam-word recurrence}.
 This is a finite recurrence, not the missing escape estimate.
 
-\subsection{Exact final-skip reduction and its residual cells}
+\subsection{Exact final-skip reduction and its exceptional carries}
 \label{app:half-final-skip}
 
-This is the only subsection that feeds the main final-skip reduction
-directly.  It first identifies nonmembership with a final skip and membership
-with terminal zeros beyond every bound.  It then separates the terminal cells already
-excluded from the two unresolved middle coordinates and the unresolved
-future-tail inequality.  The later conditional formulas
-are conditional ways to attack those residual obligations; they do not add a
-second conclusion.
+This subsection alone feeds the main final-skip reduction.  It identifies
+nonmembership with a final skip and membership with terminal zeros beyond
+every bound, then separates the excluded terminal branches from the unresolved
+middle carries and future-tail inequality.  Later formulas only attack those
+obligations; they add no second conclusion.
 
 \subsubsection{Fatal gaps and eventual right tails}\label{app:fatalright-detail}
 
@@ -1463,7 +1464,7 @@ and to a final skipped exponent in the real greedy orbit,
 This classifies the nonmembership branch exactly.  It does not decide which
 branch holds or prove universal Erd\H{o}s~\#257.
 
-\paragraph{First final-middle cell.}  At a putative final skip $D$, let $u$ be
+\paragraph{The case \(C_D=-3\).}  At a putative final skip $D$, let $u$ be
 the selected prefix and $B_D=u\cup\{n:n>D\}$ the \emph{lazy support}: it
 skips $D$, takes every later rank, and has value $V(u)+T_D<1/2$.  The finite
 transition carry is $C_D=4R_{D,D}-P_D-4$, and the exact swap makes its centred
@@ -1471,10 +1472,10 @@ carry $C_D+3$ at row $2D+1$.  For $C_D=-3$ this is zero; forced divisor
 counts at least $1$ and $2$ in the next rows make it negative at $2D+3$,
 contradicting finite-level nonnegativity below $1/2$,
 \lword{HalfCylinderFinalMiddleCellEscape.lean}{587}{finalMiddleCell_neg_three_not_last}{the middle-\(-3\) exclusion}.
-Only $-3$ is excluded; $-2$, $-1$, and the right-tail branch remain open.
+Only $C_D=-3$ is excluded; $C_D=-2,-1$ and the right-tail branch remain open.
 
-\paragraph{Second final-middle cell.}  The next cell, with transition carry
-$-2$, is not eliminated.  Here its \emph{phase} means the triple of residue
+\paragraph{The case \(C_D=-2\).}  This transition carry is not eliminated.
+Here its \emph{phase} means the triple of residue
 classes of the putative last skip \(D\) modulo \(21\), \(10\), and \(13\).
 The possible phases are nevertheless sharply constrained.  Uniformly for
 seam rows $s\ge27$, the greedy decisions through rank $26$ select exactly
@@ -1485,7 +1486,7 @@ the ranks
 by
 \lword{HalfFinalMiddlePhaseSieve.lean}{1190}{seamGreedyBits_head2367_14_20_21_26}{the exact rank-(26) prefix}.
 
-If \(D\ge27\) lies in this middle cell and is followed by an all-right
+If \(D\ge27\) has \(C_D=-2\) and is followed by an all-right
 suffix, then
 \[
  D\bmod21\in\{11,14,17,20\},\qquad D\bmod10\ne8,
@@ -1500,7 +1501,7 @@ the \(21\cdot10\cdot13=2730\) residue classes modulo \(2730\).  Exactly
 \lword{HalfFinalMiddlePhaseSieve.lean}{2050}{finalMiddleTwentySixPhaseSurvivors_card}{the exact survivor count}.
 Thus a hypothetical final $C_D=-2$ transition lies in one of $412$ classes
 modulo $2730$, a finite necessary condition rather than an exclusion; the
-$-1$ cell is untouched.  Even a survivor density tending to zero would not
+$C_D=-1$ case is untouched.  Even a survivor density tending to zero would not
 suffice, since nested nonempty residue sets can have a nonempty inverse limit.
 This route needs an empty finite sieve or an Archimedean contradiction.
 
@@ -1518,7 +1519,7 @@ A stronger finite hypothesis puts $g_D=\#G_D$.  Since
 $A_D=G_D\cup\{D\}$ has $g_D+1$ elements, $\Theta_D\le g_D+1$.
 Using $C_D=4R_{D,D}-P_D-4$, the condition
 $g_D+P_D+5<4R_{D,D}$ is exactly $g_D+1<C_D$.  At every late middle row it
-therefore excludes the negative cells and proves tail dominance.  This is
+therefore excludes the negative carries and proves tail dominance.  This is
 \lword{HalfCylinderMiddleCarryLowerBound.lean}{111}{SeamMiddleProducerCardEscape}{the cardinality escape condition},
 and its membership consequence is
 \lword{HalfCylinderMiddleCarryLowerBound.lean}{1503}{half_mem_mersenneAchievementSet_of_middleProducerCardEscape}{the prefix-cardinality bound};
@@ -1527,7 +1528,8 @@ it follows in turn from $R_{D,D}\ge D$ at every late middle row,
 Both hypotheses are unproved.
 
 \paragraph{Finite upper-reset band certificates.}  At the upper reset
-$G_{d+1}=H_d$, let $O_d$ be the upper overshoot, $A_d$ its divisor pulse,
+$G_{d+1}=H_d$, let $O_d$ be the upper overshoot, $A_d$ its corresponding
+divisor pulse,
 $Q_d=4O_d+A_d$, and $B_{d,j}=2^{d-j+1}$.  For $13\le d\le30$ and $j\le d$,
 Lean proves
 $B_{d,j}<Q_d$ or $Q_d+2(d+j)\le B_{d,j}$,
@@ -1625,7 +1627,7 @@ A carry at most $-8$ strengthens this to $1/2+(w_D-T_D)<X_{A_D}$,
 \lword{HalfCylinderProducerCarrySocket.lean}{190}{producerCarry_le_neg_eight_forces_gap_margin}{the full-gap corollary}.
 These criteria do not prove that the required carries occur.
 
-\subsubsection{Quarter-band endpoint cells}\label{res:quarterband}
+\subsubsection{Quarter-band endpoint cases}\label{res:quarterband}
 
 At row $s$ put $H=2^{s-1}$, and let $R,U,R',p^-,p^+$ denote the adjacent
 cut's remainder, overshoot, successor remainder, and two pulses.  Its gap is
@@ -1637,11 +1639,11 @@ $4H$; on either non-carry branch, failure of $R'<8H$ is equivalent to:
  4k+16H<4(R+U)+p^+.
  \end{array}
 \]
-\lword{HalfCylinderQuarterBandEndpoints.lean}{153}{seamAdjacentCut_middleNextUpperFailure_iff_pulseCell}{the middle-cell equivalence};
+\lword{HalfCylinderQuarterBandEndpoints.lean}{153}{seamAdjacentCut_middleNextUpperFailure_iff_pulseCell}{the middle-case equivalence};
 and
-\lword{HalfCylinderQuarterBandEndpoints.lean}{175}{seamAdjacentCut_rightNextUpperFailure_iff_pulseCell}{the right-cell equivalence}.
-The middle-row $k$ is unique,
-\lword{HalfCylinderQuarterBandEndpoints.lean}{34}{pulseCell_unique}{the cell uniqueness}.
+\lword{HalfCylinderQuarterBandEndpoints.lean}{175}{seamAdjacentCut_rightNextUpperFailure_iff_pulseCell}{the right-case equivalence}.
+The middle-case $k$ is unique,
+\lword{HalfCylinderQuarterBandEndpoints.lean}{34}{pulseCell_unique}{the parameter uniqueness}.
 These equivalences classify failure but prove no concrete-orbit avoidance.
 
 \subsubsection{Right-branch deficit escape}\label{res:resetdeficit}
