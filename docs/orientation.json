@@ -56,7 +56,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "Erd\\H{o}s \\#249",
-    "line": 3618
+    "line": 3617
    }
   },
   {
@@ -67,7 +67,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "unbounded certificate supply",
-    "line": 3629
+    "line": 3628
    }
   },
   {
@@ -78,7 +78,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "the half-value counterexample route",
-    "line": 3650
+    "line": 3649
    }
   },
   {
@@ -89,7 +89,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "universal Erd\\H{o}s \\#257",
-    "line": 3641
+    "line": 3640
    }
   }
  ],
@@ -559,18 +559,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_source_link_label_and_cross_reference_purpose_audit",
+   "id": "main_paper_sentence_density_and_paragraph_breathing_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "The paper contains hundreds of blue source links and numbered cross-references. A link label or reference that merely repeats an internal declaration nickname makes the reader open another surface to learn why it matters.",
-   "statement": "Audit every visible source-link label and purpose-bearing cross-reference as standalone navigation text. Replace raw or project-internal labels with the mathematical claim or role they open, and attach a short reason to ambiguous section or appendix references; do not alter URLs, declaration targets, claim scope, or the 53-page boundary."
+   "defect_class": "Several dense paragraphs combine a definition, logical status, caveat, and source route in one block. Even when every sentence is correct, a cold reader can lose the mathematical subject or mistake a verified identity for an open implication.",
+   "statement": "Audit the longest prose sentences and densest paragraphs across the main paper. Split, trim, or reorder only where the logical subject, verified/open boundary, or reason for the next display is difficult to retain; preserve formulas, claims, source targets, and the 53-page boundary."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "ebc98ee71f6819bd9fe344a0bb343542c604e533",
-  "committed_navigation_snapshot": "5974371c9fc3b9e47293fd7abcbdd7dbc7bff720",
-  "main_paper_source_digest": "sha256:6ab173890a6947601e269dbebdc3c1ddf05d41ecf87af6ae60d15f6ab3bbeaf3"
+  "committed_navigation_snapshot": "016df20e699356c2a33768f03b2950c14ceee8fc",
+  "main_paper_source_digest": "sha256:ee30d0cd606837c83ada823958e90928ac41fc59a9af5b4aaf81cead5d11d9cc"
  },
  "reading_routes": [
   {
