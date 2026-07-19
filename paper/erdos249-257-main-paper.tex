@@ -2066,9 +2066,9 @@ The finite exclusion ladder records the successive verified thresholds
 4838 \;\to\; 4\,194\,304 = 2^{22} \;\to\; 2.49\times10^{17}\ (K{=}120)
 \;\to\; 7.96\times10^{34}\ (K{=}240).
 \]
-The mediant framework is historically associated with Farey's 1816 note on
-vulgar fractions~\cite{farey1816}; every exclusion in this ladder is Lean-checked in the
-formal-source checkpoint.  The first threshold is a direct low-carry check,
+Farey's 1816 note supplies only the historical terminology for neighbouring
+fractions~\cite{farey1816}, not a bound for \(S\).  Every exclusion in this
+ladder is Lean-checked.  The first threshold is a direct low-carry check,
 $2^{22}$ is retained as a named intermediate corollary, and the two largest
 thresholds use the Farey separation. See
 \lword{CertificateKernel.lean}{15347}{tsum_totient_div_pow_two_ne_ratCast_of_den_le_4838}{denominator exclusion through 4838}
@@ -2077,9 +2077,8 @@ then \lword{GapFareyBound.lean}{88}{gap_check_window_1_120_le_248672326362367909
 \lword{GapFareyBound.lean}{176}{gap_check_window_1_240_le_79639646646701375323355774875831053}{240-term Farey bound}
 for the two Farey windows.
 
-This is an explicit lower bound on the denominator of any rational
-representation, not a proof of irrationality. A rational with a larger
-denominator is not excluded by it.
+This excludes rational denominators through $\Qzero$, not rationality;
+larger denominators remain possible.  No priority claim is made for the bound.
 
 \begin{remark}[one bound, four representations]
 The Lambert identities of Section~\ref{sec:ladder} are equalities, so the same
@@ -2125,8 +2124,9 @@ do not supply the denominator survival needed for irrationality.
 
 \subsection{Exact certificate characterisation}\label{sec:reduction}
 
-The reduction uses only the elementary bound $\ph(n)\le n$, geometric tail
-estimates, and finite integer arithmetic.
+The inputs---eventual periodicity of rational binary expansions,
+$\ph(n)\le n$, and geometric tail estimates---are classical.  The finite
+predicate and exact equivalences are formalised here without a priority claim.
 For $t\ge1$, write $M_t=\lcm(1,\ldots,t)$.
 
 \paragraph{Why tail differences detect rationality.}
