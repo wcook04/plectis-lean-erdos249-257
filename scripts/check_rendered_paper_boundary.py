@@ -21,6 +21,7 @@ Poppler and is suitable for the stdlib-only release gate.
 from __future__ import annotations
 
 import argparse
+import html
 import json
 import re
 import shutil
@@ -78,6 +79,13 @@ LINK_MACRO_RE = re.compile(
         |\\lloc\{[^{}]*\}\{[^{}]*\}""",
     re.X,
 )
+SOURCE_LINK_COORD_RE = re.compile(
+    r"""\\(?:lref|lrefx)\{(?P<ref_file>[^{}]+)\}\{(?P<ref_line>\d+)\}\{[^{}]+\}
+        |\\lword\{(?P<word_file>[^{}]+)\}\{(?P<word_line>\d+)\}\{[^{}]+\}\{[^{}]+\}
+        |\\lloc\{(?P<loc_file>[^{}]+)\}\{(?P<loc_line>\d+)\}""",
+    re.X,
+)
+HREF_RE = re.compile(r'href="([^"]+)"')
 COMMENT_RE = re.compile(r"(?<!\\)%.*$")
 HIDDEN_RE = re.compile(r"\\iffalse.*?\\fi", re.S)
 NEWCOMMAND_RE = re.compile(r"^\s*\\newcommand.*$", re.M)
@@ -159,6 +167,76 @@ def rendered_text(pdf: Path, pdftotext: str) -> str:
         detail = completed.stderr.strip() or "pdftotext failed"
         raise RuntimeError(f"{pdf.relative_to(ROOT)}: {detail}")
     return completed.stdout
+
+
+def rendered_hrefs(pdf: Path, pdftohtml: str) -> set[str]:
+    """Extract the actual URI annotations emitted into the rendered PDF."""
+    completed = subprocess.run(
+        [pdftohtml, "-q", "-xml", "-hidden", "-stdout", str(pdf)],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    if completed.returncode != 0:
+        detail = completed.stderr.strip() or "pdftohtml failed"
+        raise RuntimeError(f"{pdf.relative_to(ROOT)}: {detail}")
+    return {html.unescape(value) for value in HREF_RE.findall(completed.stdout)}
+
+
+def rendered_source_link_errors(
+    tex: Path,
+    pdf: Path,
+    pdftohtml: str,
+) -> list[str]:
+    """Require every authored Lean coordinate to survive as the pinned PDF URI."""
+    source = tex.read_text(encoding="utf-8")
+    commit_match = re.search(r"\\newcommand\{\\commit\}\{([0-9a-f]{40})\}", source)
+    if commit_match is None:
+        return [f"{tex.relative_to(ROOT)}: pinned source commit is missing"]
+    commit = commit_match.group(1)
+    prefix = (
+        "https://github.com/wcook04/plectis-lean-erdos249-257/blob/"
+        f"{commit}/Erdos249257/"
+    )
+    expected: set[str] = set()
+    for match in SOURCE_LINK_COORD_RE.finditer(source):
+        file_name = (
+            match.group("ref_file")
+            or match.group("word_file")
+            or match.group("loc_file")
+        )
+        line = (
+            match.group("ref_line")
+            or match.group("word_line")
+            or match.group("loc_line")
+        )
+        expected.add(f"{prefix}{file_name}#L{line}")
+    try:
+        hrefs = rendered_hrefs(pdf, pdftohtml)
+    except RuntimeError as error:
+        return [str(error)]
+    errors: list[str] = []
+    missing = sorted(expected - hrefs)
+    if missing:
+        errors.append(
+            f"{pdf.relative_to(ROOT)}: {len(missing)} authored Lean source "
+            f"target(s) missing from rendered URI annotations; first is {missing[0]!r}"
+        )
+    repository_blob_prefix = (
+        "https://github.com/wcook04/plectis-lean-erdos249-257/blob/"
+    )
+    stale = sorted(
+        href
+        for href in hrefs
+        if href.startswith(repository_blob_prefix) and not href.startswith(prefix)
+    )
+    if stale:
+        errors.append(
+            f"{pdf.relative_to(ROOT)}: {len(stale)} stale or unpinned rendered "
+            f"repository blob target(s); first is {stale[0]!r}"
+        )
+    return errors
 
 
 def rendered_pages(pdf: Path, pdftotext: str, first: int, last: int) -> str:
@@ -292,9 +370,12 @@ def main() -> int:
     errors = [error for tex, _pdf in PAPERS for error in source_errors(tex)]
     if not args.source_only:
         pdftotext = shutil.which("pdftotext")
+        pdftohtml = shutil.which("pdftohtml")
         if pdftotext is None:
             errors.append("pdftotext is required for the rendered-paper check")
-        else:
+        if pdftohtml is None:
+            errors.append("pdftohtml is required for the rendered-link check")
+        if pdftotext is not None and pdftohtml is not None:
             aliases = json.loads(ALIASES.read_text(encoding="utf-8"))
             for tex, pdf in PAPERS:
                 if not pdf.is_file():
@@ -307,6 +388,7 @@ def main() -> int:
                     continue
                 errors.extend(rendered_errors(pdf, text, aliases))
                 errors.extend(first_minute_errors(pdf, pdftotext))
+                errors.extend(rendered_source_link_errors(tex, pdf, pdftohtml))
             for pdf in ARCHITECTURE_PAPERS:
                 if not pdf.is_file():
                     errors.append(f"{pdf.relative_to(ROOT)}: rendered paper is missing")
