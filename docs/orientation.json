@@ -559,18 +559,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_formal_source_guide_reader_route_audit",
+   "id": "main_paper_bibliography_metadata_crosscheck_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "Appendix E sends a first reader to a list of theorem numbers and calls another list the 'strongest independent structure' without saying what question each route answers or what 'strongest' measures",
-   "statement": "Audit the formal-source guide as a cold-reader routing surface: replace qualitative ranking with short purpose labels, preserve the immutable-link boundary, and keep the route compact enough for the 53-page paper."
+   "defect_class": "The final bibliography mixes archive scans, journal DOIs, books, recent arXiv records, software papers, and a dated problem-database citation; link resolution alone does not verify that titles, years, volumes, pages, versions, and attribution scope agree with primary metadata",
+   "statement": "Cross-check the bibliography against primary publisher, arXiv, author-archive, and project records; correct only evidenced metadata or attribution errors, preserve stable links, and keep the final reference page readable."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "ebc98ee71f6819bd9fe344a0bb343542c604e533",
-  "committed_navigation_snapshot": "a57fd319c031356a18c5c6cb66b837c743e12baa",
-  "main_paper_source_digest": "sha256:b1a9227b867bb8d75a6e4f5d8636e73b5309075a7a4c9d23deb4f63eedfe0ae2"
+  "committed_navigation_snapshot": "3a8c8c91dadd4cb645a1107a1267f93d21fc898b",
+  "main_paper_source_digest": "sha256:6200e701a3fc49e81e60b8952bb48c3118fb440798c3abfabe370c7ab6719923"
  },
  "reading_routes": [
   {
