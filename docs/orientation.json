@@ -56,7 +56,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "Erd\\H{o}s \\#249",
-    "line": 3596
+    "line": 3602
    }
   },
   {
@@ -67,7 +67,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "unbounded certificate supply",
-    "line": 3607
+    "line": 3613
    }
   },
   {
@@ -78,7 +78,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "the half-value counterexample route",
-    "line": 3628
+    "line": 3634
    }
   },
   {
@@ -89,7 +89,7 @@
     "source": "paper/erdos249-257-main-paper.tex",
     "environment": "problem",
     "title": "universal Erd\\H{o}s \\#257",
-    "line": 3619
+    "line": 3625
    }
   }
  ],
@@ -559,18 +559,18 @@
  },
  "editorial_state": {
   "current_priority": {
-   "id": "main_paper_theorem_status_classifier_audit",
+   "id": "main_paper_internal_vocabulary_definition_audit",
    "surface": "paper/erdos249-257-main-paper.tex",
-   "defect_class": "The opening status table is explicit, but the long theorem and appendix sequence can still make classical formalisation, exact reformulation, finite evidence, conditional implication, local addition, and genuinely open input harder to distinguish theorem by theorem",
-   "statement": "Audit the status sentence surrounding each named theorem and appendix result; ensure that classical or cited results, exact reformulations, conditional statements, finite computations, local additions, and open cofinal inputs remain visibly classified at first reading without inflating the manuscript."
+   "defect_class": "The paper defines its central notation, but the long appendices retain coined labels and development-local compounds whose meaning may be clear only after reading their surrounding construction",
+   "statement": "Audit retained coined terms, italicised first uses, theorem titles, and appendix cross-references; replace internal metaphors when an exact mathematical description is shorter, and define every retained term before it carries an argument."
   },
   "active_inconsistencies": [],
   "blocked_decisions": []
  },
  "source_revision": {
   "formal_source_ref": "ebc98ee71f6819bd9fe344a0bb343542c604e533",
-  "committed_navigation_snapshot": "d4cf529079e16269e2a4dc0d0c630eaa6e005e87",
-  "main_paper_source_digest": "sha256:631ee8bcaa82672719718b530780d353bad64246f2583168fccdf7524436d662"
+  "committed_navigation_snapshot": "0b0bfc262143be599f03b9cc6a1478f9543fa356",
+  "main_paper_source_digest": "sha256:cfa9741aa1c6d92cfa298615d83b613c6a64ec545f480415a8eba21897de5548"
  },
  "reading_routes": [
   {
