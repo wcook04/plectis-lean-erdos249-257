@@ -901,15 +901,15 @@
         "schema": "erdos249257-editorial-state/1",
         "scope": "continuous_whole_main_paper_exposition",
         "current_priority": {
-          "id": "main_paper_internal_vocabulary_and_first_use_audit",
+          "id": "main_paper_caption_and_cross_reference_standalone_audit",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "defect_class": "Long-lived local shorthand can become invisible to an author while remaining opaque to an outside reader. Terms such as certificate, row, seam, producer, terminal bit, wrap, fibre, and carry state need either an ordinary-language first-use definition or replacement when they are only house vocabulary.",
-          "statement": "Audit the paper section by section for undefined specialist terms and repository-internal phrasing, with special attention to captions, reader maps, and appendix re-entry points. Define genuine mathematical coordinates at first use, replace avoidable house vocabulary with ordinary language, and keep technical definitions concise enough to preserve the 53-page target."
+          "defect_class": "A figure, table, or cross-reference can be locally correct yet fail when encountered out of sequence or through a link. Captions and re-entry sentences should identify the mathematical object, the logical status, and the non-conclusion without forcing the reader to reconstruct local notation from several pages earlier.",
+          "statement": "Audit every figure, table, long display, appendix consequence, and forward/back reference for standalone readability. Expand only the minimal notation needed at the point of re-entry, remove references that merely say above or below without a stable target, and preserve the 53-page target."
         },
         "last_verified_wave": {
-          "id": "main_paper_reader_interpretation_and_contribution_weight_audit",
+          "id": "main_paper_internal_vocabulary_and_first_use_audit",
           "surface": "paper/erdos249-257-main-paper.tex",
-          "result": "Audited the abstract, first-minute orientation, status table, common-transform section, unresolved statements, and conclusion against expert, formal-methods, sceptical-referee, and non-specialist readings. The existing abstract already carried the defensible obstruction-atlas headline and the introduction already kept the two programmes separate. Rewrote the conclusion's finite-to-cofinal house phrase as an after-every-cutoff obligation, named anti-concentration, cancellation, recurrence, or rigidity as examples of the missing uniform mechanism, and compressed the final #249/#257 obligations so a negative half-value answer cannot be mistaken for universal #257. Removed a peripheral further-questions paragraph to keep the interpretive hierarchy sharp and the paper at 53 pages. No theorem, formula, citation, source target, or problem status changed; the rendered boundary passes."
+          "result": "Audited first uses of certificate, row, seam, terminal bit, wrap, fibre, carry state, producer, and cofinal across the main paper and appendices. The genuine mathematical coordinates were already defined at first use. Replaced the avoidable house word producer with criterion and removed visible uses of cofinal, which in this paper meant only at arbitrarily late or unbounded depths; theorem titles, explanatory prose, semantic link labels, and appendix summaries now use that ordinary language while exact Lean declaration names remain unchanged behind the links. Removed the now-unnecessary glossary entry for cofinal. No theorem, formula, citation, source target, or problem status changed; the rendered boundary and 53-page target pass."
         },
         "active_inconsistencies": [],
         "blocked_decisions": []

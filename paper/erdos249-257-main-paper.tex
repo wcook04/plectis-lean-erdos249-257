@@ -1229,27 +1229,27 @@ parent words at depth $2d$ that realises this one-hole pattern.  The unproved
 supply hypothesis gives one at every $2d$,
 $d\geq10$.  Choose $k=1$, except $k=2$ when the hole is $1$; this gives words
 at unbounded depths
-(\lword{HalfCarryReachability.lean}{999}{cofinalAdmissibility_of_canonicalEvenSeamSupply}{the cofinal-admissibility implication}).
+(\lword{HalfCarryReachability.lean}{999}{cofinalAdmissibility_of_canonicalEvenSeamSupply}{the unbounded-depth admissibility implication}).
 Restriction fills earlier depths, and K\"onig compactness gives one infinite
 support of value $1/2$
 (\lword{HalfCarryReachability.lean}{1027}{exists_infinite_support_half_of_canonicalEvenSeamSupply}{the half-value conclusion}).
 The seam supply is unproved, so Erd\H{o}s~\#257 remains undecided.
 
-\paragraph{Cofinal strip returns.}  Let $A_g$ be the canonical greedy support
+\paragraph{Arbitrarily late strip returns.}  Let $A_g$ be the canonical greedy support
 of $1/2$, and set $\Gamma_N=K_{N+1}$,
 $g_N=\Gamma_N/2^N$, and $B_N=H_{N+1}/2^N$.  The normalised carry obeys
 $g_{N+1}=g_N-f_{A_g}(N+2)/2^{N+1}\leq g_N$
 (\lword{CofinalStripReturn.lean}{23}{scaled_integerHalfCarry_antitone}{the scaled-carry monotonicity}),
 and the proved nonnegativity of $\Gamma_N-1$ gives $g_N\geq0$; meanwhile $B_N\to0$
 (\lword{CofinalStripReturn.lean}{42}{tendsto_halfStripBound_succ_div_pow_zero}{the strip-envelope limit}).
-A cofinal return means an arbitrarily late $M$ with $g_M\leq B_M$.  For
+Such a return means an arbitrarily late $M$ with $g_M\leq B_M$.  For
 $\varepsilon>0$, choose one with $B_M<\varepsilon$; then
 $0\leq g_N\leq g_M\leq B_M<\varepsilon$ for
 $N\geq M$, so $g_N\to0$.  Hence the centred carry $C_N=\Gamma_N-1$ satisfies
 $C_N/2^N\to0$, and the tempered-carry theorem gives an infinite greedy support
 of value $1/2$.
 
-\begin{proposition}[cofinal strip-return criterion]\label{res:cofinalstripreturn}
+\begin{proposition}[arbitrarily late strip-return criterion]\label{res:cofinalstripreturn}
 Let \(\Gamma_M\) be the uncentred integer carry of the canonical greedy expansion
 of \(1/2\).  If
 \[
@@ -1262,11 +1262,11 @@ then \(1/2\in\mathcal A\), and its canonical greedy support is infinite.
 \lword{CofinalStripReturn.lean}{84}{greedy_integerHalfCarry_scaled_tendsto_zero_of_cofinalStripReturn}{scaled-carry decay}
 and
 \lword{CofinalStripReturn.lean}{157}{half_mem_mersenneAchievementSet_of_cofinalStripReturn}{the strip-return membership criterion}.
-The cofinal return condition itself is not established.  It is weaker than a
+The arbitrarily late return condition itself is not established.  It is weaker than a
 uniform strip bound and still does not give an unconditional membership
 theorem.
 
-\paragraph{Terminal-only cofinal approximation.}  A \emph{terminal-only
+\paragraph{Terminal-only unbounded-depth approximation.}  A \emph{terminal-only
 witness} at depth $M$ is a Boolean word $a$ with $a_0=a_1=0$; its earlier
 carries are unrestricted, while its terminal carry $K_M$ satisfies
 $|K_M|\leq H_M$.  Put $A=\{d:a_d=1\}$,
@@ -1285,8 +1285,8 @@ also belongs to it.  The words at different depths need not agree, and the
 finite-support obstruction forces the support representing the limit to be
 infinite.
 
-\begin{proposition}[terminal-only cofinal criterion]\label{res:terminalonlycofinal}
-Cofinal normalised terminal witnesses in the square-root strip imply that
+\begin{proposition}[terminal-only unbounded-depth criterion]\label{res:terminalonlycofinal}
+Normalised terminal witnesses at unbounded depths in the square-root strip imply that
 $1/2$ belongs to the Mersenne achievement set, and hence that an infinite
 support has support-series value $1/2$.
 \end{proposition}
@@ -1295,7 +1295,7 @@ support has support-series value $1/2$.
 \lword{TerminalOnlyCofinal.lean}{134}{half_mem_mersenneAchievementSet_of_cofinalTerminalOnlyStrip}{the terminal-strip compactness criterion},
 and
 \lword{TerminalOnlyCofinal.lean}{192}{exists_infinite_support_half_of_cofinalTerminalOnlyStrip}{the infinite-support conclusion}.
-The cofinal terminal-witness supply is not proved.  In particular, the
+The unbounded-depth terminal-witness supply is not proved.  In particular, the
 proposition does not establish membership of $1/2$ unconditionally.
 
 \paragraph{Scaled terminal vanishing.}  Let $M_n\to\infty$, and let $a^{(n)}$
@@ -1326,14 +1326,14 @@ and
 No such scaled-vanishing sequence is constructed here; the result is a
 conditional reduction, not an unconditional membership theorem.
 
-\subsection{Finite-to-cofinal criteria: windows, seams, and compactness}
+\subsection{Finite-to-unbounded-depth criteria: windows, seams, and compactness}
 \label{app:half-finite-cofinal}
 
 Every half-value route below has the form
 ``finite witness at depth $N$'' plus ``witnesses at unbounded depths''
-implies $1/2\in\mathcal A$.  These are alternative sufficient producers, not
+implies $1/2\in\mathcal A$.  These are alternative sufficient criteria, not
 successive stages of one proof.  Local identities advance one witness;
-compactness consumes a cofinal supply, which no result below proves.
+compactness consumes witnesses at unbounded depths, which no result below proves.
 
 \subsubsection{Finite residuals for the half-value problem}\label{res:halfcylindershadow}
 
@@ -1375,14 +1375,14 @@ At depth $N$, a finite family called a \emph{selected window} of radius $R$
 assigns each $k\in[1,R]$ an admissible Boolean word with terminal carry $k$.
 If such windows exist for
 every large $N$ with $R\geq1$, choosing $k=1$ gives unbounded-depth witnesses
-(\lword{HalfCarrySelectedWindow.lean}{831}{cofinalAdmissibility_of_selectedHalfWindows}{cofinality});
+(\lword{HalfCarrySelectedWindow.lean}{831}{cofinalAdmissibility_of_selectedHalfWindows}{the unbounded-depth implication});
 compactness then gives an infinite support with sum $1/2$
 (\lword{HalfCarrySelectedWindow.lean}{864}{exists_infinite_support_half_of_selectedHalfWindows}{half-value conclusion}).
 The unproved input is a coherent one-row history: the representatives either
 agree on every divisor of $N+1$, making the next coefficient common, or the
 adjacent outcome realises the canonical one-hole seam
 (\lword{HalfCarrySelectedWindow.lean}{236}{SelectedHalfWindow.HistoryAlternative}{coefficient-or-hole}).
-No such history is supplied at all large depths; hence no cofinal window
+No such history is supplied at all large depths; hence no unbounded-depth window
 supply and no proof of Erd\H{o}s~\#257 follow.
 
 \subsubsection{A realised rewind criterion}\label{res:rewindphase}
@@ -1405,17 +1405,17 @@ means each seam-reachable carry there comes from an admissible word
 (\lword{HalfCarryProtectedSeamConsumer.lean}{18}{ProtectedEvenSeamRealizedAt}{protected-seam predicate}).
 The hole is $H=2\delta-c$; take $k=4$ if $H=3$, otherwise $k=3$.
 Seams beyond every bound yield witnesses by
-\lword{HalfCarryProtectedSeamConsumer.lean}{31}{cofinalAdmissibility_of_cofinalProtectedEvenSeamRealization}{protected-seam cofinality},
+\lword{HalfCarryProtectedSeamConsumer.lean}{31}{cofinalAdmissibility_of_cofinalProtectedEvenSeamRealization}{unbounded-depth protected-seam implication},
 and compactness gives
 \lword{HalfCarryProtectedSeamConsumer.lean}{53}{exists_infinite_support_half_of_cofinalProtectedEvenSeamRealization}{an infinite support summing to \(1/2\)}.
-The cofinal supply is unproved, so Erd\H{o}s~\#257 remains open.
+The unbounded-depth supply is unproved, so Erd\H{o}s~\#257 remains open.
 
-\subsubsection{Combining the two cofinal half-carry criteria}\label{res:cofinalwindowseam}
+\subsubsection{Combining the two unbounded-depth half-carry criteria}\label{res:cofinalwindowseam}
 
 For every $N$, the hypothesis gives an $M\geq N$ with a selected window or a
 realised seam.  The window uses carry $1$; the seam uses $4$ if its hole is
 $3$, otherwise $3$.  Either gives an admissible word and hence
-\lword{HalfCarryCofinalWindowOrSeamConsumer.lean}{32}{cofinalAdmissibility_of_cofinalSelectedWindowOrProtectedSeam}{cofinal admissibility};
+\lword{HalfCarryCofinalWindowOrSeamConsumer.lean}{32}{cofinalAdmissibility_of_cofinalSelectedWindowOrProtectedSeam}{unbounded-depth admissibility};
 compactness then gives
 \lword{HalfCarryCofinalWindowOrSeamConsumer.lean}{58}{exists_infinite_support_half_of_cofinalSelectedWindowOrProtectedSeam}{an infinite support summing to \(1/2\)}.
 Branches may alternate.  The hypothesis is unproved;
@@ -1549,12 +1549,12 @@ The complementary branch has an equally exact seam formulation.  Membership
 of $1/2$ in the Mersenne achievement set is equivalent to the occurrence,
 beyond every bound, of a successor terminal bit equal to zero,
 \lword{HalfCylinderHalfMembershipClassification.lean}{126}{half_mem_mersenneAchievementSet_iff_unboundedTerminalFalse}{the unbounded terminal-zero equivalence};
-equivalently, it is equivalent to a cofinal sequence of such terminal zeros,
-\lword{HalfCylinderHalfMembershipClassification.lean}{203}{half_mem_mersenneAchievementSet_iff_cofinalTerminalFalse}{the cofinal terminal-zero equivalence}.
-It is also equivalent to a cofinal integer-seam sequence with skipped ranks
+equivalently, it is equivalent to such terminal zeros at unbounded depths,
+\lword{HalfCylinderHalfMembershipClassification.lean}{203}{half_mem_mersenneAchievementSet_iff_cofinalTerminalFalse}{the unbounded-depth terminal-zero equivalence}.
+It is also equivalent to integer-seam witnesses at unbounded depths with skipped ranks
 tending to infinity,
 \lword{HalfCylinderHalfMembershipClassification.lean}{213}{half_mem_mersenneAchievementSet_iff_exists_unboundedSkippedRanksAlong}{the unbounded skipped-rank equivalence}.
-These equivalences isolate the required cofinal skipped-rank condition; they
+These equivalences isolate the required unbounded skipped-rank condition; they
 do not establish that condition.
 
 \subsubsection{Largest skipped ranks}\label{res:largestskip}
@@ -1762,8 +1762,8 @@ interval, with separate fixed pasts below and above it.
 
 The logical roles differ.  Depth \(18\) is checked data.  The one-row and
 gap updates are conditional on their coefficient inequalities; the
-quarter-band bound is only necessary for swallowing a gap.  Only cofinal
-full stages---not a finite run---imply half-membership.
+quarter-band bound is only necessary for swallowing a gap.  Only full stages
+at unbounded depths---not a finite run---imply half-membership.
 
 \begin{proposition}[verified base and one-row cylinder update]
 \label{res:selectsuffix}
@@ -1846,7 +1846,7 @@ This is a necessary gap-width condition, not a contradiction.
 \noindent Formalised as the
 \lword{SuffixCylinderProfiledSwallow.lean}{254}{nextBound_le_four_gapWidth_add_two_of_macro_swallow}{two-row gap-width bound}.
 
-\begin{corollary}[cofinal suffix-cylinder criterion]\label{res:cofinalcylinder}
+\begin{corollary}[unbounded-depth suffix-cylinder criterion]\label{res:cofinalcylinder}
 If full suffix-cylinder stages exist at arbitrarily large depths, then
 there is an infinite set \(A\subseteq\Npos\) such that
 \[
@@ -1854,11 +1854,11 @@ there is an infinite set \(A\subseteq\Npos\) such that
 \]
 \end{corollary}
 \noindent This is the
-\lword{SuffixCylinderTerminalOnlyBridge.lean}{148}{exists_infinite_positive_support_half_of_cofinalCylinderStages}{positive-support cofinal-cylinder criterion}.
+\lword{SuffixCylinderTerminalOnlyBridge.lean}{148}{exists_infinite_positive_support_half_of_cofinalCylinderStages}{positive-support unbounded-depth cylinder criterion}.
 
 \paragraph{Status and relation to prior work.}
 The two transition propositions do not supply their coefficient inequalities,
-and the finite base does not supply the cofinal family required by
+and the finite base does not supply witnesses at unbounded depths as required by
 Corollary~\ref{res:cofinalcylinder}.  The
 strict-tail achievement-set literature supplies the surrounding Cantor-set
 geometry~\cite[Remark~4.1]{kovactao}, not this finite carry recurrence; the comparison
@@ -3129,7 +3129,7 @@ The events belong to different constructions and imply opposite kinds of
 conclusion: irrationality in the first line, membership in the second.
 Proposition~\ref{res:complete}, Theorem~\ref{res:pointwisecomplete}, and
 Theorem~\ref{res:red21} give the first equivalence; Theorem~\ref{res:halfmembership}
-gives the second.  Neither required cofinal supply is known.  By contrast,
+gives the second.  Neither required unbounded-depth supply is known.  By contrast,
 the classical full-support argument uses Bertrand--CRT and averaging to
 construct witnesses at every precision.  Other coordinate identities and
 rational-support filters do not change either missing quantifier.
@@ -3753,8 +3753,6 @@ Throughout this appendix:
 \begin{itemize}[leftmargin=1.6em]
 \item a \emph{take} (respectively a \emph{skip}) at rank \(n\) is the
 greedy decision \(\varepsilon_n=1\) (respectively \(\varepsilon_n=0\));
-\item \emph{cofinal} means at unbounded depths
-(\(\forall N\,\exists M\geq N\)), not at every sufficiently large depth;
 \item the \emph{finite greedy seam at row \(s\)} is the Boolean word of
 Definition~\ref{def:terminal-bit}; an unqualified \emph{seam} in this
 appendix is an adjacent pair of such words at a branch boundary, and the
@@ -3787,8 +3785,8 @@ This appendix supplies the local implications behind
 Theorems~\ref{res:halfmembership} and~\ref{res:fatalright},
 Proposition~\ref{res:finalskipexclusions}, and
 Corollary~\ref{res:taildominance}.  It does not establish the corollary's
-global hypothesis.  One sufficient route is a cofinal window, seam, or
-terminal approximation producing \(1/2\in\mathcal A\).  A second route
+global hypothesis.  One sufficient route is a window, seam, or terminal
+approximation at unbounded depths producing \(1/2\in\mathcal A\).  A second route
 requires both an exclusion of every actual middle transition with
 \(C_D=-2,-1\) and a proof of \(\Theta_D<C_D\) at every remaining
 non-\((-3)\) middle transition.  The
@@ -4378,15 +4376,15 @@ algebraic boundaries for the squared and M\"obius coordinates.
 Appendix~\ref{app:lambert-probability} develops unconditional geometry
 internal to the coprime-pair probability coordinate.
 No conclusion about a comparison input transfers irrationality to \(S\), and
-none of the three families supplies the cofinal
-\(\mathsf{Sep}\) supply theorem.
+none of the three families supplies the after-every-cutoff
+\(\mathsf{Sep}\) theorem.
 
 \FurtherLambertAppendix
 
 \paragraph{Appendix consequence.}
 The three subsections independently change the Lambert weight, rewrite the
 squared coordinates, and refine the coprime-pair geometry.  None supplies the
-cofinal \(\mathsf{Sep}\) theorem for \(S\) or decides whether \(1/2\in\mathcal A\).
+after-every-cutoff \(\mathsf{Sep}\) theorem for \(S\) or decides whether \(1/2\in\mathcal A\).
 
 \section{Guide to the formal sources}\label{app:index}
 
