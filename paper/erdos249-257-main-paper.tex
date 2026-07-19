@@ -2958,11 +2958,9 @@ statement.  None provides the required certificates after every cutoff.
 \section{One transform and the limit of finite evidence}
 \label{sec:architecture}
 
-\noindent This section compares the structure of the two open reductions and
-the point where finite evidence stops.  Every mathematical assertion in it
-is proved elsewhere in the paper; the section adds organisation, not
-theorems, and its closing remark is an elementary unformalised observation,
-flagged as such.
+\noindent This section maps the two open reductions and the limit of finite
+evidence.  It adds organisation, not theorems; its closing elementary
+observation is explicitly unformalised.
 
 \subsection{One transform, one mechanism, three questions}
 \label{sec:one-transform}
@@ -2974,45 +2972,48 @@ evaluation:
  f\;\longmapsto\;f*\mathbf 1\;\longmapsto\;
  \sum_{m\ge1}\frac{(f*\mathbf 1)(m)}{2^m}\;=\;L(f).
 \]
-Every series in this paper is an instance.  The primitive-conductor input
-\(f=\alpha\) gives \(L(\alpha)=S\) with divisor stream
-\(\alpha*\mathbf 1=\ph\) (Proposition~\ref{res:lift}); a support indicator
-\(f=\mathbf 1_A\) gives \(L(\mathbf 1_A)=X_A\) with divisor stream \(f_A\)
+Here \((f*\mathbf 1)(m)=\sum_{d\mid m}f(d)\) is the \emph{divisor stream}:
+the first map sums over divisors, and the second reads those sums as
+binary-series coefficients.  The primitive-conductor input \(f=\alpha\) gives
+\(L(\alpha)=S\) with divisor stream \(\alpha*\mathbf 1=\ph\)
+(Proposition~\ref{res:lift}); a support indicator \(f=\mathbf 1_A\) gives
+\(L(\mathbf 1_A)=X_A\) with divisor stream \(f_A\)
 (Appendix~\ref{app:carry-boolean}); and the comparison inputs
 \(\mu\), \(\mathbf 1\), and \(\ph\) give the comparison values listed in
 Section~\ref{sec:ladder}.
 
-Rationality acts on all of these through one mechanism.  For any \(\N\)-valued
-stream \(\gamma:\N\to\N\) with \(\gamma(n)\le n\), a class containing both
-\(\ph\) and every \(f_A\), Theorem~\ref{res:rigidity} identifies rationality
-of \(\sum_n\gamma(n)2^{-n}\) with the existence of a tempered integer orbit:
-after multiplication by one denominator, the coefficient stream is the exact
-one-step doubling difference \(2u(N)-u(N+1)\) of an integer sequence of size
-\(o(2^N)\).  The tail differences of
-Section~\ref{sec:reduction} and the carry states of
-Theorem~\ref{res:rigidity-main} are two coordinate systems for this one
-orbit condition.  M\"obius inversion then identifies the arithmetic input
-beneath the coefficient stream: the fixed weight \(\alpha=\ph*\mu\) on the
-\#249 side, and the Boolean indicator \(\mu*f_A=\mathbf 1_A\) on the \#257
-side (Proposition~\ref{res:boolmob}).
+For any \(\N\)-valued stream \(\gamma\) with \(\gamma(n)\le n\), including
+\(\ph\) and every \(f_A\), Theorem~\ref{res:rigidity} says that
+\(\sum_n\gamma(n)2^{-n}\) is rational exactly when an integer sequence
+\(u(N)\) and positive integer $v$ satisfy
+\(v\gamma(N+1)=2u(N)-u(N+1)\) and \(u(N)=o(2^N)\).  This exact recurrence
+plus subexponential bound is what \emph{tempered integer orbit} means here.
+Tail differences (Section~\ref{sec:reduction}) and carry states
+(Theorem~\ref{res:rigidity-main}) are two coordinates for that condition.
+M\"obius inversion recovers the underlying input: \(\alpha=\ph*\mu\) for
+\#249 and \(\mu*f_A=\mathbf 1_A\) for \#257
+(Proposition~\ref{res:boolmob}).
 
-The three open questions are then three different questions about this one
-map.
+The three open questions have different quantifiers, even though they use
+this one map.  Write \(\mathcal I_\infty\) for the indicators
+\(\mathbf 1_A\) of infinite supports \(A\subseteq\{2,3,\ldots\}\).  Then:
 \begin{enumerate}[label=\textup{(\roman*)},leftmargin=2.2em]
-\item Erd\H{o}s~\#249 fixes the input and asks about one image point:
-is \(L(\alpha)=S\) rational?
-\item Universal \#257 restricts the domain to indicators of infinite
-supports and asks whether the image of that domain meets \(\Q\) at all.
-\item The half-value route fixes the target and asks whether the fibre over
-\(1/2\) meets the same domain; by Theorem~\ref{res:greedy} the fibre over
-any value contains at most one positive-exponent support, so the question concerns
-one canonical greedy orbit.
+\item Erd\H{o}s~\#249 fixes one input and asks for the status of its one
+value: \(L(\alpha)=S\notin\Q\)?
+\item Universal \#257 asks whether every permitted value is irrational:
+\(L(\mathcal I_\infty)\cap\Q=\varnothing\).  Its negation is one infinite
+support $A$ with $X_A\in\Q$.
+\item The half-value route fixes one rational target and asks an existence
+question:
+\(L^{-1}(1/2)\cap\mathcal I_\infty\ne\varnothing\).  Here
+\(L^{-1}(1/2)\) is the \emph{fibre}, meaning all inputs mapped to $1/2$.
+Theorem~\ref{res:greedy} allows at most one positive-exponent support in that
+fibre, namely the canonical greedy orbit.
 \end{enumerate}
-Figure~\ref{fig:transform} displays the five inputs and the three question
-slices.
-The trichotomy describes where the questions sit inside one transform.  It
-is not a theorem transferring information between them, and the next
-subsection records exactly why no transfer follows.
+Question (iii) would refute (ii), but failure at the particular target
+$1/2$ would not prove (ii): another rational target could still be reached.
+Figure~\ref{fig:transform} marks these three ways of interrogating the map;
+it supplies no theorem transferring status between them.
 
 \begin{figure}[H]
 \centering
@@ -3064,28 +3065,22 @@ Appendix~\ref{sec:carry}; it asserts nothing further.}
 
 \subsection{Why no status transfers}
 
-The transform alone does not determine arithmetic status.  The values
-formalised or cited in Section~\ref{sec:ladder} include rational examples
-\(L(\ph)=2\) and \(L(\mu)=1/2\), the irrational example
-\(L(\mathbf 1)=E\), the transcendental example \(L(\mathrm{Id})\), and the
-open value \(L(\alpha)=S\).
+The transform alone does not determine status: Section~\ref{sec:ladder} gives
+rational \(L(\ph)=2\) and \(L(\mu)=1/2\), irrational
+\(L(\mathbf 1)=E\), transcendental \(L(\mathrm{Id})\), and open
+\(L(\alpha)=S\).
 
-Simple properties of the input do not distinguish these cases.  Both
-\(\ph\) and \(\mathbf 1\) are positive and multiplicative with at most
-linear growth, yet their transforms are respectively rational and
-irrational.  Boolean coefficients alone are also insufficient: every finite
-support has rational value, while the infinite supports of
-Theorem~\ref{res:support} have irrational values.  The finite example
-\(\{2,3\}\), whose value is \(10/21\), and its period-six carry orbit are
-worked out in Appendix~\ref{app:carry-boolean}.
+Nor do simple input properties distinguish them: \(\ph\) and \(\mathbf 1\)
+are positive, multiplicative, and at most linear, yet their values are
+rational and irrational.  Every finite Boolean support has rational value,
+whereas Theorem~\ref{res:support} gives infinite supports with irrational
+values.  Appendix~\ref{app:carry-boolean} works out the finite support
+\(\{2,3\}\), value \(10/21\), and its period-six carry orbit.
 
-A proof of an open case must therefore use arithmetic specific to its input:
-the dyadic structure of exact totient values for \#249, the interaction
-between the Boolean M\"obius condition and infinitude for universal \#257,
-or the divisor feedback of the greedy orbit for the half-value fibre.
-Appendix~\ref{app:totient-boundaries} rules out several arguments based only
-on generic input properties and identifies arithmetic information that a
-successful method would still need.
+Progress must therefore use input-specific arithmetic: exact totient values
+for \#249, Boolean M\"obius inversion plus infinitude for universal \#257,
+or greedy divisor feedback for the half-value fibre.
+Appendix~\ref{app:totient-boundaries} rules out several generic shortcuts.
 
 \subsection{The shared bottleneck}
 
@@ -3102,27 +3097,25 @@ conclusions point in opposite directions.  In literal quantifiers,
  \forall N_0\;\exists s\ge\max\{N_0,6\}\;(\tau_s=0).
 \end{aligned}
 \]
-For \(S\), Proposition~\ref{res:complete} supplies fixed completeness,
-Theorem~\ref{res:pointwisecomplete} gives the pointwise global form, and
-Theorem~\ref{res:red21} gives the first displayed equivalence.  For \(1/2\),
-Theorem~\ref{res:halfmembership} gives the second: a zero terminal bit occurs
-beyond every row cutoff.  In both cases the missing step is a theorem
-producing the required finite events beyond every cutoff.  Neither such
-theorem is known.  The
-classical full-support comparison is already proved: its
-Bertrand--CRT and averaging argument constructs the required witnesses
-uniformly at every precision.  The coordinate identities and
-rational-support filters used elsewhere in the paper do not alter either
-missing quantifier.
+The first line requires separating certificates after every cutoff for each
+shift $h$; the second requires terminal zero bits after every row cutoff.
+The events belong to different constructions and imply opposite kinds of
+conclusion: irrationality in the first line, membership in the second.
+Proposition~\ref{res:complete}, Theorem~\ref{res:pointwisecomplete}, and
+Theorem~\ref{res:red21} give the first equivalence; Theorem~\ref{res:halfmembership}
+gives the second.  Neither required cofinal supply is known.  By contrast,
+the classical full-support argument uses Bertrand--CRT and averaging to
+construct witnesses at every precision.  Other coordinate identities and
+rational-support filters do not change either missing quantifier.
 
-Thus the comparison also gives a criterion for further progress.  On the
-\#249 side, a new local identity affects the open problem only if it produces or
-rules out \(\mathsf{Sep}\)-certificates at unbounded parameters.  On the
-half-value side of \#257, it must produce terminal zeros beyond every row
-cutoff or prove that the greedy seam is eventually right.  Further fixed-scale
-computation, by itself, changes neither open statement.
+Thus useful progress must control \(\mathsf{Sep}\)-certificates at unbounded
+parameters for \#249, or produce terminal zeros beyond every row cutoff (or
+an eventually right greedy seam) for the half-value route.  More fixed-scale
+computation alone changes neither open statement.
 
 \paragraph{What finite witnesses can decide.}
+Here a \emph{finite witness} is exactly checkable data whose conclusion does
+not assume how the uninspected tail behaves; its force depends on the claim.
 For the half-value route, a finite calculation can settle nonmembership.
 By Theorem~\ref{res:fatalright}, \(1/2\notin\mathcal A\) is equivalent to the
 existence of a fatal half-gap.  Exact rational evaluation of the greedy
@@ -3142,7 +3135,7 @@ certify the same tail difference.  Thus finite discovery can certify
 half-value nonmembership, but not half-value membership or either status of
 \(S\) within these certificate systems.
 
-\begin{remark}[boundaries visible from the normal forms]
+\begin{remark}[why finite agreement does not decide the open cases]
 The following two elementary countermodels are not formalised in the source.
 Both alter the object beyond a finite inspected range; neither makes a claim
 about the actual totient stream or the actual Mersenne weights.
