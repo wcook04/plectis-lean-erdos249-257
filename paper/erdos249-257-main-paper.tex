@@ -99,8 +99,8 @@ Let $S=\sum_{n\geq1}\ph(n)/2^n$, and for $A\subseteq\Npos$ let
 $X_A=\sum_{n\in A}(2^n-1)^{-1}$.  Erd\H{o}s asked whether $S$ is
 irrational (Problem~\#249) and whether $X_A$ is irrational for every
 infinite $A$ (Problem~\#257).  Both problems remain open.  We formalise in
-Lean two exact reductions that isolate the missing unbounded step in each
-question.
+Lean two exact reductions that identify an equivalent unbounded condition
+in each question.
 
 For \#249, irrationality of $S$ is equivalent to the existence, beyond
 every bound, of a finite integer calculation plus a rigorous tail estimate
@@ -181,7 +181,8 @@ obligations; neither obligation is proved.
 The phrase ``beyond every bound'' is essential: no fixed number of successful
 computations settles either line.  The paper supplies a checked map and finite
 tools, not a mechanism forcing either event to recur.  The common coordinates
-neither merge the two programmes nor show that either missing theorem is close.
+neither merge the two programmes nor show that either unbounded condition is
+within reach.
 
 The totient constant also has the elementary form
 \[
@@ -284,8 +285,8 @@ Independently of the unbounded certificate supply, if \(S=p/q\), then
 \]
 This is the \lword{CertificateKernel.lean}{18056}{tsum_totient_div_pow_two_ne_ratCast_of_den_le_79639646646701375323355774875831053}{denominator exclusion}.
 
-\paragraph{Missing theorem.}
-An unbounded certificate supply is the exact open statement: for every
+\paragraph{Open boundary.}
+The exact open statement is an unbounded certificate supply: for every
 positive \(h\), non-integral differences \(R_{N+h}-R_N\) occur at
 arbitrarily large \(N\).  Theorem~\ref{res:diag} gives the equivalent
 one-parameter lcm-diagonal form.  The 28 changing-lcm scales through
@@ -330,14 +331,13 @@ The formal statements are the
 and the
 \lword{HalfCarryReachability.lean}{589}{finite_boolSupport_ne_half}{finite-support exclusion}.
 
-\paragraph{Missing theorem.}
-The missing input is a proof that the terminal bit is zero beyond every
-bound.  The
-current last-skip route proves that, after a putative last skip, neither the
-upper transition nor middle carry \(-3\) can occur.  It remains to exclude
-middle carries \(-2,-1\) and to prove a future-tail inequality for the
-remaining nonnegative middle carries.  Neither statement is known for the
-greedy orbit.  The exact conditional implication is the
+\paragraph{Open boundary.}
+The open statement is that the terminal bit is zero beyond every bound.  The
+proved last-skip analysis shows that, after a putative last skip, neither the
+upper transition nor the exceptional transition carry \(-3\) can occur.  It
+does not exclude the exceptional carries \(-2,-1\) or prove a future-tail
+inequality for the remaining nonnegative middle carries.  Neither statement
+is known for the greedy orbit.  The exact conditional implication is the
 \lword{HalfCylinderLastProducerContradiction.lean}{387}{half_mem_mersenneAchievementSet_of_middleProducerTailEscapeExceptNegThree}{remaining-tail implication}.
 Proposition~\ref{res:finalskipexclusions} gives the local exclusions and
 Corollary~\ref{res:taildominance} states the sufficient global hypothesis.
@@ -2975,7 +2975,7 @@ statement.  None provides the required certificates after every cutoff.
 evidence.  It adds organisation, not theorems; its closing elementary
 observation is explicitly unformalised.
 
-\subsection{One transform, one mechanism, three questions}
+\subsection{One transform, three distinct questions}
 \label{sec:one-transform}
 
 The Lambert rearrangement of Section~\ref{sec:ladder} factors the common
@@ -3090,9 +3090,9 @@ whereas Theorem~\ref{res:support} gives infinite supports with irrational
 values.  Appendix~\ref{app:carry-boolean} works out the finite support
 \(\{2,3\}\), value \(10/21\), and its period-six carry orbit.
 
-Progress must therefore use input-specific arithmetic: exact totient values
-for \#249, Boolean M\"obius inversion plus infinitude for universal \#257,
-or greedy divisor feedback for the half-value fibre.
+The transform therefore leaves the input-specific arithmetic untouched:
+exact totient values for \#249, Boolean M\"obius inversion plus infinitude
+for universal \#257, and greedy divisor feedback for the half-value fibre.
 Appendix~\ref{app:totient-boundaries} rules out several generic shortcuts.
 
 \subsection{The shared bottleneck}
@@ -3121,10 +3121,11 @@ the classical full-support argument uses Bertrand--CRT and averaging to
 construct witnesses at every precision.  Other coordinate identities and
 rational-support filters do not change either missing quantifier.
 
-Thus useful progress must control \(\mathsf{Sep}\)-certificates at unbounded
-parameters for \#249, or produce terminal zeros beyond every row cutoff (or
-an eventually right greedy seam) for the half-value route.  More fixed-scale
-computation alone changes neither open statement.
+In these coordinates, resolving the displayed statements requires
+\(\mathsf{Sep}\)-certificates at unbounded parameters for \#249, or terminal
+zeros beyond every row cutoff (or an eventually right greedy seam) for the
+half-value route.  More fixed-scale computation alone changes neither open
+statement.
 
 \paragraph{What finite witnesses can decide.}
 Here a \emph{finite witness} is exactly checkable data whose conclusion does
@@ -3485,9 +3486,9 @@ the classical mediant or continuant framework.
 
 \subsection{Two concrete scalar criteria}
 
-Two scalar conditions give concrete sufficient routes toward the two open
-directions.  Both are exact arithmetic statements; neither is proved at the
-unbounded range needed for its final conclusion.
+Two scalar conditions give conditional implications for the two open
+directions.  Both are exact arithmetic statements; neither hypothesis is
+proved at the unbounded range needed for its conclusion.
 
 For \#249, retain $M_t=\lcm(1,\ldots,t)$ and write
 \[
@@ -3653,12 +3654,13 @@ point-membership question.
 \end{problem}
 
 \paragraph{Conclusion: what the reductions change.}
-The paper supplies a checked map and reusable finite tools, not the unbounded
-mechanism that would decide either direction.  The reductions change form,
-not status.  For \#249 the one missing theorem is
-unbounded certificate supply, equivalently in pointwise or lcm-diagonal form.
+The paper proves exact reductions, finite certificates, and local no-go
+results.  It does not prove an unbounded mechanism deciding either direction;
+the reductions change form, not status.  For \#249 the unresolved statement
+is unbounded certificate supply, equivalently in pointwise or lcm-diagonal form.
 For the half-value route to \#257, arbitrary supports give way to one greedy
-orbit; in final-skip coordinates it remains to exclude cells \(-2,-1\) and
+orbit; in final-skip coordinates it remains to exclude exceptional carry
+values \(-2,-1\) and
 prove the future-tail inequality at the remaining nonnegative-carry middle
 transitions.  Supply beyond every cutoff proves \#249; terminal zero beyond
 every row cutoff refutes universal \#257; eventual right behaviour proves
