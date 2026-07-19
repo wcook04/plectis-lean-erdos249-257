@@ -36,20 +36,20 @@
 "authority_role": "proof_bearing_committed_source_anchor"
 },
 "navigation_snapshot": {
-"commit": "144fc5e788b74d16bd4b5652c3a209c1a6c18f4a",
+"commit": "22d5a2cb39e0c3004b26d307574673ce08fa39b6",
 "authority_role": "machine_readable_navigation_anchor",
 "publication_state": "main_history_snapshot",
 "published_ref": "main",
-"repository_resolution": "https://github.com/wcook04/plectis-lean-erdos249-257/tree/144fc5e788b74d16bd4b5652c3a209c1a6c18f4a"
+"repository_resolution": "https://github.com/wcook04/plectis-lean-erdos249-257/tree/22d5a2cb39e0c3004b26d307574673ce08fa39b6"
 },
 "content": {
 "machine_readable_paper": {
 "path": "docs/claims.json::machine_readable_paper",
-"content_digest": "sha256:f865854e5706d79e2ccaabd4906080a29f36a129c1fa2c52d23e3fc996a93b77"
+"content_digest": "sha256:575fe5c3fe07120d2ceb0099b6c168ea276feedfdf398939ea2d9162d6486cf8"
 },
 "claims_document": {
 "path": "docs/claims.json",
-"content_digest": "sha256:70c8f685085f2b8d983fd4e73bef32cbec8af0f896fc9f57b5ace58559a4c445"
+"content_digest": "sha256:1a3aecc067dce59aaa06a5499b6e3b01d2055f8e5683fe78c9df9e94efe4d2a8"
 },
 "declaration_atlas": {
 "path": "docs/declaration_atlas.json",
@@ -62,13 +62,13 @@
 },
 "bounded_orientation": {
 "path": "docs/orientation.json",
-"content_digest": "sha256:2f8e00ca3e3439d408975bb1f51c72a5b16997d793fbece0f4acd1ab4efb0de4"
+"content_digest": "sha256:d7bac294b64272bd94428a5a692ac88f7d79c4ccf267e5cd24393aa2da87afdc"
 },
 "human_exposition": {
 "source_path": "paper/erdos249-257-main-paper.tex",
-"source_content_digest": "sha256:4cc3714152c47930e72db2634931b809915f178e4b798f1d615895f62f1180b2",
+"source_content_digest": "sha256:e2f339dd9bd7a6f2357cf6c41977145284d043bf058fe37b9b2c2882fb231653",
 "rendered_path": "erdos249-257-main-paper.pdf",
-"rendered_content_digest": "sha256:b66c9d0f095b6aae139030c7fe209ecbffe0363f913d3613323424e1b0f4ffb3",
+"rendered_content_digest": "sha256:4b65e3deb5ac3b9dd2014b5f8103532f94613ccd3291da77bb914b9f5aceec18",
 "artifact_role": "authored_mathematician_facing_exposition",
 "authority_posture": "authored_editorial_surface_not_Lean_proof_authority"
 },
@@ -1787,7 +1787,7 @@
 "expansion": {
 "machine_readable_paper": {
 "path": "docs/claims.json::machine_readable_paper",
-"expected_content_digest": "sha256:f865854e5706d79e2ccaabd4906080a29f36a129c1fa2c52d23e3fc996a93b77",
+"expected_content_digest": "sha256:575fe5c3fe07120d2ceb0099b6c168ea276feedfdf398939ea2d9162d6486cf8",
 "contains": [
 "all_claims",
 "authored_argument_graph",
@@ -1811,9 +1811,9 @@
 },
 "human_exposition": {
 "source_path": "paper/erdos249-257-main-paper.tex",
-"expected_source_content_digest": "sha256:4cc3714152c47930e72db2634931b809915f178e4b798f1d615895f62f1180b2",
+"expected_source_content_digest": "sha256:e2f339dd9bd7a6f2357cf6c41977145284d043bf058fe37b9b2c2882fb231653",
 "rendered_path": "erdos249-257-main-paper.pdf",
-"expected_rendered_content_digest": "sha256:b66c9d0f095b6aae139030c7fe209ecbffe0363f913d3613323424e1b0f4ffb3",
+"expected_rendered_content_digest": "sha256:4b65e3deb5ac3b9dd2014b5f8103532f94613ccd3291da77bb914b9f5aceec18",
 "authority_posture": "authored_editorial_surface_not_Lean_proof_authority"
 },
 "paper_source_sigils": {
