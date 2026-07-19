@@ -113,13 +113,13 @@ These checks remain finite; they do not prove the required unbounded supply.
 For \#257, we formalise the classical irrationality theorem for the sum over
 all positive exponents in every integer base $b\geq2$, together with several
 previously known structured choices of infinite $A$.  At base $2$, each weight exceeds the
-sum of all later weights, so every attainable value has a unique support.
+sum of all later weights, so every attainable value has a unique choice of exponents.
 The value $1/2$ is attainable exactly when its greedy expansion omits weights
 at arbitrarily large ranks; this would refute the universal assertion in
 \#257.  Nonattainment is equivalent to a final omission.  After a putative
 final omission, the next-step recurrence has two branches.  We exclude one
 branch and the integer remainder $-3$ in the other; the values $-2,-1$ and a
-future-tail inequality remain unresolved.
+comparison with the unused tail remain unresolved.
 
 An exact change of variables places both series in one common formula, but
 transfers no irrationality theorem between them.  The contribution is a
@@ -145,7 +145,7 @@ catalogue~\cite{erdosproblems}.  Neither problem is settled.
 
 Throughout, \(\N=\{0,1,2,\ldots\}\) and
 \(\Npos=\{1,2,3,\ldots\}\).  A \emph{support} \(A\subseteq\Npos\)
-selects terms of the \#257 series, and its sum belongs to the corresponding
+is the set of selected exponents; the set of all resulting sums is the
 \emph{achievement set} \(\mathcal A\).  Exponent \(0\) is excluded because
 \(2^0-1=0\).  An infinite support with sum \(1/2\) would therefore refute
 the universal assertion in \#257.
@@ -156,7 +156,8 @@ Each question is reduced to a finite Lean-checkable calculation and one
 unbounded condition that remains open.  For \#249, a \emph{certificate} is a
 finite integer calculation plus a rigorous bound on the omitted tail.  Put
 \(M_t=\lcm(1,\ldots,t)\), the least common multiple of \(1,\ldots,t\), and
-\(R_N=\sum_{m\geq1}\ph(N+m)2^{-m}\).  For \#257, skipping rank \(n\) means
+\(R_N=\sum_{m\geq1}\ph(N+m)2^{-m}\), the original series tail after
+position \(N\), rescaled by \(2^N\).  For \#257, skipping rank \(n\) means
 omitting the weight \((2^n-1)^{-1}\).  Its greedy rule takes the next weight
 exactly when doing so does not overshoot the target \(1/2\).
 \noindent The two central equivalences, stated before the later proof
@@ -205,7 +206,7 @@ Question or result & Status & What is proved \\
 Irrationality in \#249 & Open & No proof of \(S\notin\Q\) is claimed. \\
 Denominator exclusion & Proved & If \(S=p/q\), then \(q>\Qzero\). \\
 Tail differences and \(M_t\)-diagonal certificates & Exact equivalences & The unbounded supply is equivalent to \(S\notin\Q\), but remains open. \\
-Diagonal computation & Finite evidence & Lean checks 28 diagonal certificates through \(t=64\); this is not cofinal. \\
+Diagonal computation & Finite evidence & Lean checks 28 diagonal certificates through \(t=64\); this is not an unbounded family. \\
 Universal assertion in \#257 & Open & No proof covers every infinite support. \\
 Structural/support results & Prior work/formalised & Dyadic-section ranks and unique support coding are checked here; named support cases are formalised or cited.  None settles \#257. \\
 Membership of \(1/2\) & Open; exact reductions & Greedy and carry laws give equivalent events without proving they occur. \\
@@ -214,13 +215,14 @@ Membership of \(1/2\) & Open; exact reductions & Greedy and carry laws give equi
 \end{center}
 
 \paragraph{What ``Lean-checked'' means here.}
-A linked theorem statement has a proof term accepted by Lean from the pinned
-source and dependencies.  An exact equivalence remains an equivalence even
+A \emph{proof term} is a formal expression that Lean's kernel accepts as a
+proof.  Here a linked theorem is ``Lean-checked'' when such a term is accepted
+from the fixed source revision and dependencies.  An exact equivalence remains an equivalence even
 when both sides are open; a finite calculation remains finite; and a theorem
 with a rationality hypothesis does not prove that a rational support exists.
 The manuscript, its link checker, and its generated indexes help a reader find
-the proof but are not themselves proof authority.  The release section states
-the additional source-pin and trust checks required for a reproducible copy.
+the proof but are not themselves proof authority.  Section~\ref{sec:verify}
+states how the fixed source revision and trusted dependencies are checked.
 
 \paragraph{Reading map.}
 The status-only route begins with Section~\ref{sec:spines}, followed by
@@ -250,7 +252,8 @@ Write
 \[
  R_N=\sum_{m\geq1}\frac{\ph(N+m)}{2^m}.
 \]
-Each \(R_N\) is \(2^NS\) minus an integer.  Rationality of \(S\) would
+This is the tail of the original series after position \(N\), multiplied by
+\(2^N\); hence \(R_N\) is \(2^NS\) minus an integer.  Rationality of \(S\) would
 force one binary period \(h\) whose tail differences \(R_{N+h}-R_N\) are
 eventually all integral; the certificates below refute exactly such
 candidate periods (Section~\ref{sec:reduction}).
@@ -302,7 +305,7 @@ Let
 \]
 
 \paragraph{Exact reduction and finite exclusion.}
-The weights satisfy
+Writing \(w_n=(2^n-1)^{-1}\), the weights satisfy
 \(w_n>\sum_{m>n}w_m\), so a value has at most one support
 \(A\subseteq\Npos\).  No finite such support can have value \(1/2\).  For
 \(1/2\), the following are equivalent:
@@ -333,10 +336,10 @@ and the
 
 \paragraph{Open boundary.}
 The open statement is that the terminal bit is zero beyond every bound.  The
-proved last-skip analysis shows that, after a putative last skip, neither the
-upper transition nor the exceptional transition carry \(-3\) can occur.  It
-does not exclude the exceptional carries \(-2,-1\) or prove a future-tail
-inequality for the remaining nonnegative middle carries.  Neither statement
+later carry analysis splits a putative final skip into two transition branches.
+It rules out one branch and the exceptional carry \(-3\) in the other, but
+does not exclude the carries \(-2,-1\) or prove the required inequality for
+the unused tail at the remaining nonnegative carries.  Neither statement
 is known for the greedy orbit.  The exact conditional implication is the
 \lword{HalfCylinderLastProducerContradiction.lean}{387}{half_mem_mersenneAchievementSet_of_middleProducerTailEscapeExceptNegThree}{remaining-tail implication}.
 Proposition~\ref{res:finalskipexclusions} gives the local exclusions and
@@ -3178,23 +3181,23 @@ not add a mathematical conclusion to either reduction.
 
 \paragraph{Proof authority and source identity.}
 The Lean~4 proof assistant~\cite{lean} and Mathlib library~\cite{mathlib} check
-the named results.  The source, exact informal-to-formal links, and build
+the named results.  The source, links from prose to formal statements, and build
 instructions are available in the
 \href{https://github.com/wcook04/plectis-lean-erdos249-257}{public repository}.
-This paper pins formal-source revision \texttt{\commitshort}, published under
+This paper fixes source revision \texttt{\commitshort}, published under
 the tag
 \href{https://github.com/wcook04/plectis-lean-erdos249-257/tree/formal-source-2026-07-18}{\texttt{formal-source-2026-07-18}}.
 The blue links resolve to immutable source files at that checkpoint.
-The release also pins the Lean and Mathlib
+The release also fixes the Lean and Mathlib
 versions; the toolchain is Lean \texttt{v4.29.1}.
 
 \paragraph{Reproduction commands and artefact identities.}
-A cold clone at the published revision is checked with \texttt{lake build}.
-The release-validation command also checks that every registered claim resolves
-to its stated Lean declaration and manuscript location, that the PDF matches
-the committed source, and that the public source pin resolves to the recorded
+A fresh copy of the published repository is checked with \texttt{lake build}.
+The release command also checks that every registered claim resolves
+to its stated Lean declaration (a named theorem or definition) and manuscript location, that the PDF matches
+the committed source, and that the public source tag resolves to the recorded
 revision.  The resulting report records release validation; it is not
-mathematical proof authority.  The repository records SHA-256 identities for
+mathematical proof authority.  The repository records SHA-256 cryptographic hashes for
 the claims file, Lean-declaration index, manuscript source, rendered PDF, and
 generated navigation files, together with their regeneration commands.  No
 hardware-independent build time is claimed;
@@ -3210,15 +3213,15 @@ reduces a decidable finite proposition to obtain a proof.  The
 uses \texttt{decide} to count 412 phases.  Its local \texttt{maxRecDepth}
 setting only raises the permitted unfolding depth; the proposition and logical
 rules are unchanged.  It does not use compiler-backed native evaluation, and
-its adjoining \texttt{\#print axioms} audit
-reports neither \texttt{Lean.trustCompiler} nor \texttt{sorryAx}, Lean's
-unfinished-proof axiom.  Generated Lean certificate declarations receive the
-same check.  An external dataset, Python release script, generated index, or
-this manuscript does not.  Appendix~\ref{app:index} connects each displayed
+its adjoining \texttt{\#print axioms} report lists neither
+\texttt{Lean.trustCompiler}, which would trust compiler evaluation, nor
+\texttt{sorryAx}, Lean's unfinished-proof axiom.  Generated Lean certificate
+declarations receive the same check; external data, scripts, indexes, and this
+manuscript do not receive kernel proof checking.  Appendix~\ref{app:index} connects each displayed
 result to its exact formal statement.
 
 \paragraph{Section consequence.}
-At the published formal-source checkpoint, the linked declarations and their
+At the published source revision, the linked declarations and their
 checked proof terms certify the stated proved, conditional, finite, and
 equivalence results.  This verification does not change the mathematical status of the
 unresolved statements: the open problems collected in
@@ -3677,7 +3680,7 @@ every finite core would remove this.  We have not pursued either question.
 
 \paragraph{Artefact and data availability.} The
 \href{\sourceurl}{archived formal-source revision} contains the Lean sources,
-pinned toolchain, library manifest, and generated certificate data used in the
+fixed toolchain, library manifest, and generated certificate data used in the
 verification. Repository metadata and this manuscript provide navigation
 rather than proof authority; Section~\ref{sec:verify} gives the verification
 route.
@@ -3685,7 +3688,7 @@ route.
 \paragraph{Use of AI assistance.} Large-language-model assistants were used
 during development for proof drafting, refactoring, and prose editing. Every
 registered formal claim is linked to a declaration in the archived source
-revision. Lean checks each proof term against the pinned library; the project
+revision. Lean checks each proof term against the fixed library version; the project
 contains no proof placeholders or project-defined axioms.
 
 \paragraph{Funding and competing interests.} This work received no external
@@ -3717,8 +3720,8 @@ sufficient hypotheses for \(1/2\in\mathcal A\), and the local identities they
 use.  Appendix~\ref{app:half-finite-cofinal} separates a finite witness from
 the unbounded supply of such witnesses needed for membership.
 Appendix~\ref{app:half-final-skip} identifies nonmembership with a last greedy
-skip, excludes some possible last transitions, and states the two cell
-exclusions and tail inequality still missing.  Appendix~\ref{app:half-evidence}
+skip, excludes some possible last transitions, and states the two exceptional
+carry exclusions and tail inequality still missing.  Appendix~\ref{app:half-evidence}
 contains finite checks, changes of coordinates, and counterexamples to
 shortcuts.
 
