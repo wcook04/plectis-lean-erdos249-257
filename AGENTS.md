@@ -64,12 +64,24 @@ below is the bounded route into mathematical claims and Lean source.
    the universal form of #257 remain open.
 8. For one claim, follow its `paper_label` into
    `paper/erdos249-257-main-paper.tex`, then follow its `declarations` to the
-   named Lean source coordinates.
-9. Use `docs/declaration_atlas.json` when you need the exhaustive mathematical
+   named Lean source coordinates. To read the surrounding exposition rather
+   than locate a claim, use the generated full text in `docs/papers/`, where
+   the manuscript's own section labels are HTML anchors:
+   `grep -n '<a id="sec:unresolved">' docs/papers/full-text/*.md`.
+9. Read `docs/papers/corpus.json` when the task concerns what the papers say
+   rather than what Lean checked. It is the bounded index to all three papers —
+   both authored here plus the Plectis paper, carried as a mirror so this clone
+   is readable offline. It names the question each paper answers, the reading
+   route each paper states for itself, every section with its label and line,
+   and what each paper is not authority for. The generated Markdown is a
+   projection: it resolves theorem numbers, cross-references, and Lean source
+   links that the `.tex` only implies, but the `.tex` remains the manuscript and
+   the hash of record. Neither is proof authority.
+10. Use `docs/declaration_atlas.json` when you need the exhaustive mathematical
    scale: every declaration, signature excerpt, module, import edge, generated
    certificate marker, and principal-claim link. It is a generated navigation
    projection; drill back to Lean before trusting a statement.
-10. Use `Erdos249257.lean` for the supported root import and exact package
+11. Use `Erdos249257.lean` for the supported root import and exact package
    topology. Use `docs/SOURCE_MAP.md` for intention-based routes and
    `docs/WAVE_INDEX.md` for mathematical chronology.
 
