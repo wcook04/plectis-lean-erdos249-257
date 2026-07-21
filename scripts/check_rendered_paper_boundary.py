@@ -41,16 +41,25 @@ ARCHITECTURE_PAPERS = (
     ROOT / "claim-faithful-publication-systems-paper.pdf",
 )
 ALIASES = ROOT / "paper" / "module-aliases.json"
+# Page bands are the reach a limiting statement must keep, not a layout record.
+# Adding the first-page provenance note in July 2026 consumed roughly five body
+# lines of page one in each paper, and pushed exactly one anchor in each across
+# a page boundary: "neither problem is settled" here, "both jobs pass?" in the
+# architecture paper. Their bands are widened by one page and no further; every
+# other anchor still has to land where it always did. The exchange is recorded
+# rather than absorbed, because the note buys the same thing the bands protect
+# -- a reader meeting the limits before the claims -- and page one still carries
+# the abstract's three statements that neither problem is settled.
 FIRST_MINUTE_CONTRACT = {
     "erdos249-257-main-paper.pdf": {
         (1, 1): (
             "q > q0",
             "all positive exponents in every integer base",
             "refute the universal assertion",
-            "neither problem is settled",
             "do not prove the required unbounded supply",
             "we do not decide whether 1/2 is attainable",
         ),
+        (1, 2): ("neither problem is settled",),
         (2, 4): (
             "tail differences and finite certificates",
             "half-value membership and final greedy skips",
@@ -69,8 +78,8 @@ FIRST_MINUTE_CONTRACT = {
             "docs/claims.json",
             "scripts/check_release.py",
             "lean checks the formal proofs",
-            "both jobs pass?",
         ),
+        (1, 3): ("both jobs pass?",),
     },
 }
 

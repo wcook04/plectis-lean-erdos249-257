@@ -89,4 +89,27 @@
   \end{center}%
   \vskip 0.9em}
 
+% Production provenance, set at the foot of the first page.
+%
+% A reader who meets a single personal byline ordinarily infers that the named
+% author drafted the sentences.  For these papers that inference is false, and
+% a declaration reached only in the back matter would leave it standing for the
+% length of the paper.  The note therefore appears on page one, small and
+% visually subordinate to the title and abstract: enough to prevent the false
+% inference, not enough to make the production method the subject.
+%
+% It carries no mark, because it qualifies the whole manuscript rather than any
+% one passage.  \footnotetext does not advance the footnote counter, and the
+% emptied \thefootnote is confined to a group, so numbered footnotes elsewhere
+% in the paper are unaffected.
+%
+% The wording is not authored here.  It is fixed by the corpus provenance
+% contract and reproduced verbatim in each manuscript, so that the three papers
+% cannot drift into three different accounts of how they were made.
+\newcommand{\provenancenote}[1]{%
+  \begingroup
+  \renewcommand{\thefootnote}{}%
+  \footnotetext{#1}%
+  \endgroup}
+
 \endinput
