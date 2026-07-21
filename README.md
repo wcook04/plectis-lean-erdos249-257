@@ -11,15 +11,13 @@ Lean 4 formal work on two unsolved irrationality problems.
 
 [**Mathematics paper**](erdos249-257-main-paper.pdf) ·
 [**Publication systems paper**](claim-faithful-publication-systems-paper.pdf) ·
+[All 3 papers, offline](docs/papers/) ·
 [Release v0.6.0](https://github.com/wcook04/plectis-lean-erdos249-257/releases/tag/v0.6.0) ·
 [![Lean CI](https://github.com/wcook04/plectis-lean-erdos249-257/actions/workflows/lean.yml/badge.svg)](https://github.com/wcook04/plectis-lean-erdos249-257/actions/workflows/lean.yml) ·
 [Plectis](https://wcook04.github.io/plectis/)
 
 This repository and [Plectis](https://github.com/wcook04/plectis)
-demonstrate a private system: machinery there, mathematics here. Three papers
-explain the pair, and all three travel with this clone — the two above, plus
-the Plectis paper on what a stranger can check. PDFs and searchable full text
-are in [`docs/papers/`](docs/papers/).
+demonstrate a private system: machinery there, mathematics here.
 
 ## The two problems
 
