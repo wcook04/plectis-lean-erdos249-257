@@ -77,6 +77,7 @@ REQUIRED_ANCHOR_GROUPS = {
 
 REQUIRED_PATHS = (
     "Erdos249257.lean",
+    "ErdosProblems.lean",
     "docs/claims.json",
     "docs/methodology.json",
     "docs/publication_contract.json",
@@ -135,7 +136,8 @@ PAPER_REQUIRED_ANCHOR_GROUPS = {
         "machine-readable summary",
     ),
     "real_owners": (
-        "Erdos249257.lean",
+    "Erdos249257.lean",
+    "ErdosProblems.lean",
         "docs/claims.json",
         "docs/publication_contract.json",
         "docs/publication_evidence.json",
