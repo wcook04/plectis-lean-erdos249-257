@@ -28,11 +28,23 @@ from typing import Any
 ROOT = Path(__file__).resolve().parent.parent
 QUERY = ROOT / "scripts" / "query_corpus.py"
 HUMAN_SURFACES = ("README.md", "SCOPE.md", "docs/ORIENTATION.md")
+# Whole-file ceilings. README.md and docs/ORIENTATION.md were raised from
+# 12_000 and 16_000 on 2026-07-23, when they sat 16 and 196 bytes below their
+# caps: a one-sentence edit to either would have turned main red, and a gate
+# that fires on the next honest sentence teaches authors to route around it
+# rather than to write short. The ceilings still bind, roughly a page of slack
+# each, and the constraint that actually protects a cold reader is not this one
+# -- see README_FIRST_CONTACT_BUDGET_BYTES below, which did not move.
 HUMAN_SURFACE_BUDGET_BYTES = {
-    "README.md": 12_000,
+    "README.md": 14_000,
     "SCOPE.md": 4_000,
-    "docs/ORIENTATION.md": 16_000,
+    "docs/ORIENTATION.md": 18_000,
 }
+# Deliberately NOT raised with the ceiling above. This is a prefix window, not
+# a cap: the section order and every semantic anchor group are asserted against
+# the first 12_000 bytes of README.md. Holding it fixed while the ceiling rises
+# means a longer README must still say what it owes a newcomer on the first
+# screen, and anything added past that point cannot pay the first-contact debt.
 README_FIRST_CONTACT_BUDGET_BYTES = 12_000
 SUMMARY_PACKET_BUDGET_BYTES = 32_256
 PACKET_BUDGET_BYTES = 16_384
