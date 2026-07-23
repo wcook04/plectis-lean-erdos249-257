@@ -125,8 +125,14 @@ exactly once. These are navigation counts, not novelty claims.
 
 ## How the repository fits together
 
-The supported root import is [`Erdos249257.lean`](Erdos249257.lean). The source
-has four reader-facing layers:
+The package has two supported roots. [`Erdos249257.lean`](Erdos249257.lean)
+preserves the reviewed #249/#257 corpus. [`ErdosProblems.lean`](ErdosProblems.lean)
+is the problem-owned expansion surface: each new line of work lives under its
+actual Erdős problem number instead of being folded into the historical
+#249/#257 tree. Kernel checking of that second root establishes its exact Lean
+propositions; it does not by itself promote them into the reviewed public claim
+record or claim that an open problem is solved. The source has five
+reader-facing layers:
 
 - **Assembled kernel.** [`CertificateKernel.lean`](Erdos249257/CertificateKernel.lean)
   contains the common series machinery, the full-support Erdős-Borwein theorem,
@@ -144,6 +150,10 @@ has four reader-facing layers:
 - **The reading layer.** The exposition gives the mathematical account; the
   [source map](docs/SOURCE_MAP.md) gives code routes, and the declaration index
   supplies exact Lean names.
+- **Problem-owned expansion.** `ErdosProblems/Erdos<N>/` contains bounded
+  formal results and explicit open frontiers for one problem at a time. New
+  entries stay outside the reviewed claim registry until human mathematical
+  review establishes their intended meaning and public framing.
 
 [`docs/SOURCE_MAP.md`](docs/SOURCE_MAP.md) gives the exact module order within
 each band. [`docs/WAVE_INDEX.md`](docs/WAVE_INDEX.md) gives the development
@@ -174,6 +184,15 @@ For memory-constrained builds:
 python3 scripts/lean_fast_build.py --jobs 2
 ```
 
+When `.lake` outputs come from a restored CI or local cache, add
+`--lake-staleness` to use Lake's content traces instead of checkout mtimes.
+The wrapper keeps at most `--jobs` independent Lake processes active and
+serializes final authority checks, so its stated memory bound remains real even
+for a wide dependency wave. With no target it checks both supported public
+roots; pass a module or `.lean` path to keep an edit/test loop focused.
+`--plan` prints compact dependency-wave counts; use `--verbose-plan` only when
+you need every planned module name.
+
 Check the public release surfaces separately:
 
 ```sh
@@ -190,10 +209,16 @@ The pinned public Lean source contains no `sorry`, `admit`, project-defined
 
 ## Use as a Lean package
 
-Import the supported root:
+Import the reviewed #249/#257 root:
 
 ```lean
 import Erdos249257
+```
+
+For the problem-owned expansion surface, import:
+
+```lean
+import ErdosProblems
 ```
 
 [`examples/Examples.lean`](examples/Examples.lean) is the minimal downstream
