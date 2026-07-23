@@ -1160,11 +1160,11 @@ The paper is an obstruction atlas: it records finite certificates and local no-g
 
 The [archived formal-source revision](https://github.com/wcook04/plectis-lean-erdos249-257/tree/ebc98ee71f6819bd9fe344a0bb343542c604e533) contains the Lean sources, fixed toolchain, library manifest, and generated certificate data used in the verification. Repository metadata and this manuscript provide navigation rather than proof authority; Section <a href="#sec:verify" data-reference-type="ref" data-reference="sec:verify">7</a> gives the verification route.
 
-<a id="use-of-ai-assistance."></a>
+<a id="declaration-of-generative-ai-use."></a>
 
-#### Use of AI assistance.
+#### Declaration of generative AI use.
 
-Large-language-model assistants were used during development for proof drafting, refactoring, and prose editing. Every registered formal claim is linked to a declaration in the archived source revision. Lean checks each proof term against the fixed library version; the project contains no proof placeholders or project-defined axioms.
+Large-language-model agents were used throughout development to draft and revise prose, formal proofs, and software. The author set the objectives and acceptance criteria, selected and reviewed the claims, and approved the published version. The author assumes responsibility for the accuracy, interpretation, and presentation of the work. Generative systems are production tools; they are not authors and supply no independent authority. Every registered formal claim is linked to a declaration in the archived source revision. Lean checks each proof term against the fixed library version, and the project contains no proof placeholders or project-defined axioms; Lean does not authorise the exposition, citation choices, or interpretation, for which the author remains responsible.
 
 <a id="funding-and-competing-interests."></a>
 

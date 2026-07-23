@@ -27,7 +27,13 @@ MAX_GUIDE_BYTES = 18_000
 # screen readers, keywords, and a numbered outline, matching what the
 # mathematics paper already declares. No prose was added and the rendered
 # paper is still fourteen pages, so this raise funds metadata, not material.
-MAX_SYSTEMS_PAPER_BYTES = 52_300
+# Raised to 53_300 for the generative-AI provenance disclosure: the page-one
+# note saying the agents wrote the prose, and the back-matter declaration that
+# replaced the weaker "AI assistance" paragraph. The disclosure is the one kind
+# of growth this budget must never buy back by trimming, because a reader who
+# misses it misreads the byline; the page-band exchange it forced is already
+# recorded in check_rendered_paper_boundary.py.
+MAX_SYSTEMS_PAPER_BYTES = 53_300
 
 SECTION_ORDER = (
     "## What this repository is",

@@ -165,6 +165,15 @@ jobs:
       - name: Test publication evidence time axis
         if: ${{ !cancelled() }}
         run: python3 scripts/test_publication_evidence_time_axis.py
+      # The clone-local paper corpus is generated from the private system
+      # repository, so no builder here can refresh it and nothing above notices
+      # when it falls behind. It shipped stale from 2026-07-21: the generated
+      # full text still omitted the generative-AI disclosure that both
+      # manuscripts and both PDFs carried, which is the one drift a reader must
+      # not meet. The checker ships in the corpus it guards; run it.
+      - name: Test clone-local paper corpus is current
+        if: ${{ !cancelled() }}
+        run: python3 docs/papers/check_paper_corpus.py
       - name: Test ordinary-language status questions
         if: ${{ !cancelled() }}
         run: python3 scripts/test_status_question_search.py

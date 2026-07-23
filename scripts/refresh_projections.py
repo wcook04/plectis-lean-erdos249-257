@@ -28,7 +28,10 @@ ROOT = Path(__file__).resolve().parent.parent
 
 # Dependency order, mirroring the sequence check_release.py verifies: the atlas
 # and module graph read the Lean sources, the source coordinates read the atlas
-# and the paper, and the corpus descriptor reads all of them.
+# and the paper, and the corpus descriptor reads all of them. The entry packet
+# reads the finished contract and claims, so it runs last: on 2026-07-21 it was
+# the one projection this list omitted, and it stayed stale through the paper
+# provenance edit while every builder listed above refreshed cleanly.
 BUILDERS = (
     "build_methodology.py",
     "build_module_graph.py",
@@ -36,6 +39,7 @@ BUILDERS = (
     "refresh_source_coordinates.py",
     "build_corpus_descriptor.py",
     "build_paper_module_aliases.py",
+    "build_publication_entry_packet.py",
 )
 
 
